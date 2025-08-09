@@ -9,5 +9,93 @@ retrieved_at: 2025-08-10
 preferred_format: docx
 checksum: 9159179d53b65f2615135c554e661d40259eedb2d61318c890617f4a49bd1f2d
 license: TBD
+verified: true
 notes: |
   Sourced from project archive as per user instruction.
+citation:
+  type: article-journal
+  author:
+    - given: Asbjørn
+      family: Hróbjartsson
+    - given: Isabelle
+      family: Boutron
+    - given: Sally
+      family: Hopewell
+    - given: David
+      family: Moher
+    - given: Kenneth F
+      family: Schulz
+    - given: Gary S
+      family: Collins
+    - given: Ruth
+      family: Tunn
+    - given: Rakesh
+      family: Aggarwal
+    - given: Michael
+      family: Berkwits
+    - given: Jesse A
+      family: Berlin
+    - given: Nita
+      family: Bhandari
+    - given: Nancy J
+      family: Butcher
+    - given: Marion K
+      family: Campbell
+    - given: Runcie C W
+      family: Chidebe
+    - given: Diana R
+      family: Elbourne
+    - given: Andrew J
+      family: Farmer
+    - given: Dean A
+      family: Fergusson
+    - given: Robert M
+      family: Golub
+    - given: Steven N
+      family: Goodman
+    - given: Tammy C
+      family: Hoffmann
+    - given: John P A
+      family: Ioannidis
+    - given: Brennan C
+      family: Kahan
+    - given: Rachel L
+      family: Knowles
+    - given: Sarah E
+      family: Lamb
+    - given: Steff
+      family: Lewis
+    - given: Elizabeth
+      family: Loder
+    - given: Martin
+      family: Offringa
+    - given: Philippe
+      family: Ravaud
+    - given: Dawn P
+      family: Richards
+    - given: Frank W
+      family: Rockhold
+    - given: David L
+      family: Schriger
+    - given: Nandi L
+      family: Siegfried
+    - given: Sophie
+      family: Staniszewska
+    - given: Rod S
+      family: Taylor
+    - given: Lehana
+      family: Thabane
+    - given: David J
+      family: Torgerson
+    - given: Sunita
+      family: Vohra
+    - given: Ian R
+      family: White
+    - given: An-Wen
+      family: Chan
+  doi: 10.1136/bmj-2024-081660
+  journal: "The BMJ"
+  volume: 389
+  pages: e081660
+  year: 2025
+  notes: "and others"
