@@ -12,3 +12,29 @@ license: TBD
 verified: true
 notes: |
   PRISMA for Protocols.
+citation:
+  type: article-journal
+  author:
+    - given: David
+      family: Moher
+    - given: Larissa
+      family: Shamseer
+    - given: Mike
+      family: Clarke
+    - given: Davina
+      family: Ghersi
+    - given: Alessandro
+      family: Liberati
+    - given: Mark
+      family: Petticrew
+    - given: Paul
+      family: Shekelle
+    - given: Lesley A
+      family: Stewart
+  doi: 10.1186/2046-4053-4-1
+  journal: "Systematic Reviews"
+  volume: 4
+  issue: 1
+  pages: 1
+  year: 2015
+  notes: "and others"

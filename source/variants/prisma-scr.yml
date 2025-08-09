@@ -12,3 +12,29 @@ license: TBD
 verified: true
 notes: |
   PRISMA for Scoping Reviews.
+citation:
+  type: article-journal
+  author:
+    - given: Andrea C
+      family: Tricco
+    - given: Erin
+      family: Lillie
+    - given: Wasifa
+      family: Zarin
+    - given: Kelly K
+      family: O'Brien
+    - given: Heather
+      family: Colquhoun
+    - given: Danielle
+      family: Levac
+    - given: David
+      family: Moher
+    - given: Sharon E
+      family: Straus
+  doi: 10.7326/M18-0850
+  journal: "Annals of Internal Medicine"
+  volume: 169
+  issue: 7
+  pages: 467-473
+  year: 2018
+  notes: "and others"

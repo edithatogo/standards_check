@@ -12,3 +12,22 @@ license: TBD
 verified: true
 notes: |
   SPIRIT for Artificial Intelligence.
+citation:
+  type: article-journal
+  author:
+    - given: Samantha Cruz
+      family: Rivera
+    - given: Xiaoxuan
+      family: Liu
+    - given: An-Wen
+      family: Chan
+    - given: Alastair K
+      family: Denniston
+    - given: Melanie J
+      family: Calvert
+  doi: 10.1136/bmj.m3210
+  journal: "The BMJ"
+  volume: 370
+  pages: m3210
+  year: 2020
+  notes: "and others"

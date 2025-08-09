@@ -12,3 +12,35 @@ license: TBD
 verified: false
 notes: |
   PRISMA for Ecology and Evolution.
+citation:
+  type: article-journal
+  author:
+    - given: R. E.
+      family: O’Dea
+    - given: M.
+      family: Lagisz
+    - given: M. D.
+      family: Jennions
+    - given: J.
+      family: Koricheva
+    - given: D. W. A.
+      family: Noble
+    - given: T. H.
+      family: Parker
+    - given: J.
+      family: Gurevitch
+    - given: M. J.
+      family: Page
+    - given: G.
+      family: Stewart
+    - given: D.
+      family: Moher
+    - given: S.
+      family: Nakagawa
+  doi: 10.1111/brv.12784
+  journal: "Biological Reviews"
+  volume: 96
+  issue: 5
+  pages: 1695-1722
+  year: 2021
+  notes: "and others"

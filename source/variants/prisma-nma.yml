@@ -12,3 +12,47 @@ license: TBD
 verified: true
 notes: |
   PRISMA for Network Meta-Analyses.
+citation:
+  type: article-journal
+  author:
+    - given: Brian
+      family: Hutton
+    - given: Georgia
+      family: Salanti
+    - given: Deborah M
+      family: Caldwell
+    - given: Anna
+      family: Chaimani
+    - given: Christopher H
+      family: Schmid
+    - given: Chris
+      family: Cameron
+    - given: John P A
+      family: Ioannidis
+    - given: Sharon
+      family: Straus
+    - given: Kristian
+      family: Thorlund
+    - given: Jeroen P
+      family: Jansen
+    - given: Cynthia
+      family: Mulrow
+    - given: Ferrán
+      family: Catalá-López
+    - given: Peter C
+      family: Gøtzsche
+    - given: Kay
+      family: Dickersin
+    - given: Isabelle
+      family: Boutron
+    - given: Douglas G
+      family: Altman
+    - given: David
+      family: Moher
+  doi: 10.7326/M14-2385
+  journal: "Annals of Internal Medicine"
+  volume: 162
+  issue: 11
+  pages: 777-784
+  year: 2015
+  notes: "and others"
