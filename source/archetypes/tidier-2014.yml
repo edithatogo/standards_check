@@ -12,3 +12,24 @@ license: CC-BY-NC
 verified: true
 notes: |
   The TIDieR checklist is published under a CC-BY-NC license.
+citation:
+  type: article-journal
+  author:
+    - given: Tammy C.
+      family: Hoffmann
+    - given: Paul P.
+      family: Glasziou
+    - given: Isabelle
+      family: Boutron
+    - given: Riaz
+      family: Milne
+    - given: Rafael
+      family: Perera
+    - given: David
+      family: Moher
+  doi: 10.1136/bmj.g1687
+  journal: "The BMJ"
+  volume: 348
+  pages: g1687
+  year: 2014
+  notes: "and others"

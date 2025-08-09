@@ -12,3 +12,24 @@ license: CC-BY-4.0
 verified: false
 notes: |
   The STARD 2015 checklist for reporting diagnostic accuracy studies.
+citation:
+  type: article-journal
+  author:
+    - given: Patrick M.
+      family: Bossuyt
+    - given: Johannes B.
+      family: Reitsma
+    - given: David E.
+      family: Bruns
+    - given: Constantine A.
+      family: Gatsonis
+    - given: Paul P.
+      family: Glasziou
+    - given: Les
+      family: Irwig
+  doi: 10.1136/bmj.h5527
+  journal: "The BMJ"
+  volume: 351
+  pages: h5527
+  year: 2015
+  notes: "and others"

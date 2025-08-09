@@ -12,3 +12,18 @@ license: CC-BY-4.0
 verified: true
 notes: |
   The TRIPOD+AI statement, an update to the 2015 version for AI/ML models.
+citation:
+  type: article-journal
+  author:
+    - given: Gary S.
+      family: Collins
+    - given: Karel G. M.
+      family: Moons
+    - given: Paula
+      family: Dhiman
+  doi: 10.1136/bmj-2023-078378
+  journal: "The BMJ"
+  volume: 385
+  pages: e078378
+  year: 2024
+  notes: "and others"

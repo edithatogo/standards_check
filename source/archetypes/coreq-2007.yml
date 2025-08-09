@@ -12,3 +12,18 @@ license: All Rights Reserved
 verified: true
 notes: |
   The COREQ checklist is under "All Rights Reserved" copyright.
+citation:
+  type: article-journal
+  author:
+    - given: Allison
+      family: Tong
+    - given: Peter
+      family: Sainsbury
+    - given: Jonathan
+      family: Craig
+  doi: 10.1093/intqhc/mzm042
+  journal: "International Journal for Quality in Health Care"
+  volume: 19
+  issue: 6
+  pages: 349-357
+  year: 2007

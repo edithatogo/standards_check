@@ -12,3 +12,25 @@ license: CC-BY-NC
 verified: true
 notes: |
   The SQUIRE 2.0 guidelines, published in BMJ Quality & Safety.
+citation:
+  type: article-journal
+  author:
+    - given: Greg
+      family: Ogrinc
+    - given: Sally
+      family: Davies
+    - given: Daisy
+      family: Goodman
+    - given: Paul
+      family: Batalden
+    - given: Frank
+      family: Davidoff
+    - given: David
+      family: Stevens
+  doi: 10.1136/bmjqs-2015-004411
+  journal: "BMJ Quality & Safety"
+  volume: 24
+  issue: 10
+  pages: e1-e7
+  year: 2015
+  notes: "and others"

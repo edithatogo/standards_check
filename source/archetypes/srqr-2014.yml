@@ -12,3 +12,22 @@ license: Copyright, AAMC
 verified: true
 notes: |
   The SRQR checklist is under conventional copyright.
+citation:
+  type: article-journal
+  author:
+    - given: Bridget C.
+      family: O'Brien
+    - given: Ilene B.
+      family: Harris
+    - given: Thomas J.
+      family: Beckman
+    - given: Darcy A.
+      family: Reed
+    - given: David A.
+      family: Cook
+  doi: 10.1097/ACM.0000000000000388
+  journal: "Academic Medicine"
+  volume: 89
+  issue: 9
+  pages: 1245-1251
+  year: 2014

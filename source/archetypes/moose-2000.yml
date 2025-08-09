@@ -13,3 +13,33 @@ verified: true
 notes: |
   VERIFIED: Canonical source is a paywalled article in JAMA.
   URL is to the abstract. Manual download of the PDF is required.
+citation:
+  type: article-journal
+  author:
+    - given: D F
+      family: Stroup
+    - given: J A
+      family: Berlin
+    - given: S C
+      family: Morton
+    - given: I
+      family: Olkin
+    - given: G D
+      family: Williamson
+    - given: D
+      family: Rennie
+    - given: D
+      family: Moher
+    - given: B J
+      family: Becker
+    - given: T A
+      family: Sipe
+    - given: S B
+      family: Thacker
+  doi: 10.1001/jama.283.15.2008
+  journal: "JAMA: The Journal of the American Medical Association"
+  volume: 283
+  issue: 15
+  pages: 2008-2012
+  year: 2000
+  notes: "and others"
