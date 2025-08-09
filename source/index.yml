@@ -1,0 +1,272 @@
+# index of academic checklists (Phase 1)
+#
+# Schema (required keys per item):
+# - id: kebab-case unique identifier (e.g., prisma-2020)
+# - title: official checklist name
+# - url: canonical URL to the checklist page (TBD until verified)
+# - version: release label (e.g., 2010, 2020)
+# - date: ISO date of release or latest update (YYYY-MM-DD)
+# - license: usage terms for redistribution (e.g., CC BY 4.0) — verify
+# - publisher: owning organization(s)
+# - preferred_format: one of [pdf, html, docx, csv]
+# - level: archetype|variant (classification)
+# - group: family/type (e.g., prisma, consort)
+# - variant_of: parent id (if level=variant)
+# - notes: optional remarks
+version: 2
+updated: 2025-08-09
+items:
+  - id: consort-2010
+    title: CONSORT 2010 Checklist
+    url: https://www.consort-statement.org/
+    version: "2010"
+    date: TBD
+    license: TBD
+    publisher: CONSORT Group (Consolidated Standards of Reporting Trials)
+    preferred_format: pdf
+    level: archetype
+    group: consort
+    status: mapped
+    notes: "Randomized trials reporting. Verify official link and terms."
+
+  - id: prisma-2020
+    title: PRISMA 2020 Checklist
+    url: https://www.prisma-statement.org/
+    version: "2020"
+    date: TBD
+    license: TBD
+    publisher: PRISMA Group
+    preferred_format: pdf
+    level: archetype
+    group: prisma
+    status: mapped
+    notes: "Systematic reviews. Confirm page and license."
+
+  - id: strobe-2007
+    title: STROBE Statement Checklist
+    url: https://www.strobe-statement.org/
+    version: "2007"
+    date: TBD
+    license: TBD
+    publisher: STROBE Initiative
+    preferred_format: pdf
+    level: archetype
+    group: strobe
+    status: mapped
+    notes: "Observational studies."
+
+  - id: care-2013
+    title: CARE Guidelines Checklist
+    url: TBD
+    version: "2013"
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: pdf
+    level: archetype
+    group: care
+    notes: "Case reports. Check latest revision year."
+
+  - id: arrive-2019
+    title: ARRIVE 2.0 Checklist
+    url: TBD
+    version: "2019"
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: pdf
+    level: archetype
+    group: arrive
+    notes: "Animal research reporting."
+
+  - id: cheers-2013
+    title: CHEERS Reporting Checklist
+    url: TBD
+    version: "2013"
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: pdf
+    level: archetype
+    group: cheers
+    notes: "Health economic evaluations; verify if updated."
+
+  - id: tripod-2015
+    title: TRIPOD Checklist
+    url: TBD
+    version: "2015"
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: pdf
+    level: archetype
+    group: tripod
+    notes: "Prediction model reporting."
+
+  - id: spirit-2013
+    title: SPIRIT 2013 Checklist
+    url: TBD
+    version: "2013"
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: pdf
+    level: archetype
+    group: spirit
+    notes: "Clinical trial protocols."
+
+  - id: stard-2015
+    title: STARD 2015 Checklist
+    url: TBD
+    version: "2015"
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: pdf
+    level: archetype
+    group: stard
+    notes: "Diagnostic accuracy studies."
+
+  - id: equator-catalog-tbd
+    title: Additional EQUATOR-listed Checklist (placeholder)
+    url: TBD
+    version: TBD
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: pdf
+    level: archetype
+    group: tbd
+    notes: "Use this placeholder to expand mapping as needed."
+
+  - id: squire-2-0
+    title: SQUIRE 2.0 Guidelines Checklist
+    url: https://www.squire-statement.org/
+    version: "2.0"
+    date: TBD
+    license: TBD
+    publisher: SQUIRE Initiative
+    preferred_format: pdf
+    level: archetype
+    group: squire
+    status: mapped
+    notes: "Quality improvement reporting."
+
+  - id: srqr-2014
+    title: SRQR — Standards for Reporting Qualitative Research
+    url: https://www.equator-network.org/reporting-guidelines/srqr/
+    version: "2014"
+    date: TBD
+    license: TBD
+    publisher: SRQR authors
+    preferred_format: pdf
+    level: archetype
+    group: srqr
+    notes: "Qualitative research reporting."
+
+  - id: coreq-2007
+    title: COREQ — Consolidated Criteria for Reporting Qualitative Research
+    url: https://www.equator-network.org/reporting-guidelines/coreq/
+    version: "2007"
+    date: TBD
+    license: TBD
+    publisher: COREQ authors
+    preferred_format: pdf
+    level: archetype
+    group: coreq
+    notes: "Qualitative interviews/focus groups."
+
+  - id: moose-2000
+    title: MOOSE Guidelines Checklist
+    url: https://www.equator-network.org/reporting-guidelines/moose/
+    version: "2000"
+    date: TBD
+    license: TBD
+    publisher: MOOSE Group
+    preferred_format: pdf
+    level: archetype
+    group: moose
+    notes: "Meta-analysis of observational studies."
+
+  - id: tidier-2014
+    title: TIDieR Checklist
+    url: https://www.equator-network.org/reporting-guidelines/tidier/
+    version: "2014"
+    date: TBD
+    license: TBD
+    publisher: The TIDieR Group / BMJ
+    preferred_format: pdf
+    level: archetype
+    group: tidier
+    status: mapped
+    notes: "Intervention description and replication."
+  
+  - id: prisma-ecoevo
+    title: PRISMA-EcoEvo Checklist
+    url: TBD
+    version: "2022"
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: pdf
+    level: variant
+    group: prisma
+    variant_of: prisma-2020
+    status: new
+    notes: "PRISMA for Ecology and Evolution."
+  
+  - id: prisma-scr
+    title: PRISMA-ScR Checklist
+    url: TBD
+    version: "2019"
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: pdf
+    level: variant
+    group: prisma
+    variant_of: prisma-2020
+    status: new
+    notes: "PRISMA for Scoping Reviews."
+  
+  - id: prisma-p
+    title: PRISMA-P Checklist
+    url: TBD
+    version: "2015"
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: pdf
+    level: variant
+    group: prisma
+    variant_of: prisma-2020
+    status: new
+    notes: "PRISMA for Protocols."
+  
+  - id: prisma-nma
+    title: PRISMA-NMA Checklist
+    url: TBD
+    version: "2015"
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: pdf
+    level: variant
+    group: prisma
+    variant_of: prisma-2020
+    status: new
+    notes: "PRISMA for Network Meta-Analyses."
+  
+  - id: spirit-ai
+    title: SPIRIT-AI Checklist
+    url: TBD
+    version: "2023"
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: docx
+    level: variant
+    group: spirit
+    variant_of: spirit-2013
+    status: new
+    notes: "SPIRIT for Artificial Intelligence."

@@ -1,0 +1,12 @@
+from: markdown+task_lists
+pdf-engine: xelatex
+resource-path:
+  - .
+  - markdown
+template: templates/pandoc/latex-checklist.tex
+# Example metadata defaults; per-file front matter overrides these.
+metadata:
+  author: ""
+variables:
+  linkcolor: blue
+

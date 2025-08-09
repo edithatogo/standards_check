@@ -1,0 +1,1687 @@
+ <!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /> <meta charset="utf-8" /> <meta name="viewport" content="width=device-width, initial-scale=1"/> <link rel="shortcut icon" href="/ResourcePackages/ISPOR/assets/dist/images/favicon2018.ico" /> <link rel="stylesheet" href="/ResourcePackages/ISPOR/assets/src/project/js/vendor/outdatedbrowser.min.css"> <title>
+	ISPOR - Page Not Found
+</title> <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,600i,700|Oswald:200,400,500,700" rel="stylesheet" type="text/css" /><link href="/ResourcePackages/ISPOR/assets/dist/css/site.css?v=2025-07-30-10:00" rel="stylesheet" type="text/css" /> <!-- Google Tag Manager --> <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PDHP8D9');</script> <!-- End Google Tag Manager --> <!-- AdSense --> <script data-ad-client="ca-pub-5906864804318753" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <!-- End AdSense --> <meta name="robots" content="noindex" /><meta property="og:title" content="Page Not Found" /><meta property="og:url" content="https://www.ispor.org/error/404" /><meta property="og:type" content="website" /><meta property="og:site_name" content="ISPOR.org" /><meta name="Generator" content="Sitefinity 15.2.8430.0 DX" /><link rel="canonical" href="https://www.ispor.org/error/404" /><meta name="published" content="2018-06-23T12:33:59Z" /><meta name="PublicationDate" content="2018-06-23T12:33:59Z" /></head> <body> <!-- Google Tag Manager (noscript) --> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PDHP8D9"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> <!-- End Google Tag Manager (noscript) --> <!--stopindex--> <script src="/ScriptResource.axd?d=6DQe8ARl7A9TiuWej5ttCupavP5W7s2vT69legLQNK2ewRQJG-vEdOAUQBQu3HC3RxTRYEPYEEPPi4qavmT4Ak2iMkXdhV3nv5IwBuL4uxbJnuAwkcSpJrZLDKrrTUYiXPn83tl4ZwhE-LXPijQjVggTqvumS9XukkrXR8FnojSP4F5aOtUVOXCg-TTPST9e0&amp;t=5b26a2a8" type="text/javascript"></script><script src="/ScriptResource.axd?d=74FHISOx3fOPKwLxL0RMYoqO-bWAOp5nVUA0s8b62aNlzpknsBMKQCG7BVmHIVKj44lDsV9bt70RRf03fRuBVPI8sJUoEtkFJ5O6hbtafnEDEvzp36FnVqpQ5bpss6e9vv6VBqzV2_fI7RAVgnTpHQbrFW6zbnrqzpFxbW-t96g_NwCLg-YvuNigr9oQbGYi0&amp;t=5b26a2a8" type="text/javascript"></script><script src="/Frontend-Assembly/Telerik.Sitefinity.Frontend/Mvc/Scripts/Bootstrap/js/bootstrap.min.js?package=ISPOR&amp;v=LTE3NzAwNDQxMzE%3d" type="text/javascript"></script> <header class="section__header"> 
+<div id="Header_T99E82712002_Col00" class="sf_colsIn container" data-sf-element="Container" data-placeholder-label="Container"><div class="flex-apart interior__header" data-sf-element="Row">
+    <div id="Header_T99E82712003_Col00" class="sf_colsIn logo" data-sf-element="Logo" data-placeholder-label="Logo">
+<div >
+    <div class="sfContentBlock sf-Long-text" ><a href="/home"><svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" version="1.1" viewBox="0 0 449.7 83.4" width="200"><!-- Generator: Adobe Illustrator 29.0.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 186)  -->
+ <defs><style>.st0 {
+                    fill: #726658;
+                }
+
+                .st1 {
+                    fill: #27aae1;
+                }
+
+                .st2 {
+                    fill: #a7a9ac;
+                }
+            </style>
+ </defs>
+ <path class="st0" d="M119,75.7h-6.7V9h6.7v66.8h0Z"></path><path class="st0" d="M161.6,19.7c-1.4-2-3.3-3.6-5.6-4.9-2.2-1.2-5-1.8-8.2-1.8s-3.3.3-5,.8c-1.7.5-3.3,1.3-4.6,2.2-1.3,1.1-2.5,2.4-3.3,4s-1.3,3.4-1.3,5.6.4,4,1.2,5.3c.8,1.3,1.9,2.5,3.3,3.6,1.3.9,2.9,1.7,4.6,2.4,1.7.7,3.6,1.3,5.4,1.8,2.4.8,4.6,1.6,7,2.5,2.4.9,4.5,2,6.4,3.4,1.9,1.4,3.4,3.2,4.6,5.4,1.2,2.1,1.9,4.9,1.9,8.2s-.7,6.2-1.9,8.6c-1.3,2.4-2.9,4.4-4.9,5.9s-4.4,2.8-7,3.4c-2.6.8-5.3,1.2-7.9,1.2s-4-.3-6.1-.7c-2-.4-4-1.1-5.8-1.8s-3.6-1.8-5.2-3.2-2.9-2.7-4.1-4.4l5.8-4.4c1.4,2.4,3.4,4.4,6.1,5.9,2.6,1.6,5.7,2.4,9.3,2.4s3.4-.3,5.2-.8,3.3-1.3,4.8-2.5c1.4-1.1,2.6-2.5,3.4-4.1.9-1.6,1.3-3.4,1.3-5.6s-.4-4.2-1.3-5.8c-.9-1.6-2.1-2.8-3.6-3.8s-3.3-1.8-5.2-2.7c-2-.7-4-1.3-6.1-2.1-2.2-.7-4.4-1.4-6.5-2.4s-4.1-2-5.8-3.4-3-3.2-4.1-5.3c-1.1-2.1-1.6-4.6-1.6-7.7s.7-6,2-8.3,2.9-4.2,5-5.8c2.1-1.5,4.4-2.7,6.9-3.3,2.5-.7,5-1.1,7.4-1.1,4.5,0,8.5.8,11.6,2.4,3.2,1.6,5.7,3.6,7.3,5.7l-5.4,5h0Z"></path><path class="st0" d="M175,9h18.9c3.4,0,6.5.4,9.3,1.1s5.2,1.8,7.1,3.3c2,1.5,3.6,3.3,4.6,5.5,1.1,2.2,1.6,4.9,1.6,7.9s-.5,5.7-1.6,7.9-2.6,4.1-4.6,5.6c-2,1.4-4.4,2.7-7.1,3.3-2.8.8-5.9,1.2-9.3,1.2h-11.9v31.1h-6.7V9h-.3ZM181.8,39h11.5c5.3,0,9.4-1.1,12.2-3.2,2.8-2.1,4.1-5.2,4.1-9.1s-1.4-7.1-4.2-9.1c-2.9-2-6.9-2.9-12-2.9h-11.5v24.3h0Z"></path><path class="st0" d="M288.4,42.4c0,5.2-.9,9.8-2.6,14-1.7,4.2-4.2,7.9-7.3,11.1-3.2,3.2-6.7,5.6-11.1,7.3-4.2,1.7-8.9,2.7-13.9,2.7s-9.5-.9-13.9-2.7c-4.2-1.7-7.9-4.2-11.1-7.3-3.2-3.2-5.5-6.9-7.3-11.1s-2.6-9-2.6-14,.9-9.8,2.6-14,4.2-7.9,7.3-11.1c3.2-3.2,6.7-5.5,11.1-7.3,4.2-1.7,8.9-2.7,13.9-2.7s9.5.9,13.9,2.7c4.2,1.7,7.9,4.2,11.1,7.3,3.2,3.2,5.5,6.9,7.3,11.1s2.6,8.9,2.6,14ZM281.3,42.4c0-3.8-.7-7.5-1.9-11.1-1.3-3.6-3-6.6-5.4-9.3s-5.3-4.8-8.7-6.3c-3.4-1.6-7.3-2.4-11.5-2.4s-8.2.8-11.5,2.4c-3.4,1.6-6.4,3.7-8.7,6.3-2.4,2.7-4.2,5.8-5.4,9.3-1.3,3.6-1.9,7.3-1.9,11.1s.7,7.5,1.9,11.1c1.3,3.6,3,6.6,5.4,9.3s5.3,4.8,8.7,6.3,7.3,2.4,11.5,2.4,8.2-.8,11.5-2.4c3.4-1.6,6.4-3.7,8.7-6.3s4.2-5.7,5.4-9.3,1.9-7.3,1.9-11.1Z"></path><path class="st0" d="M301.9,75.7h-6.7V9h19.6c3.3,0,6.4.3,9.1.9,2.8.7,5.2,1.6,7.3,3,2,1.5,3.6,3.3,4.8,5.5,1.2,2.2,1.7,5,1.7,8.3s-.4,4.6-1.3,6.7c-.9,2-2.1,3.7-3.6,5.3-1.5,1.4-3.3,2.7-5.4,3.6-2.1.9-4.4,1.4-6.7,1.7l19.6,31.9h-8.3l-18.5-31.2h-11.4v30.9h0ZM301.9,38.7h11.8c5.4,0,9.6-.9,12.7-2.9,2.9-2,4.5-4.9,4.5-8.9s-.4-4.1-1.2-5.5-2-2.8-3.4-3.7c-1.5-.9-3.2-1.6-5.3-2.1-2.1-.4-4.4-.7-6.9-.7h-12v23.8h-.1Z"></path><circle class="st1" cx="41.6" cy="24" r="6.6"></circle><circle class="st2" cx="59.3" cy="24" r="6.6"></circle><circle class="st2" cx="76.9" cy="24" r="6.6"></circle><circle class="st2" cx="6.5" cy="24" r="6.6"></circle><circle class="st2" cx="24" cy="24" r="6.6"></circle><circle class="st2" cx="41.6" cy="6.5" r="6.6"></circle><circle class="st2" cx="59.3" cy="6.5" r="6.6"></circle><circle class="st2" cx="24" cy="6.5" r="6.6"></circle><circle class="st2" cx="59.3" cy="41.6" r="6.6"></circle><circle class="st1" cx="76.9" cy="41.6" r="6.6"></circle><circle class="st2" cx="6.5" cy="41.6" r="6.6"></circle><circle class="st2" cx="24" cy="41.6" r="6.6"></circle><circle class="st2" cx="41.6" cy="59.1" r="6.6"></circle><circle class="st2" cx="59.3" cy="59.1" r="6.6"></circle><circle class="st2" cx="76.9" cy="59.1" r="6.6"></circle><circle class="st2" cx="6.5" cy="59.1" r="6.6"></circle><circle class="st1" cx="24" cy="59.1" r="6.6"></circle><circle class="st2" cx="41.6" cy="76.7" r="6.6"></circle><circle class="st2" cx="59.3" cy="76.7" r="6.6"></circle><circle class="st2" cx="24" cy="76.7" r="6.6"></circle><path class="st1" d="M418.5,21c-15.2,0-27.9,11-30.6,25.4-1.9-3.6-4.8-6.5-8.4-8.4,4.6-2.5,7.8-7.4,7.8-13,0-8.2-6.6-14.8-14.8-14.8s-14.8,6.6-14.8,14.8v2.8h4v-2.8c0-6,4.8-10.8,10.8-10.8s10.8,4.8,10.8,10.8-4.9,10.8-10.8,10.8c0,0-1.5,0-2.2,0h-2.5v4h2.5c8.8,0,15.9,7.1,15.9,15.9s-7.1,15.9-15.9,15.9-15.9-7.1-15.9-15.9h-4c0,11,8.9,19.9,19.9,19.9s16-5.6,18.7-13.3c4.2,12.3,15.8,21.1,29.5,21.1s31.2-14,31.2-31.2-14-31.2-31.2-31.2h0ZM418.5,79.4c-15,0-27.2-12.2-27.2-27.2s12.2-27.2,27.2-27.2,27.2,12.2,27.2,27.2-12.2,27.2-27.2,27.2Z"></path><path class="st1" d="M400.8,52.9v3.3h-1.6v-3.3l-2.4-4.8h1.7l1.5,3.3,1.5-3.3h1.7l-2.4,4.8h0Z"></path><path class="st1" d="M406.5,56.3v-8.1h5.4v1.4h-3.8v1.9h3.2v1.4h-3.2v2h3.8v1.4h-5.4Z"></path><path class="st1" d="M420.3,56.3l-.5-1.4h-2.9l-.5,1.4h-1.6l3-8.1h1.2l3,8.1h-1.6ZM418.4,50.5l-1,2.9h2l-1-2.9Z"></path><path class="st1" d="M429.5,56.3l-1.6-3.2h-1.1v3.2h-1.6v-8.1h3.2c1.6,0,2.6,1.1,2.6,2.5s-.7,1.8-1.5,2.1l1.8,3.5h-1.8ZM428.3,49.6h-1.5v2.1h1.5c.7,0,1.1-.4,1.1-1.1s-.5-1.1-1.1-1.1Z"></path><path class="st1" d="M437.2,56.3c-1.2,0-2.2-.3-3-1.1l1-1c.5.5,1.2.7,2,.7s1.5-.4,1.5-1,0-.5-.2-.7c-.2-.2-.3-.2-.7-.3l-1-.2c-.7,0-1.2-.3-1.6-.7-.4-.4-.6-.9-.6-1.6,0-1.4,1.1-2.5,2.8-2.5s1.9.3,2.6.9l-1,1c-.5-.5-1.1-.6-1.7-.6-.8,0-1.2.5-1.2,1s0,.4.2.6c.2.2.4.3.7.3l1,.2c.7,0,1.2.3,1.5.6.4.4.6,1,.6,1.7,0,1.6-1.3,2.5-3,2.5h0Z"></path></svg>
+</a></div>
+</div>
+    </div>
+    <div id="top-utility" class="flex-center">
+        <div id="Header_T99E82712003_Col01" class="sf_colsIn" data-sf-element="Top Utility" data-placeholder-label="Top Utility">
+
+
+
+
+<div>
+    
+
+    <nav class="navbar-plain" role="navigation">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+        <li class=""><a href="/about" target="_self">About</a></li>
+        <li class=""><a href="/get-involved" target="_self">Get Involved</a></li>
+        <li class=""><a href="/membership" target="_self">Membership</a></li>
+        <li class=""><a href="/membership/manage-profile" target="_self">Manage Profile</a></li>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+    </nav>
+</div>
+
+
+
+
+
+
+
+        </div>
+        <div class="js-element is-hidden mg-site-search">
+            <button type="button" class="search__close">
+                <span class="glyphicon glyphicon-remove"></span>
+            </button>
+            <input name="q" type="text" class="input search-input" placeholder="enter keyword">
+        </div>
+        <button type="button" class="button toggle-search toggle-search--show">
+            <span class="glyphicon glyphicon-search is-size-4">
+            </span>
+        </button>
+        <button type="button" class="button toggle-search toggle-search--hide">
+            <span class="glyphicon glyphicon-search is-size-4">
+            </span>
+        </button>
+        <div id="Header_T99E82712003_Col02" class="sf_colsIn membership" data-sf-element="Membership" data-placeholder-label="Membership">
+
+
+<div class="ml-4 membership-nav">
+    <div data-sf-role="sf-logged-in-view" style="display: none">
+            <a href="#" class="mr-4 user-name" data-sf-role="sf-logged-in-name"></a>
+            <a href="/mxt/authservice/signout" class="login">Logout</a>
+    </div>
+
+    <div data-sf-role="sf-logged-out-view" style="display: none">
+        <a class="button brown" href="https://www.ispor.org/membership/individual-membership/join-ispor-or-renew-your-membership">Join/Renew</a>
+        
+    </div>
+</div>
+
+<input type="hidden" data-sf-role="sf-status-json-endpoint-url" value="/rest-api/login-status"/>
+<input type="hidden" data-sf-role="sf-logout-redirect-url" value="https://www.ispor.org/error/404"/>
+<input type="hidden" data-sf-role="sf-login-redirect-url" value="/mxt/authservice?ReturnUrl=https%3a%2f%2fwww.ispor.org%2ferror%2f404%3finitialRequestUrl%3dhttps%253a%252f%252fwww.ispor.org%252fdocs%252fdefault-source%252fcheers%252fcheers-2022-statement.pdf%253fsfvrsn%253da330a4b_2" />
+<input type="hidden" data-sf-role="sf-is-design-mode-value" value="False" />
+<input type="hidden" data-sf-role="sf-allow-windows-sts-login" value="False" />
+
+
+        </div>
+    </div>
+</div>
+</div>
+
+
+ </header> <section class="section__primary-nav"> 
+<div class="row" data-sf-element="Row">
+    <div id="PrimaryNavigation_T865F170E003_Col00" class="sf_colsIn col-md-12" data-sf-element="Column 1" data-placeholder-label="Column 1">
+
+
+
+
+<div>
+    
+
+    <nav class="navbar navbar-static-top navbar-default" role="navigation">
+
+        <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+        <li class="dropdown allow-third-level-children">
+            <a href="/heor-resources">HEOR Resources
+            </a>
+            <span data-toggle="dropdown" class="dropdown-toggle icon-plus"></span>
+            <ul class="dropdown-menu">
+                            <li class=" ">
+                <a href="/heor-resources/about-heor" target="_self">HEOR Explained</a>
+            </li>
+            <li class=" third-level-reveal">
+                <a href="/heor-resources/top-10-heor-trends" target="_self">Top 10 HEOR Trends</a>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/heor-resources/heor-by-topic-new" target="_self">HEOR by Topic
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/heor-resources/heor-by-topic-new/clinical-outcomes" target="_self">Clinical Outcomes</a>
+            </li>
+            <li class=" ">
+                <a href="/heor-resources/heor-by-topic-new/digital-health-devices-and-diagnostics" target="_self">Digital Health, Devices, and Diagnostics</a>
+            </li>
+            <li class=" ">
+                <a href="/heor-resources/heor-by-topic-new/economic-evaluation" target="_self">Economic Evaluation</a>
+            </li>
+            <li class=" ">
+                <a href="/heor-resources/heor-by-topic-new/epidemiology" target="_self">Epidemiology</a>
+            </li>
+            <li class=" ">
+                <a href="/heor-resources/heor-by-topic-new/healthcare-delivery" target="_self">Healthcare Delivery</a>
+            </li>
+            <li class=" ">
+                <a href="/heor-resources/heor-by-topic-new/health-policy" target="_self">Health Policy</a>
+            </li>
+            <li class=" ">
+                <a href="/heor-resources/heor-by-topic-new/health-technology-assessment" target="_self">Health Technology Assessment</a>
+            </li>
+            <li class=" ">
+                <a href="/heor-resources/heor-by-topic-new/methodology" target="_self">Methodology</a>
+            </li>
+            <li class=" ">
+                <a href="/heor-resources/heor-by-topic-new/patient-centered-research" target="_self">Patient-Centered Research</a>
+            </li>
+            <li class=" ">
+                <a href="/heor-resources/heor-by-topic-new/real-world-data" target="_self">Real-World Data</a>
+            </li>
+            <li class=" ">
+                <a href="/heor-resources/heor-by-topic-new/specialized-treatment-areas" target="_self">Specialized Treatment Areas</a>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/heor-resources/good-practices" target="_self">Good Practices Reports &amp; More
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                 <li class="dropdown-submenu ">
+                <a href="/heor-resources/good-practices/cheers" target="_self">CHEERS
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/heor-resources/good-practices/cheers/cheers-related-videos" target="_self">CHEERS Related Videos</a>
+            </li>
+
+                </ul>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/heor-resources/presentations-database" target="_self">ISPOR Presentations Database
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/heor-resources/presentations-database/search" target="_self">ISPOR Presentations Database</a>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/heor-resources/news-top" target="_self">News
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                 <li class="dropdown-submenu third-level-reveal">
+                <a href="/heor-resources/news-top/news" target="_self">ISPOR News
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                 <li class="dropdown-submenu ">
+                <a href="/heor-resources/news-top/news/archive" target="_self">Archive
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/heor-resources/news-top/news/archive/2024" target="_self">2024</a>
+            </li>
+            <li class=" ">
+                <a href="/heor-resources/news-top/news/archive/2023" target="_self">2023</a>
+            </li>
+            <li class=" ">
+                <a href="/heor-resources/news-top/news/archive/2022" target="_self">2022</a>
+            </li>
+
+                </ul>
+            </li>
+            <li class=" ">
+                <a href="/heor-resources/news-top/news/media-center" target="_self">Media Center</a>
+            </li>
+
+                </ul>
+            </li>
+            <li class=" third-level-reveal">
+                <a href="/heor-resources/news-top/heor-news-desk" target="_self">HEOR News Desk</a>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/heor-resources/more-heor-resources" target="_self">More HEOR Resources
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/heor-resources/more-heor-resources/assessing-the-evidence-for-healthcare-decision-makers" target="_self">Assessing the Evidence</a>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/heor-resources/more-heor-resources/us-healthcare-system-overview" target="_self">US Healthcare System Overview 
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/heor-resources/more-heor-resources/us-healthcare-system-overview/us-healthcare-system-overview-background-page-1" target="_self">US Healthcare System Overview-Background</a>
+            </li>
+            <li class=" ">
+                <a href="/heor-resources/more-heor-resources/us-healthcare-system-overview/us-healthcare-system-overview-decision-makers-and-influencers-page-1" target="_self">US Healthcare System Overview-Decision Makers and Influencers</a>
+            </li>
+            <li class=" ">
+                <a href="/heor-resources/more-heor-resources/us-healthcare-system-overview/us-healthcare-system-overview-pharmaceuticals-page-1" target="_self">US Healthcare System Overview-Pharmaceuticals</a>
+            </li>
+            <li class=" ">
+                <a href="/heor-resources/more-heor-resources/us-healthcare-system-overview/united-states-healthcare-system-overview-medical-devices-in-vitro-diagnostics-page-1" target="_self">US Healthcare System Overview-Medical Devices and In Vitro Diagnostics</a>
+            </li>
+            <li class=" ">
+                <a href="/heor-resources/more-heor-resources/us-healthcare-system-overview/us-healthcare-system-overview-documentation-requirements" target="_self">US Healthcare System Overview-Documentation Requirements</a>
+            </li>
+            <li class=" ">
+                <a href="/heor-resources/more-heor-resources/us-healthcare-system-overview/us-healthcare-system-overview-acknowledgements" target="_self">US Healthcare System Overview-Acknowledgements</a>
+            </li>
+            <li class=" ">
+                <a href="/heor-resources/more-heor-resources/us-healthcare-system-overview/us-healthcare-system-overview-references" target="_self">US Healthcare System Overview-References</a>
+            </li>
+
+                </ul>
+            </li>
+
+                </ul>
+            </li>
+
+            </ul>
+        </li>
+        <li class="dropdown ">
+            <a href="/strategic-initiatives">Strategic Initiatives
+            </a>
+            <span data-toggle="dropdown" class="dropdown-toggle icon-plus"></span>
+            <ul class="dropdown-menu">
+                            <li class=" ">
+                <a href="/strategic-initiatives/strategic-plan" target="_self">Strategic Plan</a>
+            </li>
+            <li class=" ">
+                <a href="/strategic-initiatives/science-strategy" target="_self">Science Strategy</a>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/strategic-initiatives/real-world-evidence" target="_self">Real-World Evidence
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/strategic-initiatives/real-world-evidence/about-real-world-evidence" target="_self">About Real-World Evidence</a>
+            </li>
+            <li class=" ">
+                <a href="/strategic-initiatives/real-world-evidence/real-world-evidence-transparency-initiative" target="_self">Real-World Evidence Transparency Initiative </a>
+            </li>
+            <li class=" ">
+                <a href="/strategic-initiatives/real-world-evidence/real-world-evidence-registry" target="_self">Real-World Evidence Registry</a>
+            </li>
+
+                </ul>
+            </li>
+            <li class=" ">
+                <a href="/strategic-initiatives/payer-engagement-in-heor" target="_self">Payer Engagement in HEOR</a>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/strategic-initiatives/patient-initiatives" target="_self">Patient Engagement in HEOR
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/strategic-initiatives/patient-initiatives/patient-representatives-roundtable" target="_self">Patient Representatives Roundtable</a>
+            </li>
+            <li class=" ">
+                <a href="/strategic-initiatives/patient-initiatives/patient-centered-special-interest-group" target="_self">Patient Centered Special Interest Group</a>
+            </li>
+
+                </ul>
+            </li>
+            <li class=" ">
+                <a href="/strategic-initiatives/dialogue-with-decision-makers" target="_self">Dialogue With Decision Makers</a>
+            </li>
+            <li class=" ">
+                <a href="/strategic-initiatives/health-policy" target="_self">Health Policy</a>
+            </li>
+            <li class=" ">
+                <a href="/strategic-initiatives/digital-health" target="_self">Digital Health</a>
+            </li>
+            <li class=" ">
+                <a href="/strategic-initiatives/artificial-intelligence" target="_self">Artificial Intelligence</a>
+            </li>
+            <li class=" ">
+                <a href="/strategic-initiatives/value-assessment-frameworks" target="_self">Value Assessment Frameworks</a>
+            </li>
+            <li class=" ">
+                <a href="/strategic-initiatives/health-technology-assessment" target="_self">Health Technology Assessment</a>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/strategic-initiatives/diversity-at-ispor" target="_self">Diversity at ISPOR
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/strategic-initiatives/diversity-at-ispor/diversity-metrics" target="_self">Diversity Metrics</a>
+            </li>
+            <li class=" ">
+                <a href="/strategic-initiatives/diversity-at-ispor/what-you-can-do" target="_self">What You Can Do for Diversity</a>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/strategic-initiatives/amplifying-the-impact-of-heor" target="_self">The Impact of HEOR
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/strategic-initiatives/amplifying-the-impact-of-heor/ispor-chapters-delivering-impact" target="_self">ISPOR Chapters Delivering Impact</a>
+            </li>
+            <li class=" ">
+                <a href="/strategic-initiatives/amplifying-the-impact-of-heor/delivering-impact-in-europe" target="_self">Delivering Impact in Europe</a>
+            </li>
+            <li class=" ">
+                <a href="/strategic-initiatives/amplifying-the-impact-of-heor/delivering-impact-in-north-america" target="_self">Delivering Impact in North America</a>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/strategic-initiatives/corporate-partnerships" target="_self">Corporate Partnerships
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/strategic-initiatives/corporate-partnerships/partnership-group" target="_self">Partnership Group</a>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/strategic-initiatives/more" target="_self">Additional Strategic Initiatives
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/strategic-initiatives/more/advancing-heor-in-low-and-middle-income-countries" target="_self">Advancing HEOR in Low and Middle Income Countries</a>
+            </li>
+            <li class=" ">
+                <a href="/strategic-initiatives/more/heor-competencies-framework" target="_self">HEOR Competencies Framework</a>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/strategic-initiatives/more/women-in-heor" target="_self">Women in HEOR
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/strategic-initiatives/more/women-in-heor/women-in-heor-resources" target="_self">Women in HEOR Resources</a>
+            </li>
+            <li class=" ">
+                <a href="/strategic-initiatives/more/women-in-heor/member-survey" target="_self">Member Survey</a>
+            </li>
+
+                </ul>
+            </li>
+
+                </ul>
+            </li>
+
+            </ul>
+        </li>
+        <li class="dropdown allow-third-level-children">
+            <a href="/conferences-education">Events
+            </a>
+            <span data-toggle="dropdown" class="dropdown-toggle icon-plus"></span>
+            <ul class="dropdown-menu">
+                             <li class="dropdown-submenu show-children-only">
+                <a href="/conferences-education/conferences" target="_self">Conferences &amp; Events
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                 <li class="dropdown-submenu main-nav-hidden">
+                <a href="/conferences-education/conferences/upcoming-conferences" target="_self">Upcoming Conferences &amp; Events
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                 <li class="dropdown-submenu ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-real-world-evidence-summit-2025" target="_self">ISPOR Real-World Evidence Summit 2025
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                 <li class="dropdown-submenu ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-real-world-evidence-summit-2025/about" target="_self">About
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-real-world-evidence-summit-2025/about/why-attend" target="_self">Why Attend</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-real-world-evidence-summit-2025/about/registration-information" target="_self">Registration Information</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-real-world-evidence-summit-2025/about/press" target="_self">Press</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-real-world-evidence-summit-2025/about/marketing-kit" target="_self">Marketing Kit</a>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-real-world-evidence-summit-2025/program/short-courses-overviews" target="_self">Short Courses
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-real-world-evidence-summit-2025/program/short-courses-overviews/short-courses" target="_self">Short Courses</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-real-world-evidence-summit-2025/program/short-courses-overviews/view-all-short-courses" target="_self">View All Short Courses</a>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-real-world-evidence-summit-2025/program" target="_self">Program
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-real-world-evidence-summit-2025/program/program" target="_self">Program</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-real-world-evidence-summit-2025/program/program-committee" target="_self">Program Committee</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-real-world-evidence-summit-2025/program/learning-formats" target="_self">Learning Formats</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-real-world-evidence-summit-2025/program/posters" target="_self">Posters</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-real-world-evidence-summit-2025/program/plenaries" target="_self">Plenaries</a>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-real-world-evidence-summit-2025/presentation-information" target="_self">Presenter Information
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-real-world-evidence-summit-2025/presentation-information/presenter-information" target="_self">Presenter Information</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-real-world-evidence-summit-2025/presentation-information/poster-resources" target="_self">Poster Resources</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-real-world-evidence-summit-2025/presentation-information/speaker-resources" target="_self">Speaker Resources</a>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-real-world-evidence-summit-2025/sponsors" target="_self">Sponsors
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-real-world-evidence-summit-2025/sponsors/sponsored-session-resources" target="_self">Sponsored Session Resources</a>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-real-world-evidence-summit-2025/venue-and-travel" target="_self">Venue and Travel
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-real-world-evidence-summit-2025/venue-and-travel/discover-tokyo" target="_self">Discover Tokyo</a>
+            </li>
+
+                </ul>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025" target="_self">ISPOR Europe 2025
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                 <li class="dropdown-submenu ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025/about" target="_self">About
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025/about/why-attend" target="_self">Why Attend</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025/about/registration-fees" target="_self">Registration Information</a>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025/about/Marketing-Kit" target="_self">Marketing Kit
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025/about/Marketing-Kit/badge" target="_self">ISPOR Europe 2025 Badges</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025/about/Marketing-Kit/social-media" target="_self">#ISPOREurope—Tweet, Post, Share!</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025/about/Marketing-Kit/spread-the-word" target="_self">Spread the Word</a>
+            </li>
+
+                </ul>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025/about/Volunteer-Opportunities" target="_self">Volunteer Opportunities</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025/about/press" target="_self">Press</a>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025/short-courses" target="_self">Short Courses
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025/short-courses/short-courses" target="_self">Short Courses</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025/short-courses/view-all-short-courses" target="_self">View All Short Courses</a>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025/program" target="_self">Program
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025/program/program" target="_self">Program</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025/program/plenary-sessions" target="_self">Plenary Sessions</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025/program/student-program" target="_self">Student Program</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025/program/learning-formats" target="_self">Learning Formats</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025/program/program-committee" target="_self">Program Committee</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025/program/intro-digital-conference-pass" target="_self">Digital Conference Pass</a>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025/presenter-information" target="_self">Presenter Information
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025/presenter-information/speaker-resources" target="_self">Speaker Resources</a>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025/exhibits-sponsorship" target="_self">Exhibits &amp; Sponsorship
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025/exhibits-sponsorship/sponsors" target="_self">Sponsors</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025/exhibits-sponsorship/sponsors-opportunities" target="_self">Sponsors Opportunities</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025/exhibits-sponsorship/exhibitor-resources" target="_self">Exhibitor Resources </a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025/exhibits-sponsorship/media-partners" target="_self">Media Partners</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025/exhibits-sponsorship/exhibitor-directory" target="_blank">Exhibitor Directory</a>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025/hotel-venue-information" target="_self">Hotel &amp; Travel
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025/hotel-venue-information/hotel-information" target="_self">Hotel Information</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-europe-2025/hotel-venue-information/venue-information" target="_self">Venue Information</a>
+            </li>
+
+                </ul>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-2026" target="_self">ISPOR 2026
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                 <li class="dropdown-submenu ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-2026/about" target="_self">About
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-2026/about/why-attend" target="_self">Why Attend</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-2026/about/volunteer-opportunities" target="_self">Volunteer Opportunities</a>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-2026/program" target="_self">Program
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-2026/program/preliminary-program" target="_self">Preliminary Program</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-2026/program/student-program" target="_self">Student Program</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-2026/program/learning-formats" target="_self">Learning Formats</a>
+            </li>
+
+                </ul>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-2026/abstract-information" target="_self">Abstract Information</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-2026/exhibits---sponsorship" target="_self">Exhibits &amp; Sponsorship</a>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-2026/hotel" target="_self">Hotel &amp; Travel
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-2026/hotel/hotel---travel" target="_self">Hotel Information</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-2026/hotel/venue-information" target="_self">Venue Information</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/upcoming-conferences/ispor-2026/hotel/discover-philadelphia" target="_self">Discover Philadelphia</a>
+            </li>
+
+                </ul>
+            </li>
+
+                </ul>
+            </li>
+
+                </ul>
+            </li>
+            <li class=" third-level-reveal side-nav-hidden">
+                <a href="/conferences-education/conferences/upcoming" target="_self">Upcoming</a>
+            </li>
+            <li class=" third-level-reveal side-nav-hidden">
+                <a href="/conferences-education/conferences/recent-conferences" target="_self">Past</a>
+            </li>
+            <li class=" third-level-reveal">
+                <a href="/conferences-education/conferences/abstract-information" target="_self">Abstract Information</a>
+            </li>
+             <li class="dropdown-submenu third-level-reveal">
+                <a href="/conferences-education/conferences/awards" target="_self">Awards &amp; Grants
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/conferences-education/conferences/awards/criteria---podium-research-presentation-awards" target="_self">Criteria - Podium Research Presentation Awards</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/awards/criteria---poster-research-presentation-awards" target="_self">Criteria - Poster Research Presentation Awards</a>
+            </li>
+
+                </ul>
+            </li>
+            <li class=" third-level-reveal">
+                <a href="/conferences-education/conferences/exhibits-sponsorships" target="_self">Exhibits &amp; Sponsorships</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/register" target="_self">Register</a>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/conferences/Press-Kit" target="_self">Press Kit</a>
+            </li>
+
+                </ul>
+            </li>
+            <li class=" ">
+                <a href="/conferences-education/calendar" target="_self">Calendar</a>
+            </li>
+
+            </ul>
+        </li>
+        <li class="dropdown ">
+            <a href="/education-training">Education
+            </a>
+            <span data-toggle="dropdown" class="dropdown-toggle icon-plus"></span>
+            <ul class="dropdown-menu">
+                            <li class=" third-level-reveal">
+                <a href="/education-training/short-courses" target="_self">Short Courses</a>
+            </li>
+            <li class=" ">
+                <a href="/education-training/ispor-education-center" target="_self">ISPOR Education Center</a>
+            </li>
+            <li class=" ">
+                <a href="/education-training/heor-learning-lab" target="_self">HEOR Learning Lab</a>
+            </li>
+             <li class="dropdown-submenu third-level-reveal">
+                <a href="/education-training/webinars" target="_self">Webinars
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/education-training/webinars/value-assessment-in-the-age-of-covid-19-meeting-the-challenges" target="_self">Value Assessment in the Age of COVID-19:  Meeting the Challenges</a>
+            </li>
+            <li class=" ">
+                <a href="/education-training/webinars/value-assessment-in-alzheimers-disease-a-focus-on-equity" target="_self">Value Assessment in Alzheimer&#39;s Disease: A Focus on Equity</a>
+            </li>
+
+                </ul>
+            </li>
+
+            </ul>
+        </li>
+        <li class="dropdown allow-third-level-children">
+            <a href="/publications">Publications
+            </a>
+            <span data-toggle="dropdown" class="dropdown-toggle icon-plus"></span>
+            <ul class="dropdown-menu">
+                             <li class="dropdown-submenu ">
+                <a href="/publications/journals" target="_self">Journals
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                 <li class="dropdown-submenu third-level-reveal">
+                <a href="/publications/journals/value-in-health" target="_self">Value in Health
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/publications/journals/value-in-health/vih-about-the-editors" target="_self">About the Editors</a>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/publications/journals/value-in-health/for-authors" target="_self">For Authors
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/publications/journals/value-in-health/for-authors/about-the-journal" target="_self">About the Journal</a>
+            </li>
+            <li class=" ">
+                <a href="/publications/journals/value-in-health/for-authors/call-for-papers" target="_self">Call for Papers</a>
+            </li>
+            <li class=" ">
+                <a href="/publications/journals/value-in-health/for-authors/submit" target="_self">Submit</a>
+            </li>
+            <li class=" ">
+                <a href="/publications/journals/value-in-health/for-authors/guide-for-authors" target="_self">Instructions for Authors</a>
+            </li>
+
+                </ul>
+            </li>
+            <li class=" ">
+                <a href="/publications/journals/value-in-health/vih-archives" target="_self">Issue Archives</a>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/publications/journals/value-in-health/virtual-collections" target="_self">Special Collections
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/publications/journals/value-in-health/virtual-collections/editor-choice" target="_self">Editor&#39;s Choice</a>
+            </li>
+            <li class=" ">
+                <a href="/publications/journals/value-in-health/virtual-collections/themed-sections" target="_self">Themed Sections</a>
+            </li>
+            <li class=" ">
+                <a href="/publications/journals/value-in-health/virtual-collections/topical-collections" target="_self">Topical Collections</a>
+            </li>
+
+                </ul>
+            </li>
+            <li class=" ">
+                <a href="/publications/journals/value-in-health/vih-paper-of-the-year-award" target="_self">Awards</a>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu third-level-reveal">
+                <a href="/publications/journals/value-in-health-regional-issues" target="_self">Value in Health Regional Issues
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/publications/journals/value-in-health-regional-issues/regions" target="_self">Regions</a>
+            </li>
+            <li class=" ">
+                <a href="/publications/journals/value-in-health-regional-issues/editorial-board" target="_self">About The Editors</a>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/publications/journals/value-in-health-regional-issues/for-authors" target="_self">For Authors
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/publications/journals/value-in-health-regional-issues/for-authors/about-the-journal" target="_self">About the Journal</a>
+            </li>
+            <li class=" ">
+                <a href="/publications/journals/value-in-health-regional-issues/for-authors/call-for-papers" target="_self">Call for Papers</a>
+            </li>
+            <li class=" ">
+                <a href="/publications/journals/value-in-health-regional-issues/for-authors/submit" target="_self">Submit</a>
+            </li>
+            <li class=" ">
+                <a href="/publications/journals/value-in-health-regional-issues/for-authors/guide-for-authors" target="_self">Instructions for Authors</a>
+            </li>
+
+                </ul>
+            </li>
+            <li class=" ">
+                <a href="/publications/journals/value-in-health-regional-issues/issue-archives" target="_self">Issue Archives</a>
+            </li>
+            <li class=" ">
+                <a href="/publications/journals/value-in-health-regional-issues/ispor-vihri-excellent-article-award" target="_self">Awards</a>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/publications/journals/value-in-health-regional-issues/virtual-collections" target="_self">Special Collections
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/publications/journals/value-in-health-regional-issues/virtual-collections/viruses-and-vaccines" target="_self">Viruses and Vaccines</a>
+            </li>
+            <li class=" ">
+                <a href="/publications/journals/value-in-health-regional-issues/virtual-collections/editors-choice" target="_self">Editor&#39;s Choice</a>
+            </li>
+            <li class=" ">
+                <a href="/publications/journals/value-in-health-regional-issues/virtual-collections/topical-collections" target="_self">Topical Collections</a>
+            </li>
+            <li class=" ">
+                <a href="/publications/journals/value-in-health-regional-issues/virtual-collections/themed-sections" target="_self">Themed Sections</a>
+            </li>
+
+                </ul>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu third-level-reveal">
+                <a href="/publications/journals/value-outcomes-spotlight" target="_self">Value &amp; Outcomes Spotlight
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/publications/journals/value-outcomes-spotlight/VOS-About-the-Editors" target="_self">About the Editors</a>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/publications/journals/value-outcomes-spotlight/for-authors" target="_self">For Authors
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/publications/journals/value-outcomes-spotlight/for-authors/about-the-journal" target="_self">About the Journal</a>
+            </li>
+            <li class=" ">
+                <a href="/publications/journals/value-outcomes-spotlight/for-authors/submit" target="_self">Submit</a>
+            </li>
+            <li class=" ">
+                <a href="/publications/journals/value-outcomes-spotlight/for-authors/editorial-policy" target="_self">Instructions for Authors</a>
+            </li>
+
+                </ul>
+            </li>
+            <li class=" ">
+                <a href="/publications/journals/value-outcomes-spotlight/vos-archives" target="_self">Value and Outcomes Spotlight Archives</a>
+            </li>
+            <li class=" ">
+                <a href="/publications/journals/value-outcomes-spotlight/vos-archives-pre-2020" target="_self">Issue Archives: pre-2020</a>
+            </li>
+
+                </ul>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/publications/newsletters" target="_self">Newsletters
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                 <li class="dropdown-submenu ">
+                <a href="/publications/newsletters/news-across" target="_self">News Across The Globe
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/publications/newsletters/news-across/asia-pacific" target="_self">Asia Pacific</a>
+            </li>
+            <li class=" ">
+                <a href="/publications/newsletters/news-across/latin-america" target="_self">Latin America</a>
+            </li>
+            <li class=" ">
+                <a href="/publications/newsletters/news-across/europe-middle-east-africa" target="_self">Europe, Middle East &amp; Africa</a>
+            </li>
+
+                </ul>
+            </li>
+
+                </ul>
+            </li>
+            <li class=" ">
+                <a href="/publications/call-for-reviewers" target="_self">Call for Reviewers</a>
+            </li>
+
+            </ul>
+        </li>
+        <li class="dropdown ">
+            <a href="/member-groups">Member Groups
+            </a>
+            <span data-toggle="dropdown" class="dropdown-toggle icon-plus"></span>
+            <ul class="dropdown-menu">
+                             <li class="dropdown-submenu ">
+                <a href="/member-groups/special-interest-groups" target="_self">Special Interest Groups
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/member-groups/special-interest-groups/clinical-outcome-assessment" target="_self">Clinical Outcome Assessment</a>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/member-groups/special-interest-groups/digital-health" target="_self">Digital Health
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/member-groups/special-interest-groups/digital-health/digital-health-terms-and-definitions-monographs" target="_self">Digital Health Terms and Definitions Monographs</a>
+            </li>
+
+                </ul>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/special-interest-groups/emerging-and-orphan-therapies" target="_self">Emerging and Orphan Therapies</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/special-interest-groups/global-access-to-medical-innovation" target="_self">Global Access to Medical Innovation</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/special-interest-groups/health-equity-research" target="_self">Health Equity Research</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/special-interest-groups/health-preference-research" target="_self">Health Preference  Research</a>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/member-groups/special-interest-groups/medical-devices-and-diagnostics" target="_self">Medical Devices and Diagnostics
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/member-groups/special-interest-groups/medical-devices-and-diagnostics/medical-device-diagnostics-terms-and-definitions-monographs" target="_self">Medical Device &amp; Diagnostics Terms and Definitions Monographs</a>
+            </li>
+
+                </ul>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/special-interest-groups/medication-adherence-and-persistence" target="_self">Medication Adherence and Persistence</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/special-interest-groups/oncology" target="_self">Oncology</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/special-interest-groups/patient-centered" target="_self">Patient-Centered</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/special-interest-groups/real-world-evidence-rwe" target="_self">Real-World Evidence (RWE) </a>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/member-groups/special-interest-groups/statistical-methods" target="_self">Statistical Methods in HEOR
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/member-groups/special-interest-groups/statistical-methods/statistical-terms-and-definitions-monographs" target="_self">Statistical Terms and Definitions Monographs</a>
+            </li>
+
+                </ul>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/member-groups/task-forces" target="_self">Task Forces
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/member-groups/task-forces/patient-reported-outcomes-prospective-real-world-study-design" target="_self">Patient Reported Outcomes (PROs) in Prospective Real World Study Design&#160;</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/task-forces/performance-outcome-perfo-assessments" target="_self">Performance Outcome (PerfO) Assessments</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/task-forces/preference-heterogeneity-in-stated-choice-data" target="_self">Preference Heterogeneity in Stated Choice Data</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/task-forces/surrogate-endpoint-statistical-assessment-for-hta-decision-making" target="_self">Surrogate Endpoint Statistical Evaluation for HTA Decision Making</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/task-forces/Valuing-HRQoL-of-Children-Adolescents-in-Economic-Models" target="_self">Valuing HRQoL of Children &amp; Adolescents in Economic Evaluation (Pediatric Utilities)</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/task-forces/value-based-healthcare-implementation" target="_self">Value-Based Healthcare Implementation Special Task Force</a>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/member-groups/councils-roundtables" target="_self">Councils &amp; Roundtables
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/member-groups/councils-roundtables/awards-council" target="_self">Awards Council</a>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/member-groups/councils-roundtables/education-council" target="_self">Education Council
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/member-groups/councils-roundtables/education-council/education-council-leadership" target="_self">Education Council Leadership</a>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/member-groups/councils-roundtables/ispor-faculty-advisor-council" target="_self">Faculty Advisor Council
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/member-groups/councils-roundtables/ispor-faculty-advisor-council/fellowship-focus-group" target="_self">Faculty Advisor Council – Professional Development Focus Group</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/councils-roundtables/ispor-faculty-advisor-council/ispor-student-network-faculty-advisors-directory" target="_self">Faculty Advisor Council Resources</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/councils-roundtables/ispor-faculty-advisor-council/member-engagement-focus-group" target="_self">Faculty Advisor Council – Member Engagement Focus Group</a>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/member-groups/councils-roundtables/global-engagement-council" target="_self">Global Engagement Council 
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/member-groups/councils-roundtables/global-engagement-council/global-engagement-council-leadership" target="_self">Global Engagement Council Leadership</a>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/member-groups/councils-roundtables/health-science-policy-council" target="_self">Health Science Policy Council
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/member-groups/councils-roundtables/health-science-policy-council/health-science-policy-council-leadership" target="_self">Health Science Policy Council Leadership</a>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/member-groups/councils-roundtables/health-technology-assessment-council" target="_self">Health Technology Assessment Council
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/member-groups/councils-roundtables/health-technology-assessment-council/health-technology-assessment-good-practices-recommendation" target="_self">Health Technology Assessment Good Practices Recommendation</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/councils-roundtables/health-technology-assessment-council/health-technology-assessment-roundtables" target="_self">Health Technology Assessment Roundtables</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/councils-roundtables/health-technology-assessment-council/living-health-technology-assessment" target="_self">Living Health Technology Assessment (HTA)</a>
+            </li>
+
+                </ul>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/councils-roundtables/past-presidents-council" target="_self">Past Presidents Council</a>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/member-groups/councils-roundtables/patient-council" target="_self">Patient Council
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                 <li class="dropdown-submenu ">
+                <a href="/member-groups/councils-roundtables/patient-council/patient-representatives-roundtables" target="_self">Patient Representatives Roundtables
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/member-groups/councils-roundtables/patient-council/patient-representatives-roundtables/photo-gallery" target="_self">Photo Gallery</a>
+            </li>
+
+                </ul>
+            </li>
+
+                </ul>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/councils-roundtables/publications-council" target="_self">Publications Council</a>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/member-groups/global-groups" target="_self">Global Groups
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                 <li class="dropdown-submenu ">
+                <a href="/member-groups/global-groups/consortia" target="_self">Consortia
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                 <li class="dropdown-submenu ">
+                <a href="/member-groups/global-groups/consortia/asia-consortium" target="_self">Asia Consortium
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/member-groups/global-groups/consortia/asia-consortium/executive-committee" target="_self">Asia Consortium Executive Committee</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/global-groups/consortia/asia-consortium/industry-committee" target="_self">Asia Consortium Industry Committee</a>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/member-groups/global-groups/consortia/central-eastern-europe-consortium" target="_self">Central &amp; Eastern Europe Consortium
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/member-groups/global-groups/consortia/central-eastern-europe-consortium/executive-committee" target="_self">Central &amp; Eastern Europe Consortium Executive Committee</a>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/member-groups/global-groups/consortia/latin-america-consortium" target="_self">Latin America Consortium
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/member-groups/global-groups/consortia/latin-america-consortium/executive-committee" target="_self">Latin America Consortium Executive Committee</a>
+            </li>
+
+                </ul>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/member-groups/global-groups/networks" target="_self">Networks
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                 <li class="dropdown-submenu ">
+                <a href="/member-groups/global-groups/networks/africa-network" target="_self">Africa Network
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/member-groups/global-groups/networks/africa-network/executive-committee" target="_self">Africa Network Executive Committee</a>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/member-groups/global-groups/networks/arabic-network" target="_self">Arabic Network
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/member-groups/global-groups/networks/arabic-network/executive-committee" target="_self">Arabic Network Executive Committee</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/global-groups/networks/arabic-network/ispor-dubai-2018" target="_self">ISPOR Dubai 2018</a>
+            </li>
+
+                </ul>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/global-groups/networks/regional-network-policies-and-procedures" target="_self">Regional Network Policies and Procedures</a>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/member-groups/global-groups/regional-chapters" target="_self">Regional Chapters
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                 <li class="dropdown-submenu ">
+                <a href="/member-groups/global-groups/regional-chapters/regional-chapter-resource-center" target="_self">Regional Chapter Resource Center
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/member-groups/global-groups/regional-chapters/regional-chapter-resource-center/ispor-chapter-leadership-webinar" target="_self">ISPOR Chapter Leadership Webinar</a>
+            </li>
+
+                </ul>
+            </li>
+
+                </ul>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/global-groups/join-an-ispor-global-member-group" target="_self">Join an ISPOR Global Member Group</a>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/member-groups/students" target="_self">Students
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/member-groups/students/apply-renew-membership" target="_self">Apply For/Renew Membership</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/students/apply-for-a-student-travel-grant" target="_self">Apply for a Student Travel Grant</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/students/student-council" target="_self">Student Council</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/students/student-chapters" target="_self">Student Chapters</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/students/student-network-committees" target="_self">Student Network Committees</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/students/webinars" target="_self">Webinars</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/students/student-newsletters" target="_self">Student Newsletters</a>
+            </li>
+
+                </ul>
+            </li>
+             <li class="dropdown-submenu ">
+                <a href="/member-groups/new-professionals" target="_self">New Professionals
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                 <li class="dropdown-submenu ">
+                <a href="/member-groups/new-professionals/professional-development-resources" target="_self">Professional Development Resources
+                    <span class="right-caret"></span>
+                </a>
+                <span class="dropdown-toggle icon-plus"></span>
+                <ul class="dropdown-menu">
+                                <li class=" ">
+                <a href="/member-groups/new-professionals/professional-development-resources/what-is-the-impact-of-gdpr-on-the-heor-community" target="_self">What is the Impact of GDPR on the HEOR Community</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/new-professionals/professional-development-resources/good-practices-for-hta---what-is-out-there-and-how-do-i-use-it" target="_self">Good Practices for HTA - What is out there and how do I use it</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/new-professionals/professional-development-resources/ispor-aacp-joint-webinar-tips-for-securing-a-post-doctoral-fellowship" target="_self">ISPOR &amp; AACP Joint Webinar – “Tips for Securing a Post-Doctoral Fellowship”</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/new-professionals/professional-development-resources/you-are-creative-research-is-the-first-step" target="_self">You Are Creative: Research is the First Step</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/new-professionals/professional-development-resources/good-practices-for-a-successful-job-search" target="_self">Good Practices for a Successful Job Search</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/new-professionals/professional-development-resources/leveraging-the-power-of-linkedin" target="_self">Leveraging The Power Of LinkedIn</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/new-professionals/professional-development-resources/internships-fellowships-career-opportunities-for-the-future" target="_self">Internships &amp; Fellowships: Career Opportunities for the Future </a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/new-professionals/professional-development-resources/my-career-path" target="_self">My Career Path</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/new-professionals/professional-development-resources/career-advice-across-the-globe" target="_self">Career Advice Across the Globe</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/new-professionals/professional-development-resources/my-ispor-story---zeba-khan" target="_self">&quot;My ISPOR Story&quot; - Zeba Khan</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/new-professionals/professional-development-resources/my-ispor-story---lou-garrison" target="_self">&quot;My ISPOR Story&quot; - Lou Garrison</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/new-professionals/professional-development-resources/replicate-regulate-and-redefine-rwe-use-cases-in-the-next-decade" target="_self">Replicate, Regulate, and Redefine: RWE Use Cases in the Next Decade - Session 1</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/new-professionals/professional-development-resources/replicate-regulate-and-redefine-rwe-use-cases-in-the-next-decade---session-2" target="_self">Replicate, Regulate, and Redefine: RWE Use Cases in the Next Decade - Session 2</a>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/new-professionals/professional-development-resources/replicate-regulate-and-redefine-rwe-use-cases-in-the-next-decade---session-3" target="_self">Replicate, Regulate, and Redefine: RWE Use Cases in the Next Decade - Session 3</a>
+            </li>
+
+                </ul>
+            </li>
+
+                </ul>
+            </li>
+            <li class=" ">
+                <a href="/member-groups/online-communities" target="_self">Online Communities</a>
+            </li>
+
+            </ul>
+        </li>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</div>
+
+
+
+
+
+
+
+    </div>
+</div>
+ </section> <!--startindex--> <main class="section__main"> 
+<div class="banner img-bkg" data-sf-element="Row" style="background-image: url(&quot;undefined&quot;);">
+    <div id="Main_T99E82712007_Col00" class="sf_colsIn" data-sf-element="Background" data-placeholder-label="Background">
+<div >
+    <div class="sfContentBlock sf-Long-text" ><div class="line-dots"><div><svg height="542" viewBox="0 0 544 542" width="544" xmlns="http://www.w3.org/2000/svg"><g fill="#EBE9E6" fill-rule="evenodd"><path d="M50 202.5a4.499 4.499 0 1 1 9 0c0 2.485-2.017 4.5-4.502 4.5A4.499 4.499 0 0 1 50 202.5M9 143.5a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0M108.672 224.865a4.5 4.5 0 1 1 7.655-4.728 4.5 4.5 0 0 1-7.655 4.728M170.673 179.865a4.499 4.499 0 1 1 7.653-4.73 4.499 4.499 0 0 1-7.653 4.73M30.673 45.865a4.498 4.498 0 1 1 7.653-4.73 4.496 4.496 0 0 1-1.463 6.192 4.497 4.497 0 0 1-6.19-1.462M181.673 62.865a4.499 4.499 0 1 1 7.653-4.73 4.499 4.499 0 0 1-7.653 4.73M127.673 6.865a4.499 4.499 0 1 1 7.653-4.73 4.499 4.499 0 0 1-7.653 4.73M271.672 161.865a4.497 4.497 0 0 1 1.466-6.192 4.496 4.496 0 0 1 6.19 1.462 4.497 4.497 0 0 1-1.466 6.192 4.497 4.497 0 0 1-6.19-1.462M325.673 147.865a4.499 4.499 0 1 1 7.653-4.73 4.499 4.499 0 0 1-7.653 4.73M371.672 179.865a4.497 4.497 0 0 1 1.466-6.192 4.499 4.499 0 1 1-1.466 6.192M344.672 205.865a4.497 4.497 0 0 1 1.466-6.192 4.499 4.499 0 1 1-1.466 6.192M352.673 196.865a4.499 4.499 0 1 1 7.655-4.73 4.495 4.495 0 0 1-1.469 6.192 4.493 4.493 0 0 1-6.186-1.462M531.672 161.865a4.497 4.497 0 0 1 1.466-6.192 4.496 4.496 0 0 1 6.19 1.462 4.497 4.497 0 0 1-1.466 6.192 4.497 4.497 0 0 1-6.19-1.462M484.672 184.865a4.497 4.497 0 0 1 1.466-6.192 4.499 4.499 0 1 1-1.466 6.192M521.673 57.865a4.499 4.499 0 1 1 7.653-4.73 4.499 4.499 0 0 1-7.653 4.73M430.673 10.865a4.499 4.499 0 1 1 7.653-4.73 4.499 4.499 0 0 1-7.653 4.73M341.673 55.865a4.496 4.496 0 0 1 1.463-6.192 4.497 4.497 0 0 1 6.19 1.462 4.496 4.496 0 0 1-1.463 6.192 4.497 4.497 0 0 1-6.19-1.462M178.672 209.865a4.497 4.497 0 0 1 1.466-6.192 4.496 4.496 0 0 1 6.19 1.462 4.497 4.497 0 0 1-1.466 6.192 4.497 4.497 0 0 1-6.19-1.462M183.672 350.865a4.497 4.497 0 0 1 1.466-6.192 4.499 4.499 0 1 1-1.466 6.192M199.673 350.865a4.496 4.496 0 0 1 1.463-6.192 4.497 4.497 0 0 1 6.19 1.462 4.496 4.496 0 0 1-1.463 6.192 4.497 4.497 0 0 1-6.19-1.462M172.673 377.863a4.497 4.497 0 0 1 1.462-6.19 4.5 4.5 0 0 1 4.73 7.655 4.498 4.498 0 0 1-6.192-1.465M203.673 378.865a4.499 4.499 0 1 1 7.653-4.73 4.499 4.499 0 0 1-7.653 4.73M342.673 351.865a4.5 4.5 0 1 1 7.655-4.73 4.496 4.496 0 0 1-1.469 6.192 4.493 4.493 0 0 1-6.186-1.462M370.672 378.865a4.497 4.497 0 0 1 1.466-6.192 4.499 4.499 0 1 1-1.466 6.192M373.673 345.865a4.499 4.499 0 1 1 7.653-4.73 4.499 4.499 0 0 1-7.653 4.73M376.672 319.865a4.497 4.497 0 0 1 1.466-6.193 4.498 4.498 0 0 1 4.727 7.655 4.5 4.5 0 0 1-6.193-1.462M492.672 348.865a4.497 4.497 0 0 1 1.466-6.192 4.496 4.496 0 0 1 6.19 1.462 4.497 4.497 0 0 1-1.466 6.192 4.497 4.497 0 0 1-6.19-1.462M534.672 408.865a4.496 4.496 0 0 1 1.466-6.192 4.498 4.498 0 1 1 4.724 7.654 4.497 4.497 0 0 1-6.19-1.462M513.673 509.865a4.5 4.5 0 1 1 7.656-4.73 4.5 4.5 0 0 1-7.656 4.73M473.673 539.865a4.499 4.499 0 0 1 1.462-6.193 4.505 4.505 0 0 1 6.193 1.46 4.5 4.5 0 0 1-1.468 6.195 4.493 4.493 0 0 1-6.187-1.462M362.672 490.865a4.5 4.5 0 0 1 7.655-4.734 4.5 4.5 0 0 1-1.465 6.196 4.497 4.497 0 0 1-6.19-1.462M57.673 367.865a4.499 4.499 0 1 1 7.653-4.73 4.499 4.499 0 0 1-7.653 4.73M.674 420.865a4.495 4.495 0 0 1 1.463-6.192 4.499 4.499 0 1 1-1.463 6.192M198.673 497.861a4.493 4.493 0 0 1 1.462-6.188 4.503 4.503 0 0 1 6.193 1.457 4.505 4.505 0 0 1-1.465 6.197 4.494 4.494 0 0 1-6.19-1.466M139.673 538.862a4.495 4.495 0 0 1 1.462-6.19 4.501 4.501 0 0 1 6.193 1.46 4.5 4.5 0 0 1-1.466 6.196 4.494 4.494 0 0 1-6.19-1.466M40.673 518.865a4.499 4.499 0 1 1 7.653-4.73 4.499 4.499 0 0 1-7.653 4.73"></path><path d="M34.526 43.077l-.678-.564C47.86 25.673 66.432 13.527 87.551 7.394c14.235-4.138 28.85-5.36 43.435-3.637l-.104.873c-14.463-1.711-28.96-.498-43.085 3.606-20.949 6.086-39.373 18.134-53.271 34.841zm83.608-14.453a83.889 83.889 0 0 0-23.442 3.347C50.126 44.918 24.403 91.71 37.35 136.274c6.271 21.59 20.573 39.443 40.273 50.276 19.704 10.829 42.44 13.34 64.028 7.072 44.566-12.95 70.292-59.74 57.348-104.307-10.68-36.751-44.383-60.691-80.865-60.691zm81.691 174.702l-26.123-26.124c-8.966 7.753-19.697 13.744-31.806 17.261-21.815 6.335-44.793 3.801-64.695-7.141-19.905-10.946-34.358-28.986-40.696-50.802C23.423 91.49 49.417 44.21 94.447 31.126c33.872-9.84 69.015 2.43 89.92 28.277 28.534-11.977 58.824-18.047 90.04-18.047 23.618 0 46.91 3.52 69.233 10.467l-.258.841c-22.24-6.92-45.446-10.428-68.975-10.428-31.015 0-61.109 6.016-89.467 17.882 6.612 8.358 11.75 18.1 14.9 28.951 9.478 32.623-1.556 66.427-25.473 87.553l26.079 26.083-.62.62zm181.662 112.961l-.82-.325c5.232-13.293 7.886-27.35 7.886-41.775 0-62.944-51.206-114.15-114.146-114.15v-.878c63.425 0 115.025 51.601 115.025 115.028 0 14.536-2.672 28.702-7.945 42.1zm115.281 27.136l-.838-.262c6.918-22.25 10.425-45.456 10.425-68.974 0-32.03-6.4-63.036-19.029-92.16l.807-.35c12.675 29.235 19.101 60.36 19.101 92.51 0 23.603-3.52 46.897-10.466 69.236zm-310.482 4.702c-17.352-20.66-26.908-46.915-26.908-73.938 0-24.542 7.62-47.958 22.039-67.722l.709.517c-14.305 19.612-21.865 42.853-21.865 67.205 0 26.815 9.48 52.872 26.696 73.37l-.67.568zm350.87 58.079c-16.748-57.657-77.274-90.922-134.931-74.187a109.353 109.353 0 0 0-24.904 10.725l-.444-.76a110.2 110.2 0 0 1 25.102-10.807c58.124-16.89 119.135 16.666 136.021 74.783l-.845.246zm-494.64 109.32c-16.843-14.012-28.986-32.581-35.125-53.7-4.135-14.24-5.358-28.854-3.634-43.44l.876.105c-1.71 14.469-.5 28.963 3.6 43.089 6.091 20.952 18.14 39.373 34.843 53.27l-.56.677zm70.241-168.499a84.026 84.026 0 0 0-23.441 3.35c-21.592 6.272-39.445 20.577-50.274 40.278-10.835 19.701-13.344 42.44-7.075 64.026 12.953 44.57 59.747 70.282 104.307 57.344 21.588-6.272 39.442-20.574 50.27-40.275 10.832-19.7 13.344-42.44 7.073-64.025-10.678-36.755-44.377-60.698-80.86-60.698zm.076 169.228c-36.87 0-70.917-24.19-81.708-61.328-6.337-21.816-3.8-44.791 7.142-64.697 5.518-10.032 12.836-18.677 21.531-25.601-12.09-28.652-18.222-59.08-18.222-90.44 0-24.942 3.92-49.477 11.654-72.932-19.05-14-33.564-34.094-40.46-57.839l.842-.246c12.871 44.294 52.442 75.788 98.467 78.366l-.047.876c-21.405-1.198-41.427-8.6-58.058-20.612-7.642 23.285-11.516 47.634-11.516 72.387 0 31.16 6.073 61.398 18.056 89.879 8.392-6.533 18.036-11.478 28.556-14.532 45.033-13.086 92.31 12.909 105.391 57.943 13.082 45.03-12.912 92.312-57.941 105.39a84.75 84.75 0 0 1-23.687 3.386zm260.463-139.457c-5.64 5.61-10.51 12.064-14.453 19.234-10.828 19.701-13.337 42.44-7.065 64.026 6.268 21.592 20.57 39.446 40.27 50.275 19.704 10.829 42.436 13.34 64.03 7.069 21.589-6.272 39.442-20.574 50.274-40.275 10.829-19.7 13.337-42.44 7.069-64.026-6.272-21.588-20.573-39.443-40.274-50.275-19.703-10.832-42.442-13.34-64.027-7.072-13.444 3.908-25.442 10.927-35.196 20.429l.573.574-.62.62-.58-.58zm59.18 144.865c-14.134 0-28.118-3.561-40.85-10.561-19.905-10.943-34.358-28.983-40.693-50.798-6.338-21.816-3.804-44.792 7.141-64.697a85.289 85.289 0 0 1 14.602-19.43L346.25 349.75l.62-.62 26.433 26.426c9.855-9.603 21.982-16.7 35.571-20.65l.123.423-.123-.423c21.819-6.338 44.793-3.797 64.696 7.145 19.905 10.946 34.358 28.989 40.696 50.802 6.334 21.815 3.8 44.79-7.145 64.696s-28.985 34.357-50.797 40.695a85.402 85.402 0 0 1-23.848 3.416zm-289.06 14.942l-.246-.842c27.929-8.118 51.026-26.622 65.035-52.106 14.015-25.484 17.261-54.901 9.146-82.831a109.04 109.04 0 0 0-10.725-24.901l.76-.445a109.888 109.888 0 0 1 10.806 25.1c8.182 28.157 4.91 57.81-9.215 83.503a112.048 112.048 0 0 1-6.65 10.64c23.2 7.576 47.45 11.415 72.08 11.415 31.323 0 61.695-6.133 90.282-18.23l.344.814c-28.695 12.14-59.186 18.298-90.626 18.298-24.816 0-49.246-3.886-72.615-11.547-14.248 19.814-34.573 34.217-58.377 41.132zm333.516.397l-.356-.807c15.263-6.713 28.985-17.05 39.672-29.896l.674.56c-10.775 12.95-24.6 23.376-39.99 30.143z"></path><path d="M327.757 143.92a110.146 110.146 0 0 1-3.378-27.129C324.379 56.252 373.64 7 434.19 7v.882c-60.066 0-108.933 48.855-108.933 108.91 0 9.103 1.125 18.156 3.35 26.913l-.85.214zm207.614 15.607l-.814-.34c5.683-13.434 8.564-27.699 8.564-42.396 0-21.821-6.433-42.877-18.602-60.892l.725-.492C537.517 73.567 544 94.797 544 116.791c0 14.817-2.906 29.195-8.63 42.736zM434.19 32.603c-46.431 0-84.205 37.766-84.205 84.188 0 46.423 37.774 84.189 84.205 84.189 46.428 0 84.201-37.766 84.201-84.189 0-46.422-37.773-84.188-84.201-84.188zM274.364 172.185c-56.51 0-102.485 45.968-102.485 102.468s45.975 102.465 102.485 102.465c56.507 0 102.481-45.966 102.481-102.465 0-56.5-45.974-102.468-102.481-102.468zm0 205.815C217.368 378 171 331.638 171 274.653c0-56.985 46.368-103.347 103.364-103.347 28.97 0 55.193 11.98 73.98 31.243l25.677-25.67c-15.39-15.402-24.917-36.653-24.917-60.088 0-46.907 38.17-85.067 85.087-85.067 46.913 0 85.084 38.16 85.084 85.067 0 46.905-38.17 85.068-85.084 85.068-23.162 0-44.19-9.3-59.546-24.361l-25.69 25.681c17.811 18.576 28.77 43.77 28.77 71.474C377.725 331.638 331.36 378 274.364 378z"></path></g>
+</svg></div></div></div>
+</div>
+    </div>
+    <div id="Main_T99E82712007_Col01" class="sf_colsIn banner__text banner__text--left" data-sf-element="Text" data-placeholder-label="Text"><div>
+    <ul class="sf-breadscrumb breadcrumb">
+                <li><a href="/">Home </a></li>
+    </ul>
+</div>
+<h1 class="interior-layout__title">Page Not Found</h1>
+
+<div class="subtitle" >
+    <div class="sfContentBlock sf-Long-text" ></div>
+</div>
+    </div>
+</div><div id="Main_T99E82712010_Col00" class="sf_colsIn container py-8" data-sf-element="Container" data-placeholder-label="Container"><div class="row" data-sf-element="Row">
+    <div id="Main_C004_Col00" class="sf_colsIn col-md-6" data-sf-element="Column 1" data-placeholder-label="Column 1"> 
+    <img src="/images/default-source/default-album/page-not-found_roadsigns_istock-497254813.jpg?sfvrsn=eda3d472_0&amp;MaxWidth=650&amp;MaxHeight=650&amp;ScaleUp=false&amp;Quality=High&amp;Method=ResizeFitToAreaArguments&amp;Signature=C0CE17292D0755444A029D11FFD236167D25B9C0" title="Page Not Found_Roadsigns_iStock-497254813" alt="Page Not Found_Roadsigns_iStock-497254813" 
+                
+                 /> 
+ 
+    </div>
+    <div id="Main_C004_Col01" class="sf_colsIn col-md-6" data-sf-element="Column 2" data-placeholder-label="Column 2">
+<div class="subtitle" >
+    <div class="sfContentBlock sf-Long-text" ><h2>Sorry!<br /></h2><h4>The page you were looking for could not be found. Apparently, our website navigation, despite our HEOR expertise, did not adequately control for all variables! Please go back to the <a href="/home">home page</a>&nbsp;or try to locate what you are looking for with the search function below.</h4></div>
+</div>
+<div >
+    <div class="sfContentBlock sf-Long-text" ><div class="mg-site-search section"><input class="input search-input" name="q" placeholder="enter keyword" type="text" /></div></div>
+</div>
+    </div>
+</div>
+
+</div>
+ </main> <div class="flex"> 
+
+
+ </div> <!--stopindex--> <footer class="section__footer py-8"> <div id="footer__links" class="container"> <div class="row"> <div class="col-md-5">
+
+<div >
+    <div class="sfContentBlock sf-Long-text" ><h5>Quick Links</h5><hr /></div>
+</div>
+
+
+<div>
+    
+
+      <ul class="footer-nav">
+     <li class="">
+        <a href="/about" target="_self">About</a>
+
+    </li>
+     <li class="">
+        <a href="/heor-resources/news-top/news/media-center" target="_self">Media Center</a>
+
+    </li>
+     <li class="">
+        <a href="/conferences-education/conferences/exhibits-sponsorships" target="_self">Exhibits &amp; Sponsorships</a>
+
+    </li>
+     <li class="">
+        <a href="/about/contact-us" target="_self">Contact Us</a>
+
+    </li>
+    </ul>
+</div>
+
+
+
+
+</div> <div class="col-md-5">
+
+<div >
+    <div class="sfContentBlock sf-Long-text" ><h5>Policies &amp; Legal</h5><hr /></div>
+</div>
+
+
+<div>
+    
+
+      <ul class="footer-nav">
+     <li class="">
+        <a href="/ai-policy" target="_self">AI Policy</a>
+
+    </li>
+     <li class="">
+        <a href="/antitrust-compliance" target="_self">Antitrust Compliance</a>
+
+    </li>
+     <li class="">
+        <a href="/code-of-ethics" target="_self">Code of Ethics</a>
+
+    </li>
+     <li class="">
+        <a href="/cookie-policy" target="_self">Cookie Policy</a>
+
+    </li>
+     <li class="">
+        <a href="/about/our-society/diversity-policy" target="_self">Diversity Policy</a>
+
+    </li>
+     <li class="">
+        <a href="/funding-statement" target="_self">Funding Statement</a>
+
+    </li>
+     <li class="">
+        <a href="/legal-disclaimer" target="_self">Legal Disclaimer</a>
+
+    </li>
+     <li class="">
+        <a href="/privacy-policy" target="_self">Privacy Policy</a>
+
+    </li>
+     <li class="">
+        <a href="/terms-and-conditions" target="_self">Terms and Conditions</a>
+
+    </li>
+    </ul>
+</div>
+
+
+
+
+</div> <div class="col-md-2 mt-9">
+
+<div >
+    <div class="sfContentBlock sf-Long-text" ><p><a class="button secondary" href="/about/contact-us/subscribe">Subscribe</a></p><p><a class="button secondary" href="/join-ispor">Join ISPOR</a></p></div>
+</div></div> </div> </div> <hr> <div class="bkg-white"> <div class="container"> <div id="footer__copyright" class="row"> <div class="col-md-8">
+
+<div >
+    <div class="sfContentBlock sf-Long-text" ><h2>ISPOR&ndash;The Professional Society for <br />Health Economics and Outcomes Research</h2></div>
+</div></div> <div class="col-md-4">
+
+<div class="mt-4" >
+    <div class="sfContentBlock sf-Long-text" ><div class="flex-center"><a class="mr-4" href="mailto:info@ispor.org?subject=Mail%20from%20ISPOR%20web%20site" title="email" data-sf-ec-immutable=""><svg height="30" viewBox="0 0 45 45" width="30"><g fill="none" fill-rule="evenodd"><path d="M22.5,0 C10.0735917,0 0,10.0736016 0,22.5 C0,34.9264055 10.0735945,45 22.5,45 C34.9264125,45 45,34.9264055 45,22.5 C45,10.0735875 34.9264125,0 22.5,0 Z" fill="#27AAE1"></path><path d="M34.8046875,11.25 L10.1953125,11.25 C9.22851562,11.25 8.4375,12.0410156 8.4375,13.0078125 L8.4375,30.5859375 C8.4375,31.5527348 9.22851562,32.34375 10.1953125,32.34375 L34.8046875,32.34375 C35.7714844,32.34375 36.5625,31.5527348 36.5625,30.5859375 L36.5625,13.0078125 C36.5625,12.0410156 35.7714844,11.25 34.8046875,11.25 Z M33.046875,14.765625 L33.046875,16.0290527 L22.5,22.2442383 L11.953125,16.0290527 L11.953125,14.765625 L33.046875,14.765625 Z M11.953125,28.828125 L11.953125,19.0894043 L22.5,25.3045898 L33.046875,19.0894043 L33.046875,28.828125 L11.953125,28.828125 Z" fill="#FFF"></path></g>
+ </svg>
+ </a>
+ <a class="mr-4" href="https://www.linkedin.com/company/ISPORorg" rel="noopener noreferrer" target="_blank" title="LinkedIn" data-sf-ec-immutable=""><svg height="30" viewBox="0 0 45 45" width="30"><path d="M22.5,11 C10.0735917,11 0,21.0736016 0,33.5 C0,45.9264055 10.0735945,56 22.5,56 C34.9264125,56 45,45.9264055 45,33.5 C45,21.0735875 34.9264125,11 22.5,11 Z M17.128125,44.1734375 C17.1074812,44.5062406 16.8421781,44.7715466 16.509375,44.7921889 L12.2906264,44.7921889 C11.9550009,44.7778902 11.6861752,44.509063 11.671875,44.1734375 L11.6718764,29.0703125 C11.6861766,28.7346828 11.9550023,28.4658641 12.2906264,28.4515625 L16.509375,28.4515625 C16.6734703,28.4508313 16.8308297,28.5168125 16.9453125,28.634375 C17.0694844,28.7454266 17.1409781,28.9037422 17.1421875,29.0703125 L17.128125,44.1734375 Z M16.4109375,25.8921875 C15.8651578,26.446025 15.1213078,26.7597594 14.34375,26.7640625 C12.743408,26.7261922 11.4616012,25.4257203 11.4468764,23.825 C11.4420923,23.0497062 11.7575606,22.3068266 12.31875,21.771875 C12.8372442,21.1969859 13.5697809,20.8612437 14.34375,20.84375 C15.1192828,20.8443406 15.8628375,21.1528859 16.4109375,21.7015625 C16.9704844,22.2354031 17.2771594,22.9816578 17.2546875,23.7546875 C17.2931484,24.5428625 16.9848703,25.308425 16.4109375,25.85 L16.4109375,25.8921875 Z M35.49375,44.1734375 C35.4794484,44.509063 35.2106297,44.7778902 34.875,44.7921889 L30.459375,44.7921889 C30.2964891,44.7924673 30.1419141,44.7203295 30.0375,44.5953111 C29.9264063,44.4776572 29.8658391,44.3211627 29.86875,44.1593778 L29.86875,34.90625 C29.921175,34.2686281 29.7631125,33.6313859 29.41875,33.0921875 C28.9789031,32.6534797 28.3620375,32.4409531 27.7453125,32.515625 C26.8913672,32.4371422 26.0571516,32.8037656 25.5375,33.4859375 C25.111575,34.2174969 24.9155859,35.0602625 24.975,35.9046875 L24.975,44.0890611 C24.9606984,44.4246852 24.6918797,44.6935067 24.35625,44.7078111 L20.1375,44.7078111 C19.8018703,44.6935095 19.5330516,44.424688 19.51875,44.0890611 L19.51875,29.0703125 C19.5330516,28.7346828 19.8018703,28.4658641 20.1375,28.4515625 L24.35625,28.4515625 C24.5309766,28.4368391 24.7025672,28.5044375 24.8203125,28.634375 C24.9670969,28.9253141 25.0257516,29.2527734 24.9890625,29.5765625 C26.1486141,28.5496625 27.6601359,28.0105625 29.2078125,28.071875 C30.8519578,28.0057531 32.4647438,28.5350375 33.75,29.5625 C34.9414734,30.7216437 35.5592391,32.3484219 35.4375,34.00625 L35.49375,44.1734375 Z" fill="#27AAE1" fill-rule="evenodd" transform="translate(0 -11)"></path></svg>
+ </a>
+ <a class="mr-4" href="http://www.facebook.com/pages/International-Society-for-Pharmacoeconomics-and-Outcomes-Research-ISPOR/100220853389399" rel="noopener noreferrer" target="_blank" title="FaceBook" data-sf-ec-immutable=""><svg height="30" viewBox="0 0 45 45" width="30" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M44.972 22.499c0 12.424-10.068 22.498-22.485 22.498C10.067 44.997 0 34.923 0 22.5 0 10.072 10.068 0 22.487 0 34.904 0 44.972 10.072 44.972 22.5" fill="#27AAE1"></path><path d="M19.482 33.749h4.67V22.506h3.15l.409-3.971h-3.559v-2.336c0-.876.58-1.082.99-1.082h2.511v-3.855l-3.459-.013c-3.84 0-4.712 2.875-4.712 4.715v2.571H17.26v3.971h2.22V33.75z" fill="#FFF"></path></g>
+ </svg></a>
+ <a class="mr-4" href="https://twitter.com/ispororg" rel="noopener noreferrer" target="_blank" title="Twitter" data-sf-ec-immutable=""><svg height="30" viewBox="0 0 46 45" width="30" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M45.677 22.498c0 12.425-10.067 22.499-22.484 22.499-12.42 0-22.487-10.074-22.487-22.498C.706 10.072 10.774 0 23.193 0 35.61 0 45.677 10.072 45.677 22.498" fill="#27AAE1"></path><path d="M36.281 11.671a11.551 11.551 0 0 1-3.663 1.403 5.752 5.752 0 0 0-4.208-1.824 5.769 5.769 0 0 0-5.766 5.771c0 .453.051.892.148 1.315a16.367 16.367 0 0 1-11.885-6.03 5.747 5.747 0 0 0-.781 2.903 5.769 5.769 0 0 0 2.566 4.8 5.736 5.736 0 0 1-2.612-.72v.072a5.775 5.775 0 0 0 4.626 5.658 5.772 5.772 0 0 1-2.605.1 5.775 5.775 0 0 0 5.387 4.006 11.568 11.568 0 0 1-7.163 2.471c-.464 0-.924-.028-1.374-.081a16.315 16.315 0 0 0 8.839 2.591c10.607 0 16.405-8.79 16.405-16.417 0-.248-.003-.499-.014-.747a11.698 11.698 0 0 0 2.876-2.985 11.506 11.506 0 0 1-3.312.908 5.787 5.787 0 0 0 2.536-3.194" fill="#FFF"></path></g>
+ </svg></a>
+ <a class="mr-4" href="http://www.youtube.com/user/ISPORorg" rel="noopener noreferrer" target="_blank" title="YouTube" data-sf-ec-immutable=""><svg height="30" viewBox="0 0 45 45" width="30"><path d="M18.6609375,30.1640625 L28.2515625,22.5 L18.6609375,14.8359375 L18.6609375,30.1640625 Z M22.5,0 C10.0735917,0 0,10.0736016 0,22.5 C0,34.9264055 10.0735945,45 22.5,45 C34.9264125,45 45,34.9264055 45,22.5 C45,10.0735875 34.9264125,0 22.5,0 Z M37.8421875,28.2515625 C37.8344531,31.424857 35.2639125,33.9954005 32.090625,34.0031278 L12.909375,34.003125 C9.73608047,33.9953948 7.16554125,31.424857 7.15781109,28.2515625 L7.1578125,16.7484375 C7.16554266,13.57515 9.73608187,11.0046094 12.909375,10.996875 L32.090625,10.996875 C35.2639125,11.0046094 37.8344531,13.57515 37.8421875,16.7484375 L37.8421875,28.2515625 Z" fill="#27AAE1" fill-rule="evenodd"></path></svg></a>
+ <a href="https://www.instagram.com/ISPORorg/" rel="noopener noreferrer" target="_blank" title="Instagram" data-sf-ec-immutable=""><svg height="30" viewBox="0 0 46 45" width="30" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M45.133 22.498c0 12.425-10.068 22.499-22.484 22.499C10.229 44.997.16 34.923.16 22.499.161 10.072 10.23 0 22.65 0c12.416 0 22.484 10.072 22.484 22.498" fill="#27AAE1"></path><path d="M22.647 9c-3.664 0-4.123.016-5.562.081-1.436.066-2.417.294-3.275.628a6.613 6.613 0 0 0-2.39 1.557 6.618 6.618 0 0 0-1.556 2.391c-.334.859-.562 1.84-.627 3.277-.066 1.44-.081 1.9-.081 5.566s.015 4.126.08 5.566c.066 1.437.294 2.418.628 3.277.345.888.806 1.64 1.556 2.391a6.613 6.613 0 0 0 2.39 1.557c.858.334 1.839.562 3.275.628 1.439.065 1.898.081 5.562.081 3.664 0 4.124-.016 5.563-.081 1.436-.066 2.416-.294 3.274-.628a6.613 6.613 0 0 0 2.39-1.557 6.618 6.618 0 0 0 1.556-2.391c.334-.859.562-1.84.627-3.277.066-1.44.082-1.9.082-5.566s-.016-4.126-.082-5.566c-.065-1.437-.293-2.418-.627-3.277a6.618 6.618 0 0 0-1.556-2.391 6.613 6.613 0 0 0-2.39-1.557c-.858-.334-1.838-.562-3.274-.628C26.77 9.016 26.31 9 22.647 9zm0 2.432c3.602 0 4.03.014 5.452.08 1.315.06 2.03.28 2.505.464a4.18 4.18 0 0 1 1.551 1.01c.472.472.765.922 1.01 1.552.184.476.404 1.19.464 2.507.065 1.423.079 1.85.079 5.455s-.014 4.032-.079 5.455c-.06 1.316-.28 2.031-.465 2.507a4.182 4.182 0 0 1-1.009 1.552 4.18 4.18 0 0 1-1.551 1.01c-.475.185-1.19.405-2.505.465-1.423.065-1.85.079-5.452.079-3.603 0-4.03-.014-5.452-.08-1.315-.06-2.03-.28-2.505-.464a4.18 4.18 0 0 1-1.551-1.01 4.183 4.183 0 0 1-1.01-1.552c-.184-.476-.404-1.19-.464-2.507-.065-1.423-.079-1.85-.079-5.455s.014-4.032.08-5.455c.06-1.316.279-2.031.464-2.507.244-.63.537-1.08 1.009-1.552a4.18 4.18 0 0 1 1.551-1.01c.476-.185 1.19-.405 2.505-.465 1.423-.065 1.85-.079 5.452-.079zm0 4.136A6.93 6.93 0 0 0 15.72 22.5a6.93 6.93 0 0 0 6.928 6.932 6.93 6.93 0 0 0 6.928-6.932 6.93 6.93 0 0 0-6.928-6.932zm0 11.432a4.499 4.499 0 0 1-4.497-4.5c0-2.485 2.013-4.5 4.497-4.5a4.499 4.499 0 0 1 4.497 4.5c0 2.485-2.013 4.5-4.497 4.5zm8.82-11.706a1.62 1.62 0 1 1-3.238 0 1.62 1.62 0 0 1 3.239 0z" fill="#FFF"></path></g>
+ </svg></a>
+</div></div>
+</div>
+<div >
+    <div class="sfContentBlock sf-Long-text" ><p class="m-0 text--sm">Copyright &copy; <span class="copy-year">2018</span> <a href="/home">ISPOR</a>. All rights reserved.
+</p><p class="is-accent-lighter my-0 text--xsm">International Society for Pharmacoeconomics and Outcomes Research, Inc</p><p class="m-0 text--sm">Website Design &amp; Development by <a href="https://www.matrixgroup.net/" target="_blank">Matrix Group</a></p></div>
+</div></div> </div> </div> </div> </footer> <!--startindex--> <!-- ============= Outdated Browser ============= --> <div id="outdated"> <h6>Your browser is out-of-date</h6> <p>ISPOR recommends that you update your browser for more security, speed and the best experience on ispor.org. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p> <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p> </div> <script src="/ResourcePackages/ISPOR/assets/src/project/js/vendor/outdatedbrowser.min.js"></script> <!-- plugin call --> <script>
+        //event listener form DOM ready
+        function addLoadEvent(func) {
+            var oldonload = window.onload;
+            if (typeof window.onload != 'function') {
+                window.onload = func;
+            } else {
+                window.onload = function() {
+                    if (oldonload) {
+                        oldonload();
+                    }
+                    func();
+                }
+            }
+        }
+        //call function after DOM ready
+        addLoadEvent(function(){
+            outdatedBrowser({
+                bgColor: '#f25648',
+                color: '#ffffff',
+                lowerThan: 'object-fit',
+                languagePath: ''
+            })
+        });
+    </script> <script src='/ResourcePackages/ISPOR/assets/dist/js/site.js?v=2025-06-17-10:00'></script> <script src="/Frontend-Assembly/Telerik.Sitefinity.Frontend.Identity/Mvc/Scripts/LoginStatus/login-status.min.js?package=ISPOR&amp;v=LTE3NTAwODE5NjI%3d" type="text/javascript"></script> </body> </html>

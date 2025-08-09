@@ -1,0 +1,13 @@
+id: consort-2010
+title: CONSORT 2010 Checklist
+group: consort
+version: "2010"
+date: "2010-03-24"
+publisher: CONSORT Group
+source_url: https://www.equator-network.org/wp-content/uploads/2013/09/CONSORT-2010-Checklist-MS-Word.doc
+retrieved_at: 2025-08-09
+preferred_format: docx
+checksum: 8b8c65b432c7c03ce122be065ddee8035c8546c11c1ca7e42ca9f6793faa39e8
+license: CC BY 4.0
+verified: true
+notes: "Randomized trials reporting. From official website. The downloaded DOCX file is corrupt and could not be processed by pandoc. Multiple download attempts from different sources failed."

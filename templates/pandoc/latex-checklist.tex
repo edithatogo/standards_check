@@ -1,0 +1,44 @@
+% Pandoc LaTeX template for checklists with basic PDF forms
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{amssymb}
+% Optional AcroTeX eForms for richer widgets
+$if(use_eforms)$
+\usepackage{eforms}
+$endif$
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\usepackage{enumitem}
+\setlist[itemize]{left=1.2em}
+\setlist{noitemsep}
+\def\tightlist{}
+
+% Abstraction layer for form widgets
+$if(use_eforms)$
+  % eForms uses \checkBox and \textField
+  \newcommand{\mkCheckBox}[2][]{\checkBox[#1]{#2}}
+  \newcommand{\mkTextField}[2][]{\textField[#1]{#2}}
+$else$
+  % hyperref provides \CheckBox and \TextField
+  \newcommand{\mkCheckBox}[2][]{\CheckBox[#1]{#2}}
+  \newcommand{\mkTextField}[2][]{\TextField[#1]{#2}}
+$endif$
+
+% Enable form environment for interactive fields
+% Usage in content requires raw LaTeX or a pandoc Lua filter to insert \CheckBox/\TextField
+\begin{document}
+
+\begin{center}
+{\LARGE $title$}\\[4pt]
+\normalsize $if(author)$Author: $author$\quad$endif$$if(date)$Date: $date$$endif$
+\end{center}
+\vspace{1em}
+
+% Begin PDF form region
+\begin{Form}
+
+$body$
+
+\end{Form}
+
+\end{document}

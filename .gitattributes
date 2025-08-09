@@ -1,0 +1,8 @@
+* text=auto eol=lf
+
+# Treat these as documentation for GitHub linguist stats
+*.md linguist-documentation
+typst/*.typ linguist-documentation
+latex/*.tex linguist-documentation
+scripts/*.sh linguist-documentation
+

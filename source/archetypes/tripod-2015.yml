@@ -1,0 +1,15 @@
+id: tripod-2015
+title: TRIPOD 2015 Checklist
+group: tripod
+version: "2015"
+date: "2015-01-06"
+publisher: The TRIPOD collaborators
+source_url: https://www.tripod-statement.org/
+retrieved_at: TBD
+preferred_format: pdf
+checksum: TBD
+license: Custom; see website
+verified: true
+notes: |
+  The TRIPOD 2015 statement. A TRIPOD+AI version also exists.
+  Licensing is not standard Creative Commons; see website for details.

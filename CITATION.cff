@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+title: Standards Checklists
+message: >-
+  If you use this repository, please cite it as below.
+type: dataset
+authors:
+  - family-names: Your-Name
+    given-names: First
+    orcid: https://orcid.org/0000-0000-0000-0000
+repository-code: https://github.com/your-org/standards_checklists
+version: 0.1.0
+date-released: 2025-08-09
+license: CC-BY-4.0
+

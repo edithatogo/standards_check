@@ -1,0 +1,16 @@
+id: prisma-2020
+title: PRISMA 2020 Checklist
+group: prisma
+version: "2020"
+date: TBD
+publisher: PRISMA Group
+source_url: https://www.prisma-statement.org/
+retrieved_at: TBD
+preferred_format: pdf
+checksum: TBD
+license: TBD
+verified: false
+notes: |
+  UNVERIFIED: Candidate canonical host recorded; confirm exact checklist page/PDF and licensing.
+  Ensure version-specific items match the official checklist.
+  All attempts to download the source DOCX from multiple URLs failed (404 errors). Needs manual intervention.

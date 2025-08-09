@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/sidecar.schema.json",
+  "title": "Checklist Sidecar Metadata",
+  "type": "object",
+  "required": [
+    "id", "title", "group", "version", "date", "publisher",
+    "source_url", "retrieved_at", "preferred_format", "checksum", "license"
+  ],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "title": { "type": "string" },
+    "group": { "type": "string" },
+    "version": { "type": ["string","number"] },
+    "date": { "type": ["string","null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "publisher": { "type": "string" },
+    "source_url": { "type": "string" },
+    "retrieved_at": { "type": ["string","null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "preferred_format": { "type": "string", "enum": ["pdf","html","docx","csv"] },
+    "checksum": { "type": "string" },
+    "license": { "type": "string" },
+    "verified": { "type": "boolean" },
+    "notes": { "type": "string" }
+  },
+  "additionalProperties": true
+}
+

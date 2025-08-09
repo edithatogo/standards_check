@@ -1,0 +1,14 @@
+id: cheers-2022
+title: CHEERS 2022 Checklist
+group: cheers
+version: "2022"
+date: "2022-01-11"
+publisher: ISPOR
+source_url: https://www.ispor.org/heor-resources/good-practices/cheers
+retrieved_at: TBD
+preferred_format: pdf
+checksum: TBD
+license: CC-BY-4.0
+verified: true
+notes: |
+  The CHEERS 2022 checklist, replacing the 2013 version.

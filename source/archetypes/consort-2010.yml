@@ -1,0 +1,13 @@
+id: consort-2010
+title: CONSORT 2010 Checklist
+group: consort
+version: "2010"
+date: "2010-03-24"
+publisher: CONSORT Group
+source_url: http://www.consort-statement.org/
+retrieved_at: 2025-08-09
+preferred_format: pdf
+checksum: 9815a5650ea3abf3a3a981b0d8f3e932753d5463a02e36e0407c4ed140abeb3e
+license: CC BY 4.0
+verified: true
+notes: "Randomized trials reporting."

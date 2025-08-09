@@ -1,0 +1,14 @@
+id: tidier-2014
+title: TIDieR Checklist
+group: tidier
+version: "2014"
+date: "2014-03-07"
+publisher: The TIDieR Group / BMJ
+source_url: https://www.equator-network.org/reporting-guidelines/tidier/
+retrieved_at: TBD
+preferred_format: pdf
+checksum: 9a120bcfb0131cdc64abe143186478986971e7395d3c602cdb1a3ba2443e0ab9
+license: CC-BY-NC
+verified: true
+notes: |
+  The TIDieR checklist is published under a CC-BY-NC license.

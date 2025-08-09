@@ -1,0 +1,16 @@
+# Build artifacts (generated)
+pdf/
+latex/
+docx/
+typst/**/*.typ
+
+# OS/editor files
+.DS_Store
+.idea/
+.vscode/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+

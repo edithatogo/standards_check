@@ -1,0 +1,14 @@
+id: arrive-2020
+title: ARRIVE 2.0 Checklist
+group: arrive
+version: "2.0"
+date: "2020-07-14"
+publisher: NC3Rs
+source_url: https://arriveguidelines.org/
+retrieved_at: TBD
+preferred_format: pdf
+checksum: TBD
+license: CC-BY-4.0
+verified: true
+notes: |
+  The ARRIVE 2.0 guidelines, published in PLOS Biology.
