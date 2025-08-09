@@ -13,3 +13,24 @@ verified: true
 notes: |
   The checklist is licensed under CC-BY-NC-4.0.
   The original publication date is not precise, using the month of the first known publication.
+citation:
+  type: article-journal
+  author:
+    - given: Joel J.
+      family: Gagnier
+    - given: Gunver
+      family: Kienle
+    - given: Douglas G.
+      family: Altman
+    - given: David
+      family: Moher
+    - given: Harold
+      family: Sox
+    - given: David
+      family: Riley
+  doi: 10.1186/1752-1947-7-223
+  journal: "Journal of Medical Case Reports"
+  volume: 7
+  pages: 223
+  year: 2013
+  notes: "and the CARE Group"

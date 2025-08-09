@@ -11,3 +11,24 @@ checksum: 2eedbd5452741f9615307a0bce21a8198c0597ce2a0a8a0fd7e140d64b08c625
 license: CC BY 4.0
 verified: true
 notes: "Systematic reviews reporting."
+citation:
+  type: article-journal
+  author:
+    - given: Matthew J.
+      family: Page
+    - given: Joanne E.
+      family: McKenzie
+    - given: Patrick M.
+      family: Bossuyt
+    - given: Isabelle
+      family: Boutron
+    - given: Tammy C.
+      family: Hoffmann
+    - given: Cynthia D.
+      family: Mulrow
+  doi: 10.1136/bmj.n71
+  journal: "The BMJ"
+  volume: 372
+  pages: n71
+  year: 2021
+  notes: "and others"

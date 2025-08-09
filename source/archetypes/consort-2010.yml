@@ -11,3 +11,17 @@ checksum: 9815a5650ea3abf3a3a981b0d8f3e932753d5463a02e36e0407c4ed140abeb3e
 license: CC BY 4.0
 verified: true
 notes: "Randomized trials reporting."
+citation:
+  type: article-journal
+  author:
+    - given: Kenneth F.
+      family: Schulz
+    - given: Douglas G.
+      family: Altman
+    - given: David
+      family: Moher
+  doi: 10.1371/journal.pmed.1000251
+  journal: "PLoS Medicine"
+  volume: 7
+  issue: 3
+  pages: e1000251

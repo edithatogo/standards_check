@@ -15,7 +15,27 @@ Simple pipeline for academic publication checklists:
   - `archetypes/` and `variants/` mirrored structure.
 - `latex/` — LaTeX format (`.tex`).
   - `archetypes/` and `variants/` mirrored structure.
+- `citations/` — Generated citation files (`.bib`, `.ris`, `.json`).
+  - `archetypes/` and `variants/` mirrored structure.
 - `scripts/` — helper tools (validation, conversion stubs).
+
+## Citation Data
+The `source/**/*.yml` files can be extended with a `citation` block to hold structured metadata for generating formal citations. The schema is defined in `schemas/sidecar.schema.json`.
+
+Example:
+```yaml
+citation:
+  type: article-journal
+  author:
+    - given: Kenneth
+      family: Schulz
+    - given: Douglas
+      family: Altman
+  doi: 10.1186/1741-7015-8-18
+  journal: "PLoS Medicine"
+  # ... and so on
+```
+
 
 ## Quickstart
 1. Start with archetypes: add a source file to `source/archetypes/` (use kebab-case names).

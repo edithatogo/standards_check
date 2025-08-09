@@ -12,3 +12,25 @@ license: CC-BY-4.0
 verified: true
 notes: |
   The ARRIVE 2.0 guidelines, published in PLOS Biology.
+citation:
+  type: article-journal
+  author:
+    - given: Nathalie
+      family: Percie du Sert
+    - given: Vikki
+      family: Hurst
+    - given: Amrita
+      family: Ahluwalia
+    - given: Sadaf
+      family: Alam
+    - given: Martha T.
+      family: Avey
+    - given: Michael
+      family: Baker
+  doi: 10.1371/journal.pbio.3000410
+  journal: "PLOS Biology"
+  volume: 18
+  issue: 7
+  pages: e3000410
+  year: 2020
+  notes: "and others"

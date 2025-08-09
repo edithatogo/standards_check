@@ -13,3 +13,23 @@ verified: true
 notes: |
   Checklist requires permission for redistribution, but is free to use.
   The 'Explanation and Elaboration' document is under a Creative Commons license.
+citation:
+  type: article-journal
+  author:
+    - given: Erik
+      family: von Elm
+    - given: Douglas G.
+      family: Altman
+    - given: Matthias
+      family: Egger
+    - given: Stuart J.
+      family: Pocock
+    - given: Peter C.
+      family: Gøtzsche
+    - given: Jan P.
+      family: Vandenbroucke
+  doi: 10.1371/journal.pmed.0040296
+  journal: "PLoS Medicine"
+  volume: 4
+  issue: 10
+  pages: e296

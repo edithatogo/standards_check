@@ -103,14 +103,14 @@ items:
     group: tripod
     notes: "Prediction model reporting."
 
-  - id: spirit-2013
-    title: SPIRIT 2013 Checklist
+  - id: spirit-2025
+    title: SPIRIT 2025 Checklist
     url: TBD
-    version: "2013"
+    version: "2025"
     date: TBD
     license: TBD
     publisher: TBD
-    preferred_format: pdf
+    preferred_format: docx
     level: archetype
     group: spirit
     notes: "Clinical trial protocols."

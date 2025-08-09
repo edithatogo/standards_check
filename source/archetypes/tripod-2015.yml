@@ -13,3 +13,20 @@ verified: true
 notes: |
   The TRIPOD 2015 statement. A TRIPOD+AI version also exists.
   Licensing is not standard Creative Commons; see website for details.
+citation:
+  type: article-journal
+  author:
+    - given: Gary S.
+      family: Collins
+    - given: Johannes B.
+      family: Reitsma
+    - given: Douglas G.
+      family: Altman
+    - given: Karel G. M.
+      family: Moons
+  doi: 10.7326/M14-0697
+  journal: "Annals of Internal Medicine"
+  volume: 162
+  issue: 1
+  pages: 55-63
+  year: 2015
