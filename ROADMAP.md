@@ -33,7 +33,14 @@ Enumerate and process variants (e.g., PRISMA-S, PRISMA-ScR, CONSORT extensions).
 - Surface `markdown/` via GitHub Pages (Actions-based). See `todos/phase-06-docs-publishing.md`.
 
 ## Current Status Snapshot
-- Cycle 1A mapping: in progress; initial archetypes listed and sidecars added with placeholders.
-- Sourcing: pending verification and download (see `HANDOFF.md`).
-- Markdown: stubs created for archetypes to ease transcription.
+- Cycle 1A mapping: Complete. All archetypes are listed in `source/index.yml`.
+- Sourcing: Complete. All original source files for archetypes are collected in `source/archetypes/`.
+- Markdown: Complete. All markdown files for archetypes have been created.
+- Typst: Complete. All Typst files for archetypes have been generated.
+- LaTeX: Complete. All LaTeX files for archetypes have been generated.
 - Build: CI builds LaTeX/PDF/DOCX on changes to `markdown/**`.
+
+## Future Cycles
+- **Petri Net Conversion:** Convert YAML checklists into Petri nets for process mining analysis.
+- **Citation Generation:** Extend the `source/*.yml` files to include comprehensive metadata for building citations. Develop a workflow (potentially using Pandoc) to generate `.ris`, `.bib`, and other common citation formats from this metadata.
+- **Documentation Website:** Develop a GitHub Pages website to provide a user-friendly interface for browsing, viewing, and downloading the checklists and their associated references.
