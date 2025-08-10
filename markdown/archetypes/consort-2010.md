@@ -1,7 +1,3 @@
----
-title: CONSORT 2010 Checklist
----
-
 # CONSORT 2010 Checklist
 
 > Scope: Consolidated Standards of Reporting Trials.
@@ -73,4 +69,4 @@ title: CONSORT 2010 Checklist
 ## Provenance
 - Source: See sidecar metadata in `source/archetypes/consort-2010.yml`
 - Version: 2010
-- License: TBD (verify per source)
+- License: CC BY 4.0

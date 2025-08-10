@@ -1,14 +1,14 @@
 id: spirit-ai
-title: SPIRIT-AI Checklist
+title: "Guidelines for clinical trial protocols for interventions involving artificial intelligence: the SPIRIT-AI extension"
 group: spirit
-version: "2023"
-date: TBD
-publisher: TBD
-source_url: TBD
-retrieved_at: 2025-08-09
+version: "2020"
+date: 2020-09-09
+publisher: Springer Nature
+source_url: https://www.nature.com/articles/s41591-020-1037-7
+retrieved_at: 2025-08-10
 preferred_format: docx
 checksum: 413d028affc06792734d20c7f0fc566ecccb182f48c5679fd2d0e0d2babf4c1c
-license: TBD
+license: CC-BY-4.0
 verified: true
 notes: |
   SPIRIT for Artificial Intelligence.
@@ -25,9 +25,9 @@ citation:
       family: Denniston
     - given: Melanie J
       family: Calvert
-  doi: 10.1136/bmj.m3210
-  journal: "The BMJ"
-  volume: 370
-  pages: m3210
+  doi: 10.1038/s41591-020-1037-7
+  journal: "Nature Medicine"
+  volume: 26
+  pages: 1351–1363
   year: 2020
-  notes: "and others"
+  notes: "and The SPIRIT-AI and CONSORT-AI Working Group"

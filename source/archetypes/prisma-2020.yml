@@ -2,12 +2,12 @@ id: prisma-2020
 title: PRISMA 2020 Checklist
 group: prisma
 version: "2020"
-date: "2021-03-27"
-publisher: PRISMA Group
-source_url: http://www.prisma-statement.org/
+date: "2021-03-29"
+publisher: PRISMA Group / BMJ
+source_url: https://www.bmj.com/content/372/bmj.n71.full.pdf
 retrieved_at: 2025-08-09
 preferred_format: pdf
-checksum: 2eedbd5452741f9615307a0bce21a8198c0597ce2a0a8a0fd7e140d64b08c625
+checksum: 00804b505724d73e8e82326493ca5b5010c649753652684e1d15b88120201c2e
 license: CC BY 4.0
 verified: true
 notes: "Systematic reviews reporting."
@@ -26,9 +26,48 @@ citation:
       family: Hoffmann
     - given: Cynthia D.
       family: Mulrow
+    - given: Larissa
+      family: Shamseer
+    - given: Jennifer M.
+      family: Tetzlaff
+    - given: Elie A.
+      family: Akl
+    - given: Sue E.
+      family: Brennan
+    - given: Roger
+      family: Chou
+    - given: Julie
+      family: Glanville
+    - given: Jeremy M.
+      family: Grimshaw
+    - given: Asbjørn
+      family: Hróbjartsson
+    - given: Manoj M.
+      family: Lalu
+    - given: Tianjing
+      family: Li
+    - given: Elizabeth W.
+      family: Loder
+    - given: Evan
+      family: Mayo-Wilson
+    - given: Steve
+      family: McDonald
+    - given: Luke A.
+      family: McGuinness
+    - given: Lesley A.
+      family: Stewart
+    - given: James
+      family: Thomas
+    - given: Andrea C.
+      family: Tricco
+    - given: Vivian A.
+      family: Welch
+    - given: Penny
+      family: Whiting
+    - given: David
+      family: Moher
   doi: 10.1136/bmj.n71
   journal: "The BMJ"
   volume: 372
   pages: n71
   year: 2021
-  notes: "and others"

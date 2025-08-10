@@ -1,7 +1,3 @@
----
-title: STROBE Checklist
----
-
 # STROBE Checklist
 
 > Scope: STrengthening the Reporting of OBservational studies in Epidemiology.
@@ -58,4 +54,4 @@ title: STROBE Checklist
 ## Provenance
 - Source: See sidecar metadata in `source/archetypes/strobe-2007.yml`
 - Version: 2007
-- License: TBD (verify per source)
+- License: CC BY 4.0

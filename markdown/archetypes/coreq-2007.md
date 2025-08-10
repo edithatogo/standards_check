@@ -1,7 +1,3 @@
----
-title: COREQ Checklist
----
-
 # COREQ Checklist
 
 > Scope: COnsolidated criteria for REporting Qualitative research.
@@ -53,4 +49,4 @@ title: COREQ Checklist
 ## Provenance
 - Source: See sidecar metadata in `source/archetypes/coreq-2007.yml`
 - Version: 2007
-- License: TBD (verify per source)
+- License: All Rights Reserved

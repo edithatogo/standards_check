@@ -1,10 +1,8 @@
----
-title: ARRIVE 2.0 Checklist
----
+# ARRIVE 2.0 Checklist
 
 > Scope: The ARRIVE 2.0 guidelines are a comprehensive checklist for reporting animal research. These guidelines are designed to improve the transparency and quality of scientific publications.
 >
-> Reference: https://arriveguidelines.org/
+> Reference: See `source/archetypes/arrive-2020.yml` for canonical link and provenance.
 
 ## Instructions
 - Use task list items for checklist boxes; these become interactive checkboxes in PDF.
@@ -41,6 +39,6 @@ title: ARRIVE 2.0 Checklist
 [Notes]{.textfield name=arrive_2020_notes width=12cm}
 
 ## Provenance
-- Source: https://arriveguidelines.org/
+- Source: See sidecar metadata in `source/archetypes/arrive-2020.yml`
 - Version: 2.0
 - License: CC-BY-4.0

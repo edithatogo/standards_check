@@ -2,13 +2,13 @@ id: prisma-p
 title: PRISMA-P Checklist
 group: prisma
 version: "2015"
-date: 2015-01-09
-publisher: "BMJ"
-source_url: "https://www.bmj.com/content/349/bmj.g7647"
-retrieved_at: 2025-08-09
+date: "2015-01-09"
+publisher: "BioMed Central"
+source_url: https://www.prisma-statement.org/s/PRISMA-P-checklist.pdf
+retrieved_at: 2025-08-10
 preferred_format: pdf
 checksum: a184b3c4981e2cb7ed515268817e1ddb77aa7bffed3da78f67dd4bcf923c18e6
-license: TBD
+license: CC-BY-4.0
 verified: true
 notes: |
   PRISMA for Protocols.

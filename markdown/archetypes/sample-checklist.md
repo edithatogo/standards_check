@@ -1,7 +1,3 @@
----
-title: Sample Checklist
----
-
 # Sample Checklist
 
 > Scope: A sample checklist for testing purposes.

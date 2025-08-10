@@ -1,7 +1,3 @@
----
-title: PRISMA-EcoEvo Checklist
----
-
 # PRISMA-EcoEvo Checklist
 
 > Scope: Preferred Reporting Items for Systematic Reviews and Meta-Analyses for Ecology and Evolution.
@@ -187,5 +183,5 @@ title: PRISMA-EcoEvo Checklist
 
 ## Provenance
 - Source: See sidecar metadata in `source/variants/prisma-ecoevo.yml`
-- Version: 2022
-- License: TBD (verify per source)
+- Version: 2021
+- License: CC-BY-4.0

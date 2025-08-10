@@ -1,7 +1,3 @@
----
-title: MOOSE Checklist
----
-
 # MOOSE Checklist
 
 > Scope: Meta-analysis Of Observational Studies in Epidemiology.
@@ -57,4 +53,4 @@ title: MOOSE Checklist
 ## Provenance
 - Source: See sidecar metadata in `source/archetypes/moose-2000.yml`
 - Version: 2000
-- License: TBD (verify per source)
+- License: TBD

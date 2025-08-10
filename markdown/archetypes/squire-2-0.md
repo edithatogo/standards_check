@@ -1,7 +1,3 @@
----
-title: SQUIRE 2.0 Checklist
----
-
 # SQUIRE 2.0 Checklist
 
 > Scope: Standards for QUality Improvement Reporting Excellence.
@@ -13,47 +9,38 @@ title: SQUIRE 2.0 Checklist
 - Add reviewer notes under each section as needed.
 
 ## Title and Abstract
-
-- [ ] **1. Title:** Indicate that the manuscript is a quality improvement report.
-- [ ] **2. Abstract:** Provide a structured summary of the report.
+- [ ] **1. Title:** Indicate that the manuscript concerns an initiative to improve healthcare.
+- [ ] **2. Abstract:** Provide a structured summary of the project.
 
 ## Introduction
-
 - [ ] **3. Problem Description:** Nature and significance of the local problem.
 - [ ] **4. Available Knowledge:** Summary of what is currently known about the problem, including relevant previous studies.
-- [ ] **5. Rationale:** Rationale for the intervention(s) chosen.
-- [ ] **6. Specific Aims:** Specific aims of the project.
+- [ ] **5. Rationale:** Informal or formal frameworks, models, concepts, and/or theories used to explain the problem.
+- [ ] **6. Specific Aims:** Purpose of the project and of this report.
 
 ## Methods
-
-- [ ] **7. Context:** Contextual elements of the project.
-- [ ] **8. Intervention(s):** Description of the intervention(s) in sufficient detail that others could reproduce them.
+- [ ] **7. Context:** Contextual elements considered important at the outset of introducing the intervention(s).
+- [ ] **8. Intervention(s):** Description of the intervention(s) in sufficient detail that others could reproduce it.
 - [ ] **9. Study of the Intervention(s):** Approach chosen for assessing the impact of the intervention(s).
-- [ ] **10. Measures:** Measures chosen for studying the process and outcome of the intervention(s).
-- [ ] **11. Analysis:** Methods employed for analysis of the data.
+- [ ] **10. Measures:** Measures chosen for studying processes and outcomes of the intervention(s).
+- [ ] **11. Analysis:** Qualitative and quantitative methods used to draw inferences from the data.
 - [ ] **12. Ethical Considerations:** Ethical aspects of implementing and studying the intervention(s).
 
 ## Results
-
-- [ ] **13. Results:** Results of the study, including the impact of the intervention(s) on the process and outcome measures.
-- [ ] **14. Contextual elements:** How contextual elements may have influenced the results.
-- [ ] **15. Unintended consequences:** Unintended consequences of the intervention(s).
+- [ ] **13. Results:** Initial steps of the intervention(s) and their evolution over time.
+- [ ] **14. Summary:** Key findings, including relevance to the rationale and specific aims.
 
 ## Discussion
-
-- [ ] **16. Summary:** Summary of the main findings.
-- [ ] **17. Interpretation:** Interpretation of the findings.
-- [ ] **18. Limitations:** Limitations of the study.
-- [ ] **19. Conclusions:** Conclusions of the study, including implications for practice and future research.
+- [ ] **15. Interpretation:** Nature of the association between the intervention(s) and the outcomes.
+- [ ] **16. Limitations:** Limits to the generalizability of the work.
+- [ ] **17. Conclusions:** Usefulness of the work.
 
 ## Other Information
+- [ ] **18. Funding:** Sources of funding that supported this work.
 
-- [ ] **20. Funding:** Sources of funding for the project.
-
-### Notes
-[Reviewer notes]{.textfield name=squire_2_0_notes width=12cm}
+[Notes]{.textfield name=squire_2_0_notes width=12cm}
 
 ## Provenance
 - Source: See sidecar metadata in `source/archetypes/squire-2-0.yml`
 - Version: 2.0
-- License: TBD (verify per source)
+- License: Custom; see website

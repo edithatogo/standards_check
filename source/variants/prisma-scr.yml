@@ -2,13 +2,13 @@ id: prisma-scr
 title: PRISMA-ScR Checklist
 group: prisma
 version: "2018"
-date: 2018-10-02
+date: "2018-10-02"
 publisher: "Annals of Internal Medicine"
-source_url: "https://www.acpjournals.org/doi/10.7326/M18-0850"
-retrieved_at: 2025-08-09
+source_url: https://www.prisma-statement.org/s/PRISMA-ScR-Fillable-Checklist_11Sept2019.pdf
+retrieved_at: 2025-08-10
 preferred_format: pdf
 checksum: 1b70ecd1d4fc1105d9abc4996e6a3d1822986d00fdf22061f3aa8b9c237facf2
-license: TBD
+license: CC-BY-4.0
 verified: true
 notes: |
   PRISMA for Scoping Reviews.

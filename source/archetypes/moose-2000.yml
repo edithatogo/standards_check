@@ -4,15 +4,15 @@ group: moose
 version: "2000"
 date: "2000-04-19"
 publisher: JAMA
-source_url: https://jamanetwork.com/journals/jama/fullarticle/192528
-retrieved_at: TBD
-preferred_format: pdf
+source_url: https://www.cardiff.ac.uk/__data/assets/word_doc/0008/350954/MOOSE-Checklist.docx
+retrieved_at: 2025-08-09
+preferred_format: docx
 checksum: TBD
 license: TBD
 verified: true
 notes: |
-  VERIFIED: Canonical source is a paywalled article in JAMA.
-  URL is to the abstract. Manual download of the PDF is required.
+  Canonical source is a paywalled article in JAMA.
+  Unable to download source file from university website.
 citation:
   type: article-journal
   author:

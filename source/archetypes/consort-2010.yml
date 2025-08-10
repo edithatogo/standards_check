@@ -4,10 +4,10 @@ group: consort
 version: "2010"
 date: "2010-03-24"
 publisher: CONSORT Group
-source_url: http://www.consort-statement.org/
+source_url: https://doi.org/10.1371/journal.pmed.1000251
 retrieved_at: 2025-08-09
 preferred_format: pdf
-checksum: 9815a5650ea3abf3a3a981b0d8f3e932753d5463a02e36e0407c4ed140abeb3e
+checksum: 685c0757b18763cba6fd5b311fd4389c83b21e5535b567afe10d64c257136309
 license: CC BY 4.0
 verified: true
 notes: "Randomized trials reporting."
