@@ -12,15 +12,19 @@ python3 -m pip install -r scripts/petri_net_generation/requirements.txt
 find source -type f -name "*.yml" ! -name "index.yml" ! -name "*template.yml" -print0 | while IFS= read -r -d '' yml_file; do
   echo "Processing $yml_file..."
 
-  # Determine output path
   rel_path=${yml_file#source/}
   dir=$(dirname "$rel_path")
   base=$(basename "$rel_path" .yml)
+  markdown_file="markdown/$dir/$base.md"
   output_dir="petri-nets/$dir"
   output_pnml="$output_dir/$base.pnml"
 
-  # Run the Python script
-  python3 scripts/petri_net_generation/generate_net.py "$yml_file" "$output_pnml"
+  if [ -f "$markdown_file" ]; then
+    # Run the Python script
+    python3 scripts/petri_net_generation/generate_net.py "$markdown_file" "$output_pnml"
+  else
+    echo "[WARNING] Markdown file not found for $yml_file, skipping."
+  fi
 done
 
 echo "Petri net generation complete."

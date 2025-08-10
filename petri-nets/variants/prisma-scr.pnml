@@ -13,18 +13,282 @@
           <text>1</text>
         </initialMarking>
       </place>
+      <place id="p16">
+        <name>
+          <text>p16</text>
+        </name>
+      </place>
+      <place id="p14">
+        <name>
+          <text>p14</text>
+        </name>
+      </place>
+      <place id="p1">
+        <name>
+          <text>p1</text>
+        </name>
+      </place>
+      <place id="p11">
+        <name>
+          <text>p11</text>
+        </name>
+      </place>
+      <place id="p2">
+        <name>
+          <text>p2</text>
+        </name>
+      </place>
+      <place id="p3">
+        <name>
+          <text>p3</text>
+        </name>
+      </place>
+      <place id="p4">
+        <name>
+          <text>p4</text>
+        </name>
+      </place>
+      <place id="p17">
+        <name>
+          <text>p17</text>
+        </name>
+      </place>
+      <place id="p18">
+        <name>
+          <text>p18</text>
+        </name>
+      </place>
+      <place id="p10">
+        <name>
+          <text>p10</text>
+        </name>
+      </place>
       <place id="sink">
         <name>
           <text>sink</text>
         </name>
       </place>
-      <transition id="prisma-scr">
+      <place id="p7">
         <name>
-          <text>PRISMA-ScR Checklist</text>
+          <text>p7</text>
+        </name>
+      </place>
+      <place id="p8">
+        <name>
+          <text>p8</text>
+        </name>
+      </place>
+      <place id="p9">
+        <name>
+          <text>p9</text>
+        </name>
+      </place>
+      <place id="p15">
+        <name>
+          <text>p15</text>
+        </name>
+      </place>
+      <place id="p20">
+        <name>
+          <text>p20</text>
+        </name>
+      </place>
+      <place id="p21">
+        <name>
+          <text>p21</text>
+        </name>
+      </place>
+      <place id="p22">
+        <name>
+          <text>p22</text>
+        </name>
+      </place>
+      <place id="p13">
+        <name>
+          <text>p13</text>
+        </name>
+      </place>
+      <place id="p12">
+        <name>
+          <text>p12</text>
+        </name>
+      </place>
+      <place id="p5">
+        <name>
+          <text>p5</text>
+        </name>
+      </place>
+      <place id="p6">
+        <name>
+          <text>p6</text>
+        </name>
+      </place>
+      <place id="p19">
+        <name>
+          <text>p19</text>
+        </name>
+      </place>
+      <transition id="item_7">
+        <name>
+          <text>7 Information sources Describe all information sou</text>
         </name>
       </transition>
-      <arc id="4768072720" source="source" target="prisma-scr"/>
-      <arc id="4766508624" source="prisma-scr" target="sink"/>
+      <transition id="item_16">
+        <name>
+          <text>16 Synthesis of results Summarize and synthesize t</text>
+        </name>
+      </transition>
+      <transition id="item_5">
+        <name>
+          <text>5 Protocol and registration Indicate if a review p</text>
+        </name>
+      </transition>
+      <transition id="item_13">
+        <name>
+          <text>13 Selection of sources of evidence Give the numbe</text>
+        </name>
+      </transition>
+      <transition id="item_20">
+        <name>
+          <text>20 Funding Describe the sources of funding for the</text>
+        </name>
+      </transition>
+      <transition id="item_15">
+        <name>
+          <text>15 Results of individual sources of evidence For e</text>
+        </name>
+      </transition>
+      <transition id="item_8">
+        <name>
+          <text>8 Search Present the full electronic search strate</text>
+        </name>
+      </transition>
+      <transition id="item_21">
+        <name>
+          <text>21 Critical appraisal within sources of evidence O</text>
+        </name>
+      </transition>
+      <transition id="item_1">
+        <name>
+          <text>1 Title Identify the report as a scoping review</text>
+        </name>
+      </transition>
+      <transition id="item_22">
+        <name>
+          <text>22 Funding of included sources of evidence Describ</text>
+        </name>
+      </transition>
+      <transition id="item_3">
+        <name>
+          <text>3 Rationale Describe the rationale for the review </text>
+        </name>
+      </transition>
+      <transition id="item_2">
+        <name>
+          <text>2 Structured summary Provide a structured summary </text>
+        </name>
+      </transition>
+      <transition id="item_9">
+        <name>
+          <text>9 Selection of sources of evidence State the proce</text>
+        </name>
+      </transition>
+      <transition id="item_10">
+        <name>
+          <text>10 Data charting Describe the methods for charting</text>
+        </name>
+      </transition>
+      <transition id="item_12">
+        <name>
+          <text>12 Critical appraisal of individual sources of evi</text>
+        </name>
+      </transition>
+      <transition id="item_18">
+        <name>
+          <text>18 Limitations Discuss the limitations of the scop</text>
+        </name>
+      </transition>
+      <transition id="item_17">
+        <name>
+          <text>17 Summary of evidence Summarize the main results </text>
+        </name>
+      </transition>
+      <transition id="final_transition">
+        <name>
+          <text>End</text>
+        </name>
+      </transition>
+      <transition id="item_4">
+        <name>
+          <text>4 Objectives State the review questions and object</text>
+        </name>
+      </transition>
+      <transition id="item_11">
+        <name>
+          <text>11 Data items List and define all variables for wh</text>
+        </name>
+      </transition>
+      <transition id="item_19">
+        <name>
+          <text>19 Conclusions Provide a general interpretation of</text>
+        </name>
+      </transition>
+      <transition id="item_6">
+        <name>
+          <text>6 Eligibility criteria Specify the characteristics</text>
+        </name>
+      </transition>
+      <transition id="item_14">
+        <name>
+          <text>14 Characteristics of sources of evidence For each</text>
+        </name>
+      </transition>
+      <arc id="4898383744" source="p2" target="item_3"/>
+      <arc id="4895038336" source="p5" target="item_6"/>
+      <arc id="4898852992" source="p14" target="item_15"/>
+      <arc id="4898853888" source="p18" target="item_19"/>
+      <arc id="4898854784" source="p22" target="final_transition"/>
+      <arc id="4898270736" source="p8" target="item_9"/>
+      <arc id="4895141776" source="source" target="item_1"/>
+      <arc id="4898767888" source="p1" target="item_2"/>
+      <arc id="4898767248" source="item_1" target="p1"/>
+      <arc id="4892539024" source="item_3" target="p3"/>
+      <arc id="4892808592" source="item_4" target="p4"/>
+      <arc id="4898835344" source="item_10" target="p10"/>
+      <arc id="4898852880" source="item_14" target="p14"/>
+      <arc id="4898853776" source="p17" target="item_18"/>
+      <arc id="4898854672" source="item_22" target="p22"/>
+      <arc id="4898548640" source="p9" target="item_10"/>
+      <arc id="4898852768" source="p13" target="item_14"/>
+      <arc id="4898853664" source="item_18" target="p18"/>
+      <arc id="4898854560" source="p21" target="item_22"/>
+      <arc id="4898616624" source="item_11" target="p11"/>
+      <arc id="4898852656" source="item_13" target="p13"/>
+      <arc id="4898853552" source="item_17" target="p17"/>
+      <arc id="4898854448" source="item_21" target="p21"/>
+      <arc id="4898854224" source="item_20" target="p20"/>
+      <arc id="4898852544" source="p12" target="item_13"/>
+      <arc id="4898853440" source="p16" target="item_17"/>
+      <arc id="4898854336" source="p20" target="item_21"/>
+      <arc id="4898868816" source="p6" target="item_7"/>
+      <arc id="4898270928" source="item_8" target="p8"/>
+      <arc id="4898383440" source="item_2" target="p2"/>
+      <arc id="4892809680" source="p3" target="item_4"/>
+      <arc id="4895093584" source="p4" target="item_5"/>
+      <arc id="4895094096" source="item_5" target="p5"/>
+      <arc id="4898835664" source="p10" target="item_11"/>
+      <arc id="4322170448" source="p11" target="item_12"/>
+      <arc id="4898817104" source="item_12" target="p12"/>
+      <arc id="4898853328" source="item_16" target="p16"/>
+      <arc id="4898363360" source="p7" target="item_8"/>
+      <arc id="4898853216" source="p15" target="item_16"/>
+      <arc id="4898854112" source="p19" target="item_20"/>
+      <arc id="4898548464" source="item_9" target="p9"/>
+      <arc id="4898869488" source="item_7" target="p7"/>
+      <arc id="4895038576" source="item_6" target="p6"/>
+      <arc id="4898853104" source="item_15" target="p15"/>
+      <arc id="4898854000" source="item_19" target="p19"/>
+      <arc id="4898854896" source="final_transition" target="sink"/>
     </page>
     <finalmarkings>
       <marking>

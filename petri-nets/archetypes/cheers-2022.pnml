@@ -13,18 +13,342 @@
           <text>1</text>
         </initialMarking>
       </place>
+      <place id="p3">
+        <name>
+          <text>p3</text>
+        </name>
+      </place>
+      <place id="p10">
+        <name>
+          <text>p10</text>
+        </name>
+      </place>
+      <place id="p25">
+        <name>
+          <text>p25</text>
+        </name>
+      </place>
+      <place id="p27">
+        <name>
+          <text>p27</text>
+        </name>
+      </place>
+      <place id="p15">
+        <name>
+          <text>p15</text>
+        </name>
+      </place>
+      <place id="p1">
+        <name>
+          <text>p1</text>
+        </name>
+      </place>
+      <place id="p4">
+        <name>
+          <text>p4</text>
+        </name>
+      </place>
+      <place id="p20">
+        <name>
+          <text>p20</text>
+        </name>
+      </place>
+      <place id="p12">
+        <name>
+          <text>p12</text>
+        </name>
+      </place>
+      <place id="p18">
+        <name>
+          <text>p18</text>
+        </name>
+      </place>
+      <place id="p16">
+        <name>
+          <text>p16</text>
+        </name>
+      </place>
+      <place id="p24">
+        <name>
+          <text>p24</text>
+        </name>
+      </place>
+      <place id="p26">
+        <name>
+          <text>p26</text>
+        </name>
+      </place>
       <place id="sink">
         <name>
           <text>sink</text>
         </name>
       </place>
-      <transition id="cheers-2022">
+      <place id="p5">
         <name>
-          <text>CHEERS 2022 Checklist</text>
+          <text>p5</text>
+        </name>
+      </place>
+      <place id="p7">
+        <name>
+          <text>p7</text>
+        </name>
+      </place>
+      <place id="p8">
+        <name>
+          <text>p8</text>
+        </name>
+      </place>
+      <place id="p11">
+        <name>
+          <text>p11</text>
+        </name>
+      </place>
+      <place id="p14">
+        <name>
+          <text>p14</text>
+        </name>
+      </place>
+      <place id="p21">
+        <name>
+          <text>p21</text>
+        </name>
+      </place>
+      <place id="p22">
+        <name>
+          <text>p22</text>
+        </name>
+      </place>
+      <place id="p9">
+        <name>
+          <text>p9</text>
+        </name>
+      </place>
+      <place id="p13">
+        <name>
+          <text>p13</text>
+        </name>
+      </place>
+      <place id="p2">
+        <name>
+          <text>p2</text>
+        </name>
+      </place>
+      <place id="p6">
+        <name>
+          <text>p6</text>
+        </name>
+      </place>
+      <place id="p17">
+        <name>
+          <text>p17</text>
+        </name>
+      </place>
+      <place id="p19">
+        <name>
+          <text>p19</text>
+        </name>
+      </place>
+      <place id="p23">
+        <name>
+          <text>p23</text>
+        </name>
+      </place>
+      <transition id="item_8">
+        <name>
+          <text>Perspective State the perspectives of the study an</text>
         </name>
       </transition>
-      <arc id="4959962128" source="source" target="cheers-2022"/>
-      <arc id="4959479376" source="cheers-2022" target="sink"/>
+      <transition id="item_22">
+        <name>
+          <text>Characterizing Uncertainty Describe the methods us</text>
+        </name>
+      </transition>
+      <transition id="item_18">
+        <name>
+          <text>Study Parameters Report all parameters used in the</text>
+        </name>
+      </transition>
+      <transition id="item_17">
+        <name>
+          <text>Analytics and Assumptions Describe methods for dat</text>
+        </name>
+      </transition>
+      <transition id="item_20">
+        <name>
+          <text>Characterizing Heterogeneity Describe any methods </text>
+        </name>
+      </transition>
+      <transition id="item_25">
+        <name>
+          <text>Conflicts of Interest Disclose any potential confl</text>
+        </name>
+      </transition>
+      <transition id="item_19">
+        <name>
+          <text>Summary of Main Results Present the main results i</text>
+        </name>
+      </transition>
+      <transition id="item_27">
+        <name>
+          <text>Approach to Engagement Describe the approach to en</text>
+        </name>
+      </transition>
+      <transition id="item_15">
+        <name>
+          <text>Currency Price Date and Conversion Report the date</text>
+        </name>
+      </transition>
+      <transition id="item_4">
+        <name>
+          <text>Health Economic Analysis Plan Indicate if a health</text>
+        </name>
+      </transition>
+      <transition id="item_6">
+        <name>
+          <text>Setting and Location Provide relevant contextual i</text>
+        </name>
+      </transition>
+      <transition id="item_14">
+        <name>
+          <text>Measurement and Valuation of Resources and Costs E</text>
+        </name>
+      </transition>
+      <transition id="item_1">
+        <name>
+          <text>Title Identify the study as an economic evaluation</text>
+        </name>
+      </transition>
+      <transition id="item_16">
+        <name>
+          <text>Rationale and Description of Model If a model was </text>
+        </name>
+      </transition>
+      <transition id="item_3">
+        <name>
+          <text>Background and Objectives Describe the studys cont</text>
+        </name>
+      </transition>
+      <transition id="item_2">
+        <name>
+          <text>Abstract Provide a structured summary detailing th</text>
+        </name>
+      </transition>
+      <transition id="item_9">
+        <name>
+          <text>Time Horizon Report the time horizon for the study</text>
+        </name>
+      </transition>
+      <transition id="item_10">
+        <name>
+          <text>Discount Rate Report the discount rates used and t</text>
+        </name>
+      </transition>
+      <transition id="item_12">
+        <name>
+          <text>Measurement of Outcomes Detail how the selected ou</text>
+        </name>
+      </transition>
+      <transition id="item_13">
+        <name>
+          <text>Valuation of Outcomes Describe the methods and pop</text>
+        </name>
+      </transition>
+      <transition id="item_21">
+        <name>
+          <text>Characterizing Distributional Effects Explain how </text>
+        </name>
+      </transition>
+      <transition id="item_23">
+        <name>
+          <text>Summary of Findings Limitations Generalizability a</text>
+        </name>
+      </transition>
+      <transition id="item_24">
+        <name>
+          <text>Conclusions Provide conclusions about the studys f</text>
+        </name>
+      </transition>
+      <transition id="item_5">
+        <name>
+          <text>Study Population Describe the characteristics of t</text>
+        </name>
+      </transition>
+      <transition id="item_26">
+        <name>
+          <text>Funding Identify the sources of funding for the st</text>
+        </name>
+      </transition>
+      <transition id="final_transition">
+        <name>
+          <text>End</text>
+        </name>
+      </transition>
+      <transition id="item_7">
+        <name>
+          <text>Comparators Describe the interventions or strategi</text>
+        </name>
+      </transition>
+      <transition id="item_11">
+        <name>
+          <text>Selection of Outcomes Describe the outcomes used t</text>
+        </name>
+      </transition>
+      <arc id="4311786240" source="p5" target="item_6"/>
+      <arc id="5006086272" source="p14" target="item_15"/>
+      <arc id="5006087168" source="p18" target="item_19"/>
+      <arc id="5006088064" source="p22" target="item_23"/>
+      <arc id="5006087952" source="item_22" target="p22"/>
+      <arc id="5006090192" source="p27" target="final_transition"/>
+      <arc id="5002375056" source="source" target="item_1"/>
+      <arc id="5006001168" source="p1" target="item_2"/>
+      <arc id="5006000528" source="item_1" target="p1"/>
+      <arc id="4830766736" source="item_3" target="p3"/>
+      <arc id="4831040912" source="item_4" target="p4"/>
+      <arc id="5006100752" source="p6" target="item_7"/>
+      <arc id="5005503632" source="p8" target="item_9"/>
+      <arc id="5006069904" source="item_10" target="p10"/>
+      <arc id="5005850768" source="item_11" target="p11"/>
+      <arc id="5006086160" source="item_14" target="p14"/>
+      <arc id="5005616416" source="item_2" target="p2"/>
+      <arc id="5005597472" source="p7" target="item_8"/>
+      <arc id="5006086048" source="p13" target="item_14"/>
+      <arc id="5006086944" source="p17" target="item_18"/>
+      <arc id="5006087840" source="p21" target="item_22"/>
+      <arc id="5006088736" source="p24" target="item_25"/>
+      <arc id="5006101424" source="item_7" target="p7"/>
+      <arc id="5005782448" source="p9" target="item_10"/>
+      <arc id="5006085936" source="item_13" target="p13"/>
+      <arc id="5006086832" source="item_17" target="p17"/>
+      <arc id="5006087728" source="item_21" target="p21"/>
+      <arc id="5006088624" source="item_24" target="p24"/>
+      <arc id="5006089520" source="item_26" target="p26"/>
+      <arc id="4831039552" source="p3" target="item_4"/>
+      <arc id="5006085824" source="p12" target="item_13"/>
+      <arc id="5006086720" source="p16" target="item_17"/>
+      <arc id="5006087616" source="p20" target="item_21"/>
+      <arc id="5006089744" source="p26" target="item_27"/>
+      <arc id="5006090304" source="final_transition" target="sink"/>
+      <arc id="5005503440" source="item_8" target="p8"/>
+      <arc id="5005616720" source="p2" target="item_3"/>
+      <arc id="5002327632" source="p4" target="item_5"/>
+      <arc id="5002327888" source="item_5" target="p5"/>
+      <arc id="5006050384" source="p11" target="item_12"/>
+      <arc id="5006050512" source="item_12" target="p12"/>
+      <arc id="5006086608" source="item_16" target="p16"/>
+      <arc id="5006087504" source="item_20" target="p20"/>
+      <arc id="5006088400" source="p23" target="item_24"/>
+      <arc id="5006089296" source="p25" target="item_26"/>
+      <arc id="5002294240" source="item_6" target="p6"/>
+      <arc id="5005782624" source="item_9" target="p9"/>
+      <arc id="5006086496" source="p15" target="item_16"/>
+      <arc id="5006087392" source="p19" target="item_20"/>
+      <arc id="5006088288" source="item_23" target="p23"/>
+      <arc id="5006087056" source="item_18" target="p18"/>
+      <arc id="5006069744" source="p10" target="item_11"/>
+      <arc id="5006086384" source="item_15" target="p15"/>
+      <arc id="5006087280" source="item_19" target="p19"/>
+      <arc id="5006089072" source="item_25" target="p25"/>
+      <arc id="5006089968" source="item_27" target="p27"/>
     </page>
     <finalmarkings>
       <marking>

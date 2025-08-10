@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <pnml>
-  <net id="STROBE Statement Checklist" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+  <net id="STROBE Checklist" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
     <name>
-      <text>STROBE Statement Checklist</text>
+      <text>STROBE Checklist</text>
     </name>
     <page id="n0">
       <place id="source">
@@ -13,18 +13,282 @@
           <text>1</text>
         </initialMarking>
       </place>
+      <place id="p10">
+        <name>
+          <text>p10</text>
+        </name>
+      </place>
+      <place id="p15">
+        <name>
+          <text>p15</text>
+        </name>
+      </place>
+      <place id="p1">
+        <name>
+          <text>p1</text>
+        </name>
+      </place>
+      <place id="p4">
+        <name>
+          <text>p4</text>
+        </name>
+      </place>
+      <place id="p11">
+        <name>
+          <text>p11</text>
+        </name>
+      </place>
+      <place id="p18">
+        <name>
+          <text>p18</text>
+        </name>
+      </place>
+      <place id="p2">
+        <name>
+          <text>p2</text>
+        </name>
+      </place>
+      <place id="p16">
+        <name>
+          <text>p16</text>
+        </name>
+      </place>
+      <place id="p13">
+        <name>
+          <text>p13</text>
+        </name>
+      </place>
+      <place id="p3">
+        <name>
+          <text>p3</text>
+        </name>
+      </place>
+      <place id="p14">
+        <name>
+          <text>p14</text>
+        </name>
+      </place>
       <place id="sink">
         <name>
           <text>sink</text>
         </name>
       </place>
-      <transition id="strobe-2007">
+      <place id="p7">
         <name>
-          <text>STROBE Statement Checklist</text>
+          <text>p7</text>
+        </name>
+      </place>
+      <place id="p8">
+        <name>
+          <text>p8</text>
+        </name>
+      </place>
+      <place id="p17">
+        <name>
+          <text>p17</text>
+        </name>
+      </place>
+      <place id="p21">
+        <name>
+          <text>p21</text>
+        </name>
+      </place>
+      <place id="p22">
+        <name>
+          <text>p22</text>
+        </name>
+      </place>
+      <place id="p9">
+        <name>
+          <text>p9</text>
+        </name>
+      </place>
+      <place id="p5">
+        <name>
+          <text>p5</text>
+        </name>
+      </place>
+      <place id="p6">
+        <name>
+          <text>p6</text>
+        </name>
+      </place>
+      <place id="p12">
+        <name>
+          <text>p12</text>
+        </name>
+      </place>
+      <place id="p19">
+        <name>
+          <text>p19</text>
+        </name>
+      </place>
+      <place id="p20">
+        <name>
+          <text>p20</text>
+        </name>
+      </place>
+      <transition id="item_7">
+        <name>
+          <text>7 Variables Clearly define all outcomes exposures </text>
         </name>
       </transition>
-      <arc id="4821894160" source="source" target="strobe-2007"/>
-      <arc id="4821411408" source="strobe-2007" target="sink"/>
+      <transition id="item_15">
+        <name>
+          <text>15 Outcome data Report numbers of outcome events o</text>
+        </name>
+      </transition>
+      <transition id="item_18">
+        <name>
+          <text>18 Key results Summarise key results with referenc</text>
+        </name>
+      </transition>
+      <transition id="item_22">
+        <name>
+          <text>22 Funding Give the source of funding and the role</text>
+        </name>
+      </transition>
+      <transition id="item_16">
+        <name>
+          <text>16 Main results Give unadjusted estimates and if a</text>
+        </name>
+      </transition>
+      <transition id="item_2">
+        <name>
+          <text>2 Backgroundrationale Explain the scientific backg</text>
+        </name>
+      </transition>
+      <transition id="item_3">
+        <name>
+          <text>3 Objectives State specific objectives including a</text>
+        </name>
+      </transition>
+      <transition id="item_5">
+        <name>
+          <text>5 Setting Describe the setting locations and relev</text>
+        </name>
+      </transition>
+      <transition id="item_13">
+        <name>
+          <text>13 Participants Report numbers of individuals at e</text>
+        </name>
+      </transition>
+      <transition id="item_6">
+        <name>
+          <text>6 Participants Give the eligibility criteria and t</text>
+        </name>
+      </transition>
+      <transition id="item_8">
+        <name>
+          <text>8 Data sources measurement For each variable of in</text>
+        </name>
+      </transition>
+      <transition id="item_19">
+        <name>
+          <text>19 Limitations Discuss limitations of the study ta</text>
+        </name>
+      </transition>
+      <transition id="item_20">
+        <name>
+          <text>20 Interpretation Give a cautious overall interpre</text>
+        </name>
+      </transition>
+      <transition id="item_1">
+        <name>
+          <text>1 Title and abstract Indicate the studys design wi</text>
+        </name>
+      </transition>
+      <transition id="item_9">
+        <name>
+          <text>9 Bias Describe any efforts to address potential s</text>
+        </name>
+      </transition>
+      <transition id="item_10">
+        <name>
+          <text>10 Study size Explain how the study size was arriv</text>
+        </name>
+      </transition>
+      <transition id="item_12">
+        <name>
+          <text>12 Statistical methods Describe all statistical me</text>
+        </name>
+      </transition>
+      <transition id="item_17">
+        <name>
+          <text>17 Other analyses Report other analyses doneeg ana</text>
+        </name>
+      </transition>
+      <transition id="item_21">
+        <name>
+          <text>21 Generalisability Discuss the generalisability e</text>
+        </name>
+      </transition>
+      <transition id="final_transition">
+        <name>
+          <text>End</text>
+        </name>
+      </transition>
+      <transition id="item_4">
+        <name>
+          <text>4 Study design Present key elements of study desig</text>
+        </name>
+      </transition>
+      <transition id="item_14">
+        <name>
+          <text>14 Descriptive data Give characteristics of study </text>
+        </name>
+      </transition>
+      <transition id="item_11">
+        <name>
+          <text>11 Quantitative variables Explain how quantitative</text>
+        </name>
+      </transition>
+      <arc id="4625819520" source="p2" target="item_3"/>
+      <arc id="4338377472" source="p5" target="item_6"/>
+      <arc id="4626288768" source="p14" target="item_15"/>
+      <arc id="4626289664" source="p18" target="item_19"/>
+      <arc id="4626290560" source="p22" target="final_transition"/>
+      <arc id="4622577552" source="source" target="item_1"/>
+      <arc id="4619970192" source="item_3" target="p3"/>
+      <arc id="4620244368" source="p3" target="item_4"/>
+      <arc id="4625722512" source="p8" target="item_9"/>
+      <arc id="4626288656" source="item_14" target="p14"/>
+      <arc id="4626289552" source="item_18" target="p18"/>
+      <arc id="4626290448" source="item_22" target="p22"/>
+      <arc id="4626289104" source="item_16" target="p16"/>
+      <arc id="4626288544" source="p13" target="item_14"/>
+      <arc id="4626289440" source="p17" target="item_18"/>
+      <arc id="4626290336" source="p21" target="item_22"/>
+      <arc id="4626271280" source="p10" target="item_11"/>
+      <arc id="4626288432" source="item_13" target="p13"/>
+      <arc id="4626289328" source="item_17" target="p17"/>
+      <arc id="4626290224" source="item_21" target="p21"/>
+      <arc id="4626253008" source="item_12" target="p12"/>
+      <arc id="4626290000" source="item_20" target="p20"/>
+      <arc id="4626000448" source="item_9" target="p9"/>
+      <arc id="4626288320" source="p12" target="item_13"/>
+      <arc id="4626289216" source="p16" target="item_17"/>
+      <arc id="4626290112" source="p20" target="item_21"/>
+      <arc id="4625819216" source="item_2" target="p2"/>
+      <arc id="4626203984" source="p1" target="item_2"/>
+      <arc id="4626203344" source="item_1" target="p1"/>
+      <arc id="4620245456" source="item_4" target="p4"/>
+      <arc id="4622529872" source="p4" target="item_5"/>
+      <arc id="4622530128" source="item_5" target="p5"/>
+      <arc id="4626303696" source="p6" target="item_7"/>
+      <arc id="4625722704" source="item_8" target="p8"/>
+      <arc id="4626271440" source="item_10" target="p10"/>
+      <arc id="4626253136" source="p11" target="item_12"/>
+      <arc id="4622513120" source="item_6" target="p6"/>
+      <arc id="4625800800" source="p7" target="item_8"/>
+      <arc id="4626052832" source="item_11" target="p11"/>
+      <arc id="4626288992" source="p15" target="item_16"/>
+      <arc id="4626289888" source="p19" target="item_20"/>
+      <arc id="4626000624" source="p9" target="item_10"/>
+      <arc id="4626304368" source="item_7" target="p7"/>
+      <arc id="4626288880" source="item_15" target="p15"/>
+      <arc id="4626289776" source="item_19" target="p19"/>
+      <arc id="4626290672" source="final_transition" target="sink"/>
     </page>
     <finalmarkings>
       <marking>

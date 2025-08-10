@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <pnml>
-  <net id="MOOSE Guidelines Checklist" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+  <net id="MOOSE Checklist" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
     <name>
-      <text>MOOSE Guidelines Checklist</text>
+      <text>MOOSE Checklist</text>
     </name>
     <page id="n0">
       <place id="source">
@@ -13,18 +13,270 @@
           <text>1</text>
         </initialMarking>
       </place>
+      <place id="p3">
+        <name>
+          <text>p3</text>
+        </name>
+      </place>
+      <place id="p10">
+        <name>
+          <text>p10</text>
+        </name>
+      </place>
+      <place id="p15">
+        <name>
+          <text>p15</text>
+        </name>
+      </place>
+      <place id="p1">
+        <name>
+          <text>p1</text>
+        </name>
+      </place>
+      <place id="p4">
+        <name>
+          <text>p4</text>
+        </name>
+      </place>
+      <place id="p12">
+        <name>
+          <text>p12</text>
+        </name>
+      </place>
+      <place id="p17">
+        <name>
+          <text>p17</text>
+        </name>
+      </place>
+      <place id="p11">
+        <name>
+          <text>p11</text>
+        </name>
+      </place>
+      <place id="p20">
+        <name>
+          <text>p20</text>
+        </name>
+      </place>
+      <place id="p14">
+        <name>
+          <text>p14</text>
+        </name>
+      </place>
       <place id="sink">
         <name>
           <text>sink</text>
         </name>
       </place>
-      <transition id="moose-2000">
+      <place id="p5">
         <name>
-          <text>MOOSE Guidelines Checklist</text>
+          <text>p5</text>
+        </name>
+      </place>
+      <place id="p7">
+        <name>
+          <text>p7</text>
+        </name>
+      </place>
+      <place id="p8">
+        <name>
+          <text>p8</text>
+        </name>
+      </place>
+      <place id="p18">
+        <name>
+          <text>p18</text>
+        </name>
+      </place>
+      <place id="p21">
+        <name>
+          <text>p21</text>
+        </name>
+      </place>
+      <place id="p9">
+        <name>
+          <text>p9</text>
+        </name>
+      </place>
+      <place id="p13">
+        <name>
+          <text>p13</text>
+        </name>
+      </place>
+      <place id="p16">
+        <name>
+          <text>p16</text>
+        </name>
+      </place>
+      <place id="p2">
+        <name>
+          <text>p2</text>
+        </name>
+      </place>
+      <place id="p6">
+        <name>
+          <text>p6</text>
+        </name>
+      </place>
+      <place id="p19">
+        <name>
+          <text>p19</text>
+        </name>
+      </place>
+      <transition id="item_8">
+        <name>
+          <text>8 Search process Describe the process for selectin</text>
         </name>
       </transition>
-      <arc id="4964156432" source="source" target="moose-2000"/>
-      <arc id="4963673680" source="moose-2000" target="sink"/>
+      <transition id="item_19">
+        <name>
+          <text>19 Limitations Discuss the limitations of the revi</text>
+        </name>
+      </transition>
+      <transition id="item_14">
+        <name>
+          <text>14 Study selection Describe the results of the stu</text>
+        </name>
+      </transition>
+      <transition id="item_17">
+        <name>
+          <text>17 Publication bias Present the results of any ass</text>
+        </name>
+      </transition>
+      <transition id="item_20">
+        <name>
+          <text>20 Conclusions Provide a general interpretation of</text>
+        </name>
+      </transition>
+      <transition id="item_15">
+        <name>
+          <text>15 Study characteristics Present the characteristi</text>
+        </name>
+      </transition>
+      <transition id="item_4">
+        <name>
+          <text>4 Rationale Provide the rationale for the review i</text>
+        </name>
+      </transition>
+      <transition id="item_6">
+        <name>
+          <text>6 Information sources Specify all information sour</text>
+        </name>
+      </transition>
+      <transition id="item_13">
+        <name>
+          <text>13 Publication bias Describe any methods used to a</text>
+        </name>
+      </transition>
+      <transition id="item_21">
+        <name>
+          <text>21 Funding Describe the sources of funding for the</text>
+        </name>
+      </transition>
+      <transition id="item_1">
+        <name>
+          <text>1 Problem definition Clearly state the research qu</text>
+        </name>
+      </transition>
+      <transition id="final_transition">
+        <name>
+          <text>End</text>
+        </name>
+      </transition>
+      <transition id="item_3">
+        <name>
+          <text>3 Study objectives Describe the study objectives</text>
+        </name>
+      </transition>
+      <transition id="item_2">
+        <name>
+          <text>2 Hypothesis State the hypothesis being tested</text>
+        </name>
+      </transition>
+      <transition id="item_9">
+        <name>
+          <text>9 Data extraction Describe the methods used to ext</text>
+        </name>
+      </transition>
+      <transition id="item_10">
+        <name>
+          <text>10 Data items List and define all variables for wh</text>
+        </name>
+      </transition>
+      <transition id="item_12">
+        <name>
+          <text>12 Data synthesis Describe the methods of data syn</text>
+        </name>
+      </transition>
+      <transition id="item_16">
+        <name>
+          <text>16 Quantitative data synthesis Present the results</text>
+        </name>
+      </transition>
+      <transition id="item_18">
+        <name>
+          <text>18 Summary of evidence Summarize the main findings</text>
+        </name>
+      </transition>
+      <transition id="item_5">
+        <name>
+          <text>5 Search criteria Specify the inclusion and exclus</text>
+        </name>
+      </transition>
+      <transition id="item_7">
+        <name>
+          <text>7 Search terms Describe the search strategy includ</text>
+        </name>
+      </transition>
+      <transition id="item_11">
+        <name>
+          <text>11 Study quality assessment Describe the methods u</text>
+        </name>
+      </transition>
+      <arc id="4317635328" source="p5" target="item_6"/>
+      <arc id="4897099904" source="item_13" target="p13"/>
+      <arc id="4897100800" source="p16" target="item_17"/>
+      <arc id="4897101696" source="item_21" target="p21"/>
+      <arc id="4897101584" source="item_20" target="p20"/>
+      <arc id="4896534032" source="p8" target="item_9"/>
+      <arc id="4893388688" source="source" target="item_1"/>
+      <arc id="4897014800" source="p1" target="item_2"/>
+      <arc id="4897014160" source="item_1" target="p1"/>
+      <arc id="4890781328" source="item_3" target="p3"/>
+      <arc id="4891055504" source="item_4" target="p4"/>
+      <arc id="4897115280" source="item_7" target="p7"/>
+      <arc id="4896795024" source="p9" target="item_10"/>
+      <arc id="4897082256" source="item_10" target="p10"/>
+      <arc id="4897100688" source="item_16" target="p16"/>
+      <arc id="4896630048" source="item_2" target="p2"/>
+      <arc id="4896864544" source="item_11" target="p11"/>
+      <arc id="4897100576" source="p15" target="item_16"/>
+      <arc id="4897101472" source="p19" target="item_20"/>
+      <arc id="4897082416" source="p10" target="item_11"/>
+      <arc id="4897100464" source="item_15" target="p15"/>
+      <arc id="4897101360" source="item_19" target="p19"/>
+      <arc id="4891054144" source="p3" target="item_4"/>
+      <arc id="4896795200" source="item_9" target="p9"/>
+      <arc id="4897100352" source="p14" target="item_15"/>
+      <arc id="4897101248" source="p18" target="item_19"/>
+      <arc id="4896630352" source="p2" target="item_3"/>
+      <arc id="4893340496" source="p4" target="item_5"/>
+      <arc id="4893341008" source="item_5" target="p5"/>
+      <arc id="4896533840" source="item_8" target="p8"/>
+      <arc id="4897064144" source="p11" target="item_12"/>
+      <arc id="4897064272" source="item_12" target="p12"/>
+      <arc id="4897100240" source="item_14" target="p14"/>
+      <arc id="4897101136" source="item_18" target="p18"/>
+      <arc id="4897102032" source="final_transition" target="sink"/>
+      <arc id="4893307872" source="item_6" target="p6"/>
+      <arc id="4896610272" source="p7" target="item_8"/>
+      <arc id="4897100128" source="p13" target="item_14"/>
+      <arc id="4897101024" source="p17" target="item_18"/>
+      <arc id="4897101920" source="p21" target="final_transition"/>
+      <arc id="4897114608" source="p6" target="item_7"/>
+      <arc id="4897100016" source="p12" target="item_13"/>
+      <arc id="4897100912" source="item_17" target="p17"/>
+      <arc id="4897101808" source="p20" target="item_21"/>
     </page>
     <finalmarkings>
       <marking>

@@ -13,18 +13,42 @@
           <text>1</text>
         </initialMarking>
       </place>
+      <place id="p2">
+        <name>
+          <text>p2</text>
+        </name>
+      </place>
       <place id="sink">
         <name>
           <text>sink</text>
         </name>
       </place>
-      <transition id="spirit-ai">
+      <place id="p1">
         <name>
-          <text>Guidelines for clinical trial protocols for interventions involving artificial intelligence: the SPIRIT-AI extension</text>
+          <text>p1</text>
+        </name>
+      </place>
+      <transition id="item_1">
+        <name>
+          <text>Item 1 Title  Indicate that the trial involves AI</text>
         </name>
       </transition>
-      <arc id="5493490704" source="source" target="spirit-ai"/>
-      <arc id="5493024336" source="spirit-ai" target="sink"/>
+      <transition id="final_transition">
+        <name>
+          <text>End</text>
+        </name>
+      </transition>
+      <transition id="item_2">
+        <name>
+          <text>Item 2 Abstract  Provide a structured summary of t</text>
+        </name>
+      </transition>
+      <arc id="4812678432" source="item_2" target="p2"/>
+      <arc id="4809437072" source="source" target="item_1"/>
+      <arc id="4813063184" source="p1" target="item_2"/>
+      <arc id="4812678736" source="p2" target="final_transition"/>
+      <arc id="4813062544" source="item_1" target="p1"/>
+      <arc id="4805764752" source="final_transition" target="sink"/>
     </page>
     <finalmarkings>
       <marking>

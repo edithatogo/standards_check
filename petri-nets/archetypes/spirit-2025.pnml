@@ -13,18 +13,402 @@
           <text>1</text>
         </initialMarking>
       </place>
+      <place id="p3">
+        <name>
+          <text>p3</text>
+        </name>
+      </place>
+      <place id="p9">
+        <name>
+          <text>p9</text>
+        </name>
+      </place>
+      <place id="p17">
+        <name>
+          <text>p17</text>
+        </name>
+      </place>
+      <place id="p14">
+        <name>
+          <text>p14</text>
+        </name>
+      </place>
+      <place id="p1">
+        <name>
+          <text>p1</text>
+        </name>
+      </place>
+      <place id="p4">
+        <name>
+          <text>p4</text>
+        </name>
+      </place>
+      <place id="p20">
+        <name>
+          <text>p20</text>
+        </name>
+      </place>
+      <place id="p23">
+        <name>
+          <text>p23</text>
+        </name>
+      </place>
+      <place id="p18">
+        <name>
+          <text>p18</text>
+        </name>
+      </place>
+      <place id="p25">
+        <name>
+          <text>p25</text>
+        </name>
+      </place>
+      <place id="p27">
+        <name>
+          <text>p27</text>
+        </name>
+      </place>
+      <place id="p29">
+        <name>
+          <text>p29</text>
+        </name>
+      </place>
+      <place id="p31">
+        <name>
+          <text>p31</text>
+        </name>
+      </place>
+      <place id="p15">
+        <name>
+          <text>p15</text>
+        </name>
+      </place>
+      <place id="p12">
+        <name>
+          <text>p12</text>
+        </name>
+      </place>
       <place id="sink">
         <name>
           <text>sink</text>
         </name>
       </place>
-      <transition id="spirit-2025">
+      <place id="p7">
         <name>
-          <text>SPIRIT 2025 Checklist</text>
+          <text>p7</text>
+        </name>
+      </place>
+      <place id="p8">
+        <name>
+          <text>p8</text>
+        </name>
+      </place>
+      <place id="p16">
+        <name>
+          <text>p16</text>
+        </name>
+      </place>
+      <place id="p19">
+        <name>
+          <text>p19</text>
+        </name>
+      </place>
+      <place id="p21">
+        <name>
+          <text>p21</text>
+        </name>
+      </place>
+      <place id="p22">
+        <name>
+          <text>p22</text>
+        </name>
+      </place>
+      <place id="p13">
+        <name>
+          <text>p13</text>
+        </name>
+      </place>
+      <place id="p2">
+        <name>
+          <text>p2</text>
+        </name>
+      </place>
+      <place id="p5">
+        <name>
+          <text>p5</text>
+        </name>
+      </place>
+      <place id="p6">
+        <name>
+          <text>p6</text>
+        </name>
+      </place>
+      <place id="p10">
+        <name>
+          <text>p10</text>
+        </name>
+      </place>
+      <place id="p11">
+        <name>
+          <text>p11</text>
+        </name>
+      </place>
+      <place id="p24">
+        <name>
+          <text>p24</text>
+        </name>
+      </place>
+      <place id="p26">
+        <name>
+          <text>p26</text>
+        </name>
+      </place>
+      <place id="p28">
+        <name>
+          <text>p28</text>
+        </name>
+      </place>
+      <place id="p30">
+        <name>
+          <text>p30</text>
+        </name>
+      </place>
+      <place id="p32">
+        <name>
+          <text>p32</text>
+        </name>
+      </place>
+      <transition id="item_7">
+        <name>
+          <text>7 Objectives Specific objectives or hypotheses</text>
         </name>
       </transition>
-      <arc id="4832003088" source="source" target="spirit-2025"/>
-      <arc id="4694156880" source="spirit-2025" target="sink"/>
+      <transition id="item_27">
+        <name>
+          <text>27 Ancillary and posttrial care Provisions if any </text>
+        </name>
+      </transition>
+      <transition id="item_16">
+        <name>
+          <text>16 Data management Plans for data entry coding sec</text>
+        </name>
+      </transition>
+      <transition id="item_26">
+        <name>
+          <text>26 Access to data Statement of who will have acces</text>
+        </name>
+      </transition>
+      <transition id="item_28">
+        <name>
+          <text>28 Dissemination policy Plans for investigators an</text>
+        </name>
+      </transition>
+      <transition id="item_30">
+        <name>
+          <text>30 Reproducibility Plans for sharing of original d</text>
+        </name>
+      </transition>
+      <transition id="item_32">
+        <name>
+          <text>32 Biological specimens Plans for collection labor</text>
+        </name>
+      </transition>
+      <transition id="item_29">
+        <name>
+          <text>29 Authorship eligibility Guidelines for authorshi</text>
+        </name>
+      </transition>
+      <transition id="item_4">
+        <name>
+          <text>4 Funding Sources and types of financial material </text>
+        </name>
+      </transition>
+      <transition id="item_6">
+        <name>
+          <text>6 Background and rationale Description of research</text>
+        </name>
+      </transition>
+      <transition id="item_8">
+        <name>
+          <text>8 Trial design Description of trial design includi</text>
+        </name>
+      </transition>
+      <transition id="item_18">
+        <name>
+          <text>18 Data monitoring Plans for data monitoring</text>
+        </name>
+      </transition>
+      <transition id="item_21">
+        <name>
+          <text>21 Research ethics approval Plans for seeking rese</text>
+        </name>
+      </transition>
+      <transition id="item_22">
+        <name>
+          <text>22 Protocol amendments Plans for communicating imp</text>
+        </name>
+      </transition>
+      <transition id="item_1">
+        <name>
+          <text>1 Title Descriptive title that identifies the stud</text>
+        </name>
+      </transition>
+      <transition id="item_12">
+        <name>
+          <text>12 Outcomes Primary secondary and other outcomes</text>
+        </name>
+      </transition>
+      <transition id="item_31">
+        <name>
+          <text>31 Informed consent materials Model consent form a</text>
+        </name>
+      </transition>
+      <transition id="item_3">
+        <name>
+          <text>3 Protocol version Date and version identifier</text>
+        </name>
+      </transition>
+      <transition id="item_2">
+        <name>
+          <text>2 Trial registration Trial identifier and registry</text>
+        </name>
+      </transition>
+      <transition id="item_9">
+        <name>
+          <text>9 Study setting Description of study settings</text>
+        </name>
+      </transition>
+      <transition id="item_10">
+        <name>
+          <text>10 Eligibility criteria Inclusion and exclusion cr</text>
+        </name>
+      </transition>
+      <transition id="item_11">
+        <name>
+          <text>11 Interventions Interventions for each group with</text>
+        </name>
+      </transition>
+      <transition id="item_14">
+        <name>
+          <text>14 Blinding masking Who will be blinded and how</text>
+        </name>
+      </transition>
+      <transition id="item_17">
+        <name>
+          <text>17 Statistical methods Statistical methods for ana</text>
+        </name>
+      </transition>
+      <transition id="item_23">
+        <name>
+          <text>23 Consent or assent Who will obtain informed cons</text>
+        </name>
+      </transition>
+      <transition id="item_24">
+        <name>
+          <text>24 Confidentiality How personal information about </text>
+        </name>
+      </transition>
+      <transition id="item_25">
+        <name>
+          <text>25 Declaration of interests Financial and other co</text>
+        </name>
+      </transition>
+      <transition id="item_5">
+        <name>
+          <text>5 Roles and responsibilities Names affiliations an</text>
+        </name>
+      </transition>
+      <transition id="item_15">
+        <name>
+          <text>15 Data collection methods Plans for assessment an</text>
+        </name>
+      </transition>
+      <transition id="item_19">
+        <name>
+          <text>19 Harms Plans for collecting assessing reporting </text>
+        </name>
+      </transition>
+      <transition id="final_transition">
+        <name>
+          <text>End</text>
+        </name>
+      </transition>
+      <transition id="item_13">
+        <name>
+          <text>13 Allocation Sequence generation concealment mech</text>
+        </name>
+      </transition>
+      <transition id="item_20">
+        <name>
+          <text>20 Auditing Frequency and procedures for auditing </text>
+        </name>
+      </transition>
+      <arc id="5112805376" source="item_11" target="p11"/>
+      <arc id="5113041920" source="p15" target="item_16"/>
+      <arc id="5113042816" source="p19" target="item_20"/>
+      <arc id="5113043712" source="p23" target="item_24"/>
+      <arc id="5113044608" source="p25" target="item_26"/>
+      <arc id="5113045504" source="p27" target="item_28"/>
+      <arc id="5113046400" source="p29" target="item_30"/>
+      <arc id="5113047296" source="p31" target="item_32"/>
+      <arc id="5109329808" source="source" target="item_1"/>
+      <arc id="5112955920" source="p1" target="item_2"/>
+      <arc id="5112955280" source="item_1" target="p1"/>
+      <arc id="5106722448" source="item_3" target="p3"/>
+      <arc id="5106996624" source="p3" target="item_4"/>
+      <arc id="5112458384" source="item_8" target="p8"/>
+      <arc id="5113024016" source="p10" target="item_11"/>
+      <arc id="5113041808" source="item_16" target="p16"/>
+      <arc id="5113042704" source="item_20" target="p20"/>
+      <arc id="5113043600" source="item_23" target="p23"/>
+      <arc id="5112571168" source="item_2" target="p2"/>
+      <arc id="5112552224" source="p7" target="item_8"/>
+      <arc id="5112736672" source="p9" target="item_10"/>
+      <arc id="5113041696" source="item_15" target="p15"/>
+      <arc id="5113042592" source="item_19" target="p19"/>
+      <arc id="5113044384" source="item_25" target="p25"/>
+      <arc id="5113045280" source="item_27" target="p27"/>
+      <arc id="5113046176" source="item_29" target="p29"/>
+      <arc id="5113047072" source="item_31" target="p31"/>
+      <arc id="5113056176" source="p6" target="item_7"/>
+      <arc id="5113041584" source="p14" target="item_15"/>
+      <arc id="5113042480" source="p18" target="item_19"/>
+      <arc id="5113043376" source="p22" target="item_23"/>
+      <arc id="5113047856" source="final_transition" target="sink"/>
+      <arc id="5113041472" source="item_14" target="p14"/>
+      <arc id="5113042368" source="item_18" target="p18"/>
+      <arc id="5113043264" source="item_22" target="p22"/>
+      <arc id="5113044160" source="p24" target="item_25"/>
+      <arc id="5113045056" source="p26" target="item_27"/>
+      <arc id="5113045952" source="p28" target="item_29"/>
+      <arc id="5113046848" source="p30" target="item_31"/>
+      <arc id="5113047744" source="p32" target="final_transition"/>
+      <arc id="5113056848" source="item_7" target="p7"/>
+      <arc id="5112571472" source="p2" target="item_3"/>
+      <arc id="5106997712" source="item_4" target="p4"/>
+      <arc id="5109282384" source="p4" target="item_5"/>
+      <arc id="5109282640" source="item_5" target="p5"/>
+      <arc id="5112458576" source="p8" target="item_9"/>
+      <arc id="5113005520" source="p11" target="item_12"/>
+      <arc id="5113005648" source="item_12" target="p12"/>
+      <arc id="5113041360" source="p13" target="item_14"/>
+      <arc id="5113042256" source="p17" target="item_18"/>
+      <arc id="5113043152" source="p21" target="item_22"/>
+      <arc id="5109248992" source="p5" target="item_6"/>
+      <arc id="5109243232" source="item_6" target="p6"/>
+      <arc id="5113041248" source="p12" target="item_13"/>
+      <arc id="5113042144" source="item_17" target="p17"/>
+      <arc id="5113043040" source="item_21" target="p21"/>
+      <arc id="5113043936" source="item_24" target="p24"/>
+      <arc id="5113044832" source="item_26" target="p26"/>
+      <arc id="5113045728" source="item_28" target="p28"/>
+      <arc id="5113046624" source="item_30" target="p30"/>
+      <arc id="5113047520" source="item_32" target="p32"/>
+      <arc id="5112736496" source="item_9" target="p9"/>
+      <arc id="5113023856" source="item_10" target="p10"/>
+      <arc id="5113041136" source="item_13" target="p13"/>
+      <arc id="5113042032" source="p16" target="item_17"/>
+      <arc id="5113042928" source="p20" target="item_21"/>
     </page>
     <finalmarkings>
       <marking>

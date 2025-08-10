@@ -13,18 +13,282 @@
           <text>1</text>
         </initialMarking>
       </place>
+      <place id="p3">
+        <name>
+          <text>p3</text>
+        </name>
+      </place>
+      <place id="p10">
+        <name>
+          <text>p10</text>
+        </name>
+      </place>
+      <place id="p13">
+        <name>
+          <text>p13</text>
+        </name>
+      </place>
+      <place id="p16">
+        <name>
+          <text>p16</text>
+        </name>
+      </place>
+      <place id="p15">
+        <name>
+          <text>p15</text>
+        </name>
+      </place>
+      <place id="p1">
+        <name>
+          <text>p1</text>
+        </name>
+      </place>
+      <place id="p4">
+        <name>
+          <text>p4</text>
+        </name>
+      </place>
+      <place id="p18">
+        <name>
+          <text>p18</text>
+        </name>
+      </place>
+      <place id="p20">
+        <name>
+          <text>p20</text>
+        </name>
+      </place>
+      <place id="p12">
+        <name>
+          <text>p12</text>
+        </name>
+      </place>
       <place id="sink">
         <name>
           <text>sink</text>
         </name>
       </place>
-      <transition id="arrive-2020">
+      <place id="p7">
         <name>
-          <text>ARRIVE 2.0 Checklist</text>
+          <text>p7</text>
+        </name>
+      </place>
+      <place id="p8">
+        <name>
+          <text>p8</text>
+        </name>
+      </place>
+      <place id="p11">
+        <name>
+          <text>p11</text>
+        </name>
+      </place>
+      <place id="p14">
+        <name>
+          <text>p14</text>
+        </name>
+      </place>
+      <place id="p19">
+        <name>
+          <text>p19</text>
+        </name>
+      </place>
+      <place id="p21">
+        <name>
+          <text>p21</text>
+        </name>
+      </place>
+      <place id="p22">
+        <name>
+          <text>p22</text>
+        </name>
+      </place>
+      <place id="p9">
+        <name>
+          <text>p9</text>
+        </name>
+      </place>
+      <place id="p17">
+        <name>
+          <text>p17</text>
+        </name>
+      </place>
+      <place id="p2">
+        <name>
+          <text>p2</text>
+        </name>
+      </place>
+      <place id="p5">
+        <name>
+          <text>p5</text>
+        </name>
+      </place>
+      <place id="p6">
+        <name>
+          <text>p6</text>
+        </name>
+      </place>
+      <transition id="item_7">
+        <name>
+          <text>Statistical Methods Detailed information about the</text>
         </name>
       </transition>
-      <arc id="6164480400" source="source" target="arrive-2020"/>
-      <arc id="6078015056" source="arrive-2020" target="sink"/>
+      <transition id="item_16">
+        <name>
+          <text>Animal Care and Monitoring A description of any in</text>
+        </name>
+      </transition>
+      <transition id="item_4">
+        <name>
+          <text>Randomization A statement on whether randomization</text>
+        </name>
+      </transition>
+      <transition id="item_6">
+        <name>
+          <text>Outcome Measures A clear definition of all assesse</text>
+        </name>
+      </transition>
+      <transition id="item_8">
+        <name>
+          <text>Experimental Animals Speciesappropriate details of</text>
+        </name>
+      </transition>
+      <transition id="item_14">
+        <name>
+          <text>Ethical Statement The name of the ethical review c</text>
+        </name>
+      </transition>
+      <transition id="item_18">
+        <name>
+          <text>GeneralizabilityTranslation A discussion of the ge</text>
+        </name>
+      </transition>
+      <transition id="item_20">
+        <name>
+          <text>Data Access A statement on where the study data ca</text>
+        </name>
+      </transition>
+      <transition id="item_1">
+        <name>
+          <text>Study Design A brief description of the study desi</text>
+        </name>
+      </transition>
+      <transition id="item_17">
+        <name>
+          <text>InterpretationScientific Implications An interpret</text>
+        </name>
+      </transition>
+      <transition id="item_15">
+        <name>
+          <text>Housing and Husbandry Details of the housing and h</text>
+        </name>
+      </transition>
+      <transition id="item_3">
+        <name>
+          <text>Inclusion and Exclusion Criteria A description of </text>
+        </name>
+      </transition>
+      <transition id="item_2">
+        <name>
+          <text>Sample Size The exact number of experimental units</text>
+        </name>
+      </transition>
+      <transition id="item_9">
+        <name>
+          <text>Experimental Procedures A thorough description of </text>
+        </name>
+      </transition>
+      <transition id="item_10">
+        <name>
+          <text>Results For each experiment a report of summary an</text>
+        </name>
+      </transition>
+      <transition id="item_12">
+        <name>
+          <text>Background An explanation of the scientific contex</text>
+        </name>
+      </transition>
+      <transition id="item_13">
+        <name>
+          <text>Objectives A clear statement of the research objec</text>
+        </name>
+      </transition>
+      <transition id="final_transition">
+        <name>
+          <text>End</text>
+        </name>
+      </transition>
+      <transition id="item_5">
+        <name>
+          <text>Blinding A description of who was blinded during t</text>
+        </name>
+      </transition>
+      <transition id="item_19">
+        <name>
+          <text>Protocol Registration A statement indicating if a </text>
+        </name>
+      </transition>
+      <transition id="item_11">
+        <name>
+          <text>Abstract A summary of the studys background object</text>
+        </name>
+      </transition>
+      <transition id="item_21">
+        <name>
+          <text>Declaration of Interest A declaration of any poten</text>
+        </name>
+      </transition>
+      <transition id="item_22">
+        <name>
+          <text>Funding Information on all funding sources and the</text>
+        </name>
+      </transition>
+      <arc id="4311556864" source="p5" target="item_6"/>
+      <arc id="4983797760" source="item_11" target="p11"/>
+      <arc id="4984033408" source="item_15" target="p15"/>
+      <arc id="4984034304" source="item_19" target="p19"/>
+      <arc id="4984035200" source="final_transition" target="sink"/>
+      <arc id="4983467920" source="p8" target="item_9"/>
+      <arc id="4978257808" source="source" target="item_1"/>
+      <arc id="4983948304" source="p1" target="item_2"/>
+      <arc id="4983947664" source="item_1" target="p1"/>
+      <arc id="4974159504" source="item_3" target="p3"/>
+      <arc id="4974433680" source="item_4" target="p4"/>
+      <arc id="4984047888" source="p6" target="item_7"/>
+      <arc id="4984033296" source="p14" target="item_15"/>
+      <arc id="4984034192" source="p18" target="item_19"/>
+      <arc id="4984035088" source="p22" target="final_transition"/>
+      <arc id="4984033744" source="p16" target="item_17"/>
+      <arc id="4983563552" source="item_2" target="p2"/>
+      <arc id="4983729056" source="item_9" target="p9"/>
+      <arc id="4984033184" source="item_14" target="p14"/>
+      <arc id="4984034080" source="item_18" target="p18"/>
+      <arc id="4984034976" source="item_22" target="p22"/>
+      <arc id="4983545648" source="p7" target="item_8"/>
+      <arc id="4984048560" source="item_7" target="p7"/>
+      <arc id="4984033072" source="p13" target="item_14"/>
+      <arc id="4984033968" source="p17" target="item_18"/>
+      <arc id="4984034864" source="p21" target="item_22"/>
+      <arc id="4984034640" source="p20" target="item_21"/>
+      <arc id="4984032960" source="item_13" target="p13"/>
+      <arc id="4984033856" source="item_17" target="p17"/>
+      <arc id="4984034752" source="item_21" target="p21"/>
+      <arc id="4983467728" source="item_8" target="p8"/>
+      <arc id="4983563856" source="p2" target="item_3"/>
+      <arc id="4974434768" source="p3" target="item_4"/>
+      <arc id="4978210128" source="p4" target="item_5"/>
+      <arc id="4978210384" source="item_5" target="p5"/>
+      <arc id="4983729232" source="p9" target="item_10"/>
+      <arc id="4984016080" source="item_10" target="p10"/>
+      <arc id="4983997648" source="p11" target="item_12"/>
+      <arc id="4983997520" source="item_12" target="p12"/>
+      <arc id="4984032848" source="p12" target="item_13"/>
+      <arc id="4978176992" source="item_6" target="p6"/>
+      <arc id="4984033632" source="item_16" target="p16"/>
+      <arc id="4984034528" source="p19" target="item_20"/>
+      <arc id="4984016240" source="p10" target="item_11"/>
+      <arc id="4984033520" source="p15" target="item_16"/>
+      <arc id="4984034416" source="item_20" target="p20"/>
     </page>
     <finalmarkings>
       <marking>

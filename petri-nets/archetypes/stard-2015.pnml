@@ -13,18 +13,438 @@
           <text>1</text>
         </initialMarking>
       </place>
+      <place id="p3">
+        <name>
+          <text>p3</text>
+        </name>
+      </place>
+      <place id="p10">
+        <name>
+          <text>p10</text>
+        </name>
+      </place>
+      <place id="p13">
+        <name>
+          <text>p13</text>
+        </name>
+      </place>
+      <place id="p25">
+        <name>
+          <text>p25</text>
+        </name>
+      </place>
+      <place id="p27">
+        <name>
+          <text>p27</text>
+        </name>
+      </place>
+      <place id="p29">
+        <name>
+          <text>p29</text>
+        </name>
+      </place>
+      <place id="p31">
+        <name>
+          <text>p31</text>
+        </name>
+      </place>
+      <place id="p33">
+        <name>
+          <text>p33</text>
+        </name>
+      </place>
+      <place id="p35">
+        <name>
+          <text>p35</text>
+        </name>
+      </place>
+      <place id="p14">
+        <name>
+          <text>p14</text>
+        </name>
+      </place>
+      <place id="p16">
+        <name>
+          <text>p16</text>
+        </name>
+      </place>
+      <place id="p15">
+        <name>
+          <text>p15</text>
+        </name>
+      </place>
+      <place id="p1">
+        <name>
+          <text>p1</text>
+        </name>
+      </place>
+      <place id="p4">
+        <name>
+          <text>p4</text>
+        </name>
+      </place>
+      <place id="p12">
+        <name>
+          <text>p12</text>
+        </name>
+      </place>
+      <place id="p18">
+        <name>
+          <text>p18</text>
+        </name>
+      </place>
+      <place id="p20">
+        <name>
+          <text>p20</text>
+        </name>
+      </place>
+      <place id="p24">
+        <name>
+          <text>p24</text>
+        </name>
+      </place>
+      <place id="p26">
+        <name>
+          <text>p26</text>
+        </name>
+      </place>
+      <place id="p28">
+        <name>
+          <text>p28</text>
+        </name>
+      </place>
+      <place id="p30">
+        <name>
+          <text>p30</text>
+        </name>
+      </place>
+      <place id="p32">
+        <name>
+          <text>p32</text>
+        </name>
+      </place>
+      <place id="p34">
+        <name>
+          <text>p34</text>
+        </name>
+      </place>
       <place id="sink">
         <name>
           <text>sink</text>
         </name>
       </place>
-      <transition id="stard-2015">
+      <place id="p5">
         <name>
-          <text>STARD 2015 Checklist</text>
+          <text>p5</text>
+        </name>
+      </place>
+      <place id="p7">
+        <name>
+          <text>p7</text>
+        </name>
+      </place>
+      <place id="p8">
+        <name>
+          <text>p8</text>
+        </name>
+      </place>
+      <place id="p11">
+        <name>
+          <text>p11</text>
+        </name>
+      </place>
+      <place id="p19">
+        <name>
+          <text>p19</text>
+        </name>
+      </place>
+      <place id="p21">
+        <name>
+          <text>p21</text>
+        </name>
+      </place>
+      <place id="p22">
+        <name>
+          <text>p22</text>
+        </name>
+      </place>
+      <place id="p9">
+        <name>
+          <text>p9</text>
+        </name>
+      </place>
+      <place id="p17">
+        <name>
+          <text>p17</text>
+        </name>
+      </place>
+      <place id="p2">
+        <name>
+          <text>p2</text>
+        </name>
+      </place>
+      <place id="p6">
+        <name>
+          <text>p6</text>
+        </name>
+      </place>
+      <place id="p23">
+        <name>
+          <text>p23</text>
+        </name>
+      </place>
+      <transition id="item_8">
+        <name>
+          <text>8 Participants Where and when potentially eligible</text>
         </name>
       </transition>
-      <arc id="4625646608" source="source" target="stard-2015"/>
-      <arc id="4625163856" source="stard-2015" target="sink"/>
+      <transition id="item_2">
+        <name>
+          <text>2 Structured summary Structured summary of study d</text>
+        </name>
+      </transition>
+      <transition id="item_3">
+        <name>
+          <text>3 Scientific and clinical background Scientific an</text>
+        </name>
+      </transition>
+      <transition id="item_20">
+        <name>
+          <text>17 Analysis Any analyses of variability in diagnos</text>
+        </name>
+      </transition>
+      <transition id="item_29">
+        <name>
+          <text>26 Estimates Any analyses of variability including</text>
+        </name>
+      </transition>
+      <transition id="item_35">
+        <name>
+          <text>32 Funding Sources of funding and other support ro</text>
+        </name>
+      </transition>
+      <transition id="item_25">
+        <name>
+          <text>22 Test results Time interval from index test to r</text>
+        </name>
+      </transition>
+      <transition id="item_27">
+        <name>
+          <text>24 Test results Any adverse events from performing</text>
+        </name>
+      </transition>
+      <transition id="item_31">
+        <name>
+          <text>28 Study limitations Study limitations including s</text>
+        </name>
+      </transition>
+      <transition id="item_33">
+        <name>
+          <text>30 Registration number and name of registry Regist</text>
+        </name>
+      </transition>
+      <transition id="item_14">
+        <name>
+          <text>12b Test methods Definition of and rationale for t</text>
+        </name>
+      </transition>
+      <transition id="item_4">
+        <name>
+          <text>4 Study objectives and hypotheses Study objectives</text>
+        </name>
+      </transition>
+      <transition id="item_1">
+        <name>
+          <text>1 Identification Identification as a study of diag</text>
+        </name>
+      </transition>
+      <transition id="item_18">
+        <name>
+          <text>15 Analysis How indeterminate index test or refere</text>
+        </name>
+      </transition>
+      <transition id="item_16">
+        <name>
+          <text>13b Test methods Whether clinical information and </text>
+        </name>
+      </transition>
+      <transition id="item_15">
+        <name>
+          <text>13a Test methods Whether clinical information and </text>
+        </name>
+      </transition>
+      <transition id="item_9">
+        <name>
+          <text>9 Participants Whether participants formed a conse</text>
+        </name>
+      </transition>
+      <transition id="item_10">
+        <name>
+          <text>10a Test methods Index test in sufficient detail t</text>
+        </name>
+      </transition>
+      <transition id="item_12">
+        <name>
+          <text>11 Test methods Rationale for choosing the referen</text>
+        </name>
+      </transition>
+      <transition id="item_13">
+        <name>
+          <text>12a Test methods Definition of and rationale for t</text>
+        </name>
+      </transition>
+      <transition id="item_17">
+        <name>
+          <text>14 Analysis Methods for estimating or comparing me</text>
+        </name>
+      </transition>
+      <transition id="item_22">
+        <name>
+          <text>19 Participants Flow of participants using a diagr</text>
+        </name>
+      </transition>
+      <transition id="item_23">
+        <name>
+          <text>20 Participants Baseline demographic and clinical </text>
+        </name>
+      </transition>
+      <transition id="item_24">
+        <name>
+          <text>21 Participants Distribution of severity of diseas</text>
+        </name>
+      </transition>
+      <transition id="item_5">
+        <name>
+          <text>5 Study design Whether data collection was planned</text>
+        </name>
+      </transition>
+      <transition id="item_26">
+        <name>
+          <text>23 Test results Cross tabulation of the index test</text>
+        </name>
+      </transition>
+      <transition id="item_28">
+        <name>
+          <text>25 Estimates Estimates of diagnostic accuracy and </text>
+        </name>
+      </transition>
+      <transition id="item_30">
+        <name>
+          <text>27 Estimates The number of indeterminate test resu</text>
+        </name>
+      </transition>
+      <transition id="item_32">
+        <name>
+          <text>29 Implications for practice Implications for prac</text>
+        </name>
+      </transition>
+      <transition id="item_34">
+        <name>
+          <text>31 Where the full study protocol can be accessed W</text>
+        </name>
+      </transition>
+      <transition id="final_transition">
+        <name>
+          <text>End</text>
+        </name>
+      </transition>
+      <transition id="item_6">
+        <name>
+          <text>6 Participants Eligibility criteria</text>
+        </name>
+      </transition>
+      <transition id="item_7">
+        <name>
+          <text>7 Participants On what basis potentially eligible </text>
+        </name>
+      </transition>
+      <transition id="item_11">
+        <name>
+          <text>10b Test methods Reference standard in sufficient </text>
+        </name>
+      </transition>
+      <transition id="item_19">
+        <name>
+          <text>16 Analysis How missing data on the index test and</text>
+        </name>
+      </transition>
+      <transition id="item_21">
+        <name>
+          <text>18 Analysis Sample size calculation</text>
+        </name>
+      </transition>
+      <arc id="4303446784" source="p5" target="item_6"/>
+      <arc id="4822248704" source="item_9" target="p9"/>
+      <arc id="4822552704" source="p14" target="item_15"/>
+      <arc id="4822553600" source="p18" target="item_19"/>
+      <arc id="4822554496" source="p22" target="item_23"/>
+      <arc id="4822556624" source="p27" target="item_28"/>
+      <arc id="4817498000" source="source" target="item_1"/>
+      <arc id="4814895248" source="item_3" target="p3"/>
+      <arc id="4815164816" source="item_4" target="p4"/>
+      <arc id="4822568080" source="p6" target="item_7"/>
+      <arc id="4821970064" source="p8" target="item_9"/>
+      <arc id="4822535696" source="item_10" target="p10"/>
+      <arc id="4822552592" source="item_14" target="p14"/>
+      <arc id="4822553488" source="item_18" target="p18"/>
+      <arc id="4822554384" source="item_22" target="p22"/>
+      <arc id="4822555280" source="p24" target="item_25"/>
+      <arc id="4822558864" source="p32" target="item_33"/>
+      <arc id="4822559984" source="item_35" target="p35"/>
+      <arc id="4822082848" source="item_2" target="p2"/>
+      <arc id="4822552480" source="p13" target="item_14"/>
+      <arc id="4822553376" source="p17" target="item_18"/>
+      <arc id="4822554272" source="p21" target="item_22"/>
+      <arc id="4822556960" source="p28" target="item_29"/>
+      <arc id="4822559648" source="p34" target="item_35"/>
+      <arc id="4822557520" source="p29" target="item_30"/>
+      <arc id="4822558640" source="item_32" target="p32"/>
+      <arc id="4822568752" source="item_7" target="p7"/>
+      <arc id="4822248880" source="p9" target="item_10"/>
+      <arc id="4822317488" source="item_11" target="p11"/>
+      <arc id="4822552368" source="p12" target="item_13"/>
+      <arc id="4822553264" source="item_17" target="p17"/>
+      <arc id="4822554160" source="item_21" target="p21"/>
+      <arc id="4822555056" source="item_24" target="p24"/>
+      <arc id="4822555952" source="item_26" target="p26"/>
+      <arc id="4822556848" source="item_28" target="p28"/>
+      <arc id="4822557744" source="item_30" target="p30"/>
+      <arc id="4815163456" source="p3" target="item_4"/>
+      <arc id="4822552256" source="item_13" target="p13"/>
+      <arc id="4822553152" source="p16" target="item_17"/>
+      <arc id="4822554048" source="p20" target="item_21"/>
+      <arc id="4822556176" source="p26" target="item_27"/>
+      <arc id="4822560320" source="final_transition" target="sink"/>
+      <arc id="4822558416" source="p31" target="item_32"/>
+      <arc id="4822559536" source="item_34" target="p34"/>
+      <arc id="4822083152" source="p2" target="item_3"/>
+      <arc id="4822467920" source="p1" target="item_2"/>
+      <arc id="4822467280" source="item_1" target="p1"/>
+      <arc id="4817449808" source="p4" target="item_5"/>
+      <arc id="4817450320" source="item_5" target="p5"/>
+      <arc id="4821970256" source="item_8" target="p8"/>
+      <arc id="4822517072" source="p11" target="item_12"/>
+      <arc id="4822517200" source="item_12" target="p12"/>
+      <arc id="4822553040" source="item_16" target="p16"/>
+      <arc id="4822553936" source="item_20" target="p20"/>
+      <arc id="4822554832" source="p23" target="item_24"/>
+      <arc id="4817417184" source="item_6" target="p6"/>
+      <arc id="4822064736" source="p7" target="item_8"/>
+      <arc id="4822552928" source="p15" target="item_16"/>
+      <arc id="4822553824" source="p19" target="item_20"/>
+      <arc id="4822554720" source="item_23" target="p23"/>
+      <arc id="4822559312" source="p33" target="item_34"/>
+      <arc id="4822535536" source="p10" target="item_11"/>
+      <arc id="4822552816" source="item_15" target="p15"/>
+      <arc id="4822553712" source="item_19" target="p19"/>
+      <arc id="4822555504" source="item_25" target="p25"/>
+      <arc id="4822555728" source="p25" target="item_26"/>
+      <arc id="4822556400" source="item_27" target="p27"/>
+      <arc id="4822557296" source="item_29" target="p29"/>
+      <arc id="4822558192" source="item_31" target="p31"/>
+      <arc id="4822559088" source="item_33" target="p33"/>
+      <arc id="4822557968" source="p30" target="item_31"/>
+      <arc id="4822560208" source="p35" target="final_transition"/>
     </page>
     <finalmarkings>
       <marking>

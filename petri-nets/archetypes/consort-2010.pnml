@@ -13,18 +13,462 @@
           <text>1</text>
         </initialMarking>
       </place>
+      <place id="p3">
+        <name>
+          <text>p3</text>
+        </name>
+      </place>
+      <place id="p9">
+        <name>
+          <text>p9</text>
+        </name>
+      </place>
+      <place id="p17">
+        <name>
+          <text>p17</text>
+        </name>
+      </place>
+      <place id="p24">
+        <name>
+          <text>p24</text>
+        </name>
+      </place>
+      <place id="p26">
+        <name>
+          <text>p26</text>
+        </name>
+      </place>
+      <place id="p28">
+        <name>
+          <text>p28</text>
+        </name>
+      </place>
+      <place id="p30">
+        <name>
+          <text>p30</text>
+        </name>
+      </place>
+      <place id="p32">
+        <name>
+          <text>p32</text>
+        </name>
+      </place>
+      <place id="p34">
+        <name>
+          <text>p34</text>
+        </name>
+      </place>
+      <place id="p36">
+        <name>
+          <text>p36</text>
+        </name>
+      </place>
+      <place id="p14">
+        <name>
+          <text>p14</text>
+        </name>
+      </place>
+      <place id="p1">
+        <name>
+          <text>p1</text>
+        </name>
+      </place>
+      <place id="p11">
+        <name>
+          <text>p11</text>
+        </name>
+      </place>
+      <place id="p19">
+        <name>
+          <text>p19</text>
+        </name>
+      </place>
+      <place id="p4">
+        <name>
+          <text>p4</text>
+        </name>
+      </place>
+      <place id="p23">
+        <name>
+          <text>p23</text>
+        </name>
+      </place>
+      <place id="p25">
+        <name>
+          <text>p25</text>
+        </name>
+      </place>
+      <place id="p27">
+        <name>
+          <text>p27</text>
+        </name>
+      </place>
+      <place id="p29">
+        <name>
+          <text>p29</text>
+        </name>
+      </place>
+      <place id="p31">
+        <name>
+          <text>p31</text>
+        </name>
+      </place>
+      <place id="p33">
+        <name>
+          <text>p33</text>
+        </name>
+      </place>
+      <place id="p35">
+        <name>
+          <text>p35</text>
+        </name>
+      </place>
+      <place id="p37">
+        <name>
+          <text>p37</text>
+        </name>
+      </place>
       <place id="sink">
         <name>
           <text>sink</text>
         </name>
       </place>
-      <transition id="consort-2010">
+      <place id="p5">
         <name>
-          <text>CONSORT 2010 Checklist</text>
+          <text>p5</text>
+        </name>
+      </place>
+      <place id="p7">
+        <name>
+          <text>p7</text>
+        </name>
+      </place>
+      <place id="p8">
+        <name>
+          <text>p8</text>
+        </name>
+      </place>
+      <place id="p15">
+        <name>
+          <text>p15</text>
+        </name>
+      </place>
+      <place id="p21">
+        <name>
+          <text>p21</text>
+        </name>
+      </place>
+      <place id="p22">
+        <name>
+          <text>p22</text>
+        </name>
+      </place>
+      <place id="p13">
+        <name>
+          <text>p13</text>
+        </name>
+      </place>
+      <place id="p12">
+        <name>
+          <text>p12</text>
+        </name>
+      </place>
+      <place id="p16">
+        <name>
+          <text>p16</text>
+        </name>
+      </place>
+      <place id="p2">
+        <name>
+          <text>p2</text>
+        </name>
+      </place>
+      <place id="p6">
+        <name>
+          <text>p6</text>
+        </name>
+      </place>
+      <place id="p10">
+        <name>
+          <text>p10</text>
+        </name>
+      </place>
+      <place id="p18">
+        <name>
+          <text>p18</text>
+        </name>
+      </place>
+      <place id="p20">
+        <name>
+          <text>p20</text>
+        </name>
+      </place>
+      <transition id="item_8">
+        <name>
+          <text>4b Study settings Settings and locations where the</text>
         </name>
       </transition>
-      <arc id="4823974928" source="source" target="consort-2010"/>
-      <arc id="4823508560" source="consort-2010" target="sink"/>
+      <transition id="item_17">
+        <name>
+          <text>10 Implementation Who generated the random allocat</text>
+        </name>
+      </transition>
+      <transition id="item_2">
+        <name>
+          <text>1b Abstract Structured summary of trial design met</text>
+        </name>
+      </transition>
+      <transition id="item_3">
+        <name>
+          <text>2a Background Scientific background and explanatio</text>
+        </name>
+      </transition>
+      <transition id="item_13">
+        <name>
+          <text>7b Interim analyses and stopping guidelines When a</text>
+        </name>
+      </transition>
+      <transition id="item_16">
+        <name>
+          <text>9 Allocation concealment mechanism Mechanism used </text>
+        </name>
+      </transition>
+      <transition id="item_26">
+        <name>
+          <text>15 Baseline data A table showing baseline demograp</text>
+        </name>
+      </transition>
+      <transition id="item_28">
+        <name>
+          <text>17a Outcomes and estimation For each primary and s</text>
+        </name>
+      </transition>
+      <transition id="item_30">
+        <name>
+          <text>18 Ancillary analyses Results of any other analyse</text>
+        </name>
+      </transition>
+      <transition id="item_32">
+        <name>
+          <text>20 Limitations Trial limitations addressing source</text>
+        </name>
+      </transition>
+      <transition id="item_34">
+        <name>
+          <text>22 Interpretation Interpretation consistent with r</text>
+        </name>
+      </transition>
+      <transition id="item_36">
+        <name>
+          <text>24 Protocol Where the full trial protocol can be a</text>
+        </name>
+      </transition>
+      <transition id="final_transition">
+        <name>
+          <text>End</text>
+        </name>
+      </transition>
+      <transition id="item_15">
+        <name>
+          <text>8b Randomisation type Type of randomisation detail</text>
+        </name>
+      </transition>
+      <transition id="item_4">
+        <name>
+          <text>2b Objectives Specific objectives or hypotheses</text>
+        </name>
+      </transition>
+      <transition id="item_18">
+        <name>
+          <text>11a Blinding If done who was blinded after assignm</text>
+        </name>
+      </transition>
+      <transition id="item_20">
+        <name>
+          <text>12a Statistical methods Statistical methods used t</text>
+        </name>
+      </transition>
+      <transition id="item_1">
+        <name>
+          <text>1a Title Identification of the trial as randomised</text>
+        </name>
+      </transition>
+      <transition id="item_12">
+        <name>
+          <text>7a Sample size How sample size was determined</text>
+        </name>
+      </transition>
+      <transition id="item_9">
+        <name>
+          <text>5 Interventions The interventions for each group w</text>
+        </name>
+      </transition>
+      <transition id="item_10">
+        <name>
+          <text>6a Outcomes Completely defined prespecified primar</text>
+        </name>
+      </transition>
+      <transition id="item_11">
+        <name>
+          <text>6b Changes to outcomes Any changes to trial outcom</text>
+        </name>
+      </transition>
+      <transition id="item_21">
+        <name>
+          <text>12b Additional analyses Methods for additional ana</text>
+        </name>
+      </transition>
+      <transition id="item_23">
+        <name>
+          <text>13b Losses and exclusions For each group losses an</text>
+        </name>
+      </transition>
+      <transition id="item_24">
+        <name>
+          <text>14a Recruitment Dates defining the periods of recr</text>
+        </name>
+      </transition>
+      <transition id="item_25">
+        <name>
+          <text>14b Reason for stopping Why the trial ended or was</text>
+        </name>
+      </transition>
+      <transition id="item_35">
+        <name>
+          <text>23 Registration Registration number and name of tr</text>
+        </name>
+      </transition>
+      <transition id="item_5">
+        <name>
+          <text>3a Trial design Description of trial design eg par</text>
+        </name>
+      </transition>
+      <transition id="item_19">
+        <name>
+          <text>11b Similarity of interventions If relevant descri</text>
+        </name>
+      </transition>
+      <transition id="item_22">
+        <name>
+          <text>13a Participant flow a diagram is strongly recomme</text>
+        </name>
+      </transition>
+      <transition id="item_27">
+        <name>
+          <text>16 Numbers analysed For each group number of parti</text>
+        </name>
+      </transition>
+      <transition id="item_29">
+        <name>
+          <text>17b Binary outcomes For binary outcomes presentati</text>
+        </name>
+      </transition>
+      <transition id="item_31">
+        <name>
+          <text>19 Harms All important harms or unintended effects</text>
+        </name>
+      </transition>
+      <transition id="item_33">
+        <name>
+          <text>21 Generalisability Generalisability external vali</text>
+        </name>
+      </transition>
+      <transition id="item_37">
+        <name>
+          <text>25 Funding Sources of funding and other support su</text>
+        </name>
+      </transition>
+      <transition id="item_6">
+        <name>
+          <text>3b Changes to trial design Important changes to me</text>
+        </name>
+      </transition>
+      <transition id="item_7">
+        <name>
+          <text>4a Participants Eligibility criteria for participa</text>
+        </name>
+      </transition>
+      <transition id="item_14">
+        <name>
+          <text>8a Randomisation sequence generation Method used t</text>
+        </name>
+      </transition>
+      <arc id="4690448512" source="item_13" target="p13"/>
+      <arc id="4690449408" source="p16" target="item_17"/>
+      <arc id="4690450304" source="p20" target="item_21"/>
+      <arc id="4690457136" source="item_37" target="p37"/>
+      <arc id="4690457472" source="final_transition" target="sink"/>
+      <arc id="4690452432" source="p26" target="item_27"/>
+      <arc id="4679855632" source="item_8" target="p8"/>
+      <arc id="4678709136" source="source" target="item_1"/>
+      <arc id="4676106384" source="item_3" target="p3"/>
+      <arc id="4676375952" source="item_4" target="p4"/>
+      <arc id="4690449296" source="item_16" target="p16"/>
+      <arc id="4690450192" source="item_20" target="p20"/>
+      <arc id="4690451088" source="p23" target="item_24"/>
+      <arc id="4690451984" source="p25" target="item_26"/>
+      <arc id="4690452880" source="p27" target="item_28"/>
+      <arc id="4690453776" source="p29" target="item_30"/>
+      <arc id="4690454672" source="p31" target="item_32"/>
+      <arc id="4690456912" source="p36" target="item_37"/>
+      <arc id="4690448848" source="item_14" target="p14"/>
+      <arc id="4679951648" source="item_2" target="p2"/>
+      <arc id="4679932704" source="p7" target="item_8"/>
+      <arc id="4680117152" source="item_9" target="p9"/>
+      <arc id="4690449184" source="p15" target="item_16"/>
+      <arc id="4690450080" source="p19" target="item_20"/>
+      <arc id="4690450976" source="item_23" target="p23"/>
+      <arc id="4690453328" source="p28" target="item_29"/>
+      <arc id="4690432304" source="item_10" target="p10"/>
+      <arc id="4690449072" source="item_15" target="p15"/>
+      <arc id="4690449968" source="item_19" target="p19"/>
+      <arc id="4690451760" source="item_25" target="p25"/>
+      <arc id="4690452656" source="item_27" target="p27"/>
+      <arc id="4690453552" source="item_29" target="p29"/>
+      <arc id="4690454448" source="item_31" target="p31"/>
+      <arc id="4690455344" source="item_33" target="p33"/>
+      <arc id="4690455568" source="p33" target="item_34"/>
+      <arc id="4690456240" source="item_35" target="p35"/>
+      <arc id="4690456688" source="item_36" target="p36"/>
+      <arc id="4690449744" source="item_18" target="p18"/>
+      <arc id="4676374592" source="p3" target="item_4"/>
+      <arc id="4690448960" source="p14" target="item_15"/>
+      <arc id="4690449856" source="p18" target="item_19"/>
+      <arc id="4690413136" source="item_12" target="p12"/>
+      <arc id="4690450752" source="p22" target="item_23"/>
+      <arc id="4690413264" source="p11" target="item_12"/>
+      <arc id="4690454224" source="p30" target="item_31"/>
+      <arc id="4690456464" source="p35" target="item_36"/>
+      <arc id="4679855824" source="p8" target="item_9"/>
+      <arc id="4679951952" source="p2" target="item_3"/>
+      <arc id="4690363728" source="p1" target="item_2"/>
+      <arc id="4690363088" source="item_1" target="p1"/>
+      <arc id="4678661456" source="p4" target="item_5"/>
+      <arc id="4678661712" source="item_5" target="p5"/>
+      <arc id="4690463440" source="p6" target="item_7"/>
+      <arc id="4680117328" source="p9" target="item_10"/>
+      <arc id="4690432464" source="p10" target="item_11"/>
+      <arc id="4680185424" source="item_11" target="p11"/>
+      <arc id="4690450640" source="item_22" target="p22"/>
+      <arc id="4678628320" source="p5" target="item_6"/>
+      <arc id="4678622560" source="item_6" target="p6"/>
+      <arc id="4690448736" source="p13" target="item_14"/>
+      <arc id="4690449632" source="p17" target="item_18"/>
+      <arc id="4690450528" source="p21" target="item_22"/>
+      <arc id="4690451424" source="p24" target="item_25"/>
+      <arc id="4690455120" source="p32" target="item_33"/>
+      <arc id="4690455904" source="p34" target="item_35"/>
+      <arc id="4690457360" source="p37" target="final_transition"/>
+      <arc id="4690464112" source="item_7" target="p7"/>
+      <arc id="4690448624" source="p12" target="item_13"/>
+      <arc id="4690449520" source="item_17" target="p17"/>
+      <arc id="4690450416" source="item_21" target="p21"/>
+      <arc id="4690451312" source="item_24" target="p24"/>
+      <arc id="4690452208" source="item_26" target="p26"/>
+      <arc id="4690453104" source="item_28" target="p28"/>
+      <arc id="4690454000" source="item_30" target="p30"/>
+      <arc id="4690454896" source="item_32" target="p32"/>
+      <arc id="4690455792" source="item_34" target="p34"/>
     </page>
     <finalmarkings>
       <marking>

@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <pnml>
-  <net id="SRQR — Standards for Reporting Qualitative Research" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+  <net id="SRQR Checklist" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
     <name>
-      <text>SRQR — Standards for Reporting Qualitative Research</text>
+      <text>SRQR Checklist</text>
     </name>
     <page id="n0">
       <place id="source">
@@ -13,18 +13,270 @@
           <text>1</text>
         </initialMarking>
       </place>
+      <place id="p3">
+        <name>
+          <text>p3</text>
+        </name>
+      </place>
+      <place id="p10">
+        <name>
+          <text>p10</text>
+        </name>
+      </place>
+      <place id="p1">
+        <name>
+          <text>p1</text>
+        </name>
+      </place>
+      <place id="p4">
+        <name>
+          <text>p4</text>
+        </name>
+      </place>
+      <place id="p12">
+        <name>
+          <text>p12</text>
+        </name>
+      </place>
+      <place id="p14">
+        <name>
+          <text>p14</text>
+        </name>
+      </place>
+      <place id="p19">
+        <name>
+          <text>p19</text>
+        </name>
+      </place>
+      <place id="p16">
+        <name>
+          <text>p16</text>
+        </name>
+      </place>
+      <place id="p11">
+        <name>
+          <text>p11</text>
+        </name>
+      </place>
+      <place id="p18">
+        <name>
+          <text>p18</text>
+        </name>
+      </place>
       <place id="sink">
         <name>
           <text>sink</text>
         </name>
       </place>
-      <transition id="srqr-2014">
+      <place id="p5">
         <name>
-          <text>SRQR — Standards for Reporting Qualitative Research</text>
+          <text>p5</text>
+        </name>
+      </place>
+      <place id="p7">
+        <name>
+          <text>p7</text>
+        </name>
+      </place>
+      <place id="p8">
+        <name>
+          <text>p8</text>
+        </name>
+      </place>
+      <place id="p15">
+        <name>
+          <text>p15</text>
+        </name>
+      </place>
+      <place id="p17">
+        <name>
+          <text>p17</text>
+        </name>
+      </place>
+      <place id="p21">
+        <name>
+          <text>p21</text>
+        </name>
+      </place>
+      <place id="p9">
+        <name>
+          <text>p9</text>
+        </name>
+      </place>
+      <place id="p13">
+        <name>
+          <text>p13</text>
+        </name>
+      </place>
+      <place id="p2">
+        <name>
+          <text>p2</text>
+        </name>
+      </place>
+      <place id="p6">
+        <name>
+          <text>p6</text>
+        </name>
+      </place>
+      <place id="p20">
+        <name>
+          <text>p20</text>
+        </name>
+      </place>
+      <transition id="item_8">
+        <name>
+          <text>8 Context The context of the study eg setting part</text>
         </name>
       </transition>
-      <arc id="4935353360" source="source" target="srqr-2014"/>
-      <arc id="4934886992" source="srqr-2014" target="sink"/>
+      <transition id="item_18">
+        <name>
+          <text>18 Limitations The limitations of the study</text>
+        </name>
+      </transition>
+      <transition id="item_16">
+        <name>
+          <text>16 Integration with prior work The integration of </text>
+        </name>
+      </transition>
+      <transition id="item_14">
+        <name>
+          <text>14 Main findings The main findings of the study</text>
+        </name>
+      </transition>
+      <transition id="final_transition">
+        <name>
+          <text>End</text>
+        </name>
+      </transition>
+      <transition id="item_4">
+        <name>
+          <text>4 Purpose or research question Purpose of the stud</text>
+        </name>
+      </transition>
+      <transition id="item_6">
+        <name>
+          <text>6 Qualitative approach and research paradigm The q</text>
+        </name>
+      </transition>
+      <transition id="item_13">
+        <name>
+          <text>13 Techniques to enhance trustworthiness The techn</text>
+        </name>
+      </transition>
+      <transition id="item_19">
+        <name>
+          <text>19 Conclusions The conclusions of the study</text>
+        </name>
+      </transition>
+      <transition id="item_1">
+        <name>
+          <text>1 Title Concise description of the nature and topi</text>
+        </name>
+      </transition>
+      <transition id="item_17">
+        <name>
+          <text>17 Discussion of findings Discussion of the findin</text>
+        </name>
+      </transition>
+      <transition id="item_3">
+        <name>
+          <text>3 Problem formulation Description of the problem o</text>
+        </name>
+      </transition>
+      <transition id="item_2">
+        <name>
+          <text>2 Abstract Summary of the study including the prob</text>
+        </name>
+      </transition>
+      <transition id="item_9">
+        <name>
+          <text>9 Sampling strategy The sampling strategy used to </text>
+        </name>
+      </transition>
+      <transition id="item_10">
+        <name>
+          <text>10 Ethical considerations Ethical considerations i</text>
+        </name>
+      </transition>
+      <transition id="item_12">
+        <name>
+          <text>12 Data analysis The methods used to analyze the d</text>
+        </name>
+      </transition>
+      <transition id="item_20">
+        <name>
+          <text>20 Funding The sources of funding for the study</text>
+        </name>
+      </transition>
+      <transition id="item_5">
+        <name>
+          <text>5 Rationale Rationale for the study including the </text>
+        </name>
+      </transition>
+      <transition id="item_15">
+        <name>
+          <text>15 Quotesexcerpts The use of quotes or excerpts to</text>
+        </name>
+      </transition>
+      <transition id="item_7">
+        <name>
+          <text>7 Researcher characteristics and reflexivity The r</text>
+        </name>
+      </transition>
+      <transition id="item_11">
+        <name>
+          <text>11 Data collection methods The methods used to col</text>
+        </name>
+      </transition>
+      <transition id="item_21">
+        <name>
+          <text>21 Conflicts of interest Any conflicts of interest</text>
+        </name>
+      </transition>
+      <arc id="4307608320" source="p5" target="item_6"/>
+      <arc id="4554930176" source="item_11" target="p11"/>
+      <arc id="4764881920" source="item_16" target="p16"/>
+      <arc id="4764882816" source="item_20" target="p20"/>
+      <arc id="4553584528" source="source" target="item_1"/>
+      <arc id="4764795920" source="p1" target="item_2"/>
+      <arc id="4764795280" source="item_1" target="p1"/>
+      <arc id="4549273232" source="item_3" target="p3"/>
+      <arc id="4549547408" source="item_4" target="p4"/>
+      <arc id="4764896400" source="item_7" target="p7"/>
+      <arc id="4764881808" source="p15" target="item_16"/>
+      <arc id="4764882704" source="p19" target="item_20"/>
+      <arc id="4554695968" source="item_2" target="p2"/>
+      <arc id="4554677024" source="p7" target="item_8"/>
+      <arc id="4764881696" source="item_15" target="p15"/>
+      <arc id="4764882592" source="item_19" target="p19"/>
+      <arc id="4764881584" source="p14" target="item_15"/>
+      <arc id="4764882480" source="p18" target="item_19"/>
+      <arc id="4549546048" source="p3" target="item_4"/>
+      <arc id="4554861120" source="item_9" target="p9"/>
+      <arc id="4764881472" source="item_14" target="p14"/>
+      <arc id="4764882368" source="item_18" target="p18"/>
+      <arc id="4764883264" source="final_transition" target="sink"/>
+      <arc id="4554582224" source="item_8" target="p8"/>
+      <arc id="4554582992" source="p8" target="item_9"/>
+      <arc id="4554696272" source="p2" target="item_3"/>
+      <arc id="4553536336" source="p4" target="item_5"/>
+      <arc id="4553536848" source="item_5" target="p5"/>
+      <arc id="4764863696" source="item_10" target="p10"/>
+      <arc id="4764845648" source="p11" target="item_12"/>
+      <arc id="4764845392" source="item_12" target="p12"/>
+      <arc id="4764881360" source="p13" target="item_14"/>
+      <arc id="4764882256" source="p17" target="item_18"/>
+      <arc id="4764883152" source="p21" target="final_transition"/>
+      <arc id="4553503712" source="item_6" target="p6"/>
+      <arc id="4764881248" source="p12" target="item_13"/>
+      <arc id="4764882144" source="item_17" target="p17"/>
+      <arc id="4764883040" source="item_21" target="p21"/>
+      <arc id="4554861296" source="p9" target="item_10"/>
+      <arc id="4764895728" source="p6" target="item_7"/>
+      <arc id="4764863856" source="p10" target="item_11"/>
+      <arc id="4764881136" source="item_13" target="p13"/>
+      <arc id="4764882032" source="p16" target="item_17"/>
+      <arc id="4764882928" source="p20" target="item_21"/>
     </page>
     <finalmarkings>
       <marking>

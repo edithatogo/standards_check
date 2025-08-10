@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <pnml>
-  <net id="COREQ — Consolidated Criteria for Reporting Qualitative Research" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+  <net id="COREQ Checklist" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
     <name>
-      <text>COREQ — Consolidated Criteria for Reporting Qualitative Research</text>
+      <text>COREQ Checklist</text>
     </name>
     <page id="n0">
       <place id="source">
@@ -13,18 +13,330 @@
           <text>1</text>
         </initialMarking>
       </place>
+      <place id="p3">
+        <name>
+          <text>p3</text>
+        </name>
+      </place>
+      <place id="p10">
+        <name>
+          <text>p10</text>
+        </name>
+      </place>
+      <place id="p1">
+        <name>
+          <text>p1</text>
+        </name>
+      </place>
+      <place id="p4">
+        <name>
+          <text>p4</text>
+        </name>
+      </place>
+      <place id="p12">
+        <name>
+          <text>p12</text>
+        </name>
+      </place>
+      <place id="p14">
+        <name>
+          <text>p14</text>
+        </name>
+      </place>
+      <place id="p13">
+        <name>
+          <text>p13</text>
+        </name>
+      </place>
+      <place id="p16">
+        <name>
+          <text>p16</text>
+        </name>
+      </place>
+      <place id="p11">
+        <name>
+          <text>p11</text>
+        </name>
+      </place>
+      <place id="p18">
+        <name>
+          <text>p18</text>
+        </name>
+      </place>
+      <place id="p24">
+        <name>
+          <text>p24</text>
+        </name>
+      </place>
+      <place id="p26">
+        <name>
+          <text>p26</text>
+        </name>
+      </place>
+      <place id="p20">
+        <name>
+          <text>p20</text>
+        </name>
+      </place>
       <place id="sink">
         <name>
           <text>sink</text>
         </name>
       </place>
-      <transition id="coreq-2007">
+      <place id="p5">
         <name>
-          <text>COREQ — Consolidated Criteria for Reporting Qualitative Research</text>
+          <text>p5</text>
+        </name>
+      </place>
+      <place id="p7">
+        <name>
+          <text>p7</text>
+        </name>
+      </place>
+      <place id="p8">
+        <name>
+          <text>p8</text>
+        </name>
+      </place>
+      <place id="p15">
+        <name>
+          <text>p15</text>
+        </name>
+      </place>
+      <place id="p17">
+        <name>
+          <text>p17</text>
+        </name>
+      </place>
+      <place id="p19">
+        <name>
+          <text>p19</text>
+        </name>
+      </place>
+      <place id="p21">
+        <name>
+          <text>p21</text>
+        </name>
+      </place>
+      <place id="p22">
+        <name>
+          <text>p22</text>
+        </name>
+      </place>
+      <place id="p9">
+        <name>
+          <text>p9</text>
+        </name>
+      </place>
+      <place id="p23">
+        <name>
+          <text>p23</text>
+        </name>
+      </place>
+      <place id="p2">
+        <name>
+          <text>p2</text>
+        </name>
+      </place>
+      <place id="p6">
+        <name>
+          <text>p6</text>
+        </name>
+      </place>
+      <place id="p25">
+        <name>
+          <text>p25</text>
+        </name>
+      </place>
+      <transition id="item_8">
+        <name>
+          <text>8 Interviewer characteristics What were the interv</text>
         </name>
       </transition>
-      <arc id="6070387728" source="source" target="coreq-2007"/>
-      <arc id="6069921360" source="coreq-2007" target="sink"/>
+      <transition id="item_18">
+        <name>
+          <text>18 Derivation of themes Were themes identified in </text>
+        </name>
+      </transition>
+      <transition id="item_16">
+        <name>
+          <text>16 Description of sample What were the important c</text>
+        </name>
+      </transition>
+      <transition id="item_14">
+        <name>
+          <text>14 Setting of data collection Where was the data c</text>
+        </name>
+      </transition>
+      <transition id="item_21">
+        <name>
+          <text>21 Major themes Were major themes clearly presente</text>
+        </name>
+      </transition>
+      <transition id="item_25">
+        <name>
+          <text>25 Clarity of major themes Were major themes clear</text>
+        </name>
+      </transition>
+      <transition id="final_transition">
+        <name>
+          <text>End</text>
+        </name>
+      </transition>
+      <transition id="item_4">
+        <name>
+          <text>4 Gender Was the researcher male or female</text>
+        </name>
+      </transition>
+      <transition id="item_6">
+        <name>
+          <text>6 Relationship established Was a relationship esta</text>
+        </name>
+      </transition>
+      <transition id="item_13">
+        <name>
+          <text>13 Nonparticipation How many people refused to par</text>
+        </name>
+      </transition>
+      <transition id="item_19">
+        <name>
+          <text>19 Software What software if applicable was used t</text>
+        </name>
+      </transition>
+      <transition id="item_1">
+        <name>
+          <text>1 Interviewerfacilitator Which authors conducted t</text>
+        </name>
+      </transition>
+      <transition id="item_17">
+        <name>
+          <text>17 Data analysis How many data coders coded the da</text>
+        </name>
+      </transition>
+      <transition id="item_3">
+        <name>
+          <text>3 Occupation What was their occupation at the time</text>
+        </name>
+      </transition>
+      <transition id="item_2">
+        <name>
+          <text>2 Credentials What were the researchers credential</text>
+        </name>
+      </transition>
+      <transition id="item_9">
+        <name>
+          <text>9 Methodological orientation and theory What is th</text>
+        </name>
+      </transition>
+      <transition id="item_10">
+        <name>
+          <text>10 Sampling How were participants selected eg purp</text>
+        </name>
+      </transition>
+      <transition id="item_12">
+        <name>
+          <text>12 Sample size How many participants were in the s</text>
+        </name>
+      </transition>
+      <transition id="item_22">
+        <name>
+          <text>22 Clarity of themes Is there a description of how</text>
+        </name>
+      </transition>
+      <transition id="item_23">
+        <name>
+          <text>23 Quotations presented Were quotations presented </text>
+        </name>
+      </transition>
+      <transition id="item_24">
+        <name>
+          <text>24 Data and findings consistent Was there consiste</text>
+        </name>
+      </transition>
+      <transition id="item_26">
+        <name>
+          <text>26 Clarity of minor themes Were minor themes clear</text>
+        </name>
+      </transition>
+      <transition id="item_5">
+        <name>
+          <text>5 Experience and training What experience or train</text>
+        </name>
+      </transition>
+      <transition id="item_15">
+        <name>
+          <text>15 Presence of nonparticipants Was anyone else pre</text>
+        </name>
+      </transition>
+      <transition id="item_7">
+        <name>
+          <text>7 Participant knowledge of the interviewer What di</text>
+        </name>
+      </transition>
+      <transition id="item_11">
+        <name>
+          <text>11 Method of approach How were participants approa</text>
+        </name>
+      </transition>
+      <transition id="item_20">
+        <name>
+          <text>20 Participant checking Did participants provide f</text>
+        </name>
+      </transition>
+      <arc id="4373897984" source="p5" target="item_6"/>
+      <arc id="4780609664" source="item_14" target="p14"/>
+      <arc id="4780610560" source="item_18" target="p18"/>
+      <arc id="4780611456" source="item_22" target="p22"/>
+      <arc id="4780612352" source="p24" target="item_25"/>
+      <arc id="4780613248" source="p26" target="final_transition"/>
+      <arc id="4775260048" source="source" target="item_1"/>
+      <arc id="4780524560" source="p1" target="item_2"/>
+      <arc id="4780523920" source="item_1" target="p1"/>
+      <arc id="4772652688" source="item_3" target="p3"/>
+      <arc id="4772926864" source="item_4" target="p4"/>
+      <arc id="4780625040" source="item_7" target="p7"/>
+      <arc id="4780592656" source="p10" target="item_11"/>
+      <arc id="4780609552" source="p13" target="item_14"/>
+      <arc id="4780610448" source="p17" target="item_18"/>
+      <arc id="4780611344" source="p21" target="item_22"/>
+      <arc id="4778501408" source="item_2" target="p2"/>
+      <arc id="4780609440" source="item_13" target="p13"/>
+      <arc id="4780610336" source="item_17" target="p17"/>
+      <arc id="4780611232" source="p20" target="item_21"/>
+      <arc id="4780612128" source="item_24" target="p24"/>
+      <arc id="4780613024" source="item_26" target="p26"/>
+      <arc id="4778736048" source="item_11" target="p11"/>
+      <arc id="4780609328" source="p12" target="item_13"/>
+      <arc id="4780610224" source="p16" target="item_17"/>
+      <arc id="4780611120" source="item_21" target="p21"/>
+      <arc id="4772925504" source="p3" target="item_4"/>
+      <arc id="4778682944" source="p9" target="item_10"/>
+      <arc id="4780610112" source="item_16" target="p16"/>
+      <arc id="4780611008" source="item_20" target="p20"/>
+      <arc id="4780611904" source="p23" target="item_24"/>
+      <arc id="4780612800" source="p25" target="item_26"/>
+      <arc id="4778404816" source="p8" target="item_9"/>
+      <arc id="4778501712" source="p2" target="item_3"/>
+      <arc id="4775212368" source="p4" target="item_5"/>
+      <arc id="4775212624" source="item_5" target="p5"/>
+      <arc id="4778404048" source="item_8" target="p8"/>
+      <arc id="4780574416" source="p11" target="item_12"/>
+      <arc id="4780574288" source="item_12" target="p12"/>
+      <arc id="4780610000" source="p15" target="item_16"/>
+      <arc id="4780610896" source="p19" target="item_20"/>
+      <arc id="4780611792" source="item_23" target="p23"/>
+      <arc id="4775179232" source="item_6" target="p6"/>
+      <arc id="4778481632" source="p7" target="item_8"/>
+      <arc id="4780609888" source="item_15" target="p15"/>
+      <arc id="4780610784" source="p18" target="item_19"/>
+      <arc id="4780612576" source="item_25" target="p25"/>
+      <arc id="4778683120" source="item_9" target="p9"/>
+      <arc id="4780624368" source="p6" target="item_7"/>
+      <arc id="4780592496" source="item_10" target="p10"/>
+      <arc id="4780609776" source="p14" target="item_15"/>
+      <arc id="4780610672" source="item_19" target="p19"/>
+      <arc id="4780611568" source="p22" target="item_23"/>
+      <arc id="4780613360" source="final_transition" target="sink"/>
     </page>
     <finalmarkings>
       <marking>
