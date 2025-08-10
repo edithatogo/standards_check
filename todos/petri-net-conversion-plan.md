@@ -2,13 +2,15 @@
 
 This document outlines the plan to implement a Petri net conversion workflow.
 
+**Status: Complete.** The final implementation generates hierarchical Petri nets from the canonical Markdown files.
+
 ## High-Level Goal
 
 To convert the existing YAML-based checklists into a formal Petri net model (in PNML format). This will enable future process mining, formal verification, and simulation of the reporting standards.
 
 ---
 
-## Phase 1: Foundational Setup & Proof-of-Concept
+## Phase 1: Foundational Setup & Proof-of-Concept (Complete)
 
 This phase focuses on analyzing the checklist structure, selecting the right tools, and creating a script that can convert a single, representative YAML file into a PNML file.
 
@@ -38,7 +40,7 @@ This phase focuses on analyzing the checklist structure, selecting the right too
 
 ---
 
-## Phase 2: Automation and Integration
+## Phase 2: Automation and Integration (Complete)
 
 This phase expands the proof-of-concept into a reusable, automated workflow that can process all checklists in the repository.
 
@@ -59,7 +61,7 @@ This phase expands the proof-of-concept into a reusable, automated workflow that
 
 ---
 
-## Phase 3: Refinement and Visualization (Optional Extension)
+## Phase 3: Refinement and Visualization (Complete)
 
 This phase focuses on enhancing the model's accuracy and providing visual representations for easier analysis.
 

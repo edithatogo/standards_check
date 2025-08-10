@@ -41,6 +41,6 @@ Enumerate and process variants (e.g., PRISMA-S, PRISMA-ScR, CONSORT extensions).
 - Build: CI builds LaTeX/PDF/DOCX on changes to `markdown/**`.
 
 ## Future Cycles
-- **Petri Net Conversion:** Convert YAML checklists into Petri nets for process mining analysis.
+- **Petri Net Conversion:** Convert Markdown checklists into hierarchical Petri nets for process mining analysis.
 - **Citation Generation:** Extend the `source/*.yml` files to include comprehensive metadata for building citations. Develop a workflow (potentially using Pandoc) to generate `.ris`, `.bib`, and other common citation formats from this metadata.
 - **Documentation Website:** Develop a GitHub Pages website to provide a user-friendly interface for browsing, viewing, and downloading the checklists and their associated references.
