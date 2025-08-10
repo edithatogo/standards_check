@@ -17,6 +17,9 @@ citations:
 citations:
 	bash scripts/generate_citations.sh
 
+petri-nets:
+	bash scripts/generate_petri_nets.sh
+
 index:
 	bash scripts/generate_markdown_index.sh
 

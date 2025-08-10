@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pnml>
+  <net id="Guidelines for clinical trial protocols for interventions involving artificial intelligence: the SPIRIT-AI extension" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+    <name>
+      <text>Guidelines for clinical trial protocols for interventions involving artificial intelligence: the SPIRIT-AI extension</text>
+    </name>
+    <page id="n0">
+      <place id="source">
+        <name>
+          <text>source</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="sink">
+        <name>
+          <text>sink</text>
+        </name>
+      </place>
+      <transition id="spirit-ai">
+        <name>
+          <text>Guidelines for clinical trial protocols for interventions involving artificial intelligence: the SPIRIT-AI extension</text>
+        </name>
+      </transition>
+      <arc id="5493490704" source="source" target="spirit-ai"/>
+      <arc id="5493024336" source="spirit-ai" target="sink"/>
+    </page>
+    <finalmarkings>
+      <marking>
+        <place idref="sink">
+          <text>1</text>
+        </place>
+      </marking>
+    </finalmarkings>
+  </net>
+</pnml>

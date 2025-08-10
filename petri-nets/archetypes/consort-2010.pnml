@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pnml>
+  <net id="CONSORT 2010 Checklist" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+    <name>
+      <text>CONSORT 2010 Checklist</text>
+    </name>
+    <page id="n0">
+      <place id="source">
+        <name>
+          <text>source</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="sink">
+        <name>
+          <text>sink</text>
+        </name>
+      </place>
+      <transition id="consort-2010">
+        <name>
+          <text>CONSORT 2010 Checklist</text>
+        </name>
+      </transition>
+      <arc id="4823974928" source="source" target="consort-2010"/>
+      <arc id="4823508560" source="consort-2010" target="sink"/>
+    </page>
+    <finalmarkings>
+      <marking>
+        <place idref="sink">
+          <text>1</text>
+        </place>
+      </marking>
+    </finalmarkings>
+  </net>
+</pnml>

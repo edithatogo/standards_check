@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pnml>
+  <net id="PRISMA-ScR Checklist" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+    <name>
+      <text>PRISMA-ScR Checklist</text>
+    </name>
+    <page id="n0">
+      <place id="source">
+        <name>
+          <text>source</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="sink">
+        <name>
+          <text>sink</text>
+        </name>
+      </place>
+      <transition id="prisma-scr">
+        <name>
+          <text>PRISMA-ScR Checklist</text>
+        </name>
+      </transition>
+      <arc id="4768072720" source="source" target="prisma-scr"/>
+      <arc id="4766508624" source="prisma-scr" target="sink"/>
+    </page>
+    <finalmarkings>
+      <marking>
+        <place idref="sink">
+          <text>1</text>
+        </place>
+      </marking>
+    </finalmarkings>
+  </net>
+</pnml>

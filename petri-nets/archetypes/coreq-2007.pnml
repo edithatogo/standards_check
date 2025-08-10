@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pnml>
+  <net id="COREQ — Consolidated Criteria for Reporting Qualitative Research" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+    <name>
+      <text>COREQ — Consolidated Criteria for Reporting Qualitative Research</text>
+    </name>
+    <page id="n0">
+      <place id="source">
+        <name>
+          <text>source</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="sink">
+        <name>
+          <text>sink</text>
+        </name>
+      </place>
+      <transition id="coreq-2007">
+        <name>
+          <text>COREQ — Consolidated Criteria for Reporting Qualitative Research</text>
+        </name>
+      </transition>
+      <arc id="6070387728" source="source" target="coreq-2007"/>
+      <arc id="6069921360" source="coreq-2007" target="sink"/>
+    </page>
+    <finalmarkings>
+      <marking>
+        <place idref="sink">
+          <text>1</text>
+        </place>
+      </marking>
+    </finalmarkings>
+  </net>
+</pnml>

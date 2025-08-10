@@ -38,15 +38,6 @@ make scaffold          # Create missing markdown files from source/index.yml
 make index             # Generate markdown/index.md with all checklist links
 make list-tbd          # Find placeholder "TBD" values needing completion
 make clean             # Remove generated artifacts (pdf/, latex/, docx/)
-```
-
-### Individual Scripts (can be run directly):
-```bash
-bash scripts/validate_md.sh        # Validate markdown format (kebab-case, H1 headers)
-bash scripts/validate_index.sh     # Validate source/index.yml completeness
-bash scripts/validate_sidecars.sh  # Validate YAML sidecar metadata
-bash scripts/build_pandoc.sh       # Full Pandoc conversion pipeline
-```
 
 ### Known Issues & Workarounds
 - **Validation Failure**: `make validate` currently fails because many markdown files have YAML frontmatter before H1 titles. The validator expects first non-empty line to be `# Title`. This is a known repository state.
