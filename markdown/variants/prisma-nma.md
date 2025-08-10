@@ -1,7 +1,3 @@
----
-title: PRISMA-NMA Checklist
----
-
 # PRISMA-NMA Checklist
 
 > Scope: Preferred Reporting Items for Systematic Reviews and Meta-Analyses of Network Meta-Analyses.
@@ -84,4 +80,4 @@ title: PRISMA-NMA Checklist
 ## Provenance
 - Source: See sidecar metadata in `source/variants/prisma-nma.yml`
 - Version: 2015
-- License: TBD (verify per source)
+- License: CC-BY-4.0

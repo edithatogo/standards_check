@@ -1,7 +1,3 @@
----
-title: PRISMA-ScR Checklist
----
-
 # PRISMA-ScR Checklist
 
 > Scope: Preferred Reporting Items for Systematic Reviews and Meta-Analyses extension for Scoping Reviews.
@@ -63,4 +59,4 @@ title: PRISMA-ScR Checklist
 ## Provenance
 - Source: See sidecar metadata in `source/variants/prisma-scr.yml`
 - Version: 2018
-- License: TBD (verify per source)
+- License: CC-BY-4.0

@@ -4,12 +4,12 @@ group: stard
 version: "2015"
 date: "2015-01-01" # Exact date not specified, using start of year
 publisher: STARD Group
-source_url: http://www.equator-network.org/reporting-guidelines/stard
-retrieved_at: TBD
+source_url: https://www.equator-network.org/wp-content/uploads/2015/03/STARD-2015-checklist.pdf
+retrieved_at: 2025-08-10
 preferred_format: pdf
 checksum: 932aa134d1819949fe299063122f27ad0523573d730c0d02c58c97707ea336a3
 license: CC-BY-4.0
-verified: false
+verified: true
 notes: |
   The STARD 2015 checklist for reporting diagnostic accuracy studies.
 citation:

@@ -4,10 +4,10 @@ group: srqr
 version: "2014"
 date: "2014-09-01"
 publisher: Association of American Medical Colleges
-source_url: https://www.equator-network.org/reporting-guidelines/srqr/
-retrieved_at: TBD
-preferred_format: docx
-checksum: 692e60aaf4e8018f268b382ca9414eda727491ef5b8632298e85df7350b023da
+source_url: https://cdn.amegroups.cn/journals/amepc/files/journals/17/articles/100653/public/100653-PB2-5312-R1.pdf
+retrieved_at: 2025-08-10
+preferred_format: pdf
+checksum: 66123e33579e96854a5546612aa9b7f1cdd647d0b0a6445878b7f54a9ef25377
 license: Copyright, AAMC
 verified: true
 notes: |

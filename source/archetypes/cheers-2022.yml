@@ -4,10 +4,10 @@ group: cheers
 version: "2022"
 date: "2022-01-11"
 publisher: ISPOR
-source_url: https://www.ispor.org/heor-resources/good-practices/cheers
-retrieved_at: TBD
+source_url: https://www.equator-network.org/wp-content/uploads/2013/04/CHEERS-2022-checklist-1.pdf
+retrieved_at: 2025-08-10
 preferred_format: pdf
-checksum: cfe6048b54a31b5d886492e0c12762e5016b2d09c3871129e5e3a95ef5c28481
+checksum: 956265bdfe372e30bfde1c766e0cec9447c68e1a9dade3d644cd00fd5167d2f8
 license: CC-BY-4.0
 verified: true
 notes: |
@@ -27,10 +27,27 @@ citation:
       family: Briggs
     - given: C.
       family: Carswell
-  doi: 10.1080/13696998.2021.2014721
-  journal: "Journal of Medical Economics"
-  volume: 25
-  issue: sup1
-  pages: 1-7
+    - given: L.
+      family: Caulley
+    - given: N.
+      family: Chaiyakunapruk
+    - given: D.
+      family: Greenberg
+    - given: E.
+      family: Loder
+    - given: J.
+      family: Mauskopf
+    - given: C. D.
+      family: Mullins
+    - given: S.
+      family: Petrou
+    - given: R. F.
+      family: Pwu
+    - given: S.
+      family: Staniszewska
+  doi: 10.1136/bmj.n160
+  journal: "BMJ"
+  volume: 376
+  pages: e067975
   year: 2022
-  notes: "and others"
+  notes: "and the CHEERS 2022 ISPOR Good Research Practices Task Force"

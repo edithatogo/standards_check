@@ -1,10 +1,8 @@
----
-title: CHEERS 2022 Checklist
----
+# CHEERS 2022 Checklist
 
 > Scope: The Consolidated Health Economic Evaluation Reporting Standards (CHEERS) 2022 statement provides a 28-item checklist to promote transparent and comprehensive reporting of economic evaluations of health interventions.
 >
-> Reference: https://www.ispor.org/heor-resources/good-practices/cheers
+> Reference: See `source/archetypes/cheers-2022.yml` for canonical link and provenance.
 
 ## Instructions
 - Use task list items for checklist boxes; these become interactive checkboxes in PDF.
@@ -58,6 +56,6 @@ title: CHEERS 2022 Checklist
 [Notes]{.textfield name=cheers_2022_notes width=12cm}
 
 ## Provenance
-- Source: https://www.ispor.org/heor-resources/good-practices/cheers
+- Source: See sidecar metadata in `source/archetypes/cheers-2022.yml`
 - Version: 2022
 - License: CC-BY-4.0

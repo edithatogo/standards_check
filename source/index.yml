@@ -67,29 +67,29 @@ items:
     group: care
     notes: "Case reports. Check latest revision year."
 
-  - id: arrive-2019
+  - id: arrive-2020
     title: ARRIVE 2.0 Checklist
-    url: TBD
-    version: "2019"
-    date: TBD
-    license: TBD
-    publisher: TBD
+    url: https://doi.org/10.1371/journal.pbio.3000410
+    version: "2.0"
+    date: "2020-07-14"
+    license: CC-BY-4.0
+    publisher: NC3Rs / British Journal of Pharmacology
     preferred_format: pdf
     level: archetype
     group: arrive
-    notes: "Animal research reporting."
+    notes: "The ARRIVE 2.0 guidelines, for animal research reporting."
 
-  - id: cheers-2013
-    title: CHEERS Reporting Checklist
-    url: TBD
-    version: "2013"
-    date: TBD
-    license: TBD
-    publisher: TBD
+  - id: cheers-2022
+    title: CHEERS 2022 Checklist
+    url: https://www.equator-network.org/wp-content/uploads/2013/04/CHEERS-2022-checklist-1.pdf
+    version: "2022"
+    date: "2022-01-11"
+    license: CC-BY-4.0
+    publisher: ISPOR
     preferred_format: pdf
     level: archetype
     group: cheers
-    notes: "Health economic evaluations; verify if updated."
+    notes: "The CHEERS 2022 checklist, replacing the 2013 version."
 
   - id: tripod-2015
     title: TRIPOD Checklist
@@ -258,15 +258,14 @@ items:
     notes: "PRISMA for Network Meta-Analyses."
   
   - id: spirit-ai
-    title: SPIRIT-AI Checklist
-    url: TBD
-    version: "2023"
-    date: TBD
-    license: TBD
-    publisher: TBD
+    title: "Guidelines for clinical trial protocols for interventions involving artificial intelligence: the SPIRIT-AI extension"
+    url: https://www.nature.com/articles/s41591-020-1037-7
+    version: "2020"
+    date: "2020-09-09"
+    license: CC-BY-4.0
+    publisher: Springer Nature
     preferred_format: docx
     level: variant
     group: spirit
     variant_of: spirit-2013
-    status: new
     notes: "SPIRIT for Artificial Intelligence."

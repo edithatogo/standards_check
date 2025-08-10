@@ -1,7 +1,3 @@
----
-title: PRISMA 2020 Checklist
----
-
 # PRISMA 2020 Checklist
 
 > Scope: Preferred Reporting Items for Systematic Reviews and Meta-Analyses.
@@ -66,4 +62,4 @@ title: PRISMA 2020 Checklist
 ## Provenance
 - Source: See sidecar metadata in `source/archetypes/prisma-2020.yml`
 - Version: 2020
-- License: TBD (verify per source)
+- License: CC BY 4.0

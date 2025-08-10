@@ -1,7 +1,3 @@
----
-title: PRISMA-P Checklist
----
-
 # PRISMA-P Checklist
 
 > Scope: Preferred Reporting Items for Systematic review and Meta-Analysis Protocols.
@@ -55,4 +51,4 @@ title: PRISMA-P Checklist
 ## Provenance
 - Source: See sidecar metadata in `source/variants/prisma-p.yml`
 - Version: 2015
-- License: TBD (verify per source)
+- License: CC-BY-4.0

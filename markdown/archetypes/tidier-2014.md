@@ -1,7 +1,3 @@
----
-title: TIDieR Checklist
----
-
 # TIDieR Checklist
 
 > Scope: Template for Intervention Description and Replication.
@@ -60,4 +56,4 @@ title: TIDieR Checklist
 ## Provenance
 - Source: See sidecar metadata in `source/archetypes/tidier-2014.yml`
 - Version: 2014
-- License: TBD (verify per source)
+- License: CC-BY-NC

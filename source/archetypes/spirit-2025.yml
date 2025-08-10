@@ -2,12 +2,34 @@ id: spirit-2025
 title: SPIRIT 2025 Checklist
 group: spirit
 version: "2025"
-date: TBD
-publisher: TBD
-source_url: TBD
+date: "2025-04-28"
+publisher: PLOS
+source_url: https://www.consort-spirit.org/_files/ugd/b5740e_667c45b02102408ab983c9704525597b.docx?dn=SPIRIT%202025%20editable%20checklist.docx
 retrieved_at: 2025-08-10
 preferred_format: docx
 checksum: 9159179d53b65f2615135c554e661d40259eedb2d61318c890617f4a49bd1f2d
-license: TBD
-notes: |
-  Sourced from project archive as per user instruction.
+license: CC-BY-4.0
+verified: true
+notes: "The SPIRIT 2025 checklist."
+citation:
+  type: article-journal
+  author:
+    - given: An-Wen
+      family: Chan
+    - given: Isabelle
+      family: Boutron
+    - given: Sally
+      family: Hopewell
+    - given: David
+      family: Moher
+    - given: Kenneth F.
+      family: Schulz
+    - given: Gary S.
+      family: Collins
+  doi: 10.1371/journal.pmed.1004589
+  journal: "PLoS Medicine"
+  volume: 22
+  issue: 4
+  pages: e1004589
+  year: 2025
+  notes: "and others"

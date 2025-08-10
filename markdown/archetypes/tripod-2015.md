@@ -1,10 +1,8 @@
----
-title: TRIPOD 2015 Checklist
----
+# TRIPOD 2015 Checklist
 
 > Scope: The Transparent Reporting of a multivariable prediction model for Individual Prognosis Or Diagnosis (TRIPOD) Statement was developed to improve the quality of reporting in studies that develop, validate, or update prediction models.
 >
-> Reference: https://www.tripod-statement.org/
+> Reference: See `source/archetypes/tripod-2015.yml` for canonical link and provenance.
 
 ## Instructions
 - Use task list items for checklist boxes; these become interactive checkboxes in PDF.
@@ -53,6 +51,6 @@ title: TRIPOD 2015 Checklist
 [Notes]{.textfield name=tripod_2015_notes width=12cm}
 
 ## Provenance
-- Source: https://www.tripod-statement.org/
+- Source: See sidecar metadata in `source/archetypes/tripod-2015.yml`
 - Version: 2015
 - License: Custom; see website

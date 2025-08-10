@@ -3,34 +3,76 @@ title: ARRIVE 2.0 Checklist
 group: arrive
 version: "2.0"
 date: "2020-07-14"
-publisher: NC3Rs
-source_url: https://arriveguidelines.org/
-retrieved_at: TBD
+publisher: NC3Rs / British Journal of Pharmacology
+source_url: https://doi.org/10.1371/journal.pbio.3000410
+retrieved_at: 2025-08-09
 preferred_format: pdf
 checksum: 00957028eae5b9935a86a8bc912fd2a85b95ca9be11bf175fbfea65d97fe83fc
 license: CC-BY-4.0
 verified: true
-notes: |
-  The ARRIVE 2.0 guidelines, published in PLOS Biology.
+notes: "The ARRIVE 2.0 guidelines, published in the British Journal of Pharmacology."
 citation:
   type: article-journal
   author:
     - given: Nathalie
       family: Percie du Sert
-    - given: Vikki
+    - given: Viki
       family: Hurst
     - given: Amrita
       family: Ahluwalia
-    - given: Sadaf
+    - given: Sabina
       family: Alam
-    - given: Martha T.
+    - given: Marc T.
       family: Avey
-    - given: Michael
+    - given: Monya
       family: Baker
-  doi: 10.1371/journal.pbio.3000410
-  journal: "PLOS Biology"
-  volume: 18
-  issue: 7
-  pages: e3000410
+    - given: William J.
+      family: Browne
+    - given: Alejandra
+      family: Clark
+    - given: Innes C.
+      family: Cuthill
+    - given: Ulrich
+      family: Dirnagl
+    - given: Michael
+      family: Emerson
+    - given: Paul
+      family: Garner
+    - given: Stephen T.
+      family: Holgate
+    - given: David W.
+      family: Howells
+    - given: Natasha A.
+      family: Karp
+    - given: Stanley E.
+      family: Lazic
+    - given: Katie
+      family: Lidster
+    - given: Catriona J.
+      family: MacCallum
+    - given: Malcolm
+      family: Macleod
+    - given: Esther J.
+      family: Pearl
+    - given: Ole H.
+      family: Petersen
+    - given: Frances
+      family: Rawle
+    - given: Penny
+      family: Reynolds
+    - given: Kieron
+      family: Rooney
+    - given: Emily S.
+      family: Sena
+    - given: Shai D.
+      family: Silberberg
+    - given: Thomas
+      family: Steckler
+    - given: Hanno
+      family: Würbel
+  doi: 10.1111/bph.15193
+  journal: "British Journal of Pharmacology"
+  volume: 177
+  issue: 16
+  pages: 3617-3624
   year: 2020
-  notes: "and others"
