@@ -5,6 +5,86 @@
       <text>STARD 2015 Checklist</text>
     </name>
     <page id="n0">
+      <place id="sec_5_p_11">
+        <name>
+          <text>sec_5_p_11</text>
+        </name>
+      </place>
+      <place id="sec_8_p_1">
+        <name>
+          <text>sec_8_p_1</text>
+        </name>
+      </place>
+      <place id="sec_8_p_3">
+        <name>
+          <text>sec_8_p_3</text>
+        </name>
+      </place>
+      <place id="sec_1_start">
+        <name>
+          <text>sec_1_start</text>
+        </name>
+      </place>
+      <place id="sec_6_p_1">
+        <name>
+          <text>sec_6_p_1</text>
+        </name>
+      </place>
+      <place id="sec_6_p_3">
+        <name>
+          <text>sec_6_p_3</text>
+        </name>
+      </place>
+      <place id="sec_6_p_5">
+        <name>
+          <text>sec_6_p_5</text>
+        </name>
+      </place>
+      <place id="sec_6_p_7">
+        <name>
+          <text>sec_6_p_7</text>
+        </name>
+      </place>
+      <place id="sec_6_p_9">
+        <name>
+          <text>sec_6_p_9</text>
+        </name>
+      </place>
+      <place id="sec_3_start">
+        <name>
+          <text>sec_3_start</text>
+        </name>
+      </place>
+      <place id="sec_3_p_1">
+        <name>
+          <text>sec_3_p_1</text>
+        </name>
+      </place>
+      <place id="sec_5_p_1">
+        <name>
+          <text>sec_5_p_1</text>
+        </name>
+      </place>
+      <place id="sec_5_p_3">
+        <name>
+          <text>sec_5_p_3</text>
+        </name>
+      </place>
+      <place id="sec_5_p_15">
+        <name>
+          <text>sec_5_p_15</text>
+        </name>
+      </place>
+      <place id="sec_5_p_17">
+        <name>
+          <text>sec_5_p_17</text>
+        </name>
+      </place>
+      <place id="sec_7_p_1">
+        <name>
+          <text>sec_7_p_1</text>
+        </name>
+      </place>
       <place id="source">
         <name>
           <text>source</text>
@@ -13,119 +93,34 @@
           <text>1</text>
         </initialMarking>
       </place>
-      <place id="p3">
+      <place id="sec_5_start">
         <name>
-          <text>p3</text>
+          <text>sec_5_start</text>
         </name>
       </place>
-      <place id="p10">
+      <place id="sec_5_p_7">
         <name>
-          <text>p10</text>
+          <text>sec_5_p_7</text>
         </name>
       </place>
-      <place id="p13">
+      <place id="sec_8_start">
         <name>
-          <text>p13</text>
+          <text>sec_8_start</text>
         </name>
       </place>
-      <place id="p25">
+      <place id="sec_8_p_2">
         <name>
-          <text>p25</text>
+          <text>sec_8_p_2</text>
         </name>
       </place>
-      <place id="p27">
+      <place id="sec_9_start">
         <name>
-          <text>p27</text>
+          <text>sec_9_start</text>
         </name>
       </place>
-      <place id="p29">
+      <place id="sec_5_p_6">
         <name>
-          <text>p29</text>
-        </name>
-      </place>
-      <place id="p31">
-        <name>
-          <text>p31</text>
-        </name>
-      </place>
-      <place id="p33">
-        <name>
-          <text>p33</text>
-        </name>
-      </place>
-      <place id="p35">
-        <name>
-          <text>p35</text>
-        </name>
-      </place>
-      <place id="p14">
-        <name>
-          <text>p14</text>
-        </name>
-      </place>
-      <place id="p16">
-        <name>
-          <text>p16</text>
-        </name>
-      </place>
-      <place id="p15">
-        <name>
-          <text>p15</text>
-        </name>
-      </place>
-      <place id="p1">
-        <name>
-          <text>p1</text>
-        </name>
-      </place>
-      <place id="p4">
-        <name>
-          <text>p4</text>
-        </name>
-      </place>
-      <place id="p12">
-        <name>
-          <text>p12</text>
-        </name>
-      </place>
-      <place id="p18">
-        <name>
-          <text>p18</text>
-        </name>
-      </place>
-      <place id="p20">
-        <name>
-          <text>p20</text>
-        </name>
-      </place>
-      <place id="p24">
-        <name>
-          <text>p24</text>
-        </name>
-      </place>
-      <place id="p26">
-        <name>
-          <text>p26</text>
-        </name>
-      </place>
-      <place id="p28">
-        <name>
-          <text>p28</text>
-        </name>
-      </place>
-      <place id="p30">
-        <name>
-          <text>p30</text>
-        </name>
-      </place>
-      <place id="p32">
-        <name>
-          <text>p32</text>
-        </name>
-      </place>
-      <place id="p34">
-        <name>
-          <text>p34</text>
+          <text>sec_5_p_6</text>
         </name>
       </place>
       <place id="sink">
@@ -133,214 +128,214 @@
           <text>sink</text>
         </name>
       </place>
-      <place id="p5">
+      <place id="sec_4_p_1">
         <name>
-          <text>p5</text>
+          <text>sec_4_p_1</text>
         </name>
       </place>
-      <place id="p7">
+      <place id="sec_4_p_2">
         <name>
-          <text>p7</text>
+          <text>sec_4_p_2</text>
         </name>
       </place>
-      <place id="p8">
+      <place id="sec_5_p_2">
         <name>
-          <text>p8</text>
+          <text>sec_5_p_2</text>
         </name>
       </place>
-      <place id="p11">
+      <place id="sec_5_p_5">
         <name>
-          <text>p11</text>
+          <text>sec_5_p_5</text>
         </name>
       </place>
-      <place id="p19">
+      <place id="sec_5_p_10">
         <name>
-          <text>p19</text>
+          <text>sec_5_p_10</text>
         </name>
       </place>
-      <place id="p21">
+      <place id="sec_5_p_12">
         <name>
-          <text>p21</text>
+          <text>sec_5_p_12</text>
         </name>
       </place>
-      <place id="p22">
+      <place id="sec_5_p_13">
         <name>
-          <text>p22</text>
+          <text>sec_5_p_13</text>
         </name>
       </place>
-      <place id="p9">
+      <place id="sec_2_start">
         <name>
-          <text>p9</text>
+          <text>sec_2_start</text>
         </name>
       </place>
-      <place id="p17">
+      <place id="sec_4_start">
         <name>
-          <text>p17</text>
+          <text>sec_4_start</text>
         </name>
       </place>
-      <place id="p2">
+      <place id="sec_5_p_4">
         <name>
-          <text>p2</text>
+          <text>sec_5_p_4</text>
         </name>
       </place>
-      <place id="p6">
+      <place id="sec_5_p_14">
         <name>
-          <text>p6</text>
+          <text>sec_5_p_14</text>
         </name>
       </place>
-      <place id="p23">
+      <place id="sec_6_p_2">
         <name>
-          <text>p23</text>
+          <text>sec_6_p_2</text>
         </name>
       </place>
-      <transition id="item_8">
+      <place id="sec_6_p_4">
         <name>
-          <text>8 Participants Where and when potentially eligible</text>
+          <text>sec_6_p_4</text>
+        </name>
+      </place>
+      <place id="sec_6_p_6">
+        <name>
+          <text>sec_6_p_6</text>
+        </name>
+      </place>
+      <place id="sec_6_p_8">
+        <name>
+          <text>sec_6_p_8</text>
+        </name>
+      </place>
+      <place id="sec_7_start">
+        <name>
+          <text>sec_7_start</text>
+        </name>
+      </place>
+      <place id="sec_5_p_8">
+        <name>
+          <text>sec_5_p_8</text>
+        </name>
+      </place>
+      <place id="sec_2_p_1">
+        <name>
+          <text>sec_2_p_1</text>
+        </name>
+      </place>
+      <place id="sec_5_p_9">
+        <name>
+          <text>sec_5_p_9</text>
+        </name>
+      </place>
+      <place id="sec_5_p_16">
+        <name>
+          <text>sec_5_p_16</text>
+        </name>
+      </place>
+      <place id="sec_6_start">
+        <name>
+          <text>sec_6_start</text>
+        </name>
+      </place>
+      <place id="sec_7_p_2">
+        <name>
+          <text>sec_7_p_2</text>
+        </name>
+      </place>
+      <transition id="section_1">
+        <name>
+          <text>Instructions</text>
         </name>
       </transition>
-      <transition id="item_2">
+      <transition id="sec_5_item_3">
         <name>
-          <text>2 Structured summary Structured summary of study d</text>
+          <text>7 Participants On what basis potentially eligible </text>
         </name>
       </transition>
-      <transition id="item_3">
-        <name>
-          <text>3 Scientific and clinical background Scientific an</text>
-        </name>
-      </transition>
-      <transition id="item_20">
-        <name>
-          <text>17 Analysis Any analyses of variability in diagnos</text>
-        </name>
-      </transition>
-      <transition id="item_29">
-        <name>
-          <text>26 Estimates Any analyses of variability including</text>
-        </name>
-      </transition>
-      <transition id="item_35">
-        <name>
-          <text>32 Funding Sources of funding and other support ro</text>
-        </name>
-      </transition>
-      <transition id="item_25">
-        <name>
-          <text>22 Test results Time interval from index test to r</text>
-        </name>
-      </transition>
-      <transition id="item_27">
-        <name>
-          <text>24 Test results Any adverse events from performing</text>
-        </name>
-      </transition>
-      <transition id="item_31">
-        <name>
-          <text>28 Study limitations Study limitations including s</text>
-        </name>
-      </transition>
-      <transition id="item_33">
-        <name>
-          <text>30 Registration number and name of registry Regist</text>
-        </name>
-      </transition>
-      <transition id="item_14">
-        <name>
-          <text>12b Test methods Definition of and rationale for t</text>
-        </name>
-      </transition>
-      <transition id="item_4">
-        <name>
-          <text>4 Study objectives and hypotheses Study objectives</text>
-        </name>
-      </transition>
-      <transition id="item_1">
-        <name>
-          <text>1 Identification Identification as a study of diag</text>
-        </name>
-      </transition>
-      <transition id="item_18">
-        <name>
-          <text>15 Analysis How indeterminate index test or refere</text>
-        </name>
-      </transition>
-      <transition id="item_16">
-        <name>
-          <text>13b Test methods Whether clinical information and </text>
-        </name>
-      </transition>
-      <transition id="item_15">
-        <name>
-          <text>13a Test methods Whether clinical information and </text>
-        </name>
-      </transition>
-      <transition id="item_9">
-        <name>
-          <text>9 Participants Whether participants formed a conse</text>
-        </name>
-      </transition>
-      <transition id="item_10">
-        <name>
-          <text>10a Test methods Index test in sufficient detail t</text>
-        </name>
-      </transition>
-      <transition id="item_12">
-        <name>
-          <text>11 Test methods Rationale for choosing the referen</text>
-        </name>
-      </transition>
-      <transition id="item_13">
-        <name>
-          <text>12a Test methods Definition of and rationale for t</text>
-        </name>
-      </transition>
-      <transition id="item_17">
-        <name>
-          <text>14 Analysis Methods for estimating or comparing me</text>
-        </name>
-      </transition>
-      <transition id="item_22">
-        <name>
-          <text>19 Participants Flow of participants using a diagr</text>
-        </name>
-      </transition>
-      <transition id="item_23">
+      <transition id="sec_6_item_2">
         <name>
           <text>20 Participants Baseline demographic and clinical </text>
         </name>
       </transition>
-      <transition id="item_24">
+      <transition id="sec_6_item_4">
         <name>
-          <text>21 Participants Distribution of severity of diseas</text>
+          <text>22 Test results Time interval from index test to r</text>
         </name>
       </transition>
-      <transition id="item_5">
+      <transition id="sec_6_item_6">
         <name>
-          <text>5 Study design Whether data collection was planned</text>
+          <text>24 Test results Any adverse events from performing</text>
         </name>
       </transition>
-      <transition id="item_26">
+      <transition id="section_7">
         <name>
-          <text>23 Test results Cross tabulation of the index test</text>
+          <text>Discussion</text>
         </name>
       </transition>
-      <transition id="item_28">
+      <transition id="section_8">
         <name>
-          <text>25 Estimates Estimates of diagnostic accuracy and </text>
+          <text>Other Information</text>
         </name>
       </transition>
-      <transition id="item_30">
+      <transition id="sec_5_item_7">
         <name>
-          <text>27 Estimates The number of indeterminate test resu</text>
+          <text>10b Test methods Reference standard in sufficient </text>
         </name>
       </transition>
-      <transition id="item_32">
+      <transition id="sec_5_item_6">
+        <name>
+          <text>10a Test methods Index test in sufficient detail t</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_1">
+        <name>
+          <text>1 Identification Identification as a study of diag</text>
+        </name>
+      </transition>
+      <transition id="section_2">
+        <name>
+          <text>Title or Abstract</text>
+        </name>
+      </transition>
+      <transition id="sec_4_item_1">
+        <name>
+          <text>3 Scientific and clinical background Scientific an</text>
+        </name>
+      </transition>
+      <transition id="sec_5_item_2">
+        <name>
+          <text>6 Participants Eligibility criteria</text>
+        </name>
+      </transition>
+      <transition id="sec_5_item_13">
+        <name>
+          <text>14 Analysis Methods for estimating or comparing me</text>
+        </name>
+      </transition>
+      <transition id="sec_5_item_16">
+        <name>
+          <text>17 Analysis Any analyses of variability in diagnos</text>
+        </name>
+      </transition>
+      <transition id="section_6">
+        <name>
+          <text>Results</text>
+        </name>
+      </transition>
+      <transition id="sec_7_item_2">
         <name>
           <text>29 Implications for practice Implications for prac</text>
         </name>
       </transition>
-      <transition id="item_34">
+      <transition id="section_3">
         <name>
-          <text>31 Where the full study protocol can be accessed W</text>
+          <text>Abstract</text>
+        </name>
+      </transition>
+      <transition id="sec_5_item_9">
+        <name>
+          <text>12a Test methods Definition of and rationale for t</text>
+        </name>
+      </transition>
+      <transition id="sec_8_item_1">
+        <name>
+          <text>30 Registration number and name of registry Regist</text>
         </name>
       </transition>
       <transition id="final_transition">
@@ -348,103 +343,216 @@
           <text>End</text>
         </name>
       </transition>
-      <transition id="item_6">
+      <transition id="sec_5_item_5">
         <name>
-          <text>6 Participants Eligibility criteria</text>
+          <text>9 Participants Whether participants formed a conse</text>
         </name>
       </transition>
-      <transition id="item_7">
+      <transition id="sec_6_item_1">
         <name>
-          <text>7 Participants On what basis potentially eligible </text>
+          <text>19 Participants Flow of participants using a diagr</text>
         </name>
       </transition>
-      <transition id="item_11">
+      <transition id="sec_6_item_3">
         <name>
-          <text>10b Test methods Reference standard in sufficient </text>
+          <text>21 Participants Distribution of severity of diseas</text>
         </name>
       </transition>
-      <transition id="item_19">
+      <transition id="sec_6_item_5">
         <name>
-          <text>16 Analysis How missing data on the index test and</text>
+          <text>23 Test results Cross tabulation of the index test</text>
         </name>
       </transition>
-      <transition id="item_21">
+      <transition id="sec_6_item_7">
+        <name>
+          <text>25 Estimates Estimates of diagnostic accuracy and </text>
+        </name>
+      </transition>
+      <transition id="sec_6_item_9">
+        <name>
+          <text>27 Estimates The number of indeterminate test resu</text>
+        </name>
+      </transition>
+      <transition id="sec_5_item_17">
         <name>
           <text>18 Analysis Sample size calculation</text>
         </name>
       </transition>
-      <arc id="4303446784" source="p5" target="item_6"/>
-      <arc id="4822248704" source="item_9" target="p9"/>
-      <arc id="4822552704" source="p14" target="item_15"/>
-      <arc id="4822553600" source="p18" target="item_19"/>
-      <arc id="4822554496" source="p22" target="item_23"/>
-      <arc id="4822556624" source="p27" target="item_28"/>
-      <arc id="4817498000" source="source" target="item_1"/>
-      <arc id="4814895248" source="item_3" target="p3"/>
-      <arc id="4815164816" source="item_4" target="p4"/>
-      <arc id="4822568080" source="p6" target="item_7"/>
-      <arc id="4821970064" source="p8" target="item_9"/>
-      <arc id="4822535696" source="item_10" target="p10"/>
-      <arc id="4822552592" source="item_14" target="p14"/>
-      <arc id="4822553488" source="item_18" target="p18"/>
-      <arc id="4822554384" source="item_22" target="p22"/>
-      <arc id="4822555280" source="p24" target="item_25"/>
-      <arc id="4822558864" source="p32" target="item_33"/>
-      <arc id="4822559984" source="item_35" target="p35"/>
-      <arc id="4822082848" source="item_2" target="p2"/>
-      <arc id="4822552480" source="p13" target="item_14"/>
-      <arc id="4822553376" source="p17" target="item_18"/>
-      <arc id="4822554272" source="p21" target="item_22"/>
-      <arc id="4822556960" source="p28" target="item_29"/>
-      <arc id="4822559648" source="p34" target="item_35"/>
-      <arc id="4822557520" source="p29" target="item_30"/>
-      <arc id="4822558640" source="item_32" target="p32"/>
-      <arc id="4822568752" source="item_7" target="p7"/>
-      <arc id="4822248880" source="p9" target="item_10"/>
-      <arc id="4822317488" source="item_11" target="p11"/>
-      <arc id="4822552368" source="p12" target="item_13"/>
-      <arc id="4822553264" source="item_17" target="p17"/>
-      <arc id="4822554160" source="item_21" target="p21"/>
-      <arc id="4822555056" source="item_24" target="p24"/>
-      <arc id="4822555952" source="item_26" target="p26"/>
-      <arc id="4822556848" source="item_28" target="p28"/>
-      <arc id="4822557744" source="item_30" target="p30"/>
-      <arc id="4815163456" source="p3" target="item_4"/>
-      <arc id="4822552256" source="item_13" target="p13"/>
-      <arc id="4822553152" source="p16" target="item_17"/>
-      <arc id="4822554048" source="p20" target="item_21"/>
-      <arc id="4822556176" source="p26" target="item_27"/>
-      <arc id="4822560320" source="final_transition" target="sink"/>
-      <arc id="4822558416" source="p31" target="item_32"/>
-      <arc id="4822559536" source="item_34" target="p34"/>
-      <arc id="4822083152" source="p2" target="item_3"/>
-      <arc id="4822467920" source="p1" target="item_2"/>
-      <arc id="4822467280" source="item_1" target="p1"/>
-      <arc id="4817449808" source="p4" target="item_5"/>
-      <arc id="4817450320" source="item_5" target="p5"/>
-      <arc id="4821970256" source="item_8" target="p8"/>
-      <arc id="4822517072" source="p11" target="item_12"/>
-      <arc id="4822517200" source="item_12" target="p12"/>
-      <arc id="4822553040" source="item_16" target="p16"/>
-      <arc id="4822553936" source="item_20" target="p20"/>
-      <arc id="4822554832" source="p23" target="item_24"/>
-      <arc id="4817417184" source="item_6" target="p6"/>
-      <arc id="4822064736" source="p7" target="item_8"/>
-      <arc id="4822552928" source="p15" target="item_16"/>
-      <arc id="4822553824" source="p19" target="item_20"/>
-      <arc id="4822554720" source="item_23" target="p23"/>
-      <arc id="4822559312" source="p33" target="item_34"/>
-      <arc id="4822535536" source="p10" target="item_11"/>
-      <arc id="4822552816" source="item_15" target="p15"/>
-      <arc id="4822553712" source="item_19" target="p19"/>
-      <arc id="4822555504" source="item_25" target="p25"/>
-      <arc id="4822555728" source="p25" target="item_26"/>
-      <arc id="4822556400" source="item_27" target="p27"/>
-      <arc id="4822557296" source="item_29" target="p29"/>
-      <arc id="4822558192" source="item_31" target="p31"/>
-      <arc id="4822559088" source="item_33" target="p33"/>
-      <arc id="4822557968" source="p30" target="item_31"/>
-      <arc id="4822560208" source="p35" target="final_transition"/>
+      <transition id="sec_5_item_8">
+        <name>
+          <text>11 Test methods Rationale for choosing the referen</text>
+        </name>
+      </transition>
+      <transition id="sec_3_item_1">
+        <name>
+          <text>2 Structured summary Structured summary of study d</text>
+        </name>
+      </transition>
+      <transition id="section_4">
+        <name>
+          <text>Introduction</text>
+        </name>
+      </transition>
+      <transition id="section_5">
+        <name>
+          <text>Methods</text>
+        </name>
+      </transition>
+      <transition id="sec_5_item_1">
+        <name>
+          <text>5 Study design Whether data collection was planned</text>
+        </name>
+      </transition>
+      <transition id="sec_5_item_4">
+        <name>
+          <text>8 Participants Where and when potentially eligible</text>
+        </name>
+      </transition>
+      <transition id="sec_5_item_10">
+        <name>
+          <text>12b Test methods Definition of and rationale for t</text>
+        </name>
+      </transition>
+      <transition id="sec_5_item_11">
+        <name>
+          <text>13a Test methods Whether clinical information and </text>
+        </name>
+      </transition>
+      <transition id="sec_5_item_14">
+        <name>
+          <text>15 Analysis How indeterminate index test or refere</text>
+        </name>
+      </transition>
+      <transition id="sec_5_item_15">
+        <name>
+          <text>16 Analysis How missing data on the index test and</text>
+        </name>
+      </transition>
+      <transition id="sec_4_item_2">
+        <name>
+          <text>4 Study objectives and hypotheses Study objectives</text>
+        </name>
+      </transition>
+      <transition id="sec_8_item_2">
+        <name>
+          <text>31 Where the full study protocol can be accessed W</text>
+        </name>
+      </transition>
+      <transition id="section_9">
+        <name>
+          <text>Provenance</text>
+        </name>
+      </transition>
+      <transition id="sec_7_item_1">
+        <name>
+          <text>28 Study limitations Study limitations including s</text>
+        </name>
+      </transition>
+      <transition id="sec_5_item_12">
+        <name>
+          <text>13b Test methods Whether clinical information and </text>
+        </name>
+      </transition>
+      <transition id="sec_6_item_8">
+        <name>
+          <text>26 Estimates Any analyses of variability including</text>
+        </name>
+      </transition>
+      <transition id="sec_8_item_3">
+        <name>
+          <text>32 Funding Sources of funding and other support ro</text>
+        </name>
+      </transition>
+      <arc id="5352661504" source="sec_5_item_13" target="sec_5_p_13"/>
+      <arc id="5352668672" source="sec_7_p_1" target="sec_7_item_2"/>
+      <arc id="5352718864" source="sec_4_item_1" target="sec_4_p_1"/>
+      <arc id="5352298512" source="section_2" target="sec_2_start"/>
+      <arc id="5352660496" source="sec_5_p_8" target="sec_5_item_9"/>
+      <arc id="5352667664" source="sec_6_item_9" target="sec_6_p_9"/>
+      <arc id="5352664080" source="sec_6_item_1" target="sec_6_p_1"/>
+      <arc id="5352784400" source="sec_8_start" target="sec_8_item_1"/>
+      <arc id="5352659488" source="sec_5_p_3" target="sec_5_item_4"/>
+      <arc id="5352663072" source="sec_5_item_17" target="sec_5_p_17"/>
+      <arc id="5352619568" source="sec_5_p_1" target="sec_5_item_2"/>
+      <arc id="5352665648" source="sec_6_p_4" target="sec_6_item_5"/>
+      <arc id="5352785968" source="section_9" target="sec_9_start"/>
+      <arc id="5242007616" source="sec_4_p_1" target="sec_4_item_2"/>
+      <arc id="5352661056" source="sec_5_item_11" target="sec_5_p_11"/>
+      <arc id="5352668224" source="sec_7_start" target="sec_7_item_1"/>
+      <arc id="4377790032" source="sec_5_p_2" target="sec_5_item_3"/>
+      <arc id="5352667216" source="sec_6_item_8" target="sec_6_p_8"/>
+      <arc id="5352660048" source="sec_5_p_6" target="sec_5_item_7"/>
+      <arc id="5352783952" source="sec_7_p_2" target="section_8"/>
+      <arc id="5352662624" source="sec_5_item_16" target="sec_5_p_16"/>
+      <arc id="5237571184" source="sec_4_start" target="sec_4_item_1"/>
+      <arc id="5352661616" source="sec_5_p_13" target="sec_5_item_14"/>
+      <arc id="5352665200" source="sec_6_p_3" target="sec_6_item_4"/>
+      <arc id="5352785520" source="sec_8_item_3" target="sec_8_p_3"/>
+      <arc id="5352660608" source="sec_5_item_9" target="sec_5_p_9"/>
+      <arc id="5352666768" source="sec_6_item_7" target="sec_6_p_7"/>
+      <arc id="5352102544" source="sec_4_p_2" target="section_5"/>
+      <arc id="5352659600" source="sec_5_p_4" target="sec_5_item_5"/>
+      <arc id="5352662176" source="sec_5_item_15" target="sec_5_p_15"/>
+      <arc id="5352661168" source="sec_5_p_11" target="sec_5_item_12"/>
+      <arc id="5352664752" source="sec_6_p_2" target="sec_6_item_3"/>
+      <arc id="5352785072" source="sec_8_item_2" target="sec_8_p_2"/>
+      <arc id="5352660160" source="sec_5_item_7" target="sec_5_p_7"/>
+      <arc id="5352666320" source="sec_6_item_6" target="sec_6_p_6"/>
+      <arc id="5352475344" source="source" target="section_1"/>
+      <arc id="5054417104" source="sec_2_p_1" target="section_3"/>
+      <arc id="5234575568" source="section_3" target="sec_3_start"/>
+      <arc id="5352673488" source="sec_5_item_3" target="sec_5_p_3"/>
+      <arc id="5352668896" source="sec_7_item_2" target="sec_7_p_2"/>
+      <arc id="5352640240" source="sec_5_item_2" target="sec_5_p_2"/>
+      <arc id="5352660720" source="sec_5_p_9" target="sec_5_item_10"/>
+      <arc id="5352664304" source="sec_6_p_1" target="sec_6_item_2"/>
+      <arc id="5352667888" source="sec_6_p_9" target="section_7"/>
+      <arc id="5352784624" source="sec_8_item_1" target="sec_8_p_1"/>
+      <arc id="5352494848" source="section_5" target="sec_5_start"/>
+      <arc id="5352659712" source="sec_5_item_5" target="sec_5_p_5"/>
+      <arc id="5352663296" source="sec_5_p_17" target="section_6"/>
+      <arc id="5352666880" source="sec_6_p_7" target="sec_6_item_8"/>
+      <arc id="5352495376" source="sec_5_start" target="sec_5_item_1"/>
+      <arc id="4376613648" source="sec_3_p_1" target="section_4"/>
+      <arc id="5352665872" source="sec_6_item_5" target="sec_6_p_5"/>
+      <arc id="5352786192" source="sec_9_start" target="final_transition"/>
+      <arc id="5241889056" source="section_4" target="sec_4_start"/>
+      <arc id="5352661280" source="sec_5_item_12" target="sec_5_p_12"/>
+      <arc id="5352668448" source="sec_7_item_1" target="sec_7_p_1"/>
+      <arc id="5352785184" source="sec_8_p_2" target="sec_8_item_3"/>
+      <arc id="5352660272" source="sec_5_p_7" target="sec_5_item_8"/>
+      <arc id="5352663856" source="sec_6_start" target="sec_6_item_1"/>
+      <arc id="5352667440" source="sec_6_p_8" target="sec_6_item_9"/>
+      <arc id="5352784176" source="section_8" target="sec_8_start"/>
+      <arc id="5352298816" source="sec_2_start" target="sec_2_item_1"/>
+      <arc id="5352662848" source="sec_5_p_16" target="sec_5_item_17"/>
+      <arc id="5352665424" source="sec_6_item_4" target="sec_6_p_4"/>
+      <arc id="5352661840" source="sec_5_item_14" target="sec_5_p_14"/>
+      <arc id="5352102736" source="sec_4_item_2" target="sec_4_p_2"/>
+      <arc id="5352041808" source="section_1" target="sec_1_start"/>
+      <arc id="5352217936" source="sec_3_start" target="sec_3_item_1"/>
+      <arc id="5352218448" source="sec_3_item_1" target="sec_3_p_1"/>
+      <arc id="5352785744" source="sec_8_p_3" target="section_9"/>
+      <arc id="5352660832" source="sec_5_item_10" target="sec_5_p_10"/>
+      <arc id="5352659824" source="sec_5_p_5" target="sec_5_item_6"/>
+      <arc id="5352662400" source="sec_5_p_15" target="sec_5_item_16"/>
+      <arc id="5352786304" source="final_transition" target="sink"/>
+      <arc id="5237092240" source="sec_2_item_1" target="sec_2_p_1"/>
+      <arc id="5352619408" source="sec_5_item_1" target="sec_5_p_1"/>
+      <arc id="5352661392" source="sec_5_p_12" target="sec_5_item_13"/>
+      <arc id="5352664976" source="sec_6_item_3" target="sec_6_p_3"/>
+      <arc id="5352660384" source="sec_5_item_8" target="sec_5_p_8"/>
+      <arc id="5352659376" source="sec_5_item_4" target="sec_5_p_4"/>
+      <arc id="5352666544" source="sec_6_p_6" target="sec_6_item_7"/>
+      <arc id="5352661952" source="sec_5_p_14" target="sec_5_item_15"/>
+      <arc id="5352660944" source="sec_5_p_10" target="sec_5_item_11"/>
+      <arc id="5352042448" source="sec_1_start" target="section_2"/>
+      <arc id="5352668112" source="section_7" target="sec_7_start"/>
+      <arc id="5352664528" source="sec_6_item_2" target="sec_6_p_2"/>
+      <arc id="5352784848" source="sec_8_p_1" target="sec_8_item_2"/>
+      <arc id="5352659936" source="sec_5_item_6" target="sec_5_p_6"/>
+      <arc id="5352663520" source="section_6" target="sec_6_start"/>
+      <arc id="5352666096" source="sec_6_p_5" target="sec_6_item_6"/>
     </page>
     <finalmarkings>
       <marking>

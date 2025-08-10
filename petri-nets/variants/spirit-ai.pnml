@@ -13,9 +13,19 @@
           <text>1</text>
         </initialMarking>
       </place>
-      <place id="p2">
+      <place id="sec_2_start">
         <name>
-          <text>p2</text>
+          <text>sec_2_start</text>
+        </name>
+      </place>
+      <place id="sec_1_start">
+        <name>
+          <text>sec_1_start</text>
+        </name>
+      </place>
+      <place id="sec_2_p_1">
+        <name>
+          <text>sec_2_p_1</text>
         </name>
       </place>
       <place id="sink">
@@ -23,14 +33,39 @@
           <text>sink</text>
         </name>
       </place>
-      <place id="p1">
+      <place id="sec_2_p_2">
         <name>
-          <text>p1</text>
+          <text>sec_2_p_2</text>
         </name>
       </place>
-      <transition id="item_1">
+      <place id="sec_3_start">
+        <name>
+          <text>sec_3_start</text>
+        </name>
+      </place>
+      <transition id="section_1">
+        <name>
+          <text>Instructions</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_2">
+        <name>
+          <text>Item 2 Abstract  Provide a structured summary of t</text>
+        </name>
+      </transition>
+      <transition id="section_2">
+        <name>
+          <text>Checklist Items</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_1">
         <name>
           <text>Item 1 Title  Indicate that the trial involves AI</text>
+        </name>
+      </transition>
+      <transition id="section_3">
+        <name>
+          <text>Provenance</text>
         </name>
       </transition>
       <transition id="final_transition">
@@ -38,17 +73,18 @@
           <text>End</text>
         </name>
       </transition>
-      <transition id="item_2">
-        <name>
-          <text>Item 2 Abstract  Provide a structured summary of t</text>
-        </name>
-      </transition>
-      <arc id="4812678432" source="item_2" target="p2"/>
-      <arc id="4809437072" source="source" target="item_1"/>
-      <arc id="4813063184" source="p1" target="item_2"/>
-      <arc id="4812678736" source="p2" target="final_transition"/>
-      <arc id="4813062544" source="item_1" target="p1"/>
-      <arc id="4805764752" source="final_transition" target="sink"/>
+      <arc id="5171976512" source="sec_2_start" target="sec_2_item_1"/>
+      <arc id="5170635040" source="final_transition" target="sink"/>
+      <arc id="5172153040" source="source" target="section_1"/>
+      <arc id="5171976208" source="section_2" target="sec_2_start"/>
+      <arc id="5171735888" source="sec_1_start" target="section_2"/>
+      <arc id="5171735248" source="section_1" target="sec_1_start"/>
+      <arc id="5167886224" source="sec_2_item_1" target="sec_2_p_1"/>
+      <arc id="4964327472" source="sec_2_p_1" target="sec_2_item_2"/>
+      <arc id="4964319856" source="sec_2_item_2" target="sec_2_p_2"/>
+      <arc id="5171896400" source="sec_2_p_2" target="section_3"/>
+      <arc id="5171896656" source="section_3" target="sec_3_start"/>
+      <arc id="4345254672" source="sec_3_start" target="final_transition"/>
     </page>
     <finalmarkings>
       <marking>

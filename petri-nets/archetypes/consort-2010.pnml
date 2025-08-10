@@ -5,6 +5,96 @@
       <text>CONSORT 2010 Checklist</text>
     </name>
     <page id="n0">
+      <place id="sec_7_start">
+        <name>
+          <text>sec_7_start</text>
+        </name>
+      </place>
+      <place id="sec_7_p_2">
+        <name>
+          <text>sec_7_p_2</text>
+        </name>
+      </place>
+      <place id="sec_8_start">
+        <name>
+          <text>sec_8_start</text>
+        </name>
+      </place>
+      <place id="sec_1_start">
+        <name>
+          <text>sec_1_start</text>
+        </name>
+      </place>
+      <place id="sec_4_p_7">
+        <name>
+          <text>sec_4_p_7</text>
+        </name>
+      </place>
+      <place id="sec_4_p_11">
+        <name>
+          <text>sec_4_p_11</text>
+        </name>
+      </place>
+      <place id="sec_4_p_16">
+        <name>
+          <text>sec_4_p_16</text>
+        </name>
+      </place>
+      <place id="sec_5_start">
+        <name>
+          <text>sec_5_start</text>
+        </name>
+      </place>
+      <place id="sec_5_p_2">
+        <name>
+          <text>sec_5_p_2</text>
+        </name>
+      </place>
+      <place id="sec_5_p_4">
+        <name>
+          <text>sec_5_p_4</text>
+        </name>
+      </place>
+      <place id="sec_5_p_6">
+        <name>
+          <text>sec_5_p_6</text>
+        </name>
+      </place>
+      <place id="sec_5_p_8">
+        <name>
+          <text>sec_5_p_8</text>
+        </name>
+      </place>
+      <place id="sec_5_p_10">
+        <name>
+          <text>sec_5_p_10</text>
+        </name>
+      </place>
+      <place id="sec_2_p_2">
+        <name>
+          <text>sec_2_p_2</text>
+        </name>
+      </place>
+      <place id="sec_3_start">
+        <name>
+          <text>sec_3_start</text>
+        </name>
+      </place>
+      <place id="sec_4_p_2">
+        <name>
+          <text>sec_4_p_2</text>
+        </name>
+      </place>
+      <place id="sec_4_p_12">
+        <name>
+          <text>sec_4_p_12</text>
+        </name>
+      </place>
+      <place id="sec_6_p_1">
+        <name>
+          <text>sec_6_p_1</text>
+        </name>
+      </place>
       <place id="source">
         <name>
           <text>source</text>
@@ -13,119 +103,39 @@
           <text>1</text>
         </initialMarking>
       </place>
-      <place id="p3">
+      <place id="sec_4_p_1">
         <name>
-          <text>p3</text>
+          <text>sec_4_p_1</text>
         </name>
       </place>
-      <place id="p9">
+      <place id="sec_4_p_8">
         <name>
-          <text>p9</text>
+          <text>sec_4_p_8</text>
         </name>
       </place>
-      <place id="p17">
+      <place id="sec_4_p_15">
         <name>
-          <text>p17</text>
+          <text>sec_4_p_15</text>
         </name>
       </place>
-      <place id="p24">
+      <place id="sec_6_p_3">
         <name>
-          <text>p24</text>
+          <text>sec_6_p_3</text>
         </name>
       </place>
-      <place id="p26">
+      <place id="sec_7_p_1">
         <name>
-          <text>p26</text>
+          <text>sec_7_p_1</text>
         </name>
       </place>
-      <place id="p28">
+      <place id="sec_7_p_3">
         <name>
-          <text>p28</text>
+          <text>sec_7_p_3</text>
         </name>
       </place>
-      <place id="p30">
+      <place id="sec_4_p_6">
         <name>
-          <text>p30</text>
-        </name>
-      </place>
-      <place id="p32">
-        <name>
-          <text>p32</text>
-        </name>
-      </place>
-      <place id="p34">
-        <name>
-          <text>p34</text>
-        </name>
-      </place>
-      <place id="p36">
-        <name>
-          <text>p36</text>
-        </name>
-      </place>
-      <place id="p14">
-        <name>
-          <text>p14</text>
-        </name>
-      </place>
-      <place id="p1">
-        <name>
-          <text>p1</text>
-        </name>
-      </place>
-      <place id="p11">
-        <name>
-          <text>p11</text>
-        </name>
-      </place>
-      <place id="p19">
-        <name>
-          <text>p19</text>
-        </name>
-      </place>
-      <place id="p4">
-        <name>
-          <text>p4</text>
-        </name>
-      </place>
-      <place id="p23">
-        <name>
-          <text>p23</text>
-        </name>
-      </place>
-      <place id="p25">
-        <name>
-          <text>p25</text>
-        </name>
-      </place>
-      <place id="p27">
-        <name>
-          <text>p27</text>
-        </name>
-      </place>
-      <place id="p29">
-        <name>
-          <text>p29</text>
-        </name>
-      </place>
-      <place id="p31">
-        <name>
-          <text>p31</text>
-        </name>
-      </place>
-      <place id="p33">
-        <name>
-          <text>p33</text>
-        </name>
-      </place>
-      <place id="p35">
-        <name>
-          <text>p35</text>
-        </name>
-      </place>
-      <place id="p37">
-        <name>
-          <text>p37</text>
+          <text>sec_4_p_6</text>
         </name>
       </place>
       <place id="sink">
@@ -133,134 +143,309 @@
           <text>sink</text>
         </name>
       </place>
-      <place id="p5">
+      <place id="sec_3_p_1">
         <name>
-          <text>p5</text>
+          <text>sec_3_p_1</text>
         </name>
       </place>
-      <place id="p7">
+      <place id="sec_3_p_2">
         <name>
-          <text>p7</text>
+          <text>sec_3_p_2</text>
         </name>
       </place>
-      <place id="p8">
+      <place id="sec_4_start">
         <name>
-          <text>p8</text>
+          <text>sec_4_start</text>
         </name>
       </place>
-      <place id="p15">
+      <place id="sec_4_p_4">
         <name>
-          <text>p15</text>
+          <text>sec_4_p_4</text>
         </name>
       </place>
-      <place id="p21">
+      <place id="sec_4_p_13">
         <name>
-          <text>p21</text>
+          <text>sec_4_p_13</text>
         </name>
       </place>
-      <place id="p22">
+      <place id="sec_4_p_14">
         <name>
-          <text>p22</text>
+          <text>sec_4_p_14</text>
         </name>
       </place>
-      <place id="p13">
+      <place id="sec_4_p_17">
         <name>
-          <text>p13</text>
+          <text>sec_4_p_17</text>
         </name>
       </place>
-      <place id="p12">
+      <place id="sec_2_start">
         <name>
-          <text>p12</text>
+          <text>sec_2_start</text>
         </name>
       </place>
-      <place id="p16">
+      <place id="sec_4_p_5">
         <name>
-          <text>p16</text>
+          <text>sec_4_p_5</text>
         </name>
       </place>
-      <place id="p2">
+      <place id="sec_4_p_9">
         <name>
-          <text>p2</text>
+          <text>sec_4_p_9</text>
         </name>
       </place>
-      <place id="p6">
+      <place id="sec_5_p_1">
         <name>
-          <text>p6</text>
+          <text>sec_5_p_1</text>
         </name>
       </place>
-      <place id="p10">
+      <place id="sec_5_p_3">
         <name>
-          <text>p10</text>
+          <text>sec_5_p_3</text>
         </name>
       </place>
-      <place id="p18">
+      <place id="sec_5_p_5">
         <name>
-          <text>p18</text>
+          <text>sec_5_p_5</text>
         </name>
       </place>
-      <place id="p20">
+      <place id="sec_5_p_7">
         <name>
-          <text>p20</text>
+          <text>sec_5_p_7</text>
         </name>
       </place>
-      <transition id="item_8">
+      <place id="sec_5_p_9">
+        <name>
+          <text>sec_5_p_9</text>
+        </name>
+      </place>
+      <place id="sec_6_start">
+        <name>
+          <text>sec_6_start</text>
+        </name>
+      </place>
+      <place id="sec_2_p_1">
+        <name>
+          <text>sec_2_p_1</text>
+        </name>
+      </place>
+      <place id="sec_4_p_3">
+        <name>
+          <text>sec_4_p_3</text>
+        </name>
+      </place>
+      <place id="sec_4_p_10">
+        <name>
+          <text>sec_4_p_10</text>
+        </name>
+      </place>
+      <place id="sec_6_p_2">
+        <name>
+          <text>sec_6_p_2</text>
+        </name>
+      </place>
+      <transition id="section_1">
+        <name>
+          <text>Instructions</text>
+        </name>
+      </transition>
+      <transition id="sec_4_item_4">
         <name>
           <text>4b Study settings Settings and locations where the</text>
         </name>
       </transition>
-      <transition id="item_17">
+      <transition id="sec_5_item_3">
         <name>
-          <text>10 Implementation Who generated the random allocat</text>
+          <text>14a Recruitment Dates defining the periods of recr</text>
         </name>
       </transition>
-      <transition id="item_2">
-        <name>
-          <text>1b Abstract Structured summary of trial design met</text>
-        </name>
-      </transition>
-      <transition id="item_3">
-        <name>
-          <text>2a Background Scientific background and explanatio</text>
-        </name>
-      </transition>
-      <transition id="item_13">
-        <name>
-          <text>7b Interim analyses and stopping guidelines When a</text>
-        </name>
-      </transition>
-      <transition id="item_16">
-        <name>
-          <text>9 Allocation concealment mechanism Mechanism used </text>
-        </name>
-      </transition>
-      <transition id="item_26">
+      <transition id="sec_5_item_5">
         <name>
           <text>15 Baseline data A table showing baseline demograp</text>
         </name>
       </transition>
-      <transition id="item_28">
+      <transition id="sec_5_item_7">
         <name>
           <text>17a Outcomes and estimation For each primary and s</text>
         </name>
       </transition>
-      <transition id="item_30">
+      <transition id="sec_5_item_9">
         <name>
           <text>18 Ancillary analyses Results of any other analyse</text>
         </name>
       </transition>
-      <transition id="item_32">
+      <transition id="section_6">
         <name>
-          <text>20 Limitations Trial limitations addressing source</text>
+          <text>Discussion</text>
         </name>
       </transition>
-      <transition id="item_34">
+      <transition id="sec_6_item_3">
         <name>
           <text>22 Interpretation Interpretation consistent with r</text>
         </name>
       </transition>
-      <transition id="item_36">
+      <transition id="sec_4_item_9">
+        <name>
+          <text>7b Interim analyses and stopping guidelines When a</text>
+        </name>
+      </transition>
+      <transition id="section_2">
+        <name>
+          <text>Title and Abstract</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_1">
+        <name>
+          <text>1a Title Identification of the trial as randomised</text>
+        </name>
+      </transition>
+      <transition id="sec_4_item_3">
+        <name>
+          <text>4a Participants Eligibility criteria for participa</text>
+        </name>
+      </transition>
+      <transition id="sec_4_item_14">
+        <name>
+          <text>11a Blinding If done who was blinded after assignm</text>
+        </name>
+      </transition>
+      <transition id="sec_5_item_1">
+        <name>
+          <text>13a Participant flow a diagram is strongly recomme</text>
+        </name>
+      </transition>
+      <transition id="sec_6_item_2">
+        <name>
+          <text>21 Generalisability Generalisability external vali</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_2">
+        <name>
+          <text>1b Abstract Structured summary of trial design met</text>
+        </name>
+      </transition>
+      <transition id="sec_4_item_11">
+        <name>
+          <text>8b Randomisation type Type of randomisation detail</text>
+        </name>
+      </transition>
+      <transition id="section_7">
+        <name>
+          <text>Other Information</text>
+        </name>
+      </transition>
+      <transition id="sec_7_item_2">
         <name>
           <text>24 Protocol Where the full trial protocol can be a</text>
+        </name>
+      </transition>
+      <transition id="section_8">
+        <name>
+          <text>Provenance</text>
+        </name>
+      </transition>
+      <transition id="sec_7_item_1">
+        <name>
+          <text>23 Registration Registration number and name of tr</text>
+        </name>
+      </transition>
+      <transition id="sec_4_item_7">
+        <name>
+          <text>6b Changes to outcomes Any changes to trial outcom</text>
+        </name>
+      </transition>
+      <transition id="sec_4_item_12">
+        <name>
+          <text>9 Allocation concealment mechanism Mechanism used </text>
+        </name>
+      </transition>
+      <transition id="section_5">
+        <name>
+          <text>Results</text>
+        </name>
+      </transition>
+      <transition id="sec_5_item_4">
+        <name>
+          <text>14b Reason for stopping Why the trial ended or was</text>
+        </name>
+      </transition>
+      <transition id="sec_5_item_2">
+        <name>
+          <text>13b Losses and exclusions For each group losses an</text>
+        </name>
+      </transition>
+      <transition id="sec_5_item_6">
+        <name>
+          <text>16 Numbers analysed For each group number of parti</text>
+        </name>
+      </transition>
+      <transition id="sec_5_item_8">
+        <name>
+          <text>17b Binary outcomes For binary outcomes presentati</text>
+        </name>
+      </transition>
+      <transition id="sec_5_item_10">
+        <name>
+          <text>19 Harms All important harms or unintended effects</text>
+        </name>
+      </transition>
+      <transition id="section_3">
+        <name>
+          <text>Introduction</text>
+        </name>
+      </transition>
+      <transition id="sec_3_item_1">
+        <name>
+          <text>2a Background Scientific background and explanatio</text>
+        </name>
+      </transition>
+      <transition id="sec_3_item_2">
+        <name>
+          <text>2b Objectives Specific objectives or hypotheses</text>
+        </name>
+      </transition>
+      <transition id="sec_4_item_1">
+        <name>
+          <text>3a Trial design Description of trial design eg par</text>
+        </name>
+      </transition>
+      <transition id="sec_4_item_2">
+        <name>
+          <text>3b Changes to trial design Important changes to me</text>
+        </name>
+      </transition>
+      <transition id="sec_4_item_6">
+        <name>
+          <text>6a Outcomes Completely defined prespecified primar</text>
+        </name>
+      </transition>
+      <transition id="sec_4_item_8">
+        <name>
+          <text>7a Sample size How sample size was determined</text>
+        </name>
+      </transition>
+      <transition id="sec_4_item_13">
+        <name>
+          <text>10 Implementation Who generated the random allocat</text>
+        </name>
+      </transition>
+      <transition id="sec_4_item_15">
+        <name>
+          <text>11b Similarity of interventions If relevant descri</text>
+        </name>
+      </transition>
+      <transition id="sec_4_item_16">
+        <name>
+          <text>12a Statistical methods Statistical methods used t</text>
+        </name>
+      </transition>
+      <transition id="section_4">
+        <name>
+          <text>Methods</text>
+        </name>
+      </transition>
+      <transition id="sec_7_item_3">
+        <name>
+          <text>25 Funding Sources of funding and other support su</text>
         </name>
       </transition>
       <transition id="final_transition">
@@ -268,207 +453,118 @@
           <text>End</text>
         </name>
       </transition>
-      <transition id="item_15">
-        <name>
-          <text>8b Randomisation type Type of randomisation detail</text>
-        </name>
-      </transition>
-      <transition id="item_4">
-        <name>
-          <text>2b Objectives Specific objectives or hypotheses</text>
-        </name>
-      </transition>
-      <transition id="item_18">
-        <name>
-          <text>11a Blinding If done who was blinded after assignm</text>
-        </name>
-      </transition>
-      <transition id="item_20">
-        <name>
-          <text>12a Statistical methods Statistical methods used t</text>
-        </name>
-      </transition>
-      <transition id="item_1">
-        <name>
-          <text>1a Title Identification of the trial as randomised</text>
-        </name>
-      </transition>
-      <transition id="item_12">
-        <name>
-          <text>7a Sample size How sample size was determined</text>
-        </name>
-      </transition>
-      <transition id="item_9">
-        <name>
-          <text>5 Interventions The interventions for each group w</text>
-        </name>
-      </transition>
-      <transition id="item_10">
-        <name>
-          <text>6a Outcomes Completely defined prespecified primar</text>
-        </name>
-      </transition>
-      <transition id="item_11">
-        <name>
-          <text>6b Changes to outcomes Any changes to trial outcom</text>
-        </name>
-      </transition>
-      <transition id="item_21">
-        <name>
-          <text>12b Additional analyses Methods for additional ana</text>
-        </name>
-      </transition>
-      <transition id="item_23">
-        <name>
-          <text>13b Losses and exclusions For each group losses an</text>
-        </name>
-      </transition>
-      <transition id="item_24">
-        <name>
-          <text>14a Recruitment Dates defining the periods of recr</text>
-        </name>
-      </transition>
-      <transition id="item_25">
-        <name>
-          <text>14b Reason for stopping Why the trial ended or was</text>
-        </name>
-      </transition>
-      <transition id="item_35">
-        <name>
-          <text>23 Registration Registration number and name of tr</text>
-        </name>
-      </transition>
-      <transition id="item_5">
-        <name>
-          <text>3a Trial design Description of trial design eg par</text>
-        </name>
-      </transition>
-      <transition id="item_19">
-        <name>
-          <text>11b Similarity of interventions If relevant descri</text>
-        </name>
-      </transition>
-      <transition id="item_22">
-        <name>
-          <text>13a Participant flow a diagram is strongly recomme</text>
-        </name>
-      </transition>
-      <transition id="item_27">
-        <name>
-          <text>16 Numbers analysed For each group number of parti</text>
-        </name>
-      </transition>
-      <transition id="item_29">
-        <name>
-          <text>17b Binary outcomes For binary outcomes presentati</text>
-        </name>
-      </transition>
-      <transition id="item_31">
-        <name>
-          <text>19 Harms All important harms or unintended effects</text>
-        </name>
-      </transition>
-      <transition id="item_33">
-        <name>
-          <text>21 Generalisability Generalisability external vali</text>
-        </name>
-      </transition>
-      <transition id="item_37">
-        <name>
-          <text>25 Funding Sources of funding and other support su</text>
-        </name>
-      </transition>
-      <transition id="item_6">
-        <name>
-          <text>3b Changes to trial design Important changes to me</text>
-        </name>
-      </transition>
-      <transition id="item_7">
-        <name>
-          <text>4a Participants Eligibility criteria for participa</text>
-        </name>
-      </transition>
-      <transition id="item_14">
+      <transition id="sec_4_item_10">
         <name>
           <text>8a Randomisation sequence generation Method used t</text>
         </name>
       </transition>
-      <arc id="4690448512" source="item_13" target="p13"/>
-      <arc id="4690449408" source="p16" target="item_17"/>
-      <arc id="4690450304" source="p20" target="item_21"/>
-      <arc id="4690457136" source="item_37" target="p37"/>
-      <arc id="4690457472" source="final_transition" target="sink"/>
-      <arc id="4690452432" source="p26" target="item_27"/>
-      <arc id="4679855632" source="item_8" target="p8"/>
-      <arc id="4678709136" source="source" target="item_1"/>
-      <arc id="4676106384" source="item_3" target="p3"/>
-      <arc id="4676375952" source="item_4" target="p4"/>
-      <arc id="4690449296" source="item_16" target="p16"/>
-      <arc id="4690450192" source="item_20" target="p20"/>
-      <arc id="4690451088" source="p23" target="item_24"/>
-      <arc id="4690451984" source="p25" target="item_26"/>
-      <arc id="4690452880" source="p27" target="item_28"/>
-      <arc id="4690453776" source="p29" target="item_30"/>
-      <arc id="4690454672" source="p31" target="item_32"/>
-      <arc id="4690456912" source="p36" target="item_37"/>
-      <arc id="4690448848" source="item_14" target="p14"/>
-      <arc id="4679951648" source="item_2" target="p2"/>
-      <arc id="4679932704" source="p7" target="item_8"/>
-      <arc id="4680117152" source="item_9" target="p9"/>
-      <arc id="4690449184" source="p15" target="item_16"/>
-      <arc id="4690450080" source="p19" target="item_20"/>
-      <arc id="4690450976" source="item_23" target="p23"/>
-      <arc id="4690453328" source="p28" target="item_29"/>
-      <arc id="4690432304" source="item_10" target="p10"/>
-      <arc id="4690449072" source="item_15" target="p15"/>
-      <arc id="4690449968" source="item_19" target="p19"/>
-      <arc id="4690451760" source="item_25" target="p25"/>
-      <arc id="4690452656" source="item_27" target="p27"/>
-      <arc id="4690453552" source="item_29" target="p29"/>
-      <arc id="4690454448" source="item_31" target="p31"/>
-      <arc id="4690455344" source="item_33" target="p33"/>
-      <arc id="4690455568" source="p33" target="item_34"/>
-      <arc id="4690456240" source="item_35" target="p35"/>
-      <arc id="4690456688" source="item_36" target="p36"/>
-      <arc id="4690449744" source="item_18" target="p18"/>
-      <arc id="4676374592" source="p3" target="item_4"/>
-      <arc id="4690448960" source="p14" target="item_15"/>
-      <arc id="4690449856" source="p18" target="item_19"/>
-      <arc id="4690413136" source="item_12" target="p12"/>
-      <arc id="4690450752" source="p22" target="item_23"/>
-      <arc id="4690413264" source="p11" target="item_12"/>
-      <arc id="4690454224" source="p30" target="item_31"/>
-      <arc id="4690456464" source="p35" target="item_36"/>
-      <arc id="4679855824" source="p8" target="item_9"/>
-      <arc id="4679951952" source="p2" target="item_3"/>
-      <arc id="4690363728" source="p1" target="item_2"/>
-      <arc id="4690363088" source="item_1" target="p1"/>
-      <arc id="4678661456" source="p4" target="item_5"/>
-      <arc id="4678661712" source="item_5" target="p5"/>
-      <arc id="4690463440" source="p6" target="item_7"/>
-      <arc id="4680117328" source="p9" target="item_10"/>
-      <arc id="4690432464" source="p10" target="item_11"/>
-      <arc id="4680185424" source="item_11" target="p11"/>
-      <arc id="4690450640" source="item_22" target="p22"/>
-      <arc id="4678628320" source="p5" target="item_6"/>
-      <arc id="4678622560" source="item_6" target="p6"/>
-      <arc id="4690448736" source="p13" target="item_14"/>
-      <arc id="4690449632" source="p17" target="item_18"/>
-      <arc id="4690450528" source="p21" target="item_22"/>
-      <arc id="4690451424" source="p24" target="item_25"/>
-      <arc id="4690455120" source="p32" target="item_33"/>
-      <arc id="4690455904" source="p34" target="item_35"/>
-      <arc id="4690457360" source="p37" target="final_transition"/>
-      <arc id="4690464112" source="item_7" target="p7"/>
-      <arc id="4690448624" source="p12" target="item_13"/>
-      <arc id="4690449520" source="item_17" target="p17"/>
-      <arc id="4690450416" source="item_21" target="p21"/>
-      <arc id="4690451312" source="item_24" target="p24"/>
-      <arc id="4690452208" source="item_26" target="p26"/>
-      <arc id="4690453104" source="item_28" target="p28"/>
-      <arc id="4690454000" source="item_30" target="p30"/>
-      <arc id="4690454896" source="item_32" target="p32"/>
-      <arc id="4690455792" source="item_34" target="p34"/>
+      <transition id="sec_4_item_5">
+        <name>
+          <text>5 Interventions The interventions for each group w</text>
+        </name>
+      </transition>
+      <transition id="sec_4_item_17">
+        <name>
+          <text>12b Additional analyses Methods for additional ana</text>
+        </name>
+      </transition>
+      <transition id="sec_6_item_1">
+        <name>
+          <text>20 Limitations Trial limitations addressing source</text>
+        </name>
+      </transition>
+      <arc id="5096219136" source="sec_4_item_13" target="sec_4_p_13"/>
+      <arc id="5096226304" source="sec_6_p_1" target="sec_6_item_2"/>
+      <arc id="5095856144" source="section_2" target="sec_2_start"/>
+      <arc id="5096218128" source="sec_4_p_8" target="sec_4_item_9"/>
+      <arc id="5096221712" source="sec_5_item_2" target="sec_5_p_2"/>
+      <arc id="5096225296" source="sec_5_item_10" target="sec_5_p_10"/>
+      <arc id="5096342032" source="sec_6_p_3" target="section_7"/>
+      <arc id="5096197152" source="sec_4_item_3" target="sec_4_p_3"/>
+      <arc id="5096217120" source="sec_4_p_4" target="sec_4_item_5"/>
+      <arc id="5096220704" source="sec_4_p_17" target="section_5"/>
+      <arc id="5090304048" source="sec_2_p_1" target="sec_2_item_2"/>
+      <arc id="5096292912" source="sec_4_item_2" target="sec_4_p_2"/>
+      <arc id="5096219696" source="sec_4_item_15" target="sec_4_p_15"/>
+      <arc id="5096223280" source="sec_5_p_5" target="sec_5_item_6"/>
+      <arc id="5096343600" source="sec_7_item_3" target="sec_7_p_3"/>
+      <arc id="5096218688" source="sec_4_item_11" target="sec_4_p_11"/>
+      <arc id="5096222272" source="sec_5_p_3" target="sec_5_item_4"/>
+      <arc id="5096225856" source="sec_6_start" target="sec_6_item_1"/>
+      <arc id="5096276048" source="sec_3_item_2" target="sec_3_p_2"/>
+      <arc id="4385375824" source="sec_4_p_3" target="sec_4_item_4"/>
+      <arc id="5096230992" source="sec_4_item_4" target="sec_4_p_4"/>
+      <arc id="5096224848" source="sec_5_item_9" target="sec_5_p_9"/>
+      <arc id="5096221264" source="sec_5_item_1" target="sec_5_p_1"/>
+      <arc id="5096217680" source="sec_4_p_6" target="sec_4_item_7"/>
+      <arc id="5096341584" source="sec_6_p_2" target="sec_6_item_3"/>
+      <arc id="5096220256" source="sec_4_p_16" target="sec_4_item_17"/>
+      <arc id="5090296432" source="sec_2_item_2" target="sec_2_p_2"/>
+      <arc id="5096219248" source="sec_4_p_13" target="sec_4_item_14"/>
+      <arc id="5096222832" source="sec_5_p_4" target="sec_5_item_5"/>
+      <arc id="5096343152" source="sec_7_item_2" target="sec_7_p_2"/>
+      <arc id="5096218240" source="sec_4_item_9" target="sec_4_p_9"/>
+      <arc id="5096224400" source="sec_5_item_8" target="sec_5_p_8"/>
+      <arc id="5096219808" source="sec_4_p_15" target="sec_4_item_16"/>
+      <arc id="5092228272" source="sec_3_p_1" target="sec_3_item_2"/>
+      <arc id="5096218800" source="sec_4_p_11" target="sec_4_item_12"/>
+      <arc id="5096342704" source="sec_7_item_1" target="sec_7_p_1"/>
+      <arc id="5096217792" source="sec_4_item_7" target="sec_4_p_7"/>
+      <arc id="5096223952" source="sec_5_item_7" target="sec_5_p_7"/>
+      <arc id="5096032976" source="source" target="section_1"/>
+      <arc id="5095598800" source="section_1" target="sec_1_start"/>
+      <arc id="5096293072" source="sec_4_p_2" target="sec_4_item_3"/>
+      <arc id="5096344272" source="sec_8_start" target="final_transition"/>
+      <arc id="5096219360" source="sec_4_item_14" target="sec_4_p_14"/>
+      <arc id="5096226528" source="sec_6_item_2" target="sec_6_p_2"/>
+      <arc id="5096225520" source="sec_5_p_10" target="section_6"/>
+      <arc id="5096218352" source="sec_4_p_9" target="sec_4_item_10"/>
+      <arc id="5096221936" source="sec_5_p_2" target="sec_5_item_3"/>
+      <arc id="5096342256" source="section_7" target="sec_7_start"/>
+      <arc id="5096217344" source="sec_4_item_5" target="sec_4_p_5"/>
+      <arc id="5096220928" source="section_5" target="sec_5_start"/>
+      <arc id="5096053008" source="sec_4_p_1" target="sec_4_item_2"/>
+      <arc id="5095661328" source="sec_4_start" target="sec_4_item_1"/>
+      <arc id="4384199440" source="sec_3_start" target="sec_3_item_1"/>
+      <arc id="5096223504" source="sec_5_item_6" target="sec_5_p_6"/>
+      <arc id="5096343824" source="sec_7_p_3" target="section_8"/>
+      <arc id="5094514976" source="sec_3_item_1" target="sec_3_p_1"/>
+      <arc id="5096218912" source="sec_4_item_12" target="sec_4_p_12"/>
+      <arc id="5096226080" source="sec_6_item_1" target="sec_6_p_1"/>
+      <arc id="5096217904" source="sec_4_p_7" target="sec_4_item_8"/>
+      <arc id="5096221488" source="sec_5_p_1" target="sec_5_item_2"/>
+      <arc id="5096225072" source="sec_5_p_9" target="sec_5_item_10"/>
+      <arc id="5096341808" source="sec_6_item_3" target="sec_6_p_3"/>
+      <arc id="5095856448" source="sec_2_start" target="sec_2_item_1"/>
+      <arc id="5096220480" source="sec_4_item_17" target="sec_4_p_17"/>
+      <arc id="5096344384" source="final_transition" target="sink"/>
+      <arc id="5096223056" source="sec_5_item_5" target="sec_5_p_5"/>
+      <arc id="5096219472" source="sec_4_p_14" target="sec_4_item_15"/>
+      <arc id="5095660368" source="section_4" target="sec_4_start"/>
+      <arc id="5095599440" source="sec_1_start" target="section_2"/>
+      <arc id="5095775568" source="sec_2_p_2" target="section_3"/>
+      <arc id="5095776080" source="section_3" target="sec_3_start"/>
+      <arc id="5096343376" source="sec_7_p_2" target="sec_7_item_3"/>
+      <arc id="5096218464" source="sec_4_item_10" target="sec_4_p_10"/>
+      <arc id="5096342368" source="sec_7_start" target="sec_7_item_1"/>
+      <arc id="5094616944" source="sec_3_p_2" target="section_4"/>
+      <arc id="5096217456" source="sec_4_p_5" target="sec_4_item_6"/>
+      <arc id="5096224624" source="sec_5_p_8" target="sec_5_item_9"/>
+      <arc id="5096220032" source="sec_4_item_16" target="sec_4_p_16"/>
+      <arc id="5091749776" source="sec_2_item_1" target="sec_2_p_1"/>
+      <arc id="5096219024" source="sec_4_p_12" target="sec_4_item_13"/>
+      <arc id="5096222608" source="sec_5_item_4" target="sec_5_p_4"/>
+      <arc id="5096342928" source="sec_7_p_1" target="sec_7_item_2"/>
+      <arc id="5096218016" source="sec_4_item_8" target="sec_4_p_8"/>
+      <arc id="5096224176" source="sec_5_p_7" target="sec_5_item_8"/>
+      <arc id="5096052656" source="sec_4_item_1" target="sec_4_p_1"/>
+      <arc id="5096217008" source="sec_5_start" target="sec_5_item_1"/>
+      <arc id="5096218576" source="sec_4_p_10" target="sec_4_item_11"/>
+      <arc id="5096225744" source="section_6" target="sec_6_start"/>
+      <arc id="5096222160" source="sec_5_item_3" target="sec_5_p_3"/>
+      <arc id="5096217568" source="sec_4_item_6" target="sec_4_p_6"/>
+      <arc id="5096223728" source="sec_5_p_6" target="sec_5_item_7"/>
+      <arc id="5096344048" source="section_8" target="sec_8_start"/>
     </page>
     <finalmarkings>
       <marking>

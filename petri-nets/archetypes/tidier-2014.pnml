@@ -5,6 +5,61 @@
       <text>TIDieR Checklist</text>
     </name>
     <page id="n0">
+      <place id="sec_9_start">
+        <name>
+          <text>sec_9_start</text>
+        </name>
+      </place>
+      <place id="sec_8_start">
+        <name>
+          <text>sec_8_start</text>
+        </name>
+      </place>
+      <place id="sec_1_start">
+        <name>
+          <text>sec_1_start</text>
+        </name>
+      </place>
+      <place id="sec_5_p_1">
+        <name>
+          <text>sec_5_p_1</text>
+        </name>
+      </place>
+      <place id="sec_7_start">
+        <name>
+          <text>sec_7_start</text>
+        </name>
+      </place>
+      <place id="sec_10_p_1">
+        <name>
+          <text>sec_10_p_1</text>
+        </name>
+      </place>
+      <place id="sec_6_p_1">
+        <name>
+          <text>sec_6_p_1</text>
+        </name>
+      </place>
+      <place id="sec_3_start">
+        <name>
+          <text>sec_3_start</text>
+        </name>
+      </place>
+      <place id="sec_3_p_1">
+        <name>
+          <text>sec_3_p_1</text>
+        </name>
+      </place>
+      <place id="sec_5_start">
+        <name>
+          <text>sec_5_start</text>
+        </name>
+      </place>
+      <place id="sec_12_start">
+        <name>
+          <text>sec_12_start</text>
+        </name>
+      </place>
       <place id="source">
         <name>
           <text>source</text>
@@ -13,24 +68,14 @@
           <text>1</text>
         </initialMarking>
       </place>
-      <place id="p3">
+      <place id="sec_6_start">
         <name>
-          <text>p3</text>
+          <text>sec_6_start</text>
         </name>
       </place>
-      <place id="p9">
+      <place id="sec_7_p_1">
         <name>
-          <text>p9</text>
-        </name>
-      </place>
-      <place id="p10">
-        <name>
-          <text>p10</text>
-        </name>
-      </place>
-      <place id="p2">
-        <name>
-          <text>p2</text>
+          <text>sec_7_p_1</text>
         </name>
       </place>
       <place id="sink">
@@ -38,104 +83,94 @@
           <text>sink</text>
         </name>
       </place>
-      <place id="p1">
+      <place id="sec_4_start">
         <name>
-          <text>p1</text>
+          <text>sec_4_start</text>
         </name>
       </place>
-      <place id="p4">
+      <place id="sec_4_p_1">
         <name>
-          <text>p4</text>
+          <text>sec_4_p_1</text>
         </name>
       </place>
-      <place id="p5">
+      <place id="sec_4_p_2">
         <name>
-          <text>p5</text>
+          <text>sec_4_p_2</text>
         </name>
       </place>
-      <place id="p6">
+      <place id="sec_9_p_1">
         <name>
-          <text>p6</text>
+          <text>sec_9_p_1</text>
         </name>
       </place>
-      <place id="p7">
+      <place id="sec_11_start">
         <name>
-          <text>p7</text>
+          <text>sec_11_start</text>
         </name>
       </place>
-      <place id="p8">
+      <place id="sec_11_p_1">
         <name>
-          <text>p8</text>
+          <text>sec_11_p_1</text>
         </name>
       </place>
-      <place id="p11">
+      <place id="sec_2_start">
         <name>
-          <text>p11</text>
+          <text>sec_2_start</text>
         </name>
       </place>
-      <place id="p12">
+      <place id="sec_8_p_1">
         <name>
-          <text>p12</text>
+          <text>sec_8_p_1</text>
         </name>
       </place>
-      <transition id="item_1">
+      <place id="sec_11_p_2">
+        <name>
+          <text>sec_11_p_2</text>
+        </name>
+      </place>
+      <place id="sec_2_p_1">
+        <name>
+          <text>sec_2_p_1</text>
+        </name>
+      </place>
+      <place id="sec_10_start">
+        <name>
+          <text>sec_10_start</text>
+        </name>
+      </place>
+      <transition id="section_1">
+        <name>
+          <text>Instructions</text>
+        </name>
+      </transition>
+      <transition id="section_6">
+        <name>
+          <text>How</text>
+        </name>
+      </transition>
+      <transition id="section_2">
+        <name>
+          <text>Brief name</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_1">
         <name>
           <text>1 Brief name Provide the name or a phrase that des</text>
         </name>
       </transition>
-      <transition id="item_5">
-        <name>
-          <text>5 Who provided For each category of intervention p</text>
-        </name>
-      </transition>
-      <transition id="item_7">
-        <name>
-          <text>7 Where Describe the locations where the intervent</text>
-        </name>
-      </transition>
-      <transition id="item_3">
-        <name>
-          <text>3 What materials Describe any physical or informat</text>
-        </name>
-      </transition>
-      <transition id="item_4">
+      <transition id="sec_4_item_2">
         <name>
           <text>4 What procedures Describe each of the procedures </text>
         </name>
       </transition>
-      <transition id="item_2">
+      <transition id="section_9">
         <name>
-          <text>2 Why Describe any rationale theory or goal of the</text>
+          <text>Tailoring</text>
         </name>
       </transition>
-      <transition id="item_6">
-        <name>
-          <text>6 How Describe the modes of delivery eg facetoface</text>
-        </name>
-      </transition>
-      <transition id="item_8">
-        <name>
-          <text>8 When and how much Describe the number of times t</text>
-        </name>
-      </transition>
-      <transition id="item_9">
-        <name>
-          <text>9 Tailoring If the intervention was planned to be </text>
-        </name>
-      </transition>
-      <transition id="item_10">
+      <transition id="sec_10_item_1">
         <name>
           <text>10 Modifications If the intervention was modified </text>
-        </name>
-      </transition>
-      <transition id="item_11">
-        <name>
-          <text>11 How well planned If intervention adherence or f</text>
-        </name>
-      </transition>
-      <transition id="item_12">
-        <name>
-          <text>12 How well actual If intervention adherence or fi</text>
         </name>
       </transition>
       <transition id="final_transition">
@@ -143,32 +178,141 @@
           <text>End</text>
         </name>
       </transition>
-      <arc id="4307264256" source="p5" target="item_6"/>
-      <arc id="4780076944" source="source" target="item_1"/>
-      <arc id="4823516176" source="p1" target="item_2"/>
-      <arc id="4823515536" source="item_1" target="p1"/>
-      <arc id="4769687184" source="item_3" target="p3"/>
-      <arc id="4769961360" source="p3" target="item_4"/>
-      <arc id="4781091984" source="p8" target="item_9"/>
-      <arc id="4781353360" source="item_9" target="p9"/>
-      <arc id="4823583632" source="item_10" target="p10"/>
-      <arc id="4781188384" source="item_2" target="p2"/>
-      <arc id="4781170480" source="p7" target="item_8"/>
-      <arc id="4823583792" source="p10" target="item_11"/>
-      <arc id="4781422016" source="item_11" target="p11"/>
-      <arc id="4823600832" source="final_transition" target="sink"/>
-      <arc id="4781188688" source="p2" target="item_3"/>
-      <arc id="4769962448" source="item_4" target="p4"/>
-      <arc id="4780029520" source="p4" target="item_5"/>
-      <arc id="4780029264" source="item_5" target="p5"/>
-      <arc id="4823616208" source="p6" target="item_7"/>
-      <arc id="4781092176" source="item_8" target="p8"/>
-      <arc id="4823565392" source="p11" target="item_12"/>
-      <arc id="4823565520" source="item_12" target="p12"/>
-      <arc id="4823600720" source="p12" target="final_transition"/>
-      <arc id="4779996128" source="item_6" target="p6"/>
-      <arc id="4781353712" source="p9" target="item_10"/>
-      <arc id="4823616880" source="item_7" target="p7"/>
+      <transition id="section_3">
+        <name>
+          <text>Why</text>
+        </name>
+      </transition>
+      <transition id="sec_6_item_1">
+        <name>
+          <text>6 How Describe the modes of delivery eg facetoface</text>
+        </name>
+      </transition>
+      <transition id="sec_7_item_1">
+        <name>
+          <text>7 Where Describe the locations where the intervent</text>
+        </name>
+      </transition>
+      <transition id="section_11">
+        <name>
+          <text>How well</text>
+        </name>
+      </transition>
+      <transition id="sec_9_item_1">
+        <name>
+          <text>9 Tailoring If the intervention was planned to be </text>
+        </name>
+      </transition>
+      <transition id="sec_11_item_1">
+        <name>
+          <text>11 How well planned If intervention adherence or f</text>
+        </name>
+      </transition>
+      <transition id="sec_8_item_1">
+        <name>
+          <text>8 When and how much Describe the number of times t</text>
+        </name>
+      </transition>
+      <transition id="sec_3_item_1">
+        <name>
+          <text>2 Why Describe any rationale theory or goal of the</text>
+        </name>
+      </transition>
+      <transition id="section_4">
+        <name>
+          <text>What</text>
+        </name>
+      </transition>
+      <transition id="section_5">
+        <name>
+          <text>Who provided</text>
+        </name>
+      </transition>
+      <transition id="sec_5_item_1">
+        <name>
+          <text>5 Who provided For each category of intervention p</text>
+        </name>
+      </transition>
+      <transition id="section_7">
+        <name>
+          <text>Where</text>
+        </name>
+      </transition>
+      <transition id="sec_11_item_2">
+        <name>
+          <text>12 How well actual If intervention adherence or fi</text>
+        </name>
+      </transition>
+      <transition id="section_12">
+        <name>
+          <text>Provenance</text>
+        </name>
+      </transition>
+      <transition id="sec_4_item_1">
+        <name>
+          <text>3 What materials Describe any physical or informat</text>
+        </name>
+      </transition>
+      <transition id="section_10">
+        <name>
+          <text>Modifications</text>
+        </name>
+      </transition>
+      <transition id="section_8">
+        <name>
+          <text>When and how much</text>
+        </name>
+      </transition>
+      <arc id="5105063680" source="section_5" target="sec_5_start"/>
+      <arc id="5105228544" source="sec_7_item_1" target="sec_7_p_1"/>
+      <arc id="5105229440" source="sec_9_item_1" target="sec_9_p_1"/>
+      <arc id="5105230336" source="sec_11_item_1" target="sec_11_p_1"/>
+      <arc id="5105231232" source="sec_12_start" target="final_transition"/>
+      <arc id="5105229776" source="sec_10_start" target="sec_10_item_1"/>
+      <arc id="5104867344" source="section_2" target="sec_2_start"/>
+      <arc id="5101809552" source="sec_2_item_1" target="sec_2_p_1"/>
+      <arc id="5102288272" source="sec_4_start" target="sec_4_item_1"/>
+      <arc id="5104672144" source="sec_4_item_2" target="sec_4_p_2"/>
+      <arc id="5105228432" source="sec_7_start" target="sec_7_item_1"/>
+      <arc id="5105229328" source="sec_9_start" target="sec_9_item_1"/>
+      <arc id="5105230224" source="sec_11_start" target="sec_11_item_1"/>
+      <arc id="5102434208" source="sec_3_p_1" target="section_4"/>
+      <arc id="5105228320" source="section_7" target="sec_7_start"/>
+      <arc id="5105229216" source="section_9" target="sec_9_start"/>
+      <arc id="5105230112" source="section_11" target="sec_11_start"/>
+      <arc id="5105231008" source="section_12" target="sec_12_start"/>
+      <arc id="5105230672" source="sec_11_item_2" target="sec_11_p_2"/>
+      <arc id="5105063856" source="sec_5_start" target="sec_5_item_1"/>
+      <arc id="5100363824" source="sec_2_p_1" target="section_3"/>
+      <arc id="5105287472" source="sec_4_item_1" target="sec_4_p_1"/>
+      <arc id="5105208496" source="section_6" target="sec_6_start"/>
+      <arc id="5105228208" source="sec_6_p_1" target="section_7"/>
+      <arc id="5105229104" source="sec_8_p_1" target="section_9"/>
+      <arc id="5105230000" source="sec_10_p_1" target="section_11"/>
+      <arc id="5104867648" source="sec_2_start" target="sec_2_item_1"/>
+      <arc id="5102427968" source="section_4" target="sec_4_start"/>
+      <arc id="5102530624" source="sec_4_p_1" target="sec_4_item_2"/>
+      <arc id="5105228992" source="sec_8_item_1" target="sec_8_p_1"/>
+      <arc id="5105229888" source="sec_10_item_1" target="sec_10_p_1"/>
+      <arc id="5105230784" source="sec_11_p_2" target="section_12"/>
+      <arc id="5104671568" source="sec_4_p_2" target="section_5"/>
+      <arc id="5105044176" source="source" target="section_1"/>
+      <arc id="5104610640" source="sec_1_start" target="section_2"/>
+      <arc id="5104610000" source="section_1" target="sec_1_start"/>
+      <arc id="5104788048" source="sec_3_start" target="sec_3_item_1"/>
+      <arc id="5104788304" source="sec_3_item_1" target="sec_3_p_1"/>
+      <arc id="5105188560" source="sec_5_item_1" target="sec_5_p_1"/>
+      <arc id="5105242192" source="sec_6_start" target="sec_6_item_1"/>
+      <arc id="5105242320" source="sec_6_item_1" target="sec_6_p_1"/>
+      <arc id="5105228880" source="sec_8_start" target="sec_8_item_1"/>
+      <arc id="5105228768" source="section_8" target="sec_8_start"/>
+      <arc id="5105229664" source="section_10" target="sec_10_start"/>
+      <arc id="5100356208" source="section_3" target="sec_3_start"/>
+      <arc id="5105188720" source="sec_5_p_1" target="section_6"/>
+      <arc id="5105228656" source="sec_7_p_1" target="section_8"/>
+      <arc id="5105229552" source="sec_9_p_1" target="section_10"/>
+      <arc id="5105230448" source="sec_11_p_1" target="sec_11_item_2"/>
+      <arc id="5105231344" source="final_transition" target="sink"/>
     </page>
     <finalmarkings>
       <marking>

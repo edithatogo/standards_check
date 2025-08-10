@@ -13,34 +13,49 @@
           <text>1</text>
         </initialMarking>
       </place>
-      <place id="p3">
+      <place id="sec_2_start">
         <name>
-          <text>p3</text>
+          <text>sec_2_start</text>
         </name>
       </place>
-      <place id="p6">
+      <place id="sec_2_p_3">
         <name>
-          <text>p6</text>
+          <text>sec_2_p_3</text>
         </name>
       </place>
-      <place id="p9">
+      <place id="sec_2_p_7">
         <name>
-          <text>p9</text>
+          <text>sec_2_p_7</text>
         </name>
       </place>
-      <place id="p10">
+      <place id="sec_3_start">
         <name>
-          <text>p10</text>
+          <text>sec_3_start</text>
         </name>
       </place>
-      <place id="p13">
+      <place id="sec_2_p_13">
         <name>
-          <text>p13</text>
+          <text>sec_2_p_13</text>
         </name>
       </place>
-      <place id="p2">
+      <place id="sec_2_p_12">
         <name>
-          <text>p2</text>
+          <text>sec_2_p_12</text>
+        </name>
+      </place>
+      <place id="sec_2_p_11">
+        <name>
+          <text>sec_2_p_11</text>
+        </name>
+      </place>
+      <place id="sec_1_start">
+        <name>
+          <text>sec_1_start</text>
+        </name>
+      </place>
+      <place id="sec_2_p_1">
+        <name>
+          <text>sec_2_p_1</text>
         </name>
       </place>
       <place id="sink">
@@ -48,102 +63,117 @@
           <text>sink</text>
         </name>
       </place>
-      <place id="p1">
+      <place id="sec_2_p_2">
         <name>
-          <text>p1</text>
+          <text>sec_2_p_2</text>
         </name>
       </place>
-      <place id="p4">
+      <place id="sec_2_p_4">
         <name>
-          <text>p4</text>
+          <text>sec_2_p_4</text>
         </name>
       </place>
-      <place id="p5">
+      <place id="sec_2_p_5">
         <name>
-          <text>p5</text>
+          <text>sec_2_p_5</text>
         </name>
       </place>
-      <place id="p7">
+      <place id="sec_2_p_6">
         <name>
-          <text>p7</text>
+          <text>sec_2_p_6</text>
         </name>
       </place>
-      <place id="p8">
+      <place id="sec_2_p_8">
         <name>
-          <text>p8</text>
+          <text>sec_2_p_8</text>
         </name>
       </place>
-      <place id="p11">
+      <place id="sec_2_p_9">
         <name>
-          <text>p11</text>
+          <text>sec_2_p_9</text>
         </name>
       </place>
-      <place id="p12">
+      <place id="sec_2_p_10">
         <name>
-          <text>p12</text>
+          <text>sec_2_p_10</text>
         </name>
       </place>
-      <transition id="item_5">
+      <transition id="section_1">
         <name>
-          <text>Patient Information This section should include de</text>
+          <text>Instructions</text>
         </name>
       </transition>
-      <transition id="item_8">
-        <name>
-          <text>Diagnostic Assessment This includes the diagnostic</text>
-        </name>
-      </transition>
-      <transition id="item_13">
-        <name>
-          <text>Informed Consent Confirmation that the patient gav</text>
-        </name>
-      </transition>
-      <transition id="item_1">
-        <name>
-          <text>Title The title should include the words case repo</text>
-        </name>
-      </transition>
-      <transition id="item_3">
-        <name>
-          <text>Abstract A structured or unstructured summary that</text>
-        </name>
-      </transition>
-      <transition id="item_4">
-        <name>
-          <text>Introduction A brief summary of why the case is un</text>
-        </name>
-      </transition>
-      <transition id="item_2">
+      <transition id="sec_2_item_2">
         <name>
           <text>Key Words Two to five keywords that identify the d</text>
         </name>
       </transition>
-      <transition id="item_6">
+      <transition id="sec_2_item_6">
         <name>
           <text>Clinical Findings A description of the relevant ph</text>
         </name>
       </transition>
-      <transition id="item_7">
-        <name>
-          <text>Timeline A timeline that organizes important histo</text>
-        </name>
-      </transition>
-      <transition id="item_9">
-        <name>
-          <text>Therapeutic Intervention Details on the types of i</text>
-        </name>
-      </transition>
-      <transition id="item_10">
+      <transition id="sec_2_item_10">
         <name>
           <text>Followup and Outcomes This should cover clinician </text>
         </name>
       </transition>
-      <transition id="item_11">
+      <transition id="sec_2_item_13">
+        <name>
+          <text>Informed Consent Confirmation that the patient gav</text>
+        </name>
+      </transition>
+      <transition id="section_3">
+        <name>
+          <text>Provenance</text>
+        </name>
+      </transition>
+      <transition id="section_2">
+        <name>
+          <text>Items</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_1">
+        <name>
+          <text>Title The title should include the words case repo</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_3">
+        <name>
+          <text>Abstract A structured or unstructured summary that</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_4">
+        <name>
+          <text>Introduction A brief summary of why the case is un</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_5">
+        <name>
+          <text>Patient Information This section should include de</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_7">
+        <name>
+          <text>Timeline A timeline that organizes important histo</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_8">
+        <name>
+          <text>Diagnostic Assessment This includes the diagnostic</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_9">
+        <name>
+          <text>Therapeutic Intervention Details on the types of i</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_11">
         <name>
           <text>Discussion A discussion of the strengths and limit</text>
         </name>
       </transition>
-      <transition id="item_12">
+      <transition id="sec_2_item_12">
         <name>
           <text>Patient Perspective The patient should have the op</text>
         </name>
@@ -153,34 +183,40 @@
           <text>End</text>
         </name>
       </transition>
-      <arc id="4371456768" source="p5" target="item_6"/>
-      <arc id="5235106320" source="p8" target="item_9"/>
-      <arc id="5236687888" source="p1" target="item_2"/>
-      <arc id="5236687248" source="item_1" target="p1"/>
-      <arc id="5236787472" source="p6" target="item_7"/>
-      <arc id="5235221792" source="item_2" target="p2"/>
-      <arc id="5235387296" source="item_9" target="p9"/>
-      <arc id="5236772768" source="final_transition" target="sink"/>
-      <arc id="4990331952" source="item_3" target="p3"/>
-      <arc id="5236788144" source="item_7" target="p7"/>
-      <arc id="5236755504" source="item_10" target="p10"/>
-      <arc id="5236772656" source="p13" target="final_transition"/>
-      <arc id="5236772544" source="item_13" target="p13"/>
-      <arc id="5235108048" source="item_8" target="p8"/>
-      <arc id="5235222096" source="p2" target="item_3"/>
-      <arc id="4990792528" source="p4" target="item_5"/>
-      <arc id="4990793040" source="item_5" target="p5"/>
-      <arc id="5235387472" source="p9" target="item_10"/>
-      <arc id="5236755664" source="p10" target="item_11"/>
-      <arc id="5235455568" source="item_11" target="p11"/>
-      <arc id="4373599824" source="p11" target="item_12"/>
-      <arc id="5236737104" source="item_12" target="p12"/>
-      <arc id="5236772432" source="p12" target="item_13"/>
-      <arc id="4990841056" source="source" target="item_1"/>
-      <arc id="4990759904" source="item_6" target="p6"/>
-      <arc id="5235202016" source="p7" target="item_8"/>
-      <arc id="4817345520" source="p3" target="item_4"/>
-      <arc id="4971731952" source="item_4" target="p4"/>
+      <arc id="4810562304" source="sec_2_item_12" target="sec_2_p_12"/>
+      <arc id="4810018832" source="sec_2_item_6" target="sec_2_p_6"/>
+      <arc id="4810217488" source="section_2" target="sec_2_start"/>
+      <arc id="4370305808" source="sec_2_p_3" target="sec_2_item_4"/>
+      <arc id="4810397968" source="sec_2_item_7" target="sec_2_p_7"/>
+      <arc id="4787158416" source="sec_2_item_5" target="sec_2_p_5"/>
+      <arc id="4810541968" source="sec_2_item_9" target="sec_2_p_9"/>
+      <arc id="4810575952" source="sec_2_item_10" target="sec_2_p_10"/>
+      <arc id="4810562192" source="sec_2_p_11" target="sec_2_item_12"/>
+      <arc id="4808859936" source="sec_2_item_4" target="sec_2_p_4"/>
+      <arc id="4810562080" source="sec_2_item_11" target="sec_2_p_11"/>
+      <arc id="4810562976" source="final_transition" target="sink"/>
+      <arc id="4808961072" source="sec_2_p_5" target="sec_2_item_6"/>
+      <arc id="4810561968" source="sec_2_p_10" target="sec_2_item_11"/>
+      <arc id="4810562864" source="sec_3_start" target="final_transition"/>
+      <arc id="4810217792" source="sec_2_start" target="sec_2_item_1"/>
+      <arc id="4810398144" source="sec_2_p_7" target="sec_2_item_8"/>
+      <arc id="4810562752" source="section_3" target="sec_3_start"/>
+      <arc id="4372252240" source="sec_2_p_9" target="sec_2_item_10"/>
+      <arc id="4810377936" source="source" target="section_1"/>
+      <arc id="4809960784" source="sec_1_start" target="section_2"/>
+      <arc id="4809960144" source="section_1" target="sec_1_start"/>
+      <arc id="4786663888" source="sec_2_item_1" target="sec_2_p_1"/>
+      <arc id="4549167312" source="sec_2_p_1" target="sec_2_item_2"/>
+      <arc id="4785227984" source="sec_2_item_2" target="sec_2_p_2"/>
+      <arc id="4810136912" source="sec_2_p_2" target="sec_2_item_3"/>
+      <arc id="4810137424" source="sec_2_item_3" target="sec_2_p_3"/>
+      <arc id="4810021328" source="sec_2_p_6" target="sec_2_item_7"/>
+      <arc id="4810538704" source="sec_2_item_8" target="sec_2_p_8"/>
+      <arc id="4810562528" source="sec_2_item_13" target="sec_2_p_13"/>
+      <arc id="4787157744" source="sec_2_p_4" target="sec_2_item_5"/>
+      <arc id="4810538864" source="sec_2_p_8" target="sec_2_item_9"/>
+      <arc id="4810562416" source="sec_2_p_12" target="sec_2_item_13"/>
+      <arc id="4810562640" source="sec_2_p_13" target="section_3"/>
     </page>
     <finalmarkings>
       <marking>

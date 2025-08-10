@@ -5,6 +5,81 @@
       <text>TRIPOD 2015 Checklist</text>
     </name>
     <page id="n0">
+      <place id="sec_5_p_3">
+        <name>
+          <text>sec_5_p_3</text>
+        </name>
+      </place>
+      <place id="sec_1_start">
+        <name>
+          <text>sec_1_start</text>
+        </name>
+      </place>
+      <place id="sec_4_p_5">
+        <name>
+          <text>sec_4_p_5</text>
+        </name>
+      </place>
+      <place id="sec_4_p_8">
+        <name>
+          <text>sec_4_p_8</text>
+        </name>
+      </place>
+      <place id="sec_5_p_1">
+        <name>
+          <text>sec_5_p_1</text>
+        </name>
+      </place>
+      <place id="sec_5_start">
+        <name>
+          <text>sec_5_start</text>
+        </name>
+      </place>
+      <place id="sec_6_p_1">
+        <name>
+          <text>sec_6_p_1</text>
+        </name>
+      </place>
+      <place id="sec_6_p_3">
+        <name>
+          <text>sec_6_p_3</text>
+        </name>
+      </place>
+      <place id="sec_2_p_2">
+        <name>
+          <text>sec_2_p_2</text>
+        </name>
+      </place>
+      <place id="sec_3_start">
+        <name>
+          <text>sec_3_start</text>
+        </name>
+      </place>
+      <place id="sec_4_p_3">
+        <name>
+          <text>sec_4_p_3</text>
+        </name>
+      </place>
+      <place id="sec_4_p_4">
+        <name>
+          <text>sec_4_p_4</text>
+        </name>
+      </place>
+      <place id="sec_4_p_6">
+        <name>
+          <text>sec_4_p_6</text>
+        </name>
+      </place>
+      <place id="sec_7_p_1">
+        <name>
+          <text>sec_7_p_1</text>
+        </name>
+      </place>
+      <place id="sec_8_start">
+        <name>
+          <text>sec_8_start</text>
+        </name>
+      </place>
       <place id="source">
         <name>
           <text>source</text>
@@ -13,49 +88,24 @@
           <text>1</text>
         </initialMarking>
       </place>
-      <place id="p3">
+      <place id="sec_2_start">
         <name>
-          <text>p3</text>
+          <text>sec_2_start</text>
         </name>
       </place>
-      <place id="p10">
+      <place id="sec_4_p_2">
         <name>
-          <text>p10</text>
+          <text>sec_4_p_2</text>
         </name>
       </place>
-      <place id="p16">
+      <place id="sec_4_p_7">
         <name>
-          <text>p16</text>
+          <text>sec_4_p_7</text>
         </name>
       </place>
-      <place id="p14">
+      <place id="sec_2_p_1">
         <name>
-          <text>p14</text>
-        </name>
-      </place>
-      <place id="p1">
-        <name>
-          <text>p1</text>
-        </name>
-      </place>
-      <place id="p4">
-        <name>
-          <text>p4</text>
-        </name>
-      </place>
-      <place id="p11">
-        <name>
-          <text>p11</text>
-        </name>
-      </place>
-      <place id="p17">
-        <name>
-          <text>p17</text>
-        </name>
-      </place>
-      <place id="p15">
-        <name>
-          <text>p15</text>
+          <text>sec_2_p_1</text>
         </name>
       </place>
       <place id="sink">
@@ -63,149 +113,114 @@
           <text>sink</text>
         </name>
       </place>
-      <place id="p5">
+      <place id="sec_3_p_1">
         <name>
-          <text>p5</text>
+          <text>sec_3_p_1</text>
         </name>
       </place>
-      <place id="p7">
+      <place id="sec_4_start">
         <name>
-          <text>p7</text>
+          <text>sec_4_start</text>
         </name>
       </place>
-      <place id="p8">
+      <place id="sec_4_p_1">
         <name>
-          <text>p8</text>
+          <text>sec_4_p_1</text>
         </name>
       </place>
-      <place id="p19">
+      <place id="sec_5_p_4">
         <name>
-          <text>p19</text>
+          <text>sec_5_p_4</text>
         </name>
       </place>
-      <place id="p21">
+      <place id="sec_5_p_5">
         <name>
-          <text>p21</text>
+          <text>sec_5_p_5</text>
         </name>
       </place>
-      <place id="p22">
+      <place id="sec_6_start">
         <name>
-          <text>p22</text>
+          <text>sec_6_start</text>
         </name>
       </place>
-      <place id="p9">
+      <place id="sec_6_p_2">
         <name>
-          <text>p9</text>
+          <text>sec_6_p_2</text>
         </name>
       </place>
-      <place id="p13">
+      <place id="sec_7_start">
         <name>
-          <text>p13</text>
+          <text>sec_7_start</text>
         </name>
       </place>
-      <place id="p2">
+      <place id="sec_4_p_9">
         <name>
-          <text>p2</text>
+          <text>sec_4_p_9</text>
         </name>
       </place>
-      <place id="p6">
+      <place id="sec_5_p_2">
         <name>
-          <text>p6</text>
+          <text>sec_5_p_2</text>
         </name>
       </place>
-      <place id="p12">
+      <place id="sec_7_p_2">
         <name>
-          <text>p12</text>
+          <text>sec_7_p_2</text>
         </name>
       </place>
-      <place id="p18">
-        <name>
-          <text>p18</text>
-        </name>
-      </place>
-      <place id="p20">
-        <name>
-          <text>p20</text>
-        </name>
-      </place>
-      <transition id="item_8">
-        <name>
-          <text>8 Sample size Explain how the study size was deter</text>
-        </name>
-      </transition>
-      <transition id="item_22">
-        <name>
-          <text>22 Funding Disclose the source of funding and the </text>
-        </name>
-      </transition>
-      <transition id="item_16">
-        <name>
-          <text>16 Model performance Report performance measures f</text>
-        </name>
-      </transition>
-      <transition id="item_13">
-        <name>
-          <text>13 Participants Describe the flow of participants </text>
-        </name>
-      </transition>
-      <transition id="item_21">
-        <name>
-          <text>21 Supplementary information Provide information a</text>
-        </name>
-      </transition>
-      <transition id="item_15">
-        <name>
-          <text>15 Model specification Present the full prediction</text>
-        </name>
-      </transition>
-      <transition id="item_4">
-        <name>
-          <text>4 Source of data Describe the study design and key</text>
-        </name>
-      </transition>
-      <transition id="item_6">
-        <name>
-          <text>6 Outcome Clearly define the outcome that is predi</text>
-        </name>
-      </transition>
-      <transition id="item_1">
-        <name>
-          <text>1 Title Identify the study as one that develops va</text>
-        </name>
-      </transition>
-      <transition id="item_19">
-        <name>
-          <text>19 Interpretation Give an overall interpretation o</text>
-        </name>
-      </transition>
-      <transition id="item_3">
-        <name>
-          <text>3 Background and Objectives Explain the medical co</text>
-        </name>
-      </transition>
-      <transition id="item_2">
+      <transition id="sec_2_item_2">
         <name>
           <text>2 Abstract Provide a summary of the objectives stu</text>
         </name>
       </transition>
-      <transition id="item_9">
+      <transition id="sec_4_item_5">
         <name>
-          <text>9 Missing data Describe how missing data were hand</text>
+          <text>8 Sample size Explain how the study size was deter</text>
         </name>
       </transition>
-      <transition id="item_10">
+      <transition id="sec_6_item_2">
+        <name>
+          <text>19 Interpretation Give an overall interpretation o</text>
+        </name>
+      </transition>
+      <transition id="section_7">
+        <name>
+          <text>Other Information</text>
+        </name>
+      </transition>
+      <transition id="section_5">
+        <name>
+          <text>Results</text>
+        </name>
+      </transition>
+      <transition id="section_2">
+        <name>
+          <text>Title and Abstract</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_1">
+        <name>
+          <text>1 Title Identify the study as one that develops va</text>
+        </name>
+      </transition>
+      <transition id="sec_4_item_4">
+        <name>
+          <text>7 Predictors Clearly define all predictors used in</text>
+        </name>
+      </transition>
+      <transition id="sec_4_item_7">
         <name>
           <text>10 Statistical analysis methods Describe how predi</text>
         </name>
       </transition>
-      <transition id="item_12">
+      <transition id="sec_5_item_3">
         <name>
-          <text>12 Model performance Specify all measures used to </text>
+          <text>15 Model specification Present the full prediction</text>
         </name>
       </transition>
-      <transition id="item_17">
+      <transition id="sec_7_item_2">
         <name>
-          <text>17 Model validation For validation describe how th</text>
+          <text>22 Funding Disclose the source of funding and the </text>
         </name>
       </transition>
       <transition id="final_transition">
@@ -213,82 +228,163 @@
           <text>End</text>
         </name>
       </transition>
-      <transition id="item_5">
+      <transition id="section_1">
         <name>
-          <text>5 Participants Describe the eligibility criteria f</text>
+          <text>Instructions</text>
         </name>
       </transition>
-      <transition id="item_18">
-        <name>
-          <text>18 Limitations Discuss any limitations of the stud</text>
-        </name>
-      </transition>
-      <transition id="item_14">
+      <transition id="sec_5_item_2">
         <name>
           <text>14 Model development Specify the number of partici</text>
         </name>
       </transition>
-      <transition id="item_7">
+      <transition id="section_3">
         <name>
-          <text>7 Predictors Clearly define all predictors used in</text>
+          <text>Introduction</text>
         </name>
       </transition>
-      <transition id="item_11">
+      <transition id="sec_4_item_6">
         <name>
-          <text>11 Model development Specify the type of model all</text>
+          <text>9 Missing data Describe how missing data were hand</text>
         </name>
       </transition>
-      <transition id="item_20">
+      <transition id="sec_5_item_4">
+        <name>
+          <text>16 Model performance Report performance measures f</text>
+        </name>
+      </transition>
+      <transition id="sec_6_item_3">
         <name>
           <text>20 Implications Discuss the implications for pract</text>
         </name>
       </transition>
-      <arc id="4348748544" source="p5" target="item_6"/>
-      <arc id="4796338304" source="p13" target="item_14"/>
-      <arc id="4796339200" source="p17" target="item_18"/>
-      <arc id="4796340096" source="p21" target="item_22"/>
-      <arc id="4796339984" source="item_21" target="p21"/>
-      <arc id="4347931280" source="p7" target="item_8"/>
-      <arc id="4791168912" source="source" target="item_1"/>
-      <arc id="4796253200" source="p1" target="item_2"/>
-      <arc id="4796252560" source="item_1" target="p1"/>
-      <arc id="4788561552" source="item_3" target="p3"/>
-      <arc id="4788835728" source="item_4" target="p4"/>
-      <arc id="4794297488" source="item_8" target="p8"/>
-      <arc id="4796321296" source="item_10" target="p10"/>
-      <arc id="4796338192" source="item_13" target="p13"/>
-      <arc id="4796339088" source="item_17" target="p17"/>
-      <arc id="4794410272" source="item_2" target="p2"/>
-      <arc id="4794575776" source="p9" target="item_10"/>
-      <arc id="4796338080" source="p12" target="item_13"/>
-      <arc id="4796338976" source="p16" target="item_17"/>
-      <arc id="4796339872" source="p20" target="item_21"/>
-      <arc id="4796321456" source="p10" target="item_11"/>
-      <arc id="4796338864" source="item_16" target="p16"/>
-      <arc id="4796339760" source="p19" target="item_20"/>
-      <arc id="4796339536" source="item_19" target="p19"/>
-      <arc id="4788834368" source="p3" target="item_4"/>
-      <arc id="4796338752" source="p15" target="item_16"/>
-      <arc id="4796339648" source="item_20" target="p20"/>
-      <arc id="4794410576" source="p2" target="item_3"/>
-      <arc id="4791120720" source="p4" target="item_5"/>
-      <arc id="4791121232" source="item_5" target="p5"/>
-      <arc id="4796353232" source="p6" target="item_7"/>
-      <arc id="4794297680" source="p8" target="item_9"/>
-      <arc id="4794575952" source="item_9" target="p9"/>
-      <arc id="4794644048" source="item_11" target="p11"/>
-      <arc id="4796302928" source="p11" target="item_12"/>
-      <arc id="4796303056" source="item_12" target="p12"/>
-      <arc id="4796338640" source="item_15" target="p15"/>
-      <arc id="4796340432" source="final_transition" target="sink"/>
-      <arc id="4791088096" source="item_6" target="p6"/>
-      <arc id="4796338528" source="p14" target="item_15"/>
-      <arc id="4796339424" source="p18" target="item_19"/>
-      <arc id="4796340320" source="p22" target="final_transition"/>
-      <arc id="4796353904" source="item_7" target="p7"/>
-      <arc id="4796338416" source="item_14" target="p14"/>
-      <arc id="4796339312" source="item_18" target="p18"/>
-      <arc id="4796340208" source="item_22" target="p22"/>
+      <transition id="sec_7_item_1">
+        <name>
+          <text>21 Supplementary information Provide information a</text>
+        </name>
+      </transition>
+      <transition id="sec_4_item_9">
+        <name>
+          <text>12 Model performance Specify all measures used to </text>
+        </name>
+      </transition>
+      <transition id="sec_3_item_1">
+        <name>
+          <text>3 Background and Objectives Explain the medical co</text>
+        </name>
+      </transition>
+      <transition id="section_4">
+        <name>
+          <text>Methods</text>
+        </name>
+      </transition>
+      <transition id="sec_4_item_2">
+        <name>
+          <text>5 Participants Describe the eligibility criteria f</text>
+        </name>
+      </transition>
+      <transition id="sec_4_item_3">
+        <name>
+          <text>6 Outcome Clearly define the outcome that is predi</text>
+        </name>
+      </transition>
+      <transition id="section_6">
+        <name>
+          <text>Discussion</text>
+        </name>
+      </transition>
+      <transition id="sec_6_item_1">
+        <name>
+          <text>18 Limitations Discuss any limitations of the stud</text>
+        </name>
+      </transition>
+      <transition id="section_8">
+        <name>
+          <text>Provenance</text>
+        </name>
+      </transition>
+      <transition id="sec_4_item_1">
+        <name>
+          <text>4 Source of data Describe the study design and key</text>
+        </name>
+      </transition>
+      <transition id="sec_5_item_1">
+        <name>
+          <text>13 Participants Describe the flow of participants </text>
+        </name>
+      </transition>
+      <transition id="sec_4_item_8">
+        <name>
+          <text>11 Model development Specify the type of model all</text>
+        </name>
+      </transition>
+      <transition id="sec_5_item_5">
+        <name>
+          <text>17 Model validation For validation describe how th</text>
+        </name>
+      </transition>
+      <arc id="5567470336" source="sec_4_p_5" target="sec_4_item_6"/>
+      <arc id="5567471232" source="section_5" target="sec_5_start"/>
+      <arc id="5567472128" source="sec_5_item_5" target="sec_5_p_5"/>
+      <arc id="5567474816" source="sec_7_p_1" target="sec_7_item_2"/>
+      <arc id="5567475712" source="sec_8_start" target="final_transition"/>
+      <arc id="5566913552" source="sec_4_p_1" target="sec_4_item_2"/>
+      <arc id="5563002768" source="sec_2_item_1" target="sec_2_p_1"/>
+      <arc id="4312961808" source="sec_3_start" target="sec_3_item_1"/>
+      <arc id="5567306000" source="sec_4_item_2" target="sec_4_p_2"/>
+      <arc id="5563481488" source="section_4" target="sec_4_start"/>
+      <arc id="5567450000" source="sec_4_item_4" target="sec_4_p_4"/>
+      <arc id="5567470224" source="sec_4_item_6" target="sec_4_p_6"/>
+      <arc id="5567471120" source="sec_4_p_9" target="section_5"/>
+      <arc id="5567472016" source="sec_5_p_4" target="sec_5_item_5"/>
+      <arc id="5567472912" source="sec_6_item_1" target="sec_6_p_1"/>
+      <arc id="5567473808" source="sec_6_item_3" target="sec_6_p_3"/>
+      <arc id="5567110048" source="sec_2_start" target="sec_2_item_1"/>
+      <arc id="5565751584" source="sec_3_item_1" target="sec_3_p_1"/>
+      <arc id="5567471008" source="sec_4_item_9" target="sec_4_p_9"/>
+      <arc id="5567470112" source="sec_5_start" target="sec_5_item_1"/>
+      <arc id="5567471904" source="sec_5_item_4" target="sec_5_p_4"/>
+      <arc id="5567474592" source="sec_7_item_1" target="sec_7_p_1"/>
+      <arc id="5567475488" source="section_8" target="sec_8_start"/>
+      <arc id="5567472464" source="section_6" target="sec_6_start"/>
+      <arc id="5561557040" source="sec_2_p_1" target="sec_2_item_2"/>
+      <arc id="5567430192" source="sec_4_p_3" target="sec_4_item_4"/>
+      <arc id="5567470896" source="sec_4_p_8" target="sec_4_item_9"/>
+      <arc id="5567470000" source="sec_5_item_1" target="sec_5_p_1"/>
+      <arc id="5567471792" source="sec_5_p_3" target="sec_5_item_4"/>
+      <arc id="5567472688" source="sec_6_start" target="sec_6_item_1"/>
+      <arc id="5567475824" source="final_transition" target="sink"/>
+      <arc id="5567306176" source="sec_4_p_2" target="sec_4_item_3"/>
+      <arc id="5567470784" source="sec_4_item_8" target="sec_4_p_8"/>
+      <arc id="5567471680" source="sec_5_item_3" target="sec_5_p_3"/>
+      <arc id="5567473472" source="sec_6_p_2" target="sec_6_item_3"/>
+      <arc id="5567474368" source="sec_7_start" target="sec_7_item_1"/>
+      <arc id="5567475264" source="sec_7_p_2" target="section_8"/>
+      <arc id="5567473360" source="sec_6_item_2" target="sec_6_p_2"/>
+      <arc id="5566913360" source="sec_4_item_1" target="sec_4_p_1"/>
+      <arc id="5566852432" source="sec_1_start" target="section_2"/>
+      <arc id="5566851792" source="section_1" target="sec_1_start"/>
+      <arc id="5567028560" source="sec_2_p_2" target="section_3"/>
+      <arc id="5567029072" source="section_3" target="sec_3_start"/>
+      <arc id="5567430352" source="sec_4_item_3" target="sec_4_p_3"/>
+      <arc id="5567483984" source="sec_4_p_4" target="sec_4_item_5"/>
+      <arc id="5567484112" source="sec_4_item_5" target="sec_4_p_5"/>
+      <arc id="5567470672" source="sec_4_p_7" target="sec_4_item_8"/>
+      <arc id="5567471568" source="sec_5_p_2" target="sec_5_item_3"/>
+      <arc id="5567470560" source="sec_4_item_7" target="sec_4_p_7"/>
+      <arc id="5567471456" source="sec_5_item_2" target="sec_5_p_2"/>
+      <arc id="5567475040" source="sec_7_item_2" target="sec_7_p_2"/>
+      <arc id="5567474256" source="section_7" target="sec_7_start"/>
+      <arc id="5563480816" source="sec_3_p_1" target="section_4"/>
+      <arc id="5567286640" source="source" target="section_1"/>
+      <arc id="5567109744" source="section_2" target="sec_2_start"/>
+      <arc id="5561549424" source="sec_2_item_2" target="sec_2_p_2"/>
+      <arc id="5565868272" source="sec_4_start" target="sec_4_item_1"/>
+      <arc id="5567470448" source="sec_4_p_6" target="sec_4_item_7"/>
+      <arc id="5567471344" source="sec_5_p_1" target="sec_5_item_2"/>
+      <arc id="5567472240" source="sec_5_p_5" target="section_6"/>
+      <arc id="5567473136" source="sec_6_p_1" target="sec_6_item_2"/>
+      <arc id="5567474032" source="sec_6_p_3" target="section_7"/>
     </page>
     <finalmarkings>
       <marking>

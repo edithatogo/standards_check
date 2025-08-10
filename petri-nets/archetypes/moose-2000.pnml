@@ -5,6 +5,61 @@
       <text>MOOSE Checklist</text>
     </name>
     <page id="n0">
+      <place id="sec_1_start">
+        <name>
+          <text>sec_1_start</text>
+        </name>
+      </place>
+      <place id="sec_2_start">
+        <name>
+          <text>sec_2_start</text>
+        </name>
+      </place>
+      <place id="sec_4_p_4">
+        <name>
+          <text>sec_4_p_4</text>
+        </name>
+      </place>
+      <place id="sec_5_p_1">
+        <name>
+          <text>sec_5_p_1</text>
+        </name>
+      </place>
+      <place id="sec_2_p_1">
+        <name>
+          <text>sec_2_p_1</text>
+        </name>
+      </place>
+      <place id="sec_6_p_1">
+        <name>
+          <text>sec_6_p_1</text>
+        </name>
+      </place>
+      <place id="sec_6_p_3">
+        <name>
+          <text>sec_6_p_3</text>
+        </name>
+      </place>
+      <place id="sec_7_p_1">
+        <name>
+          <text>sec_7_p_1</text>
+        </name>
+      </place>
+      <place id="sec_2_p_3">
+        <name>
+          <text>sec_2_p_3</text>
+        </name>
+      </place>
+      <place id="sec_3_p_3">
+        <name>
+          <text>sec_3_p_3</text>
+        </name>
+      </place>
+      <place id="sec_5_start">
+        <name>
+          <text>sec_5_start</text>
+        </name>
+      </place>
       <place id="source">
         <name>
           <text>source</text>
@@ -13,54 +68,24 @@
           <text>1</text>
         </initialMarking>
       </place>
-      <place id="p3">
+      <place id="sec_3_p_2">
         <name>
-          <text>p3</text>
+          <text>sec_3_p_2</text>
         </name>
       </place>
-      <place id="p10">
+      <place id="sec_5_p_2">
         <name>
-          <text>p10</text>
+          <text>sec_5_p_2</text>
         </name>
       </place>
-      <place id="p15">
+      <place id="sec_4_p_3">
         <name>
-          <text>p15</text>
+          <text>sec_4_p_3</text>
         </name>
       </place>
-      <place id="p1">
+      <place id="sec_4_p_2">
         <name>
-          <text>p1</text>
-        </name>
-      </place>
-      <place id="p4">
-        <name>
-          <text>p4</text>
-        </name>
-      </place>
-      <place id="p12">
-        <name>
-          <text>p12</text>
-        </name>
-      </place>
-      <place id="p17">
-        <name>
-          <text>p17</text>
-        </name>
-      </place>
-      <place id="p11">
-        <name>
-          <text>p11</text>
-        </name>
-      </place>
-      <place id="p20">
-        <name>
-          <text>p20</text>
-        </name>
-      </place>
-      <place id="p14">
-        <name>
-          <text>p14</text>
+          <text>sec_4_p_2</text>
         </name>
       </place>
       <place id="sink">
@@ -68,114 +93,149 @@
           <text>sink</text>
         </name>
       </place>
-      <place id="p5">
+      <place id="sec_2_p_2">
         <name>
-          <text>p5</text>
+          <text>sec_2_p_2</text>
         </name>
       </place>
-      <place id="p7">
+      <place id="sec_2_p_4">
         <name>
-          <text>p7</text>
+          <text>sec_2_p_4</text>
         </name>
       </place>
-      <place id="p8">
+      <place id="sec_3_start">
         <name>
-          <text>p8</text>
+          <text>sec_3_start</text>
         </name>
       </place>
-      <place id="p18">
+      <place id="sec_3_p_1">
         <name>
-          <text>p18</text>
+          <text>sec_3_p_1</text>
         </name>
       </place>
-      <place id="p21">
+      <place id="sec_4_start">
         <name>
-          <text>p21</text>
+          <text>sec_4_start</text>
         </name>
       </place>
-      <place id="p9">
+      <place id="sec_5_p_3">
         <name>
-          <text>p9</text>
+          <text>sec_5_p_3</text>
         </name>
       </place>
-      <place id="p13">
+      <place id="sec_5_p_4">
         <name>
-          <text>p13</text>
+          <text>sec_5_p_4</text>
         </name>
       </place>
-      <place id="p16">
+      <place id="sec_4_p_5">
         <name>
-          <text>p16</text>
+          <text>sec_4_p_5</text>
         </name>
       </place>
-      <place id="p2">
+      <place id="sec_6_start">
         <name>
-          <text>p2</text>
+          <text>sec_6_start</text>
         </name>
       </place>
-      <place id="p6">
+      <place id="sec_6_p_2">
         <name>
-          <text>p6</text>
+          <text>sec_6_p_2</text>
         </name>
       </place>
-      <place id="p19">
+      <place id="sec_7_start">
         <name>
-          <text>p19</text>
+          <text>sec_7_start</text>
         </name>
       </place>
-      <transition id="item_8">
+      <place id="sec_8_start">
         <name>
-          <text>8 Search process Describe the process for selectin</text>
+          <text>sec_8_start</text>
+        </name>
+      </place>
+      <place id="sec_4_p_1">
+        <name>
+          <text>sec_4_p_1</text>
+        </name>
+      </place>
+      <place id="sec_3_p_4">
+        <name>
+          <text>sec_3_p_4</text>
+        </name>
+      </place>
+      <transition id="sec_2_item_3">
+        <name>
+          <text>3 Study objectives Describe the study objectives</text>
         </name>
       </transition>
-      <transition id="item_19">
+      <transition id="section_4">
+        <name>
+          <text>Reporting of Methods</text>
+        </name>
+      </transition>
+      <transition id="sec_6_item_2">
         <name>
           <text>19 Limitations Discuss the limitations of the revi</text>
         </name>
       </transition>
-      <transition id="item_14">
+      <transition id="section_7">
+        <name>
+          <text>Reporting of Funding</text>
+        </name>
+      </transition>
+      <transition id="section_8">
+        <name>
+          <text>Provenance</text>
+        </name>
+      </transition>
+      <transition id="sec_4_item_4">
+        <name>
+          <text>12 Data synthesis Describe the methods of data syn</text>
+        </name>
+      </transition>
+      <transition id="section_2">
+        <name>
+          <text>Reporting of Background</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_1">
+        <name>
+          <text>1 Problem definition Clearly state the research qu</text>
+        </name>
+      </transition>
+      <transition id="sec_3_item_4">
+        <name>
+          <text>8 Search process Describe the process for selectin</text>
+        </name>
+      </transition>
+      <transition id="sec_5_item_1">
         <name>
           <text>14 Study selection Describe the results of the stu</text>
         </name>
       </transition>
-      <transition id="item_17">
+      <transition id="sec_4_item_3">
         <name>
-          <text>17 Publication bias Present the results of any ass</text>
+          <text>11 Study quality assessment Describe the methods u</text>
         </name>
       </transition>
-      <transition id="item_20">
+      <transition id="sec_4_item_2">
         <name>
-          <text>20 Conclusions Provide a general interpretation of</text>
+          <text>10 Data items List and define all variables for wh</text>
         </name>
       </transition>
-      <transition id="item_15">
-        <name>
-          <text>15 Study characteristics Present the characteristi</text>
-        </name>
-      </transition>
-      <transition id="item_4">
-        <name>
-          <text>4 Rationale Provide the rationale for the review i</text>
-        </name>
-      </transition>
-      <transition id="item_6">
-        <name>
-          <text>6 Information sources Specify all information sour</text>
-        </name>
-      </transition>
-      <transition id="item_13">
-        <name>
-          <text>13 Publication bias Describe any methods used to a</text>
-        </name>
-      </transition>
-      <transition id="item_21">
+      <transition id="sec_7_item_1">
         <name>
           <text>21 Funding Describe the sources of funding for the</text>
         </name>
       </transition>
-      <transition id="item_1">
+      <transition id="section_5">
         <name>
-          <text>1 Problem definition Clearly state the research qu</text>
+          <text>Reporting of Results</text>
+        </name>
+      </transition>
+      <transition id="sec_6_item_3">
+        <name>
+          <text>20 Conclusions Provide a general interpretation of</text>
         </name>
       </transition>
       <transition id="final_transition">
@@ -183,100 +243,136 @@
           <text>End</text>
         </name>
       </transition>
-      <transition id="item_3">
+      <transition id="sec_4_item_5">
         <name>
-          <text>3 Study objectives Describe the study objectives</text>
+          <text>13 Publication bias Describe any methods used to a</text>
         </name>
       </transition>
-      <transition id="item_2">
+      <transition id="section_1">
+        <name>
+          <text>Instructions</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_2">
         <name>
           <text>2 Hypothesis State the hypothesis being tested</text>
         </name>
       </transition>
-      <transition id="item_9">
+      <transition id="section_3">
         <name>
-          <text>9 Data extraction Describe the methods used to ext</text>
+          <text>Reporting of Search Strategy</text>
         </name>
       </transition>
-      <transition id="item_10">
+      <transition id="sec_3_item_2">
         <name>
-          <text>10 Data items List and define all variables for wh</text>
+          <text>6 Information sources Specify all information sour</text>
         </name>
       </transition>
-      <transition id="item_12">
-        <name>
-          <text>12 Data synthesis Describe the methods of data syn</text>
-        </name>
-      </transition>
-      <transition id="item_16">
-        <name>
-          <text>16 Quantitative data synthesis Present the results</text>
-        </name>
-      </transition>
-      <transition id="item_18">
-        <name>
-          <text>18 Summary of evidence Summarize the main findings</text>
-        </name>
-      </transition>
-      <transition id="item_5">
-        <name>
-          <text>5 Search criteria Specify the inclusion and exclus</text>
-        </name>
-      </transition>
-      <transition id="item_7">
+      <transition id="sec_3_item_3">
         <name>
           <text>7 Search terms Describe the search strategy includ</text>
         </name>
       </transition>
-      <transition id="item_11">
+      <transition id="sec_4_item_1">
         <name>
-          <text>11 Study quality assessment Describe the methods u</text>
+          <text>9 Data extraction Describe the methods used to ext</text>
         </name>
       </transition>
-      <arc id="4317635328" source="p5" target="item_6"/>
-      <arc id="4897099904" source="item_13" target="p13"/>
-      <arc id="4897100800" source="p16" target="item_17"/>
-      <arc id="4897101696" source="item_21" target="p21"/>
-      <arc id="4897101584" source="item_20" target="p20"/>
-      <arc id="4896534032" source="p8" target="item_9"/>
-      <arc id="4893388688" source="source" target="item_1"/>
-      <arc id="4897014800" source="p1" target="item_2"/>
-      <arc id="4897014160" source="item_1" target="p1"/>
-      <arc id="4890781328" source="item_3" target="p3"/>
-      <arc id="4891055504" source="item_4" target="p4"/>
-      <arc id="4897115280" source="item_7" target="p7"/>
-      <arc id="4896795024" source="p9" target="item_10"/>
-      <arc id="4897082256" source="item_10" target="p10"/>
-      <arc id="4897100688" source="item_16" target="p16"/>
-      <arc id="4896630048" source="item_2" target="p2"/>
-      <arc id="4896864544" source="item_11" target="p11"/>
-      <arc id="4897100576" source="p15" target="item_16"/>
-      <arc id="4897101472" source="p19" target="item_20"/>
-      <arc id="4897082416" source="p10" target="item_11"/>
-      <arc id="4897100464" source="item_15" target="p15"/>
-      <arc id="4897101360" source="item_19" target="p19"/>
-      <arc id="4891054144" source="p3" target="item_4"/>
-      <arc id="4896795200" source="item_9" target="p9"/>
-      <arc id="4897100352" source="p14" target="item_15"/>
-      <arc id="4897101248" source="p18" target="item_19"/>
-      <arc id="4896630352" source="p2" target="item_3"/>
-      <arc id="4893340496" source="p4" target="item_5"/>
-      <arc id="4893341008" source="item_5" target="p5"/>
-      <arc id="4896533840" source="item_8" target="p8"/>
-      <arc id="4897064144" source="p11" target="item_12"/>
-      <arc id="4897064272" source="item_12" target="p12"/>
-      <arc id="4897100240" source="item_14" target="p14"/>
-      <arc id="4897101136" source="item_18" target="p18"/>
-      <arc id="4897102032" source="final_transition" target="sink"/>
-      <arc id="4893307872" source="item_6" target="p6"/>
-      <arc id="4896610272" source="p7" target="item_8"/>
-      <arc id="4897100128" source="p13" target="item_14"/>
-      <arc id="4897101024" source="p17" target="item_18"/>
-      <arc id="4897101920" source="p21" target="final_transition"/>
-      <arc id="4897114608" source="p6" target="item_7"/>
-      <arc id="4897100016" source="p12" target="item_13"/>
-      <arc id="4897100912" source="item_17" target="p17"/>
-      <arc id="4897101808" source="p20" target="item_21"/>
+      <transition id="sec_5_item_2">
+        <name>
+          <text>15 Study characteristics Present the characteristi</text>
+        </name>
+      </transition>
+      <transition id="section_6">
+        <name>
+          <text>Reporting of Discussion</text>
+        </name>
+      </transition>
+      <transition id="sec_6_item_1">
+        <name>
+          <text>18 Summary of evidence Summarize the main findings</text>
+        </name>
+      </transition>
+      <transition id="sec_3_item_1">
+        <name>
+          <text>5 Search criteria Specify the inclusion and exclus</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_4">
+        <name>
+          <text>4 Rationale Provide the rationale for the review i</text>
+        </name>
+      </transition>
+      <transition id="sec_5_item_3">
+        <name>
+          <text>16 Quantitative data synthesis Present the results</text>
+        </name>
+      </transition>
+      <transition id="sec_5_item_4">
+        <name>
+          <text>17 Publication bias Present the results of any ass</text>
+        </name>
+      </transition>
+      <arc id="4559361792" source="sec_3_p_2" target="sec_3_item_3"/>
+      <arc id="4559526656" source="sec_4_p_2" target="sec_4_item_3"/>
+      <arc id="4559527552" source="section_5" target="sec_5_start"/>
+      <arc id="4559528448" source="sec_5_item_4" target="sec_5_p_4"/>
+      <arc id="4558969872" source="sec_3_item_1" target="sec_3_p_1"/>
+      <arc id="4307145488" source="sec_2_p_3" target="sec_2_item_4"/>
+      <arc id="4559526544" source="sec_4_p_1" target="sec_4_item_2"/>
+      <arc id="4559527440" source="sec_4_p_5" target="section_5"/>
+      <arc id="4559528336" source="sec_5_p_3" target="sec_5_item_4"/>
+      <arc id="4559529232" source="sec_6_item_1" target="sec_6_p_1"/>
+      <arc id="4559530128" source="sec_6_item_3" target="sec_6_p_3"/>
+      <arc id="4559531024" source="sec_7_item_1" target="sec_7_p_1"/>
+      <arc id="4559531248" source="sec_7_p_1" target="section_8"/>
+      <arc id="4559342624" source="source" target="section_1"/>
+      <arc id="4557824288" source="sec_2_item_4" target="sec_2_p_4"/>
+      <arc id="4559526432" source="sec_4_item_1" target="sec_4_p_1"/>
+      <arc id="4559527328" source="sec_4_item_5" target="sec_4_p_5"/>
+      <arc id="4559528224" source="sec_5_item_3" target="sec_5_p_3"/>
+      <arc id="4559531808" source="final_transition" target="sink"/>
+      <arc id="4559528784" source="section_6" target="sec_6_start"/>
+      <arc id="4559361968" source="sec_3_item_2" target="sec_3_p_2"/>
+      <arc id="4555059376" source="sec_2_item_1" target="sec_2_p_1"/>
+      <arc id="4553613360" source="sec_2_p_1" target="sec_2_item_2"/>
+      <arc id="4555553968" source="sec_2_p_4" target="section_3"/>
+      <arc id="4559506608" source="sec_3_item_4" target="sec_3_p_4"/>
+      <arc id="4559526320" source="sec_4_start" target="sec_4_item_1"/>
+      <arc id="4559527216" source="sec_4_p_4" target="sec_4_item_5"/>
+      <arc id="4559528112" source="sec_5_p_2" target="sec_5_item_3"/>
+      <arc id="4559529008" source="sec_6_start" target="sec_6_item_1"/>
+      <arc id="4559529904" source="sec_6_p_2" target="sec_6_item_3"/>
+      <arc id="4559165760" source="section_2" target="sec_2_start"/>
+      <arc id="4559527104" source="sec_4_item_4" target="sec_4_p_4"/>
+      <arc id="4559528000" source="sec_5_item_2" target="sec_5_p_2"/>
+      <arc id="4559528896" source="sec_7_start" target="sec_7_item_1"/>
+      <arc id="4559529680" source="sec_6_item_2" target="sec_6_p_2"/>
+      <arc id="4558970064" source="sec_3_p_1" target="sec_3_item_2"/>
+      <arc id="4558908752" source="sec_1_start" target="section_2"/>
+      <arc id="4558908112" source="section_1" target="sec_1_start"/>
+      <arc id="4559084880" source="sec_2_p_2" target="sec_2_item_3"/>
+      <arc id="4559085392" source="sec_2_item_3" target="sec_2_p_3"/>
+      <arc id="4559585360" source="section_3" target="sec_3_start"/>
+      <arc id="4307091280" source="sec_3_p_4" target="section_4"/>
+      <arc id="4308321872" source="section_4" target="sec_4_start"/>
+      <arc id="4559526992" source="sec_4_p_3" target="sec_4_item_4"/>
+      <arc id="4559527888" source="sec_5_p_1" target="sec_5_item_2"/>
+      <arc id="4559526880" source="sec_4_item_3" target="sec_4_p_3"/>
+      <arc id="4559527776" source="sec_5_item_1" target="sec_5_p_1"/>
+      <arc id="4559530576" source="section_7" target="sec_7_start"/>
+      <arc id="4559531696" source="sec_8_start" target="final_transition"/>
+      <arc id="4559166064" source="sec_2_start" target="sec_2_item_1"/>
+      <arc id="4553605744" source="sec_2_item_2" target="sec_2_p_2"/>
+      <arc id="4557924592" source="sec_3_start" target="sec_3_item_1"/>
+      <arc id="4559395952" source="sec_3_item_3" target="sec_3_p_3"/>
+      <arc id="4559502576" source="sec_3_p_3" target="sec_3_item_4"/>
+      <arc id="4559526768" source="sec_4_item_2" target="sec_4_p_2"/>
+      <arc id="4559527664" source="sec_5_start" target="sec_5_item_1"/>
+      <arc id="4559528560" source="sec_5_p_4" target="section_6"/>
+      <arc id="4559529456" source="sec_6_p_1" target="sec_6_item_2"/>
+      <arc id="4559530352" source="sec_6_p_3" target="section_7"/>
+      <arc id="4559531472" source="section_8" target="sec_8_start"/>
     </page>
     <finalmarkings>
       <marking>

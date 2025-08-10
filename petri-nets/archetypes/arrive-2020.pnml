@@ -5,6 +5,61 @@
       <text>ARRIVE 2.0 Checklist</text>
     </name>
     <page id="n0">
+      <place id="sec_3_p_3">
+        <name>
+          <text>sec_3_p_3</text>
+        </name>
+      </place>
+      <place id="sec_3_start">
+        <name>
+          <text>sec_3_start</text>
+        </name>
+      </place>
+      <place id="sec_3_p_2">
+        <name>
+          <text>sec_3_p_2</text>
+        </name>
+      </place>
+      <place id="sec_1_start">
+        <name>
+          <text>sec_1_start</text>
+        </name>
+      </place>
+      <place id="sec_2_p_10">
+        <name>
+          <text>sec_2_p_10</text>
+        </name>
+      </place>
+      <place id="sec_3_p_5">
+        <name>
+          <text>sec_3_p_5</text>
+        </name>
+      </place>
+      <place id="sec_2_p_2">
+        <name>
+          <text>sec_2_p_2</text>
+        </name>
+      </place>
+      <place id="sec_2_p_8">
+        <name>
+          <text>sec_2_p_8</text>
+        </name>
+      </place>
+      <place id="sec_2_p_9">
+        <name>
+          <text>sec_2_p_9</text>
+        </name>
+      </place>
+      <place id="sec_3_p_11">
+        <name>
+          <text>sec_3_p_11</text>
+        </name>
+      </place>
+      <place id="sec_4_start">
+        <name>
+          <text>sec_4_start</text>
+        </name>
+      </place>
       <place id="source">
         <name>
           <text>source</text>
@@ -13,54 +68,14 @@
           <text>1</text>
         </initialMarking>
       </place>
-      <place id="p3">
+      <place id="sec_2_p_7">
         <name>
-          <text>p3</text>
+          <text>sec_2_p_7</text>
         </name>
       </place>
-      <place id="p10">
+      <place id="sec_3_p_7">
         <name>
-          <text>p10</text>
-        </name>
-      </place>
-      <place id="p13">
-        <name>
-          <text>p13</text>
-        </name>
-      </place>
-      <place id="p16">
-        <name>
-          <text>p16</text>
-        </name>
-      </place>
-      <place id="p15">
-        <name>
-          <text>p15</text>
-        </name>
-      </place>
-      <place id="p1">
-        <name>
-          <text>p1</text>
-        </name>
-      </place>
-      <place id="p4">
-        <name>
-          <text>p4</text>
-        </name>
-      </place>
-      <place id="p18">
-        <name>
-          <text>p18</text>
-        </name>
-      </place>
-      <place id="p20">
-        <name>
-          <text>p20</text>
-        </name>
-      </place>
-      <place id="p12">
-        <name>
-          <text>p12</text>
+          <text>sec_3_p_7</text>
         </name>
       </place>
       <place id="sink">
@@ -68,149 +83,124 @@
           <text>sink</text>
         </name>
       </place>
-      <place id="p7">
+      <place id="sec_2_p_3">
         <name>
-          <text>p7</text>
+          <text>sec_2_p_3</text>
         </name>
       </place>
-      <place id="p8">
+      <place id="sec_2_p_4">
         <name>
-          <text>p8</text>
+          <text>sec_2_p_4</text>
         </name>
       </place>
-      <place id="p11">
+      <place id="sec_2_p_5">
         <name>
-          <text>p11</text>
+          <text>sec_2_p_5</text>
         </name>
       </place>
-      <place id="p14">
+      <place id="sec_2_p_6">
         <name>
-          <text>p14</text>
+          <text>sec_2_p_6</text>
         </name>
       </place>
-      <place id="p19">
+      <place id="sec_3_p_1">
         <name>
-          <text>p19</text>
+          <text>sec_3_p_1</text>
         </name>
       </place>
-      <place id="p21">
+      <place id="sec_3_p_8">
         <name>
-          <text>p21</text>
+          <text>sec_3_p_8</text>
         </name>
       </place>
-      <place id="p22">
+      <place id="sec_3_p_9">
         <name>
-          <text>p22</text>
+          <text>sec_3_p_9</text>
         </name>
       </place>
-      <place id="p9">
+      <place id="sec_2_start">
         <name>
-          <text>p9</text>
+          <text>sec_2_start</text>
         </name>
       </place>
-      <place id="p17">
+      <place id="sec_3_p_4">
         <name>
-          <text>p17</text>
+          <text>sec_3_p_4</text>
         </name>
       </place>
-      <place id="p2">
+      <place id="sec_2_p_1">
         <name>
-          <text>p2</text>
+          <text>sec_2_p_1</text>
         </name>
       </place>
-      <place id="p5">
+      <place id="sec_3_p_6">
         <name>
-          <text>p5</text>
+          <text>sec_3_p_6</text>
         </name>
       </place>
-      <place id="p6">
+      <place id="sec_3_p_10">
         <name>
-          <text>p6</text>
+          <text>sec_3_p_10</text>
         </name>
       </place>
-      <transition id="item_7">
+      <place id="sec_3_p_12">
         <name>
-          <text>Statistical Methods Detailed information about the</text>
+          <text>sec_3_p_12</text>
+        </name>
+      </place>
+      <transition id="section_1">
+        <name>
+          <text>Instructions</text>
         </name>
       </transition>
-      <transition id="item_16">
-        <name>
-          <text>Animal Care and Monitoring A description of any in</text>
-        </name>
-      </transition>
-      <transition id="item_4">
-        <name>
-          <text>Randomization A statement on whether randomization</text>
-        </name>
-      </transition>
-      <transition id="item_6">
-        <name>
-          <text>Outcome Measures A clear definition of all assesse</text>
-        </name>
-      </transition>
-      <transition id="item_8">
-        <name>
-          <text>Experimental Animals Speciesappropriate details of</text>
-        </name>
-      </transition>
-      <transition id="item_14">
-        <name>
-          <text>Ethical Statement The name of the ethical review c</text>
-        </name>
-      </transition>
-      <transition id="item_18">
-        <name>
-          <text>GeneralizabilityTranslation A discussion of the ge</text>
-        </name>
-      </transition>
-      <transition id="item_20">
-        <name>
-          <text>Data Access A statement on where the study data ca</text>
-        </name>
-      </transition>
-      <transition id="item_1">
-        <name>
-          <text>Study Design A brief description of the study desi</text>
-        </name>
-      </transition>
-      <transition id="item_17">
-        <name>
-          <text>InterpretationScientific Implications An interpret</text>
-        </name>
-      </transition>
-      <transition id="item_15">
-        <name>
-          <text>Housing and Husbandry Details of the housing and h</text>
-        </name>
-      </transition>
-      <transition id="item_3">
-        <name>
-          <text>Inclusion and Exclusion Criteria A description of </text>
-        </name>
-      </transition>
-      <transition id="item_2">
-        <name>
-          <text>Sample Size The exact number of experimental units</text>
-        </name>
-      </transition>
-      <transition id="item_9">
-        <name>
-          <text>Experimental Procedures A thorough description of </text>
-        </name>
-      </transition>
-      <transition id="item_10">
+      <transition id="sec_2_item_10">
         <name>
           <text>Results For each experiment a report of summary an</text>
         </name>
       </transition>
-      <transition id="item_12">
+      <transition id="sec_3_item_5">
         <name>
-          <text>Background An explanation of the scientific contex</text>
+          <text>Housing and Husbandry Details of the housing and h</text>
         </name>
       </transition>
-      <transition id="item_13">
+      <transition id="section_2">
         <name>
-          <text>Objectives A clear statement of the research objec</text>
+          <text>The ARRIVE Essential 10</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_1">
+        <name>
+          <text>Study Design A brief description of the study desi</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_6">
+        <name>
+          <text>Outcome Measures A clear definition of all assesse</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_9">
+        <name>
+          <text>Experimental Procedures A thorough description of </text>
+        </name>
+      </transition>
+      <transition id="sec_3_item_1">
+        <name>
+          <text>Abstract A summary of the studys background object</text>
+        </name>
+      </transition>
+      <transition id="sec_3_item_4">
+        <name>
+          <text>Ethical Statement The name of the ethical review c</text>
+        </name>
+      </transition>
+      <transition id="sec_3_item_7">
+        <name>
+          <text>InterpretationScientific Implications An interpret</text>
+        </name>
+      </transition>
+      <transition id="sec_3_item_12">
+        <name>
+          <text>Funding Information on all funding sources and the</text>
         </name>
       </transition>
       <transition id="final_transition">
@@ -218,77 +208,135 @@
           <text>End</text>
         </name>
       </transition>
-      <transition id="item_5">
+      <transition id="sec_2_item_2">
         <name>
-          <text>Blinding A description of who was blinded during t</text>
+          <text>Sample Size The exact number of experimental units</text>
         </name>
       </transition>
-      <transition id="item_19">
+      <transition id="sec_3_item_6">
+        <name>
+          <text>Animal Care and Monitoring A description of any in</text>
+        </name>
+      </transition>
+      <transition id="section_3">
+        <name>
+          <text>The Recommended Set</text>
+        </name>
+      </transition>
+      <transition id="sec_3_item_8">
+        <name>
+          <text>GeneralizabilityTranslation A discussion of the ge</text>
+        </name>
+      </transition>
+      <transition id="sec_3_item_3">
+        <name>
+          <text>Objectives A clear statement of the research objec</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_3">
+        <name>
+          <text>Inclusion and Exclusion Criteria A description of </text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_4">
+        <name>
+          <text>Randomization A statement on whether randomization</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_7">
+        <name>
+          <text>Statistical Methods Detailed information about the</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_8">
+        <name>
+          <text>Experimental Animals Speciesappropriate details of</text>
+        </name>
+      </transition>
+      <transition id="sec_3_item_9">
         <name>
           <text>Protocol Registration A statement indicating if a </text>
         </name>
       </transition>
-      <transition id="item_11">
+      <transition id="sec_3_item_10">
         <name>
-          <text>Abstract A summary of the studys background object</text>
+          <text>Data Access A statement on where the study data ca</text>
         </name>
       </transition>
-      <transition id="item_21">
+      <transition id="sec_3_item_11">
         <name>
           <text>Declaration of Interest A declaration of any poten</text>
         </name>
       </transition>
-      <transition id="item_22">
+      <transition id="section_4">
         <name>
-          <text>Funding Information on all funding sources and the</text>
+          <text>Provenance</text>
         </name>
       </transition>
-      <arc id="4311556864" source="p5" target="item_6"/>
-      <arc id="4983797760" source="item_11" target="p11"/>
-      <arc id="4984033408" source="item_15" target="p15"/>
-      <arc id="4984034304" source="item_19" target="p19"/>
-      <arc id="4984035200" source="final_transition" target="sink"/>
-      <arc id="4983467920" source="p8" target="item_9"/>
-      <arc id="4978257808" source="source" target="item_1"/>
-      <arc id="4983948304" source="p1" target="item_2"/>
-      <arc id="4983947664" source="item_1" target="p1"/>
-      <arc id="4974159504" source="item_3" target="p3"/>
-      <arc id="4974433680" source="item_4" target="p4"/>
-      <arc id="4984047888" source="p6" target="item_7"/>
-      <arc id="4984033296" source="p14" target="item_15"/>
-      <arc id="4984034192" source="p18" target="item_19"/>
-      <arc id="4984035088" source="p22" target="final_transition"/>
-      <arc id="4984033744" source="p16" target="item_17"/>
-      <arc id="4983563552" source="item_2" target="p2"/>
-      <arc id="4983729056" source="item_9" target="p9"/>
-      <arc id="4984033184" source="item_14" target="p14"/>
-      <arc id="4984034080" source="item_18" target="p18"/>
-      <arc id="4984034976" source="item_22" target="p22"/>
-      <arc id="4983545648" source="p7" target="item_8"/>
-      <arc id="4984048560" source="item_7" target="p7"/>
-      <arc id="4984033072" source="p13" target="item_14"/>
-      <arc id="4984033968" source="p17" target="item_18"/>
-      <arc id="4984034864" source="p21" target="item_22"/>
-      <arc id="4984034640" source="p20" target="item_21"/>
-      <arc id="4984032960" source="item_13" target="p13"/>
-      <arc id="4984033856" source="item_17" target="p17"/>
-      <arc id="4984034752" source="item_21" target="p21"/>
-      <arc id="4983467728" source="item_8" target="p8"/>
-      <arc id="4983563856" source="p2" target="item_3"/>
-      <arc id="4974434768" source="p3" target="item_4"/>
-      <arc id="4978210128" source="p4" target="item_5"/>
-      <arc id="4978210384" source="item_5" target="p5"/>
-      <arc id="4983729232" source="p9" target="item_10"/>
-      <arc id="4984016080" source="item_10" target="p10"/>
-      <arc id="4983997648" source="p11" target="item_12"/>
-      <arc id="4983997520" source="item_12" target="p12"/>
-      <arc id="4984032848" source="p12" target="item_13"/>
-      <arc id="4978176992" source="item_6" target="p6"/>
-      <arc id="4984033632" source="item_16" target="p16"/>
-      <arc id="4984034528" source="p19" target="item_20"/>
-      <arc id="4984016240" source="p10" target="item_11"/>
-      <arc id="4984033520" source="p15" target="item_16"/>
-      <arc id="4984034416" source="item_20" target="p20"/>
+      <transition id="sec_2_item_5">
+        <name>
+          <text>Blinding A description of who was blinded during t</text>
+        </name>
+      </transition>
+      <transition id="sec_3_item_2">
+        <name>
+          <text>Background An explanation of the scientific contex</text>
+        </name>
+      </transition>
+      <arc id="4693039872" source="sec_3_item_1" target="sec_3_p_1"/>
+      <arc id="4693040768" source="sec_3_item_5" target="sec_3_p_5"/>
+      <arc id="4693041664" source="sec_3_item_9" target="sec_3_p_9"/>
+      <arc id="4693042560" source="sec_3_p_11" target="sec_3_item_12"/>
+      <arc id="4693043456" source="sec_4_start" target="final_transition"/>
+      <arc id="4693041104" source="sec_3_p_6" target="sec_3_item_7"/>
+      <arc id="4692499088" source="sec_2_item_6" target="sec_2_p_6"/>
+      <arc id="4692695056" source="section_2" target="sec_2_start"/>
+      <arc id="4688588688" source="sec_2_item_1" target="sec_2_p_1"/>
+      <arc id="4371272464" source="sec_2_p_3" target="sec_2_item_4"/>
+      <arc id="4689067408" source="sec_2_item_5" target="sec_2_p_5"/>
+      <arc id="4693039760" source="sec_3_start" target="sec_3_item_1"/>
+      <arc id="4693040656" source="sec_3_p_4" target="sec_3_item_5"/>
+      <arc id="4693041552" source="sec_3_p_8" target="sec_3_item_9"/>
+      <arc id="4691337504" source="sec_2_item_4" target="sec_2_p_4"/>
+      <arc id="4693039648" source="section_3" target="sec_3_start"/>
+      <arc id="4693040544" source="sec_3_item_4" target="sec_3_p_4"/>
+      <arc id="4693041440" source="sec_3_item_8" target="sec_3_p_8"/>
+      <arc id="4693042336" source="sec_3_item_11" target="sec_3_p_11"/>
+      <arc id="4693043232" source="section_4" target="sec_4_start"/>
+      <arc id="4693042000" source="sec_3_item_10" target="sec_3_p_10"/>
+      <arc id="4692875184" source="sec_2_p_7" target="sec_2_item_8"/>
+      <arc id="4687136432" source="sec_2_p_1" target="sec_2_item_2"/>
+      <arc id="4693016112" source="sec_2_item_8" target="sec_2_p_8"/>
+      <arc id="4693039536" source="sec_2_p_10" target="section_3"/>
+      <arc id="4693040432" source="sec_3_p_3" target="sec_3_item_4"/>
+      <arc id="4693041328" source="sec_3_p_7" target="sec_3_item_8"/>
+      <arc id="4692695360" source="sec_2_start" target="sec_2_item_1"/>
+      <arc id="4691439680" source="sec_2_p_5" target="sec_2_item_6"/>
+      <arc id="4693040320" source="sec_3_item_3" target="sec_3_p_3"/>
+      <arc id="4693041216" source="sec_3_item_7" target="sec_3_p_7"/>
+      <arc id="4693042112" source="sec_3_p_10" target="sec_3_item_11"/>
+      <arc id="4693043008" source="sec_3_p_12" target="section_4"/>
+      <arc id="4692499280" source="sec_2_p_6" target="sec_2_item_7"/>
+      <arc id="4692855504" source="source" target="section_1"/>
+      <arc id="4692438352" source="sec_1_start" target="section_2"/>
+      <arc id="4692437712" source="section_1" target="sec_1_start"/>
+      <arc id="4692614992" source="sec_2_p_2" target="sec_2_item_3"/>
+      <arc id="4692615248" source="sec_2_item_3" target="sec_2_p_3"/>
+      <arc id="4693016272" source="sec_2_p_8" target="sec_2_item_9"/>
+      <arc id="4693053776" source="sec_2_p_9" target="sec_2_item_10"/>
+      <arc id="4693053648" source="sec_2_item_10" target="sec_2_p_10"/>
+      <arc id="4693040208" source="sec_3_p_2" target="sec_3_item_3"/>
+      <arc id="4692875360" source="sec_2_item_7" target="sec_2_p_7"/>
+      <arc id="4693040096" source="sec_3_item_2" target="sec_3_p_2"/>
+      <arc id="4693040992" source="sec_3_item_6" target="sec_3_p_6"/>
+      <arc id="4693041888" source="sec_3_p_9" target="sec_3_item_10"/>
+      <arc id="4693042784" source="sec_3_item_12" target="sec_3_p_12"/>
+      <arc id="4689066736" source="sec_2_p_4" target="sec_2_item_5"/>
+      <arc id="4687135344" source="sec_2_item_2" target="sec_2_p_2"/>
+      <arc id="4693019248" source="sec_2_item_9" target="sec_2_p_9"/>
+      <arc id="4693039984" source="sec_3_p_1" target="sec_3_item_2"/>
+      <arc id="4693040880" source="sec_3_p_5" target="sec_3_item_6"/>
+      <arc id="4693043568" source="final_transition" target="sink"/>
     </page>
     <finalmarkings>
       <marking>
