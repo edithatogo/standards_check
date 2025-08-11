@@ -6,3 +6,7 @@
 transformers
 torch
 sacremoses
+requests
+PyYAML
+beautifulsoup4
+google-search-results

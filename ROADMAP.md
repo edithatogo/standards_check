@@ -16,5 +16,5 @@
 - [x] **Historical Versioning:** Archive and provide access to previous versions of checklists.
 
 ### Automation & Project Maintenance
-- [ ] **Automated Link and DOI Validation:** Create a script to periodically validate URLs and DOIs in the source files.
-- [ ] **Enhanced Ingestion Scripts:** Improve the ingestion scripts to automatically find the latest checklist versions.
+- [x] **Automated Link and DOI Validation:** Create a script to periodically validate URLs and DOIs in the source files.
+- [x] **Enhanced Ingestion Scripts:** Improve the ingestion scripts to automatically find the latest checklist versions.
