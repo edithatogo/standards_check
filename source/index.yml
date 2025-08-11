@@ -14,7 +14,7 @@
 # - variant_of: parent id (if level=variant)
 # - notes: optional remarks
 version: 2
-updated: 2025-08-09
+updated: 2025-08-11
 items:
   - id: consort-2010
     title: CONSORT 2010 Checklist
@@ -270,8 +270,9 @@ items:
     license: TBD
     publisher: TBD
     preferred_format: docx
-    level: archetype
-    group: ace
+    level: variant
+    group: consort
+    variant_of: consort-2010
     status: mapped
     notes: "Appraisal of Clinical Evidence."
   - id: conserve
@@ -598,3 +599,133 @@ items:
     variant_of: prisma-2020
     status: mapped
     notes: "PRISMA for Searching."
+  - id: prisma-acupuncture
+    title: "PRISMA for Acupuncture"
+    url: "https://doi.org/10.1186/s12906-019-2535-6"
+    version: "2019"
+    date: "2019-06-28"
+    license: "CC BY 4.0"
+    publisher: "BMC"
+    preferred_format: pdf
+    level: variant
+    group: prisma
+    variant_of: prisma-2020
+    status: new
+    notes: "PRISMA extension for acupuncture."
+  - id: prisma-chinese-herbal-medicines
+    title: "PRISMA for Chinese Herbal Medicines"
+    url: TBD
+    version: TBD
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: pdf
+    level: variant
+    group: prisma
+    variant_of: prisma-2020
+    status: new
+    notes: "PRISMA extension for Chinese herbal medicines."
+  - id: prisma-complex-interventions
+    title: "PRISMA for Complex Interventions"
+    url: "https://doi.org/10.1016/j.jclinepi.2017.06.016"
+    version: "2017"
+    date: "2017-10-01"
+    license: TBD
+    publisher: "Elsevier"
+    preferred_format: pdf
+    level: variant
+    group: prisma
+    variant_of: prisma-2020
+    status: new
+    notes: "PRISMA extension for complex interventions."
+  - id: consort-factorial
+    title: "CONSORT for Factorial Trials"
+    url: "https://doi.org/10.1001/jama.2023.22531"
+    version: "2023"
+    date: "2023-12-05"
+    license: TBD
+    publisher: "JAMA"
+    preferred_format: pdf
+    level: variant
+    group: consort
+    variant_of: consort-2010
+    status: new
+    notes: "CONSORT extension for factorial trials."
+  - id: consort-pro
+    title: "CONSORT for Patient-reported Outcomes"
+    url: "https://doi.org/10.1001/jama.2012.206153"
+    version: "2013"
+    date: "2013-02-27"
+    license: TBD
+    publisher: "JAMA"
+    preferred_format: pdf
+    level: variant
+    group: consort
+    variant_of: consort-2010
+    status: new
+    notes: "CONSORT extension for patient-reported outcomes."
+  - id: consort-ai
+    title: "CONSORT-AI"
+    url: "https://doi.org/10.1038/s41591-020-1034-x"
+    version: "2020"
+    date: "2020-09-09"
+    license: "CC BY 4.0"
+    publisher: "Nature Medicine"
+    preferred_format: pdf
+    level: variant
+    group: consort
+    variant_of: consort-2010
+    status: new
+    notes: "CONSORT extension for artificial intelligence."
+  - id: consort-outcomes
+    title: "CONSORT-Outcomes"
+    url: "https://doi.org/10.1001/jama.2022.21022"
+    version: "2022"
+    date: "2022-12-13"
+    license: TBD
+    publisher: "JAMA"
+    preferred_format: pdf
+    level: variant
+    group: consort
+    variant_of: consort-2010
+    status: new
+    notes: "CONSORT extension for outcomes."
+  - id: consort-routine
+    title: "CONSORT-ROUTINE"
+    url: "https://doi.org/10.1136/bmj.k1483"
+    version: "2018"
+    date: "2018-04-25"
+    license: "CC BY 4.0"
+    publisher: "BMJ"
+    preferred_format: pdf
+    level: variant
+    group: consort
+    variant_of: consort-2010
+    status: new
+    notes: "CONSORT extension for routinely collected data."
+  - id: consort-cluster-crossover
+    title: "CONSORT for Cluster Crossover Trials"
+    url: "https://doi.org/10.1136/bmj.m4885"
+    version: "2025"
+    date: "2025-01-06"
+    license: "CC BY 4.0"
+    publisher: "BMJ"
+    preferred_format: pdf
+    level: variant
+    group: consort
+    variant_of: consort-2010
+    status: new
+    notes: "CONSORT extension for cluster crossover trials."
+  - id: consort-npi
+    title: "CONSORT for Non-pharmacological Interventions"
+    url: "https://doi.org/10.7326/M16-2677"
+    version: "2017"
+    date: "2017-08-15"
+    license: TBD
+    publisher: "Annals of Internal Medicine"
+    preferred_format: pdf
+    level: variant
+    group: consort
+    variant_of: consort-2010
+    status: new
+    notes: "CONSORT extension for non-pharmacological interventions."
