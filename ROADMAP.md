@@ -1,20 +1,12 @@
-# Roadmap
+### Roadmap
 
-## Core Functionality
-- [ ] **On Hold:** Interactive PDF forms
+#### Data Quality Initiative
+- [ ] **Fix Broken Links:** Systematically investigate and correct the broken and redirected links identified by the `validate_links.py` script.
+- [ ] **Schema Validation:** Enhance validation to ensure all source YAML files conform to the project's schemas, preventing data entry errors.
 
-## Future Enhancements
+#### Tooling & Automation
+- [ ] **Fully Implement `find_latest_checklist.py`:** Integrate a live web search tool to make the script fully functional for discovering new checklist versions.
+- [ ] **Automated Documentation Generation:** Create a script to automatically generate a user-friendly HTML documentation site from the checklist data.
 
-### User-Facing Features & Accessibility
-- [x] **Interactive Web Portal:** Develop a web-based front-end for filling out and saving checklists.
-- [x] **Checklist Comparison Tool:** Create a "diff" tool to compare different versions of a checklist (e.g., CONSORT 2010 vs. 2025).
-- [x] **Programmatic API Access:** Expose checklist data via a JSON API for integration with other tools.
-
-### Data & Content Enhancement
-- [ ] **On Hold:** Explanation and Elaboration (E&E) Documents: Integrate and link to detailed E&E documents for checklists.
-- [x] **Support for Translations:** Add a mechanism to manage and serve official translations of checklists.
-- [x] **Historical Versioning:** Archive and provide access to previous versions of checklists.
-
-### Automation & Project Maintenance
-- [x] **Automated Link and DOI Validation:** Create a script to periodically validate URLs and DOIs in the source files.
-- [x] **Enhanced Ingestion Scripts:** Improve the ingestion scripts to automatically find the latest checklist versions.
+#### Content Expansion
+- [ ] **Ingest New Checklists:** Use the enhanced `find_latest_checklist.py` to identify, ingest, and process at least one new checklist.
