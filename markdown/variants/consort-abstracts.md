@@ -1,20 +1,4 @@
----
-id: consort-abstracts
-title: "CONSORT for Abstracts"
-group: consort
-variant_of: consort-2010
-version: "2008"
-date: "2008-04-22"
-publisher: "PLOS Medicine"
-source_url: "https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.0050020"
-license: "CC-BY-2.5"
----
-
 # CONSORT for Abstracts Checklist
-
-> Scope: Preferred Reporting Items for reporting randomized controlled trials in journal and conference abstracts.
->
-> Reference: See `source/variants/consort-abstracts.yml` for canonical link and provenance.
 
 ## Instructions
 - Use the boxes to confirm each reporting item.

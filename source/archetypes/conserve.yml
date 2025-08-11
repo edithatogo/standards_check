@@ -1,5 +1,14 @@
 id: conserve
-title: "CONSERVE Checklist"
-group: conserve
-status: new
-notes: "Guideline for Reporting Trials of CONSERVEative Interventions."
+title: "CONSERVE 2021: CONSORT and SPIRIT Extension for RCTs Revised in Extenuating Circumstances"
+group: consort
+variant_of: consort-2010
+version: "2021"
+date: "2021-06-29"
+publisher: "JAMA"
+source_url: "https://jamanetwork.com/journals/jama/fullarticle/2781349"
+retrieved_at: "2025-08-11"
+preferred_format: html
+checksum: ""
+license: "CC-BY-NC"
+notes: |
+  This is an extension of the CONSORT 2010 and SPIRIT 2013 statements for reporting clinical trials that have been modified due to extenuating circumstances.

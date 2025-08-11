@@ -1,16 +1,14 @@
-# Sidecar metadata template for archetype source files
-# Save as source/archetypes/<name>.yml
-
-id: <kebab-case-id>
-title: <official-title>
-group: <family> # e.g., prisma, consort
-version: <label> # e.g., 2020
-date: <YYYY-MM-DD>
-publisher: <organization(s)>
-source_url: <canonical-webpage-or-download>
-retrieved_at: <YYYY-MM-DD>
-preferred_format: pdf # pdf|html|docx|csv
-checksum: <sha256-or-md5>
-license: <license-string-or-url>
+id: ace
+title: "ACE Statement: Enhancing the Reporting of Adaptive Design Clinical Trials"
+group: consort
+variant_of: consort-2010
+version: "2020"
+date: "2020-03-18"
+publisher: "BMJ"
+source_url: "https://www.bmj.com/content/368/bmj.l6939"
+retrieved_at: "2025-08-11"
+preferred_format: html
+checksum: ""
+license: "CC-BY-NC"
 notes: |
-  Short notes on provenance, mirrors, or usage terms.
+  This is an extension of the CONSORT 2010 statement for reporting adaptive design clinical trials.

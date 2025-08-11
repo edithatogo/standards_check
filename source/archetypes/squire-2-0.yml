@@ -1,16 +1,13 @@
-# Sidecar metadata template for archetype source files
-# Save as source/archetypes/<name>.yml
-
-id: <kebab-case-id>
-title: <official-title>
-group: <family> # e.g., prisma, consort
-version: <label> # e.g., 2020
-date: <YYYY-MM-DD>
-publisher: <organization(s)>
-source_url: <canonical-webpage-or-download>
-retrieved_at: <YYYY-MM-DD>
-preferred_format: pdf # pdf|html|docx|csv
-checksum: <sha256-or-md5>
-license: <license-string-or-url>
+id: squire-2-0
+title: "SQUIRE 2.0 (Standards for QUality Improvement Reporting Excellence): revised publication guidelines from a detailed consensus process"
+group: squire
+version: "2.0"
+date: "2015-09-15"
+publisher: "BMJ Quality & Safety"
+source_url: "https://qualitysafety.bmj.com/content/24/10/636"
+retrieved_at: "2025-08-11"
+preferred_format: html
+checksum: ""
+license: "CC-BY-NC"
 notes: |
-  Short notes on provenance, mirrors, or usage terms.
+  SQUIRE 2.0 provides a framework for reporting new knowledge about how to improve healthcare.

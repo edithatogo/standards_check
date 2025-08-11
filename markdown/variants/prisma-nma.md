@@ -1,19 +1,4 @@
----
-id: prisma-nma
-title: PRISMA-NMA Checklist
-group: prisma
-version: "2015"
-date: "2016-09-01"
-publisher: "Elsevier"
-source_url: https://www.elsevier.es/en-revista-medicina-clinica-english-edition--462-pdf-S2387020616306015
-license: CC-BY-4.0
----
-
 # PRISMA-NMA Checklist
-
-> Scope: Preferred Reporting Items for Systematic Reviews and Meta-Analyses of Network Meta-Analyses.
->
-> Reference: See `source/variants/prisma-nma.yml` for canonical link and provenance.
 
 ## Instructions
 - Use the boxes to confirm each reporting item.

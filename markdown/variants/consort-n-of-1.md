@@ -1,20 +1,4 @@
----
-id: consort-n-of-1
-title: "CONSORT for N-of-1 Trials"
-group: consort
-variant_of: consort-2010
-version: "2015"
-date: "2015-04-29"
-publisher: "BMJ"
-source_url: "https://www.bmj.com/content/350/bmj.h1738"
-license: "CC-BY-NC"
----
-
 # CONSORT for N-of-1 Trials Checklist
-
-> Scope: Preferred Reporting Items for N-of-1 trials.
->
-> Reference: See `source/variants/consort-n-of-1.yml` for canonical link and provenance.
 
 ## Instructions
 - Use the boxes to confirm each reporting item.

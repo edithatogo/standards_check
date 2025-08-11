@@ -1,20 +1,4 @@
----
-id: consort-cluster
-title: "CONSORT for Cluster Trials"
-group: consort
-variant_of: consort-2010
-version: "2012"
-date: "2012-09-04"
-publisher: "BMJ"
-source_url: "https://www.bmj.com/content/345/bmj.e5661"
-license: "CC-BY-NC"
----
-
 # CONSORT for Cluster Trials Checklist
-
-> Scope: Preferred Reporting Items for cluster randomized trials.
->
-> Reference: See `source/variants/consort-cluster.yml` for canonical link and provenance.
 
 ## Instructions
 - Use the boxes to confirm each reporting item.

@@ -1,20 +1,4 @@
----
-id: consort-dose-finding
-title: "CONSORT for Dose-finding Trials"
-group: consort
-variant_of: consort-2010
-version: "2023"
-date: "2023-10-20"
-publisher: "BMJ"
-source_url: "https://www.bmj.com/content/383/bmj-2023-078524"
-license: "CC-BY-NC"
----
-
 # CONSORT for Dose-finding Trials Checklist
-
-> Scope: Preferred Reporting Items for early phase dose-finding trials.
->
-> Reference: See `source/variants/consort-dose-finding.yml` for canonical link and provenance.
 
 ## Instructions
 - Use the boxes to confirm each reporting item.

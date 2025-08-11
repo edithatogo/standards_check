@@ -1,15 +1,3 @@
----
-id: prisma-ecoevo
-title: "PRISMA-EcoEvo: The PRISMA Extension for Systematic Reviews in Ecology and Evolution"
-version: "1.0"
-date: "2021-06-29"
-group: prisma
-variant_of: prisma-2020
-publisher: "Collaboration for Environmental Evidence"
-source_url: "https://environmentalevidence.org/information-for-authors/reporting-standards/"
-license: "CC BY 4.0"
----
-
 # PRISMA-EcoEvo Checklist
 
 This checklist is an extension of the PRISMA 2020 statement for systematic reviews in ecology and evolution.
