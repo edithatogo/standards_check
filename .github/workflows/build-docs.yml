@@ -5,13 +5,15 @@ on:
     paths:
       - 'markdown/**'
       - 'templates/pandoc/**'
-      - 'scripts/build_pandoc.sh'
+      - 'scripts/**'
+      - 'source/**'
       - 'pandoc.yaml'
   pull_request:
     paths:
       - 'markdown/**'
       - 'templates/pandoc/**'
-      - 'scripts/build_pandoc.sh'
+      - 'scripts/**'
+      - 'source/**'
       - 'pandoc.yaml'
   workflow_dispatch:
 
