@@ -80,10 +80,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Install Pandoc
+      - name: Install Pandoc and yq
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc
+          sudo snap install yq
       - name: Build HTML
         run: bash scripts/generate_html_index.sh
       - name: Upload artifact
