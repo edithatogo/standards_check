@@ -6,7 +6,7 @@
 ## Future Enhancements
 
 ### User-Facing Features & Accessibility
-- [ ] **Interactive Web Portal:** Develop a web-based front-end for filling out and saving checklists.
+- [x] **Interactive Web Portal:** Develop a web-based front-end for filling out and saving checklists.
 - [ ] **Checklist Comparison Tool:** Create a "diff" tool to compare different versions of a checklist (e.g., CONSORT 2010 vs. 2025).
 - [ ] **Programmatic API Access:** Expose checklist data via a JSON API for integration with other tools.
 
