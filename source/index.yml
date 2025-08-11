@@ -28,6 +28,18 @@ items:
     group: consort
     status: mapped
     notes: "Randomized trials reporting. Verify official link and terms."
+  - id: consort-2025
+    title: "CONSORT 2025 Checklist"
+    url: TBD
+    version: "2025"
+    date: TBD
+    license: TBD
+    publisher: CONSORT Group (Consolidated Standards of Reporting Trials)
+    preferred_format: docx
+    level: archetype
+    group: consort
+    status: mapped
+    notes: "Updated randomized trials reporting guideline."
   - id: prisma-2020
     title: PRISMA 2020 Checklist
     url: https://www.prisma-statement.org/
