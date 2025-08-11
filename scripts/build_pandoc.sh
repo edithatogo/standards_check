@@ -27,6 +27,7 @@ while IFS= read -r -d '' md; do
   rel=${md#markdown/}
   dir=$(dirname "$rel")
   base=$(basename "$rel" .md)
+  title=$(head -n 1 "$md" | sed 's/# //')
 
   mkdir -p "latex/$dir" "pdf/$dir" "docx/$dir"
 
@@ -38,7 +39,6 @@ while IFS= read -r -d '' md; do
     --from=markdown+task_lists
     --to=latex
     --template="$template"
-    "${filter_args[@]}"
   )
   if [ ${#forms_flag[@]} -gt 0 ]; then
     pandoc_args+=("${forms_flag[@]}")
@@ -46,20 +46,17 @@ while IFS= read -r -d '' md; do
   pandoc_args+=(-o "latex/$dir/$base.tex")
   pandoc "${pandoc_args[@]}"
 
-  # PDF (via LaTeX engine)
-  pandoc_args=(
-    "$md"
-    --from=markdown+task_lists
-    --to=pdf
-    --template="$template"
-    --pdf-engine=xelatex
-    "${filter_args[@]}"
-  )
-  if [ ${#forms_flag[@]} -gt 0 ]; then
-    pandoc_args+=("${forms_flag[@]}")
+  # PDF (via Typst)
+  if [[ $has_typst_writer -eq 1 ]]; then
+    pandoc "$md" \
+      --from=markdown+task_lists \
+      --to=pdf \
+      --pdf-engine=typst \
+      --metadata title="$title" \
+      -o "pdf/$dir/$base.pdf"
+  else
+    echo "[WARNING] Typst writer not found. Skipping PDF generation for $rel."
   fi
-  pandoc_args+=(-o "pdf/$dir/$base.pdf")
-  pandoc "${pandoc_args[@]}"
 
   # DOCX
   pandoc "$md" \
@@ -73,7 +70,6 @@ while IFS= read -r -d '' md; do
     pandoc "$md" \
       --from=markdown+task_lists \
       --to=typst \
-      "${filter_args[@]}" \
       -o "typst/$dir/$base.typ"
   fi
 
