@@ -42,7 +42,7 @@ jobs:
       - name: Setup Typst
         uses: typst-community/setup-typst@v1
         with:
-          version: 'latest'
+          version: 'v0.13.1'
 
       - name: Build documents
         run: |
