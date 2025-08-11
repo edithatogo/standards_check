@@ -1,7 +1,7 @@
 # Roadmap
 
 ## Core Functionality
-- [ ] Interactive PDF forms
+- [ ] **On Hold:** Interactive PDF forms
 
 ## Future Enhancements
 
