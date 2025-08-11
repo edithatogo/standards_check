@@ -1,16 +1,37 @@
-# Sidecar metadata template for archetype source files
-# Save as source/archetypes/<name>.yml
-
-id: <kebab-case-id>
-title: <official-title>
-group: <family> # e.g., prisma, consort
-version: <label> # e.g., 2020
-date: <YYYY-MM-DD>
-publisher: <organization(s)>
-source_url: <canonical-webpage-or-download>
-retrieved_at: <YYYY-MM-DD>
-preferred_format: pdf # pdf|html|docx|csv
-checksum: <sha256-or-md5>
-license: <license-string-or-url>
+id: consort-pro
+title: "Reporting of patient-reported outcomes in randomized trials: the CONSORT PRO extension"
+group: consort
+variant_of: consort-2010
+version: "2013"
+date: "2013-02-27"
+publisher: "JAMA"
+source_url: "https://jamanetwork.com/journals/jama/fullarticle/10.1001/jama.2013.879"
+retrieved_at: "2025-08-11"
+preferred_format: "html"
+checksum: "TBD"
+license: "TBD"
+status: "sourced"
 notes: |
-  Short notes on provenance, mirrors, or usage terms.
+  Source is behind a paywall.
+citation:
+  type: article-journal
+  author:
+    - given: M
+      family: Calvert
+    - given: J
+      family: Blazeby
+    - given: DG
+      family: Altman
+    - given: DA
+      family: Revicki
+    - given: D
+      family: Moher
+    - given: MD
+      family: Brundage
+    - notes: "for the CONSORT PRO Group"
+  doi: "10.1001/jama.2013.879"
+  journal: "JAMA"
+  volume: 309
+  issue: 8
+  pages: 814-822
+  year: 2013

@@ -1,6 +1,14 @@
 id: prisma-s
-title: PRISMA-S Checklist
+title: "PRISMA-S: an extension to the PRISMA Statement for Reporting Literature Searches in Systematic Reviews"
 group: prisma
 variant_of: prisma-2020
-status: new
+version: "2021"
+date: "2021-01-26"
+publisher: "Systematic Reviews"
+source_url: "https://systematicreviewsjournal.biomedcentral.com/articles/10.1186/s13643-020-01542-z"
+retrieved_at: "2025-08-11"
+preferred_format: "pdf"
+checksum: "9ab7dbeca6bfde918103f42e90f4bac54b9b766a36b3546e0c71a1a5ada0c51a"
+license: "CC-BY-4.0"
+status: "sourced"
 notes: "PRISMA for Searching."

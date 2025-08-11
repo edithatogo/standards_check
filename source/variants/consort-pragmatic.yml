@@ -9,6 +9,7 @@ source_url: "https://www.bmj.com/content/337/bmj.a2390"
 retrieved_at: "2025-08-11"
 preferred_format: "html"
 license: "TBD"
+checksum: "ea653e14516de4e423990ec2dc7d1fe721384b784bad7e77bf7639a47de29a31"
 status: "sourced"
 notes: |
   CONSORT extension for pragmatic trials.

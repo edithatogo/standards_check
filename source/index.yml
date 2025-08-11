@@ -20,10 +20,11 @@ items:
     title: CONSORT 2010 Checklist
     url: https://www.consort-statement.org/
     version: "2010"
-    date: TBD
-    license: TBD
+    date: "2010-03-24"
+    license: "CC-BY-NC-2.0"
     publisher: CONSORT Group (Consolidated Standards of Reporting Trials)
     preferred_format: pdf
+    checksum: "c78be4ecfcace6fddf0b58905fd005de5f53fd2afdd63bf9ddab99cb319c82ec"
     level: archetype
     group: consort
     status: mapped
@@ -44,8 +45,8 @@ items:
     title: PRISMA 2020 Checklist
     url: https://www.prisma-statement.org/
     version: "2020"
-    date: TBD
-    license: TBD
+    date: "2021-03-29"
+    license: "CC-BY-4.0"
     publisher: PRISMA Group
     preferred_format: pdf
     level: archetype
@@ -56,9 +57,10 @@ items:
     title: STROBE Statement Checklist
     url: https://www.strobe-statement.org/
     version: "2007"
-    date: TBD
-    license: TBD
+    date: "2007-10-16"
+    license: "CC-BY-4.0"
     publisher: STROBE Initiative
+    checksum: "c996c0469ef05ff6fdd1f7cefbc3f7e109bb21969de42fcf591498a828a7ad5f"
     preferred_format: pdf
     level: archetype
     group: strobe

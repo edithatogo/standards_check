@@ -1,9 +1,18 @@
 id: consort-equity
-title: "CONSORT for Equity"
+title: "CONSORT-Equity 2017 extension and elaboration for better reporting of health equity in randomised trials"
 group: consort
 variant_of: consort-2010
-status: new
-notes: "CONSORT extension for equity."
+version: "2017"
+date: "2017-11-23"
+publisher: "BMJ"
+source_url: "https://www.bmj.com/content/359/bmj.j5085"
+retrieved_at: "2025-08-11"
+preferred_format: "pdf"
+checksum: "67ff47696970dc5e41a8ebd82a8733152a940ccf6d0c23590286ea3d3f69a3f1"
+license: "BMJ-permission"
+status: "sourced"
+notes: |
+  CONSORT extension for equity. License requires permission from BMJ.
 citation:
   type: article-journal
   author:
