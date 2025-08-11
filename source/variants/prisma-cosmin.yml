@@ -1,0 +1,26 @@
+id: prisma-cosmin
+title: PRISMA-COSMIN Checklist
+group: prisma
+variant_of: prisma-2020
+status: new
+notes: "PRISMA for COnsensus-based Standards for the selection of health Measurement INstruments."
+citation:
+  type: article-journal
+  author:
+    - given: E. B. M.
+      family: Elsman
+    - given: L. B.
+      family: Mokkink
+    - given: C. B.
+      family: Terwee
+    - given: D.
+      family: Beaton
+    - given: J. J.
+      family: Gagnier
+    - given: A. C.
+      family: Tricco
+    - notes: "et al."
+  title: "Guideline for reporting systematic reviews of outcome measurement instruments (OMIs): PRISMA-COSMIN for OMIs 2024"
+  doi: 10.1007/s11136-024-03634-y
+  journal: "Quality of Life Research"
+  year: 2024

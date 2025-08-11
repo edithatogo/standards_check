@@ -1,3 +1,14 @@
+---
+id: prisma-scr
+title: PRISMA-ScR Checklist
+group: prisma
+version: "2018"
+date: "2018-10-02"
+publisher: "Annals of Internal Medicine"
+source_url: https://www.prisma-statement.org/s/PRISMA-ScR-Fillable-Checklist_11Sept2019.pdf
+license: CC-BY-4.0
+---
+
 # PRISMA-ScR Checklist
 
 > Scope: Preferred Reporting Items for Systematic Reviews and Meta-Analyses extension for Scoping Reviews.

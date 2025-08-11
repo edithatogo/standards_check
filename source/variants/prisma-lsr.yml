@@ -1,0 +1,33 @@
+id: prisma-lsr
+title: PRISMA-LSR Checklist
+group: prisma
+variant_of: prisma-2020
+status: new
+notes: "PRISMA for Living Systematic Reviews."
+citation:
+  type: article-journal
+  author:
+    - given: E. A.
+      family: Akl
+    - given: J.
+      family: Khabsa
+    - given: C.
+      family: Iannizzi
+    - given: V.
+      family: Piechotta
+    - given: L. A.
+      family: Kahale
+    - given: J. M.
+      family: Barker
+    - given: J. E.
+      family: McKenzie
+    - given: M. J.
+      family: Page
+    - given: N.
+      family: Skoetz
+  title: "Extension of the PRISMA 2020 statement for living systematic reviews (PRISMA-LSR): checklist and explanation"
+  doi: 10.1136/bmj-2024-079183
+  journal: "BMJ"
+  volume: 387
+  pages: e079183
+  year: 2024

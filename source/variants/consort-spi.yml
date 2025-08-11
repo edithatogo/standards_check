@@ -1,0 +1,30 @@
+id: consort-spi
+title: "CONSORT for Social and Psychological Interventions"
+group: consort
+variant_of: consort-2010
+status: new
+notes: "CONSORT extension for social and psychological interventions."
+citation:
+  type: article-journal
+  author:
+    - given: P.
+      family: Montgomery
+    - given: S.
+      family: Grant
+    - given: E.
+      family: Mayo-Wilson
+    - given: G.
+      family: Macdonald
+    - given: S.
+      family: Michie
+    - given: S.
+      family: Hopewell
+    - given: D.
+      family: Moher
+    - notes: "on behalf of the CONSORT-SPI Group"
+  title: "Reporting randomised trials of social and psychological interventions: the CONSORT-SPI 2018 Extension"
+  doi: 10.1186/s13063-018-2733-1
+  journal: "Trials"
+  volume: 19
+  pages: 407
+  year: 2018

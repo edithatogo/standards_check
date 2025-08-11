@@ -1,0 +1,41 @@
+id: consort-pilot
+title: "CONSORT for Pilot Trials"
+group: consort
+variant_of: consort-2010
+version: "2016"
+date: "2016-10-24"
+publisher: "BMJ"
+source_url: "https://www.bmj.com/content/355/bmj.i5239"
+retrieved_at: "2025-08-11"
+preferred_format: "html"
+license: "CC-BY-NC"
+status: "sourced"
+notes: |
+  CONSORT extension for pilot and feasibility trials.
+citation:
+  type: article-journal
+  author:
+    - given: Sandra
+      family: Eldridge
+    - given: Lehana
+      family: Thabane
+    - given: Gillian
+      family: Lancaster
+    - given: Mike
+      family: Clarke
+    - given: Christine
+      family: Bond
+    - given: Sally
+      family: Hopewell
+    - given: Claire
+      family: Littlejohns
+    - given: Frank
+      family: Bretz
+    - given: Douglas G
+      family: Altman
+  doi: "10.1136/bmj.i5239"
+  journal: "BMJ"
+  volume: 355
+  pages: i5239
+  year: 2016
+  notes: "on behalf of the CONSORT group"

@@ -1,0 +1,117 @@
+id: consort-dose-finding
+title: "CONSORT for Dose-finding Trials"
+group: consort
+variant_of: consort-2010
+version: "2023"
+date: "2023-10-20"
+publisher: "BMJ"
+source_url: "https://www.bmj.com/content/383/bmj-2023-078524"
+retrieved_at: "2025-08-11"
+preferred_format: "html"
+license: "CC-BY-NC"
+status: "sourced"
+notes: |
+  CONSORT extension for early phase dose-finding trials.
+citation:
+  type: article-journal
+  author:
+    - given: Christina
+      family: Yap
+    - given: Mourad
+      family: Tighiouart
+    - given: Mark J
+      family: Ratain
+    - given: Adrian
+      family: Mander
+    - given: Alex
+      family: Lee
+    - given: John
+      family: O'Quigley
+    - given: Shing M
+      family: Lee
+    - given: Ying
+      family: Kuen
+    - given: Cheung
+      family: Bjoern
+    - given: Bornkamp
+      family: Tom
+    - given: Parke
+      family: Jack
+    - given: Lee
+      family: Nathan
+    - given: L.
+      family: Pace
+    - given: David
+      family: C.
+    - given: Wheeler
+      family: Matthew
+    - given: J.
+      family: Schipper
+    - given: Elizabeth
+      family: A.
+    - given: Garrett-Mayer
+      family: Peter
+    - given: F.
+      family: Thall
+    - given: Sudha
+      family: Sundar
+    - given: Alistair
+      family: Ring
+    - given: Graham
+      family: Wheeler
+    - given: Gary
+      family: S.
+    - given: Collins
+      family: Douglas
+      family: G.
+    - given: Altman
+      family: Muhammad
+    - given: Shah
+      family: Z.
+    - given: Oon
+      family: Clifton
+      family: D.
+    - given: Leaf
+      family: Christopher
+      family: J.
+    - given: Weir
+      family: Andrew
+      family: P.
+    - given: Grieve
+      family: Susan
+      family: Mallett
+    - given: Timothy
+      family: C.
+    - given: Frayling
+      family: Frank
+      family: E.
+    - given: Harrell
+      family: Jr
+    - given: David
+      family: L.
+    - given: DeMets
+      family: Janet
+      family: A.
+    - given: Dancey
+      family: Stan
+      family: B.
+    - given: Gerson
+      family: Simon
+      family: J.
+    - given: Bond
+      family: Richard
+      family: J.
+    - given: J.
+      family: O'Donnell
+    - given: Michael
+      family: J.
+    - given: Sweeting
+      family: Thomas
+      family: A.
+    - given: Jaki
+  doi: "10.1136/bmj-2023-078524"
+  journal: "BMJ"
+  volume: 383
+  pages: e078524
+  year: 2023
+  notes: "and others"

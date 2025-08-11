@@ -15,6 +15,11 @@
           <text>sec_8_start</text>
         </name>
       </place>
+      <place id="sec_7_start">
+        <name>
+          <text>sec_7_start</text>
+        </name>
+      </place>
       <place id="sec_1_start">
         <name>
           <text>sec_1_start</text>
@@ -25,19 +30,9 @@
           <text>sec_5_p_1</text>
         </name>
       </place>
-      <place id="sec_7_start">
-        <name>
-          <text>sec_7_start</text>
-        </name>
-      </place>
       <place id="sec_10_p_1">
         <name>
           <text>sec_10_p_1</text>
-        </name>
-      </place>
-      <place id="sec_6_p_1">
-        <name>
-          <text>sec_6_p_1</text>
         </name>
       </place>
       <place id="sec_3_start">
@@ -50,9 +45,9 @@
           <text>sec_3_p_1</text>
         </name>
       </place>
-      <place id="sec_5_start">
+      <place id="sec_6_p_1">
         <name>
-          <text>sec_5_start</text>
+          <text>sec_6_p_1</text>
         </name>
       </place>
       <place id="sec_12_start">
@@ -68,9 +63,9 @@
           <text>1</text>
         </initialMarking>
       </place>
-      <place id="sec_6_start">
+      <place id="sec_5_start">
         <name>
-          <text>sec_6_start</text>
+          <text>sec_5_start</text>
         </name>
       </place>
       <place id="sec_7_p_1">
@@ -96,6 +91,11 @@
       <place id="sec_4_p_2">
         <name>
           <text>sec_4_p_2</text>
+        </name>
+      </place>
+      <place id="sec_6_start">
+        <name>
+          <text>sec_6_start</text>
         </name>
       </place>
       <place id="sec_9_p_1">
@@ -143,11 +143,6 @@
           <text>Instructions</text>
         </name>
       </transition>
-      <transition id="section_6">
-        <name>
-          <text>How</text>
-        </name>
-      </transition>
       <transition id="section_2">
         <name>
           <text>Brief name</text>
@@ -161,6 +156,11 @@
       <transition id="sec_4_item_2">
         <name>
           <text>4 What procedures Describe each of the procedures </text>
+        </name>
+      </transition>
+      <transition id="section_6">
+        <name>
+          <text>How</text>
         </name>
       </transition>
       <transition id="section_9">
@@ -263,56 +263,56 @@
           <text>When and how much</text>
         </name>
       </transition>
-      <arc id="5105063680" source="section_5" target="sec_5_start"/>
-      <arc id="5105228544" source="sec_7_item_1" target="sec_7_p_1"/>
-      <arc id="5105229440" source="sec_9_item_1" target="sec_9_p_1"/>
-      <arc id="5105230336" source="sec_11_item_1" target="sec_11_p_1"/>
-      <arc id="5105231232" source="sec_12_start" target="final_transition"/>
-      <arc id="5105229776" source="sec_10_start" target="sec_10_item_1"/>
-      <arc id="5104867344" source="section_2" target="sec_2_start"/>
-      <arc id="5101809552" source="sec_2_item_1" target="sec_2_p_1"/>
-      <arc id="5102288272" source="sec_4_start" target="sec_4_item_1"/>
-      <arc id="5104672144" source="sec_4_item_2" target="sec_4_p_2"/>
-      <arc id="5105228432" source="sec_7_start" target="sec_7_item_1"/>
-      <arc id="5105229328" source="sec_9_start" target="sec_9_item_1"/>
-      <arc id="5105230224" source="sec_11_start" target="sec_11_item_1"/>
-      <arc id="5102434208" source="sec_3_p_1" target="section_4"/>
-      <arc id="5105228320" source="section_7" target="sec_7_start"/>
-      <arc id="5105229216" source="section_9" target="sec_9_start"/>
-      <arc id="5105230112" source="section_11" target="sec_11_start"/>
-      <arc id="5105231008" source="section_12" target="sec_12_start"/>
-      <arc id="5105230672" source="sec_11_item_2" target="sec_11_p_2"/>
-      <arc id="5105063856" source="sec_5_start" target="sec_5_item_1"/>
-      <arc id="5100363824" source="sec_2_p_1" target="section_3"/>
-      <arc id="5105287472" source="sec_4_item_1" target="sec_4_p_1"/>
-      <arc id="5105208496" source="section_6" target="sec_6_start"/>
-      <arc id="5105228208" source="sec_6_p_1" target="section_7"/>
-      <arc id="5105229104" source="sec_8_p_1" target="section_9"/>
-      <arc id="5105230000" source="sec_10_p_1" target="section_11"/>
-      <arc id="5104867648" source="sec_2_start" target="sec_2_item_1"/>
-      <arc id="5102427968" source="section_4" target="sec_4_start"/>
-      <arc id="5102530624" source="sec_4_p_1" target="sec_4_item_2"/>
-      <arc id="5105228992" source="sec_8_item_1" target="sec_8_p_1"/>
-      <arc id="5105229888" source="sec_10_item_1" target="sec_10_p_1"/>
-      <arc id="5105230784" source="sec_11_p_2" target="section_12"/>
-      <arc id="5104671568" source="sec_4_p_2" target="section_5"/>
-      <arc id="5105044176" source="source" target="section_1"/>
-      <arc id="5104610640" source="sec_1_start" target="section_2"/>
-      <arc id="5104610000" source="section_1" target="sec_1_start"/>
-      <arc id="5104788048" source="sec_3_start" target="sec_3_item_1"/>
-      <arc id="5104788304" source="sec_3_item_1" target="sec_3_p_1"/>
-      <arc id="5105188560" source="sec_5_item_1" target="sec_5_p_1"/>
-      <arc id="5105242192" source="sec_6_start" target="sec_6_item_1"/>
-      <arc id="5105242320" source="sec_6_item_1" target="sec_6_p_1"/>
-      <arc id="5105228880" source="sec_8_start" target="sec_8_item_1"/>
-      <arc id="5105228768" source="section_8" target="sec_8_start"/>
-      <arc id="5105229664" source="section_10" target="sec_10_start"/>
-      <arc id="5100356208" source="section_3" target="sec_3_start"/>
-      <arc id="5105188720" source="sec_5_p_1" target="section_6"/>
-      <arc id="5105228656" source="sec_7_p_1" target="section_8"/>
-      <arc id="5105229552" source="sec_9_p_1" target="section_10"/>
-      <arc id="5105230448" source="sec_11_p_1" target="sec_11_item_2"/>
-      <arc id="5105231344" source="final_transition" target="sink"/>
+      <arc id="5214574336" source="section_5" target="sec_5_start"/>
+      <arc id="5214739200" source="sec_7_item_1" target="sec_7_p_1"/>
+      <arc id="5214740096" source="sec_9_item_1" target="sec_9_p_1"/>
+      <arc id="5214740992" source="sec_11_item_1" target="sec_11_p_1"/>
+      <arc id="5214741888" source="sec_12_start" target="final_transition"/>
+      <arc id="5214740432" source="sec_10_start" target="sec_10_item_1"/>
+      <arc id="5214199184" source="sec_4_item_2" target="sec_4_p_2"/>
+      <arc id="5214394384" source="section_2" target="sec_2_start"/>
+      <arc id="5210304400" source="sec_2_item_1" target="sec_2_p_1"/>
+      <arc id="5210766736" source="sec_4_start" target="sec_4_item_1"/>
+      <arc id="5214739088" source="sec_7_start" target="sec_7_item_1"/>
+      <arc id="5214739984" source="sec_9_start" target="sec_9_item_1"/>
+      <arc id="5214740880" source="sec_11_start" target="sec_11_item_1"/>
+      <arc id="5214738976" source="section_7" target="sec_7_start"/>
+      <arc id="5214739872" source="section_9" target="sec_9_start"/>
+      <arc id="5214740768" source="section_11" target="sec_11_start"/>
+      <arc id="5214741664" source="section_12" target="sec_12_start"/>
+      <arc id="5214741328" source="sec_11_item_2" target="sec_11_p_2"/>
+      <arc id="5214574512" source="sec_5_start" target="sec_5_item_1"/>
+      <arc id="5208842288" source="sec_2_p_1" target="section_3"/>
+      <arc id="5213042352" source="sec_3_p_1" target="section_4"/>
+      <arc id="5214814512" source="sec_4_item_1" target="sec_4_p_1"/>
+      <arc id="5214719152" source="section_6" target="sec_6_start"/>
+      <arc id="5214738864" source="sec_6_p_1" target="section_7"/>
+      <arc id="5214739760" source="sec_8_p_1" target="section_9"/>
+      <arc id="5214740656" source="sec_10_p_1" target="section_11"/>
+      <arc id="5214394688" source="sec_2_start" target="sec_2_item_1"/>
+      <arc id="5213139008" source="sec_4_p_1" target="sec_4_item_2"/>
+      <arc id="5214739648" source="sec_8_item_1" target="sec_8_p_1"/>
+      <arc id="5214740544" source="sec_10_item_1" target="sec_10_p_1"/>
+      <arc id="5214741440" source="sec_11_p_2" target="section_12"/>
+      <arc id="5213036112" source="section_4" target="sec_4_start"/>
+      <arc id="5214198608" source="sec_4_p_2" target="section_5"/>
+      <arc id="5214554832" source="source" target="section_1"/>
+      <arc id="5214137680" source="sec_1_start" target="section_2"/>
+      <arc id="5214137040" source="section_1" target="sec_1_start"/>
+      <arc id="5214315088" source="sec_3_start" target="sec_3_item_1"/>
+      <arc id="5214315344" source="sec_3_item_1" target="sec_3_p_1"/>
+      <arc id="5214715600" source="sec_5_item_1" target="sec_5_p_1"/>
+      <arc id="5214752848" source="sec_6_start" target="sec_6_item_1"/>
+      <arc id="5214752976" source="sec_6_item_1" target="sec_6_p_1"/>
+      <arc id="5214739424" source="section_8" target="sec_8_start"/>
+      <arc id="5214740320" source="section_10" target="sec_10_start"/>
+      <arc id="5208834672" source="section_3" target="sec_3_start"/>
+      <arc id="5214715760" source="sec_5_p_1" target="section_6"/>
+      <arc id="5214739312" source="sec_7_p_1" target="section_8"/>
+      <arc id="5214739536" source="sec_8_start" target="sec_8_item_1"/>
+      <arc id="5214740208" source="sec_9_p_1" target="section_10"/>
+      <arc id="5214741104" source="sec_11_p_1" target="sec_11_item_2"/>
+      <arc id="5214742000" source="final_transition" target="sink"/>
     </page>
     <finalmarkings>
       <marking>

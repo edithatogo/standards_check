@@ -1,0 +1,28 @@
+id: prisma-harms
+title: PRISMA-Harms Checklist
+group: prisma
+variant_of: prisma-2020
+status: new
+notes: "PRISMA for Harms."
+citation:
+  type: article-journal
+  author:
+    - given: L.
+      family: Zorzela
+    - given: Y. K.
+      family: Loke
+    - given: J. P. A.
+      family: Ioannidis
+    - given: S.
+      family: Golder
+    - given: P.
+      family: Santaguida
+    - given: D. G.
+      family: Altman
+    - notes: "et al."
+  title: "PRISMA harms checklist: improving harms reporting in systematic reviews"
+  doi: 10.1136/bmj.i157
+  journal: "BMJ"
+  volume: 352
+  pages: i157
+  year: 2016

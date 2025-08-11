@@ -1,0 +1,38 @@
+id: consort-abstracts
+title: "CONSORT for Abstracts"
+group: consort
+variant_of: consort-2010
+version: "2008"
+date: "2008-04-22"
+publisher: "PLOS Medicine"
+source_url: "https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.0050020"
+retrieved_at: "2025-08-11"
+preferred_format: "html"
+license: "CC-BY-2.5"
+status: "sourced"
+notes: |
+  CONSORT extension for reporting randomized controlled trials in journal and conference abstracts.
+citation:
+  type: article-journal
+  author:
+    - given: Sally
+      family: Hopewell
+    - given: Mike
+      family: Clarke
+    - given: David
+      family: Moher
+    - given: Elizabeth
+      family: Wager
+    - given: Philippa
+      family: Middleton
+    - given: Douglas G
+      family: Altman
+    - given: Kenneth F
+      family: Schulz
+  doi: "10.1371/journal.pmed.0050020"
+  journal: "PLOS Medicine"
+  volume: 5
+  issue: 4
+  pages: e20
+  year: 2008
+  notes: "and the CONSORT Group"

@@ -4,7 +4,7 @@ validate:
 	bash scripts/validate_repo.sh
 
 build:
-	bash scripts/build_pandoc.sh
+	FORMS=eforms bash scripts/build_pandoc.sh
 	bash scripts/generate_citations.sh
 	bash scripts/generate_citations.sh
 

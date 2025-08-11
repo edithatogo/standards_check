@@ -1,0 +1,29 @@
+id: prisma-a
+title: PRISMA for Abstracts Checklist
+group: prisma
+variant_of: prisma-2020
+status: new
+notes: "PRISMA for Abstracts."
+citation:
+  type: article-journal
+  author:
+    - given: E. M.
+      family: Beller
+    - given: P. P.
+      family: Glasziou
+    - given: D. G.
+      family: Altman
+    - given: S.
+      family: Hopewell
+    - given: H.
+      family: Bastian
+    - given: I.
+      family: Chalmers
+    - notes: "et al."
+  title: "PRISMA for Abstracts: Reporting Systematic Reviews in Journal and Conference Abstracts"
+  doi: 10.1371/journal.pmed.1001419
+  journal: "PLoS Medicine"
+  volume: 10
+  issue: 4
+  pages: e1001419
+  year: 2013

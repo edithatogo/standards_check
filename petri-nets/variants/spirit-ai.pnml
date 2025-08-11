@@ -73,18 +73,18 @@
           <text>End</text>
         </name>
       </transition>
-      <arc id="5171976512" source="sec_2_start" target="sec_2_item_1"/>
-      <arc id="5170635040" source="final_transition" target="sink"/>
-      <arc id="5172153040" source="source" target="section_1"/>
-      <arc id="5171976208" source="section_2" target="sec_2_start"/>
-      <arc id="5171735888" source="sec_1_start" target="section_2"/>
-      <arc id="5171735248" source="section_1" target="sec_1_start"/>
-      <arc id="5167886224" source="sec_2_item_1" target="sec_2_p_1"/>
-      <arc id="4964327472" source="sec_2_p_1" target="sec_2_item_2"/>
-      <arc id="4964319856" source="sec_2_item_2" target="sec_2_p_2"/>
-      <arc id="5171896400" source="sec_2_p_2" target="section_3"/>
-      <arc id="5171896656" source="section_3" target="sec_3_start"/>
-      <arc id="4345254672" source="sec_3_start" target="final_transition"/>
+      <arc id="4683340096" source="sec_2_start" target="sec_2_item_1"/>
+      <arc id="4380660256" source="sec_3_start" target="final_transition"/>
+      <arc id="4683516624" source="source" target="section_1"/>
+      <arc id="4683339792" source="section_2" target="sec_2_start"/>
+      <arc id="4683083088" source="sec_1_start" target="section_2"/>
+      <arc id="4683082448" source="section_1" target="sec_1_start"/>
+      <arc id="4679249808" source="sec_2_item_1" target="sec_2_p_1"/>
+      <arc id="4677787696" source="sec_2_p_1" target="sec_2_item_2"/>
+      <arc id="4677780080" source="sec_2_item_2" target="sec_2_p_2"/>
+      <arc id="4683259984" source="sec_2_p_2" target="section_3"/>
+      <arc id="4683260240" source="section_3" target="sec_3_start"/>
+      <arc id="4681998384" source="final_transition" target="sink"/>
     </page>
     <finalmarkings>
       <marking>

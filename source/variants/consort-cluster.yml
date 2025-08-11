@@ -1,0 +1,31 @@
+id: consort-cluster
+title: "CONSORT for Cluster Trials"
+group: consort
+variant_of: consort-2010
+version: "2012"
+date: "2012-09-04"
+publisher: "BMJ"
+source_url: "https://www.bmj.com/content/345/bmj.e5661"
+retrieved_at: "2025-08-11"
+preferred_format: "html"
+license: "CC-BY-NC"
+status: "sourced"
+notes: |
+  CONSORT extension for cluster randomized trials.
+citation:
+  type: article-journal
+  author:
+    - given: Marion K
+      family: Campbell
+    - given: Gilda
+      family: Piaggio
+    - given: Diana R
+      family: Elbourne
+    - given: Douglas G
+      family: Altman
+  doi: "10.1136/bmj.e5661"
+  journal: "BMJ"
+  volume: 345
+  pages: e5661
+  year: 2012
+  notes: "for the CONSORT Group"

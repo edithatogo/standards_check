@@ -1,46 +1,46 @@
 id: prisma-ecoevo
-title: PRISMA-EcoEvo Checklist
+title: "PRISMA-EcoEvo: The PRISMA Extension for Systematic Reviews in Ecology and Evolution"
 group: prisma
-version: "2021"
-date: "2021-07-12"
-publisher: Biological Reviews
-source_url: https://www.prisma-statement.org/s/PRISMA-EcoEvo_PDFChecklist.pdf
-retrieved_at: 2025-08-10
+variant_of: prisma-2020
+version: "1.0"
+date: "2021-06-29"
+publisher: "Collaboration for Environmental Evidence"
+source_url: "https://onlinelibrary.wiley.com/doi/10.1111/brv.12721"
+retrieved_at: "2025-08-11"
 preferred_format: pdf
-checksum: db0a9fb221a1467a82c277419be96e18c7f8600b0deed25009bacb41322623ba
-license: CC-BY-4.0
-verified: true
+checksum: # TBD
+license: "CC BY 4.0"
 notes: |
-  PRISMA for Ecology and Evolution.
+  This is the PRISMA extension for systematic reviews and meta-analyses in ecology and evolution.
+  The source file was found in the project's archive.
 citation:
   type: article-journal
   author:
-    - given: R. E.
-      family: O’Dea
-    - given: M.
-      family: Lagisz
-    - given: M. D.
-      family: Jennions
-    - given: J.
-      family: Koricheva
-    - given: D. W. A.
-      family: Noble
-    - given: T. H.
-      family: Parker
-    - given: J.
-      family: Gurevitch
-    - given: M. J.
-      family: Page
-    - given: G.
-      family: Stewart
-    - given: D.
-      family: Moher
-    - given: S.
-      family: Nakagawa
+    - family: O'Dea
+      given: R.E.
+    - family: Lagisz
+      given: M.
+    - family: Jennions
+      given: M.D.
+    - family: Koricheva
+      given: J.
+    - family: Noble
+      given: D.W.A.
+    - family: Parker
+      given: T.H.
+    - family: Gurevitch
+      given: J.
+    - family: Page
+      given: M.J.
+    - family: Stewart
+      given: G.
+    - family: Moher
+      given: D.
+    - family: Nakagawa
+      given: S.
   doi: 10.1111/brv.12721
-  journal: "Biological Reviews"
+  journal: Biological Reviews
   volume: 96
   issue: 5
   pages: 1695-1722
   year: 2021
-  notes: "and others"

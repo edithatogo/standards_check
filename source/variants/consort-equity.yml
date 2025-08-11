@@ -1,0 +1,28 @@
+id: consort-equity
+title: "CONSORT for Equity"
+group: consort
+variant_of: consort-2010
+status: new
+notes: "CONSORT extension for equity."
+citation:
+  type: article-journal
+  author:
+    - given: V. A.
+      family: Welch
+    - given: O. F.
+      family: Norheim
+    - given: J.
+      family: Jull
+    - given: R.
+      family: Cookson
+    - given: H.
+      family: Sommerfelt
+    - given: P.
+      family: Tugwell
+    - notes: "et al."
+  title: "CONSORT-Equity 2017 extension and elaboration for better reporting of health equity in randomised trials"
+  doi: 10.1136/bmj.j5085
+  journal: "BMJ"
+  volume: 359
+  pages: j5085
+  year: 2017

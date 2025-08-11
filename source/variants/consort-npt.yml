@@ -1,0 +1,27 @@
+id: consort-npt
+title: "CONSORT for Non-pharmacological Treatment Trials"
+group: consort
+variant_of: consort-2010
+status: new
+notes: "CONSORT extension for non-pharmacological treatment trials."
+citation:
+  type: article-journal
+  author:
+    - given: I.
+      family: Boutron
+    - given: D. G.
+      family: Altman
+    - given: D.
+      family: Moher
+    - given: K. F.
+      family: Schulz
+    - given: P.
+      family: Ravaud
+    - notes: "for the CONSORT NPT Group"
+  title: "CONSORT Statement for Randomized Trials of Nonpharmacologic Treatments: A 2017 Update and a CONSORT Extension for Nonpharmacologic Trial Abstracts"
+  doi: 10.7326/M17-0045
+  journal: "Annals of Internal Medicine"
+  volume: 167
+  issue: 1
+  pages: "40-47"
+  year: 2017

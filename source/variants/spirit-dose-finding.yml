@@ -1,0 +1,117 @@
+id: spirit-dose-finding
+title: "SPIRIT for Dose-finding Trials"
+group: spirit
+variant_of: spirit-2013
+version: "2023"
+date: "2023-10-20"
+publisher: "BMJ"
+source_url: "https://www.bmj.com/content/383/bmj-2023-078525"
+retrieved_at: "2025-08-11"
+preferred_format: "html"
+license: "CC-BY-NC"
+status: "sourced"
+notes: |
+  SPIRIT extension for early phase dose-finding trials.
+citation:
+  type: article-journal
+  author:
+    - given: Christina
+      family: Yap
+    - given: Mourad
+      family: Tighiouart
+    - given: Mark J
+      family: Ratain
+    - given: Adrian
+      family: Mander
+    - given: Alex
+      family: Lee
+    - given: John
+      family: O'Quigley
+    - given: Shing M
+      family: Lee
+    - given: Ying
+      family: Kuen
+    - given: Cheung
+      family: Bjoern
+    - given: Bornkamp
+    - given: Tom
+      family: Parke
+    - given: Jack
+      family: Lee
+    - given: Nathan
+      family: L.
+    - given: Pace
+    - given: David
+      family: C.
+    - given: Wheeler
+    - given: Matthew
+      family: J.
+    - given: Schipper
+    - given: Elizabeth
+      family: A.
+    - given: Garrett-Mayer
+    - given: Peter
+      family: F.
+    - given: Thall
+    - given: Sudha
+      family: Sundar
+    - given: Alistair
+      family: Ring
+    - given: Graham
+      family: Wheeler
+    - given: Gary
+      family: S.
+    - given: Collins
+    - given: Douglas
+      family: G.
+    - given: Altman
+    - given: Muhammad
+      family: Shah
+    - given: Z.
+    - given: Oon
+    - given: Clifton
+      family: D.
+    - given: Leaf
+    - given: Christopher
+      family: J.
+    - given: Weir
+    - given: Andrew
+      family: P.
+    - given: Grieve
+    - given: Susan
+      family: Mallett
+    - given: Timothy
+      family: C.
+    - given: Frayling
+    - given: Frank
+      family: E.
+    - given: Harrell
+      family: Jr
+    - given: David
+      family: L.
+    - given: DeMets
+    - given: Janet
+      family: A.
+    - given: Dancey
+    - given: Stan
+      family: B.
+    - given: Gerson
+    - given: Simon
+      family: J.
+    - given: Bond
+    - given: Richard
+      family: J.
+    - given: J.
+    - given: O'Donnell
+    - given: Michael
+      family: J.
+    - given: Sweeting
+    - given: Thomas
+      family: A.
+    - given: Jaki
+  doi: "10.1136/bmj-2023-078525"
+  journal: "BMJ"
+  volume: 383
+  pages: e078525
+  year: 2023
+  notes: "and others"

@@ -1,0 +1,41 @@
+id: spirit-n-of-1
+title: "SPIRIT for N-of-1 Trials"
+group: spirit
+variant_of: spirit-2013
+version: "2019"
+date: "2020-02-12"
+publisher: "BMJ"
+source_url: "https://www.bmj.com/content/368/bmj.l6430"
+retrieved_at: "2025-08-11"
+preferred_format: "html"
+license: "CC-BY-NC"
+status: "sourced"
+notes: |
+  SPIRIT extension for N-of-1 trials.
+citation:
+  type: article-journal
+  author:
+    - given: A.J.
+      family: Porcino
+    - given: L.
+      family: Shamseer
+    - given: A-W.
+      family: Chan
+    - given: R.L.
+      family: Kravitz
+    - given: A.
+      family: Orkin
+    - given: S.
+      family: Punja
+    - given: P.
+      family: Ravaud
+    - given: C.H.
+      family: Schmid
+    - given: S.
+      family: Vohra
+  doi: "10.1136/bmj.l6430"
+  journal: "BMJ"
+  volume: 368
+  pages: l6430
+  year: 2020
+  notes: "on behalf of the SPENT group"

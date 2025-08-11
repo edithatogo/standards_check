@@ -28,7 +28,6 @@ items:
     group: consort
     status: mapped
     notes: "Randomized trials reporting. Verify official link and terms."
-
   - id: prisma-2020
     title: PRISMA 2020 Checklist
     url: https://www.prisma-statement.org/
@@ -41,7 +40,6 @@ items:
     group: prisma
     status: mapped
     notes: "Systematic reviews. Confirm page and license."
-
   - id: strobe-2007
     title: STROBE Statement Checklist
     url: https://www.strobe-statement.org/
@@ -54,7 +52,6 @@ items:
     group: strobe
     status: mapped
     notes: "Observational studies."
-
   - id: care-2013
     title: CARE Guidelines Checklist
     url: TBD
@@ -66,7 +63,6 @@ items:
     level: archetype
     group: care
     notes: "Case reports. Check latest revision year."
-
   - id: arrive-2020
     title: ARRIVE 2.0 Checklist
     url: https://doi.org/10.1371/journal.pbio.3000410
@@ -78,7 +74,6 @@ items:
     level: archetype
     group: arrive
     notes: "The ARRIVE 2.0 guidelines, for animal research reporting."
-
   - id: cheers-2022
     title: CHEERS 2022 Checklist
     url: https://www.equator-network.org/wp-content/uploads/2013/04/CHEERS-2022-checklist-1.pdf
@@ -90,7 +85,6 @@ items:
     level: archetype
     group: cheers
     notes: "The CHEERS 2022 checklist, replacing the 2013 version."
-
   - id: tripod-2015
     title: TRIPOD Checklist
     url: TBD
@@ -102,7 +96,6 @@ items:
     level: archetype
     group: tripod
     notes: "Prediction model reporting."
-
   - id: spirit-2025
     title: SPIRIT 2025 Checklist
     url: TBD
@@ -114,7 +107,6 @@ items:
     level: archetype
     group: spirit
     notes: "Clinical trial protocols."
-
   - id: stard-2015
     title: STARD 2015 Checklist
     url: TBD
@@ -126,7 +118,6 @@ items:
     level: archetype
     group: stard
     notes: "Diagnostic accuracy studies."
-
   - id: equator-catalog-tbd
     title: Additional EQUATOR-listed Checklist (placeholder)
     url: TBD
@@ -138,7 +129,6 @@ items:
     level: archetype
     group: tbd
     notes: "Use this placeholder to expand mapping as needed."
-
   - id: squire-2-0
     title: SQUIRE 2.0 Guidelines Checklist
     url: https://www.squire-statement.org/
@@ -151,7 +141,6 @@ items:
     group: squire
     status: mapped
     notes: "Quality improvement reporting."
-
   - id: srqr-2014
     title: SRQR — Standards for Reporting Qualitative Research
     url: https://www.equator-network.org/reporting-guidelines/srqr/
@@ -163,7 +152,6 @@ items:
     level: archetype
     group: srqr
     notes: "Qualitative research reporting."
-
   - id: coreq-2007
     title: COREQ — Consolidated Criteria for Reporting Qualitative Research
     url: https://www.equator-network.org/reporting-guidelines/coreq/
@@ -175,7 +163,6 @@ items:
     level: archetype
     group: coreq
     notes: "Qualitative interviews/focus groups."
-
   - id: moose-2000
     title: MOOSE Guidelines Checklist
     url: https://www.equator-network.org/reporting-guidelines/moose/
@@ -187,7 +174,6 @@ items:
     level: archetype
     group: moose
     notes: "Meta-analysis of observational studies."
-
   - id: tidier-2014
     title: TIDieR Checklist
     url: https://www.equator-network.org/reporting-guidelines/tidier/
@@ -200,21 +186,19 @@ items:
     group: tidier
     status: mapped
     notes: "Intervention description and replication."
-  
   - id: prisma-ecoevo
-    title: PRISMA-EcoEvo Checklist
-    url: TBD
-    version: "2022"
-    date: TBD
-    license: TBD
-    publisher: TBD
-    preferred_format: pdf
+    title: "PRISMA-EcoEvo: The PRISMA Extension for Systematic Reviews in Ecology and Evolution"
+    url: "https://environmentalevidence.org/information-for-authors/reporting-standards/"
+    version: "1.0"
+    date: "2021-06-29"
+    license: "CC BY 4.0"
+    publisher: "Collaboration for Environmental Evidence"
+    preferred_format: csv
     level: variant
     group: prisma
     variant_of: prisma-2020
-    status: new
+    status: mapped
     notes: "PRISMA for Ecology and Evolution."
-  
   - id: prisma-scr
     title: PRISMA-ScR Checklist
     url: TBD
@@ -226,9 +210,8 @@ items:
     level: variant
     group: prisma
     variant_of: prisma-2020
-    status: new
+    status: mapped
     notes: "PRISMA for Scoping Reviews."
-  
   - id: prisma-p
     title: PRISMA-P Checklist
     url: TBD
@@ -240,9 +223,8 @@ items:
     level: variant
     group: prisma
     variant_of: prisma-2020
-    status: new
+    status: mapped
     notes: "PRISMA for Protocols."
-  
   - id: prisma-nma
     title: PRISMA-NMA Checklist
     url: TBD
@@ -254,9 +236,8 @@ items:
     level: variant
     group: prisma
     variant_of: prisma-2020
-    status: new
+    status: mapped
     notes: "PRISMA for Network Meta-Analyses."
-  
   - id: spirit-ai
     title: "Guidelines for clinical trial protocols for interventions involving artificial intelligence: the SPIRIT-AI extension"
     url: https://www.nature.com/articles/s41591-020-1037-7
@@ -269,3 +250,339 @@ items:
     group: spirit
     variant_of: spirit-2013
     notes: "SPIRIT for Artificial Intelligence."
+  - id: ace
+    title: "ACE Checklist"
+    url: TBD
+    version: TBD
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: docx
+    level: archetype
+    group: ace
+    status: mapped
+    notes: "Appraisal of Clinical Evidence."
+  - id: conserve
+    title: "CONSERVE Checklist"
+    url: TBD
+    version: TBD
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: docx
+    level: archetype
+    group: conserve
+    status: mapped
+    notes: "Guideline for Reporting Trials of CONSERVEative Interventions."
+  - id: consort-abstracts
+    title: "CONSORT for Abstracts"
+    url: TBD
+    version: TBD
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: doc
+    level: variant
+    group: consort
+    variant_of: consort-2010
+    status: mapped
+    notes: "CONSORT extension for abstracts."
+  - id: consort-cluster
+    title: "CONSORT for Cluster Trials"
+    url: TBD
+    version: "2012"
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: docx
+    level: variant
+    group: consort
+    variant_of: consort-2010
+    status: mapped
+    notes: "CONSORT extension for cluster trials."
+  - id: consort-dose-finding
+    title: "CONSORT for Dose-finding Trials"
+    url: TBD
+    version: TBD
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: docx
+    level: variant
+    group: consort
+    variant_of: consort-2010
+    status: mapped
+    notes: "CONSORT extension for dose-finding and early-phase trials."
+  - id: consort-n-of-1
+    title: "CONSORT for N-of-1 Trials"
+    url: TBD
+    version: "2015"
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: docx
+    level: variant
+    group: consort
+    variant_of: consort-2010
+    status: mapped
+    notes: "CONSORT extension for N-of-1 trials."
+  - id: consort-non-inferiority
+    title: "CONSORT for Non-inferiority Trials"
+    url: TBD
+    version: "2006"
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: doc
+    level: variant
+    group: consort
+    variant_of: consort-2010
+    status: mapped
+    notes: "CONSORT extension for non-inferiority and equivalence trials."
+  - id: consort-pilot
+    title: "CONSORT for Pilot Trials"
+    url: TBD
+    version: TBD
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: doc
+    level: variant
+    group: consort
+    variant_of: consort-2010
+    status: mapped
+    notes: "CONSORT extension for pilot and feasibility trials."
+  - id: consort-pragmatic
+    title: "CONSORT for Pragmatic Trials"
+    url: TBD
+    version: TBD
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: docx
+    level: variant
+    group: consort
+    variant_of: consort-2010
+    status: mapped
+    notes: "CONSORT extension for pragmatic trials."
+  - id: consort-within-person
+    title: "CONSORT for Within-person Trials"
+    url: TBD
+    version: TBD
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: docx
+    level: variant
+    group: consort
+    variant_of: consort-2010
+    status: mapped
+    notes: "CONSORT extension for within person trials."
+  - id: consort-npt
+    title: "CONSORT for Non-pharmacological Treatment Trials"
+    url: TBD
+    version: "2017"
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: docx
+    level: variant
+    group: consort
+    variant_of: consort-2010
+    status: mapped
+    notes: "CONSORT extension for non-pharmacological treatment trials."
+  - id: consort-equity
+    title: "CONSORT for Equity"
+    url: TBD
+    version: "2017"
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: docx
+    level: variant
+    group: consort
+    variant_of: consort-2010
+    status: mapped
+    notes: "CONSORT extension for equity."
+  - id: consort-harms
+    title: "CONSORT for Harms"
+    url: TBD
+    version: "2022"
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: docx
+    level: variant
+    group: consort
+    variant_of: consort-2010
+    status: mapped
+    notes: "CONSORT extension for harms."
+  - id: consort-spi
+    title: "CONSORT for Social and Psychological Interventions"
+    url: TBD
+    version: "2018"
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: docx
+    level: variant
+    group: consort
+    variant_of: consort-2010
+    status: mapped
+    notes: "CONSORT extension for social and psychological interventions."
+  - id: consort-stepped-wedge
+    title: "CONSORT for Stepped-wedge Cluster Trials"
+    url: TBD
+    version: TBD
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: pdf
+    level: variant
+    group: consort
+    variant_of: consort-2010
+    status: mapped
+    notes: "CONSORT extension for stepped-wedge cluster randomized trials."
+  - id: spirit-dose-finding
+    title: "SPIRIT for Dose-finding Trials"
+    url: TBD
+    version: TBD
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: docx
+    level: variant
+    group: spirit
+    variant_of: spirit-2013
+    status: mapped
+    notes: "SPIRIT extension for dose-finding and early-phase trials."
+  - id: spirit-n-of-1
+    title: "SPIRIT for N-of-1 Trials"
+    url: TBD
+    version: TBD
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: pdf
+    level: variant
+    group: spirit
+    variant_of: spirit-2013
+    status: mapped
+    notes: "SPIRIT extension for N-of-1 trials."
+  - id: prisma-a
+    title: PRISMA for Abstracts Checklist
+    url: TBD
+    version: TBD
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: pdf
+    level: variant
+    group: prisma
+    variant_of: prisma-2020
+    status: mapped
+    notes: "PRISMA for Abstracts."
+  - id: prisma-cosmin
+    title: PRISMA-COSMIN Checklist
+    url: TBD
+    version: TBD
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: pdf
+    level: variant
+    group: prisma
+    variant_of: prisma-2020
+    status: mapped
+    notes: "PRISMA for COnsensus-based Standards for the selection of health Measurement INstruments."
+  - id: prisma-dta
+    title: PRISMA-DTA Checklist
+    url: TBD
+    version: TBD
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: pdf
+    level: variant
+    group: prisma
+    variant_of: prisma-2020
+    status: mapped
+    notes: "PRISMA for Diagnostic Test Accuracy."
+  - id: prisma-equity
+    title: PRISMA-Equity Checklist
+    url: TBD
+    version: TBD
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: pdf
+    level: variant
+    group: prisma
+    variant_of: prisma-2020
+    status: mapped
+    notes: "PRISMA for Equity-focused systematic reviews."
+  - id: prisma-harms
+    title: PRISMA-Harms Checklist
+    url: TBD
+    version: TBD
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: pdf
+    level: variant
+    group: prisma
+    variant_of: prisma-2020
+    status: mapped
+    notes: "PRISMA for Harms."
+  - id: prisma-ipd
+    title: PRISMA-IPD Checklist
+    url: TBD
+    version: TBD
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: pdf
+    level: variant
+    group: prisma
+    variant_of: prisma-2020
+    status: mapped
+    notes: "PRISMA for Individual Patient Data."
+  - id: prisma-lsr
+    title: PRISMA-LSR Checklist
+    url: TBD
+    version: TBD
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: pdf
+    level: variant
+    group: prisma
+    variant_of: prisma-2020
+    status: mapped
+    notes: "PRISMA for Living Systematic Reviews."
+  - id: prisma-moxibustion
+    title: PRISMA for Moxibustion Checklist
+    url: TBD
+    version: TBD
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: pdf
+    level: variant
+    group: prisma
+    variant_of: prisma-2020
+    status: mapped
+    notes: "PRISMA for Moxibustion."
+  - id: prisma-s
+    title: PRISMA-S Checklist
+    url: TBD
+    version: TBD
+    date: TBD
+    license: TBD
+    publisher: TBD
+    preferred_format: pdf
+    level: variant
+    group: prisma
+    variant_of: prisma-2020
+    status: mapped
+    notes: "PRISMA for Searching."

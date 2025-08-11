@@ -1,0 +1,41 @@
+id: consort-n-of-1
+title: "CONSORT for N-of-1 Trials"
+group: consort
+variant_of: consort-2010
+version: "2015"
+date: "2015-04-29"
+publisher: "BMJ"
+source_url: "https://www.bmj.com/content/350/bmj.h1738"
+retrieved_at: "2025-08-11"
+preferred_format: "html"
+license: "CC-BY-NC"
+status: "sourced"
+notes: |
+  CONSORT extension for N-of-1 trials.
+citation:
+  type: article-journal
+  author:
+    - given: Larissa
+      family: Shamseer
+    - given: Christopher
+      family: Sampson
+    - given: Davina
+      family: Ghersi
+    - given: Robyn
+      family: Tamblyn
+    - given: David
+      family: Moher
+    - given: Douglas G
+      family: Altman
+    - given: Mike
+      family: Clarke
+    - given: Paul
+      family: Shekelle
+    - given: Sunita
+      family: Vohra
+  doi: "10.1136/bmj.h1738"
+  journal: "BMJ"
+  volume: 350
+  pages: h1738
+  year: 2015
+  notes: "and the CENT group"

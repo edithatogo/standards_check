@@ -1,0 +1,29 @@
+id: prisma-equity
+title: PRISMA-Equity Checklist
+group: prisma
+variant_of: prisma-2020
+status: new
+notes: "PRISMA for Equity-focused systematic reviews."
+citation:
+  type: article-journal
+  author:
+    - given: V.
+      family: Welch
+    - given: M.
+      family: Petticrew
+    - given: P.
+      family: Tugwell
+    - given: D.
+      family: Moher
+    - given: J.
+      family: O'Neill
+    - given: E.
+      family: Waters
+    - notes: "et al."
+  title: "PRISMA-Equity 2012 extension: reporting guidelines for systematic reviews with a focus on health equity"
+  doi: 10.1371/journal.pmed.1001333
+  journal: "PLoS Medicine"
+  volume: 9
+  issue: 10
+  pages: e1001333
+  year: 2012

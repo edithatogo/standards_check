@@ -1,31 +1,80 @@
 #!/usr/bin/env bash
+#
+# Creates placeholder files for a new checklist to begin ingestion.
+#
+# Usage: ./scripts/scaffold_from_index.sh [id]
+#
+# If an id is provided, only that item is processed. Otherwise, all items
+# in the index are checked and any missing files are created.
 
-tpl="markdown/_template.md"
-index="source/index.yml"
+set -euo pipefail
 
-[[ -f "$tpl" ]] || { echo "[ERROR] Missing template: $tpl" >&2; exit 1; }
-[[ -f "$index" ]] || { echo "[ERROR] Missing index: $index" >&2; exit 1; }
+# Configuration
+index_file="source/index.yml"
+tpl_md="markdown/_template.md"
+tpl_bib="citations/archetypes/.gitkeep" # Empty file
+tpl_yml="source/archetypes/_meta.template.yml"
 
-created=0
+# Check for yq
+if ! command -v yq &> /dev/null;
+then
+    echo "[ERROR] yq is not installed. Please install it to continue."
+    exit 1
+fi
 
-# Extract id, level, title per item (best-effort parsing)
-awk '
-  $1=="-" && $2 ~ /^id:/ {
-    if (id!="") print id "\t" level "\t" title
-    id=$2; sub("id:","",id); gsub(/^[ \t]+|[ \t]+$/,"",id)
-    level=""; title=""
-  }
-  $1 ~ /^level:/ { level=$0; sub("level:","",level); gsub(/^[ \t]+|[ \t]+$/,"",level) }
-  $1 ~ /^title:/ { title=$0; sub("title:","",title); gsub(/^[ \t]+|[ \t]+$/,"",title) }
-  END { if (id!="") print id "\t" level "\t" title }
-' "$index" | while IFS=$'\t' read -r id level title; do
-  track=archetypes; [[ "$level" == "variant" ]] && track=variants
-  out="markdown/$track/$id.md"
-  [[ -f "$out" ]] && continue
-  mkdir -p "markdown/$track"
-  { printf '# %s\n' "$title"; sed '1d' "$tpl"; } > "$out"
-  echo "Scaffolded: $out"
-  created=$((created+1))
-done
+# File checks
+[[ -f "$index_file" ]] || { echo "[ERROR] Missing index: $index_file" >&2; exit 1; }
+[[ -f "$tpl_md" ]] || { echo "[ERROR] Missing markdown template: $tpl_md" >&2; exit 1; }
+[[ -f "$tpl_bib" ]] || { echo "[ERROR] Missing bib template: $tpl_bib" >&2; exit 1; }
+[[ -f "$tpl_yml" ]] || { echo "[ERROR] Missing yml template: $tpl_yml" >&2; exit 1; }
 
-echo "Scaffold complete. New files: $created"
+# Target ID from argument
+target_id=${1:-}
+created_count=0
+
+# Read and process the index file
+while IFS= read -r item; do
+  read -r id level title <<<"$item"
+
+  # Skip if a target is specified and this is not it
+  if [[ -n "$target_id" && "$id" != "$target_id" ]]; then
+    continue
+  fi
+
+  # Determine track (archetypes/variants)
+  track="archetypes"
+  if [[ "$level" == "variant" ]]; then
+    track="variants"
+  fi
+
+  # File paths
+  file_md="markdown/$track/$id.md"
+  file_bib="citations/$track/$id.bib"
+  file_yml="source/$track/$id.yml"
+
+  # Create markdown file if it doesn't exist
+  if [[ ! -f "$file_md" ]]; then
+    mkdir -p "$(dirname "$file_md")"
+    { printf '# %s\n\n' "$title"; cat "$tpl_md"; } > "$file_md"
+    echo "Created: $file_md"
+    created_count=$((created_count + 1))
+  fi
+
+  # Create bib file if it doesn't exist
+  if [[ ! -f "$file_bib" ]]; then
+    mkdir -p "$(dirname "$file_bib")"
+    cp "$tpl_bib" "$file_bib"
+    echo "Created: $file_bib"
+    created_count=$((created_count + 1))
+  fi
+
+  # Create yml file if it doesn't exist
+  if [[ ! -f "$file_yml" ]]; then
+    mkdir -p "$(dirname "$file_yml")"
+    cp "$tpl_yml" "$file_yml"
+    echo "Created: $file_yml"
+    created_count=$((created_count + 1))
+  fi
+done < <(yq -r '.items[] | .id + " " + .level + " " + .title' "$index_file")
+
+echo "Scaffold complete. New files: $created_count"

@@ -1,0 +1,289 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pnml>
+  <net id="CONSORT for Abstracts Checklist" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+    <name>
+      <text>CONSORT for Abstracts Checklist</text>
+    </name>
+    <page id="n0">
+      <place id="sec_2_p_14">
+        <name>
+          <text>sec_2_p_14</text>
+        </name>
+      </place>
+      <place id="sec_1_start">
+        <name>
+          <text>sec_1_start</text>
+        </name>
+      </place>
+      <place id="sec_2_p_10">
+        <name>
+          <text>sec_2_p_10</text>
+        </name>
+      </place>
+      <place id="sec_2_p_13">
+        <name>
+          <text>sec_2_p_13</text>
+        </name>
+      </place>
+      <place id="sec_2_p_18">
+        <name>
+          <text>sec_2_p_18</text>
+        </name>
+      </place>
+      <place id="sec_2_p_2">
+        <name>
+          <text>sec_2_p_2</text>
+        </name>
+      </place>
+      <place id="sec_2_p_3">
+        <name>
+          <text>sec_2_p_3</text>
+        </name>
+      </place>
+      <place id="sec_2_p_9">
+        <name>
+          <text>sec_2_p_9</text>
+        </name>
+      </place>
+      <place id="sec_2_p_11">
+        <name>
+          <text>sec_2_p_11</text>
+        </name>
+      </place>
+      <place id="source">
+        <name>
+          <text>source</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="sec_2_p_8">
+        <name>
+          <text>sec_2_p_8</text>
+        </name>
+      </place>
+      <place id="sec_2_p_12">
+        <name>
+          <text>sec_2_p_12</text>
+        </name>
+      </place>
+      <place id="sink">
+        <name>
+          <text>sink</text>
+        </name>
+      </place>
+      <place id="sec_2_p_4">
+        <name>
+          <text>sec_2_p_4</text>
+        </name>
+      </place>
+      <place id="sec_2_p_5">
+        <name>
+          <text>sec_2_p_5</text>
+        </name>
+      </place>
+      <place id="sec_2_p_6">
+        <name>
+          <text>sec_2_p_6</text>
+        </name>
+      </place>
+      <place id="sec_2_p_7">
+        <name>
+          <text>sec_2_p_7</text>
+        </name>
+      </place>
+      <place id="sec_2_p_16">
+        <name>
+          <text>sec_2_p_16</text>
+        </name>
+      </place>
+      <place id="sec_2_p_19">
+        <name>
+          <text>sec_2_p_19</text>
+        </name>
+      </place>
+      <place id="sec_2_start">
+        <name>
+          <text>sec_2_start</text>
+        </name>
+      </place>
+      <place id="sec_2_p_15">
+        <name>
+          <text>sec_2_p_15</text>
+        </name>
+      </place>
+      <place id="sec_2_p_1">
+        <name>
+          <text>sec_2_p_1</text>
+        </name>
+      </place>
+      <place id="sec_2_p_17">
+        <name>
+          <text>sec_2_p_17</text>
+        </name>
+      </place>
+      <transition id="section_1">
+        <name>
+          <text>Instructions</text>
+        </name>
+      </transition>
+      <transition id="section_2">
+        <name>
+          <text>Checklist Items</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_1">
+        <name>
+          <text>Title Identification of the study as a randomized </text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_10">
+        <name>
+          <text>Blinding masking Whether or not participants care </text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_12">
+        <name>
+          <text>Numbers randomized Number of participants randomiz</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_15">
+        <name>
+          <text>Outcome For the primary outcome a result for each </text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_2">
+        <name>
+          <text>Authors Contact details for the corresponding auth</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_9">
+        <name>
+          <text>Randomization How participants were allocated to i</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_11">
+        <name>
+          <text>Results</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_16">
+        <name>
+          <text>Harms Important adverse events or side effects</text>
+        </name>
+      </transition>
+      <transition id="final_transition">
+        <name>
+          <text>End</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_3">
+        <name>
+          <text>Trial design Description of the trial design eg pa</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_4">
+        <name>
+          <text>Methods</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_5">
+        <name>
+          <text>Participants Eligibility criteria for participants</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_7">
+        <name>
+          <text>Objective Specific objective or hypothesis</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_8">
+        <name>
+          <text>Outcomes Clearly defined primary outcome for this </text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_14">
+        <name>
+          <text>Numbers analyzed Number of participants analyzed i</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_18">
+        <name>
+          <text>Trial registration Registration number and name of</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_6">
+        <name>
+          <text>Interventions Interventions intended for each grou</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_17">
+        <name>
+          <text>Conclusions General interpretation of the results</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_13">
+        <name>
+          <text>Recruitment Trial status</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_19">
+        <name>
+          <text>Funding Source of funding</text>
+        </name>
+      </transition>
+      <arc id="5058369280" source="sec_2_item_7" target="sec_2_p_7"/>
+      <arc id="5058535040" source="sec_2_item_13" target="sec_2_p_13"/>
+      <arc id="5058535936" source="sec_2_item_17" target="sec_2_p_17"/>
+      <arc id="5057976976" source="sec_2_p_6" target="sec_2_item_7"/>
+      <arc id="5058172944" source="section_2" target="sec_2_start"/>
+      <arc id="5055115152" source="sec_2_item_1" target="sec_2_p_1"/>
+      <arc id="5055593872" source="sec_2_item_5" target="sec_2_p_5"/>
+      <arc id="5058510224" source="sec_2_item_8" target="sec_2_p_8"/>
+      <arc id="5058534928" source="sec_2_p_12" target="sec_2_item_13"/>
+      <arc id="5058535824" source="sec_2_p_16" target="sec_2_item_17"/>
+      <arc id="4340912672" source="sec_2_p_3" target="sec_2_item_4"/>
+      <arc id="5058534816" source="sec_2_p_11" target="sec_2_item_12"/>
+      <arc id="5058535712" source="sec_2_item_16" target="sec_2_p_16"/>
+      <arc id="5058536608" source="final_transition" target="sink"/>
+      <arc id="5058536272" source="sec_2_p_18" target="sec_2_item_19"/>
+      <arc id="5058369456" source="sec_2_p_7" target="sec_2_item_8"/>
+      <arc id="4830879792" source="sec_2_p_1" target="sec_2_item_2"/>
+      <arc id="5055750192" source="sec_2_item_4" target="sec_2_p_4"/>
+      <arc id="5058510384" source="sec_2_p_8" target="sec_2_item_9"/>
+      <arc id="5058514096" source="sec_2_item_9" target="sec_2_p_9"/>
+      <arc id="5058534704" source="sec_2_item_12" target="sec_2_p_12"/>
+      <arc id="5058535600" source="sec_2_p_15" target="sec_2_item_16"/>
+      <arc id="5058536496" source="sec_2_p_19" target="final_transition"/>
+      <arc id="5058173248" source="sec_2_start" target="sec_2_item_1"/>
+      <arc id="5058534592" source="sec_2_item_11" target="sec_2_p_11"/>
+      <arc id="5058535488" source="sec_2_item_15" target="sec_2_p_15"/>
+      <arc id="5058536384" source="sec_2_item_19" target="sec_2_p_19"/>
+      <arc id="5058349776" source="source" target="section_1"/>
+      <arc id="5057916240" source="sec_1_start" target="section_2"/>
+      <arc id="5057915600" source="section_1" target="sec_1_start"/>
+      <arc id="5058092368" source="sec_2_p_2" target="sec_2_item_3"/>
+      <arc id="5058092880" source="sec_2_item_3" target="sec_2_p_3"/>
+      <arc id="5057976784" source="sec_2_item_6" target="sec_2_p_6"/>
+      <arc id="5058548176" source="sec_2_p_9" target="sec_2_item_10"/>
+      <arc id="5058548048" source="sec_2_item_10" target="sec_2_p_10"/>
+      <arc id="5058534480" source="sec_2_p_10" target="sec_2_item_11"/>
+      <arc id="5058535376" source="sec_2_p_14" target="sec_2_item_15"/>
+      <arc id="5058535264" source="sec_2_p_13" target="sec_2_item_14"/>
+      <arc id="5058536160" source="sec_2_p_17" target="sec_2_item_18"/>
+      <arc id="5055850736" source="sec_2_p_5" target="sec_2_item_6"/>
+      <arc id="5055593200" source="sec_2_p_4" target="sec_2_item_5"/>
+      <arc id="4830872176" source="sec_2_item_2" target="sec_2_p_2"/>
+      <arc id="5058535152" source="sec_2_item_14" target="sec_2_p_14"/>
+      <arc id="5058536048" source="sec_2_item_18" target="sec_2_p_18"/>
+    </page>
+    <finalmarkings>
+      <marking>
+        <place idref="sink">
+          <text>1</text>
+        </place>
+      </marking>
+    </finalmarkings>
+  </net>
+</pnml>

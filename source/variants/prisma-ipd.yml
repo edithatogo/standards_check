@@ -1,0 +1,31 @@
+id: prisma-ipd
+title: PRISMA-IPD Checklist
+group: prisma
+variant_of: prisma-2020
+status: new
+notes: "PRISMA for Individual Patient Data."
+citation:
+  type: article-journal
+  author:
+    - given: L. A.
+      family: Stewart
+    - given: M.
+      family: Clarke
+    - given: M.
+      family: Rovers
+    - given: R. D.
+      family: Riley
+    - given: M.
+      family: Simmonds
+    - given: G.
+      family: Stewart
+    - given: J. F.
+      family: Tierney
+    - notes: "for the PRISMA-IPD Development Group"
+  title: "Preferred Reporting Items for Systematic review and Meta-Analyses of Individual Participant Data: The PRISMA-IPD Statement"
+  doi: 10.1001/jama.2015.3656
+  journal: "JAMA"
+  volume: 313
+  issue: 16
+  pages: "1657-1665"
+  year: 2015

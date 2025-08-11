@@ -5,24 +5,24 @@
       <text>PRISMA-EcoEvo Checklist</text>
     </name>
     <page id="n0">
-      <place id="sec_21_p_2">
+      <place id="sec_13_p_4">
         <name>
-          <text>sec_21_p_2</text>
+          <text>sec_13_p_4</text>
         </name>
       </place>
-      <place id="sec_24_start">
+      <place id="sec_19_start">
         <name>
-          <text>sec_24_start</text>
+          <text>sec_19_start</text>
         </name>
       </place>
-      <place id="sec_26_start">
+      <place id="sec_20_p_3">
         <name>
-          <text>sec_26_start</text>
+          <text>sec_20_p_3</text>
         </name>
       </place>
-      <place id="sec_28_start">
+      <place id="sec_25_p_1">
         <name>
-          <text>sec_28_start</text>
+          <text>sec_25_p_1</text>
         </name>
       </place>
       <place id="sec_1_start">
@@ -30,19 +30,392 @@
           <text>sec_1_start</text>
         </name>
       </place>
-      <place id="sec_14_p_1">
+      <place id="sec_2_p_4">
         <name>
-          <text>sec_14_p_1</text>
+          <text>sec_2_p_4</text>
         </name>
       </place>
-      <place id="sec_6_p_4">
+      <place id="sec_6_start">
         <name>
-          <text>sec_6_p_4</text>
+          <text>sec_6_start</text>
         </name>
       </place>
-      <place id="sec_8_p_4">
+      <place id="sec_7_p_5">
         <name>
-          <text>sec_8_p_4</text>
+          <text>sec_7_p_5</text>
+        </name>
+      </place>
+      <place id="sec_14_p_2">
+        <name>
+          <text>sec_14_p_2</text>
+        </name>
+      </place>
+      <place id="sec_13_start">
+        <name>
+          <text>sec_13_start</text>
+        </name>
+      </place>
+      <place id="sec_4_p_1">
+        <name>
+          <text>sec_4_p_1</text>
+        </name>
+      </place>
+      <place id="sec_10_start">
+        <name>
+          <text>sec_10_start</text>
+        </name>
+      </place>
+      <place id="sec_16_start">
+        <name>
+          <text>sec_16_start</text>
+        </name>
+      </place>
+      <place id="sec_23_p_2">
+        <name>
+          <text>sec_23_p_2</text>
+        </name>
+      </place>
+      <place id="source">
+        <name>
+          <text>source</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="sec_2_p_5">
+        <name>
+          <text>sec_2_p_5</text>
+        </name>
+      </place>
+      <place id="sec_13_p_3">
+        <name>
+          <text>sec_13_p_3</text>
+        </name>
+      </place>
+      <place id="sec_18_p_4">
+        <name>
+          <text>sec_18_p_4</text>
+        </name>
+      </place>
+      <place id="sec_20_p_2">
+        <name>
+          <text>sec_20_p_2</text>
+        </name>
+      </place>
+      <place id="sec_23_start">
+        <name>
+          <text>sec_23_start</text>
+        </name>
+      </place>
+      <place id="sec_25_start">
+        <name>
+          <text>sec_25_start</text>
+        </name>
+      </place>
+      <place id="sec_2_start">
+        <name>
+          <text>sec_2_start</text>
+        </name>
+      </place>
+      <place id="sec_2_p_1">
+        <name>
+          <text>sec_2_p_1</text>
+        </name>
+      </place>
+      <place id="sec_5_start">
+        <name>
+          <text>sec_5_start</text>
+        </name>
+      </place>
+      <place id="sec_5_p_1">
+        <name>
+          <text>sec_5_p_1</text>
+        </name>
+      </place>
+      <place id="sec_12_p_2">
+        <name>
+          <text>sec_12_p_2</text>
+        </name>
+      </place>
+      <place id="sec_5_p_4">
+        <name>
+          <text>sec_5_p_4</text>
+        </name>
+      </place>
+      <place id="sec_7_p_4">
+        <name>
+          <text>sec_7_p_4</text>
+        </name>
+      </place>
+      <place id="sec_18_p_1">
+        <name>
+          <text>sec_18_p_1</text>
+        </name>
+      </place>
+      <place id="sec_3_p_3">
+        <name>
+          <text>sec_3_p_3</text>
+        </name>
+      </place>
+      <place id="sec_4_start">
+        <name>
+          <text>sec_4_start</text>
+        </name>
+      </place>
+      <place id="sec_9_p_2">
+        <name>
+          <text>sec_9_p_2</text>
+        </name>
+      </place>
+      <place id="sec_15_p_3">
+        <name>
+          <text>sec_15_p_3</text>
+        </name>
+      </place>
+      <place id="sec_23_p_1">
+        <name>
+          <text>sec_23_p_1</text>
+        </name>
+      </place>
+      <place id="sec_13_p_2">
+        <name>
+          <text>sec_13_p_2</text>
+        </name>
+      </place>
+      <place id="sec_18_p_3">
+        <name>
+          <text>sec_18_p_3</text>
+        </name>
+      </place>
+      <place id="sec_20_p_1">
+        <name>
+          <text>sec_20_p_1</text>
+        </name>
+      </place>
+      <place id="sec_22_p_1">
+        <name>
+          <text>sec_22_p_1</text>
+        </name>
+      </place>
+      <place id="sec_24_p_2">
+        <name>
+          <text>sec_24_p_2</text>
+        </name>
+      </place>
+      <place id="sec_26_start">
+        <name>
+          <text>sec_26_start</text>
+        </name>
+      </place>
+      <place id="sec_3_p_1">
+        <name>
+          <text>sec_3_p_1</text>
+        </name>
+      </place>
+      <place id="sec_1_p_5">
+        <name>
+          <text>sec_1_p_5</text>
+        </name>
+      </place>
+      <place id="sec_5_p_3">
+        <name>
+          <text>sec_5_p_3</text>
+        </name>
+      </place>
+      <place id="sec_7_p_3">
+        <name>
+          <text>sec_7_p_3</text>
+        </name>
+      </place>
+      <place id="sec_12_p_1">
+        <name>
+          <text>sec_12_p_1</text>
+        </name>
+      </place>
+      <place id="sec_9_p_1">
+        <name>
+          <text>sec_9_p_1</text>
+        </name>
+      </place>
+      <place id="sec_15_p_2">
+        <name>
+          <text>sec_15_p_2</text>
+        </name>
+      </place>
+      <place id="sec_18_start">
+        <name>
+          <text>sec_18_start</text>
+        </name>
+      </place>
+      <place id="sec_27_start">
+        <name>
+          <text>sec_27_start</text>
+        </name>
+      </place>
+      <place id="sec_13_p_1">
+        <name>
+          <text>sec_13_p_1</text>
+        </name>
+      </place>
+      <place id="sec_18_p_2">
+        <name>
+          <text>sec_18_p_2</text>
+        </name>
+      </place>
+      <place id="sec_20_start">
+        <name>
+          <text>sec_20_start</text>
+        </name>
+      </place>
+      <place id="sec_22_start">
+        <name>
+          <text>sec_22_start</text>
+        </name>
+      </place>
+      <place id="sec_24_p_1">
+        <name>
+          <text>sec_24_p_1</text>
+        </name>
+      </place>
+      <place id="sec_25_p_6">
+        <name>
+          <text>sec_25_p_6</text>
+        </name>
+      </place>
+      <place id="sec_1_p_2">
+        <name>
+          <text>sec_1_p_2</text>
+        </name>
+      </place>
+      <place id="sec_7_p_2">
+        <name>
+          <text>sec_7_p_2</text>
+        </name>
+      </place>
+      <place id="sec_12_start">
+        <name>
+          <text>sec_12_start</text>
+        </name>
+      </place>
+      <place id="sec_26_p_2">
+        <name>
+          <text>sec_26_p_2</text>
+        </name>
+      </place>
+      <place id="sec_17_p_1">
+        <name>
+          <text>sec_17_p_1</text>
+        </name>
+      </place>
+      <place id="sec_15_p_1">
+        <name>
+          <text>sec_15_p_1</text>
+        </name>
+      </place>
+      <place id="sec_26_p_4">
+        <name>
+          <text>sec_26_p_4</text>
+        </name>
+      </place>
+      <place id="sec_19_p_4">
+        <name>
+          <text>sec_19_p_4</text>
+        </name>
+      </place>
+      <place id="sec_21_p_1">
+        <name>
+          <text>sec_21_p_1</text>
+        </name>
+      </place>
+      <place id="sec_25_p_5">
+        <name>
+          <text>sec_25_p_5</text>
+        </name>
+      </place>
+      <place id="sec_7_p_1">
+        <name>
+          <text>sec_7_p_1</text>
+        </name>
+      </place>
+      <place id="sec_11_p_2">
+        <name>
+          <text>sec_11_p_2</text>
+        </name>
+      </place>
+      <place id="sec_26_p_1">
+        <name>
+          <text>sec_26_p_1</text>
+        </name>
+      </place>
+      <place id="sec_11_start">
+        <name>
+          <text>sec_11_start</text>
+        </name>
+      </place>
+      <place id="sec_17_start">
+        <name>
+          <text>sec_17_start</text>
+        </name>
+      </place>
+      <place id="sec_26_p_3">
+        <name>
+          <text>sec_26_p_3</text>
+        </name>
+      </place>
+      <place id="sec_1_p_1">
+        <name>
+          <text>sec_1_p_1</text>
+        </name>
+      </place>
+      <place id="sec_2_p_2">
+        <name>
+          <text>sec_2_p_2</text>
+        </name>
+      </place>
+      <place id="sec_19_p_3">
+        <name>
+          <text>sec_19_p_3</text>
+        </name>
+      </place>
+      <place id="sec_21_start">
+        <name>
+          <text>sec_21_start</text>
+        </name>
+      </place>
+      <place id="sec_25_p_4">
+        <name>
+          <text>sec_25_p_4</text>
+        </name>
+      </place>
+      <place id="sec_8_p_3">
+        <name>
+          <text>sec_8_p_3</text>
+        </name>
+      </place>
+      <place id="sec_1_p_6">
+        <name>
+          <text>sec_1_p_6</text>
+        </name>
+      </place>
+      <place id="sec_5_p_2">
+        <name>
+          <text>sec_5_p_2</text>
+        </name>
+      </place>
+      <place id="sec_27_p_2">
+        <name>
+          <text>sec_27_p_2</text>
+        </name>
+      </place>
+      <place id="sec_7_start">
+        <name>
+          <text>sec_7_start</text>
+        </name>
+      </place>
+      <place id="sec_9_start">
+        <name>
+          <text>sec_9_start</text>
         </name>
       </place>
       <place id="sec_11_p_1">
@@ -55,237 +428,24 @@
           <text>sec_16_p_3</text>
         </name>
       </place>
-      <place id="sec_3_p_1">
+      <place id="sec_10_p_3">
         <name>
-          <text>sec_3_p_1</text>
+          <text>sec_10_p_3</text>
         </name>
       </place>
-      <place id="sec_10_p_2">
+      <place id="sec_14_p_1">
         <name>
-          <text>sec_10_p_2</text>
+          <text>sec_14_p_1</text>
         </name>
       </place>
-      <place id="sec_13_start">
+      <place id="sec_24_start">
         <name>
-          <text>sec_13_start</text>
+          <text>sec_24_start</text>
         </name>
       </place>
-      <place id="sec_20_start">
+      <place id="sec_14_start">
         <name>
-          <text>sec_20_start</text>
-        </name>
-      </place>
-      <place id="source">
-        <name>
-          <text>source</text>
-        </name>
-        <initialMarking>
-          <text>1</text>
-        </initialMarking>
-      </place>
-      <place id="sec_21_p_1">
-        <name>
-          <text>sec_21_p_1</text>
-        </name>
-      </place>
-      <place id="sec_23_p_1">
-        <name>
-          <text>sec_23_p_1</text>
-        </name>
-      </place>
-      <place id="sec_25_p_2">
-        <name>
-          <text>sec_25_p_2</text>
-        </name>
-      </place>
-      <place id="sec_27_start">
-        <name>
-          <text>sec_27_start</text>
-        </name>
-      </place>
-      <place id="sec_27_p_4">
-        <name>
-          <text>sec_27_p_4</text>
-        </name>
-      </place>
-      <place id="sec_2_p_6">
-        <name>
-          <text>sec_2_p_6</text>
-        </name>
-      </place>
-      <place id="sec_5_p_2">
-        <name>
-          <text>sec_5_p_2</text>
-        </name>
-      </place>
-      <place id="sec_6_p_3">
-        <name>
-          <text>sec_6_p_3</text>
-        </name>
-      </place>
-      <place id="sec_8_p_3">
-        <name>
-          <text>sec_8_p_3</text>
-        </name>
-      </place>
-      <place id="sec_19_start">
-        <name>
-          <text>sec_19_start</text>
-        </name>
-      </place>
-      <place id="sec_16_p_2">
-        <name>
-          <text>sec_16_p_2</text>
-        </name>
-      </place>
-      <place id="sec_2_p_1">
-        <name>
-          <text>sec_2_p_1</text>
-        </name>
-      </place>
-      <place id="sec_10_p_1">
-        <name>
-          <text>sec_10_p_1</text>
-        </name>
-      </place>
-      <place id="sec_12_p_2">
-        <name>
-          <text>sec_12_p_2</text>
-        </name>
-      </place>
-      <place id="sec_19_p_4">
-        <name>
-          <text>sec_19_p_4</text>
-        </name>
-      </place>
-      <place id="sec_27_p_1">
-        <name>
-          <text>sec_27_p_1</text>
-        </name>
-      </place>
-      <place id="sec_23_start">
-        <name>
-          <text>sec_23_start</text>
-        </name>
-      </place>
-      <place id="sec_25_p_1">
-        <name>
-          <text>sec_25_p_1</text>
-        </name>
-      </place>
-      <place id="sec_26_p_6">
-        <name>
-          <text>sec_26_p_6</text>
-        </name>
-      </place>
-      <place id="sec_27_p_3">
-        <name>
-          <text>sec_27_p_3</text>
-        </name>
-      </place>
-      <place id="sec_3_p_5">
-        <name>
-          <text>sec_3_p_5</text>
-        </name>
-      </place>
-      <place id="sec_2_p_4">
-        <name>
-          <text>sec_2_p_4</text>
-        </name>
-      </place>
-      <place id="sec_6_p_2">
-        <name>
-          <text>sec_6_p_2</text>
-        </name>
-      </place>
-      <place id="sec_8_p_2">
-        <name>
-          <text>sec_8_p_2</text>
-        </name>
-      </place>
-      <place id="sec_5_p_1">
-        <name>
-          <text>sec_5_p_1</text>
-        </name>
-      </place>
-      <place id="sec_12_p_1">
-        <name>
-          <text>sec_12_p_1</text>
-        </name>
-      </place>
-      <place id="sec_16_p_1">
-        <name>
-          <text>sec_16_p_1</text>
-        </name>
-      </place>
-      <place id="sec_18_p_1">
-        <name>
-          <text>sec_18_p_1</text>
-        </name>
-      </place>
-      <place id="sec_19_p_3">
-        <name>
-          <text>sec_19_p_3</text>
-        </name>
-      </place>
-      <place id="sec_22_p_1">
-        <name>
-          <text>sec_22_p_1</text>
-        </name>
-      </place>
-      <place id="sec_25_start">
-        <name>
-          <text>sec_25_start</text>
-        </name>
-      </place>
-      <place id="sec_26_p_5">
-        <name>
-          <text>sec_26_p_5</text>
-        </name>
-      </place>
-      <place id="sec_27_p_2">
-        <name>
-          <text>sec_27_p_2</text>
-        </name>
-      </place>
-      <place id="sec_15_start">
-        <name>
-          <text>sec_15_start</text>
-        </name>
-      </place>
-      <place id="sec_4_p_3">
-        <name>
-          <text>sec_4_p_3</text>
-        </name>
-      </place>
-      <place id="sec_6_start">
-        <name>
-          <text>sec_6_start</text>
-        </name>
-      </place>
-      <place id="sec_29_start">
-        <name>
-          <text>sec_29_start</text>
-        </name>
-      </place>
-      <place id="sec_2_start">
-        <name>
-          <text>sec_2_start</text>
-        </name>
-      </place>
-      <place id="sec_8_p_1">
-        <name>
-          <text>sec_8_p_1</text>
-        </name>
-      </place>
-      <place id="sec_18_start">
-        <name>
-          <text>sec_18_start</text>
-        </name>
-      </place>
-      <place id="sec_16_start">
-        <name>
-          <text>sec_16_start</text>
+          <text>sec_14_start</text>
         </name>
       </place>
       <place id="sec_19_p_2">
@@ -293,24 +453,14 @@
           <text>sec_19_p_2</text>
         </name>
       </place>
-      <place id="sec_21_start">
+      <place id="sec_20_p_5">
         <name>
-          <text>sec_21_start</text>
+          <text>sec_20_p_5</text>
         </name>
       </place>
-      <place id="sec_22_start">
+      <place id="sec_25_p_3">
         <name>
-          <text>sec_22_start</text>
-        </name>
-      </place>
-      <place id="sec_24_p_4">
-        <name>
-          <text>sec_24_p_4</text>
-        </name>
-      </place>
-      <place id="sec_26_p_4">
-        <name>
-          <text>sec_26_p_4</text>
+          <text>sec_25_p_3</text>
         </name>
       </place>
       <place id="sec_4_p_2">
@@ -318,14 +468,19 @@
           <text>sec_4_p_2</text>
         </name>
       </place>
-      <place id="sec_14_p_5">
+      <place id="sec_8_p_2">
         <name>
-          <text>sec_14_p_5</text>
+          <text>sec_8_p_2</text>
         </name>
       </place>
-      <place id="sec_28_p_2">
+      <place id="sec_27_p_1">
         <name>
-          <text>sec_28_p_2</text>
+          <text>sec_27_p_1</text>
+        </name>
+      </place>
+      <place id="sec_6_p_2">
+        <name>
+          <text>sec_6_p_2</text>
         </name>
       </place>
       <place id="sec_8_start">
@@ -333,19 +488,44 @@
           <text>sec_8_start</text>
         </name>
       </place>
-      <place id="sec_10_start">
+      <place id="sec_8_p_4">
         <name>
-          <text>sec_10_start</text>
+          <text>sec_8_p_4</text>
         </name>
       </place>
-      <place id="sec_15_p_3">
+      <place id="sec_15_start">
         <name>
-          <text>sec_15_p_3</text>
+          <text>sec_15_start</text>
         </name>
       </place>
-      <place id="sec_17_p_3">
+      <place id="sec_2_p_3">
         <name>
-          <text>sec_17_p_3</text>
+          <text>sec_2_p_3</text>
+        </name>
+      </place>
+      <place id="sec_10_p_2">
+        <name>
+          <text>sec_10_p_2</text>
+        </name>
+      </place>
+      <place id="sec_16_p_2">
+        <name>
+          <text>sec_16_p_2</text>
+        </name>
+      </place>
+      <place id="sec_23_p_4">
+        <name>
+          <text>sec_23_p_4</text>
+        </name>
+      </place>
+      <place id="sec_3_p_2">
+        <name>
+          <text>sec_3_p_2</text>
+        </name>
+      </place>
+      <place id="sec_13_p_5">
+        <name>
+          <text>sec_13_p_5</text>
         </name>
       </place>
       <place id="sec_19_p_1">
@@ -358,199 +538,9 @@
           <text>sec_20_p_4</text>
         </name>
       </place>
-      <place id="sec_3_start">
+      <place id="sec_25_p_2">
         <name>
-          <text>sec_3_start</text>
-        </name>
-      </place>
-      <place id="sec_21_p_5">
-        <name>
-          <text>sec_21_p_5</text>
-        </name>
-      </place>
-      <place id="sec_24_p_3">
-        <name>
-          <text>sec_24_p_3</text>
-        </name>
-      </place>
-      <place id="sec_26_p_3">
-        <name>
-          <text>sec_26_p_3</text>
-        </name>
-      </place>
-      <place id="sec_9_p_2">
-        <name>
-          <text>sec_9_p_2</text>
-        </name>
-      </place>
-      <place id="sec_14_p_4">
-        <name>
-          <text>sec_14_p_4</text>
-        </name>
-      </place>
-      <place id="sec_4_start">
-        <name>
-          <text>sec_4_start</text>
-        </name>
-      </place>
-      <place id="sec_2_p_5">
-        <name>
-          <text>sec_2_p_5</text>
-        </name>
-      </place>
-      <place id="sec_6_p_1">
-        <name>
-          <text>sec_6_p_1</text>
-        </name>
-      </place>
-      <place id="sec_28_p_1">
-        <name>
-          <text>sec_28_p_1</text>
-        </name>
-      </place>
-      <place id="sec_7_p_2">
-        <name>
-          <text>sec_7_p_2</text>
-        </name>
-      </place>
-      <place id="sec_9_start">
-        <name>
-          <text>sec_9_start</text>
-        </name>
-      </place>
-      <place id="sec_9_p_4">
-        <name>
-          <text>sec_9_p_4</text>
-        </name>
-      </place>
-      <place id="sec_12_start">
-        <name>
-          <text>sec_12_start</text>
-        </name>
-      </place>
-      <place id="sec_17_p_2">
-        <name>
-          <text>sec_17_p_2</text>
-        </name>
-      </place>
-      <place id="sec_3_p_4">
-        <name>
-          <text>sec_3_p_4</text>
-        </name>
-      </place>
-      <place id="sec_3_p_2">
-        <name>
-          <text>sec_3_p_2</text>
-        </name>
-      </place>
-      <place id="sec_14_start">
-        <name>
-          <text>sec_14_start</text>
-        </name>
-      </place>
-      <place id="sec_15_p_2">
-        <name>
-          <text>sec_15_p_2</text>
-        </name>
-      </place>
-      <place id="sec_20_p_3">
-        <name>
-          <text>sec_20_p_3</text>
-        </name>
-      </place>
-      <place id="sec_21_p_4">
-        <name>
-          <text>sec_21_p_4</text>
-        </name>
-      </place>
-      <place id="sec_24_p_2">
-        <name>
-          <text>sec_24_p_2</text>
-        </name>
-      </place>
-      <place id="sec_26_p_2">
-        <name>
-          <text>sec_26_p_2</text>
-        </name>
-      </place>
-      <place id="sec_5_start">
-        <name>
-          <text>sec_5_start</text>
-        </name>
-      </place>
-      <place id="sec_9_p_1">
-        <name>
-          <text>sec_9_p_1</text>
-        </name>
-      </place>
-      <place id="sec_14_p_3">
-        <name>
-          <text>sec_14_p_3</text>
-        </name>
-      </place>
-      <place id="sec_11_p_3">
-        <name>
-          <text>sec_11_p_3</text>
-        </name>
-      </place>
-      <place id="sec_7_p_1">
-        <name>
-          <text>sec_7_p_1</text>
-        </name>
-      </place>
-      <place id="sec_8_p_6">
-        <name>
-          <text>sec_8_p_6</text>
-        </name>
-      </place>
-      <place id="sec_9_p_3">
-        <name>
-          <text>sec_9_p_3</text>
-        </name>
-      </place>
-      <place id="sec_17_p_1">
-        <name>
-          <text>sec_17_p_1</text>
-        </name>
-      </place>
-      <place id="sec_4_p_1">
-        <name>
-          <text>sec_4_p_1</text>
-        </name>
-      </place>
-      <place id="sec_13_p_2">
-        <name>
-          <text>sec_13_p_2</text>
-        </name>
-      </place>
-      <place id="sec_15_p_1">
-        <name>
-          <text>sec_15_p_1</text>
-        </name>
-      </place>
-      <place id="sec_20_p_2">
-        <name>
-          <text>sec_20_p_2</text>
-        </name>
-      </place>
-      <place id="sec_21_p_3">
-        <name>
-          <text>sec_21_p_3</text>
-        </name>
-      </place>
-      <place id="sec_24_p_1">
-        <name>
-          <text>sec_24_p_1</text>
-        </name>
-      </place>
-      <place id="sec_26_p_1">
-        <name>
-          <text>sec_26_p_1</text>
-        </name>
-      </place>
-      <place id="sec_14_p_2">
-        <name>
-          <text>sec_14_p_2</text>
+          <text>sec_25_p_2</text>
         </name>
       </place>
       <place id="sink">
@@ -558,584 +548,104 @@
           <text>sink</text>
         </name>
       </place>
-      <place id="sec_2_p_2">
+      <place id="sec_1_p_3">
         <name>
-          <text>sec_2_p_2</text>
+          <text>sec_1_p_3</text>
         </name>
       </place>
-      <place id="sec_3_p_3">
+      <place id="sec_3_start">
         <name>
-          <text>sec_3_p_3</text>
+          <text>sec_3_start</text>
         </name>
       </place>
-      <place id="sec_11_p_2">
+      <place id="sec_8_p_1">
         <name>
-          <text>sec_11_p_2</text>
+          <text>sec_8_p_1</text>
         </name>
       </place>
-      <place id="sec_2_p_3">
+      <place id="sec_14_p_3">
         <name>
-          <text>sec_2_p_3</text>
+          <text>sec_14_p_3</text>
         </name>
       </place>
-      <place id="sec_7_start">
+      <place id="sec_1_p_4">
         <name>
-          <text>sec_7_start</text>
+          <text>sec_1_p_4</text>
         </name>
       </place>
-      <place id="sec_8_p_5">
+      <place id="sec_6_p_1">
         <name>
-          <text>sec_8_p_5</text>
+          <text>sec_6_p_1</text>
         </name>
       </place>
-      <place id="sec_17_start">
+      <place id="sec_7_p_6">
         <name>
-          <text>sec_17_start</text>
+          <text>sec_7_p_6</text>
         </name>
       </place>
-      <place id="sec_11_start">
+      <place id="sec_10_p_1">
         <name>
-          <text>sec_11_start</text>
+          <text>sec_10_p_1</text>
         </name>
       </place>
-      <place id="sec_13_p_1">
+      <place id="sec_16_p_1">
         <name>
-          <text>sec_13_p_1</text>
+          <text>sec_16_p_1</text>
         </name>
       </place>
-      <place id="sec_20_p_1">
+      <place id="sec_23_p_3">
         <name>
-          <text>sec_20_p_1</text>
+          <text>sec_23_p_3</text>
         </name>
       </place>
-      <transition id="sec_8_item_1">
+      <transition id="sec_1_item_3">
         <name>
-          <text>71 Location Describe where in the reports data wer</text>
-        </name>
-      </transition>
-      <transition id="sec_4_item_1">
-        <name>
-          <text>31 Registration Register review aims hypotheses if</text>
-        </name>
-      </transition>
-      <transition id="section_16">
-        <name>
-          <text>Meta-regression and Model Selection</text>
-        </name>
-      </transition>
-      <transition id="section_18">
-        <name>
-          <text>Clarification of Post Hoc Analyses</text>
-        </name>
-      </transition>
-      <transition id="sec_19_item_2">
-        <name>
-          <text>182 Data Share data required to reproduce the resu</text>
-        </name>
-      </transition>
-      <transition id="section_21">
-        <name>
-          <text>Sample Sizes and Study Characteristics</text>
-        </name>
-      </transition>
-      <transition id="sec_27_item_3">
-        <name>
-          <text>263 Contact Provide contact details for the corres</text>
-        </name>
-      </transition>
-      <transition id="section_1">
-        <name>
-          <text>Instructions</text>
-        </name>
-      </transition>
-      <transition id="section_22">
-        <name>
-          <text>Meta-analysis</text>
-        </name>
-      </transition>
-      <transition id="sec_24_item_4">
-        <name>
-          <text>234 Model Outcomes Describe outcomes from model se</text>
-        </name>
-      </transition>
-      <transition id="sec_26_item_4">
-        <name>
-          <text>254 Relevance Summarise the main findings in terms</text>
-        </name>
-      </transition>
-      <transition id="sec_5_item_2">
-        <name>
-          <text>42 Justification Justify criteria if necessary ie </text>
-        </name>
-      </transition>
-      <transition id="sec_28_item_2">
-        <name>
-          <text>272 Referenced Sources List included studies as re</text>
-        </name>
-      </transition>
-      <transition id="sec_10_item_1">
-        <name>
-          <text>91 Assessment Describe whether the quality of stud</text>
-        </name>
-      </transition>
-      <transition id="section_4">
-        <name>
-          <text>Review Registration</text>
-        </name>
-      </transition>
-      <transition id="section_8">
-        <name>
-          <text>Data Collection Process</text>
-        </name>
-      </transition>
-      <transition id="section_10">
-        <name>
-          <text>Assessment of Individual Study Quality</text>
-        </name>
-      </transition>
-      <transition id="sec_19_item_1">
-        <name>
-          <text>181 Metadata Share metadata ie data descriptions</text>
-        </name>
-      </transition>
-      <transition id="sec_3_item_1">
-        <name>
-          <text>21 Rationale Provide a rationale for the review</text>
-        </name>
-      </transition>
-      <transition id="sec_17_item_3">
-        <name>
-          <text>163 Robustness Describe any other analyses of robu</text>
-        </name>
-      </transition>
-      <transition id="sec_15_item_3">
-        <name>
-          <text>143 Justification Justify decisions made</text>
-        </name>
-      </transition>
-      <transition id="sec_15_item_1">
-        <name>
-          <text>141 Types Describe the types of nonindependence en</text>
-        </name>
-      </transition>
-      <transition id="sec_20_item_4">
-        <name>
-          <text>194 Flowchart Present a Preferred Reporting Items </text>
-        </name>
-      </transition>
-      <transition id="sec_2_item_5">
-        <name>
-          <text>15 Conclusions State conclusions</text>
-        </name>
-      </transition>
-      <transition id="sec_21_item_5">
-        <name>
-          <text>205 Quality Provide a summary of characteristics r</text>
-        </name>
-      </transition>
-      <transition id="sec_26_item_3">
-        <name>
-          <text>253 Heterogeneity Summarise the main findings in t</text>
-        </name>
-      </transition>
-      <transition id="section_5">
-        <name>
-          <text>Eligibility Criteria</text>
-        </name>
-      </transition>
-      <transition id="sec_3_item_4">
-        <name>
-          <text>24 Primary Questions State the primary questions t</text>
-        </name>
-      </transition>
-      <transition id="sec_9_item_2">
-        <name>
-          <text>82 Excluded Items Describe items that do not appea</text>
-        </name>
-      </transition>
-      <transition id="sec_14_item_4">
-        <name>
-          <text>134 Arguments Describe any arguments that differed</text>
-        </name>
-      </transition>
-      <transition id="sec_2_item_6">
-        <name>
-          <text>16 Limitations State limitations</text>
+          <text>13 Describe the data set</text>
         </name>
       </transition>
       <transition id="sec_7_item_2">
         <name>
-          <text>62 Personnel Report the number of people involved </text>
-        </name>
-      </transition>
-      <transition id="section_9">
-        <name>
-          <text>Data Items</text>
-        </name>
-      </transition>
-      <transition id="sec_9_item_4">
-        <name>
-          <text>84 Replication Unit Describe the type of replicati</text>
+          <text>72 Describe how data were collected eg software us</text>
         </name>
       </transition>
       <transition id="section_12">
         <name>
-          <text>Missing Data</text>
-        </name>
-      </transition>
-      <transition id="sec_17_item_2">
-        <name>
-          <text>162 Investigation Describe any steps taken to inve</text>
-        </name>
-      </transition>
-      <transition id="section_2">
-        <name>
-          <text>Title and Abstract</text>
-        </name>
-      </transition>
-      <transition id="sec_3_item_2">
-        <name>
-          <text>22 Previous Work Reference any previous reviews or</text>
-        </name>
-      </transition>
-      <transition id="section_14">
-        <name>
-          <text>Software</text>
-        </name>
-      </transition>
-      <transition id="sec_20_item_3">
-        <name>
-          <text>193 Reasons Report brief reasons for exclusion fro</text>
-        </name>
-      </transition>
-      <transition id="sec_14_item_5">
-        <name>
-          <text>135 Versions Describe the version numbers of all s</text>
-        </name>
-      </transition>
-      <transition id="sec_21_item_4">
-        <name>
-          <text>204 Moderators Provide a summary of limitations of</text>
-        </name>
-      </transition>
-      <transition id="sec_24_item_2">
-        <name>
-          <text>232 All Moderators Include estimates and confidenc</text>
+          <text>Meta-analytic Model Description</text>
         </name>
       </transition>
       <transition id="sec_26_item_2">
         <name>
-          <text>252 Precision Summarise the main findings in terms</text>
-        </name>
-      </transition>
-      <transition id="sec_14_item_3">
-        <name>
-          <text>133 Functions Describe the functions used to run m</text>
-        </name>
-      </transition>
-      <transition id="sec_11_item_3">
-        <name>
-          <text>103 Derivation If no reference exists derive the e</text>
-        </name>
-      </transition>
-      <transition id="sec_7_item_1">
-        <name>
-          <text>61 Process Describe how studies were selected for </text>
-        </name>
-      </transition>
-      <transition id="sec_8_item_6">
-        <name>
-          <text>76 Accuracy State the number of extractions that w</text>
-        </name>
-      </transition>
-      <transition id="sec_9_item_3">
-        <name>
-          <text>83 Assumptions Describe main assumptions or simpli</text>
-        </name>
-      </transition>
-      <transition id="sec_17_item_1">
-        <name>
-          <text>161 Bias Assessment Describe assessments of the ri</text>
-        </name>
-      </transition>
-      <transition id="sec_2_item_3">
-        <name>
-          <text>13 Data Set Describe the data set</text>
-        </name>
-      </transition>
-      <transition id="sec_3_item_5">
-        <name>
-          <text>25 Effect Sizes Describe whether effect sizes were</text>
-        </name>
-      </transition>
-      <transition id="sec_4_item_2">
-        <name>
-          <text>32 Deviations Describe deviations from the registe</text>
-        </name>
-      </transition>
-      <transition id="sec_12_item_1">
-        <name>
-          <text>111 Handling Describe any steps taken to deal with</text>
-        </name>
-      </transition>
-      <transition id="sec_13_item_2">
-        <name>
-          <text>122 Justification The most common approach in ecol</text>
-        </name>
-      </transition>
-      <transition id="sec_20_item_2">
-        <name>
-          <text>192 Excluded Report the number of studies excluded</text>
-        </name>
-      </transition>
-      <transition id="sec_24_item_3">
-        <name>
-          <text>233 Interactions Report interactions if they were </text>
-        </name>
-      </transition>
-      <transition id="sec_21_item_3">
-        <name>
-          <text>203 Outcomes Provide a summary of key characterist</text>
-        </name>
-      </transition>
-      <transition id="sec_24_item_1">
-        <name>
-          <text>231 Slopes Provide estimates of metaregression slo</text>
-        </name>
-      </transition>
-      <transition id="sec_26_item_1">
-        <name>
-          <text>251 Magnitude Summarise the main findings in terms</text>
-        </name>
-      </transition>
-      <transition id="sec_2_item_4">
-        <name>
-          <text>14 Primary Outcome State the results of the primar</text>
-        </name>
-      </transition>
-      <transition id="sec_5_item_1">
-        <name>
-          <text>41 Criteria Report the specific criteria used for </text>
-        </name>
-      </transition>
-      <transition id="sec_14_item_2">
-        <name>
-          <text>132 Packages Describe the packages used to run mod</text>
-        </name>
-      </transition>
-      <transition id="section_7">
-        <name>
-          <text>Study Selection</text>
-        </name>
-      </transition>
-      <transition id="sec_8_item_5">
-        <name>
-          <text>75 Personnel Report who collected data</text>
-        </name>
-      </transition>
-      <transition id="sec_15_item_2">
-        <name>
-          <text>142 Handling Describe how nonindependence has been</text>
-        </name>
-      </transition>
-      <transition id="sec_11_item_2">
-        <name>
-          <text>102 Equation Provide a reference to the equation o</text>
-        </name>
-      </transition>
-      <transition id="sec_2_item_1">
-        <name>
-          <text>11 Identification Identify the review as a systema</text>
-        </name>
-      </transition>
-      <transition id="section_11">
-        <name>
-          <text>Effect Size Measures</text>
-        </name>
-      </transition>
-      <transition id="section_17">
-        <name>
-          <text>Publication Bias and Sensitivity Analyses</text>
-        </name>
-      </transition>
-      <transition id="sec_21_item_1">
-        <name>
-          <text>201 Metaanalyses Report the number of studies and </text>
-        </name>
-      </transition>
-      <transition id="sec_9_item_1">
-        <name>
-          <text>81 Key Data Describe the key data sought from each</text>
-        </name>
-      </transition>
-      <transition id="sec_21_item_2">
-        <name>
-          <text>202 Metaregressions Report the number of studies a</text>
-        </name>
-      </transition>
-      <transition id="section_24">
-        <name>
-          <text>Meta-regression</text>
-        </name>
-      </transition>
-      <transition id="section_26">
-        <name>
-          <text>Discussion</text>
-        </name>
-      </transition>
-      <transition id="section_28">
-        <name>
-          <text>References</text>
-        </name>
-      </transition>
-      <transition id="sec_28_item_1">
-        <name>
-          <text>271 Reference List Provide a reference list of all</text>
-        </name>
-      </transition>
-      <transition id="sec_14_item_1">
-        <name>
-          <text>131 Platform Describe the statistical platform use</text>
-        </name>
-      </transition>
-      <transition id="sec_11_item_1">
-        <name>
-          <text>101 Effect Size Describe effect sizes used</text>
-        </name>
-      </transition>
-      <transition id="section_6">
-        <name>
-          <text>Finding Studies</text>
-        </name>
-      </transition>
-      <transition id="sec_6_item_4">
-        <name>
-          <text>54 Reproducibility Provide enough information to r</text>
-        </name>
-      </transition>
-      <transition id="sec_8_item_4">
-        <name>
-          <text>74 Missing Information Report how missing or ambig</text>
-        </name>
-      </transition>
-      <transition id="section_3">
-        <name>
-          <text>Aims and Questions</text>
-        </name>
-      </transition>
-      <transition id="sec_6_item_2">
-        <name>
-          <text>52 Sources State what sources of information were </text>
-        </name>
-      </transition>
-      <transition id="sec_10_item_2">
-        <name>
-          <text>92 Incorporation Describe how information about st</text>
-        </name>
-      </transition>
-      <transition id="section_13">
-        <name>
-          <text>Meta-analytic Model Description</text>
-        </name>
-      </transition>
-      <transition id="section_20">
-        <name>
-          <text>Results of Study Selection Process</text>
-        </name>
-      </transition>
-      <transition id="sec_20_item_1">
-        <name>
-          <text>191 Screened Report the number of studies screened</text>
-        </name>
-      </transition>
-      <transition id="sec_27_item_2">
-        <name>
-          <text>262 Contributions List the contributions of each c</text>
-        </name>
-      </transition>
-      <transition id="sec_23_item_1">
-        <name>
-          <text>221 Indicators Report indicators of heterogeneity </text>
-        </name>
-      </transition>
-      <transition id="sec_25_item_2">
-        <name>
-          <text>242 Robustness Results Provide results for the rob</text>
-        </name>
-      </transition>
-      <transition id="section_27">
-        <name>
-          <text>Contributions and Funding</text>
-        </name>
-      </transition>
-      <transition id="sec_27_item_4">
-        <name>
-          <text>264 Conflicts Disclose any conflicts of interest</text>
+          <text>262 List the contributions of each coauthor</text>
         </name>
       </transition>
       <transition id="sec_3_item_3">
         <name>
-          <text>23 Aims and Scope State the aims and scope of the </text>
+          <text>33 Justify deviations from the registered aims and</text>
         </name>
       </transition>
-      <transition id="sec_6_item_3">
+      <transition id="sec_17_item_1">
         <name>
-          <text>53 Search Strings Include for each database search</text>
+          <text>171 When hypotheses were formulated after data ana</text>
         </name>
       </transition>
-      <transition id="sec_8_item_3">
+      <transition id="sec_26_item_4">
         <name>
-          <text>73 Moderators Describe moderator variables that we</text>
-        </name>
-      </transition>
-      <transition id="sec_13_item_1">
-        <name>
-          <text>121 Models Describe the models used for synthesis </text>
-        </name>
-      </transition>
-      <transition id="sec_12_item_2">
-        <name>
-          <text>112 Justification Justify the decisions made to de</text>
-        </name>
-      </transition>
-      <transition id="sec_16_item_2">
-        <name>
-          <text>152 Parameter Justification Justify the number of </text>
-        </name>
-      </transition>
-      <transition id="section_19">
-        <name>
-          <text>Metadata, Data, and Code</text>
+          <text>264 Disclose any conflicts of interest</text>
         </name>
       </transition>
       <transition id="sec_19_item_4">
         <name>
-          <text>184 Scripts Share analysis scripts or if a softwar</text>
+          <text>194 Present a Preferred Reporting Items for System</text>
         </name>
       </transition>
-      <transition id="sec_27_item_1">
+      <transition id="sec_21_item_1">
         <name>
-          <text>261 Affiliations Provide names affiliations and fu</text>
+          <text>211 Provide a quantitative synthesis of results ac</text>
         </name>
       </transition>
-      <transition id="sec_2_item_2">
+      <transition id="sec_12_item_1">
         <name>
-          <text>12 Summary Summarise the aims and scope of the rev</text>
-        </name>
-      </transition>
-      <transition id="section_23">
-        <name>
-          <text>Heterogeneity</text>
-        </name>
-      </transition>
-      <transition id="sec_25_item_1">
-        <name>
-          <text>241 Bias Results Provide results for the assessmen</text>
-        </name>
-      </transition>
-      <transition id="sec_26_item_6">
-        <name>
-          <text>256 Limitations Consider limitations and their inf</text>
+          <text>121 Describe the models used for synthesis of effe</text>
         </name>
       </transition>
       <transition id="final_transition">
@@ -1143,304 +653,770 @@
           <text>End</text>
         </name>
       </transition>
-      <transition id="sec_4_item_3">
+      <transition id="sec_7_item_1">
         <name>
-          <text>33 Justification Justify deviations from the regis</text>
+          <text>71 Describe where in the reports data were collect</text>
         </name>
       </transition>
-      <transition id="sec_8_item_2">
+      <transition id="section_11">
         <name>
-          <text>72 Method Describe how data were collected eg soft</text>
+          <text>Missing Data</text>
         </name>
       </transition>
-      <transition id="sec_16_item_3">
+      <transition id="sec_2_item_2">
         <name>
-          <text>153 Model Selection Describe any process of model </text>
+          <text>22 Reference any previous reviews or metaanalyses </text>
         </name>
       </transition>
-      <transition id="sec_6_item_1">
+      <transition id="section_17">
         <name>
-          <text>51 Search Type Define the type of search eg compre</text>
+          <text>Clarification of Post Hoc Analyses</text>
         </name>
       </transition>
-      <transition id="sec_18_item_1">
+      <transition id="sec_13_item_1">
         <name>
-          <text>171 Acknowledgement When hypotheses were formulate</text>
+          <text>131 Describe the statistical platform used for inf</text>
         </name>
       </transition>
-      <transition id="sec_16_item_1">
+      <transition id="sec_1_item_6">
         <name>
-          <text>151 Rationale Provide a rationale for the inclusio</text>
+          <text>16 State limitations</text>
+        </name>
+      </transition>
+      <transition id="sec_15_item_1">
+        <name>
+          <text>151 Provide a rationale for the inclusion of moder</text>
         </name>
       </transition>
       <transition id="sec_19_item_3">
         <name>
-          <text>183 Additional Data Share additional data includin</text>
+          <text>193 Report brief reasons for exclusion from the fu</text>
         </name>
       </transition>
-      <transition id="sec_22_item_1">
+      <transition id="section_21">
         <name>
-          <text>211 Synthesis Provide a quantitative synthesis of </text>
+          <text>Meta-analysis</text>
         </name>
       </transition>
-      <transition id="section_25">
+      <transition id="sec_25_item_4">
         <name>
-          <text>Outcomes of Publication Bias and Sensitivity Analyses</text>
+          <text>254 Summarise the main findings in terms of their </text>
         </name>
       </transition>
-      <transition id="sec_26_item_5">
+      <transition id="sec_8_item_3">
         <name>
-          <text>255 Comparison Compare results with previous revie</text>
+          <text>83 Describe main assumptions or simplifications th</text>
         </name>
       </transition>
-      <transition id="section_15">
+      <transition id="sec_27_item_2">
+        <name>
+          <text>272 List included studies as referenced sources eg</text>
+        </name>
+      </transition>
+      <transition id="section_2">
+        <name>
+          <text>Aims and Questions</text>
+        </name>
+      </transition>
+      <transition id="section_7">
+        <name>
+          <text>Data Collection Process</text>
+        </name>
+      </transition>
+      <transition id="section_9">
+        <name>
+          <text>Assessment of Individual Study Quality</text>
+        </name>
+      </transition>
+      <transition id="sec_11_item_1">
+        <name>
+          <text>111 Describe any steps taken to deal with missing </text>
+        </name>
+      </transition>
+      <transition id="sec_9_item_1">
+        <name>
+          <text>91 Describe whether the quality of studies include</text>
+        </name>
+      </transition>
+      <transition id="sec_16_item_3">
+        <name>
+          <text>163 Describe any other analyses of robustness of t</text>
+        </name>
+      </transition>
+      <transition id="sec_1_item_1">
+        <name>
+          <text>11 Identify the review as a systematic review meta</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_4">
+        <name>
+          <text>24 State the primary questions the review addresse</text>
+        </name>
+      </transition>
+      <transition id="sec_10_item_3">
+        <name>
+          <text>103 If no reference exists derive the equations fo</text>
+        </name>
+      </transition>
+      <transition id="section_24">
+        <name>
+          <text>Outcomes of Publication Bias and Sensitivity Analysis</text>
+        </name>
+      </transition>
+      <transition id="sec_25_item_5">
+        <name>
+          <text>255 Compare results with previous reviews on the t</text>
+        </name>
+      </transition>
+      <transition id="section_14">
         <name>
           <text>Non-independence</text>
         </name>
       </transition>
-      <transition id="section_29">
+      <transition id="sec_19_item_2">
         <name>
-          <text>Provenance</text>
+          <text>192 Report the number of studies excluded at each </text>
         </name>
       </transition>
-      <arc id="4966785536" source="sec_5_p_2" target="section_6"/>
-      <arc id="4966792704" source="sec_9_item_1" target="sec_9_p_1"/>
-      <arc id="4966909440" source="sec_10_start" target="sec_10_item_1"/>
-      <arc id="4966913024" source="sec_12_p_1" target="sec_12_item_2"/>
-      <arc id="4966916608" source="sec_14_item_3" target="sec_14_p_3"/>
-      <arc id="4966920192" source="sec_16_p_1" target="sec_16_item_2"/>
-      <arc id="4966923776" source="sec_18_p_1" target="section_19"/>
-      <arc id="4966974976" source="sec_19_p_3" target="sec_19_item_4"/>
-      <arc id="4966989312" source="sec_27_start" target="sec_27_item_1"/>
-      <arc id="4966422544" source="section_2" target="sec_2_start"/>
-      <arc id="4966784528" source="sec_4_item_2" target="sec_4_p_2"/>
-      <arc id="4966788112" source="sec_7_item_1" target="sec_7_p_1"/>
-      <arc id="4966791696" source="sec_8_item_6" target="sec_8_p_6"/>
-      <arc id="4966908432" source="sec_9_item_3" target="sec_9_p_3"/>
-      <arc id="4966912016" source="sec_11_item_3" target="sec_11_p_3"/>
-      <arc id="4966981136" source="sec_22_p_1" target="section_23"/>
-      <arc id="4966984720" source="sec_25_start" target="sec_25_item_1"/>
-      <arc id="4966988304" source="sec_26_p_5" target="sec_26_item_6"/>
-      <arc id="4966783520" source="sec_3_p_3" target="sec_3_item_4"/>
-      <arc id="4966914592" source="sec_13_item_2" target="sec_13_p_2"/>
-      <arc id="4966918176" source="sec_15_item_1" target="sec_15_p_1"/>
-      <arc id="4966921760" source="sec_17_item_1" target="sec_17_p_1"/>
-      <arc id="4966976544" source="sec_20_item_2" target="sec_20_p_2"/>
-      <arc id="4967042080" source="sec_29_start" target="final_transition"/>
-      <arc id="4830850096" source="sec_2_p_5" target="sec_2_item_6"/>
-      <arc id="4966786096" source="sec_6_p_1" target="sec_6_item_2"/>
-      <arc id="4966789680" source="sec_8_p_1" target="sec_8_item_2"/>
-      <arc id="4966917168" source="sec_14_p_4" target="sec_14_item_5"/>
-      <arc id="4966979120" source="sec_21_item_3" target="sec_21_p_3"/>
-      <arc id="4966982704" source="sec_24_item_1" target="sec_24_p_1"/>
-      <arc id="4966986288" source="sec_26_item_1" target="sec_26_p_1"/>
-      <arc id="4966785088" source="sec_5_start" target="sec_5_item_1"/>
-      <arc id="4966912576" source="sec_12_start" target="sec_12_item_1"/>
-      <arc id="4966916160" source="sec_14_item_2" target="sec_14_p_2"/>
-      <arc id="4966919744" source="sec_16_start" target="sec_16_item_1"/>
-      <arc id="4966923328" source="sec_18_start" target="sec_18_item_1"/>
-      <arc id="4966974528" source="sec_19_p_2" target="sec_19_item_3"/>
-      <arc id="4313974352" source="sec_3_item_3" target="sec_3_p_3"/>
-      <arc id="4966342736" source="sec_2_item_3" target="sec_2_p_3"/>
-      <arc id="4966842448" source="sec_2_item_5" target="sec_2_p_5"/>
-      <arc id="4966858832" source="sec_3_p_1" target="sec_3_item_2"/>
-      <arc id="4966791248" source="sec_8_item_5" target="sec_8_p_5"/>
-      <arc id="4966787664" source="section_7" target="sec_7_start"/>
-      <arc id="4966784080" source="sec_3_p_5" target="section_4"/>
-      <arc id="4966907984" source="sec_9_item_2" target="sec_9_p_2"/>
-      <arc id="4966911568" source="sec_11_item_2" target="sec_11_p_2"/>
-      <arc id="4966980688" source="sec_22_start" target="sec_22_item_1"/>
-      <arc id="4966619232" source="sec_3_start" target="sec_3_item_1"/>
-      <arc id="4966910560" source="section_11" target="sec_11_start"/>
-      <arc id="4966914144" source="sec_13_item_1" target="sec_13_p_1"/>
-      <arc id="4966917728" source="sec_14_p_5" target="section_15"/>
-      <arc id="4966921312" source="section_17" target="sec_17_start"/>
-      <arc id="4966976096" source="sec_20_item_1" target="sec_20_p_1"/>
-      <arc id="4966983264" source="sec_24_p_2" target="sec_24_item_3"/>
-      <arc id="4967041632" source="sec_28_p_2" target="section_29"/>
-      <arc id="4966785648" source="section_6" target="sec_6_start"/>
-      <arc id="4966789232" source="sec_8_start" target="sec_8_item_1"/>
-      <arc id="4966978672" source="sec_21_item_2" target="sec_21_p_2"/>
-      <arc id="4966982256" source="section_24" target="sec_24_start"/>
-      <arc id="4966985840" source="section_26" target="sec_26_start"/>
-      <arc id="4967040624" source="section_28" target="sec_28_start"/>
-      <arc id="4966784640" source="sec_4_p_2" target="sec_4_item_3"/>
-      <arc id="4966915712" source="sec_14_item_1" target="sec_14_p_1"/>
-      <arc id="4966919296" source="sec_15_p_3" target="section_16"/>
-      <arc id="4966922880" source="sec_17_p_3" target="section_18"/>
-      <arc id="4966974080" source="sec_19_p_1" target="sec_19_item_2"/>
-      <arc id="4966977664" source="sec_20_p_4" target="section_21"/>
-      <arc id="4966790800" source="sec_8_item_4" target="sec_8_p_4"/>
-      <arc id="4966783632" source="sec_3_item_4" target="sec_3_p_4"/>
-      <arc id="4966787216" source="sec_6_item_4" target="sec_6_p_4"/>
-      <arc id="4966911120" source="sec_11_item_1" target="sec_11_p_1"/>
-      <arc id="4966918288" source="sec_15_p_1" target="sec_15_item_2"/>
-      <arc id="4966980240" source="sec_21_p_5" target="section_22"/>
-      <arc id="4966983824" source="sec_24_p_3" target="sec_24_item_4"/>
-      <arc id="4966987408" source="sec_26_p_3" target="sec_26_item_4"/>
-      <arc id="4967040736" source="sec_28_start" target="sec_28_item_1"/>
-      <arc id="4967042192" source="final_transition" target="sink"/>
-      <arc id="4966910112" source="sec_10_item_2" target="sec_10_p_2"/>
-      <arc id="4966913696" source="section_13" target="sec_13_start"/>
-      <arc id="4966920864" source="sec_16_item_3" target="sec_16_p_3"/>
-      <arc id="4966975648" source="section_20" target="sec_20_start"/>
-      <arc id="4967041184" source="sec_28_p_1" target="sec_28_item_2"/>
-      <arc id="4827984048" source="sec_2_item_1" target="sec_2_p_1"/>
-      <arc id="4828462256" source="sec_2_p_4" target="sec_2_item_5"/>
-      <arc id="4966785200" source="sec_5_item_1" target="sec_5_p_1"/>
-      <arc id="4966788784" source="sec_7_p_2" target="section_8"/>
-      <arc id="4966792368" source="sec_9_start" target="sec_9_item_1"/>
-      <arc id="4966909104" source="sec_9_p_4" target="section_10"/>
-      <arc id="4966978224" source="sec_21_item_1" target="sec_21_p_1"/>
-      <arc id="4966981808" source="sec_23_item_1" target="sec_23_p_1"/>
-      <arc id="4966985392" source="sec_25_item_2" target="sec_25_p_2"/>
-      <arc id="4966988976" source="section_27" target="sec_27_start"/>
-      <arc id="4966784192" source="section_4" target="sec_4_start"/>
-      <arc id="4966915264" source="sec_15_start" target="sec_15_item_1"/>
-      <arc id="4966918848" source="sec_15_p_2" target="sec_15_item_3"/>
-      <arc id="4966922432" source="sec_17_p_2" target="sec_17_item_3"/>
-      <arc id="4966973632" source="sec_19_start" target="sec_19_item_1"/>
-      <arc id="4966977216" source="sec_20_p_3" target="sec_20_item_4"/>
-      <arc id="4966790352" source="sec_8_item_3" target="sec_8_p_3"/>
-      <arc id="4966786768" source="sec_6_item_3" target="sec_6_p_3"/>
-      <arc id="4966225616" source="sec_2_item_6" target="sec_2_p_6"/>
-      <arc id="4826532048" source="sec_2_p_1" target="sec_2_item_2"/>
-      <arc id="4719839440" source="sec_2_item_2" target="sec_2_p_2"/>
-      <arc id="4966979792" source="sec_21_p_4" target="sec_21_item_5"/>
-      <arc id="4966986960" source="sec_26_p_2" target="sec_26_item_3"/>
-      <arc id="4966785760" source="sec_6_start" target="sec_6_item_1"/>
-      <arc id="4966792928" source="sec_9_p_1" target="sec_9_item_2"/>
-      <arc id="4966909664" source="sec_10_item_1" target="sec_10_p_1"/>
-      <arc id="4966913248" source="sec_12_item_2" target="sec_12_p_2"/>
-      <arc id="4966916832" source="sec_14_p_3" target="sec_14_item_4"/>
-      <arc id="4966920416" source="sec_16_item_2" target="sec_16_p_2"/>
-      <arc id="4966924000" source="section_19" target="sec_19_start"/>
-      <arc id="4966975200" source="sec_19_item_4" target="sec_19_p_4"/>
-      <arc id="4966984272" source="sec_24_p_4" target="section_25"/>
-      <arc id="4966989536" source="sec_27_item_1" target="sec_27_p_1"/>
-      <arc id="4966988752" source="sec_26_p_6" target="section_27"/>
-      <arc id="4966791920" source="sec_8_p_6" target="section_9"/>
-      <arc id="4966784752" source="sec_4_item_3" target="sec_4_p_3"/>
-      <arc id="4966788336" source="sec_7_p_1" target="sec_7_item_2"/>
-      <arc id="4966908656" source="sec_9_p_3" target="sec_9_item_4"/>
-      <arc id="4966912240" source="sec_11_p_3" target="section_12"/>
-      <arc id="4966981360" source="section_23" target="sec_23_start"/>
-      <arc id="4966984944" source="sec_25_item_1" target="sec_25_p_1"/>
-      <arc id="4966988528" source="sec_26_item_6" target="sec_26_p_6"/>
-      <arc id="4967039728" source="sec_27_item_3" target="sec_27_p_3"/>
-      <arc id="4966618880" source="section_3" target="sec_3_start"/>
-      <arc id="4966783744" source="sec_4_start" target="sec_4_item_1"/>
-      <arc id="4966914816" source="sec_13_p_2" target="section_14"/>
-      <arc id="4966921984" source="sec_17_p_1" target="sec_17_item_2"/>
-      <arc id="4966976768" source="sec_20_p_2" target="sec_20_item_3"/>
-      <arc id="4312814352" source="sec_2_p_3" target="sec_2_item_4"/>
-      <arc id="4966786320" source="sec_6_item_2" target="sec_6_p_2"/>
-      <arc id="4966789904" source="sec_8_item_2" target="sec_8_p_2"/>
-      <arc id="4966913808" source="sec_13_start" target="sec_13_item_1"/>
-      <arc id="4966979344" source="sec_21_p_3" target="sec_21_item_4"/>
-      <arc id="4966982928" source="sec_24_p_1" target="sec_24_item_2"/>
-      <arc id="4966986512" source="sec_26_p_1" target="sec_26_item_2"/>
-      <arc id="4830748960" source="sec_2_item_4" target="sec_2_p_4"/>
-      <arc id="4966785312" source="sec_5_p_1" target="sec_5_item_2"/>
-      <arc id="4966912800" source="sec_12_item_1" target="sec_12_p_1"/>
-      <arc id="4966916384" source="sec_14_p_2" target="sec_14_item_3"/>
-      <arc id="4966919968" source="sec_16_item_1" target="sec_16_p_1"/>
-      <arc id="4966923552" source="sec_18_item_1" target="sec_18_p_1"/>
-      <arc id="4966974752" source="sec_19_item_3" target="sec_19_p_3"/>
-      <arc id="4967039952" source="sec_27_p_3" target="sec_27_item_4"/>
-      <arc id="4966784304" source="sec_4_item_1" target="sec_4_p_1"/>
-      <arc id="4966787888" source="sec_7_start" target="sec_7_item_1"/>
-      <arc id="4966791472" source="sec_8_p_5" target="sec_8_item_6"/>
-      <arc id="4966908208" source="sec_9_p_2" target="sec_9_item_3"/>
-      <arc id="4966911792" source="sec_11_p_2" target="sec_11_item_3"/>
-      <arc id="4966980912" source="sec_22_item_1" target="sec_22_p_1"/>
-      <arc id="4966984496" source="section_25" target="sec_25_start"/>
-      <arc id="4966988080" source="sec_26_item_5" target="sec_26_p_5"/>
-      <arc id="4967039280" source="sec_27_item_2" target="sec_27_p_2"/>
-      <arc id="4966422848" source="sec_2_start" target="sec_2_item_1"/>
-      <arc id="4966914368" source="sec_13_p_1" target="sec_13_item_2"/>
-      <arc id="4966917952" source="section_15" target="sec_15_start"/>
-      <arc id="4966921536" source="sec_17_start" target="sec_17_item_1"/>
-      <arc id="4966976320" source="sec_20_p_1" target="sec_20_item_2"/>
-      <arc id="4967041856" source="section_29" target="sec_29_start"/>
-      <arc id="4312760144" source="sec_3_p_2" target="sec_3_item_3"/>
-      <arc id="4966789456" source="sec_8_item_1" target="sec_8_p_1"/>
-      <arc id="4966165840" source="section_1" target="sec_1_start"/>
-      <arc id="4966342480" source="sec_2_p_2" target="sec_2_item_3"/>
-      <arc id="4966920528" source="sec_16_p_2" target="sec_16_item_3"/>
-      <arc id="4966978896" source="sec_21_p_2" target="sec_21_item_3"/>
-      <arc id="4966982480" source="sec_24_start" target="sec_24_item_1"/>
-      <arc id="4966986064" source="sec_26_start" target="sec_26_item_1"/>
-      <arc id="4966987856" source="sec_26_p_4" target="sec_26_item_5"/>
-      <arc id="4966784864" source="sec_4_p_3" target="section_5"/>
-      <arc id="4966915936" source="sec_14_p_1" target="sec_14_item_2"/>
-      <arc id="4966919520" source="section_16" target="sec_16_start"/>
-      <arc id="4966923104" source="section_18" target="sec_18_start"/>
-      <arc id="4966974304" source="sec_19_item_2" target="sec_19_p_2"/>
-      <arc id="4966977888" source="section_21" target="sec_21_start"/>
-      <arc id="4966791024" source="sec_8_p_4" target="sec_8_item_5"/>
-      <arc id="4966600048" source="source" target="section_1"/>
-      <arc id="4966743920" source="sec_3_item_1" target="sec_3_p_1"/>
-      <arc id="4966783856" source="sec_3_p_4" target="sec_3_item_5"/>
-      <arc id="4966787440" source="sec_6_p_4" target="section_7"/>
-      <arc id="4966911344" source="sec_11_p_1" target="sec_11_item_2"/>
-      <arc id="4966980464" source="section_22" target="sec_22_start"/>
-      <arc id="4966984048" source="sec_24_item_4" target="sec_24_p_4"/>
-      <arc id="4966987632" source="sec_26_item_4" target="sec_26_p_4"/>
-      <arc id="4966910336" source="sec_10_p_2" target="section_11"/>
-      <arc id="4966917504" source="sec_14_item_5" target="sec_14_p_5"/>
-      <arc id="4966921088" source="sec_16_p_3" target="section_17"/>
-      <arc id="4966975872" source="sec_20_start" target="sec_20_item_1"/>
-      <arc id="4967041408" source="sec_28_item_2" target="sec_28_p_2"/>
-      <arc id="4966763408" source="sec_3_item_2" target="sec_3_p_2"/>
-      <arc id="4966785424" source="sec_5_item_2" target="sec_5_p_2"/>
-      <arc id="4966789008" source="section_8" target="sec_8_start"/>
-      <arc id="4966909328" source="section_10" target="sec_10_start"/>
-      <arc id="4966978448" source="sec_21_p_1" target="sec_21_item_2"/>
-      <arc id="4966982032" source="sec_23_p_1" target="section_24"/>
-      <arc id="4966985616" source="sec_25_p_2" target="section_26"/>
-      <arc id="4967039056" source="sec_27_p_1" target="sec_27_item_2"/>
-      <arc id="4967040176" source="sec_27_item_4" target="sec_27_p_4"/>
-      <arc id="4967040400" source="sec_27_p_4" target="section_28"/>
-      <arc id="4966784416" source="sec_4_p_1" target="sec_4_item_2"/>
-      <arc id="4966915488" source="sec_14_start" target="sec_14_item_1"/>
-      <arc id="4966919072" source="sec_15_item_3" target="sec_15_p_3"/>
-      <arc id="4966922656" source="sec_17_item_3" target="sec_17_p_3"/>
-      <arc id="4966973856" source="sec_19_item_1" target="sec_19_p_1"/>
-      <arc id="4966977440" source="sec_20_item_4" target="sec_20_p_4"/>
-      <arc id="4967039392" source="sec_27_p_2" target="sec_27_item_3"/>
-      <arc id="4966790576" source="sec_8_p_3" target="sec_8_item_4"/>
-      <arc id="4966786992" source="sec_6_p_3" target="sec_6_item_4"/>
-      <arc id="4966910896" source="sec_11_start" target="sec_11_item_1"/>
-      <arc id="4966980016" source="sec_21_item_5" target="sec_21_p_5"/>
-      <arc id="4966983600" source="sec_24_item_3" target="sec_24_p_3"/>
-      <arc id="4966987184" source="sec_26_item_3" target="sec_26_p_3"/>
-      <arc id="4966785984" source="sec_6_item_1" target="sec_6_p_1"/>
-      <arc id="4966909888" source="sec_10_p_1" target="sec_10_item_2"/>
-      <arc id="4966913472" source="sec_12_p_2" target="section_13"/>
-      <arc id="4966917056" source="sec_14_item_4" target="sec_14_p_4"/>
-      <arc id="4966975424" source="sec_19_p_4" target="section_20"/>
-      <arc id="4967040960" source="sec_28_item_1" target="sec_28_p_1"/>
-      <arc id="4966784976" source="section_5" target="sec_5_start"/>
-      <arc id="4966166480" source="sec_1_start" target="section_2"/>
-      <arc id="4966226384" source="sec_2_p_6" target="section_3"/>
-      <arc id="4966792144" source="section_9" target="sec_9_start"/>
-      <arc id="4966788560" source="sec_7_item_2" target="sec_7_p_2"/>
-      <arc id="4966908880" source="sec_9_item_4" target="sec_9_p_4"/>
-      <arc id="4966912464" source="section_12" target="sec_12_start"/>
-      <arc id="4966978000" source="sec_21_start" target="sec_21_item_1"/>
-      <arc id="4966981584" source="sec_23_start" target="sec_23_item_1"/>
-      <arc id="4966985168" source="sec_25_p_1" target="sec_25_item_2"/>
-      <arc id="4966783968" source="sec_3_item_5" target="sec_3_p_5"/>
-      <arc id="4966915040" source="section_14" target="sec_14_start"/>
-      <arc id="4966918624" source="sec_15_item_2" target="sec_15_p_2"/>
-      <arc id="4966922208" source="sec_17_item_2" target="sec_17_p_2"/>
-      <arc id="4966976992" source="sec_20_item_3" target="sec_20_p_3"/>
-      <arc id="4966790128" source="sec_8_p_2" target="sec_8_item_3"/>
-      <arc id="4966786544" source="sec_6_p_2" target="sec_6_item_3"/>
-      <arc id="4966979568" source="sec_21_item_4" target="sec_21_p_4"/>
-      <arc id="4966983152" source="sec_24_item_2" target="sec_24_p_2"/>
-      <arc id="4966986736" source="sec_26_item_2" target="sec_26_p_2"/>
+      <transition id="sec_20_item_5">
+        <name>
+          <text>205 Provide a summary of characteristics related t</text>
+        </name>
+      </transition>
+      <transition id="sec_25_item_3">
+        <name>
+          <text>253 Summarise the main findings in terms of their </text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_5">
+        <name>
+          <text>25 Describe whether effect sizes were derived from</text>
+        </name>
+      </transition>
+      <transition id="sec_5_item_1">
+        <name>
+          <text>51 Define the type of search eg comprehensive sear</text>
+        </name>
+      </transition>
+      <transition id="sec_8_item_2">
+        <name>
+          <text>82 Describe items that do not appear in the main r</text>
+        </name>
+      </transition>
+      <transition id="sec_11_item_2">
+        <name>
+          <text>112 Justify the decisions made to deal with missin</text>
+        </name>
+      </transition>
+      <transition id="sec_26_item_1">
+        <name>
+          <text>261 Provide names affiliations and funding sources</text>
+        </name>
+      </transition>
+      <transition id="section_15">
+        <name>
+          <text>Meta-regression and Model Selection</text>
+        </name>
+      </transition>
+      <transition id="sec_6_item_2">
+        <name>
+          <text>62 Report the number of people involved and how th</text>
+        </name>
+      </transition>
+      <transition id="section_8">
+        <name>
+          <text>Data Items</text>
+        </name>
+      </transition>
+      <transition id="sec_8_item_4">
+        <name>
+          <text>84 Describe the type of replication unit eg indivi</text>
+        </name>
+      </transition>
+      <transition id="sec_26_item_3">
+        <name>
+          <text>263 Provide contact details for the corresponding </text>
+        </name>
+      </transition>
+      <transition id="sec_16_item_2">
+        <name>
+          <text>162 Describe any steps taken to investigate the ef</text>
+        </name>
+      </transition>
+      <transition id="sec_4_item_2">
+        <name>
+          <text>42 Justify criteria if necessary ie not obvious fr</text>
+        </name>
+      </transition>
+      <transition id="sec_10_item_2">
+        <name>
+          <text>102 Provide a reference to the equation of each ca</text>
+        </name>
+      </transition>
+      <transition id="sec_13_item_5">
+        <name>
+          <text>135 Describe the version numbers of all software u</text>
+        </name>
+      </transition>
+      <transition id="sec_19_item_1">
+        <name>
+          <text>191 Report the number of studies screened</text>
+        </name>
+      </transition>
+      <transition id="sec_20_item_4">
+        <name>
+          <text>204 Provide a summary of limitations of included m</text>
+        </name>
+      </transition>
+      <transition id="sec_25_item_2">
+        <name>
+          <text>252 Summarise the main findings in terms of the pr</text>
+        </name>
+      </transition>
+      <transition id="sec_1_item_5">
+        <name>
+          <text>15 State conclusions</text>
+        </name>
+      </transition>
+      <transition id="sec_8_item_1">
+        <name>
+          <text>81 Describe the key data sought from each study</text>
+        </name>
+      </transition>
+      <transition id="sec_6_item_1">
+        <name>
+          <text>61 Describe how studies were selected for inclusio</text>
+        </name>
+      </transition>
+      <transition id="sec_7_item_6">
+        <name>
+          <text>76 State the number of extractions that were check</text>
+        </name>
+      </transition>
+      <transition id="sec_14_item_3">
+        <name>
+          <text>143 Justify decisions made</text>
+        </name>
+      </transition>
+      <transition id="sec_1_item_2">
+        <name>
+          <text>12 Summarise the aims and scope of the review</text>
+        </name>
+      </transition>
+      <transition id="section_3">
+        <name>
+          <text>Review Registration</text>
+        </name>
+      </transition>
+      <transition id="sec_3_item_1">
+        <name>
+          <text>31 Register review aims hypotheses if applicable a</text>
+        </name>
+      </transition>
+      <transition id="sec_10_item_1">
+        <name>
+          <text>101 Describe effect sizes used</text>
+        </name>
+      </transition>
+      <transition id="sec_16_item_1">
+        <name>
+          <text>161 Describe assessments of the risk of bias due t</text>
+        </name>
+      </transition>
+      <transition id="sec_23_item_3">
+        <name>
+          <text>233 Report interactions if they were included</text>
+        </name>
+      </transition>
+      <transition id="section_4">
+        <name>
+          <text>Eligibility Criteria</text>
+        </name>
+      </transition>
+      <transition id="sec_13_item_4">
+        <name>
+          <text>144 Describe any arguments that differed from the </text>
+        </name>
+      </transition>
+      <transition id="section_19">
+        <name>
+          <text>Results of Study Selection Process</text>
+        </name>
+      </transition>
+      <transition id="sec_20_item_3">
+        <name>
+          <text>203 Provide a summary of key characteristics for r</text>
+        </name>
+      </transition>
+      <transition id="sec_24_item_1">
+        <name>
+          <text>241 Provide results for the assessments of the ris</text>
+        </name>
+      </transition>
+      <transition id="sec_25_item_1">
+        <name>
+          <text>251 Summarise the main findings in terms of the ma</text>
+        </name>
+      </transition>
+      <transition id="sec_1_item_4">
+        <name>
+          <text>14 State the results of the primary outcome</text>
+        </name>
+      </transition>
+      <transition id="section_6">
+        <name>
+          <text>Study Selection</text>
+        </name>
+      </transition>
+      <transition id="sec_7_item_5">
+        <name>
+          <text>75 Report who collected data</text>
+        </name>
+      </transition>
+      <transition id="section_13">
+        <name>
+          <text>Software</text>
+        </name>
+      </transition>
+      <transition id="sec_14_item_2">
+        <name>
+          <text>142 Describe how nonindependence has been handled</text>
+        </name>
+      </transition>
+      <transition id="sec_23_item_4">
+        <name>
+          <text>234 Describe outcomes from model selection if done</text>
+        </name>
+      </transition>
+      <transition id="sec_18_item_2">
+        <name>
+          <text>182 Share data required to reproduce the results p</text>
+        </name>
+      </transition>
+      <transition id="section_16">
+        <name>
+          <text>Publication Bias and Sensitivity Analysis</text>
+        </name>
+      </transition>
+      <transition id="sec_3_item_2">
+        <name>
+          <text>32 Describe deviations from the registered aims an</text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_1">
+        <name>
+          <text>21 Provide a rationale for the review</text>
+        </name>
+      </transition>
+      <transition id="sec_5_item_2">
+        <name>
+          <text>52 State what sources of information were sought e</text>
+        </name>
+      </transition>
+      <transition id="section_10">
+        <name>
+          <text>Effect Size Measures</text>
+        </name>
+      </transition>
+      <transition id="sec_23_item_2">
+        <name>
+          <text>232 Include estimates and confidencecredible inter</text>
+        </name>
+      </transition>
+      <transition id="sec_13_item_3">
+        <name>
+          <text>133 Describe the functions used to run models</text>
+        </name>
+      </transition>
+      <transition id="sec_18_item_4">
+        <name>
+          <text>184 Share analysis scripts or if a software packag</text>
+        </name>
+      </transition>
+      <transition id="sec_20_item_2">
+        <name>
+          <text>202 Report the number of studies and effect sizes </text>
+        </name>
+      </transition>
+      <transition id="section_23">
+        <name>
+          <text>Meta-regression</text>
+        </name>
+      </transition>
+      <transition id="section_25">
+        <name>
+          <text>Discussion</text>
+        </name>
+      </transition>
+      <transition id="sec_27_item_1">
+        <name>
+          <text>271 Provide a reference list of all studies includ</text>
+        </name>
+      </transition>
+      <transition id="section_5">
+        <name>
+          <text>Finding Studies</text>
+        </name>
+      </transition>
+      <transition id="section_1">
+        <name>
+          <text>Title and Abstract</text>
+        </name>
+      </transition>
+      <transition id="sec_5_item_4">
+        <name>
+          <text>54 Provide enough information to repeat the equiva</text>
+        </name>
+      </transition>
+      <transition id="sec_7_item_4">
+        <name>
+          <text>74 Report how missing or ambiguous information was</text>
+        </name>
+      </transition>
+      <transition id="sec_12_item_2">
+        <name>
+          <text>122 The most common approach in ecology and evolut</text>
+        </name>
+      </transition>
+      <transition id="sec_9_item_2">
+        <name>
+          <text>92 Describe how information about study quality wa</text>
+        </name>
+      </transition>
+      <transition id="sec_18_item_1">
+        <name>
+          <text>181 Share metadata ie data descriptions</text>
+        </name>
+      </transition>
+      <transition id="sec_15_item_3">
+        <name>
+          <text>153 Describe any process of model selection</text>
+        </name>
+      </transition>
+      <transition id="sec_23_item_1">
+        <name>
+          <text>231 Provide estimates of metaregression slopes ie </text>
+        </name>
+      </transition>
+      <transition id="sec_2_item_3">
+        <name>
+          <text>23 State the aims and scope of the review includin</text>
+        </name>
+      </transition>
+      <transition id="sec_13_item_2">
+        <name>
+          <text>132 Describe the packages used to run models</text>
+        </name>
+      </transition>
+      <transition id="sec_18_item_3">
+        <name>
+          <text>183 Share additional data including information th</text>
+        </name>
+      </transition>
+      <transition id="sec_20_item_1">
+        <name>
+          <text>201 Report the number of studies and effect sizes </text>
+        </name>
+      </transition>
+      <transition id="sec_22_item_1">
+        <name>
+          <text>221 Report indicators of heterogeneity in the esti</text>
+        </name>
+      </transition>
+      <transition id="sec_24_item_2">
+        <name>
+          <text>242 Provide results for the robustness of the revi</text>
+        </name>
+      </transition>
+      <transition id="section_26">
+        <name>
+          <text>Contributions and Funding</text>
+        </name>
+      </transition>
+      <transition id="sec_7_item_3">
+        <name>
+          <text>73 Describe moderator variables that were construc</text>
+        </name>
+      </transition>
+      <transition id="sec_4_item_1">
+        <name>
+          <text>41 Report the specific criteria used for including</text>
+        </name>
+      </transition>
+      <transition id="sec_5_item_3">
+        <name>
+          <text>53 Include for each database searched the exact se</text>
+        </name>
+      </transition>
+      <transition id="section_18">
+        <name>
+          <text>Metadata, Data, and Code</text>
+        </name>
+      </transition>
+      <transition id="sec_15_item_2">
+        <name>
+          <text>152 Justify the number of parameters estimated in </text>
+        </name>
+      </transition>
+      <transition id="section_27">
+        <name>
+          <text>References</text>
+        </name>
+      </transition>
+      <transition id="sec_14_item_1">
+        <name>
+          <text>141 Describe the types of nonindependence encounte</text>
+        </name>
+      </transition>
+      <transition id="section_20">
+        <name>
+          <text>Sample Sizes and Study Characteristics</text>
+        </name>
+      </transition>
+      <transition id="section_22">
+        <name>
+          <text>Heterogeneity</text>
+        </name>
+      </transition>
+      <transition id="sec_25_item_6">
+        <name>
+          <text>256 Consider limitations and their influence on th</text>
+        </name>
+      </transition>
+      <arc id="4721418752" source="sec_5_start" target="sec_5_item_1"/>
+      <arc id="4721425920" source="sec_8_item_2" target="sec_8_p_2"/>
+      <arc id="4721526272" source="sec_9_p_1" target="sec_9_item_2"/>
+      <arc id="4721537024" source="sec_15_p_2" target="sec_15_item_3"/>
+      <arc id="4721540608" source="sec_18_start" target="sec_18_item_1"/>
+      <arc id="4721598976" source="sec_23_start" target="sec_23_item_1"/>
+      <arc id="4721657344" source="sec_27_item_1" target="sec_27_p_1"/>
+      <arc id="4720857104" source="section_2" target="sec_2_start"/>
+      <arc id="4721417744" source="sec_3_item_2" target="sec_3_p_2"/>
+      <arc id="4721421328" source="sec_6_item_2" target="sec_6_p_2"/>
+      <arc id="4721424912" source="section_8" target="sec_8_start"/>
+      <arc id="4721525264" source="sec_8_item_4" target="sec_8_p_4"/>
+      <arc id="4721528848" source="sec_12_start" target="sec_12_item_1"/>
+      <arc id="4721532432" source="sec_13_p_1" target="sec_13_item_2"/>
+      <arc id="4721536016" source="section_15" target="sec_15_start"/>
+      <arc id="4721590800" source="sec_18_p_2" target="sec_18_item_3"/>
+      <arc id="4721594384" source="sec_20_start" target="sec_20_item_1"/>
+      <arc id="4721601776" source="sec_24_item_2" target="sec_24_p_2"/>
+      <arc id="4314436128" source="sec_1_p_4" target="sec_1_item_5"/>
+      <arc id="4721396768" source="sec_2_item_3" target="sec_2_p_3"/>
+      <arc id="4721416736" source="sec_2_p_4" target="sec_2_item_5"/>
+      <arc id="4721527840" source="sec_10_item_2" target="sec_10_p_2"/>
+      <arc id="4721538592" source="sec_16_item_2" target="sec_16_p_2"/>
+      <arc id="4721600544" source="sec_23_item_4" target="sec_23_p_4"/>
+      <arc id="4721604128" source="sec_25_p_4" target="sec_25_item_5"/>
+      <arc id="4721605136" source="sec_25_p_6" target="section_26"/>
+      <arc id="4717961264" source="sec_1_item_5" target="sec_1_p_5"/>
+      <arc id="4721419312" source="sec_5_p_2" target="sec_5_item_3"/>
+      <arc id="4721422896" source="sec_7_p_2" target="sec_7_item_3"/>
+      <arc id="4721534000" source="sec_13_item_5" target="sec_13_p_5"/>
+      <arc id="4721592368" source="sec_19_item_1" target="sec_19_p_1"/>
+      <arc id="4721595952" source="sec_20_item_4" target="sec_20_p_4"/>
+      <arc id="4721603120" source="sec_25_item_2" target="sec_25_p_2"/>
+      <arc id="4721418304" source="sec_4_item_2" target="sec_4_p_2"/>
+      <arc id="4721425472" source="sec_8_item_1" target="sec_8_p_1"/>
+      <arc id="4721525824" source="sec_9_start" target="sec_9_item_1"/>
+      <arc id="4721529408" source="sec_11_p_1" target="sec_11_item_2"/>
+      <arc id="4721536576" source="sec_15_p_1" target="sec_15_item_2"/>
+      <arc id="4721540160" source="sec_17_p_1" target="section_18"/>
+      <arc id="4721605696" source="sec_26_start" target="sec_26_item_1"/>
+      <arc id="4721656896" source="sec_26_p_4" target="section_27"/>
+      <arc id="4720976464" source="sec_1_item_4" target="sec_1_p_4"/>
+      <arc id="4721424464" source="sec_7_item_6" target="sec_7_p_6"/>
+      <arc id="4721420880" source="sec_6_item_1" target="sec_6_p_1"/>
+      <arc id="4721417296" source="sec_4_start" target="sec_4_item_1"/>
+      <arc id="4721524816" source="sec_8_item_3" target="sec_8_p_3"/>
+      <arc id="4721535568" source="sec_14_item_3" target="sec_14_p_3"/>
+      <arc id="4721590352" source="sec_18_p_1" target="sec_18_item_2"/>
+      <arc id="4721593936" source="sec_19_p_4" target="section_20"/>
+      <arc id="4721597520" source="sec_21_p_1" target="section_22"/>
+      <arc id="4721601104" source="sec_24_start" target="sec_24_item_1"/>
+      <arc id="4721252448" source="sec_2_item_1" target="sec_2_p_1"/>
+      <arc id="4721527392" source="sec_10_item_1" target="sec_10_p_1"/>
+      <arc id="4721538144" source="sec_16_item_1" target="sec_16_p_1"/>
+      <arc id="4721600096" source="sec_23_item_3" target="sec_23_p_3"/>
+      <arc id="4721422448" source="sec_7_p_1" target="sec_7_item_2"/>
+      <arc id="4721056368" source="sec_1_item_1" target="sec_1_p_1"/>
+      <arc id="4721418864" source="sec_5_item_1" target="sec_5_p_1"/>
+      <arc id="4721529968" source="sec_11_p_2" target="section_12"/>
+      <arc id="4721533552" source="sec_13_item_4" target="sec_13_p_4"/>
+      <arc id="4721591920" source="section_19" target="sec_19_start"/>
+      <arc id="4721595504" source="sec_20_item_3" target="sec_20_p_3"/>
+      <arc id="4721602672" source="sec_25_item_1" target="sec_25_p_1"/>
+      <arc id="4721606256" source="sec_26_p_1" target="sec_26_item_2"/>
+      <arc id="4721417856" source="sec_3_p_2" target="sec_3_item_3"/>
+      <arc id="4721536128" source="sec_15_start" target="sec_15_item_1"/>
+      <arc id="4721539712" source="sec_17_start" target="sec_17_item_1"/>
+      <arc id="4721656448" source="sec_26_p_3" target="sec_26_item_4"/>
+      <arc id="4721605360" source="section_26" target="sec_26_start"/>
+      <arc id="4721606480" source="sec_26_item_2" target="sec_26_p_2"/>
+      <arc id="4721424016" source="sec_7_item_5" target="sec_7_p_5"/>
+      <arc id="4721416848" source="sec_2_p_5" target="section_3"/>
+      <arc id="4721420432" source="section_6" target="sec_6_start"/>
+      <arc id="4721531536" source="section_13" target="sec_13_start"/>
+      <arc id="4721535120" source="sec_14_item_2" target="sec_14_p_2"/>
+      <arc id="4721593488" source="sec_19_p_3" target="sec_19_item_4"/>
+      <arc id="4721597072" source="sec_21_start" target="sec_21_item_1"/>
+      <arc id="4721526944" source="section_10" target="sec_10_start"/>
+      <arc id="4721537696" source="section_16" target="sec_16_start"/>
+      <arc id="4721599648" source="sec_23_item_2" target="sec_23_p_2"/>
+      <arc id="4721658016" source="sec_27_p_2" target="final_transition"/>
+      <arc id="4560466096" source="sec_1_item_2" target="sec_1_p_2"/>
+      <arc id="4721418416" source="sec_4_p_1" target="sec_4_item_2"/>
+      <arc id="4721422000" source="sec_7_start" target="sec_7_item_1"/>
+      <arc id="4721533104" source="sec_13_item_3" target="sec_13_p_3"/>
+      <arc id="4721591472" source="sec_18_item_4" target="sec_18_p_4"/>
+      <arc id="4721595056" source="sec_20_item_2" target="sec_20_p_2"/>
+      <arc id="4721598640" source="section_23" target="sec_23_start"/>
+      <arc id="4721602224" source="section_25" target="sec_25_start"/>
+      <arc id="4721417408" source="sec_3_start" target="sec_3_item_1"/>
+      <arc id="4721528512" source="sec_10_p_3" target="section_11"/>
+      <arc id="4721539264" source="sec_16_p_3" target="section_17"/>
+      <arc id="4721423568" source="sec_7_item_4" target="sec_7_p_4"/>
+      <arc id="4721419984" source="sec_5_item_4" target="sec_5_p_4"/>
+      <arc id="4720858832" source="sec_2_start" target="sec_2_item_1"/>
+      <arc id="4721232592" source="source" target="section_1"/>
+      <arc id="4558997712" source="sec_1_p_2" target="sec_1_item_3"/>
+      <arc id="4541827280" source="sec_1_item_3" target="sec_1_p_3"/>
+      <arc id="4721430736" source="sec_2_item_4" target="sec_2_p_4"/>
+      <arc id="4721531088" source="sec_12_item_2" target="sec_12_p_2"/>
+      <arc id="4721534672" source="sec_14_item_1" target="sec_14_p_1"/>
+      <arc id="4721593040" source="sec_19_p_2" target="sec_19_item_3"/>
+      <arc id="4721596624" source="sec_20_p_5" target="section_21"/>
+      <arc id="4721418976" source="sec_5_p_1" target="sec_5_item_2"/>
+      <arc id="4721426144" source="sec_8_p_2" target="sec_8_item_3"/>
+      <arc id="4721526496" source="sec_9_item_2" target="sec_9_p_2"/>
+      <arc id="4721537248" source="sec_15_item_3" target="sec_15_p_3"/>
+      <arc id="4721540832" source="sec_18_item_1" target="sec_18_p_1"/>
+      <arc id="4721599200" source="sec_23_item_1" target="sec_23_p_1"/>
+      <arc id="4721657568" source="sec_27_p_1" target="sec_27_item_2"/>
+      <arc id="4721605584" source="sec_27_start" target="sec_27_item_1"/>
+      <arc id="4721421552" source="sec_6_p_2" target="section_7"/>
+      <arc id="4560927472" source="sec_1_p_5" target="sec_1_item_6"/>
+      <arc id="4721376496" source="sec_2_item_2" target="sec_2_p_2"/>
+      <arc id="4721417968" source="sec_3_item_3" target="sec_3_p_3"/>
+      <arc id="4721525488" source="sec_8_p_4" target="section_9"/>
+      <arc id="4721529072" source="sec_11_start" target="sec_11_item_1"/>
+      <arc id="4721532656" source="sec_13_item_2" target="sec_13_p_2"/>
+      <arc id="4721591024" source="sec_18_item_3" target="sec_18_p_3"/>
+      <arc id="4721594608" source="sec_20_item_1" target="sec_20_p_1"/>
+      <arc id="4721598192" source="sec_22_item_1" target="sec_22_p_1"/>
+      <arc id="4721416960" source="sec_2_item_5" target="sec_2_p_5"/>
+      <arc id="4721528064" source="sec_10_p_2" target="sec_10_item_3"/>
+      <arc id="4721531648" source="sec_14_start" target="sec_14_item_1"/>
+      <arc id="4721538816" source="sec_16_p_2" target="sec_16_item_3"/>
+      <arc id="4721600768" source="sec_23_p_4" target="section_24"/>
+      <arc id="4721252624" source="sec_2_p_1" target="sec_2_item_2"/>
+      <arc id="4721419536" source="sec_5_item_3" target="sec_5_p_3"/>
+      <arc id="4721423120" source="sec_7_item_3" target="sec_7_p_3"/>
+      <arc id="4721530640" source="sec_12_item_1" target="sec_12_p_1"/>
+      <arc id="4721534224" source="sec_13_p_5" target="section_14"/>
+      <arc id="4721592592" source="sec_19_p_1" target="sec_19_item_2"/>
+      <arc id="4721596176" source="sec_20_p_4" target="sec_20_item_5"/>
+      <arc id="4721603344" source="sec_25_p_2" target="sec_25_item_3"/>
+      <arc id="4721658128" source="final_transition" target="sink"/>
+      <arc id="4721418528" source="sec_4_p_2" target="section_5"/>
+      <arc id="4721425696" source="sec_8_p_1" target="sec_8_item_2"/>
+      <arc id="4721526048" source="sec_9_item_1" target="sec_9_p_1"/>
+      <arc id="4721536800" source="sec_15_item_2" target="sec_15_p_2"/>
+      <arc id="4721540384" source="section_18" target="sec_18_start"/>
+      <arc id="4721657120" source="section_27" target="sec_27_start"/>
+      <arc id="4721417520" source="sec_3_item_1" target="sec_3_p_1"/>
+      <arc id="4721421104" source="sec_6_p_1" target="sec_6_item_2"/>
+      <arc id="4721424688" source="sec_7_p_6" target="section_8"/>
+      <arc id="4721525040" source="sec_8_p_3" target="sec_8_item_4"/>
+      <arc id="4721532208" source="sec_13_item_1" target="sec_13_p_1"/>
+      <arc id="4721535792" source="sec_14_p_3" target="section_15"/>
+      <arc id="4721590576" source="sec_18_item_2" target="sec_18_p_2"/>
+      <arc id="4721594160" source="section_20" target="sec_20_start"/>
+      <arc id="4721597744" source="section_22" target="sec_22_start"/>
+      <arc id="4721601328" source="sec_24_item_1" target="sec_24_p_1"/>
+      <arc id="4721527616" source="sec_10_p_1" target="sec_10_item_2"/>
+      <arc id="4721538368" source="sec_16_p_1" target="sec_16_item_2"/>
+      <arc id="4721597968" source="sec_22_start" target="sec_22_item_1"/>
+      <arc id="4721600208" source="sec_23_p_3" target="sec_23_item_4"/>
+      <arc id="4721422672" source="sec_7_item_2" target="sec_7_p_2"/>
+      <arc id="4720799056" source="section_1" target="sec_1_start"/>
+      <arc id="4720976208" source="sec_1_p_3" target="sec_1_item_4"/>
+      <arc id="4314382160" source="sec_2_p_3" target="sec_2_item_4"/>
+      <arc id="4721530192" source="section_12" target="sec_12_start"/>
+      <arc id="4721533776" source="sec_13_p_4" target="sec_13_item_5"/>
+      <arc id="4721592144" source="sec_19_start" target="sec_19_item_1"/>
+      <arc id="4721595728" source="sec_20_p_3" target="sec_20_item_4"/>
+      <arc id="4721602896" source="sec_25_p_1" target="sec_25_item_2"/>
+      <arc id="4721604688" source="sec_25_p_5" target="sec_25_item_6"/>
+      <arc id="4721418080" source="sec_3_p_3" target="section_4"/>
+      <arc id="4721425248" source="sec_8_start" target="sec_8_item_1"/>
+      <arc id="4721536352" source="sec_15_item_1" target="sec_15_p_1"/>
+      <arc id="4721539936" source="sec_17_item_1" target="sec_17_p_1"/>
+      <arc id="4721656672" source="sec_26_item_4" target="sec_26_p_4"/>
+      <arc id="4721424240" source="sec_7_p_5" target="sec_7_item_6"/>
+      <arc id="4718063472" source="sec_1_p_6" target="section_2"/>
+      <arc id="4721417072" source="section_3" target="sec_3_start"/>
+      <arc id="4721420656" source="sec_6_start" target="sec_6_item_1"/>
+      <arc id="4721535344" source="sec_14_p_2" target="sec_14_item_3"/>
+      <arc id="4721593712" source="sec_19_item_4" target="sec_19_p_4"/>
+      <arc id="4721597296" source="sec_21_item_1" target="sec_21_p_1"/>
+      <arc id="4721604464" source="sec_25_item_5" target="sec_25_p_5"/>
+      <arc id="4721527168" source="sec_10_start" target="sec_10_item_1"/>
+      <arc id="4721537920" source="sec_16_start" target="sec_16_item_1"/>
+      <arc id="4721599872" source="sec_23_p_2" target="sec_23_item_3"/>
+      <arc id="4560928144" source="sec_1_item_6" target="sec_1_p_6"/>
+      <arc id="4721376656" source="sec_2_p_2" target="sec_2_item_3"/>
+      <arc id="4721418640" source="section_5" target="sec_5_start"/>
+      <arc id="4721422224" source="sec_7_item_1" target="sec_7_p_1"/>
+      <arc id="4721529744" source="sec_11_item_2" target="sec_11_p_2"/>
+      <arc id="4721533328" source="sec_13_p_3" target="sec_13_item_4"/>
+      <arc id="4721591696" source="sec_18_p_4" target="section_19"/>
+      <arc id="4721595280" source="sec_20_p_2" target="sec_20_item_3"/>
+      <arc id="4721602448" source="sec_25_start" target="sec_25_item_1"/>
+      <arc id="4721606032" source="sec_26_item_1" target="sec_26_p_1"/>
+      <arc id="4721655888" source="sec_26_p_2" target="sec_26_item_3"/>
+      <arc id="4721056672" source="sec_1_p_1" target="sec_1_item_2"/>
+      <arc id="4721417632" source="sec_3_p_1" target="sec_3_item_2"/>
+      <arc id="4721528736" source="section_11" target="sec_11_start"/>
+      <arc id="4721539488" source="section_17" target="sec_17_start"/>
+      <arc id="4721656224" source="sec_26_item_3" target="sec_26_p_3"/>
+      <arc id="4721423792" source="sec_7_p_4" target="sec_7_item_5"/>
+      <arc id="4721420208" source="sec_5_p_4" target="section_6"/>
+      <arc id="4721531312" source="sec_12_p_2" target="section_13"/>
+      <arc id="4721534896" source="sec_14_p_1" target="sec_14_item_2"/>
+      <arc id="4721593264" source="sec_19_item_3" target="sec_19_p_3"/>
+      <arc id="4721596848" source="section_21" target="sec_21_start"/>
+      <arc id="4721601552" source="sec_24_p_1" target="sec_24_item_2"/>
+      <arc id="4721603792" source="sec_25_p_3" target="sec_25_item_4"/>
+      <arc id="4721604016" source="sec_25_item_4" target="sec_25_p_4"/>
+      <arc id="4721604912" source="sec_25_item_6" target="sec_25_p_6"/>
+      <arc id="4721419200" source="sec_5_item_2" target="sec_5_p_2"/>
+      <arc id="4721526720" source="sec_9_p_2" target="section_10"/>
+      <arc id="4721530304" source="sec_13_start" target="sec_13_item_1"/>
+      <arc id="4721537472" source="sec_15_p_3" target="section_16"/>
+      <arc id="4721599424" source="sec_23_p_1" target="sec_23_item_2"/>
+      <arc id="4721657792" source="sec_27_item_2" target="sec_27_p_2"/>
+      <arc id="4721418192" source="section_4" target="sec_4_start"/>
+      <arc id="4720799696" source="sec_1_start" target="sec_1_item_1"/>
+      <arc id="4721421776" source="section_7" target="sec_7_start"/>
+      <arc id="4721525712" source="section_9" target="sec_9_start"/>
+      <arc id="4721529296" source="sec_11_item_1" target="sec_11_p_1"/>
+      <arc id="4721532880" source="sec_13_p_2" target="sec_13_item_3"/>
+      <arc id="4721591248" source="sec_18_p_3" target="sec_18_item_4"/>
+      <arc id="4721594832" source="sec_20_p_1" target="sec_20_item_2"/>
+      <arc id="4721598416" source="sec_22_p_1" target="section_23"/>
+      <arc id="4721602000" source="sec_24_p_2" target="section_25"/>
+      <arc id="4721417184" source="sec_4_item_1" target="sec_4_p_1"/>
+      <arc id="4721528288" source="sec_10_item_3" target="sec_10_p_3"/>
+      <arc id="4721539040" source="sec_16_item_3" target="sec_16_p_3"/>
+      <arc id="4721600992" source="section_24" target="sec_24_start"/>
+      <arc id="4721423344" source="sec_7_p_3" target="sec_7_item_4"/>
+      <arc id="4721419760" source="sec_5_p_3" target="sec_5_item_4"/>
+      <arc id="4721530864" source="sec_12_p_1" target="sec_12_item_2"/>
+      <arc id="4721534448" source="section_14" target="sec_14_start"/>
+      <arc id="4721592816" source="sec_19_item_2" target="sec_19_p_2"/>
+      <arc id="4721596400" source="sec_20_item_5" target="sec_20_p_5"/>
+      <arc id="4721603568" source="sec_25_item_3" target="sec_25_p_3"/>
     </page>
     <finalmarkings>
       <marking>

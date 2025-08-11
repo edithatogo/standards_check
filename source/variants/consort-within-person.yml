@@ -1,0 +1,35 @@
+id: consort-within-person
+title: "CONSORT for Within-person Trials"
+group: consort
+variant_of: consort-2010
+version: "2017"
+date: "2017-09-20"
+publisher: "BMJ"
+source_url: "https://www.bmj.com/content/358/bmj.j3929"
+retrieved_at: "2025-08-11"
+preferred_format: "html"
+license: "CC-BY-NC"
+status: "sourced"
+notes: |
+  CONSORT extension for within person randomised trials.
+citation:
+  type: article-journal
+  author:
+    - given: Tianjing
+      family: Li
+    - given: Jonathan J
+      family: Deeks
+    - given: Christopher J
+      family: Weir
+    - given: Lesley
+      family: Stewart
+    - given: Sally
+      family: Hopewell
+    - given: Douglas G
+      family: Altman
+  doi: "10.1136/bmj.j3929"
+  journal: "BMJ"
+  volume: 358
+  pages: j3929
+  year: 2017
+  notes: "on behalf of the CONSORT group"

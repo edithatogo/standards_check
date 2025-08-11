@@ -1,3 +1,14 @@
+---
+id: prisma-p
+title: PRISMA-P Checklist
+group: prisma
+version: "2015"
+date: "2015-01-09"
+publisher: "BioMed Central"
+source_url: https://www.prisma-statement.org/s/PRISMA-P-checklist.pdf
+license: CC-BY-4.0
+---
+
 # PRISMA-P Checklist
 
 > Scope: Preferred Reporting Items for Systematic review and Meta-Analysis Protocols.

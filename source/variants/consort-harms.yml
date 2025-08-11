@@ -1,0 +1,28 @@
+id: consort-harms
+title: "CONSORT for Harms"
+group: consort
+variant_of: consort-2010
+status: new
+notes: "CONSORT extension for harms."
+citation:
+  type: article-journal
+  author:
+    - given: D. R.
+      family: Junqueira
+    - given: L.
+      family: Zorzela
+    - given: S.
+      family: Golder
+    - given: Y.
+      family: Loke
+    - given: J. J.
+      family: Gagnier
+    - given: S. A.
+      family: Julious
+    - notes: "et al."
+  title: "CONSORT Harms 2022 statement, explanation, and elaboration: updated guideline for the reporting of harms in randomised trials"
+  doi: 10.1136/bmj-2022-073725
+  journal: "BMJ"
+  volume: 381
+  pages: e073725
+  year: 2023

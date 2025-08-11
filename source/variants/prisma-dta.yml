@@ -1,0 +1,27 @@
+id: prisma-dta
+title: PRISMA-DTA Checklist
+group: prisma
+variant_of: prisma-2020
+status: new
+notes: "PRISMA for Diagnostic Test Accuracy."
+citation:
+  type: article-journal
+  author:
+    - given: M. D. F.
+      family: McInnes
+    - given: D.
+      family: Moher
+    - given: B. D.
+      family: Thombs
+    - given: T. A.
+      family: McGrath
+    - given: P. M.
+      family: Bossuyt
+    - notes: "and the PRISMA-DTA Group"
+  title: "Preferred Reporting Items for a Systematic Review and Meta-analysis of Diagnostic Test Accuracy Studies: The PRISMA-DTA Statement"
+  doi: 10.1001/jama.2017.19163
+  journal: "JAMA"
+  volume: 319
+  issue: 4
+  pages: "388-396"
+  year: 2018

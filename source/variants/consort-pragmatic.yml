@@ -1,0 +1,39 @@
+id: consort-pragmatic
+title: "CONSORT for Pragmatic Trials"
+group: consort
+variant_of: consort-2010
+version: "2008"
+date: "2008-11-11"
+publisher: "BMJ"
+source_url: "https://www.bmj.com/content/337/bmj.a2390"
+retrieved_at: "2025-08-11"
+preferred_format: "html"
+license: "TBD"
+status: "sourced"
+notes: |
+  CONSORT extension for pragmatic trials.
+citation:
+  type: article-journal
+  author:
+    - given: Merrick
+      family: Zwarenstein
+    - given: Shaun
+      family: Treweek
+    - given: J
+      family: Gagnier
+    - given: Douglas G
+      family: Altman
+    - given: S
+      family: Tunis
+    - given: B
+      family: Haynes
+    - given: A D
+      family: Oxman
+    - given: David
+      family: Moher
+  doi: "10.1136/bmj.a2390"
+  journal: "BMJ"
+  volume: 337
+  pages: a2390
+  year: 2008
+  notes: "for the CONSORT and Pragmatic Trials in Healthcare (Practihc) groups"
