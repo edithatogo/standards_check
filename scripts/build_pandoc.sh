@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# This script builds documents using Pandoc.
 set -euo pipefail
 
 command -v pandoc >/dev/null 2>&1 || { echo "[ERROR] pandoc not found. Please install Pandoc." >&2; exit 1; }
