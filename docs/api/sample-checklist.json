@@ -1,0 +1,34 @@
+{
+  "id": "sample-checklist",
+  "title": "Sample Checklist",
+  "items": [
+    {
+      "section": "Section 1",
+      "item": "**1.1. Item 1:** [TBD]"
+    },
+    {
+      "section": "Section 1",
+      "item": "**1.2. Item 2:** [TBD]"
+    },
+    {
+      "section": "Section 2",
+      "item": "**2.1. Item 3:** [TBD]"
+    },
+    {
+      "section": "Section 2",
+      "item": "**2.2. Item 4:** [TBD]"
+    },
+    {
+      "section": "Provenance",
+      "item": "Source: See sidecar metadata in `source/archetypes/sample-checklist.yml`"
+    },
+    {
+      "section": "Provenance",
+      "item": "Version: 1.0"
+    },
+    {
+      "section": "Provenance",
+      "item": "License: TBD (verify per source)"
+    }
+  ]
+}

@@ -1,0 +1,194 @@
+% Pandoc LaTeX template for checklists with basic PDF forms
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{amssymb}
+% Optional AcroTeX eForms for richer widgets
+\usepackage{eforms}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\usepackage{enumitem}
+\setlist[itemize]{left=1.2em}
+\setlist{noitemsep}
+\def\tightlist{}
+
+% Abstraction layer for form widgets
+  % eForms uses \checkBox and \textField
+  \newcommand{\mkCheckBox}[2][]{\checkBox[#1]{#2}}
+  \newcommand{\mkTextField}[2][]{\textField[#1]{#2}}
+
+% Enable form environment for interactive fields
+% Usage in content requires raw LaTeX or a pandoc Lua filter to insert \CheckBox/\TextField
+\begin{document}
+
+\begin{center}
+{\LARGE }\\[4pt]
+\normalsize 
+\end{center}
+\vspace{1em}
+
+% Begin PDF form region
+\begin{Form}
+
+\section{CHEERS 2022 Checklist}\label{cheers-2022-checklist}
+
+\begin{quote}
+Scope: The Consolidated Health Economic Evaluation Reporting Standards
+(CHEERS) 2022 statement provides a 28-item checklist to promote
+transparent and comprehensive reporting of economic evaluations of
+health interventions.
+
+Reference: See \texttt{source/archetypes/cheers-2022.yml} for canonical
+link and provenance.
+\end{quote}
+
+\subsection{Instructions}\label{instructions}
+
+\begin{itemize}
+\tightlist
+\item
+  Use task list items for checklist boxes; these become interactive
+  checkboxes in PDF.
+\item
+  Use a span with class \texttt{.textfield} for free‑text fields.
+\end{itemize}
+
+\subsection{Title and Abstract}\label{title-and-abstract}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{Title:} Identify the study as an economic evaluation and
+  specify the interventions being compared.
+\item[$\square$]
+  \textbf{Abstract:} Provide a structured summary detailing the context,
+  key methods, results, and alternative analyses.
+\end{itemize}
+
+\subsection{Introduction}\label{introduction}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{Background and Objectives:} Describe the study's context, the
+  research question, and its relevance for policy or practice.
+\end{itemize}
+
+\subsection{Methods}\label{methods}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{Health Economic Analysis Plan:} Indicate if a health economic
+  analysis plan was developed and where it can be accessed.
+\item[$\square$]
+  \textbf{Study Population:} Describe the characteristics of the study
+  population, including demographics and clinical characteristics.
+\item[$\square$]
+  \textbf{Setting and Location:} Provide relevant contextual information
+  that could influence the findings.
+\item[$\square$]
+  \textbf{Comparators:} Describe the interventions or strategies being
+  compared and the rationale for their choice.
+\item[$\square$]
+  \textbf{Perspective:} State the perspective(s) of the study and the
+  reasoning for their selection.
+\item[$\square$]
+  \textbf{Time Horizon:} Report the time horizon for the study and
+  justify its appropriateness.
+\item[$\square$]
+  \textbf{Discount Rate:} Report the discount rate(s) used and the
+  reason for their choice.
+\item[$\square$]
+  \textbf{Selection of Outcomes:} Describe the outcomes used to measure
+  benefits and harms.
+\item[$\square$]
+  \textbf{Measurement of Outcomes:} Detail how the selected outcomes
+  were measured.
+\item[$\square$]
+  \textbf{Valuation of Outcomes:} Describe the methods and population
+  used to measure and value outcomes.
+\item[$\square$]
+  \textbf{Measurement and Valuation of Resources and Costs:} Explain how
+  costs were valued.
+\item[$\square$]
+  \textbf{Currency, Price Date, and Conversion:} Report the dates of
+  estimated resource quantities and unit costs, as well as the currency
+  and conversion year.
+\item[$\square$]
+  \textbf{Rationale and Description of Model:} If a model was used,
+  describe it in detail, explain its use, and state if it is publicly
+  available.
+\item[$\square$]
+  \textbf{Analytics and Assumptions:} Describe methods for data
+  analysis, statistical transformation, extrapolation, and model
+  validation.
+\end{itemize}
+
+\subsection{Results}\label{results}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{Study Parameters:} Report all parameters used in the analysis,
+  including their sources and any assumptions.
+\item[$\square$]
+  \textbf{Summary of Main Results:} Present the main results, including
+  costs, effects, and the incremental cost-effectiveness ratio.
+\item[$\square$]
+  \textbf{Characterizing Heterogeneity:} Describe any methods used to
+  explore how results may vary for different subgroups.
+\item[$\square$]
+  \textbf{Characterizing Distributional Effects:} Explain how impacts
+  are distributed across different individuals or any adjustments made
+  for priority populations.
+\item[$\square$]
+  \textbf{Characterizing Uncertainty:} Describe the methods used to
+  characterize any sources of uncertainty in the analysis.
+\end{itemize}
+
+\subsection{Discussion}\label{discussion}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{Summary of Findings, Limitations, Generalizability, and
+  Current Knowledge:} Summarize the findings, discuss limitations, and
+  consider the generalizability of the results in the context of current
+  knowledge.
+\item[$\square$]
+  \textbf{Conclusions:} Provide conclusions about the study's findings
+  and their implications for policy or practice.
+\end{itemize}
+
+\subsection{Other}\label{other}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{Conflicts of Interest:} Disclose any potential conflicts of
+  interest.
+\item[$\square$]
+  \textbf{Funding:} Identify the sources of funding for the study.
+\item[$\square$]
+  \textbf{Approach to Engagement:} Describe the approach to engaging
+  with patients and others affected by the study.
+\end{itemize}
+
+{Notes}
+
+\subsection{Provenance}\label{provenance}
+
+\begin{itemize}
+\tightlist
+\item
+  Source: See sidecar metadata in
+  \texttt{source/archetypes/cheers-2022.yml}
+\item
+  Version: 2022
+\item
+  License: CC-BY-4.0
+\end{itemize}
+
+\end{Form}
+
+\end{document}

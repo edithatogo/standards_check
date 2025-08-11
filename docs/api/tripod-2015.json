@@ -1,0 +1,114 @@
+{
+  "id": "tripod-2015",
+  "title": "TRIPOD 2015 Checklist",
+  "items": [
+    {
+      "section": "Instructions",
+      "item": "Use task list items for checklist boxes; these become interactive checkboxes in PDF."
+    },
+    {
+      "section": "Instructions",
+      "item": "Use a span with class `.textfield` for free‑text fields."
+    },
+    {
+      "section": "Title and Abstract",
+      "item": "**1. Title:** Identify the study as one that develops, validates, or updates a multivariable prediction model, specify the target population, and the outcome to be predicted."
+    },
+    {
+      "section": "Title and Abstract",
+      "item": "**2. Abstract:** Provide a summary of the objectives, study design, setting, participants, sample size, predictors, outcome, statistical analysis, results, and conclusions."
+    },
+    {
+      "section": "Introduction",
+      "item": "**3. Background and Objectives:** Explain the medical context and rationale for the study, including references to existing models."
+    },
+    {
+      "section": "Methods",
+      "item": "**4. Source of data:** Describe the study design and key elements of the study setting."
+    },
+    {
+      "section": "Methods",
+      "item": "**5. Participants:** Describe the eligibility criteria for participants."
+    },
+    {
+      "section": "Methods",
+      "item": "**6. Outcome:** Clearly define the outcome that is predicted by the model, including how and when it was assessed."
+    },
+    {
+      "section": "Methods",
+      "item": "**7. Predictors:** Clearly define all predictors used in the model, including how and when they were measured."
+    },
+    {
+      "section": "Methods",
+      "item": "**8. Sample size:** Explain how the study size was determined."
+    },
+    {
+      "section": "Methods",
+      "item": "**9. Missing data:** Describe how missing data were handled."
+    },
+    {
+      "section": "Methods",
+      "item": "**10. Statistical analysis methods:** Describe how predictors were handled in the analyses."
+    },
+    {
+      "section": "Methods",
+      "item": "**11. Model development:** Specify the type of model, all model-building procedures, and the method for internal validation."
+    },
+    {
+      "section": "Methods",
+      "item": "**12. Model performance:** Specify all measures used to assess model performance and, if relevant, to compare multiple models."
+    },
+    {
+      "section": "Results",
+      "item": "**13. Participants:** Describe the flow of participants through the study."
+    },
+    {
+      "section": "Results",
+      "item": "**14. Model development:** Specify the number of participants and outcome events in each analysis."
+    },
+    {
+      "section": "Results",
+      "item": "**15. Model specification:** Present the full prediction model for use by others."
+    },
+    {
+      "section": "Results",
+      "item": "**16. Model performance:** Report performance measures for the prediction model."
+    },
+    {
+      "section": "Results",
+      "item": "**17. Model validation:** For validation, describe how the predictions were calculated and report the results."
+    },
+    {
+      "section": "Discussion",
+      "item": "**18. Limitations:** Discuss any limitations of the study."
+    },
+    {
+      "section": "Discussion",
+      "item": "**19. Interpretation:** Give an overall interpretation of the results, considering objectives, limitations, and other relevant evidence."
+    },
+    {
+      "section": "Discussion",
+      "item": "**20. Implications:** Discuss the implications for practice and research."
+    },
+    {
+      "section": "Other Information",
+      "item": "**21. Supplementary information:** Provide information about the availability of supplementary resources."
+    },
+    {
+      "section": "Other Information",
+      "item": "**22. Funding:** Disclose the source of funding and the role of the funders."
+    },
+    {
+      "section": "Provenance",
+      "item": "Source: See sidecar metadata in `source/archetypes/tripod-2015.yml`"
+    },
+    {
+      "section": "Provenance",
+      "item": "Version: 2015"
+    },
+    {
+      "section": "Provenance",
+      "item": "License: Custom; see website"
+    }
+  ]
+}

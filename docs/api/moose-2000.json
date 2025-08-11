@@ -1,0 +1,110 @@
+{
+  "id": "moose-2000",
+  "title": "MOOSE Checklist",
+  "items": [
+    {
+      "section": "Instructions",
+      "item": "Use the boxes to confirm each reporting item."
+    },
+    {
+      "section": "Instructions",
+      "item": "Add reviewer notes under each section as needed."
+    },
+    {
+      "section": "Reporting of Background",
+      "item": "**1. Problem definition:** Clearly state the research question."
+    },
+    {
+      "section": "Reporting of Background",
+      "item": "**2. Hypothesis:** State the hypothesis being tested."
+    },
+    {
+      "section": "Reporting of Background",
+      "item": "**3. Study objectives:** Describe the study objectives."
+    },
+    {
+      "section": "Reporting of Background",
+      "item": "**4. Rationale:** Provide the rationale for the review in the context of what is already known."
+    },
+    {
+      "section": "Reporting of Search Strategy",
+      "item": "**5. Search criteria:** Specify the inclusion and exclusion criteria for the review."
+    },
+    {
+      "section": "Reporting of Search Strategy",
+      "item": "**6. Information sources:** Specify all information sources used to identify studies, including databases, registers, and other sources."
+    },
+    {
+      "section": "Reporting of Search Strategy",
+      "item": "**7. Search terms:** Describe the search strategy, including search terms and any limits used."
+    },
+    {
+      "section": "Reporting of Search Strategy",
+      "item": "**8. Search process:** Describe the process for selecting studies for inclusion in the review."
+    },
+    {
+      "section": "Reporting of Methods",
+      "item": "**9. Data extraction:** Describe the methods used to extract data from reports, including how many reviewers extracted data and whether they worked independently."
+    },
+    {
+      "section": "Reporting of Methods",
+      "item": "**10. Data items:** List and define all variables for which data were sought."
+    },
+    {
+      "section": "Reporting of Methods",
+      "item": "**11. Study quality assessment:** Describe the methods used to assess the quality of the included studies."
+    },
+    {
+      "section": "Reporting of Methods",
+      "item": "**12. Data synthesis:** Describe the methods of data synthesis, including the summary measures and any investigation of heterogeneity."
+    },
+    {
+      "section": "Reporting of Methods",
+      "item": "**13. Publication bias:** Describe any methods used to assess publication bias."
+    },
+    {
+      "section": "Reporting of Results",
+      "item": "**14. Study selection:** Describe the results of the study selection process, including the number of studies included in the review."
+    },
+    {
+      "section": "Reporting of Results",
+      "item": "**15. Study characteristics:** Present the characteristics of the included studies."
+    },
+    {
+      "section": "Reporting of Results",
+      "item": "**16. Quantitative data synthesis:** Present the results of the data synthesis, including the summary measures and any investigation of heterogeneity."
+    },
+    {
+      "section": "Reporting of Results",
+      "item": "**17. Publication bias:** Present the results of any assessment of publication bias."
+    },
+    {
+      "section": "Reporting of Discussion",
+      "item": "**18. Summary of evidence:** Summarize the main findings and their strength."
+    },
+    {
+      "section": "Reporting of Discussion",
+      "item": "**19. Limitations:** Discuss the limitations of the review."
+    },
+    {
+      "section": "Reporting of Discussion",
+      "item": "**20. Conclusions:** Provide a general interpretation of the results and their implications."
+    },
+    {
+      "section": "Reporting of Funding",
+      "item": "**21. Funding:** Describe the sources of funding for the review."
+    },
+    {
+      "section": "Provenance",
+      "item": "Source: See sidecar metadata in `source/archetypes/moose-2000.yml`"
+    },
+    {
+      "section": "Provenance",
+      "item": "Version: 2000"
+    },
+    {
+      "section": "Provenance",
+      "item": "License: TBD"
+    }
+  ]
+}

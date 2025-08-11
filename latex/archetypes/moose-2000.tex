@@ -1,0 +1,169 @@
+% Pandoc LaTeX template for checklists with basic PDF forms
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{amssymb}
+% Optional AcroTeX eForms for richer widgets
+\usepackage{eforms}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\usepackage{enumitem}
+\setlist[itemize]{left=1.2em}
+\setlist{noitemsep}
+\def\tightlist{}
+
+% Abstraction layer for form widgets
+  % eForms uses \checkBox and \textField
+  \newcommand{\mkCheckBox}[2][]{\checkBox[#1]{#2}}
+  \newcommand{\mkTextField}[2][]{\textField[#1]{#2}}
+
+% Enable form environment for interactive fields
+% Usage in content requires raw LaTeX or a pandoc Lua filter to insert \CheckBox/\TextField
+\begin{document}
+
+\begin{center}
+{\LARGE }\\[4pt]
+\normalsize 
+\end{center}
+\vspace{1em}
+
+% Begin PDF form region
+\begin{Form}
+
+\section{MOOSE Checklist}\label{moose-checklist}
+
+\begin{quote}
+Scope: Meta-analysis Of Observational Studies in Epidemiology.
+
+Reference: See \texttt{source/archetypes/moose-2000.yml} for canonical
+link and provenance.
+\end{quote}
+
+\subsection{Instructions}\label{instructions}
+
+\begin{itemize}
+\tightlist
+\item
+  Use the boxes to confirm each reporting item.
+\item
+  Add reviewer notes under each section as needed.
+\end{itemize}
+
+\subsection{Reporting of Background}\label{reporting-of-background}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{1. Problem definition:} Clearly state the research question.
+\item[$\square$]
+  \textbf{2. Hypothesis:} State the hypothesis being tested.
+\item[$\square$]
+  \textbf{3. Study objectives:} Describe the study objectives.
+\item[$\square$]
+  \textbf{4. Rationale:} Provide the rationale for the review in the
+  context of what is already known.
+\end{itemize}
+
+\subsection{Reporting of Search
+Strategy}\label{reporting-of-search-strategy}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{5. Search criteria:} Specify the inclusion and exclusion
+  criteria for the review.
+\item[$\square$]
+  \textbf{6. Information sources:} Specify all information sources used
+  to identify studies, including databases, registers, and other
+  sources.
+\item[$\square$]
+  \textbf{7. Search terms:} Describe the search strategy, including
+  search terms and any limits used.
+\item[$\square$]
+  \textbf{8. Search process:} Describe the process for selecting studies
+  for inclusion in the review.
+\end{itemize}
+
+\subsection{Reporting of Methods}\label{reporting-of-methods}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{9. Data extraction:} Describe the methods used to extract data
+  from reports, including how many reviewers extracted data and whether
+  they worked independently.
+\item[$\square$]
+  \textbf{10. Data items:} List and define all variables for which data
+  were sought.
+\item[$\square$]
+  \textbf{11. Study quality assessment:} Describe the methods used to
+  assess the quality of the included studies.
+\item[$\square$]
+  \textbf{12. Data synthesis:} Describe the methods of data synthesis,
+  including the summary measures and any investigation of heterogeneity.
+\item[$\square$]
+  \textbf{13. Publication bias:} Describe any methods used to assess
+  publication bias.
+\end{itemize}
+
+\subsection{Reporting of Results}\label{reporting-of-results}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{14. Study selection:} Describe the results of the study
+  selection process, including the number of studies included in the
+  review.
+\item[$\square$]
+  \textbf{15. Study characteristics:} Present the characteristics of the
+  included studies.
+\item[$\square$]
+  \textbf{16. Quantitative data synthesis:} Present the results of the
+  data synthesis, including the summary measures and any investigation
+  of heterogeneity.
+\item[$\square$]
+  \textbf{17. Publication bias:} Present the results of any assessment
+  of publication bias.
+\end{itemize}
+
+\subsection{Reporting of Discussion}\label{reporting-of-discussion}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{18. Summary of evidence:} Summarize the main findings and
+  their strength.
+\item[$\square$]
+  \textbf{19. Limitations:} Discuss the limitations of the review.
+\item[$\square$]
+  \textbf{20. Conclusions:} Provide a general interpretation of the
+  results and their implications.
+\end{itemize}
+
+\subsection{Reporting of Funding}\label{reporting-of-funding}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{21. Funding:} Describe the sources of funding for the review.
+\end{itemize}
+
+\subsubsection{Notes}\label{notes}
+
+{Reviewer notes}
+
+\subsection{Provenance}\label{provenance}
+
+\begin{itemize}
+\tightlist
+\item
+  Source: See sidecar metadata in
+  \texttt{source/archetypes/moose-2000.yml}
+\item
+  Version: 2000
+\item
+  License: TBD
+\end{itemize}
+
+\end{Form}
+
+\end{document}

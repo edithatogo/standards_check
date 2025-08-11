@@ -1,0 +1,221 @@
+% Pandoc LaTeX template for checklists with basic PDF forms
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{amssymb}
+% Optional AcroTeX eForms for richer widgets
+\usepackage{eforms}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\usepackage{enumitem}
+\setlist[itemize]{left=1.2em}
+\setlist{noitemsep}
+\def\tightlist{}
+
+% Abstraction layer for form widgets
+  % eForms uses \checkBox and \textField
+  \newcommand{\mkCheckBox}[2][]{\checkBox[#1]{#2}}
+  \newcommand{\mkTextField}[2][]{\textField[#1]{#2}}
+
+% Enable form environment for interactive fields
+% Usage in content requires raw LaTeX or a pandoc Lua filter to insert \CheckBox/\TextField
+\begin{document}
+
+\begin{center}
+{\LARGE }\\[4pt]
+\normalsize 
+\end{center}
+\vspace{1em}
+
+% Begin PDF form region
+\begin{Form}
+
+\section{SPIRIT 2025 Checklist}\label{spirit-2025-checklist}
+
+\begin{quote}
+Scope: Standard Protocol Items: Recommendations for Interventional
+Trials.
+
+Reference: See \texttt{source/archetypes/spirit-2025.yml} for canonical
+link and provenance.
+\end{quote}
+
+\subsection{Instructions}\label{instructions}
+
+\begin{itemize}
+\tightlist
+\item
+  Use the boxes to confirm each reporting item.
+\item
+  Add reviewer notes under each section as needed.
+\end{itemize}
+
+\subsection{Administrative
+information}\label{administrative-information}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{1. Title:} Descriptive title that identifies the study as a
+  randomised trial, the interventions, the trial acronym, and the SPIRIT
+  item this protocol is based on.
+\item[$\square$]
+  \textbf{2. Trial registration:} Trial identifier and registry name. If
+  not yet registered, name of intended registry.
+\item[$\square$]
+  \textbf{3. Protocol version:} Date and version identifier.
+\item[$\square$]
+  \textbf{4. Funding:} Sources and types of financial, material, and
+  other support.
+\item[$\square$]
+  \textbf{5. Roles and responsibilities:} Names, affiliations, and roles
+  of protocol contributors.
+\end{itemize}
+
+\subsection{Introduction}\label{introduction}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{6. Background and rationale:} Description of research question
+  and justification for undertaking the trial, including summary of
+  relevant studies.
+\item[$\square$]
+  \textbf{7. Objectives:} Specific objectives or hypotheses.
+\end{itemize}
+
+\subsection{Methods: Participants, interventions, and
+outcomes}\label{methods-participants-interventions-and-outcomes}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{8. Trial design:} Description of trial design including type
+  of trial, allocation ratio, and framework.
+\item[$\square$]
+  \textbf{9. Study setting:} Description of study settings.
+\item[$\square$]
+  \textbf{10. Eligibility criteria:} Inclusion and exclusion criteria
+  for participants.
+\item[$\square$]
+  \textbf{11. Interventions:} Interventions for each group with
+  sufficient detail to allow replication.
+\item[$\square$]
+  \textbf{12. Outcomes:} Primary, secondary, and other outcomes.
+\end{itemize}
+
+\subsection{Methods: Assignment of interventions (for controlled
+trials)}\label{methods-assignment-of-interventions-for-controlled-trials}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{13. Allocation:} Sequence generation, concealment mechanism,
+  and implementation.
+\item[$\square$]
+  \textbf{14. Blinding (masking):} Who will be blinded and how.
+\end{itemize}
+
+\subsection{Methods: Data collection, management, and
+analysis}\label{methods-data-collection-management-and-analysis}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{15. Data collection methods:} Plans for assessment and
+  collection of outcome, baseline, and other trial data.
+\item[$\square$]
+  \textbf{16. Data management:} Plans for data entry, coding, security,
+  and storage.
+\item[$\square$]
+  \textbf{17. Statistical methods:} Statistical methods for analysing
+  primary and secondary outcomes.
+\end{itemize}
+
+\subsection{Methods: Monitoring}\label{methods-monitoring}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{18. Data monitoring:} Plans for data monitoring.
+\item[$\square$]
+  \textbf{19. Harms:} Plans for collecting, assessing, reporting, and
+  managing solicited and spontaneously reported adverse events and other
+  unintended effects of trial interventions or trial conduct.
+\item[$\square$]
+  \textbf{20. Auditing:} Frequency and procedures for auditing trial
+  conduct.
+\end{itemize}
+
+\subsection{Ethics and dissemination}\label{ethics-and-dissemination}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{21. Research ethics approval:} Plans for seeking research
+  ethics committee/institutional review board approval.
+\item[$\square$]
+  \textbf{22. Protocol amendments:} Plans for communicating important
+  protocol modifications to relevant parties.
+\item[$\square$]
+  \textbf{23. Consent or assent:} Who will obtain informed consent or
+  assent from potential trial participants or authorized surrogates, and
+  how.
+\item[$\square$]
+  \textbf{24. Confidentiality:} How personal information about potential
+  and enrolled participants will be collected, shared, and maintained in
+  order to protect confidentiality before, during, and after the trial.
+\item[$\square$]
+  \textbf{25. Declaration of interests:} Financial and other competing
+  interests for principal investigators for the overall trial and each
+  study site.
+\item[$\square$]
+  \textbf{26. Access to data:} Statement of who will have access to the
+  final trial dataset, and disclosure of contractual agreements that
+  limit such access for investigators.
+\item[$\square$]
+  \textbf{27. Ancillary and post-trial care:} Provisions, if any, for
+  ancillary and post-trial care, and for compensation to those who
+  suffer harm from trial participation.
+\item[$\square$]
+  \textbf{28. Dissemination policy:} Plans for investigators and
+  sponsors to authors and other stakeholders to share trial results.
+\item[$\square$]
+  \textbf{29. Authorship eligibility:} Guidelines for authorship
+  eligibility for trial publications.
+\item[$\square$]
+  \textbf{30. Reproducibility:} Plans for sharing of original data and
+  statistical code.
+\end{itemize}
+
+\subsection{Appendices}\label{appendices}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{31. Informed consent materials:} Model consent form and other
+  related documentation given to participants and authorized surrogates.
+\item[$\square$]
+  \textbf{32. Biological specimens:} Plans for collection, laboratory
+  evaluation, and storage of biological specimens for genetic or
+  molecular analysis in the current trial and for future use in
+  ancillary studies, if applicable.
+\end{itemize}
+
+{Notes}
+
+\subsection{Provenance}\label{provenance}
+
+\begin{itemize}
+\tightlist
+\item
+  Source: See sidecar metadata in
+  \texttt{source/archetypes/spirit-2025.yml}
+\item
+  Version: 2025
+\item
+  License: CC-BY-4.0
+\end{itemize}
+
+\end{Form}
+
+\end{document}

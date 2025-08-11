@@ -1,0 +1,130 @@
+{
+  "id": "coreq-2007",
+  "title": "COREQ Checklist",
+  "items": [
+    {
+      "section": "Instructions",
+      "item": "Use the boxes to confirm each reporting item."
+    },
+    {
+      "section": "Instructions",
+      "item": "Add reviewer notes under each section as needed."
+    },
+    {
+      "section": "Domain 1: Research team and reflexivity",
+      "item": "**1. Interviewer/facilitator:** Which author/s conducted the interview/focus group?"
+    },
+    {
+      "section": "Domain 1: Research team and reflexivity",
+      "item": "**2. Credentials:** What were the researcher’s credentials? E.g. PhD, MD."
+    },
+    {
+      "section": "Domain 1: Research team and reflexivity",
+      "item": "**3. Occupation:** What was their occupation at the time of the study?"
+    },
+    {
+      "section": "Domain 1: Research team and reflexivity",
+      "item": "**4. Gender:** Was the researcher male or female?"
+    },
+    {
+      "section": "Domain 1: Research team and reflexivity",
+      "item": "**5. Experience and training:** What experience or training did the researcher have?"
+    },
+    {
+      "section": "Domain 1: Research team and reflexivity",
+      "item": "**6. Relationship established:** Was a relationship established prior to study commencement?"
+    },
+    {
+      "section": "Domain 1: Research team and reflexivity",
+      "item": "**7. Participant knowledge of the interviewer:** What did the participants know about the researcher? e.g. personal goals, reasons for doing the research."
+    },
+    {
+      "section": "Domain 1: Research team and reflexivity",
+      "item": "**8. Interviewer characteristics:** What were the interviewer’s characteristics? e.g. assumptions, reasons for doing the research, relationship with participants."
+    },
+    {
+      "section": "Domain 2: Study design",
+      "item": "**9. Methodological orientation and theory:** What is the methodological orientation and what is the theoretical framework for the study?"
+    },
+    {
+      "section": "Domain 2: Study design",
+      "item": "**10. Sampling:** How were participants selected? e.g. purposive, convenience, consecutive, snowball."
+    },
+    {
+      "section": "Domain 2: Study design",
+      "item": "**11. Method of approach:** How were participants approached? e.g. face-to-face, telephone, mail, email."
+    },
+    {
+      "section": "Domain 2: Study design",
+      "item": "**12. Sample size:** How many participants were in the study?"
+    },
+    {
+      "section": "Domain 2: Study design",
+      "item": "**13. Non-participation:** How many people refused to participate or dropped out? Reasons?"
+    },
+    {
+      "section": "Domain 2: Study design",
+      "item": "**14. Setting of data collection:** Where was the data collected? e.g. home, clinic, workplace."
+    },
+    {
+      "section": "Domain 2: Study design",
+      "item": "**15. Presence of non-participants:** Was anyone else present besides the participants and researchers?"
+    },
+    {
+      "section": "Domain 2: Study design",
+      "item": "**16. Description of sample:** What were the important characteristics of the sample? e.g. demographic data, date."
+    },
+    {
+      "section": "Domain 3: Analysis and findings",
+      "item": "**17. Data analysis:** How many data coders coded the data?"
+    },
+    {
+      "section": "Domain 3: Analysis and findings",
+      "item": "**18. Derivation of themes:** Were themes identified in advance or did they emerge from the data?"
+    },
+    {
+      "section": "Domain 3: Analysis and findings",
+      "item": "**19. Software:** What software, if applicable, was used to manage the data?"
+    },
+    {
+      "section": "Domain 3: Analysis and findings",
+      "item": "**20. Participant checking:** Did participants provide feedback on the findings?"
+    },
+    {
+      "section": "Domain 3: Analysis and findings",
+      "item": "**21. Major themes:** Were major themes clearly presented in the findings?"
+    },
+    {
+      "section": "Domain 3: Analysis and findings",
+      "item": "**22. Clarity of themes:** Is there a description of how themes were developed?"
+    },
+    {
+      "section": "Domain 3: Analysis and findings",
+      "item": "**23. Quotations presented:** Were quotations presented to illustrate the themes?"
+    },
+    {
+      "section": "Domain 3: Analysis and findings",
+      "item": "**24. Data and findings consistent:** Was there consistency between the data presented and the findings?"
+    },
+    {
+      "section": "Domain 3: Analysis and findings",
+      "item": "**25. Clarity of major themes:** Were major themes clearly presented in the findings?"
+    },
+    {
+      "section": "Domain 3: Analysis and findings",
+      "item": "**26. Clarity of minor themes:** Were minor themes clearly presented in the findings?"
+    },
+    {
+      "section": "Provenance",
+      "item": "Source: See sidecar metadata in `source/archetypes/coreq-2007.yml`"
+    },
+    {
+      "section": "Provenance",
+      "item": "Version: 2007"
+    },
+    {
+      "section": "Provenance",
+      "item": "License: All Rights Reserved"
+    }
+  ]
+}

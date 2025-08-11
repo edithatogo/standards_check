@@ -1,0 +1,120 @@
+% Pandoc LaTeX template for checklists with basic PDF forms
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{amssymb}
+% Optional AcroTeX eForms for richer widgets
+\usepackage{eforms}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\usepackage{enumitem}
+\setlist[itemize]{left=1.2em}
+\setlist{noitemsep}
+\def\tightlist{}
+
+% Abstraction layer for form widgets
+  % eForms uses \checkBox and \textField
+  \newcommand{\mkCheckBox}[2][]{\checkBox[#1]{#2}}
+  \newcommand{\mkTextField}[2][]{\textField[#1]{#2}}
+
+% Enable form environment for interactive fields
+% Usage in content requires raw LaTeX or a pandoc Lua filter to insert \CheckBox/\TextField
+\begin{document}
+
+\begin{center}
+{\LARGE CONSORT for Abstracts}\\[4pt]
+\normalsize Date: 2008-04-22
+\end{center}
+\vspace{1em}
+
+% Begin PDF form region
+\begin{Form}
+
+\section{CONSORT for Abstracts
+Checklist}\label{consort-for-abstracts-checklist}
+
+\begin{quote}
+Scope: Preferred Reporting Items for reporting randomized controlled
+trials in journal and conference abstracts.
+
+Reference: See \texttt{source/variants/consort-abstracts.yml} for
+canonical link and provenance.
+\end{quote}
+
+\subsection{Instructions}\label{instructions}
+
+\begin{itemize}
+\tightlist
+\item
+  Use the boxes to confirm each reporting item.
+\item
+  Add reviewer notes under each section as needed.
+\end{itemize}
+
+\subsection{Checklist Items}\label{checklist-items}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{Title:} Identification of the study as a randomized trial.
+\item[$\square$]
+  \textbf{Authors:} Contact details for the corresponding author.
+\item[$\square$]
+  \textbf{Trial design:} Description of the trial design (e.g.,
+  parallel, cluster, non-inferiority).
+\item[$\square$]
+  \textbf{Methods:}
+
+  \begin{itemize}
+  \tightlist
+  \item[$\square$]
+    \textbf{Participants:} Eligibility criteria for participants and the
+    settings where the data were collected.
+  \item[$\square$]
+    \textbf{Interventions:} Interventions intended for each group.
+  \item[$\square$]
+    \textbf{Objective:} Specific objective or hypothesis.
+  \item[$\square$]
+    \textbf{Outcomes:} Clearly defined primary outcome for this report.
+  \item[$\square$]
+    \textbf{Randomization:} How participants were allocated to
+    interventions.
+  \item[$\square$]
+    \textbf{Blinding (masking):} Whether or not participants, care
+    givers, and those assessing the outcomes were blinded to group
+    assignment.
+  \end{itemize}
+\item[$\square$]
+  \textbf{Results:}
+
+  \begin{itemize}
+  \tightlist
+  \item[$\square$]
+    \textbf{Numbers randomized:} Number of participants randomized to
+    each group.
+  \item[$\square$]
+    \textbf{Recruitment:} Trial status.
+  \item[$\square$]
+    \textbf{Numbers analyzed:} Number of participants analyzed in each
+    group.
+  \item[$\square$]
+    \textbf{Outcome:} For the primary outcome, a result for each group
+    and the estimated effect size and its precision.
+  \item[$\square$]
+    \textbf{Harms:} Important adverse events or side effects.
+  \end{itemize}
+\item[$\square$]
+  \textbf{Conclusions:} General interpretation of the results.
+\item[$\square$]
+  \textbf{Trial registration:} Registration number and name of trial
+  register.
+\item[$\square$]
+  \textbf{Funding:} Source of funding.
+\end{itemize}
+
+\subsubsection{Notes}\label{notes}
+
+{Reviewer notes}
+
+\end{Form}
+
+\end{document}

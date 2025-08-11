@@ -1,0 +1,132 @@
+% Pandoc LaTeX template for checklists with basic PDF forms
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{amssymb}
+% Optional AcroTeX eForms for richer widgets
+\usepackage{eforms}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\usepackage{enumitem}
+\setlist[itemize]{left=1.2em}
+\setlist{noitemsep}
+\def\tightlist{}
+
+% Abstraction layer for form widgets
+  % eForms uses \checkBox and \textField
+  \newcommand{\mkCheckBox}[2][]{\checkBox[#1]{#2}}
+  \newcommand{\mkTextField}[2][]{\textField[#1]{#2}}
+
+% Enable form environment for interactive fields
+% Usage in content requires raw LaTeX or a pandoc Lua filter to insert \CheckBox/\TextField
+\begin{document}
+
+\begin{center}
+{\LARGE }\\[4pt]
+\normalsize 
+\end{center}
+\vspace{1em}
+
+% Begin PDF form region
+\begin{Form}
+
+\section{CARE Guidelines Checklist}\label{care-guidelines-checklist}
+
+\begin{quote}
+Scope: The CARE guidelines provide a framework for authors to follow
+when reporting on cases. The checklist is designed to correspond with
+the key components of a case report and to capture essential clinical
+information.
+
+Reference: See \texttt{source/archetypes/care-2013.yml} for canonical
+link and provenance.
+\end{quote}
+
+\subsection{Instructions}\label{instructions}
+
+\begin{itemize}
+\tightlist
+\item
+  Use task list items for checklist boxes; these become interactive
+  checkboxes in PDF.
+\item
+  Use a span with class \texttt{.textfield} for free‑text fields.
+\end{itemize}
+
+\subsection{Items}\label{items}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{Title:} The title should include the words ``case report'' and
+  identify the primary focus of the report.
+\item[$\square$]
+  \textbf{Key Words:} Two to five keywords that identify the diagnoses
+  or interventions covered in the case report.
+\item[$\square$]
+  \textbf{Abstract:} A structured or unstructured summary that includes
+  an introduction to the case's uniqueness, the patient's main symptoms
+  and clinical findings, the primary diagnoses and interventions, and
+  the main ``take-away'' lessons.
+\item[$\square$]
+  \textbf{Introduction:} A brief summary of why the case is unique,
+  potentially with references to existing medical literature.
+\item[$\square$]
+  \textbf{Patient Information:} This section should include
+  de-identified demographic and other specific information about the
+  patient, their main concerns and symptoms, and their medical, family,
+  and psychosocial history, including relevant genetic information and
+  past interventions with their outcomes.
+\item[$\square$]
+  \textbf{Clinical Findings:} A description of the relevant physical
+  examination and other significant clinical findings.
+\item[$\square$]
+  \textbf{Timeline:} A timeline that organizes important historical and
+  current information from the episode of care, which can be presented
+  as a figure or table.
+\item[$\square$]
+  \textbf{Diagnostic Assessment:} This includes the diagnostic methods
+  used (such as physical examination, laboratory testing, imaging, and
+  surveys), any diagnostic challenges, the final diagnosis (including
+  other diagnoses that were considered), and prognostic characteristics
+  where applicable.
+\item[$\square$]
+  \textbf{Therapeutic Intervention:} Details on the types of
+  interventions (e.g., pharmacologic, surgical, preventive), how they
+  were administered (dosage, strength, duration), and any changes made
+  to the interventions with explanations.
+\item[$\square$]
+  \textbf{Follow-up and Outcomes:} This should cover clinician- and
+  patient-assessed outcomes, important follow-up diagnostic and other
+  test results, intervention adherence and tolerability, and any adverse
+  or unanticipated events.
+\item[$\square$]
+  \textbf{Discussion:} A discussion of the strengths and limitations of
+  the approach to the case, a review of relevant medical literature, the
+  rationale for the conclusions drawn, and the primary ``take-away''
+  lessons from the report.
+\item[$\square$]
+  \textbf{Patient Perspective:} The patient should have the opportunity
+  to share their perspective on the treatment(s) they received.
+\item[$\square$]
+  \textbf{Informed Consent:} Confirmation that the patient gave informed
+  consent for the report.
+\end{itemize}
+
+{Notes}
+
+\subsection{Provenance}\label{provenance}
+
+\begin{itemize}
+\tightlist
+\item
+  Source: See sidecar metadata in
+  \texttt{source/archetypes/care-2013.yml}
+\item
+  Version: 2013
+\item
+  License: CC-BY-NC-4.0
+\end{itemize}
+
+\end{Form}
+
+\end{document}

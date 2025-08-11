@@ -1,0 +1,154 @@
+{
+  "id": "spirit-2025",
+  "title": "SPIRIT 2025 Checklist",
+  "items": [
+    {
+      "section": "Instructions",
+      "item": "Use the boxes to confirm each reporting item."
+    },
+    {
+      "section": "Instructions",
+      "item": "Add reviewer notes under each section as needed."
+    },
+    {
+      "section": "Administrative information",
+      "item": "**1. Title:** Descriptive title that identifies the study as a randomised trial, the interventions, the trial acronym, and the SPIRIT item this protocol is based on."
+    },
+    {
+      "section": "Administrative information",
+      "item": "**2. Trial registration:** Trial identifier and registry name. If not yet registered, name of intended registry."
+    },
+    {
+      "section": "Administrative information",
+      "item": "**3. Protocol version:** Date and version identifier."
+    },
+    {
+      "section": "Administrative information",
+      "item": "**4. Funding:** Sources and types of financial, material, and other support."
+    },
+    {
+      "section": "Administrative information",
+      "item": "**5. Roles and responsibilities:** Names, affiliations, and roles of protocol contributors."
+    },
+    {
+      "section": "Introduction",
+      "item": "**6. Background and rationale:** Description of research question and justification for undertaking the trial, including summary of relevant studies."
+    },
+    {
+      "section": "Introduction",
+      "item": "**7. Objectives:** Specific objectives or hypotheses."
+    },
+    {
+      "section": "Methods: Participants, interventions, and outcomes",
+      "item": "**8. Trial design:** Description of trial design including type of trial, allocation ratio, and framework."
+    },
+    {
+      "section": "Methods: Participants, interventions, and outcomes",
+      "item": "**9. Study setting:** Description of study settings."
+    },
+    {
+      "section": "Methods: Participants, interventions, and outcomes",
+      "item": "**10. Eligibility criteria:** Inclusion and exclusion criteria for participants."
+    },
+    {
+      "section": "Methods: Participants, interventions, and outcomes",
+      "item": "**11. Interventions:** Interventions for each group with sufficient detail to allow replication."
+    },
+    {
+      "section": "Methods: Participants, interventions, and outcomes",
+      "item": "**12. Outcomes:** Primary, secondary, and other outcomes."
+    },
+    {
+      "section": "Methods: Assignment of interventions (for controlled trials)",
+      "item": "**13. Allocation:** Sequence generation, concealment mechanism, and implementation."
+    },
+    {
+      "section": "Methods: Assignment of interventions (for controlled trials)",
+      "item": "**14. Blinding (masking):** Who will be blinded and how."
+    },
+    {
+      "section": "Methods: Data collection, management, and analysis",
+      "item": "**15. Data collection methods:** Plans for assessment and collection of outcome, baseline, and other trial data."
+    },
+    {
+      "section": "Methods: Data collection, management, and analysis",
+      "item": "**16. Data management:** Plans for data entry, coding, security, and storage."
+    },
+    {
+      "section": "Methods: Data collection, management, and analysis",
+      "item": "**17. Statistical methods:** Statistical methods for analysing primary and secondary outcomes."
+    },
+    {
+      "section": "Methods: Monitoring",
+      "item": "**18. Data monitoring:** Plans for data monitoring."
+    },
+    {
+      "section": "Methods: Monitoring",
+      "item": "**19. Harms:** Plans for collecting, assessing, reporting, and managing solicited and spontaneously reported adverse events and other unintended effects of trial interventions or trial conduct."
+    },
+    {
+      "section": "Methods: Monitoring",
+      "item": "**20. Auditing:** Frequency and procedures for auditing trial conduct."
+    },
+    {
+      "section": "Ethics and dissemination",
+      "item": "**21. Research ethics approval:** Plans for seeking research ethics committee/institutional review board approval."
+    },
+    {
+      "section": "Ethics and dissemination",
+      "item": "**22. Protocol amendments:** Plans for communicating important protocol modifications to relevant parties."
+    },
+    {
+      "section": "Ethics and dissemination",
+      "item": "**23. Consent or assent:** Who will obtain informed consent or assent from potential trial participants or authorized surrogates, and how."
+    },
+    {
+      "section": "Ethics and dissemination",
+      "item": "**24. Confidentiality:** How personal information about potential and enrolled participants will be collected, shared, and maintained in order to protect confidentiality before, during, and after the trial."
+    },
+    {
+      "section": "Ethics and dissemination",
+      "item": "**25. Declaration of interests:** Financial and other competing interests for principal investigators for the overall trial and each study site."
+    },
+    {
+      "section": "Ethics and dissemination",
+      "item": "**26. Access to data:** Statement of who will have access to the final trial dataset, and disclosure of contractual agreements that limit such access for investigators."
+    },
+    {
+      "section": "Ethics and dissemination",
+      "item": "**27. Ancillary and post-trial care:** Provisions, if any, for ancillary and post-trial care, and for compensation to those who suffer harm from trial participation."
+    },
+    {
+      "section": "Ethics and dissemination",
+      "item": "**28. Dissemination policy:** Plans for investigators and sponsors to authors and other stakeholders to share trial results."
+    },
+    {
+      "section": "Ethics and dissemination",
+      "item": "**29. Authorship eligibility:** Guidelines for authorship eligibility for trial publications."
+    },
+    {
+      "section": "Ethics and dissemination",
+      "item": "**30. Reproducibility:** Plans for sharing of original data and statistical code."
+    },
+    {
+      "section": "Appendices",
+      "item": "**31. Informed consent materials:** Model consent form and other related documentation given to participants and authorized surrogates."
+    },
+    {
+      "section": "Appendices",
+      "item": "**32. Biological specimens:** Plans for collection, laboratory evaluation, and storage of biological specimens for genetic or molecular analysis in the current trial and for future use in ancillary studies, if applicable."
+    },
+    {
+      "section": "Provenance",
+      "item": "Source: See sidecar metadata in `source/archetypes/spirit-2025.yml`"
+    },
+    {
+      "section": "Provenance",
+      "item": "Version: 2025"
+    },
+    {
+      "section": "Provenance",
+      "item": "License: CC-BY-4.0"
+    }
+  ]
+}

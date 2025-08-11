@@ -1,0 +1,34 @@
+{
+  "id": "spirit-ai",
+  "title": "Guidelines for clinical trial protocols for interventions involving artificial intelligence: the SPIRIT-AI extension",
+  "items": [
+    {
+      "section": "Instructions",
+      "item": "Use the boxes to confirm each reporting item."
+    },
+    {
+      "section": "Instructions",
+      "item": "Add reviewer notes under each section as needed."
+    },
+    {
+      "section": "Checklist Items",
+      "item": "**Item 1: Title** - Indicate that the trial involves AI."
+    },
+    {
+      "section": "Checklist Items",
+      "item": "**Item 2: Abstract** - Provide a structured summary of the protocol."
+    },
+    {
+      "section": "Provenance",
+      "item": "Source: See sidecar metadata in `source/variants/spirit-ai.yml`"
+    },
+    {
+      "section": "Provenance",
+      "item": "Version: 2020"
+    },
+    {
+      "section": "Provenance",
+      "item": "License: CC-BY-4.0"
+    }
+  ]
+}

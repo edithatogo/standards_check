@@ -1,0 +1,114 @@
+{
+  "id": "arrive-2020",
+  "title": "ARRIVE 2.0 Checklist",
+  "items": [
+    {
+      "section": "Instructions",
+      "item": "Use task list items for checklist boxes; these become interactive checkboxes in PDF."
+    },
+    {
+      "section": "Instructions",
+      "item": "Use a span with class `.textfield` for free‑text fields."
+    },
+    {
+      "section": "The ARRIVE Essential 10",
+      "item": "**Study Design:** A brief description of the study design for each experiment, including the groups being compared (with control groups) and the experimental unit (e.g., a single animal or a cage of animals)."
+    },
+    {
+      "section": "The ARRIVE Essential 10",
+      "item": "**Sample Size:** The exact number of experimental units in each group and the total number for each experiment, along with the total number of animals used. The method for determining the sample size should also be explained."
+    },
+    {
+      "section": "The ARRIVE Essential 10",
+      "item": "**Inclusion and Exclusion Criteria:** A description of the criteria for including or excluding animals or data points during the experiment and analysis."
+    },
+    {
+      "section": "The ARRIVE Essential 10",
+      "item": "**Randomization:** A statement on whether randomization was used to assign experimental units to groups and a description of the method used."
+    },
+    {
+      "section": "The ARRIVE Essential 10",
+      "item": "**Blinding:** A description of who was blinded during the different stages of the experiment (e.g., during allocation, outcome assessment, and data analysis)."
+    },
+    {
+      "section": "The ARRIVE Essential 10",
+      "item": "**Outcome Measures:** A clear definition of all assessed outcome measures. For studies testing a hypothesis, the primary outcome measure should be specified."
+    },
+    {
+      "section": "The ARRIVE Essential 10",
+      "item": "**Statistical Methods:** Detailed information about the statistical methods used for each analysis, including the software used."
+    },
+    {
+      "section": "The ARRIVE Essential 10",
+      "item": "**Experimental Animals:** Species-appropriate details of the animals used, such as species, strain, sex, and age."
+    },
+    {
+      "section": "The ARRIVE Essential 10",
+      "item": "**Experimental Procedures:** A thorough description of the procedures for each experimental group, detailed enough for replication by others."
+    },
+    {
+      "section": "The ARRIVE Essential 10",
+      "item": "**Results:** For each experiment, a report of summary and descriptive statistics for each group, including a measure of variability."
+    },
+    {
+      "section": "The Recommended Set",
+      "item": "**Abstract:** A summary of the study's background, objectives, methods, principal findings, and conclusions."
+    },
+    {
+      "section": "The Recommended Set",
+      "item": "**Background:** An explanation of the scientific context and the experimental approach."
+    },
+    {
+      "section": "The Recommended Set",
+      "item": "**Objectives:** A clear statement of the research objectives and any specific hypotheses being tested."
+    },
+    {
+      "section": "The Recommended Set",
+      "item": "**Ethical Statement:** The name of the ethical review committee that approved the study and any relevant license or protocol numbers."
+    },
+    {
+      "section": "The Recommended Set",
+      "item": "**Housing and Husbandry:** Details of the housing and husbandry conditions for the animals."
+    },
+    {
+      "section": "The Recommended Set",
+      "item": "**Animal Care and Monitoring:** A description of any interventions to reduce pain and suffering, as well as any adverse events and humane endpoints."
+    },
+    {
+      "section": "The Recommended Set",
+      "item": "**Interpretation/Scientific Implications:** An interpretation of the results in the context of the study's objectives and existing literature."
+    },
+    {
+      "section": "The Recommended Set",
+      "item": "**Generalizability/Translation:** A discussion of the generalizability of the findings."
+    },
+    {
+      "section": "The Recommended Set",
+      "item": "**Protocol Registration:** A statement indicating if a protocol was prepared before the study and where it was registered."
+    },
+    {
+      "section": "The Recommended Set",
+      "item": "**Data Access:** A statement on where the study data can be accessed."
+    },
+    {
+      "section": "The Recommended Set",
+      "item": "**Declaration of Interest:** A declaration of any potential conflicts of interest."
+    },
+    {
+      "section": "The Recommended Set",
+      "item": "**Funding:** Information on all funding sources and the role of the funder(s)."
+    },
+    {
+      "section": "Provenance",
+      "item": "Source: See sidecar metadata in `source/archetypes/arrive-2020.yml`"
+    },
+    {
+      "section": "Provenance",
+      "item": "Version: 2.0"
+    },
+    {
+      "section": "Provenance",
+      "item": "License: CC-BY-4.0"
+    }
+  ]
+}

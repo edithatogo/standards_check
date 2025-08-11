@@ -1,0 +1,98 @@
+{
+  "id": "squire-2-0",
+  "title": "SQUIRE 2.0 Checklist",
+  "items": [
+    {
+      "section": "Instructions",
+      "item": "Use the boxes to confirm each reporting item."
+    },
+    {
+      "section": "Instructions",
+      "item": "Add reviewer notes under each section as needed."
+    },
+    {
+      "section": "Title and Abstract",
+      "item": "**1. Title:** Indicate that the manuscript concerns an initiative to improve healthcare."
+    },
+    {
+      "section": "Title and Abstract",
+      "item": "**2. Abstract:** Provide a structured summary of the project."
+    },
+    {
+      "section": "Introduction",
+      "item": "**3. Problem Description:** Nature and significance of the local problem."
+    },
+    {
+      "section": "Introduction",
+      "item": "**4. Available Knowledge:** Summary of what is currently known about the problem, including relevant previous studies."
+    },
+    {
+      "section": "Introduction",
+      "item": "**5. Rationale:** Informal or formal frameworks, models, concepts, and/or theories used to explain the problem."
+    },
+    {
+      "section": "Introduction",
+      "item": "**6. Specific Aims:** Purpose of the project and of this report."
+    },
+    {
+      "section": "Methods",
+      "item": "**7. Context:** Contextual elements considered important at the outset of introducing the intervention(s)."
+    },
+    {
+      "section": "Methods",
+      "item": "**8. Intervention(s):** Description of the intervention(s) in sufficient detail that others could reproduce it."
+    },
+    {
+      "section": "Methods",
+      "item": "**9. Study of the Intervention(s):** Approach chosen for assessing the impact of the intervention(s)."
+    },
+    {
+      "section": "Methods",
+      "item": "**10. Measures:** Measures chosen for studying processes and outcomes of the intervention(s)."
+    },
+    {
+      "section": "Methods",
+      "item": "**11. Analysis:** Qualitative and quantitative methods used to draw inferences from the data."
+    },
+    {
+      "section": "Methods",
+      "item": "**12. Ethical Considerations:** Ethical aspects of implementing and studying the intervention(s)."
+    },
+    {
+      "section": "Results",
+      "item": "**13. Results:** Initial steps of the intervention(s) and their evolution over time."
+    },
+    {
+      "section": "Results",
+      "item": "**14. Summary:** Key findings, including relevance to the rationale and specific aims."
+    },
+    {
+      "section": "Discussion",
+      "item": "**15. Interpretation:** Nature of the association between the intervention(s) and the outcomes."
+    },
+    {
+      "section": "Discussion",
+      "item": "**16. Limitations:** Limits to the generalizability of the work."
+    },
+    {
+      "section": "Discussion",
+      "item": "**17. Conclusions:** Usefulness of the work."
+    },
+    {
+      "section": "Other Information",
+      "item": "**18. Funding:** Sources of funding that supported this work."
+    },
+    {
+      "section": "Provenance",
+      "item": "Source: See sidecar metadata in `source/archetypes/squire-2-0.yml`"
+    },
+    {
+      "section": "Provenance",
+      "item": "Version: 2.0"
+    },
+    {
+      "section": "Provenance",
+      "item": "License: Custom; see website"
+    }
+  ]
+}

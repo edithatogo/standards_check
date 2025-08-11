@@ -1,0 +1,114 @@
+{
+  "id": "strobe-2007",
+  "title": "STROBE Checklist",
+  "items": [
+    {
+      "section": "Instructions",
+      "item": "Use the boxes to confirm each reporting item."
+    },
+    {
+      "section": "Instructions",
+      "item": "Add reviewer notes under each section as needed."
+    },
+    {
+      "section": "Title and abstract",
+      "item": "**1. Title and abstract:** Indicate the study’s design with a commonly used term in the title or the abstract."
+    },
+    {
+      "section": "Introduction",
+      "item": "**2. Background/rationale:** Explain the scientific background and rationale for the investigation being reported."
+    },
+    {
+      "section": "Introduction",
+      "item": "**3. Objectives:** State specific objectives, including any prespecified hypotheses."
+    },
+    {
+      "section": "Methods",
+      "item": "**4. Study design:** Present key elements of study design early in the paper."
+    },
+    {
+      "section": "Methods",
+      "item": "**5. Setting:** Describe the setting, locations, and relevant dates, including periods of recruitment, exposure, follow-up, and data collection."
+    },
+    {
+      "section": "Methods",
+      "item": "**6. Participants:** Give the eligibility criteria, and the sources and methods of selection of participants."
+    },
+    {
+      "section": "Methods",
+      "item": "**7. Variables:** Clearly define all outcomes, exposures, predictors, potential confounders, and effect modifiers. Give diagnostic criteria, if applicable."
+    },
+    {
+      "section": "Methods",
+      "item": "**8. Data sources/ measurement:** For each variable of interest, give sources of data and details of methods of assessment (measurement)."
+    },
+    {
+      "section": "Methods",
+      "item": "**9. Bias:** Describe any efforts to address potential sources of bias."
+    },
+    {
+      "section": "Methods",
+      "item": "**10. Study size:** Explain how the study size was arrived at."
+    },
+    {
+      "section": "Methods",
+      "item": "**11. Quantitative variables:** Explain how quantitative variables were handled in the analyses. If applicable, describe which groupings were chosen and why."
+    },
+    {
+      "section": "Methods",
+      "item": "**12. Statistical methods:** Describe all statistical methods, including those used to control for confounding."
+    },
+    {
+      "section": "Results",
+      "item": "**13. Participants:** Report numbers of individuals at each stage of study—eg, numbers potentially eligible, examined for eligibility, confirmed eligible, included in the study, completing follow-up, and analysed."
+    },
+    {
+      "section": "Results",
+      "item": "**14. Descriptive data:** Give characteristics of study participants (eg, demographic, clinical, social) and information on exposures and potential confounders."
+    },
+    {
+      "section": "Results",
+      "item": "**15. Outcome data:** Report numbers of outcome events or summary measures over time."
+    },
+    {
+      "section": "Results",
+      "item": "**16. Main results:** Give unadjusted estimates and, if applicable, confounder-adjusted estimates and their precision (eg, 95% confidence interval). Make clear which confounders were adjusted for and why they were included."
+    },
+    {
+      "section": "Results",
+      "item": "**17. Other analyses:** Report other analyses done—eg, analyses of subgroups and interactions, and sensitivity analyses."
+    },
+    {
+      "section": "Discussion",
+      "item": "**18. Key results:** Summarise key results with reference to study objectives."
+    },
+    {
+      "section": "Discussion",
+      "item": "**19. Limitations:** Discuss limitations of the study, taking into account sources of potential bias or imprecision. Discuss both direction and magnitude of any potential bias."
+    },
+    {
+      "section": "Discussion",
+      "item": "**20. Interpretation:** Give a cautious overall interpretation of results considering objectives, limitations, multiplicity of analyses, results from similar studies, and other relevant evidence."
+    },
+    {
+      "section": "Discussion",
+      "item": "**21. Generalisability:** Discuss the generalisability (external validity) of the study results."
+    },
+    {
+      "section": "Other information",
+      "item": "**22. Funding:** Give the source of funding and the role of the funders for the present study and, if applicable, for the original study on which the present article is based."
+    },
+    {
+      "section": "Provenance",
+      "item": "Source: See sidecar metadata in `source/archetypes/strobe-2007.yml`"
+    },
+    {
+      "section": "Provenance",
+      "item": "Version: 2007"
+    },
+    {
+      "section": "Provenance",
+      "item": "License: CC BY 4.0"
+    }
+  ]
+}

@@ -1,0 +1,165 @@
+% Pandoc LaTeX template for checklists with basic PDF forms
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{amssymb}
+% Optional AcroTeX eForms for richer widgets
+\usepackage{eforms}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\usepackage{enumitem}
+\setlist[itemize]{left=1.2em}
+\setlist{noitemsep}
+\def\tightlist{}
+
+% Abstraction layer for form widgets
+  % eForms uses \checkBox and \textField
+  \newcommand{\mkCheckBox}[2][]{\checkBox[#1]{#2}}
+  \newcommand{\mkTextField}[2][]{\textField[#1]{#2}}
+
+% Enable form environment for interactive fields
+% Usage in content requires raw LaTeX or a pandoc Lua filter to insert \CheckBox/\TextField
+\begin{document}
+
+\begin{center}
+{\LARGE }\\[4pt]
+\normalsize 
+\end{center}
+\vspace{1em}
+
+% Begin PDF form region
+\begin{Form}
+
+\section{SRQR Checklist}\label{srqr-checklist}
+
+\begin{quote}
+Scope: Standards for Reporting Qualitative Research.
+
+Reference: See \texttt{source/archetypes/srqr-2014.yml} for canonical
+link and provenance.
+\end{quote}
+
+\subsection{Instructions}\label{instructions}
+
+\begin{itemize}
+\tightlist
+\item
+  Use the boxes to confirm each reporting item.
+\item
+  Add reviewer notes under each section as needed.
+\end{itemize}
+
+\subsection{Title and Abstract}\label{title-and-abstract}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{1. Title:} Concise description of the nature and topic of the
+  study.
+\item[$\square$]
+  \textbf{2. Abstract:} Summary of the study, including the problem,
+  purpose, methods, findings, and implications.
+\end{itemize}
+
+\subsection{Introduction}\label{introduction}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{3. Problem formulation:} Description of the problem or
+  question and its importance.
+\item[$\square$]
+  \textbf{4. Purpose or research question:} Purpose of the study or
+  research question.
+\item[$\square$]
+  \textbf{5. Rationale:} Rationale for the study, including the state of
+  knowledge on the topic.
+\end{itemize}
+
+\subsection{Methods}\label{methods}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{6. Qualitative approach and research paradigm:} The
+  qualitative approach (e.g., ethnography, grounded theory) and the
+  research paradigm (e.g., positivist, constructivist).
+\item[$\square$]
+  \textbf{7. Researcher characteristics and reflexivity:} The
+  researchers' characteristics and their reflexivity on how they might
+  have influenced the research.
+\item[$\square$]
+  \textbf{8. Context:} The context of the study (e.g., setting,
+  participants).
+\item[$\square$]
+  \textbf{9. Sampling strategy:} The sampling strategy used to select
+  participants.
+\item[$\square$]
+  \textbf{10. Ethical considerations:} Ethical considerations, including
+  how informed consent was obtained.
+\item[$\square$]
+  \textbf{11. Data collection methods:} The methods used to collect data
+  (e.g., interviews, focus groups, observation).
+\item[$\square$]
+  \textbf{12. Data analysis:} The methods used to analyze the data.
+\item[$\square$]
+  \textbf{13. Techniques to enhance trustworthiness:} The techniques
+  used to enhance the trustworthiness of the findings.
+\end{itemize}
+
+\subsection{Results/Findings}\label{resultsfindings}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{14. Main findings:} The main findings of the study.
+\item[$\square$]
+  \textbf{15. Quotes/excerpts:} The use of quotes or excerpts to support
+  the findings.
+\item[$\square$]
+  \textbf{16. Integration with prior work:} The integration of the
+  findings with prior work.
+\end{itemize}
+
+\subsection{Discussion}\label{discussion}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{17. Discussion of findings:} Discussion of the findings,
+  including their implications.
+\item[$\square$]
+  \textbf{18. Limitations:} The limitations of the study.
+\item[$\square$]
+  \textbf{19. Conclusions:} The conclusions of the study.
+\end{itemize}
+
+\subsection{Other}\label{other}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{20. Funding:} The sources of funding for the study.
+\item[$\square$]
+  \textbf{21. Conflicts of interest:} Any conflicts of interest.
+\end{itemize}
+
+\subsubsection{Notes}\label{notes}
+
+{Reviewer notes}
+
+\subsection{Provenance}\label{provenance}
+
+\begin{itemize}
+\tightlist
+\item
+  Source: See sidecar metadata in
+  \texttt{source/archetypes/srqr-2014.yml}
+\item
+  Version: 2014
+\item
+  License: Copyright, AAMC
+\end{itemize}
+
+\end{Form}
+
+\end{document}

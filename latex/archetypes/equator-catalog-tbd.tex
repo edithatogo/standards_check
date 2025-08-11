@@ -1,0 +1,83 @@
+% Pandoc LaTeX template for checklists with basic PDF forms
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{amssymb}
+% Optional AcroTeX eForms for richer widgets
+\usepackage{eforms}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\usepackage{enumitem}
+\setlist[itemize]{left=1.2em}
+\setlist{noitemsep}
+\def\tightlist{}
+
+% Abstraction layer for form widgets
+  % eForms uses \checkBox and \textField
+  \newcommand{\mkCheckBox}[2][]{\checkBox[#1]{#2}}
+  \newcommand{\mkTextField}[2][]{\textField[#1]{#2}}
+
+% Enable form environment for interactive fields
+% Usage in content requires raw LaTeX or a pandoc Lua filter to insert \CheckBox/\TextField
+\begin{document}
+
+\begin{center}
+{\LARGE }\\[4pt]
+\normalsize 
+\end{center}
+\vspace{1em}
+
+% Begin PDF form region
+\begin{Form}
+
+\section{Additional EQUATOR-listed Checklist
+(placeholder)}\label{additional-equator-listed-checklist-placeholder}
+
+\section{Title of Checklist}\label{title-of-checklist}
+
+\begin{quote}
+Scope: Brief description of what this checklist covers and when to use
+it.
+
+Reference: Citation or URL to the official checklist.
+\end{quote}
+
+\subsection{Instructions}\label{instructions}
+
+\begin{itemize}
+\tightlist
+\item
+  Use task list items for checklist boxes; these become interactive
+  checkboxes in PDF.
+\item
+  Use a span with class \texttt{.textfield} for free‑text fields.
+\end{itemize}
+
+\subsection{Items}\label{items}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  First requirement clearly stated.
+\item[$\square$]
+  Second requirement with some detail.
+\item[$\square$]
+  Third requirement; add notes below.
+\end{itemize}
+
+{Notes}
+
+\subsection{Provenance}\label{provenance}
+
+\begin{itemize}
+\tightlist
+\item
+  Source:
+\item
+  Version:
+\item
+  License:
+\end{itemize}
+
+\end{Form}
+
+\end{document}

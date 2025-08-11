@@ -1,0 +1,110 @@
+{
+  "id": "srqr-2014",
+  "title": "SRQR Checklist",
+  "items": [
+    {
+      "section": "Instructions",
+      "item": "Use the boxes to confirm each reporting item."
+    },
+    {
+      "section": "Instructions",
+      "item": "Add reviewer notes under each section as needed."
+    },
+    {
+      "section": "Title and Abstract",
+      "item": "**1. Title:** Concise description of the nature and topic of the study."
+    },
+    {
+      "section": "Title and Abstract",
+      "item": "**2. Abstract:** Summary of the study, including the problem, purpose, methods, findings, and implications."
+    },
+    {
+      "section": "Introduction",
+      "item": "**3. Problem formulation:** Description of the problem or question and its importance."
+    },
+    {
+      "section": "Introduction",
+      "item": "**4. Purpose or research question:** Purpose of the study or research question."
+    },
+    {
+      "section": "Introduction",
+      "item": "**5. Rationale:** Rationale for the study, including the state of knowledge on the topic."
+    },
+    {
+      "section": "Methods",
+      "item": "**6. Qualitative approach and research paradigm:** The qualitative approach (e.g., ethnography, grounded theory) and the research paradigm (e.g., positivist, constructivist)."
+    },
+    {
+      "section": "Methods",
+      "item": "**7. Researcher characteristics and reflexivity:** The researchers' characteristics and their reflexivity on how they might have influenced the research."
+    },
+    {
+      "section": "Methods",
+      "item": "**8. Context:** The context of the study (e.g., setting, participants)."
+    },
+    {
+      "section": "Methods",
+      "item": "**9. Sampling strategy:** The sampling strategy used to select participants."
+    },
+    {
+      "section": "Methods",
+      "item": "**10. Ethical considerations:** Ethical considerations, including how informed consent was obtained."
+    },
+    {
+      "section": "Methods",
+      "item": "**11. Data collection methods:** The methods used to collect data (e.g., interviews, focus groups, observation)."
+    },
+    {
+      "section": "Methods",
+      "item": "**12. Data analysis:** The methods used to analyze the data."
+    },
+    {
+      "section": "Methods",
+      "item": "**13. Techniques to enhance trustworthiness:** The techniques used to enhance the trustworthiness of the findings."
+    },
+    {
+      "section": "Results/Findings",
+      "item": "**14. Main findings:** The main findings of the study."
+    },
+    {
+      "section": "Results/Findings",
+      "item": "**15. Quotes/excerpts:** The use of quotes or excerpts to support the findings."
+    },
+    {
+      "section": "Results/Findings",
+      "item": "**16. Integration with prior work:** The integration of the findings with prior work."
+    },
+    {
+      "section": "Discussion",
+      "item": "**17. Discussion of findings:** Discussion of the findings, including their implications."
+    },
+    {
+      "section": "Discussion",
+      "item": "**18. Limitations:** The limitations of the study."
+    },
+    {
+      "section": "Discussion",
+      "item": "**19. Conclusions:** The conclusions of the study."
+    },
+    {
+      "section": "Other",
+      "item": "**20. Funding:** The sources of funding for the study."
+    },
+    {
+      "section": "Other",
+      "item": "**21. Conflicts of interest:** Any conflicts of interest."
+    },
+    {
+      "section": "Provenance",
+      "item": "Source: See sidecar metadata in `source/archetypes/srqr-2014.yml`"
+    },
+    {
+      "section": "Provenance",
+      "item": "Version: 2014"
+    },
+    {
+      "section": "Provenance",
+      "item": "License: Copyright, AAMC"
+    }
+  ]
+}

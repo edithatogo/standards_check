@@ -1,0 +1,46 @@
+{
+  "id": "consort-abstracts",
+  "title": "CONSORT for Abstracts Checklist",
+  "items": [
+    {
+      "section": "Instructions",
+      "item": "Use the boxes to confirm each reporting item."
+    },
+    {
+      "section": "Instructions",
+      "item": "Add reviewer notes under each section as needed."
+    },
+    {
+      "section": "Checklist Items",
+      "item": "**Title:** Identification of the study as a randomized trial."
+    },
+    {
+      "section": "Checklist Items",
+      "item": "**Authors:** Contact details for the corresponding author."
+    },
+    {
+      "section": "Checklist Items",
+      "item": "**Trial design:** Description of the trial design (e.g., parallel, cluster, non-inferiority)."
+    },
+    {
+      "section": "Checklist Items",
+      "item": "**Methods:**\n  - [ ] **Participants:** Eligibility criteria for participants and the settings where the data were collected.\n  - [ ] **Interventions:** Interventions intended for each group.\n  - [ ] **Objective:** Specific objective or hypothesis.\n  - [ ] **Outcomes:** Clearly defined primary outcome for this report.\n  - [ ] **Randomization:** How participants were allocated to interventions.\n  - [ ] **Blinding (masking):** Whether or not participants, care givers, and those assessing the outcomes were blinded to group assignment."
+    },
+    {
+      "section": "Checklist Items",
+      "item": "**Results:**\n  - [ ] **Numbers randomized:** Number of participants randomized to each group.\n  - [ ] **Recruitment:** Trial status.\n  - [ ] **Numbers analyzed:** Number of participants analyzed in each group.\n  - [ ] **Outcome:** For the primary outcome, a result for each group and the estimated effect size and its precision.\n  - [ ] **Harms:** Important adverse events or side effects."
+    },
+    {
+      "section": "Checklist Items",
+      "item": "**Conclusions:** General interpretation of the results."
+    },
+    {
+      "section": "Checklist Items",
+      "item": "**Trial registration:** Registration number and name of trial register."
+    },
+    {
+      "section": "Checklist Items",
+      "item": "**Funding:** Source of funding."
+    }
+  ]
+}

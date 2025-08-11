@@ -1,0 +1,38 @@
+{
+  "id": "prisma-equity",
+  "title": "PRISMA-Equity Checklist",
+  "items": [
+    {
+      "section": "Instructions",
+      "item": "Use task list items for checklist boxes; these become interactive checkboxes in PDF."
+    },
+    {
+      "section": "Instructions",
+      "item": "Use a span with class `.textfield` for free‑text fields."
+    },
+    {
+      "section": "Items",
+      "item": "First requirement clearly stated."
+    },
+    {
+      "section": "Items",
+      "item": "Second requirement with some detail."
+    },
+    {
+      "section": "Items",
+      "item": "Third requirement; add notes below."
+    },
+    {
+      "section": "Provenance",
+      "item": "Source: <URL to official page>"
+    },
+    {
+      "section": "Provenance",
+      "item": "Version: <year or tag>"
+    },
+    {
+      "section": "Provenance",
+      "item": "License: <terms or URL>"
+    }
+  ]
+}

@@ -1,0 +1,154 @@
+{
+  "id": "prisma-nma",
+  "title": "PRISMA-NMA Checklist",
+  "items": [
+    {
+      "section": "Instructions",
+      "item": "Use the boxes to confirm each reporting item."
+    },
+    {
+      "section": "Instructions",
+      "item": "Add reviewer notes under each section as needed."
+    },
+    {
+      "section": "Title",
+      "item": "**1. Title:** Identify the report as a systematic review incorporating a network meta-analysis (or related form of meta-analysis)."
+    },
+    {
+      "section": "Abstract",
+      "item": "**2. Structured Summary:** Provide a structured summary including, as applicable:\n  - **Background:** main objectives\n  - **Methods:** data sources; study eligibility criteria, participants, and interventions; study appraisal; and synthesis methods, such as network meta-analysis.\n  - **Results:** number of studies and participants identified; summary estimates with corresponding confidence/credible intervals; treatment rankings may also be discussed. Authors may choose to summarize pairwise comparisons against a chosen treatment included in their analyses for brevity.\n  - **Discussion/Conclusions:** limitations; conclusions and implications of findings.\n  - **Other:** primary source of funding; systematic review registration number with registry name."
+    },
+    {
+      "section": "Introduction",
+      "item": "**3. Rationale:** Describe the rationale for the review in the context of what is already known, including mention of why a network meta-analysis has been conducted."
+    },
+    {
+      "section": "Introduction",
+      "item": "**4. Objectives:** Provide an explicit statement of questions being addressed, with reference to participants, interventions, comparisons, outcomes, and study design (PICOS)."
+    },
+    {
+      "section": "Methods",
+      "item": "**5. Protocol and Registration:** Indicate whether a review protocol exists and if and where it can be accessed (e.g., Web address); and, if available, provide registration information, including registration number."
+    },
+    {
+      "section": "Methods",
+      "item": "**6. Eligibility Criteria:** Specify study characteristics (e.g., PICOS, length of follow-up) and report characteristics (e.g., years considered, language, publication status) used as criteria for eligibility, giving rationale. Clearly describe eligible treatments included in the treatment network, and note whether any have been clustered or merged into the same node (with justification)."
+    },
+    {
+      "section": "Methods",
+      "item": "**7. Information Sources:** Describe all information sources (e.g., databases with dates of coverage, contact with study authors to identify additional studies) in the search and date last searched."
+    },
+    {
+      "section": "Methods",
+      "item": "**8. Search:** Present full electronic search strategy for at least one database, including any limits used, such that it could be repeated."
+    },
+    {
+      "section": "Methods",
+      "item": "**9. Study Selection:** State the process for selecting studies (i.e., screening, eligibility, included in systematic review, and, if applicable, included in the meta-analysis)."
+    },
+    {
+      "section": "Methods",
+      "item": "**10. Data Collection Process:** Describe method of data extraction from reports (e.g., piloted forms, independently, in duplicate) and any processes for obtaining and confirming data from investigators."
+    },
+    {
+      "section": "Methods",
+      "item": "**11. Data Items:** List and define all variables for which data were sought (e.g., PICOS, funding sources) and any assumptions and simplifications made."
+    },
+    {
+      "section": "Methods",
+      "item": "**S1. Geometry of the Network:** Describe methods used to explore the geometry of the treatment network under study and potential biases related to it. This should include how the evidence base has been graphically summarized for presentation, and what characteristics were compiled and used to describe the evidence base to readers."
+    },
+    {
+      "section": "Methods",
+      "item": "**12. Risk of Bias within Individual Studies:** Describe methods used for assessing risk of bias of individual studies (including specification of whether this was done at the study or outcome level), and how this information is to be used in any data synthesis."
+    },
+    {
+      "section": "Methods",
+      "item": "**13. Summary Measures:** State the principal summary measures (e.g., risk ratio, difference in means). Also describe the use of additional summary measures assessed, such as treatment rankings and surface under the cumulative ranking curve (SUCRA) values, as well as modified approaches used to present summary findings from meta-analyses."
+    },
+    {
+      "section": "Methods",
+      "item": "**14. Planned Methods of Analysis:** Describe the methods of handling data and combining results of studies for each network meta-analysis. This should include, but not be limited to:\n  - Handling of multi-arm trials;\n  - Selection of variance structure;\n  - Selection of prior distributions in Bayesian analyses; and\n  - Assessment of model fit."
+    },
+    {
+      "section": "Methods",
+      "item": "**S2. Assessment of Inconsistency:** Describe the statistical methods used to evaluate the agreement of direct and indirect evidence in the treatment network(s) studied. Describe efforts taken to address its presence when found."
+    },
+    {
+      "section": "Methods",
+      "item": "**15. Risk of Bias across Studies:** Specify any assessment of risk of bias that may affect the cumulative evidence (e.g., publication bias, selective reporting within studies)."
+    },
+    {
+      "section": "Methods",
+      "item": "**16. Additional Analyses:** Describe methods of additional analyses if done, indicating which were pre-specified. This may include, but not be limited to, the following:\n  - Sensitivity or subgroup analyses;\n  - Meta-regression analyses;\n  - Alternative formulations of the treatment network;\n  - Use of alternative prior distributions for Bayesian analyses (if applicable)."
+    },
+    {
+      "section": "Results",
+      "item": "**17. Study Selection:** Give numbers of studies screened, assessed for eligibility, and included in the review, with reasons for exclusions at each stage, ideally with a flow diagram."
+    },
+    {
+      "section": "Results",
+      "item": "**S3. Presentation of Network Structure:** Provide a network graph of the included studies to enable visualization of the geometry of the treatment network."
+    },
+    {
+      "section": "Results",
+      "item": "**S4. Summary of Network Geometry:** Provide a brief overview of characteristics of the treatment network. This may include commentary on the abundance of trials and randomized patients for the different interventions and pairwise comparisons in the network, gaps of evidence in the treatment network, and potential biases reflected by the network structure."
+    },
+    {
+      "section": "Results",
+      "item": "**18. Study Characteristics:** For each study, present characteristics for which data were extracted (e.g., study size, PICOS, follow-up period) and provide the citations."
+    },
+    {
+      "section": "Results",
+      "item": "**19. Risk of Bias within Studies:** Present data on risk of bias of each study and, if available, any outcome level assessment."
+    },
+    {
+      "section": "Results",
+      "item": "**20. Results of Individual Studies:** For all outcomes considered (benefits or harms), present, for each study: 1) simple summary data for each intervention group, and 2) effect estimates and confidence intervals. Modified approaches may be needed to deal with information from larger networks."
+    },
+    {
+      "section": "Results",
+      "item": "**21. Synthesis of Results:** Present results of each meta-analysis done, including confidence/credible intervals. In larger networks, authors may focus on comparisons versus a particular comparator (e.g. placebo or standard care), with full findings presented in an appendix. League tables and forest plots may be considered to summarize pairwise comparisons. If additional summary measures were explored (such as treatment rankings), these should also be presented."
+    },
+    {
+      "section": "Results",
+      "item": "**S5. Exploration for Inconsistency:** Describe results from investigations of inconsistency. This may include such information as measures of model fit to compare consistency and inconsistency models, P values from statistical tests, or summary of inconsistency estimates from different parts of the treatment network."
+    },
+    {
+      "section": "Results",
+      "item": "**22. Risk of Bias across Studies:** Present results of any assessment of risk of bias across studies for the evidence base being studied."
+    },
+    {
+      "section": "Results",
+      "item": "**23. Results of Additional Analyses:** Give results of additional analyses, if done (e.g., sensitivity or subgroup analyses, meta-regression analyses, alternative network geometries studied, alternative choice of prior distributions for Bayesian analyses, and so forth)."
+    },
+    {
+      "section": "Discussion",
+      "item": "**24. Summary of Evidence:** Summarize the main findings, including the strength of evidence for each main outcome; consider their relevance to key groups (e.g., healthcare providers, users, and policy-makers)."
+    },
+    {
+      "section": "Discussion",
+      "item": "**25. Limitations:** Discuss limitations at study and outcome level (e.g., risk of bias), and at review level (e.g., incomplete retrieval of identified research, reporting bias). Comment on the validity of the assumptions, such as transitivity and consistency. Comment on any concerns regarding network geometry (e.g., avoidance of certain comparisons)."
+    },
+    {
+      "section": "Discussion",
+      "item": "**26. Conclusions:** Provide a general interpretation of the results in the context of other evidence, and implications for future research."
+    },
+    {
+      "section": "Funding",
+      "item": "**27. Funding:** Describe sources of funding for the systematic review and other support (e.g., supply of data); role of funders for the systematic review. This should also include information regarding whether funding has been received from manufacturers of treatments in the network and/or whether some of the authors are content experts with professional conflicts of interest that could affect use of treatments in the network."
+    },
+    {
+      "section": "Provenance",
+      "item": "Source: See sidecar metadata in `source/variants/prisma-nma.yml`"
+    },
+    {
+      "section": "Provenance",
+      "item": "Version: 2015"
+    },
+    {
+      "section": "Provenance",
+      "item": "License: CC-BY-4.0"
+    }
+  ]
+}

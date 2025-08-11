@@ -1,0 +1,102 @@
+{
+  "id": "prisma-p",
+  "title": "PRISMA-P Checklist",
+  "items": [
+    {
+      "section": "Instructions",
+      "item": "Use the boxes to confirm each reporting item."
+    },
+    {
+      "section": "Instructions",
+      "item": "Add reviewer notes under each section as needed."
+    },
+    {
+      "section": "Title",
+      "item": "**1a. Title:** Identification of the report as a protocol of a systematic review."
+    },
+    {
+      "section": "Title",
+      "item": "**1b. Update:** If the protocol is for an update of an existing review, identify as such."
+    },
+    {
+      "section": "Abstract",
+      "item": "**2. Abstract:** Provide a structured summary of the protocol, including:\n  - **Background:** Rationale for the review.\n  - **Methods:** Key elements of the methods, including eligibility criteria, information sources, risk of bias assessment, and data synthesis.\n  - **Registration:** If registered, provide the registration number and registry name."
+    },
+    {
+      "section": "Introduction",
+      "item": "**3. Rationale:** Describe the rationale for the review in the context of what is already known."
+    },
+    {
+      "section": "Introduction",
+      "item": "**4. Objectives:** Provide an explicit statement of the question(s) the review will address with reference to participants, interventions, comparators, and outcomes (PICO)."
+    },
+    {
+      "section": "Methods",
+      "item": "**5. Eligibility criteria:** Specify the study characteristics (e.g., PICO, study design, setting, time frame) and report characteristics (e.g., years considered, language, publication status) to be used as criteria for eligibility for the review."
+    },
+    {
+      "section": "Methods",
+      "item": "**6. Information sources:** Describe all intended information sources (e.g., electronic databases, contact with study authors, trial registers, or other grey literature sources) with planned dates of coverage."
+    },
+    {
+      "section": "Methods",
+      "item": "**7. Search strategy:** Present a draft of the search strategy to be used for at least one electronic database, including planned limits, such that it could be repeated."
+    },
+    {
+      "section": "Methods",
+      "item": "**8. Study records: data management:** Describe the mechanism(s) that will be used to manage records and data throughout the review."
+    },
+    {
+      "section": "Methods",
+      "item": "**9. Study records: selection process:** State the process that will be used for selecting studies (e.g., two independent reviewers) for inclusion in the review."
+    },
+    {
+      "section": "Methods",
+      "item": "**10. Study records: data collection process:** Describe the process of data extraction, including how it will be done and who will do it."
+    },
+    {
+      "section": "Methods",
+      "item": "**11a. Data items:** List and define all variables for which data will be sought, including PICO and other relevant data for the review."
+    },
+    {
+      "section": "Methods",
+      "item": "**11b. Outcomes and prioritization:** List and define all outcomes for which data will be sought. If more than one, prioritize and explain the choice of the main outcomes."
+    },
+    {
+      "section": "Methods",
+      "item": "**12. Risk of bias in individual studies:** Describe the planned method for assessing risk of bias in individual studies, including how it will be used in data synthesis."
+    },
+    {
+      "section": "Methods",
+      "item": "**13. Data synthesis:** Describe the planned methods of data synthesis, including a description of the summary measures and any planned investigation of heterogeneity."
+    },
+    {
+      "section": "Methods",
+      "item": "**14. Meta-bias(es):** Describe any planned assessment of meta-bias(es) (e.g., publication bias, selective reporting within studies)."
+    },
+    {
+      "section": "Methods",
+      "item": "**15. Confidence in cumulative evidence:** Describe how the strength of the body of evidence will be assessed."
+    },
+    {
+      "section": "Other",
+      "item": "**16. Amendments:** Describe any planned amendments to the protocol."
+    },
+    {
+      "section": "Other",
+      "item": "**17. Dissemination:** Describe the planned dissemination strategy."
+    },
+    {
+      "section": "Provenance",
+      "item": "Source: See sidecar metadata in `source/variants/prisma-p.yml`"
+    },
+    {
+      "section": "Provenance",
+      "item": "Version: 2015"
+    },
+    {
+      "section": "Provenance",
+      "item": "License: CC-BY-4.0"
+    }
+  ]
+}

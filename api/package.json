@@ -1,0 +1,26 @@
+{
+  "name": "standards_check",
+  "version": "1.0.0",
+  "description": "Simple pipeline for academic publication checklists: 1) Collect originals into `source/`. 2) Produce edited Markdown in `markdown/`. 3) Produce Typst in `typst/`. 4) Produce LaTeX in `latex/`.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edithatogo/standards_check.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/edithatogo/standards_check/issues"
+  },
+  "homepage": "https://github.com/edithatogo/standards_check#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "marked": "^16.1.2"
+  }
+}
