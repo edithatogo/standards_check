@@ -17,6 +17,11 @@ on:
       - 'pandoc.yaml'
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -65,3 +70,22 @@ jobs:
         with:
           name: docx-artifacts
           path: docx/
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build HTML
+        run: bash scripts/generate_html_index.sh
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./html
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
