@@ -6,6 +6,16 @@ Thank you for contributing. This repository is documents-first and pipeline-driv
 - Use `ROADMAP.md` and `todos/` to pick the next task.
 - If you have internet access, follow `HANDOFF.md` to verify sources, ingest originals, and transcribe items.
 
+## Core Workflow
+
+This project uses a data-driven approach to manage checklists. All checklist information is stored in YAML files under the `source/` directory. The primary file is `source/index.yml`, which contains a master list of all checklists and their metadata.
+
+To add a new checklist, you must first add a new entry to `source/index.yml`. Then, run the following command to generate the necessary files:
+
+`make scaffold`
+
+This will create the markdown file, citation file, and other necessary assets based on the information in `source/index.yml`. **Do not create these files manually.**
+
 ## Quick Commands
 - `make validate`: Run all local validators.
 - `make build`: Generate PDF/LaTeX/DOCX from Markdown.
