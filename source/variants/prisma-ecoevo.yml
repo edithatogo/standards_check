@@ -8,7 +8,7 @@ publisher: "Collaboration for Environmental Evidence"
 source_url: "https://onlinelibrary.wiley.com/doi/10.1111/brv.12721"
 retrieved_at: "2025-08-11"
 preferred_format: pdf
-checksum: # TBD
+checksum: "e95aed1e0f4d97c2082e70382e0c17fff1a46b420b939cb3cfda4273d433e04e"
 license: "CC BY 4.0"
 notes: |
   This is the PRISMA extension for systematic reviews and meta-analyses in ecology and evolution.

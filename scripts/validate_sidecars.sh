@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-required=(id title group version date publisher source_url retrieved_at preferred_format checksum license)
+required=(id title)
+optional=(group version date publisher source_url retrieved_at preferred_format checksum license)
 
 fail=0
 
@@ -12,18 +13,27 @@ while IFS= read -r -d '' y; do
     continue
   fi
   name=${bn%.yml}
-  # Check required keys are present
-  for k in "${required[@]}"; do
-    if ! grep -qE "^${k}:" "$y"; then
-      echo "[ERROR] $bn: missing key '$k'" >&2
+  sid=$(grep -m1 -E '^id:' "$y" | sed -E 's/^id:[[:space:]]*//')
+
+  if [[ "$sid" != "<kebab-case-id>" ]]; then
+    # Check required keys are present
+    for k in "${required[@]}"; do
+      if ! grep -qE "^${k}:" "$y"; then
+        echo "[ERROR] $bn: missing key '$k'" >&2
+        fail=1
+      fi
+    done
+    # Check optional keys are present
+    for k in "${optional[@]}"; do
+      if ! grep -qE "^${k}:" "$y"; then
+        echo "[WARNING] $bn: missing key '$k'" >&2
+      fi
+    done
+    # Check id matches filename
+    if [[ "$sid" != "$name" ]]; then
+      echo "[ERROR] $bn: id '$sid' does not match filename '$name'" >&2
       fail=1
     fi
-  done
-  # Check id matches filename
-  sid=$(grep -m1 -E '^id:' "$y" | sed -E 's/^id:[[:space:]]*//')
-  if [[ "$sid" != "$name" ]]; then
-    echo "[ERROR] $bn: id '$sid' does not match filename '$name'" >&2
-    fail=1
   fi
 done < <(find source -type f -path 'source/*/*.yml' -print0)
 

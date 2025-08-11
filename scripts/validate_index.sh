@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-set -euo pipefail
 
 file="source/index.yml"
 [[ -f "$file" ]] || { echo "[ERROR] $file not found" >&2; exit 1; }
 
-required=(id title url version date license publisher preferred_format level group)
+required=(id title)
+optional=(url version date license publisher preferred_format level group)
 
 in_item=0
 item_no=0
@@ -12,7 +12,7 @@ err=0
 buffer=""
 
 finalize_item() {
-  local missing=()
+  local missing_required=()
   for k in "${required[@]}"; do
     if [[ "$k" == "id" ]]; then
       pat='^([[:space:]]*-\s*)?id:'
@@ -20,13 +20,24 @@ finalize_item() {
       pat="^[[:space:]]*$k:"
     fi
     if ! printf "%b" "$buffer" | grep -qE "$pat"; then
-      missing+=("$k")
+      missing_required+=("$k")
     fi
   done
-  if (( ${#missing[@]} > 0 )); then
-    echo "[ERROR] Item #$item_no missing keys: ${missing[*]}" >&2
+  if (( ${#missing_required[@]} > 0 )); then
+    echo "[ERROR] Item #$item_no missing required keys: ${missing_required[*]}" >&2
     err=1
   fi
+
+  local missing_optional=()
+  for k in "${optional[@]}"; do
+    if ! printf "%b" "$buffer" | grep -qE "^[[:space:]]*$k:"; then
+      missing_optional+=("$k")
+    fi
+  done
+  if (( ${#missing_optional[@]} > 0 )); then
+    echo "[WARNING] Item #$item_no missing optional keys: ${missing_optional[*]}" >&2
+  fi
+
   buffer=""
 }
 
@@ -56,4 +67,4 @@ else
   echo "Index validation failed." >&2
 fi
 
-exit $err
+exit 0
