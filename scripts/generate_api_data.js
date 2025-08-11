@@ -3,8 +3,10 @@
 const fs = require('fs').promises;
 const path = require('path');
 const { marked } = require('marked');
+const yaml = require('js-yaml');
 
-const checklistsDir = path.join(__dirname, '../markdown');
+const checklistsDir = path.join(__dirname, '../markdown/en');
+const sourceDir = path.join(__dirname, '../source');
 const outputDir = path.join(__dirname, '../docs/api');
 
 // Helper function to parse markdown content into a structured JSON object.
@@ -20,12 +22,10 @@ const parseMarkdown = (content, checklistId) => {
       currentSection = token.text;
     } else if (token.type === 'list') {
       for (const item of token.items) {
-        // Clean up the text, removing any nested list markers if they exist
         const cleanedText = item.text.replace(/^\s*[-*+]\s+/, '');
         items.push({
           section: currentSection,
           item: cleanedText,
-          // We can add more structured data here later if needed
         });
       }
     }
@@ -38,6 +38,23 @@ const parseMarkdown = (content, checklistId) => {
   };
 };
 
+// Helper function to find and read the corresponding YAML file.
+const readSourceYml = async (checklistId, type) => {
+  const ymlPath = path.join(sourceDir, `${type}s`, `${checklistId}.yml`);
+  try {
+    const fileContent = await fs.readFile(ymlPath, 'utf-8');
+    return yaml.load(fileContent);
+  } catch (error) {
+    // If the file doesn't exist, it's not a critical error, just return null.
+    if (error.code === 'ENOENT') {
+      return null;
+    }
+    // For other errors, log them.
+    console.warn(`Warning: Could not read or parse YAML for ${checklistId}:`, error);
+    return null;
+  }
+};
+
 
 const main = async () => {
   try {
@@ -45,8 +62,8 @@ const main = async () => {
     await fs.mkdir(outputDir, { recursive: true });
 
     const allChecklists = [];
-    const archetypesPath = path.join(__dirname, '..', 'markdown', 'archetypes');
-    const variantsPath = path.join(__dirname, '..', 'markdown', 'variants');
+    const archetypesPath = path.join(checklistsDir, 'archetypes');
+    const variantsPath = path.join(checklistsDir, 'variants');
 
     const processDir = async (dir, type) => {
       const files = await fs.readdir(dir);
@@ -55,19 +72,28 @@ const main = async () => {
           const checklistId = path.basename(file, '.md');
           const filePath = path.join(dir, file);
           const content = await fs.readFile(filePath, 'utf-8');
+          
           const jsonData = parseMarkdown(content, checklistId);
-          const checklistInfo = { ...jsonData, type };
+          const sourceData = await readSourceYml(checklistId, type);
+          
+          const combinedData = { ...jsonData };
+          if (sourceData) {
+            combinedData.title = sourceData.title || jsonData.title;
+            combinedData.history = sourceData.history || [];
+            combinedData.source_url = sourceData.source_url || null;
+          }
 
           // Write individual checklist file
           const individualOutputPath = path.join(outputDir, `${checklistId}.json`);
-          await fs.writeFile(individualOutputPath, JSON.stringify(jsonData, null, 2));
+          await fs.writeFile(individualOutputPath, JSON.stringify(combinedData, null, 2));
           console.log(`  ✓ Generated ${path.relative(path.join(__dirname, '..'), individualOutputPath)}`);
 
-          // Add to the main list (without the detailed items for a smaller index)
+          // Add to the main list
           allChecklists.push({
-            id: checklistInfo.id,
-            title: checklistInfo.title,
-            type: checklistInfo.type,
+            id: combinedData.id,
+            title: combinedData.title,
+            type: type,
+            history: combinedData.history,
             url: `api/${checklistId}.json`
           });
         }

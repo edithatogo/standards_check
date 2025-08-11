@@ -1,0 +1,17 @@
+id: consort-2025
+title: "CONSORT 2025 Statement"
+group: consort
+version: "2025"
+date: "2025-01-01" # Placeholder date
+publisher: "The CONSORT Group"
+source_url: "" # To be filled in when available
+retrieved_at: "2025-08-11"
+preferred_format: ""
+checksum: ""
+license: "" # To be determined
+history:
+  - version: "2010"
+    path: "archive/consort/2010/consort-2010.md"
+    source_url: "https://www.bmj.com/content/340/bmj.c869"
+notes: |
+  The CONSORT (Consolidated Standards of Reporting Trials) statement is a guideline for reporting randomized controlled trials. This is the 2025 update.

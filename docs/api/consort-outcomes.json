@@ -1,6 +1,6 @@
 {
   "id": "consort-outcomes",
-  "title": "CONSORT-Outcomes",
+  "title": "<official-title>",
   "items": [
     {
       "section": "Instructions",
@@ -34,5 +34,7 @@
       "section": "Provenance",
       "item": "License: <terms or URL>"
     }
-  ]
+  ],
+  "history": [],
+  "source_url": "<canonical-webpage-or-download>"
 }

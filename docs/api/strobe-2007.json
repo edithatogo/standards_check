@@ -1,6 +1,6 @@
 {
   "id": "strobe-2007",
-  "title": "STROBE Checklist",
+  "title": "STROBE Statement Checklist",
   "items": [
     {
       "section": "Instructions",
@@ -110,5 +110,7 @@
       "section": "Provenance",
       "item": "License: CC BY 4.0"
     }
-  ]
+  ],
+  "history": [],
+  "source_url": "https://doi.org/10.1371/journal.pmed.0040296"
 }

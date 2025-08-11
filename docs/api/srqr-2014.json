@@ -1,6 +1,6 @@
 {
   "id": "srqr-2014",
-  "title": "SRQR Checklist",
+  "title": "SRQR — Standards for Reporting Qualitative Research",
   "items": [
     {
       "section": "Instructions",
@@ -106,5 +106,7 @@
       "section": "Provenance",
       "item": "License: Copyright, AAMC"
     }
-  ]
+  ],
+  "history": [],
+  "source_url": "https://cdn.amegroups.cn/journals/amepc/files/journals/17/articles/100653/public/100653-PB2-5312-R1.pdf"
 }

@@ -1,6 +1,6 @@
 {
   "id": "consort-cluster",
-  "title": "CONSORT for Cluster Trials Checklist",
+  "title": "CONSORT for Cluster Trials",
   "items": [
     {
       "section": "Instructions",
@@ -34,5 +34,7 @@
       "section": "Checklist Items",
       "item": "**Other information**\n- [ ] 23. Registration number and name of trial registry\n- [ ] 24. Where the full trial protocol can be accessed, if available\n- [ ] 25. Sources of funding and other support (e.g., supply of drugs), role of funders"
     }
-  ]
+  ],
+  "history": [],
+  "source_url": "https://www.bmj.com/content/345/bmj.e5661"
 }

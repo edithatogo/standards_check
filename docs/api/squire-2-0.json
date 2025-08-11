@@ -1,6 +1,6 @@
 {
   "id": "squire-2-0",
-  "title": "SQUIRE 2.0 Checklist",
+  "title": "SQUIRE 2.0 (Standards for QUality Improvement Reporting Excellence): revised publication guidelines from a detailed consensus process",
   "items": [
     {
       "section": "Instructions",
@@ -94,5 +94,7 @@
       "section": "Provenance",
       "item": "License: Custom; see website"
     }
-  ]
+  ],
+  "history": [],
+  "source_url": "https://qualitysafety.bmj.com/content/24/10/636"
 }

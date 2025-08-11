@@ -12,8 +12,8 @@
 
 ### Data & Content Enhancement
 - [ ] **On Hold:** Explanation and Elaboration (E&E) Documents: Integrate and link to detailed E&E documents for checklists.
-- [ ] **Support for Translations:** Add a mechanism to manage and serve official translations of checklists.
-- [ ] **Historical Versioning:** Archive and provide access to previous versions of checklists.
+- [x] **Support for Translations:** Add a mechanism to manage and serve official translations of checklists.
+- [x] **Historical Versioning:** Archive and provide access to previous versions of checklists.
 
 ### Automation & Project Maintenance
 - [ ] **Automated Link and DOI Validation:** Create a script to periodically validate URLs and DOIs in the source files.

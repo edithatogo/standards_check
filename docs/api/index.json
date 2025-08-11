@@ -3,42 +3,48 @@
     "id": "arrive-2020",
     "title": "ARRIVE 2.0 Checklist",
     "type": "archetype",
+    "history": [],
     "url": "api/arrive-2020.json"
   },
   {
     "id": "care-2013",
     "title": "CARE Guidelines Checklist",
     "type": "archetype",
+    "history": [],
     "url": "api/care-2013.json"
   },
   {
     "id": "cheers-2022",
     "title": "CHEERS 2022 Checklist",
     "type": "archetype",
+    "history": [],
     "url": "api/cheers-2022.json"
   },
   {
     "id": "conserve",
-    "title": "CONSERVE Checklist",
+    "title": "CONSERVE 2021: CONSORT and SPIRIT Extension for RCTs Revised in Extenuating Circumstances",
     "type": "archetype",
+    "history": [],
     "url": "api/conserve.json"
   },
   {
-    "id": "consort-2010",
-    "title": "CONSORT 2010 Checklist",
-    "type": "archetype",
-    "url": "api/consort-2010.json"
-  },
-  {
     "id": "consort-2025",
-    "title": "CONSORT 2025 Checklist",
+    "title": "CONSORT 2025 Statement",
     "type": "archetype",
+    "history": [
+      {
+        "version": "2010",
+        "path": "archive/consort/2010/consort-2010.md",
+        "source_url": "https://www.bmj.com/content/340/bmj.c869"
+      }
+    ],
     "url": "api/consort-2025.json"
   },
   {
     "id": "coreq-2007",
-    "title": "COREQ Checklist",
+    "title": "COREQ — Consolidated Criteria for Reporting Qualitative Research",
     "type": "archetype",
+    "history": [],
     "url": "api/coreq-2007.json"
   },
   {
@@ -49,14 +55,16 @@
   },
   {
     "id": "moose-2000",
-    "title": "MOOSE Checklist",
+    "title": "MOOSE Guidelines Checklist",
     "type": "archetype",
+    "history": [],
     "url": "api/moose-2000.json"
   },
   {
     "id": "prisma-2020",
     "title": "PRISMA 2020 Checklist",
     "type": "archetype",
+    "history": [],
     "url": "api/prisma-2020.json"
   },
   {
@@ -69,282 +77,329 @@
     "id": "spirit-2025",
     "title": "SPIRIT 2025 Checklist",
     "type": "archetype",
+    "history": [],
     "url": "api/spirit-2025.json"
   },
   {
     "id": "squire-2-0",
-    "title": "SQUIRE 2.0 Checklist",
+    "title": "SQUIRE 2.0 (Standards for QUality Improvement Reporting Excellence): revised publication guidelines from a detailed consensus process",
     "type": "archetype",
+    "history": [],
     "url": "api/squire-2-0.json"
   },
   {
     "id": "srqr-2014",
-    "title": "SRQR Checklist",
+    "title": "SRQR — Standards for Reporting Qualitative Research",
     "type": "archetype",
+    "history": [],
     "url": "api/srqr-2014.json"
   },
   {
     "id": "stard-2015",
     "title": "STARD 2015 Checklist",
     "type": "archetype",
+    "history": [],
     "url": "api/stard-2015.json"
   },
   {
     "id": "strobe-2007",
-    "title": "STROBE Checklist",
+    "title": "STROBE Statement Checklist",
     "type": "archetype",
+    "history": [],
     "url": "api/strobe-2007.json"
   },
   {
     "id": "tidier-2014",
     "title": "TIDieR Checklist",
     "type": "archetype",
+    "history": [],
     "url": "api/tidier-2014.json"
   },
   {
     "id": "tripod-2015",
     "title": "TRIPOD 2015 Checklist",
     "type": "archetype",
+    "history": [],
     "url": "api/tripod-2015.json"
   },
   {
     "id": "ace",
-    "title": "ACE Checklist",
+    "title": "ACE Statement: Enhancing the Reporting of Adaptive Design Clinical Trials",
     "type": "variant",
+    "history": [],
     "url": "api/ace.json"
   },
   {
     "id": "consort-abstracts",
-    "title": "CONSORT for Abstracts Checklist",
+    "title": "CONSORT for Abstracts",
     "type": "variant",
+    "history": [],
     "url": "api/consort-abstracts.json"
   },
   {
     "id": "consort-ai",
-    "title": "CONSORT-AI",
+    "title": "<official-title>",
     "type": "variant",
+    "history": [],
     "url": "api/consort-ai.json"
   },
   {
     "id": "consort-cluster-crossover",
-    "title": "CONSORT for Cluster Crossover Trials",
+    "title": "<official-title>",
     "type": "variant",
+    "history": [],
     "url": "api/consort-cluster-crossover.json"
   },
   {
     "id": "consort-cluster",
-    "title": "CONSORT for Cluster Trials Checklist",
+    "title": "CONSORT for Cluster Trials",
     "type": "variant",
+    "history": [],
     "url": "api/consort-cluster.json"
   },
   {
     "id": "consort-dose-finding",
-    "title": "CONSORT for Dose-finding Trials Checklist",
+    "title": "CONSORT for Dose-finding Trials",
     "type": "variant",
+    "history": [],
     "url": "api/consort-dose-finding.json"
   },
   {
     "id": "consort-equity",
     "title": "CONSORT for Equity",
     "type": "variant",
+    "history": [],
     "url": "api/consort-equity.json"
   },
   {
     "id": "consort-factorial",
-    "title": "CONSORT for Factorial Trials",
+    "title": "<official-title>",
     "type": "variant",
+    "history": [],
     "url": "api/consort-factorial.json"
   },
   {
     "id": "consort-harms",
     "title": "CONSORT for Harms",
     "type": "variant",
+    "history": [],
     "url": "api/consort-harms.json"
   },
   {
     "id": "consort-n-of-1",
-    "title": "CONSORT for N-of-1 Trials Checklist",
+    "title": "CONSORT for N-of-1 Trials",
     "type": "variant",
+    "history": [],
     "url": "api/consort-n-of-1.json"
   },
   {
     "id": "consort-non-inferiority",
     "title": "CONSORT for Non-inferiority Trials",
     "type": "variant",
+    "history": [],
     "url": "api/consort-non-inferiority.json"
   },
   {
     "id": "consort-npi",
-    "title": "CONSORT for Non-pharmacological Interventions",
+    "title": "<official-title>",
     "type": "variant",
+    "history": [],
     "url": "api/consort-npi.json"
   },
   {
     "id": "consort-npt",
     "title": "CONSORT for Non-pharmacological Treatment Trials",
     "type": "variant",
+    "history": [],
     "url": "api/consort-npt.json"
   },
   {
     "id": "consort-outcomes",
-    "title": "CONSORT-Outcomes",
+    "title": "<official-title>",
     "type": "variant",
+    "history": [],
     "url": "api/consort-outcomes.json"
   },
   {
     "id": "consort-pilot",
     "title": "CONSORT for Pilot Trials",
     "type": "variant",
+    "history": [],
     "url": "api/consort-pilot.json"
   },
   {
     "id": "consort-pragmatic",
     "title": "CONSORT for Pragmatic Trials",
     "type": "variant",
+    "history": [],
     "url": "api/consort-pragmatic.json"
   },
   {
     "id": "consort-pro",
-    "title": "CONSORT for Patient-reported Outcomes",
+    "title": "<official-title>",
     "type": "variant",
+    "history": [],
     "url": "api/consort-pro.json"
   },
   {
     "id": "consort-routine",
-    "title": "CONSORT-ROUTINE",
+    "title": "<official-title>",
     "type": "variant",
+    "history": [],
     "url": "api/consort-routine.json"
   },
   {
     "id": "consort-spi",
     "title": "CONSORT for Social and Psychological Interventions",
     "type": "variant",
+    "history": [],
     "url": "api/consort-spi.json"
   },
   {
     "id": "consort-stepped-wedge",
     "title": "CONSORT for Stepped-wedge Cluster Trials",
     "type": "variant",
+    "history": [],
     "url": "api/consort-stepped-wedge.json"
   },
   {
     "id": "consort-within-person",
     "title": "CONSORT for Within-person Trials",
     "type": "variant",
+    "history": [],
     "url": "api/consort-within-person.json"
   },
   {
     "id": "prisma-a",
     "title": "PRISMA for Abstracts Checklist",
     "type": "variant",
+    "history": [],
     "url": "api/prisma-a.json"
   },
   {
     "id": "prisma-acupuncture",
-    "title": "PRISMA for Acupuncture",
+    "title": "<official-title>",
     "type": "variant",
+    "history": [],
     "url": "api/prisma-acupuncture.json"
   },
   {
     "id": "prisma-chinese-herbal-medicines",
-    "title": "PRISMA for Chinese Herbal Medicines",
+    "title": "<official-title>",
     "type": "variant",
+    "history": [],
     "url": "api/prisma-chinese-herbal-medicines.json"
   },
   {
     "id": "prisma-complex-interventions",
-    "title": "PRISMA for Complex Interventions",
+    "title": "<official-title>",
     "type": "variant",
+    "history": [],
     "url": "api/prisma-complex-interventions.json"
   },
   {
     "id": "prisma-cosmin",
     "title": "PRISMA-COSMIN Checklist",
     "type": "variant",
+    "history": [],
     "url": "api/prisma-cosmin.json"
   },
   {
     "id": "prisma-dta",
     "title": "PRISMA-DTA Checklist",
     "type": "variant",
+    "history": [],
     "url": "api/prisma-dta.json"
   },
   {
     "id": "prisma-ecoevo",
-    "title": "PRISMA-EcoEvo Checklist",
+    "title": "PRISMA-EcoEvo: The PRISMA Extension for Systematic Reviews in Ecology and Evolution",
     "type": "variant",
+    "history": [],
     "url": "api/prisma-ecoevo.json"
   },
   {
     "id": "prisma-equity",
     "title": "PRISMA-Equity Checklist",
     "type": "variant",
+    "history": [],
     "url": "api/prisma-equity.json"
   },
   {
     "id": "prisma-harms",
     "title": "PRISMA-Harms Checklist",
     "type": "variant",
+    "history": [],
     "url": "api/prisma-harms.json"
   },
   {
     "id": "prisma-ipd",
     "title": "PRISMA-IPD Checklist",
     "type": "variant",
+    "history": [],
     "url": "api/prisma-ipd.json"
   },
   {
     "id": "prisma-lsr",
     "title": "PRISMA-LSR Checklist",
     "type": "variant",
+    "history": [],
     "url": "api/prisma-lsr.json"
   },
   {
     "id": "prisma-moxibustion",
     "title": "PRISMA for Moxibustion Checklist",
     "type": "variant",
+    "history": [],
     "url": "api/prisma-moxibustion.json"
   },
   {
     "id": "prisma-nma",
     "title": "PRISMA-NMA Checklist",
     "type": "variant",
+    "history": [],
     "url": "api/prisma-nma.json"
   },
   {
     "id": "prisma-p",
     "title": "PRISMA-P Checklist",
     "type": "variant",
+    "history": [],
     "url": "api/prisma-p.json"
   },
   {
     "id": "prisma-s",
     "title": "PRISMA-S Checklist",
     "type": "variant",
+    "history": [],
     "url": "api/prisma-s.json"
   },
   {
     "id": "prisma-scr",
     "title": "PRISMA-ScR Checklist",
     "type": "variant",
+    "history": [],
     "url": "api/prisma-scr.json"
   },
   {
     "id": "spirit-ai",
     "title": "Guidelines for clinical trial protocols for interventions involving artificial intelligence: the SPIRIT-AI extension",
     "type": "variant",
+    "history": [],
     "url": "api/spirit-ai.json"
   },
   {
     "id": "spirit-dose-finding",
     "title": "SPIRIT for Dose-finding Trials",
     "type": "variant",
+    "history": [],
     "url": "api/spirit-dose-finding.json"
   },
   {
     "id": "spirit-n-of-1",
     "title": "SPIRIT for N-of-1 Trials",
     "type": "variant",
+    "history": [],
     "url": "api/spirit-n-of-1.json"
   }
 ]

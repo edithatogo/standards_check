@@ -19,7 +19,7 @@ citation:
       family: Yap
     - given: Mourad
       family: Tighiouart
-    - given: Mark J
+    - given: Mark J.
       family: Ratain
     - given: Adrian
       family: Mander
@@ -27,31 +27,25 @@ citation:
       family: Lee
     - given: John
       family: O'Quigley
-    - given: Shing M
+    - given: Shing M.
       family: Lee
-    - given: Ying
-      family: Kuen
-    - given: Cheung
-      family: Bjoern
-    - given: Bornkamp
-      family: Tom
-    - given: Parke
-      family: Jack
-    - given: Lee
-      family: Nathan
-    - given: L.
+    - given: Ying Kuen
+      family: Cheung
+    - given: Bjoern
+      family: Bornkamp
+    - given: Tom
+      family: Parke
+    - given: Jack
+      family: Lee
+    - given: Nathan L.
       family: Pace
-    - given: David
-      family: C.
-    - given: Wheeler
-      family: Matthew
-    - given: J.
+    - given: David C.
+      family: Wheeler
+    - given: Matthew J.
       family: Schipper
-    - given: Elizabeth
-      family: A.
-    - given: Garrett-Mayer
-      family: Peter
-    - given: F.
+    - given: Elizabeth A.
+      family: Garrett-Mayer
+    - given: Peter F.
       family: Thall
     - given: Sudha
       family: Sundar
@@ -59,56 +53,39 @@ citation:
       family: Ring
     - given: Graham
       family: Wheeler
-    - given: Gary
-      family: S.
-    - given: Collins
-      family: Douglas
-      family: G.
-    - given: Altman
-      family: Muhammad
-    - given: Shah
-      family: Z.
-    - given: Oon
+    - given: Gary S.
+      family: Collins
+    - given: Douglas G.
+      family: Altman
+    - given: Muhammad
+      family: Shah
+    - given: Z. Oon
       family: Clifton
-      family: D.
-    - given: Leaf
+    - given: D. Leaf
       family: Christopher
-      family: J.
-    - given: Weir
+    - given: J. Weir
       family: Andrew
-      family: P.
-    - given: Grieve
+    - given: P. Grieve
       family: Susan
-      family: Mallett
-    - given: Timothy
-      family: C.
-    - given: Frayling
+    - given: Mallett
+      family: Timothy
+    - given: C. Frayling
       family: Frank
-      family: E.
-    - given: Harrell
-      family: Jr
-    - given: David
-      family: L.
-    - given: DeMets
+    - given: E. Harrell Jr
+      family: David
+    - given: L. DeMets
       family: Janet
-      family: A.
-    - given: Dancey
+    - given: A. Dancey
       family: Stan
-      family: B.
-    - given: Gerson
+    - given: B. Gerson
       family: Simon
-      family: J.
-    - given: Bond
+    - given: J. Bond
       family: Richard
-      family: J.
-    - given: J.
-      family: O'Donnell
-    - given: Michael
-      family: J.
-    - given: Sweeting
+    - given: J. J. O'Donnell
+      family: Michael
+    - given: J. Sweeting
       family: Thomas
-      family: A.
-    - given: Jaki
+    - given: A. Jaki
   doi: "10.1136/bmj-2023-078524"
   journal: "BMJ"
   volume: 383

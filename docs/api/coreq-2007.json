@@ -1,6 +1,6 @@
 {
   "id": "coreq-2007",
-  "title": "COREQ Checklist",
+  "title": "COREQ — Consolidated Criteria for Reporting Qualitative Research",
   "items": [
     {
       "section": "Instructions",
@@ -126,5 +126,7 @@
       "section": "Provenance",
       "item": "License: All Rights Reserved"
     }
-  ]
+  ],
+  "history": [],
+  "source_url": "https://www.equator-network.org/reporting-guidelines/coreq/"
 }

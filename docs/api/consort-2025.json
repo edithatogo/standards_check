@@ -1,6 +1,6 @@
 {
   "id": "consort-2025",
-  "title": "CONSORT 2025 Checklist",
+  "title": "CONSORT 2025 Statement",
   "items": [
     {
       "section": "Instructions",
@@ -34,5 +34,13 @@
       "section": "Provenance",
       "item": "License: <terms or URL>"
     }
-  ]
+  ],
+  "history": [
+    {
+      "version": "2010",
+      "path": "archive/consort/2010/consort-2010.md",
+      "source_url": "https://www.bmj.com/content/340/bmj.c869"
+    }
+  ],
+  "source_url": null
 }

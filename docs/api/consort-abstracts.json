@@ -1,6 +1,6 @@
 {
   "id": "consort-abstracts",
-  "title": "CONSORT for Abstracts Checklist",
+  "title": "CONSORT for Abstracts",
   "items": [
     {
       "section": "Instructions",
@@ -42,5 +42,7 @@
       "section": "Checklist Items",
       "item": "**Funding:** Source of funding."
     }
-  ]
+  ],
+  "history": [],
+  "source_url": "https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.0050020"
 }

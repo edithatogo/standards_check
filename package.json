@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/edithatogo/standards_check#readme",
   "dependencies": {
+    "js-yaml": "^4.1.0",
     "marked": "^16.1.2"
   }
 }

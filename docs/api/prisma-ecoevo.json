@@ -1,6 +1,6 @@
 {
   "id": "prisma-ecoevo",
-  "title": "PRISMA-EcoEvo Checklist",
+  "title": "PRISMA-EcoEvo: The PRISMA Extension for Systematic Reviews in Ecology and Evolution",
   "items": [
     {
       "section": "Title and Abstract",
@@ -358,5 +358,7 @@
       "section": "References",
       "item": "**27.2** List included studies as referenced sources (e.g. rather than listing them in a table or supplement)."
     }
-  ]
+  ],
+  "history": [],
+  "source_url": "https://onlinelibrary.wiley.com/doi/10.1111/brv.12721"
 }

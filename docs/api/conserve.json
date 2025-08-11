@@ -1,6 +1,6 @@
 {
   "id": "conserve",
-  "title": "CONSERVE Checklist",
+  "title": "CONSERVE 2021: CONSORT and SPIRIT Extension for RCTs Revised in Extenuating Circumstances",
   "items": [
     {
       "section": "Instructions",
@@ -34,5 +34,7 @@
       "section": "Provenance",
       "item": "License: <terms or URL>"
     }
-  ]
+  ],
+  "history": [],
+  "source_url": "https://jamanetwork.com/journals/jama/fullarticle/2781349"
 }

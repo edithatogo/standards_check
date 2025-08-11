@@ -1,6 +1,6 @@
 {
   "id": "moose-2000",
-  "title": "MOOSE Checklist",
+  "title": "MOOSE Guidelines Checklist",
   "items": [
     {
       "section": "Instructions",
@@ -106,5 +106,7 @@
       "section": "Provenance",
       "item": "License: TBD"
     }
-  ]
+  ],
+  "history": [],
+  "source_url": "https://www.cardiff.ac.uk/__data/assets/word_doc/0008/350954/MOOSE-Checklist.docx"
 }
