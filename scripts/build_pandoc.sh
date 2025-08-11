@@ -29,9 +29,17 @@ while IFS= read -r -d '' md; do
   base=$(basename "$rel" .md)
   title=$(head -n 1 "$md" | sed 's/# //')
 
-  mkdir -p "latex/$dir" "pdf/$dir" "docx/$dir"
+  mkdir -p "latex/$dir" "pdf/$dir" "docx/$dir" "html/$dir"
 
   echo "Building $rel ..."
+
+  # HTML
+  pandoc "$md" \
+    --from=markdown+task_lists \
+    --to=html \
+    --template="templates/pandoc/html_template.html" \
+    --metadata title="$title" \
+    -o "html/$dir/$base.html"
 
   # LaTeX
   pandoc_args=(
