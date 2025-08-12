@@ -80,11 +80,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Install Pandoc and yq
+      - name: Install Pandoc, TeX (XeLaTeX), and yq
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc
+          sudo apt-get install -y pandoc texlive-xetex texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
           sudo snap install yq
+      - name: Setup Typst
+        uses: typst-community/setup-typst@v4
+        with:
+          typst-version: 'v0.13.1'
       - name: Build HTML
         run: |
           bash scripts/build_pandoc.sh
