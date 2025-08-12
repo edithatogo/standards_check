@@ -31,25 +31,35 @@ BODY_CONTENT_TMP=$(mktemp)
 trap 'rm -f "$BODY_CONTENT_TMP"' EXIT
 
 # Generate the body of the index page
-echo "<h2>Checklist Archetypes</h2>" >> "$BODY_CONTENT_TMP"
+echo "<h2>Implemented Checklists</h2>" >> "$BODY_CONTENT_TMP"
 echo "<div class='list-group mb-4'>" >> "$BODY_CONTENT_TMP"
-yq -r '.items[] | select(.level == "archetype") | .id' "$INDEX_YAML" | while read -r id; do
+yq -r '.items[] | select(.status == "mapped") | .id' "$INDEX_YAML" | while read -r id;
+do
   title=$(yq -r ".items[] | select(.id == \"$id\") | .title" "$INDEX_YAML")
+  level=$(yq -r ".items[] | select(.id == \"$id\") | .level" "$INDEX_YAML")
   html_file="${id}.html"
-  echo "<a href=\"./archetypes/${html_file}\" class=\"list-group-item list-group-item-action\">${title}</a>" >> "$BODY_CONTENT_TMP"
+  if [ "$level" == "archetype" ]; then
+    echo "<a href=\"./archetypes/${html_file}\" class=\"list-group-item list-group-item-action\">${title}</a>" >> "$BODY_CONTENT_TMP"
+  else
+    echo "<a href=\"./variants/${html_file}\" class=\"list-group-item list-group-item-action\">${title}</a>" >> "$BODY_CONTENT_TMP"
+  fi
 done
 echo "</div>" >> "$BODY_CONTENT_TMP"
 
-echo "<h2>Checklist Variants</h2>" >> "$BODY_CONTENT_TMP"
+echo "<h2>Placeholder Checklists</h2>" >> "$BODY_CONTENT_TMP"
 echo "<div class='list-group mb-4'>" >> "$BODY_CONTENT_TMP"
-yq -r '.items[] | select(.level == "variant") | .id' "$INDEX_YAML" | while read -r id; do
+yq -r '.items[] | select(.status != "mapped") | .id' "$INDEX_YAML" | while read -r id;
+do
   title=$(yq -r ".items[] | select(.id == \"$id\") | .title" "$INDEX_YAML")
+  level=$(yq -r ".items[] | select(.id == \"$id\") | .level" "$INDEX_YAML")
   html_file="${id}.html"
-  echo "<a href=\"./variants/${html_file}\" class=\"list-group-item list-group-item-action\">${title}</a>" >> "$BODY_CONTENT_TMP"
+  if [ "$level" == "archetype" ]; then
+    echo "<a href=\"./archetypes/${html_file}\" class=\"list-group-item list-group-item-action\">${title}</a>" >> "$BODY_CONTENT_TMP"
+  else
+    echo "<a href=\"./variants/${html_file}\" class=\"list-group-item list-group-item-action\">${title}</a>" >> "$BODY_CONTENT_TMP"
+  fi
 done
 echo "</div>" >> "$BODY_CONTENT_TMP"
-
-
 
 # Use pandoc to apply the main template to our generated body
 log "Applying HTML template..."
