@@ -25,7 +25,9 @@ fi
 shopt -s nullglob
 while IFS= read -r -d '' md; do
   rel=${md#markdown/}
+  rel=${md#markdown/}
   dir=$(dirname "$rel")
+  dir=${dir#en/}
   base=$(basename "$rel" .md)
   title=$(head -n 1 "$md" | sed 's/# //')
 
