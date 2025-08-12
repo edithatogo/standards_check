@@ -1,0 +1,161 @@
+% Pandoc LaTeX template for checklists with basic PDF forms
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{amssymb}
+% Optional AcroTeX eForms for richer widgets
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\usepackage{enumitem}
+\setlist[itemize]{left=1.2em}
+\setlist{noitemsep}
+\def\tightlist{}
+
+% Abstraction layer for form widgets
+  % hyperref provides \CheckBox and \TextField
+  \newcommand{\mkCheckBox}[2][]{\CheckBox[#1]{#2}}
+  \newcommand{\mkTextField}[2][]{\TextField[#1]{#2}}
+
+% Enable form environment for interactive fields
+% Usage in content requires raw LaTeX or a pandoc Lua filter to insert \CheckBox/\TextField
+\begin{document}
+
+\begin{center}
+{\LARGE }\\[4pt]
+\normalsize 
+\end{center}
+\vspace{1em}
+
+% Begin PDF form region
+\begin{Form}
+
+\section{ARRIVE 2.0 Checklist}\label{arrive-2.0-checklist}
+
+\begin{quote}
+Scope: The ARRIVE 2.0 guidelines are a comprehensive checklist for
+reporting animal research. These guidelines are designed to improve the
+transparency and quality of scientific publications.
+
+Reference: See \texttt{source/archetypes/arrive-2020.yml} for canonical
+link and provenance.
+\end{quote}
+
+\subsection{Instructions}\label{instructions}
+
+\begin{itemize}
+\tightlist
+\item
+  Use task list items for checklist boxes; these become interactive
+  checkboxes in PDF.
+\item
+  Use a span with class \texttt{.textfield} for free‑text fields.
+\end{itemize}
+
+\subsection{The ARRIVE Essential 10}\label{the-arrive-essential-10}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{Study Design:} A brief description of the study design for
+  each experiment, including the groups being compared (with control
+  groups) and the experimental unit (e.g., a single animal or a cage of
+  animals).
+\item[$\square$]
+  \textbf{Sample Size:} The exact number of experimental units in each
+  group and the total number for each experiment, along with the total
+  number of animals used. The method for determining the sample size
+  should also be explained.
+\item[$\square$]
+  \textbf{Inclusion and Exclusion Criteria:} A description of the
+  criteria for including or excluding animals or data points during the
+  experiment and analysis.
+\item[$\square$]
+  \textbf{Randomization:} A statement on whether randomization was used
+  to assign experimental units to groups and a description of the method
+  used.
+\item[$\square$]
+  \textbf{Blinding:} A description of who was blinded during the
+  different stages of the experiment (e.g., during allocation, outcome
+  assessment, and data analysis).
+\item[$\square$]
+  \textbf{Outcome Measures:} A clear definition of all assessed outcome
+  measures. For studies testing a hypothesis, the primary outcome
+  measure should be specified.
+\item[$\square$]
+  \textbf{Statistical Methods:} Detailed information about the
+  statistical methods used for each analysis, including the software
+  used.
+\item[$\square$]
+  \textbf{Experimental Animals:} Species-appropriate details of the
+  animals used, such as species, strain, sex, and age.
+\item[$\square$]
+  \textbf{Experimental Procedures:} A thorough description of the
+  procedures for each experimental group, detailed enough for
+  replication by others.
+\item[$\square$]
+  \textbf{Results:} For each experiment, a report of summary and
+  descriptive statistics for each group, including a measure of
+  variability.
+\end{itemize}
+
+\subsection{The Recommended Set}\label{the-recommended-set}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{Abstract:} A summary of the study's background, objectives,
+  methods, principal findings, and conclusions.
+\item[$\square$]
+  \textbf{Background:} An explanation of the scientific context and the
+  experimental approach.
+\item[$\square$]
+  \textbf{Objectives:} A clear statement of the research objectives and
+  any specific hypotheses being tested.
+\item[$\square$]
+  \textbf{Ethical Statement:} The name of the ethical review committee
+  that approved the study and any relevant license or protocol numbers.
+\item[$\square$]
+  \textbf{Housing and Husbandry:} Details of the housing and husbandry
+  conditions for the animals.
+\item[$\square$]
+  \textbf{Animal Care and Monitoring:} A description of any
+  interventions to reduce pain and suffering, as well as any adverse
+  events and humane endpoints.
+\item[$\square$]
+  \textbf{Interpretation/Scientific Implications:} An interpretation of
+  the results in the context of the study's objectives and existing
+  literature.
+\item[$\square$]
+  \textbf{Generalizability/Translation:} A discussion of the
+  generalizability of the findings.
+\item[$\square$]
+  \textbf{Protocol Registration:} A statement indicating if a protocol
+  was prepared before the study and where it was registered.
+\item[$\square$]
+  \textbf{Data Access:} A statement on where the study data can be
+  accessed.
+\item[$\square$]
+  \textbf{Declaration of Interest:} A declaration of any potential
+  conflicts of interest.
+\item[$\square$]
+  \textbf{Funding:} Information on all funding sources and the role of
+  the funder(s).
+\end{itemize}
+
+{Notes}
+
+\subsection{Provenance}\label{provenance}
+
+\begin{itemize}
+\tightlist
+\item
+  Source: See sidecar metadata in
+  \texttt{source/archetypes/arrive-2020.yml}
+\item
+  Version: 2.0
+\item
+  License: CC-BY-4.0
+\end{itemize}
+
+\end{Form}
+
+\end{document}

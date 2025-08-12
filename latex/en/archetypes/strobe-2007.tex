@@ -1,0 +1,183 @@
+% Pandoc LaTeX template for checklists with basic PDF forms
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{amssymb}
+% Optional AcroTeX eForms for richer widgets
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\usepackage{enumitem}
+\setlist[itemize]{left=1.2em}
+\setlist{noitemsep}
+\def\tightlist{}
+
+% Abstraction layer for form widgets
+  % hyperref provides \CheckBox and \TextField
+  \newcommand{\mkCheckBox}[2][]{\CheckBox[#1]{#2}}
+  \newcommand{\mkTextField}[2][]{\TextField[#1]{#2}}
+
+% Enable form environment for interactive fields
+% Usage in content requires raw LaTeX or a pandoc Lua filter to insert \CheckBox/\TextField
+\begin{document}
+
+\begin{center}
+{\LARGE }\\[4pt]
+\normalsize 
+\end{center}
+\vspace{1em}
+
+% Begin PDF form region
+\begin{Form}
+
+\section{STROBE Checklist}\label{strobe-checklist}
+
+\begin{quote}
+Scope: STrengthening the Reporting of OBservational studies in
+Epidemiology.
+
+Reference: See \texttt{source/archetypes/strobe-2007.yml} for canonical
+link and provenance.
+\end{quote}
+
+\subsection{Instructions}\label{instructions}
+
+\begin{itemize}
+\tightlist
+\item
+  Use the boxes to confirm each reporting item.
+\item
+  Add reviewer notes under each section as needed.
+\end{itemize}
+
+\subsection{Title and abstract}\label{title-and-abstract}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{1. Title and abstract:} Indicate the study's design with a
+  commonly used term in the title or the abstract.
+\end{itemize}
+
+\subsection{Introduction}\label{introduction}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{2. Background/rationale:} Explain the scientific background
+  and rationale for the investigation being reported.
+\item[$\square$]
+  \textbf{3. Objectives:} State specific objectives, including any
+  prespecified hypotheses.
+\end{itemize}
+
+\subsection{Methods}\label{methods}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{4. Study design:} Present key elements of study design early
+  in the paper.
+\item[$\square$]
+  \textbf{5. Setting:} Describe the setting, locations, and relevant
+  dates, including periods of recruitment, exposure, follow-up, and data
+  collection.
+\item[$\square$]
+  \textbf{6. Participants:} Give the eligibility criteria, and the
+  sources and methods of selection of participants.
+\item[$\square$]
+  \textbf{7. Variables:} Clearly define all outcomes, exposures,
+  predictors, potential confounders, and effect modifiers. Give
+  diagnostic criteria, if applicable.
+\item[$\square$]
+  \textbf{8. Data sources/ measurement:} For each variable of interest,
+  give sources of data and details of methods of assessment
+  (measurement).
+\item[$\square$]
+  \textbf{9. Bias:} Describe any efforts to address potential sources of
+  bias.
+\item[$\square$]
+  \textbf{10. Study size:} Explain how the study size was arrived at.
+\item[$\square$]
+  \textbf{11. Quantitative variables:} Explain how quantitative
+  variables were handled in the analyses. If applicable, describe which
+  groupings were chosen and why.
+\item[$\square$]
+  \textbf{12. Statistical methods:} Describe all statistical methods,
+  including those used to control for confounding.
+\end{itemize}
+
+\subsection{Results}\label{results}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{13. Participants:} Report numbers of individuals at each stage
+  of study---eg, numbers potentially eligible, examined for eligibility,
+  confirmed eligible, included in the study, completing follow-up, and
+  analysed.
+\item[$\square$]
+  \textbf{14. Descriptive data:} Give characteristics of study
+  participants (eg, demographic, clinical, social) and information on
+  exposures and potential confounders.
+\item[$\square$]
+  \textbf{15. Outcome data:} Report numbers of outcome events or summary
+  measures over time.
+\item[$\square$]
+  \textbf{16. Main results:} Give unadjusted estimates and, if
+  applicable, confounder-adjusted estimates and their precision (eg,
+  95\% confidence interval). Make clear which confounders were adjusted
+  for and why they were included.
+\item[$\square$]
+  \textbf{17. Other analyses:} Report other analyses done---eg, analyses
+  of subgroups and interactions, and sensitivity analyses.
+\end{itemize}
+
+\subsection{Discussion}\label{discussion}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{18. Key results:} Summarise key results with reference to
+  study objectives.
+\item[$\square$]
+  \textbf{19. Limitations:} Discuss limitations of the study, taking
+  into account sources of potential bias or imprecision. Discuss both
+  direction and magnitude of any potential bias.
+\item[$\square$]
+  \textbf{20. Interpretation:} Give a cautious overall interpretation of
+  results considering objectives, limitations, multiplicity of analyses,
+  results from similar studies, and other relevant evidence.
+\item[$\square$]
+  \textbf{21. Generalisability:} Discuss the generalisability (external
+  validity) of the study results.
+\end{itemize}
+
+\subsection{Other information}\label{other-information}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{22. Funding:} Give the source of funding and the role of the
+  funders for the present study and, if applicable, for the original
+  study on which the present article is based.
+\end{itemize}
+
+\subsubsection{Notes}\label{notes}
+
+{Reviewer notes}
+
+\subsection{Provenance}\label{provenance}
+
+\begin{itemize}
+\tightlist
+\item
+  Source: See sidecar metadata in
+  \texttt{source/archetypes/strobe-2007.yml}
+\item
+  Version: 2007
+\item
+  License: CC BY 4.0
+\end{itemize}
+
+\end{Form}
+
+\end{document}

@@ -1,0 +1,79 @@
+% Pandoc LaTeX template for checklists with basic PDF forms
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{amssymb}
+% Optional AcroTeX eForms for richer widgets
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\usepackage{enumitem}
+\setlist[itemize]{left=1.2em}
+\setlist{noitemsep}
+\def\tightlist{}
+
+% Abstraction layer for form widgets
+  % hyperref provides \CheckBox and \TextField
+  \newcommand{\mkCheckBox}[2][]{\CheckBox[#1]{#2}}
+  \newcommand{\mkTextField}[2][]{\TextField[#1]{#2}}
+
+% Enable form environment for interactive fields
+% Usage in content requires raw LaTeX or a pandoc Lua filter to insert \CheckBox/\TextField
+\begin{document}
+
+\begin{center}
+{\LARGE }\\[4pt]
+\normalsize 
+\end{center}
+\vspace{1em}
+
+% Begin PDF form region
+\begin{Form}
+
+\section{Sample Checklist}\label{sample-checklist}
+
+\begin{quote}
+Scope: A sample checklist for testing purposes.
+
+Reference: See \texttt{source/archetypes/sample-checklist.yml} for
+canonical link and provenance.
+\end{quote}
+
+\subsection{Section 1}\label{section-1}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{1.1. Item 1:} {[}TBD{]}
+\item[$\square$]
+  \textbf{1.2. Item 2:} {[}TBD{]}
+\end{itemize}
+
+\subsection{Section 2}\label{section-2}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{2.1. Item 3:} {[}TBD{]}
+\item[$\square$]
+  \textbf{2.2. Item 4:} {[}TBD{]}
+\end{itemize}
+
+\subsubsection{Notes}\label{notes}
+
+{Reviewer notes}
+
+\subsection{Provenance}\label{provenance}
+
+\begin{itemize}
+\tightlist
+\item
+  Source: See sidecar metadata in
+  \texttt{source/archetypes/sample-checklist.yml}
+\item
+  Version: 1.0
+\item
+  License: TBD (verify per source)
+\end{itemize}
+
+\end{Form}
+
+\end{document}

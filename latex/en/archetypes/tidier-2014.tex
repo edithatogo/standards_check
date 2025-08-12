@@ -1,0 +1,177 @@
+% Pandoc LaTeX template for checklists with basic PDF forms
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{amssymb}
+% Optional AcroTeX eForms for richer widgets
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\usepackage{enumitem}
+\setlist[itemize]{left=1.2em}
+\setlist{noitemsep}
+\def\tightlist{}
+
+% Abstraction layer for form widgets
+  % hyperref provides \CheckBox and \TextField
+  \newcommand{\mkCheckBox}[2][]{\CheckBox[#1]{#2}}
+  \newcommand{\mkTextField}[2][]{\TextField[#1]{#2}}
+
+% Enable form environment for interactive fields
+% Usage in content requires raw LaTeX or a pandoc Lua filter to insert \CheckBox/\TextField
+\begin{document}
+
+\begin{center}
+{\LARGE }\\[4pt]
+\normalsize 
+\end{center}
+\vspace{1em}
+
+% Begin PDF form region
+\begin{Form}
+
+\section{TIDieR Checklist}\label{tidier-checklist}
+
+\begin{quote}
+Scope: Template for Intervention Description and Replication.
+
+Reference: See \texttt{source/archetypes/tidier-2014.yml} for canonical
+link and provenance.
+\end{quote}
+
+\subsection{Instructions}\label{instructions}
+
+\begin{itemize}
+\tightlist
+\item
+  Use the boxes to confirm each reporting item.
+\item
+  Add reviewer notes under each section as needed.
+\end{itemize}
+
+\subsection{Brief name}\label{brief-name}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{1. Brief name:} Provide the name or a phrase that describes
+  the intervention.
+\end{itemize}
+
+\subsection{Why}\label{why}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{2. Why:} Describe any rationale, theory, or goal of the
+  elements essential to the intervention.
+\end{itemize}
+
+\subsection{What}\label{what}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{3. What (materials):} Describe any physical or informational
+  materials used in the intervention, including those provided to
+  participants or used in intervention delivery or training of
+  intervention providers.
+\item[$\square$]
+  \textbf{4. What (procedures):} Describe each of the procedures,
+  activities, and/or processes used in the intervention, including any
+  enabling or support activities.
+\end{itemize}
+
+\subsection{Who provided}\label{who-provided}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{5. Who provided:} For each category of intervention provider
+  (e.g., psychologist, nursing assistant), describe their expertise,
+  background, and any specific training given.
+\end{itemize}
+
+\subsection{How}\label{how}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{6. How:} Describe the mode(s) of delivery (e.g., face-to-face,
+  internet) and the setting (e.g., home, clinic) for each component of
+  the intervention.
+\end{itemize}
+
+\subsection{Where}\label{where}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{7. Where:} Describe the location(s) where the intervention was
+  delivered, including any necessary infrastructure or relevant
+  features.
+\end{itemize}
+
+\subsection{When and how much}\label{when-and-how-much}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{8. When and how much:} Describe the number of times the
+  intervention was delivered and over what period of time, including the
+  number of sessions, their schedule, and their duration, intensity, or
+  dose.
+\end{itemize}
+
+\subsection{Tailoring}\label{tailoring}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{9. Tailoring:} If the intervention was planned to be
+  personalized, titrated, or adapted, then describe what, why, when, and
+  how.
+\end{itemize}
+
+\subsection{Modifications}\label{modifications}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{10. Modifications:} If the intervention was modified during
+  the course of the study, describe the changes (what, why, when, and
+  how).
+\end{itemize}
+
+\subsection{How well}\label{how-well}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{11. How well (planned):} If intervention adherence or fidelity
+  was assessed, describe how and by whom, and if any strategies were
+  used to maintain or improve fidelity.
+\item[$\square$]
+  \textbf{12. How well (actual):} If intervention adherence or fidelity
+  was assessed, describe the extent to which the intervention was
+  delivered as planned.
+\end{itemize}
+
+\subsubsection{Notes}\label{notes}
+
+{Reviewer notes}
+
+\subsection{Provenance}\label{provenance}
+
+\begin{itemize}
+\tightlist
+\item
+  Source: See sidecar metadata in
+  \texttt{source/archetypes/tidier-2014.yml}
+\item
+  Version: 2014
+\item
+  License: CC-BY-NC
+\end{itemize}
+
+\end{Form}
+
+\end{document}

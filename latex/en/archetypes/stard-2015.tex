@@ -1,0 +1,223 @@
+% Pandoc LaTeX template for checklists with basic PDF forms
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{amssymb}
+% Optional AcroTeX eForms for richer widgets
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\usepackage{enumitem}
+\setlist[itemize]{left=1.2em}
+\setlist{noitemsep}
+\def\tightlist{}
+
+% Abstraction layer for form widgets
+  % hyperref provides \CheckBox and \TextField
+  \newcommand{\mkCheckBox}[2][]{\CheckBox[#1]{#2}}
+  \newcommand{\mkTextField}[2][]{\TextField[#1]{#2}}
+
+% Enable form environment for interactive fields
+% Usage in content requires raw LaTeX or a pandoc Lua filter to insert \CheckBox/\TextField
+\begin{document}
+
+\begin{center}
+{\LARGE }\\[4pt]
+\normalsize 
+\end{center}
+\vspace{1em}
+
+% Begin PDF form region
+\begin{Form}
+
+\section{STARD 2015 Checklist}\label{stard-2015-checklist}
+
+\begin{quote}
+Scope: Standards for Reporting of Diagnostic Accuracy Studies.
+
+Reference: See \texttt{source/archetypes/stard-2015.yml} for canonical
+link and provenance.
+\end{quote}
+
+\subsection{Instructions}\label{instructions}
+
+\begin{itemize}
+\tightlist
+\item
+  Use the boxes to confirm each reporting item.
+\item
+  Add reviewer notes under each section as needed.
+\end{itemize}
+
+\subsection{Title or Abstract}\label{title-or-abstract}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{1. Identification:} Identification as a study of diagnostic
+  accuracy using at least one measure of accuracy (such as sensitivity,
+  specificity, predictive values, or AUC).
+\end{itemize}
+
+\subsection{Abstract}\label{abstract}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{2. Structured summary:} Structured summary of study design,
+  methods, results, and conclusions (for specific guidance, see STARD
+  for Abstracts).
+\end{itemize}
+
+\subsection{Introduction}\label{introduction}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{3. Scientific and clinical background:} Scientific and
+  clinical background, including the intended use and clinical role of
+  the index test.
+\item[$\square$]
+  \textbf{4. Study objectives and hypotheses:} Study objectives and
+  hypotheses.
+\end{itemize}
+
+\subsection{Methods}\label{methods}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{5. Study design:} Whether data collection was planned before
+  the index test and reference standard were performed (prospective
+  study) or after (retrospective study).
+\item[$\square$]
+  \textbf{6. Participants:} Eligibility criteria.
+\item[$\square$]
+  \textbf{7. Participants:} On what basis potentially eligible
+  participants were identified (such as symptoms, results from previous
+  tests, inclusion in registry).
+\item[$\square$]
+  \textbf{8. Participants:} Where and when potentially eligible
+  participants were identified (setting, location and dates).
+\item[$\square$]
+  \textbf{9. Participants:} Whether participants formed a consecutive,
+  random or convenience series.
+\item[$\square$]
+  \textbf{10a. Test methods:} Index test, in sufficient detail to allow
+  replication.
+\item[$\square$]
+  \textbf{10b. Test methods:} Reference standard, in sufficient detail
+  to allow replication.
+\item[$\square$]
+  \textbf{11. Test methods:} Rationale for choosing the reference
+  standard (if alternatives exist).
+\item[$\square$]
+  \textbf{12a. Test methods:} Definition of and rationale for test
+  positivity cut-offs or result categories of the index test,
+  distinguishing prespecified from exploratory.
+\item[$\square$]
+  \textbf{12b. Test methods:} Definition of and rationale for test
+  positivity cut-offs or result categories of the reference standard,
+  distinguishing prespecified from exploratory.
+\item[$\square$]
+  \textbf{13a. Test methods:} Whether clinical information and reference
+  standard results were available to the performers/readers of the index
+  test.
+\item[$\square$]
+  \textbf{13b. Test methods:} Whether clinical information and index
+  test results were available to the assessors of the reference
+  standard.
+\item[$\square$]
+  \textbf{14. Analysis:} Methods for estimating or comparing measures of
+  diagnostic accuracy.
+\item[$\square$]
+  \textbf{15. Analysis:} How indeterminate index test or reference
+  standard results were handled.
+\item[$\square$]
+  \textbf{16. Analysis:} How missing data on the index test and
+  reference standard were handled.
+\item[$\square$]
+  \textbf{17. Analysis:} Any analyses of variability in diagnostic
+  accuracy, distinguishing prespecified from exploratory.
+\item[$\square$]
+  \textbf{18. Analysis:} Sample size calculation.
+\end{itemize}
+
+\subsection{Results}\label{results}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{19. Participants:} Flow of participants, using a diagram.
+\item[$\square$]
+  \textbf{20. Participants:} Baseline demographic and clinical
+  characteristics of participants.
+\item[$\square$]
+  \textbf{21. Participants:} Distribution of severity of disease in
+  those with the target condition; other diagnoses in participants
+  without the target condition.
+\item[$\square$]
+  \textbf{22. Test results:} Time interval from index test to reference
+  standard, and any treatment administered between them.
+\item[$\square$]
+  \textbf{23. Test results:} Cross tabulation of the index test results
+  (or their distribution) by the results of the reference standard; for
+  continuous results, the distribution of the test results by the
+  results of the reference standard.
+\item[$\square$]
+  \textbf{24. Test results:} Any adverse events from performing the
+  index test or the reference standard.
+\item[$\square$]
+  \textbf{25. Estimates:} Estimates of diagnostic accuracy and their
+  precision (such as 95\% confidence intervals).
+\item[$\square$]
+  \textbf{26. Estimates:} Any analyses of variability, including
+  subgroup analyses.
+\item[$\square$]
+  \textbf{27. Estimates:} The number of indeterminate test results or
+  missing data and where they occurred.
+\end{itemize}
+
+\subsection{Discussion}\label{discussion}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{28. Study limitations:} Study limitations, including sources
+  of potential bias, statistical uncertainty, and generalisability.
+\item[$\square$]
+  \textbf{29. Implications for practice:} Implications for practice,
+  including the intended use and clinical role of the index test.
+\end{itemize}
+
+\subsection{Other Information}\label{other-information}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{30. Registration number and name of registry:} Registration
+  number and name of registry.
+\item[$\square$]
+  \textbf{31. Where the full study protocol can be accessed:} Where the
+  full study protocol can be accessed.
+\item[$\square$]
+  \textbf{32. Funding:} Sources of funding and other support; role of
+  funders.
+\end{itemize}
+
+{Notes}
+
+\subsection{Provenance}\label{provenance}
+
+\begin{itemize}
+\tightlist
+\item
+  Source: See sidecar metadata in
+  \texttt{source/archetypes/stard-2015.yml}
+\item
+  Version: 2015
+\item
+  License: CC-BY-4.0
+\end{itemize}
+
+\end{Form}
+
+\end{document}

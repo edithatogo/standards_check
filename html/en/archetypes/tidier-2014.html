@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TIDieR Checklist</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+    .container {
+      max-width: 960px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="pb-3 mb-4 border-bottom">
+      <div class="d-flex align-items-center justify-content-between">
+        <div>
+          <h1 class="display-4">TIDieR Checklist</h1>
+                  </div>
+        <div class="btn-group" role="group">
+          <button id="importButton" type="button" class="btn btn-outline-primary">Import</button>
+          <button id="exportButton" type="button" class="btn btn-primary">Export</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="progress mb-4">
+      <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+    </div>
+
+    <main>
+      <h1 id="tidier-checklist">TIDieR Checklist</h1>
+      <blockquote>
+      <p>Scope: Template for Intervention Description and
+      Replication.</p>
+      <p>Reference: See <code>source/archetypes/tidier-2014.yml</code>
+      for canonical link and provenance.</p>
+      </blockquote>
+      <h2 id="instructions">Instructions</h2>
+      <ul>
+      <li>Use the boxes to confirm each reporting item.</li>
+      <li>Add reviewer notes under each section as needed.</li>
+      </ul>
+      <h2 id="brief-name">Brief name</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>1. Brief
+      name:</strong> Provide the name or a phrase that describes the
+      intervention.</label></li>
+      </ul>
+      <h2 id="why">Why</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>2. Why:</strong>
+      Describe any rationale, theory, or goal of the elements essential
+      to the intervention.</label></li>
+      </ul>
+      <h2 id="what">What</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>3. What
+      (materials):</strong> Describe any physical or informational
+      materials used in the intervention, including those provided to
+      participants or used in intervention delivery or training of
+      intervention providers.</label></li>
+      <li><label><input type="checkbox" /><strong>4. What
+      (procedures):</strong> Describe each of the procedures,
+      activities, and/or processes used in the intervention, including
+      any enabling or support activities.</label></li>
+      </ul>
+      <h2 id="who-provided">Who provided</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>5. Who
+      provided:</strong> For each category of intervention provider
+      (e.g., psychologist, nursing assistant), describe their expertise,
+      background, and any specific training given.</label></li>
+      </ul>
+      <h2 id="how">How</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>6. How:</strong>
+      Describe the mode(s) of delivery (e.g., face-to-face, internet)
+      and the setting (e.g., home, clinic) for each component of the
+      intervention.</label></li>
+      </ul>
+      <h2 id="where">Where</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>7. Where:</strong>
+      Describe the location(s) where the intervention was delivered,
+      including any necessary infrastructure or relevant
+      features.</label></li>
+      </ul>
+      <h2 id="when-and-how-much">When and how much</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>8. When and how
+      much:</strong> Describe the number of times the intervention was
+      delivered and over what period of time, including the number of
+      sessions, their schedule, and their duration, intensity, or
+      dose.</label></li>
+      </ul>
+      <h2 id="tailoring">Tailoring</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>9. Tailoring:</strong>
+      If the intervention was planned to be personalized, titrated, or
+      adapted, then describe what, why, when, and how.</label></li>
+      </ul>
+      <h2 id="modifications">Modifications</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>10.
+      Modifications:</strong> If the intervention was modified during
+      the course of the study, describe the changes (what, why, when,
+      and how).</label></li>
+      </ul>
+      <h2 id="how-well">How well</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>11. How well
+      (planned):</strong> If intervention adherence or fidelity was
+      assessed, describe how and by whom, and if any strategies were
+      used to maintain or improve fidelity.</label></li>
+      <li><label><input type="checkbox" /><strong>12. How well
+      (actual):</strong> If intervention adherence or fidelity was
+      assessed, describe the extent to which the intervention was
+      delivered as planned.</label></li>
+      </ul>
+      <h3 id="notes">Notes</h3>
+      <p><span class="textfield" name="tidier_2014_notes"
+      width="12cm">Reviewer notes</span></p>
+      <h2 id="provenance">Provenance</h2>
+      <ul>
+      <li>Source: See sidecar metadata in
+      <code>source/archetypes/tidier-2014.yml</code></li>
+      <li>Version: 2014</li>
+      <li>License: CC-BY-NC</li>
+      </ul>
+    </main>
+
+    <footer class="pt-3 mt-4 text-muted border-top">
+      Generated by the standards_check project.
+    </footer>
+  </div>
+
+  <script src="/assets/js/app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+% Pandoc LaTeX template for checklists with basic PDF forms
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{amssymb}
+% Optional AcroTeX eForms for richer widgets
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\usepackage{enumitem}
+\setlist[itemize]{left=1.2em}
+\setlist{noitemsep}
+\def\tightlist{}
+
+% Abstraction layer for form widgets
+  % hyperref provides \CheckBox and \TextField
+  \newcommand{\mkCheckBox}[2][]{\CheckBox[#1]{#2}}
+  \newcommand{\mkTextField}[2][]{\TextField[#1]{#2}}
+
+% Enable form environment for interactive fields
+% Usage in content requires raw LaTeX or a pandoc Lua filter to insert \CheckBox/\TextField
+\begin{document}
+
+\begin{center}
+{\LARGE }\\[4pt]
+\normalsize 
+\end{center}
+\vspace{1em}
+
+% Begin PDF form region
+\begin{Form}
+
+\section{Guidelines for clinical trial protocols for interventions
+involving artificial intelligence: the SPIRIT-AI
+extension}\label{guidelines-for-clinical-trial-protocols-for-interventions-involving-artificial-intelligence-the-spirit-ai-extension}
+
+\begin{quote}
+Scope: This document pertains to the reporting of clinical trial
+protocols for studies evaluating interventions that include an
+artificial intelligence component.
+
+Reference: See \texttt{source/variants/spirit-ai.yml} for canonical link
+and provenance.
+\end{quote}
+
+\subsection{Instructions}\label{instructions}
+
+\begin{itemize}
+\tightlist
+\item
+  Use the boxes to confirm each reporting item.
+\item
+  Add reviewer notes under each section as needed.
+\end{itemize}
+
+\subsection{Checklist Items}\label{checklist-items}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{Item 1: Title} - Indicate that the trial involves AI.
+\item[$\square$]
+  \textbf{Item 2: Abstract} - Provide a structured summary of the
+  protocol.
+\end{itemize}
+
+\subsubsection{Notes}\label{notes}
+
+{Reviewer notes}
+
+\subsection{Provenance}\label{provenance}
+
+\begin{itemize}
+\tightlist
+\item
+  Source: See sidecar metadata in \texttt{source/variants/spirit-ai.yml}
+\item
+  Version: 2020
+\item
+  License: CC-BY-4.0
+\end{itemize}
+
+\end{Form}
+
+\end{document}

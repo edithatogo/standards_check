@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CHEERS 2022 Checklist</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+    .container {
+      max-width: 960px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="pb-3 mb-4 border-bottom">
+      <div class="d-flex align-items-center justify-content-between">
+        <div>
+          <h1 class="display-4">CHEERS 2022 Checklist</h1>
+                  </div>
+        <div class="btn-group" role="group">
+          <button id="importButton" type="button" class="btn btn-outline-primary">Import</button>
+          <button id="exportButton" type="button" class="btn btn-primary">Export</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="progress mb-4">
+      <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+    </div>
+
+    <main>
+      <h1 id="cheers-2022-checklist">CHEERS 2022 Checklist</h1>
+      <blockquote>
+      <p>Scope: The Consolidated Health Economic Evaluation Reporting
+      Standards (CHEERS) 2022 statement provides a 28-item checklist to
+      promote transparent and comprehensive reporting of economic
+      evaluations of health interventions.</p>
+      <p>Reference: See <code>source/archetypes/cheers-2022.yml</code>
+      for canonical link and provenance.</p>
+      </blockquote>
+      <h2 id="instructions">Instructions</h2>
+      <ul>
+      <li>Use task list items for checklist boxes; these become
+      interactive checkboxes in PDF.</li>
+      <li>Use a span with class <code>.textfield</code> for free‑text
+      fields.</li>
+      </ul>
+      <h2 id="title-and-abstract">Title and Abstract</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>Title:</strong>
+      Identify the study as an economic evaluation and specify the
+      interventions being compared.</label></li>
+      <li><label><input type="checkbox" /><strong>Abstract:</strong>
+      Provide a structured summary detailing the context, key methods,
+      results, and alternative analyses.</label></li>
+      </ul>
+      <h2 id="introduction">Introduction</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>Background and
+      Objectives:</strong> Describe the study’s context, the research
+      question, and its relevance for policy or practice.</label></li>
+      </ul>
+      <h2 id="methods">Methods</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>Health Economic
+      Analysis Plan:</strong> Indicate if a health economic analysis
+      plan was developed and where it can be accessed.</label></li>
+      <li><label><input type="checkbox" /><strong>Study
+      Population:</strong> Describe the characteristics of the study
+      population, including demographics and clinical
+      characteristics.</label></li>
+      <li><label><input type="checkbox" /><strong>Setting and
+      Location:</strong> Provide relevant contextual information that
+      could influence the findings.</label></li>
+      <li><label><input type="checkbox" /><strong>Comparators:</strong>
+      Describe the interventions or strategies being compared and the
+      rationale for their choice.</label></li>
+      <li><label><input type="checkbox" /><strong>Perspective:</strong>
+      State the perspective(s) of the study and the reasoning for their
+      selection.</label></li>
+      <li><label><input type="checkbox" /><strong>Time Horizon:</strong>
+      Report the time horizon for the study and justify its
+      appropriateness.</label></li>
+      <li><label><input type="checkbox" /><strong>Discount
+      Rate:</strong> Report the discount rate(s) used and the reason for
+      their choice.</label></li>
+      <li><label><input type="checkbox" /><strong>Selection of
+      Outcomes:</strong> Describe the outcomes used to measure benefits
+      and harms.</label></li>
+      <li><label><input type="checkbox" /><strong>Measurement of
+      Outcomes:</strong> Detail how the selected outcomes were
+      measured.</label></li>
+      <li><label><input type="checkbox" /><strong>Valuation of
+      Outcomes:</strong> Describe the methods and population used to
+      measure and value outcomes.</label></li>
+      <li><label><input type="checkbox" /><strong>Measurement and
+      Valuation of Resources and Costs:</strong> Explain how costs were
+      valued.</label></li>
+      <li><label><input type="checkbox" /><strong>Currency, Price Date,
+      and Conversion:</strong> Report the dates of estimated resource
+      quantities and unit costs, as well as the currency and conversion
+      year.</label></li>
+      <li><label><input type="checkbox" /><strong>Rationale and
+      Description of Model:</strong> If a model was used, describe it in
+      detail, explain its use, and state if it is publicly
+      available.</label></li>
+      <li><label><input type="checkbox" /><strong>Analytics and
+      Assumptions:</strong> Describe methods for data analysis,
+      statistical transformation, extrapolation, and model
+      validation.</label></li>
+      </ul>
+      <h2 id="results">Results</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>Study
+      Parameters:</strong> Report all parameters used in the analysis,
+      including their sources and any assumptions.</label></li>
+      <li><label><input type="checkbox" /><strong>Summary of Main
+      Results:</strong> Present the main results, including costs,
+      effects, and the incremental cost-effectiveness
+      ratio.</label></li>
+      <li><label><input type="checkbox" /><strong>Characterizing
+      Heterogeneity:</strong> Describe any methods used to explore how
+      results may vary for different subgroups.</label></li>
+      <li><label><input type="checkbox" /><strong>Characterizing
+      Distributional Effects:</strong> Explain how impacts are
+      distributed across different individuals or any adjustments made
+      for priority populations.</label></li>
+      <li><label><input type="checkbox" /><strong>Characterizing
+      Uncertainty:</strong> Describe the methods used to characterize
+      any sources of uncertainty in the analysis.</label></li>
+      </ul>
+      <h2 id="discussion">Discussion</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>Summary of Findings,
+      Limitations, Generalizability, and Current Knowledge:</strong>
+      Summarize the findings, discuss limitations, and consider the
+      generalizability of the results in the context of current
+      knowledge.</label></li>
+      <li><label><input type="checkbox" /><strong>Conclusions:</strong>
+      Provide conclusions about the study’s findings and their
+      implications for policy or practice.</label></li>
+      </ul>
+      <h2 id="other">Other</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>Conflicts of
+      Interest:</strong> Disclose any potential conflicts of
+      interest.</label></li>
+      <li><label><input type="checkbox" /><strong>Funding:</strong>
+      Identify the sources of funding for the study.</label></li>
+      <li><label><input type="checkbox" /><strong>Approach to
+      Engagement:</strong> Describe the approach to engaging with
+      patients and others affected by the study.</label></li>
+      </ul>
+      <p><span class="textfield" name="cheers_2022_notes"
+      width="12cm">Notes</span></p>
+      <h2 id="provenance">Provenance</h2>
+      <ul>
+      <li>Source: See sidecar metadata in
+      <code>source/archetypes/cheers-2022.yml</code></li>
+      <li>Version: 2022</li>
+      <li>License: CC-BY-4.0</li>
+      </ul>
+    </main>
+
+    <footer class="pt-3 mt-4 text-muted border-top">
+      Generated by the standards_check project.
+    </footer>
+  </div>
+
+  <script src="/assets/js/app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

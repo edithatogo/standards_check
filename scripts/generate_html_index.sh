@@ -31,23 +31,24 @@ BODY_CONTENT_TMP=$(mktemp)
 trap 'rm -f "$BODY_CONTENT_TMP"' EXIT
 
 # Generate the body of the index page
-# This is a simple parser for the specific YAML structure.
-# It looks for lines starting with "  - id:" to identify a checklist entry.
-while IFS= read -r id; do
-  title=$(yq -r ".archetypes[] | select(.id == \"$id\") | .title" "$INDEX_YAML")
+echo "<h2>Checklist Archetypes</h2>" >> "$BODY_CONTENT_TMP"
+echo "<div class='list-group mb-4'>" >> "$BODY_CONTENT_TMP"
+yq -r '.items[] | select(.level == "archetype") | .id' "$INDEX_YAML" | while read -r id; do
+  title=$(yq -r ".items[] | select(.id == \"$id\") | .title" "$INDEX_YAML")
   html_file="${id}.html"
   echo "<a href=\"./archetypes/${html_file}\" class=\"list-group-item list-group-item-action\">${title}</a>" >> "$BODY_CONTENT_TMP"
-done < <(yq -r '.archetypes[].id' "$INDEX_YAML")
-
-
-# This is a placeholder for variants, assuming a similar structure
-# TODO: Add logic for variants when their structure is confirmed in index.yml
-# echo "<h2>Checklist Variants</h2>" >> "$BODY_CONTENT_TMP"
-# echo "<div class='list-group'>" >> "$BODY_CONTENT_TMP"
-# ... logic for variants ...
-# echo "</div>" >> "$BODY_CONTENT_TMP"
-
+done
 echo "</div>" >> "$BODY_CONTENT_TMP"
+
+echo "<h2>Checklist Variants</h2>" >> "$BODY_CONTENT_TMP"
+echo "<div class='list-group mb-4'>" >> "$BODY_CONTENT_TMP"
+yq -r '.items[] | select(.level == "variant") | .id' "$INDEX_YAML" | while read -r id; do
+  title=$(yq -r ".items[] | select(.id == \"$id\") | .title" "$INDEX_YAML")
+  html_file="${id}.html"
+  echo "<a href=\"./variants/${html_file}\" class=\"list-group-item list-group-item-action\">${title}</a>" >> "$BODY_CONTENT_TMP"
+done
+echo "</div>" >> "$BODY_CONTENT_TMP"
+
 
 
 # Use pandoc to apply the main template to our generated body

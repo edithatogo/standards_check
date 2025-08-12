@@ -1,0 +1,173 @@
+% Pandoc LaTeX template for checklists with basic PDF forms
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{amssymb}
+% Optional AcroTeX eForms for richer widgets
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\usepackage{enumitem}
+\setlist[itemize]{left=1.2em}
+\setlist{noitemsep}
+\def\tightlist{}
+
+% Abstraction layer for form widgets
+  % hyperref provides \CheckBox and \TextField
+  \newcommand{\mkCheckBox}[2][]{\CheckBox[#1]{#2}}
+  \newcommand{\mkTextField}[2][]{\TextField[#1]{#2}}
+
+% Enable form environment for interactive fields
+% Usage in content requires raw LaTeX or a pandoc Lua filter to insert \CheckBox/\TextField
+\begin{document}
+
+\begin{center}
+{\LARGE }\\[4pt]
+\normalsize 
+\end{center}
+\vspace{1em}
+
+% Begin PDF form region
+\begin{Form}
+
+\section{TRIPOD 2015 Checklist}\label{tripod-2015-checklist}
+
+\begin{quote}
+Scope: The Transparent Reporting of a multivariable prediction model for
+Individual Prognosis Or Diagnosis (TRIPOD) Statement was developed to
+improve the quality of reporting in studies that develop, validate, or
+update prediction models.
+
+Reference: See \texttt{source/archetypes/tripod-2015.yml} for canonical
+link and provenance.
+\end{quote}
+
+\subsection{Instructions}\label{instructions}
+
+\begin{itemize}
+\tightlist
+\item
+  Use task list items for checklist boxes; these become interactive
+  checkboxes in PDF.
+\item
+  Use a span with class \texttt{.textfield} for free‑text fields.
+\end{itemize}
+
+\subsection{Title and Abstract}\label{title-and-abstract}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{1. Title:} Identify the study as one that develops, validates,
+  or updates a multivariable prediction model, specify the target
+  population, and the outcome to be predicted.
+\item[$\square$]
+  \textbf{2. Abstract:} Provide a summary of the objectives, study
+  design, setting, participants, sample size, predictors, outcome,
+  statistical analysis, results, and conclusions.
+\end{itemize}
+
+\subsection{Introduction}\label{introduction}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{3. Background and Objectives:} Explain the medical context and
+  rationale for the study, including references to existing models.
+\end{itemize}
+
+\subsection{Methods}\label{methods}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{4. Source of data:} Describe the study design and key elements
+  of the study setting.
+\item[$\square$]
+  \textbf{5. Participants:} Describe the eligibility criteria for
+  participants.
+\item[$\square$]
+  \textbf{6. Outcome:} Clearly define the outcome that is predicted by
+  the model, including how and when it was assessed.
+\item[$\square$]
+  \textbf{7. Predictors:} Clearly define all predictors used in the
+  model, including how and when they were measured.
+\item[$\square$]
+  \textbf{8. Sample size:} Explain how the study size was determined.
+\item[$\square$]
+  \textbf{9. Missing data:} Describe how missing data were handled.
+\item[$\square$]
+  \textbf{10. Statistical analysis methods:} Describe how predictors
+  were handled in the analyses.
+\item[$\square$]
+  \textbf{11. Model development:} Specify the type of model, all
+  model-building procedures, and the method for internal validation.
+\item[$\square$]
+  \textbf{12. Model performance:} Specify all measures used to assess
+  model performance and, if relevant, to compare multiple models.
+\end{itemize}
+
+\subsection{Results}\label{results}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{13. Participants:} Describe the flow of participants through
+  the study.
+\item[$\square$]
+  \textbf{14. Model development:} Specify the number of participants and
+  outcome events in each analysis.
+\item[$\square$]
+  \textbf{15. Model specification:} Present the full prediction model
+  for use by others.
+\item[$\square$]
+  \textbf{16. Model performance:} Report performance measures for the
+  prediction model.
+\item[$\square$]
+  \textbf{17. Model validation:} For validation, describe how the
+  predictions were calculated and report the results.
+\end{itemize}
+
+\subsection{Discussion}\label{discussion}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{18. Limitations:} Discuss any limitations of the study.
+\item[$\square$]
+  \textbf{19. Interpretation:} Give an overall interpretation of the
+  results, considering objectives, limitations, and other relevant
+  evidence.
+\item[$\square$]
+  \textbf{20. Implications:} Discuss the implications for practice and
+  research.
+\end{itemize}
+
+\subsection{Other Information}\label{other-information}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{21. Supplementary information:} Provide information about the
+  availability of supplementary resources.
+\item[$\square$]
+  \textbf{22. Funding:} Disclose the source of funding and the role of
+  the funders.
+\end{itemize}
+
+{Notes}
+
+\subsection{Provenance}\label{provenance}
+
+\begin{itemize}
+\tightlist
+\item
+  Source: See sidecar metadata in
+  \texttt{source/archetypes/tripod-2015.yml}
+\item
+  Version: 2015
+\item
+  License: Custom; see website
+\end{itemize}
+
+\end{Form}
+
+\end{document}

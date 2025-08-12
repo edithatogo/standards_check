@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SQUIRE 2.0 Checklist</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+    .container {
+      max-width: 960px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="pb-3 mb-4 border-bottom">
+      <div class="d-flex align-items-center justify-content-between">
+        <div>
+          <h1 class="display-4">SQUIRE 2.0 Checklist</h1>
+                  </div>
+        <div class="btn-group" role="group">
+          <button id="importButton" type="button" class="btn btn-outline-primary">Import</button>
+          <button id="exportButton" type="button" class="btn btn-primary">Export</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="progress mb-4">
+      <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+    </div>
+
+    <main>
+      <h1 id="squire-2.0-checklist">SQUIRE 2.0 Checklist</h1>
+      <blockquote>
+      <p>Scope: Standards for QUality Improvement Reporting
+      Excellence.</p>
+      <p>Reference: See <code>source/archetypes/squire-2-0.yml</code>
+      for canonical link and provenance.</p>
+      </blockquote>
+      <h2 id="instructions">Instructions</h2>
+      <ul>
+      <li>Use the boxes to confirm each reporting item.</li>
+      <li>Add reviewer notes under each section as needed.</li>
+      </ul>
+      <h2 id="title-and-abstract">Title and Abstract</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>1. Title:</strong>
+      Indicate that the manuscript concerns an initiative to improve
+      healthcare.</label></li>
+      <li><label><input type="checkbox" /><strong>2. Abstract:</strong>
+      Provide a structured summary of the project.</label></li>
+      </ul>
+      <h2 id="introduction">Introduction</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>3. Problem
+      Description:</strong> Nature and significance of the local
+      problem.</label></li>
+      <li><label><input type="checkbox" /><strong>4. Available
+      Knowledge:</strong> Summary of what is currently known about the
+      problem, including relevant previous studies.</label></li>
+      <li><label><input type="checkbox" /><strong>5. Rationale:</strong>
+      Informal or formal frameworks, models, concepts, and/or theories
+      used to explain the problem.</label></li>
+      <li><label><input type="checkbox" /><strong>6. Specific
+      Aims:</strong> Purpose of the project and of this
+      report.</label></li>
+      </ul>
+      <h2 id="methods">Methods</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>7. Context:</strong>
+      Contextual elements considered important at the outset of
+      introducing the intervention(s).</label></li>
+      <li><label><input type="checkbox" /><strong>8.
+      Intervention(s):</strong> Description of the intervention(s) in
+      sufficient detail that others could reproduce it.</label></li>
+      <li><label><input type="checkbox" /><strong>9. Study of the
+      Intervention(s):</strong> Approach chosen for assessing the impact
+      of the intervention(s).</label></li>
+      <li><label><input type="checkbox" /><strong>10. Measures:</strong>
+      Measures chosen for studying processes and outcomes of the
+      intervention(s).</label></li>
+      <li><label><input type="checkbox" /><strong>11. Analysis:</strong>
+      Qualitative and quantitative methods used to draw inferences from
+      the data.</label></li>
+      <li><label><input type="checkbox" /><strong>12. Ethical
+      Considerations:</strong> Ethical aspects of implementing and
+      studying the intervention(s).</label></li>
+      </ul>
+      <h2 id="results">Results</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>13. Results:</strong>
+      Initial steps of the intervention(s) and their evolution over
+      time.</label></li>
+      <li><label><input type="checkbox" /><strong>14. Summary:</strong>
+      Key findings, including relevance to the rationale and specific
+      aims.</label></li>
+      </ul>
+      <h2 id="discussion">Discussion</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>15.
+      Interpretation:</strong> Nature of the association between the
+      intervention(s) and the outcomes.</label></li>
+      <li><label><input type="checkbox" /><strong>16.
+      Limitations:</strong> Limits to the generalizability of the
+      work.</label></li>
+      <li><label><input type="checkbox" /><strong>17.
+      Conclusions:</strong> Usefulness of the work.</label></li>
+      </ul>
+      <h2 id="other-information">Other Information</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>18. Funding:</strong>
+      Sources of funding that supported this work.</label></li>
+      </ul>
+      <p><span class="textfield" name="squire_2_0_notes"
+      width="12cm">Notes</span></p>
+      <h2 id="provenance">Provenance</h2>
+      <ul>
+      <li>Source: See sidecar metadata in
+      <code>source/archetypes/squire-2-0.yml</code></li>
+      <li>Version: 2.0</li>
+      <li>License: Custom; see website</li>
+      </ul>
+    </main>
+
+    <footer class="pt-3 mt-4 text-muted border-top">
+      Generated by the standards_check project.
+    </footer>
+  </div>
+
+  <script src="/assets/js/app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

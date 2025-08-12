@@ -1,0 +1,70 @@
+= CARE Guidelines Checklist
+<care-guidelines-checklist>
+#quote(block: true)[
+Scope: The CARE guidelines provide a framework for authors to follow
+when reporting on cases. The checklist is designed to correspond with
+the key components of a case report and to capture essential clinical
+information.
+
+Reference: See `source/archetypes/care-2013.yml` for canonical link and
+provenance.
+]
+
+== Instructions
+<instructions>
+- Use task list items for checklist boxes; these become interactive
+  checkboxes in PDF.
+- Use a span with class `.textfield` for free‑text fields.
+
+== Items
+<items>
+- ☐ #strong[Title:] The title should include the words "case report" and
+  identify the primary focus of the report.
+- ☐ #strong[Key Words:] Two to five keywords that identify the diagnoses
+  or interventions covered in the case report.
+- ☐ #strong[Abstract:] A structured or unstructured summary that
+  includes an introduction to the case's uniqueness, the patient's main
+  symptoms and clinical findings, the primary diagnoses and
+  interventions, and the main "take-away" lessons.
+- ☐ #strong[Introduction:] A brief summary of why the case is unique,
+  potentially with references to existing medical literature.
+- ☐ #strong[Patient Information:] This section should include
+  de-identified demographic and other specific information about the
+  patient, their main concerns and symptoms, and their medical, family,
+  and psychosocial history, including relevant genetic information and
+  past interventions with their outcomes.
+- ☐ #strong[Clinical Findings:] A description of the relevant physical
+  examination and other significant clinical findings.
+- ☐ #strong[Timeline:] A timeline that organizes important historical
+  and current information from the episode of care, which can be
+  presented as a figure or table.
+- ☐ #strong[Diagnostic Assessment:] This includes the diagnostic methods
+  used (such as physical examination, laboratory testing, imaging, and
+  surveys), any diagnostic challenges, the final diagnosis (including
+  other diagnoses that were considered), and prognostic characteristics
+  where applicable.
+- ☐ #strong[Therapeutic Intervention:] Details on the types of
+  interventions (e.g., pharmacologic, surgical, preventive), how they
+  were administered (dosage, strength, duration), and any changes made
+  to the interventions with explanations.
+- ☐ #strong[Follow-up and Outcomes:] This should cover clinician- and
+  patient-assessed outcomes, important follow-up diagnostic and other
+  test results, intervention adherence and tolerability, and any adverse
+  or unanticipated events.
+- ☐ #strong[Discussion:] A discussion of the strengths and limitations
+  of the approach to the case, a review of relevant medical literature,
+  the rationale for the conclusions drawn, and the primary "take-away"
+  lessons from the report.
+- ☐ #strong[Patient Perspective:] The patient should have the
+  opportunity to share their perspective on the treatment(s) they
+  received.
+- ☐ #strong[Informed Consent:] Confirmation that the patient gave
+  informed consent for the report.
+
+Notes
+
+== Provenance
+<provenance>
+- Source: See sidecar metadata in `source/archetypes/care-2013.yml`
+- Version: 2013
+- License: CC-BY-NC-4.0

@@ -1,0 +1,476 @@
+% Pandoc LaTeX template for checklists with basic PDF forms
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{amssymb}
+% Optional AcroTeX eForms for richer widgets
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\usepackage{enumitem}
+\setlist[itemize]{left=1.2em}
+\setlist{noitemsep}
+\def\tightlist{}
+
+% Abstraction layer for form widgets
+  % hyperref provides \CheckBox and \TextField
+  \newcommand{\mkCheckBox}[2][]{\CheckBox[#1]{#2}}
+  \newcommand{\mkTextField}[2][]{\TextField[#1]{#2}}
+
+% Enable form environment for interactive fields
+% Usage in content requires raw LaTeX or a pandoc Lua filter to insert \CheckBox/\TextField
+\begin{document}
+
+\begin{center}
+{\LARGE }\\[4pt]
+\normalsize 
+\end{center}
+\vspace{1em}
+
+% Begin PDF form region
+\begin{Form}
+
+\section{PRISMA-EcoEvo Checklist}\label{prisma-ecoevo-checklist}
+
+This checklist is an extension of the PRISMA 2020 statement for
+systematic reviews in ecology and evolution.
+
+\subsection{Title and Abstract}\label{title-and-abstract}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{1.1} Identify the review as a systematic review,
+  meta-analysis, or both.
+\item[$\square$]
+  \textbf{1.2} Summarise the aims and scope of the review.
+\item[$\square$]
+  \textbf{1.3} Describe the data set.
+\item[$\square$]
+  \textbf{1.4} State the results of the primary outcome.
+\item[$\square$]
+  \textbf{1.5} State conclusions.
+\item[$\square$]
+  \textbf{1.6} State limitations.
+\end{itemize}
+
+\subsection{Aims and Questions}\label{aims-and-questions}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{2.1} Provide a rationale for the review.
+\item[$\square$]
+  \textbf{2.2} Reference any previous reviews or meta-analyses on the
+  topic.
+\item[$\square$]
+  \textbf{2.3} State the aims and scope of the review (including its
+  generality).
+\item[$\square$]
+  \textbf{2.4} State the primary questions the review addresses
+  (e.g.~which moderators were tested).
+\item[$\square$]
+  \textbf{2.5} Describe whether effect sizes were derived from
+  experimental and/or observational comparisons.
+\end{itemize}
+
+\subsection{Review Registration}\label{review-registration}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{3.1} Register review aims, hypotheses (if applicable), and
+  methods in a time-stamped and publicly accessible archive and provide
+  a link to the registration in the methods section of the manuscript.
+  Ideally registration occurs before the search, but it can be done at
+  any stage before data analysis.
+\item[$\square$]
+  \textbf{3.2} Describe deviations from the registered aims and methods.
+\item[$\square$]
+  \textbf{3.3} Justify deviations from the registered aims and methods.
+\end{itemize}
+
+\subsection{Eligibility Criteria}\label{eligibility-criteria}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{4.1} Report the specific criteria used for including or
+  excluding studies when screening titles and/or abstracts, and full
+  texts, according to the aims of the systematic review (e.g.~study
+  design, taxa, data availability).
+\item[$\square$]
+  \textbf{4.2} Justify criteria, if necessary (i.e.~not obvious from
+  aims and scope).
+\end{itemize}
+
+\subsection{Finding Studies}\label{finding-studies}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{5.1} Define the type of search (e.g.~comprehensive search,
+  representative sample).
+\item[$\square$]
+  \textbf{5.2} State what sources of information were sought
+  (e.g.~published and unpublished studies, personal communications).
+\item[$\square$]
+  \textbf{5.3} Include, for each database searched, the exact search
+  strings used, with keyword combinations and Boolean operators.
+\item[$\square$]
+  \textbf{5.4} Provide enough information to repeat the equivalent
+  search (if possible), including the timespan covered (start and end
+  dates).
+\end{itemize}
+
+\subsection{Study Selection}\label{study-selection}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{6.1} Describe how studies were selected for inclusion at each
+  stage of the screening process (e.g.~use of decision trees, screening
+  software).
+\item[$\square$]
+  \textbf{6.2} Report the number of people involved and how they
+  contributed (e.g.~independent parallel screening).
+\end{itemize}
+
+\subsection{Data Collection Process}\label{data-collection-process}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{7.1} Describe where in the reports data were collected from
+  (e.g.~text or figures).
+\item[$\square$]
+  \textbf{7.2} Describe how data were collected (e.g.~software used to
+  digitize figures, external data sources).
+\item[$\square$]
+  \textbf{7.3} Describe moderator variables that were constructed from
+  collected data (e.g.~number of generations calculated from years and
+  average generation time).
+\item[$\square$]
+  \textbf{7.4} Report how missing or ambiguous information was dealt
+  with during data collection (e.g.~authors of original studies were
+  contacted for missing descriptive statistics, and/or effect sizes were
+  calculated from test statistics).
+\item[$\square$]
+  \textbf{7.5} Report who collected data.
+\item[$\square$]
+  \textbf{7.6} State the number of extractions that were checked for
+  accuracy by co-authors.
+\end{itemize}
+
+\subsection{Data Items}\label{data-items}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{8.1} Describe the key data sought from each study.
+\item[$\square$]
+  \textbf{8.2} Describe items that do not appear in the main results, or
+  which could not be extracted due to insufficient information.
+\item[$\square$]
+  \textbf{8.3} Describe main assumptions or simplifications that were
+  made (e.g.~categorising both `length' and `mass' as `morphology').
+\item[$\square$]
+  \textbf{8.4} Describe the type of replication unit (e.g.~individuals,
+  broods, study sites).
+\end{itemize}
+
+\subsection{Assessment of Individual Study
+Quality}\label{assessment-of-individual-study-quality}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{9.1} Describe whether the quality of studies included in the
+  systematic review or meta-analysis was assessed (e.g.~blinded data
+  collection, reporting quality, experimental versus observational).
+\item[$\square$]
+  \textbf{9.2} Describe how information about study quality was
+  incorporated into analyses (e.g.~meta-regression and/or sensitivity
+  analysis).
+\end{itemize}
+
+\subsection{Effect Size Measures}\label{effect-size-measures}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{10.1} Describe effect size(s) used.
+\item[$\square$]
+  \textbf{10.2} Provide a reference to the equation of each calculated
+  effect size (e.g.~standardised mean difference, log response ratio)
+  and (if applicable) its sampling variance.
+\item[$\square$]
+  \textbf{10.3} If no reference exists, derive the equations for each
+  effect size and state the assumed sampling distribution(s).
+\end{itemize}
+
+\subsection{Missing Data}\label{missing-data}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{11.1} Describe any steps taken to deal with missing data
+  during analysis (e.g.~imputation, complete case, subset analysis).
+\item[$\square$]
+  \textbf{11.2} Justify the decisions made to deal with missing data.
+\end{itemize}
+
+\subsection{Meta-analytic Model
+Description}\label{meta-analytic-model-description}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{12.1} Describe the models used for synthesis of effect sizes.
+\item[$\square$]
+  \textbf{12.2} The most common approach in ecology and evolution will
+  be a random-effects model, often with a hierarchical/multilevel
+  structure. If other types of models are chosen (e.g.~common/fixed
+  effects model, unweighted model), provide justification for this
+  choice.
+\end{itemize}
+
+\subsection{Software}\label{software}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{13.1} Describe the statistical platform used for inference
+  (e.g.~R).
+\item[$\square$]
+  \textbf{13.2} Describe the packages used to run models.
+\item[$\square$]
+  \textbf{13.3} Describe the functions used to run models.
+\item[$\square$]
+  \textbf{14.4} Describe any arguments that differed from the default
+  settings.
+\item[$\square$]
+  \textbf{13.5} Describe the version numbers of all software used.
+\end{itemize}
+
+\subsection{Non-independence}\label{non-independence}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{14.1} Describe the types of non-independence encountered
+  (e.g.~phylogenetic, spatial, multiple measurements over time).
+\item[$\square$]
+  \textbf{14.2} Describe how non-independence has been handled.
+\item[$\square$]
+  \textbf{14.3} Justify decisions made.
+\end{itemize}
+
+\subsection{Meta-regression and Model
+Selection}\label{meta-regression-and-model-selection}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{15.1} Provide a rationale for the inclusion of moderators
+  (covariates) that were evaluated in meta-regression models.
+\item[$\square$]
+  \textbf{15.2} Justify the number of parameters estimated in models, in
+  relation to the number of effect sizes and studies (e.g.~interaction
+  terms were not included due to insufficient sample sizes).
+\item[$\square$]
+  \textbf{15.3} Describe any process of model selection.
+\end{itemize}
+
+\subsection{Publication Bias and Sensitivity
+Analysis}\label{publication-bias-and-sensitivity-analysis}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{16.1} Describe assessments of the risk of bias due to missing
+  results (e.g.~publication, time-lag, and taxonomic biases).
+\item[$\square$]
+  \textbf{16.2} Describe any steps taken to investigate the effects of
+  such biases (if present).
+\item[$\square$]
+  \textbf{16.3} Describe any other analyses of robustness of the
+  results, e.g.~due to effect size choice, weighting or analytical model
+  assumptions, inclusion or exclusion of subsets of the data, or the
+  inclusion of alternative moderator variables in meta-regressions.
+\end{itemize}
+
+\subsection{Clarification of Post Hoc
+Analyses}\label{clarification-of-post-hoc-analyses}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{17.1} When hypotheses were formulated after data analysis,
+  this should be acknowledged.
+\end{itemize}
+
+\subsection{Metadata, Data, and Code}\label{metadata-data-and-code}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{18.1} Share metadata (i.e.~data descriptions).
+\item[$\square$]
+  \textbf{18.2} Share data required to reproduce the results presented
+  in the manuscript.
+\item[$\square$]
+  \textbf{18.3} Share additional data, including information that was
+  not presented in the manuscript (e.g.~raw data used to calculate
+  effect sizes, descriptions of where data were located in papers).
+\item[$\square$]
+  \textbf{18.4} Share analysis scripts (or, if a software package with
+  graphical user interface (GUI) was used, then describe full model
+  specification and fully specify choices).
+\end{itemize}
+
+\subsection{Results of Study Selection
+Process}\label{results-of-study-selection-process}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{19.1} Report the number of studies screened.
+\item[$\square$]
+  \textbf{19.2} Report the number of studies excluded at each stage of
+  screening.
+\item[$\square$]
+  \textbf{19.3} Report brief reasons for exclusion from the full text
+  stage.
+\item[$\square$]
+  \textbf{19.4} Present a Preferred Reporting Items for Systematic
+  Reviews and Meta-Analyses (PRISMA)-like flowchart
+  (www.prisma-statement.org).
+\end{itemize}
+
+\subsection{Sample Sizes and Study
+Characteristics}\label{sample-sizes-and-study-characteristics}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{20.1} Report the number of studies and effect sizes for data
+  included in meta-analyses.
+\item[$\square$]
+  \textbf{20.2} Report the number of studies and effect sizes for
+  subsets of data included in meta-regressions.
+\item[$\square$]
+  \textbf{20.3} Provide a summary of key characteristics for reported
+  outcomes (either in text or figures; e.g.~one quarter of effect sizes
+  reported for vertebrates and the rest invertebrates).
+\item[$\square$]
+  \textbf{20.4} Provide a summary of limitations of included moderators
+  (e.g.~collinearity and overlap between moderators).
+\item[$\square$]
+  \textbf{20.5} Provide a summary of characteristics related to
+  individual study quality (risk of bias).
+\end{itemize}
+
+\subsection{Meta-analysis}\label{meta-analysis}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{21.1} Provide a quantitative synthesis of results across
+  studies, including estimates for the mean effect size, with
+  confidence/credible intervals.
+\end{itemize}
+
+\subsection{Heterogeneity}\label{heterogeneity}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{22.1} Report indicators of heterogeneity in the estimated
+  effect (e.g.~I2, tau2 and other variance components).
+\end{itemize}
+
+\subsection{Meta-regression}\label{meta-regression}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{23.1} Provide estimates of meta-regression slopes
+  (i.e.~regression coefficients) and confidence/credible intervals.
+\item[$\square$]
+  \textbf{23.2} Include estimates and confidence/credible intervals for
+  all moderator variables that were assessed (i.e.~complete reporting).
+\item[$\square$]
+  \textbf{23.3} Report interactions, if they were included.
+\item[$\square$]
+  \textbf{23.4} Describe outcomes from model selection, if done (e.g.~R2
+  and AIC).
+\end{itemize}
+
+\subsection{Outcomes of Publication Bias and Sensitivity
+Analysis}\label{outcomes-of-publication-bias-and-sensitivity-analysis}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{24.1} Provide results for the assessments of the risks of bias
+  (e.g.~Egger's regression, funnel plots).
+\item[$\square$]
+  \textbf{24.2} Provide results for the robustness of the review's
+  results (e.g.~subgroup analyses, meta-regression of study quality,
+  results from alternative methods of analysis, and temporal trends).
+\end{itemize}
+
+\subsection{Discussion}\label{discussion}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{25.1} Summarise the main findings in terms of the magnitude of
+  effect.
+\item[$\square$]
+  \textbf{25.2} Summarise the main findings in terms of the precision of
+  effects (e.g.~size of confidence intervals, statistical significance).
+\item[$\square$]
+  \textbf{25.3} Summarise the main findings in terms of their
+  heterogeneity.
+\item[$\square$]
+  \textbf{25.4} Summarise the main findings in terms of their
+  biological/practical relevance.
+\item[$\square$]
+  \textbf{25.5} Compare results with previous reviews on the topic, if
+  available.
+\item[$\square$]
+  \textbf{25.6} Consider limitations and their influence on the
+  generality of conclusions, such as gaps in the available evidence
+  (e.g.~taxonomic and geographical research biases).
+\end{itemize}
+
+\subsection{Contributions and Funding}\label{contributions-and-funding}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{26.1} Provide names, affiliations, and funding sources of all
+  co-authors.
+\item[$\square$]
+  \textbf{26.2} List the contributions of each co-author.
+\item[$\square$]
+  \textbf{26.3} Provide contact details for the corresponding author.
+\item[$\square$]
+  \textbf{26.4} Disclose any conflicts of interest.
+\end{itemize}
+
+\subsection{References}\label{references}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{27.1} Provide a reference list of all studies included in the
+  systematic review or meta-analysis.
+\item[$\square$]
+  \textbf{27.2} List included studies as referenced sources (e.g.~rather
+  than listing them in a table or supplement).
+\end{itemize}
+
+\end{Form}
+
+\end{document}
