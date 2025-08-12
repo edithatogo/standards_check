@@ -30,7 +30,7 @@ fi
 BODY_CONTENT_TMP=$(mktemp)
 trap 'rm -f "$BODY_CONTENT_TMP"' EXIT
 
-# Generate the body of the index page
+# --- Implemented Checklists ---
 echo "<h2>Implemented Checklists</h2>" >> "$BODY_CONTENT_TMP"
 echo "<div class='list-group mb-4'>" >> "$BODY_CONTENT_TMP"
 yq -r '.items[] | select(.status == "mapped") | .id' "$INDEX_YAML" | while read -r id;
@@ -38,14 +38,24 @@ do
   title=$(yq -r ".items[] | select(.id == \"$id\") | .title" "$INDEX_YAML")
   level=$(yq -r ".items[] | select(.id == \"$id\") | .level" "$INDEX_YAML")
   html_file="${id}.html"
+  
   if [ "$level" == "archetype" ]; then
-    echo "<a href=\"./archetypes/${html_file}\" class=\"list-group-item list-group-item-action\">${title}</a>" >> "$BODY_CONTENT_TMP"
+    path_to_check="${OUTPUT_DIR}/archetypes/${html_file}"
+    link_path="./archetypes/${html_file}"
   else
-    echo "<a href=\"./variants/${html_file}\" class=\"list-group-item list-group-item-action\">${title}</a>" >> "$BODY_CONTENT_TMP"
+    path_to_check="${OUTPUT_DIR}/variants/${html_file}"
+    link_path="./variants/${html_file}"
+  fi
+
+  if [ -f "$path_to_check" ]; then
+    echo "<a href=\"${link_path}\" class=\"list-group-item list-group-item-action\">${title}</a>" >> "$BODY_CONTENT_TMP"
+  else
+    echo "<span class=\"list-group-item list-group-item-action list-group-item-light text-muted\">${title} (Coming Soon)</span>" >> "$BODY_CONTENT_TMP"
   fi
 done
 echo "</div>" >> "$BODY_CONTENT_TMP"
 
+# --- Placeholder Checklists ---
 echo "<h2>Placeholder Checklists</h2>" >> "$BODY_CONTENT_TMP"
 echo "<div class='list-group mb-4'>" >> "$BODY_CONTENT_TMP"
 yq -r '.items[] | select(.status != "mapped") | .id' "$INDEX_YAML" | while read -r id;
@@ -53,13 +63,23 @@ do
   title=$(yq -r ".items[] | select(.id == \"$id\") | .title" "$INDEX_YAML")
   level=$(yq -r ".items[] | select(.id == \"$id\") | .level" "$INDEX_YAML")
   html_file="${id}.html"
+
   if [ "$level" == "archetype" ]; then
-    echo "<a href=\"./archetypes/${html_file}\" class=\"list-group-item list-group-item-action\">${title}</a>" >> "$BODY_CONTENT_TMP"
+    path_to_check="${OUTPUT_DIR}/archetypes/${html_file}"
+    link_path="./archetypes/${html_file}"
   else
-    echo "<a href=\"./variants/${html_file}\" class=\"list-group-item list-group-item-action\">${title}</a>" >> "$BODY_CONTENT_TMP"
+    path_to_check="${OUTPUT_DIR}/variants/${html_file}"
+    link_path="./variants/${html_file}"
+  fi
+
+  if [ -f "$path_to_check" ]; then
+    echo "<a href=\"${link_path}\" class=\"list-group-item list-group-item-action\">${title}</a>" >> "$BODY_CONTENT_TMP"
+  else
+    echo "<span class=\"list-group-item list-group-item-action list-group-item-light text-muted\">${title} (Coming Soon)</span>" >> "$BODY_CONTENT_TMP"
   fi
 done
 echo "</div>" >> "$BODY_CONTENT_TMP"
+
 
 # Use pandoc to apply the main template to our generated body
 log "Applying HTML template..."
