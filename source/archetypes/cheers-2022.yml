@@ -4,9 +4,9 @@ group: cheers
 version: "2022"
 date: "2022-01-11"
 publisher: ISPOR
-source_url: https://www.equator-network.org/wp-content/uploads/2013/04/CHEERS-2022-checklist-1.pdf
-retrieved_at: 2025-08-10
-preferred_format: pdf
+source_url: https://doi.org/10.1016/j.jval.2021.11.1351
+retrieved_at: 2025-08-12
+preferred_format: html
 checksum: 956265bdfe372e30bfde1c766e0cec9447c68e1a9dade3d644cd00fd5167d2f8
 license: CC-BY-4.0
 verified: true
@@ -45,9 +45,10 @@ citation:
       family: Pwu
     - given: S.
       family: Staniszewska
-  doi: 10.1136/bmj.n160
-  journal: "BMJ"
-  volume: 376
-  pages: e067975
+  doi: 10.1016/j.jval.2021.11.1351
+  journal: "Value in Health"
+  volume: 25
+  issue: 1
+  pages: 3-21
   year: 2022
   notes: "and the CHEERS 2022 ISPOR Good Research Practices Task Force"

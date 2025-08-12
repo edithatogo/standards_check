@@ -28,6 +28,7 @@ Usage:
 
 import os
 import sys
+import time
 import yaml
 import requests
 from glob import glob
@@ -36,31 +37,42 @@ SOURCE_DIR = "source"
 DOI_BASE_URL = "https://doi.org"
 SUCCESS_STATUS_CODES = [200, 201, 202, 203]
 REDIRECT_STATUS_CODES = [301, 302, 307, 308]
+WARNING_STATUS_CODES = [403]  # Treat 403 Forbidden as a warning
+MAX_RETRIES = 3
+RETRY_DELAY = 5  # seconds
 
 def validate_url(url, file_path):
-    """Validates a single URL."""
+    """Validates a single URL with retries."""
     if not url or not url.startswith('http'):
         return None  # Skip empty or invalid URLs
 
-    try:
-        # Use a timeout to avoid hanging on unresponsive servers
-        response = requests.head(url, allow_redirects=True, timeout=10)
-        status = response.status_code
+    for attempt in range(MAX_RETRIES):
+        try:
+            # Use a timeout to avoid hanging on unresponsive servers
+            response = requests.head(url, allow_redirects=True, timeout=10)
+            status = response.status_code
 
-        if status in SUCCESS_STATUS_CODES:
-            print(f"  ✓ OK ({status}): {url}")
-            return None
-        elif status in REDIRECT_STATUS_CODES:
-            final_url = response.url
-            print(f"  ? REDIRECT ({status}): {url} -> {final_url}")
-            return {"file": file_path, "url": url, "status": status, "final_url": final_url, "type": "REDIRECT"}
-        else:
-            print(f"  ✗ FAILED ({status}): {url}")
-            return {"file": file_path, "url": url, "status": status, "type": "BROKEN"}
+            if status in SUCCESS_STATUS_CODES:
+                print(f"  ✓ OK ({status}): {url}")
+                return None
+            elif status in REDIRECT_STATUS_CODES:
+                final_url = response.url
+                print(f"  ? REDIRECT ({status}): {url} -> {final_url}")
+                return {"file": file_path, "url": url, "status": status, "final_url": final_url, "type": "REDIRECT"}
+            elif status in WARNING_STATUS_CODES:
+                print(f"  ! WARNING ({status}): {url} (Access Forbidden)")
+                return {"file": file_path, "url": url, "status": status, "type": "WARNING"}
+            else:
+                print(f"  ✗ FAILED ({status}): {url}")
+                return {"file": file_path, "url": url, "status": status, "type": "BROKEN"}
 
-    except requests.RequestException as e:
-        print(f"  ✗ ERROR: {url} ({e})")
-        return {"file": file_path, "url": url, "status": "ERROR", "error_message": str(e), "type": "ERROR"}
+        except requests.RequestException as e:
+            print(f"  ✗ ERROR on attempt {attempt + 1}/{MAX_RETRIES}: {url} ({e})")
+            if attempt < MAX_RETRIES - 1:
+                time.sleep(RETRY_DELAY)
+            else:
+                return {"file": file_path, "url": url, "status": "ERROR", "error_message": str(e), "type": "ERROR"}
+    return None
 
 def main():
     """Main function to find all YAML files and validate their links."""
@@ -74,6 +86,7 @@ def main():
 
     broken_links = []
     redirected_links = []
+    warning_links = []
 
     for file_path in source_files:
         print(f"\nProcessing: {file_path}")
@@ -92,6 +105,8 @@ def main():
                             broken_links.append(result)
                         elif result['type'] == 'REDIRECT':
                             redirected_links.append(result)
+                        elif result['type'] == 'WARNING':
+                            warning_links.append(result)
                 
                 # Validate DOI
                 doi = data.get('citation', {}).get('doi')
@@ -101,15 +116,15 @@ def main():
                     if result:
                         if result['type'] == 'BROKEN' or result['type'] == 'ERROR':
                             broken_links.append(result)
-                        # We typically expect DOIs to redirect, so we don't flag them as warnings
-                        # unless the final destination is also broken.
+                        elif result['type'] == 'WARNING':
+                            warning_links.append(result)
 
             except yaml.YAMLError as e:
                 print(f"  ✗ ERROR: Could not parse YAML file. {e}")
                 broken_links.append({"file": file_path, "url": "N/A", "status": "YAML_ERROR", "error_message": str(e), "type": "ERROR"})
 
     print("\n--- Validation Summary ---")
-    if not broken_links and not redirected_links:
+    if not broken_links and not redirected_links and not warning_links:
         print("✓ All links are valid.")
     else:
         if redirected_links:
@@ -118,6 +133,13 @@ def main():
                 print(f"  - File: {link['file']}")
                 print(f"    URL: {link['url']}")
                 print(f"    Status: {link['status']} -> {link['final_url']}\n")
+
+        if warning_links:
+            print(f"\nFound {len(warning_links)} links with warnings (e.g., 403 Forbidden):")
+            for link in warning_links:
+                print(f"  - File: {link['file']}")
+                print(f"    URL: {link['url']}")
+                print(f"    Status: {link['status']}\n")
 
         if broken_links:
             print(f"\nFound {len(broken_links)} broken or invalid links:")

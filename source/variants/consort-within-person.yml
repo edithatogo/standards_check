@@ -5,7 +5,7 @@ variant_of: consort-2010
 version: "2017"
 date: "2017-09-20"
 publisher: "BMJ"
-source_url: "https://www.bmj.com/content/358/bmj.j3929"
+source_url: "https://doi.org/10.1136/bmj.j2835"
 retrieved_at: "2025-08-11"
 preferred_format: "html"
 license: "CC-BY-NC"
@@ -27,9 +27,9 @@ citation:
       family: Hopewell
     - given: Douglas G
       family: Altman
-  doi: "10.1136/bmj.j3929"
+  doi: "10.1136/bmj.j2835"
   journal: "BMJ"
   volume: 358
-  pages: j3929
+  pages: j2835
   year: 2017
   notes: "on behalf of the CONSORT group"

@@ -5,10 +5,11 @@ variant_of: consort-2010
 version: "2020"
 date: "2020-03-18"
 publisher: "BMJ"
-source_url: "https://www.bmj.com/content/368/bmj.l6939"
+source_url: "https://doi.org/10.1136/bmj.m115"
 retrieved_at: "2025-08-11"
 preferred_format: html
 checksum: "6c2b5920099f4d4fa4c06863b6ec1d77a7058c3e89aa78a2d5c495c7fa118811"
 license: "CC-BY-NC"
+doi: "10.1136/bmj.m115"
 notes: |
   This is an extension of the CONSORT 2010 statement for reporting adaptive design clinical trials.

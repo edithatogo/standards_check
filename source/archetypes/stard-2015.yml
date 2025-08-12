@@ -4,9 +4,9 @@ group: stard
 version: "2015"
 date: "2015-01-01" # Exact date not specified, using start of year
 publisher: STARD Group
-source_url: https://www.equator-network.org/wp-content/uploads/2015/03/STARD-2015-checklist.pdf
-retrieved_at: 2025-08-10
-preferred_format: pdf
+source_url: https://doi.org/10.1136/bmj.h5527
+retrieved_at: 2025-08-12
+preferred_format: html
 checksum: 932aa134d1819949fe299063122f27ad0523573d730c0d02c58c97707ea336a3
 license: CC-BY-4.0
 verified: true

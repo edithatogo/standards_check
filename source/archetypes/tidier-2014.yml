@@ -4,9 +4,9 @@ group: tidier
 version: "2014"
 date: "2014-03-07"
 publisher: The TIDieR Group / BMJ
-source_url: https://www.equator-network.org/wp-content/uploads/2014/03/TIDieR-Checklist-Word.docx
-retrieved_at: 2025-08-10
-preferred_format: docx
+source_url: https://doi.org/10.1136/bmj.g1687
+retrieved_at: 2025-08-12
+preferred_format: html
 checksum: 588fd86fef2c4d903ccc4d4fcbd3b1722bf73b7039244617c78c8978901ce647
 license: CC-BY-NC
 verified: true

@@ -2,6 +2,8 @@ id: consort-npt
 title: "CONSORT for Non-pharmacological Treatment Trials"
 group: consort
 variant_of: consort-2010
+source_url: "https://www.acpjournals.org/doi/10.7326/M17-0045"
+retrieved_at: "2025-08-12"
 status: new
 notes: "CONSORT extension for non-pharmacological treatment trials."
 citation:
@@ -19,9 +21,10 @@ citation:
       family: Ravaud
     - notes: "for the CONSORT NPT Group"
   title: "CONSORT Statement for Randomized Trials of Nonpharmacologic Treatments: A 2017 Update and a CONSORT Extension for Nonpharmacologic Trial Abstracts"
-  doi: 10.7326/M17-0045
+  
   journal: "Annals of Internal Medicine"
   volume: 167
   issue: 1
   pages: "40-47"
   year: 2017
+  url: "https://www.acpjournals.org/doi/10.7326/M17-0045"
