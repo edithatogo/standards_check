@@ -86,7 +86,9 @@ jobs:
           sudo apt-get install -y pandoc
           sudo snap install yq
       - name: Build HTML
-        run: bash scripts/generate_html_index.sh
+        run: |
+          bash scripts/build_pandoc.sh
+          bash scripts/generate_html_index.sh
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
