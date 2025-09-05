@@ -1,12 +1,5 @@
 = CONSORT for N-of-1 Trials Checklist
 <consort-for-n-of-1-trials-checklist>
-#quote(block: true)[
-Scope: Preferred Reporting Items for N-of-1 trials.
-
-Reference: See `source/variants/consort-n-of-1.yml` for canonical link
-and provenance.
-]
-
 == Instructions
 <instructions>
 - Use the boxes to confirm each reporting item.

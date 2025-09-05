@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STARD 2015 Checklist</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+    .container {
+      max-width: 960px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="pb-3 mb-4 border-bottom">
+      <div class="d-flex align-items-center justify-content-between">
+        <div>
+          <h1 class="display-4">STARD 2015 Checklist</h1>
+                  </div>
+        <div class="btn-group" role="group">
+          <button id="importButton" type="button" class="btn btn-outline-primary">Import</button>
+          <button id="exportButton" type="button" class="btn btn-primary">Export</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="progress mb-4">
+      <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+    </div>
+
+    <main>
+      <h1 id="stard-2015-checklist">STARD 2015 Checklist</h1>
+      <blockquote>
+      <p>Scope: Standards for Reporting of Diagnostic Accuracy
+      Studies.</p>
+      <p>Reference: See <code>source/archetypes/stard-2015.yml</code>
+      for canonical link and provenance.</p>
+      </blockquote>
+      <h2 id="instructions">Instructions</h2>
+      <ul>
+      <li>Use the boxes to confirm each reporting item.</li>
+      <li>Add reviewer notes under each section as needed.</li>
+      </ul>
+      <h2 id="title-or-abstract">Title or Abstract</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>1.
+      Identification:</strong> Identification as a study of diagnostic
+      accuracy using at least one measure of accuracy (such as
+      sensitivity, specificity, predictive values, or AUC).</label></li>
+      </ul>
+      <h2 id="abstract">Abstract</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>2. Structured
+      summary:</strong> Structured summary of study design, methods,
+      results, and conclusions (for specific guidance, see STARD for
+      Abstracts).</label></li>
+      </ul>
+      <h2 id="introduction">Introduction</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>3. Scientific and
+      clinical background:</strong> Scientific and clinical background,
+      including the intended use and clinical role of the index
+      test.</label></li>
+      <li><label><input type="checkbox" /><strong>4. Study objectives
+      and hypotheses:</strong> Study objectives and
+      hypotheses.</label></li>
+      </ul>
+      <h2 id="methods">Methods</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>5. Study
+      design:</strong> Whether data collection was planned before the
+      index test and reference standard were performed (prospective
+      study) or after (retrospective study).</label></li>
+      <li><label><input type="checkbox" /><strong>6.
+      Participants:</strong> Eligibility criteria.</label></li>
+      <li><label><input type="checkbox" /><strong>7.
+      Participants:</strong> On what basis potentially eligible
+      participants were identified (such as symptoms, results from
+      previous tests, inclusion in registry).</label></li>
+      <li><label><input type="checkbox" /><strong>8.
+      Participants:</strong> Where and when potentially eligible
+      participants were identified (setting, location and
+      dates).</label></li>
+      <li><label><input type="checkbox" /><strong>9.
+      Participants:</strong> Whether participants formed a consecutive,
+      random or convenience series.</label></li>
+      <li><label><input type="checkbox" /><strong>10a. Test
+      methods:</strong> Index test, in sufficient detail to allow
+      replication.</label></li>
+      <li><label><input type="checkbox" /><strong>10b. Test
+      methods:</strong> Reference standard, in sufficient detail to
+      allow replication.</label></li>
+      <li><label><input type="checkbox" /><strong>11. Test
+      methods:</strong> Rationale for choosing the reference standard
+      (if alternatives exist).</label></li>
+      <li><label><input type="checkbox" /><strong>12a. Test
+      methods:</strong> Definition of and rationale for test positivity
+      cut-offs or result categories of the index test, distinguishing
+      prespecified from exploratory.</label></li>
+      <li><label><input type="checkbox" /><strong>12b. Test
+      methods:</strong> Definition of and rationale for test positivity
+      cut-offs or result categories of the reference standard,
+      distinguishing prespecified from exploratory.</label></li>
+      <li><label><input type="checkbox" /><strong>13a. Test
+      methods:</strong> Whether clinical information and reference
+      standard results were available to the performers/readers of the
+      index test.</label></li>
+      <li><label><input type="checkbox" /><strong>13b. Test
+      methods:</strong> Whether clinical information and index test
+      results were available to the assessors of the reference
+      standard.</label></li>
+      <li><label><input type="checkbox" /><strong>14. Analysis:</strong>
+      Methods for estimating or comparing measures of diagnostic
+      accuracy.</label></li>
+      <li><label><input type="checkbox" /><strong>15. Analysis:</strong>
+      How indeterminate index test or reference standard results were
+      handled.</label></li>
+      <li><label><input type="checkbox" /><strong>16. Analysis:</strong>
+      How missing data on the index test and reference standard were
+      handled.</label></li>
+      <li><label><input type="checkbox" /><strong>17. Analysis:</strong>
+      Any analyses of variability in diagnostic accuracy, distinguishing
+      prespecified from exploratory.</label></li>
+      <li><label><input type="checkbox" /><strong>18. Analysis:</strong>
+      Sample size calculation.</label></li>
+      </ul>
+      <h2 id="results">Results</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>19.
+      Participants:</strong> Flow of participants, using a
+      diagram.</label></li>
+      <li><label><input type="checkbox" /><strong>20.
+      Participants:</strong> Baseline demographic and clinical
+      characteristics of participants.</label></li>
+      <li><label><input type="checkbox" /><strong>21.
+      Participants:</strong> Distribution of severity of disease in
+      those with the target condition; other diagnoses in participants
+      without the target condition.</label></li>
+      <li><label><input type="checkbox" /><strong>22. Test
+      results:</strong> Time interval from index test to reference
+      standard, and any treatment administered between
+      them.</label></li>
+      <li><label><input type="checkbox" /><strong>23. Test
+      results:</strong> Cross tabulation of the index test results (or
+      their distribution) by the results of the reference standard; for
+      continuous results, the distribution of the test results by the
+      results of the reference standard.</label></li>
+      <li><label><input type="checkbox" /><strong>24. Test
+      results:</strong> Any adverse events from performing the index
+      test or the reference standard.</label></li>
+      <li><label><input type="checkbox" /><strong>25.
+      Estimates:</strong> Estimates of diagnostic accuracy and their
+      precision (such as 95% confidence intervals).</label></li>
+      <li><label><input type="checkbox" /><strong>26.
+      Estimates:</strong> Any analyses of variability, including
+      subgroup analyses.</label></li>
+      <li><label><input type="checkbox" /><strong>27.
+      Estimates:</strong> The number of indeterminate test results or
+      missing data and where they occurred.</label></li>
+      </ul>
+      <h2 id="discussion">Discussion</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>28. Study
+      limitations:</strong> Study limitations, including sources of
+      potential bias, statistical uncertainty, and
+      generalisability.</label></li>
+      <li><label><input type="checkbox" /><strong>29. Implications for
+      practice:</strong> Implications for practice, including the
+      intended use and clinical role of the index test.</label></li>
+      </ul>
+      <h2 id="other-information">Other Information</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>30. Registration
+      number and name of registry:</strong> Registration number and name
+      of registry.</label></li>
+      <li><label><input type="checkbox" /><strong>31. Where the full
+      study protocol can be accessed:</strong> Where the full study
+      protocol can be accessed.</label></li>
+      <li><label><input type="checkbox" /><strong>32. Funding:</strong>
+      Sources of funding and other support; role of
+      funders.</label></li>
+      </ul>
+      <p><span class="textfield" name="stard_2015_notes"
+      width="12cm">Notes</span></p>
+      <h2 id="provenance">Provenance</h2>
+      <ul>
+      <li>Source: See sidecar metadata in
+      <code>source/archetypes/stard-2015.yml</code></li>
+      <li>Version: 2015</li>
+      <li>License: CC-BY-4.0</li>
+      </ul>
+    </main>
+
+    <footer class="pt-3 mt-4 text-muted border-top">
+      Generated by the standards_check project.
+    </footer>
+  </div>
+
+  <script src="/assets/js/app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

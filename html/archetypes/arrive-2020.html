@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARRIVE 2.0 Checklist</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+    .container {
+      max-width: 960px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="pb-3 mb-4 border-bottom">
+      <div class="d-flex align-items-center justify-content-between">
+        <div>
+          <h1 class="display-4">ARRIVE 2.0 Checklist</h1>
+                  </div>
+        <div class="btn-group" role="group">
+          <button id="importButton" type="button" class="btn btn-outline-primary">Import</button>
+          <button id="exportButton" type="button" class="btn btn-primary">Export</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="progress mb-4">
+      <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+    </div>
+
+    <main>
+      <h1 id="arrive-2.0-checklist">ARRIVE 2.0 Checklist</h1>
+      <blockquote>
+      <p>Scope: The ARRIVE 2.0 guidelines are a comprehensive checklist
+      for reporting animal research. These guidelines are designed to
+      improve the transparency and quality of scientific
+      publications.</p>
+      <p>Reference: See <code>source/archetypes/arrive-2020.yml</code>
+      for canonical link and provenance.</p>
+      </blockquote>
+      <h2 id="instructions">Instructions</h2>
+      <ul>
+      <li>Use task list items for checklist boxes; these become
+      interactive checkboxes in PDF.</li>
+      <li>Use a span with class <code>.textfield</code> for free‑text
+      fields.</li>
+      </ul>
+      <h2 id="the-arrive-essential-10">The ARRIVE Essential 10</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>Study Design:</strong>
+      A brief description of the study design for each experiment,
+      including the groups being compared (with control groups) and the
+      experimental unit (e.g., a single animal or a cage of
+      animals).</label></li>
+      <li><label><input type="checkbox" /><strong>Sample Size:</strong>
+      The exact number of experimental units in each group and the total
+      number for each experiment, along with the total number of animals
+      used. The method for determining the sample size should also be
+      explained.</label></li>
+      <li><label><input type="checkbox" /><strong>Inclusion and
+      Exclusion Criteria:</strong> A description of the criteria for
+      including or excluding animals or data points during the
+      experiment and analysis.</label></li>
+      <li><label><input
+      type="checkbox" /><strong>Randomization:</strong> A statement on
+      whether randomization was used to assign experimental units to
+      groups and a description of the method used.</label></li>
+      <li><label><input type="checkbox" /><strong>Blinding:</strong> A
+      description of who was blinded during the different stages of the
+      experiment (e.g., during allocation, outcome assessment, and data
+      analysis).</label></li>
+      <li><label><input type="checkbox" /><strong>Outcome
+      Measures:</strong> A clear definition of all assessed outcome
+      measures. For studies testing a hypothesis, the primary outcome
+      measure should be specified.</label></li>
+      <li><label><input type="checkbox" /><strong>Statistical
+      Methods:</strong> Detailed information about the statistical
+      methods used for each analysis, including the software
+      used.</label></li>
+      <li><label><input type="checkbox" /><strong>Experimental
+      Animals:</strong> Species-appropriate details of the animals used,
+      such as species, strain, sex, and age.</label></li>
+      <li><label><input type="checkbox" /><strong>Experimental
+      Procedures:</strong> A thorough description of the procedures for
+      each experimental group, detailed enough for replication by
+      others.</label></li>
+      <li><label><input type="checkbox" /><strong>Results:</strong> For
+      each experiment, a report of summary and descriptive statistics
+      for each group, including a measure of variability.</label></li>
+      </ul>
+      <h2 id="the-recommended-set">The Recommended Set</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>Abstract:</strong> A
+      summary of the study’s background, objectives, methods, principal
+      findings, and conclusions.</label></li>
+      <li><label><input type="checkbox" /><strong>Background:</strong>
+      An explanation of the scientific context and the experimental
+      approach.</label></li>
+      <li><label><input type="checkbox" /><strong>Objectives:</strong> A
+      clear statement of the research objectives and any specific
+      hypotheses being tested.</label></li>
+      <li><label><input type="checkbox" /><strong>Ethical
+      Statement:</strong> The name of the ethical review committee that
+      approved the study and any relevant license or protocol
+      numbers.</label></li>
+      <li><label><input type="checkbox" /><strong>Housing and
+      Husbandry:</strong> Details of the housing and husbandry
+      conditions for the animals.</label></li>
+      <li><label><input type="checkbox" /><strong>Animal Care and
+      Monitoring:</strong> A description of any interventions to reduce
+      pain and suffering, as well as any adverse events and humane
+      endpoints.</label></li>
+      <li><label><input
+      type="checkbox" /><strong>Interpretation/Scientific
+      Implications:</strong> An interpretation of the results in the
+      context of the study’s objectives and existing
+      literature.</label></li>
+      <li><label><input
+      type="checkbox" /><strong>Generalizability/Translation:</strong> A
+      discussion of the generalizability of the findings.</label></li>
+      <li><label><input type="checkbox" /><strong>Protocol
+      Registration:</strong> A statement indicating if a protocol was
+      prepared before the study and where it was
+      registered.</label></li>
+      <li><label><input type="checkbox" /><strong>Data Access:</strong>
+      A statement on where the study data can be accessed.</label></li>
+      <li><label><input type="checkbox" /><strong>Declaration of
+      Interest:</strong> A declaration of any potential conflicts of
+      interest.</label></li>
+      <li><label><input type="checkbox" /><strong>Funding:</strong>
+      Information on all funding sources and the role of the
+      funder(s).</label></li>
+      </ul>
+      <p><span class="textfield" name="arrive_2020_notes"
+      width="12cm">Notes</span></p>
+      <h2 id="provenance">Provenance</h2>
+      <ul>
+      <li>Source: See sidecar metadata in
+      <code>source/archetypes/arrive-2020.yml</code></li>
+      <li>Version: 2.0</li>
+      <li>License: CC-BY-4.0</li>
+      </ul>
+    </main>
+
+    <footer class="pt-3 mt-4 text-muted border-top">
+      Generated by the standards_check project.
+    </footer>
+  </div>
+
+  <script src="/assets/js/app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

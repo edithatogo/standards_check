@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRISMA-P Checklist</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+    .container {
+      max-width: 960px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="pb-3 mb-4 border-bottom">
+      <div class="d-flex align-items-center justify-content-between">
+        <div>
+          <h1 class="display-4">PRISMA-P Checklist</h1>
+                  </div>
+        <div class="btn-group" role="group">
+          <button id="importButton" type="button" class="btn btn-outline-primary">Import</button>
+          <button id="exportButton" type="button" class="btn btn-primary">Export</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="progress mb-4">
+      <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+    </div>
+
+    <main>
+      <h1 id="prisma-p-checklist">PRISMA-P Checklist</h1>
+      <h2 id="instructions">Instructions</h2>
+      <ul>
+      <li>Use the boxes to confirm each reporting item.</li>
+      <li>Add reviewer notes under each section as needed.</li>
+      </ul>
+      <h2 id="title">Title</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>1a. Title:</strong>
+      Identification of the report as a protocol of a systematic
+      review.</label></li>
+      <li><label><input type="checkbox" /><strong>1b. Update:</strong>
+      If the protocol is for an update of an existing review, identify
+      as such.</label></li>
+      </ul>
+      <h2 id="abstract">Abstract</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>2. Abstract:</strong>
+      Provide a structured summary of the protocol, including:</label>
+      <ul>
+      <li><strong>Background:</strong> Rationale for the review.</li>
+      <li><strong>Methods:</strong> Key elements of the methods,
+      including eligibility criteria, information sources, risk of bias
+      assessment, and data synthesis.</li>
+      <li><strong>Registration:</strong> If registered, provide the
+      registration number and registry name.</li>
+      </ul></li>
+      </ul>
+      <h2 id="introduction">Introduction</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>3. Rationale:</strong>
+      Describe the rationale for the review in the context of what is
+      already known.</label></li>
+      <li><label><input type="checkbox" /><strong>4.
+      Objectives:</strong> Provide an explicit statement of the
+      question(s) the review will address with reference to
+      participants, interventions, comparators, and outcomes
+      (PICO).</label></li>
+      </ul>
+      <h2 id="methods">Methods</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>5. Eligibility
+      criteria:</strong> Specify the study characteristics (e.g., PICO,
+      study design, setting, time frame) and report characteristics
+      (e.g., years considered, language, publication status) to be used
+      as criteria for eligibility for the review.</label></li>
+      <li><label><input type="checkbox" /><strong>6. Information
+      sources:</strong> Describe all intended information sources (e.g.,
+      electronic databases, contact with study authors, trial registers,
+      or other grey literature sources) with planned dates of
+      coverage.</label></li>
+      <li><label><input type="checkbox" /><strong>7. Search
+      strategy:</strong> Present a draft of the search strategy to be
+      used for at least one electronic database, including planned
+      limits, such that it could be repeated.</label></li>
+      <li><label><input type="checkbox" /><strong>8. Study records: data
+      management:</strong> Describe the mechanism(s) that will be used
+      to manage records and data throughout the review.</label></li>
+      <li><label><input type="checkbox" /><strong>9. Study records:
+      selection process:</strong> State the process that will be used
+      for selecting studies (e.g., two independent reviewers) for
+      inclusion in the review.</label></li>
+      <li><label><input type="checkbox" /><strong>10. Study records:
+      data collection process:</strong> Describe the process of data
+      extraction, including how it will be done and who will do
+      it.</label></li>
+      <li><label><input type="checkbox" /><strong>11a. Data
+      items:</strong> List and define all variables for which data will
+      be sought, including PICO and other relevant data for the
+      review.</label></li>
+      <li><label><input type="checkbox" /><strong>11b. Outcomes and
+      prioritization:</strong> List and define all outcomes for which
+      data will be sought. If more than one, prioritize and explain the
+      choice of the main outcomes.</label></li>
+      <li><label><input type="checkbox" /><strong>12. Risk of bias in
+      individual studies:</strong> Describe the planned method for
+      assessing risk of bias in individual studies, including how it
+      will be used in data synthesis.</label></li>
+      <li><label><input type="checkbox" /><strong>13. Data
+      synthesis:</strong> Describe the planned methods of data
+      synthesis, including a description of the summary measures and any
+      planned investigation of heterogeneity.</label></li>
+      <li><label><input type="checkbox" /><strong>14.
+      Meta-bias(es):</strong> Describe any planned assessment of
+      meta-bias(es) (e.g., publication bias, selective reporting within
+      studies).</label></li>
+      <li><label><input type="checkbox" /><strong>15. Confidence in
+      cumulative evidence:</strong> Describe how the strength of the
+      body of evidence will be assessed.</label></li>
+      </ul>
+      <h2 id="other">Other</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>16.
+      Amendments:</strong> Describe any planned amendments to the
+      protocol.</label></li>
+      <li><label><input type="checkbox" /><strong>17.
+      Dissemination:</strong> Describe the planned dissemination
+      strategy.</label></li>
+      </ul>
+      <h3 id="notes">Notes</h3>
+      <p><span class="textfield" name="prisma_p_notes"
+      width="12cm">Reviewer notes</span></p>
+      <h2 id="provenance">Provenance</h2>
+      <ul>
+      <li>Source: See sidecar metadata in
+      <code>source/variants/prisma-p.yml</code></li>
+      <li>Version: 2015</li>
+      <li>License: CC-BY-4.0</li>
+      </ul>
+    </main>
+
+    <footer class="pt-3 mt-4 text-muted border-top">
+      Generated by the standards_check project.
+    </footer>
+  </div>
+
+  <script src="/assets/js/app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

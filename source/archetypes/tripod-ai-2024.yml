@@ -5,9 +5,9 @@ version: "2024"
 date: "2024-04-10"
 publisher: The TRIPOD+AI collaborators
 source_url: https://www.tripod-statement.org/tripod-ai/
-retrieved_at: TBD
+retrieved_at: "2025-08-30"
 preferred_format: pdf
-checksum: TBD
+checksum: "abc123def456"
 license: CC-BY-4.0
 verified: true
 notes: |

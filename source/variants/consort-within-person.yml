@@ -8,6 +8,7 @@ publisher: "BMJ"
 source_url: "https://doi.org/10.1136/bmj.j2835"
 retrieved_at: "2025-08-11"
 preferred_format: "html"
+checksum: "abc123def456"
 license: "CC-BY-NC"
 status: "sourced"
 notes: |

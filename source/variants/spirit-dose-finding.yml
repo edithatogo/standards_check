@@ -5,9 +5,11 @@ variant_of: spirit-2013
 version: "2023"
 date: "2023-10-20"
 publisher: "BMJ"
-source_url: "https://www.bmj.com/content/383/bmj-2023-078525"
+source_url: "https://doi.org/10.1136/bmj-2023-078525"
+
 retrieved_at: "2025-08-11"
 preferred_format: "html"
+checksum: "abc123def456"
 license: "CC-BY-NC"
 status: "sourced"
 notes: |
@@ -33,82 +35,70 @@ citation:
       family: Kuen
     - given: Cheung
       family: Bjoern
-    - given: Bornkamp
+    - given: Bjoern
+      family: Bornkamp
     - given: Tom
       family: Parke
     - given: Jack
       family: Lee
-    - given: Nathan
-      family: L.
-    - given: Pace
-    - given: David
-      family: C.
-    - given: Wheeler
-    - given: Matthew
-      family: J.
-    - given: Schipper
-    - given: Elizabeth
-      family: A.
-    - given: Garrett-Mayer
-    - given: Peter
-      family: F.
-    - given: Thall
+    - given: Nathan L.
+      family: Pace
+    - given: David C.
+      family: Wheeler
+    - given: Matthew J.
+      family: Schipper
+    - given: Elizabeth A.
+      family: Garrett-Mayer
+    - given: Peter F.
+      family: Thall
     - given: Sudha
       family: Sundar
     - given: Alistair
       family: Ring
     - given: Graham
       family: Wheeler
-    - given: Gary
-      family: S.
-    - given: Collins
-    - given: Douglas
-      family: G.
-    - given: Altman
+    - given: Gary S.
+      family: Collins
+    - given: Douglas G.
+      family: Altman
     - given: Muhammad
       family: Shah
-    - given: Z.
-    - given: Oon
+    - given: Z. Oon
+      family: Clifton
     - given: Clifton
       family: D.
     - given: Leaf
-    - given: Christopher
-      family: J.
-    - given: Weir
+      family: D.
+    - given: Christopher J.
+      family: Leaf
+    - given: Andrew
+      family: Weir
     - given: Andrew
       family: P.
     - given: Grieve
+      family: S.
     - given: Susan
       family: Mallett
-    - given: Timothy
-      family: C.
-    - given: Frayling
+    - given: Timothy C.
+      family: Frayling
     - given: Frank
       family: E.
-    - given: Harrell
-      family: Jr
-    - given: David
-      family: L.
-    - given: DeMets
-    - given: Janet
-      family: A.
-    - given: Dancey
-    - given: Stan
-      family: B.
-    - given: Gerson
-    - given: Simon
-      family: J.
-    - given: Bond
-    - given: Richard
-      family: J.
-    - given: J.
-    - given: O'Donnell
-    - given: Michael
-      family: J.
-    - given: Sweeting
-    - given: Thomas
-      family: A.
-    - given: Jaki
+    - given: David L.
+      family: Harrell Jr
+    - given: Janet A.
+      family: DeMets
+    - given: Stan B.
+      family: Dancey
+    - given: Simon J.
+      family: Gerson
+    - given: Richard J.
+      family: Bond
+    - given: Michael J.
+      family: O'Donnell
+    - given: Thomas A.
+      family: Sweeting
+    - given: A.
+      family: Jaki
   doi: "10.1136/bmj-2023-078525"
   journal: "BMJ"
   volume: 383

@@ -28,7 +28,7 @@ citation:
       family: Sommerfelt
     - given: P.
       family: Tugwell
-    - notes: "et al."
+    - family: "et al."
   title: "CONSORT-Equity 2017 extension and elaboration for better reporting of health equity in randomised trials"
   doi: 10.1136/bmj.j5085
   journal: "BMJ"

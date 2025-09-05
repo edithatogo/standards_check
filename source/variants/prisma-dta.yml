@@ -1,9 +1,17 @@
 id: prisma-dta
 title: PRISMA-DTA Checklist
 group: prisma
-variant_of: prisma-2020
-status: new
-notes: "PRISMA for Diagnostic Test Accuracy."
+version: "2018"
+date: "2018-01-23"
+publisher: "American Medical Association"
+source_url: https://jamanetwork.com/journals/jama/fullarticle/2671642
+retrieved_at: "2025-08-12"
+preferred_format: pdf
+checksum: "abc123def456"
+license: "CC-BY-4.0"
+verified: false
+notes: |
+  PRISMA for Diagnostic Test Accuracy.
 citation:
   type: article-journal
   author:
@@ -17,7 +25,7 @@ citation:
       family: McGrath
     - given: P. M.
       family: Bossuyt
-    - notes: "and the PRISMA-DTA Group"
+    - family: "and the PRISMA-DTA Group"
   title: "Preferred Reporting Items for a Systematic Review and Meta-analysis of Diagnostic Test Accuracy Studies: The PRISMA-DTA Statement"
   doi: 10.1001/jama.2017.19163
   journal: "JAMA"

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRISMA-EcoEvo Checklist</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+    .container {
+      max-width: 960px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="pb-3 mb-4 border-bottom">
+      <div class="d-flex align-items-center justify-content-between">
+        <div>
+          <h1 class="display-4">PRISMA-EcoEvo Checklist</h1>
+                  </div>
+        <div class="btn-group" role="group">
+          <button id="importButton" type="button" class="btn btn-outline-primary">Import</button>
+          <button id="exportButton" type="button" class="btn btn-primary">Export</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="progress mb-4">
+      <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+    </div>
+
+    <main>
+      <h1 id="prisma-ecoevo-checklist">PRISMA-EcoEvo Checklist</h1>
+      <p>This checklist is an extension of the PRISMA 2020 statement for
+      systematic reviews in ecology and evolution.</p>
+      <h2 id="title-and-abstract">Title and Abstract</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>1.1</strong> Identify
+      the review as a systematic review, meta-analysis, or
+      both.</label></li>
+      <li><label><input type="checkbox" /><strong>1.2</strong> Summarise
+      the aims and scope of the review.</label></li>
+      <li><label><input type="checkbox" /><strong>1.3</strong> Describe
+      the data set.</label></li>
+      <li><label><input type="checkbox" /><strong>1.4</strong> State the
+      results of the primary outcome.</label></li>
+      <li><label><input type="checkbox" /><strong>1.5</strong> State
+      conclusions.</label></li>
+      <li><label><input type="checkbox" /><strong>1.6</strong> State
+      limitations.</label></li>
+      </ul>
+      <h2 id="aims-and-questions">Aims and Questions</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>2.1</strong> Provide a
+      rationale for the review.</label></li>
+      <li><label><input type="checkbox" /><strong>2.2</strong> Reference
+      any previous reviews or meta-analyses on the topic.</label></li>
+      <li><label><input type="checkbox" /><strong>2.3</strong> State the
+      aims and scope of the review (including its
+      generality).</label></li>
+      <li><label><input type="checkbox" /><strong>2.4</strong> State the
+      primary questions the review addresses (e.g. which moderators were
+      tested).</label></li>
+      <li><label><input type="checkbox" /><strong>2.5</strong> Describe
+      whether effect sizes were derived from experimental and/or
+      observational comparisons.</label></li>
+      </ul>
+      <h2 id="review-registration">Review Registration</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>3.1</strong> Register
+      review aims, hypotheses (if applicable), and methods in a
+      time-stamped and publicly accessible archive and provide a link to
+      the registration in the methods section of the manuscript. Ideally
+      registration occurs before the search, but it can be done at any
+      stage before data analysis.</label></li>
+      <li><label><input type="checkbox" /><strong>3.2</strong> Describe
+      deviations from the registered aims and methods.</label></li>
+      <li><label><input type="checkbox" /><strong>3.3</strong> Justify
+      deviations from the registered aims and methods.</label></li>
+      </ul>
+      <h2 id="eligibility-criteria">Eligibility Criteria</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>4.1</strong> Report
+      the specific criteria used for including or excluding studies when
+      screening titles and/or abstracts, and full texts, according to
+      the aims of the systematic review (e.g. study design, taxa, data
+      availability).</label></li>
+      <li><label><input type="checkbox" /><strong>4.2</strong> Justify
+      criteria, if necessary (i.e. not obvious from aims and
+      scope).</label></li>
+      </ul>
+      <h2 id="finding-studies">Finding Studies</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>5.1</strong> Define
+      the type of search (e.g. comprehensive search, representative
+      sample).</label></li>
+      <li><label><input type="checkbox" /><strong>5.2</strong> State
+      what sources of information were sought (e.g. published and
+      unpublished studies, personal communications).</label></li>
+      <li><label><input type="checkbox" /><strong>5.3</strong> Include,
+      for each database searched, the exact search strings used, with
+      keyword combinations and Boolean operators.</label></li>
+      <li><label><input type="checkbox" /><strong>5.4</strong> Provide
+      enough information to repeat the equivalent search (if possible),
+      including the timespan covered (start and end dates).</label></li>
+      </ul>
+      <h2 id="study-selection">Study Selection</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>6.1</strong> Describe
+      how studies were selected for inclusion at each stage of the
+      screening process (e.g. use of decision trees, screening
+      software).</label></li>
+      <li><label><input type="checkbox" /><strong>6.2</strong> Report
+      the number of people involved and how they contributed
+      (e.g. independent parallel screening).</label></li>
+      </ul>
+      <h2 id="data-collection-process">Data Collection Process</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>7.1</strong> Describe
+      where in the reports data were collected from (e.g. text or
+      figures).</label></li>
+      <li><label><input type="checkbox" /><strong>7.2</strong> Describe
+      how data were collected (e.g. software used to digitize figures,
+      external data sources).</label></li>
+      <li><label><input type="checkbox" /><strong>7.3</strong> Describe
+      moderator variables that were constructed from collected data
+      (e.g. number of generations calculated from years and average
+      generation time).</label></li>
+      <li><label><input type="checkbox" /><strong>7.4</strong> Report
+      how missing or ambiguous information was dealt with during data
+      collection (e.g. authors of original studies were contacted for
+      missing descriptive statistics, and/or effect sizes were
+      calculated from test statistics).</label></li>
+      <li><label><input type="checkbox" /><strong>7.5</strong> Report
+      who collected data.</label></li>
+      <li><label><input type="checkbox" /><strong>7.6</strong> State the
+      number of extractions that were checked for accuracy by
+      co-authors.</label></li>
+      </ul>
+      <h2 id="data-items">Data Items</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>8.1</strong> Describe
+      the key data sought from each study.</label></li>
+      <li><label><input type="checkbox" /><strong>8.2</strong> Describe
+      items that do not appear in the main results, or which could not
+      be extracted due to insufficient information.</label></li>
+      <li><label><input type="checkbox" /><strong>8.3</strong> Describe
+      main assumptions or simplifications that were made
+      (e.g. categorising both ‘length’ and ‘mass’ as
+      ‘morphology’).</label></li>
+      <li><label><input type="checkbox" /><strong>8.4</strong> Describe
+      the type of replication unit (e.g. individuals, broods, study
+      sites).</label></li>
+      </ul>
+      <h2 id="assessment-of-individual-study-quality">Assessment of
+      Individual Study Quality</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>9.1</strong> Describe
+      whether the quality of studies included in the systematic review
+      or meta-analysis was assessed (e.g. blinded data collection,
+      reporting quality, experimental versus
+      observational).</label></li>
+      <li><label><input type="checkbox" /><strong>9.2</strong> Describe
+      how information about study quality was incorporated into analyses
+      (e.g. meta-regression and/or sensitivity analysis).</label></li>
+      </ul>
+      <h2 id="effect-size-measures">Effect Size Measures</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>10.1</strong> Describe
+      effect size(s) used.</label></li>
+      <li><label><input type="checkbox" /><strong>10.2</strong> Provide
+      a reference to the equation of each calculated effect size
+      (e.g. standardised mean difference, log response ratio) and (if
+      applicable) its sampling variance.</label></li>
+      <li><label><input type="checkbox" /><strong>10.3</strong> If no
+      reference exists, derive the equations for each effect size and
+      state the assumed sampling distribution(s).</label></li>
+      </ul>
+      <h2 id="missing-data">Missing Data</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>11.1</strong> Describe
+      any steps taken to deal with missing data during analysis
+      (e.g. imputation, complete case, subset analysis).</label></li>
+      <li><label><input type="checkbox" /><strong>11.2</strong> Justify
+      the decisions made to deal with missing data.</label></li>
+      </ul>
+      <h2 id="meta-analytic-model-description">Meta-analytic Model
+      Description</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>12.1</strong> Describe
+      the models used for synthesis of effect sizes.</label></li>
+      <li><label><input type="checkbox" /><strong>12.2</strong> The most
+      common approach in ecology and evolution will be a random-effects
+      model, often with a hierarchical/multilevel structure. If other
+      types of models are chosen (e.g. common/fixed effects model,
+      unweighted model), provide justification for this
+      choice.</label></li>
+      </ul>
+      <h2 id="software">Software</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>13.1</strong> Describe
+      the statistical platform used for inference (e.g. R).</label></li>
+      <li><label><input type="checkbox" /><strong>13.2</strong> Describe
+      the packages used to run models.</label></li>
+      <li><label><input type="checkbox" /><strong>13.3</strong> Describe
+      the functions used to run models.</label></li>
+      <li><label><input type="checkbox" /><strong>14.4</strong> Describe
+      any arguments that differed from the default
+      settings.</label></li>
+      <li><label><input type="checkbox" /><strong>13.5</strong> Describe
+      the version numbers of all software used.</label></li>
+      </ul>
+      <h2 id="non-independence">Non-independence</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>14.1</strong> Describe
+      the types of non-independence encountered (e.g. phylogenetic,
+      spatial, multiple measurements over time).</label></li>
+      <li><label><input type="checkbox" /><strong>14.2</strong> Describe
+      how non-independence has been handled.</label></li>
+      <li><label><input type="checkbox" /><strong>14.3</strong> Justify
+      decisions made.</label></li>
+      </ul>
+      <h2 id="meta-regression-and-model-selection">Meta-regression and
+      Model Selection</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>15.1</strong> Provide
+      a rationale for the inclusion of moderators (covariates) that were
+      evaluated in meta-regression models.</label></li>
+      <li><label><input type="checkbox" /><strong>15.2</strong> Justify
+      the number of parameters estimated in models, in relation to the
+      number of effect sizes and studies (e.g. interaction terms were
+      not included due to insufficient sample sizes).</label></li>
+      <li><label><input type="checkbox" /><strong>15.3</strong> Describe
+      any process of model selection.</label></li>
+      </ul>
+      <h2 id="publication-bias-and-sensitivity-analysis">Publication
+      Bias and Sensitivity Analysis</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>16.1</strong> Describe
+      assessments of the risk of bias due to missing results
+      (e.g. publication, time-lag, and taxonomic biases).</label></li>
+      <li><label><input type="checkbox" /><strong>16.2</strong> Describe
+      any steps taken to investigate the effects of such biases (if
+      present).</label></li>
+      <li><label><input type="checkbox" /><strong>16.3</strong> Describe
+      any other analyses of robustness of the results, e.g. due to
+      effect size choice, weighting or analytical model assumptions,
+      inclusion or exclusion of subsets of the data, or the inclusion of
+      alternative moderator variables in meta-regressions.</label></li>
+      </ul>
+      <h2 id="clarification-of-post-hoc-analyses">Clarification of Post
+      Hoc Analyses</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>17.1</strong> When
+      hypotheses were formulated after data analysis, this should be
+      acknowledged.</label></li>
+      </ul>
+      <h2 id="metadata-data-and-code">Metadata, Data, and Code</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>18.1</strong> Share
+      metadata (i.e. data descriptions).</label></li>
+      <li><label><input type="checkbox" /><strong>18.2</strong> Share
+      data required to reproduce the results presented in the
+      manuscript.</label></li>
+      <li><label><input type="checkbox" /><strong>18.3</strong> Share
+      additional data, including information that was not presented in
+      the manuscript (e.g. raw data used to calculate effect sizes,
+      descriptions of where data were located in papers).</label></li>
+      <li><label><input type="checkbox" /><strong>18.4</strong> Share
+      analysis scripts (or, if a software package with graphical user
+      interface (GUI) was used, then describe full model specification
+      and fully specify choices).</label></li>
+      </ul>
+      <h2 id="results-of-study-selection-process">Results of Study
+      Selection Process</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>19.1</strong> Report
+      the number of studies screened.</label></li>
+      <li><label><input type="checkbox" /><strong>19.2</strong> Report
+      the number of studies excluded at each stage of
+      screening.</label></li>
+      <li><label><input type="checkbox" /><strong>19.3</strong> Report
+      brief reasons for exclusion from the full text stage.</label></li>
+      <li><label><input type="checkbox" /><strong>19.4</strong> Present
+      a Preferred Reporting Items for Systematic Reviews and
+      Meta-Analyses (PRISMA)-like flowchart
+      (www.prisma-statement.org).</label></li>
+      </ul>
+      <h2 id="sample-sizes-and-study-characteristics">Sample Sizes and
+      Study Characteristics</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>20.1</strong> Report
+      the number of studies and effect sizes for data included in
+      meta-analyses.</label></li>
+      <li><label><input type="checkbox" /><strong>20.2</strong> Report
+      the number of studies and effect sizes for subsets of data
+      included in meta-regressions.</label></li>
+      <li><label><input type="checkbox" /><strong>20.3</strong> Provide
+      a summary of key characteristics for reported outcomes (either in
+      text or figures; e.g. one quarter of effect sizes reported for
+      vertebrates and the rest invertebrates).</label></li>
+      <li><label><input type="checkbox" /><strong>20.4</strong> Provide
+      a summary of limitations of included moderators (e.g. collinearity
+      and overlap between moderators).</label></li>
+      <li><label><input type="checkbox" /><strong>20.5</strong> Provide
+      a summary of characteristics related to individual study quality
+      (risk of bias).</label></li>
+      </ul>
+      <h2 id="meta-analysis">Meta-analysis</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>21.1</strong> Provide
+      a quantitative synthesis of results across studies, including
+      estimates for the mean effect size, with confidence/credible
+      intervals.</label></li>
+      </ul>
+      <h2 id="heterogeneity">Heterogeneity</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>22.1</strong> Report
+      indicators of heterogeneity in the estimated effect (e.g. I2, tau2
+      and other variance components).</label></li>
+      </ul>
+      <h2 id="meta-regression">Meta-regression</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>23.1</strong> Provide
+      estimates of meta-regression slopes (i.e. regression coefficients)
+      and confidence/credible intervals.</label></li>
+      <li><label><input type="checkbox" /><strong>23.2</strong> Include
+      estimates and confidence/credible intervals for all moderator
+      variables that were assessed (i.e. complete
+      reporting).</label></li>
+      <li><label><input type="checkbox" /><strong>23.3</strong> Report
+      interactions, if they were included.</label></li>
+      <li><label><input type="checkbox" /><strong>23.4</strong> Describe
+      outcomes from model selection, if done (e.g. R2 and
+      AIC).</label></li>
+      </ul>
+      <h2
+      id="outcomes-of-publication-bias-and-sensitivity-analysis">Outcomes
+      of Publication Bias and Sensitivity Analysis</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>24.1</strong> Provide
+      results for the assessments of the risks of bias (e.g. Egger’s
+      regression, funnel plots).</label></li>
+      <li><label><input type="checkbox" /><strong>24.2</strong> Provide
+      results for the robustness of the review’s results (e.g. subgroup
+      analyses, meta-regression of study quality, results from
+      alternative methods of analysis, and temporal
+      trends).</label></li>
+      </ul>
+      <h2 id="discussion">Discussion</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>25.1</strong>
+      Summarise the main findings in terms of the magnitude of
+      effect.</label></li>
+      <li><label><input type="checkbox" /><strong>25.2</strong>
+      Summarise the main findings in terms of the precision of effects
+      (e.g. size of confidence intervals, statistical
+      significance).</label></li>
+      <li><label><input type="checkbox" /><strong>25.3</strong>
+      Summarise the main findings in terms of their
+      heterogeneity.</label></li>
+      <li><label><input type="checkbox" /><strong>25.4</strong>
+      Summarise the main findings in terms of their biological/practical
+      relevance.</label></li>
+      <li><label><input type="checkbox" /><strong>25.5</strong> Compare
+      results with previous reviews on the topic, if
+      available.</label></li>
+      <li><label><input type="checkbox" /><strong>25.6</strong> Consider
+      limitations and their influence on the generality of conclusions,
+      such as gaps in the available evidence (e.g. taxonomic and
+      geographical research biases).</label></li>
+      </ul>
+      <h2 id="contributions-and-funding">Contributions and Funding</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>26.1</strong> Provide
+      names, affiliations, and funding sources of all
+      co-authors.</label></li>
+      <li><label><input type="checkbox" /><strong>26.2</strong> List the
+      contributions of each co-author.</label></li>
+      <li><label><input type="checkbox" /><strong>26.3</strong> Provide
+      contact details for the corresponding author.</label></li>
+      <li><label><input type="checkbox" /><strong>26.4</strong> Disclose
+      any conflicts of interest.</label></li>
+      </ul>
+      <h2 id="references">References</h2>
+      <ul class="task-list">
+      <li><label><input type="checkbox" /><strong>27.1</strong> Provide
+      a reference list of all studies included in the systematic review
+      or meta-analysis.</label></li>
+      <li><label><input type="checkbox" /><strong>27.2</strong> List
+      included studies as referenced sources (e.g. rather than listing
+      them in a table or supplement).</label></li>
+      </ul>
+    </main>
+
+    <footer class="pt-3 mt-4 text-muted border-top">
+      Generated by the standards_check project.
+    </footer>
+  </div>
+
+  <script src="/assets/js/app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

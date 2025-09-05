@@ -4,7 +4,6 @@
 \usepackage{hyperref}
 \usepackage{amssymb}
 % Optional AcroTeX eForms for richer widgets
-\usepackage{eforms}
 \hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
 \usepackage{enumitem}
 \setlist[itemize]{left=1.2em}
@@ -12,17 +11,17 @@
 \def\tightlist{}
 
 % Abstraction layer for form widgets
-  % eForms uses \checkBox and \textField
-  \newcommand{\mkCheckBox}[2][]{\checkBox[#1]{#2}}
-  \newcommand{\mkTextField}[2][]{\textField[#1]{#2}}
+  % hyperref provides \CheckBox and \TextField
+  \newcommand{\mkCheckBox}[2][]{\CheckBox[#1]{#2}}
+  \newcommand{\mkTextField}[2][]{\TextField[#1]{#2}}
 
 % Enable form environment for interactive fields
 % Usage in content requires raw LaTeX or a pandoc Lua filter to insert \CheckBox/\TextField
 \begin{document}
 
 \begin{center}
-{\LARGE CONSORT for Cluster Trials}\\[4pt]
-\normalsize Date: 2012-09-04
+{\LARGE }\\[4pt]
+\normalsize 
 \end{center}
 \vspace{1em}
 
@@ -31,13 +30,6 @@
 
 \section{CONSORT for Cluster Trials
 Checklist}\label{consort-for-cluster-trials-checklist}
-
-\begin{quote}
-Scope: Preferred Reporting Items for cluster randomized trials.
-
-Reference: See \texttt{source/variants/consort-cluster.yml} for
-canonical link and provenance.
-\end{quote}
 
 \subsection{Instructions}\label{instructions}
 

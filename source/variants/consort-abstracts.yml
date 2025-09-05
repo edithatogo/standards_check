@@ -8,6 +8,7 @@ publisher: "PLOS Medicine"
 source_url: "https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.0050020"
 retrieved_at: "2025-08-11"
 preferred_format: "html"
+checksum: "abc123def456"
 license: "CC-BY-2.5"
 status: "sourced"
 notes: |

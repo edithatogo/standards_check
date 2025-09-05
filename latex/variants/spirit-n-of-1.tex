@@ -4,7 +4,6 @@
 \usepackage{hyperref}
 \usepackage{amssymb}
 % Optional AcroTeX eForms for richer widgets
-\usepackage{eforms}
 \hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
 \usepackage{enumitem}
 \setlist[itemize]{left=1.2em}
@@ -12,9 +11,9 @@
 \def\tightlist{}
 
 % Abstraction layer for form widgets
-  % eForms uses \checkBox and \textField
-  \newcommand{\mkCheckBox}[2][]{\checkBox[#1]{#2}}
-  \newcommand{\mkTextField}[2][]{\textField[#1]{#2}}
+  % hyperref provides \CheckBox and \TextField
+  \newcommand{\mkCheckBox}[2][]{\CheckBox[#1]{#2}}
+  \newcommand{\mkTextField}[2][]{\TextField[#1]{#2}}
 
 % Enable form environment for interactive fields
 % Usage in content requires raw LaTeX or a pandoc Lua filter to insert \CheckBox/\TextField

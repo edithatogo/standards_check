@@ -1,13 +1,5 @@
 = PRISMA-P Checklist
 <prisma-p-checklist>
-#quote(block: true)[
-Scope: Preferred Reporting Items for Systematic review and Meta-Analysis
-Protocols.
-
-Reference: See `source/variants/prisma-p.yml` for canonical link and
-provenance.
-]
-
 == Instructions
 <instructions>
 - Use the boxes to confirm each reporting item.

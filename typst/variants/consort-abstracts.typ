@@ -1,13 +1,5 @@
 = CONSORT for Abstracts Checklist
 <consort-for-abstracts-checklist>
-#quote(block: true)[
-Scope: Preferred Reporting Items for reporting randomized controlled
-trials in journal and conference abstracts.
-
-Reference: See `source/variants/consort-abstracts.yml` for canonical
-link and provenance.
-]
-
 == Instructions
 <instructions>
 - Use the boxes to confirm each reporting item.

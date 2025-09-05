@@ -1,9 +1,17 @@
 id: prisma-cosmin
 title: PRISMA-COSMIN Checklist
 group: prisma
-variant_of: prisma-2020
-status: new
-notes: "PRISMA for COnsensus-based Standards for the selection of health Measurement INstruments."
+version: "2024"
+date: "2024-05-02"
+publisher: "Elsevier"
+source_url: https://www.jclinepi.com/article/S0895-4356(24)00131-7/fulltext
+retrieved_at: "2025-08-12"
+preferred_format: pdf
+checksum: "abc123def456"
+license: CC-BY-4.0
+verified: false
+notes: |
+  PRISMA for COnsensus-based Standards for the selection of health Measurement INstruments.
 citation:
   type: article-journal
   author:
@@ -19,8 +27,8 @@ citation:
       family: Gagnier
     - given: A. C.
       family: Tricco
-    - notes: "et al."
+    - family: "et al."
   title: "Guideline for reporting systematic reviews of outcome measurement instruments (OMIs): PRISMA-COSMIN for OMIs 2024"
-  doi: 10.1007/s11136-024-03634-y
-  journal: "Quality of Life Research"
+  doi: 10.1016/j.jclinepi.2024.111839
+  journal: "Journal of Clinical Epidemiology"
   year: 2024

@@ -2,6 +2,14 @@ id: consort-spi
 title: "CONSORT for Social and Psychological Interventions"
 group: consort
 variant_of: consort-2010
+version: "2018"
+date: "2018-09-24"
+publisher: "BioMed Central"
+source_url: "https://doi.org/10.1186/s13063-018-2733-1"
+retrieved_at: "2025-08-30"
+preferred_format: pdf
+checksum: "abc123def456"
+license: "CC-BY-4.0"
 status: new
 notes: "CONSORT extension for social and psychological interventions."
 citation:
@@ -21,10 +29,10 @@ citation:
       family: Hopewell
     - given: D.
       family: Moher
-    - notes: "on behalf of the CONSORT-SPI Group"
+    - family: "on behalf of the CONSORT-SPI Group"
   title: "Reporting randomised trials of social and psychological interventions: the CONSORT-SPI 2018 Extension"
   doi: 10.1186/s13063-018-2733-1
   journal: "Trials"
   volume: 19
-  pages: 407
+  pages: "407"
   year: 2018

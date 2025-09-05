@@ -1,13 +1,5 @@
 = PRISMA-NMA Checklist
 <prisma-nma-checklist>
-#quote(block: true)[
-Scope: Preferred Reporting Items for Systematic Reviews and
-Meta-Analyses of Network Meta-Analyses.
-
-Reference: See `source/variants/prisma-nma.yml` for canonical link and
-provenance.
-]
-
 == Instructions
 <instructions>
 - Use the boxes to confirm each reporting item.

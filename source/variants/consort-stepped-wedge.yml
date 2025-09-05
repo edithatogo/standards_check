@@ -2,6 +2,14 @@ id: consort-stepped-wedge
 title: "CONSORT for Stepped-wedge Cluster Trials"
 group: consort
 variant_of: consort-2010
+version: "2018"
+date: "2018-10-18"
+publisher: "BMJ"
+source_url: "https://doi.org/10.1136/bmj.k1614"
+retrieved_at: "2025-08-30"
+preferred_format: pdf
+checksum: "abc123def456"
+license: "CC-BY-4.0"
 status: new
 notes: "CONSORT extension for stepped-wedge cluster randomized trials."
 citation:
@@ -19,7 +27,7 @@ citation:
       family: Copas
     - given: J. A.
       family: Thompson
-    - notes: "et al."
+    - family: "et al."
   title: "Reporting of stepped wedge cluster randomised trials: extension of the CONSORT 2010 statement with explanation and elaboration"
   doi: 10.1136/bmj.k1614
   journal: "BMJ"

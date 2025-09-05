@@ -4,8 +4,8 @@ group: prisma
 version: "2015"
 date: "2015-01-09"
 publisher: "BioMed Central"
-source_url: https://www.prisma-statement.org/s/PRISMA-P-checklist.pdf
-retrieved_at: 2025-08-10
+source_url: https://systematicreviewsjournal.biomedcentral.com/articles/10.1186/2046-4053-4-1
+retrieved_at: "2025-08-10"
 preferred_format: pdf
 checksum: a184b3c4981e2cb7ed515268817e1ddb77aa7bffed3da78f67dd4bcf923c18e6
 license: CC-BY-4.0
@@ -35,6 +35,6 @@ citation:
   journal: "Systematic Reviews"
   volume: 4
   issue: 1
-  pages: 1
+  pages: "1"
   year: 2015
   notes: "and others"

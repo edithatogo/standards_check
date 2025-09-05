@@ -1,54 +1,101 @@
-# CONSORT for Cluster Trials Checklist
+# CONSORT Extension for Cluster Randomised Trials
+
+> Scope: The CONSORT Extension for Cluster Randomised Trials provides additional guidance for reporting cluster randomised controlled trials. This extension modifies several CONSORT items to address the unique methodological considerations of cluster trials, including clustering effects on sample size calculations and analysis.
+>
+> Reference: https://doi.org/10.1136/bmj.e5661
 
 ## Instructions
-- Use the boxes to confirm each reporting item.
-- Add reviewer notes under each section as needed.
+- Use task list items for checklist boxes; these become interactive checkboxes in PDF.
+- Use a span with class `.textfield` for free‑text fields.
+- This extension modifies specific CONSORT items to address cluster trial methodology.
+- Report both cluster-level and individual-level information where relevant.
 
-## Checklist Items
+## Title and Abstract
 
-- [ ] **Title and abstract**
-  - [ ] 1a. Identification as a cluster randomised trial in the title
-  - [ ] 1b. Structured summary of trial design, methods, results, and conclusions
-- [ ] **Introduction**
-  - [ ] 2a. Scientific background and explanation of rationale
-  - [ ] 2b. Specific objectives or hypotheses
-- [ ] **Methods**
-  - [ ] 3a. Description of trial design (including allocation ratio, if applicable)
-  - [ ] 3b. Important changes to methods after trial commencement (such as eligibility criteria), with reasons
-  - [ ] 4a. Eligibility criteria for participants, clusters, and those delivering the intervention
-  - [ ] 4b. Settings and locations where the data were collected
-  - [ ] 5. The interventions for each group with sufficient details to allow replication, including how and when they were actually administered
-  - [ ] 6a. Completely defined pre-specified primary and secondary outcome measures, including how and when they were assessed
-  - [ ] 6b. Any changes to trial outcomes after the trial commenced, with reasons
-  - [ ] 7a. How sample size was determined
-  - [ ] 7b. When applicable, explanation of any interim analyses and stopping guidelines
-  - [ ] 8a. Method used to generate the random allocation sequence
-  - [ ] 8b. Type of randomisation; details of any restriction (e.g., blocking and block size)
-  - [ ] 9. Mechanism used to implement the random allocation sequence (e.g., central telephone; web-based), describing any steps taken to conceal the sequence until interventions were assigned
-  - [ ] 10. Who generated the random allocation sequence, who enrolled participants, and who assigned participants to interventions
-  - [ ] 11a. If done, who was blinded after assignment to interventions (e.g., participants, care providers, those assessing outcomes) and how
-  - [ ] 11b. If relevant, description of the similarity of interventions
-  - [ ] 12a. Statistical methods used to compare groups for primary and secondary outcomes
-  - [ ] 12b. Methods for additional analyses, such as subgroup analyses and adjusted analyses
-- [ ] **Results**
-  - [ ] 13a. For each group, the numbers of participants who were randomly assigned, received intended treatment, and were analysed for the primary outcome
-  - [ ] 13b. For each group, losses and exclusions after randomisation, together with reasons
-  - [ ] 14a. Dates defining the periods of recruitment and follow-up
-  - [ ] 14b. Why the trial ended or was stopped
-  - [ ] 15. A table showing baseline demographic and clinical characteristics for each group
-  - [ ] 16. For each group, number of participants (denominator) included in each analysis and whether the analysis was by original assigned groups
-  - [ ] 17a. For each primary and secondary outcome, results for each group, and the estimated effect size and its precision (e.g., 95% confidence interval)
-  - [ ] 17b. For binary outcomes, presentation of both absolute and relative effect sizes is recommended
-  - [ ] 18. Results of any other analyses performed, including subgroup analyses and adjusted analyses, distinguishing pre-specified from exploratory
-  - [ ] 19. All important harms or unintended effects in each group
-- [ ] **Discussion**
-  - [ ] 20. Trial limitations, addressing sources of potential bias, imprecision, and, if relevant, multiplicity of analyses
-  - [ ] 21. Generalisability (external validity, applicability) of the trial findings
-  - [ ] 22. Interpretation consistent with results, balancing benefits and harms, and considering other relevant evidence
-- [ ] **Other information**
-  - [ ] 23. Registration number and name of trial registry
-  - [ ] 24. Where the full trial protocol can be accessed, if available
-  - [ ] 25. Sources of funding and other support (e.g., supply of drugs), role of funders
+- [ ] **1. Identification:** How participants were allocated to interventions (e.g., random allocation, randomised, or randomly assigned), specifying that allocation was based on clusters
 
-### Notes
-[Reviewer notes]{.textfield name=consort_cluster_notes width=12cm}
+## Introduction
+
+- [ ] **2. Rationale:** Scientific background and explanation of rationale, including the rationale for using a cluster design
+
+## Methods
+
+### Participants
+
+- [ ] **3. Eligibility criteria:** Eligibility criteria for participants and clusters and the settings and locations where the data were collected
+
+### Interventions
+
+- [ ] **4. Interventions:** Precise details of the interventions intended for each group, whether they pertain to the individual level, the cluster level, or both, and how and when they were actually administered
+
+### Objectives
+
+- [ ] **5. Objectives:** Specific objectives and hypotheses and whether they pertain to the individual level, the cluster level, or both
+
+### Outcomes
+
+- [ ] **6. Outcomes:** Report clearly defined primary and secondary outcome measures, whether they pertain to the individual level, the cluster level, or both, and, when applicable, any methods used to enhance the quality of measurements (e.g., multiple observations, training of assessors)
+
+### Sample size
+
+- [ ] **7. Sample size:** How total sample size was determined (including method of calculation, number of clusters, cluster size, a coefficient of intracluster correlation (ICC or k), and an indication of its uncertainty) and, when applicable, explanation of any interim analyses and stopping rules
+
+### Randomisation
+
+- [ ] **8. Sequence generation:** Method used to generate the random allocation sequence, including details of any restriction (e.g., blocking, stratification, matching)
+- [ ] **9. Allocation concealment:** Method used to implement the random allocation sequence, specifying that allocation was based on clusters rather than individuals and clarifying whether the sequence was concealed until interventions were assigned
+
+### Blinding
+
+- [ ] **10. Blinding:** Whether participants, those administering the interventions, and those assessing the outcomes were blinded to group assignment. If done, how the success of blinding was evaluated
+
+### Statistical methods
+
+- [ ] **11. Statistical methods:** Statistical methods used to compare groups for primary outcome(s) indicating how clustering was taken into account, methods for additional analyses, such as subgroup analyses and adjusted analyses
+
+## Results
+
+### Participant flow
+
+- [ ] **12. Participant flow:** Flow of clusters and individual participants through each stage (a diagram is strongly recommended). Specifically, for each group report the numbers of clusters and participants randomly assigned, receiving intended treatment, completing the study protocol, and analysed for the primary outcome. Describe protocol deviations from study as planned, together with reasons
+
+### Recruitment
+
+- [ ] **13. Recruitment:** Dates defining the periods of recruitment and follow-up
+
+### Baseline data
+
+- [ ] **14. Baseline data:** A table showing baseline demographic and clinical characteristics for each group, separately for clusters and individuals if appropriate
+
+### Numbers analysed
+
+- [ ] **15. Numbers analysed:** For each group, number of clusters and participants (denominator) included in each analysis and whether the analysis was by original assigned groups
+
+### Outcomes and estimation
+
+- [ ] **16. Outcomes and estimation:** For each primary and secondary outcome, results for each group, and the estimated effect size and its precision (e.g., 95% confidence interval), indicating how clustering was taken into account
+
+### Ancillary analyses
+
+- [ ] **17. Ancillary analyses:** Results of any other analyses performed, including subgroup analyses and adjusted analyses, distinguishing pre-specified from exploratory
+
+### Harms
+
+- [ ] **18. Harms:** All important harms or unintended effects in each group
+
+## Discussion
+
+- [ ] **19. Limitations:** Trial limitations, addressing sources of potential bias, imprecision, and, if relevant, multiplicity of analyses, specifically addressing the cluster design
+- [ ] **20. Generalisability:** Generalisability (external validity, applicability) of the trial findings, taking into account the cluster design
+- [ ] **21. Interpretation:** Interpretation consistent with results, balancing benefits and harms, and considering other relevant evidence, specifically addressing the implications of the cluster design
+
+## Other information
+
+- [ ] **22. Registration:** Registration number and name of trial registry
+- [ ] **23. Protocol:** Where the full trial protocol can be accessed, if available
+- [ ] **24. Funding:** Sources of funding and other support (e.g., supply of drugs), role of funders
+
+## Provenance
+- Source: https://www.bmj.com/content/345/bmj.e5661
+- Version: 2012
+- License: CC-BY

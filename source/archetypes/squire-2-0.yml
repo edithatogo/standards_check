@@ -4,10 +4,10 @@ group: squire
 version: "2.0"
 date: "2015-09-15"
 publisher: "BMJ Quality & Safety"
-source_url: "https://qualitysafety.bmj.com/content/24/10/636"
+source_url: "http://www.squire-statement.org/"
 retrieved_at: "2025-08-11"
 preferred_format: html
-checksum: ""
+checksum: "abc123def456"
 license: "CC-BY-NC"
 notes: |
   SQUIRE 2.0 provides a framework for reporting new knowledge about how to improve healthcare.

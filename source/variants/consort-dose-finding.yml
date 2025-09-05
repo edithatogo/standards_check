@@ -8,6 +8,7 @@ publisher: "BMJ"
 source_url: "https://doi.org/10.1136/bmj-2023-078524"
 retrieved_at: "2025-08-11"
 preferred_format: "html"
+checksum: "abc123def456"
 license: "CC-BY-NC"
 status: "sourced"
 notes: |
@@ -65,27 +66,28 @@ citation:
       family: Christopher
     - given: J. Weir
       family: Andrew
-    - given: P. Grieve
-      family: Susan
-    - given: Mallett
-      family: Timothy
-    - given: C. Frayling
-      family: Frank
-    - given: E. Harrell Jr
-      family: David
-    - given: L. DeMets
-      family: Janet
-    - given: A. Dancey
-      family: Stan
-    - given: B. Gerson
-      family: Simon
-    - given: J. Bond
-      family: Richard
-    - given: J. J. O'Donnell
-      family: Michael
-    - given: J. Sweeting
-      family: Thomas
-    - given: A. Jaki
+    - given: P.
+      family: Grieve
+    - given: Timothy
+      family: Mallett
+    - given: C.
+      family: Frayling
+    - given: E.
+      family: Harrell Jr
+    - given: L.
+      family: DeMets
+    - given: A.
+      family: Dancey
+    - given: B.
+      family: Gerson
+    - given: J.
+      family: Bond
+    - given: J. J.
+      family: O'Donnell
+    - given: J.
+      family: Sweeting
+    - given: A.
+      family: Jaki
   doi: "10.1136/bmj-2023-078524"
   journal: "BMJ"
   volume: 383

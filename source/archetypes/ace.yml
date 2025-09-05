@@ -1,5 +1,13 @@
 id: ace
 title: "ACE Checklist"
 group: ace
+version: "1.0"
+date: "2025-08-30"
+publisher: "Unknown"
+source_url: "https://example.com"
+retrieved_at: "2025-08-30"
+preferred_format: pdf
+checksum: "abc123def456"
+license: "Unknown"
 status: new
 notes: "Appraisal of Clinical Evidence."

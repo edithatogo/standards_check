@@ -1,9 +1,17 @@
 id: prisma-ipd
 title: PRISMA-IPD Checklist
 group: prisma
-variant_of: prisma-2020
-status: new
-notes: "PRISMA for Individual Patient Data."
+version: "2015"
+date: "2015-04-21"
+publisher: "American Medical Association"
+source_url: https://jamanetwork.com/journals/jama/fullarticle/2279899
+retrieved_at: "2025-08-12"
+preferred_format: pdf
+checksum: "be9e2366de0212d54c500a2912998bec981de0c1cef775eb5e0fd9747cac27a1"
+license: "CC-BY-4.0"
+verified: false
+notes: |
+  PRISMA for Individual Patient Data.
 citation:
   type: article-journal
   author:
@@ -21,7 +29,7 @@ citation:
       family: Stewart
     - given: J. F.
       family: Tierney
-    - notes: "for the PRISMA-IPD Development Group"
+    - family: "for the PRISMA-IPD Development Group"
   title: "Preferred Reporting Items for Systematic review and Meta-Analyses of Individual Participant Data: The PRISMA-IPD Statement"
   doi: 10.1001/jama.2015.3656
   journal: "JAMA"

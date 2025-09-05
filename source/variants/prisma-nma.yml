@@ -2,13 +2,13 @@ id: prisma-nma
 title: PRISMA-NMA Checklist
 group: prisma
 version: "2015"
-date: "2016-09-01"
-publisher: "Elsevier"
-source_url: https://www.elsevier.es/en-revista-medicina-clinica-english-edition--462-pdf-S2387020616306015
-retrieved_at: 2025-08-10
+date: "2015-06-02"
+publisher: "Annals of Internal Medicine"
+source_url: https://www.acpjournals.org/doi/10.7326/M14-2355
+retrieved_at: "2025-08-10"
 preferred_format: pdf
 checksum: 1badcb8107e1bcb9aab28d699a12118a9ce5a0bfbb29b61b118f65a76d65ad10
-license: CC-BY-4.0
+license: CC-BY-NC-SA-4.0
 verified: true
 notes: |
   PRISMA for Network Meta-Analyses.
@@ -17,13 +17,20 @@ citation:
   author:
     - given: Brian
       family: Hutton
-    - given: Ferrán
-      family: Catalá-López
+    - given: Giovanni
+      family: Salanti
+    - given: Douglas G
+      family: Altman
+    - given: John PA
+      family: Ioannidis
+    - given: Julian PT
+      family: Higgins
     - given: David
       family: Moher
-  doi: 10.1016/j.medcle.2016.10.003
-  journal: "Medicina Clínica (English Edition)"
-  volume: 147
-  issue: 6
-  pages: 262-266
-  year: 2016
+  doi: 10.7326/M14-2355
+  journal: "Annals of Internal Medicine"
+  volume: 162
+  issue: 11
+  pages: 777-784
+  year: 2015
+  notes: "and others"

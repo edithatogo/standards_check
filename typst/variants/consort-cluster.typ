@@ -1,12 +1,5 @@
 = CONSORT for Cluster Trials Checklist
 <consort-for-cluster-trials-checklist>
-#quote(block: true)[
-Scope: Preferred Reporting Items for cluster randomized trials.
-
-Reference: See `source/variants/consort-cluster.yml` for canonical link
-and provenance.
-]
-
 == Instructions
 <instructions>
 - Use the boxes to confirm each reporting item.

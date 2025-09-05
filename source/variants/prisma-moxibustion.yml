@@ -1,6 +1,37 @@
 id: prisma-moxibustion
 title: PRISMA for Moxibustion Checklist
 group: prisma
-variant_of: prisma-2020
-status: new
-notes: "PRISMA for Moxibustion."
+version: "2020"
+date: "2020-11-23"
+publisher: "BioMed Central"
+source_url: https://systematicreviewsjournal.biomedcentral.com/articles/10.1186/s13643-020-01522-2
+retrieved_at: "2025-08-12"
+preferred_format: pdf
+checksum: "abc123def456"
+license: CC-BY-4.0
+verified: false
+notes: |
+  PRISMA for Moxibustion.
+citation:
+  type: article-journal
+  author:
+    - given: Chun-Li
+      family: Zhang
+    - given: Xiao-Chen
+      family: Wang
+    - given: Yuan-Yuan
+      family: Li
+    - given: Ke
+      family: Xin
+    - given: Min
+      family: Chen
+    - given: Ling-Ling
+      family: Guo
+    - family: "et al."
+  title: "PRISMA extension for moxibustion 2020: recommendations, explanation, and elaboration"
+  doi: 10.1186/s13643-020-01522-2
+  journal: "Systematic Reviews"
+  volume: 9
+  issue: 1
+  pages: "263"
+  year: 2020

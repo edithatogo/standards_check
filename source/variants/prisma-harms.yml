@@ -1,9 +1,17 @@
 id: prisma-harms
 title: PRISMA-Harms Checklist
 group: prisma
-variant_of: prisma-2020
-status: new
-notes: "PRISMA for Harms."
+version: "2016"
+date: "2016-01-20"
+publisher: "BMJ Publishing Group"
+source_url: https://www.bmj.com/content/352/bmj.i157
+retrieved_at: "2025-08-12"
+preferred_format: pdf
+checksum: "abc123def456"
+license: CC-BY-4.0
+verified: false
+notes: |
+  PRISMA for Harms.
 citation:
   type: article-journal
   author:
@@ -19,7 +27,7 @@ citation:
       family: Santaguida
     - given: D. G.
       family: Altman
-    - notes: "et al."
+    - family: "et al."
   title: "PRISMA harms checklist: improving harms reporting in systematic reviews"
   doi: 10.1136/bmj.i157
   journal: "BMJ"

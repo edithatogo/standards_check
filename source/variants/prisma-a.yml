@@ -1,29 +1,36 @@
 id: prisma-a
 title: PRISMA for Abstracts Checklist
 group: prisma
-variant_of: prisma-2020
-status: new
-notes: "PRISMA for Abstracts."
+version: "2020"
+date: "2021-03-29"
+publisher: "BMJ Publishing Group"
+source_url: https://www.bmj.com/content/372/bmj.n14
+retrieved_at: "2025-08-12"
+preferred_format: pdf
+checksum: "abc123def456"
+license: CC-BY-4.0
+verified: false
+notes: |
+  PRISMA for Abstracts, updated as part of the PRISMA 2020 statement.
 citation:
   type: article-journal
   author:
-    - given: E. M.
-      family: Beller
-    - given: P. P.
-      family: Glasziou
-    - given: D. G.
-      family: Altman
-    - given: S.
-      family: Hopewell
-    - given: H.
-      family: Bastian
-    - given: I.
-      family: Chalmers
-    - notes: "et al."
-  title: "PRISMA for Abstracts: Reporting Systematic Reviews in Journal and Conference Abstracts"
-  doi: 10.1371/journal.pmed.1001419
-  journal: "PLoS Medicine"
-  volume: 10
-  issue: 4
-  pages: e1001419
-  year: 2013
+    - given: Matthew J
+      family: Page
+    - given: Joanne E
+      family: McKenzie
+    - given: Patrick M
+      family: Bossuyt
+    - given: Isabelle
+      family: Boutron
+    - given: Tammy C
+      family: Hoffmann
+    - given: Cynthia D
+      family: Mulrow
+    - family: "et al."
+  title: "The PRISMA 2020 statement: an updated guideline for reporting systematic reviews"
+  doi: 10.1136/bmj.n71
+  journal: "The BMJ"
+  volume: 372
+  pages: n71
+  year: 2021

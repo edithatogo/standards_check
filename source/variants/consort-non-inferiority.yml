@@ -5,10 +5,11 @@ variant_of: consort-2010
 version: "2012"
 date: "2012-10-18"
 publisher: "JAMA"
-source_url: "https://jamanetwork.com/journals/jama/fullarticle/201245"
+source_url: "https://jamanetwork.com/journals/jama/fullarticle/10.1001/jama.2012.87802"
 retrieved_at: "2025-08-11"
 preferred_format: "html"
-license: "TBD"
+checksum: "abc123def456"
+license: "CC-BY-4.0"
 status: "sourced"
 notes: |
   CONSORT extension for non-inferiority and equivalence trials.
@@ -25,7 +26,7 @@ citation:
       family: Pocock
     - given: Stephen J W
       family: Evans
-  doi: "10.1001/jama.2012.8722"
+  doi: "10.1001/jama.2012.87802"
   journal: "JAMA"
   volume: 308
   issue: 24

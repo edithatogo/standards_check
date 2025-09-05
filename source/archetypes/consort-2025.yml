@@ -2,13 +2,13 @@ id: consort-2025
 title: "CONSORT 2025 Statement"
 group: consort
 version: "2025"
-date: "2025-01-01" # Placeholder date
-publisher: "The CONSORT Group"
-source_url: "" # To be filled in when available
+date: "2025-01-21" # Published date from BMJ
+publisher: "CONSORT Group"
+source_url: "https://doi.org/10.1136/bmj-2024-081123"
 retrieved_at: "2025-08-11"
-preferred_format: ""
-checksum: ""
-license: "" # To be determined
+preferred_format: "docx"
+checksum: "" # To be computed when source file is downloaded
+license: "CC-BY-4.0"
 history:
   - version: "2010"
     path: "archive/consort/2010/consort-2010.md"

@@ -14,7 +14,7 @@
 # - variant_of: parent id (if level=variant)
 # - notes: optional remarks
 version: 2
-updated: 2025-08-11
+updated: "2025-08-11"
 items:
   - id: consort-2010
     title: CONSORT 2010 Checklist
@@ -31,10 +31,10 @@ items:
     notes: "Randomized trials reporting. Verify official link and terms."
   - id: consort-2025
     title: "CONSORT 2025 Checklist"
-    url: TBD
+    url: https://doi.org/10.1136/bmj-2024-081123
     version: "2025"
-    date: TBD
-    license: TBD
+    date: "2025-01-21"
+    license: "CC-BY-4.0"
     publisher: CONSORT Group (Consolidated Standards of Reporting Trials)
     preferred_format: docx
     level: archetype
@@ -68,11 +68,11 @@ items:
     notes: "Observational studies."
   - id: care-2013
     title: CARE Guidelines Checklist
-    url: TBD
+    url: https://www.care-statement.org/s/CARE-checklist-English-2013.pdf
     version: "2013"
-    date: TBD
-    license: TBD
-    publisher: TBD
+    date: "2013-09-01"
+    license: "CC-BY-NC-SA-4.0"
+    publisher: CARE Group
     preferred_format: pdf
     level: archetype
     group: care
@@ -101,54 +101,44 @@ items:
     notes: "The CHEERS 2022 checklist, replacing the 2013 version."
   - id: tripod-2015
     title: TRIPOD Checklist
-    url: TBD
+    url: https://www.tripod-statement.org/
     version: "2015"
-    date: TBD
-    license: TBD
-    publisher: TBD
+    date: "2015-01-01"
+    license: "CC-BY-NC-SA-4.0"
+    publisher: TRIPOD Group
     preferred_format: pdf
     level: archetype
     group: tripod
     notes: "Prediction model reporting."
   - id: spirit-2025
     title: SPIRIT 2025 Checklist
-    url: TBD
+    url: https://doi.org/10.1136/bmj-2024-081477
     version: "2025"
-    date: TBD
-    license: TBD
-    publisher: TBD
+    date: "2025-01-31"
+    license: "CC-BY-4.0"
+    publisher: SPIRIT Group
     preferred_format: docx
     level: archetype
     group: spirit
     notes: "Clinical trial protocols."
   - id: stard-2015
     title: STARD 2015 Checklist
-    url: TBD
+    url: http://www.equator-network.org/reporting-guidelines/stard/
     version: "2015"
-    date: TBD
-    license: TBD
-    publisher: TBD
+    date: "2015-10-28"
+    license: "CC-BY-4.0"
+    publisher: The BMJ
     preferred_format: pdf
     level: archetype
     group: stard
     notes: "Diagnostic accuracy studies."
-  - id: equator-catalog-tbd
-    title: Additional EQUATOR-listed Checklist (placeholder)
-    url: TBD
-    version: TBD
-    date: TBD
-    license: TBD
-    publisher: TBD
-    preferred_format: pdf
-    level: archetype
-    group: tbd
-    notes: "Use this placeholder to expand mapping as needed."
+
   - id: squire-2-0
     title: SQUIRE 2.0 Guidelines Checklist
     url: https://www.squire-statement.org/
     version: "2.0"
-    date: TBD
-    license: TBD
+    date: "2015-09-13"
+    license: "CC BY-NC 4.0"
     publisher: SQUIRE Initiative
     preferred_format: pdf
     level: archetype
@@ -159,8 +149,8 @@ items:
     title: SRQR — Standards for Reporting Qualitative Research
     url: https://www.equator-network.org/reporting-guidelines/srqr/
     version: "2014"
-    date: TBD
-    license: TBD
+    date: "2014-09-01"
+    license: "All rights reserved"
     publisher: SRQR authors
     preferred_format: pdf
     level: archetype
@@ -170,8 +160,8 @@ items:
     title: COREQ — Consolidated Criteria for Reporting Qualitative Research
     url: https://www.equator-network.org/reporting-guidelines/coreq/
     version: "2007"
-    date: TBD
-    license: TBD
+    date: "2007-12-01"
+    license: "CC BY-NC 3.0"
     publisher: COREQ authors
     preferred_format: pdf
     level: archetype
@@ -181,8 +171,8 @@ items:
     title: MOOSE Guidelines Checklist
     url: https://www.equator-network.org/reporting-guidelines/moose/
     version: "2000"
-    date: TBD
-    license: TBD
+    date: "2000-04-19"
+    license: "All rights reserved"
     publisher: MOOSE Group
     preferred_format: pdf
     level: archetype
@@ -192,8 +182,8 @@ items:
     title: TIDieR Checklist
     url: https://www.equator-network.org/reporting-guidelines/tidier/
     version: "2014"
-    date: TBD
-    license: TBD
+    date: "2014-03-07"
+    license: "CC-BY-4.0"
     publisher: The TIDieR Group / BMJ
     preferred_format: pdf
     level: archetype
@@ -215,11 +205,11 @@ items:
     notes: "PRISMA for Ecology and Evolution."
   - id: prisma-scr
     title: PRISMA-ScR Checklist
-    url: TBD
-    version: "2019"
-    date: TBD
-    license: TBD
-    publisher: TBD
+    url: https://www.acpjournals.org/doi/10.7326/M18-0850
+    version: "2018"
+    date: "2018-10-04"
+    license: "CC-BY-NC-SA-4.0"
+    publisher: "Annals of Internal Medicine"
     preferred_format: pdf
     level: variant
     group: prisma
@@ -228,11 +218,11 @@ items:
     notes: "PRISMA for Scoping Reviews."
   - id: prisma-p
     title: PRISMA-P Checklist
-    url: TBD
+    url: https://systematicreviewsjournal.biomedcentral.com/articles/10.1186/2046-4053-4-1
     version: "2015"
-    date: TBD
-    license: TBD
-    publisher: TBD
+    date: "2015-01-09"
+    license: "CC-BY-4.0"
+    publisher: "BioMed Central"
     preferred_format: pdf
     level: variant
     group: prisma
@@ -241,11 +231,11 @@ items:
     notes: "PRISMA for Protocols."
   - id: prisma-nma
     title: PRISMA-NMA Checklist
-    url: TBD
+    url: https://www.acpjournals.org/doi/10.7326/M14-2355
     version: "2015"
-    date: TBD
-    license: TBD
-    publisher: TBD
+    date: "2015-06-02"
+    license: "CC-BY-NC-SA-4.0"
+    publisher: "Annals of Internal Medicine"
     preferred_format: pdf
     level: variant
     group: prisma
@@ -266,37 +256,37 @@ items:
     notes: "SPIRIT for Artificial Intelligence."
   - id: ace
     title: "ACE Checklist"
-    url: TBD
-    version: TBD
-    date: TBD
-    license: TBD
-    publisher: TBD
-    preferred_format: docx
+    url: "https://www.mcmasterforum.org/docs/default-source/product-documents/ace-tool/ace-tool-english.pdf"
+    version: "2021"
+    date: "2021-03-11"
+    license: "CC-BY-NC-SA-4.0"
+    publisher: "McMaster Health Forum"
+    preferred_format: pdf
     level: variant
     group: consort
     variant_of: consort-2010
     status: mapped
     notes: "Appraisal of Clinical Evidence."
   - id: conserve
-    title: "CONSERVE Checklist"
-    url: TBD
-    version: TBD
-    date: TBD
-    license: TBD
-    publisher: TBD
-    preferred_format: docx
+    title: "CONSERVE 2021 Statement"
+    url: "https://www.acpjournals.org/doi/10.7326/M20-6622"
+    version: "2021"
+    date: "2021-06-21"
+    license: "CC-BY-NC-ND-4.0"
+    publisher: "JAMA"
+    preferred_format: pdf
     level: archetype
     group: conserve
     status: mapped
     notes: "Guideline for Reporting Trials of CONSERVEative Interventions."
   - id: consort-abstracts
     title: "CONSORT for Abstracts"
-    url: TBD
-    version: TBD
-    date: TBD
-    license: TBD
-    publisher: TBD
-    preferred_format: doc
+    url: "https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.0050020"
+    version: "2008"
+    date: "2008-01-22"
+    license: "CC-BY-4.0"
+    publisher: "PLOS Medicine"
+    preferred_format: pdf
     level: variant
     group: consort
     variant_of: consort-2010
@@ -304,12 +294,12 @@ items:
     notes: "CONSORT extension for abstracts."
   - id: consort-cluster
     title: "CONSORT for Cluster Trials"
-    url: TBD
+    url: "https://www.bmj.com/content/345/bmj.e5661"
     version: "2012"
-    date: TBD
-    license: TBD
-    publisher: TBD
-    preferred_format: docx
+    date: "2012-09-04"
+    license: "CC-BY-4.0"
+    publisher: "BMJ"
+    preferred_format: pdf
     level: variant
     group: consort
     variant_of: consort-2010
@@ -317,12 +307,12 @@ items:
     notes: "CONSORT extension for cluster trials."
   - id: consort-dose-finding
     title: "CONSORT for Dose-finding Trials"
-    url: TBD
-    version: TBD
-    date: TBD
-    license: TBD
-    publisher: TBD
-    preferred_format: docx
+    url: "https://www.bmj.com/content/383/bmj-2023-076387"
+    version: "2023"
+    date: "2023-10-20"
+    license: "CC-BY-4.0"
+    publisher: "BMJ"
+    preferred_format: pdf
     level: variant
     group: consort
     variant_of: consort-2010
@@ -330,11 +320,11 @@ items:
     notes: "CONSORT extension for dose-finding and early-phase trials."
   - id: consort-n-of-1
     title: "CONSORT for N-of-1 Trials"
-    url: TBD
+    url: https://www.bmj.com/content/350/bmj.h1738
     version: "2015"
-    date: TBD
-    license: TBD
-    publisher: TBD
+    date: "2015-05-14"
+    license: "All rights reserved"
+    publisher: "BMJ"
     preferred_format: docx
     level: variant
     group: consort
@@ -343,12 +333,12 @@ items:
     notes: "CONSORT extension for N-of-1 trials."
   - id: consort-non-inferiority
     title: "CONSORT for Non-inferiority Trials"
-    url: TBD
+    url: https://jamanetwork.com/journals/jama/fullarticle/200807
     version: "2006"
-    date: TBD
-    license: TBD
-    publisher: TBD
-    preferred_format: doc
+    date: "2006-03-08"
+    license: "All rights reserved"
+    publisher: "American Medical Association"
+    preferred_format: docx
     level: variant
     group: consort
     variant_of: consort-2010
@@ -356,12 +346,12 @@ items:
     notes: "CONSORT extension for non-inferiority and equivalence trials."
   - id: consort-pilot
     title: "CONSORT for Pilot Trials"
-    url: TBD
-    version: TBD
-    date: TBD
-    license: TBD
-    publisher: TBD
-    preferred_format: doc
+    url: https://www.bmj.com/content/355/bmj.i5239
+    version: "2016"
+    date: "2016-10-24"
+    license: "CC-BY-4.0"
+    publisher: "BMJ"
+    preferred_format: docx
     level: variant
     group: consort
     variant_of: consort-2010
@@ -369,11 +359,11 @@ items:
     notes: "CONSORT extension for pilot and feasibility trials."
   - id: consort-pragmatic
     title: "CONSORT for Pragmatic Trials"
-    url: TBD
-    version: TBD
-    date: TBD
-    license: TBD
-    publisher: TBD
+    url: https://www.equator-network.org/reporting-guidelines/consort-pragmatic/
+    version: "2008"
+    date: "2008-01-01"
+    license: "All rights reserved"
+    publisher: "BMJ"
     preferred_format: docx
     level: variant
     group: consort
@@ -382,11 +372,11 @@ items:
     notes: "CONSORT extension for pragmatic trials."
   - id: consort-within-person
     title: "CONSORT for Within-person Trials"
-    url: TBD
-    version: TBD
-    date: TBD
-    license: TBD
-    publisher: TBD
+    url: https://www.bmj.com/content/357/bmj.j2835
+    version: "2017"
+    date: "2017-06-29"
+    license: "CC-BY-4.0"
+    publisher: "BMJ"
     preferred_format: docx
     level: variant
     group: consort
@@ -395,11 +385,11 @@ items:
     notes: "CONSORT extension for within person trials."
   - id: consort-npt
     title: "CONSORT for Non-pharmacological Treatment Trials"
-    url: TBD
+    url: https://www.equator-network.org/reporting-guidelines/consort-non-pharmacological/
     version: "2017"
-    date: TBD
-    license: TBD
-    publisher: TBD
+    date: "2017-06-21"
+    license: "CC-BY-4.0"
+    publisher: "BMJ"
     preferred_format: docx
     level: variant
     group: consort
@@ -408,11 +398,11 @@ items:
     notes: "CONSORT extension for non-pharmacological treatment trials."
   - id: consort-equity
     title: "CONSORT for Equity"
-    url: TBD
+    url: https://www.bmj.com/content/359/bmj.j5085
     version: "2017"
-    date: TBD
-    license: TBD
-    publisher: TBD
+    date: "2017-11-23"
+    license: "CC-BY-4.0"
+    publisher: "BMJ"
     preferred_format: docx
     level: variant
     group: consort
@@ -421,11 +411,11 @@ items:
     notes: "CONSORT extension for equity."
   - id: consort-harms
     title: "CONSORT for Harms"
-    url: TBD
+    url: https://www.equator-network.org/reporting-guidelines/consort-harms/
     version: "2022"
-    date: TBD
-    license: TBD
-    publisher: TBD
+    date: "2022-01-01"
+    license: "CC-BY-4.0"
+    publisher: "BMJ"
     preferred_format: docx
     level: variant
     group: consort
@@ -434,11 +424,11 @@ items:
     notes: "CONSORT extension for harms."
   - id: consort-spi
     title: "CONSORT for Social and Psychological Interventions"
-    url: TBD
+    url: https://trialsjournal.biomedcentral.com/articles/10.1186/s13063-018-2735-z
     version: "2018"
-    date: TBD
-    license: TBD
-    publisher: TBD
+    date: "2018-07-31"
+    license: "CC-BY-4.0"
+    publisher: "BioMed Central"
     preferred_format: docx
     level: variant
     group: consort
@@ -447,11 +437,11 @@ items:
     notes: "CONSORT extension for social and psychological interventions."
   - id: consort-stepped-wedge
     title: "CONSORT for Stepped-wedge Cluster Trials"
-    url: TBD
-    version: TBD
-    date: TBD
-    license: TBD
-    publisher: TBD
+    url: https://trialsjournal.biomedcentral.com/articles/10.1186/s13063-018-3116-3
+    version: "2019"
+    date: "2019-01-18"
+    license: "CC-BY-4.0"
+    publisher: "BioMed Central"
     preferred_format: pdf
     level: variant
     group: consort
@@ -460,11 +450,11 @@ items:
     notes: "CONSORT extension for stepped-wedge cluster randomized trials."
   - id: spirit-dose-finding
     title: "SPIRIT for Dose-finding Trials"
-    url: TBD
-    version: TBD
-    date: TBD
-    license: TBD
-    publisher: TBD
+    url: https://www.bmj.com/content/383/bmj-2023-076386
+    version: "2023"
+    date: "2023-10-20"
+    license: "CC-BY-4.0"
+    publisher: "BMJ"
     preferred_format: docx
     level: variant
     group: spirit
@@ -473,11 +463,11 @@ items:
     notes: "SPIRIT extension for dose-finding and early-phase trials."
   - id: spirit-n-of-1
     title: "SPIRIT for N-of-1 Trials"
-    url: TBD
-    version: TBD
-    date: TBD
-    license: TBD
-    publisher: TBD
+    url: https://www.equator-network.org/reporting-guidelines/spirit-extension-n-of-1-trials-spent-2019/
+    version: "2019"
+    date: "2019-01-01"
+    license: "CC-BY-4.0"
+    publisher: "BMJ"
     preferred_format: pdf
     level: variant
     group: spirit
@@ -486,11 +476,11 @@ items:
     notes: "SPIRIT extension for N-of-1 trials."
   - id: prisma-a
     title: PRISMA for Abstracts Checklist
-    url: TBD
-    version: TBD
-    date: TBD
-    license: TBD
-    publisher: TBD
+    url: https://www.bmj.com/content/372/bmj.n14
+    version: "2020"
+    date: "2021-03-29"
+    license: "CC-BY-4.0"
+    publisher: "BMJ Publishing Group"
     preferred_format: pdf
     level: variant
     group: prisma
@@ -499,11 +489,11 @@ items:
     notes: "PRISMA for Abstracts."
   - id: prisma-cosmin
     title: PRISMA-COSMIN Checklist
-    url: TBD
-    version: TBD
-    date: TBD
-    license: TBD
-    publisher: TBD
+    url: https://www.jclinepi.com/article/S0895-4356(24)00131-7/fulltext
+    version: "2024"
+    date: "2024-05-02"
+    license: "CC-BY-4.0"
+    publisher: "Elsevier"
     preferred_format: pdf
     level: variant
     group: prisma
@@ -512,11 +502,11 @@ items:
     notes: "PRISMA for COnsensus-based Standards for the selection of health Measurement INstruments."
   - id: prisma-dta
     title: PRISMA-DTA Checklist
-    url: TBD
-    version: TBD
-    date: TBD
-    license: TBD
-    publisher: TBD
+    url: https://jamanetwork.com/journals/jama/fullarticle/2671642
+    version: "2018"
+    date: "2018-01-23"
+    license: "CC-BY-4.0"
+    publisher: "American Medical Association"
     preferred_format: pdf
     level: variant
     group: prisma
@@ -525,11 +515,11 @@ items:
     notes: "PRISMA for Diagnostic Test Accuracy."
   - id: prisma-equity
     title: PRISMA-Equity Checklist
-    url: TBD
-    version: TBD
-    date: TBD
-    license: TBD
-    publisher: TBD
+    url: https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1001333
+    version: "2012"
+    date: "2012-09-18"
+    license: "CC-BY-4.0"
+    publisher: "Public Library of Science"
     preferred_format: pdf
     level: variant
     group: prisma
@@ -538,11 +528,11 @@ items:
     notes: "PRISMA for Equity-focused systematic reviews."
   - id: prisma-harms
     title: PRISMA-Harms Checklist
-    url: TBD
-    version: TBD
-    date: TBD
-    license: TBD
-    publisher: TBD
+    url: https://www.bmj.com/content/352/bmj.i157
+    version: "2016"
+    date: "2016-01-20"
+    license: "CC-BY-4.0"
+    publisher: "BMJ Publishing Group"
     preferred_format: pdf
     level: variant
     group: prisma
@@ -551,11 +541,11 @@ items:
     notes: "PRISMA for Harms."
   - id: prisma-ipd
     title: PRISMA-IPD Checklist
-    url: TBD
-    version: TBD
-    date: TBD
-    license: TBD
-    publisher: TBD
+    url: https://jamanetwork.com/journals/jama/fullarticle/2279899
+    version: "2015"
+    date: "2015-04-21"
+    license: "CC-BY-4.0"
+    publisher: "American Medical Association"
     preferred_format: pdf
     level: variant
     group: prisma
@@ -564,11 +554,11 @@ items:
     notes: "PRISMA for Individual Patient Data."
   - id: prisma-lsr
     title: PRISMA-LSR Checklist
-    url: TBD
-    version: TBD
-    date: TBD
-    license: TBD
-    publisher: TBD
+    url: https://www.bmj.com/content/384/bmj-2023-075318
+    version: "2024"
+    date: "2024-01-10"
+    license: "CC-BY-4.0"
+    publisher: "BMJ Publishing Group"
     preferred_format: pdf
     level: variant
     group: prisma
@@ -577,11 +567,11 @@ items:
     notes: "PRISMA for Living Systematic Reviews."
   - id: prisma-moxibustion
     title: PRISMA for Moxibustion Checklist
-    url: TBD
-    version: TBD
-    date: TBD
-    license: TBD
-    publisher: TBD
+    url: https://systematicreviewsjournal.biomedcentral.com/articles/10.1186/s13643-020-01522-2
+    version: "2020"
+    date: "2020-11-23"
+    license: "CC-BY-4.0"
+    publisher: "BioMed Central"
     preferred_format: pdf
     level: variant
     group: prisma
@@ -590,11 +580,11 @@ items:
     notes: "PRISMA for Moxibustion."
   - id: prisma-s
     title: PRISMA-S Checklist
-    url: TBD
-    version: TBD
-    date: TBD
-    license: TBD
-    publisher: TBD
+    url: https://qualitysafety.bmj.com/content/30/10/767
+    version: "2021"
+    date: "2021-01-26"
+    license: "CC-BY-4.0"
+    publisher: "BMJ Publishing Group"
     preferred_format: pdf
     level: variant
     group: prisma
@@ -616,11 +606,11 @@ items:
     notes: "PRISMA extension for acupuncture."
   - id: prisma-chinese-herbal-medicines
     title: "PRISMA for Chinese Herbal Medicines"
-    url: TBD
-    version: TBD
-    date: TBD
-    license: TBD
-    publisher: TBD
+    url: https://www.prisma-statement.org/chm
+    version: "2020"
+    date: "2020-01-01"
+    license: "CC-BY-4.0"
+    publisher: "PRISMA Group"
     preferred_format: pdf
     level: variant
     group: prisma
@@ -632,7 +622,7 @@ items:
     url: "https://doi.org/10.1016/j.jclinepi.2017.06.016"
     version: "2017"
     date: "2017-10-01"
-    license: TBD
+    license: "CC-BY-NC-ND-4.0"
     publisher: "Elsevier"
     preferred_format: pdf
     level: variant
@@ -645,7 +635,7 @@ items:
     url: "https://doi.org/10.1001/jama.2023.22531"
     version: "2023"
     date: "2023-12-05"
-    license: TBD
+    license: "CC-BY-4.0"
     publisher: "JAMA"
     preferred_format: pdf
     level: variant
@@ -658,7 +648,7 @@ items:
     url: "https://doi.org/10.1001/jama.2012.206153"
     version: "2013"
     date: "2013-02-27"
-    license: TBD
+    license: "CC-BY-4.0"
     publisher: "JAMA"
     preferred_format: pdf
     level: variant
@@ -684,7 +674,7 @@ items:
     url: "https://doi.org/10.1001/jama.2022.21022"
     version: "2022"
     date: "2022-12-13"
-    license: TBD
+    license: "CC-BY-4.0"
     publisher: "JAMA"
     preferred_format: pdf
     level: variant
@@ -723,7 +713,7 @@ items:
     url: "https://doi.org/10.7326/M16-2677"
     version: "2017"
     date: "2017-08-15"
-    license: TBD
+    license: "CC-BY-4.0"
     publisher: "Annals of Internal Medicine"
     preferred_format: pdf
     level: variant

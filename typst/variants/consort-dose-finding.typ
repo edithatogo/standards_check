@@ -1,12 +1,5 @@
 = CONSORT for Dose-finding Trials Checklist
 <consort-for-dose-finding-trials-checklist>
-#quote(block: true)[
-Scope: Preferred Reporting Items for early phase dose-finding trials.
-
-Reference: See `source/variants/consort-dose-finding.yml` for canonical
-link and provenance.
-]
-
 == Instructions
 <instructions>
 - Use the boxes to confirm each reporting item.

@@ -1,13 +1,5 @@
 = PRISMA-ScR Checklist
 <prisma-scr-checklist>
-#quote(block: true)[
-Scope: Preferred Reporting Items for Systematic Reviews and
-Meta-Analyses extension for Scoping Reviews.
-
-Reference: See `source/variants/prisma-scr.yml` for canonical link and
-provenance.
-]
-
 == Instructions
 <instructions>
 - Use the boxes to confirm each reporting item.
