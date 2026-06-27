@@ -6,10 +6,15 @@ const ITERATIONS = 1000;
 
 async function setupMockDir() {
     const mockDir = await fs.mkdtemp(path.join(os.tmpdir(), 'benchmark-'));
-    for (let i = 0; i < 10000; i++) {
-        await fs.writeFile(path.join(mockDir, `file${i}.md`), 'content');
+    try {
+        for (let i = 0; i < 10000; i++) {
+            await fs.writeFile(path.join(mockDir, `file${i}.md`), 'content');
+        }
+        await fs.writeFile(path.join(mockDir, `targetChecklist.md`), 'target content');
+    } catch (error) {
+        await fs.rm(mockDir, { recursive: true, force: true }).catch(() => {});
+        throw new Error(`Failed to setup benchmark directory: ${error.message}`);
     }
-    await fs.writeFile(path.join(mockDir, `targetChecklist.md`), 'target content');
     return mockDir;
 }
 
