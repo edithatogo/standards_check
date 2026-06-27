@@ -23,8 +23,9 @@ def test_validate_url_request_exception(mock_head, mock_sleep):
     assert mock_head.call_count == MAX_RETRIES
     mock_head.assert_called_with(url, allow_redirects=True, timeout=10)
 
-    # Assert time.sleep was called MAX_RETRIES - 1 times
+    # Assert time.sleep was called MAX_RETRIES - 1 times with the correct delay
     assert mock_sleep.call_count == MAX_RETRIES - 1
+    mock_sleep.assert_called_with(RETRY_DELAY)
 
     # Assert result is the expected error dictionary
     assert result is not None
