@@ -75,12 +75,15 @@ app.get('/api/checklists/:id', async (req, res) => {
     try {
         const checklistId = req.params.id;
         const findChecklist = async (dir) => {
-            const files = await fs.readdir(dir);
-            const foundFile = files.find(file => path.basename(file, '.md') === checklistId);
-            if (foundFile) {
-                return path.join(dir, foundFile);
+            // Prevent directory traversal attacks
+            const safeChecklistId = path.basename(checklistId);
+            const targetPath = path.join(dir, `${safeChecklistId}.md`);
+            try {
+                await fs.access(targetPath);
+                return targetPath;
+            } catch (error) {
+                return null;
             }
-            return null;
         };
 
         const archetypesPath = path.join(checklistsDir, 'archetypes');
