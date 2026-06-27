@@ -11,3 +11,6 @@ PyYAML
 beautifulsoup4
 google-search-results
 jsonschema
+pytest
+pytest-mock
+pdfplumber
