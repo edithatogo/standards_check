@@ -32,8 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 500);
   }
 
-  window.addEventListener('beforeunload', () => {
-    if (saveStateTimeout) {
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden' && saveStateTimeout) {
       clearTimeout(saveStateTimeout);
       saveState(); // Ensure last state is saved
       saveStateTimeout = null;
