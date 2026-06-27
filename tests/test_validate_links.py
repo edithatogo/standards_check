@@ -5,7 +5,7 @@ from unittest.mock import patch, MagicMock
 
 # Add scripts directory to path to import the module
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from scripts.validate_links import validate_url, MAX_RETRIES
+from scripts.validate_links import validate_url, MAX_RETRIES, RETRY_DELAY
 
 @patch('scripts.validate_links.time.sleep')
 @patch('scripts.validate_links.requests.head')
