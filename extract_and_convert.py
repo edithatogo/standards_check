@@ -1,6 +1,5 @@
 import docx
 import os
-import sys
 import re
 
 def extract_text_from_docx(file_path):
