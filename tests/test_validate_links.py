@@ -52,8 +52,9 @@ def test_validate_url_success_after_retries(mock_head, mock_sleep):
     # Assert requests.head was called 2 times
     assert mock_head.call_count == 2
 
-    # Assert time.sleep was called 1 time
+    # Assert time.sleep was called 1 time with the correct delay
     assert mock_sleep.call_count == 1
+    mock_sleep.assert_called_with(RETRY_DELAY)
 
     # Assert result is None (success)
     assert result is None
