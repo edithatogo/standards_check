@@ -49,17 +49,17 @@ app.get('/api/checklists', async (req, res) => {
 
     const readChecklistsFromDir = async (dir, type) => {
       const files = await fs.readdir(dir);
-      await Promise.all(
+      const checklists = await Promise.all(
         files.map(async (file) => {
-          if (path.extname(file) === '.md') {
-            const filePath = path.join(dir, file);
-            const content = await fs.readFile(filePath, 'utf-8');
-            const checklistId = path.basename(file, '.md');
-            const jsonData = parseMarkdown(content, checklistId);
-            checklistData.push({ ...jsonData, type });
-          }
+          if (path.extname(file) !== '.md') return null;
+          const filePath = path.join(dir, file);
+          const content = await fs.readFile(filePath, 'utf-8');
+          const checklistId = path.basename(file, '.md');
+          const jsonData = parseMarkdown(content, checklistId);
+          return { ...jsonData, type };
         })
       );
+      checklistData.push(...checklists.filter(Boolean));
     };
 
     await readChecklistsFromDir(archetypesPath, 'archetype');
