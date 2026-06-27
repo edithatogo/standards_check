@@ -67,14 +67,18 @@ const main = async () => {
 
     const processDir = async (dir, type) => {
       const files = await fs.readdir(dir);
-      for (const file of files) {
+      const filePromises = files.map(async (file) => {
         if (path.extname(file) === '.md') {
           const checklistId = path.basename(file, '.md');
           const filePath = path.join(dir, file);
-          const content = await fs.readFile(filePath, 'utf-8');
+
+          // Read markdown and YAML concurrently
+          const [content, sourceData] = await Promise.all([
+            fs.readFile(filePath, 'utf-8'),
+            readSourceYml(checklistId, type)
+          ]);
           
           const jsonData = parseMarkdown(content, checklistId);
-          const sourceData = await readSourceYml(checklistId, type);
           
           const combinedData = { ...jsonData };
           if (sourceData) {
@@ -88,16 +92,23 @@ const main = async () => {
           await fs.writeFile(individualOutputPath, JSON.stringify(combinedData, null, 2));
           console.log(`  ✓ Generated ${path.relative(path.join(__dirname, '..'), individualOutputPath)}`);
 
-          // Add to the main list
-          allChecklists.push({
+          return {
             id: combinedData.id,
             title: combinedData.title,
             type: type,
             history: combinedData.history,
             url: `api/${checklistId}.json`
-          });
+          };
         }
-      }
+        return null;
+      });
+
+      const results = await Promise.all(filePromises);
+      const validResults = results.filter(Boolean);
+
+      // Sort to ensure deterministic output
+      validResults.sort((a, b) => a.id.localeCompare(b.id));
+      allChecklists.push(...validResults);
     };
 
     await processDir(archetypesPath, 'archetype');
