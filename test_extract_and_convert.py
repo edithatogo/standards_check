@@ -20,11 +20,11 @@ def test_convert_to_markdown_format_headers():
     assert "## Methodology Section\n\nMethods here." in result
 
 def test_convert_to_markdown_format_checklist_items():
-    text = "1. First item\na) Second item\n* Third item\n- Fourth item"
+    text = "1. First Item\na) Second item\n* Third item\n- Fourth item"
     filename = "doc.docx"
     result = convert_to_markdown_format(text, filename)
 
-    assert "- [ ] First item" in result
+    assert "- [ ] First Item" in result
     assert "- [ ] Second item" in result
     assert "- [ ] Third item" in result
     assert "- [ ] Fourth item" in result
