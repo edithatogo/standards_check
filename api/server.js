@@ -9,7 +9,12 @@ const port = 3000;
 
 const checklistsDir = path.join(__dirname, '../markdown');
 
-app.use(cors());
+const corsOptions = {
+  origin: process.env.CORS_ORIGIN || 'https://trusted-domain.com',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Helper function to parse markdown content into a structured JSON object.
