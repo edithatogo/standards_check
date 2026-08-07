@@ -9,8 +9,11 @@ const port = 3000;
 
 const checklistsDir = path.join(__dirname, '../markdown');
 
+const rawOrigin = process.env.CORS_ORIGIN || 'http://localhost:3000';
+const allowedOrigins = rawOrigin === '*' ? '*' : rawOrigin.split(',').map(o => o.trim());
+
 const corsOptions = {
-  origin: process.env.CORS_ORIGIN,
+  origin: allowedOrigins,
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
