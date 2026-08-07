@@ -9,10 +9,11 @@ def extract_text_from_docx(file_path):
         full_text.append(paragraph.text)
     return '\n'.join(full_text)
 
-if __name__ == "__main__":
+def main():
     if len(sys.argv) != 2:
         print("Usage: python extract_docx.py <file_path>")
         sys.exit(1)
+        return
     
     file_path = sys.argv[1]
     try:
@@ -21,3 +22,7 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"Error extracting text from {file_path}: {e}")
         sys.exit(1)
+        return
+
+if __name__ == "__main__":
+    main()
