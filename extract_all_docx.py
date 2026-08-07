@@ -30,18 +30,19 @@ def main():
     
     # Extract content from all DOCX files
     for docx_file in docx_files:
-        file_path = os.path.join(docx_dir, docx_file)
+        safe_filename = os.path.basename(docx_file)
+        file_path = os.path.join(docx_dir, safe_filename)
         print(f"\nExtracting content from {file_path}:")
         content = extract_text_from_docx(file_path)
         
         if content:
             # Create a temp markdown file name by replacing .docx with -temp.md
-            temp_file_name = docx_file.replace(".docx", "-temp.md")
+            temp_file_name = safe_filename.replace(".docx", "-temp.md")
             with open(temp_file_name, "w") as f:
                 f.write(content)
             print(f"Content extracted and saved to {temp_file_name}")
         else:
-            print(f"Failed to extract content from {docx_file}")
+            print(f"Failed to extract content from {safe_filename}")
 
 if __name__ == "__main__":
     main()
