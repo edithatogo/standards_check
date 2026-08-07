@@ -1,0 +1,9 @@
+🎯 **What:** The testing gap addressed
+The `translate_text` function in `scripts/translate_checklist.py` was untested. The function interacts with complex `MarianMTModel` and `MarianTokenizer` classes from Hugging Face Transformers.
+
+📊 **Coverage:** What scenarios are now tested
+1. Handled empty and whitespace-only lists appropriately (ensures early exit and returns `""` without calling model methods).
+2. Proper interaction with the tokenizer and model generation steps for standard strings. Includes exact mocking to verify the padding arguments when tokenizing strings, verifying `**tokenizer(...)` kwargs passed to `model.generate()`, and the proper iteration decoding mechanism with `skip_special_tokens=True`.
+
+✨ **Result:** The improvement in test coverage
+Tests can safely run without a network requirement by injecting MagicMocks into `translate_text()`. It isolates external integrations, making unit testing deterministic and fast, completely safeguarding future refactoring within translation logic.
