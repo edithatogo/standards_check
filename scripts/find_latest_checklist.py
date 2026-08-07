@@ -78,7 +78,7 @@ def analyze_results(results, group):
             score += 10
             
         # Year detection
-        years = year_pattern.findall(title + snippet)
+        years = year_pattern.findall(title + ' ' + snippet)
         if years:
             # Give more weight to more recent years
             latest_year = max([int(y) for y in years])
