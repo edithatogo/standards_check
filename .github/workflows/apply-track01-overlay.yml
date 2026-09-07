@@ -66,6 +66,202 @@ jobs:
           tar --extract --gzip --file /tmp/track01-overlay.tar.gz --directory .
           rm -rf scripts/__pycache__
 
+      - name: Apply strict-lint corrections found by the first compiler pass
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+
+          def replace(path: str, old: str, new: str) -> None:
+              file = Path(path)
+              text = file.read_text(encoding="utf-8")
+              if old not in text:
+                  raise SystemExit(f"expected source fragment not found in {path}")
+              file.write_text(text.replace(old, new), encoding="utf-8")
+
+          canonical = "crates/standardflow-core/src/canonical.rs"
+          replace(canonical, "/// Error produced while creating StandardFlow canonical JSON.", "/// Error produced while creating `StandardFlow` canonical JSON.")
+          replace(canonical, "/// Floating-point values are excluded from canonical StandardFlow contracts.", "/// Floating-point values are excluded from canonical `StandardFlow` contracts.")
+          replace(canonical, "/// Serializes a value using the StandardFlow canonical JSON profile.", "/// Serializes a value using the `StandardFlow` canonical JSON profile.")
+          replace(
+              canonical,
+              '''    let digest = Sha256::digest(bytes);
+              let mut output = String::with_capacity(digest.len() * 2);
+              const HEX: &[u8; 16] = b"0123456789abcdef";
+              for byte in digest {
+                  output.push(char::from(HEX[usize::from(byte >> 4)]));
+                  output.push(char::from(HEX[usize::from(byte & 0x0f)]));
+              }
+              output
+          }
+          ''',
+              '''    let digest = Sha256::digest(bytes);
+              let mut output = String::with_capacity(digest.len() * 2);
+              for byte in digest {
+                  output.push(hex_digit(byte >> 4));
+                  output.push(hex_digit(byte & 0x0f));
+              }
+              output
+          }
+
+          const fn hex_digit(nibble: u8) -> char {
+              match nibble {
+                  0 => '0',
+                  1 => '1',
+                  2 => '2',
+                  3 => '3',
+                  4 => '4',
+                  5 => '5',
+                  6 => '6',
+                  7 => '7',
+                  8 => '8',
+                  9 => '9',
+                  10 => 'a',
+                  11 => 'b',
+                  12 => 'c',
+                  13 => 'd',
+                  14 => 'e',
+                  15 => 'f',
+                  _ => '?',
+              }
+          }
+          ''',
+          )
+
+          evidence = "crates/standardflow-core/src/evidence.rs"
+          replace(evidence, "//! Evidence and authority types shared across StandardFlow boundaries.", "//! Evidence and authority types shared across `StandardFlow` boundaries.")
+
+          lock = "crates/standardflow-core/src/lock.rs"
+          replace(lock, "use std::fs::{self, File, OpenOptions};", "use std::fs::{self, OpenOptions};")
+          replace(
+              lock,
+              '''fn manifest_digest(files: &[LockedFile]) -> String {
+              let mut digest = Sha256::new();
+              for file in files {
+                  digest.update(file.path.as_bytes());
+                  digest.update([0]);
+                  digest.update(file.sha256.as_bytes());
+                  digest.update([0]);
+                  digest.update(file.bytes.to_string().as_bytes());
+                  digest.update([b'\\n']);
+              }
+              let bytes = digest.finalize();
+              let mut output = String::with_capacity(bytes.len() * 2);
+              const HEX: &[u8; 16] = b"0123456789abcdef";
+              for byte in bytes {
+                  output.push(char::from(HEX[usize::from(byte >> 4)]));
+                  output.push(char::from(HEX[usize::from(byte & 0x0f)]));
+              }
+              output
+          }
+          ''',
+              '''fn manifest_digest(files: &[LockedFile]) -> String {
+              let mut digest = Sha256::new();
+              for file in files {
+                  digest.update(file.path.as_bytes());
+                  digest.update(b"\\0");
+                  digest.update(file.sha256.as_bytes());
+                  digest.update(b"\\0");
+                  digest.update(file.bytes.to_string().as_bytes());
+                  digest.update(b"\\n");
+              }
+              sha256_hex(&digest.finalize())
+          }
+          ''',
+          )
+
+          pack = "crates/standardflow-core/src/pack.rs"
+          replace(
+              pack,
+              '''        if let Some(number) = requirement.display_number.as_deref() {
+                      if let Some(previous) = display_numbers.insert(number, index) {
+                          report.push(Diagnostic::warning(
+                              "SF-REQ-009",
+                              format!("{path}/display_number"),
+                              format!("display number duplicates requirement index {previous}"),
+                          ));
+                      }
+                  }
+          ''',
+              '''        if let Some(number) = requirement.display_number.as_deref()
+                      && let Some(previous) = display_numbers.insert(number, index)
+                  {
+                      report.push(Diagnostic::warning(
+                          "SF-REQ-009",
+                          format!("{path}/display_number"),
+                          format!("display number duplicates requirement index {previous}"),
+                      ));
+                  }
+          ''',
+          )
+          replace(
+              pack,
+              '''fn is_iso_date(value: &str) -> bool {
+              let bytes = value.as_bytes();
+              if bytes.len() != 10 || bytes[4] != b'-' || bytes[7] != b'-' {
+                  return false;
+              }
+              let Some(year) = parse_decimal(&bytes[0..4]) else {
+                  return false;
+              };
+              let Some(month) = parse_decimal(&bytes[5..7]) else {
+                  return false;
+              };
+              let Some(day) = parse_decimal(&bytes[8..10]) else {
+                  return false;
+              };
+              let max_day = match month {
+                  1 | 3 | 5 | 7 | 8 | 10 | 12 => 31,
+                  4 | 6 | 9 | 11 => 30,
+                  2 if is_leap_year(year) => 29,
+                  2 => 28,
+                  _ => return false,
+              };
+              (1..=max_day).contains(&day)
+          }
+          ''',
+              '''fn is_iso_date(value: &str) -> bool {
+              let mut parts = value.split('-');
+              let Some(year_text) = parts.next() else {
+                  return false;
+              };
+              let Some(month_text) = parts.next() else {
+                  return false;
+              };
+              let Some(day_text) = parts.next() else {
+                  return false;
+              };
+              if parts.next().is_some()
+                  || year_text.len() != 4
+                  || month_text.len() != 2
+                  || day_text.len() != 2
+              {
+                  return false;
+              }
+              let Some(year) = parse_decimal(year_text.as_bytes()) else {
+                  return false;
+              };
+              let Some(month) = parse_decimal(month_text.as_bytes()) else {
+                  return false;
+              };
+              let Some(day) = parse_decimal(day_text.as_bytes()) else {
+                  return false;
+              };
+              let max_day = match month {
+                  1 | 3 | 5 | 7 | 8 | 10 | 12 => 31,
+                  4 | 6 | 9 | 11 => 30,
+                  2 if is_leap_year(year) => 29,
+                  2 => 28,
+                  _ => return false,
+              };
+              (1..=max_day).contains(&day)
+          }
+          ''',
+          )
+          replace(pack, "fn is_leap_year(year: u32) -> bool {", "const fn is_leap_year(year: u32) -> bool {")
+          PY
+
       - name: Install Rust 1.98.1
         uses: dtolnay/rust-toolchain@4cda84d5c5c54efe2404f9d843567869ab1699d4
         with:
