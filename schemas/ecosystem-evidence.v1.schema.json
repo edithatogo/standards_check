@@ -4,17 +4,33 @@
   "title": "StandardFlow ecosystem evidence envelope",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "producer", "producer_revision", "evidence_type", "subject", "payload", "authority", "created_at"],
+  "required": [
+    "schema_version",
+    "producer",
+    "producer_revision",
+    "artifact_provenance",
+    "evidence_type",
+    "subject",
+    "payload",
+    "authority",
+    "created_at",
+    "limitations"
+  ],
   "properties": {
     "schema_version": {"const": "dev.standardflow.ecosystem-evidence.v1"},
     "producer": {"enum": ["standardflow", "searchright", "sourceright", "authentext"]},
-    "producer_revision": {"type": "string", "pattern": "^[a-f0-9]{40}$"},
+    "producer_revision": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$",
+      "description": "Exact revision of the producer logic and contract semantics. The envelope location is recorded separately in artifact_provenance."
+    },
+    "artifact_provenance": {"$ref": "#/$defs/artifactProvenance"},
     "evidence_type": {"enum": ["review_flow", "citation_verification", "text_pattern_finding", "standard_assessment", "artifact_receipt"]},
     "subject": {"type": "string", "minLength": 1},
     "payload": {"type": "object"},
     "authority": {"enum": ["advisory", "candidate_evidence", "human_verified", "system_of_record"]},
     "created_at": {"type": "string", "format": "date-time"},
-    "limitations": {"type": "array", "items": {"type": "string"}}
+    "limitations": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}
   },
   "oneOf": [
     {
@@ -45,5 +61,46 @@
         "authority": {"enum": ["advisory", "candidate_evidence", "human_verified", "system_of_record"]}
       }
     }
-  ]
+  ],
+  "$defs": {
+    "artifactProvenance": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "repository", "revision", "path", "immutable"],
+          "properties": {
+            "kind": {"const": "repository_commit"},
+            "repository": {"type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"},
+            "revision": {"type": "string", "pattern": "^[a-f0-9]{40}$"},
+            "path": {"type": "string", "minLength": 1},
+            "immutable": {"const": true}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "repository", "pull_request", "path", "immutable"],
+          "properties": {
+            "kind": {"const": "pull_request_head"},
+            "repository": {"type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"},
+            "pull_request": {"type": "integer", "minimum": 1},
+            "path": {"type": "string", "minLength": 1},
+            "immutable": {"const": false}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "uri", "sha256", "immutable"],
+          "properties": {
+            "kind": {"const": "runtime_receipt"},
+            "uri": {"type": "string", "format": "uri"},
+            "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+            "immutable": {"const": true}
+          }
+        }
+      ]
+    }
+  }
 }

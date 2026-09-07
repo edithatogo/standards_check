@@ -54,7 +54,9 @@ impl RequirementId {
     /// alphanumeric character, or contains other non-portable characters.
     pub fn parse(value: &str) -> Result<Self, IdentifierError> {
         let mut bytes = value.bytes();
-        let valid = bytes.next().is_some_and(|first| first.is_ascii_alphanumeric())
+        let valid = bytes
+            .next()
+            .is_some_and(|first| first.is_ascii_alphanumeric())
             && bytes.all(|byte| {
                 byte.is_ascii_alphanumeric() || matches!(byte, b'.' | b'_' | b':' | b'-')
             });

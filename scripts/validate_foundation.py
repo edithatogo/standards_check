@@ -2,7 +2,8 @@
 """Network-free validation for the initial StandardFlow contracts and context."""
 from __future__ import annotations
 
-from datetime import date
+from copy import deepcopy
+from datetime import date, datetime
 import json
 from pathlib import Path
 import sys
@@ -24,6 +25,7 @@ REQUIRED = (
     "schemas/artifact-recipe.v1.schema.json",
     "schemas/ecosystem-evidence.v1.schema.json",
     "contracts/examples/minimal-standard-pack.v1.json",
+    "contracts/examples/ecosystem-evidence-review-flow.v1.json",
 )
 
 
@@ -42,6 +44,21 @@ def load_json(path: Path) -> dict[str, Any]:
     return value
 
 
+def first_validation_error(
+    validator: Draft202012Validator,
+    instance: dict[str, Any],
+) -> str | None:
+    errors = sorted(
+        validator.iter_errors(instance),
+        key=lambda error: "/".join(str(part) for part in error.absolute_path),
+    )
+    if not errors:
+        return None
+    error = errors[0]
+    location = "/".join(str(part) for part in error.absolute_path) or "<root>"
+    return f"{location}: {error.message}"
+
+
 FORMAT_CHECKER = FormatChecker()
 
 
@@ -50,6 +67,14 @@ def is_canonical_date(value: object) -> bool:
     if not isinstance(value, str):
         return True
     return date.fromisoformat(value).isoformat() == value
+
+
+@FORMAT_CHECKER.checks("date-time", raises=(TypeError, ValueError))
+def is_offset_datetime(value: object) -> bool:
+    if not isinstance(value, str):
+        return True
+    parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    return parsed.tzinfo is not None
 
 
 @FORMAT_CHECKER.checks("uri")
@@ -82,14 +107,9 @@ pack_validator = Draft202012Validator(
     schemas["standard-pack.v1.schema.json"],
     format_checker=FORMAT_CHECKER,
 )
-pack_errors = sorted(
-    pack_validator.iter_errors(pack),
-    key=lambda error: "/".join(str(part) for part in error.absolute_path),
-)
-if pack_errors:
-    error = pack_errors[0]
-    location = "/".join(str(part) for part in error.absolute_path) or "<root>"
-    fail(f"{pack_path.relative_to(ROOT)} violates its schema at {location}: {error.message}")
+pack_error = first_validation_error(pack_validator, pack)
+if pack_error is not None:
+    fail(f"{pack_path.relative_to(ROOT)} violates its schema at {pack_error}")
 
 if pack.get("schema_version") != "dev.standardflow.standard-pack.v1":
     fail("fixture schema version mismatch")
@@ -103,6 +123,31 @@ if len(ids) != len(set(ids)):
     fail("fixture must contain unique requirement IDs")
 if pack.get("rights", {}).get("status") != "cleared":
     fail("committed fixture must be rights-cleared")
+
+evidence_path = ROOT / "contracts/examples/ecosystem-evidence-review-flow.v1.json"
+evidence = load_json(evidence_path)
+evidence_validator = Draft202012Validator(
+    schemas["ecosystem-evidence.v1.schema.json"],
+    format_checker=FORMAT_CHECKER,
+)
+evidence_error = first_validation_error(evidence_validator, evidence)
+if evidence_error is not None:
+    fail(f"{evidence_path.relative_to(ROOT)} violates its schema at {evidence_error}")
+
+invalid_authority = deepcopy(evidence)
+invalid_authority["authority"] = "advisory"
+if first_validation_error(evidence_validator, invalid_authority) is None:
+    fail("SearchRight review-flow evidence must not validate with advisory authority")
+
+invalid_type = deepcopy(evidence)
+invalid_type["evidence_type"] = "text_pattern_finding"
+if first_validation_error(evidence_validator, invalid_type) is None:
+    fail("SearchRight must not validate as a text-pattern evidence producer")
+
+missing_provenance = deepcopy(evidence)
+del missing_provenance["artifact_provenance"]
+if first_validation_error(evidence_validator, missing_provenance) is None:
+    fail("ecosystem evidence must include retrievable artifact provenance")
 
 for relative in (
     "conductor/tracks/00-platform-foundation/spec.md",
