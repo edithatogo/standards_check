@@ -1,0 +1,50 @@
+{
+  "schema_version": "dev.standardflow.track-evidence.v1",
+  "track_id": "01",
+  "claims": [
+    {
+      "claim": "Canonical pack, rights, verification, lock and CLI source surfaces exist",
+      "evidence_level": "source_verified",
+      "paths": [
+        "crates/standardflow-core/src/pack.rs",
+        "crates/standardflow-core/src/canonical.rs",
+        "crates/standardflow-core/src/lock.rs",
+        "crates/standardflow-cli/src/main.rs"
+      ]
+    },
+    {
+      "claim": "The Canonical Standard Pack runtime, synthetic fixtures and provisional PRISMA pack structure pass strict lint, tests, schema checks and deterministic lock verification on Linux, macOS and Windows",
+      "evidence_level": "fixture_proven",
+      "commit": "16238dbf3c0fe82d522c81d05d42df9d0eac1408",
+      "receipts": [
+        "https://github.com/edithatogo/standards_check/actions/runs/34164376566",
+        "https://github.com/edithatogo/standards_check/actions/runs/34164485083",
+        "https://github.com/edithatogo/standards_check/actions/runs/34164485098"
+      ],
+      "coverage": [
+        "Python Draft 2020-12 validation",
+        "rustfmt",
+        "strict Clippy with warnings denied",
+        "unit, integration, property and documentation tests",
+        "CLI validation",
+        "deterministic lock write/check round-trip",
+        "Linux, macOS and Windows execution"
+      ]
+    },
+    {
+      "claim": "Automated review findings for bounded file reads and decimal arithmetic were corrected and re-verified",
+      "evidence_level": "fixture_proven",
+      "commit": "fd5fa183c82ce1c8133bf51972482a4fd52cdb56",
+      "receipt": "https://github.com/edithatogo/standards_check/actions/runs/34164376566"
+    },
+    {
+      "claim": "The PRISMA 2020 pack has been reconciled item-by-item to the authoritative source",
+      "evidence_level": "contracted",
+      "blocked_by": [
+        "independent source-reconciliation receipt",
+        "item-level rights confirmation"
+      ],
+      "current_pack_status": "imported_unverified"
+    }
+  ]
+}
