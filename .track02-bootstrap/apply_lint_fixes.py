@@ -126,4 +126,11 @@ replace_once(
     "const fn rectangles_overlap(left: Rect, right: Rect) -> bool {",
 )
 
+cli_test = Path('crates/standardflow-cli/tests/diagram.rs')
+replace_once(
+    cli_test,
+    'use std::fs;\n',
+    '//! End-to-end CLI tests for deterministic PRISMA diagram generation.\n\nuse std::fs;\n',
+)
+
 print("Applied reviewed strict-Clippy corrections to Track 02 source")
