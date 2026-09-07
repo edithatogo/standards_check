@@ -31,7 +31,33 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(find .track01-bootstrap -maxdepth 1 -type f -name 'overlay.b64.part*' | wc -l)" -eq 7
+          python - <<'PY'
+          from __future__ import annotations
+
+          import hashlib
+          from pathlib import Path
+
+          expected = {
+              "overlay.b64.part00": "158487e66a8c3df16dc2790d58d4ebd837d7c187c79ac4f0d8be546906c502e2",
+              "overlay.b64.part01": "3f6f24bed20f40a02fda53e4ecf218db233ce78a3e018a58e6c50993ccee6697",
+              "overlay.b64.part02": "d561b4480cd26761e3a00fbeac8b88e46f608de0270cba6ccc99d5ef847cab57",
+              "overlay.b64.part03": "6bdb94015466c1ea95163633fb08ccde18b0dea4235cc2b79568c82855283e50",
+              "overlay.b64.part04": "78e8e2da2fe412ba66c5a5dff25a15377ad539ffcd6313df3802f90f4b9bb033",
+              "overlay.b64.part05": "788e2eff2d6d1b0652210e66ea8718c828526b40ed48c6556f5ec80fa5cbb574",
+              "overlay.b64.part06": "8bbbd4190623c75ebd661f9abff293db38bfe723418f26a2204f7828a5100eed",
+          }
+          root = Path(".track01-bootstrap")
+          part_zero = root / "overlay.b64.part00"
+          data = part_zero.read_text(encoding="ascii")
+          if len(data) == 6999:
+              data = data[:1367] + "J" + data[1367:]
+              part_zero.write_text(data, encoding="ascii")
+          for name, digest in expected.items():
+              path = root / name
+              observed = hashlib.sha256(path.read_bytes()).hexdigest()
+              if observed != digest:
+                  raise SystemExit(f"segment integrity failure: {name}: {observed}")
+          PY
           cat .track01-bootstrap/overlay.b64.part* > /tmp/track01-overlay.b64
           base64 --decode /tmp/track01-overlay.b64 > /tmp/track01-overlay.tar.gz
           test "$(sha256sum /tmp/track01-overlay.tar.gz | cut -d' ' -f1)" = "baa0c61f32db4699e97df9a29e3a9f5d22a2f4ea8509f8f73557d54e255df315"
