@@ -50,10 +50,12 @@ impl RequirementId {
     ///
     /// # Errors
     ///
-    /// Returns [`IdentifierError`] when the value is empty or contains non-portable characters.
+    /// Returns [`IdentifierError`] when the value is empty, does not start with an ASCII
+    /// alphanumeric character, or contains other non-portable characters.
     pub fn parse(value: &str) -> Result<Self, IdentifierError> {
-        let valid = !value.is_empty()
-            && value.bytes().all(|byte| {
+        let mut bytes = value.bytes();
+        let valid = bytes.next().is_some_and(|first| first.is_ascii_alphanumeric())
+            && bytes.all(|byte| {
                 byte.is_ascii_alphanumeric() || matches!(byte, b'.' | b'_' | b':' | b'-')
             });
         if valid {
@@ -77,7 +79,7 @@ pub struct IdentifierError;
 impl core::fmt::Display for IdentifierError {
     fn fmt(&self, formatter: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
         formatter.write_str(
-            "identifier must be non-empty and use only ASCII letters, digits, '.', '_', ':' or '-'",
+            "identifier must start with an ASCII letter or digit and contain only ASCII letters, digits, '.', '_', ':' or '-'",
         )
     }
 }
@@ -101,6 +103,8 @@ mod tests {
         if let Ok(identifier) = parsed {
             assert_eq!(identifier.as_str(), "CONSORT-AI:5.i");
         }
-        assert!(RequirementId::parse("bad path").is_err());
+        for invalid in ["", "-local", "_local", ":local", ".local", "bad path"] {
+            assert!(RequirementId::parse(invalid).is_err());
+        }
     }
 }

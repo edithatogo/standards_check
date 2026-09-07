@@ -15,5 +15,35 @@
     "authority": {"enum": ["advisory", "candidate_evidence", "human_verified", "system_of_record"]},
     "created_at": {"type": "string", "format": "date-time"},
     "limitations": {"type": "array", "items": {"type": "string"}}
-  }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "producer": {"const": "searchright"},
+        "evidence_type": {"const": "review_flow"},
+        "authority": {"const": "system_of_record"}
+      }
+    },
+    {
+      "properties": {
+        "producer": {"const": "sourceright"},
+        "evidence_type": {"const": "citation_verification"},
+        "authority": {"enum": ["advisory", "candidate_evidence", "human_verified", "system_of_record"]}
+      }
+    },
+    {
+      "properties": {
+        "producer": {"const": "authentext"},
+        "evidence_type": {"const": "text_pattern_finding"},
+        "authority": {"const": "advisory"}
+      }
+    },
+    {
+      "properties": {
+        "producer": {"const": "standardflow"},
+        "evidence_type": {"enum": ["standard_assessment", "artifact_receipt"]},
+        "authority": {"enum": ["advisory", "candidate_evidence", "human_verified", "system_of_record"]}
+      }
+    }
+  ]
 }

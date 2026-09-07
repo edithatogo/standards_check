@@ -25,6 +25,7 @@
       "normalized_requirement": "The report describes the method used.",
       "guidance": "Provide enough detail for a reviewer to understand the method.",
       "source_anchor": "fixture:line:1",
+      "rights": {"inherit_from_pack": true},
       "evidence_expectations": ["document_span"]
     }
   ]
