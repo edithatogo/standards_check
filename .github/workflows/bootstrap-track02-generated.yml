@@ -25,7 +25,7 @@ jobs:
           ref: ${{ github.ref_name }}
           persist-credentials: true
           submodules: false
-      - name: Verify and unpack the staged implementation
+      - name: Verify, unpack and patch the staged implementation
         shell: bash
         run: |
           set -euo pipefail
@@ -34,10 +34,12 @@ jobs:
           test "$(git hash-object .track02-bootstrap/overlay.b64.part02a)" = "0c3fe4140c91dd8f608bf64de8bd0095d6bc8b72"
           test "$(git hash-object .track02-bootstrap/overlay.b64.part02b)" = "84a2529b8345c163c4723b7b1663419bcf96f727"
           test "$(git hash-object .track02-bootstrap/overlay.b64.part03)" = "c37be3a8dfd127acfab0d00338cf199ba56a8e1b"
+          test "$(git hash-object .track02-bootstrap/apply_lint_fixes.py)" = "7ee7f88cc58a7ecbb1b9cac6785e427077342363"
           cat .track02-bootstrap/overlay.b64.part* | base64 --decode > /tmp/track02-overlay.tar.gz
           test "$(sha256sum /tmp/track02-overlay.tar.gz | cut -d' ' -f1)" = "c0a3a43f2b846682d55b9385c0ad87eb2fb5bcf8a15b0dc87b513d2abae354ee"
           tar -tzf /tmp/track02-overlay.tar.gz >/dev/null
           tar -xzf /tmp/track02-overlay.tar.gz -C .
+          python .track02-bootstrap/apply_lint_fixes.py
       - uses: dtolnay/rust-toolchain@4cda84d5c5c54efe2404f9d843567869ab1699d4
         with:
           toolchain: 1.98.1
