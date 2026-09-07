@@ -1,0 +1,26 @@
+{
+  "schema_version": "dev.standardflow.track-evidence.v1",
+  "track_id": "01",
+  "claims": [
+    {
+      "claim": "Canonical pack, rights, verification, lock and CLI source surfaces exist",
+      "evidence_level": "source_verified",
+      "paths": [
+        "crates/standardflow-core/src/pack.rs",
+        "crates/standardflow-core/src/canonical.rs",
+        "crates/standardflow-core/src/lock.rs",
+        "crates/standardflow-cli/src/main.rs"
+      ]
+    },
+    {
+      "claim": "The PRISMA 2020 pack has been reconciled item-by-item to the authoritative source",
+      "evidence_level": "contracted",
+      "blocked_by": ["independent source-reconciliation receipt"]
+    },
+    {
+      "claim": "The Rust runtime and reference pack are fixture proven",
+      "evidence_level": "contracted",
+      "blocked_by": ["passing stacked pull-request CI"]
+    }
+  ]
+}

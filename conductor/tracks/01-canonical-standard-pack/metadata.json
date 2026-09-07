@@ -1,0 +1,12 @@
+{
+  "schema_version": "dev.standardflow.conductor-track.v1",
+  "track_id": "01",
+  "slug": "01-canonical-standard-pack",
+  "title": "Canonical Standard Pack runtime",
+  "status": "in_progress",
+  "implementation_state": "source_implemented",
+  "evidence_level": "source_verified",
+  "dependencies": ["00-platform-foundation"],
+  "stacked_on_branch": "feat/standardflow-platform-foundation",
+  "updated": "2026-09-08"
+}

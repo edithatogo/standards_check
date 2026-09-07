@@ -1,22 +1,50 @@
 [workspace]
 resolver = "3"
-members = ["crates/standardflow-core"]
+members = [
+  "crates/standardflow-core",
+  "crates/standardflow-cli",
+]
+default-members = [
+  "crates/standardflow-core",
+  "crates/standardflow-cli",
+]
 
 [workspace.package]
-version = "0.0.0"
+version = "0.1.0-alpha.1"
 edition = "2024"
 rust-version = "1.98"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/edithatogo/standards_check"
 
+[workspace.dependencies]
+proptest = "1.8"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+sha2 = "0.11"
+thiserror = "2.0"
+
 [workspace.lints.rust]
 unsafe_code = "forbid"
 missing_docs = "warn"
+unreachable_pub = "warn"
+unused_lifetimes = "deny"
+unused_qualifications = "warn"
 
 [workspace.lints.clippy]
 all = { level = "deny", priority = -1 }
 pedantic = { level = "deny", priority = -1 }
 nursery = { level = "deny", priority = -1 }
-unwrap_used = "deny"
+allow_attributes_without_reason = "deny"
+dbg_macro = "deny"
 expect_used = "deny"
+indexing_slicing = "deny"
 panic = "deny"
+print_stderr = "deny"
+print_stdout = "deny"
+todo = "deny"
+unimplemented = "deny"
+unwrap_used = "deny"
+module_name_repetitions = "allow"
+struct_field_names = "allow"
+missing_errors_doc = "allow"
+missing_panics_doc = "allow"
