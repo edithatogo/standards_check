@@ -51,16 +51,22 @@ jobs:
           cache-dependency-path: requirements/standardflow-foundation.txt
       - name: Install exact validation dependencies
         run: python -m pip install --disable-pip-version-check --no-deps --requirement requirements/standardflow-foundation.txt
-      - name: Compile, test and generate deterministic artefacts
+      - name: Validate source contracts before generation
+        run: python scripts/validate_artifacts.py --allow-missing-generated
+      - name: Generate dependency lock
+        run: cargo generate-lockfile
+      - name: Format Rust workspace
+        run: cargo fmt --all
+      - name: Run strict Clippy
+        run: cargo clippy --workspace --all-targets --all-features --locked -- -D warnings
+      - name: Run all Rust targets
+        run: cargo test --workspace --all-targets --all-features --locked
+      - name: Run Rust documentation tests
+        run: cargo test --workspace --doc --locked
+      - name: Render deterministic PRISMA artefacts
         shell: bash
         run: |
           set -euo pipefail
-          python scripts/validate_artifacts.py --allow-missing-generated
-          cargo generate-lockfile
-          cargo fmt --all
-          cargo clippy --workspace --all-targets --all-features --locked -- -D warnings
-          cargo test --workspace --all-targets --all-features --locked
-          cargo test --workspace --doc --locked
           mkdir -p examples/generated/prisma-2020
           for input in contracts/examples/prisma-flow/*.json; do
             stem="$(basename "$input" .json)"
@@ -68,7 +74,8 @@ jobs:
             cargo run --locked -p standardflow-cli -- diagram prisma "$input" --format text --output "examples/generated/prisma-2020/${stem}.txt"
             cargo run --locked -p standardflow-cli -- diagram prisma "$input" --format scene-json --output "examples/generated/prisma-2020/${stem}.scene.json"
           done
-          python scripts/validate_artifacts.py
+      - name: Validate generated PRISMA artefacts
+        run: python scripts/validate_artifacts.py
       - name: Commit the implementation and generated state
         shell: bash
         run: |
