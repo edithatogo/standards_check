@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.standardflow.dev/standard-pack.v1.schema.json",
+  "title": "StandardFlow Canonical Standard Pack",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "pack_id", "version", "kind", "title", "authority", "rights", "requirements"],
+  "properties": {
+    "schema_version": {"const": "dev.standardflow.standard-pack.v1"},
+    "pack_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._/-]*$"},
+    "version": {"type": "string", "minLength": 1},
+    "kind": {"enum": ["reporting", "protocol", "conduct", "appraisal", "risk_of_bias", "regulatory", "metadata", "profile"]},
+    "title": {"type": "string", "minLength": 1},
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["publisher", "source_url", "retrieved_at", "source_sha256"],
+      "properties": {
+        "publisher": {"type": "string", "minLength": 1},
+        "source_url": {"type": "string", "format": "uri"},
+        "retrieved_at": {"type": "string", "format": "date"},
+        "source_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      }
+    },
+    "rights": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "redistribution"],
+      "properties": {
+        "status": {"enum": ["cleared", "link_only", "paraphrase_only", "review_required"]},
+        "spdx": {"type": ["string", "null"]},
+        "redistribution": {"type": "string", "minLength": 1}
+      }
+    },
+    "relationships": {"type": "array", "items": {"$ref": "#/$defs/relationship"}},
+    "requirements": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/requirement"}}
+  },
+  "$defs": {
+    "relationship": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["predicate", "target"],
+      "properties": {
+        "predicate": {"enum": ["edition_of", "supersedes", "extends", "use_with", "profile_of", "incompatible_with", "equivalent_to", "partially_maps_to", "translation_of"]},
+        "target": {"type": "string", "minLength": 1}
+      }
+    },
+    "requirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "section", "normalized_requirement", "source_anchor", "evidence_expectations"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"},
+        "display_number": {"type": ["string", "null"]},
+        "section": {"type": "string", "minLength": 1},
+        "verbatim_text": {"type": ["string", "null"]},
+        "normalized_requirement": {"type": "string", "minLength": 1},
+        "guidance": {"type": ["string", "null"]},
+        "source_anchor": {"type": "string", "minLength": 1},
+        "evidence_expectations": {"type": "array", "items": {"type": "string", "minLength": 1}}
+      }
+    }
+  }
+}

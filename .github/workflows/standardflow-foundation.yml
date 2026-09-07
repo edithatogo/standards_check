@@ -1,0 +1,63 @@
+name: StandardFlow foundation
+
+on:
+  pull_request:
+    paths:
+      - "Cargo.*"
+      - "rust-toolchain.toml"
+      - "crates/**"
+      - "schemas/**"
+      - "contracts/**"
+      - "conductor/**"
+      - "docs/architecture/**"
+      - "scripts/validate_foundation.py"
+      - ".github/workflows/standardflow-foundation.yml"
+  push:
+    branches: [main]
+    paths:
+      - "Cargo.*"
+      - "rust-toolchain.toml"
+      - "crates/**"
+      - "schemas/**"
+      - "contracts/**"
+      - "conductor/**"
+      - "docs/architecture/**"
+      - "scripts/validate_foundation.py"
+      - ".github/workflows/standardflow-foundation.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: standardflow-foundation-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          submodules: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.14"
+      - run: python scripts/validate_foundation.py
+
+  rust:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          submodules: false
+      - uses: dtolnay/rust-toolchain@4cda84d5c5c54efe2404f9d843567869ab1699d4
+        with:
+          toolchain: 1.98.1
+          components: rustfmt,clippy
+      - run: cargo fmt --all -- --check
+      - run: cargo clippy --workspace --all-targets --all-features --locked -- -D warnings
+      - run: cargo test --workspace --all-targets --all-features --locked
