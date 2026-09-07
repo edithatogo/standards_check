@@ -1,35 +1,22 @@
 #!/usr/bin/env python3
-"""Apply the reviewed corrections from the first strict-Clippy compiler receipt."""
+"""Apply reviewed strict-Clippy corrections from GitHub compiler receipts."""
 from pathlib import Path
 
-ROOT = Path("crates/standardflow-artifacts/src")
-
+root = Path('crates/standardflow-artifacts/src')
 
 def replace_once(path: Path, old: str, new: str) -> None:
-    text = path.read_text(encoding="utf-8")
+    text = path.read_text(encoding='utf-8')
     count = text.count(old)
     if count != 1:
-        raise SystemExit(
-            f"{path}: expected exactly one match, found {count}: {old!r}"
-        )
-    path.write_text(text.replace(old, new, 1), encoding="utf-8")
+        raise SystemExit(f'{path}: expected exactly one match, found {count}: {old!r}')
+    path.write_text(text.replace(old, new, 1), encoding='utf-8')
 
-
-prisma = ROOT / "prisma.rs"
-replace_once(
-    prisma,
-    "    fn recipe_json(self) -> &'static str {",
-    "    const fn recipe_json(self) -> &'static str {",
-)
+prisma = root / 'prisma.rs'
+replace_once(prisma, "    fn recipe_json(self) -> &'static str {", "    const fn recipe_json(self) -> &'static str {")
 replace_once(
     prisma,
     "    fn bindings(&self) -> Result<BTreeMap<String, String>, PrismaError> {",
-    "    #[allow(\n"
-    "        clippy::too_many_lines,\n"
-    "        reason = \"bindings intentionally enumerate the complete versioned "
-    "PRISMA contract in one auditable mapping\"\n"
-    "    )]\n"
-    "    fn bindings(&self) -> Result<BTreeMap<String, String>, PrismaError> {",
+    "    #[allow(\n        clippy::too_many_lines,\n        reason = \"bindings intentionally enumerate the complete versioned PRISMA contract in one auditable mapping\"\n    )]\n    fn bindings(&self) -> Result<BTreeMap<String, String>, PrismaError> {",
 )
 replace_once(
     prisma,
@@ -59,22 +46,12 @@ replace_once(
 ''',
 )
 
-recipe = ROOT / "recipe.rs"
-replace_once(
-    recipe,
-    "use std::collections::{BTreeMap, BTreeSet};\n",
-    "use std::collections::{BTreeMap, BTreeSet};\nuse std::fmt::Write as _;\n",
-)
+recipe = root / 'recipe.rs'
+replace_once(recipe, 'use std::collections::{BTreeMap, BTreeSet};\n', 'use std::collections::{BTreeMap, BTreeSet};\nuse std::fmt::Write as _;\n')
 replace_once(
     recipe,
     "    #[must_use]\n    pub fn validate(&self) -> ValidationReport {",
-    "    #[must_use]\n"
-    "    #[allow(\n"
-    "        clippy::too_many_lines,\n"
-    "        reason = \"validation is a linear catalogue of stable recipe diagnostics "
-    "kept together for auditability\"\n"
-    "    )]\n"
-    "    pub fn validate(&self) -> ValidationReport {",
+    "    #[must_use]\n    #[allow(\n        clippy::too_many_lines,\n        reason = \"validation is a linear catalogue of stable recipe diagnostics kept together for auditability\"\n    )]\n    pub fn validate(&self) -> ValidationReport {",
 )
 replace_once(
     recipe,
@@ -105,11 +82,7 @@ replace_once(
     Formatting,
 ''',
 )
-replace_once(
-    recipe,
-    "fn nodes_overlap(left: &RecipeNode, right: &RecipeNode) -> bool {",
-    "const fn nodes_overlap(left: &RecipeNode, right: &RecipeNode) -> bool {",
-)
+replace_once(recipe, "fn nodes_overlap(left: &RecipeNode, right: &RecipeNode) -> bool {", "const fn nodes_overlap(left: &RecipeNode, right: &RecipeNode) -> bool {")
 replace_once(
     recipe,
     '        text.push_str(&format!("\\n{}. {}", index + 1, node.label));',
@@ -117,16 +90,11 @@ replace_once(
             .map_err(|_| RecipeError::Formatting)?;''',
 )
 
-render = ROOT / "render.rs"
+render = root / 'render.rs'
 replace_once(
     render,
     "pub fn render_svg(scene: &Scene) -> Result<String, RenderError> {",
-    "#[allow(\n"
-    "    clippy::too_many_lines,\n"
-    "    reason = \"the standalone SVG writer is a linear, deterministic "
-    "serialization pass with no hidden renderer state\"\n"
-    ")]\n"
-    "pub fn render_svg(scene: &Scene) -> Result<String, RenderError> {",
+    "#[allow(\n    clippy::too_many_lines,\n    reason = \"the standalone SVG writer is a linear, deterministic serialization pass with no hidden renderer state\"\n)]\npub fn render_svg(scene: &Scene) -> Result<String, RenderError> {",
 )
 replace_once(
     render,
@@ -138,27 +106,24 @@ replace_once(
 }''',
 )
 
-scene = ROOT / "scene.rs"
-replace_once(
-    scene,
-    "    fn right(self) -> Option<u32> {",
-    "    const fn right(self) -> Option<u32> {",
-)
-replace_once(
-    scene,
-    "    fn bottom(self) -> Option<u32> {",
-    "    const fn bottom(self) -> Option<u32> {",
-)
+scene = root / 'scene.rs'
+replace_once(scene, "    fn right(self) -> Option<u32> {", "    const fn right(self) -> Option<u32> {")
+replace_once(scene, "    fn bottom(self) -> Option<u32> {", "    const fn bottom(self) -> Option<u32> {")
 replace_once(
     scene,
     "    #[must_use]\n    pub fn validate(&self) -> ValidationReport {",
-    "    #[must_use]\n"
-    "    #[allow(\n"
-    "        clippy::too_many_lines,\n"
-    "        reason = \"scene validation keeps the complete stable diagnostic "
-    "catalogue together for auditability\"\n"
-    "    )]\n"
-    "    pub fn validate(&self) -> ValidationReport {",
+    "    #[must_use]\n    #[allow(\n        clippy::too_many_lines,\n        reason = \"scene validation keeps the complete stable diagnostic catalogue together for auditability\"\n    )]\n    pub fn validate(&self) -> ValidationReport {",
 )
 
-print("Applied strict-Clippy corrections to Track 02 source")
+replace_once(
+    render,
+    "fn midpoint(left: u32, right: u32) -> u32 {",
+    "const fn midpoint(left: u32, right: u32) -> u32 {",
+)
+replace_once(
+    scene,
+    "fn rectangles_overlap(left: Rect, right: Rect) -> bool {",
+    "const fn rectangles_overlap(left: Rect, right: Rect) -> bool {",
+)
+
+print("Applied reviewed strict-Clippy corrections to Track 02 source")
