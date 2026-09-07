@@ -1,7 +1,7 @@
 //! Deterministic, symlink-safe Standard Pack lockfiles.
 
 use std::fs::{self, OpenOptions};
-use std::io::Write;
+use std::io::{Read, Write};
 use std::path::{Component, Path, PathBuf};
 use std::sync::atomic::{AtomicU64, Ordering};
 
@@ -286,33 +286,12 @@ fn collect_files(
                 limits.max_files
             )));
         }
-        if metadata.len() > limits.max_file_bytes {
-            return Err(LockError::Limit(format!(
-                "{portable} exceeds the per-file limit of {} bytes",
-                limits.max_file_bytes
-            )));
-        }
-        let next_total = total_bytes
-            .checked_add(metadata.len())
-            .ok_or_else(|| LockError::Limit(String::from("aggregate byte count overflow")))?;
-        if next_total > limits.max_total_bytes {
-            return Err(LockError::Limit(format!(
-                "aggregate bytes exceed {}",
-                limits.max_total_bytes
-            )));
-        }
-        let bytes = fs::read(&path).map_err(|source| LockError::Io {
-            operation: "read pack file",
-            path: path.display().to_string(),
-            source,
-        })?;
+        let bytes = read_bounded_file(&path, &portable, limits, *total_bytes)?;
         let observed_bytes = u64::try_from(bytes.len())
             .map_err(|_| LockError::Limit(String::from("file length does not fit u64")))?;
-        if observed_bytes != metadata.len() {
-            return Err(LockError::Limit(format!(
-                "{portable} changed while the lock was being generated"
-            )));
-        }
+        let next_total = (*total_bytes)
+            .checked_add(observed_bytes)
+            .ok_or_else(|| LockError::Limit(String::from("aggregate byte count overflow")))?;
         *total_bytes = next_total;
         files.push(LockedFile {
             path: portable,
@@ -321,6 +300,98 @@ fn collect_files(
         });
     }
     Ok(())
+}
+
+fn read_bounded_file(
+    path: &Path,
+    portable: &str,
+    limits: LockLimits,
+    total_bytes: u64,
+) -> Result<Vec<u8>, LockError> {
+    let file = OpenOptions::new()
+        .read(true)
+        .open(path)
+        .map_err(|source| LockError::Io {
+            operation: "open pack file",
+            path: path.display().to_string(),
+            source,
+        })?;
+    let before = file.metadata().map_err(|source| LockError::Io {
+        operation: "inspect opened pack file",
+        path: path.display().to_string(),
+        source,
+    })?;
+    if !before.is_file() {
+        return Err(LockError::NonPortablePath(path.display().to_string()));
+    }
+    if before.len() > limits.max_file_bytes {
+        return Err(LockError::Limit(format!(
+            "{portable} exceeds the per-file limit of {} bytes",
+            limits.max_file_bytes
+        )));
+    }
+    let remaining_total = limits
+        .max_total_bytes
+        .checked_sub(total_bytes)
+        .ok_or_else(|| LockError::Limit(String::from("aggregate bytes already exceed limit")))?;
+    if before.len() > remaining_total {
+        return Err(LockError::Limit(format!(
+            "aggregate bytes exceed {}",
+            limits.max_total_bytes
+        )));
+    }
+    let read_limit = limits
+        .max_file_bytes
+        .min(remaining_total)
+        .checked_add(1)
+        .ok_or_else(|| LockError::Limit(String::from("bounded read limit overflow")))?;
+    let mut reader = file.take(read_limit);
+    let mut bytes = Vec::new();
+    reader
+        .read_to_end(&mut bytes)
+        .map_err(|source| LockError::Io {
+            operation: "read pack file through bounded reader",
+            path: path.display().to_string(),
+            source,
+        })?;
+    let observed_bytes = u64::try_from(bytes.len())
+        .map_err(|_| LockError::Limit(String::from("file length does not fit u64")))?;
+    if observed_bytes > limits.max_file_bytes {
+        return Err(LockError::Limit(format!(
+            "{portable} exceeds the per-file limit of {} bytes",
+            limits.max_file_bytes
+        )));
+    }
+    if observed_bytes > remaining_total {
+        return Err(LockError::Limit(format!(
+            "aggregate bytes exceed {}",
+            limits.max_total_bytes
+        )));
+    }
+    let file = reader.into_inner();
+    let after = file.metadata().map_err(|source| LockError::Io {
+        operation: "reinspect opened pack file",
+        path: path.display().to_string(),
+        source,
+    })?;
+    let path_after = fs::symlink_metadata(path).map_err(|source| LockError::Io {
+        operation: "reinspect pack path",
+        path: path.display().to_string(),
+        source,
+    })?;
+    if path_after.file_type().is_symlink() {
+        return Err(LockError::Symlink(path.display().to_string()));
+    }
+    if !path_after.is_file()
+        || before.len() != observed_bytes
+        || after.len() != observed_bytes
+        || path_after.len() != observed_bytes
+    {
+        return Err(LockError::Limit(format!(
+            "{portable} changed while the lock was being generated"
+        )));
+    }
+    Ok(bytes)
 }
 
 fn portable_path(path: &Path) -> Result<String, LockError> {
@@ -410,7 +481,10 @@ mod tests {
     use std::path::{Path, PathBuf};
     use std::sync::atomic::{AtomicU64, Ordering};
 
-    use super::{LockError, LockLimits, build_pack_lock, verify_pack_lock, write_pack_lock};
+    use super::{
+        LockError, LockLimits, build_pack_lock, read_bounded_file, verify_pack_lock,
+        write_pack_lock,
+    };
 
     static TEST_COUNTER: AtomicU64 = AtomicU64::new(0);
 
@@ -467,6 +541,25 @@ mod tests {
         assert!(matches!(
             verify_pack_lock(directory.path(), LockLimits::default()),
             Err(LockError::Mismatch { .. })
+        ));
+        Ok(())
+    }
+
+    #[test]
+    fn bounded_reader_rejects_oversized_files() -> Result<(), Box<dyn std::error::Error>> {
+        let directory = TestDirectory::create()?;
+        let path = directory.path().join("payload.bin");
+        fs::write(&path, [0_u8; 32])?;
+        let limits = LockLimits {
+            max_files: 1,
+            max_file_bytes: 8,
+            max_total_bytes: 16,
+            max_depth: 1,
+        };
+        let result = read_bounded_file(&path, "payload.bin", limits, 0);
+        assert!(matches!(
+            result,
+            Err(LockError::Limit(message)) if message.contains("per-file limit")
         ));
         Ok(())
     }

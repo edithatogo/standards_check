@@ -826,13 +826,23 @@ fn parse_decimal(bytes: &[u8]) -> Option<u32> {
         if !byte.is_ascii_digit() {
             return None;
         }
-        value = value * 10 + u32::from(byte - b'0');
+        value = value.checked_mul(10)?.checked_add(u32::from(byte - b'0'))?;
     }
     Some(value)
 }
 
 const fn is_leap_year(year: u32) -> bool {
     year.is_multiple_of(4) && (!year.is_multiple_of(100) || year.is_multiple_of(400))
+}
+
+#[cfg(test)]
+mod decimal_tests {
+    use super::parse_decimal;
+
+    #[test]
+    fn decimal_parser_rejects_overflow() {
+        assert_eq!(parse_decimal(b"999999999999999999999"), None);
+    }
 }
 
 impl fmt::Display for ValidationReport {

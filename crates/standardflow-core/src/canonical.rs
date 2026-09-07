@@ -149,6 +149,16 @@ mod tests {
     }
 
     #[test]
+    fn diagnostic_paths_use_rfc_6901_escape_order() {
+        let value = json!({"~/": 0.25});
+        let result = canonical_json(&value);
+        assert!(matches!(
+            result,
+            Err(CanonicalError::FloatingPoint { path }) if path == "/~0~1"
+        ));
+    }
+
+    #[test]
     fn sha256_matches_a_known_vector() {
         assert_eq!(
             sha256_hex(b"abc"),
