@@ -40,7 +40,8 @@ jobs:
           expected = {
               "overlay.b64.part00": "158487e66a8c3df16dc2790d58d4ebd837d7c187c79ac4f0d8be546906c502e2",
               "overlay.b64.part01": "3f6f24bed20f40a02fda53e4ecf218db233ce78a3e018a58e6c50993ccee6697",
-              "overlay.b64.part02": "d561b4480cd26761e3a00fbeac8b88e46f608de0270cba6ccc99d5ef847cab57",
+              "overlay.b64.part02a": "fa75a03f7ed1e3cc94bd9cf69762627edf32ca5471117cc1d40e682aced1a37d",
+              "overlay.b64.part02b": "4f3a838f47fdc75b76202cf7fcac430ff0f7cf90338591c4bd8bcadada3241dd",
               "overlay.b64.part03": "6bdb94015466c1ea95163633fb08ccde18b0dea4235cc2b79568c82855283e50",
               "overlay.b64.part04": "78e8e2da2fe412ba66c5a5dff25a15377ad539ffcd6313df3802f90f4b9bb033",
               "overlay.b64.part05": "788e2eff2d6d1b0652210e66ea8718c828526b40ed48c6556f5ec80fa5cbb574",
