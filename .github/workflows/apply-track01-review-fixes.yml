@@ -1,0 +1,72 @@
+name: Apply Track 01 review fixes
+
+on:
+  push:
+    branches:
+      - feat/canonical-standard-pack-v1
+    paths:
+      - ".github/workflows/apply-track01-review-fixes.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apply-track01-review-fixes
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout implementation branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.ref_name }}
+          persist-credentials: true
+          submodules: false
+
+      - name: Apply reviewed security corrections
+        run: python .track01-review/apply_fixes.py
+
+      - name: Install Rust 1.98.1
+        uses: dtolnay/rust-toolchain@4cda84d5c5c54efe2404f9d843567869ab1699d4
+        with:
+          toolchain: 1.98.1
+          components: rustfmt,clippy
+
+      - name: Install Python 3.14
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.14"
+          cache: pip
+          cache-dependency-path: requirements/standardflow-foundation.txt
+
+      - name: Install exact validation dependencies
+        run: python -m pip install --disable-pip-version-check --no-deps --requirement requirements/standardflow-foundation.txt
+
+      - name: Verify the corrected implementation
+        shell: bash
+        run: |
+          set -euo pipefail
+          cargo fmt --all
+          python scripts/validate_foundation.py
+          python scripts/validate_packs.py
+          cargo fmt --all -- --check
+          cargo clippy --workspace --all-targets --all-features --locked -- -D warnings
+          cargo test --workspace --all-targets --all-features --locked
+          cargo test --workspace --doc --locked
+          cargo run --locked -p standardflow-cli -- pack lock packs/org.prisma/prisma/2020 --check
+
+      - name: Commit the verified review fixes
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf .track01-review target
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --check
+          git commit -m "fix(pack): harden bounded reads and decimal parsing"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
