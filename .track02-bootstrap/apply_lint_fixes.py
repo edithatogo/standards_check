@@ -133,4 +133,16 @@ replace_once(
     '//! End-to-end CLI tests for deterministic PRISMA diagram generation.\n\nuse std::fs;\n',
 )
 
+artifact_test = Path('crates/standardflow-artifacts/tests/prisma.rs')
+replace_once(
+    artifact_test,
+    'use proptest::prelude::*;\n',
+    '//! Contract, arithmetic, rendering and accessibility tests for the four PRISMA 2020 variants.\n\nuse proptest::prelude::*;\n',
+)
+replace_once(
+    artifact_test,
+    "fn fixtures() -> [&'static str; 4] {",
+    "const fn fixtures() -> [&'static str; 4] {",
+)
+
 print("Applied reviewed strict-Clippy corrections to Track 02 source")
