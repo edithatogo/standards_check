@@ -65,12 +65,12 @@ jobs:
           cargo test --workspace --doc --locked
           cargo run --locked -p standardflow-cli -- pack lock packs/org.prisma/prisma/2020 --check
 
-      - name: Commit the verified implementation
+      - name: Commit verified source and generated locks
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf .track01-bootstrap
-          rm .github/workflows/apply-track01-overlay.yml
+          rm -rf target .track01-bootstrap
+          rm -f .github/workflows/standardflow-pack.yml
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
