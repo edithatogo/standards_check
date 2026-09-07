@@ -66,7 +66,7 @@ impl RequirementId {
 
     /// Returns the stable identifier as text.
     #[must_use]
-    pub const fn as_str(&self) -> &str {
+    pub fn as_str(&self) -> &str {
         &self.0
     }
 }
