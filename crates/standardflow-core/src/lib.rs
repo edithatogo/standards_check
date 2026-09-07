@@ -1,4 +1,4 @@
-//! Domain boundaries for the future StandardFlow execution core.
+//! Domain boundaries for the future `StandardFlow` execution core.
 #![forbid(unsafe_code)]
 
 /// Evidence levels used to prevent implementation and release overclaims.
@@ -51,7 +51,6 @@ impl RequirementId {
     /// # Errors
     ///
     /// Returns [`IdentifierError`] when the value is empty or contains non-portable characters.
-    #[must_use]
     pub fn parse(value: &str) -> Result<Self, IdentifierError> {
         let valid = !value.is_empty()
             && value.bytes().all(|byte| {
