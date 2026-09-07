@@ -1,0 +1,81 @@
+name: Bootstrap Track 02 generated diagrams
+
+on:
+  push:
+    branches:
+      - feat/semantic-diagram-prisma-2020
+    paths:
+      - ".github/workflows/bootstrap-track02-generated.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bootstrap-track02-generated
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.ref_name }}
+          persist-credentials: true
+          submodules: false
+      - name: Verify and unpack the staged implementation
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object .track02-bootstrap/overlay.b64.part00)" = "769f3d72c949c1aee99db0234c0ae31c3e40c994"
+          test "$(git hash-object .track02-bootstrap/overlay.b64.part01)" = "d2979b454b06f7c7b9123e16a222cb0e9d2922f5"
+          test "$(git hash-object .track02-bootstrap/overlay.b64.part02a)" = "0c3fe4140c91dd8f608bf64de8bd0095d6bc8b72"
+          test "$(git hash-object .track02-bootstrap/overlay.b64.part02b)" = "84a2529b8345c163c4723b7b1663419bcf96f727"
+          test "$(git hash-object .track02-bootstrap/overlay.b64.part03)" = "c37be3a8dfd127acfab0d00338cf199ba56a8e1b"
+          cat .track02-bootstrap/overlay.b64.part* | base64 --decode > /tmp/track02-overlay.tar.gz
+          test "$(sha256sum /tmp/track02-overlay.tar.gz | cut -d' ' -f1)" = "c0a3a43f2b846682d55b9385c0ad87eb2fb5bcf8a15b0dc87b513d2abae354ee"
+          tar -tzf /tmp/track02-overlay.tar.gz >/dev/null
+          tar -xzf /tmp/track02-overlay.tar.gz -C .
+      - uses: dtolnay/rust-toolchain@4cda84d5c5c54efe2404f9d843567869ab1699d4
+        with:
+          toolchain: 1.98.1
+          components: rustfmt,clippy
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.14"
+          cache: pip
+          cache-dependency-path: requirements/standardflow-foundation.txt
+      - name: Install exact validation dependencies
+        run: python -m pip install --disable-pip-version-check --no-deps --requirement requirements/standardflow-foundation.txt
+      - name: Compile, test and generate deterministic artefacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/validate_artifacts.py --allow-missing-generated
+          cargo generate-lockfile
+          cargo fmt --all
+          cargo clippy --workspace --all-targets --all-features --locked -- -D warnings
+          cargo test --workspace --all-targets --all-features --locked
+          cargo test --workspace --doc --locked
+          mkdir -p examples/generated/prisma-2020
+          for input in contracts/examples/prisma-flow/*.json; do
+            stem="$(basename "$input" .json)"
+            cargo run --locked -p standardflow-cli -- diagram prisma "$input" --format svg --output "examples/generated/prisma-2020/${stem}.svg"
+            cargo run --locked -p standardflow-cli -- diagram prisma "$input" --format text --output "examples/generated/prisma-2020/${stem}.txt"
+            cargo run --locked -p standardflow-cli -- diagram prisma "$input" --format scene-json --output "examples/generated/prisma-2020/${stem}.scene.json"
+          done
+          python scripts/validate_artifacts.py
+      - name: Commit the implementation and generated state
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf .track02-bootstrap
+          rm .github/workflows/bootstrap-track02-generated.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --check
+          git commit -m "feat(diagrams): implement semantic PRISMA 2020 engine"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
