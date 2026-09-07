@@ -2,101 +2,125 @@ name: Build Documents
 
 on:
   push:
+    branches: [main]
     paths:
-      - 'markdown/**'
-      - 'templates/pandoc/**'
-      - 'scripts/**'
-      - 'source/**'
-      - 'pandoc.yaml'
+      - "markdown/**"
+      - "templates/pandoc/**"
+      - "scripts/**"
+      - "source/**"
+      - "pandoc.yaml"
+      - ".github/workflows/build-docs.yml"
   pull_request:
     paths:
-      - 'markdown/**'
-      - 'templates/pandoc/**'
-      - 'scripts/**'
-      - 'source/**'
-      - 'pandoc.yaml'
+      - "markdown/**"
+      - "templates/pandoc/**"
+      - "scripts/**"
+      - "source/**"
+      - "pandoc.yaml"
+      - ".github/workflows/build-docs.yml"
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
+
+concurrency:
+  group: build-documents-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   validate:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          submodules: false
       - name: Validate repo
-        run: |
-          bash scripts/validate_repo.sh
+        run: bash scripts/validate_repo.sh
 
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     needs: validate
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install Pandoc and TeX (XeLaTeX)
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          submodules: false
+      - name: Setup Pandoc
+        uses: pandoc/actions/setup@86321b6dd4675f5014c611e05088e10d4939e09e # v1
+        with:
+          version: "3.9.0.2"
+      - name: Install TeX
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc texlive-xetex texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
-
+          sudo apt-get install -y --no-install-recommends texlive-xetex texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
       - name: Setup Typst
-        uses: typst-community/setup-typst@v4
+        uses: typst-community/setup-typst@63ac138db421d586de61f7f5ac3bcef6a2e6c78c # v5.1.0
         with:
-          typst-version: 'v0.13.1'
-
+          typst-version: "0.15.1"
       - name: Build documents
-        run: |
-          bash scripts/build_pandoc.sh
-
-      - name: Upload artifacts (PDF)
-        uses: actions/upload-artifact@v4
+        run: bash scripts/build_pandoc.sh
+      - name: Upload PDF artifacts
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: pdf-artifacts
           path: pdf/
-
-      - name: Upload artifacts (LaTeX)
-        uses: actions/upload-artifact@v4
+          if-no-files-found: error
+      - name: Upload LaTeX artifacts
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: latex-artifacts
           path: latex/
-
-      - name: Upload artifacts (DOCX)
-        uses: actions/upload-artifact@v4
+          if-no-files-found: error
+      - name: Upload DOCX artifacts
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: docx-artifacts
           path: docx/
+          if-no-files-found: error
 
   deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    needs: build
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-      - name: Install Pandoc, TeX (XeLaTeX), and yq
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          submodules: false
+      - name: Setup Pandoc
+        uses: pandoc/actions/setup@86321b6dd4675f5014c611e05088e10d4939e09e # v1
+        with:
+          version: "3.9.0.2"
+      - name: Install TeX and yq
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc texlive-xetex texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
-          sudo snap install yq
+          sudo apt-get install -y --no-install-recommends texlive-xetex texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended yq
       - name: Setup Typst
-        uses: typst-community/setup-typst@v4
+        uses: typst-community/setup-typst@63ac138db421d586de61f7f5ac3bcef6a2e6c78c # v5.1.0
         with:
-          typst-version: 'v0.13.1'
+          typst-version: "0.15.1"
       - name: Build HTML
         run: |
           bash scripts/build_pandoc.sh
           bash scripts/generate_html_index.sh
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
         with:
           path: ./html
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4

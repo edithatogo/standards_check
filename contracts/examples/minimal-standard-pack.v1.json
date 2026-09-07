@@ -1,0 +1,32 @@
+{
+  "schema_version": "dev.standardflow.standard-pack.v1",
+  "pack_id": "example/minimal-reporting-standard",
+  "version": "0.1.0",
+  "kind": "reporting",
+  "title": "Minimal rights-clear example reporting standard",
+  "authority": {
+    "publisher": "StandardFlow fixture",
+    "source_url": "https://example.invalid/standard",
+    "retrieved_at": "2026-09-08",
+    "source_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "rights": {
+    "status": "cleared",
+    "spdx": "CC0-1.0",
+    "redistribution": "Synthetic fixture; unrestricted for testing."
+  },
+  "relationships": [],
+  "requirements": [
+    {
+      "id": "EXAMPLE-1",
+      "display_number": "1",
+      "section": "Methods",
+      "verbatim_text": "Describe the method used.",
+      "normalized_requirement": "The report describes the method used.",
+      "guidance": "Provide enough detail for a reviewer to understand the method.",
+      "source_anchor": "fixture:line:1",
+      "rights": {"inherit_from_pack": true},
+      "evidence_expectations": ["document_span"]
+    }
+  ]
+}
