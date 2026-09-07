@@ -3,10 +3,14 @@
   "track_id": "01",
   "slug": "01-canonical-standard-pack",
   "title": "Canonical Standard Pack runtime",
-  "status": "in_progress",
+  "status": "implementation_complete",
   "implementation_state": "source_implemented",
-  "evidence_level": "source_verified",
+  "evidence_level": "fixture_proven",
   "dependencies": ["00-platform-foundation"],
   "stacked_on_branch": "feat/standardflow-platform-foundation",
+  "pull_request": 60,
+  "merge_blockers": [
+    "merge foundation pull request 59 before retargeting this stacked pull request to main"
+  ],
   "updated": "2026-09-08"
 }

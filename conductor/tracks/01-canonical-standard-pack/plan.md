@@ -1,6 +1,6 @@
 # Plan: Canonical Standard Pack runtime
 
-Status: **in progress**. Implementation: **source implemented**. Evidence: **source verified** until the stacked PR CI produces compiler and fixture receipts.
+Status: **implementation complete**. Implementation: **source implemented**. Evidence: **fixture proven** for the runtime, synthetic fixtures and provisional pack structure. Authoritative PRISMA item reconciliation remains unproven and explicitly blocked.
 
 ## Phase 1: Contract and rights model
 
@@ -11,8 +11,8 @@ Status: **in progress**. Implementation: **source implemented**. Evidence: **sou
 ## Phase 2: Canonicalization and lockfiles
 
 - [x] Implement integer-only deterministic canonical JSON and SHA-256.
-- [x] Implement symlink-safe recursive pack locks with defensive limits.
-- [x] Add atomic lock writing and mutation detection.
+- [x] Implement bounded recursive pack locks with symlink rejection and mutation checks.
+- [x] Add atomic lock writing and deterministic lock verification.
 
 ## Phase 3: Reference pack and interfaces
 
@@ -23,6 +23,14 @@ Status: **in progress**. Implementation: **source implemented**. Evidence: **sou
 ## Phase 4: Evidence and review
 
 - [x] Add unit, property, lock, CLI and schema tests.
-- [ ] Generate and commit the dependency lock and PRISMA content lock in CI.
-- [ ] Obtain passing Linux lint/test, cross-platform test and pack-drift receipts.
-- [ ] Review automated PR findings and append any required correction tasks.
+- [x] Generate and commit the dependency lock and PRISMA content lock in CI.
+- [x] Obtain passing Linux lint/test, cross-platform test and pack-drift receipts.
+- [x] Review all automated PR findings and implement bounded-read and checked-arithmetic corrections.
+- [x] Add an RFC 6901 regression test while retaining the correct tilde-before-slash escape order.
+- [x] Remove all one-use transfer and review workflows from the branch.
+
+## Remaining dependency gate
+
+- [ ] Merge foundation pull request 59, then retarget pull request 60 from `feat/standardflow-platform-foundation` to `main` and re-run the same checks.
+
+This dependency gate affects merge sequencing, not the recorded implementation or fixture evidence. Item-by-item reconciliation of the provisional PRISMA pack is owned by a later source-verification task and is not silently promoted here.
