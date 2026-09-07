@@ -9,6 +9,9 @@ npm-debug.log
 .env.test.local
 .env.production.local
 
+# Rust
+target/
+
 # macOS
 .DS_Store
 .coverage
