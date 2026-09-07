@@ -28,7 +28,11 @@ jobs:
           submodules: false
 
       - name: Verify, extract, and patch the staged implementation
-        run: python .track01-bootstrap/apply_overlay.py
+        shell: bash
+        run: |
+          set -euo pipefail
+          python .track01-bootstrap/apply_overlay.py
+          python .track01-bootstrap/final_fix.py
 
       - name: Install Rust 1.98.1
         uses: dtolnay/rust-toolchain@4cda84d5c5c54efe2404f9d843567869ab1699d4
