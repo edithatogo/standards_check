@@ -101,4 +101,16 @@ limits_path.write_text(
     encoding="utf-8",
 )
 
-print("Refined hardening patch: bounded labels remain complete and resource budgets are public")
+cli = "crates/standardflow-cli/src/main.rs"
+replace_once(
+    cli,
+    '''    let observed = match u64::try_from(bytes.len()) {
+        Ok(value) => value,
+        Err(_) => u64::MAX,
+    };
+''',
+    '''    let observed = u64::try_from(bytes.len()).unwrap_or(u64::MAX);
+''',
+)
+
+print("Refined hardening patch: bounded labels remain complete, resource budgets are public and bounded reads satisfy strict Clippy")
