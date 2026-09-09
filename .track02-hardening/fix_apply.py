@@ -80,13 +80,25 @@ replace_once(
     "#[allow(\n    clippy::manual_range_contains,\n    reason = \"explicit scalar boundaries remain const and mirror the XML 1.0 production\"\n)]\nconst fn is_xml_10_char(value: char) -> bool {",
 )
 
-# The limits module is shared by sibling implementation modules but is not part of the
-# public crate API. Making the module crate-visible lets its `pub(crate)` items remain
-# reachable without triggering either `unreachable_pub` or `redundant_pub_crate`.
+# Resource budgets are part of the caller-facing contract: clients should be able to
+# reject oversized work before serialising or submitting it. Expose the documented
+# catalogue deliberately rather than fighting `unreachable_pub` and
+# `redundant_pub_crate` with conflicting restricted visibilities.
 replace_once(
     "crates/standardflow-artifacts/src/lib.rs",
     "mod limits;\n",
-    "pub(crate) mod limits;\n",
+    "pub mod limits;\n",
+)
+limits_path = ROOT / limits
+limits_text = limits_path.read_text(encoding="utf-8")
+visibility_count = limits_text.count("pub(crate) ")
+if visibility_count != 18:
+    raise SystemExit(
+        f"{limits}: expected 18 visibility markers, found {visibility_count}"
+    )
+limits_path.write_text(
+    limits_text.replace("pub(crate) ", "pub "),
+    encoding="utf-8",
 )
 
-print("Refined hardening patch: bounded labels remain complete and shared limits are crate-visible")
+print("Refined hardening patch: bounded labels remain complete and resource budgets are public")
