@@ -97,7 +97,7 @@ pub fn render_svg(scene: &Scene) -> Result<String, RenderError> {
     let mut output = String::new();
     writeln!(
         output,
-        r#"<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {} {}" width="{}" height="{}" role="img" aria-labelledby="standardflow-title standardflow-description">"#,
+        r#"<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {} {}" width="{}" height="{}" role="img" aria-labelledby="standardflow-title" aria-describedby="standardflow-description">"#,
         scene.canvas.width,
         scene.canvas.height,
         scene.canvas.width,
@@ -113,7 +113,7 @@ pub fn render_svg(scene: &Scene) -> Result<String, RenderError> {
     writeln!(
         output,
         "  <desc id=\"standardflow-description\">{}</desc>",
-        escape_xml(&scene.description)
+        escape_xml(&scene.text_equivalent)
     )
     .map_err(|_| RenderError::Formatting)?;
     writeln!(
