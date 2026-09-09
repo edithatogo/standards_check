@@ -17,6 +17,11 @@ def replace_once(path: str, old: str, new: str) -> None:
 recipe = "crates/standardflow-artifacts/src/recipe.rs"
 replace_once(
     recipe,
+    "use std::fmt::Write as _;\n",
+    "",
+)
+replace_once(
+    recipe,
     "            let lines = wrap_label(&label, self.layout, width);",
     "            let lines = wrap_label(&label, self.layout, width)?;",
 )
@@ -56,10 +61,10 @@ replace_once(
             .as_deref()
             .map_or(String::new(), |value| format!("; label: {value}"));
 ''',
-    '''        let label = match edge.label.as_deref() {
-            Some(value) => format!("; label: {value}"),
-            None => String::new(),
-        };
+    '''        let label = edge
+            .label
+            .as_deref()
+            .map_or_else(String::new, |value| format!("; label: {value}"));
 ''',
 )
 replace_once(
@@ -74,5 +79,16 @@ replace_once(
     "const fn is_xml_10_char(value: char) -> bool {",
     "#[allow(\n    clippy::manual_range_contains,\n    reason = \"explicit scalar boundaries remain const and mirror the XML 1.0 production\"\n)]\nconst fn is_xml_10_char(value: char) -> bool {",
 )
+limits_path = ROOT / limits
+limits_text = limits_path.read_text(encoding="utf-8")
+visibility_count = limits_text.count("pub(crate) ")
+if visibility_count != 18:
+    raise SystemExit(
+        f"{limits}: expected 18 private-module visibility markers, found {visibility_count}"
+    )
+limits_path.write_text(
+    limits_text.replace("pub(crate) ", "pub "),
+    encoding="utf-8",
+)
 
-print("Refined hardening patch: complete labels fail closed and escapes remain valid")
+print("Refined hardening patch: bounded labels remain complete and strict Clippy hygiene is preserved")
