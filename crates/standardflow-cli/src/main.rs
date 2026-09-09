@@ -1,4 +1,4 @@
-//! Command-line access to Canonical Standard Pack operations.
+//! Command-line access to Canonical Standard Pack and artefact operations.
 #![forbid(unsafe_code)]
 
 use std::env;
@@ -9,11 +9,13 @@ use std::path::{Path, PathBuf};
 use std::process::ExitCode;
 
 use serde::Serialize;
+use standardflow_artifacts::{PrismaError, RenderFormat, parse_prisma_flow, render};
 use standardflow_core::{
-    LockLimits, PackError, ValidationReport, load_pack, verify_pack_lock, write_pack_lock,
+    LockLimits, PackError, ValidationReport, load_pack, sha256_hex, verify_pack_lock,
+    write_pack_lock,
 };
 
-const USAGE: &str = "Usage:\n  standardflow [--json] pack validate <pack.json>\n  standardflow [--json] pack canonicalize <pack.json> <output.json|->\n  standardflow [--json] pack digest <pack.json>\n  standardflow [--json] pack lock <pack-directory> --write\n  standardflow [--json] pack lock <pack-directory> --check\n";
+const USAGE: &str = "Usage:\n  standardflow [--json] pack validate <pack.json>\n  standardflow [--json] pack canonicalize <pack.json> <output.json|->\n  standardflow [--json] pack digest <pack.json>\n  standardflow [--json] pack lock <pack-directory> --write\n  standardflow [--json] pack lock <pack-directory> --check\n  standardflow [--json] diagram prisma <input.json> --format <svg|text|scene-json> --output <path|->\n";
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 enum OutputMode {
@@ -50,13 +52,24 @@ impl CliError {
 
     fn from_pack(error: PackError) -> Self {
         match error {
-            PackError::Validation(report) => Self {
-                exit_code: 1,
-                kind: "validation",
-                message: report.to_string(),
-                validation: Some(report),
-            },
+            PackError::Validation(report) => Self::validation("pack validation", report),
             other => Self::operation("pack", other.to_string()),
+        }
+    }
+
+    fn from_prisma(error: PrismaError) -> Self {
+        match error {
+            PrismaError::Validation(report) => Self::validation("PRISMA validation", report),
+            other => Self::operation("diagram", other.to_string()),
+        }
+    }
+
+    fn validation(context: &'static str, report: ValidationReport) -> Self {
+        Self {
+            exit_code: 1,
+            kind: "validation",
+            message: format!("{context} failed with {} error(s)", report.error_count()),
+            validation: Some(report),
         }
     }
 }
@@ -106,6 +119,15 @@ struct LockSummary<'a> {
     mode: &'static str,
 }
 
+#[derive(Serialize)]
+struct DiagramSummary {
+    recipe_id: String,
+    format: &'static str,
+    output: String,
+    bytes: usize,
+    sha256: String,
+}
+
 fn main() -> ExitCode {
     let arguments = env::args_os().skip(1).collect::<Vec<_>>();
     let (mode, arguments) = extract_output_mode(arguments);
@@ -131,9 +153,14 @@ fn run(mode: OutputMode, arguments: &[OsString]) -> Result<(), CliError> {
     let Some(command) = arguments.first() else {
         return Err(CliError::usage(USAGE));
     };
-    if command != "pack" {
-        return Err(CliError::usage(format!("unknown command\n\n{USAGE}")));
+    match command.to_str() {
+        Some("pack") => pack_command(mode, arguments),
+        Some("diagram") => diagram_command(mode, arguments),
+        _ => Err(CliError::usage(format!("unknown command\n\n{USAGE}"))),
     }
+}
+
+fn pack_command(mode: OutputMode, arguments: &[OsString]) -> Result<(), CliError> {
     let Some(operation) = arguments.get(1) else {
         return Err(CliError::usage(USAGE));
     };
@@ -146,6 +173,55 @@ fn run(mode: OutputMode, arguments: &[OsString]) -> Result<(), CliError> {
             "unknown pack operation\n\n{USAGE}"
         ))),
     }
+}
+
+fn diagram_command(mode: OutputMode, arguments: &[OsString]) -> Result<(), CliError> {
+    ensure_argument_count(arguments, 7)?;
+    if argument(arguments, 1)? != OsStr::new("prisma")
+        || argument(arguments, 3)? != OsStr::new("--format")
+        || argument(arguments, 5)? != OsStr::new("--output")
+    {
+        return Err(CliError::usage(USAGE));
+    }
+    let input_path = PathBuf::from(argument(arguments, 2)?);
+    let format_text = argument(arguments, 4)?
+        .to_str()
+        .ok_or_else(|| CliError::usage("diagram format must be UTF-8"))?;
+    let format = RenderFormat::parse(format_text)
+        .ok_or_else(|| CliError::usage("diagram format must be svg, text or scene-json"))?;
+    let output_argument = argument(arguments, 6)?;
+    if output_argument == OsStr::new("-") && mode == OutputMode::Json {
+        return Err(CliError::usage(
+            "--json cannot be combined with diagram output to stdout",
+        ));
+    }
+    let input = fs::read(&input_path).map_err(|error| {
+        CliError::operation(
+            "io",
+            format!("cannot read {}: {error}", input_path.display()),
+        )
+    })?;
+    let flow = parse_prisma_flow(&input).map_err(CliError::from_prisma)?;
+    let scene = flow.build_scene().map_err(CliError::from_prisma)?;
+    let bytes =
+        render(&scene, format).map_err(|error| CliError::operation("render", error.to_string()))?;
+    if output_argument == OsStr::new("-") {
+        io::stdout()
+            .lock()
+            .write_all(&bytes)
+            .map_err(|error| CliError::operation("io", error.to_string()))?;
+        return Ok(());
+    }
+    let output_path = PathBuf::from(output_argument);
+    write_atomic(&output_path, &bytes)?;
+    let result = DiagramSummary {
+        recipe_id: scene.recipe_id,
+        format: format.as_str(),
+        output: output_path.display().to_string(),
+        bytes: bytes.len(),
+        sha256: sha256_hex(&bytes),
+    };
+    emit_success(mode, "diagram.prisma", &result)
 }
 
 fn validate_command(mode: OutputMode, arguments: &[OsString]) -> Result<(), CliError> {
