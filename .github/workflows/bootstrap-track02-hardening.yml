@@ -1,6 +1,6 @@
 name: Bootstrap Track 02 hardening
 
-# bootstrap-attempt: 5
+# bootstrap-attempt: 6
 on:
   push:
     branches:
