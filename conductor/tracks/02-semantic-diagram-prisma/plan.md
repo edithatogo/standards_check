@@ -30,3 +30,15 @@ Status: **in progress**. Implementation: **source implemented**. Evidence: **sou
 - [ ] Generate and commit all 12 golden outputs in the branch bootstrap workflow.
 - [ ] Obtain green strict Rust, cross-platform, schema and drift receipts.
 - [ ] Review automated PR findings and append correction tasks where required.
+
+
+## Review fixes: bounded inputs and complete non-visual flow
+
+- [x] Define shared parser, cardinality, layout and text limits.
+- [x] Mirror schema constraints in Rust and add adversarial tests.
+- [x] Separate recipe, source-standard and node-reference identifier grammars.
+- [x] Enforce version, contract-ID and optional edge-label parity.
+- [x] Reject XML-invalid content before SVG serialization.
+- [x] Include directed edge relationships in the text equivalent and SVG description.
+- [x] Add bounded CLI reads and regenerate all reference artefacts.
+- [ ] Retain an observed permanent-CI receipt for Linux, macOS and Windows.

@@ -1,6 +1,8 @@
 //! Standards-derived artefact recipes, semantic scenes and deterministic renderers.
 #![forbid(unsafe_code)]
 
+pub mod limits;
+
 pub mod prisma;
 pub mod recipe;
 pub mod render;
