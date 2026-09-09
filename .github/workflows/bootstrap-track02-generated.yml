@@ -1,5 +1,6 @@
 name: Bootstrap Track 02 generated diagrams
 
+# bootstrap-attempt: 6
 on:
   push:
     branches:
@@ -34,7 +35,7 @@ jobs:
           test "$(git hash-object .track02-bootstrap/overlay.b64.part02a)" = "0c3fe4140c91dd8f608bf64de8bd0095d6bc8b72"
           test "$(git hash-object .track02-bootstrap/overlay.b64.part02b)" = "84a2529b8345c163c4723b7b1663419bcf96f727"
           test "$(git hash-object .track02-bootstrap/overlay.b64.part03)" = "c37be3a8dfd127acfab0d00338cf199ba56a8e1b"
-          test "$(git hash-object .track02-bootstrap/apply_lint_fixes.py)" = "b76394f8f011a2f2d6d2929056fba47501b9b614"
+          test "$(git hash-object .track02-bootstrap/apply_lint_fixes.py)" = "d4569d7c2df97ec4d360c7de2ddf18d8f8a99c4f"
           cat .track02-bootstrap/overlay.b64.part* | base64 --decode > /tmp/track02-overlay.tar.gz
           test "$(sha256sum /tmp/track02-overlay.tar.gz | cut -d' ' -f1)" = "c0a3a43f2b846682d55b9385c0ad87eb2fb5bcf8a15b0dc87b513d2abae354ee"
           tar -tzf /tmp/track02-overlay.tar.gz >/dev/null
