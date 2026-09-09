@@ -1,5 +1,6 @@
 name: Bootstrap Track 02 hardening
 
+# bootstrap-attempt: 2
 on:
   push:
     branches:
@@ -26,8 +27,20 @@ jobs:
           persist-credentials: true
           submodules: false
       - name: Apply reviewed source and contract changes
+        shell: bash
         run: |
           set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('.track02-hardening/apply.py')
+          content = path.read_text(encoding='utf-8')
+          old = "    '''//! Shared resource and text-safety limits"
+          new = "    r'''//! Shared resource and text-safety limits"
+          if content.count(old) != 1:
+              raise SystemExit('expected exactly one Rust limits literal')
+          path.write_text(content.replace(old, new, 1), encoding='utf-8')
+          PY
           python .track02-hardening/apply.py
           python .track02-hardening/fix_apply.py
           rm -rf examples/generated/prisma-2020
