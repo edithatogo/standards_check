@@ -1,6 +1,6 @@
 name: Bootstrap Track 02 generated diagrams
 
-# bootstrap-attempt: 6
+# bootstrap-attempt: 7
 on:
   push:
     branches:
@@ -77,12 +77,12 @@ jobs:
           done
       - name: Validate generated PRISMA artefacts
         run: python scripts/validate_artifacts.py
-      - name: Commit the implementation and generated state
+      - name: Commit verified implementation without workflow mutations
         shell: bash
         run: |
           set -euo pipefail
           rm -rf .track02-bootstrap
-          rm .github/workflows/bootstrap-track02-generated.yml
+          rm -f .github/workflows/standardflow-diagrams.yml
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
