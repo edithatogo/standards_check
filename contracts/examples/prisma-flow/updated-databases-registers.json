@@ -1,0 +1,27 @@
+{
+  "schema_version": "dev.standardflow.prisma-flow.v1",
+  "review_id": "fixture-updated-db-registers",
+  "template": "updated_databases_registers",
+  "databases_registers": {
+    "databases": 120,
+    "registers": 30,
+    "duplicate_records_removed": 20,
+    "records_marked_ineligible_by_automation": 5,
+    "records_removed_other_reasons": 5,
+    "records_screened": 120,
+    "records_excluded": 70,
+    "reports_sought": 50,
+    "reports_not_retrieved": 5,
+    "reports_assessed": 45,
+    "reports_excluded": [
+      {"reason": "Wrong population", "reports": 10},
+      {"reason": "Wrong intervention", "reports": 8},
+      {"reason": "Wrong study design", "reports": 7}
+    ],
+    "reports_included": 20
+  },
+  "other_methods": null,
+  "previous_review": {"studies": 40, "reports": 50},
+  "new_included": {"studies": 16, "reports": 20},
+  "total_included": {"studies": 56, "reports": 70}
+}

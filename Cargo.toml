@@ -1,10 +1,12 @@
 [workspace]
 resolver = "3"
 members = [
+  "crates/standardflow-artifacts",
   "crates/standardflow-core",
   "crates/standardflow-cli",
 ]
 default-members = [
+  "crates/standardflow-artifacts",
   "crates/standardflow-core",
   "crates/standardflow-cli",
 ]

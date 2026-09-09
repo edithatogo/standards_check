@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.standardflow.dev/scene-graph.v1.schema.json",
+  "title": "StandardFlow accessible semantic scene graph",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "recipe_id",
+    "title",
+    "description",
+    "canvas",
+    "nodes",
+    "edges",
+    "reading_order",
+    "text_equivalent"
+  ],
+  "properties": {
+    "schema_version": {"const": "dev.standardflow.scene-graph.v1"},
+    "recipe_id": {"type": "string", "minLength": 1},
+    "title": {"type": "string", "minLength": 1},
+    "description": {"type": "string", "minLength": 1},
+    "canvas": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["width", "height"],
+      "properties": {
+        "width": {"type": "integer", "minimum": 1},
+        "height": {"type": "integer", "minimum": 1}
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "role", "rect", "label", "lines", "aria_label"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"},
+          "role": {"enum": ["source", "process", "exclusion", "outcome", "prior"]},
+          "rect": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["x", "y", "width", "height"],
+            "properties": {
+              "x": {"type": "integer", "minimum": 0},
+              "y": {"type": "integer", "minimum": 0},
+              "width": {"type": "integer", "minimum": 1},
+              "height": {"type": "integer", "minimum": 1}
+            }
+          },
+          "label": {"type": "string", "minLength": 1},
+          "lines": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+          "aria_label": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "from", "to", "kind", "from_anchor", "to_anchor", "label"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"},
+          "from": {"type": "string", "minLength": 1},
+          "to": {"type": "string", "minLength": 1},
+          "kind": {"enum": ["progression", "exclusion", "merge", "lineage"]},
+          "from_anchor": {"enum": ["top", "right", "bottom", "left"]},
+          "to_anchor": {"enum": ["top", "right", "bottom", "left"]},
+          "label": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "reading_order": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "text_equivalent": {"type": "string", "minLength": 1}
+  }
+}

@@ -1,26 +1,147 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://schemas.standardflow.dev/artifact-recipe.v1.schema.json",
-  "title": "StandardFlow artefact recipe",
+  "title": "StandardFlow deterministic diagram recipe",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "recipe_id", "version", "artifact_type", "inputs", "outputs", "accessibility"],
+  "required": [
+    "schema_version",
+    "recipe_id",
+    "version",
+    "artifact_type",
+    "source_standard",
+    "input_contract",
+    "title_template",
+    "description_template",
+    "layout",
+    "nodes",
+    "edges",
+    "reading_order",
+    "outputs",
+    "accessibility"
+  ],
   "properties": {
     "schema_version": {"const": "dev.standardflow.artifact-recipe.v1"},
-    "recipe_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._/-]*$"},
+    "recipe_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
     "version": {"type": "string", "minLength": 1},
-    "artifact_type": {"enum": ["checklist", "form", "flow_diagram", "timeline", "relationship_graph", "document", "research_object"]},
-    "inputs": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
-    "outputs": {"type": "array", "minItems": 1, "items": {"enum": ["json", "markdown", "html", "svg", "pdf", "png", "tiff", "docx", "typst", "latex", "text"]}},
-    "invariants": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "artifact_type": {"const": "flow_diagram"},
+    "source_standard": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]*(/[a-z0-9][a-z0-9._-]*)+$"
+    },
+    "input_contract": {"type": "string", "minLength": 1},
+    "title_template": {"type": "string", "minLength": 1},
+    "description_template": {"type": "string", "minLength": 1},
+    "layout": {"$ref": "#/$defs/layout"},
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/node"}
+    },
+    "edges": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/edge"}
+    },
+    "reading_order": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"},
+      "uniqueItems": true
+    },
+    "outputs": {
+      "type": "array",
+      "minItems": 3,
+      "items": {"enum": ["scene-json", "svg", "text"]},
+      "uniqueItems": true,
+      "allOf": [
+        {"contains": {"const": "scene-json"}},
+        {"contains": {"const": "svg"}},
+        {"contains": {"const": "text"}}
+      ]
+    },
     "accessibility": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["reading_order", "text_equivalent"],
+      "required": ["reading_order", "text_equivalent", "labelled_groups"],
       "properties": {
-        "reading_order": {"type": "boolean", "const": true},
-        "text_equivalent": {"type": "boolean", "const": true},
-        "keyboard_operable": {"type": "boolean"}
+        "reading_order": {"const": true},
+        "text_equivalent": {"const": true},
+        "labelled_groups": {"const": true}
+      }
+    }
+  },
+  "$defs": {
+    "layout": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "columns",
+        "margin",
+        "column_width",
+        "column_gap",
+        "row_gap",
+        "minimum_node_height",
+        "padding",
+        "line_height",
+        "character_width"
+      ],
+      "properties": {
+        "columns": {"type": "integer", "minimum": 1, "maximum": 12},
+        "margin": {"type": "integer", "minimum": 1, "maximum": 500},
+        "column_width": {"type": "integer", "minimum": 80, "maximum": 2000},
+        "column_gap": {"type": "integer", "minimum": 8, "maximum": 1000},
+        "row_gap": {"type": "integer", "minimum": 8, "maximum": 1000},
+        "minimum_node_height": {"type": "integer", "minimum": 40, "maximum": 2000},
+        "padding": {"type": "integer", "minimum": 4, "maximum": 200},
+        "line_height": {"type": "integer", "minimum": 10, "maximum": 100},
+        "character_width": {"type": "integer", "minimum": 1, "maximum": 40}
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "role",
+        "row",
+        "column",
+        "column_span",
+        "label_template",
+        "aria_template"
+      ],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"},
+        "role": {"enum": ["source", "process", "exclusion", "outcome", "prior"]},
+        "row": {"type": "integer", "minimum": 0, "maximum": 1000},
+        "column": {"type": "integer", "minimum": 0, "maximum": 1000},
+        "column_span": {"type": "integer", "minimum": 1, "maximum": 12},
+        "label_template": {"type": "string", "minLength": 1},
+        "aria_template": {"type": "string", "minLength": 1}
+      }
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "from",
+        "to",
+        "kind",
+        "from_anchor",
+        "to_anchor",
+        "label_template"
+      ],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"},
+        "from": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"},
+        "to": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"},
+        "kind": {"enum": ["progression", "exclusion", "merge", "lineage"]},
+        "from_anchor": {"enum": ["top", "right", "bottom", "left"]},
+        "to_anchor": {"enum": ["top", "right", "bottom", "left"]},
+        "label_template": {"type": ["string", "null"]}
       }
     }
   }

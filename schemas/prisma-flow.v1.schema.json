@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.standardflow.dev/prisma-flow.v1.schema.json",
+  "title": "StandardFlow PRISMA 2020 flow evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "review_id",
+    "template",
+    "databases_registers",
+    "other_methods",
+    "previous_review",
+    "new_included",
+    "total_included"
+  ],
+  "properties": {
+    "schema_version": {"const": "dev.standardflow.prisma-flow.v1"},
+    "review_id": {"type": "string", "minLength": 1, "maxLength": 200},
+    "template": {
+      "enum": [
+        "new_databases_registers",
+        "new_databases_registers_other_sources",
+        "updated_databases_registers",
+        "updated_databases_registers_other_sources"
+      ]
+    },
+    "databases_registers": {"$ref": "#/$defs/databaseStream"},
+    "other_methods": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/otherStream"}]},
+    "previous_review": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/included"}]},
+    "new_included": {"$ref": "#/$defs/included"},
+    "total_included": {"$ref": "#/$defs/included"}
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "template": {
+            "enum": [
+              "new_databases_registers_other_sources",
+              "updated_databases_registers_other_sources"
+            ]
+          }
+        }
+      },
+      "then": {"properties": {"other_methods": {"$ref": "#/$defs/otherStream"}}},
+      "else": {"properties": {"other_methods": {"type": "null"}}}
+    },
+    {
+      "if": {
+        "properties": {
+          "template": {
+            "enum": [
+              "updated_databases_registers",
+              "updated_databases_registers_other_sources"
+            ]
+          }
+        }
+      },
+      "then": {"properties": {"previous_review": {"$ref": "#/$defs/included"}}},
+      "else": {"properties": {"previous_review": {"type": "null"}}}
+    }
+  ],
+  "$defs": {
+    "count": {"type": "integer", "minimum": 0, "maximum": 9007199254740991},
+    "included": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["studies", "reports"],
+      "properties": {
+        "studies": {"$ref": "#/$defs/count"},
+        "reports": {"$ref": "#/$defs/count"}
+      }
+    },
+    "reason": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reason", "reports"],
+      "properties": {
+        "reason": {"type": "string", "minLength": 1, "maxLength": 240},
+        "reports": {"type": "integer", "minimum": 1, "maximum": 9007199254740991}
+      }
+    },
+    "databaseStream": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "databases",
+        "registers",
+        "duplicate_records_removed",
+        "records_marked_ineligible_by_automation",
+        "records_removed_other_reasons",
+        "records_screened",
+        "records_excluded",
+        "reports_sought",
+        "reports_not_retrieved",
+        "reports_assessed",
+        "reports_excluded",
+        "reports_included"
+      ],
+      "properties": {
+        "databases": {"$ref": "#/$defs/count"},
+        "registers": {"$ref": "#/$defs/count"},
+        "duplicate_records_removed": {"$ref": "#/$defs/count"},
+        "records_marked_ineligible_by_automation": {"$ref": "#/$defs/count"},
+        "records_removed_other_reasons": {"$ref": "#/$defs/count"},
+        "records_screened": {"$ref": "#/$defs/count"},
+        "records_excluded": {"$ref": "#/$defs/count"},
+        "reports_sought": {"$ref": "#/$defs/count"},
+        "reports_not_retrieved": {"$ref": "#/$defs/count"},
+        "reports_assessed": {"$ref": "#/$defs/count"},
+        "reports_excluded": {
+          "type": "array",
+          "maxItems": 20,
+          "items": {"$ref": "#/$defs/reason"}
+        },
+        "reports_included": {"$ref": "#/$defs/count"}
+      }
+    },
+    "otherStream": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "websites",
+        "organisations",
+        "citation_searching",
+        "other_sources",
+        "reports_sought",
+        "reports_not_retrieved",
+        "reports_assessed",
+        "reports_excluded",
+        "reports_included"
+      ],
+      "properties": {
+        "websites": {"$ref": "#/$defs/count"},
+        "organisations": {"$ref": "#/$defs/count"},
+        "citation_searching": {"$ref": "#/$defs/count"},
+        "other_sources": {"$ref": "#/$defs/count"},
+        "reports_sought": {"$ref": "#/$defs/count"},
+        "reports_not_retrieved": {"$ref": "#/$defs/count"},
+        "reports_assessed": {"$ref": "#/$defs/count"},
+        "reports_excluded": {
+          "type": "array",
+          "maxItems": 20,
+          "items": {"$ref": "#/$defs/reason"}
+        },
+        "reports_included": {"$ref": "#/$defs/count"}
+      }
+    }
+  }
+}

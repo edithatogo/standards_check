@@ -1,0 +1,12 @@
+{
+  "schema_version": "dev.standardflow.conductor-track.v1",
+  "track_id": "02",
+  "slug": "02-semantic-diagram-prisma",
+  "title": "Semantic diagram engine and PRISMA 2020 flows",
+  "status": "in_progress",
+  "implementation_state": "source_implemented",
+  "evidence_level": "source_verified",
+  "dependencies": ["01-canonical-standard-pack"],
+  "stacked_on_branch": "feat/canonical-standard-pack-v1",
+  "updated": "2026-09-08"
+}

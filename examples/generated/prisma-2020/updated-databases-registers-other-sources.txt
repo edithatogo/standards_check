@@ -1,0 +1,54 @@
+PRISMA 2020 flow diagram: updated review with other sources
+
+Updated study identification and selection for fixture-updated-mixed-sources, using databases, registers and other methods.
+
+1. Records identified from:
+Databases (n = 120)
+Registers (n = 30)
+Total (n = 150)
+2. Records removed before screening:
+Duplicate records (n = 20)
+Marked ineligible by automation (n = 5)
+Other reasons (n = 5)
+Total removed (n = 30)
+3. Records identified from other methods:
+Websites (n = 8)
+Organisations (n = 4)
+Citation searching (n = 6)
+Other sources (n = 2)
+Total (n = 20)
+4. Records screened
+(n = 120)
+5. Records excluded
+(n = 70)
+6. Reports sought for retrieval
+(n = 20)
+7. Reports not retrieved
+(n = 2)
+8. Reports sought for retrieval
+(n = 50)
+9. Reports not retrieved
+(n = 5)
+10. Reports assessed for eligibility
+(n = 18)
+11. Reports excluded (n = 8):
+Duplicate report (n = 5)
+Insufficient information (n = 3)
+12. Reports assessed for eligibility
+(n = 45)
+13. Reports excluded (n = 25):
+Wrong population (n = 10)
+Wrong intervention (n = 8)
+Wrong study design (n = 7)
+14. Studies included in previous version
+(n = 40)
+Reports of previous studies
+(n = 50)
+15. New studies included in review
+(n = 24)
+Reports of new included studies
+(n = 30)
+16. Total studies included in review
+(n = 64)
+Reports of total included studies
+(n = 80)
