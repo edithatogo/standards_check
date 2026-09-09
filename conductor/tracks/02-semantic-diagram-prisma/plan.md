@@ -36,6 +36,8 @@ Status: **in progress**. Implementation: **source implemented**. Evidence: **sou
 
 - [x] Define shared parser, cardinality, layout and text limits.
 - [x] Mirror schema constraints in Rust and add adversarial tests.
+- [x] Separate recipe, source-standard and node-reference identifier grammars.
+- [x] Enforce version, contract-ID and optional edge-label parity.
 - [x] Reject XML-invalid content before SVG serialization.
 - [x] Include directed edge relationships in the text equivalent and SVG description.
 - [x] Add bounded CLI reads and regenerate all reference artefacts.

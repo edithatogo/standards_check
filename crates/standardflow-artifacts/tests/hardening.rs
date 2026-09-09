@@ -115,3 +115,69 @@ fn xml_invalid_text_is_rejected_before_rendering() -> Result<(), Box<dyn std::er
     assert!(render_svg(&scene).is_err());
     Ok(())
 }
+
+#[test]
+fn recipe_validation_matches_identifier_and_metadata_schema_boundaries()
+-> Result<(), Box<dyn std::error::Error>> {
+    let mut recipe = DiagramRecipe::from_json(RECIPE)?;
+    let node = recipe
+        .nodes
+        .first_mut()
+        .ok_or_else(|| std::io::Error::other("fixture has no node"))?;
+    node.id = String::from("invalid/node");
+    let reading_id = recipe
+        .reading_order
+        .first_mut()
+        .ok_or_else(|| std::io::Error::other("fixture has no reading-order entry"))?;
+    *reading_id = String::from("invalid/node");
+    let report = recipe.validate();
+    assert!(
+        report
+            .diagnostics
+            .iter()
+            .any(|item| item.code == "SF-RECIPE-004")
+    );
+    assert!(
+        report
+            .diagnostics
+            .iter()
+            .any(|item| item.code == "SF-RECIPE-021")
+    );
+
+    let mut recipe = DiagramRecipe::from_json(RECIPE)?;
+    recipe.version = "v".repeat(129);
+    recipe.input_contract = "c".repeat(257);
+    recipe.source_standard = String::from("Org.PRISMA/PRISMA/2020");
+    let report = recipe.validate();
+    assert!(
+        report
+            .diagnostics
+            .iter()
+            .any(|item| item.code == "SF-RECIPE-017")
+    );
+    assert!(
+        report
+            .diagnostics
+            .iter()
+            .any(|item| item.code == "SF-RECIPE-020")
+    );
+    Ok(())
+}
+
+#[test]
+fn optional_edge_labels_cannot_be_blank() -> Result<(), Box<dyn std::error::Error>> {
+    let mut recipe = DiagramRecipe::from_json(RECIPE)?;
+    let edge = recipe
+        .edges
+        .first_mut()
+        .ok_or_else(|| std::io::Error::other("fixture has no edge"))?;
+    edge.label_template = Some(String::new());
+    let report = recipe.validate();
+    assert!(
+        report
+            .diagnostics
+            .iter()
+            .any(|item| item.code == "SF-RECIPE-019")
+    );
+    Ok(())
+}

@@ -14,6 +14,10 @@ pub const MAX_COLUMNS: u32 = 12;
 pub const MAX_IDENTIFIER_BYTES: usize = 256;
 /// Maximum bytes in a recipe identifier or source-standard path.
 pub const MAX_PATH_IDENTIFIER_BYTES: usize = 512;
+/// Maximum bytes in a recipe release version.
+pub const MAX_VERSION_BYTES: usize = 128;
+/// Maximum bytes in an input-contract identifier.
+pub const MAX_CONTRACT_IDENTIFIER_BYTES: usize = 256;
 /// Maximum bytes in one template, label, reason or accessible text component.
 pub const MAX_TEMPLATE_BYTES: usize = 16_384;
 /// Maximum bindings supplied to a recipe.

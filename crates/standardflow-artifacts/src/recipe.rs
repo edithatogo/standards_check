@@ -7,10 +7,10 @@ use standardflow_core::{Diagnostic, ValidationReport};
 use thiserror::Error;
 
 use crate::limits::{
-    MAX_BINDING_BYTES, MAX_BINDINGS, MAX_CANVAS_DIMENSION, MAX_COLUMNS, MAX_EDGES,
-    MAX_IDENTIFIER_BYTES, MAX_INPUT_BYTES, MAX_NODES, MAX_PATH_IDENTIFIER_BYTES,
-    MAX_RENDERED_COMPONENT_BYTES, MAX_ROW_INDEX, MAX_TEMPLATE_BYTES, MAX_TEXT_EQUIVALENT_BYTES,
-    MAX_WRAPPED_LINES, is_xml_10_text,
+    MAX_BINDING_BYTES, MAX_BINDINGS, MAX_CANVAS_DIMENSION, MAX_COLUMNS,
+    MAX_CONTRACT_IDENTIFIER_BYTES, MAX_EDGES, MAX_IDENTIFIER_BYTES, MAX_INPUT_BYTES, MAX_NODES,
+    MAX_PATH_IDENTIFIER_BYTES, MAX_RENDERED_COMPONENT_BYTES, MAX_ROW_INDEX, MAX_TEMPLATE_BYTES,
+    MAX_TEXT_EQUIVALENT_BYTES, MAX_VERSION_BYTES, MAX_WRAPPED_LINES, is_xml_10_text,
 };
 use crate::scene::{Anchor, Canvas, EdgeKind, NodeRole, Rect, Scene, SceneEdge, SceneNode};
 
@@ -189,13 +189,33 @@ impl DiagramRecipe {
                 format!("recipes permit at most {MAX_EDGES} edges"),
             ));
         }
-        for (path, value) in [
-            ("/recipe_id", self.recipe_id.as_str()),
-            ("/version", self.version.as_str()),
-            ("/source_standard", self.source_standard.as_str()),
-            ("/input_contract", self.input_contract.as_str()),
-            ("/title_template", self.title_template.as_str()),
-            ("/description_template", self.description_template.as_str()),
+        for (path, value, limit) in [
+            (
+                "/recipe_id",
+                self.recipe_id.as_str(),
+                MAX_PATH_IDENTIFIER_BYTES,
+            ),
+            ("/version", self.version.as_str(), MAX_VERSION_BYTES),
+            (
+                "/source_standard",
+                self.source_standard.as_str(),
+                MAX_PATH_IDENTIFIER_BYTES,
+            ),
+            (
+                "/input_contract",
+                self.input_contract.as_str(),
+                MAX_CONTRACT_IDENTIFIER_BYTES,
+            ),
+            (
+                "/title_template",
+                self.title_template.as_str(),
+                MAX_TEMPLATE_BYTES,
+            ),
+            (
+                "/description_template",
+                self.description_template.as_str(),
+                MAX_TEMPLATE_BYTES,
+            ),
         ] {
             if value.trim().is_empty() {
                 report.push(Diagnostic::error(
@@ -203,24 +223,28 @@ impl DiagramRecipe {
                     path,
                     "value must not be blank",
                 ));
-            } else if value.len() > MAX_TEMPLATE_BYTES || !is_xml_10_text(value) {
+            } else if value.len() > limit || !is_xml_10_text(value) {
                 report.push(Diagnostic::error(
                     "SF-RECIPE-017",
                     path,
                     format!(
-                        "value must be valid XML 1.0 text and no more than {MAX_TEMPLATE_BYTES} UTF-8 bytes"
+                        "value must be valid XML 1.0 text and no more than {limit} UTF-8 bytes"
                     ),
                 ));
             }
         }
-        if !is_portable_id(&self.recipe_id)
-            || self.recipe_id.len() > MAX_PATH_IDENTIFIER_BYTES
-            || self.source_standard.len() > MAX_PATH_IDENTIFIER_BYTES
-        {
+        if !is_portable_recipe_id(&self.recipe_id) {
             report.push(Diagnostic::error(
                 "SF-RECIPE-003",
                 "/recipe_id",
-                "recipe_id must use portable identifier characters",
+                "recipe_id must use the portable slash-delimited recipe grammar",
+            ));
+        }
+        if !is_source_standard_id(&self.source_standard) {
+            report.push(Diagnostic::error(
+                "SF-RECIPE-020",
+                "/source_standard",
+                "source_standard must contain at least two lowercase portable path segments",
             ));
         }
         validate_layout(self.layout, &mut report);
@@ -228,7 +252,7 @@ impl DiagramRecipe {
         let mut node_ids = BTreeSet::new();
         for (index, node) in self.nodes.iter().enumerate() {
             let path = format!("/nodes/{index}");
-            if !is_portable_id(&node.id) || !node_ids.insert(node.id.as_str()) {
+            if !is_portable_reference_id(&node.id) || !node_ids.insert(node.id.as_str()) {
                 report.push(Diagnostic::error(
                     "SF-RECIPE-004",
                     format!("{path}/id"),
@@ -286,7 +310,7 @@ impl DiagramRecipe {
         let mut edge_ids = BTreeSet::new();
         for (index, edge) in self.edges.iter().enumerate() {
             let path = format!("/edges/{index}");
-            if !is_portable_id(&edge.id) || !edge_ids.insert(edge.id.as_str()) {
+            if !is_portable_reference_id(&edge.id) || !edge_ids.insert(edge.id.as_str()) {
                 report.push(Diagnostic::error(
                     "SF-RECIPE-008",
                     format!("{path}/id"),
@@ -296,10 +320,11 @@ impl DiagramRecipe {
             if edge.id.len() > MAX_IDENTIFIER_BYTES
                 || edge.from.len() > MAX_IDENTIFIER_BYTES
                 || edge.to.len() > MAX_IDENTIFIER_BYTES
-                || edge
-                    .label_template
-                    .as_ref()
-                    .is_some_and(|label| label.len() > MAX_TEMPLATE_BYTES || !is_xml_10_text(label))
+                || edge.label_template.as_ref().is_some_and(|label| {
+                    label.trim().is_empty()
+                        || label.len() > MAX_TEMPLATE_BYTES
+                        || !is_xml_10_text(label)
+                })
             {
                 report.push(Diagnostic::error(
                     "SF-RECIPE-019",
@@ -319,6 +344,17 @@ impl DiagramRecipe {
             }
         }
 
+        if self
+            .reading_order
+            .iter()
+            .any(|id| !is_portable_reference_id(id) || id.len() > MAX_IDENTIFIER_BYTES)
+        {
+            report.push(Diagnostic::error(
+                "SF-RECIPE-021",
+                "/reading_order",
+                "reading-order identifiers must use the bounded reference grammar",
+            ));
+        }
         let reading_ids = self
             .reading_order
             .iter()
@@ -831,7 +867,7 @@ fn validate_bindings(bindings: &BTreeMap<String, String>) -> Result<(), RecipeEr
         });
     }
     for (key, value) in bindings {
-        if !is_portable_id(key)
+        if !is_portable_reference_id(key)
             || key.len() > MAX_IDENTIFIER_BYTES
             || value.len() > MAX_BINDING_BYTES
             || !is_xml_10_text(value)
@@ -868,7 +904,7 @@ const fn edge_kind_text(kind: EdgeKind) -> &'static str {
     }
 }
 
-fn is_portable_id(value: &str) -> bool {
+fn is_portable_recipe_id(value: &str) -> bool {
     let mut bytes = value.bytes();
     bytes
         .next()
@@ -876,6 +912,35 @@ fn is_portable_id(value: &str) -> bool {
         && bytes.all(|byte| {
             byte.is_ascii_alphanumeric() || matches!(byte, b'.' | b'_' | b':' | b'-' | b'/')
         })
+}
+
+fn is_portable_reference_id(value: &str) -> bool {
+    let mut bytes = value.bytes();
+    bytes
+        .next()
+        .is_some_and(|first| first.is_ascii_alphanumeric())
+        && bytes
+            .all(|byte| byte.is_ascii_alphanumeric() || matches!(byte, b'.' | b'_' | b':' | b'-'))
+}
+
+fn is_source_standard_id(value: &str) -> bool {
+    let mut segment_count = 0_usize;
+    for segment in value.split('/') {
+        segment_count += 1;
+        let mut bytes = segment.bytes();
+        if !bytes
+            .next()
+            .is_some_and(|first| first.is_ascii_lowercase() || first.is_ascii_digit())
+            || !bytes.all(|byte| {
+                byte.is_ascii_lowercase()
+                    || byte.is_ascii_digit()
+                    || matches!(byte, b'.' | b'_' | b'-')
+            })
+        {
+            return false;
+        }
+    }
+    segment_count >= 2
 }
 
 #[cfg(test)]
