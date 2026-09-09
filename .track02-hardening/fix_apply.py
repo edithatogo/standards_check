@@ -62,6 +62,11 @@ replace_once(
         };
 ''',
 )
+replace_once(
+    recipe,
+    "    text.push('\n');",
+    "    text.push('\\n');",
+)
 
 limits = "crates/standardflow-artifacts/src/limits.rs"
 replace_once(
@@ -70,4 +75,4 @@ replace_once(
     "#[allow(\n    clippy::manual_range_contains,\n    reason = \"explicit scalar boundaries remain const and mirror the XML 1.0 production\"\n)]\nconst fn is_xml_10_char(value: char) -> bool {",
 )
 
-print("Refined hardening patch: complete labels fail closed rather than truncate")
+print("Refined hardening patch: complete labels fail closed and escapes remain valid")
