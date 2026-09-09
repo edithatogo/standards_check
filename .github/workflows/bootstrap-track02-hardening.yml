@@ -1,6 +1,6 @@
 name: Bootstrap Track 02 hardening
 
-# bootstrap-attempt: 2
+# bootstrap-attempt: 3
 on:
   push:
     branches:
@@ -35,11 +35,21 @@ jobs:
 
           path = Path('.track02-hardening/apply.py')
           content = path.read_text(encoding='utf-8')
-          old = "    '''//! Shared resource and text-safety limits"
-          new = "    r'''//! Shared resource and text-safety limits"
-          if content.count(old) != 1:
-              raise SystemExit('expected exactly one Rust limits literal')
-          path.write_text(content.replace(old, new, 1), encoding='utf-8')
+          replacements = [
+              (
+                  "    '''//! Shared resource and text-safety limits",
+                  "    r'''//! Shared resource and text-safety limits",
+              ),
+              (
+                  "    '''//! Adversarial resource, schema-parity and accessibility regression tests.",
+                  "    r'''//! Adversarial resource, schema-parity and accessibility regression tests.",
+              ),
+          ]
+          for old, new in replacements:
+              if content.count(old) != 1:
+                  raise SystemExit(f'expected exactly one generated Rust literal: {old}')
+              content = content.replace(old, new, 1)
+          path.write_text(content, encoding='utf-8')
           PY
           python .track02-hardening/apply.py
           python .track02-hardening/fix_apply.py
