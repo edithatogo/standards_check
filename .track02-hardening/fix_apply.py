@@ -87,8 +87,8 @@ if visibility_count != 18:
         f"{limits}: expected 18 private-module visibility markers, found {visibility_count}"
     )
 limits_path.write_text(
-    limits_text.replace("pub(crate) ", "pub "),
+    limits_text.replace("pub(crate) ", "pub(super) "),
     encoding="utf-8",
 )
 
-print("Refined hardening patch: bounded labels remain complete and strict Clippy hygiene is preserved")
+print("Refined hardening patch: bounded labels remain complete and limits use parent-scoped visibility")
