@@ -113,4 +113,27 @@ replace_once(
 ''',
 )
 
-print("Refined hardening patch: bounded labels remain complete, resource budgets are public and bounded reads satisfy strict Clippy")
+scene = "crates/standardflow-artifacts/src/scene.rs"
+replace_once(
+    scene,
+    "        if !is_portable_id(&self.recipe_id)\n",
+    "        if !is_portable_recipe_id(&self.recipe_id)\n",
+)
+replace_once(
+    scene,
+    "fn is_portable_id(value: &str) -> bool {\n",
+    '''fn is_portable_recipe_id(value: &str) -> bool {
+    let mut bytes = value.bytes();
+    bytes
+        .next()
+        .is_some_and(|first| first.is_ascii_alphanumeric())
+        && bytes.all(|byte| {
+            byte.is_ascii_alphanumeric() || matches!(byte, b'.' | b'_' | b':' | b'-' | b'/')
+        })
+}
+
+fn is_portable_id(value: &str) -> bool {
+''',
+)
+
+print("Refined hardening patch: resource budgets are public, bounded reads satisfy strict Clippy and recipe IDs retain their canonical grammar")
