@@ -161,4 +161,4 @@ jobs:
         run: cargo test --workspace --all-targets --all-features --locked
       - name: Exercise deterministic scene output
         shell: bash
-        run: cargo run --quiet --locked -p standardflow-cli -- diagram prisma contracts/examples/prisma-flow/new-databases-registers.json --format scene-json > /dev/null
+        run: cargo run --quiet --locked -p standardflow-cli -- diagram prisma contracts/examples/prisma-flow/new-databases-registers.json --format scene-json --output - > /dev/null
