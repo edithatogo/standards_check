@@ -1,0 +1,40 @@
+{
+  "schema_version": "dev.standardflow.prisma-flow.v1",
+  "review_id": "fixture-new-mixed-sources",
+  "template": "new_databases_registers_other_sources",
+  "databases_registers": {
+    "databases": 120,
+    "registers": 30,
+    "duplicate_records_removed": 20,
+    "records_marked_ineligible_by_automation": 5,
+    "records_removed_other_reasons": 5,
+    "records_screened": 120,
+    "records_excluded": 70,
+    "reports_sought": 50,
+    "reports_not_retrieved": 5,
+    "reports_assessed": 45,
+    "reports_excluded": [
+      {"reason": "Wrong population", "reports": 10},
+      {"reason": "Wrong intervention", "reports": 8},
+      {"reason": "Wrong study design", "reports": 7}
+    ],
+    "reports_included": 20
+  },
+  "other_methods": {
+    "websites": 8,
+    "organisations": 4,
+    "citation_searching": 6,
+    "other_sources": 2,
+    "reports_sought": 20,
+    "reports_not_retrieved": 2,
+    "reports_assessed": 18,
+    "reports_excluded": [
+      {"reason": "Duplicate report", "reports": 5},
+      {"reason": "Insufficient information", "reports": 3}
+    ],
+    "reports_included": 10
+  },
+  "previous_review": null,
+  "new_included": {"studies": 24, "reports": 30},
+  "total_included": {"studies": 24, "reports": 30}
+}
