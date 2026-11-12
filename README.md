@@ -18,6 +18,9 @@ Simple pipeline for academic publication checklists:
 - `citations/` — Generated citation files (`.bib`, `.ris`, `.json`).
   - `archetypes/` and `variants/` mirrored structure.
 - `scripts/` — helper tools (validation, conversion stubs).
+- `reconciliations/` — source-aware crosswalks, kept separate from canonical checklists.
+  - [Costing and valuation](reconciliations/costing/README.md): 26 classified sources and
+    106 verified item/principle mappings, with applicability and coverage limits.
 
 ## Citation Data
 The `source/**/*.yml` files can be extended with a `citation` block to hold structured metadata for generating formal citations. The schema is defined in `schemas/sidecar.schema.json`.
@@ -48,7 +51,9 @@ citation:
 - `scripts/checksum.sh <file> [sidecar.yml]`: compute SHA-256; optionally write `checksum:` into a sidecar.
 - `scripts/build_pandoc.sh`: convert all Markdown files to LaTeX (`latex/`), PDF (`pdf/`), and DOCX (`docx/`). If your Pandoc includes a Typst writer, it will also generate `.typ`.
 - `scripts/ingest_source.sh <track> <id> <url> [ext]`: download an original into `source/<track>/<id>.<ext>`, compute checksum, and update the sidecar.
-- `scripts/validate_repo.sh`: run all local validations (Markdown, index, sidecars).
+- `scripts/validate_repo.sh`: run local validations (Markdown, index, sidecars and costing metadata).
+- `python3 scripts/validate_costing_reconciliation.py`: check costing catalogue references,
+  status distinctions and verified-coverage counts; does not assess scientific validity.
 - `scripts/scaffold_from_index.sh`: create missing Markdown stubs from `source/index.yml`.
 - `scripts/generate_markdown_index.sh`: generate `markdown/index.md` with links to all checklists.
 
