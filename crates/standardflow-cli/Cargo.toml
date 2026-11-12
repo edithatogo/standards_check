@@ -1,0 +1,21 @@
+[package]
+name = "standardflow-cli"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+publish = false
+
+[[bin]]
+name = "standardflow"
+path = "src/main.rs"
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+standardflow-artifacts = { path = "../standardflow-artifacts" }
+standardflow-core = { path = "../standardflow-core" }
+
+[lints]
+workspace = true

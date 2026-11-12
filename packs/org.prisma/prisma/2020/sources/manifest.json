@@ -1,0 +1,22 @@
+{
+  "schema_version": "dev.standardflow.source-manifest.v1",
+  "sources": [
+    {
+      "id": "prisma-2020-statement-pdf",
+      "role": "authoritative_source",
+      "url": "https://www.bmj.com/content/372/bmj.n71.full.pdf",
+      "retrieved_at": "2025-08-09",
+      "sha256": "00804b505724d73e8e82326493ca5b5010c649753652684e1d15b88120201c2e",
+      "redistributed_in_pack": false,
+      "local_legacy_path": "source/archetypes/prisma-2020.pdf"
+    },
+    {
+      "id": "legacy-prisma-markdown",
+      "role": "migration_input",
+      "repository_path": "markdown/en/archetypes/prisma-2020.md",
+      "git_blob_sha1": "6d441c169e68d10fd0737eda759a4e0ed9ffd6d0",
+      "redistributed_in_pack": false
+    }
+  ],
+  "claim_boundary": "The pack is imported from the existing repository transcription and is not source-reconciled until a later evidence receipt records item-by-item verification."
+}

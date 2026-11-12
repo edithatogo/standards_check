@@ -1,0 +1,33 @@
+{
+  "schema_version": "dev.standardflow.track-evidence.v1",
+  "track_id": "02",
+  "claims": [
+    {
+      "claim": "Generic recipe, semantic scene and renderer source surfaces exist",
+      "evidence_level": "source_verified",
+      "paths": [
+        "crates/standardflow-artifacts/src/recipe.rs",
+        "crates/standardflow-artifacts/src/scene.rs",
+        "crates/standardflow-artifacts/src/render.rs"
+      ]
+    },
+    {
+      "claim": "All four PRISMA 2020 flow families are represented by strict recipes and fixtures",
+      "evidence_level": "source_verified",
+      "paths": [
+        "recipes/prisma-2020",
+        "contracts/examples/prisma-flow"
+      ]
+    },
+    {
+      "claim": "The diagram engine is deterministic, accessible and cross-platform fixture proven",
+      "evidence_level": "contracted",
+      "blocked_by": ["passing stacked pull-request CI and committed golden-output receipt"]
+    },
+    {
+      "claim": "Rendered PRISMA diagrams are methodologically or externally validated",
+      "evidence_level": "contracted",
+      "blocked_by": ["independent PRISMA source and usability/accessibility evaluation"]
+    }
+  ]
+}
