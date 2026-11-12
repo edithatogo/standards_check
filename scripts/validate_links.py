@@ -32,6 +32,7 @@ import time
 import yaml
 import requests
 from glob import glob
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 SOURCE_DIR = "source"
 DOI_BASE_URL = "https://doi.org"
@@ -41,6 +42,12 @@ WARNING_STATUS_CODES = [403]  # Treat 403 Forbidden as a warning
 MAX_RETRIES = 3
 RETRY_DELAY = 5  # seconds
 
+# Global session for connection pooling across threads
+session = requests.Session()
+adapter = requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=100)
+session.mount('http://', adapter)
+session.mount('https://', adapter)
+
 def validate_url(url, file_path):
     """Validates a single URL with retries."""
     if not url or not url.startswith('http'):
@@ -49,7 +56,7 @@ def validate_url(url, file_path):
     for attempt in range(MAX_RETRIES):
         try:
             # Use a timeout to avoid hanging on unresponsive servers
-            response = requests.head(url, allow_redirects=True, timeout=10)
+            response = session.head(url, allow_redirects=True, timeout=10)
             status = response.status_code
 
             if status in SUCCESS_STATUS_CODES:
@@ -88,8 +95,9 @@ def main():
     redirected_links = []
     warning_links = []
 
+    tasks = []
+
     for file_path in source_files:
-        print(f"\nProcessing: {file_path}")
         with open(file_path, 'r', encoding='utf-8') as f:
             try:
                 data = yaml.safe_load(f)
@@ -99,29 +107,37 @@ def main():
                 # Validate source_url
                 url_to_check = data.get('source_url')
                 if url_to_check:
-                    result = validate_url(url_to_check, file_path)
-                    if result:
-                        if result['type'] == 'BROKEN' or result['type'] == 'ERROR':
-                            broken_links.append(result)
-                        elif result['type'] == 'REDIRECT':
-                            redirected_links.append(result)
-                        elif result['type'] == 'WARNING':
-                            warning_links.append(result)
+                    tasks.append((url_to_check, file_path))
                 
                 # Validate DOI
                 doi = data.get('citation', {}).get('doi')
                 if doi:
                     doi_url = f"{DOI_BASE_URL}/{doi}"
-                    result = validate_url(doi_url, file_path)
-                    if result:
-                        if result['type'] == 'BROKEN' or result['type'] == 'ERROR':
-                            broken_links.append(result)
-                        elif result['type'] == 'WARNING':
-                            warning_links.append(result)
+                    tasks.append((doi_url, file_path))
 
             except yaml.YAMLError as e:
                 print(f"  ✗ ERROR: Could not parse YAML file. {e}")
                 broken_links.append({"file": file_path, "url": "N/A", "status": "YAML_ERROR", "error_message": str(e), "type": "ERROR"})
+
+    print(f"Found {len(tasks)} links to validate. Validating concurrently...")
+
+    with ThreadPoolExecutor(max_workers=20) as executor:
+        future_to_url = {executor.submit(validate_url, url, file_path): (url, file_path) for url, file_path in tasks}
+
+        for future in as_completed(future_to_url):
+            url, file_path = future_to_url[future]
+            try:
+                result = future.result()
+                if result:
+                    if result['type'] == 'BROKEN' or result['type'] == 'ERROR':
+                        broken_links.append(result)
+                    elif result['type'] == 'REDIRECT':
+                        redirected_links.append(result)
+                    elif result['type'] == 'WARNING':
+                        warning_links.append(result)
+            except Exception as exc:
+                print(f"  ✗ UNEXPECTED ERROR for {url} in {file_path}: {exc}")
+                broken_links.append({"file": file_path, "url": url, "status": "EXCEPTION", "error_message": str(exc), "type": "ERROR"})
 
     print("\n--- Validation Summary ---")
     if not broken_links and not redirected_links and not warning_links:
