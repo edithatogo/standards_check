@@ -21,6 +21,25 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem(pageKey, JSON.stringify(state));
   }
 
+  let saveStateTimeout;
+  function debouncedSaveState() {
+    if (saveStateTimeout) {
+      clearTimeout(saveStateTimeout);
+    }
+    saveStateTimeout = setTimeout(() => {
+      saveState();
+      saveStateTimeout = null;
+    }, 500);
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden' && saveStateTimeout) {
+      clearTimeout(saveStateTimeout);
+      saveState(); // Ensure last state is saved
+      saveStateTimeout = null;
+    }
+  });
+
   function loadState() {
     const savedState = localStorage.getItem(pageKey);
     if (savedState) {
@@ -137,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         noteArea.addEventListener('input', () => {
             state.notes[itemId] = noteArea.value;
-            saveState();
+            debouncedSaveState();
         });
     }
     

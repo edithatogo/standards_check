@@ -7,6 +7,8 @@ on:
       - 'templates/pandoc/**'
       - 'scripts/**'
       - 'source/**'
+      - 'reconciliations/**'
+      - '.github/workflows/build-docs.yml'
       - 'pandoc.yaml'
   pull_request:
     paths:
@@ -14,6 +16,8 @@ on:
       - 'templates/pandoc/**'
       - 'scripts/**'
       - 'source/**'
+      - 'reconciliations/**'
+      - '.github/workflows/build-docs.yml'
       - 'pandoc.yaml'
   workflow_dispatch:
 
@@ -72,6 +76,7 @@ jobs:
           path: docx/
 
   deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
