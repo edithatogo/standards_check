@@ -37,6 +37,8 @@ def create_petri_net_from_checklist(checklist_file):
             section_content = cleaned_parts[i+1] if i + 1 < len(cleaned_parts) and not cleaned_parts[i+1].startswith('##') else ""
             sections.append((section_header, section_content))
 
+    item_name_regex = re.compile(r'[^a-zA-Z0-9\s]')
+
     if not sections:
         # If no sections, fall back to simple item parsing
         items = re.findall(r'-\s\[\s\].*', content)
@@ -50,7 +52,7 @@ def create_petri_net_from_checklist(checklist_file):
             # Process items in a single sequence
             last_place = source
             for i, item_text in enumerate(items):
-                item_name = re.sub(r'[^a-zA-Z0-9\s]', '', item_text).strip()[:50]
+                item_name = item_name_regex.sub('', item_text).strip()[:50]
                 transition = PetriNet.Transition(name=f"item_{i+1}", label=item_name)
                 net.transitions.add(transition)
                 petri_utils.add_arc_from_to(last_place, transition, net)
@@ -84,7 +86,7 @@ def create_petri_net_from_checklist(checklist_file):
             items = re.findall(r'-\s\[\s\].*', section_content)
             if items:
                 for j, item_text in enumerate(items):
-                    item_name = re.sub(r'[^a-zA-Z0-9\s]', '', item_text).strip()[:50]
+                    item_name = item_name_regex.sub('', item_text).strip()[:50]
                     item_transition = PetriNet.Transition(name=f"sec_{i+1}_item_{j+1}", label=item_name)
                     net.transitions.add(item_transition)
                     petri_utils.add_arc_from_to(last_item_place, item_transition, net)
