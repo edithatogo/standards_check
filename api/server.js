@@ -9,7 +9,12 @@ const port = 3000;
 
 const checklistsDir = path.join(__dirname, '../markdown');
 
-app.use(cors());
+const corsOptions = {
+  origin: process.env.CORS_ORIGIN,
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Helper function to parse markdown content into a structured JSON object.
@@ -49,15 +54,17 @@ app.get('/api/checklists', async (req, res) => {
 
     const readChecklistsFromDir = async (dir, type) => {
       const files = await fs.readdir(dir);
-      for (const file of files) {
-        if (path.extname(file) === '.md') {
+      const checklists = await Promise.all(
+        files.map(async (file) => {
+          if (path.extname(file) !== '.md') return null;
           const filePath = path.join(dir, file);
           const content = await fs.readFile(filePath, 'utf-8');
           const checklistId = path.basename(file, '.md');
           const jsonData = parseMarkdown(content, checklistId);
-          checklistData.push({ ...jsonData, type });
-        }
-      }
+          return { ...jsonData, type };
+        })
+      );
+      checklistData.push(...checklists.filter(Boolean));
     };
 
     await readChecklistsFromDir(archetypesPath, 'archetype');
@@ -75,12 +82,15 @@ app.get('/api/checklists/:id', async (req, res) => {
     try {
         const checklistId = req.params.id;
         const findChecklist = async (dir) => {
-            const files = await fs.readdir(dir);
-            const foundFile = files.find(file => path.basename(file, '.md') === checklistId);
-            if (foundFile) {
-                return path.join(dir, foundFile);
+            // Prevent directory traversal attacks
+            const safeChecklistId = path.basename(checklistId);
+            const targetPath = path.join(dir, `${safeChecklistId}.md`);
+            try {
+                await fs.access(targetPath);
+                return targetPath;
+            } catch (error) {
+                return null;
             }
-            return null;
         };
 
         const archetypesPath = path.join(checklistsDir, 'archetypes');
