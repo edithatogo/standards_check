@@ -10,7 +10,7 @@ publisher: <organization(s)>
 source_url: <canonical-webpage-or-download>
 retrieved_at: <YYYY-MM-DD>
 preferred_format: pdf # pdf|html|docx|csv
-checksum: <sha256-or-md5>
+checksum: 54d748a9f99391b8a2b70a46fdd18f1154a0d494e0571d9b614754943dde466d
 license: <license-string-or-url>
 notes: |
   Short notes on provenance, mirrors, or usage terms.

@@ -8,7 +8,7 @@ publisher: "JAMA"
 source_url: "https://jamanetwork.com/journals/jama/fullarticle/10.1001/jama.2013.879"
 retrieved_at: "2025-08-11"
 preferred_format: "html"
-checksum: "abc123def456"
+checksum: 5b68d017cabf2c533f5aa7b552bcb502cbbf422ec947698d4033fa5e68b44f28
 license: "CC-BY-4.0"
 status: "sourced"
 notes: |
