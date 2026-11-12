@@ -8,11 +8,10 @@ npm-debug.log
 .env.development.local
 .env.test.local
 .env.production.local
-
 # macOS
 .DS_Store
-
-# Python
+.coverage
 __pycache__/
+# Python
 *.pyc
 *.pyo
