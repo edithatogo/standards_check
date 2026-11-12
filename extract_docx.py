@@ -1,13 +1,5 @@
-import docx
 import sys
-
-def extract_text_from_docx(file_path):
-    """Extract text from a DOCX file and return as string"""
-    doc = docx.Document(file_path)
-    full_text = []
-    for paragraph in doc.paragraphs:
-        full_text.append(paragraph.text)
-    return '\n'.join(full_text)
+from utils.docx_utils import extract_text_from_docx
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
