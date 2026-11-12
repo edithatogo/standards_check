@@ -8,6 +8,7 @@ on:
       - "templates/pandoc/**"
       - "scripts/**"
       - "source/**"
+      - "reconciliations/**"
       - "pandoc.yaml"
       - ".github/workflows/build-docs.yml"
   pull_request:
@@ -16,6 +17,7 @@ on:
       - "templates/pandoc/**"
       - "scripts/**"
       - "source/**"
+      - "reconciliations/**"
       - "pandoc.yaml"
       - ".github/workflows/build-docs.yml"
   workflow_dispatch:
