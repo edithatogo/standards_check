@@ -17,6 +17,11 @@ function log() {
   echo "[INFO] $1"
 }
 
+function escape_html() {
+  local str="$1"
+  echo "$str" | sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' -e 's/>/\&gt;/g' -e 's/"/\&quot;/g' -e "s/'/\&#39;/g"
+}
+
 # --- Main ---
 log "Starting HTML index generation..."
 
@@ -36,6 +41,7 @@ echo "<div class='list-group mb-4'>" >> "$BODY_CONTENT_TMP"
 yq -r '.items[] | select(.status == "mapped") | .id' "$INDEX_YAML" | while read -r id;
 do
   title=$(yq -r ".items[] | select(.id == \"$id\") | .title" "$INDEX_YAML")
+  title=$(escape_html "$title")
   level=$(yq -r ".items[] | select(.id == \"$id\") | .level" "$INDEX_YAML")
   html_file="${id}.html"
   
@@ -61,6 +67,7 @@ echo "<div class='list-group mb-4'>" >> "$BODY_CONTENT_TMP"
 yq -r '.items[] | select(.status != "mapped") | .id' "$INDEX_YAML" | while read -r id;
 do
   title=$(yq -r ".items[] | select(.id == \"$id\") | .title" "$INDEX_YAML")
+  title=$(escape_html "$title")
   level=$(yq -r ".items[] | select(.id == \"$id\") | .level" "$INDEX_YAML")
   html_file="${id}.html"
 
