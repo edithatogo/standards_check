@@ -74,55 +74,57 @@ def validate_url(url, file_path):
                 return {"file": file_path, "url": url, "status": "ERROR", "error_message": str(e), "type": "ERROR"}
     return None
 
-def main():
-    """Main function to find all YAML files and validate their links."""
-    print(f"Starting link validation in '{SOURCE_DIR}' directory...")
-    
-    source_files = glob(os.path.join(SOURCE_DIR, "**", "*.yml"), recursive=True)
-    
-    if not source_files:
-        print("No YAML files found to validate.")
-        sys.exit(0)
+def process_file(file_path, broken_links, redirected_links, warning_links):
+    """Processes a single YAML file, checking its URLs and DOIs."""
+    print(f"\nProcessing: {file_path}")
+    with open(file_path, 'r', encoding='utf-8') as f:
+        try:
+            data = yaml.safe_load(f)
+            if not data:
+                return
 
+            # Validate source_url
+            url_to_check = data.get('source_url')
+            if url_to_check:
+                result = validate_url(url_to_check, file_path)
+                if result:
+                    if result['type'] in ('BROKEN', 'ERROR'):
+                        broken_links.append(result)
+                    elif result['type'] == 'REDIRECT':
+                        redirected_links.append(result)
+                    elif result['type'] == 'WARNING':
+                        warning_links.append(result)
+
+            # Validate DOI
+            doi = data.get('citation', {}).get('doi')
+            if doi:
+                doi_url = f"{DOI_BASE_URL}/{doi}"
+                result = validate_url(doi_url, file_path)
+                if result:
+                    if result['type'] in ('BROKEN', 'ERROR'):
+                        broken_links.append(result)
+                    elif result['type'] == 'WARNING':
+                        warning_links.append(result)
+
+        except yaml.YAMLError as e:
+            print(f"  ✗ ERROR: Could not parse YAML file. {e}")
+            broken_links.append({"file": file_path, "url": "N/A", "status": "YAML_ERROR", "error_message": str(e), "type": "ERROR"})
+
+
+def check_links_in_files(source_files):
+    """Iterates over files and collects broken, redirected, and warning links."""
     broken_links = []
     redirected_links = []
     warning_links = []
 
     for file_path in source_files:
-        print(f"\nProcessing: {file_path}")
-        with open(file_path, 'r', encoding='utf-8') as f:
-            try:
-                data = yaml.safe_load(f)
-                if not data:
-                    continue
+        process_file(file_path, broken_links, redirected_links, warning_links)
 
-                # Validate source_url
-                url_to_check = data.get('source_url')
-                if url_to_check:
-                    result = validate_url(url_to_check, file_path)
-                    if result:
-                        if result['type'] == 'BROKEN' or result['type'] == 'ERROR':
-                            broken_links.append(result)
-                        elif result['type'] == 'REDIRECT':
-                            redirected_links.append(result)
-                        elif result['type'] == 'WARNING':
-                            warning_links.append(result)
-                
-                # Validate DOI
-                doi = data.get('citation', {}).get('doi')
-                if doi:
-                    doi_url = f"{DOI_BASE_URL}/{doi}"
-                    result = validate_url(doi_url, file_path)
-                    if result:
-                        if result['type'] == 'BROKEN' or result['type'] == 'ERROR':
-                            broken_links.append(result)
-                        elif result['type'] == 'WARNING':
-                            warning_links.append(result)
+    return broken_links, redirected_links, warning_links
 
-            except yaml.YAMLError as e:
-                print(f"  ✗ ERROR: Could not parse YAML file. {e}")
-                broken_links.append({"file": file_path, "url": "N/A", "status": "YAML_ERROR", "error_message": str(e), "type": "ERROR"})
 
+def print_summary(broken_links, redirected_links, warning_links):
+    """Prints the validation summary and exits appropriately."""
     print("\n--- Validation Summary ---")
     if not broken_links and not redirected_links and not warning_links:
         print("✓ All links are valid.")
@@ -150,6 +152,20 @@ def main():
             sys.exit(1) # Exit with an error code if links are broken
             
     print("Validation complete.")
+
+
+def main():
+    """Main function to find all YAML files and validate their links."""
+    print(f"Starting link validation in '{SOURCE_DIR}' directory...")
+
+    source_files = glob(os.path.join(SOURCE_DIR, "**", "*.yml"), recursive=True)
+
+    if not source_files:
+        print("No YAML files found to validate.")
+        sys.exit(0)
+
+    broken_links, redirected_links, warning_links = check_links_in_files(source_files)
+    print_summary(broken_links, redirected_links, warning_links)
     sys.exit(0)
 
 if __name__ == "__main__":
