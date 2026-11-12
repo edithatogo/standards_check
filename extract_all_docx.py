@@ -1,6 +1,5 @@
 import docx
 import os
-import sys
 
 def extract_text_from_docx(file_path):
     """Extract text from a DOCX file and return as string"""
