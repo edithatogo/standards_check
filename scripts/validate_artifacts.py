@@ -86,13 +86,18 @@ def validate_svg(path: Path) -> None:
         fail(f"{path.relative_to(ROOT)} root element is not SVG")
     if root.attrib.get("role") != "img":
         fail(f"{path.relative_to(ROOT)} must expose role=img")
-    if root.attrib.get("aria-labelledby") != "standardflow-title standardflow-description":
-        fail(f"{path.relative_to(ROOT)} must link its title and description")
+    if root.attrib.get("aria-labelledby") != "standardflow-title":
+        fail(f"{path.relative_to(ROOT)} must identify its title")
+    if root.attrib.get("aria-describedby") != "standardflow-description":
+        fail(f"{path.relative_to(ROOT)} must identify its complete accessible description")
     namespace = {"svg": "http://www.w3.org/2000/svg"}
     for selector in ("svg:title", "svg:desc", "svg:metadata"):
         element = root.find(selector, namespace)
         if element is None or not "".join(element.itertext()).strip():
             fail(f"{path.relative_to(ROOT)} is missing non-empty {selector}")
+    description = root.find("svg:desc", namespace)
+    if description is None or "Flow relationships:" not in "".join(description.itertext()):
+        fail(f"{path.relative_to(ROOT)} accessible description omits flow relationships")
     groups = root.findall(".//svg:g", namespace)
     if not any(group.attrib.get("role") == "list" for group in groups):
         fail(f"{path.relative_to(ROOT)} must expose the node collection as a list")

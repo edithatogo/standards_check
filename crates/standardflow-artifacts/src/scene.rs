@@ -5,6 +5,11 @@ use std::collections::{BTreeMap, BTreeSet};
 use serde::{Deserialize, Serialize};
 use standardflow_core::{Diagnostic, ValidationReport};
 
+use crate::limits::{
+    MAX_CANVAS_DIMENSION, MAX_EDGES, MAX_IDENTIFIER_BYTES, MAX_NODES, MAX_PATH_IDENTIFIER_BYTES,
+    MAX_RENDERED_COMPONENT_BYTES, MAX_TEXT_EQUIVALENT_BYTES, MAX_WRAPPED_LINES, is_xml_10_text,
+};
+
 /// Canvas dimensions in integer CSS pixels.
 #[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(deny_unknown_fields)]
@@ -202,21 +207,57 @@ impl Scene {
                 "schema_version must be dev.standardflow.scene-graph.v1",
             ));
         }
-        if self.canvas.width == 0 || self.canvas.height == 0 {
+        if !is_portable_recipe_id(&self.recipe_id)
+            || self.recipe_id.len() > MAX_PATH_IDENTIFIER_BYTES
+        {
+            report.push(Diagnostic::error(
+                "SF-SCENE-013",
+                "/recipe_id",
+                "recipe_id must be a bounded portable identifier",
+            ));
+        }
+        if self.nodes.is_empty() || self.nodes.len() > MAX_NODES {
+            report.push(Diagnostic::error(
+                "SF-SCENE-014",
+                "/nodes",
+                format!("scenes require 1 to {MAX_NODES} nodes"),
+            ));
+        }
+        if self.edges.len() > MAX_EDGES {
+            report.push(Diagnostic::error(
+                "SF-SCENE-015",
+                "/edges",
+                format!("scenes permit at most {MAX_EDGES} edges"),
+            ));
+        }
+        if self.canvas.width == 0
+            || self.canvas.height == 0
+            || self.canvas.width > MAX_CANVAS_DIMENSION
+            || self.canvas.height > MAX_CANVAS_DIMENSION
+        {
             report.push(Diagnostic::error(
                 "SF-SCENE-002",
                 "/canvas",
                 "canvas dimensions must be positive",
             ));
         }
-        if self.title.trim().is_empty() || self.description.trim().is_empty() {
+        if self.title.trim().is_empty()
+            || self.description.trim().is_empty()
+            || self.title.len() > MAX_RENDERED_COMPONENT_BYTES
+            || self.description.len() > MAX_RENDERED_COMPONENT_BYTES
+            || !is_xml_10_text(&self.title)
+            || !is_xml_10_text(&self.description)
+        {
             report.push(Diagnostic::error(
                 "SF-SCENE-003",
                 "/title",
                 "title and description must not be blank",
             ));
         }
-        if self.text_equivalent.trim().is_empty() {
+        if self.text_equivalent.trim().is_empty()
+            || self.text_equivalent.len() > MAX_TEXT_EQUIVALENT_BYTES
+            || !is_xml_10_text(&self.text_equivalent)
+        {
             report.push(Diagnostic::error(
                 "SF-SCENE-004",
                 "/text_equivalent",
@@ -243,8 +284,17 @@ impl Scene {
             }
             if node.label.trim().is_empty()
                 || node.aria_label.trim().is_empty()
+                || node.label.len() > MAX_RENDERED_COMPONENT_BYTES
+                || node.aria_label.len() > MAX_RENDERED_COMPONENT_BYTES
+                || !is_xml_10_text(&node.label)
+                || !is_xml_10_text(&node.aria_label)
                 || node.lines.is_empty()
-                || node.lines.iter().any(|line| line.trim().is_empty())
+                || node.lines.len() > MAX_WRAPPED_LINES
+                || node.lines.iter().any(|line| {
+                    line.trim().is_empty()
+                        || line.len() > MAX_RENDERED_COMPONENT_BYTES
+                        || !is_xml_10_text(line)
+                })
             {
                 report.push(Diagnostic::error(
                     "SF-SCENE-007",
@@ -266,14 +316,16 @@ impl Scene {
             }
         }
 
-        for (left_index, left) in self.nodes.iter().enumerate() {
-            for right in self.nodes.iter().skip(left_index + 1) {
-                if rectangles_overlap(left.rect, right.rect) {
-                    report.push(Diagnostic::error(
-                        "SF-SCENE-009",
-                        "/nodes",
-                        format!("nodes {} and {} overlap", left.id, right.id),
-                    ));
+        if self.nodes.len() <= MAX_NODES {
+            for (left_index, left) in self.nodes.iter().enumerate() {
+                for right in self.nodes.iter().skip(left_index + 1) {
+                    if rectangles_overlap(left.rect, right.rect) {
+                        report.push(Diagnostic::error(
+                            "SF-SCENE-009",
+                            "/nodes",
+                            format!("nodes {} and {} overlap", left.id, right.id),
+                        ));
+                    }
                 }
             }
         }
@@ -286,6 +338,21 @@ impl Scene {
                     "SF-SCENE-010",
                     format!("{path}/id"),
                     "edge id must be portable and unique",
+                ));
+            }
+            if edge.id.len() > MAX_IDENTIFIER_BYTES
+                || edge.from.len() > MAX_IDENTIFIER_BYTES
+                || edge.to.len() > MAX_IDENTIFIER_BYTES
+                || edge.label.as_ref().is_some_and(|label| {
+                    label.trim().is_empty()
+                        || label.len() > MAX_RENDERED_COMPONENT_BYTES
+                        || !is_xml_10_text(label)
+                })
+            {
+                report.push(Diagnostic::error(
+                    "SF-SCENE-016",
+                    path.clone(),
+                    "edge identifier or optional label violates text or size limits",
                 ));
             }
             if edge.from == edge.to
@@ -313,6 +380,24 @@ impl Scene {
                 "reading_order must contain every node exactly once",
             ));
         }
+        if self
+            .nodes
+            .iter()
+            .any(|node| !self.text_equivalent.contains(&node.label))
+        {
+            report.push(Diagnostic::error(
+                "SF-SCENE-017",
+                "/text_equivalent",
+                "text equivalent must contain every complete node label",
+            ));
+        }
+        if !self.edges.is_empty() && !self.text_equivalent.contains("Flow relationships:") {
+            report.push(Diagnostic::error(
+                "SF-SCENE-018",
+                "/text_equivalent",
+                "text equivalent must describe directed flow relationships",
+            ));
+        }
         report
     }
 
@@ -337,6 +422,16 @@ const fn rectangles_overlap(left: Rect, right: Rect) -> bool {
         return true;
     };
     left.x < right_right && left_right > right.x && left.y < right_bottom && left_bottom > right.y
+}
+
+fn is_portable_recipe_id(value: &str) -> bool {
+    let mut bytes = value.bytes();
+    bytes
+        .next()
+        .is_some_and(|first| first.is_ascii_alphanumeric())
+        && bytes.all(|byte| {
+            byte.is_ascii_alphanumeric() || matches!(byte, b'.' | b'_' | b':' | b'-' | b'/')
+        })
 }
 
 fn is_portable_id(value: &str) -> bool {

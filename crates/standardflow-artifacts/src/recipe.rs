@@ -1,12 +1,17 @@
 //! Data-driven diagram recipes and deterministic grid layout.
 
 use std::collections::{BTreeMap, BTreeSet};
-use std::fmt::Write as _;
 
 use serde::{Deserialize, Serialize};
 use standardflow_core::{Diagnostic, ValidationReport};
 use thiserror::Error;
 
+use crate::limits::{
+    MAX_BINDING_BYTES, MAX_BINDINGS, MAX_CANVAS_DIMENSION, MAX_COLUMNS,
+    MAX_CONTRACT_IDENTIFIER_BYTES, MAX_EDGES, MAX_IDENTIFIER_BYTES, MAX_INPUT_BYTES, MAX_NODES,
+    MAX_PATH_IDENTIFIER_BYTES, MAX_RENDERED_COMPONENT_BYTES, MAX_ROW_INDEX, MAX_TEMPLATE_BYTES,
+    MAX_TEXT_EQUIVALENT_BYTES, MAX_VERSION_BYTES, MAX_WRAPPED_LINES, is_xml_10_text,
+};
 use crate::scene::{Anchor, Canvas, EdgeKind, NodeRole, Rect, Scene, SceneEdge, SceneNode};
 
 /// Supported artefact kind for this first renderer slice.
@@ -146,6 +151,12 @@ impl DiagramRecipe {
     ///
     /// Returns [`RecipeError::Json`] when the JSON cannot be decoded.
     pub fn from_json(bytes: &[u8]) -> Result<Self, RecipeError> {
+        if bytes.len() > MAX_INPUT_BYTES {
+            return Err(RecipeError::ResourceLimit {
+                resource: "recipe JSON bytes",
+                limit: MAX_INPUT_BYTES,
+            });
+        }
         serde_json::from_slice(bytes).map_err(RecipeError::Json)
     }
 
@@ -164,13 +175,47 @@ impl DiagramRecipe {
                 "schema_version must be dev.standardflow.artifact-recipe.v1",
             ));
         }
-        for (path, value) in [
-            ("/recipe_id", self.recipe_id.as_str()),
-            ("/version", self.version.as_str()),
-            ("/source_standard", self.source_standard.as_str()),
-            ("/input_contract", self.input_contract.as_str()),
-            ("/title_template", self.title_template.as_str()),
-            ("/description_template", self.description_template.as_str()),
+        if self.nodes.is_empty() || self.nodes.len() > MAX_NODES {
+            report.push(Diagnostic::error(
+                "SF-RECIPE-015",
+                "/nodes",
+                format!("recipes require 1 to {MAX_NODES} nodes"),
+            ));
+        }
+        if self.edges.len() > MAX_EDGES {
+            report.push(Diagnostic::error(
+                "SF-RECIPE-016",
+                "/edges",
+                format!("recipes permit at most {MAX_EDGES} edges"),
+            ));
+        }
+        for (path, value, limit) in [
+            (
+                "/recipe_id",
+                self.recipe_id.as_str(),
+                MAX_PATH_IDENTIFIER_BYTES,
+            ),
+            ("/version", self.version.as_str(), MAX_VERSION_BYTES),
+            (
+                "/source_standard",
+                self.source_standard.as_str(),
+                MAX_PATH_IDENTIFIER_BYTES,
+            ),
+            (
+                "/input_contract",
+                self.input_contract.as_str(),
+                MAX_CONTRACT_IDENTIFIER_BYTES,
+            ),
+            (
+                "/title_template",
+                self.title_template.as_str(),
+                MAX_TEMPLATE_BYTES,
+            ),
+            (
+                "/description_template",
+                self.description_template.as_str(),
+                MAX_TEMPLATE_BYTES,
+            ),
         ] {
             if value.trim().is_empty() {
                 report.push(Diagnostic::error(
@@ -178,13 +223,28 @@ impl DiagramRecipe {
                     path,
                     "value must not be blank",
                 ));
+            } else if value.len() > limit || !is_xml_10_text(value) {
+                report.push(Diagnostic::error(
+                    "SF-RECIPE-017",
+                    path,
+                    format!(
+                        "value must be valid XML 1.0 text and no more than {limit} UTF-8 bytes"
+                    ),
+                ));
             }
         }
-        if !is_portable_id(&self.recipe_id) {
+        if !is_portable_recipe_id(&self.recipe_id) {
             report.push(Diagnostic::error(
                 "SF-RECIPE-003",
                 "/recipe_id",
-                "recipe_id must use portable identifier characters",
+                "recipe_id must use the portable slash-delimited recipe grammar",
+            ));
+        }
+        if !is_source_standard_id(&self.source_standard) {
+            report.push(Diagnostic::error(
+                "SF-RECIPE-020",
+                "/source_standard",
+                "source_standard must contain at least two lowercase portable path segments",
             ));
         }
         validate_layout(self.layout, &mut report);
@@ -192,11 +252,24 @@ impl DiagramRecipe {
         let mut node_ids = BTreeSet::new();
         for (index, node) in self.nodes.iter().enumerate() {
             let path = format!("/nodes/{index}");
-            if !is_portable_id(&node.id) || !node_ids.insert(node.id.as_str()) {
+            if !is_portable_reference_id(&node.id) || !node_ids.insert(node.id.as_str()) {
                 report.push(Diagnostic::error(
                     "SF-RECIPE-004",
                     format!("{path}/id"),
                     "node id must be portable and unique",
+                ));
+            }
+            if node.row > MAX_ROW_INDEX
+                || node.id.len() > MAX_IDENTIFIER_BYTES
+                || node.label_template.len() > MAX_TEMPLATE_BYTES
+                || node.aria_template.len() > MAX_TEMPLATE_BYTES
+                || !is_xml_10_text(&node.label_template)
+                || !is_xml_10_text(&node.aria_template)
+            {
+                report.push(Diagnostic::error(
+                    "SF-RECIPE-018",
+                    path.clone(),
+                    "node row, identifier or text exceeds the declared safe limits",
                 ));
             }
             if node.column_span == 0
@@ -220,14 +293,16 @@ impl DiagramRecipe {
                 ));
             }
         }
-        for (left_index, left) in self.nodes.iter().enumerate() {
-            for right in self.nodes.iter().skip(left_index + 1) {
-                if nodes_overlap(left, right) {
-                    report.push(Diagnostic::error(
-                        "SF-RECIPE-007",
-                        "/nodes",
-                        format!("grid cells overlap for {} and {}", left.id, right.id),
-                    ));
+        if self.nodes.len() <= MAX_NODES {
+            for (left_index, left) in self.nodes.iter().enumerate() {
+                for right in self.nodes.iter().skip(left_index + 1) {
+                    if nodes_overlap(left, right) {
+                        report.push(Diagnostic::error(
+                            "SF-RECIPE-007",
+                            "/nodes",
+                            format!("grid cells overlap for {} and {}", left.id, right.id),
+                        ));
+                    }
                 }
             }
         }
@@ -235,11 +310,26 @@ impl DiagramRecipe {
         let mut edge_ids = BTreeSet::new();
         for (index, edge) in self.edges.iter().enumerate() {
             let path = format!("/edges/{index}");
-            if !is_portable_id(&edge.id) || !edge_ids.insert(edge.id.as_str()) {
+            if !is_portable_reference_id(&edge.id) || !edge_ids.insert(edge.id.as_str()) {
                 report.push(Diagnostic::error(
                     "SF-RECIPE-008",
                     format!("{path}/id"),
                     "edge id must be portable and unique",
+                ));
+            }
+            if edge.id.len() > MAX_IDENTIFIER_BYTES
+                || edge.from.len() > MAX_IDENTIFIER_BYTES
+                || edge.to.len() > MAX_IDENTIFIER_BYTES
+                || edge.label_template.as_ref().is_some_and(|label| {
+                    label.trim().is_empty()
+                        || label.len() > MAX_TEMPLATE_BYTES
+                        || !is_xml_10_text(label)
+                })
+            {
+                report.push(Diagnostic::error(
+                    "SF-RECIPE-019",
+                    path.clone(),
+                    "edge identifier or label exceeds the declared safe limits",
                 ));
             }
             if edge.from == edge.to
@@ -254,6 +344,17 @@ impl DiagramRecipe {
             }
         }
 
+        if self
+            .reading_order
+            .iter()
+            .any(|id| !is_portable_reference_id(id) || id.len() > MAX_IDENTIFIER_BYTES)
+        {
+            report.push(Diagnostic::error(
+                "SF-RECIPE-021",
+                "/reading_order",
+                "reading-order identifiers must use the bounded reference grammar",
+            ));
+        }
         let reading_ids = self
             .reading_order
             .iter()
@@ -310,6 +411,7 @@ impl DiagramRecipe {
         if !recipe_report.is_valid() {
             return Err(RecipeError::Validation(recipe_report));
         }
+        validate_bindings(bindings)?;
         let title = interpolate(&self.title_template, bindings)?;
         let description = interpolate(&self.description_template, bindings)?;
 
@@ -319,7 +421,7 @@ impl DiagramRecipe {
             let label = interpolate(&node.label_template, bindings)?;
             let aria_label = interpolate(&node.aria_template, bindings)?;
             let width = node_width(self.layout, node.column_span)?;
-            let lines = wrap_label(&label, self.layout, width);
+            let lines = wrap_label(&label, self.layout, width)?;
             let content_height = u32::try_from(lines.len())
                 .ok()
                 .and_then(|count| count.checked_mul(self.layout.line_height))
@@ -408,7 +510,7 @@ impl DiagramRecipe {
         }
 
         let text_equivalent =
-            build_text_equivalent(&title, &description, &nodes, &self.reading_order)?;
+            build_text_equivalent(&title, &description, &nodes, &edges, &self.reading_order)?;
         let scene = Scene {
             schema_version: String::from("dev.standardflow.scene-graph.v1"),
             recipe_id: self.recipe_id.clone(),
@@ -432,6 +534,17 @@ impl DiagramRecipe {
 /// Recipe parsing, validation or rendering failure.
 #[derive(Debug, Error)]
 pub enum RecipeError {
+    /// An input or generated component exceeds a declared resource limit.
+    #[error("{resource} exceeds the declared limit of {limit}")]
+    ResourceLimit {
+        /// Bounded resource.
+        resource: &'static str,
+        /// Maximum permitted value.
+        limit: usize,
+    },
+    /// A binding key or value violates the portable bounded contract.
+    #[error("binding {0:?} violates identifier, XML text or size limits")]
+    InvalidBinding(String),
     /// Recipe JSON could not be decoded.
     #[error("recipe JSON is invalid: {0}")]
     Json(#[source] serde_json::Error),
@@ -457,14 +570,16 @@ pub enum RecipeError {
 
 fn validate_layout(layout: GridLayout, report: &mut ValidationReport) {
     if layout.columns == 0
+        || layout.columns > MAX_COLUMNS
         || layout.margin == 0
-        || layout.column_width < 80
-        || layout.column_gap < 8
-        || layout.row_gap < 8
-        || layout.minimum_node_height < 40
-        || layout.padding < 4
-        || layout.line_height < 10
-        || layout.character_width == 0
+        || layout.margin > 500
+        || !(80..=2_000).contains(&layout.column_width)
+        || !(8..=1_000).contains(&layout.column_gap)
+        || !(8..=1_000).contains(&layout.row_gap)
+        || !(40..=2_000).contains(&layout.minimum_node_height)
+        || !(4..=200).contains(&layout.padding)
+        || !(10..=100).contains(&layout.line_height)
+        || !(1..=40).contains(&layout.character_width)
     {
         report.push(Diagnostic::error(
             "SF-RECIPE-013",
@@ -472,7 +587,9 @@ fn validate_layout(layout: GridLayout, report: &mut ValidationReport) {
             "layout dimensions are outside the safe deterministic range",
         ));
     }
-    if canvas_width(layout).is_err() {
+    if canvas_width(layout).is_err()
+        || canvas_width(layout).is_ok_and(|width| width > MAX_CANVAS_DIMENSION)
+    {
         report.push(Diagnostic::error(
             "SF-RECIPE-014",
             "/layout",
@@ -544,16 +661,26 @@ fn column_x(layout: GridLayout, column: u32) -> Result<u32, RecipeError> {
 )]
 fn interpolate(template: &str, bindings: &BTreeMap<String, String>) -> Result<String, RecipeError> {
     let mut remaining = template;
-    let mut output = String::with_capacity(template.len());
+    let mut output = String::with_capacity(template.len().min(MAX_RENDERED_COMPONENT_BYTES));
     loop {
         let Some(open) = remaining.find("{{") else {
             if remaining.contains("}}") {
                 return Err(RecipeError::MalformedTemplate);
             }
-            output.push_str(remaining);
+            append_bounded(
+                &mut output,
+                remaining,
+                MAX_RENDERED_COMPONENT_BYTES,
+                "interpolated text bytes",
+            )?;
             break;
         };
-        output.push_str(&remaining[..open]);
+        append_bounded(
+            &mut output,
+            &remaining[..open],
+            MAX_RENDERED_COMPONENT_BYTES,
+            "interpolated text bytes",
+        )?;
         let after_open = &remaining[open + 2..];
         let Some(close) = after_open.find("}}") else {
             return Err(RecipeError::MalformedTemplate);
@@ -565,13 +692,18 @@ fn interpolate(template: &str, bindings: &BTreeMap<String, String>) -> Result<St
         let value = bindings
             .get(key)
             .ok_or_else(|| RecipeError::MissingBinding(key.to_owned()))?;
-        output.push_str(value);
+        append_bounded(
+            &mut output,
+            value,
+            MAX_RENDERED_COMPONENT_BYTES,
+            "interpolated text bytes",
+        )?;
         remaining = &after_open[close + 2..];
     }
     Ok(output)
 }
 
-fn wrap_label(label: &str, layout: GridLayout, width: u32) -> Vec<String> {
+fn wrap_label(label: &str, layout: GridLayout, width: u32) -> Result<Vec<String>, RecipeError> {
     let available = width.saturating_sub(layout.padding.saturating_mul(2));
     let maximum = usize::try_from((available / layout.character_width).max(12)).unwrap_or(12);
     let mut lines = Vec::new();
@@ -581,7 +713,13 @@ fn wrap_label(label: &str, layout: GridLayout, width: u32) -> Vec<String> {
     if lines.is_empty() {
         lines.push(String::from(" "));
     }
-    lines
+    if lines.len() > MAX_WRAPPED_LINES {
+        return Err(RecipeError::ResourceLimit {
+            resource: "wrapped label lines",
+            limit: MAX_WRAPPED_LINES,
+        });
+    }
+    Ok(lines)
 }
 
 fn wrap_paragraph(paragraph: &str, maximum: usize, output: &mut Vec<String>) {
@@ -591,14 +729,31 @@ fn wrap_paragraph(paragraph: &str, maximum: usize, output: &mut Vec<String>) {
     }
     let mut line = String::new();
     for word in paragraph.split_whitespace() {
+        let word_length = word.chars().count();
+        if word_length > maximum {
+            if !line.is_empty() {
+                output.push(std::mem::take(&mut line));
+            }
+            let mut chunk = String::new();
+            let mut chunk_length = 0_usize;
+            for character in word.chars() {
+                if chunk_length == maximum {
+                    output.push(std::mem::take(&mut chunk));
+                    chunk_length = 0;
+                }
+                chunk.push(character);
+                chunk_length += 1;
+            }
+            line = chunk;
+            continue;
+        }
         let candidate_length = line
             .chars()
             .count()
             .saturating_add(usize::from(!line.is_empty()))
-            .saturating_add(word.chars().count());
+            .saturating_add(word_length);
         if !line.is_empty() && candidate_length > maximum {
-            output.push(line);
-            line = String::new();
+            output.push(std::mem::take(&mut line));
         }
         if !line.is_empty() {
             line.push(' ');
@@ -614,25 +769,142 @@ fn build_text_equivalent(
     title: &str,
     description: &str,
     nodes: &[SceneNode],
+    edges: &[SceneEdge],
     reading_order: &[String],
 ) -> Result<String, RecipeError> {
     let lookup = nodes
         .iter()
         .map(|node| (node.id.as_str(), node))
         .collect::<BTreeMap<_, _>>();
-    let mut text = format!("{title}\n\n{description}\n");
+    let mut text = String::new();
+    append_bounded(
+        &mut text,
+        title,
+        MAX_TEXT_EQUIVALENT_BYTES,
+        "text equivalent bytes",
+    )?;
+    append_bounded(
+        &mut text,
+        "
+
+",
+        MAX_TEXT_EQUIVALENT_BYTES,
+        "text equivalent bytes",
+    )?;
+    append_bounded(
+        &mut text,
+        description,
+        MAX_TEXT_EQUIVALENT_BYTES,
+        "text equivalent bytes",
+    )?;
+    append_bounded(
+        &mut text,
+        "
+
+Stages:",
+        MAX_TEXT_EQUIVALENT_BYTES,
+        "text equivalent bytes",
+    )?;
     for (index, id) in reading_order.iter().enumerate() {
         let node = lookup
             .get(id.as_str())
             .ok_or_else(|| RecipeError::MissingBinding(id.clone()))?;
-        write!(&mut text, "\n{}. {}", index + 1, node.label)
-            .map_err(|_| RecipeError::Formatting)?;
+        append_bounded(
+            &mut text,
+            &format!(
+                "
+{}. {}",
+                index + 1,
+                node.label
+            ),
+            MAX_TEXT_EQUIVALENT_BYTES,
+            "text equivalent bytes",
+        )?;
+    }
+    append_bounded(
+        &mut text,
+        "
+
+Flow relationships:",
+        MAX_TEXT_EQUIVALENT_BYTES,
+        "text equivalent bytes",
+    )?;
+    for (index, edge) in edges.iter().enumerate() {
+        let from = lookup
+            .get(edge.from.as_str())
+            .ok_or_else(|| RecipeError::MissingBinding(edge.from.clone()))?;
+        let to = lookup
+            .get(edge.to.as_str())
+            .ok_or_else(|| RecipeError::MissingBinding(edge.to.clone()))?;
+        let label = edge
+            .label
+            .as_deref()
+            .map_or_else(String::new, |value| format!("; label: {value}"));
+        append_bounded(
+            &mut text,
+            &format!(
+                "
+{}. {} → {} ({}){}",
+                index + 1,
+                from.label,
+                to.label,
+                edge_kind_text(edge.kind),
+                label
+            ),
+            MAX_TEXT_EQUIVALENT_BYTES,
+            "text equivalent bytes",
+        )?;
     }
     text.push('\n');
     Ok(text)
 }
 
-fn is_portable_id(value: &str) -> bool {
+fn validate_bindings(bindings: &BTreeMap<String, String>) -> Result<(), RecipeError> {
+    if bindings.len() > MAX_BINDINGS {
+        return Err(RecipeError::ResourceLimit {
+            resource: "recipe bindings",
+            limit: MAX_BINDINGS,
+        });
+    }
+    for (key, value) in bindings {
+        if !is_portable_reference_id(key)
+            || key.len() > MAX_IDENTIFIER_BYTES
+            || value.len() > MAX_BINDING_BYTES
+            || !is_xml_10_text(value)
+        {
+            return Err(RecipeError::InvalidBinding(key.clone()));
+        }
+    }
+    Ok(())
+}
+
+fn append_bounded(
+    output: &mut String,
+    value: &str,
+    limit: usize,
+    resource: &'static str,
+) -> Result<(), RecipeError> {
+    let length = output
+        .len()
+        .checked_add(value.len())
+        .ok_or(RecipeError::ResourceLimit { resource, limit })?;
+    if length > limit {
+        return Err(RecipeError::ResourceLimit { resource, limit });
+    }
+    output.push_str(value);
+    Ok(())
+}
+
+const fn edge_kind_text(kind: EdgeKind) -> &'static str {
+    match kind {
+        EdgeKind::Progression => "progression",
+        EdgeKind::Exclusion => "exclusion",
+        EdgeKind::Merge => "merge",
+        EdgeKind::Lineage => "lineage",
+    }
+}
+
+fn is_portable_recipe_id(value: &str) -> bool {
     let mut bytes = value.bytes();
     bytes
         .next()
@@ -640,6 +912,35 @@ fn is_portable_id(value: &str) -> bool {
         && bytes.all(|byte| {
             byte.is_ascii_alphanumeric() || matches!(byte, b'.' | b'_' | b':' | b'-' | b'/')
         })
+}
+
+fn is_portable_reference_id(value: &str) -> bool {
+    let mut bytes = value.bytes();
+    bytes
+        .next()
+        .is_some_and(|first| first.is_ascii_alphanumeric())
+        && bytes
+            .all(|byte| byte.is_ascii_alphanumeric() || matches!(byte, b'.' | b'_' | b':' | b'-'))
+}
+
+fn is_source_standard_id(value: &str) -> bool {
+    let mut segment_count = 0_usize;
+    for segment in value.split('/') {
+        segment_count += 1;
+        let mut bytes = segment.bytes();
+        if !bytes
+            .next()
+            .is_some_and(|first| first.is_ascii_lowercase() || first.is_ascii_digit())
+            || !bytes.all(|byte| {
+                byte.is_ascii_lowercase()
+                    || byte.is_ascii_digit()
+                    || matches!(byte, b'.' | b'_' | b'-')
+            })
+        {
+            return false;
+        }
+    }
+    segment_count >= 2
 }
 
 #[cfg(test)]

@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1460 896" width="1460" height="896" role="img" aria-labelledby="standardflow-title standardflow-description">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1460 896" width="1460" height="896" role="img" aria-labelledby="standardflow-title" aria-describedby="standardflow-description">
   <title id="standardflow-title">PRISMA 2020 flow diagram: new review with other sources</title>
-  <desc id="standardflow-description">Study identification and selection for fixture-new-mixed-sources, using databases, registers and other methods.</desc>
-  <metadata id="standardflow-text-equivalent">PRISMA 2020 flow diagram: new review with other sources
+  <desc id="standardflow-description">PRISMA 2020 flow diagram: new review with other sources
 
 Study identification and selection for fixture-new-mixed-sources, using databases, registers and other methods.
 
+Stages:
 1. Records identified from:
 Databases (n = 120)
 Registers (n = 30)
@@ -47,6 +47,172 @@ Wrong study design (n = 7)
 (n = 24)
 Reports of included studies
 (n = 30)
+
+Flow relationships:
+1. Records identified from:
+Databases (n = 120)
+Registers (n = 30)
+Total (n = 150) → Records removed before screening:
+Duplicate records (n = 20)
+Marked ineligible by automation (n = 5)
+Other reasons (n = 5)
+Total removed (n = 30) (exclusion)
+2. Records identified from:
+Databases (n = 120)
+Registers (n = 30)
+Total (n = 150) → Records screened
+(n = 120) (progression)
+3. Records screened
+(n = 120) → Records excluded
+(n = 70) (exclusion)
+4. Records screened
+(n = 120) → Reports sought for retrieval
+(n = 50) (progression)
+5. Reports sought for retrieval
+(n = 50) → Reports not retrieved
+(n = 5) (exclusion)
+6. Reports sought for retrieval
+(n = 50) → Reports assessed for eligibility
+(n = 45) (progression)
+7. Reports assessed for eligibility
+(n = 45) → Reports excluded (n = 25):
+Wrong population (n = 10)
+Wrong intervention (n = 8)
+Wrong study design (n = 7) (exclusion)
+8. Records identified from other methods:
+Websites (n = 8)
+Organisations (n = 4)
+Citation searching (n = 6)
+Other sources (n = 2)
+Total (n = 20) → Reports sought for retrieval
+(n = 20) (progression)
+9. Reports sought for retrieval
+(n = 20) → Reports not retrieved
+(n = 2) (exclusion)
+10. Reports sought for retrieval
+(n = 20) → Reports assessed for eligibility
+(n = 18) (progression)
+11. Reports assessed for eligibility
+(n = 18) → Reports excluded (n = 8):
+Duplicate report (n = 5)
+Insufficient information (n = 3) (exclusion)
+12. Reports assessed for eligibility
+(n = 45) → Studies included in review
+(n = 24)
+Reports of included studies
+(n = 30) (merge)
+13. Reports assessed for eligibility
+(n = 18) → Studies included in review
+(n = 24)
+Reports of included studies
+(n = 30) (merge)
+</desc>
+  <metadata id="standardflow-text-equivalent">PRISMA 2020 flow diagram: new review with other sources
+
+Study identification and selection for fixture-new-mixed-sources, using databases, registers and other methods.
+
+Stages:
+1. Records identified from:
+Databases (n = 120)
+Registers (n = 30)
+Total (n = 150)
+2. Records removed before screening:
+Duplicate records (n = 20)
+Marked ineligible by automation (n = 5)
+Other reasons (n = 5)
+Total removed (n = 30)
+3. Records identified from other methods:
+Websites (n = 8)
+Organisations (n = 4)
+Citation searching (n = 6)
+Other sources (n = 2)
+Total (n = 20)
+4. Records screened
+(n = 120)
+5. Records excluded
+(n = 70)
+6. Reports sought for retrieval
+(n = 20)
+7. Reports not retrieved
+(n = 2)
+8. Reports sought for retrieval
+(n = 50)
+9. Reports not retrieved
+(n = 5)
+10. Reports assessed for eligibility
+(n = 18)
+11. Reports excluded (n = 8):
+Duplicate report (n = 5)
+Insufficient information (n = 3)
+12. Reports assessed for eligibility
+(n = 45)
+13. Reports excluded (n = 25):
+Wrong population (n = 10)
+Wrong intervention (n = 8)
+Wrong study design (n = 7)
+14. Studies included in review
+(n = 24)
+Reports of included studies
+(n = 30)
+
+Flow relationships:
+1. Records identified from:
+Databases (n = 120)
+Registers (n = 30)
+Total (n = 150) → Records removed before screening:
+Duplicate records (n = 20)
+Marked ineligible by automation (n = 5)
+Other reasons (n = 5)
+Total removed (n = 30) (exclusion)
+2. Records identified from:
+Databases (n = 120)
+Registers (n = 30)
+Total (n = 150) → Records screened
+(n = 120) (progression)
+3. Records screened
+(n = 120) → Records excluded
+(n = 70) (exclusion)
+4. Records screened
+(n = 120) → Reports sought for retrieval
+(n = 50) (progression)
+5. Reports sought for retrieval
+(n = 50) → Reports not retrieved
+(n = 5) (exclusion)
+6. Reports sought for retrieval
+(n = 50) → Reports assessed for eligibility
+(n = 45) (progression)
+7. Reports assessed for eligibility
+(n = 45) → Reports excluded (n = 25):
+Wrong population (n = 10)
+Wrong intervention (n = 8)
+Wrong study design (n = 7) (exclusion)
+8. Records identified from other methods:
+Websites (n = 8)
+Organisations (n = 4)
+Citation searching (n = 6)
+Other sources (n = 2)
+Total (n = 20) → Reports sought for retrieval
+(n = 20) (progression)
+9. Reports sought for retrieval
+(n = 20) → Reports not retrieved
+(n = 2) (exclusion)
+10. Reports sought for retrieval
+(n = 20) → Reports assessed for eligibility
+(n = 18) (progression)
+11. Reports assessed for eligibility
+(n = 18) → Reports excluded (n = 8):
+Duplicate report (n = 5)
+Insufficient information (n = 3) (exclusion)
+12. Reports assessed for eligibility
+(n = 45) → Studies included in review
+(n = 24)
+Reports of included studies
+(n = 30) (merge)
+13. Reports assessed for eligibility
+(n = 18) → Studies included in review
+(n = 24)
+Reports of included studies
+(n = 30) (merge)
 </metadata>
   <defs>
     <marker id="standardflow-arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" /></marker>

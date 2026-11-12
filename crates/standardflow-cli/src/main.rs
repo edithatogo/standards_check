@@ -4,7 +4,7 @@
 use std::env;
 use std::ffi::{OsStr, OsString};
 use std::fs;
-use std::io::{self, Write};
+use std::io::{self, Read, Write};
 use std::path::{Path, PathBuf};
 use std::process::ExitCode;
 
@@ -14,6 +14,8 @@ use standardflow_core::{
     LockLimits, PackError, ValidationReport, load_pack, sha256_hex, verify_pack_lock,
     write_pack_lock,
 };
+
+const MAX_DIAGRAM_INPUT_BYTES: u64 = 1_048_576;
 
 const USAGE: &str = "Usage:\n  standardflow [--json] pack validate <pack.json>\n  standardflow [--json] pack canonicalize <pack.json> <output.json|->\n  standardflow [--json] pack digest <pack.json>\n  standardflow [--json] pack lock <pack-directory> --write\n  standardflow [--json] pack lock <pack-directory> --check\n  standardflow [--json] diagram prisma <input.json> --format <svg|text|scene-json> --output <path|->\n";
 
@@ -195,12 +197,7 @@ fn diagram_command(mode: OutputMode, arguments: &[OsString]) -> Result<(), CliEr
             "--json cannot be combined with diagram output to stdout",
         ));
     }
-    let input = fs::read(&input_path).map_err(|error| {
-        CliError::operation(
-            "io",
-            format!("cannot read {}: {error}", input_path.display()),
-        )
-    })?;
+    let input = read_bounded(&input_path, MAX_DIAGRAM_INPUT_BYTES)?;
     let flow = parse_prisma_flow(&input).map_err(CliError::from_prisma)?;
     let scene = flow.build_scene().map_err(CliError::from_prisma)?;
     let bytes =
@@ -424,6 +421,25 @@ fn display_json_value(value: &serde_json::Value) -> String {
     value
         .as_str()
         .map_or_else(|| value.to_string(), str::to_owned)
+}
+
+fn read_bounded(path: &Path, limit: u64) -> Result<Vec<u8>, CliError> {
+    let file = fs::File::open(path).map_err(|error| {
+        CliError::operation("io", format!("cannot open {}: {error}", path.display()))
+    })?;
+    let mut reader = file.take(limit.saturating_add(1));
+    let mut bytes = Vec::new();
+    let _read = reader.read_to_end(&mut bytes).map_err(|error| {
+        CliError::operation("io", format!("cannot read {}: {error}", path.display()))
+    })?;
+    let observed = u64::try_from(bytes.len()).unwrap_or(u64::MAX);
+    if observed > limit {
+        return Err(CliError::operation(
+            "io",
+            format!("{} exceeds the {limit}-byte input limit", path.display()),
+        ));
+    }
+    Ok(bytes)
 }
 
 fn write_atomic(path: &Path, bytes: &[u8]) -> Result<(), CliError> {

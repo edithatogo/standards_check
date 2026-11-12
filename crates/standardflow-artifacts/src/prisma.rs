@@ -6,6 +6,10 @@ use serde::{Deserialize, Serialize};
 use standardflow_core::{Diagnostic, ValidationReport};
 use thiserror::Error;
 
+use crate::limits::{
+    MAX_EXCLUSION_REASON_CHARS, MAX_EXCLUSION_REASONS, MAX_INPUT_BYTES, MAX_SAFE_JSON_INTEGER,
+    is_xml_10_text,
+};
 use crate::recipe::{DiagramRecipe, RecipeError};
 use crate::scene::Scene;
 
@@ -186,6 +190,7 @@ impl PrismaFlow {
         if self.review_id.trim().is_empty()
             || self.review_id.chars().count() > 200
             || self.review_id.chars().any(char::is_control)
+            || !is_xml_10_text(&self.review_id)
         {
             report.push(Diagnostic::error(
                 "SF-PRISMA-002",
@@ -444,6 +449,9 @@ impl PrismaFlow {
 /// PRISMA parsing, arithmetic or recipe failure.
 #[derive(Debug, Error)]
 pub enum PrismaError {
+    /// Input exceeds the bounded parser contract.
+    #[error("PRISMA flow JSON exceeds the declared limit of {0} bytes")]
+    ResourceLimit(usize),
     /// Input JSON could not be decoded into the strict model.
     #[error("PRISMA flow JSON is invalid: {0}")]
     Json(#[from] serde_json::Error),
@@ -472,10 +480,15 @@ pub enum PrismaError {
 ///
 /// Returns [`PrismaError`] when decoding fails.
 pub fn parse_prisma_flow(bytes: &[u8]) -> Result<PrismaFlow, PrismaError> {
+    if bytes.len() > MAX_INPUT_BYTES {
+        return Err(PrismaError::ResourceLimit(MAX_INPUT_BYTES));
+    }
     serde_json::from_slice(bytes).map_err(PrismaError::Json)
 }
 
 fn validate_included_counts(counts: IncludedCounts, path: &str, report: &mut ValidationReport) {
+    validate_count(counts.studies, &format!("{path}/studies"), report);
+    validate_count(counts.reports, &format!("{path}/reports"), report);
     if counts.studies > counts.reports {
         report.push(Diagnostic::error(
             "SF-PRISMA-008",
@@ -486,6 +499,30 @@ fn validate_included_counts(counts: IncludedCounts, path: &str, report: &mut Val
 }
 
 fn validate_database_stream(stream: &DatabaseRegisterStream, report: &mut ValidationReport) {
+    for (name, value) in [
+        ("databases", stream.databases),
+        ("registers", stream.registers),
+        (
+            "duplicate_records_removed",
+            stream.duplicate_records_removed,
+        ),
+        (
+            "records_marked_ineligible_by_automation",
+            stream.records_marked_ineligible_by_automation,
+        ),
+        (
+            "records_removed_other_reasons",
+            stream.records_removed_other_reasons,
+        ),
+        ("records_screened", stream.records_screened),
+        ("records_excluded", stream.records_excluded),
+        ("reports_sought", stream.reports_sought),
+        ("reports_not_retrieved", stream.reports_not_retrieved),
+        ("reports_assessed", stream.reports_assessed),
+        ("reports_included", stream.reports_included),
+    ] {
+        validate_count(value, &format!("/databases_registers/{name}"), report);
+    }
     let identified = diagnostic_sum(
         [stream.databases, stream.registers],
         "/databases_registers",
@@ -539,6 +576,18 @@ fn validate_database_stream(stream: &DatabaseRegisterStream, report: &mut Valida
 }
 
 fn validate_other_stream(stream: &OtherMethodsStream, report: &mut ValidationReport) {
+    for (name, value) in [
+        ("websites", stream.websites),
+        ("organisations", stream.organisations),
+        ("citation_searching", stream.citation_searching),
+        ("other_sources", stream.other_sources),
+        ("reports_sought", stream.reports_sought),
+        ("reports_not_retrieved", stream.reports_not_retrieved),
+        ("reports_assessed", stream.reports_assessed),
+        ("reports_included", stream.reports_included),
+    ] {
+        validate_count(value, &format!("/other_methods/{name}"), report);
+    }
     let identified = diagnostic_sum(
         [
             stream.websites,
@@ -610,23 +659,37 @@ fn validate_reasons(
     path: &str,
     report: &mut ValidationReport,
 ) -> Option<u64> {
+    if reasons.len() > MAX_EXCLUSION_REASONS {
+        report.push(Diagnostic::error(
+            "SF-PRISMA-036",
+            path,
+            format!("at most {MAX_EXCLUSION_REASONS} exclusion reasons are permitted"),
+        ));
+    }
     let mut names = BTreeSet::new();
     let mut total = 0_u64;
     for (index, reason) in reasons.iter().enumerate() {
         let reason_path = format!("{path}/{index}");
-        if reason.reason.trim().is_empty() {
+        let normalized = reason.reason.trim();
+        if normalized.is_empty()
+            || normalized.chars().count() > MAX_EXCLUSION_REASON_CHARS
+            || !is_xml_10_text(normalized)
+        {
             report.push(Diagnostic::error(
                 "SF-PRISMA-032",
                 format!("{reason_path}/reason"),
-                "exclusion reason must not be blank",
+                format!(
+                    "exclusion reason must contain 1 to {MAX_EXCLUSION_REASON_CHARS} XML 1.0-compatible characters"
+                ),
             ));
-        } else if !names.insert(reason.reason.trim()) {
+        } else if !names.insert(normalized) {
             report.push(Diagnostic::error(
                 "SF-PRISMA-033",
                 format!("{reason_path}/reason"),
                 "exclusion reasons must be unique within a stream",
             ));
         }
+        validate_count(reason.reports, &format!("{reason_path}/reports"), report);
         if reason.reports == 0 {
             report.push(Diagnostic::error(
                 "SF-PRISMA-034",
@@ -642,9 +705,27 @@ fn validate_reasons(
             ));
             return None;
         };
+        if next > MAX_SAFE_JSON_INTEGER {
+            report.push(Diagnostic::error(
+                "SF-PRISMA-037",
+                path,
+                "report-exclusion total exceeds the cross-language safe-integer ceiling",
+            ));
+            return None;
+        }
         total = next;
     }
     Some(total)
+}
+
+fn validate_count(value: u64, path: &str, report: &mut ValidationReport) {
+    if value > MAX_SAFE_JSON_INTEGER {
+        report.push(Diagnostic::error(
+            "SF-PRISMA-009",
+            path,
+            format!("count must not exceed {MAX_SAFE_JSON_INTEGER}"),
+        ));
+    }
 }
 
 fn validate_difference(
@@ -712,6 +793,14 @@ fn diagnostic_sum<const N: usize>(
             ));
             return None;
         };
+        if next > MAX_SAFE_JSON_INTEGER {
+            report.push(Diagnostic::error(
+                "SF-PRISMA-051",
+                path,
+                "count total exceeds the cross-language safe-integer ceiling",
+            ));
+            return None;
+        }
         total = next;
     }
     Some(total)
@@ -722,6 +811,7 @@ fn checked_sum<const N: usize>(values: [u64; N], path: &str) -> Result<u64, Pris
     for value in values {
         total = total
             .checked_add(value)
+            .filter(|sum| *sum <= MAX_SAFE_JSON_INTEGER)
             .ok_or_else(|| PrismaError::BindingOverflow(path.to_owned()))?;
     }
     Ok(total)
@@ -732,6 +822,7 @@ fn exclusion_total(reasons: &[ExclusionReason], path: &str) -> Result<u64, Prism
     for reason in reasons {
         total = total
             .checked_add(reason.reports)
+            .filter(|sum| *sum <= MAX_SAFE_JSON_INTEGER)
             .ok_or_else(|| PrismaError::BindingOverflow(path.to_owned()))?;
     }
     Ok(total)
