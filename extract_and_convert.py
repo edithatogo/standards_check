@@ -38,17 +38,17 @@ def convert_to_markdown_format(text, filename):
         if not line:
             continue
             
-        # Check if this is a section header (all caps or title case)
-        if line.isupper() or (line.istitle() and len(line.split()) <= 5):
-            current_section = line
-            markdown_lines.append(f"## {line}")
-            markdown_lines.append("")
-        # Check if this is a checklist item (starts with number or bullet)
-        elif re.match(r'^\d+[\.\)]|^[a-zA-Z][\.\)]|^[\*\-\u2022]', line):
+        # Explicit checklist markers take precedence over title casing.
+        if re.match(r'^\d+[\.\)]|^[a-zA-Z][\.\)]|^[\*\-\u2022]', line):
             # Clean up the line
             clean_line = re.sub(r'^[\d\w\*\-\u2022\.\)]+\s*', '', line)
             if clean_line:
                 markdown_lines.append(f"- [ ] {clean_line}")
+        # Check if this is a section header (all caps or title case)
+        elif line.isupper() or (line.istitle() and len(line.split()) <= 5):
+            current_section = line
+            markdown_lines.append(f"## {line}")
+            markdown_lines.append("")
         # Regular text
         else:
             if line:
