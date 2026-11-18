@@ -1,11 +1,13 @@
 import os
 import sys
 import requests
+import pytest
 from unittest.mock import patch, MagicMock
 
 # Add scripts directory to path to import the module
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from scripts.validate_links import validate_url, MAX_RETRIES, RETRY_DELAY
+from scripts import validate_links
 
 @patch('scripts.validate_links.time.sleep')
 @patch('scripts.validate_links.requests.head')
@@ -59,123 +61,79 @@ def test_validate_url_success_after_retries(mock_head, mock_sleep):
     # Assert result is None (success)
     assert result is None
 
-import yaml
-from scripts.validate_links import main
 
-@patch('scripts.validate_links.sys.exit')
-@patch('scripts.validate_links.glob')
-def test_main_no_files(mock_glob, mock_exit, capsys):
-    """Test main when no YAML files are found."""
-    mock_glob.return_value = []
 
-    main()
+def test_main_no_files(tmp_path, monkeypatch, capsys):
+    monkeypatch.setattr(validate_links, "SOURCE_DIR", str(tmp_path))
+    with patch("scripts.validate_links.validate_url") as check_url:
+        with pytest.raises(SystemExit) as result:
+            validate_links.main()
+    assert result.value.code == 0
+    check_url.assert_not_called()
+    assert "No YAML files found to validate." in capsys.readouterr().out
 
-    mock_exit.assert_any_call(0)
-    captured = capsys.readouterr()
-    assert "No YAML files found to validate." in captured.out
 
-@patch('scripts.validate_links.sys.exit')
-@patch('scripts.validate_links.validate_url')
-@patch('scripts.validate_links.yaml.safe_load')
-@patch('builtins.open')
-@patch('scripts.validate_links.glob')
-def test_main_all_valid(mock_glob, mock_open, mock_yaml_load, mock_validate_url, mock_exit, capsys):
-    """Test main when all URLs are valid."""
-    mock_glob.return_value = ['test.yml']
-
-    mock_file = MagicMock()
-    mock_open.return_value.__enter__.return_value = mock_file
-
-    # Return data that has both source_url and citation.doi
-    mock_yaml_load.return_value = {
-        'source_url': 'http://valid.com',
-        'citation': {'doi': '10.1234/valid'}
+def test_main_all_valid(tmp_path, monkeypatch, capsys):
+    sidecar = tmp_path / "valid.yml"
+    sidecar.write_text(
+        "source_url: https://valid.example\ncitation:\n  doi: 10.1234/valid\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(validate_links, "SOURCE_DIR", str(tmp_path))
+    with patch("scripts.validate_links.validate_url", return_value=None) as check_url:
+        with pytest.raises(SystemExit) as result:
+            validate_links.main()
+    assert result.value.code == 0
+    assert check_url.call_count == 2
+    assert {call.args for call in check_url.call_args_list} == {
+        ("https://valid.example", str(sidecar)),
+        ("https://doi.org/10.1234/valid", str(sidecar)),
     }
+    assert "✓ All links are valid." in capsys.readouterr().out
 
-    # Validation returns None for valid links
-    mock_validate_url.return_value = None
 
-    main()
+def test_main_broken_links(tmp_path, monkeypatch, capsys):
+    sidecar = tmp_path / "broken.yml"
+    sidecar.write_text("source_url: https://broken.example\n", encoding="utf-8")
+    monkeypatch.setattr(validate_links, "SOURCE_DIR", str(tmp_path))
+    broken = {"file": str(sidecar), "url": "https://broken.example", "status": 404, "type": "BROKEN"}
+    with patch("scripts.validate_links.validate_url", return_value=broken) as check_url:
+        with pytest.raises(SystemExit) as result:
+            validate_links.main()
+    assert result.value.code == 1
+    check_url.assert_called_once_with("https://broken.example", str(sidecar))
+    assert "Found 1 broken or invalid links:" in capsys.readouterr().out
 
-    mock_exit.assert_any_call(0)
-    captured = capsys.readouterr()
-    assert "✓ All links are valid." in captured.out
 
-@patch('scripts.validate_links.sys.exit')
-@patch('scripts.validate_links.validate_url')
-@patch('scripts.validate_links.yaml.safe_load')
-@patch('builtins.open')
-@patch('scripts.validate_links.glob')
-def test_main_broken_links(mock_glob, mock_open, mock_yaml_load, mock_validate_url, mock_exit, capsys):
-    """Test main when broken URLs are encountered."""
-    mock_glob.return_value = ['test.yml']
+def test_main_redirect_warning_links(tmp_path, monkeypatch, capsys):
+    (tmp_path / "redirect.yml").write_text("source_url: https://redirect.example\n", encoding="utf-8")
+    (tmp_path / "warning.yml").write_text("source_url: https://warning.example\n", encoding="utf-8")
+    monkeypatch.setattr(validate_links, "SOURCE_DIR", str(tmp_path))
 
-    mock_file = MagicMock()
-    mock_open.return_value.__enter__.return_value = mock_file
+    def response(url, file_path):
+        if url == "https://redirect.example":
+            return {"file": file_path, "url": url, "status": 301,
+                    "final_url": "https://final.example", "type": "REDIRECT"}
+        return {"file": file_path, "url": url, "status": 403, "type": "WARNING"}
 
-    mock_yaml_load.return_value = {
-        'source_url': 'http://broken.com',
-    }
+    with patch("scripts.validate_links.validate_url", side_effect=response) as check_url:
+        with pytest.raises(SystemExit) as result:
+            validate_links.main()
+    assert result.value.code == 0
+    assert check_url.call_count == 2
+    output = capsys.readouterr().out
+    assert "Found 1 redirected links" in output
+    assert "Found 1 links with warnings" in output
 
-    mock_validate_url.return_value = {
-        "file": "test.yml", "url": "http://broken.com", "status": 404, "type": "BROKEN"
-    }
 
-    main()
-
-    mock_exit.assert_any_call(1)
-    captured = capsys.readouterr()
-    assert "Found 1 broken or invalid links:" in captured.out
-
-@patch('scripts.validate_links.sys.exit')
-@patch('scripts.validate_links.validate_url')
-@patch('scripts.validate_links.yaml.safe_load')
-@patch('builtins.open')
-@patch('scripts.validate_links.glob')
-def test_main_redirect_warning_links(mock_glob, mock_open, mock_yaml_load, mock_validate_url, mock_exit, capsys):
-    """Test main when redirected and warning URLs are encountered."""
-    mock_glob.return_value = ['test1.yml', 'test2.yml']
-
-    mock_file = MagicMock()
-    mock_open.return_value.__enter__.return_value = mock_file
-
-    # Return different mock data for different files
-    def yaml_load_side_effect(*args, **kwargs):
-        if mock_yaml_load.call_count == 1:
-            return {'source_url': 'http://redirect.com'}
-        return {'source_url': 'http://warning.com'}
-    mock_yaml_load.side_effect = yaml_load_side_effect
-
-    def validate_url_side_effect(url, *args):
-        if url == 'http://redirect.com':
-            return {"file": "test1.yml", "url": url, "status": 301, "final_url": "http://final.com", "type": "REDIRECT"}
-        return {"file": "test2.yml", "url": url, "status": 403, "type": "WARNING"}
-    mock_validate_url.side_effect = validate_url_side_effect
-
-    main()
-
-    # Should exit with 0 if no BROKEN or ERROR links exist
-    mock_exit.assert_any_call(0)
-    captured = capsys.readouterr()
-    assert "Found 1 redirected links" in captured.out
-    assert "Found 1 links with warnings" in captured.out
-
-@patch('scripts.validate_links.sys.exit')
-@patch('scripts.validate_links.yaml.safe_load')
-@patch('builtins.open')
-@patch('scripts.validate_links.glob')
-def test_main_yaml_error(mock_glob, mock_open, mock_yaml_load, mock_exit, capsys):
-    """Test main when a YAML parsing error occurs."""
-    mock_glob.return_value = ['test.yml']
-
-    mock_file = MagicMock()
-    mock_open.return_value.__enter__.return_value = mock_file
-
-    mock_yaml_load.side_effect = yaml.YAMLError("Parse error")
-
-    main()
-
-    mock_exit.assert_any_call(1)
-    captured = capsys.readouterr()
-    assert "ERROR: Could not parse YAML file." in captured.out
-    assert "Found 1 broken or invalid links:" in captured.out
+def test_main_yaml_error(tmp_path, monkeypatch, capsys):
+    (tmp_path / "malformed.yml").write_text("source_url: [\n", encoding="utf-8")
+    monkeypatch.setattr(validate_links, "SOURCE_DIR", str(tmp_path))
+    with patch("scripts.validate_links.validate_url") as check_url:
+        with pytest.raises(SystemExit) as result:
+            validate_links.main()
+    assert result.value.code == 1
+    check_url.assert_not_called()
+    output = capsys.readouterr().out
+    assert "ERROR: Could not read or parse YAML file." in output
+    assert "Found 1 broken or invalid links:" in output

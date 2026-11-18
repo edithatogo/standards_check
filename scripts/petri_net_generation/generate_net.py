@@ -5,49 +5,54 @@ import pm4py
 from pm4py.objects.petri_net.obj import PetriNet
 from pm4py.objects.petri_net.utils import petri_utils
 
-def create_petri_net_from_checklist(checklist_file):
+def parse_checklist(content, default_title):
     """
-    Creates a hierarchical Petri net from a checklist Markdown file,
-    modeling sections and items.
+    Parses a checklist Markdown file content into a structured dictionary.
     """
-    with open(checklist_file, 'r') as f:
-        content = f.read()
-
-    # Extract title from H1
     title_match = re.search(r'^#\s(.+)', content, re.MULTILINE)
-    title = title_match.group(1) if title_match else os.path.basename(checklist_file)
-    net = PetriNet(title)
+    title = title_match.group(1) if title_match else default_title
 
-    # Global source and sink places
-    source = PetriNet.Place("source")
-    sink = PetriNet.Place("sink")
-    net.places.add(source)
-    net.places.add(sink)
-
-    # Split content by H2 headers to find sections
-    # The regex split keeps the section headers
     parts = re.split(r'(^##\s.*$)', content, flags=re.MULTILINE)
-    
-    # Clean and group parts into (header, content) tuples
     cleaned_parts = [p.strip() for p in parts if p.strip()]
     sections = []
+
     for i in range(0, len(cleaned_parts)):
         if cleaned_parts[i].startswith('##'):
             section_header = cleaned_parts[i]
             section_content = cleaned_parts[i+1] if i + 1 < len(cleaned_parts) and not cleaned_parts[i+1].startswith('##') else ""
             sections.append((section_header, section_content))
 
+    items = []
     if not sections:
-        # If no sections, fall back to simple item parsing
         items = re.findall(r'-\s\[\s\].*', content)
+
+    return {
+        "title": title,
+        "sections": sections,
+        "items": items
+    }
+
+def generate_petri_net(parsed_data):
+    """
+    Generates a Petri net from parsed checklist data.
+    """
+    title = parsed_data["title"]
+    sections = parsed_data["sections"]
+    items = parsed_data["items"]
+
+    net = PetriNet(title)
+    source = PetriNet.Place("source")
+    sink = PetriNet.Place("sink")
+    net.places.add(source)
+    net.places.add(sink)
+
+    if not sections:
         if not items:
-            # If no items either, create a single transition for the whole document
             transition = PetriNet.Transition(name="single_transition", label=title)
             net.transitions.add(transition)
             petri_utils.add_arc_from_to(source, transition, net)
             petri_utils.add_arc_from_to(transition, sink, net)
         else:
-            # Process items in a single sequence
             last_place = source
             for i, item_text in enumerate(items):
                 item_name = re.sub(r'[^a-zA-Z0-9\s]', '', item_text).strip()[:50]
@@ -65,25 +70,22 @@ def create_petri_net_from_checklist(checklist_file):
             petri_utils.add_arc_from_to(last_place, final_transition, net)
             petri_utils.add_arc_from_to(final_transition, sink, net)
     else:
-        # Process the hierarchical structure of sections and items
         last_main_place = source
         for i, (header, section_content) in enumerate(sections):
             section_title = header.replace('##', '').strip()
             
-            # Transition to represent starting a section
             section_transition = PetriNet.Transition(name=f"section_{i+1}", label=section_title)
             net.transitions.add(section_transition)
             petri_utils.add_arc_from_to(last_main_place, section_transition, net)
 
-            # Place representing the start of the item sequence within the section
             section_start_place = PetriNet.Place(f"sec_{i+1}_start")
             net.places.add(section_start_place)
             petri_utils.add_arc_from_to(section_transition, section_start_place, net)
             
             last_item_place = section_start_place
-            items = re.findall(r'-\s\[\s\].*', section_content)
-            if items:
-                for j, item_text in enumerate(items):
+            section_items = re.findall(r'-\s\[\s\].*', section_content)
+            if section_items:
+                for j, item_text in enumerate(section_items):
                     item_name = re.sub(r'[^a-zA-Z0-9\s]', '', item_text).strip()[:50]
                     item_transition = PetriNet.Transition(name=f"sec_{i+1}_item_{j+1}", label=item_name)
                     net.transitions.add(item_transition)
@@ -96,7 +98,6 @@ def create_petri_net_from_checklist(checklist_file):
             
             last_main_place = last_item_place
 
-        # Connect the last section's final place to the global sink
         final_transition = PetriNet.Transition(name="final_transition", label="End")
         net.transitions.add(final_transition)
         petri_utils.add_arc_from_to(last_main_place, final_transition, net)
@@ -106,6 +107,18 @@ def create_petri_net_from_checklist(checklist_file):
     final_marking = pm4py.Marking({sink: 1})
 
     return net, initial_marking, final_marking
+
+def create_petri_net_from_checklist(checklist_file):
+    """
+    Creates a hierarchical Petri net from a checklist Markdown file,
+    modeling sections and items.
+    """
+    with open(checklist_file, 'r') as f:
+        content = f.read()
+
+    default_title = os.path.basename(checklist_file)
+    parsed_data = parse_checklist(content, default_title)
+    return generate_petri_net(parsed_data)
 
 def main():
     if len(sys.argv) != 3:
