@@ -1,4 +1,3 @@
-import pytest
 from unittest.mock import MagicMock
 from extract_docx import extract_text_from_docx
 
@@ -12,10 +11,11 @@ def test_extract_text_from_docx_normal(mocker):
     mock_doc.paragraphs = [mock_para1, mock_para2]
 
     # Patch docx.Document
-    mocker.patch('docx.Document', return_value=mock_doc)
+    open_document = mocker.patch('docx.Document', return_value=mock_doc)
 
     # Call the function
     result = extract_text_from_docx("dummy_path.docx")
+    open_document.assert_called_once_with("dummy_path.docx")
 
     # Assert result
     assert result == "First paragraph.\nSecond paragraph."
@@ -26,10 +26,11 @@ def test_extract_text_from_docx_empty(mocker):
     mock_doc.paragraphs = []
 
     # Patch docx.Document
-    mocker.patch('docx.Document', return_value=mock_doc)
+    open_document = mocker.patch('docx.Document', return_value=mock_doc)
 
     # Call the function
     result = extract_text_from_docx("dummy_path.docx")
+    open_document.assert_called_once_with("dummy_path.docx")
 
     # Assert result
     assert result == ""
