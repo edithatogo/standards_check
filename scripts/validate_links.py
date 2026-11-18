@@ -32,6 +32,7 @@ import time
 import yaml
 import requests
 from glob import glob
+from concurrent.futures import ThreadPoolExecutor
 
 SOURCE_DIR = "source"
 DOI_BASE_URL = "https://doi.org"
@@ -74,52 +75,63 @@ def validate_url(url, file_path):
                 return {"file": file_path, "url": url, "status": "ERROR", "error_message": str(e), "type": "ERROR"}
     return None
 
-def process_file(file_path, broken_links, redirected_links, warning_links):
-    """Processes a single YAML file, checking its URLs and DOIs."""
+def process_file(file_path):
+    """Read one sidecar and return its URL tasks, recording malformed input."""
     print(f"\nProcessing: {file_path}")
-    with open(file_path, 'r', encoding='utf-8') as f:
-        try:
-            data = yaml.safe_load(f)
-            if not data:
-                return
-
-            # Validate source_url
-            url_to_check = data.get('source_url')
-            if url_to_check:
-                result = validate_url(url_to_check, file_path)
-                if result:
-                    if result['type'] in ('BROKEN', 'ERROR'):
-                        broken_links.append(result)
-                    elif result['type'] == 'REDIRECT':
-                        redirected_links.append(result)
-                    elif result['type'] == 'WARNING':
-                        warning_links.append(result)
-
-            # Validate DOI
-            doi = data.get('citation', {}).get('doi')
-            if doi:
-                doi_url = f"{DOI_BASE_URL}/{doi}"
-                result = validate_url(doi_url, file_path)
-                if result:
-                    if result['type'] in ('BROKEN', 'ERROR'):
-                        broken_links.append(result)
-                    elif result['type'] == 'WARNING':
-                        warning_links.append(result)
-
-        except yaml.YAMLError as e:
-            print(f"  ✗ ERROR: Could not parse YAML file. {e}")
-            broken_links.append({"file": file_path, "url": "N/A", "status": "YAML_ERROR", "error_message": str(e), "type": "ERROR"})
+    try:
+        with open(file_path, 'r', encoding='utf-8') as handle:
+            data = yaml.safe_load(handle)
+        if data is None:
+            return [], []
+        if not isinstance(data, dict):
+            raise ValueError("Top-level YAML must be a mapping")
+        citation = data.get('citation') or {}
+        if not isinstance(citation, dict):
+            raise ValueError("citation must be a mapping")
+        url = data.get('source_url')
+        doi = citation.get('doi')
+        if url is not None and not isinstance(url, str):
+            raise ValueError("source_url must be a string")
+        if doi is not None and not isinstance(doi, str):
+            raise ValueError("citation.doi must be a string")
+        tasks = [(url, file_path)] if url else []
+        if doi:
+            tasks.append((f"{DOI_BASE_URL}/{doi}", file_path))
+        return tasks, []
+    except (OSError, UnicodeError, yaml.YAMLError, ValueError) as error:
+        status = "YAML_ERROR" if isinstance(error, yaml.YAMLError) else "INPUT_ERROR"
+        print(f"  ✗ ERROR: Could not read or parse YAML file. {error}")
+        return [], [{"file": file_path, "url": "N/A", "status": status,
+                     "error_message": str(error), "type": "ERROR"}]
 
 
 def check_links_in_files(source_files):
-    """Iterates over files and collects broken, redirected, and warning links."""
-    broken_links = []
-    redirected_links = []
-    warning_links = []
-
+    """Collect sidecars, validate concurrently, and report in input order."""
+    broken_links, redirected_links, warning_links = [], [], []
+    tasks = []
     for file_path in source_files:
-        process_file(file_path, broken_links, redirected_links, warning_links)
+        file_tasks, errors = process_file(file_path)
+        tasks.extend(file_tasks)
+        broken_links.extend(errors)
 
+    print(f"Found {len(tasks)} links to validate. Validating concurrently...")
+    with ThreadPoolExecutor(max_workers=20) as executor:
+        futures = {executor.submit(validate_url, url, path): (url, path)
+                   for url, path in tasks}
+        for future, (url, file_path) in futures.items():
+            try:
+                result = future.result()
+            except Exception as error:
+                result = {"file": file_path, "url": url, "status": "EXCEPTION",
+                          "error_message": str(error), "type": "ERROR"}
+            if not result:
+                continue
+            if result['type'] in ('BROKEN', 'ERROR'):
+                broken_links.append(result)
+            elif result['type'] == 'REDIRECT':
+                redirected_links.append(result)
+            elif result['type'] == 'WARNING':
+                warning_links.append(result)
     return broken_links, redirected_links, warning_links
 
 
