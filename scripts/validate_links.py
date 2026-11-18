@@ -85,7 +85,9 @@ def process_file(file_path):
             return [], []
         if not isinstance(data, dict):
             raise ValueError("Top-level YAML must be a mapping")
-        citation = data.get('citation') or {}
+        citation = data.get('citation')
+        if citation is None:
+            citation = {}
         if not isinstance(citation, dict):
             raise ValueError("citation must be a mapping")
         url = data.get('source_url')

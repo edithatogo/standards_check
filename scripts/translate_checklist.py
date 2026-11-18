@@ -37,7 +37,15 @@ Example:
 
 import sys
 import os
-from transformers import MarianMTModel, MarianTokenizer
+
+
+def _load_translation_model(model_name):
+    """Load optional model dependencies only when a non-empty batch needs them."""
+    from transformers import MarianMTModel, MarianTokenizer
+
+    tokenizer = MarianTokenizer.from_pretrained(model_name)
+    model = MarianMTModel.from_pretrained(model_name)
+    return tokenizer, model
 
 def translate_text(text, model, tokenizer):
     """Translates a batch of text."""
@@ -50,17 +58,6 @@ def translate_markdown_file(source_path, target_lang):
     """
     Translates a markdown file line by line, preserving structure.
     """
-    model_name = f'Helsinki-NLP/opus-mt-en-{target_lang}'
-    print(f"Loading model: {model_name}...")
-
-    try:
-        tokenizer = MarianTokenizer.from_pretrained(model_name)
-        model = MarianMTModel.from_pretrained(model_name)
-    except OSError:
-        print(f"Error: Model for target language '{target_lang}' not found.")
-        print("Please check the Hugging Face model hub for available 'Helsinki-NLP/opus-mt-en-*' models.")
-        sys.exit(1)
-
     print("Reading source file...")
     with open(source_path, 'r', encoding='utf-8') as f:
         lines = f.readlines()
@@ -76,6 +73,18 @@ def translate_markdown_file(source_path, target_lang):
         if stripped_line and not stripped_line.startswith('#') and not stripped_line == '---':
             batch_to_translate.append(stripped_line)
             line_indices_to_translate.append(i)
+
+    if not batch_to_translate:
+        return "".join(lines)
+
+    model_name = f'Helsinki-NLP/opus-mt-en-{target_lang}'
+    print(f"Loading model: {model_name}...")
+    try:
+        tokenizer, model = _load_translation_model(model_name)
+    except OSError:
+        print(f"Error: Model for target language '{target_lang}' not found.")
+        print("Please check the Hugging Face model hub for available 'Helsinki-NLP/opus-mt-en-*' models.")
+        sys.exit(1)
 
     print(f"Translating {len(batch_to_translate)} lines...")
     translated_text_batch = translate_text(batch_to_translate, model, tokenizer)

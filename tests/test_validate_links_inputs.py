@@ -7,7 +7,8 @@ from scripts import validate_links
 
 @pytest.mark.parametrize("content", [
     b"\xff", b"source_url: [", b"- invalid-root", b"citation: invalid",
-    b"source_url: 123", b"citation: {doi: 123}",
+    b"source_url: 123", b"citation: {doi: 123}", b"citation: []", b"citation: false",
+    b"citation: 0", b"citation: \"\"",
 ])
 def test_bad_input_is_reported_and_other_files_continue(tmp_path, monkeypatch, content):
     invalid = tmp_path / "invalid.yml"
