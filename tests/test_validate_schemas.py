@@ -1,15 +1,17 @@
 import sys
 import os
-import pytest
-import yaml
 import json
 
 # Add scripts directory to path to import validate_schemas
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'scripts')))
-from validate_schemas import validate_yaml_file
+sys.path.append(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'scripts'))
+)
+from validate_schemas import validate_yaml_file  # noqa: E402
+
 
 def test_import():
     assert callable(validate_yaml_file)
+
 
 def test_validate_yaml_file_happy_path(tmp_path):
     schema_content = {
@@ -28,6 +30,7 @@ def test_validate_yaml_file_happy_path(tmp_path):
     yaml_file.write_text(yaml_content)
 
     assert validate_yaml_file(str(yaml_file), str(schema_file)) is True
+
 
 def test_validate_yaml_file_skip_template(tmp_path):
     schema_content = {
@@ -49,6 +52,7 @@ def test_validate_yaml_file_skip_template(tmp_path):
     # It should return True early and not fail validation
     assert validate_yaml_file(str(yaml_file), str(schema_file)) is True
 
+
 def test_validate_yaml_file_not_found(tmp_path):
     schema_file = tmp_path / "schema.json"
     schema_file.write_text("{}")
@@ -58,6 +62,7 @@ def test_validate_yaml_file_not_found(tmp_path):
     # Should catch FileNotFoundError and return False
     assert validate_yaml_file(str(yaml_file), str(schema_file)) is False
 
+
 def test_validate_yaml_file_schema_not_found(tmp_path):
     yaml_file = tmp_path / "test.yml"
     yaml_file.write_text("name: 'Test Name'\n")
@@ -66,6 +71,7 @@ def test_validate_yaml_file_schema_not_found(tmp_path):
 
     # Should catch FileNotFoundError and return False
     assert validate_yaml_file(str(yaml_file), str(schema_file)) is False
+
 
 def test_validate_yaml_file_malformed_yaml(tmp_path):
     schema_content = {
@@ -84,6 +90,7 @@ def test_validate_yaml_file_malformed_yaml(tmp_path):
 
     # Should catch yaml.YAMLError and return False
     assert validate_yaml_file(str(yaml_file), str(schema_file)) is False
+
 
 def test_validate_yaml_file_validation_error(tmp_path):
     schema_content = {

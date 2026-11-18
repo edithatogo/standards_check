@@ -1,5 +1,14 @@
 import os
-from utils.docx_utils import extract_text_from_docx
+from utils.docx_utils import extract_text_from_docx as _extract_text_from_docx
+
+
+def extract_text_from_docx(file_path):
+    """Return document text, or report a batch extraction error and return None."""
+    try:
+        return _extract_text_from_docx(file_path)
+    except Exception as error:
+        print(f"Error extracting text from {file_path}: {error}")
+        return None
 
 def main():
     # Directory containing DOCX files
