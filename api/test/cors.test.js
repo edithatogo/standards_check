@@ -65,14 +65,12 @@ test('a comma-separated list trims whitespace and matches complete origins', asy
   assert.equal(response.headers['access-control-allow-origin'], undefined);
 });
 
-test('a single explicit wildcard permits public cross-origin reads', async () => {
-  const response = await requestOrigin(' * ', 'https://any.example');
-  assert.equal(response.headers['access-control-allow-origin'], '*');
-  assert.equal(response.headers['access-control-allow-credentials'], undefined);
+test('a standalone wildcard fails configuration', () => {
+  assert.throws(() => createCorsOptions(' * '), /wildcards are not supported/);
 });
 
 test('a wildcard mixed with an allow-list fails configuration', () => {
-  assert.throws(() => createCorsOptions('https://allowed.example,*'), /must be used by itself/);
+  assert.throws(() => createCorsOptions('https://allowed.example,*'), /wildcards are not supported/);
 });
 
 test('requests without Origin remain usable without CORS response headers', async () => {

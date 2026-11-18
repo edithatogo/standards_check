@@ -63,9 +63,9 @@ CORS_ORIGIN='http://localhost:5173,https://checklists.example.org' node server.j
 Other browser origins receive no `Access-Control-Allow-Origin` header. Matching includes the
 scheme, hostname and port. Requests without an `Origin` header continue to work normally.
 
-For intentionally public cross-origin reads, explicitly set `CORS_ORIGIN='*'`. The wildcard
-must be the only entry; combining it with an allow-list fails at startup. Credentialed CORS
-is not enabled. CORS controls browser access to responses; it does not authenticate callers.
+Wildcard origins are rejected at startup; configure each permitted browser origin explicitly.
+Credentialed CORS is not enabled. CORS controls browser access to responses; it does not
+authenticate callers.
 
 Run the origin and preflight regression tests with `npm test` from `api/` (Node.js 20 or newer).
 
