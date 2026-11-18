@@ -50,6 +50,25 @@ For developers working on a front-end that consumes this data, a local Node.js/E
 
 The local API will be available at `http://localhost:3000`.
 
+### Browser origin configuration
+
+With `CORS_ORIGIN` unset or blank, the local server allows browser reads from
+`http://localhost:3000`. Set a comma-separated list of complete origins for a frontend
+running elsewhere; surrounding whitespace and empty entries are ignored:
+
+```bash
+CORS_ORIGIN='http://localhost:5173,https://checklists.example.org' node server.js
+```
+
+Other browser origins receive no `Access-Control-Allow-Origin` header. Matching includes the
+scheme, hostname and port. Requests without an `Origin` header continue to work normally.
+
+For intentionally public cross-origin reads, explicitly set `CORS_ORIGIN='*'`. The wildcard
+must be the only entry; combining it with an allow-list fails at startup. Credentialed CORS
+is not enabled. CORS controls browser access to responses; it does not authenticate callers.
+
+Run the origin and preflight regression tests with `npm test` from `api/` (Node.js 20 or newer).
+
 ### Local API Endpoints
 
 *   `GET /api/checklists`: Returns a list of all available checklists.
