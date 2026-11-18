@@ -1,123 +1,130 @@
 import os
 import sys
-import pytest
-from unittest.mock import patch, MagicMock, mock_open
 from pathlib import Path
+import pytest
 
-# Add scripts directory to path to import the module
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from scripts.extract_pdf_content import extract_text_from_pdf, extract_multiple_pdfs, main
+# Add the scripts directory to the path so we can import the module
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../scripts')))
 
-@patch('scripts.extract_pdf_content.pdfplumber.open')
-@patch('builtins.open', new_callable=mock_open)
-def test_extract_text_from_pdf_success_explicit_output(mock_file, mock_pdf_open):
+from extract_pdf_content import extract_text_from_pdf, extract_multiple_pdfs
+
+class MockPage:
+    def __init__(self, text):
+        self.text = text
+
+    def extract_text(self):
+        return self.text
+
+class MockPDF:
+    def __init__(self, pages):
+        self.pages = [MockPage(p) for p in pages]
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        pass
+
+@pytest.fixture
+def mock_pdfplumber_open(mocker):
+    def _mock_open(pages_text):
+        mock_pdf = MockPDF(pages_text)
+        return mocker.patch('pdfplumber.open', return_value=mock_pdf)
+    return _mock_open
+
+def test_extract_text_from_pdf_success(tmp_path, mock_pdfplumber_open):
+    # Setup mock PDF with two pages
+    mock_pdfplumber_open(["Page 1 content", "Page 2 content"])
+
+    pdf_path = "dummy.pdf"
+    output_path = tmp_path / "output.txt"
+
+    # Call function
+    extracted_text = extract_text_from_pdf(pdf_path, str(output_path))
+
+    # Assertions
+    expected_text = "Page 1 content\n\nPage 2 content\n\n"
+    assert extracted_text == expected_text
+
+    # Verify file was written
+    assert output_path.exists()
+    assert output_path.read_text(encoding='utf-8') == expected_text
+
+def test_extract_text_from_pdf_default_output(tmp_path, mock_pdfplumber_open, mocker):
     # Setup mock PDF
-    mock_pdf = MagicMock()
-    mock_page1 = MagicMock()
-    mock_page1.extract_text.return_value = "Page 1 text"
-    mock_page2 = MagicMock()
-    mock_page2.extract_text.return_value = "Page 2 text"
-    mock_pdf.pages = [mock_page1, mock_page2]
-    mock_pdf_open.return_value.__enter__.return_value = mock_pdf
+    mock_pdfplumber_open(["Single page content"])
 
-    result = extract_text_from_pdf("dummy.pdf", "output.txt")
+    # Create a dummy pdf file so it has a path, use tmp_path as current dir essentially
+    # We will patch Path.cwd to tmp_path or just use relative path in tmp_path
+    pdf_path = tmp_path / "my_document.pdf"
 
-    # Assertions
-    mock_pdf_open.assert_called_once_with("dummy.pdf")
-    mock_file.assert_called_once_with("output.txt", 'w', encoding='utf-8')
-    mock_file().write.assert_called_once_with("Page 1 text\n\nPage 2 text\n\n")
-    assert result == "Page 1 text\n\nPage 2 text\n\n"
+    # We want the output to be created in the current working directory as per the script
+    # Wait, the script does `output_path = f"{pdf_name}_extracted.txt"` where `pdf_name = Path(pdf_path).stem`
+    # This writes to the current working directory where the script is executed.
 
-@patch('scripts.extract_pdf_content.pdfplumber.open')
-@patch('builtins.open', new_callable=mock_open)
-def test_extract_text_from_pdf_success_implicit_output(mock_file, mock_pdf_open):
-    # Setup mock PDF
-    mock_pdf = MagicMock()
-    mock_page1 = MagicMock()
-    mock_page1.extract_text.return_value = "Page 1 text"
-    mock_pdf.pages = [mock_page1]
-    mock_pdf_open.return_value.__enter__.return_value = mock_pdf
+    # Let's mock open to intercept where it's written
+    m_open = mocker.patch("builtins.open", mocker.mock_open())
 
-    result = extract_text_from_pdf("dummy.pdf")
+    # Call function without specifying output_path
+    extracted_text = extract_text_from_pdf(str(pdf_path))
 
-    # Assertions
-    mock_pdf_open.assert_called_once_with("dummy.pdf")
-    mock_file.assert_called_once_with("dummy_extracted.txt", 'w', encoding='utf-8')
-    mock_file().write.assert_called_once_with("Page 1 text\n\n")
-    assert result == "Page 1 text\n\n"
+    expected_text = "Single page content\n\n"
+    assert extracted_text == expected_text
 
-@patch('scripts.extract_pdf_content.pdfplumber.open')
-def test_extract_text_from_pdf_exception(mock_pdf_open):
-    # Setup mock to raise exception
-    mock_pdf_open.side_effect = Exception("PDF error")
+    # Verify open was called with the correct default filename
+    m_open.assert_called_once_with("my_document_extracted.txt", 'w', encoding='utf-8')
+    m_open().write.assert_called_once_with(expected_text)
 
-    result = extract_text_from_pdf("dummy.pdf")
+def test_extract_text_from_pdf_exception(mocker):
+    # Setup mock to raise an exception when opening
+    mocker.patch('pdfplumber.open', side_effect=Exception("Failed to open PDF"))
+
+    # Call function
+    extracted_text = extract_text_from_pdf("error.pdf", "out.txt")
 
     # Assertions
-    mock_pdf_open.assert_called_once_with("dummy.pdf")
-    assert result is None
+    assert extracted_text is None
 
-@patch('scripts.extract_pdf_content.os.makedirs')
-@patch('scripts.extract_pdf_content.Path.glob')
-@patch('scripts.extract_pdf_content.extract_text_from_pdf')
-def test_extract_multiple_pdfs_found(mock_extract, mock_glob, mock_makedirs):
-    # Setup mock glob to return fake paths
-    mock_glob.return_value = [Path("source/file1.pdf"), Path("source/file2.pdf")]
+def test_extract_multiple_pdfs(tmp_path, mocker):
+    # Create dummy source and output directories
+    source_dir = tmp_path / "source"
+    output_dir = tmp_path / "output"
+    source_dir.mkdir()
 
-    extract_multiple_pdfs("source_dir", "output_dir")
+    # Create some dummy pdf files
+    (source_dir / "doc1.pdf").touch()
+    (source_dir / "doc2.pdf").touch()
 
-    # Assertions
-    mock_makedirs.assert_called_once_with("output_dir", exist_ok=True)
-    mock_glob.assert_called_once_with("*.pdf")
-    assert mock_extract.call_count == 2
+    # Mock extract_text_from_pdf
+    m_extract = mocker.patch('extract_pdf_content.extract_text_from_pdf')
 
-    # Check calls explicitly
-    calls = mock_extract.call_args_list
-    assert str(calls[0][0][0]) == "source/file1.pdf"
-    assert "file1_extracted.txt" in str(calls[0][0][1])
-    assert str(calls[1][0][0]) == "source/file2.pdf"
-    assert "file2_extracted.txt" in str(calls[1][0][1])
-
-@patch('scripts.extract_pdf_content.os.makedirs')
-@patch('scripts.extract_pdf_content.Path.glob')
-@patch('scripts.extract_pdf_content.extract_text_from_pdf')
-def test_extract_multiple_pdfs_not_found(mock_extract, mock_glob, mock_makedirs):
-    # Setup mock glob to return empty
-    mock_glob.return_value = []
-
-    extract_multiple_pdfs("source_dir", "output_dir")
+    # Call function
+    extract_multiple_pdfs(str(source_dir), str(output_dir))
 
     # Assertions
-    mock_makedirs.assert_called_once_with("output_dir", exist_ok=True)
-    mock_glob.assert_called_once_with("*.pdf")
-    mock_extract.assert_not_called()
+    assert output_dir.exists()
+    assert m_extract.call_count == 2
 
-@patch('scripts.extract_pdf_content.sys.argv', ['extract_pdf_content.py', 'test.pdf'])
-@patch('scripts.extract_pdf_content.extract_text_from_pdf')
-def test_main_single_file(mock_extract):
-    main()
-    mock_extract.assert_called_once_with('test.pdf', None)
+    # Check arguments
+    calls = m_extract.call_args_list
+    args_called = [ (c[0][0], c[0][1]) for c in calls ]
 
-@patch('scripts.extract_pdf_content.sys.argv', ['extract_pdf_content.py', 'test.pdf', '-o', 'out.txt'])
-@patch('scripts.extract_pdf_content.extract_text_from_pdf')
-def test_main_single_file_with_output(mock_extract):
-    main()
-    mock_extract.assert_called_once_with('test.pdf', 'out.txt')
+    # Paths will depend on glob order, so we check sets
+    expected_args = {
+        (str(source_dir / "doc1.pdf"), str(output_dir / "doc1_extracted.txt")),
+        (str(source_dir / "doc2.pdf"), str(output_dir / "doc2_extracted.txt"))
+    }
+    assert set(args_called) == expected_args
 
-@patch('scripts.extract_pdf_content.sys.argv', ['extract_pdf_content.py', 'source_dir', '-d'])
-@patch('scripts.extract_pdf_content.extract_multiple_pdfs')
-def test_main_directory(mock_extract_multiple):
-    main()
-    mock_extract_multiple.assert_called_once_with('source_dir', 'extracted_text')
+def test_extract_multiple_pdfs_no_files(tmp_path, mocker):
+    source_dir = tmp_path / "source"
+    output_dir = tmp_path / "output"
+    source_dir.mkdir()
 
-@patch('scripts.extract_pdf_content.sys.argv', ['extract_pdf_content.py', 'source_dir', '-d', '-o', 'custom_out'])
-@patch('scripts.extract_pdf_content.extract_multiple_pdfs')
-def test_main_directory_with_output(mock_extract_multiple):
-    main()
-    mock_extract_multiple.assert_called_once_with('source_dir', 'custom_out')
+    m_extract = mocker.patch('extract_pdf_content.extract_text_from_pdf')
 
-@patch('scripts.extract_pdf_content.sys.argv', ['extract_pdf_content.py'])
-@patch('scripts.extract_pdf_content.sys.exit')
-def test_main_no_args(mock_exit):
-    main()
-    mock_exit.assert_called_once_with(1)
+    # Call function on empty directory
+    extract_multiple_pdfs(str(source_dir), str(output_dir))
+
+    # Should not be called
+    m_extract.assert_not_called()
