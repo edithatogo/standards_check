@@ -61,7 +61,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends texlive-xetex texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
       - name: Setup Typst
-        uses: typst-community/setup-typst@63ac138db421d586de61f7f5ac3bcef6a2e6c78c # v5.1.0
+        uses: typst-community/setup-typst@00ad6338f0b34724ea002136bfb701a6c18585b0 # v5.3.2
         with:
           typst-version: "0.15.1"
       - name: Build documents
@@ -112,7 +112,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends texlive-xetex texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended yq
       - name: Setup Typst
-        uses: typst-community/setup-typst@63ac138db421d586de61f7f5ac3bcef6a2e6c78c # v5.1.0
+        uses: typst-community/setup-typst@00ad6338f0b34724ea002136bfb701a6c18585b0 # v5.3.2
         with:
           typst-version: "0.15.1"
       - name: Build HTML
