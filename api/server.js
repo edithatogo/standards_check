@@ -8,7 +8,7 @@ const { createCorsOptions } = require('./cors-options');
 const app = express();
 const port = 3000;
 
-const checklistsDir = path.join(__dirname, '../markdown');
+const checklistsDir = path.join(__dirname, '../markdown/en');
 
 app.use(cors(createCorsOptions(process.env.CORS_ORIGIN)));
 app.use(express.json());
