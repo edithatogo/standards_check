@@ -1,0 +1,16 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "local>edithatogo/renovate-config"
+  ],
+  "automerge": false,
+  "platformAutomerge": false,
+  "packageRules": [
+    {
+      "description": "Keep updates reviewable until required repository checks are configured",
+      "matchPackageNames": ["*"],
+      "automerge": false,
+      "platformAutomerge": false
+    }
+  ]
+}

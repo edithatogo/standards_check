@@ -32,6 +32,7 @@ import time
 import yaml
 import requests
 from glob import glob
+from concurrent.futures import ThreadPoolExecutor
 
 SOURCE_DIR = "source"
 DOI_BASE_URL = "https://doi.org"
@@ -74,55 +75,70 @@ def validate_url(url, file_path):
                 return {"file": file_path, "url": url, "status": "ERROR", "error_message": str(e), "type": "ERROR"}
     return None
 
-def main():
-    """Main function to find all YAML files and validate their links."""
-    print(f"Starting link validation in '{SOURCE_DIR}' directory...")
-    
-    source_files = glob(os.path.join(SOURCE_DIR, "**", "*.yml"), recursive=True)
-    
-    if not source_files:
-        print("No YAML files found to validate.")
-        sys.exit(0)
+def process_file(file_path):
+    """Read one sidecar and return its URL tasks, recording malformed input."""
+    print(f"\nProcessing: {file_path}")
+    try:
+        with open(file_path, 'r', encoding='utf-8') as handle:
+            data = yaml.safe_load(handle)
+        if data is None:
+            return [], []
+        if not isinstance(data, dict):
+            raise ValueError("Top-level YAML must be a mapping")
+        citation = data.get('citation')
+        if citation is None:
+            citation = {}
+        if not isinstance(citation, dict):
+            raise ValueError("citation must be a mapping")
+        url = data.get('source_url')
+        doi = citation.get('doi')
+        if url is not None and not isinstance(url, str):
+            raise ValueError("source_url must be a string")
+        if doi is not None and not isinstance(doi, str):
+            raise ValueError("citation.doi must be a string")
+        tasks = [(url, file_path)] if url else []
+        if doi:
+            tasks.append((f"{DOI_BASE_URL}/{doi}", file_path))
+        return tasks, []
+    except (OSError, UnicodeError, yaml.YAMLError, ValueError) as error:
+        status = "YAML_ERROR" if isinstance(error, yaml.YAMLError) else "INPUT_ERROR"
+        print(f"  ✗ ERROR: Could not read or parse YAML file. {error}")
+        return [], [{"file": file_path, "url": "N/A", "status": status,
+                     "error_message": str(error), "type": "ERROR"}]
 
-    broken_links = []
-    redirected_links = []
-    warning_links = []
 
+def check_links_in_files(source_files):
+    """Collect sidecars, validate concurrently, and report in input order."""
+    broken_links, redirected_links, warning_links = [], [], []
+    tasks = []
     for file_path in source_files:
-        print(f"\nProcessing: {file_path}")
-        with open(file_path, 'r', encoding='utf-8') as f:
+        file_tasks, errors = process_file(file_path)
+        tasks.extend(file_tasks)
+        broken_links.extend(errors)
+
+    print(f"Found {len(tasks)} links to validate. Validating concurrently...")
+    with ThreadPoolExecutor(max_workers=20) as executor:
+        futures = {executor.submit(validate_url, url, path): (url, path)
+                   for url, path in tasks}
+        for future, (url, file_path) in futures.items():
             try:
-                data = yaml.safe_load(f)
-                if not data:
-                    continue
+                result = future.result()
+            except Exception as error:
+                result = {"file": file_path, "url": url, "status": "EXCEPTION",
+                          "error_message": str(error), "type": "ERROR"}
+            if not result:
+                continue
+            if result['type'] in ('BROKEN', 'ERROR'):
+                broken_links.append(result)
+            elif result['type'] == 'REDIRECT':
+                redirected_links.append(result)
+            elif result['type'] == 'WARNING':
+                warning_links.append(result)
+    return broken_links, redirected_links, warning_links
 
-                # Validate source_url
-                url_to_check = data.get('source_url')
-                if url_to_check:
-                    result = validate_url(url_to_check, file_path)
-                    if result:
-                        if result['type'] == 'BROKEN' or result['type'] == 'ERROR':
-                            broken_links.append(result)
-                        elif result['type'] == 'REDIRECT':
-                            redirected_links.append(result)
-                        elif result['type'] == 'WARNING':
-                            warning_links.append(result)
-                
-                # Validate DOI
-                doi = data.get('citation', {}).get('doi')
-                if doi:
-                    doi_url = f"{DOI_BASE_URL}/{doi}"
-                    result = validate_url(doi_url, file_path)
-                    if result:
-                        if result['type'] == 'BROKEN' or result['type'] == 'ERROR':
-                            broken_links.append(result)
-                        elif result['type'] == 'WARNING':
-                            warning_links.append(result)
 
-            except yaml.YAMLError as e:
-                print(f"  ✗ ERROR: Could not parse YAML file. {e}")
-                broken_links.append({"file": file_path, "url": "N/A", "status": "YAML_ERROR", "error_message": str(e), "type": "ERROR"})
-
+def print_summary(broken_links, redirected_links, warning_links):
+    """Prints the validation summary and exits appropriately."""
     print("\n--- Validation Summary ---")
     if not broken_links and not redirected_links and not warning_links:
         print("✓ All links are valid.")
@@ -150,6 +166,20 @@ def main():
             sys.exit(1) # Exit with an error code if links are broken
             
     print("Validation complete.")
+
+
+def main():
+    """Main function to find all YAML files and validate their links."""
+    print(f"Starting link validation in '{SOURCE_DIR}' directory...")
+
+    source_files = glob(os.path.join(SOURCE_DIR, "**", "*.yml"), recursive=True)
+
+    if not source_files:
+        print("No YAML files found to validate.")
+        sys.exit(0)
+
+    broken_links, redirected_links, warning_links = check_links_in_files(source_files)
+    print_summary(broken_links, redirected_links, warning_links)
     sys.exit(0)
 
 if __name__ == "__main__":
