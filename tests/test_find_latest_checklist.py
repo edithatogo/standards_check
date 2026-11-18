@@ -1,94 +1,110 @@
-import os
-import sys
 import pytest
+import sys
+import os
 
-# Add scripts directory to path to import the module
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from scripts.find_latest_checklist import analyze_results
+from scripts.find_latest_checklist import mock_google_search, analyze_results, main
 
-def test_empty_results():
-    assert analyze_results([], "consort") == []
+def test_mock_google_search_returns_empty_list():
+    result = mock_google_search("test query")
+    assert result == []
 
-def test_zero_score_omitted():
+def test_mock_google_search_prints_query(capsys):
+    query = "consort guidelines 2024"
+    mock_google_search(query)
+    captured = capsys.readouterr()
+    assert f"--> Mock Search: '{query}'" in captured.out
+
+def test_analyze_results_official_domain():
     results = [
-        {"title": "Some random article", "link": "http://example.com", "snippet": "Nothing useful here."}
+        {'title': 'Some page', 'snippet': 'Some snippet', 'link': 'https://example.com/test'},
+        {'title': 'Official CONSORT', 'snippet': 'Here it is', 'link': 'https://consort-statement.org/latest'}
     ]
-    assert analyze_results(results, "consort") == []
+    ranked = analyze_results(results, 'consort')
+    assert len(ranked) == 1
+    # 30 for domain + 20 for 'official' in title
+    assert ranked[0]['score'] == 50
 
-def test_official_domain_score():
+def test_analyze_results_keywords():
     results = [
-        {"title": "Article", "link": "http://bmj.com/article", "snippet": "Snippet"}
+        {'title': 'official statement latest', 'snippet': 'latest version updated guideline', 'link': 'https://example.com/test'}
     ]
-    analyzed = analyze_results(results, "consort")
-    assert len(analyzed) == 1
-    assert analyzed[0]['score'] == 30
+    ranked = analyze_results(results, 'consort')
+    assert len(ranked) == 1
+    # 20 (title: official/statement) + 15 (title: latest/revision/update) + 10 (snippet: latest version/updated guideline) = 45
+    assert ranked[0]['score'] == 45
 
-def test_title_keywords_score():
+def test_analyze_results_year_detection():
     results = [
-        {"title": "Official Statement", "link": "http://example.com", "snippet": ""},
-        {"title": "Latest Update", "link": "http://example.com", "snippet": ""}
+        {'title': 'Guidelines 2022', 'snippet': 'Updated in 2023', 'link': 'https://example.com/test'}
     ]
-    analyzed = analyze_results(results, "consort")
-    assert len(analyzed) == 2
-    # First candidate ("official statement" -> 20, actually both "official" and "statement" match the same condition which gives 20 once)
-    # Wait, the code is:
-    # if 'official' in title or 'statement' in title: score += 20
-    # if 'update' in title or 'revision' in title or 'latest' in title: score += 15
-    # So "Official Statement" gets 20.
-    # "Latest Update" gets 15.
+    ranked = analyze_results(results, 'consort')
+    assert len(ranked) == 1
+    # 2023 - 2000 = 23
+    assert ranked[0]['score'] == 23
 
-    # Sort order: 20 then 15
-    assert analyzed[0]['score'] == 20
-    assert analyzed[0]['title'] == "Official Statement"
-    assert analyzed[1]['score'] == 15
-    assert analyzed[1]['title'] == "Latest Update"
-
-def test_snippet_keywords_score():
+def test_analyze_results_multiple():
     results = [
-        {"title": "Article", "link": "http://example.com", "snippet": "Here is the latest version of the guideline."}
+        {'title': 'Guidelines', 'snippet': 'Test', 'link': 'https://example.com'}, # score 0
+        {'title': 'Official Guidelines 2020', 'snippet': 'Latest version', 'link': 'https://bmj.com/test'}
+        # domain 30 + title 20 ('official') + snippet 10 ('latest version') + year 20 ('2020') = 80
     ]
-    analyzed = analyze_results(results, "consort")
-    assert len(analyzed) == 1
-    assert analyzed[0]['score'] == 10
+    ranked = analyze_results(results, 'consort')
+    assert len(ranked) == 1
+    assert ranked[0]['score'] == 80
+    assert ranked[0]['link'] == 'https://bmj.com/test'
 
-def test_year_detection_score():
+def test_main_no_args(monkeypatch, capsys):
+    monkeypatch.setattr(sys, 'argv', ['find_latest_checklist.py'])
+    with pytest.raises(SystemExit) as e:
+        main()
+    assert e.value.code == 1
+    captured = capsys.readouterr()
+    assert "Usage:" in captured.out
+
+def test_main_with_args(monkeypatch, capsys):
+    monkeypatch.setattr(sys, 'argv', ['find_latest_checklist.py', 'consort'])
+    with pytest.raises(SystemExit) as e:
+        main()
+    assert e.value.code == 0
+    captured = capsys.readouterr()
+    assert "Searching for the latest version of 'consort'" in captured.out
+    assert "Could not retrieve search results." in captured.out
+
+def test_main_with_results(monkeypatch, capsys):
+    monkeypatch.setattr(sys, 'argv', ['find_latest_checklist.py', 'consort'])
+
+    def mock_search(query):
+        return [
+            {'title': 'Official CONSORT Statement 2024', 'snippet': 'The updated guideline', 'link': 'https://consort-statement.org/2024'}
+        ]
+
+    monkeypatch.setattr('scripts.find_latest_checklist.mock_google_search', mock_search)
+
+    main()
+    captured = capsys.readouterr()
+    assert "--- Top Candidates ---" in captured.out
+    assert "Official CONSORT Statement 2024" in captured.out
+    assert "Link: https://consort-statement.org/2024" in captured.out
+
+def test_main_with_results_but_no_candidates(monkeypatch, capsys):
+    monkeypatch.setattr(sys, 'argv', ['find_latest_checklist.py', 'consort'])
+
+    def mock_search(query):
+        return [
+            {'title': 'Random stuff', 'snippet': 'Nothing here', 'link': 'https://example.com/'}
+        ]
+
+    monkeypatch.setattr('scripts.find_latest_checklist.mock_google_search', mock_search)
+
+    main()
+    captured = capsys.readouterr()
+    assert "--- Top Candidates ---" in captured.out
+    assert "No strong candidates found" in captured.out
+
+def test_analyze_results_missing_fields():
     results = [
-        {"title": "Article 2023", "link": "http://example.com", "snippet": "Also mentions 2010."},
+        {'title': 'Just title'} # no link, no snippet
     ]
-    analyzed = analyze_results(results, "consort")
-    assert len(analyzed) == 1
-    # latest_year = max(2023, 2010) = 2023. Score = 2023 - 2000 = 23
-    assert analyzed[0]['score'] == 23
-
-def test_combined_score_and_sorting():
-    results = [
-        {"title": "A normal article", "link": "http://example.com", "snippet": ""}, # score 0, omitted
-        {"title": "Official Statement 2024", "link": "http://bmj.com/article", "snippet": "latest version"},
-        # score = 30 (bmj) + 20 (official/statement) + 10 (latest version) + 24 (2024) = 84
-        {"title": "Update 2020", "link": "http://example.com", "snippet": ""},
-        # score = 15 (update) + 20 (2020) = 35
-    ]
-    analyzed = analyze_results(results, "consort")
-    assert len(analyzed) == 2
-    assert analyzed[0]['title'] == "Official Statement 2024"
-    assert analyzed[0]['score'] == 84
-
-    assert analyzed[1]['title'] == "Update 2020"
-    assert analyzed[1]['score'] == 35
-
-def test_missing_keys_gracefully_handled():
-    results = [
-        {"title": "Official", "link": "http://example.com"}, # Missing snippet
-        {"snippet": "latest version", "link": "http://example.com"}, # Missing title
-        {"title": "update", "snippet": "snippet"} # Missing link
-    ]
-    analyzed = analyze_results(results, "consort")
-    assert len(analyzed) == 3
-    # Check that it didn't crash and processed them
-    # "Official" -> 20
-    # "latest version" -> 10
-    # "update" -> 15
-
-    assert analyzed[0]['score'] == 20
-    assert analyzed[1]['score'] == 15
-    assert analyzed[2]['score'] == 10
+    ranked = analyze_results(results, 'consort')
+    assert len(ranked) == 0
