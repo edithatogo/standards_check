@@ -12,7 +12,7 @@ def test_extract_text_from_docx_normal(mocker):
     mock_doc.paragraphs = [mock_para1, mock_para2]
 
     # Patch docx.Document
-    mocker.patch('extract_docx.docx.Document', return_value=mock_doc)
+    mocker.patch('docx.Document', return_value=mock_doc)
 
     # Call the function
     result = extract_text_from_docx("dummy_path.docx")
@@ -26,7 +26,7 @@ def test_extract_text_from_docx_empty(mocker):
     mock_doc.paragraphs = []
 
     # Patch docx.Document
-    mocker.patch('extract_docx.docx.Document', return_value=mock_doc)
+    mocker.patch('docx.Document', return_value=mock_doc)
 
     # Call the function
     result = extract_text_from_docx("dummy_path.docx")
