@@ -32,6 +32,7 @@ import time
 import yaml
 import requests
 from glob import glob
+from concurrent.futures import ThreadPoolExecutor
 
 SOURCE_DIR = "source"
 DOI_BASE_URL = "https://doi.org"
@@ -40,6 +41,7 @@ REDIRECT_STATUS_CODES = [301, 302, 307, 308]
 WARNING_STATUS_CODES = [403]  # Treat 403 Forbidden as a warning
 MAX_RETRIES = 3
 RETRY_DELAY = 5  # seconds
+
 
 def validate_url(url, file_path):
     """Validates a single URL with retries."""
@@ -88,8 +90,9 @@ def main():
     redirected_links = []
     warning_links = []
 
+    tasks = []
+
     for file_path in source_files:
-        print(f"\nProcessing: {file_path}")
         with open(file_path, 'r', encoding='utf-8') as f:
             try:
                 data = yaml.safe_load(f)
@@ -99,29 +102,38 @@ def main():
                 # Validate source_url
                 url_to_check = data.get('source_url')
                 if url_to_check:
-                    result = validate_url(url_to_check, file_path)
-                    if result:
-                        if result['type'] == 'BROKEN' or result['type'] == 'ERROR':
-                            broken_links.append(result)
-                        elif result['type'] == 'REDIRECT':
-                            redirected_links.append(result)
-                        elif result['type'] == 'WARNING':
-                            warning_links.append(result)
+                    tasks.append((url_to_check, file_path))
                 
                 # Validate DOI
                 doi = data.get('citation', {}).get('doi')
                 if doi:
                     doi_url = f"{DOI_BASE_URL}/{doi}"
-                    result = validate_url(doi_url, file_path)
-                    if result:
-                        if result['type'] == 'BROKEN' or result['type'] == 'ERROR':
-                            broken_links.append(result)
-                        elif result['type'] == 'WARNING':
-                            warning_links.append(result)
+                    tasks.append((doi_url, file_path))
 
             except yaml.YAMLError as e:
                 print(f"  ✗ ERROR: Could not parse YAML file. {e}")
                 broken_links.append({"file": file_path, "url": "N/A", "status": "YAML_ERROR", "error_message": str(e), "type": "ERROR"})
+
+    print(f"Found {len(tasks)} links to validate. Validating concurrently...")
+
+    with ThreadPoolExecutor(max_workers=20) as executor:
+        future_to_url = {executor.submit(validate_url, url, file_path): (url, file_path) for url, file_path in tasks}
+
+        # All requests are submitted concurrently; consume in input order for
+        # reproducible summaries without sharing mutable HTTP sessions.
+        for future, (url, file_path) in future_to_url.items():
+            try:
+                result = future.result()
+                if result:
+                    if result['type'] == 'BROKEN' or result['type'] == 'ERROR':
+                        broken_links.append(result)
+                    elif result['type'] == 'REDIRECT':
+                        redirected_links.append(result)
+                    elif result['type'] == 'WARNING':
+                        warning_links.append(result)
+            except Exception as exc:
+                print(f"  ✗ UNEXPECTED ERROR for {url} in {file_path}: {exc}")
+                broken_links.append({"file": file_path, "url": url, "status": "EXCEPTION", "error_message": str(exc), "type": "ERROR"})
 
     print("\n--- Validation Summary ---")
     if not broken_links and not redirected_links and not warning_links:
