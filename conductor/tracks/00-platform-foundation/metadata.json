@@ -1,0 +1,11 @@
+{
+  "schema_version": "dev.standardflow.conductor-track.v1",
+  "track_id": "00",
+  "slug": "00-platform-foundation",
+  "title": "Platform foundation",
+  "status": "in_progress",
+  "implementation_state": "source_implemented",
+  "evidence_level": "source_verified",
+  "dependencies": [],
+  "updated": "2026-09-08"
+}
