@@ -61,8 +61,12 @@ def analyze_results(results, group):
         
         # --- Scoring Logic ---
         # Higher score for official-sounding domains
-        if any(domain in urlparse(link).netloc for domain in ['bmj.com', 'jamanetwork.com', 'prisma-statement.org', 'consort-statement.org']):
-            score += 30
+        if link:
+            netloc = urlparse(link).netloc
+            for domain in ('bmj.com', 'jamanetwork.com', 'prisma-statement.org', 'consort-statement.org'):
+                if domain in netloc:
+                    score += 30
+                    break
         
         # Keywords in title
         if 'official' in title or 'statement' in title:
@@ -75,7 +79,7 @@ def analyze_results(results, group):
             score += 10
             
         # Year detection
-        years = year_pattern.findall(title + snippet)
+        years = year_pattern.findall(title + ' ' + snippet)
         if years:
             # Give more weight to more recent years
             latest_year = max([int(y) for y in years])
