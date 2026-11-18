@@ -50,30 +50,18 @@ def test_extract_text_from_pdf_success(tmp_path, mock_pdfplumber_open):
     assert output_path.exists()
     assert output_path.read_text(encoding='utf-8') == expected_text
 
-def test_extract_text_from_pdf_default_output(tmp_path, mock_pdfplumber_open, mocker):
-    # Setup mock PDF
+def test_extract_text_from_pdf_default_output(tmp_path, mock_pdfplumber_open, monkeypatch):
     mock_pdfplumber_open(["Single page content"])
-
-    # Create a dummy pdf file so it has a path, use tmp_path as current dir essentially
-    # We will patch Path.cwd to tmp_path or just use relative path in tmp_path
+    monkeypatch.chdir(tmp_path)
     pdf_path = tmp_path / "my_document.pdf"
 
-    # We want the output to be created in the current working directory as per the script
-    # Wait, the script does `output_path = f"{pdf_name}_extracted.txt"` where `pdf_name = Path(pdf_path).stem`
-    # This writes to the current working directory where the script is executed.
-
-    # Let's mock open to intercept where it's written
-    m_open = mocker.patch("builtins.open", mocker.mock_open())
-
-    # Call function without specifying output_path
     extracted_text = extract_text_from_pdf(str(pdf_path))
 
     expected_text = "Single page content\n\n"
     assert extracted_text == expected_text
-
-    # Verify open was called with the correct default filename
-    m_open.assert_called_once_with("my_document_extracted.txt", 'w', encoding='utf-8')
-    m_open().write.assert_called_once_with(expected_text)
+    output_path = tmp_path / "my_document_extracted.txt"
+    assert output_path.is_file()
+    assert output_path.read_text(encoding="utf-8") == expected_text
 
 def test_extract_text_from_pdf_exception(mocker):
     # Setup mock to raise an exception when opening
