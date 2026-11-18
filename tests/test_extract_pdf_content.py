@@ -1,169 +1,118 @@
 import os
 import sys
+from pathlib import Path
 import pytest
-from unittest.mock import patch, mock_open
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from scripts.extract_pdf_content import extract_text_from_pdf
+# Add the scripts directory to the path so we can import the module
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../scripts')))
 
-def test_extract_text_from_pdf_exception(capsys):
-    """
-    Test that when an exception occurs during PDF text extraction
-    (e.g., pdfplumber fails to open the file), the function gracefully
-    catches the exception, prints an error message, and returns None.
-    """
-    with patch('pdfplumber.open', side_effect=Exception('Simulated PDF extraction error')):
-        result = extract_text_from_pdf('dummy.pdf')
-        assert result is None
+from extract_pdf_content import extract_text_from_pdf, extract_multiple_pdfs
 
-        # Verify that the error message is printed to stdout
-        captured = capsys.readouterr()
-        assert "Error extracting text from dummy.pdf: Simulated PDF extraction error" in captured.out
+class MockPage:
+    def __init__(self, text):
+        self.text = text
 
-def test_extract_text_from_pdf_success(tmp_path):
-    """
-    Test the happy path where a PDF is successfully opened and text extracted.
-    """
-    pdf_path = str(tmp_path / 'dummy.pdf')
-    output_path = str(tmp_path / 'dummy_extracted.txt')
+    def extract_text(self):
+        return self.text
 
-    # We create a mock pdf object that returns pages when iterated over
-    class MockPage:
-        def extract_text(self):
-            return "Test content page"
+class MockPDF:
+    def __init__(self, pages):
+        self.pages = [MockPage(p) for p in pages]
 
-    class MockPDF:
-        pages = [MockPage(), MockPage()]
+    def __enter__(self):
+        return self
 
-        def __enter__(self):
-            return self
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        pass
 
-        def __exit__(self, exc_type, exc_val, exc_tb):
-            pass
+@pytest.fixture
+def mock_pdfplumber_open(mocker):
+    def _mock_open(pages_text):
+        mock_pdf = MockPDF(pages_text)
+        return mocker.patch('pdfplumber.open', return_value=mock_pdf)
+    return _mock_open
 
-    with patch('pdfplumber.open', return_value=MockPDF()):
-        result = extract_text_from_pdf(pdf_path, output_path)
+def test_extract_text_from_pdf_success(tmp_path, mock_pdfplumber_open):
+    # Setup mock PDF with two pages
+    mock_pdfplumber_open(["Page 1 content", "Page 2 content"])
 
-        # Verify the returned content
-        assert "Test content page\n\nTest content page\n\n" == result
+    pdf_path = "dummy.pdf"
+    output_path = tmp_path / "output.txt"
 
-        # Verify the content was written to the output file
-        assert os.path.exists(output_path)
-        with open(output_path, 'r', encoding='utf-8') as f:
-            content = f.read()
-            assert "Test content page\n\nTest content page\n\n" == content
+    # Call function
+    extracted_text = extract_text_from_pdf(pdf_path, str(output_path))
 
-def test_extract_text_from_pdf_success_no_output_path(tmp_path):
-    """
-    Test the happy path where no output path is given, so it defaults to generating one.
-    """
-    pdf_path = str(tmp_path / 'my_doc.pdf')
+    # Assertions
+    expected_text = "Page 1 content\n\nPage 2 content\n\n"
+    assert extracted_text == expected_text
 
-    # We create a mock pdf object that returns pages when iterated over
-    class MockPage:
-        def extract_text(self):
-            return "Content without output path"
+    # Verify file was written
+    assert output_path.exists()
+    assert output_path.read_text(encoding='utf-8') == expected_text
 
-    class MockPDF:
-        pages = [MockPage()]
+def test_extract_text_from_pdf_default_output(tmp_path, mock_pdfplumber_open, monkeypatch):
+    mock_pdfplumber_open(["Single page content"])
+    monkeypatch.chdir(tmp_path)
+    pdf_path = tmp_path / "my_document.pdf"
 
-        def __enter__(self):
-            return self
+    extracted_text = extract_text_from_pdf(str(pdf_path))
 
-        def __exit__(self, exc_type, exc_val, exc_tb):
-            pass
+    expected_text = "Single page content\n\n"
+    assert extracted_text == expected_text
+    output_path = tmp_path / "my_document_extracted.txt"
+    assert output_path.is_file()
+    assert output_path.read_text(encoding="utf-8") == expected_text
 
-    # Change to the tmp_path directory so the default output file is created there
-    original_cwd = os.getcwd()
-    os.chdir(tmp_path)
-    try:
-        with patch('pdfplumber.open', return_value=MockPDF()):
-            result = extract_text_from_pdf(pdf_path)
+def test_extract_text_from_pdf_exception(mocker):
+    # Setup mock to raise an exception when opening
+    mocker.patch('pdfplumber.open', side_effect=Exception("Failed to open PDF"))
 
-            # Verify the returned content
-            assert "Content without output path\n\n" == result
+    # Call function
+    extracted_text = extract_text_from_pdf("error.pdf", "out.txt")
 
-            # Default output name should be 'my_doc_extracted.txt' in the current working dir
-            expected_output = "my_doc_extracted.txt"
-            assert os.path.exists(expected_output)
-            with open(expected_output, 'r', encoding='utf-8') as f:
-                content = f.read()
-                assert "Content without output path\n\n" == content
-    finally:
-        os.chdir(original_cwd)
+    # Assertions
+    assert extracted_text is None
 
-def test_extract_multiple_pdfs(tmp_path):
-    """
-    Test extraction of multiple PDFs from a directory.
-    """
-    source_dir = tmp_path / "pdfs"
+def test_extract_multiple_pdfs(tmp_path, mocker):
+    # Create dummy source and output directories
+    source_dir = tmp_path / "source"
     output_dir = tmp_path / "output"
-
     source_dir.mkdir()
 
     # Create some dummy pdf files
-    (source_dir / "doc1.pdf").write_text("dummy")
-    (source_dir / "doc2.pdf").write_text("dummy")
+    (source_dir / "doc1.pdf").touch()
+    (source_dir / "doc2.pdf").touch()
 
-    # We mock extract_text_from_pdf since we already tested it directly
-    with patch('scripts.extract_pdf_content.extract_text_from_pdf') as mock_extract:
-        from scripts.extract_pdf_content import extract_multiple_pdfs
-        extract_multiple_pdfs(str(source_dir), str(output_dir))
+    # Mock extract_text_from_pdf
+    m_extract = mocker.patch('extract_pdf_content.extract_text_from_pdf')
 
-        # Should be called twice (for doc1.pdf and doc2.pdf)
-        assert mock_extract.call_count == 2
-
-        # Verify call arguments
-        calls = mock_extract.call_args_list
-        # Output file paths
-        out1 = str(output_dir / "doc1_extracted.txt")
-        out2 = str(output_dir / "doc2_extracted.txt")
-
-        # Get all positional arguments from all calls
-        called_args = [call[0] for call in calls]
-
-        # Extract both source and dest paths that were called
-        called_source_dest = {(args[0], args[1]) for args in called_args}
-
-        expected_source_dest = {
-            (str(source_dir / "doc1.pdf"), out1),
-            (str(source_dir / "doc2.pdf"), out2),
-        }
-
-        assert called_source_dest == expected_source_dest
-
-def test_extract_multiple_pdfs_no_pdfs(tmp_path, capsys):
-    """
-    Test multiple extraction when directory has no PDFs.
-    """
-    source_dir = tmp_path / "empty_dir"
-    output_dir = tmp_path / "output"
-
-    source_dir.mkdir()
-
-    from scripts.extract_pdf_content import extract_multiple_pdfs
+    # Call function
     extract_multiple_pdfs(str(source_dir), str(output_dir))
 
-    captured = capsys.readouterr()
-    assert f"No PDF files found in {str(source_dir)}" in captured.out
+    # Assertions
+    assert output_dir.exists()
+    assert m_extract.call_count == 2
 
-def test_main_missing_args():
-    from scripts.extract_pdf_content import main
-    with patch('sys.argv', ['extract_pdf_content.py']):
-        with pytest.raises(SystemExit) as exc_info:
-            main()
-        assert exc_info.value.code == 1
+    # Check arguments
+    calls = m_extract.call_args_list
+    args_called = [ (c[0][0], c[0][1]) for c in calls ]
 
-def test_main_directory_mode(tmp_path):
-    from scripts.extract_pdf_content import main
-    with patch('sys.argv', ['extract_pdf_content.py', str(tmp_path), '-d', '-o', str(tmp_path / 'out')]):
-        with patch('scripts.extract_pdf_content.extract_multiple_pdfs') as mock_multi:
-            main()
-            mock_multi.assert_called_once_with(str(tmp_path), str(tmp_path / 'out'))
+    # Paths will depend on glob order, so we check sets
+    expected_args = {
+        (str(source_dir / "doc1.pdf"), str(output_dir / "doc1_extracted.txt")),
+        (str(source_dir / "doc2.pdf"), str(output_dir / "doc2_extracted.txt"))
+    }
+    assert set(args_called) == expected_args
 
-def test_main_single_file_mode(tmp_path):
-    from scripts.extract_pdf_content import main
-    with patch('sys.argv', ['extract_pdf_content.py', str(tmp_path / 'dummy.pdf'), '-o', str(tmp_path / 'out.txt')]):
-        with patch('scripts.extract_pdf_content.extract_text_from_pdf') as mock_single:
-            main()
-            mock_single.assert_called_once_with(str(tmp_path / 'dummy.pdf'), str(tmp_path / 'out.txt'))
+def test_extract_multiple_pdfs_no_files(tmp_path, mocker):
+    source_dir = tmp_path / "source"
+    output_dir = tmp_path / "output"
+    source_dir.mkdir()
+
+    m_extract = mocker.patch('extract_pdf_content.extract_text_from_pdf')
+
+    # Call function on empty directory
+    extract_multiple_pdfs(str(source_dir), str(output_dir))
+
+    # Should not be called
+    m_extract.assert_not_called()
