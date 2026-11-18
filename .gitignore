@@ -8,10 +8,13 @@ npm-debug.log
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Rust
+target/
+
 # macOS
 .DS_Store
 .coverage
 __pycache__/
-# Python
 *.pyc
 *.pyo

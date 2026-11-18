@@ -1,0 +1,76 @@
+{
+  "schema_version": "dev.standardflow.track-evidence.v1",
+  "track_id": "01",
+  "claims": [
+    {
+      "claim": "Canonical pack, rights, verification, lock and CLI source surfaces exist",
+      "evidence_level": "source_verified",
+      "paths": [
+        "crates/standardflow-core/src/pack.rs",
+        "crates/standardflow-core/src/canonical.rs",
+        "crates/standardflow-core/src/lock.rs",
+        "crates/standardflow-cli/src/main.rs"
+      ]
+    },
+    {
+      "claim": "The Canonical Standard Pack runtime, synthetic fixtures and provisional PRISMA pack structure pass strict lint, tests, schema checks and deterministic lock verification on Linux, macOS and Windows",
+      "evidence_level": "fixture_proven",
+      "commit": "16238dbf3c0fe82d522c81d05d42df9d0eac1408",
+      "receipts": [
+        "https://github.com/edithatogo/standards_check/actions/runs/34164376566",
+        "https://github.com/edithatogo/standards_check/actions/runs/34164485083",
+        "https://github.com/edithatogo/standards_check/actions/runs/34164485098"
+      ],
+      "coverage": [
+        "Python Draft 2020-12 validation",
+        "rustfmt",
+        "strict Clippy with warnings denied",
+        "unit, integration, property and documentation tests",
+        "CLI validation",
+        "deterministic lock write/check round-trip",
+        "Linux, macOS and Windows execution"
+      ]
+    },
+    {
+      "claim": "Automated review findings for bounded file reads and decimal arithmetic were corrected and re-verified",
+      "evidence_level": "fixture_proven",
+      "commit": "fd5fa183c82ce1c8133bf51972482a4fd52cdb56",
+      "receipt": "https://github.com/edithatogo/standards_check/actions/runs/34164376566"
+    },
+    {
+      "claim": "The original runtime and diagram integration passed permanent pack and foundation checks on the recorded head",
+      "evidence_level": "fixture_proven",
+      "commit": "55bff593c6e91491ad50596baefae5626c6bf2c5",
+      "receipts": [
+        "https://github.com/edithatogo/standards_check/actions/runs/43308300569",
+        "https://github.com/edithatogo/standards_check/actions/runs/43308300678"
+      ],
+      "reviewed_on": "2026-11-18"
+    },
+    {
+      "claim": "The bounded runtime repair passes 55 Rust tests, strict Clippy, formatting, schema validators, lock verification and all 12 golden-output comparisons on Linux",
+      "evidence_level": "fixture_proven",
+      "commit": "f41888832c2b169528b30fe99df6aa7a85aff153",
+      "execution": "local",
+      "platform": "Linux",
+      "rust_toolchain": "1.98.1",
+      "hosted_checks": "not yet observed for the final merged repair head"
+    },
+    {
+      "claim": "The PRISMA 2020 pack has been reconciled item-by-item to the authoritative source",
+      "evidence_level": "contracted",
+      "blocked_by": [
+        "independent source-reconciliation receipt",
+        "item-level rights confirmation"
+      ],
+      "current_pack_status": "imported_unverified"
+    },
+    {
+      "claim": "The final repaired integration head has passed hosted acceptance checks",
+      "evidence_level": "contracted",
+      "blocked_by": [
+        "fresh hosted checks at the final pull request 60 integration head"
+      ]
+    }
+  ]
+}

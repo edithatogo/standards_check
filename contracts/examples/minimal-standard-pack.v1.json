@@ -10,9 +10,17 @@
     "retrieved_at": "2026-09-08",
     "source_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
   },
+  "verification": {
+    "status": "source_reconciled",
+    "verified_at": "2026-09-08",
+    "verified_by": ["StandardFlow deterministic fixture generator"],
+    "evidence": ["urn:standardflow:fixture:minimal-standard-pack:v1"]
+  },
   "rights": {
     "status": "cleared",
     "spdx": "CC0-1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution": null,
     "redistribution": "Synthetic fixture; unrestricted for testing."
   },
   "relationships": [],

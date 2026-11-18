@@ -1,0 +1,33 @@
+{
+  "schema_version": "dev.standardflow.conductor-track.v1",
+  "track_id": "01",
+  "slug": "01-canonical-standard-pack",
+  "title": "Canonical Standard Pack runtime",
+  "status": "implementation_complete",
+  "implementation_state": "source_implemented",
+  "evidence_level": "fixture_proven",
+  "dependencies": [
+    "00-platform-foundation"
+  ],
+  "pull_request": 60,
+  "merge_blockers": [
+    "passing hosted foundation, pack, diagram, document and privacy checks at the final repaired integration head"
+  ],
+  "updated": "2026-11-18",
+  "evidence_level_scope": "bounded prior-revision fixtures; final merged head hosted acceptance remains pending",
+  "base_branch": "main",
+  "last_hosted_verification": {
+    "commit": "55bff593c6e91491ad50596baefae5626c6bf2c5",
+    "receipts": [
+      "https://github.com/edithatogo/standards_check/actions/runs/43308300569",
+      "https://github.com/edithatogo/standards_check/actions/runs/43308300678"
+    ]
+  },
+  "last_local_verification": {
+    "commit": "f41888832c2b169528b30fe99df6aa7a85aff153",
+    "rust_tests_passed": 55,
+    "golden_outputs_compared": 12,
+    "platform": "Linux",
+    "rust_toolchain": "1.98.1"
+  }
+}

@@ -1,6 +1,10 @@
 # Plan: Platform foundation
 
-Current status: **in progress**. Implementation: **source implemented**. Evidence: **source verified** until CI produces compiler receipts.
+Current status: **in progress**. Implementation: **source implemented and foundation merged**.
+The reviewed foundation at `d8cd1f2c54934ee15400d5be047c76977adfa29b` has
+**compiler-verified** hosted evidence, retained in [evidence.json](evidence.json).
+PR #59 merged as `a8bfec446d219b770e76a23b44d1f08d9e00465d`.
+Hosted acceptance of the final repaired PR #60 integration head remains pending.
 
 ## Phase 1: Brownfield truth baseline
 
@@ -17,11 +21,20 @@ Current status: **in progress**. Implementation: **source implemented**. Evidenc
 ## Phase 3: Rust foundation
 
 - [x] Add the dependency-minimal Rust workspace and initial authority/evidence types.
-- [ ] Run formatting, Clippy and tests using Rust 1.98.1 in CI.
-- [ ] Record the resulting compiler receipt without promoting unrelated claims.
+- [x] Run formatting, Clippy and tests using Rust 1.98.1 in CI for the reviewed foundation.
+- [x] Record the resulting compiler receipt without promoting unrelated claims.
 
-## Phase 4: Repository standards and next track
+The foundation Rust/contracts receipt is
+[run 43304348843](https://github.com/edithatogo/standards_check/actions/runs/43304348843).
+Document and privacy receipts are recorded separately in the evidence file.
+These receipts apply to their recorded commit, not automatically to later repairs or merges.
+
+## Phase 4: Repository standards and next tracks
 
 - [x] Add immutable-pinned foundation CI and network-free contract checks.
 - [ ] Reconcile the repository profile with `edithatogo/repository-standards`.
-- [ ] Create Track 01 through `conductor-new-track` after the foundation PR is reviewed.
+- [x] Record the implemented Track 01 and Track 02 artefacts in the Conductor registry.
+- [ ] Obtain hosted acceptance of the final PR #60 integration head.
+
+The foundation merge does not complete the brownfield audit, confirm third-party rights,
+prove legacy migration parity or establish publication and external acceptance.
