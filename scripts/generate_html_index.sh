@@ -3,7 +3,7 @@
 # Generates the main index.html page for the web portal.
 # Reads source/index.yml and creates a list of links to each checklist.
 
-set -e
+set -euo pipefail
 
 # --- Configuration ---
 INDEX_YAML="source/index.yml"
@@ -19,7 +19,7 @@ function log() {
 
 function escape_html() {
   local str="$1"
-  echo "$str" | sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' -e 's/>/\&gt;/g' -e 's/"/\&quot;/g' -e "s/'/\&#39;/g"
+  printf '%s' "$str" | sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' -e 's/>/\&gt;/g' -e 's/"/\&quot;/g' -e "s/'/\&#39;/g"
 }
 
 # --- Main ---
@@ -31,6 +31,16 @@ if [ ! -f "$INDEX_YAML" ]; then
   exit 1
 fi
 
+# Match the index schema before using identifiers in yq expressions or link paths.
+# pipefail also makes a malformed index fail before any output is generated.
+yq -r '.items[].id' "$INDEX_YAML" | while IFS= read -r id;
+do
+  if [[ ! "$id" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]]; then
+    printf '[ERROR] Invalid checklist id: %s\n' "$id" >&2
+    exit 1
+  fi
+done
+
 # Create a temporary body file
 BODY_CONTENT_TMP=$(mktemp)
 trap 'rm -f "$BODY_CONTENT_TMP"' EXIT
@@ -38,7 +48,7 @@ trap 'rm -f "$BODY_CONTENT_TMP"' EXIT
 # --- Implemented Checklists ---
 echo "<h2>Implemented Checklists</h2>" >> "$BODY_CONTENT_TMP"
 echo "<div class='list-group mb-4'>" >> "$BODY_CONTENT_TMP"
-yq -r '.items[] | select(.status == "mapped") | .id' "$INDEX_YAML" | while read -r id;
+yq -r '.items[] | select(.status == "mapped") | .id' "$INDEX_YAML" | while IFS= read -r id;
 do
   title=$(yq -r ".items[] | select(.id == \"$id\") | .title" "$INDEX_YAML")
   title=$(escape_html "$title")
@@ -59,12 +69,13 @@ do
     echo "<span class=\"list-group-item list-group-item-action list-group-item-light text-muted\">${title} (Coming Soon)</span>" >> "$BODY_CONTENT_TMP"
   fi
 done
-echo "</div>" >> "$BODY_CONTENT_TMP"
-
-# --- Placeholder Checklists ---
-echo "<h2>Placeholder Checklists</h2>" >> "$BODY_CONTENT_TMP"
-echo "<div class='list-group mb-4'>" >> "$BODY_CONTENT_TMP"
-yq -r '.items[] | select(.status != "mapped") | .id' "$INDEX_YAML" | while read -r id;
+{
+  echo "</div>"
+  # --- Placeholder Checklists ---
+  echo "<h2>Placeholder Checklists</h2>"
+  echo "<div class='list-group mb-4'>"
+} >> "$BODY_CONTENT_TMP"
+yq -r '.items[] | select(.status != "mapped") | .id' "$INDEX_YAML" | while IFS= read -r id;
 do
   title=$(yq -r ".items[] | select(.id == \"$id\") | .title" "$INDEX_YAML")
   title=$(escape_html "$title")
