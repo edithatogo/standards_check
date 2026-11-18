@@ -28,3 +28,19 @@ This will create the markdown file, citation file, and other necessary assets ba
 - Use the provided PR template and complete all boxes.
 - Keep PRs focused (one checklist or a small batch).
 - Include artifacts (PDF/DOCX) via CI run links when helpful.
+
+## Local commit checks
+
+Install `pre-commit`, a Go toolchain for its Gitleaks environment, and the `shellcheck`
+executable before enabling the hooks:
+
+```bash
+python -m pip install pre-commit
+pre-commit install
+pre-commit run --files path/to/changed-file
+```
+
+The hooks scan staged changes for secrets, check shell scripts, and fix whitespace in
+maintained text files. Formatting hooks exclude original source material, archives, assets
+and generated document directories, and preserve Markdown hard linebreaks. ESLint is
+deferred until a project configuration and its existing JavaScript files are qualified.
