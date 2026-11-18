@@ -12,19 +12,21 @@
   "merged_commit": "a8bfec446d219b770e76a23b44d1f08d9e00465d",
   "evidence_level_scope": "current integration source; revision-bound hosted compiler evidence is recorded separately",
   "last_hosted_verification": {
-    "commit": "d8cd1f2c54934ee15400d5be047c76977adfa29b",
+    "commit": "bfe2255fda85b891c2f68044676c0b777d92c38c",
     "evidence_level": "compiler_verified",
     "receipts": [
-      "https://github.com/edithatogo/standards_check/actions/runs/43304348843",
-      "https://github.com/edithatogo/standards_check/actions/runs/43304348854",
-      "https://github.com/edithatogo/standards_check/actions/runs/43304348877"
+      "https://github.com/edithatogo/standards_check/actions/runs/44314792407",
+      "https://github.com/edithatogo/standards_check/actions/runs/44314792172",
+      "https://github.com/edithatogo/standards_check/actions/runs/44314792189",
+      "https://github.com/edithatogo/standards_check/actions/runs/44314780941"
     ]
   },
-  "current_integration_hosted_checks": "pending",
+  "current_integration_hosted_checks": "passed",
   "remaining_work": [
     "brownfield corpus, placeholder, licensing and test audit",
     "CI verification of the exact Conductor gitlink and context links",
     "repository-standards profile reconciliation",
     "rights, migration parity and publication acceptance remain separate gates"
-  ]
+  ],
+  "current_integration_hosted_commit": "bfe2255fda85b891c2f68044676c0b777d92c38c"
 }

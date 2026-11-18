@@ -4,7 +4,8 @@ Current status: **in progress**. Implementation: **source implemented and founda
 The reviewed foundation at `d8cd1f2c54934ee15400d5be047c76977adfa29b` has
 **compiler-verified** hosted evidence, retained in [evidence.json](evidence.json).
 PR #59 merged as `a8bfec446d219b770e76a23b44d1f08d9e00465d`.
-Hosted acceptance of the final repaired PR #60 integration head remains pending.
+Hosted acceptance of PR #60 revision `bfe2255fda85b891c2f68044676c0b777d92c38c` has passed;
+the revision-bound foundation, document, privacy and CodeQL receipts are retained in [evidence.json](evidence.json).
 
 ## Phase 1: Brownfield truth baseline
 
@@ -34,7 +35,7 @@ These receipts apply to their recorded commit, not automatically to later repair
 - [x] Add immutable-pinned foundation CI and network-free contract checks.
 - [ ] Reconcile the repository profile with `edithatogo/repository-standards`.
 - [x] Record the implemented Track 01 and Track 02 artefacts in the Conductor registry.
-- [ ] Obtain hosted acceptance of the final PR #60 integration head.
+- [x] Record hosted acceptance at PR #60 revision `bfe2255fda85b891c2f68044676c0b777d92c38c`.
 
 The foundation merge does not complete the brownfield audit, confirm third-party rights,
 prove legacy migration parity or establish publication and external acceptance.
