@@ -1,0 +1,40 @@
+{
+  "schema_version": "dev.standardflow.track-evidence.v1",
+  "track_id": "00",
+  "claims": [
+    {
+      "claim": "The reviewed platform foundation passed contract validation, Rust formatting, strict Clippy and tests, document build checks, and privacy/secrets checks",
+      "evidence_level": "compiler_verified",
+      "commit": "d8cd1f2c54934ee15400d5be047c76977adfa29b",
+      "receipts": [
+        "https://github.com/edithatogo/standards_check/actions/runs/43304348843",
+        "https://github.com/edithatogo/standards_check/actions/runs/43304348854",
+        "https://github.com/edithatogo/standards_check/actions/runs/43304348877"
+      ],
+      "reviewed_on": "2026-11-18"
+    },
+    {
+      "claim": "Foundation pull request 59 is integrated into main",
+      "evidence_level": "source_verified",
+      "commit": "a8bfec446d219b770e76a23b44d1f08d9e00465d",
+      "receipt": "https://github.com/edithatogo/standards_check/pull/59"
+    },
+    {
+      "claim": "The final repaired runtime merged with current main has passed hosted acceptance checks",
+      "evidence_level": "contracted",
+      "blocked_by": [
+        "fresh hosted checks at the final pull request 60 integration head"
+      ]
+    },
+    {
+      "claim": "The legacy corpus, rights, migration and public-release obligations are complete",
+      "evidence_level": "contracted",
+      "blocked_by": [
+        "brownfield audit",
+        "rights and source reconciliation",
+        "migration parity",
+        "publication and external acceptance"
+      ]
+    }
+  ]
+}

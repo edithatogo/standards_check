@@ -1,0 +1,127 @@
+[
+  {
+    "id": "page-2021-prisma",
+    "type": "article-journal",
+    "title": "The PRISMA 2020 statement: an updated guideline for reporting systematic reviews",
+    "author": [
+      {
+        "family": "Page",
+        "given": "Matthew J."
+      },
+      {
+        "family": "McKenzie",
+        "given": "Joanne E."
+      },
+      {
+        "family": "Bossuyt",
+        "given": "Patrick M."
+      },
+      {
+        "family": "Boutron",
+        "given": "Isabelle"
+      },
+      {
+        "family": "Hoffmann",
+        "given": "Tammy C."
+      },
+      {
+        "family": "Mulrow",
+        "given": "Cynthia D."
+      },
+      {
+        "family": "Shamseer",
+        "given": "Larissa"
+      },
+      {
+        "family": "Tetzlaff",
+        "given": "Jennifer M."
+      },
+      {
+        "family": "Akl",
+        "given": "Elie A."
+      },
+      {
+        "family": "Brennan",
+        "given": "Sue E."
+      },
+      {
+        "family": "Chou",
+        "given": "Roger"
+      },
+      {
+        "family": "Glanville",
+        "given": "Julie"
+      },
+      {
+        "family": "Grimshaw",
+        "given": "Jeremy M."
+      },
+      {
+        "family": "Hróbjartsson",
+        "given": "Asbjørn"
+      },
+      {
+        "family": "Lalu",
+        "given": "Manoj M."
+      },
+      {
+        "family": "Li",
+        "given": "Tianjing"
+      },
+      {
+        "family": "Loder",
+        "given": "Elizabeth W."
+      },
+      {
+        "family": "Mayo-Wilson",
+        "given": "Evan"
+      },
+      {
+        "family": "McDonald",
+        "given": "Steve"
+      },
+      {
+        "family": "McGuinness",
+        "given": "Luke A."
+      },
+      {
+        "family": "Stewart",
+        "given": "Lesley A."
+      },
+      {
+        "family": "Thomas",
+        "given": "James"
+      },
+      {
+        "family": "Tricco",
+        "given": "Andrea C."
+      },
+      {
+        "family": "Welch",
+        "given": "Vivian A."
+      },
+      {
+        "family": "Whiting",
+        "given": "Penny"
+      },
+      {
+        "family": "Moher",
+        "given": "David"
+      }
+    ],
+    "container-title": "BMJ",
+    "volume": "372",
+    "page": "n71",
+    "DOI": "10.1136/bmj.n71",
+    "issued": {
+      "date-parts": [
+        [
+          2021,
+          3,
+          29
+        ]
+      ]
+    },
+    "URL": "https://doi.org/10.1136/bmj.n71"
+  }
+]

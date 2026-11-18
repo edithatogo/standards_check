@@ -7,5 +7,24 @@
   "implementation_state": "source_implemented",
   "evidence_level": "source_verified",
   "dependencies": [],
-  "updated": "2026-09-08"
+  "updated": "2026-11-18",
+  "pull_request": 59,
+  "merged_commit": "a8bfec446d219b770e76a23b44d1f08d9e00465d",
+  "evidence_level_scope": "current integration source; revision-bound hosted compiler evidence is recorded separately",
+  "last_hosted_verification": {
+    "commit": "d8cd1f2c54934ee15400d5be047c76977adfa29b",
+    "evidence_level": "compiler_verified",
+    "receipts": [
+      "https://github.com/edithatogo/standards_check/actions/runs/43304348843",
+      "https://github.com/edithatogo/standards_check/actions/runs/43304348854",
+      "https://github.com/edithatogo/standards_check/actions/runs/43304348877"
+    ]
+  },
+  "current_integration_hosted_checks": "pending",
+  "remaining_work": [
+    "brownfield corpus, placeholder, licensing and test audit",
+    "CI verification of the exact Conductor gitlink and context links",
+    "repository-standards profile reconciliation",
+    "rights, migration parity and publication acceptance remain separate gates"
+  ]
 }

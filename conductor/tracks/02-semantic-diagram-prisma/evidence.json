@@ -1,0 +1,91 @@
+{
+  "schema_version": "dev.standardflow.track-evidence.v1",
+  "track_id": "02",
+  "claims": [
+    {
+      "claim": "Generic recipe, semantic scene and renderer source surfaces exist",
+      "evidence_level": "source_verified",
+      "paths": [
+        "crates/standardflow-artifacts/src/recipe.rs",
+        "crates/standardflow-artifacts/src/scene.rs",
+        "crates/standardflow-artifacts/src/render.rs"
+      ]
+    },
+    {
+      "claim": "All four PRISMA 2020 flow families are represented by strict recipes and fixtures",
+      "evidence_level": "source_verified",
+      "paths": [
+        "recipes/prisma-2020",
+        "contracts/examples/prisma-flow"
+      ]
+    },
+    {
+      "claim": "The four synthetic PRISMA families pass strict Rust tests, schema/XML/accessibility assertions, Linux/macOS/Windows execution and byte-for-byte regeneration of all 12 committed golden outputs",
+      "evidence_level": "fixture_proven",
+      "commit": "55bff593c6e91491ad50596baefae5626c6bf2c5",
+      "receipts": [
+        "https://github.com/edithatogo/standards_check/actions/runs/43308301190"
+      ],
+      "reviewed_on": "2026-11-18",
+      "coverage": [
+        "rust-quality",
+        "contracts-and-accessibility",
+        "deterministic-generation",
+        "cross-platform (ubuntu-latest)",
+        "cross-platform (macos-latest)",
+        "cross-platform (windows-latest)"
+      ],
+      "limitations": [
+        "synthetic fixture properties only",
+        "no external accessibility or methodological certification"
+      ]
+    },
+    {
+      "claim": "The runtime repair preserves all 12 golden outputs and passes the combined 55-test Rust suite on Linux",
+      "evidence_level": "fixture_proven",
+      "commit": "f41888832c2b169528b30fe99df6aa7a85aff153",
+      "execution": "local",
+      "platform": "Linux",
+      "rust_toolchain": "1.98.1"
+    },
+    {
+      "claim": "Rendered PRISMA diagrams are methodologically or externally validated",
+      "evidence_level": "contracted",
+      "blocked_by": [
+        "independent PRISMA source and usability/accessibility evaluation"
+      ]
+    },
+    {
+      "claim": "The repaired integration passed hosted acceptance checks at the recorded PR #60 revision",
+      "evidence_level": "fixture_proven",
+      "commit": "bfe2255fda85b891c2f68044676c0b777d92c38c",
+      "receipts": [
+        "https://github.com/edithatogo/standards_check/actions/runs/44314792407",
+        "https://github.com/edithatogo/standards_check/actions/runs/44314792180",
+        "https://github.com/edithatogo/standards_check/actions/runs/44314792201",
+        "https://github.com/edithatogo/standards_check/actions/runs/44314792172",
+        "https://github.com/edithatogo/standards_check/actions/runs/44314792189",
+        "https://github.com/edithatogo/standards_check/actions/runs/44314780941"
+      ],
+      "reviewed_on": "2026-11-18",
+      "coverage": [
+        "strict Rust formatting, Clippy and workspace tests",
+        "recipe/input contracts, schema/XML and fixture accessibility assertions",
+        "Linux, macOS and Windows workspace tests",
+        "byte-for-byte regeneration of all 12 committed golden outputs",
+        "document validation/build and privacy/secrets checks",
+        "CodeQL analyses for Python, JavaScript/TypeScript and GitHub Actions"
+      ],
+      "limitations": [
+        "independent source and provenance reconciliation",
+        "item-level rights and licensing confirmation",
+        "brownfield audit and history-preserving migration parity",
+        "independent methodological qualification",
+        "independent usability/accessibility evaluation",
+        "publication and external acceptance",
+        "acceptance is revision-bound and does not certify later changes",
+        "pull-request document build is not deployment or publication"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,332 @@
+{
+  "schema_version": "dev.standardflow.artifact-recipe.v1",
+  "version": "2020.1",
+  "artifact_type": "flow_diagram",
+  "source_standard": "org.prisma/prisma/2020",
+  "input_contract": "dev.standardflow.prisma-flow.v1",
+  "outputs": [
+    "scene-json",
+    "svg",
+    "text"
+  ],
+  "accessibility": {
+    "reading_order": true,
+    "text_equivalent": true,
+    "labelled_groups": true
+  },
+  "recipe_id": "org.prisma/prisma-2020/updated-databases-registers-other-sources",
+  "title_template": "PRISMA 2020 flow diagram: updated review with other sources",
+  "description_template": "Updated study identification and selection for {{review_id}}, using databases, registers and other methods.",
+  "layout": {
+    "columns": 5,
+    "margin": 40,
+    "column_width": 300,
+    "column_gap": 60,
+    "row_gap": 55,
+    "minimum_node_height": 92,
+    "padding": 18,
+    "line_height": 20,
+    "character_width": 8
+  },
+  "nodes": [
+    {
+      "id": "db-identified",
+      "role": "source",
+      "row": 0,
+      "column": 1,
+      "column_span": 1,
+      "label_template": "Records identified from:\nDatabases (n = {{db_databases}})\nRegisters (n = {{db_registers}})\nTotal (n = {{db_identified_total}})",
+      "aria_template": "Records identified from:; Databases (n = {{db_databases}}); Registers (n = {{db_registers}}); Total (n = {{db_identified_total}})"
+    },
+    {
+      "id": "db-removed",
+      "role": "exclusion",
+      "row": 0,
+      "column": 2,
+      "column_span": 1,
+      "label_template": "Records removed before screening:\nDuplicate records (n = {{db_duplicates_removed}})\nMarked ineligible by automation (n = {{db_automation_removed}})\nOther reasons (n = {{db_other_removed}})\nTotal removed (n = {{db_removed_total}})",
+      "aria_template": "Records removed before screening:; Duplicate records (n = {{db_duplicates_removed}}); Marked ineligible by automation (n = {{db_automation_removed}}); Other reasons (n = {{db_other_removed}}); Total removed (n = {{db_removed_total}})"
+    },
+    {
+      "id": "db-screened",
+      "role": "process",
+      "row": 1,
+      "column": 1,
+      "column_span": 1,
+      "label_template": "Records screened\n(n = {{db_records_screened}})",
+      "aria_template": "Records screened; (n = {{db_records_screened}})"
+    },
+    {
+      "id": "db-records-excluded",
+      "role": "exclusion",
+      "row": 1,
+      "column": 2,
+      "column_span": 1,
+      "label_template": "Records excluded\n(n = {{db_records_excluded}})",
+      "aria_template": "Records excluded; (n = {{db_records_excluded}})"
+    },
+    {
+      "id": "db-reports-sought",
+      "role": "process",
+      "row": 2,
+      "column": 1,
+      "column_span": 1,
+      "label_template": "Reports sought for retrieval\n(n = {{db_reports_sought}})",
+      "aria_template": "Reports sought for retrieval; (n = {{db_reports_sought}})"
+    },
+    {
+      "id": "db-reports-not-retrieved",
+      "role": "exclusion",
+      "row": 2,
+      "column": 2,
+      "column_span": 1,
+      "label_template": "Reports not retrieved\n(n = {{db_reports_not_retrieved}})",
+      "aria_template": "Reports not retrieved; (n = {{db_reports_not_retrieved}})"
+    },
+    {
+      "id": "db-reports-assessed",
+      "role": "process",
+      "row": 3,
+      "column": 1,
+      "column_span": 1,
+      "label_template": "Reports assessed for eligibility\n(n = {{db_reports_assessed}})",
+      "aria_template": "Reports assessed for eligibility; (n = {{db_reports_assessed}})"
+    },
+    {
+      "id": "db-reports-excluded",
+      "role": "exclusion",
+      "row": 3,
+      "column": 2,
+      "column_span": 1,
+      "label_template": "Reports excluded (n = {{db_reports_excluded}}):\n{{db_exclusion_reasons}}",
+      "aria_template": "Reports excluded (n = {{db_reports_excluded}}):; {{db_exclusion_reasons}}"
+    },
+    {
+      "id": "other-identified",
+      "role": "source",
+      "row": 0,
+      "column": 3,
+      "column_span": 1,
+      "label_template": "Records identified from other methods:\nWebsites (n = {{other_websites}})\nOrganisations (n = {{other_organisations}})\nCitation searching (n = {{other_citation_searching}})\nOther sources (n = {{other_sources}})\nTotal (n = {{other_identified_total}})",
+      "aria_template": "Records identified from other methods:; Websites (n = {{other_websites}}); Organisations (n = {{other_organisations}}); Citation searching (n = {{other_citation_searching}}); Other sources (n = {{other_sources}}); Total (n = {{other_identified_total}})"
+    },
+    {
+      "id": "other-reports-sought",
+      "role": "process",
+      "row": 1,
+      "column": 3,
+      "column_span": 1,
+      "label_template": "Reports sought for retrieval\n(n = {{other_reports_sought}})",
+      "aria_template": "Reports sought for retrieval; (n = {{other_reports_sought}})"
+    },
+    {
+      "id": "other-reports-not-retrieved",
+      "role": "exclusion",
+      "row": 1,
+      "column": 4,
+      "column_span": 1,
+      "label_template": "Reports not retrieved\n(n = {{other_reports_not_retrieved}})",
+      "aria_template": "Reports not retrieved; (n = {{other_reports_not_retrieved}})"
+    },
+    {
+      "id": "other-reports-assessed",
+      "role": "process",
+      "row": 2,
+      "column": 3,
+      "column_span": 1,
+      "label_template": "Reports assessed for eligibility\n(n = {{other_reports_assessed}})",
+      "aria_template": "Reports assessed for eligibility; (n = {{other_reports_assessed}})"
+    },
+    {
+      "id": "other-reports-excluded",
+      "role": "exclusion",
+      "row": 2,
+      "column": 4,
+      "column_span": 1,
+      "label_template": "Reports excluded (n = {{other_reports_excluded}}):\n{{other_exclusion_reasons}}",
+      "aria_template": "Reports excluded (n = {{other_reports_excluded}}):; {{other_exclusion_reasons}}"
+    },
+    {
+      "id": "previous-included",
+      "role": "prior",
+      "row": 4,
+      "column": 0,
+      "column_span": 1,
+      "label_template": "Studies included in previous version\n(n = {{previous_studies}})\nReports of previous studies\n(n = {{previous_reports}})",
+      "aria_template": "Studies included in previous version; (n = {{previous_studies}}); Reports of previous studies; (n = {{previous_reports}})"
+    },
+    {
+      "id": "new-included",
+      "role": "outcome",
+      "row": 4,
+      "column": 2,
+      "column_span": 2,
+      "label_template": "New studies included in review\n(n = {{new_studies}})\nReports of new included studies\n(n = {{new_reports}})",
+      "aria_template": "New studies included in review; (n = {{new_studies}}); Reports of new included studies; (n = {{new_reports}})"
+    },
+    {
+      "id": "total-included",
+      "role": "outcome",
+      "row": 5,
+      "column": 1,
+      "column_span": 3,
+      "label_template": "Total studies included in review\n(n = {{total_studies}})\nReports of total included studies\n(n = {{total_reports}})",
+      "aria_template": "Total studies included in review; (n = {{total_studies}}); Reports of total included studies; (n = {{total_reports}})"
+    }
+  ],
+  "edges": [
+    {
+      "id": "db-identification-to-removal",
+      "from": "db-identified",
+      "to": "db-removed",
+      "kind": "exclusion",
+      "from_anchor": "right",
+      "to_anchor": "left",
+      "label_template": null
+    },
+    {
+      "id": "db-identification-to-screening",
+      "from": "db-identified",
+      "to": "db-screened",
+      "kind": "progression",
+      "from_anchor": "bottom",
+      "to_anchor": "top",
+      "label_template": null
+    },
+    {
+      "id": "db-screening-to-record-exclusion",
+      "from": "db-screened",
+      "to": "db-records-excluded",
+      "kind": "exclusion",
+      "from_anchor": "right",
+      "to_anchor": "left",
+      "label_template": null
+    },
+    {
+      "id": "db-screening-to-retrieval",
+      "from": "db-screened",
+      "to": "db-reports-sought",
+      "kind": "progression",
+      "from_anchor": "bottom",
+      "to_anchor": "top",
+      "label_template": null
+    },
+    {
+      "id": "db-retrieval-to-failure",
+      "from": "db-reports-sought",
+      "to": "db-reports-not-retrieved",
+      "kind": "exclusion",
+      "from_anchor": "right",
+      "to_anchor": "left",
+      "label_template": null
+    },
+    {
+      "id": "db-retrieval-to-assessment",
+      "from": "db-reports-sought",
+      "to": "db-reports-assessed",
+      "kind": "progression",
+      "from_anchor": "bottom",
+      "to_anchor": "top",
+      "label_template": null
+    },
+    {
+      "id": "db-assessment-to-exclusion",
+      "from": "db-reports-assessed",
+      "to": "db-reports-excluded",
+      "kind": "exclusion",
+      "from_anchor": "right",
+      "to_anchor": "left",
+      "label_template": null
+    },
+    {
+      "id": "other-identification-to-retrieval",
+      "from": "other-identified",
+      "to": "other-reports-sought",
+      "kind": "progression",
+      "from_anchor": "bottom",
+      "to_anchor": "top",
+      "label_template": null
+    },
+    {
+      "id": "other-retrieval-to-failure",
+      "from": "other-reports-sought",
+      "to": "other-reports-not-retrieved",
+      "kind": "exclusion",
+      "from_anchor": "right",
+      "to_anchor": "left",
+      "label_template": null
+    },
+    {
+      "id": "other-retrieval-to-assessment",
+      "from": "other-reports-sought",
+      "to": "other-reports-assessed",
+      "kind": "progression",
+      "from_anchor": "bottom",
+      "to_anchor": "top",
+      "label_template": null
+    },
+    {
+      "id": "other-assessment-to-exclusion",
+      "from": "other-reports-assessed",
+      "to": "other-reports-excluded",
+      "kind": "exclusion",
+      "from_anchor": "right",
+      "to_anchor": "left",
+      "label_template": null
+    },
+    {
+      "id": "db-assessment-to-new-included",
+      "from": "db-reports-assessed",
+      "to": "new-included",
+      "kind": "merge",
+      "from_anchor": "bottom",
+      "to_anchor": "top",
+      "label_template": null
+    },
+    {
+      "id": "other-assessment-to-new-included",
+      "from": "other-reports-assessed",
+      "to": "new-included",
+      "kind": "merge",
+      "from_anchor": "bottom",
+      "to_anchor": "top",
+      "label_template": null
+    },
+    {
+      "id": "previous-to-total",
+      "from": "previous-included",
+      "to": "total-included",
+      "kind": "lineage",
+      "from_anchor": "bottom",
+      "to_anchor": "top",
+      "label_template": null
+    },
+    {
+      "id": "new-to-total",
+      "from": "new-included",
+      "to": "total-included",
+      "kind": "merge",
+      "from_anchor": "bottom",
+      "to_anchor": "top",
+      "label_template": null
+    }
+  ],
+  "reading_order": [
+    "db-identified",
+    "db-removed",
+    "other-identified",
+    "db-screened",
+    "db-records-excluded",
+    "other-reports-sought",
+    "other-reports-not-retrieved",
+    "db-reports-sought",
+    "db-reports-not-retrieved",
+    "other-reports-assessed",
+    "other-reports-excluded",
+    "db-reports-assessed",
+    "db-reports-excluded",
+    "previous-included",
+    "new-included",
+    "total-included"
+  ]
+}

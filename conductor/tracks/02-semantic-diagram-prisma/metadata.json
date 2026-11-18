@@ -1,0 +1,51 @@
+{
+  "schema_version": "dev.standardflow.conductor-track.v1",
+  "track_id": "02",
+  "slug": "02-semantic-diagram-prisma",
+  "title": "Semantic diagram engine and PRISMA 2020 flows",
+  "status": "implementation_complete",
+  "implementation_state": "source_implemented",
+  "evidence_level": "fixture_proven",
+  "dependencies": [
+    "01-canonical-standard-pack"
+  ],
+  "updated": "2026-11-18",
+  "evidence_level_scope": "bounded hosted fixtures at the recorded accepted PR #60 revision; independent source, rights, migration, external validation and publication remain open",
+  "base_branch": "main",
+  "pull_request": 60,
+  "last_hosted_verification": {
+    "commit": "bfe2255fda85b891c2f68044676c0b777d92c38c",
+    "receipts": [
+      "https://github.com/edithatogo/standards_check/actions/runs/44314792201"
+    ]
+  },
+  "last_local_verification": {
+    "commit": "f41888832c2b169528b30fe99df6aa7a85aff153",
+    "rust_tests_passed": 55,
+    "golden_outputs_compared": 12,
+    "platform": "Linux",
+    "rust_toolchain": "1.98.1"
+  },
+  "merge_blockers": [],
+  "hosted_acceptance": {
+    "commit": "bfe2255fda85b891c2f68044676c0b777d92c38c",
+    "status": "passed",
+    "reviewed_on": "2026-11-18",
+    "receipts": [
+      "https://github.com/edithatogo/standards_check/actions/runs/44314792407",
+      "https://github.com/edithatogo/standards_check/actions/runs/44314792180",
+      "https://github.com/edithatogo/standards_check/actions/runs/44314792201",
+      "https://github.com/edithatogo/standards_check/actions/runs/44314792172",
+      "https://github.com/edithatogo/standards_check/actions/runs/44314792189",
+      "https://github.com/edithatogo/standards_check/actions/runs/44314780941"
+    ]
+  },
+  "remaining_evidence_gates": [
+    "independent source and provenance reconciliation",
+    "item-level rights and licensing confirmation",
+    "brownfield audit and history-preserving migration parity",
+    "independent methodological qualification",
+    "independent usability/accessibility evaluation",
+    "publication and external acceptance"
+  ]
+}
