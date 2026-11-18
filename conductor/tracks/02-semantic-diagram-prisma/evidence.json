@@ -56,10 +56,35 @@
       ]
     },
     {
-      "claim": "The final repaired integration head has passed hosted acceptance checks",
-      "evidence_level": "contracted",
-      "blocked_by": [
-        "fresh hosted checks at the final pull request 60 integration head"
+      "claim": "The repaired integration passed hosted acceptance checks at the recorded PR #60 revision",
+      "evidence_level": "fixture_proven",
+      "commit": "bfe2255fda85b891c2f68044676c0b777d92c38c",
+      "receipts": [
+        "https://github.com/edithatogo/standards_check/actions/runs/44314792407",
+        "https://github.com/edithatogo/standards_check/actions/runs/44314792180",
+        "https://github.com/edithatogo/standards_check/actions/runs/44314792201",
+        "https://github.com/edithatogo/standards_check/actions/runs/44314792172",
+        "https://github.com/edithatogo/standards_check/actions/runs/44314792189",
+        "https://github.com/edithatogo/standards_check/actions/runs/44314780941"
+      ],
+      "reviewed_on": "2026-11-18",
+      "coverage": [
+        "strict Rust formatting, Clippy and workspace tests",
+        "recipe/input contracts, schema/XML and fixture accessibility assertions",
+        "Linux, macOS and Windows workspace tests",
+        "byte-for-byte regeneration of all 12 committed golden outputs",
+        "document validation/build and privacy/secrets checks",
+        "CodeQL analyses for Python, JavaScript/TypeScript and GitHub Actions"
+      ],
+      "limitations": [
+        "independent source and provenance reconciliation",
+        "item-level rights and licensing confirmation",
+        "brownfield audit and history-preserving migration parity",
+        "independent methodological qualification",
+        "independent usability/accessibility evaluation",
+        "publication and external acceptance",
+        "acceptance is revision-bound and does not certify later changes",
+        "pull-request document build is not deployment or publication"
       ]
     }
   ]

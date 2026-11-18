@@ -1,6 +1,6 @@
 # Plan: Semantic diagram engine and PRISMA 2020 flows
 
-Status: **implementation complete; integration acceptance pending**. Implementation: **source implemented**. Evidence: **fixture proven** for the bounded diagram invariants at original head `55bff593c6e91491ad50596baefae5626c6bf2c5`. Permanent CI receipts and the local repair boundary are retained in [evidence.json](evidence.json). Hosted checks for the final merged repair head remain pending.
+Status: **implementation complete; hosted integration accepted**. Implementation: **source implemented**. Evidence: **fixture proven** for the bounded diagram invariants and four synthetic PRISMA families. Hosted acceptance applies to PR #60 revision `bfe2255fda85b891c2f68044676c0b777d92c38c`; exact receipts and historical verification are retained in [evidence.json](evidence.json). Independent source, rights, migration, methodological, usability/accessibility and publication obligations remain open.
 
 ## Phase 1: Semantic contracts
 
@@ -46,8 +46,9 @@ Status: **implementation complete; integration acceptance pending**. Implementat
 ## Current integration and external gates
 
 - [x] Reconcile the existing diagram implementation with the repaired pack and CLI runtime.
-- [ ] Obtain fresh hosted Rust, platform, schema and drift checks at the final PR #60 head.
+- [x] Record passing hosted Rust, platform, schema and drift checks at `bfe2255fda85b891c2f68044676c0b777d92c38c`.
 - [ ] Complete independent PRISMA source, methodological and usability/accessibility evaluation.
+- [ ] Confirm item-level rights and migration parity through separate retained evidence.
 - [ ] Establish publication or external acceptance through a separate retained receipt.
 
 Passing SVG semantics and accessibility assertions establish only the tested fixture properties;

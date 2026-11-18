@@ -10,17 +10,15 @@
     "00-platform-foundation"
   ],
   "pull_request": 60,
-  "merge_blockers": [
-    "passing hosted foundation, pack, diagram, document and privacy checks at the final repaired integration head"
-  ],
+  "merge_blockers": [],
   "updated": "2026-11-18",
-  "evidence_level_scope": "bounded prior-revision fixtures; final merged head hosted acceptance remains pending",
+  "evidence_level_scope": "bounded hosted fixtures at the recorded accepted PR #60 revision; independent source, rights, migration, external validation and publication remain open",
   "base_branch": "main",
   "last_hosted_verification": {
-    "commit": "55bff593c6e91491ad50596baefae5626c6bf2c5",
+    "commit": "bfe2255fda85b891c2f68044676c0b777d92c38c",
     "receipts": [
-      "https://github.com/edithatogo/standards_check/actions/runs/43308300569",
-      "https://github.com/edithatogo/standards_check/actions/runs/43308300678"
+      "https://github.com/edithatogo/standards_check/actions/runs/44314792180",
+      "https://github.com/edithatogo/standards_check/actions/runs/44314792407"
     ]
   },
   "last_local_verification": {
@@ -29,5 +27,26 @@
     "golden_outputs_compared": 12,
     "platform": "Linux",
     "rust_toolchain": "1.98.1"
-  }
+  },
+  "hosted_acceptance": {
+    "commit": "bfe2255fda85b891c2f68044676c0b777d92c38c",
+    "status": "passed",
+    "reviewed_on": "2026-11-18",
+    "receipts": [
+      "https://github.com/edithatogo/standards_check/actions/runs/44314792407",
+      "https://github.com/edithatogo/standards_check/actions/runs/44314792180",
+      "https://github.com/edithatogo/standards_check/actions/runs/44314792201",
+      "https://github.com/edithatogo/standards_check/actions/runs/44314792172",
+      "https://github.com/edithatogo/standards_check/actions/runs/44314792189",
+      "https://github.com/edithatogo/standards_check/actions/runs/44314780941"
+    ]
+  },
+  "remaining_evidence_gates": [
+    "independent source and provenance reconciliation",
+    "item-level rights and licensing confirmation",
+    "brownfield audit and history-preserving migration parity",
+    "independent methodological qualification",
+    "independent usability/accessibility evaluation",
+    "publication and external acceptance"
+  ]
 }

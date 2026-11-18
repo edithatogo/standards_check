@@ -1,6 +1,6 @@
 # Plan: Canonical Standard Pack runtime
 
-Status: **implementation complete; integration acceptance pending**. Implementation: **source implemented**. Evidence: **fixture proven** for the runtime, synthetic fixtures and provisional pack structure at the revisions listed in [evidence.json](evidence.json). Original head `55bff593c6e91491ad50596baefae5626c6bf2c5` has hosted Linux, macOS and Windows receipts. Repair commit `f41888832c2b169528b30fe99df6aa7a85aff153` has local Linux evidence. Authoritative PRISMA item reconciliation remains unproven and explicitly blocked.
+Status: **implementation complete; hosted integration accepted**. Implementation: **source implemented**. Evidence: **fixture proven** for the runtime, synthetic fixtures and provisional pack structure. Hosted acceptance applies to PR #60 revision `bfe2255fda85b891c2f68044676c0b777d92c38c`; exact receipts and historical verification are retained in [evidence.json](evidence.json). Independent source, rights, migration, methodological, usability/accessibility and publication obligations remain open.
 
 ## Phase 1: Contract and rights model
 
@@ -35,10 +35,11 @@ Status: **implementation complete; integration acceptance pending**. Implementat
 - [x] Merge foundation PR #59 into main as `a8bfec446d219b770e76a23b44d1f08d9e00465d`.
 - [x] Retarget PR #60 from the former foundation branch to `main`.
 - [x] Reconcile the repaired runtime with current-main legacy, dependency and workflow changes.
-- [ ] Obtain passing hosted checks at the final merged repair head, including Linux, macOS and Windows.
+- [x] Record passing hosted checks at `bfe2255fda85b891c2f68044676c0b777d92c38c`, including Linux, macOS and Windows.
 - [ ] Reconcile the provisional PRISMA pack item-by-item to the authoritative source.
 - [ ] Retain independent item-level rights confirmation and later external/publication acceptance.
+- [ ] Complete migration parity and independent methodological/usability/accessibility qualification.
 
-Earlier successful receipts are revision-bound. The current merge gate remains open until fresh
-checks cover the final PR head. Source reconciliation and rights are separate obligations and are
-not promoted by compiler, fixture or merge evidence.
+Hosted integration acceptance is recorded for the exact revision above; it does not transfer
+automatically to later changes. Source reconciliation, rights, migration parity, independent
+methodological/accessibility qualification and publication remain separate obligations.
