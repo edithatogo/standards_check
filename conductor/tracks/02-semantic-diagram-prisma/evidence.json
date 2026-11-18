@@ -20,14 +20,47 @@
       ]
     },
     {
-      "claim": "The diagram engine is deterministic, accessible and cross-platform fixture proven",
-      "evidence_level": "contracted",
-      "blocked_by": ["passing stacked pull-request CI and committed golden-output receipt"]
+      "claim": "The four synthetic PRISMA families pass strict Rust tests, schema/XML/accessibility assertions, Linux/macOS/Windows execution and byte-for-byte regeneration of all 12 committed golden outputs",
+      "evidence_level": "fixture_proven",
+      "commit": "55bff593c6e91491ad50596baefae5626c6bf2c5",
+      "receipts": [
+        "https://github.com/edithatogo/standards_check/actions/runs/43308301190"
+      ],
+      "reviewed_on": "2026-11-18",
+      "coverage": [
+        "rust-quality",
+        "contracts-and-accessibility",
+        "deterministic-generation",
+        "cross-platform (ubuntu-latest)",
+        "cross-platform (macos-latest)",
+        "cross-platform (windows-latest)"
+      ],
+      "limitations": [
+        "synthetic fixture properties only",
+        "no external accessibility or methodological certification"
+      ]
+    },
+    {
+      "claim": "The runtime repair preserves all 12 golden outputs and passes the combined 55-test Rust suite on Linux",
+      "evidence_level": "fixture_proven",
+      "commit": "f41888832c2b169528b30fe99df6aa7a85aff153",
+      "execution": "local",
+      "platform": "Linux",
+      "rust_toolchain": "1.98.1"
     },
     {
       "claim": "Rendered PRISMA diagrams are methodologically or externally validated",
       "evidence_level": "contracted",
-      "blocked_by": ["independent PRISMA source and usability/accessibility evaluation"]
+      "blocked_by": [
+        "independent PRISMA source and usability/accessibility evaluation"
+      ]
+    },
+    {
+      "claim": "The final repaired integration head has passed hosted acceptance checks",
+      "evidence_level": "contracted",
+      "blocked_by": [
+        "fresh hosted checks at the final pull request 60 integration head"
+      ]
     }
   ]
 }

@@ -66,6 +66,136 @@ fn non_cleared_verbatim_text_is_rejected() -> Result<(), Box<dyn std::error::Err
     Ok(())
 }
 
+#[test]
+fn required_nullable_members_must_be_present() -> Result<(), Box<dyn std::error::Error>> {
+    for (parent, member) in [
+        ("/verification", "verified_at"),
+        ("/verification", "verified_by"),
+        ("/verification", "evidence"),
+        ("/rights", "spdx"),
+        ("/rights", "license_url"),
+        ("/rights", "attribution"),
+        ("/requirements/0", "display_number"),
+        ("/requirements/0", "verbatim_text"),
+        ("/requirements/0", "guidance"),
+        ("/requirements/0", "evidence_expectations"),
+    ] {
+        let mut value: Value = serde_json::from_str(PRISMA_PACK)?;
+        let object = value
+            .pointer_mut(parent)
+            .and_then(Value::as_object_mut)
+            .ok_or_else(|| io::Error::other("fixture member parent is missing"))?;
+        object.remove(member);
+        assert!(
+            matches!(
+                parse_pack(&serde_json::to_vec(&value)?),
+                Err(PackError::Json(_))
+            ),
+            "missing {parent}/{member} must fail decoding"
+        );
+    }
+    Ok(())
+}
+
+#[test]
+fn explicit_null_remains_valid_for_nullable_members() -> Result<(), Box<dyn std::error::Error>> {
+    let mut value: Value = serde_json::from_str(PRISMA_PACK)?;
+    for pointer in [
+        "/verification/verified_at",
+        "/rights/license_url",
+        "/requirements/0/display_number",
+        "/requirements/0/verbatim_text",
+        "/requirements/0/guidance",
+    ] {
+        let member = value
+            .pointer_mut(pointer)
+            .ok_or_else(|| io::Error::other("fixture nullable member is missing"))?;
+        *member = Value::Null;
+    }
+    parse_pack(&serde_json::to_vec(&value)?)?;
+    Ok(())
+}
+
+#[test]
+fn pack_ids_match_the_declared_schema() {
+    for invalid in [
+        "single",
+        "_org/family",
+        "org/_family",
+        "org/.family",
+        "org/-family",
+    ] {
+        assert!(PackId::parse(invalid).is_err(), "accepted {invalid}");
+    }
+    assert!(PackId::parse("org.example/standard-1/2026").is_ok());
+}
+
+#[test]
+fn source_uris_require_a_valid_supported_absolute_uri() -> Result<(), Box<dyn std::error::Error>> {
+    for source in [
+        "https://",
+        "https:///example.invalid",
+        "https:example.invalid",
+        "https://example.invalid/%zz",
+        "https://example.invalid/a b",
+        "https://example.invalid/\\wrong",
+        "urn:",
+        "urn:example:",
+        "urn:example",
+        "relative/source.pdf",
+        "ftp://example.invalid/source.pdf",
+    ] {
+        let mut value: Value = serde_json::from_str(MINIMAL_PACK)?;
+        let member = value
+            .pointer_mut("/authority/source_url")
+            .ok_or_else(|| io::Error::other("fixture source URL is missing"))?;
+        *member = Value::String(source.to_owned());
+        assert!(
+            matches!(
+                parse_pack(&serde_json::to_vec(&value)?),
+                Err(PackError::Validation(_))
+            ),
+            "accepted malformed or unsupported URI {source}"
+        );
+    }
+    for source in [
+        "https://example.invalid/source.pdf?version=1#section",
+        "http://[::1]:8080/source.pdf",
+        "urn:example:standard-v1",
+    ] {
+        let mut value: Value = serde_json::from_str(MINIMAL_PACK)?;
+        let member = value
+            .pointer_mut("/authority/source_url")
+            .ok_or_else(|| io::Error::other("fixture source URL is missing"))?;
+        *member = Value::String(source.to_owned());
+        parse_pack(&serde_json::to_vec(&value)?)?;
+    }
+    Ok(())
+}
+
+#[test]
+fn licence_uris_and_dates_obey_the_wire_contract() -> Result<(), Box<dyn std::error::Error>> {
+    for (pointer, invalid) in [
+        ("/rights/license_url", "https://"),
+        ("/authority/retrieved_at", "0000-01-01"),
+        ("/verification/verified_at", "0000-01-01"),
+    ] {
+        let mut value: Value = serde_json::from_str(MINIMAL_PACK)?;
+        let member = value
+            .pointer_mut(pointer)
+            .ok_or_else(|| io::Error::other("fixture member is missing"))?;
+        *member = Value::String(invalid.to_owned());
+        assert!(
+            matches!(
+                parse_pack(&serde_json::to_vec(&value)?),
+                Err(PackError::Validation(_))
+            ),
+            "accepted invalid value at {pointer}"
+        );
+    }
+    Ok(())
+}
+
 proptest! {
     #[test]
     fn valid_requirement_identifiers_round_trip(

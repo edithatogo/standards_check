@@ -12,6 +12,9 @@ serde.workspace = true
 serde_json.workspace = true
 sha2.workspace = true
 thiserror.workspace = true
+# Core owns URI parsing; url is MIT OR Apache-2.0 and can be removed if a shared
+# contract parser replaces the supported HTTP(S)/URN validation boundary.
+url = "2.5"
 
 [dev-dependencies]
 proptest.workspace = true

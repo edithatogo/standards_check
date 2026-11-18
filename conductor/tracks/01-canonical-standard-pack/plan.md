@@ -1,6 +1,6 @@
 # Plan: Canonical Standard Pack runtime
 
-Status: **implementation complete**. Implementation: **source implemented**. Evidence: **fixture proven** for the runtime, synthetic fixtures and provisional pack structure. Authoritative PRISMA item reconciliation remains unproven and explicitly blocked.
+Status: **implementation complete; integration acceptance pending**. Implementation: **source implemented**. Evidence: **fixture proven** for the runtime, synthetic fixtures and provisional pack structure at the revisions listed in [evidence.json](evidence.json). Original head `55bff593c6e91491ad50596baefae5626c6bf2c5` has hosted Linux, macOS and Windows receipts. Repair commit `f41888832c2b169528b30fe99df6aa7a85aff153` has local Linux evidence. Authoritative PRISMA item reconciliation remains unproven and explicitly blocked.
 
 ## Phase 1: Contract and rights model
 
@@ -24,13 +24,21 @@ Status: **implementation complete**. Implementation: **source implemented**. Evi
 
 - [x] Add unit, property, lock, CLI and schema tests.
 - [x] Generate and commit the dependency lock and PRISMA content lock in CI.
-- [x] Obtain passing Linux lint/test, cross-platform test and pack-drift receipts.
-- [x] Review all automated PR findings and implement bounded-read and checked-arithmetic corrections.
+- [x] Obtain passing Linux lint/test, cross-platform test and pack-drift receipts for the recorded original head.
+- [x] Review automated PR findings and implement bounded-read, checked-arithmetic, required-field, URI and portable-path corrections.
+- [x] Add regression tests for pack/lock input limits and atomic temporary-file ownership.
 - [x] Add an RFC 6901 regression test while retaining the correct tilde-before-slash escape order.
 - [x] Remove all one-use transfer and review workflows from the branch.
 
-## Remaining dependency gate
+## Integration and remaining evidence gates
 
-- [ ] Merge foundation pull request 59, then retarget pull request 60 from `feat/standardflow-platform-foundation` to `main` and re-run the same checks.
+- [x] Merge foundation PR #59 into main as `a8bfec446d219b770e76a23b44d1f08d9e00465d`.
+- [x] Retarget PR #60 from the former foundation branch to `main`.
+- [x] Reconcile the repaired runtime with current-main legacy, dependency and workflow changes.
+- [ ] Obtain passing hosted checks at the final merged repair head, including Linux, macOS and Windows.
+- [ ] Reconcile the provisional PRISMA pack item-by-item to the authoritative source.
+- [ ] Retain independent item-level rights confirmation and later external/publication acceptance.
 
-This dependency gate affects merge sequencing, not the recorded implementation or fixture evidence. Item-by-item reconciliation of the provisional PRISMA pack is owned by a later source-verification task and is not silently promoted here.
+Earlier successful receipts are revision-bound. The current merge gate remains open until fresh
+checks cover the final PR head. Source reconciliation and rights are separate obligations and are
+not promoted by compiler, fixture or merge evidence.

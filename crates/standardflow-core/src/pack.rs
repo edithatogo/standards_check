@@ -2,6 +2,7 @@
 
 use std::collections::{BTreeMap, BTreeSet};
 use std::fmt;
+use std::io::Read;
 use std::path::Path;
 
 use serde::de::Error as DeError;
@@ -27,17 +28,18 @@ impl PackId {
     /// Returns [`IdentifierError`] for an empty, absolute, traversal-capable or
     /// non-portable identifier.
     pub fn parse(value: &str) -> Result<Self, IdentifierError> {
-        let portable = !value.is_empty()
-            && !value.starts_with('/')
-            && !value.ends_with('/')
-            && value.bytes().all(|byte| {
-                byte.is_ascii_lowercase()
-                    || byte.is_ascii_digit()
-                    || matches!(byte, b'.' | b'_' | b'/' | b'-')
-            })
-            && value
-                .split('/')
-                .all(|segment| !segment.is_empty() && segment != "." && segment != "..");
+        let portable = value.contains('/')
+            && value.split('/').all(|segment| {
+                let mut bytes = segment.bytes();
+                bytes
+                    .next()
+                    .is_some_and(|first| first.is_ascii_lowercase() || first.is_ascii_digit())
+                    && bytes.all(|byte| {
+                        byte.is_ascii_lowercase()
+                            || byte.is_ascii_digit()
+                            || matches!(byte, b'.' | b'_' | b'-')
+                    })
+            });
         if portable {
             Ok(Self(value.to_owned()))
         } else {
@@ -111,7 +113,7 @@ impl<'de> Deserialize<'de> for RequirementId {
 pub enum IdentifierError {
     /// A pack identifier is unsafe or not portable.
     #[error(
-        "pack identifier must be a relative lower-case portable path without empty, '.' or '..' segments"
+        "pack identifier must contain at least two lower-case portable path segments, each starting with a letter or digit"
     )]
     Pack,
     /// A requirement identifier is unsafe or not portable.
@@ -176,12 +178,11 @@ pub struct Verification {
     /// Current verification status.
     pub status: VerificationStatus,
     /// Date of the completed verification, when applicable.
+    #[serde(deserialize_with = "required_nullable")]
     pub verified_at: Option<String>,
     /// People or accountable roles that performed the verification.
-    #[serde(default)]
     pub verified_by: Vec<String>,
     /// Stable evidence references.
-    #[serde(default)]
     pub evidence: Vec<String>,
 }
 
@@ -206,10 +207,13 @@ pub struct Rights {
     /// Rights status.
     pub status: RightsStatus,
     /// SPDX expression when one accurately represents the terms.
+    #[serde(deserialize_with = "required_nullable")]
     pub spdx: Option<String>,
     /// Canonical licence or terms URL.
+    #[serde(deserialize_with = "required_nullable")]
     pub license_url: Option<String>,
     /// Required attribution text.
+    #[serde(deserialize_with = "required_nullable")]
     pub attribution: Option<String>,
     /// Plain-language redistribution rule.
     pub redistribution: String,
@@ -274,22 +278,34 @@ pub struct Requirement {
     /// Stable semantic identifier.
     pub id: RequirementId,
     /// Source-facing display number.
+    #[serde(deserialize_with = "required_nullable")]
     pub display_number: Option<String>,
     /// Human section label.
     pub section: String,
     /// Authoritative text where redistribution is permitted.
+    #[serde(deserialize_with = "required_nullable")]
     pub verbatim_text: Option<String>,
     /// Machine-oriented normalized requirement.
     pub normalized_requirement: String,
     /// Explanatory guidance distinct from the requirement.
+    #[serde(deserialize_with = "required_nullable")]
     pub guidance: Option<String>,
     /// Stable source locator.
     pub source_anchor: String,
     /// Rights for this item.
     pub rights: RequirementRights,
     /// Types of evidence that can support assessment.
-    #[serde(default)]
     pub evidence_expectations: Vec<String>,
+}
+
+// A custom deserializer keeps a missing member distinct from an explicit null.
+// Without it, Serde silently defaults missing Option members to None.
+fn required_nullable<'de, D, T>(deserializer: D) -> Result<Option<T>, D::Error>
+where
+    D: Deserializer<'de>,
+    T: Deserialize<'de>,
+{
+    Option::<T>::deserialize(deserializer)
 }
 
 /// Canonical Standard Pack source document.
@@ -424,6 +440,9 @@ pub enum PackError {
     /// Symlinked pack files are rejected.
     #[error("pack file {0} must not be a symbolic link")]
     Symlink(String),
+    /// A non-regular or changing file cannot supply a stable pack document.
+    #[error("pack file {0} must remain a regular, unchanged file while being read")]
+    UnstableFile(String),
 }
 
 /// Parses and semantically validates a pack.
@@ -441,7 +460,9 @@ pub fn parse_pack(bytes: &[u8]) -> Result<ValidatedPack, PackError> {
     }
 }
 
-/// Loads and validates one `pack.json` without following a symlink.
+/// Loads and validates one `pack.json` through a bounded reader.
+///
+/// Symbolic links and non-regular files are rejected before and after reading.
 ///
 /// # Errors
 ///
@@ -454,17 +475,66 @@ pub fn load_pack(path: &Path) -> Result<ValidatedPack, PackError> {
     if metadata.file_type().is_symlink() {
         return Err(PackError::Symlink(path.display().to_string()));
     }
+    if !metadata.is_file() {
+        return Err(PackError::UnstableFile(path.display().to_string()));
+    }
     if metadata.len() > MAX_PACK_JSON_BYTES {
         return Err(PackError::TooLarge {
             path: path.display().to_string(),
             limit: MAX_PACK_JSON_BYTES,
         });
     }
-    let bytes = std::fs::read(path).map_err(|source| PackError::Io {
+    let file = std::fs::File::open(path).map_err(|source| PackError::Io {
         path: path.display().to_string(),
         source,
     })?;
+    let before = file.metadata().map_err(|source| PackError::Io {
+        path: path.display().to_string(),
+        source,
+    })?;
+    if !before.is_file() {
+        return Err(PackError::UnstableFile(path.display().to_string()));
+    }
+    let bytes = read_pack_bytes(&file, path)?;
+    let observed_bytes = u64::try_from(bytes.len()).unwrap_or(u64::MAX);
+    let after = file.metadata().map_err(|source| PackError::Io {
+        path: path.display().to_string(),
+        source,
+    })?;
+    let path_after = std::fs::symlink_metadata(path).map_err(|source| PackError::Io {
+        path: path.display().to_string(),
+        source,
+    })?;
+    if path_after.file_type().is_symlink() {
+        return Err(PackError::Symlink(path.display().to_string()));
+    }
+    if !path_after.is_file()
+        || metadata.len() != observed_bytes
+        || before.len() != observed_bytes
+        || after.len() != observed_bytes
+        || path_after.len() != observed_bytes
+    {
+        return Err(PackError::UnstableFile(path.display().to_string()));
+    }
     parse_pack(&bytes)
+}
+
+fn read_pack_bytes(reader: impl Read, path: &Path) -> Result<Vec<u8>, PackError> {
+    let mut bytes = Vec::new();
+    reader
+        .take(MAX_PACK_JSON_BYTES + 1)
+        .read_to_end(&mut bytes)
+        .map_err(|source| PackError::Io {
+            path: path.display().to_string(),
+            source,
+        })?;
+    if u64::try_from(bytes.len()).unwrap_or(u64::MAX) > MAX_PACK_JSON_BYTES {
+        return Err(PackError::TooLarge {
+            path: path.display().to_string(),
+            limit: MAX_PACK_JSON_BYTES,
+        });
+    }
+    Ok(bytes)
 }
 
 fn validate_source_authority(authority: &SourceAuthority, report: &mut ValidationReport) {
@@ -574,6 +644,17 @@ fn validate_rights(rights: &Rights, path: &str, report: &mut ValidationReport) {
                 "optional rights fields must be omitted rather than blank",
             ));
         }
+    }
+    if rights
+        .license_url
+        .as_deref()
+        .is_some_and(|value| !is_absolute_source(value))
+    {
+        report.push(Diagnostic::error(
+            "SF-RIGHTS-008",
+            format!("{path}/license_url"),
+            "license_url must be an absolute http, https or urn URI",
+        ));
     }
     if rights.status == RightsStatus::Cleared {
         let is_cc0 = rights.spdx.as_deref() == Some("CC0-1.0");
@@ -780,7 +861,88 @@ fn is_sha256(value: &str) -> bool {
 }
 
 fn is_absolute_source(value: &str) -> bool {
-    value.starts_with("https://") || value.starts_with("http://") || value.starts_with("urn:")
+    if !is_uri_text(value) {
+        return false;
+    }
+    let Ok(uri) = url::Url::parse(value) else {
+        return false;
+    };
+    match uri.scheme() {
+        "http" | "https" => {
+            // URL parsers normalize missing slashes; a source URI must explicitly
+            // include its authority instead of relying on that repair.
+            uri.host_str().is_some()
+                && value.split_once(':').is_some_and(|(_, rest)| {
+                    rest.strip_prefix("//").is_some_and(|authority| {
+                        authority
+                            .split(['/', '?', '#'])
+                            .next()
+                            .is_some_and(|host| !host.is_empty())
+                    })
+                })
+        }
+        "urn" => uri
+            .path()
+            .split_once(':')
+            .is_some_and(|(namespace, specific)| {
+                !namespace.is_empty()
+                    && namespace.len() <= 32
+                    && namespace
+                        .bytes()
+                        .all(|byte| byte.is_ascii_alphanumeric() || byte == b'-')
+                    && namespace
+                        .as_bytes()
+                        .first()
+                        .is_some_and(u8::is_ascii_alphanumeric)
+                    && namespace
+                        .as_bytes()
+                        .last()
+                        .is_some_and(u8::is_ascii_alphanumeric)
+                    && !specific.is_empty()
+            }),
+        _ => false,
+    }
+}
+
+fn is_uri_text(value: &str) -> bool {
+    let mut bytes = value.bytes();
+    while let Some(byte) = bytes.next() {
+        if byte == b'%' {
+            if !bytes.next().is_some_and(|digit| digit.is_ascii_hexdigit())
+                || !bytes.next().is_some_and(|digit| digit.is_ascii_hexdigit())
+            {
+                return false;
+            }
+        } else if !byte.is_ascii_alphanumeric()
+            && !matches!(
+                byte,
+                b'-' | b'.'
+                    | b'_'
+                    | b'~'
+                    | b':'
+                    | b'/'
+                    | b'?'
+                    | b'#'
+                    | b'['
+                    | b']'
+                    | b'@'
+                    | b'!'
+                    | b'$'
+                    | b'&'
+                    | b'\''
+                    | b'('
+                    | b')'
+                    | b'*'
+                    | b'+'
+                    | b','
+                    | b';'
+                    | b'='
+            )
+        {
+            return false;
+        }
+    }
+    true
 }
 
 fn is_iso_date(value: &str) -> bool {
@@ -804,6 +966,9 @@ fn is_iso_date(value: &str) -> bool {
     let Some(year) = parse_decimal(year_text.as_bytes()) else {
         return false;
     };
+    if year == 0 {
+        return false;
+    }
     let Some(month) = parse_decimal(month_text.as_bytes()) else {
         return false;
     };
@@ -842,6 +1007,21 @@ mod decimal_tests {
     #[test]
     fn decimal_parser_rejects_overflow() {
         assert_eq!(parse_decimal(b"999999999999999999999"), None);
+    }
+}
+
+#[cfg(test)]
+mod bounded_read_tests {
+    use std::path::Path;
+
+    use super::{PackError, read_pack_bytes};
+
+    #[test]
+    fn growing_input_is_bounded_independently_of_metadata() {
+        assert!(matches!(
+            read_pack_bytes(std::io::repeat(b' '), Path::new("growing.json")),
+            Err(PackError::TooLarge { .. })
+        ));
     }
 }
 

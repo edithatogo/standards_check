@@ -455,10 +455,105 @@ fn write_atomic(path: &Path, bytes: &[u8]) -> Result<(), CliError> {
         file_name.to_string_lossy(),
         std::process::id()
     ));
-    fs::write(&temporary, bytes).map_err(|error| CliError::operation("io", error.to_string()))?;
+    // Exclusive creation prevents truncating another writer's temporary file or
+    // following an existing symlink in the output directory.
+    let mut file = fs::OpenOptions::new()
+        .write(true)
+        .create_new(true)
+        .open(&temporary)
+        .map_err(|error| CliError::operation("io", error.to_string()))?;
+    let result = file.write_all(bytes).and_then(|()| file.sync_all());
+    drop(file);
+    if let Err(error) = result {
+        let _ignored = fs::remove_file(&temporary);
+        return Err(CliError::operation("io", error.to_string()));
+    }
     if let Err(error) = fs::rename(&temporary, path) {
         let _ignored = fs::remove_file(&temporary);
         return Err(CliError::operation("io", error.to_string()));
     }
     Ok(())
+}
+
+#[cfg(test)]
+mod atomic_write_tests {
+    use std::fs;
+    use std::path::{Path, PathBuf};
+    use std::sync::atomic::{AtomicU64, Ordering};
+
+    use super::write_atomic;
+
+    static TEST_COUNTER: AtomicU64 = AtomicU64::new(0);
+
+    struct TestDirectory(PathBuf);
+
+    impl TestDirectory {
+        fn create() -> Result<Self, std::io::Error> {
+            let counter = TEST_COUNTER.fetch_add(1, Ordering::Relaxed);
+            let path = std::env::temp_dir().join(format!(
+                "standardflow-cli-write-test-{}-{counter}",
+                std::process::id()
+            ));
+            fs::create_dir(&path)?;
+            Ok(Self(path))
+        }
+
+        fn path(&self) -> &Path {
+            &self.0
+        }
+
+        fn temporary_output(&self) -> PathBuf {
+            self.path()
+                .join(format!(".output.json.{}.tmp", std::process::id()))
+        }
+    }
+
+    impl Drop for TestDirectory {
+        fn drop(&mut self) {
+            let _ignored = fs::remove_dir_all(&self.0);
+        }
+    }
+
+    #[test]
+    fn existing_temporary_file_is_preserved() -> Result<(), Box<dyn std::error::Error>> {
+        let directory = TestDirectory::create()?;
+        let destination = directory.path().join("output.json");
+        let temporary = directory.temporary_output();
+        fs::write(&destination, b"previous output")?;
+        fs::write(&temporary, b"another writer's content")?;
+        assert!(write_atomic(&destination, b"new output").is_err());
+        assert_eq!(fs::read(&destination)?, b"previous output");
+        assert_eq!(fs::read(&temporary)?, b"another writer's content");
+        Ok(())
+    }
+
+    #[cfg(unix)]
+    #[test]
+    fn existing_temporary_symlink_is_never_followed() -> Result<(), Box<dyn std::error::Error>> {
+        use std::os::unix::fs::symlink;
+
+        let directory = TestDirectory::create()?;
+        let destination = directory.path().join("output.json");
+        let victim = directory.path().join("unrelated.txt");
+        let temporary = directory.temporary_output();
+        fs::write(&victim, b"unrelated content")?;
+        symlink(&victim, &temporary)?;
+        assert!(write_atomic(&destination, b"new output").is_err());
+        assert_eq!(fs::read(&victim)?, b"unrelated content");
+        assert!(temporary.is_symlink());
+        assert!(!destination.exists());
+        Ok(())
+    }
+
+    #[test]
+    fn successful_write_replaces_output_and_removes_temporary_file()
+    -> Result<(), Box<dyn std::error::Error>> {
+        let directory = TestDirectory::create()?;
+        let destination = directory.path().join("output.json");
+        fs::write(&destination, b"previous output")?;
+        assert!(write_atomic(&destination, b"new output").is_ok());
+        assert_eq!(fs::read(&destination)?, b"new output");
+        assert!(!directory.temporary_output().exists());
+        Ok(())
+    }
 }

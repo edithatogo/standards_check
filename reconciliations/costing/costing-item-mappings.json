@@ -1,0 +1,1515 @@
+{
+  "schema_version": "0.1.0",
+  "mapping_status": "research_seed_review_required",
+  "mappings": [
+    {
+      "instrument_id": "cheers_2022",
+      "item_id": "1",
+      "topic": "Study identification",
+      "domain_ids": [
+        "study_scope"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749494/",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_2022",
+      "item_id": "2",
+      "topic": "Synopsis",
+      "domain_ids": [
+        "study_scope"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749494/",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_2022",
+      "item_id": "3",
+      "topic": "Decision question",
+      "domain_ids": [
+        "study_scope"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749494/",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_2022",
+      "item_id": "4",
+      "topic": "Prespecified economic plan",
+      "domain_ids": [
+        "study_scope"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749494/",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_2022",
+      "item_id": "5",
+      "topic": "Study population",
+      "domain_ids": [
+        "study_scope"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749494/",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_2022",
+      "item_id": "6",
+      "topic": "Service setting",
+      "domain_ids": [
+        "study_scope"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749494/",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_2022",
+      "item_id": "7",
+      "topic": "Alternatives",
+      "domain_ids": [
+        "comparators"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749494/",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_2022",
+      "item_id": "8",
+      "topic": "Included perspectives",
+      "domain_ids": [
+        "perspective"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749494/",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_2022",
+      "item_id": "9",
+      "topic": "Analytic duration",
+      "domain_ids": [
+        "time_basis"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749494/",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_2022",
+      "item_id": "10",
+      "topic": "Discount assumptions",
+      "domain_ids": [
+        "time_basis",
+        "price_adjustment"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749494/",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_2022",
+      "item_id": "11",
+      "topic": "Chosen endpoints",
+      "domain_ids": [
+        "outcome_measurement"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749494/",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_2022",
+      "item_id": "12",
+      "topic": "Endpoint measurement",
+      "domain_ids": [
+        "outcome_measurement"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749494/",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_2022",
+      "item_id": "13",
+      "topic": "Endpoint valuation",
+      "domain_ids": [
+        "outcome_measurement"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749494/",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_2022",
+      "item_id": "14",
+      "topic": "Resource costing",
+      "domain_ids": [
+        "resource_measurement",
+        "price_provenance"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749494/",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_2022",
+      "item_id": "15",
+      "topic": "Monetary reference basis",
+      "domain_ids": [
+        "price_adjustment"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749494/",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_2022",
+      "item_id": "16",
+      "topic": "Model specification",
+      "domain_ids": [
+        "model_validation"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749494/",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_2022",
+      "item_id": "17",
+      "topic": "Analysis assumptions",
+      "domain_ids": [
+        "model_validation"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749494/",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_2022",
+      "item_id": "18",
+      "topic": "Subgroup variation",
+      "domain_ids": [
+        "heterogeneity"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749494/",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_2022",
+      "item_id": "19",
+      "topic": "Distribution across people",
+      "domain_ids": [
+        "equity"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749494/",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_2022",
+      "item_id": "20",
+      "topic": "Uncertainty methods",
+      "domain_ids": [
+        "uncertainty"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749494/",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_2022",
+      "item_id": "21",
+      "topic": "Participation methods",
+      "domain_ids": [
+        "engagement"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749494/",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_2022",
+      "item_id": "22",
+      "topic": "Parameter evidence",
+      "domain_ids": [
+        "price_provenance",
+        "uncertainty"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749494/",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_2022",
+      "item_id": "23",
+      "topic": "Cost/outcome findings",
+      "domain_ids": [
+        "results_disaggregation"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749494/",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_2022",
+      "item_id": "24",
+      "topic": "Uncertainty findings",
+      "domain_ids": [
+        "uncertainty"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749494/",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_2022",
+      "item_id": "25",
+      "topic": "Participation consequences",
+      "domain_ids": [
+        "engagement"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749494/",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_2022",
+      "item_id": "26",
+      "topic": "Interpretation and limits",
+      "domain_ids": [
+        "transferability",
+        "equity"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749494/",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_2022",
+      "item_id": "27",
+      "topic": "Financial support",
+      "domain_ids": [
+        "disclosure"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749494/",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_2022",
+      "item_id": "28",
+      "topic": "Competing interests",
+      "domain_ids": [
+        "disclosure"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749494/",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "ghcc_2017",
+      "item_id": "1",
+      "topic": "Costing purpose",
+      "domain_ids": [
+        "study_scope"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Methodological principles 1-17; not numbered subrows of the downloadable reporting checklist",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://ghcosting.org/pages/standards/principles/study_design.php",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "ghcc_2017",
+      "item_id": "2",
+      "topic": "Included agents",
+      "domain_ids": [
+        "perspective"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Methodological principles 1-17; not numbered subrows of the downloadable reporting checklist",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://ghcosting.org/pages/standards/principles/study_design.php",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "ghcc_2017",
+      "item_id": "3",
+      "topic": "Economic or financial basis",
+      "domain_ids": [
+        "cost_concept"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Methodological principles 1-17; not numbered subrows of the downloadable reporting checklist",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://ghcosting.org/pages/standards/principles/study_design.php",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "ghcc_2017",
+      "item_id": "4",
+      "topic": "Output definitions",
+      "domain_ids": [
+        "output_denominator"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Methodological principles 1-17; not numbered subrows of the downloadable reporting checklist",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://ghcosting.org/pages/standards/principles/study_design.php",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "ghcc_2017",
+      "item_id": "5",
+      "topic": "Periods and horizon",
+      "domain_ids": [
+        "time_basis"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Methodological principles 1-17; not numbered subrows of the downloadable reporting checklist",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://ghcosting.org/pages/standards/principles/study_design.php",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "ghcc_2017",
+      "item_id": "6",
+      "topic": "Input boundary",
+      "domain_ids": [
+        "resource_boundary"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Methodological principles 1-17; not numbered subrows of the downloadable reporting checklist",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://ghcosting.org/pages/standards/principles/resource_use_measurement.php",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "ghcc_2017",
+      "item_id": "7",
+      "topic": "Input measurement and apportionment",
+      "domain_ids": [
+        "resource_measurement",
+        "allocation"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Methodological principles 1-17; not numbered subrows of the downloadable reporting checklist",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://ghcosting.org/pages/standards/principles/resource_use_measurement.php",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "ghcc_2017",
+      "item_id": "8",
+      "topic": "Observation sample",
+      "domain_ids": [
+        "sampling"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Methodological principles 1-17; not numbered subrows of the downloadable reporting checklist",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://ghcosting.org/pages/standards/principles/resource_use_measurement.php",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "ghcc_2017",
+      "item_id": "9",
+      "topic": "Output measurement",
+      "domain_ids": [
+        "output_denominator"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Methodological principles 1-17; not numbered subrows of the downloadable reporting checklist",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://ghcosting.org/pages/standards/principles/resource_use_measurement.php",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "ghcc_2017",
+      "item_id": "10",
+      "topic": "Measurement timing",
+      "domain_ids": [
+        "data_collection"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Methodological principles 1-17; not numbered subrows of the downloadable reporting checklist",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://ghcosting.org/pages/standards/principles/resource_use_measurement.php",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "ghcc_2017",
+      "item_id": "11",
+      "topic": "Price evidence",
+      "domain_ids": [
+        "price_provenance"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Methodological principles 1-17; not numbered subrows of the downloadable reporting checklist",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://ghcosting.org/pages/standards/principles/pricing_and_valuation.php",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "ghcc_2017",
+      "item_id": "12",
+      "topic": "Capital treatment",
+      "domain_ids": [
+        "capital"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Methodological principles 1-17; not numbered subrows of the downloadable reporting checklist",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://ghcosting.org/pages/standards/principles/pricing_and_valuation.php",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "ghcc_2017",
+      "item_id": "13",
+      "topic": "Monetary/time adjustments",
+      "domain_ids": [
+        "price_adjustment"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Methodological principles 1-17; not numbered subrows of the downloadable reporting checklist",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://ghcosting.org/pages/standards/principles/pricing_and_valuation.php",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "ghcc_2017",
+      "item_id": "14",
+      "topic": "Unpriced resource values",
+      "domain_ids": [
+        "nonmarket_valuation"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Methodological principles 1-17; not numbered subrows of the downloadable reporting checklist",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://ghcosting.org/pages/standards/principles/pricing_and_valuation.php",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "ghcc_2017",
+      "item_id": "15",
+      "topic": "Scale and subgroup variation",
+      "domain_ids": [
+        "heterogeneity"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Methodological principles 1-17; not numbered subrows of the downloadable reporting checklist",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://ghcosting.org/pages/standards/principles/analysing_and_presenting_results.php",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "ghcc_2017",
+      "item_id": "16",
+      "topic": "Estimate uncertainty",
+      "domain_ids": [
+        "uncertainty"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Methodological principles 1-17; not numbered subrows of the downloadable reporting checklist",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://ghcosting.org/pages/standards/principles/analysing_and_presenting_results.php",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "ghcc_2017",
+      "item_id": "17",
+      "topic": "Transparent disaggregation",
+      "domain_ids": [
+        "results_disaggregation",
+        "transferability",
+        "disclosure"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Methodological principles 1-17; not numbered subrows of the downloadable reporting checklist",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://ghcosting.org/pages/standards/principles/analysing_and_presenting_results.php",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_voi_2023",
+      "item_id": "S1",
+      "topic": "Information-value estimation",
+      "domain_ids": [
+        "voi",
+        "model_validation"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 2, supplemental items S1-S6",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://www.valueinhealthjournal.com/article/S1098-3015%2823%2903031-0/fulltext",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_voi_2023",
+      "item_id": "S2",
+      "topic": "Evidence limitations",
+      "domain_ids": [
+        "uncertainty"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 2, supplemental items S1-S6",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://www.valueinhealthjournal.com/article/S1098-3015%2823%2903031-0/fulltext",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_voi_2023",
+      "item_id": "S3",
+      "topic": "Investigated parameter sets",
+      "domain_ids": [
+        "voi"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 2, supplemental items S1-S6",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://www.valueinhealthjournal.com/article/S1098-3015%2823%2903031-0/fulltext",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_voi_2023",
+      "item_id": "S4",
+      "topic": "Candidate study designs",
+      "domain_ids": [
+        "voi"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 2, supplemental items S1-S6",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://www.valueinhealthjournal.com/article/S1098-3015%2823%2903031-0/fulltext",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_voi_2023",
+      "item_id": "S5",
+      "topic": "Future-data simulation",
+      "domain_ids": [
+        "voi",
+        "uncertainty"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 2, supplemental items S1-S6",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://www.valueinhealthjournal.com/article/S1098-3015%2823%2903031-0/fulltext",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "cheers_voi_2023",
+      "item_id": "S6",
+      "topic": "Research cost model",
+      "domain_ids": [
+        "voi",
+        "price_provenance"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 2, supplemental items S1-S6",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://www.valueinhealthjournal.com/article/S1098-3015%2823%2903031-0/fulltext",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "1.1",
+      "topic": "Pathway entrants",
+      "domain_ids": [
+        "study_scope"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "1.2",
+      "topic": "Time to diagnostic entry",
+      "domain_ids": [
+        "diagnostic_pathway",
+        "time_basis"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "2",
+      "topic": "Diagnostic purpose and pathway",
+      "domain_ids": [
+        "diagnostic_pathway"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "2.1",
+      "topic": "Alternative test strategies",
+      "domain_ids": [
+        "comparators"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "2.2",
+      "topic": "Test sequence or parallelism",
+      "domain_ids": [
+        "diagnostic_pathway"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "2.2.1",
+      "topic": "Conditional testing",
+      "domain_ids": [
+        "diagnostic_pathway"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "2.3",
+      "topic": "Subgroup test selection",
+      "domain_ids": [
+        "heterogeneity",
+        "diagnostic_pathway"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "2.4",
+      "topic": "Implicit test selection",
+      "domain_ids": [
+        "diagnostic_pathway"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "3.1",
+      "topic": "Assay cost",
+      "domain_ids": [
+        "price_provenance"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "3.2",
+      "topic": "Accuracy parameters",
+      "domain_ids": [
+        "diagnostic_pathway"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "3.2.1",
+      "topic": "Accuracy evidence",
+      "domain_ids": [
+        "diagnostic_pathway"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "3.2.2",
+      "topic": "Positivity threshold",
+      "domain_ids": [
+        "diagnostic_pathway"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "3.2.3",
+      "topic": "Accuracy bias",
+      "domain_ids": [
+        "uncertainty"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "3.2.3.1",
+      "topic": "Bias consequences",
+      "domain_ids": [
+        "uncertainty"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "3.2.4",
+      "topic": "Accuracy variation",
+      "domain_ids": [
+        "uncertainty"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "3.2.5",
+      "topic": "Threshold rationale",
+      "domain_ids": [
+        "diagnostic_pathway"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "3.2.6",
+      "topic": "Subgroup accuracy",
+      "domain_ids": [
+        "heterogeneity"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "3.2.7",
+      "topic": "Prevalence dependence",
+      "domain_ids": [
+        "diagnostic_pathway"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "3.2.8",
+      "topic": "Combined-test accuracy",
+      "domain_ids": [
+        "diagnostic_pathway"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "3.3",
+      "topic": "Sample adequacy",
+      "domain_ids": [
+        "diagnostic_pathway"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "3.4",
+      "topic": "Invalid or inconclusive tests",
+      "domain_ids": [
+        "diagnostic_pathway"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "3.5",
+      "topic": "Repeat-test cost",
+      "domain_ids": [
+        "resource_measurement"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "3.6",
+      "topic": "Sampling and assay harms",
+      "domain_ids": [
+        "outcome_measurement"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "3.7",
+      "topic": "Turnaround and waiting",
+      "domain_ids": [
+        "time_basis",
+        "capacity_workflow"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "3.8",
+      "topic": "Unexpected information",
+      "domain_ids": [
+        "diagnostic_pathway",
+        "spillovers"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "3.8.1",
+      "topic": "Incidental-finding workup",
+      "domain_ids": [
+        "resource_measurement"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "4.1",
+      "topic": "Management consequences",
+      "domain_ids": [
+        "diagnostic_pathway"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "4.2",
+      "topic": "Other management determinants",
+      "domain_ids": [
+        "diagnostic_pathway"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "4.3",
+      "topic": "Subgroup management",
+      "domain_ids": [
+        "heterogeneity"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "4.4",
+      "topic": "Temporal test consistency",
+      "domain_ids": [
+        "diagnostic_pathway"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "4.5",
+      "topic": "Staff and patient capacity",
+      "domain_ids": [
+        "capacity_workflow"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "5",
+      "topic": "Management cost and outcomes",
+      "domain_ids": [
+        "outcome_measurement"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "5.1",
+      "topic": "Full management effects",
+      "domain_ids": [
+        "outcome_measurement"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "5.2",
+      "topic": "Subgroup consequences",
+      "domain_ids": [
+        "heterogeneity"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "5.3",
+      "topic": "Treatment adherence",
+      "domain_ids": [
+        "diagnostic_pathway"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "5.4",
+      "topic": "Treatment harms",
+      "domain_ids": [
+        "outcome_measurement"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "5.5",
+      "topic": "Time to response",
+      "domain_ids": [
+        "time_basis"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "5.6",
+      "topic": "Repeated diagnostic workup",
+      "domain_ids": [
+        "diagnostic_pathway"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "5.7",
+      "topic": "Ineffective care consequences",
+      "domain_ids": [
+        "outcome_measurement"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "5.7.1",
+      "topic": "Treatment-delay effects",
+      "domain_ids": [
+        "time_basis",
+        "outcome_measurement"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "6.1",
+      "topic": "Psychological and caregiver effects",
+      "domain_ids": [
+        "spillovers"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "6.1.1",
+      "topic": "Family testing and knowledge",
+      "domain_ids": [
+        "spillovers"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "6.2",
+      "topic": "System and professional effects",
+      "domain_ids": [
+        "spillovers"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "agreedt_2018",
+      "item_id": "6.3",
+      "topic": "Societal consequences",
+      "domain_ids": [
+        "spillovers"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "idsi_2016",
+      "item_id": "1",
+      "topic": "Transparent decision evidence",
+      "domain_ids": [
+        "results_disaggregation"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://www.sciencedirect.com/science/article/pii/S1098301516304405",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "idsi_2016",
+      "item_id": "2",
+      "topic": "Decision-relevant alternatives",
+      "domain_ids": [
+        "comparators"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://www.sciencedirect.com/science/article/pii/S1098301516304405",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "idsi_2016",
+      "item_id": "3",
+      "topic": "Relevant evidence coverage",
+      "domain_ids": [
+        "model_validation"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://www.sciencedirect.com/science/article/pii/S1098301516304405",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "idsi_2016",
+      "item_id": "4",
+      "topic": "Outcome relevance",
+      "domain_ids": [
+        "outcome_measurement"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://www.sciencedirect.com/science/article/pii/S1098301516304405",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "idsi_2016",
+      "item_id": "5",
+      "topic": "Incremental resources",
+      "domain_ids": [
+        "resource_boundary",
+        "resource_measurement"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://www.sciencedirect.com/science/article/pii/S1098301516304405",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "idsi_2016",
+      "item_id": "6",
+      "topic": "Horizon and discounting",
+      "domain_ids": [
+        "time_basis",
+        "price_adjustment"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://www.sciencedirect.com/science/article/pii/S1098301516304405",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "idsi_2016",
+      "item_id": "7",
+      "topic": "Consequences beyond health budget",
+      "domain_ids": [
+        "spillovers",
+        "perspective"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://www.sciencedirect.com/science/article/pii/S1098301516304405",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "idsi_2016",
+      "item_id": "8",
+      "topic": "Population differences",
+      "domain_ids": [
+        "heterogeneity"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://www.sciencedirect.com/science/article/pii/S1098301516304405",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "idsi_2016",
+      "item_id": "9",
+      "topic": "Decision uncertainty",
+      "domain_ids": [
+        "uncertainty"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://www.sciencedirect.com/science/article/pii/S1098301516304405",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "idsi_2016",
+      "item_id": "10",
+      "topic": "Budget and other constraints",
+      "domain_ids": [
+        "budget_impact",
+        "capacity_workflow"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://www.sciencedirect.com/science/article/pii/S1098301516304405",
+      "checked_on": "2026-11-08"
+    },
+    {
+      "instrument_id": "idsi_2016",
+      "item_id": "11",
+      "topic": "Equity implications",
+      "domain_ids": [
+        "equity"
+      ],
+      "relation": "covers_topic",
+      "source_locator": "Table 1",
+      "item_identifier_verified": true,
+      "wording": "original short topic label; not verbatim checklist text",
+      "source_url": "https://www.sciencedirect.com/science/article/pii/S1098301516304405",
+      "checked_on": "2026-11-08"
+    }
+  ],
+  "provenance": {
+    "registry": "costing-standards-registry.json",
+    "prepared_on": "2026-11-08",
+    "assertion_type": "Editorial covers_topic mapping, not logical equivalence or an endorsement by the instrument authors.",
+    "scope": "Original short topic labels and verified identifiers; consult the source for exact requirements."
+  }
+}

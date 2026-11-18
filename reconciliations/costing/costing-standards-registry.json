@@ -1,0 +1,918 @@
+{
+  "schema_version": "0.1.0",
+  "searched_through": "2026-11-08",
+  "title": "Costing and valuation instrument registry: verified research seed",
+  "coverage_statement": "Bounded high-recall primary-source web review. This is not a registered systematic review or a claim of global exhaustiveness; national HTA manuals, specialty extensions and translations require continuing curation.",
+  "not_a_consensus_standard": true,
+  "interpretation": "Published_current_identified means a published applicable version was found and no successor was identified in this search; it is not a guarantee that no newer instrument exists.",
+  "copyright_policy": "Original short summaries and semantic mappings; no wholesale checklist wording or restricted spreadsheet redistribution.",
+  "instruments": [
+    {
+      "id": "cheers_2022",
+      "title": "Consolidated Health Economic Evaluation Reporting Standards",
+      "version": "2022",
+      "category": "reporting_guideline",
+      "status": "published_current_identified",
+      "primary_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749494/",
+      "doi": "10.1136/bmj-2021-067975",
+      "domains": [
+        "study_scope",
+        "comparators",
+        "perspective",
+        "time_basis",
+        "resource_measurement",
+        "price_provenance",
+        "price_adjustment",
+        "outcome_measurement",
+        "model_validation",
+        "heterogeneity",
+        "equity",
+        "uncertainty",
+        "engagement",
+        "results_disaggregation",
+        "transferability",
+        "disclosure"
+      ],
+      "summary": "General health-economic reporting, including cost-only analyses; excludes budget-impact analysis and constrained optimisation. Replaces CHEERS 2013. Reporting completeness is not methodological quality or a validated numerical score.",
+      "checked_on": "2026-11-08",
+      "count": 28,
+      "item_level_verified": true,
+      "supersedes": [
+        "cheers_2013"
+      ],
+      "verification_scope": {
+        "mapping_coverage": "all_numbered_items",
+        "verified_mapping_count": 28,
+        "full_checklist_transcription_added": false,
+        "source_access": "Primary publisher, official organisational page, or PubMed record; publication details and scope checked. Item identifiers only marked verified where source table/principles were retrieved."
+      },
+      "repository_links": {
+        "source_sidecar": "source/archetypes/cheers-2022.yml",
+        "canonical_markdown": "markdown/en/archetypes/cheers-2022.md"
+      }
+    },
+    {
+      "id": "ghcc_2017",
+      "title": "GHCC Reference Case and Principles and Methods Reporting Checklist",
+      "version": "2017",
+      "category": "methods_reporting_reference_case",
+      "status": "published_current_identified",
+      "primary_url": "https://ghcosting.org/pages/standards/appendices/principles_and_methods_reporting_checklist.php",
+      "doi": null,
+      "domains": [
+        "study_scope",
+        "perspective",
+        "cost_concept",
+        "time_basis",
+        "resource_boundary",
+        "resource_measurement",
+        "allocation",
+        "output_denominator",
+        "sampling",
+        "data_collection",
+        "price_provenance",
+        "capital",
+        "price_adjustment",
+        "nonmarket_valuation",
+        "heterogeneity",
+        "uncertainty",
+        "results_disaggregation",
+        "transferability",
+        "disclosure"
+      ],
+      "summary": "Seventeen principles in four groups connect costing purpose, resource quantities, valuation, and transparent results. Principle identifiers are verified; the more detailed downloadable checklist rows have not all been independently transcribed.",
+      "checked_on": "2026-11-08",
+      "count": 17,
+      "count_unit": "principles",
+      "item_level_verified": true,
+      "related_urls": [
+        "https://ghcosting.org/pages/standards/principles/study_design.php",
+        "https://ghcosting.org/pages/standards/principles/resource_use_measurement.php",
+        "https://ghcosting.org/pages/standards/principles/pricing_and_valuation.php",
+        "https://ghcosting.org/pages/standards/principles/analysing_and_presenting_results.php"
+      ],
+      "verification_scope": {
+        "mapping_coverage": "all_numbered_principles",
+        "verified_mapping_count": 17,
+        "full_checklist_transcription_added": false,
+        "source_access": "Primary publisher, official organisational page, or PubMed record; publication details and scope checked. Item identifiers only marked verified where source table/principles were retrieved.",
+        "qualification": "All 17 methodological principle IDs; not every subrow in the downloadable reporting checklist."
+      }
+    },
+    {
+      "id": "tdabc_2020",
+      "title": "TDABC in Healthcare Consortium Consensus Statement",
+      "version": "2020",
+      "category": "costing_reporting_framework",
+      "status": "published_current_identified",
+      "primary_url": "https://link.springer.com/article/10.1186/s12913-020-05869-0",
+      "doi": "10.1186/s12913-020-05869-0",
+      "domains": [
+        "study_scope",
+        "capacity_workflow",
+        "resource_measurement",
+        "allocation",
+        "price_provenance",
+        "price_adjustment",
+        "results_disaggregation"
+      ],
+      "summary": "Framework for designing and reporting healthcare TDABC: 32 elements, 21 mandatory and 11 strongly suggested. Process maps, financial inputs, overhead, practical capacity and time measurement are central. Full item numbering awaits independent table extraction.",
+      "checked_on": "2026-11-08",
+      "count": 32,
+      "item_level_verified": false,
+      "verification_scope": {
+        "mapping_coverage": "not_item_mapped",
+        "verified_mapping_count": 0,
+        "full_checklist_transcription_added": false,
+        "source_access": "Primary publisher, official organisational page, or PubMed record; publication details and scope checked. Item identifiers only marked verified where source table/principles were retrieved."
+      }
+    },
+    {
+      "id": "agreedt_2018",
+      "title": "Alignment in Reporting Economic Evaluations of Diagnostic Tests and Biomarkers",
+      "version": "2018",
+      "category": "reporting_guideline",
+      "status": "published_current_identified",
+      "primary_url": "https://journals.sagepub.com/doi/10.1177/0272989X18797590",
+      "doi": "10.1177/0272989X18797590",
+      "domains": [
+        "diagnostic_pathway",
+        "resource_measurement",
+        "price_provenance",
+        "capacity_workflow",
+        "heterogeneity",
+        "uncertainty",
+        "outcome_measurement",
+        "spillovers"
+      ],
+      "summary": "Diagnostic-strategy economic reporting across the testing and subsequent management pathway. Especially relevant to screening: failed samples, retesting, delays, downstream management, incidental findings and family effects. Not newborn-screening-specific.",
+      "checked_on": "2026-11-08",
+      "count": 44,
+      "item_level_verified": true,
+      "verification_scope": {
+        "mapping_coverage": "all_numbered_items",
+        "verified_mapping_count": 44,
+        "full_checklist_transcription_added": false,
+        "source_access": "Primary publisher, official organisational page, or PubMed record; publication details and scope checked. Item identifiers only marked verified where source table/principles were retrieved."
+      }
+    },
+    {
+      "id": "cheers_voi_2023",
+      "title": "CHEERS Value of Information",
+      "version": "2023",
+      "category": "reporting_guideline_extension",
+      "status": "published_current_identified",
+      "primary_url": "https://www.valueinhealthjournal.com/article/S1098-3015%2823%2903031-0/fulltext",
+      "doi": "10.1016/j.jval.2023.06.014",
+      "domains": [
+        "voi",
+        "model_validation",
+        "uncertainty",
+        "price_provenance",
+        "results_disaggregation"
+      ],
+      "summary": "Use for VOI accompanying economic evaluation. Six supplemental items S1-S6 cover estimation, evidence, parameter groups, proposed research, simulated data and research costs; several inherited CHEERS items are elaborated. Do not calculate a total item count from inconsistent secondary descriptions.",
+      "checked_on": "2026-11-08",
+      "extends": [
+        "cheers_2022"
+      ],
+      "additional_items": 6,
+      "item_level_verified": true,
+      "verification_scope": {
+        "mapping_coverage": "supplemental_items_only",
+        "verified_mapping_count": 6,
+        "full_checklist_transcription_added": false,
+        "source_access": "Primary publisher, official organisational page, or PubMed record; publication details and scope checked. Item identifiers only marked verified where source table/principles were retrieved.",
+        "qualification": "S1-S6 only; inherited and elaborated CHEERS items require the official extension wording."
+      },
+      "related_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/37414276/"
+      ]
+    },
+    {
+      "id": "cheers_ai_2024",
+      "title": "CHEERS for Interventions That Use Artificial Intelligence",
+      "version": "2024",
+      "category": "reporting_guideline_extension",
+      "status": "published_current_identified",
+      "primary_url": "https://www.sciencedirect.com/science/article/pii/S1098301524023660",
+      "doi": "10.1016/j.jval.2024.05.006",
+      "domains": [
+        "ai_intervention",
+        "study_scope",
+        "model_validation",
+        "resource_measurement",
+        "uncertainty",
+        "transferability"
+      ],
+      "summary": "Economic evaluations of interventions using AI: 28 inherited CHEERS items, eight elaborations and ten additional items. Applies when the intervention uses AI, not simply because an analyst used AI. Item-level mapping remains pending full checklist verification.",
+      "checked_on": "2026-11-08",
+      "count": 38,
+      "extends": [
+        "cheers_2022"
+      ],
+      "item_level_verified": false,
+      "verification_scope": {
+        "mapping_coverage": "not_item_mapped",
+        "verified_mapping_count": 0,
+        "full_checklist_transcription_added": false,
+        "source_access": "Primary publisher, official organisational page, or PubMed record; publication details and scope checked. Item identifiers only marked verified where source table/principles were retrieved."
+      },
+      "related_urls": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC11343728/"
+      ]
+    },
+    {
+      "id": "ispor_bia_2014",
+      "title": "ISPOR Budget Impact Analysis Good Practice II",
+      "version": "2014 (2012 Task Force)",
+      "category": "methods_reporting_reference_case",
+      "status": "published_current_identified",
+      "primary_url": "https://www.ispor.org/heor-resources/good-practices/article/principles-of-good-practice-for-budget-impact-analysis-ii",
+      "doi": "10.1016/j.jval.2013.08.2291",
+      "domains": [
+        "budget_impact",
+        "perspective",
+        "time_basis",
+        "output_denominator",
+        "price_provenance",
+        "model_validation",
+        "uncertainty",
+        "results_disaggregation"
+      ],
+      "summary": "Separate budget-holder framework covering eligible population, adoption, treatment mix, costs, scenarios, validation and reporting. Jurisdiction-specific BIA requirements remain applicable; CHEERS alone is insufficient.",
+      "checked_on": "2026-11-08",
+      "item_level_verified": false,
+      "verification_scope": {
+        "mapping_coverage": "not_item_mapped",
+        "verified_mapping_count": 0,
+        "full_checklist_transcription_added": false,
+        "source_access": "Primary publisher, official organisational page, or PubMed record; publication details and scope checked. Item identifiers only marked verified where source table/principles were retrieved."
+      }
+    },
+    {
+      "id": "idsi_2016",
+      "title": "iDSI Reference Case for Economic Evaluation",
+      "version": "2016",
+      "category": "methods_reporting_reference_case",
+      "status": "published_current_identified",
+      "primary_url": "https://www.sciencedirect.com/science/article/pii/S1098301516304405",
+      "doi": "10.1016/j.jval.2016.04.015",
+      "domains": [
+        "comparators",
+        "resource_boundary",
+        "price_provenance",
+        "outcome_measurement",
+        "time_basis",
+        "spillovers",
+        "heterogeneity",
+        "uncertainty",
+        "budget_impact",
+        "equity",
+        "results_disaggregation"
+      ],
+      "summary": "Eleven principles pair methodological specifications with reporting standards. Context matters; policy defaults should be versioned jurisdiction profiles rather than universal engine constants.",
+      "checked_on": "2026-11-08",
+      "count": 11,
+      "count_unit": "principles",
+      "item_level_verified": true,
+      "verification_scope": {
+        "mapping_coverage": "all_numbered_principles",
+        "verified_mapping_count": 11,
+        "full_checklist_transcription_added": false,
+        "source_access": "Primary publisher, official organisational page, or PubMed record; publication details and scope checked. Item identifiers only marked verified where source table/principles were retrieved."
+      }
+    },
+    {
+      "id": "second_panel_2016",
+      "title": "Second Panel on Cost-Effectiveness in Health and Medicine",
+      "version": "2016",
+      "category": "methods_reporting_reference_case",
+      "status": "published_current_identified",
+      "primary_url": "https://pubmed.ncbi.nlm.nih.gov/27623463/",
+      "doi": "10.1001/jama.2016.12195",
+      "domains": [
+        "perspective",
+        "resource_boundary",
+        "spillovers",
+        "outcome_measurement",
+        "results_disaggregation"
+      ],
+      "summary": "US reference-case recommendations and impact inventory: distinguish health-sector and societal consequences. Useful for explicit inclusion/exclusion across sectors, without universalising US-specific defaults.",
+      "checked_on": "2026-11-08",
+      "item_level_verified": false,
+      "verification_scope": {
+        "mapping_coverage": "not_item_mapped",
+        "verified_mapping_count": 0,
+        "full_checklist_transcription_added": false,
+        "source_access": "Primary publisher, official organisational page, or PubMed record; publication details and scope checked. Item identifiers only marked verified where source table/principles were retrieved."
+      }
+    },
+    {
+      "id": "ahpcs_4_2",
+      "title": "Australian Hospital Patient Costing Standards",
+      "version": "4.2; Parts 1-2 Aug 2023; Part 3 Nov 2025",
+      "category": "sector_costing_standard",
+      "status": "published_current_identified",
+      "primary_url": "https://www.ihacpa.gov.au/resources/australian-hospital-patient-costing-standards-version-42",
+      "doi": null,
+      "domains": [
+        "resource_boundary",
+        "resource_measurement",
+        "allocation",
+        "output_denominator",
+        "cost_concept",
+        "results_disaggregation"
+      ],
+      "summary": "Australian patient-level hospital costing standard, business rules and service-specific guidance. Preserve reconciliation and in-scope allocation obligations as an optional jurisdiction profile, distinct from manuscript reporting.",
+      "checked_on": "2026-11-08",
+      "jurisdiction": "Australia",
+      "item_level_verified": false,
+      "verification_scope": {
+        "mapping_coverage": "not_item_mapped",
+        "verified_mapping_count": 0,
+        "full_checklist_transcription_added": false,
+        "source_access": "Primary publisher, official organisational page, or PubMed record; publication details and scope checked. Item identifiers only marked verified where source table/principles were retrieved."
+      }
+    },
+    {
+      "id": "nhs_acg_2026",
+      "title": "NHS England Approved Costing Guidance",
+      "version": "2026 submission",
+      "category": "sector_costing_standard",
+      "status": "published_current_identified",
+      "primary_url": "https://www.england.nhs.uk/costing-in-the-nhs/approved-costing-guidance/",
+      "doi": null,
+      "domains": [
+        "resource_boundary",
+        "allocation",
+        "resource_measurement",
+        "output_denominator",
+        "results_disaggregation"
+      ],
+      "summary": "Annually versioned patient-level costing and National Cost Collection guidance. Include a separate England profile for cost quantum, classification, allocation, patient matching and reconciliation.",
+      "checked_on": "2026-11-08",
+      "jurisdiction": "England",
+      "item_level_verified": false,
+      "verification_scope": {
+        "mapping_coverage": "not_item_mapped",
+        "verified_mapping_count": 0,
+        "full_checklist_transcription_added": false,
+        "source_access": "Primary publisher, official organisational page, or PubMed record; publication details and scope checked. Item identifiers only marked verified where source table/principles were retrieved."
+      }
+    },
+    {
+      "id": "pecunia_ruc_2021",
+      "title": "PECUNIA Reference Unit Cost Templates",
+      "version": "1.0/2021; methods paper 2024",
+      "category": "measurement_valuation_tool",
+      "status": "published_current_identified",
+      "primary_url": "https://www.pecunia-project.eu/tools/ruc-templates",
+      "doi": "10.5281/zenodo.5037573",
+      "domains": [
+        "resource_measurement",
+        "output_denominator",
+        "price_provenance",
+        "price_adjustment",
+        "nonmarket_valuation",
+        "spillovers",
+        "transferability"
+      ],
+      "summary": "Harmonised multi-sector unit-cost templates and service descriptors. Covers services, tangible consequences, productivity and personal time. Official access has registration and use conditions; concepts can be mapped without redistributing templates.",
+      "checked_on": "2026-11-08",
+      "related_dois": [
+        "10.1007/s40258-024-00905-0"
+      ],
+      "item_level_verified": false,
+      "verification_scope": {
+        "mapping_coverage": "not_item_mapped",
+        "verified_mapping_count": 0,
+        "full_checklist_transcription_added": false,
+        "source_access": "Primary publisher, official organisational page, or PubMed record; publication details and scope checked. Item identifiers only marked verified where source table/principles were retrieved."
+      }
+    },
+    {
+      "id": "immunisation_reporting_2020",
+      "title": "Reporting gaps in immunization costing studies: reporting checklist",
+      "version": "2020",
+      "category": "sector_reporting_guideline",
+      "status": "published_current_identified",
+      "primary_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7451807/",
+      "doi": "10.1016/j.jvacx.2020.100069",
+      "domains": [
+        "study_scope",
+        "resource_boundary",
+        "resource_measurement",
+        "output_denominator",
+        "price_provenance",
+        "capital",
+        "price_adjustment",
+        "uncertainty",
+        "results_disaggregation"
+      ],
+      "summary": "GHCC-derived immunisation reporting profile adds vaccines, target populations, coverage and delivery configurations. Denominator definitions and whether vaccine/staff costs are included materially affect interpretation.",
+      "checked_on": "2026-11-08",
+      "derives_from": [
+        "ghcc_2017"
+      ],
+      "item_level_verified": false,
+      "verification_scope": {
+        "mapping_coverage": "not_item_mapped",
+        "verified_mapping_count": 0,
+        "full_checklist_transcription_added": false,
+        "source_access": "Primary publisher, official organisational page, or PubMed record; publication details and scope checked. Item identifiers only marked verified where source table/principles were retrieved."
+      }
+    },
+    {
+      "id": "unaids_costing_2024",
+      "title": "UNAIDS national HIV strategic-plan costing guideline and reporting checklist",
+      "version": "2024",
+      "category": "sector_reporting_guideline",
+      "status": "published_current_identified",
+      "primary_url": "https://unaids.org/en/resources/documents/2024/JC3105_costing-methods",
+      "doi": null,
+      "domains": [
+        "study_scope",
+        "budget_impact",
+        "output_denominator",
+        "price_provenance",
+        "results_disaggregation"
+      ],
+      "summary": "Programme-planning costing guidance and reporting checklist arising from review of national HIV strategic plans. Full checklist mapping remains pending; preserve as a sector profile rather than generic microcosting authority.",
+      "checked_on": "2026-11-08",
+      "item_level_verified": false,
+      "verification_scope": {
+        "mapping_coverage": "not_item_mapped",
+        "verified_mapping_count": 0,
+        "full_checklist_transcription_added": false,
+        "source_access": "Primary publisher, official organisational page, or PubMed record; publication details and scope checked. Item identifiers only marked verified where source table/principles were retrieved."
+      }
+    },
+    {
+      "id": "coi_appraisal_2023",
+      "title": "Consensus checklist for critical appraisal of cost-of-illness studies",
+      "version": "2023",
+      "category": "appraisal_instrument",
+      "status": "published_current_identified",
+      "primary_url": "https://pubmed.ncbi.nlm.nih.gov/37325977/",
+      "doi": "10.1017/S0266462323000193",
+      "domains": [
+        "study_scope",
+        "perspective",
+        "cost_concept",
+        "resource_boundary",
+        "resource_measurement",
+        "price_provenance",
+        "uncertainty",
+        "results_disaggregation"
+      ],
+      "summary": "Seventeen main questions across study characteristics, methods/cost analysis and results/reporting. Yes/Partially/No/Not Applicable/Unclear are appraisal responses. Do not present it as a manuscript-reporting standard.",
+      "checked_on": "2026-11-08",
+      "count": 17,
+      "count_unit": "main_questions",
+      "item_level_verified": false,
+      "verification_scope": {
+        "mapping_coverage": "not_item_mapped",
+        "verified_mapping_count": 0,
+        "full_checklist_transcription_added": false,
+        "source_access": "Primary publisher, official organisational page, or PubMed record; publication details and scope checked. Item identifiers only marked verified where source table/principles were retrieved."
+      }
+    },
+    {
+      "id": "chec_2005",
+      "title": "Consensus on Health Economic Criteria",
+      "version": "2005",
+      "category": "appraisal_instrument",
+      "status": "published_established",
+      "primary_url": "https://pubmed.ncbi.nlm.nih.gov/15921065/",
+      "doi": null,
+      "domains": [
+        "study_scope",
+        "comparators",
+        "perspective",
+        "time_basis",
+        "resource_boundary",
+        "resource_measurement",
+        "price_provenance",
+        "outcome_measurement",
+        "uncertainty"
+      ],
+      "summary": "Methodological appraisal for economic evaluations in systematic reviews. Use separate appraisal assertions; reporting presence alone cannot establish appropriateness.",
+      "checked_on": "2026-11-08",
+      "item_level_verified": false,
+      "verification_scope": {
+        "mapping_coverage": "not_item_mapped",
+        "verified_mapping_count": 0,
+        "full_checklist_transcription_added": false,
+        "source_access": "Primary publisher, official organisational page, or PubMed record; publication details and scope checked. Item identifiers only marked verified where source table/principles were retrieved."
+      }
+    },
+    {
+      "id": "philips_2004",
+      "title": "Philips checklist for decision-analytic modelling in HTA",
+      "version": "2004",
+      "category": "model_appraisal_guidance",
+      "status": "published_established",
+      "primary_url": "https://pubmed.ncbi.nlm.nih.gov/15361314/",
+      "doi": "10.3310/hta8360",
+      "domains": [
+        "model_validation",
+        "uncertainty",
+        "study_scope"
+      ],
+      "summary": "Model structure, evidence and consistency appraisal. A complement for decision models, not an alternative costing reporting checklist.",
+      "checked_on": "2026-11-08",
+      "item_level_verified": false,
+      "verification_scope": {
+        "mapping_coverage": "not_item_mapped",
+        "verified_mapping_count": 0,
+        "full_checklist_transcription_added": false,
+        "source_access": "Primary publisher, official organisational page, or PubMed record; publication details and scope checked. Item identifiers only marked verified where source table/principles were retrieved."
+      }
+    },
+    {
+      "id": "advishe_2016",
+      "title": "Assessment of the Validation Status of Health-Economic decision models",
+      "version": "2016",
+      "category": "validation_reporting_instrument",
+      "status": "published_established",
+      "primary_url": "https://pubmed.ncbi.nlm.nih.gov/26660529/",
+      "doi": "10.1007/s40273-015-0327-2",
+      "domains": [
+        "model_validation",
+        "results_disaggregation"
+      ],
+      "summary": "Reports validation efforts and outcomes for conceptual models, inputs, software and results. Useful for evidence-backed validation records, separate from claims that a model is validated merely because a checklist is complete.",
+      "checked_on": "2026-11-08",
+      "item_level_verified": false,
+      "verification_scope": {
+        "mapping_coverage": "not_item_mapped",
+        "verified_mapping_count": 0,
+        "full_checklist_transcription_added": false,
+        "source_access": "Primary publisher, official organisational page, or PubMed record; publication details and scope checked. Item identifiers only marked verified where source table/principles were retrieved."
+      }
+    },
+    {
+      "id": "bmj_economic_1996",
+      "title": "BMJ Economic Evaluation Working Party guidelines",
+      "version": "1996",
+      "category": "historical_reporting_review_guidance",
+      "status": "legacy",
+      "primary_url": "https://www.bmj.com/content/313/7052/275",
+      "doi": "10.1136/bmj.313.7052.275",
+      "domains": [
+        "study_scope",
+        "resource_measurement",
+        "price_provenance",
+        "uncertainty",
+        "results_disaggregation"
+      ],
+      "summary": "Historical author/referee/editor guidance. Retain provenance and legacy mappings; current general reporting should use CHEERS 2022.",
+      "checked_on": "2026-11-08",
+      "item_level_verified": false,
+      "verification_scope": {
+        "mapping_coverage": "not_item_mapped",
+        "verified_mapping_count": 0,
+        "full_checklist_transcription_added": false,
+        "source_access": "Primary publisher, official organisational page, or PubMed record; publication details and scope checked. Item identifiers only marked verified where source table/principles were retrieved."
+      }
+    },
+    {
+      "id": "cheers_2013",
+      "title": "CHEERS original statement",
+      "version": "2013",
+      "category": "historical_reporting_guideline",
+      "status": "superseded",
+      "primary_url": "https://www.ispor.org/heor-resources/good-practices/cheers",
+      "doi": null,
+      "domains": [
+        "study_scope",
+        "resource_measurement",
+        "price_provenance",
+        "uncertainty",
+        "results_disaggregation"
+      ],
+      "summary": "Retain only for historical documents and migration; CHEERS 2022 supersedes this edition.",
+      "checked_on": "2026-11-08",
+      "superseded_by": "cheers_2022",
+      "item_level_verified": false,
+      "verification_scope": {
+        "mapping_coverage": "not_item_mapped",
+        "verified_mapping_count": 0,
+        "full_checklist_transcription_added": false,
+        "source_access": "Primary publisher, official organisational page, or PubMed record; publication details and scope checked. Item identifiers only marked verified where source table/principles were retrieved."
+      }
+    },
+    {
+      "id": "microcosting_protocol_2016",
+      "title": "Checklist for conduct, reporting and appraisal of microcosting: protocol",
+      "version": "2016",
+      "category": "development_protocol",
+      "status": "protocol_only_verified",
+      "primary_url": "https://pubmed.ncbi.nlm.nih.gov/27707687/",
+      "doi": "10.2196/resprot.6263",
+      "domains": [
+        "resource_measurement",
+        "price_provenance",
+        "results_disaggregation"
+      ],
+      "summary": "Describes proposed checklist development, Delphi and piloting. The protocol is not evidence of a completed consensus checklist. No final successor was verified in this search.",
+      "checked_on": "2026-11-08",
+      "item_level_verified": false,
+      "verification_scope": {
+        "mapping_coverage": "not_item_mapped",
+        "verified_mapping_count": 0,
+        "full_checklist_transcription_added": false,
+        "source_access": "Primary publisher, official organisational page, or PubMed record; publication details and scope checked. Item identifiers only marked verified where source table/principles were retrieved."
+      }
+    },
+    {
+      "id": "microcosting_review_2021",
+      "title": "Micro-costing in health and medicine: a critical appraisal",
+      "version": "2021",
+      "category": "evidence_review",
+      "status": "published",
+      "primary_url": "https://link.springer.com/article/10.1186/s13561-020-00298-5",
+      "doi": "10.1186/s13561-020-00298-5",
+      "domains": [
+        "resource_measurement",
+        "price_provenance",
+        "results_disaggregation"
+      ],
+      "summary": "Evidence about methodological and reporting gaps; not a newly validated generic microcosting reporting instrument.",
+      "checked_on": "2026-11-08",
+      "item_level_verified": false,
+      "verification_scope": {
+        "mapping_coverage": "not_item_mapped",
+        "verified_mapping_count": 0,
+        "full_checklist_transcription_added": false,
+        "source_access": "Primary publisher, official organisational page, or PubMed record; publication details and scope checked. Item identifiers only marked verified where source table/principles were retrieved."
+      }
+    },
+    {
+      "id": "genomic_microcosting_review_2023",
+      "title": "Microcosting diagnostic genomic sequencing: systematic review",
+      "version": "2023",
+      "category": "evidence_review",
+      "status": "published",
+      "primary_url": "https://pubmed.ncbi.nlm.nih.gov/36939042/",
+      "doi": "10.1016/j.gim.2023.100829",
+      "domains": [
+        "capacity_workflow",
+        "resource_measurement",
+        "price_provenance",
+        "uncertainty",
+        "transferability"
+      ],
+      "summary": "Gonzalez, Mordaunt and colleagues identify variation in sequencing workflow/resource reporting. Evidence supports explicit process and input provenance; not an independent reporting standard.",
+      "checked_on": "2026-11-08",
+      "item_level_verified": false,
+      "verification_scope": {
+        "mapping_coverage": "not_item_mapped",
+        "verified_mapping_count": 0,
+        "full_checklist_transcription_added": false,
+        "source_access": "Primary publisher, official organisational page, or PubMed record; publication details and scope checked. Item identifiers only marked verified where source table/principles were retrieved."
+      }
+    },
+    {
+      "id": "genomic_microcosting_protocol_2023",
+      "title": "Australian rare-disease genomic testing microcosting protocol",
+      "version": "2023",
+      "category": "study_protocol",
+      "status": "published",
+      "primary_url": "https://doi.org/10.1136/bmjopen-2022-069441",
+      "doi": "10.1136/bmjopen-2022-069441",
+      "domains": [
+        "capacity_workflow",
+        "resource_measurement",
+        "price_provenance",
+        "capital",
+        "allocation",
+        "data_collection"
+      ],
+      "summary": "Mordaunt and colleagues provide an applied GHCC-based genomic costing protocol. A valuable domain implementation and provenance source, not a consensus reporting guideline.",
+      "checked_on": "2026-11-08",
+      "item_level_verified": false,
+      "verification_scope": {
+        "mapping_coverage": "not_item_mapped",
+        "verified_mapping_count": 0,
+        "full_checklist_transcription_added": false,
+        "source_access": "Primary publisher, official organisational page, or PubMed record; publication details and scope checked. Item identifiers only marked verified where source table/principles were retrieved."
+      }
+    },
+    {
+      "id": "genomic_oncology_review_2026",
+      "title": "Micro-costing of genetic and genomic testing in oncology: systematic review",
+      "version": "2026",
+      "category": "evidence_review",
+      "status": "published",
+      "primary_url": "https://link.springer.com/article/10.1186/s13561-026-00752-w",
+      "doi": "10.1186/s13561-026-00752-w",
+      "domains": [
+        "capacity_workflow",
+        "resource_measurement",
+        "price_provenance",
+        "allocation",
+        "results_disaggregation"
+      ],
+      "summary": "Nine-study review used a modified CHEC instrument and calls for standardisation of terminology, workflows and costing methods. It does not establish a universal new reporting checklist.",
+      "checked_on": "2026-11-08",
+      "item_level_verified": false,
+      "verification_scope": {
+        "mapping_coverage": "not_item_mapped",
+        "verified_mapping_count": 0,
+        "full_checklist_transcription_added": false,
+        "source_access": "Primary publisher, official organisational page, or PubMed record; publication details and scope checked. Item identifiers only marked verified where source table/principles were retrieved."
+      }
+    },
+    {
+      "id": "cheers_climate_protocol_2025",
+      "title": "CHEERS ClimatE development protocol",
+      "version": "2025",
+      "category": "development_protocol",
+      "status": "protocol_only_verified",
+      "primary_url": "https://bmjopen.bmj.com/content/15/9/e094617",
+      "doi": "10.1136/bmjopen-2024-094617",
+      "domains": [
+        "environment",
+        "resource_boundary",
+        "price_provenance",
+        "outcome_measurement"
+      ],
+      "summary": "Protocol and initial proposal for a climate-impact extension. Final consensus publication not located in this search. Climate is narrower than all environmental effects; keep an experimental profile and monitor updates.",
+      "checked_on": "2026-11-08",
+      "item_level_verified": false,
+      "verification_scope": {
+        "mapping_coverage": "not_item_mapped",
+        "verified_mapping_count": 0,
+        "full_checklist_transcription_added": false,
+        "source_access": "Primary publisher, official organisational page, or PubMed record; publication details and scope checked. Item identifiers only marked verified where source table/principles were retrieved."
+      }
+    }
+  ],
+  "domains": [
+    {
+      "id": "study_scope",
+      "definition": "Decision purpose, population, setting, intervention and intended user."
+    },
+    {
+      "id": "comparators",
+      "definition": "Explicit alternative strategies and baseline."
+    },
+    {
+      "id": "perspective",
+      "definition": "Which agents and sectors bear included consequences."
+    },
+    {
+      "id": "cost_concept",
+      "definition": "Financial cost, opportunity cost, tariff, charge and payment remain distinct."
+    },
+    {
+      "id": "time_basis",
+      "definition": "Horizon, observation period, lifecycle phase and discount timing."
+    },
+    {
+      "id": "resource_boundary",
+      "definition": "Included inputs, excluded inputs, reasons and completeness."
+    },
+    {
+      "id": "resource_measurement",
+      "definition": "Quantity, physical unit, observation method and provenance."
+    },
+    {
+      "id": "allocation",
+      "definition": "Shared pools, allocation drivers, conservation and reconciliation."
+    },
+    {
+      "id": "output_denominator",
+      "definition": "Precisely defined output or beneficiary counted by a unit cost."
+    },
+    {
+      "id": "sampling",
+      "definition": "Site/person/event selection, sample size and representativeness."
+    },
+    {
+      "id": "data_collection",
+      "definition": "Collection dates, recall, seasonality and missingness."
+    },
+    {
+      "id": "price_provenance",
+      "definition": "Unit price basis, supplier/source, geography, effective date and adjustments."
+    },
+    {
+      "id": "capital",
+      "definition": "Useful life, residual value, replacement basis and depreciation/annuitisation."
+    },
+    {
+      "id": "price_adjustment",
+      "definition": "Price year, index, inflation, currency and exchange/PPP policy."
+    },
+    {
+      "id": "nonmarket_valuation",
+      "definition": "Shadow values, donated resources, unpaid time and opportunity costs."
+    },
+    {
+      "id": "capacity_workflow",
+      "definition": "Activity graph, timing, batching, capacity, utilisation and resource occupancy."
+    },
+    {
+      "id": "heterogeneity",
+      "definition": "Differences by site, scale, pathway and population."
+    },
+    {
+      "id": "equity",
+      "definition": "Distribution of costs/outcomes and explicit normative weights."
+    },
+    {
+      "id": "uncertainty",
+      "definition": "Parameter, sampling, structural and methodological uncertainty and dependencies."
+    },
+    {
+      "id": "model_validation",
+      "definition": "Conceptual checks, implementation verification and empirical validation evidence."
+    },
+    {
+      "id": "results_disaggregation",
+      "definition": "Totals and components with quantities, denominators and units."
+    },
+    {
+      "id": "transferability",
+      "definition": "Limits of reuse across setting, price system, throughput and time."
+    },
+    {
+      "id": "engagement",
+      "definition": "Patient/public/stakeholder contribution and its consequences."
+    },
+    {
+      "id": "disclosure",
+      "definition": "Funding, conflicts, access and provenance."
+    },
+    {
+      "id": "outcome_measurement",
+      "definition": "Health and nonhealth outcomes with measurement and valuation methods."
+    },
+    {
+      "id": "voi",
+      "definition": "Decision uncertainty, research designs, information value and research costs."
+    },
+    {
+      "id": "budget_impact",
+      "definition": "Eligible population, uptake, cash flows and annual budget consequences."
+    },
+    {
+      "id": "diagnostic_pathway",
+      "definition": "Testing strategy, accuracy, thresholds, failed samples, retests and downstream care."
+    },
+    {
+      "id": "spillovers",
+      "definition": "Family, caregiver, productivity and other sector consequences."
+    },
+    {
+      "id": "environment",
+      "definition": "Resource/emission inventory, physical effects and optional valuation."
+    },
+    {
+      "id": "ai_intervention",
+      "definition": "AI intervention role, deployment, updates, validation and economic consequences."
+    }
+  ],
+  "unresolved": [
+    "No completed universal successor to the 2016 microcosting checklist protocol was verified.",
+    "No formal CHEERS-DCEA or generic CHESS costing reporting guideline was verified; CHEERS 2022 already covers heterogeneity and distributional effects.",
+    "CHEERS ClimatE was verified as a protocol/proposal; final Delphi-based checklist remains unverified.",
+    "Detailed item mappings for TDABC, CHEERS-AI, COI, BIA, AHPCS, UNAIDS and immunisation require original-table verification before being marked item-complete.",
+    "No dedicated universally endorsed newborn-screening microcosting reporting checklist was identified. Compose CHEERS/GHCC with AGREEDT and relevant jurisdiction methods.",
+    "Generic study-design adjuncts such as CONSORT, STROBE/RECORD, STARD, TIDieR and PRISMA should be selected separately when applicable, not relabelled as costing-specific checklists."
+  ],
+  "ontology_rules": [
+    "Model InstrumentVersion, Requirement, ApplicabilityRule, EvidenceArtifact, Assessment and MappingAssertion as distinct entities.",
+    "Keep original instrument IDs and versions; map to shared concepts with related/broader/narrower relationships, not unsupported semantic equivalence.",
+    "Keep reporting presence, methodological appropriateness, implementation verification and empirical validation as separate assessment dimensions.",
+    "Represent not applicable with a reason, not as missing; preserve not reported, unclear and not assessed states.",
+    "A machine can verify fields and numerical invariants; human judgements about bias or appropriateness remain explicit review tasks.",
+    "Local rates, depreciation rules and perspective requirements are versioned policy profiles, not hard-coded ontology truths.",
+    "Attach evidence to each requirement and result; generate a reporting matrix from the executable model without claiming that generated prose validates the science.",
+    "Keep experimental project-specific additions visibly separate from external consensus requirements."
+  ],
+  "provenance": {
+    "prepared_on": "2026-11-08",
+    "method": "Bounded primary-source web review and editorial semantic reconciliation, assisted by an AI research agent. No Delphi process or consensus validation was performed.",
+    "verification_limit": "A source can be verified at publication/scope level without its full checklist being transcribed. Search results and publisher records were used where full-text pages were intermittently inaccessible.",
+    "pipeline_role": "Reconciliation metadata only; new canonical checklists still require source ingestion, source/index.yml registration and the repository format pipeline.",
+    "mapping_review": "Independent human review of semantic associations remains required."
+  },
+  "verification_summary": {
+    "instrument_count": 26,
+    "domain_count": 31,
+    "verified_mapping_count": 106,
+    "mapped_instrument_count": 5,
+    "mapping_counts": {
+      "agreedt_2018": 44,
+      "cheers_2022": 28,
+      "cheers_voi_2023": 6,
+      "ghcc_2017": 17,
+      "idsi_2016": 11
+    },
+    "full_checklist_transcriptions_added": 0
+  }
+}

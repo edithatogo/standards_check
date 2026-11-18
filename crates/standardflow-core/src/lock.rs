@@ -171,17 +171,7 @@ pub fn write_pack_lock(root: &Path, limits: LockLimits) -> Result<PackLock, Lock
     let destination = root.join(LOCK_FILE_NAME);
     reject_symlink_lock(&destination)?;
     let temp = temporary_lock_path(root);
-    let result = write_new_file(&temp, &bytes).and_then(|()| {
-        fs::rename(&temp, &destination).map_err(|source| LockError::Io {
-            operation: "rename temporary lockfile",
-            path: destination.display().to_string(),
-            source,
-        })
-    });
-    if result.is_err() {
-        let _ignored = fs::remove_file(&temp);
-    }
-    result?;
+    replace_lock_file(&destination, &temp, &bytes)?;
     Ok(lock)
 }
 
@@ -195,11 +185,7 @@ pub fn verify_pack_lock(root: &Path, limits: LockLimits) -> Result<LockVerificat
     validate_root(root)?;
     let path = root.join(LOCK_FILE_NAME);
     reject_symlink_lock(&path)?;
-    let bytes = fs::read(&path).map_err(|source| LockError::Io {
-        operation: "read lockfile",
-        path: path.display().to_string(),
-        source,
-    })?;
+    let bytes = read_bounded_file(&path, LOCK_FILE_NAME, limits, 0)?;
     let recorded: PackLock = serde_json::from_slice(&bytes)?;
     let computed = build_pack_lock(root, limits)?;
     if recorded != computed {
@@ -402,7 +388,7 @@ fn portable_path(path: &Path) -> Result<String, LockError> {
                 let text = segment
                     .to_str()
                     .ok_or_else(|| LockError::NonPortablePath(path.display().to_string()))?;
-                if text.is_empty() || text == "." || text == ".." {
+                if text.is_empty() || text == "." || text == ".." || text.contains('\\') {
                     return Err(LockError::NonPortablePath(path.display().to_string()));
                 }
                 segments.push(text);
@@ -463,16 +449,35 @@ fn write_new_file(path: &Path, bytes: &[u8]) -> Result<(), LockError> {
             path: path.display().to_string(),
             source,
         })?;
-    file.write_all(bytes).map_err(|source| LockError::Io {
-        operation: "write temporary lockfile",
-        path: path.display().to_string(),
+    let result = file
+        .write_all(bytes)
+        .and_then(|()| file.sync_all())
+        .map_err(|source| LockError::Io {
+            operation: "write and sync temporary lockfile",
+            path: path.display().to_string(),
+            source,
+        });
+    drop(file);
+    if result.is_err() {
+        // This invocation created the file, so it owns partial-write cleanup.
+        let _ignored = fs::remove_file(path);
+    }
+    result
+}
+
+fn replace_lock_file(destination: &Path, temporary: &Path, bytes: &[u8]) -> Result<(), LockError> {
+    // If exclusive creation fails, the existing temporary path belongs to
+    // someone else and must not be removed.
+    write_new_file(temporary, bytes)?;
+    let result = fs::rename(temporary, destination).map_err(|source| LockError::Io {
+        operation: "rename temporary lockfile",
+        path: destination.display().to_string(),
         source,
-    })?;
-    file.sync_all().map_err(|source| LockError::Io {
-        operation: "sync temporary lockfile",
-        path: path.display().to_string(),
-        source,
-    })
+    });
+    if result.is_err() {
+        let _ignored = fs::remove_file(temporary);
+    }
+    result
 }
 
 #[cfg(test)]
@@ -482,8 +487,8 @@ mod tests {
     use std::sync::atomic::{AtomicU64, Ordering};
 
     use super::{
-        LockError, LockLimits, build_pack_lock, read_bounded_file, verify_pack_lock,
-        write_pack_lock,
+        LockError, LockLimits, build_pack_lock, read_bounded_file, replace_lock_file,
+        verify_pack_lock, write_pack_lock,
     };
 
     static TEST_COUNTER: AtomicU64 = AtomicU64::new(0);
@@ -560,6 +565,49 @@ mod tests {
         assert!(matches!(
             result,
             Err(LockError::Limit(message)) if message.contains("per-file limit")
+        ));
+        Ok(())
+    }
+
+    #[test]
+    fn lock_verification_bounds_the_lock_before_json_decoding()
+    -> Result<(), Box<dyn std::error::Error>> {
+        let directory = TestDirectory::create()?;
+        fs::write(directory.path().join("standardflow.lock.json"), [b' '; 32])?;
+        let limits = LockLimits {
+            max_file_bytes: 8,
+            ..LockLimits::default()
+        };
+        assert!(matches!(
+            verify_pack_lock(directory.path(), limits),
+            Err(LockError::Limit(_))
+        ));
+        Ok(())
+    }
+
+    #[test]
+    fn failed_exclusive_creation_preserves_existing_files() -> Result<(), Box<dyn std::error::Error>>
+    {
+        let directory = TestDirectory::create()?;
+        let destination = directory.path().join("standardflow.lock.json");
+        let temporary = directory.path().join("already-owned.tmp");
+        fs::write(&destination, b"existing lock")?;
+        fs::write(&temporary, b"unrelated content")?;
+        assert!(replace_lock_file(&destination, &temporary, b"new lock").is_err());
+        assert_eq!(fs::read(&destination)?, b"existing lock");
+        assert_eq!(fs::read(&temporary)?, b"unrelated content");
+        Ok(())
+    }
+
+    #[cfg(unix)]
+    #[test]
+    fn lock_rejects_backslashes_in_file_names() -> Result<(), Box<dyn std::error::Error>> {
+        let directory = TestDirectory::create()?;
+        fs::write(directory.path().join("pack.json"), minimal_pack())?;
+        fs::write(directory.path().join("sources\\manifest.json"), b"{}")?;
+        assert!(matches!(
+            build_pack_lock(directory.path(), LockLimits::default()),
+            Err(LockError::NonPortablePath(_))
         ));
         Ok(())
     }

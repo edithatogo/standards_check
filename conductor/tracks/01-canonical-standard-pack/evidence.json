@@ -38,6 +38,25 @@
       "receipt": "https://github.com/edithatogo/standards_check/actions/runs/34164376566"
     },
     {
+      "claim": "The original runtime and diagram integration passed permanent pack and foundation checks on the recorded head",
+      "evidence_level": "fixture_proven",
+      "commit": "55bff593c6e91491ad50596baefae5626c6bf2c5",
+      "receipts": [
+        "https://github.com/edithatogo/standards_check/actions/runs/43308300569",
+        "https://github.com/edithatogo/standards_check/actions/runs/43308300678"
+      ],
+      "reviewed_on": "2026-11-18"
+    },
+    {
+      "claim": "The bounded runtime repair passes 55 Rust tests, strict Clippy, formatting, schema validators, lock verification and all 12 golden-output comparisons on Linux",
+      "evidence_level": "fixture_proven",
+      "commit": "f41888832c2b169528b30fe99df6aa7a85aff153",
+      "execution": "local",
+      "platform": "Linux",
+      "rust_toolchain": "1.98.1",
+      "hosted_checks": "not yet observed for the final merged repair head"
+    },
+    {
       "claim": "The PRISMA 2020 pack has been reconciled item-by-item to the authoritative source",
       "evidence_level": "contracted",
       "blocked_by": [
@@ -45,6 +64,13 @@
         "item-level rights confirmation"
       ],
       "current_pack_status": "imported_unverified"
+    },
+    {
+      "claim": "The final repaired integration head has passed hosted acceptance checks",
+      "evidence_level": "contracted",
+      "blocked_by": [
+        "fresh hosted checks at the final pull request 60 integration head"
+      ]
     }
   ]
 }

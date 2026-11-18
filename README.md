@@ -16,6 +16,16 @@ Markdown and generated Typst/LaTeX/HTML/PDF/DOCX outputs, and exposes static/API
 are not yet all Canonical Standard Packs. Existing status must not be interpreted as implementation
 of the future Rust architecture.
 
+## Costing and valuation reconciliation
+
+The source-aware [costing and valuation reconciliation](reconciliations/costing/README.md) remains
+separate from canonical checklists. It classifies 26 sources and provides 106 verified
+item/principle mappings, with explicit applicability and coverage limits.
+
+Run `python3 scripts/validate_costing_reconciliation.py` to check catalogue references, status
+distinctions and verified-coverage counts. This metadata check also runs through `make validate`;
+it does not assess scientific validity.
+
 ## Target architecture
 
 ```text
