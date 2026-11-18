@@ -32,7 +32,7 @@ import time
 import yaml
 import requests
 from glob import glob
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor
 
 SOURCE_DIR = "source"
 DOI_BASE_URL = "https://doi.org"
@@ -42,11 +42,6 @@ WARNING_STATUS_CODES = [403]  # Treat 403 Forbidden as a warning
 MAX_RETRIES = 3
 RETRY_DELAY = 5  # seconds
 
-# Global session for connection pooling across threads
-session = requests.Session()
-adapter = requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=100)
-session.mount('http://', adapter)
-session.mount('https://', adapter)
 
 def validate_url(url, file_path):
     """Validates a single URL with retries."""
@@ -56,7 +51,7 @@ def validate_url(url, file_path):
     for attempt in range(MAX_RETRIES):
         try:
             # Use a timeout to avoid hanging on unresponsive servers
-            response = session.head(url, allow_redirects=True, timeout=10)
+            response = requests.head(url, allow_redirects=True, timeout=10)
             status = response.status_code
 
             if status in SUCCESS_STATUS_CODES:
@@ -124,8 +119,9 @@ def main():
     with ThreadPoolExecutor(max_workers=20) as executor:
         future_to_url = {executor.submit(validate_url, url, file_path): (url, file_path) for url, file_path in tasks}
 
-        for future in as_completed(future_to_url):
-            url, file_path = future_to_url[future]
+        # All requests are submitted concurrently; consume in input order for
+        # reproducible summaries without sharing mutable HTTP sessions.
+        for future, (url, file_path) in future_to_url.items():
             try:
                 result = future.result()
                 if result:
