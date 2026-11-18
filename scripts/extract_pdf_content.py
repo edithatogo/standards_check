@@ -23,11 +23,13 @@ def extract_text_from_pdf(pdf_path, output_path=None):
     """
     try:
         # Extract text from PDF
-        text_content = ""
+        text_parts = []
         with pdfplumber.open(pdf_path) as pdf:
             for page in pdf.pages:
-                text_content += page.extract_text()
-                text_content += "\n\n"  # Add spacing between pages
+                text = page.extract_text()
+                text_parts.append(text if text is not None else "")
+
+        text_content = "\n\n".join(text_parts) + "\n\n" if text_parts else ""
         
         # If no output path specified, create one based on PDF name
         if output_path is None:

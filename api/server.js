@@ -3,18 +3,14 @@ const fs = require('fs').promises;
 const path = require('path');
 const { marked } = require('marked');
 const cors = require('cors');
+const { createCorsOptions } = require('./cors-options');
 
 const app = express();
 const port = 3000;
 
 const checklistsDir = path.join(__dirname, '../markdown');
 
-const corsOptions = {
-  origin: process.env.CORS_ORIGIN,
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-};
-
-app.use(cors(corsOptions));
+app.use(cors(createCorsOptions(process.env.CORS_ORIGIN)));
 app.use(express.json());
 
 // Helper function to parse markdown content into a structured JSON object.

@@ -39,6 +39,7 @@ def generate_petri_net(parsed_data):
     title = parsed_data["title"]
     sections = parsed_data["sections"]
     items = parsed_data["items"]
+    item_name_regex = re.compile(r'[^a-zA-Z0-9\s]')
 
     net = PetriNet(title)
     source = PetriNet.Place("source")
@@ -55,7 +56,7 @@ def generate_petri_net(parsed_data):
         else:
             last_place = source
             for i, item_text in enumerate(items):
-                item_name = re.sub(r'[^a-zA-Z0-9\s]', '', item_text).strip()[:50]
+                item_name = item_name_regex.sub('', item_text).strip()[:50]
                 transition = PetriNet.Transition(name=f"item_{i+1}", label=item_name)
                 net.transitions.add(transition)
                 petri_utils.add_arc_from_to(last_place, transition, net)
@@ -86,7 +87,7 @@ def generate_petri_net(parsed_data):
             section_items = re.findall(r'-\s\[\s\].*', section_content)
             if section_items:
                 for j, item_text in enumerate(section_items):
-                    item_name = re.sub(r'[^a-zA-Z0-9\s]', '', item_text).strip()[:50]
+                    item_name = item_name_regex.sub('', item_text).strip()[:50]
                     item_transition = PetriNet.Transition(name=f"sec_{i+1}_item_{j+1}", label=item_name)
                     net.transitions.add(item_transition)
                     petri_utils.add_arc_from_to(last_item_place, item_transition, net)
