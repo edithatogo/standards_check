@@ -6,7 +6,9 @@ It never treats a licence statement as proof of item-level transcription parity.
 """
 from __future__ import annotations
 
+import hashlib
 import json
+import unicodedata
 from pathlib import Path
 import re
 import sys
@@ -42,16 +44,26 @@ def audit(pack: dict) -> dict:
     authority_sha = pack.get("authority", {}).get("source_sha256", "")
     source_receipt = "source-sha256:" + authority_sha
     item_receipts = {
-        match.group(1) for receipt in receipt_strings
+        match.group(1): match.group(2) for receipt in receipt_strings
         if (match := re.fullmatch(
-            r"item-check:([0-9]+[a-z]?):sha256:[a-f0-9]{64}", str(receipt)
+            r"item-check:([0-9]+[a-z]?):sha256:([a-f0-9]{64})", str(receipt)
         ))
     }
+    matching_receipts = all(
+        item_receipts.get(str(item["display_number"])) == hashlib.sha256(
+            "".join(
+                c for c in unicodedata.normalize("NFKC", item.get("verbatim_text") or "")
+                if not c.isspace()
+            ).encode("utf-8")
+        ).hexdigest()
+        for item in requirements
+    )
     evidence_ok = (bool(evidence.get("verified_at"))
                    and bool(evidence.get("verified_by"))
                    and re.fullmatch(r"[a-f0-9]{64}", authority_sha) is not None
                    and source_receipt in receipt_strings
                    and EXPECTED.issubset(item_receipts)
+                   and matching_receipts
                    and all(str(i["source_anchor"]).strip() for i in requirements))
     # Exact-item evidence requires the full official checklist numbering, not
     # one aggregate item representing multiple required subitems.
