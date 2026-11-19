@@ -17,7 +17,7 @@ ORIGINAL = ROOT / "packs/org.prisma/prisma/2020/pack.json"
 SPLIT = {"10": "ab", "13": "abcdef", "16": "ab",
          "20": "abcd", "23": "abcd", "24": "abc"}
 EXPECTED = [
-    (f"{i}{suffix}" if i in SPLIT else str(i))
+    (f"{i}{suffix}" if str(i) in SPLIT else str(i))
     for i in range(1, 28)
     for suffix in (SPLIT[str(i)] if str(i) in SPLIT else ("",))
 ]
