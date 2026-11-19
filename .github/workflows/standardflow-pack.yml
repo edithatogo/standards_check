@@ -146,6 +146,11 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install --yes --no-install-recommends poppler-utils
+      - name: Emit immutable authorised CC BY source for archival capture
+        run: |
+          echo PRISMA_BINARY_BASE64_BEGIN
+          base64 -w 76 "${RUNNER_TEMP}/prisma2020-official.pdf"
+          echo PRISMA_BINARY_BASE64_END
       - name: Inspect extracted official checklist text for comparison discrepancies
         run: |
           pdftotext -layout "${RUNNER_TEMP}/prisma2020-official.pdf" - | head -n 100
