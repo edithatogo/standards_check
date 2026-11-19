@@ -21,7 +21,7 @@ PINNED_PDF_LENGTH = 67506
 
 def normalize(text: str) -> str:
     return "".join(
-        c.casefold() for c in unicodedata.normalize("NFKC", text) if c.isalnum()
+        c for c in unicodedata.normalize("NFKC", text) if not c.isspace()
     )
 
 
@@ -47,14 +47,14 @@ def verify_pdf(source_bytes: bytes, text_pages: list[str], ledger: dict) -> dict
         source = normalize(checklist_column(text_pages[page - 1], page))
         expected_text = normalize(item["verbatim_text"])
         if not expected_text or expected_text not in source:
-            raise ValueError(f"Item {number} not found verbatim (word-normalized) on PDF page {page}")
+            raise ValueError(f"Item {number} not found verbatim (whitespace-normalized) on PDF page {page}")
         comparisons.append({
             "item": number,
             "page": page,
             "source_pdf_sha256": actual_sha,
-            "word_normalized_text_sha256": hashlib.sha256(expected_text.encode()).hexdigest(),
-            "word_normalized_source_match": True,
-            "comparison_method": "normalized_unicode_alphanumeric_contiguous_substring",
+            "whitespace_normalized_text_sha256": hashlib.sha256(expected_text.encode()).hexdigest(),
+            "whitespace_normalized_source_match": True,
+            "comparison_method": "unicode_nfkc_whitespace_ignored_contiguous_substring",
         })
     return {
         "schema_version": "dev.standardflow.prisma-source-comparison.v1",
