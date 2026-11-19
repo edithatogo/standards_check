@@ -1,0 +1,310 @@
+{
+  "schema_version": "dev.standardflow.prisma-transcription-draft.v1",
+  "title": "PRISMA 2020 Checklist",
+  "source_url": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf",
+  "source_pages": 2,
+  "source_bytes_sha256": null,
+  "source_bytes_verified": false,
+  "rights": "CC-BY-4.0",
+  "attribution": "Page MJ, McKenzie JE, Bossuyt PM, Boutron I, Hoffmann TC, Mulrow CD, et al. The PRISMA 2020 statement: an updated guideline for reporting systematic reviews. BMJ 2021;372:n71. doi:10.1136/bmj.n71.",
+  "transcription_status": "draft_transcribed_from_official_web_pdf_text_and_visual",
+  "reviewed_by": [],
+  "reviewed_at": null,
+  "notes": "Draft independently identified from the PRISMA Executive PDF visible on 2026-11-19. PDF original bytes and independent reviewer attestation have NOT been obtained. No claim of byte-exact transcription.",
+  "items": [
+    {
+      "number": "1",
+      "page": 1,
+      "verbatim_text": "Identify the report as a systematic review.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=1",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "2",
+      "page": 1,
+      "verbatim_text": "See the PRISMA 2020 for Abstracts checklist.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=1",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "3",
+      "page": 1,
+      "verbatim_text": "Describe the rationale for the review in the context of existing knowledge.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=1",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "4",
+      "page": 1,
+      "verbatim_text": "Provide an explicit statement of the objective(s) or question(s) the review addresses.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=1",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "5",
+      "page": 1,
+      "verbatim_text": "Specify the inclusion and exclusion criteria for the review and how studies were grouped for the syntheses.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=1",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "6",
+      "page": 1,
+      "verbatim_text": "Specify all databases, registers, websites, organisations, reference lists and other sources searched or consulted to identify studies. Specify the date when each source was last searched or consulted.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=1",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "7",
+      "page": 1,
+      "verbatim_text": "Present the full search strategies for all databases, registers and websites, including any filters and limits used.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=1",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "8",
+      "page": 1,
+      "verbatim_text": "Specify the methods used to decide whether a study met the inclusion criteria of the review, including how many reviewers screened each record and each report retrieved, whether they worked independently, and if applicable, details of automation tools used in the process.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=1",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "9",
+      "page": 1,
+      "verbatim_text": "Specify the methods used to collect data from reports, including how many reviewers collected data from each report, whether they worked independently, any processes for obtaining or confirming data from study investigators, and if applicable, details of automation tools used in the process.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=1",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "10a",
+      "page": 1,
+      "verbatim_text": "List and define all outcomes for which data were sought. Specify whether all results that were compatible with each outcome domain in each study were sought (e.g. for all measures, time points, analyses), and if not, the methods used to decide which results to collect.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=1",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "10b",
+      "page": 1,
+      "verbatim_text": "List and define all other variables for which data were sought (e.g. participant and intervention characteristics, funding sources). Describe any assumptions made about any missing or unclear information.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=1",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "11",
+      "page": 1,
+      "verbatim_text": "Specify the methods used to assess risk of bias in the included studies, including details of the tool(s) used, how many reviewers assessed each study and whether they worked independently, and if applicable, details of automation tools used in the process.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=1",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "12",
+      "page": 1,
+      "verbatim_text": "Specify for each outcome the effect measure(s) (e.g. risk ratio, mean difference) used in the synthesis or presentation of results.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=1",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "13a",
+      "page": 1,
+      "verbatim_text": "Describe the processes used to decide which studies were eligible for each synthesis (e.g. tabulating the study intervention characteristics and comparing against the planned groups for each synthesis (item #5)).",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=1",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "13b",
+      "page": 1,
+      "verbatim_text": "Describe any methods required to prepare the data for presentation or synthesis, such as handling of missing summary statistics, or data conversions.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=1",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "13c",
+      "page": 1,
+      "verbatim_text": "Describe any methods used to tabulate or visually display results of individual studies and syntheses.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=1",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "13d",
+      "page": 1,
+      "verbatim_text": "Describe any methods used to synthesize results and provide a rationale for the choice(s). If meta-analysis was performed, describe the model(s), method(s) to identify the presence and extent of statistical heterogeneity, and software package(s) used.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=1",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "13e",
+      "page": 1,
+      "verbatim_text": "Describe any methods used to explore possible causes of heterogeneity among study results (e.g. subgroup analysis, meta-regression).",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=1",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "13f",
+      "page": 1,
+      "verbatim_text": "Describe any sensitivity analyses conducted to assess robustness of the synthesized results.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=1",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "14",
+      "page": 1,
+      "verbatim_text": "Describe any methods used to assess risk of bias due to missing results in a synthesis (arising from reporting biases).",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=1",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "15",
+      "page": 1,
+      "verbatim_text": "Describe any methods used to assess certainty (or confidence) in the body of evidence for an outcome.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=1",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "16a",
+      "page": 2,
+      "verbatim_text": "Describe the results of the search and selection process, from the number of records identified in the search to the number of studies included in the review, ideally using a flow diagram.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=2",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "16b",
+      "page": 2,
+      "verbatim_text": "Cite studies that might appear to meet the inclusion criteria, but which were excluded, and explain why they were excluded.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=2",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "17",
+      "page": 2,
+      "verbatim_text": "Cite each included study and present its characteristics.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=2",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "18",
+      "page": 2,
+      "verbatim_text": "Present assessments of risk of bias for each included study.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=2",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "19",
+      "page": 2,
+      "verbatim_text": "For all outcomes, present, for each study: (a) summary statistics for each group (where appropriate) and (b) an effect estimate and its precision (e.g. confidence/credible interval), ideally using structured tables or plots.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=2",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "20a",
+      "page": 2,
+      "verbatim_text": "For each synthesis, briefly summarise the characteristics and risk of bias among contributing studies.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=2",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "20b",
+      "page": 2,
+      "verbatim_text": "Present results of all statistical syntheses conducted. If meta-analysis was done, present for each the summary estimate and its precision (e.g. confidence/credible interval) and measures of statistical heterogeneity. If comparing groups, describe the direction of the effect.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=2",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "20c",
+      "page": 2,
+      "verbatim_text": "Present results of all investigations of possible causes of heterogeneity among study results.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=2",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "20d",
+      "page": 2,
+      "verbatim_text": "Present results of all sensitivity analyses conducted to assess the robustness of the synthesized results.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=2",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "21",
+      "page": 2,
+      "verbatim_text": "Present assessments of risk of bias due to missing results (arising from reporting biases) for each synthesis assessed.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=2",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "22",
+      "page": 2,
+      "verbatim_text": "Present assessments of certainty (or confidence) in the body of evidence for each outcome assessed.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=2",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "23a",
+      "page": 2,
+      "verbatim_text": "Provide a general interpretation of the results in the context of other evidence.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=2",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "23b",
+      "page": 2,
+      "verbatim_text": "Discuss any limitations of the evidence included in the review.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=2",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "23c",
+      "page": 2,
+      "verbatim_text": "Discuss any limitations of the review processes used.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=2",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "23d",
+      "page": 2,
+      "verbatim_text": "Discuss implications of the results for practice, policy, and future research.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=2",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "24a",
+      "page": 2,
+      "verbatim_text": "Provide registration information for the review, including register name and registration number, or state that the review was not registered.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=2",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "24b",
+      "page": 2,
+      "verbatim_text": "Indicate where the review protocol can be accessed, or state that a protocol was not prepared.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=2",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "24c",
+      "page": 2,
+      "verbatim_text": "Describe and explain any amendments to information provided at registration or in the protocol.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=2",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "25",
+      "page": 2,
+      "verbatim_text": "Describe sources of financial or non-financial support for the review, and the role of the funders or sponsors in the review.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=2",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "26",
+      "page": 2,
+      "verbatim_text": "Declare any competing interests of review authors.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=2",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    },
+    {
+      "number": "27",
+      "page": 2,
+      "verbatim_text": "Report which of the following are publicly available and where they can be found: template data collection forms; data extracted from included studies; data used for all analyses; analytic code; any other materials used in the review.",
+      "source_anchor": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf#page=2",
+      "comparison_state": "provisionally_transcribed_requires_byte_pinned_review"
+    }
+  ]
+}
