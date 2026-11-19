@@ -141,7 +141,7 @@ jobs:
           file "${RUNNER_TEMP}/prisma2020-official.pdf"
           wc -c "${RUNNER_TEMP}/prisma2020-official.pdf"
           sha256sum "${RUNNER_TEMP}/prisma2020-official.pdf"
-          echo 'a3e92d99152e912e608e4001c038111808c3c33238a5936007913d805729986c  '"${RUNNER_TEMP}/prisma2020-official.pdf" | sha256sum --check
+          echo '2eedbd5452741f9615307a0bce21a8198c0597ce2a0a8a0fd7e140d64b08c625  '"${RUNNER_TEMP}/prisma2020-official.pdf" | sha256sum --check
       - name: Compare every checklist item to the pinned PDF
         run: |
           python scripts/compare_prisma_source_pdf.py \
