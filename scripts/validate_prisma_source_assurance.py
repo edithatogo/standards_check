@@ -8,25 +8,40 @@ from __future__ import annotations
 
 import hashlib
 import json
-import unicodedata
 from pathlib import Path
 import re
-import sys
+
+if __package__:
+    from .build_prisma42_candidate import (
+        EXPECTED as EXPECTED_ORDER, LEDGER, OFFICIAL_PDF_URL, PINNED_PDF_SHA256,
+        SPLIT as SUBITEMS, checked_ledger_items, normalize,
+    )
+else:
+    from build_prisma42_candidate import (
+        EXPECTED as EXPECTED_ORDER, LEDGER, OFFICIAL_PDF_URL, PINNED_PDF_SHA256,
+        SPLIT as SUBITEMS, checked_ledger_items, normalize,
+    )
 
 ROOT = Path(__file__).resolve().parents[1]
 PACK = ROOT / "packs/org.prisma/prisma/2020/pack.json"
 BASE_ITEMS = tuple(str(i) for i in range(1, 28))
-SUBITEMS = {"10": "ab", "13": "abcdef", "16": "ab", "20": "abcd",
-            "23": "abcd", "24": "abc"}
-EXPECTED = frozenset(
-    f"{item}{suffix}" for item in BASE_ITEMS
-    for suffix in (SUBITEMS[item] if item in SUBITEMS else ("",))
-)
+EXPECTED = frozenset(EXPECTED_ORDER)
 OFFICIAL = "https://www.prisma-statement.org/prisma-2020-checklist"
 LICENCE = "https://creativecommons.org/licenses/by/4.0/"
 
 
-def audit(pack: dict) -> dict:
+def audit(pack: dict, ledger: dict) -> dict:
+    """Check a pack against independent ledger data, not its self-declared hashes.
+
+    The authoritative-PDF job separately checks this same ledger and pack against
+    complete numbered rows extracted from the pinned source bytes.
+    """
+    ledger_error = None
+    try:
+        source_items = checked_ledger_items(ledger)
+    except ValueError as error:
+        source_items = {}
+        ledger_error = str(error)
     requirements = pack["requirements"]
     numbers = [str(item["display_number"]) for item in requirements]
     seen = set(numbers)
@@ -42,7 +57,11 @@ def audit(pack: dict) -> dict:
     evidence = pack["verification"]
     receipt_strings = evidence.get("evidence", [])
     authority_sha = pack.get("authority", {}).get("source_sha256", "")
-    source_receipt = "source-sha256:" + authority_sha
+    source_identity_ok = (
+        authority_sha == PINNED_PDF_SHA256
+        and pack.get("authority", {}).get("source_url") == OFFICIAL_PDF_URL
+    )
+    source_receipt = "source-sha256:" + PINNED_PDF_SHA256
     item_receipts = {
         match.group(1): match.group(2) for receipt in receipt_strings
         if (match := re.fullmatch(
@@ -51,26 +70,42 @@ def audit(pack: dict) -> dict:
     }
     matching_receipts = all(
         item_receipts.get(str(item["display_number"])) == hashlib.sha256(
-            "".join(
-                c for c in unicodedata.normalize("NFKC", item.get("verbatim_text") or "")
-                if not c.isspace()
-            ).encode("utf-8")
+            normalize(item.get("verbatim_text") or "").encode("utf-8")
         ).hexdigest()
+        for item in requirements
+    )
+    matching_source_text = ledger_error is None and all(
+        str(item["display_number"]) in source_items
+        and normalize(item.get("verbatim_text") or "") == normalize(
+            source_items[str(item["display_number"])]["verbatim_text"]
+        )
+        for item in requirements
+    )
+    matching_source_anchors = all(
+        item.get("source_anchor") == f"prisma-2020-checklist:item:{item['display_number']}"
+        for item in requirements
+    )
+    matching_source_identifiers = all(
+        item.get("id") == f"PRISMA-2020:{item['display_number']}"
         for item in requirements
     )
     evidence_ok = (bool(evidence.get("verified_at"))
                    and bool(evidence.get("verified_by"))
-                   and re.fullmatch(r"[a-f0-9]{64}", authority_sha) is not None
+                   and source_identity_ok
                    and source_receipt in receipt_strings
                    and EXPECTED.issubset(item_receipts)
                    and matching_receipts
-                   and all(str(i["source_anchor"]).strip() for i in requirements))
+                   and matching_source_text
+                   and matching_source_anchors
+                   and matching_source_identifiers)
     # Exact-item evidence requires the full official checklist numbering, not
     # one aggregate item representing multiple required subitems.
     source_ready = bool(not missing and not extra and not duplicate
                         and not legacy_aggregate and evidence_ok and licence_ok)
     status = evidence["status"]
     errors = []
+    if ledger_error is not None:
+        errors.append(f"PRISMA source ledger is invalid: {ledger_error}")
     if not licence_ok:
         errors.append("PRISMA pack licence metadata is not cleared CC BY 4.0 with attribution")
     if status != "imported_unverified" and not source_ready:
@@ -88,6 +123,10 @@ def audit(pack: dict) -> dict:
         "unexpected_identifiers": extra,
         "duplicate_identifiers": duplicate,
         "licence_metadata_complete": licence_ok,
+        "source_identity_matches_pin": source_identity_ok,
+        "item_text_matches_source_ledger": matching_source_text,
+        "source_anchors_match_items": matching_source_anchors,
+        "source_identifiers_match_items": matching_source_identifiers,
         "item_level_source_reconciled": source_ready,
         "pack_status": status,
         "errors": errors,
@@ -96,7 +135,8 @@ def audit(pack: dict) -> dict:
 
 def main() -> int:
     pack = json.loads(PACK.read_text(encoding="utf-8"))
-    result = audit(pack)
+    ledger = json.loads(LEDGER.read_text(encoding="utf-8"))
+    result = audit(pack, ledger)
     print(json.dumps(result, sort_keys=True, indent=2))
     return int(bool(result["errors"]))
 

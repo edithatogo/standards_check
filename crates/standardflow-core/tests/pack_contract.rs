@@ -4,11 +4,29 @@ use std::io;
 
 use proptest::prelude::*;
 use serde_json::Value;
-use standardflow_core::{PackError, PackId, RequirementId, parse_pack, sha256_hex};
+use standardflow_core::{
+    PackError, PackId, RequirementId, VerificationStatus, parse_pack, sha256_hex,
+};
 
 const MINIMAL_PACK: &str =
     include_str!("../../../contracts/examples/minimal-standard-pack.v1.json");
 const PRISMA_PACK: &str = include_str!("../../../packs/org.prisma/prisma/2020/pack.json");
+
+fn imported_unverified_fixture() -> Result<Value, Box<dyn std::error::Error>> {
+    // The synthetic example provides a stable fixture without reclassifying
+    // the production PRISMA pack or retaining any source-verification claims.
+    let mut fixture: Value = serde_json::from_str(MINIMAL_PACK)?;
+    let verification = fixture
+        .pointer_mut("/verification")
+        .ok_or_else(|| io::Error::other("fixture verification is missing"))?;
+    *verification = serde_json::json!({
+        "status": "imported_unverified",
+        "verified_at": null,
+        "verified_by": [],
+        "evidence": []
+    });
+    Ok(fixture)
+}
 
 #[test]
 fn minimal_pack_round_trips_canonically() -> Result<(), Box<dyn std::error::Error>> {
@@ -22,13 +40,35 @@ fn minimal_pack_round_trips_canonically() -> Result<(), Box<dyn std::error::Erro
 }
 
 #[test]
-fn prisma_reference_pack_has_stable_items_and_explicit_warning()
--> Result<(), Box<dyn std::error::Error>> {
+fn prisma_reference_pack_has_42_source_reconciled_items() -> Result<(), Box<dyn std::error::Error>>
+{
     let validated = parse_pack(PRISMA_PACK.as_bytes())?;
-    assert_eq!(validated.pack().requirements.len(), 27);
+    assert_eq!(validated.pack().requirements.len(), 42);
+    assert_eq!(
+        validated.pack().verification.status,
+        VerificationStatus::SourceReconciled
+    );
+    assert_eq!(validated.report().error_count(), 0);
+    assert_eq!(validated.report().warning_count(), 0);
+    assert_eq!(validated.pack().pack_id.as_str(), "org.prisma/prisma/2020");
+    Ok(())
+}
+
+#[test]
+fn imported_unverified_pack_retains_its_explicit_warning() -> Result<(), Box<dyn std::error::Error>>
+{
+    let fixture = imported_unverified_fixture()?;
+    let validated = parse_pack(&serde_json::to_vec(&fixture)?)?;
+    assert_eq!(
+        validated.pack().verification.status,
+        VerificationStatus::ImportedUnverified
+    );
+    assert!(validated.pack().verification.verified_at.is_none());
     assert_eq!(validated.report().error_count(), 0);
     assert_eq!(validated.report().warning_count(), 1);
-    assert_eq!(validated.pack().pack_id.as_str(), "org.prisma/prisma/2020");
+    assert!(validated.report().diagnostics.iter().any(|diagnostic| {
+        diagnostic.code == "SF-VERIFY-001" && diagnostic.path == "/verification/status"
+    }));
     Ok(())
 }
 
@@ -80,7 +120,7 @@ fn required_nullable_members_must_be_present() -> Result<(), Box<dyn std::error:
         ("/requirements/0", "guidance"),
         ("/requirements/0", "evidence_expectations"),
     ] {
-        let mut value: Value = serde_json::from_str(PRISMA_PACK)?;
+        let mut value = imported_unverified_fixture()?;
         let object = value
             .pointer_mut(parent)
             .and_then(Value::as_object_mut)
@@ -98,21 +138,48 @@ fn required_nullable_members_must_be_present() -> Result<(), Box<dyn std::error:
 }
 
 #[test]
-fn explicit_null_remains_valid_for_nullable_members() -> Result<(), Box<dyn std::error::Error>> {
-    let mut value: Value = serde_json::from_str(PRISMA_PACK)?;
-    for pointer in [
+fn explicit_null_remains_valid_for_unverified_nullable_members()
+-> Result<(), Box<dyn std::error::Error>> {
+    let mut value = imported_unverified_fixture()?;
+    let nullable_members = [
         "/verification/verified_at",
         "/rights/license_url",
         "/requirements/0/display_number",
         "/requirements/0/verbatim_text",
         "/requirements/0/guidance",
-    ] {
+    ];
+    for pointer in nullable_members {
         let member = value
             .pointer_mut(pointer)
             .ok_or_else(|| io::Error::other("fixture nullable member is missing"))?;
         *member = Value::Null;
     }
-    parse_pack(&serde_json::to_vec(&value)?)?;
+    let validated = parse_pack(&serde_json::to_vec(&value)?)?;
+    assert_eq!(validated.report().warning_count(), 1);
+    let round_trip: Value = serde_json::from_slice(&validated.pack().canonical_bytes()?)?;
+    for pointer in nullable_members {
+        assert_eq!(round_trip.pointer(pointer), Some(&Value::Null));
+    }
+    Ok(())
+}
+
+#[test]
+fn source_reconciled_pack_rejects_null_verification_date() -> Result<(), Box<dyn std::error::Error>>
+{
+    let mut value: Value = serde_json::from_str(MINIMAL_PACK)?;
+    let verified_at = value
+        .pointer_mut("/verification/verified_at")
+        .ok_or_else(|| io::Error::other("fixture verification date is missing"))?;
+    *verified_at = Value::Null;
+    assert!(matches!(
+        parse_pack(&serde_json::to_vec(&value)?),
+        Err(PackError::Validation(report))
+            if report.error_count() == 1
+                && report.diagnostics.iter().any(|diagnostic| {
+                    diagnostic.code == "SF-VERIFY-003"
+                        && diagnostic.path == "/verification/verified_at"
+                })
+    ));
     Ok(())
 }
 

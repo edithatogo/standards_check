@@ -1,28 +1,33 @@
-# PRISMA 2020, 42-item transcription draft and migration preview
+# PRISMA 2020 source ledger and historical migration preview
 
-This work continues [issue #82](https://github.com/edithatogo/standards_check/issues/82) and is dependent on the fail-closed source-assurance gate from PR #81.
+This work continues [issue #82](https://github.com/edithatogo/standards_check/issues/82). PR #81 introduced the promotion gate; PR #83 subsequently promoted the live canonical pack to **42 items with `source_reconciled` status** and regenerated its lock. The [20 November receiving review](../prisma2020-receiving-review-20261120.md) records the current evidence and integration repair.
 
-## Source checked
+## Retained source
 
-- PRISMA Executive [2020 checklist](https://www.prisma-statement.org/prisma-2020-checklist), authoritative two-page [PDF](https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf)
-- Both page images and extracted checklist lines were checked on 19 November 2026
-- Official licence: CC BY 4.0; attribution: Page et al., BMJ 2021;372:n71, DOI 10.1136/bmj.n71
-- **Source-byte SHA-256 not obtained.** The runtime cannot download the official PDF bytes from the external source. No invented checksum or reviewer signature has been supplied.
+- PRISMA Executive [2020 checklist](https://www.prisma-statement.org/prisma-2020-checklist), authoritative two-page [PDF](https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf).
+- Retained bytes: [`source/official/prisma-2020-checklist.pdf`](../../source/official/prisma-2020-checklist.pdf), 67,506 bytes, SHA-256 `2eedbd5452741f9615307a0bce21a8198c0597ce2a0a8a0fd7e140d64b08c625`.
+- Official licence: CC BY 4.0; attribution: Page et al., BMJ 2021;372:n71, DOI 10.1136/bmj.n71. Source attribution and retention details are in the [source README](../../source/official/README.md).
+- The receiving review rehashed the committed snapshot; it does not claim a new download from the publisher.
 
-## Implemented
+## Ledger and reproducible preview
 
-- 42 individually numbered and page-anchored draft item texts in `source-reconciliation/prisma-2020-checklist-draft.json`
-- Migration preview generator, preserving all 27 legacy IDs as aliases and splitting 10, 13, 16, 20, 23 and 24
-- Explicit one-to-many alias mappings; no silent claim of semantic identity for legacy aggregate requirements
-- Unit tests reject missing subitems, invalid source anchors, and fabricated byte-verification status
+`prisma-2020-checklist-draft.json` retains the original 42-item draft ledger, including its historical draft status, empty reviewer list and unverified-byte fields. Those fields describe the draft's original stage, not the later live pack. The live pack has separate verification receipts.
 
-## Remaining acceptance gates
+The migration preview reads the immutable [27-item predecessor](../../contracts/examples/prisma-2020-legacy27.pack.json), whose [provenance](../../contracts/examples/prisma-2020-legacy27-provenance.md) identifies its exact commit and digest. It preserves all 27 legacy IDs as aliases, splitting groups 10, 13, 16, 20, 23 and 24 through explicit one-to-many mappings. It does not assert semantic identity between an aggregate requirement and every resulting subitem.
 
-- [ ] Acquire and independently SHA-256 checksum exact official PDF/Word bytes
-- [ ] Independently compare all 42 draft strings with pinned source bytes; record item-by-item review receipts, reviewer identity and corrections
-- [ ] Review normalized requirements and evidence expectations for newly split items
-- [ ] Promote candidate to live `packs/org.prisma/prisma/2020/pack.json`, only after rights/content review; regenerate the committed `standardflow.lock.json` with the Rust CLI
-- [ ] Run pack schema, lock, Rust, Python and cross-platform CI at exact head; retain rollback and migration receipts
-- [ ] Set `source_reconciled` only after every item has the required source-fingerprint and item-specific evidence; external validation remains separate
+```sh
+python scripts/build_prisma42_candidate.py --output /tmp/prisma42-draft.json
+python scripts/validate_prisma_source_assurance.py
+python -m scripts.compare_prisma_source_pdf --pdf source/official/prisma-2020-checklist.pdf --output /tmp/prisma2020-source-comparison.json
+```
 
-**Important:** The live canonical pack is untouched and remains `imported_unverified`. Draft transcription is not an auditable complete source-verification receipt.
+The comparator requires the pinned PDF bytes, complete numbered rows, exact expected item order and page, full normalized text equality, and agreement between the source ledger and live pack. Normalization uses Unicode NFKC and removes whitespace; it does not remove punctuation. The promotion audit independently checks fixed source identity and item-specific ledger text and anchors. The PDF job establishes correspondence with the retained source bytes.
+
+## Remaining acceptance boundaries
+
+- Independent review of normalized requirements, interpretations and evidence expectations for the newly split items.
+- History-preserving migration parity and compatibility across legacy formats and consumers.
+- Revision-specific pack schema, lock, Rust, Python and cross-platform CI evidence for subsequent changes.
+- Independent methodological, usability/accessibility and publication acceptance. `source_reconciled` does not mean `externally_validated`.
+
+The original draft is an auditable migration input. Its existence alone is not a complete source-verification receipt.
