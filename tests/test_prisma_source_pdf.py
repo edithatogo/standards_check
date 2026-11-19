@@ -19,8 +19,18 @@ class PDFComparisonTests(unittest.TestCase):
             "sources                       date when each source was last searched.\n"
         )
         self.assertEqual(
-            normalize(checklist_column(layout)),
+            normalize(checklist_column(layout, 1)),
             normalize("Specify all databases. Specify the date when each source was last searched.")
+        )
+
+    def test_second_page_uses_narrower_topic_gutter(self):
+        layout = (
+            "Study selection      16a    Describe the results of the search.\n"
+            "                            The review includes a flow diagram.\n"
+        )
+        self.assertEqual(
+            normalize(checklist_column(layout, 2)),
+            normalize("Describe the results of the search. The review includes a flow diagram.")
         )
 
     def test_rejects_wrong_pdf_fingerprint(self):
