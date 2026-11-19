@@ -138,6 +138,9 @@ jobs:
           curl --fail --show-error --location --retry 2 --max-time 90 \
             'https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf' \
             --output "${RUNNER_TEMP}/prisma2020-official.pdf"
+          file "${RUNNER_TEMP}/prisma2020-official.pdf"
+          wc -c "${RUNNER_TEMP}/prisma2020-official.pdf"
+          sha256sum "${RUNNER_TEMP}/prisma2020-official.pdf"
           echo 'a3e92d99152e912e608e4001c038111808c3c33238a5936007913d805729986c  '"${RUNNER_TEMP}/prisma2020-official.pdf" | sha256sum --check
       - name: Compare every checklist item to the pinned PDF
         run: |
