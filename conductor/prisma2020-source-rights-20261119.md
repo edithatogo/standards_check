@@ -1,5 +1,7 @@
 # PRISMA 2020 source and rights reconciliation (19 November 2026)
 
+This assessment records the **pre-PR #83, 27-item state** and its original promotion decision. PR #83 later promoted the live pack to 42 source-reconciled items. The current source identity, comparison scope and receiving integration repairs are recorded in the [20 November receiving review](prisma2020-receiving-review-20261120.md). References to the current or committed pack below mean the pack at the time of this original assessment.
+
 ## Authoritative evidence and rights
 
 - PRISMA Executive official [2020 checklist](https://www.prisma-statement.org/prisma-2020-checklist): provides original checklist in PDF and Word and explicitly states checklist redistribution, adaptation and commercial reuse under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) **with attribution**.

@@ -1,0 +1,462 @@
+{
+  "schema_version": "dev.standardflow.standard-pack.v1",
+  "pack_id": "org.prisma/prisma/2020",
+  "version": "2020",
+  "kind": "reporting",
+  "title": "PRISMA 2020 Checklist",
+  "authority": {
+    "publisher": "PRISMA Group / BMJ",
+    "source_url": "https://www.bmj.com/content/372/bmj.n71.full.pdf",
+    "retrieved_at": "2025-08-09",
+    "source_sha256": "00804b505724d73e8e82326493ca5b5010c649753652684e1d15b88120201c2e"
+  },
+  "verification": {
+    "status": "imported_unverified",
+    "verified_at": null,
+    "verified_by": [],
+    "evidence": [
+      "legacy:markdown/en/archetypes/prisma-2020.md@6d441c169e68d10fd0737eda759a4e0ed9ffd6d0",
+      "legacy:source/archetypes/prisma-2020.yml@4066f22cc2ab45040627d749b84945749e3f1a82"
+    ]
+  },
+  "rights": {
+    "status": "cleared",
+    "spdx": "CC-BY-4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "attribution": "Page MJ et al. The PRISMA 2020 statement: an updated guideline for reporting systematic reviews. BMJ. 2021;372:n71. doi:10.1136/bmj.n71.",
+    "redistribution": "May be shared and adapted with attribution under CC BY 4.0; this imported pack remains pending item-by-item source reconciliation."
+  },
+  "relationships": [],
+  "requirements": [
+    {
+      "id": "PRISMA-2020:1",
+      "display_number": "1",
+      "section": "Title",
+      "verbatim_text": "Identify the report as a systematic review.",
+      "normalized_requirement": "The title identifies the report as a systematic review.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:1",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:2",
+      "display_number": "2",
+      "section": "Abstract",
+      "verbatim_text": "See the PRISMA 2020 for Abstracts checklist.",
+      "normalized_requirement": "The abstract follows the applicable PRISMA 2020 for Abstracts requirements.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:2",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "related_standard_assessment"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:3",
+      "display_number": "3",
+      "section": "Introduction",
+      "verbatim_text": "Describe the rationale for the review in the context of existing knowledge.",
+      "normalized_requirement": "The introduction describes the rationale for the review in the context of existing knowledge.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:3",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:4",
+      "display_number": "4",
+      "section": "Introduction",
+      "verbatim_text": "Provide an explicit statement of the main objective(s) or question(s) the review addresses.",
+      "normalized_requirement": "The report states the main objectives or questions addressed by the review.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:4",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:5",
+      "display_number": "5",
+      "section": "Methods",
+      "verbatim_text": "Specify the inclusion and exclusion criteria for the review and how studies were grouped for the syntheses.",
+      "normalized_requirement": "The methods specify inclusion and exclusion criteria and explain how studies were grouped for synthesis.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:5",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "structured_eligibility_criteria"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:6",
+      "display_number": "6",
+      "section": "Methods",
+      "verbatim_text": "Specify all databases, registers, websites, organisations, reference lists and other sources searched or consulted to identify studies. Specify the date when each source was last searched or consulted.",
+      "normalized_requirement": "The methods identify every information source and the date each source was last searched or consulted.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:6",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "search_source_ledger"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:7",
+      "display_number": "7",
+      "section": "Methods",
+      "verbatim_text": "Present the full search strategies for all databases, registers, and websites, including any filters and limits used.",
+      "normalized_requirement": "The report presents reproducible search strategies, including filters and limits, for every searched source.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:7",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "search_strategy_artifact"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:8",
+      "display_number": "8",
+      "section": "Methods",
+      "verbatim_text": "Specify the methods used to decide whether a study met the inclusion criteria of the review, including how many reviewers screened each record and each report retrieved, whether they worked independently, and if applicable, details of automation tools used in the process.",
+      "normalized_requirement": "The methods describe study-selection decisions, reviewer independence and any automation used.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:8",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "screening_workflow_receipt"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:9",
+      "display_number": "9",
+      "section": "Methods",
+      "verbatim_text": "Specify the methods used to collect data from reports, including how many reviewers collected data from each report, whether they worked independently, any processes for obtaining or confirming data from study investigators, and if applicable, details of automation tools used in the process.",
+      "normalized_requirement": "The methods describe data collection, reviewer independence, investigator contact and any automation used.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:9",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "data_collection_workflow"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:10",
+      "display_number": "10",
+      "section": "Methods",
+      "verbatim_text": "List and define all outcomes for which data were sought. Specify whether and how results were sought for each outcome, by who, and how they were categorised.",
+      "normalized_requirement": "The methods define all outcomes and explain how outcome results were sought and categorised.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:10",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "outcome_catalogue"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:11",
+      "display_number": "11",
+      "section": "Methods",
+      "verbatim_text": "Specify the methods used to assess risk of bias in the included studies, including details of the tool(s) used, how many reviewers assessed each study and whether they worked independently, and if applicable, details of automation tools used in the process.",
+      "normalized_requirement": "The methods describe risk-of-bias assessment tools, reviewer independence and any automation used.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:11",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "risk_of_bias_artifact"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:12",
+      "display_number": "12",
+      "section": "Methods",
+      "verbatim_text": "Specify the effect measure(s) (e.g., risk ratio, mean difference) used in the synthesis or presentation of results for each outcome.",
+      "normalized_requirement": "The methods identify the effect measure used for each outcome.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:12",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "outcome_catalogue"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:13",
+      "display_number": "13",
+      "section": "Methods",
+      "verbatim_text": "Describe the processes used to decide which studies were eligible for each synthesis (e.g., tabulating the study intervention characteristics and comparing them against the planned groups for each synthesis (item 5)).",
+      "normalized_requirement": "The methods explain how studies were assigned to each synthesis and how synthesis decisions related to the eligibility criteria.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:13",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "synthesis_plan"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:14",
+      "display_number": "14",
+      "section": "Methods",
+      "verbatim_text": "Describe any methods used to assess the risk of bias due to missing results in a synthesis (arising from reporting biases).",
+      "normalized_requirement": "The methods describe assessment of reporting bias caused by missing results.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:14",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "reporting_bias_artifact"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:15",
+      "display_number": "15",
+      "section": "Methods",
+      "verbatim_text": "Describe any methods used to assess certainty (or confidence) in the body of evidence for an outcome.",
+      "normalized_requirement": "The methods describe how certainty or confidence in the body of evidence was assessed.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:15",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "certainty_assessment_artifact"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:16",
+      "display_number": "16",
+      "section": "Results",
+      "verbatim_text": "Describe the results of the search and selection process, from the number of records identified in the search to the number of studies included in the review, ideally using a flow diagram.",
+      "normalized_requirement": "The results account for study selection from records identified through studies included, with a flow representation where applicable.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:16",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "review_flow",
+        "flow_diagram"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:17",
+      "display_number": "17",
+      "section": "Results",
+      "verbatim_text": "Cite each included study and present its characteristics.",
+      "normalized_requirement": "The results cite every included study and present its characteristics.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:17",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "citation_verification",
+        "study_characteristics_table"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:18",
+      "display_number": "18",
+      "section": "Results",
+      "verbatim_text": "Present assessments of risk of bias for each included study.",
+      "normalized_requirement": "The results present risk-of-bias assessments for every included study.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:18",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "risk_of_bias_artifact"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:19",
+      "display_number": "19",
+      "section": "Results",
+      "verbatim_text": "For all outcomes, present, for each study: (a) summary statistics for each group (where appropriate) and (b) an effect estimate and its precision (e.g., confidence/credible interval), ideally using structured tables or plots.",
+      "normalized_requirement": "For each study and outcome, the results present appropriate group summaries, effect estimates and precision.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:19",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "results_table_or_plot"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:20",
+      "display_number": "20",
+      "section": "Results",
+      "verbatim_text": "For each synthesis, present results for all outcomes that were assessed, and for each outcome, present a summary of findings and, if meta-analysis was done, an effect estimate and its precision.",
+      "normalized_requirement": "For each synthesis and assessed outcome, the results present findings and, where applicable, meta-analytic estimates and precision.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:20",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "synthesis_results"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:21",
+      "display_number": "21",
+      "section": "Results",
+      "verbatim_text": "Present assessments of risk of bias due to missing results (arising from reporting biases) for each synthesis assessed.",
+      "normalized_requirement": "The results present reporting-bias assessments for each relevant synthesis.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:21",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "reporting_bias_artifact"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:22",
+      "display_number": "22",
+      "section": "Results",
+      "verbatim_text": "Present assessments of certainty (or confidence) in the body of evidence for each outcome assessed.",
+      "normalized_requirement": "The results present certainty or confidence assessments for each assessed outcome.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:22",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "certainty_assessment_artifact"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:23",
+      "display_number": "23",
+      "section": "Discussion",
+      "verbatim_text": "(a) Provide a general interpretation of the results in the context of other evidence. (b) Discuss any limitations of the evidence included in the review. (c) Discuss any limitations of the review processes used. (d) Discuss the implications of the results for practice, policy, and future research.",
+      "normalized_requirement": "The discussion interprets results, addresses evidence and process limitations, and explains implications for practice, policy and future research.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:23",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:24",
+      "display_number": "24",
+      "section": "Other information",
+      "verbatim_text": "Provide registration information for the review, including register name and registration number, or state that the review was not registered.",
+      "normalized_requirement": "The report provides review registration details or explicitly states that the review was not registered.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:24",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "registration_identifier"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:25",
+      "display_number": "25",
+      "section": "Other information",
+      "verbatim_text": "Specify the sources of financial or non-financial support for the review, and the role of the funders or sponsors in the review.",
+      "normalized_requirement": "The report identifies financial and non-financial support and explains funder or sponsor roles.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:25",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "funding_statement"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:26",
+      "display_number": "26",
+      "section": "Other information",
+      "verbatim_text": "Declare any competing interests of review authors.",
+      "normalized_requirement": "The report declares competing interests for all review authors.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:26",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "competing_interest_statement"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:27",
+      "display_number": "27",
+      "section": "Other information",
+      "verbatim_text": "Report which of the following are publicly available and where they can be found: template data collection forms; data extracted from included studies; data used for all analyses; analytic code; any other materials used in the review.",
+      "normalized_requirement": "The report identifies which forms, extracted data, analysis data, analytic code and other review materials are publicly available and where.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:27",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "artifact_link"
+      ]
+    }
+  ]
+}

@@ -7,13 +7,19 @@ from __future__ import annotations
 
 import argparse
 from copy import deepcopy
+import hashlib
 import json
 from pathlib import Path
 import re
+import unicodedata
 
 ROOT = Path(__file__).resolve().parents[1]
 LEDGER = ROOT / "conductor/source-reconciliation/prisma-2020-checklist-draft.json"
-ORIGINAL = ROOT / "packs/org.prisma/prisma/2020/pack.json"
+ORIGINAL = ROOT / "contracts/examples/prisma-2020-legacy27.pack.json"
+LEGACY_PACK_SHA256 = "2c4ca02e5c8fb65f046b6eb1cf131769288f07d1f92f16a50f721a03be3c429b"
+OFFICIAL_PDF_URL = "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf"
+PINNED_PDF_SHA256 = "2eedbd5452741f9615307a0bce21a8198c0597ce2a0a8a0fd7e140d64b08c625"
+PINNED_PDF_LENGTH = 67506
 SPLIT = {"10": "ab", "13": "abcdef", "16": "ab",
          "20": "abcd", "23": "abcd", "24": "abc"}
 EXPECTED = [
@@ -21,6 +27,42 @@ EXPECTED = [
     for i in range(1, 28)
     for suffix in (SPLIT[str(i)] if str(i) in SPLIT else ("",))
 ]
+EXPECTED_PAGES = {
+    number: 1 if int(re.match(r"\d+", number).group()) <= 15 else 2
+    for number in EXPECTED
+}
+
+
+def normalize(text: str) -> str:
+    """Apply Unicode NFKC normalization and remove whitespace only."""
+    return "".join(c for c in unicodedata.normalize("NFKC", text) if not c.isspace())
+
+
+def checked_ledger_items(ledger: dict) -> dict[str, dict]:
+    """Bind the complete item sequence and page anchors to the fixed source."""
+    if ledger.get("source_url") != OFFICIAL_PDF_URL or ledger.get("source_pages") != 2:
+        raise ValueError("Expected the pinned official two-page PRISMA PDF")
+    source = ledger.get("items", [])
+    if [entry.get("number") for entry in source] != EXPECTED:
+        raise ValueError("PRISMA numbered and lettered item sequence must contain all 42 in order")
+    for entry in source:
+        number = entry["number"]
+        if not isinstance(entry.get("verbatim_text"), str) or not entry["verbatim_text"].strip():
+            raise ValueError(f"Missing source text for item {number}")
+        page = EXPECTED_PAGES[number]
+        if type(entry.get("page")) is not int or entry["page"] != page:
+            raise ValueError(f"Item {number} must refer to official PDF page {page}")
+        if entry.get("source_anchor") != f"{OFFICIAL_PDF_URL}#page={page}":
+            raise ValueError(f"Item {number} must have the complete official PDF page anchor")
+    return {entry["number"]: entry for entry in source}
+
+
+def load_legacy_pack() -> dict:
+    """Read the exact pre-promotion pack; never use the live 42-item pack."""
+    source = ORIGINAL.read_bytes()
+    if hashlib.sha256(source).hexdigest() != LEGACY_PACK_SHA256:
+        raise ValueError("The immutable 27-item legacy pack fixture has changed")
+    return json.loads(source)
 
 
 def preview(old: dict, ledger: dict) -> dict:
@@ -28,16 +70,9 @@ def preview(old: dict, ledger: dict) -> dict:
         raise ValueError("Draft ledger must not assert source-byte verification")
     if ledger.get("transcription_status") != "draft_transcribed_from_official_web_pdf_text_and_visual":
         raise ValueError("Unexpected transcription evidence boundary")
-    source = ledger.get("items", [])
-    identifiers = [entry["number"] for entry in source]
-    if identifiers != EXPECTED:
-        raise ValueError("PRISMA numbered and lettered item sequence must contain all 42 in order")
-    if any(not entry["verbatim_text"].strip() or entry["page"] not in (1, 2) for entry in source):
-        raise ValueError("Missing source text or PDF page anchor")
-    if any(not entry["source_anchor"].startswith(ledger["source_url"] + "#page=") for entry in source):
-        raise ValueError("Every draft item must point to the official PDF page")
+    source = list(checked_ledger_items(ledger).values())
     original = {item["display_number"]: item for item in old["requirements"]}
-    if set(original) != {str(i) for i in range(1, 28)}:
+    if len(old["requirements"]) != 27 or set(original) != {str(i) for i in range(1, 28)}:
         raise ValueError("Expected exactly 27 original legacy item identifiers")
     items = []
     alias = {}
@@ -84,7 +119,7 @@ def main() -> None:
     parser.add_argument("--output", type=Path, help="Optional preview destination")
     args = parser.parse_args()
     candidate = preview(
-        json.loads(ORIGINAL.read_text(encoding="utf-8")),
+        load_legacy_pack(),
         json.loads(LEDGER.read_text(encoding="utf-8")),
     )
     content = json.dumps(candidate, indent=2, ensure_ascii=False) + "\n"

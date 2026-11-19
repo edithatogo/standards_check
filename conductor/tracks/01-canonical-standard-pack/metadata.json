@@ -11,8 +11,8 @@
   ],
   "pull_request": 60,
   "merge_blockers": [],
-  "updated": "2026-11-19",
-  "evidence_level_scope": "bounded hosted fixtures at the recorded accepted PR #60 revision; independent source, rights, migration, external validation and publication remain open",
+  "updated": "2026-11-20",
+  "evidence_level_scope": "bounded runtime fixtures at accepted PR #60; PRISMA 42-item source comparison at PR #83; receiving revisions, interpretation, migration and external qualification require separate evidence",
   "base_branch": "main",
   "last_hosted_verification": {
     "commit": "bfe2255fda85b891c2f68044676c0b777d92c38c",
@@ -42,8 +42,9 @@
     ]
   },
   "remaining_evidence_gates": [
-    "independent source and provenance reconciliation",
-    "item-level rights and licensing confirmation",
+    "revision-specific receiving integration and source-comparison acceptance",
+    "independent review of normalized interpretations and evidence expectations",
+    "broader legacy-corpus item-level rights and licensing confirmation",
     "brownfield audit and history-preserving migration parity",
     "independent methodological qualification",
     "independent usability/accessibility evaluation",
@@ -54,7 +55,7 @@
     "merge_commit": "840b8431403035be7e5dec5f22b64ad3ddb20d2b",
     "pr_head": "baab246e62f3585237b987f87647eba743f2818e",
     "limitations": [
-      "source rights and independent content review unresolved",
+      "broader legacy-corpus rights and independent content review unresolved",
       "track 03 migration parity unresolved",
       "receiving-main CI requires independent qualification"
     ]
@@ -62,10 +63,23 @@
   "source_assurance": {
     "rights_documentation": "official PRISMA Executive CC BY 4.0 notice",
     "licence_status": "documented",
-    "transcription_status": "imported_unverified",
-    "pack_items": 27,
+    "transcription_status": "source_reconciled",
+    "pack_items": 42,
     "official_independently_numbered_items": 42,
-    "reason": "lettered subitems not independently transcribed and no full byte-pinned comparison receipt",
-    "evidence": "conductor/prisma2020-source-rights-20261119.md"
+    "receiving_commit": "da7e780dad139980cadfc40fb0fec44d90f6af50",
+    "source_sha256": "2eedbd5452741f9615307a0bce21a8198c0597ce2a0a8a0fd7e140d64b08c625",
+    "source_bytes": 67506,
+    "source_comparison": {
+      "commit": "4ace3d0230063b7090961d52404e8001d537915d",
+      "receipt": "https://github.com/edithatogo/standards_check/actions/runs/44607909955/job/135856426381",
+      "scope": "original comparator passed; receiving review strengthens complete numbered-row and live-pack binding"
+    },
+    "evidence": "conductor/prisma2020-receiving-review-20261120.md",
+    "historical_rights_assessment": "conductor/prisma2020-source-rights-20261119.md",
+    "limitations": [
+      "source transcription is not independent methodological or external validation",
+      "normalized interpretations, evidence expectations and migration semantic parity require separate review",
+      "later receiving revisions require their own CI receipts"
+    ]
   }
 }

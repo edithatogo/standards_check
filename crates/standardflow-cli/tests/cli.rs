@@ -1,5 +1,7 @@
 //! CLI integration tests for the `StandardFlow` pack commands.
 
+use std::fs;
+use std::io::{self, Write};
 use std::path::PathBuf;
 use std::process::Command;
 
@@ -25,7 +27,50 @@ fn validate_returns_machine_readable_summary() -> Result<(), Box<dyn std::error:
     assert_eq!(response.pointer("/ok"), Some(&Value::Bool(true)));
     assert_eq!(
         response.pointer("/result/requirements"),
-        Some(&Value::from(27))
+        Some(&Value::from(42))
+    );
+    assert_eq!(response.pointer("/result/warnings"), Some(&Value::from(0)));
+    Ok(())
+}
+
+#[test]
+fn validate_reports_warning_for_imported_unverified_fixture()
+-> Result<(), Box<dyn std::error::Error>> {
+    // Keep the unverified case independent of the promoted PRISMA pack.
+    let mut fixture: Value = serde_json::from_str(include_str!(
+        "../../../contracts/examples/minimal-standard-pack.v1.json"
+    ))?;
+    let verification = fixture
+        .pointer_mut("/verification")
+        .ok_or_else(|| io::Error::other("fixture verification is missing"))?;
+    *verification = serde_json::json!({
+        "status": "imported_unverified",
+        "verified_at": null,
+        "verified_by": [],
+        "evidence": []
+    });
+    let pack = std::env::temp_dir().join(format!(
+        "standardflow-cli-unverified-pack-{}.json",
+        std::process::id()
+    ));
+    let mut file = fs::OpenOptions::new()
+        .write(true)
+        .create_new(true)
+        .open(&pack)?;
+    file.write_all(&serde_json::to_vec(&fixture)?)?;
+    drop(file);
+    let output = cli()
+        .args(["--json", "pack", "validate"])
+        .arg(&pack)
+        .output();
+    fs::remove_file(pack)?;
+    let output = output?;
+    assert!(output.status.success());
+    let response: Value = serde_json::from_slice(&output.stdout)?;
+    assert_eq!(response.pointer("/ok"), Some(&Value::Bool(true)));
+    assert_eq!(
+        response.pointer("/result/requirements"),
+        Some(&Value::from(1))
     );
     assert_eq!(response.pointer("/result/warnings"), Some(&Value::from(1)));
     Ok(())
