@@ -1,6 +1,13 @@
 name: Canonical contract property campaign
 
 on:
+  pull_request:
+    paths:
+      - "crates/standardflow-core/**"
+      - "Cargo.toml"
+      - "Cargo.lock"
+      - "rust-toolchain.toml"
+      - ".github/workflows/canonical-properties.yml"
   schedule:
     - cron: "23 5 * * 2"
   workflow_dispatch:

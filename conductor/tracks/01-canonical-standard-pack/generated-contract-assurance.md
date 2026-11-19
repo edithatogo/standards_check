@@ -19,7 +19,7 @@ cases each, using the existing locked proptest dependency and canonical Rust
    the public parser and deserialization.
 
 The normal foundation CI already runs this integration target. A separate
-weekly/manual workflow runs the bounded campaign with seed `721114987`, records
+path-scoped PR/weekly/manual workflow runs the bounded campaign with seed `721114987`, records
 compiler/commit/seed and test logs, and retains any minimized proptest regression
 files. Its build budget is nine minutes, execution budget two minutes and job
 budget twelve minutes; artifacts remain for fourteen days. Other seeds can be
