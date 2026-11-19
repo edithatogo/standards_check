@@ -142,6 +142,10 @@ jobs:
           wc -c "${RUNNER_TEMP}/prisma2020-official.pdf"
           sha256sum "${RUNNER_TEMP}/prisma2020-official.pdf"
           echo '2eedbd5452741f9615307a0bce21a8198c0597ce2a0a8a0fd7e140d64b08c625  '"${RUNNER_TEMP}/prisma2020-official.pdf" | sha256sum --check
+      - name: Install pinned-runner PDF text extraction utility
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends poppler-utils
       - name: Compare every checklist item to the pinned PDF
         run: |
           python -m scripts.compare_prisma_source_pdf \
