@@ -12,6 +12,8 @@ on:
       - "scripts/validate_packs.py"
       - "scripts/validate_prisma_source_assurance.py"
       - "scripts/build_prisma42_candidate.py"
+      - "scripts/compare_prisma_source_pdf.py"
+      - "tests/test_prisma_source_pdf.py"
       - "tests/test_prisma42_candidate.py"
       - "conductor/source-reconciliation/**"
       - "tests/test_prisma_source_assurance.py"
@@ -29,6 +31,8 @@ on:
       - "scripts/validate_packs.py"
       - "scripts/validate_prisma_source_assurance.py"
       - "scripts/build_prisma42_candidate.py"
+      - "scripts/compare_prisma_source_pdf.py"
+      - "tests/test_prisma_source_pdf.py"
       - "tests/test_prisma42_candidate.py"
       - "conductor/source-reconciliation/**"
       - "tests/test_prisma_source_assurance.py"
@@ -67,6 +71,7 @@ jobs:
       - run: python scripts/validate_prisma_source_assurance.py
       - run: python -m unittest tests.test_prisma42_candidate
       - run: python scripts/build_prisma42_candidate.py --output /tmp/prisma42-draft.json
+      - run: python -m unittest tests.test_prisma_source_pdf
 
   rust-quality:
     runs-on: ubuntu-latest
@@ -114,3 +119,35 @@ jobs:
           toolchain: 1.98.1
       - run: cargo test --workspace --all-targets --all-features --locked
       - run: cargo run --locked -p standardflow-cli -- pack lock packs/org.prisma/prisma/2020 --check
+
+  authoritative-pdf-comparison:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Harden the runner (Audit outbound source retrieval)
+        uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Download exact official two-page checklist
+        run: |
+          curl --fail --show-error --location --retry 2 --max-time 90 \
+            'https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf' \
+            --output "${RUNNER_TEMP}/prisma2020-official.pdf"
+          echo 'a3e92d99152e912e608e4001c038111808c3c33238a5936007913d805729986c  '"${RUNNER_TEMP}/prisma2020-official.pdf" | sha256sum --check
+      - name: Compare every checklist item to the pinned PDF
+        run: |
+          python scripts/compare_prisma_source_pdf.py \
+            --pdf "${RUNNER_TEMP}/prisma2020-official.pdf" \
+            --output "${RUNNER_TEMP}/prisma2020-source-comparison.json"
+      - name: Retain structured source evidence
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: prisma2020-source-comparison
+          path: ${{ runner.temp }}/prisma2020-source-comparison.json
+          if-no-files-found: error
+          retention-days: 90
