@@ -25,6 +25,11 @@ def normalize(text: str) -> str:
     )
 
 
+def checklist_column(page_text: str) -> str:
+    """Read only the checklist text column from Poppler's fixed-width table."""
+    return "\n".join(line[30:] for line in page_text.splitlines())
+
+
 def verify_pdf(source_bytes: bytes, text_pages: list[str], ledger: dict) -> dict:
     actual_sha = hashlib.sha256(source_bytes).hexdigest()
     if actual_sha != PINNED_PDF_SHA256 or len(source_bytes) != PINNED_PDF_LENGTH:
@@ -36,7 +41,7 @@ def verify_pdf(source_bytes: bytes, text_pages: list[str], ledger: dict) -> dict
     comparisons = []
     for item in ledger["items"]:
         number, page = item["number"], item["page"]
-        source = normalize(text_pages[page - 1])
+        source = normalize(checklist_column(text_pages[page - 1]))
         expected_text = normalize(item["verbatim_text"])
         if not expected_text or expected_text not in source:
             raise ValueError(f"Item {number} not found verbatim (word-normalized) on PDF page {page}")
