@@ -133,31 +133,17 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - name: Download exact official two-page checklist
+      - name: Verify immutable official two-page source
         run: |
-          curl --fail --show-error --location --retry 2 --max-time 90 \
-            'https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf' \
-            --output "${RUNNER_TEMP}/prisma2020-official.pdf"
-          file "${RUNNER_TEMP}/prisma2020-official.pdf"
-          wc -c "${RUNNER_TEMP}/prisma2020-official.pdf"
-          sha256sum "${RUNNER_TEMP}/prisma2020-official.pdf"
-          echo '2eedbd5452741f9615307a0bce21a8198c0597ce2a0a8a0fd7e140d64b08c625  '"${RUNNER_TEMP}/prisma2020-official.pdf" | sha256sum --check
-      - name: Install pinned-runner PDF text extraction utility
+          echo '2eedbd5452741f9615307a0bce21a8198c0597ce2a0a8a0fd7e140d64b08c625  source/official/prisma-2020-checklist.pdf' | sha256sum --check
+      - name: Install PDF text extraction utility
         run: |
           sudo apt-get update
           sudo apt-get install --yes --no-install-recommends poppler-utils
-      - name: Emit immutable authorised CC BY source for archival capture
-        run: |
-          echo PRISMA_BINARY_BASE64_BEGIN
-          base64 -w 76 "${RUNNER_TEMP}/prisma2020-official.pdf"
-          echo PRISMA_BINARY_BASE64_END
-      - name: Inspect extracted official checklist text for comparison discrepancies
-        run: |
-          pdftotext -layout "${RUNNER_TEMP}/prisma2020-official.pdf" - | head -n 100
       - name: Compare every checklist item to the pinned PDF
         run: |
           python -m scripts.compare_prisma_source_pdf \
-            --pdf "${RUNNER_TEMP}/prisma2020-official.pdf" \
+            --pdf source/official/prisma-2020-checklist.pdf \
             --output "${RUNNER_TEMP}/prisma2020-source-comparison.json"
       - name: Retain structured source evidence
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
