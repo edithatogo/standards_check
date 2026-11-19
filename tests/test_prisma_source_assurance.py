@@ -12,6 +12,7 @@ def pack_fixture():
             "license_url": "https://creativecommons.org/licenses/by/4.0/",
             "attribution": "Page et al. 2021 BMJ 372:n71",
         },
+        "authority": {"source_sha256": "a" * 64},
         "verification": {
             "status": "imported_unverified", "verified_at": None,
             "verified_by": [], "evidence": [],
@@ -48,7 +49,9 @@ class AssuranceTests(unittest.TestCase):
         p = pack_fixture()
         p["verification"] = {
             "status": "source_reconciled", "verified_at": "2026-11-19",
-            "verified_by": ["reviewer"], "evidence": ["review:item-level"],
+            "verified_by": ["reviewer"], "evidence": ["source-sha256:" + "a" * 64] + [
+                f"item-check:{identifier}:sha256:" + "b" * 64 for identifier in EXPECTED
+            ],
         }
         result = audit(p)
         self.assertTrue(result["item_level_source_reconciled"])
