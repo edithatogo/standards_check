@@ -73,6 +73,21 @@
       "limitations": [
         "main branch CI must be verified separately"
       ]
+    },
+    {
+      "claim": "Receiving-main merge commit for Track 00 PR #79 passed all 11 observed hosted checks, including deployment",
+      "evidence_level": "compiler_verified",
+      "commit": "840b8431403035be7e5dec5f22b64ad3ddb20d2b",
+      "receipts": [
+        "https://github.com/edithatogo/standards_check/commit/840b8431403035be7e5dec5f22b64ad3ddb20d2b/checks"
+      ],
+      "observed": {
+        "completed_success": 11,
+        "failed": 0
+      },
+      "limitations": [
+        "This is CI technical acceptance only; independent rights, methodology, and publication content review remain open"
+      ]
     }
   ]
 }

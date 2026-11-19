@@ -6,7 +6,7 @@
 - Track 00 PR [#79](https://github.com/edithatogo/standards_check/pull/79), reviewed head `baab246e62f3585237b987f87647eba743f2818e`: **11 successful check runs**, one deployment check skipped. Exact-head jobs included foundation contracts, Rust, offline Python, document build, privacy/secrets and CodeQL for Rust/Python/JS/Actions.
 - [Foundation contracts job](https://github.com/edithatogo/standards_check/actions/runs/44498580063/job/135472024917): foundation validator, `tests.test_foundation_audit`, and `scripts/audit_foundation.py` succeeded. Its JSON reports 1,316 tracked files, 292 source files, 11 paths with explicit placeholder markers, zero unreadable text files and zero Conductor context errors.
 - PR #79 merged (squash) to `main` as `840b8431403035be7e5dec5f22b64ad3ddb20d2b`.
-- Receiving-main check runs were **in progress** at initial reconciliation: see [the main commit](https://github.com/edithatogo/standards_check/commit/840b8431403035be7e5dec5f22b64ad3ddb20d2b). Do not treat PR check success as an automatic assertion that the receiving-main checks succeeded. This document describes the observed state, not a promise of future CI completion.
+- Receiving-main check runs were **separately observed complete** at `840b8431403035be7e5dec5f22b64ad3ddb20d2b`: **11 of 11 successful** (including deployment, document build, schema validation, Rust, Python, privacy/secrets and four CodeQL analyses). See [commit check runs](https://github.com/edithatogo/standards_check/commit/840b8431403035be7e5dec5f22b64ad3ddb20d2b/checks). This is a receiving-main receipt, distinct from the PR head.
 
 ## Snapshot versus obsolete audit claims
 
@@ -28,7 +28,7 @@ The previous issue statement of **one workflow** was obsolete. Counts of five te
 - [ ] Establish applicability matrix and explicit evidence-backed exclusions for property, mutation, deterministic simulation, metamorphic and contract tests.
 - [ ] Add bounded mutation/coverage thresholds for high-value Rust and parsing logic, with published exact-head receipts.
 - [ ] Qualify workflow lint, dependency review, supply-chain assurance and immutable pin exceptions where warranted.
-- [ ] Record current-head CI result and non-green or skipped jobs separately from PR acceptance.
+- [x] Record PR #79 exact-head and receiving-main CI distinctly (11/11 receiving-main success); later heads require new checks.
 
 ### #30 security, maintainer and dependencies
 

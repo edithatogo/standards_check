@@ -20,11 +20,16 @@
     ],
     "scope": "new exact-pin/context and brownfield audit, foundation checks, Rust, Python, document, privacy and CodeQL on PR head"
   },
-  "current_integration_hosted_checks": "receiving_main_pending_at_initial_reconciliation",
+  "current_integration_hosted_checks": "passed_at_receiving_main_commit",
   "remaining_work": [
     "repository-standards profile and managed-file drift reconciliation",
-    "confirm receiving-main CI at exact commit",
     "authoritative rights/content review, history parity and public acceptance remain separate tracks"
   ],
-  "current_integration_hosted_commit": "840b8431403035be7e5dec5f22b64ad3ddb20d2b"
+  "current_integration_hosted_commit": "840b8431403035be7e5dec5f22b64ad3ddb20d2b",
+  "receiving_main_verification": {
+    "commit": "840b8431403035be7e5dec5f22b64ad3ddb20d2b",
+    "completed_success": 11,
+    "failed": 0,
+    "receipt": "https://github.com/edithatogo/standards_check/commit/840b8431403035be7e5dec5f22b64ad3ddb20d2b/checks"
+  }
 }
