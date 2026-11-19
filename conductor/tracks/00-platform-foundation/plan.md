@@ -9,15 +9,15 @@ the revision-bound foundation, document, privacy and CodeQL receipts are retaine
 
 ## Phase 1: Brownfield truth baseline
 
-- [ ] Audit current corpus, generated outputs, placeholders, licences and tests.
-- [ ] Record authority conflicts and migration debt without deleting legacy surfaces.
-- [ ] Add deterministic audit tests and a retained receipt.
+- [x] Implement tracked-area inventory for corpus, outputs, placeholders, licences and tests (not third-party certification).
+- [x] Document authority conflicts and migration debt without deleting legacy surfaces.
+- [x] Add deterministic audit unit tests and CI invocation; hosted acceptance receipt pending.
 
 ## Phase 2: Conductor and context
 
 - [x] Pin the official Conductor plugin as a gitlink.
 - [x] Add the local routing skill and project handshake.
-- [ ] Validate the gitlink and context links in CI.
+- [x] Implement exact gitlink and local context-link checks in CI; hosted acceptance pending.
 
 ## Phase 3: Rust foundation
 
@@ -39,3 +39,5 @@ These receipts apply to their recorded commit, not automatically to later repair
 
 The foundation merge does not complete the brownfield audit, confirm third-party rights,
 prove legacy migration parity or establish publication and external acceptance.
+
+See [brownfield-audit.md](brownfield-audit.md) for classified authority and migration debt. CI verification at the proposed head must precede evidence promotion.
