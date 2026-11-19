@@ -25,9 +25,12 @@ def normalize(text: str) -> str:
     )
 
 
-def checklist_column(page_text: str) -> str:
-    """Read only the checklist text column from Poppler's fixed-width table."""
-    return "\n".join(line[30:] for line in page_text.splitlines())
+def checklist_column(page_text: str, page: int) -> str:
+    """Read only the item text; the two PDF pages have distinct left gutters."""
+    if page not in (1, 2):
+        raise ValueError("Unexpected PDF page")
+    start = 30 if page == 1 else 28
+    return "\n".join(line[start:] for line in page_text.splitlines())
 
 
 def verify_pdf(source_bytes: bytes, text_pages: list[str], ledger: dict) -> dict:
