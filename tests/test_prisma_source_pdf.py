@@ -15,8 +15,8 @@ class PDFComparisonTests(unittest.TestCase):
 
     def test_wrapped_topic_labels_do_not_interrupt_checklist_text(self):
         layout = (
-            "Information              6    Specify all databases. Specify the\\n"
-            "sources                       date when each source was last searched.\\n"
+            "Information              6    Specify all databases. Specify the\n"
+            "sources                       date when each source was last searched.\n"
         )
         self.assertEqual(
             normalize(checklist_column(layout)),
