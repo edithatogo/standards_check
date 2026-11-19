@@ -3,7 +3,7 @@ from copy import deepcopy
 import json
 import unittest
 from scripts.compare_prisma_source_pdf import (
-    PINNED_PDF_SHA256, normalize, verify_pdf,
+    PINNED_PDF_SHA256, normalize, checklist_column, verify_pdf,
 )
 from scripts.build_prisma42_candidate import LEDGER
 
@@ -12,6 +12,16 @@ class PDFComparisonTests(unittest.TestCase):
     def test_word_normalization_does_not_conflate_words(self):
         self.assertEqual(normalize("e.g., confidence/credible"), "egconfidencecredible")
         self.assertNotEqual(normalize("risk of bias"), normalize("risk of precision"))
+
+    def test_wrapped_topic_labels_do_not_interrupt_checklist_text(self):
+        layout = (
+            "Information              6    Specify all databases. Specify the\\n"
+            "sources                       date when each source was last searched.\\n"
+        )
+        self.assertEqual(
+            normalize(checklist_column(layout)),
+            normalize("Specify all databases. Specify the date when each source was last searched.")
+        )
 
     def test_rejects_wrong_pdf_fingerprint(self):
         ledger = json.loads(LEDGER.read_text(encoding="utf-8"))
