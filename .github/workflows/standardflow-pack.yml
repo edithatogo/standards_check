@@ -144,7 +144,7 @@ jobs:
           echo '2eedbd5452741f9615307a0bce21a8198c0597ce2a0a8a0fd7e140d64b08c625  '"${RUNNER_TEMP}/prisma2020-official.pdf" | sha256sum --check
       - name: Compare every checklist item to the pinned PDF
         run: |
-          python scripts/compare_prisma_source_pdf.py \
+          python -m scripts.compare_prisma_source_pdf \
             --pdf "${RUNNER_TEMP}/prisma2020-official.pdf" \
             --output "${RUNNER_TEMP}/prisma2020-source-comparison.json"
       - name: Retain structured source evidence
