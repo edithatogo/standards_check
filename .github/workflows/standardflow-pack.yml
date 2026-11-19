@@ -146,6 +146,9 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install --yes --no-install-recommends poppler-utils
+      - name: Inspect extracted official checklist text for comparison discrepancies
+        run: |
+          pdftotext -layout "${RUNNER_TEMP}/prisma2020-official.pdf" - | head -n 100
       - name: Compare every checklist item to the pinned PDF
         run: |
           python -m scripts.compare_prisma_source_pdf \
