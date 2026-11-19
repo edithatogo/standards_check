@@ -1,0 +1,111 @@
+{
+  "schema_version": "dev.standardflow.prisma-legacy-migration.v1",
+  "pack_id": "org.prisma/prisma/2020",
+  "source_pdf_sha256": "2eedbd5452741f9615307a0bce21a8198c0597ce2a0a8a0fd7e140d64b08c625",
+  "legacy_to_current": {
+    "PRISMA-2020:1": [
+      "PRISMA-2020:1"
+    ],
+    "PRISMA-2020:2": [
+      "PRISMA-2020:2"
+    ],
+    "PRISMA-2020:3": [
+      "PRISMA-2020:3"
+    ],
+    "PRISMA-2020:4": [
+      "PRISMA-2020:4"
+    ],
+    "PRISMA-2020:5": [
+      "PRISMA-2020:5"
+    ],
+    "PRISMA-2020:6": [
+      "PRISMA-2020:6"
+    ],
+    "PRISMA-2020:7": [
+      "PRISMA-2020:7"
+    ],
+    "PRISMA-2020:8": [
+      "PRISMA-2020:8"
+    ],
+    "PRISMA-2020:9": [
+      "PRISMA-2020:9"
+    ],
+    "PRISMA-2020:10": [
+      "PRISMA-2020:10a",
+      "PRISMA-2020:10b"
+    ],
+    "PRISMA-2020:11": [
+      "PRISMA-2020:11"
+    ],
+    "PRISMA-2020:12": [
+      "PRISMA-2020:12"
+    ],
+    "PRISMA-2020:13": [
+      "PRISMA-2020:13a",
+      "PRISMA-2020:13b",
+      "PRISMA-2020:13c",
+      "PRISMA-2020:13d",
+      "PRISMA-2020:13e",
+      "PRISMA-2020:13f"
+    ],
+    "PRISMA-2020:14": [
+      "PRISMA-2020:14"
+    ],
+    "PRISMA-2020:15": [
+      "PRISMA-2020:15"
+    ],
+    "PRISMA-2020:16": [
+      "PRISMA-2020:16a",
+      "PRISMA-2020:16b"
+    ],
+    "PRISMA-2020:17": [
+      "PRISMA-2020:17"
+    ],
+    "PRISMA-2020:18": [
+      "PRISMA-2020:18"
+    ],
+    "PRISMA-2020:19": [
+      "PRISMA-2020:19"
+    ],
+    "PRISMA-2020:20": [
+      "PRISMA-2020:20a",
+      "PRISMA-2020:20b",
+      "PRISMA-2020:20c",
+      "PRISMA-2020:20d"
+    ],
+    "PRISMA-2020:21": [
+      "PRISMA-2020:21"
+    ],
+    "PRISMA-2020:22": [
+      "PRISMA-2020:22"
+    ],
+    "PRISMA-2020:23": [
+      "PRISMA-2020:23a",
+      "PRISMA-2020:23b",
+      "PRISMA-2020:23c",
+      "PRISMA-2020:23d"
+    ],
+    "PRISMA-2020:24": [
+      "PRISMA-2020:24a",
+      "PRISMA-2020:24b",
+      "PRISMA-2020:24c"
+    ],
+    "PRISMA-2020:25": [
+      "PRISMA-2020:25"
+    ],
+    "PRISMA-2020:26": [
+      "PRISMA-2020:26"
+    ],
+    "PRISMA-2020:27": [
+      "PRISMA-2020:27"
+    ]
+  },
+  "splits_require_semantic_reassessment": [
+    "PRISMA-2020:10",
+    "PRISMA-2020:13",
+    "PRISMA-2020:16",
+    "PRISMA-2020:20",
+    "PRISMA-2020:23",
+    "PRISMA-2020:24"
+  ]
+}
