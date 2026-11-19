@@ -38,9 +38,20 @@ def audit(pack: dict) -> dict:
                   and rights.get("license_url") == LICENCE
                   and bool(rights.get("attribution")))
     evidence = pack["verification"]
+    receipt_strings = evidence.get("evidence", [])
+    authority_sha = pack.get("authority", {}).get("source_sha256", "")
+    source_receipt = "source-sha256:" + authority_sha
+    item_receipts = {
+        match.group(1) for receipt in receipt_strings
+        if (match := re.fullmatch(
+            r"item-check:([0-9]+[a-z]?):sha256:[a-f0-9]{64}", str(receipt)
+        ))
+    }
     evidence_ok = (bool(evidence.get("verified_at"))
                    and bool(evidence.get("verified_by"))
-                   and bool(evidence.get("evidence"))
+                   and re.fullmatch(r"[a-f0-9]{64}", authority_sha) is not None
+                   and source_receipt in receipt_strings
+                   and EXPECTED.issubset(item_receipts)
                    and all(str(i["source_anchor"]).strip() for i in requirements))
     # Exact-item evidence requires the full official checklist numbering, not
     # one aggregate item representing multiple required subitems.
