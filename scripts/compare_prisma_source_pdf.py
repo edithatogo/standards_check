@@ -41,7 +41,7 @@ def verify_pdf(source_bytes: bytes, text_pages: list[str], ledger: dict) -> dict
     comparisons = []
     for item in ledger["items"]:
         number, page = item["number"], item["page"]
-        source = normalize(checklist_column(text_pages[page - 1]))
+        source = normalize(checklist_column(text_pages[page - 1], page))
         expected_text = normalize(item["verbatim_text"])
         if not expected_text or expected_text not in source:
             raise ValueError(f"Item {number} not found verbatim (word-normalized) on PDF page {page}")
