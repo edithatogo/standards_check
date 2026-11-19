@@ -10,7 +10,7 @@ from scripts.build_prisma42_candidate import LEDGER
 
 class PDFComparisonTests(unittest.TestCase):
     def test_word_normalization_does_not_conflate_words(self):
-        self.assertEqual(normalize("e.g., confidence/credible"), "egconfidencecredible")
+        self.assertEqual(normalize("e.g., confidence/credible"), "e.g.,confidence/credible")
         self.assertNotEqual(normalize("risk of bias"), normalize("risk of precision"))
 
     def test_wrapped_topic_labels_do_not_interrupt_checklist_text(self):
