@@ -10,6 +10,13 @@ on:
       - "packs/**"
       - "schemas/**"
       - "scripts/validate_packs.py"
+      - "scripts/validate_prisma_source_assurance.py"
+      - "scripts/build_prisma42_candidate.py"
+      - "scripts/compare_prisma_source_pdf.py"
+      - "tests/test_prisma_source_pdf.py"
+      - "tests/test_prisma42_candidate.py"
+      - "conductor/source-reconciliation/**"
+      - "tests/test_prisma_source_assurance.py"
       - "conductor/tracks/01-canonical-standard-pack/**"
       - ".github/workflows/standardflow-pack.yml"
   push:
@@ -22,6 +29,13 @@ on:
       - "packs/**"
       - "schemas/**"
       - "scripts/validate_packs.py"
+      - "scripts/validate_prisma_source_assurance.py"
+      - "scripts/build_prisma42_candidate.py"
+      - "scripts/compare_prisma_source_pdf.py"
+      - "tests/test_prisma_source_pdf.py"
+      - "tests/test_prisma42_candidate.py"
+      - "conductor/source-reconciliation/**"
+      - "tests/test_prisma_source_assurance.py"
       - "conductor/tracks/01-canonical-standard-pack/**"
       - ".github/workflows/standardflow-pack.yml"
 
@@ -53,6 +67,11 @@ jobs:
           cache-dependency-path: requirements/standardflow-foundation.txt
       - run: python -m pip install --disable-pip-version-check --no-deps --requirement requirements/standardflow-foundation.txt
       - run: python scripts/validate_packs.py
+      - run: python -m unittest tests.test_prisma_source_assurance
+      - run: python scripts/validate_prisma_source_assurance.py
+      - run: python -m unittest tests.test_prisma42_candidate
+      - run: python scripts/build_prisma42_candidate.py --output /tmp/prisma42-draft.json
+      - run: python -m unittest tests.test_prisma_source_pdf
 
   rust-quality:
     runs-on: ubuntu-latest
@@ -100,3 +119,36 @@ jobs:
           toolchain: 1.98.1
       - run: cargo test --workspace --all-targets --all-features --locked
       - run: cargo run --locked -p standardflow-cli -- pack lock packs/org.prisma/prisma/2020 --check
+
+  authoritative-pdf-comparison:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Harden the runner (Audit outbound source retrieval)
+        uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Verify immutable official two-page source
+        run: |
+          echo '2eedbd5452741f9615307a0bce21a8198c0597ce2a0a8a0fd7e140d64b08c625  source/official/prisma-2020-checklist.pdf' | sha256sum --check
+      - name: Install PDF text extraction utility
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends poppler-utils
+      - name: Compare every checklist item to the pinned PDF
+        run: |
+          python -m scripts.compare_prisma_source_pdf \
+            --pdf source/official/prisma-2020-checklist.pdf \
+            --output "${RUNNER_TEMP}/prisma2020-source-comparison.json"
+      - name: Retain structured source evidence
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: prisma2020-source-comparison
+          path: ${{ runner.temp }}/prisma2020-source-comparison.json
+          if-no-files-found: error
+          retention-days: 90

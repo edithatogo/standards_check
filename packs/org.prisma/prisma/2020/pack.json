@@ -5,18 +5,62 @@
   "kind": "reporting",
   "title": "PRISMA 2020 Checklist",
   "authority": {
-    "publisher": "PRISMA Group / BMJ",
-    "source_url": "https://www.bmj.com/content/372/bmj.n71.full.pdf",
-    "retrieved_at": "2025-08-09",
-    "source_sha256": "00804b505724d73e8e82326493ca5b5010c649753652684e1d15b88120201c2e"
+    "publisher": "PRISMA Executive",
+    "source_url": "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf",
+    "retrieved_at": "2026-11-19",
+    "source_sha256": "2eedbd5452741f9615307a0bce21a8198c0597ce2a0a8a0fd7e140d64b08c625"
   },
   "verification": {
-    "status": "imported_unverified",
-    "verified_at": null,
-    "verified_by": [],
+    "status": "source_reconciled",
+    "verified_at": "2026-11-19",
+    "verified_by": [
+      "StandardFlow hosted authoritative PDF comparator"
+    ],
     "evidence": [
-      "legacy:markdown/en/archetypes/prisma-2020.md@6d441c169e68d10fd0737eda759a4e0ed9ffd6d0",
-      "legacy:source/archetypes/prisma-2020.yml@4066f22cc2ab45040627d749b84945749e3f1a82"
+      "source-sha256:2eedbd5452741f9615307a0bce21a8198c0597ce2a0a8a0fd7e140d64b08c625",
+      "ci:https://github.com/edithatogo/standards_check/actions/runs/44508730776/job/135507112818",
+      "item-check:1:sha256:b3246ec3f959f5bb33a6b714feedf2d4b8a09cfaf0767bdfc33b7069c38eeed4",
+      "item-check:2:sha256:b9c42bbd75137cd740a292f4b51f42024770d50724384037076c39d30f46e3a9",
+      "item-check:3:sha256:6ccf8e3dab82d4256ca5e594523d6b108b7465bdc44fcd7580745cc529dc3737",
+      "item-check:4:sha256:be1bc7d1536d2e29afe94b3ee11f3b52121b754d2b58949fc41ae7db7c7ee736",
+      "item-check:5:sha256:c4dcbe62267199622be596135047afe561af9703164e8123f8dc6e101ce4a8bd",
+      "item-check:6:sha256:2b5617bb962e0d0ddc1ade31e8f34cb09ae93511184f9e26b28d975363ce94b8",
+      "item-check:7:sha256:f3ec54b6eb60d8b01c7620b4bb1f8362067184d068c23384037bde2a9587cc99",
+      "item-check:8:sha256:23af920972363675a19976ddb2829a7a0a376e03af1076d5adcbcd4d6289773f",
+      "item-check:9:sha256:eea8c7fd44c3ef7075d8d1404b802cebe1df49fee40d8505d3c51794264f6ffe",
+      "item-check:10a:sha256:db3db084475b201623c02ebd3f08e51571c1d1e5e35c569800a8c4357dee7161",
+      "item-check:10b:sha256:d856fa166a3f47beaaea79586b71ee6155c7b6b45d81e62f862471fba03478ae",
+      "item-check:11:sha256:e8ea4667a0ed6dae03a2a78c23169b3b7e1c8f54bdf20c559dbc8f86cf54367d",
+      "item-check:12:sha256:03bb0f130c8fd4ea333cb182af23786a8207a0871329129c4d8c6325c0551c2e",
+      "item-check:13a:sha256:1e1b062f72f7e30c3b3a959e4dea88b041da657d6a8121daa70485113f277a64",
+      "item-check:13b:sha256:f3c420e629ad1e321d99477aa241cdc2d5468fdf86a2222076e01308eda86c27",
+      "item-check:13c:sha256:2ae2074e01ccbf6186438f1d98d4c150ff924918382cc2e031db9e8fac447943",
+      "item-check:13d:sha256:24d829837fafd661e1e1f4301e417da0ef0692269742f8b5e262d2779a2849e5",
+      "item-check:13e:sha256:2d0cbdaa430c2d8fd2f80957805cbe43adace7a339db65fa1e02cfcb426e06d0",
+      "item-check:13f:sha256:8e6cff617e57824f8660b36971571315673802a1b3de38310044e24751c6ad91",
+      "item-check:14:sha256:7ed494d92603995aca3a9f7fc38146da9f4b81e358248ecd93dd2acf5d8382c3",
+      "item-check:15:sha256:2099bef6669346f14c73ba16b6cedc9c34c5584cc0eac7a9545269326481b961",
+      "item-check:16a:sha256:e4450f7fdbdc6176377169be4f887a47c1ee80e81489ec2604767a241c7dedae",
+      "item-check:16b:sha256:caf6775e8e33f68a91acbd1353f4fcd73e4330bb15cf435929cd08c5a630619a",
+      "item-check:17:sha256:492dbc57c49bf064e3665596b553d2af57b9853cb1cfb23afec48de3cec7e09f",
+      "item-check:18:sha256:8a84f9aa1d5d8b95fb768f4063821c26d6d40eff9147bd0e21a75b0a8926a248",
+      "item-check:19:sha256:5f39eff626ce836793a07d09d1fb5547b188677b91e29aeaf2f911f25698d3f3",
+      "item-check:20a:sha256:b048d5afd7cd899ebaa02395a6e0861b5840943cee43be8cb008c26718e3abd7",
+      "item-check:20b:sha256:7a319627e06486da75a9255cfff7d61574b8e593d3c330346cda750e1c0fd21e",
+      "item-check:20c:sha256:a63c0e43245a2fbd95911ca4b70bac5e4091acaf2a5f421f335e1c3f917ea04b",
+      "item-check:20d:sha256:56228b960a7caecb0eb01d947b4f7a187663264be7e066d195e314a7435a1460",
+      "item-check:21:sha256:6b26eda478e48800e601e88427bd961065f566b9be6ad550209e48ddf01007b5",
+      "item-check:22:sha256:7f824f897fa4c10e0710d16a5839f73d5cc101f9b4b574ba430e2f460afde7e8",
+      "item-check:23a:sha256:6dfca4148eff5f694f6ae885fc840adc4da045523f71944ba0844e9176492beb",
+      "item-check:23b:sha256:5ff1cb4246cffe2514b5b5f1b84ce104331357d27e20f59b6989239635892c68",
+      "item-check:23c:sha256:af02811829f34521b9003bb5e2944b94155a87c14f2b9b62fdbc58211490bb91",
+      "item-check:23d:sha256:2a522e42820400bf7c8c642217cbd5f5ece87d210ab159ab2c8177645d38e122",
+      "item-check:24a:sha256:81711c7f5fe3adc839f0c250cca8aef5ba941416c5c2609efab27d75b6a32df8",
+      "item-check:24b:sha256:d5f89b8c27e603958848fc46b79afb7eca8c9cbd97ec27a09f2479ce8eb82d85",
+      "item-check:24c:sha256:f913899880ff3ec81bf49259207066a717c981f920d6a5210d75e9d4b9a145da",
+      "item-check:25:sha256:f23005c567c3c45fc68bacf578e96cc964349b1e4a18e1defbe2ac87d3fd06ee",
+      "item-check:26:sha256:aa6b141447976f0887834284f5b406463cc2bf2170b5da1cdac4197d1192048a",
+      "item-check:27:sha256:8346a9efdfbc5f485cc617e939965058e545e537ecf8cf1763290696a78a02b0"
     ]
   },
   "rights": {
@@ -24,7 +68,7 @@
     "spdx": "CC-BY-4.0",
     "license_url": "https://creativecommons.org/licenses/by/4.0/",
     "attribution": "Page MJ et al. The PRISMA 2020 statement: an updated guideline for reporting systematic reviews. BMJ. 2021;372:n71. doi:10.1136/bmj.n71.",
-    "redistribution": "May be shared and adapted with attribution under CC BY 4.0; this imported pack remains pending item-by-item source reconciliation."
+    "redistribution": "PRISMA 2020 checklist CC BY 4.0; StandardFlow adaptation changes item structure, identifiers and normalized assessment expectations, with attribution and change notice. Unrelated third-party rights are excluded."
   },
   "relationships": [],
   "requirements": [
@@ -78,7 +122,7 @@
       "id": "PRISMA-2020:4",
       "display_number": "4",
       "section": "Introduction",
-      "verbatim_text": "Provide an explicit statement of the main objective(s) or question(s) the review addresses.",
+      "verbatim_text": "Provide an explicit statement of the objective(s) or question(s) the review addresses.",
       "normalized_requirement": "The report states the main objectives or questions addressed by the review.",
       "guidance": null,
       "source_anchor": "prisma-2020-checklist:item:4",
@@ -125,7 +169,7 @@
       "id": "PRISMA-2020:7",
       "display_number": "7",
       "section": "Methods",
-      "verbatim_text": "Present the full search strategies for all databases, registers, and websites, including any filters and limits used.",
+      "verbatim_text": "Present the full search strategies for all databases, registers and websites, including any filters and limits used.",
       "normalized_requirement": "The report presents reproducible search strategies, including filters and limits, for every searched source.",
       "guidance": null,
       "source_anchor": "prisma-2020-checklist:item:7",
@@ -170,13 +214,29 @@
       ]
     },
     {
-      "id": "PRISMA-2020:10",
-      "display_number": "10",
+      "id": "PRISMA-2020:10a",
+      "display_number": "10a",
       "section": "Methods",
-      "verbatim_text": "List and define all outcomes for which data were sought. Specify whether and how results were sought for each outcome, by who, and how they were categorised.",
-      "normalized_requirement": "The methods define all outcomes and explain how outcome results were sought and categorised.",
+      "verbatim_text": "List and define all outcomes for which data were sought. Specify whether all results that were compatible with each outcome domain in each study were sought (e.g. for all measures, time points, analyses), and if not, the methods used to decide which results to collect.",
+      "normalized_requirement": "List and define all outcomes for which data were sought. Specify whether all results that were compatible with each outcome domain in each study were sought (e.g. for all measures, time points, analyses), and if not, the methods used to decide which results to collect.",
       "guidance": null,
-      "source_anchor": "prisma-2020-checklist:item:10",
+      "source_anchor": "prisma-2020-checklist:item:10a",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "outcome_catalogue"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:10b",
+      "display_number": "10b",
+      "section": "Methods",
+      "verbatim_text": "List and define all other variables for which data were sought (e.g. participant and intervention characteristics, funding sources). Describe any assumptions made about any missing or unclear information.",
+      "normalized_requirement": "List and define all other variables for which data were sought (e.g. participant and intervention characteristics, funding sources). Describe any assumptions made about any missing or unclear information.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:10b",
       "rights": {
         "inherit_from_pack": true
       },
@@ -205,7 +265,7 @@
       "id": "PRISMA-2020:12",
       "display_number": "12",
       "section": "Methods",
-      "verbatim_text": "Specify the effect measure(s) (e.g., risk ratio, mean difference) used in the synthesis or presentation of results for each outcome.",
+      "verbatim_text": "Specify for each outcome the effect measure(s) (e.g. risk ratio, mean difference) used in the synthesis or presentation of results.",
       "normalized_requirement": "The methods identify the effect measure used for each outcome.",
       "guidance": null,
       "source_anchor": "prisma-2020-checklist:item:12",
@@ -218,13 +278,93 @@
       ]
     },
     {
-      "id": "PRISMA-2020:13",
-      "display_number": "13",
+      "id": "PRISMA-2020:13a",
+      "display_number": "13a",
       "section": "Methods",
-      "verbatim_text": "Describe the processes used to decide which studies were eligible for each synthesis (e.g., tabulating the study intervention characteristics and comparing them against the planned groups for each synthesis (item 5)).",
-      "normalized_requirement": "The methods explain how studies were assigned to each synthesis and how synthesis decisions related to the eligibility criteria.",
+      "verbatim_text": "Describe the processes used to decide which studies were eligible for each synthesis (e.g. tabulating the study intervention characteristics and comparing against the planned groups for each synthesis (item #5)).",
+      "normalized_requirement": "Describe the processes used to decide which studies were eligible for each synthesis (e.g. tabulating the study intervention characteristics and comparing against the planned groups for each synthesis (item #5)).",
       "guidance": null,
-      "source_anchor": "prisma-2020-checklist:item:13",
+      "source_anchor": "prisma-2020-checklist:item:13a",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "synthesis_plan"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:13b",
+      "display_number": "13b",
+      "section": "Methods",
+      "verbatim_text": "Describe any methods required to prepare the data for presentation or synthesis, such as handling of missing summary statistics, or data conversions.",
+      "normalized_requirement": "Describe any methods required to prepare the data for presentation or synthesis, such as handling of missing summary statistics, or data conversions.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:13b",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "synthesis_plan"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:13c",
+      "display_number": "13c",
+      "section": "Methods",
+      "verbatim_text": "Describe any methods used to tabulate or visually display results of individual studies and syntheses.",
+      "normalized_requirement": "Describe any methods used to tabulate or visually display results of individual studies and syntheses.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:13c",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "synthesis_plan"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:13d",
+      "display_number": "13d",
+      "section": "Methods",
+      "verbatim_text": "Describe any methods used to synthesize results and provide a rationale for the choice(s). If meta-analysis was performed, describe the model(s), method(s) to identify the presence and extent of statistical heterogeneity, and software package(s) used.",
+      "normalized_requirement": "Describe any methods used to synthesize results and provide a rationale for the choice(s). If meta-analysis was performed, describe the model(s), method(s) to identify the presence and extent of statistical heterogeneity, and software package(s) used.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:13d",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "synthesis_plan"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:13e",
+      "display_number": "13e",
+      "section": "Methods",
+      "verbatim_text": "Describe any methods used to explore possible causes of heterogeneity among study results (e.g. subgroup analysis, meta-regression).",
+      "normalized_requirement": "Describe any methods used to explore possible causes of heterogeneity among study results (e.g. subgroup analysis, meta-regression).",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:13e",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "synthesis_plan"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:13f",
+      "display_number": "13f",
+      "section": "Methods",
+      "verbatim_text": "Describe any sensitivity analyses conducted to assess robustness of the synthesized results.",
+      "normalized_requirement": "Describe any sensitivity analyses conducted to assess robustness of the synthesized results.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:13f",
       "rights": {
         "inherit_from_pack": true
       },
@@ -237,7 +377,7 @@
       "id": "PRISMA-2020:14",
       "display_number": "14",
       "section": "Methods",
-      "verbatim_text": "Describe any methods used to assess the risk of bias due to missing results in a synthesis (arising from reporting biases).",
+      "verbatim_text": "Describe any methods used to assess risk of bias due to missing results in a synthesis (arising from reporting biases).",
       "normalized_requirement": "The methods describe assessment of reporting bias caused by missing results.",
       "guidance": null,
       "source_anchor": "prisma-2020-checklist:item:14",
@@ -266,13 +406,30 @@
       ]
     },
     {
-      "id": "PRISMA-2020:16",
-      "display_number": "16",
+      "id": "PRISMA-2020:16a",
+      "display_number": "16a",
       "section": "Results",
       "verbatim_text": "Describe the results of the search and selection process, from the number of records identified in the search to the number of studies included in the review, ideally using a flow diagram.",
-      "normalized_requirement": "The results account for study selection from records identified through studies included, with a flow representation where applicable.",
+      "normalized_requirement": "Describe the results of the search and selection process, from the number of records identified in the search to the number of studies included in the review, ideally using a flow diagram.",
       "guidance": null,
-      "source_anchor": "prisma-2020-checklist:item:16",
+      "source_anchor": "prisma-2020-checklist:item:16a",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "review_flow",
+        "flow_diagram"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:16b",
+      "display_number": "16b",
+      "section": "Results",
+      "verbatim_text": "Cite studies that might appear to meet the inclusion criteria, but which were excluded, and explain why they were excluded.",
+      "normalized_requirement": "Cite studies that might appear to meet the inclusion criteria, but which were excluded, and explain why they were excluded.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:16b",
       "rights": {
         "inherit_from_pack": true
       },
@@ -319,7 +476,7 @@
       "id": "PRISMA-2020:19",
       "display_number": "19",
       "section": "Results",
-      "verbatim_text": "For all outcomes, present, for each study: (a) summary statistics for each group (where appropriate) and (b) an effect estimate and its precision (e.g., confidence/credible interval), ideally using structured tables or plots.",
+      "verbatim_text": "For all outcomes, present, for each study: (a) summary statistics for each group (where appropriate) and (b) an effect estimate and its precision (e.g. confidence/credible interval), ideally using structured tables or plots.",
       "normalized_requirement": "For each study and outcome, the results present appropriate group summaries, effect estimates and precision.",
       "guidance": null,
       "source_anchor": "prisma-2020-checklist:item:19",
@@ -332,13 +489,61 @@
       ]
     },
     {
-      "id": "PRISMA-2020:20",
-      "display_number": "20",
+      "id": "PRISMA-2020:20a",
+      "display_number": "20a",
       "section": "Results",
-      "verbatim_text": "For each synthesis, present results for all outcomes that were assessed, and for each outcome, present a summary of findings and, if meta-analysis was done, an effect estimate and its precision.",
-      "normalized_requirement": "For each synthesis and assessed outcome, the results present findings and, where applicable, meta-analytic estimates and precision.",
+      "verbatim_text": "For each synthesis, briefly summarise the characteristics and risk of bias among contributing studies.",
+      "normalized_requirement": "For each synthesis, briefly summarise the characteristics and risk of bias among contributing studies.",
       "guidance": null,
-      "source_anchor": "prisma-2020-checklist:item:20",
+      "source_anchor": "prisma-2020-checklist:item:20a",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "synthesis_results"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:20b",
+      "display_number": "20b",
+      "section": "Results",
+      "verbatim_text": "Present results of all statistical syntheses conducted. If meta-analysis was done, present for each the summary estimate and its precision (e.g. confidence/credible interval) and measures of statistical heterogeneity. If comparing groups, describe the direction of the effect.",
+      "normalized_requirement": "Present results of all statistical syntheses conducted. If meta-analysis was done, present for each the summary estimate and its precision (e.g. confidence/credible interval) and measures of statistical heterogeneity. If comparing groups, describe the direction of the effect.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:20b",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "synthesis_results"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:20c",
+      "display_number": "20c",
+      "section": "Results",
+      "verbatim_text": "Present results of all investigations of possible causes of heterogeneity among study results.",
+      "normalized_requirement": "Present results of all investigations of possible causes of heterogeneity among study results.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:20c",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "synthesis_results"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:20d",
+      "display_number": "20d",
+      "section": "Results",
+      "verbatim_text": "Present results of all sensitivity analyses conducted to assess the robustness of the synthesized results.",
+      "normalized_requirement": "Present results of all sensitivity analyses conducted to assess the robustness of the synthesized results.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:20d",
       "rights": {
         "inherit_from_pack": true
       },
@@ -380,13 +585,13 @@
       ]
     },
     {
-      "id": "PRISMA-2020:23",
-      "display_number": "23",
+      "id": "PRISMA-2020:23a",
+      "display_number": "23a",
       "section": "Discussion",
-      "verbatim_text": "(a) Provide a general interpretation of the results in the context of other evidence. (b) Discuss any limitations of the evidence included in the review. (c) Discuss any limitations of the review processes used. (d) Discuss the implications of the results for practice, policy, and future research.",
-      "normalized_requirement": "The discussion interprets results, addresses evidence and process limitations, and explains implications for practice, policy and future research.",
+      "verbatim_text": "Provide a general interpretation of the results in the context of other evidence.",
+      "normalized_requirement": "Provide a general interpretation of the results in the context of other evidence.",
       "guidance": null,
-      "source_anchor": "prisma-2020-checklist:item:23",
+      "source_anchor": "prisma-2020-checklist:item:23a",
       "rights": {
         "inherit_from_pack": true
       },
@@ -395,13 +600,90 @@
       ]
     },
     {
-      "id": "PRISMA-2020:24",
-      "display_number": "24",
+      "id": "PRISMA-2020:23b",
+      "display_number": "23b",
+      "section": "Discussion",
+      "verbatim_text": "Discuss any limitations of the evidence included in the review.",
+      "normalized_requirement": "Discuss any limitations of the evidence included in the review.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:23b",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:23c",
+      "display_number": "23c",
+      "section": "Discussion",
+      "verbatim_text": "Discuss any limitations of the review processes used.",
+      "normalized_requirement": "Discuss any limitations of the review processes used.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:23c",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:23d",
+      "display_number": "23d",
+      "section": "Discussion",
+      "verbatim_text": "Discuss implications of the results for practice, policy, and future research.",
+      "normalized_requirement": "Discuss implications of the results for practice, policy, and future research.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:23d",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:24a",
+      "display_number": "24a",
       "section": "Other information",
       "verbatim_text": "Provide registration information for the review, including register name and registration number, or state that the review was not registered.",
-      "normalized_requirement": "The report provides review registration details or explicitly states that the review was not registered.",
+      "normalized_requirement": "Provide registration information for the review, including register name and registration number, or state that the review was not registered.",
       "guidance": null,
-      "source_anchor": "prisma-2020-checklist:item:24",
+      "source_anchor": "prisma-2020-checklist:item:24a",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "registration_identifier"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:24b",
+      "display_number": "24b",
+      "section": "Other information",
+      "verbatim_text": "Indicate where the review protocol can be accessed, or state that a protocol was not prepared.",
+      "normalized_requirement": "Indicate where the review protocol can be accessed, or state that a protocol was not prepared.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:24b",
+      "rights": {
+        "inherit_from_pack": true
+      },
+      "evidence_expectations": [
+        "document_span",
+        "registration_identifier"
+      ]
+    },
+    {
+      "id": "PRISMA-2020:24c",
+      "display_number": "24c",
+      "section": "Other information",
+      "verbatim_text": "Describe and explain any amendments to information provided at registration or in the protocol.",
+      "normalized_requirement": "Describe and explain any amendments to information provided at registration or in the protocol.",
+      "guidance": null,
+      "source_anchor": "prisma-2020-checklist:item:24c",
       "rights": {
         "inherit_from_pack": true
       },
@@ -414,7 +696,7 @@
       "id": "PRISMA-2020:25",
       "display_number": "25",
       "section": "Other information",
-      "verbatim_text": "Specify the sources of financial or non-financial support for the review, and the role of the funders or sponsors in the review.",
+      "verbatim_text": "Describe sources of financial or non-financial support for the review, and the role of the funders or sponsors in the review.",
       "normalized_requirement": "The report identifies financial and non-financial support and explains funder or sponsor roles.",
       "guidance": null,
       "source_anchor": "prisma-2020-checklist:item:25",

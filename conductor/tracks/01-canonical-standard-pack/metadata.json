@@ -58,5 +58,14 @@
       "track 03 migration parity unresolved",
       "receiving-main CI requires independent qualification"
     ]
+  },
+  "source_assurance": {
+    "rights_documentation": "official PRISMA Executive CC BY 4.0 notice",
+    "licence_status": "documented",
+    "transcription_status": "imported_unverified",
+    "pack_items": 27,
+    "official_independently_numbered_items": 42,
+    "reason": "lettered subitems not independently transcribed and no full byte-pinned comparison receipt",
+    "evidence": "conductor/prisma2020-source-rights-20261119.md"
   }
 }
