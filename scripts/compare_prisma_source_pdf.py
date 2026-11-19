@@ -15,8 +15,8 @@ import unicodedata
 
 from scripts.build_prisma42_candidate import EXPECTED, LEDGER
 
-PINNED_PDF_SHA256 = "a3e92d99152e912e608e4001c038111808c3c33238a5936007913d805729986c"
-PINNED_PDF_LENGTH = 264559
+PINNED_PDF_SHA256 = "2eedbd5452741f9615307a0bce21a8198c0597ce2a0a8a0fd7e140d64b08c625"
+PINNED_PDF_LENGTH = 67506
 
 
 def normalize(text: str) -> str:
