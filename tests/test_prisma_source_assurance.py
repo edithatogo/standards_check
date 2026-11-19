@@ -1,5 +1,6 @@
 """Unit tests for PRISMA rights/status promotion safety."""
 from copy import deepcopy
+import hashlib
 import unittest
 
 from scripts.validate_prisma_source_assurance import audit, EXPECTED, SUBITEMS
@@ -18,7 +19,7 @@ def pack_fixture():
             "verified_by": [], "evidence": [],
         },
         "requirements": [
-            {"display_number": number, "source_anchor": f"checklist:{number}"}
+            {"display_number": number, "source_anchor": f"checklist:{number}", "verbatim_text": f"Text {number}"}
             for number in sorted(EXPECTED)
         ],
     }
@@ -50,13 +51,29 @@ class AssuranceTests(unittest.TestCase):
         p["verification"] = {
             "status": "source_reconciled", "verified_at": "2026-11-19",
             "verified_by": ["reviewer"], "evidence": ["source-sha256:" + "a" * 64] + [
-                f"item-check:{identifier}:sha256:" + "b" * 64 for identifier in EXPECTED
+                f"item-check:{identifier}:sha256:" + hashlib.sha256(f"Text {identifier}".encode()).hexdigest() for identifier in EXPECTED
             ],
         }
         result = audit(p)
         self.assertTrue(result["item_level_source_reconciled"])
         self.assertEqual(result["errors"], [])
         p["verification"]["status"] = "externally_validated"
+        self.assertTrue(audit(p)["errors"])
+
+    def test_tampered_source_text_invalidates_all_prior_receipts(self):
+        p = pack_fixture()
+        p["verification"] = {
+            "status": "source_reconciled", "verified_at": "2026-11-19",
+            "verified_by": ["automated source comparator"],
+            "evidence": ["source-sha256:" + "a" * 64] + [
+                f"item-check:{identifier}:sha256:" +
+                hashlib.sha256(f"Text {identifier}".encode()).hexdigest()
+                for identifier in EXPECTED
+            ],
+        }
+        self.assertTrue(audit(p)["item_level_source_reconciled"])
+        p["requirements"][0]["verbatim_text"] = "Content changed without a new receipt"
+        self.assertFalse(audit(p)["item_level_source_reconciled"])
         self.assertTrue(audit(p)["errors"])
 
     def test_rejects_uncleared_licence_and_duplicate_identifiers(self):
