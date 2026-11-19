@@ -43,3 +43,7 @@ Status: **implementation complete; hosted integration accepted**. Implementation
 Hosted integration acceptance is recorded for the exact revision above; it does not transfer
 automatically to later changes. Source reconciliation, rights, migration parity, independent
 methodological/accessibility qualification and publication remain separate obligations.
+
+## PRISMA source and rights review, 19 November 2026
+
+The [source and rights evidence assessment](../../prisma2020-source-rights-20261119.md) verifies the official CC BY 4.0 checklist licence. Full transcription remains **unverified**: the provisional pack contains 27 aggregate items whereas the official checklist has 42 independently numbered items/subitems. The new CI validator prevents unjustified promotion; 42-item migration, independent text comparison, source checksum receipt, lock regeneration and mapping parity remain outstanding. This is not acceptance of the source-reconciliation gate.
