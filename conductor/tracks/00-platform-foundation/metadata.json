@@ -8,25 +8,23 @@
   "evidence_level": "source_verified",
   "dependencies": [],
   "updated": "2026-11-19",
-  "pull_request": 59,
-  "merged_commit": "a8bfec446d219b770e76a23b44d1f08d9e00465d",
+  "pull_request": 79,
+  "merged_commit": "840b8431403035be7e5dec5f22b64ad3ddb20d2b",
   "evidence_level_scope": "current integration source; revision-bound hosted compiler evidence is recorded separately",
   "last_hosted_verification": {
-    "commit": "bfe2255fda85b891c2f68044676c0b777d92c38c",
+    "commit": "baab246e62f3585237b987f87647eba743f2818e",
     "evidence_level": "compiler_verified",
     "receipts": [
-      "https://github.com/edithatogo/standards_check/actions/runs/44314792407",
-      "https://github.com/edithatogo/standards_check/actions/runs/44314792172",
-      "https://github.com/edithatogo/standards_check/actions/runs/44314792189",
-      "https://github.com/edithatogo/standards_check/actions/runs/44314780941"
-    ]
+      "https://github.com/edithatogo/standards_check/actions/runs/44498580063",
+      "https://github.com/edithatogo/standards_check/pull/79"
+    ],
+    "scope": "new exact-pin/context and brownfield audit, foundation checks, Rust, Python, document, privacy and CodeQL on PR head"
   },
-  "current_integration_hosted_checks": "pending_for_new_revision",
+  "current_integration_hosted_checks": "receiving_main_pending_at_initial_reconciliation",
   "remaining_work": [
-    "hosted acceptance of new audit/context validator",
-    "repository-standards profile reconciliation",
-    "source and item-level rights verification (separate gate)",
-    "legacy migration parity and publication acceptance (separate gates)"
+    "repository-standards profile and managed-file drift reconciliation",
+    "confirm receiving-main CI at exact commit",
+    "authoritative rights/content review, history parity and public acceptance remain separate tracks"
   ],
-  "current_integration_hosted_commit": "bfe2255fda85b891c2f68044676c0b777d92c38c"
+  "current_integration_hosted_commit": "840b8431403035be7e5dec5f22b64ad3ddb20d2b"
 }
