@@ -11,6 +11,9 @@ on:
       - "schemas/**"
       - "scripts/validate_packs.py"
       - "scripts/validate_prisma_source_assurance.py"
+      - "scripts/build_prisma42_candidate.py"
+      - "tests/test_prisma42_candidate.py"
+      - "conductor/source-reconciliation/**"
       - "tests/test_prisma_source_assurance.py"
       - "conductor/tracks/01-canonical-standard-pack/**"
       - ".github/workflows/standardflow-pack.yml"
@@ -25,6 +28,9 @@ on:
       - "schemas/**"
       - "scripts/validate_packs.py"
       - "scripts/validate_prisma_source_assurance.py"
+      - "scripts/build_prisma42_candidate.py"
+      - "tests/test_prisma42_candidate.py"
+      - "conductor/source-reconciliation/**"
       - "tests/test_prisma_source_assurance.py"
       - "conductor/tracks/01-canonical-standard-pack/**"
       - ".github/workflows/standardflow-pack.yml"
@@ -59,6 +65,8 @@ jobs:
       - run: python scripts/validate_packs.py
       - run: python -m unittest tests.test_prisma_source_assurance
       - run: python scripts/validate_prisma_source_assurance.py
+      - run: python -m unittest tests.test_prisma42_candidate
+      - run: python scripts/build_prisma42_candidate.py --output /tmp/prisma42-draft.json
 
   rust-quality:
     runs-on: ubuntu-latest
