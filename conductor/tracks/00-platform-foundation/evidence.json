@@ -44,6 +44,50 @@
         "migration parity",
         "publication and external acceptance"
       ]
+    },
+    {
+      "claim": "Deterministic brownfield inventory and exact Conductor gitlink/context link checks passed as part of foundation contracts job on PR #79 head",
+      "evidence_level": "compiler_verified",
+      "commit": "baab246e62f3585237b987f87647eba743f2818e",
+      "receipts": [
+        "https://github.com/edithatogo/standards_check/actions/runs/44498580063/job/135472024917",
+        "https://github.com/edithatogo/standards_check/pull/79"
+      ],
+      "observed": {
+        "tracked_files": 1316,
+        "source_files": 292,
+        "placeholder_paths": 11,
+        "unreadable_text_paths": 0,
+        "context_errors": 0
+      },
+      "limitations": [
+        "inventory-only, neither rights clearance nor source reconciliation",
+        "receipt is tied to PR head, not the receiving-main SHA"
+      ]
+    },
+    {
+      "claim": "PR #79 was squash-merged into main",
+      "evidence_level": "source_verified",
+      "commit": "840b8431403035be7e5dec5f22b64ad3ddb20d2b",
+      "receipt": "https://github.com/edithatogo/standards_check/pull/79",
+      "limitations": [
+        "main branch CI must be verified separately"
+      ]
+    },
+    {
+      "claim": "Receiving-main merge commit for Track 00 PR #79 passed all 11 observed hosted checks, including deployment",
+      "evidence_level": "compiler_verified",
+      "commit": "840b8431403035be7e5dec5f22b64ad3ddb20d2b",
+      "receipts": [
+        "https://github.com/edithatogo/standards_check/commit/840b8431403035be7e5dec5f22b64ad3ddb20d2b/checks"
+      ],
+      "observed": {
+        "completed_success": 11,
+        "failed": 0
+      },
+      "limitations": [
+        "This is CI technical acceptance only; independent rights, methodology, and publication content review remain open"
+      ]
     }
   ]
 }

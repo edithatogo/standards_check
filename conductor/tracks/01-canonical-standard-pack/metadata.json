@@ -11,7 +11,7 @@
   ],
   "pull_request": 60,
   "merge_blockers": [],
-  "updated": "2026-11-18",
+  "updated": "2026-11-19",
   "evidence_level_scope": "bounded hosted fixtures at the recorded accepted PR #60 revision; independent source, rights, migration, external validation and publication remain open",
   "base_branch": "main",
   "last_hosted_verification": {
@@ -48,5 +48,15 @@
     "independent methodological qualification",
     "independent usability/accessibility evaluation",
     "publication and external acceptance"
-  ]
+  ],
+  "brownfield_dependency": {
+    "state": "inventory_and_context_checks_merged",
+    "merge_commit": "840b8431403035be7e5dec5f22b64ad3ddb20d2b",
+    "pr_head": "baab246e62f3585237b987f87647eba743f2818e",
+    "limitations": [
+      "source rights and independent content review unresolved",
+      "track 03 migration parity unresolved",
+      "receiving-main CI requires independent qualification"
+    ]
+  }
 }
