@@ -1,0 +1,54 @@
+name: Import StandardFlow history once
+
+on:
+  pull_request:
+    types: [opened, reopened]
+    paths:
+      - ".github/workflows/import-standardflow.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'codex/ponytail-validation-review-20261122'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: codex/ponytail-validation-review-20261122
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Preserve exact legacy commits and isolated source tree
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch https://github.com/edithatogo/standardflow.git '+refs/heads/*:refs/remotes/standardflow-import/*'
+          python - <<'PY'
+          import subprocess
+          expected = {
+              "main": "af299f724bcf456c131b43a143b3eabc1d81245b",
+              "feature/refactor-and-document": "41c3e174fd7932d308992c4ef96d055273dabdbd",
+              "feature/implement-guidelines": "f1680778b4141bb5553b0e80af22bbdf5c75c862",
+              "chore/GHA-190519-stepsecurity-remediation": "eb7d0703b86aaa82e3cd738a273db7c60a70f6c9",
+              "dependabot/github_actions/actions/setup-python-7.1.0": "7d2e233217d5d3d6c4ca9c5866f64158d117099e",
+          }
+          output = subprocess.check_output(["git", "for-each-ref", "--format=%(refname:strip=3) %(objectname)", "refs/remotes/standardflow-import"], text=True)
+          actual = dict(row.split() for row in output.splitlines())
+          if actual != expected:
+              raise SystemExit("Source refs changed; reconcile before importing")
+          PY
+          test ! -e legacy/standardflow
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git merge --no-commit --no-ff --allow-unrelated-histories -s ours af299f724bcf456c131b43a143b3eabc1d81245b
+          git read-tree --prefix=legacy/standardflow/ -u af299f724bcf456c131b43a143b3eabc1d81245b
+          git commit -m "feat(migration): preserve StandardFlow source and full history"
+          test "$(git rev-parse HEAD:legacy/standardflow)" = a4527d66180a059883f7f6848eebf2c7e12fb94c
+          git merge-base --is-ancestor af299f724bcf456c131b43a143b3eabc1d81245b HEAD
+          git push origin HEAD:refs/heads/codex/ponytail-validation-review-20261122 'refs/remotes/standardflow-import/*:refs/heads/archive/standardflow/*'
