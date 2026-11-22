@@ -5,7 +5,7 @@
   "title": "History-preserving StandardFlow import",
   "status": "in_progress",
   "implementation_state": "source_implemented",
-  "evidence_level": "receiving_runtime_and_recovery_verified",
+  "evidence_level": "receiving_main_runtime_and_recovery_verified",
   "dependencies": [
     "00-platform-foundation",
     "01-canonical-standard-pack",
@@ -17,18 +17,27 @@
   "base_branch": "main",
   "source_retirement_authorization": "User explicitly requested export followed by private archival on 2026-11-22.",
   "remaining_evidence_gates": [
-    "hosted import and runtime checks",
-    "receiving main verification",
     "observed source private/archive settings",
+    "active repository registry and external-consumer reconciliation",
+    "offline AI-security execution",
     "legacy-to-Rust semantic parity",
     "legacy item-level rights and provenance",
     "independent methodology and accessibility qualification"
   ],
   "integration_pull_request": 88,
   "preserved_export_pull_request": 92,
+  "receiving_main_commit": "15184da899f21a62565cfc3145d1a4719baf4ad4",
+  "receiving_workflow_run": "https://github.com/edithatogo/standards_check/actions/runs/45034583489",
   "functional_parity_receipt": "../../../docs/migration/standardflow/functional-parity.json",
   "retirement_receipt": "../../../docs/migration/standardflow/retirement.md",
-  "source_privacy": "pending",
-  "source_archival": "pending",
+  "source_privacy": "pending_owner_reauthentication",
+  "source_archival": "pending_owner_reauthentication",
+  "source_retirement_blocker": "GitHub Confirm access requires the owner's passkey or authenticator; successful account reauthentication has not been observed.",
+  "source_settings_observed": {
+    "observed_at": "2026-11-22T14:53:00Z",
+    "private": false,
+    "archived": false,
+    "open_pull_requests": 0
+  },
   "canonical_content_promotion": false
 }

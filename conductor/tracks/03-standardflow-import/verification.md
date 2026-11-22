@@ -1,9 +1,9 @@
 # StandardFlow export verification
 
-This receipt records evidence observed before the receiving merge. Final receiving
-checks, the main-branch merge and the source's private/archive settings are recorded
-in the receiving pull request. These claims concern repository preservation and the
-legacy runtime; they do not qualify Rust parity, source rights or methodology.
+This receipt records the preserved source, receiving main and its successful hosted
+checks. The export is merged; source privacy and archival remain blocked on owner
+account reauthentication. These claims concern repository preservation and the legacy
+runtime; they do not qualify Rust parity, source rights, methodology or accessibility.
 
 ## Initial source repair
 
@@ -108,5 +108,56 @@ receiving repository on 22 November 2026 UTC and match `import.json`, including 
 advanced repaired application and both later dependency branches. Final source/receiving
 parity passed 52 tests in each copy, all 11 notebook examples, the nine positive CLI
 cases and 21 identical output files against this final source snapshot. Four provenance
-regressions passed again. The new default-container HTTP smoke still requires the
-final receiving hosted run; no result is inferred from its configuration.
+regressions passed again. The actual-main hosted run below subsequently verified the
+new default-container HTTP smoke; this result is observed execution evidence.
+
+## Actual-main acceptance
+
+[Export PR #92](https://github.com/edithatogo/standards_check/pull/92) merged as
+`906c025d67b03322e5c1b41a63aea88e150672e5`. Its preserved history reached main through
+[integration PR #88](https://github.com/edithatogo/standards_check/pull/88), at
+[`15184da899f21a62565cfc3145d1a4719baf4ad4`](https://github.com/edithatogo/standards_check/commit/15184da899f21a62565cfc3145d1a4719baf4ad4).
+Both merges retained ancestry. The integrated primary validator, HTML and Rust/SVG
+improvements are intentional; the earlier unchanged-primary comparison applies only
+to the export preparation described above.
+
+[Main workflow 45034583489](https://github.com/edithatogo/standards_check/actions/runs/45034583489)
+completed successfully at that exact main commit on 22 November 2026 at 14:47:58 UTC.
+Its [receiving job](https://github.com/edithatogo/standards_check/actions/runs/45034583489/job/137245366320)
+and [parity artifact](https://github.com/edithatogo/standards_check/actions/runs/45034583489/artifacts/14758977889)
+record the following results:
+
+| Check | Observed result at receiving main |
+| --- | --- |
+| Source and subtree | Source `dc51d8e392858d5cb4e653aed199563514191efb` and imported tree `62d8a0e738f0255cc59822ae4e661568090a213e` match exactly. |
+| History | All nine manifest source revisions are reachable ancestors. |
+| Provenance regressions | Four tests passed, including rejection cases. |
+| Source/receiving parity | 52 tests passed in each isolated copy, including all 11 notebooks; nine positive CLI cases produced 21 byte-identical files. Invalid PRISMA input was rejected without output. |
+| Container runtime | All 52 tests passed in the built imported image. |
+| Default container startup | The image's default command served HTTP through the published host port. |
+
+An independent clone of this actual main also passed the nine-history provenance
+check and all 52 imported tests. It contained no temporary write-capable import
+workflow. A separate recovery checkout recreated all nine recorded source refs,
+removed its only remote and checked out `dc51d8e392858d5cb4e653aed199563514191efb`;
+the original tree matched `62d8a0e738f0255cc59822ae4e661568090a213e` with no shared
+object alternates. Recovery therefore does not depend on access to the old remote.
+
+The [main document build and deployment](https://github.com/edithatogo/standards_check/actions/runs/45034583564)
+also succeeded. The separate
+[offline AI-security run](https://github.com/edithatogo/standards_check/actions/runs/45034583761)
+was still queued at 14:53 UTC; no pass or exemption is claimed for that job.
+
+## Source retirement remains pending
+
+Source PRs #9 and #24 through #29 were closed after export, with their receiving
+destinations retained in the [retirement record](../../../docs/migration/standardflow/retirement.md).
+At 14:53 UTC on 22 November 2026 the source had zero open PRs and still returned
+`private: false` and `archived: false`. The authorized visibility change reached
+GitHub's **Confirm access** screen, which requires the owner's passkey or
+authenticator. Successful reauthentication and the requested settings changes have
+not been observed. Export completion does not complete this administrative step.
+
+Actual source private/archive settings and downstream registry/consumer updates
+still require receipts. Legacy-to-Rust semantic parity, item-level rights and
+provenance, independent methodology and accessibility qualification remain open.
