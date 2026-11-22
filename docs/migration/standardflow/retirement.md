@@ -8,31 +8,38 @@ returned `private: false` and `archived: false`.
 
 ## Preserved implementation and history
 
-The adopted compatibility snapshot is repaired source commit
-`d89a5dbacc207cdce11f19efd667b83fdb09df18`, tree
-`e48c081ff946d0fac6a1a4b65a3599c6b7aa3352`, under `legacy/standardflow/`.
-It retains both original main `af299f724bcf456c131b43a143b3eabc1d81245b`
-and the earlier PR #9 head `41c3e174fd7932d308992c4ef96d055273dabdbd` as ancestors.
-The existing import `989f2fa5c26b22b8294e20b442a6f602d9d124ed` is reused as a
-parent of receiving commit `c64c61a0a978b4b50f8d525fc76d6548d2e75718` in
-[receiving PR #88](https://github.com/edithatogo/standards_check/pull/88).
-Its exact source subtree and original Apache-2.0 licence are retained.
+The current transferred compatibility baseline is source commit
+`dc51d8e392858d5cb4e653aed199563514191efb`, tree
+`62d8a0e738f0255cc59822ae4e661568090a213e`, under `legacy/standardflow/`.
+Receiving import
+[`6c67527512ad5b603307ac6415ba214d3333c42a`](https://github.com/edithatogo/standards_check/commit/6c67527512ad5b603307ac6415ba214d3333c42a)
+contains that exact subtree, and all nine current source tips are independently
+verified ancestors. It retains original main `af299f724...`, the earlier PR #9
+head `41c3e174...`, and initial repair `d89a5dba...` in history.
+Preparation child
+[`cda5469d6107fe9729f274165ba9dd01fcba25f2`](https://github.com/edithatogo/standards_check/commit/cda5469d6107fe9729f274165ba9dd01fcba25f2)
+retains the transfer and records the completed import. The exact source tree and
+original Apache-2.0 licence are retained. **Transfer is complete; the final main
+merge and source privacy/archive settings remain pending.**
 
-All seven receiving branches below were created and independently read back at
+All nine receiving branches below were created and independently read back at
 the listed SHAs. Each name is prefixed with `archive/standardflow/` in the
 receiving repository; these are preserved snapshots, not accepted runtime changes.
 
 | Source branch | Preserved SHA |
 | --- | --- |
 | `main` | `af299f724bcf456c131b43a143b3eabc1d81245b` |
-| `feature/refactor-and-document` | `d89a5dbacc207cdce11f19efd667b83fdb09df18` |
+| `feature/refactor-and-document` | `dc51d8e392858d5cb4e653aed199563514191efb` |
 | `feature/implement-guidelines` | `f1680778b4141bb5553b0e80af22bbdf5c75c862` |
 | `chore/GHA-190519-stepsecurity-remediation` | `eb7d0703b86aaa82e3cd738a273db7c60a70f6c9` |
 | `dependabot/github_actions/actions/setup-python-7.1.0` | `7d2e233217d5d3d6c4ca9c5866f64158d117099e` |
 | `renovate/click-8.x` | `3f850b81be3feb1a4d84d003b2ec6c166059a68e` |
 | `renovate/graphviz-0.x` | `38c6327a9fe507150ee2bd655f36269345cf04a8` |
+| `renovate/ipykernel-6.x` | `fb91d00d4f49d9b29e1a1a8dc73b1110b2518e00` |
+| `renovate/jsonschema-4.x` | `59c119a933376d5f2e76d1b0088ad92f14d0fc60` |
 
-Final integration must preserve all seven tips as ancestors, including the two
+All nine tips are preserved as ancestors of the completed transfer. Final
+integration into receiving main must retain that ancestry, including the four
 Renovate tips created after the original export. Use a **merge commit**, not
 squash or rebase. Record the resulting receiving main SHA, recheck ancestry and
 `HEAD:legacy/standardflow` against the pinned tree, and recheck live source refs
@@ -41,8 +48,9 @@ absent from receiving main; source workflows inside the retained subtree are ine
 
 ## Acceptance and outstanding work
 
-The [functional receipt](functional-parity.json) records the local source and
-receiving copies passing 52 tests each, including 11 notebooks, with identical
+The [functional receipt](functional-parity.json) records current dc51 source and
+receiving copies passing 52 tests each, including 11 notebooks, with all nine tips
+preserved and identical
 outputs for six diagram and three checklist CLI canaries. Invalid PRISMA input
 also failed without output. This is same-environment legacy behaviour evidence.
 Final hosted receiving checks and the main merge are not claimed complete here.
@@ -59,7 +67,7 @@ from source #23 maps to receiving
 [#76](https://github.com/edithatogo/standards_check/issues/76).
 The three receiving issue bodies retain their transferred obligations. Source PR #9
 supplies the repaired snapshot; the receiving workflow uses the harden-runner and
-setup-python pins represented by PR #24/#25. PR #26/#27 are held in
+setup-python pins represented by PR #24/#25. Dependency PRs #26/#27/#28/#29 are held in
 [#94](https://github.com/edithatogo/standards_check/issues/94); unqualified guideline
 datasets are held in [#95](https://github.com/edithatogo/standards_check/issues/95).
 Preserving their commits does not admit their changes.
@@ -86,16 +94,16 @@ repository and inspect the accepted source directly:
 
 ```bash
 git fetch origin 'refs/heads/archive/standardflow/*:refs/remotes/origin/archive/standardflow/*'
-git show d89a5dbacc207cdce11f19efd667b83fdb09df18:README.md
-git rev-parse d89a5dbacc207cdce11f19efd667b83fdb09df18^{tree}
+git show dc51d8e392858d5cb4e653aed199563514191efb:README.md
+git rev-parse dc51d8e392858d5cb4e653aed199563514191efb^{tree}
 ```
 
-The final command must return `e48c081ff946d0fac6a1a4b65a3599c6b7aa3352`.
+The final command must return `62d8a0e738f0255cc59822ae4e661568090a213e`.
 To recover a standalone source checkout without modifying receiving main:
 
 ```bash
 recovery_parent=$(mktemp -d)
-git worktree add --detach "$recovery_parent/standardflow" d89a5dbacc207cdce11f19efd667b83fdb09df18
+git worktree add --detach "$recovery_parent/standardflow" dc51d8e392858d5cb4e653aed199563514191efb
 ```
 
 Any preserved SHA in the table can be substituted. Original main's tree is

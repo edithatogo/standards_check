@@ -13,7 +13,11 @@ from src.checklist import Checklist
 from src.main import generate_artifact, validate_data
 
 app = Flask(__name__)
-OUTPUT_FORMATS = {"png": "image/png", "svg": "image/svg+xml", "pdf": "application/pdf"}
+OUTPUT_FORMATS = {
+    "png": ("diagram.png", "image/png"),
+    "svg": ("diagram.svg", "image/svg+xml"),
+    "pdf": ("diagram.pdf", "application/pdf"),
+}
 
 
 @app.errorhandler(ValueError)
@@ -28,8 +32,9 @@ def index():
     if request.method == 'GET':
         return render_template('index.html')
 
-    output_format = request.form.get('output_format', 'png')
-    if output_format not in OUTPUT_FORMATS:
+    try:
+        output_filename, mimetype = OUTPUT_FORMATS[request.form.get('output_format', 'png')]
+    except KeyError:
         abort(400, description='Choose PNG, SVG, or PDF.')
     if 'json_toggle' in request.form:
         data = json.loads(request.form['json_data'])
@@ -44,14 +49,14 @@ def index():
 
     # Request-local files and native downloads avoid shared output state.
     with tempfile.TemporaryDirectory() as directory:
-        output = Path(directory) / f'diagram.{output_format}'
+        output = Path(directory) / output_filename
         generate_artifact(data, output)
         encoded = base64.b64encode(output.read_bytes()).decode('ascii')
     return render_template(
         'diagram_viewer.html',
         diagram_file=output.name,
-        diagram_url=f'data:{OUTPUT_FORMATS[output_format]};base64,{encoded}',
-        preview=output_format in {'png', 'svg'},
+        diagram_url=f'data:{mimetype};base64,{encoded}',
+        preview=output_filename.endswith(('.png', '.svg')),
     )
 
 

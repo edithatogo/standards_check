@@ -6,18 +6,21 @@
 - [x] Pin the repaired tree and inventory every source branch tip.
 - [x] Keep unqualified guideline work in history only.
 - [x] Define tree, ancestry and drift checks with negative regression cases.
-- [x] Import the exact tree and preserve all seven branch histories.
+- [x] Import the exact tree and preserve all nine branch histories.
 - [x] Run the relocated application, notebooks and initial provenance checks.
 - [x] Verify the export's original primary baseline; integrate the separately reviewed
   Ponytail validator, HTML and SVG improvements with their regression evidence.
-- [x] Preserve all seven named archive refs and merge the two export preparations.
+- [x] Preserve all nine named archive refs and merge the two export preparations.
 - [x] Record source issue destinations (#29, #30, #31 and #76), held dependency work (#94)
   and unqualified guideline datasets (#95).
+- [x] Include the final source container-startup and fixed-output-name repair; add a
+  default-container HTTP smoke test.
 - [x] Add same-environment source/receiving parity, 21 byte-identical outputs and an
   isolated 27-package dependency closure alongside provenance and container checks.
 - [ ] Observe receiving hosted checks and merge without squashing ancestry.
 - [x] Rehearse recovery from preserved commits without the source remote.
-- [ ] Verify receiving main and the final seven-ref inventory.
+- [x] Verify all nine named recovery refs against the final source inventory.
+- [ ] Verify receiving main.
 - [ ] Make the source private, archive it and record the observed repository settings.
 - [ ] Reconcile the active repository registry and current downstream StandardFlow links.
 

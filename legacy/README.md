@@ -2,9 +2,9 @@
 
 The repaired legacy runtime from `edithatogo/standardflow` is retained under
 [`standardflow/`](standardflow/) with its complete Git history and Apache-2.0 licence.
-Source revision `d89a5dbacc207cdce11f19efd667b83fdb09df18` includes the original main
+Source revision `dc51d8e392858d5cb4e653aed199563514191efb` includes the original main
 and the reviewed compatibility repairs. Its exact tree is
-`e48c081ff946d0fac6a1a4b65a3599c6b7aa3352`.
+`62d8a0e738f0255cc59822ae4e661568090a213e`.
 The imported tree is an exact snapshot, not a new canonical standards authority.
 Use this repository for development and issues; the old repository is being retired.
 
