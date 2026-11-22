@@ -1,72 +1,85 @@
-import unittest
-import os
 import json
+from pathlib import Path
+import os
+import subprocess
+import sys
+import unittest
+
 from click.testing import CliRunner
+
 from src.cli import cli
 
-class TestCli(unittest.TestCase):
+ROOT = Path(__file__).resolve().parent.parent
 
+
+class TestCli(unittest.TestCase):
     def setUp(self):
         self.runner = CliRunner()
-        self.valid_data_path = 'examples/data/consort_data.json'
-        self.invalid_data_path = 'invalid_data.json'
-        with open(self.invalid_data_path, 'w') as f:
-            json.dump({"diagram_type": "CONSORT"}, f)
 
-        self.style_path = 'style.json'
-        with open(self.style_path, 'w') as f:
-            json.dump({"box_color": "red"}, f)
+    def test_list_and_schemas(self):
+        for args, expected in (
+            (['list'], 'CONSORT_CLUSTER'), (['list'], 'CARE'),
+            (['schemas'], 'CHECKLIST'),
+            (['schemas', 'consort'], 'CONSORT 2010 flow diagram schema'),
+        ):
+            with self.subTest(args=args):
+                result = self.runner.invoke(cli, args)
+                self.assertEqual(result.exit_code, 0, result.output)
+                self.assertIn(expected, result.output)
+        result = self.runner.invoke(cli, ['schemas', '../requirements'])
+        self.assertNotEqual(result.exit_code, 0)
 
-    def tearDown(self):
-        if os.path.exists(self.invalid_data_path):
-            os.remove(self.invalid_data_path)
-        if os.path.exists(self.style_path):
-            os.remove(self.style_path)
-        # Clean up any generated files
-        for f in ['test.png', 'test.svg', 'test.pdf', 'test.typ', 'test.svg']:
-            if os.path.exists(f):
-                os.remove(f)
+    def test_generation_from_another_directory_and_default_png(self):
+        with self.runner.isolated_filesystem():
+            for output in ('diagram.png', 'diagram.svg', 'diagram.pdf', 'diagram.typ'):
+                with self.subTest(output=output):
+                    result = self.runner.invoke(cli, [
+                        'generate', str(ROOT / 'data/prisma_data.json'), '-o', output,
+                    ])
+                    self.assertEqual(result.exit_code, 0, result.output)
+                    self.assertGreater(Path(output).stat().st_size, 0)
+            result = self.runner.invoke(cli, [
+                'generate', str(ROOT / 'data/prisma_data.json'),
+            ])
+            self.assertEqual(result.exit_code, 0, result.output)
+            self.assertTrue(Path('output.png').read_bytes().startswith(b'\x89PNG'))
 
-    def test_list_command(self):
-        result = self.runner.invoke(cli, ['list'])
-        self.assertEqual(result.exit_code, 0)
-        self.assertIn("Available diagram types:", result.output)
+    def test_validate_returns_nonzero_for_invalid_data(self):
+        with self.runner.isolated_filesystem():
+            for contents in ('{', '[]', '{}', '{"diagram_type": "CONSORT"}'):
+                with self.subTest(contents=contents):
+                    Path('invalid.json').write_text(contents)
+                    result = self.runner.invoke(cli, ['validate', 'invalid.json'])
+                    self.assertNotEqual(result.exit_code, 0)
+                    self.assertIn('Validation failed:', result.output)
+            for fixture in ('prisma_data.json', 'care_checklist.json'):
+                result = self.runner.invoke(cli, ['validate', str(ROOT / 'data' / fixture)])
+                self.assertEqual(result.exit_code, 0, result.output)
+                self.assertIn('Validation successful!', result.output)
 
-    def test_generate_command(self):
-        result = self.runner.invoke(cli, ['generate', self.valid_data_path, '-o', 'test.png'])
-        self.assertEqual(result.exit_code, 0)
+    def test_style_and_overrides_reach_the_rendered_output(self):
+        with self.runner.isolated_filesystem():
+            Path('style.json').write_text(json.dumps({'box_color': '#ff0000'}))
+            result = self.runner.invoke(cli, [
+                'generate', str(ROOT / 'data/prisma_data.json'), '-o', 'styled.svg',
+                '--style', 'style.json', '--set', 'records_screened=777',
+            ])
+            self.assertEqual(result.exit_code, 0, result.output)
+            svg = Path('styled.svg').read_text()
+            self.assertIn('#ff0000', svg)
+            self.assertIn('(n = 777)', svg)
 
-    def test_generate_command_with_format(self):
-        result = self.runner.invoke(cli, ['generate', self.valid_data_path, '-o', 'test.svg'])
-        self.assertEqual(result.exit_code, 0)
+    def test_legacy_module_entrypoint(self):
+        with self.runner.isolated_filesystem():
+            result = subprocess.run(
+                [sys.executable, '-m', 'src', str(ROOT / 'data/prisma_data.json'),
+                 '-o', 'module.svg'],
+                env={**os.environ, 'PYTHONPATH': str(ROOT)},
+                capture_output=True, text=True, check=False,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertIn('<svg', Path('module.svg').read_text())
 
-    def test_validate_command_valid(self):
-        result = self.runner.invoke(cli, ['validate', self.valid_data_path])
-        self.assertEqual(result.exit_code, 0)
-        self.assertIn("Validation successful!", result.output)
-
-    def test_validate_command_invalid(self):
-        result = self.runner.invoke(cli, ['validate', self.invalid_data_path])
-        self.assertEqual(result.exit_code, 0)
-        self.assertIn("Validation failed:", result.output)
-
-    def test_schemas_command_list(self):
-        result = self.runner.invoke(cli, ['schemas'])
-        self.assertEqual(result.exit_code, 0)
-        self.assertIn("Available schemas:", result.output)
-
-    def test_schemas_command_print(self):
-        result = self.runner.invoke(cli, ['schemas', 'CONSORT'])
-        self.assertEqual(result.exit_code, 0)
-        self.assertIn("CONSORT 2010 flow diagram schema", result.output)
-
-    def test_generate_with_style(self):
-        result = self.runner.invoke(cli, ['generate', self.valid_data_path, '-o', 'test.png', '--style', self.style_path])
-        self.assertEqual(result.exit_code, 0)
-
-    def test_generate_with_set(self):
-        result = self.runner.invoke(cli, ['generate', self.valid_data_path, '-o', 'test.png', '--set', 'randomized=999'])
-        self.assertEqual(result.exit_code, 0)
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,66 +1,114 @@
-from flask import Flask, render_template, request, send_file
+import base64
+import io
 import json
-import os
-import sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from src.main import generate_artifact
+from pathlib import Path
+import tempfile
+import zipfile
 
-from .markdown_filter import markdown_filter
+from flask import Flask, abort, render_template, request, send_file
+from jsonschema.exceptions import ValidationError
+from werkzeug.exceptions import BadRequest
+
+from src.checklist import Checklist
+from src.main import generate_artifact, validate_data
 
 app = Flask(__name__)
-app.jinja_env.filters['markdown'] = markdown_filter
+OUTPUT_FORMATS = {"png": "image/png", "svg": "image/svg+xml", "pdf": "application/pdf"}
+
+
+@app.errorhandler(ValueError)
+@app.errorhandler(ValidationError)
+def invalid_data(error):
+    message = error.message if isinstance(error, ValidationError) else str(error)
+    return BadRequest(description=message)
+
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    if request.method == 'POST':
-        data = request.form.to_dict()
-        diagram_type = data.get('diagram_type')
-        output_format = data.get('output_format', 'png')
+    if request.method == 'GET':
+        return render_template('index.html')
 
-        if diagram_type:
-            temp_file = "temp.json"
-            with open(temp_file, 'w') as f:
-                json.dump(data, f)
+    output_format = request.form.get('output_format', 'png')
+    if output_format not in OUTPUT_FORMATS:
+        abort(400, description='Choose PNG, SVG, or PDF.')
+    if 'json_toggle' in request.form:
+        data = json.loads(request.form['json_data'])
+    else:
+        controls = {'diagram_type', 'output_format', 'json_data', 'json_toggle'}
+        data = {
+            'diagram_type': request.form['diagram_type'],
+            **{key: int(value) for key, value in request.form.items() if key not in controls},
+        }
+    if not isinstance(data, dict) or 'diagram_type' not in data or 'checklist_type' in data:
+        abort(400, description='Provide a diagram JSON object.')
 
-            output_filename = f'diagram.{output_format}'
-            output_file = os.path.join(app.root_path, 'static', output_filename)
-            generate_artifact(temp_file, output_file, schema_dir='schemas')
-            return render_template('diagram_viewer.html', diagram_file=output_filename)
-    return render_template('index.html')
+    # Request-local files and native downloads avoid shared output state.
+    with tempfile.TemporaryDirectory() as directory:
+        output = Path(directory) / f'diagram.{output_format}'
+        generate_artifact(data, output)
+        encoded = base64.b64encode(output.read_bytes()).decode('ascii')
+    return render_template(
+        'diagram_viewer.html',
+        diagram_file=output.name,
+        diagram_url=f'data:{OUTPUT_FORMATS[output_format]};base64,{encoded}',
+        preview=output_format in {'png', 'svg'},
+    )
+
+
+def checklist_data():
+    if 'json_toggle' in request.form:
+        data = json.loads(request.form['json_data'])
+    else:
+        checklist_type = request.form['checklist_type']
+        indices = sorted(
+            (key[3:] for key in request.form if key.startswith('id-') and key[3:].isdigit()),
+            key=int,
+        )
+        items = []
+        for index in indices:
+            item = {
+                field: request.form[f'{field}-{index}']
+                for field in ('id', 'section', 'description', 'type')
+            }
+            if item['type'] == 'multiple_choice':
+                prefix = f'option-{index}-'
+                options = sorted(
+                    (key for key in request.form if key.startswith(prefix) and key[len(prefix):].isdigit()),
+                    key=lambda key: int(key[len(prefix):]),
+                )
+                item['options'] = [request.form[key] for key in options]
+            items.append(item)
+        data = {
+            'checklist_type': checklist_type,
+            'title': request.form.get('title', f'{checklist_type} checklist'),
+            'items': items,
+        }
+    if not isinstance(data, dict) or 'checklist_type' not in data or 'diagram_type' in data:
+        abort(400, description='Provide a checklist JSON object.')
+    return validate_data(data)
+
 
 @app.route('/checklist', methods=['GET', 'POST'])
 def checklist():
-    if request.method == 'POST':
-        data = request.form.to_dict()
-        data['diagram_type'] = data.get('checklist_type')
-        checklist_type = data.get('checklist_type')
-        if checklist_type:
-            temp_file = "temp.json"
-            with open(temp_file, 'w') as f:
-                json.dump(data, f)
+    if request.method == 'GET':
+        return render_template('checklist.html')
+    data = checklist_data()
+    return render_template(
+        'checklist_viewer.html', data=data,
+        sections=Checklist(data).to_markdown_by_section(),
+    )
 
-            output_file = os.path.join(app.root_path, 'static', 'checklist.md')
-            generate_artifact(temp_file, output_file, schema_dir='schemas')
-            with open(output_file, 'r') as f:
-                checklist_content = f.read()
-            sections = {}
-            current_section = None
-            for line in checklist_content.split('\n'):
-                if line.startswith('## '):
-                    current_section = line[3:]
-                    sections[current_section] = []
-                elif current_section:
-                    sections[current_section].append(line)
-            return render_template('checklist_viewer.html', sections=sections)
-    return render_template('checklist.html')
 
-@app.route('/download_checklist')
+@app.post('/download_checklist')
 def download_checklist():
-    return send_file(os.path.join(app.root_path, 'static', 'checklist.md'), as_attachment=True)
+    sections = Checklist(checklist_data()).to_markdown_by_section()
+    buffer = io.BytesIO()
+    with zipfile.ZipFile(buffer, 'w', compression=zipfile.ZIP_DEFLATED) as archive:
+        for section, markdown in sections.items():
+            archive.writestr(f"{section.replace(' ', '_')}.md", markdown)
+    buffer.seek(0)
+    return send_file(buffer, as_attachment=True, download_name='checklist.zip', mimetype='application/zip')
 
-@app.route('/download_diagram/<filename>')
-def download_diagram(filename):
-    return send_file(os.path.join(app.root_path, 'static', filename), as_attachment=True)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

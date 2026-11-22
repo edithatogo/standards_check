@@ -8,7 +8,10 @@
         "diagram_type": {
             "description": "The type of diagram to generate.",
             "type": "string",
-            "enum": ["PRISMA", "PRISMA_2020_UPDATED"]
+            "enum": [
+                "PRISMA",
+                "PRISMA_2020_UPDATED"
+            ]
         },
         "previous_studies": {
             "description": "Number of studies included in the previous version of the review.",
@@ -54,10 +57,45 @@
             "description": "Total number of studies included in the synthesis.",
             "type": "integer",
             "minimum": 0
+        },
+        "style": {
+            "$ref": "#/definitions/style"
+        },
+        "records_identified": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "records_after_duplicates_removed": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "records_screened": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "records_excluded": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "full_text_articles_assessed": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "full_text_articles_excluded": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "studies_included": {
+            "type": "integer",
+            "minimum": 0
         }
     },
     "if": {
-        "properties": { "diagram_type": { "const": "PRISMA" } }
+        "properties": {
+            "diagram_type": {
+                "const": "PRISMA"
+            }
+        }
     },
     "then": {
         "required": [
@@ -112,9 +150,7 @@
             }
         }
     },
-    "properties": {
-        "style": {
-            "$ref": "#/definitions/style"
-        }
-    }
+    "required": [
+        "diagram_type"
+    ]
 }

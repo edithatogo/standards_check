@@ -1,62 +1,70 @@
-import unittest
-import os
 import json
+from pathlib import Path
+import subprocess
+from tempfile import TemporaryDirectory
+import unittest
+from unittest.mock import patch
+from xml.etree import ElementTree
+
 from src.consort import ConsortDiagram
+from src.prisma import PrismaDiagram
+from src.strobe import StrobeDiagram
+
 
 class TestDiagram(unittest.TestCase):
+    def test_variants_render_labelled_svg(self):
+        cases = (
+            ('prisma', PrismaDiagram, 'Records screened', '800'),
+            ('prisma_2020_updated', PrismaDiagram, 'previous version', '160'),
+            ('consort', ConsortDiagram, 'Allocated to intervention', '400'),
+            ('consort_cluster', ConsortDiagram, 'clusters', 'individuals'),
+            ('strobe', StrobeDiagram, 'Included in study', '720'),
+            ('strobe_cohort', StrobeDiagram, 'Exposed Group', 'Unexposed Group'),
+        )
+        with TemporaryDirectory() as directory:
+            for name, renderer, label, count in cases:
+                with self.subTest(name=name):
+                    data = json.loads(Path(f'data/{name}_data.json').read_text())
+                    output = Path(directory) / f'{name}.svg'
+                    renderer(data).generate(output)
+                    texts = ElementTree.parse(output).findall(
+                        './/{http://www.w3.org/2000/svg}text')
+                    rendered = ' '.join(text.text or '' for text in texts)
+                    self.assertIn(label, rendered)
+                    self.assertIn(count, rendered)
 
-    def setUp(self):
-        self.data = {
-            "diagram_type": "CONSORT",
-            "assessed_for_eligibility": 1000,
-            "excluded_before_randomization": 200,
-            "randomized": 800,
-            "intervention_group_allocated": 400,
-            "intervention_group_received": 400,
-            "intervention_group_lost_to_follow_up": 20,
-            "intervention_group_discontinued": 10,
-            "intervention_group_analysed": 370,
-            "control_group_allocated": 400,
-            "control_group_received": 400,
-            "control_group_lost_to_follow_up": 15,
-            "control_group_discontinued": 5,
-            "control_group_analysed": 380
+    def test_styles_and_typst_reference(self):
+        data = json.loads(Path('data/prisma_data.json').read_text())
+        data['style'] = {
+            'box_color': '#ffff00', 'font_color': '#ff0000',
+            'font_name': 'Helvetica', 'font_size': '16',
+            'arrow_color': '#0000ff',
         }
-        self.diagram = ConsortDiagram(self.data)
-        self.diagram.build_graph()
+        with TemporaryDirectory() as directory:
+            output = Path(directory) / 'diagram.typ'
+            diagram = PrismaDiagram(data)
+            diagram.generate(output)
+            self.assertEqual(output.read_text(), '#image("diagram.svg")\n')
+            svg = output.with_suffix('.svg').read_text()
+            for value in ('#ffff00', '#ff0000', '#0000ff', 'Helvetica', '16.00'):
+                self.assertIn(value, svg)
+            self.assertIn('Records screened', svg)
+            self.assertEqual(sorted(p.name for p in Path(directory).iterdir()),
+                             ['diagram.svg', 'diagram.typ'])
 
-    def test_save_png(self):
-        output_path = "test_diagram.png"
-        self.diagram.save(output_path)
-        # Assuming if no exception is raised, the file is created.
-        # This is due to the issues with `ls` in the environment.
-        # In a real-world scenario, we would check for file existence.
-        if os.path.exists(output_path):
-            os.remove(output_path)
+    def test_tiff_failure_keeps_existing_png(self):
+        data = json.loads(Path('data/prisma_data.json').read_text())
+        with TemporaryDirectory() as directory:
+            output = Path(directory) / 'diagram.tiff'
+            png = output.with_suffix('.png')
+            png.write_bytes(b'existing user output')
+            with patch('src.diagram.subprocess.run',
+                       side_effect=subprocess.CalledProcessError(1, ['convert'])):
+                with self.assertRaises(subprocess.CalledProcessError):
+                    PrismaDiagram(data).generate(output)
+            self.assertEqual(png.read_bytes(), b'existing user output')
+            self.assertFalse(output.exists())
 
-    def test_save_svg(self):
-        output_path = "test_diagram.svg"
-        self.diagram.save(output_path)
-        if os.path.exists(output_path):
-            os.remove(output_path)
-
-    def test_save_pdf(self):
-        output_path = "test_diagram.pdf"
-        self.diagram.save(output_path)
-        if os.path.exists(output_path):
-            os.remove(output_path)
-
-    def test_save_typ(self):
-        output_path = "test_diagram.typ"
-        self.diagram.save(output_path)
-        self.assertTrue(os.path.exists(output_path))
-        with open(output_path, 'r') as f:
-            content = f.read()
-        self.assertEqual(content, '#image("test_diagram.svg")')
-        if os.path.exists(output_path):
-            os.remove(output_path)
-        if os.path.exists("test_diagram.svg"):
-             os.remove("test_diagram.svg")
 
 if __name__ == '__main__':
     unittest.main()

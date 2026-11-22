@@ -34,7 +34,12 @@
                     "type": {
                         "description": "The type of the item.",
                         "type": "string",
-                        "enum": ["boolean", "string", "integer", "multiple_choice"]
+                        "enum": [
+                            "boolean",
+                            "string",
+                            "integer",
+                            "multiple_choice"
+                        ]
                     },
                     "options": {
                         "description": "The options for a multiple choice question.",
@@ -56,9 +61,34 @@
                         }
                     }
                 },
-                "required": ["section", "id", "description", "type"]
+                "required": [
+                    "section",
+                    "id",
+                    "description",
+                    "type"
+                ],
+                "allOf": [
+                    {
+                        "if": {
+                            "properties": {
+                                "type": {
+                                    "const": "multiple_choice"
+                                }
+                            }
+                        },
+                        "then": {
+                            "required": [
+                                "options"
+                            ]
+                        }
+                    }
+                ]
             }
         }
     },
-    "required": ["checklist_type", "title", "items"]
+    "required": [
+        "checklist_type",
+        "title",
+        "items"
+    ]
 }

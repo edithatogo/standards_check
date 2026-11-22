@@ -1,16 +1,31 @@
 {
     "diagram_type": "CONSORT_CLUSTER",
-    "assessed_for_eligibility": 1000,
-    "excluded": 200,
-    "randomized": 800,
-    "intervention_group_allocated": 400,
-    "intervention_group_received": 380,
-    "intervention_group_lost_to_follow_up": 10,
-    "intervention_group_discontinued": 10,
-    "intervention_group_analysed": 350,
-    "control_group_allocated": 400,
-    "control_group_received": 390,
-    "control_group_lost_to_follow_up": 5,
-    "control_group_discontinued": 5,
-    "control_group_analysed": 380
+    "clusters_assessed_for_eligibility": 100,
+    "clusters_excluded": 20,
+    "reasons_for_cluster_exclusion": [
+        "Not meeting inclusion criteria (n=15)",
+        "Declined to participate (n=5)"
+    ],
+    "clusters_randomized": 80,
+    "clusters_allocated_to_intervention": 40,
+    "individuals_in_clusters_allocated_to_intervention": 4000,
+    "clusters_lost_to_follow_up": 5,
+    "individuals_lost_to_follow_up": 500,
+    "reasons_for_cluster_loss_to_follow_up": [
+        "Unable to contact (n=3)",
+        "Withdrew consent (n=2)"
+    ],
+    "clusters_discontinued_intervention": 2,
+    "individuals_discontinued_intervention": 200,
+    "reasons_for_cluster_discontinuation": [
+        "Adverse event (n=1)",
+        "Protocol violation (n=1)"
+    ],
+    "clusters_analysed": 33,
+    "individuals_analysed": 3300,
+    "clusters_excluded_from_analysis": 2,
+    "individuals_excluded_from_analysis": 200,
+    "reasons_for_cluster_exclusion_from_analysis": [
+        "Incomplete data (n=2)"
+    ]
 }

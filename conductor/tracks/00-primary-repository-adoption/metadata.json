@@ -1,0 +1,12 @@
+{
+  "schema_version": "dev.standardflow.conductor-track.v1",
+  "track_id": "00",
+  "slug": "00-primary-repository-adoption",
+  "title": "Primary-repository adoption",
+  "status": "in_progress",
+  "implementation_state": "source_implemented",
+  "evidence_level": "source_verified",
+  "primary_repository": "edithatogo/standards_check",
+  "proposed_primary_revision": "f1e7b6c6e283865c1b7dbb34dbe33d8bf6f6c799",
+  "updated": "2026-09-08"
+}

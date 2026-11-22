@@ -8,7 +8,10 @@
         "diagram_type": {
             "description": "The type of diagram to generate.",
             "type": "string",
-            "enum": ["STROBE", "STROBE_COHORT"]
+            "enum": [
+                "STROBE",
+                "STROBE_COHORT"
+            ]
         },
         "exposed_group_potentially_eligible": {
             "description": "Number of potentially eligible participants in the exposed group.",
@@ -97,10 +100,63 @@
             "description": "Number of participants in the unexposed group analysed.",
             "type": "integer",
             "minimum": 0
+        },
+        "style": {
+            "$ref": "#/definitions/style"
+        },
+        "potentially_eligible": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "assessed_for_eligibility": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "excluded_before_study": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "included_in_study": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "lost_to_follow_up": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "incomplete_data": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "analysed": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "reasons_for_exclusion_before_study": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "reasons_for_loss_to_follow_up": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "reasons_for_incomplete_data": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
         }
     },
     "if": {
-        "properties": { "diagram_type": { "const": "STROBE" } }
+        "properties": {
+            "diagram_type": {
+                "const": "STROBE"
+            }
+        }
     },
     "then": {
         "required": [
@@ -158,9 +214,7 @@
             }
         }
     },
-    "properties": {
-        "style": {
-            "$ref": "#/definitions/style"
-        }
-    }
+    "required": [
+        "diagram_type"
+    ]
 }

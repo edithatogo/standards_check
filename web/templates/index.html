@@ -1,44 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Research Artifacts Library</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script>
         function updateForm() {
-            var diagramType = document.getElementById('diagram_type').value;
-            document.getElementById('prisma_fields').style.display = 'none';
-            document.getElementById('prisma_updated_fields').style.display = 'none';
-            document.getElementById('consort_fields').style.display = 'none';
-            document.getElementById('consort_cluster_fields').style.display = 'none';
-            document.getElementById('strobe_fields').style.display = 'none';
-            document.getElementById('strobe_cohort_fields').style.display = 'none';
-
-            if (diagramType === 'PRISMA') {
-                document.getElementById('prisma_fields').style.display = 'block';
-            } else if (diagramType === 'PRISMA_2020_UPDATED') {
-                document.getElementById('prisma_updated_fields').style.display = 'block';
-            } else if (diagramType === 'CONSORT') {
-                document.getElementById('consort_fields').style.display = 'block';
-            } else if (diagramType === 'CONSORT_CLUSTER') {
-                document.getElementById('consort_cluster_fields').style.display = 'block';
-            } else if (diagramType === 'STROBE') {
-                document.getElementById('strobe_fields').style.display = 'block';
-            } else if (diagramType === 'STROBE_COHORT') {
-                document.getElementById('strobe_cohort_fields').style.display = 'block';
+            const diagramType = document.getElementById('diagram_type').value;
+            const rawJson = document.getElementById('json_toggle').checked;
+            const groups = {
+                prisma_fields: 'PRISMA',
+                prisma_updated_fields: 'PRISMA_2020_UPDATED',
+                consort_fields: 'CONSORT',
+                consort_cluster_fields: 'CONSORT_CLUSTER',
+                strobe_fields: 'STROBE',
+                strobe_cohort_fields: 'STROBE_COHORT'
+            };
+            for (const [id, type] of Object.entries(groups)) {
+                const group = document.getElementById(id);
+                const active = type === diagramType && !rawJson;
+                group.style.display = active ? 'block' : 'none';
+                group.querySelectorAll('input').forEach(input => { input.disabled = !active; });
             }
-        }
-
-        function toggleJsonInput() {
-            var jsonToggle = document.getElementById('json_toggle');
-            var dynamicForm = document.getElementById('dynamic_form');
-            var jsonInput = document.getElementById('json_input');
-            if (jsonToggle.checked) {
-                dynamicForm.style.display = 'none';
-                jsonInput.style.display = 'block';
-            } else {
-                dynamicForm.style.display = 'block';
-                jsonInput.style.display = 'none';
-            }
+            document.getElementById('dynamic_form').style.display = rawJson ? 'none' : 'block';
+            document.getElementById('json_input').style.display = rawJson ? 'block' : 'none';
+            document.getElementById('json_data').disabled = !rawJson;
         }
     </script>
 </head>
@@ -55,7 +40,7 @@
             <option value="STROBE_COHORT">STROBE (Cohort)</option>
         </select>
         <br>
-        <input type="checkbox" id="json_toggle" onchange="toggleJsonInput()">
+        <input type="checkbox" id="json_toggle" name="json_toggle" onchange="updateForm()">
         <label for="json_toggle">Use Raw JSON Input</label>
         <br>
         <label for="output_format">Output Format:</label>
@@ -63,7 +48,6 @@
             <option value="png">PNG</option>
             <option value="svg">SVG</option>
             <option value="pdf">PDF</option>
-            <option value="typ">Typst</option>
         </select>
         <br>
 

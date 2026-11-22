@@ -1,17 +1,10 @@
 {
     "diagram_type": "PRISMA",
-    "records_identified": 150,
-    "records_after_duplicates_removed": 130,
-    "records_screened": 130,
-    "records_excluded": 30,
-    "full_text_articles_assessed": 100,
-    "full_text_articles_excluded": 10,
-    "studies_included": 90,
-    "included_in_synthesis": 80,
-    "databases": 100,
-    "registers": 50,
-    "duplicates": 20,
-    "retrieved_reports": 100,
-    "excluded_reports": 10,
-    "excluded_records": 30
+    "records_identified": 1000,
+    "records_after_duplicates_removed": 800,
+    "records_screened": 800,
+    "records_excluded": 200,
+    "full_text_articles_assessed": 600,
+    "full_text_articles_excluded": 300,
+    "studies_included": 300
 }

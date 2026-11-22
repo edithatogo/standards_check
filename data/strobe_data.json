@@ -3,9 +3,19 @@
     "potentially_eligible": 1200,
     "assessed_for_eligibility": 1000,
     "excluded_before_study": 200,
+    "reasons_for_exclusion_before_study": [
+        "Did not meet inclusion criteria (n=150)",
+        "Declined to participate (n=50)"
+    ],
     "included_in_study": 800,
     "lost_to_follow_up": 50,
-    "incomplete_data": 50,
-    "analysed": 700,
-    "excluded": 100
+    "reasons_for_loss_to_follow_up": [
+        "Unable to contact (n=30)",
+        "Withdrew consent (n=20)"
+    ],
+    "incomplete_data": 30,
+    "reasons_for_incomplete_data": [
+        "Missing key variables (n=30)"
+    ],
+    "analysed": 720
 }

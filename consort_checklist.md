@@ -1,3 +1,7 @@
+# CONSORT 2010 Checklist of Information to Include When Reporting a Randomised Trial
+
+## Title and abstract
+
 **1a**: Identification as a randomised trial in the title
 
 [ ] Yes
@@ -7,6 +11,8 @@
 
 [ ] Yes
 [ ] No
+
+## Introduction
 
 **2a**: Scientific background and explanation of rationale
 

@@ -8,77 +8,10 @@
         "diagram_type": {
             "description": "The type of diagram to generate.",
             "type": "string",
-            "enum": ["CONSORT", "CONSORT_CLUSTER"]
-        },
-        "assessed_for_eligibility": {
-            "description": "Number of participants assessed for eligibility.",
-            "type": "integer",
-            "minimum": 0
-        },
-        "excluded": {
-            "description": "Number of participants excluded before randomization.",
-            "type": "integer",
-            "minimum": 0
-        },
-        "excluded_before_randomization": {
-            "description": "Number of participants excluded before randomization.",
-            "type": "integer",
-            "minimum": 0
-        },
-        "randomized": {
-            "description": "Number of participants randomized.",
-            "type": "integer",
-            "minimum": 0
-        },
-        "intervention_group_allocated": {
-            "description": "Number of participants allocated to intervention group.",
-            "type": "integer",
-            "minimum": 0
-        },
-        "intervention_group_received": {
-            "description": "Number of participants who received intervention.",
-            "type": "integer",
-            "minimum": 0
-        },
-        "intervention_group_lost_to_follow_up": {
-            "description": "Number of participants in intervention group lost to follow-up.",
-            "type": "integer",
-            "minimum": 0
-        },
-        "intervention_group_discontinued": {
-            "description": "Number of participants in intervention group who discontinued intervention.",
-            "type": "integer",
-            "minimum": 0
-        },
-        "intervention_group_analysed": {
-            "description": "Number of participants in intervention group analysed.",
-            "type": "integer",
-            "minimum": 0
-        },
-        "control_group_allocated": {
-            "description": "Number of participants allocated to control group.",
-            "type": "integer",
-            "minimum": 0
-        },
-        "control_group_received": {
-            "description": "Number of participants who received control.",
-            "type": "integer",
-            "minimum": 0
-        },
-        "control_group_lost_to_follow_up": {
-            "description": "Number of participants in control group lost to follow-up.",
-            "type": "integer",
-            "minimum": 0
-        },
-        "control_group_discontinued": {
-            "description": "Number of participants in control group who discontinued intervention.",
-            "type": "integer",
-            "minimum": 0
-        },
-        "control_group_analysed": {
-            "description": "Number of participants in control group analysed.",
-            "type": "integer",
-            "minimum": 0
+            "enum": [
+                "CONSORT",
+                "CONSORT_CLUSTER"
+            ]
         },
         "clusters_assessed_for_eligibility": {
             "description": "Number of clusters assessed for eligibility.",
@@ -172,30 +105,101 @@
             "items": {
                 "type": "string"
             }
+        },
+        "style": {
+            "$ref": "#/definitions/style"
+        },
+        "assessed_for_eligibility": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "excluded": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "randomized": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "allocated_to_intervention": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "received_allocated_intervention": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "did_not_receive_allocated_intervention": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "lost_to_follow_up": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "discontinued_intervention": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "analysed": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "excluded_from_analysis": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "reasons_for_exclusion": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "reasons_for_not_receiving_intervention": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "reasons_for_loss_to_follow_up": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "reasons_for_discontinuing_intervention": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "reasons_for_exclusion_from_analysis": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
         }
     },
     "if": {
-        "properties": { "diagram_type": { "const": "CONSORT" } }
+        "properties": {
+            "diagram_type": {
+                "const": "CONSORT"
+            }
+        }
     },
     "then": {
         "required": [
             "diagram_type",
             "assessed_for_eligibility",
+            "excluded",
             "randomized",
-            "intervention_group_allocated",
-            "intervention_group_received",
-            "intervention_group_lost_to_follow_up",
-            "intervention_group_discontinued",
-            "intervention_group_analysed",
-            "control_group_allocated",
-            "control_group_received",
-            "control_group_lost_to_follow_up",
-            "control_group_discontinued",
-            "control_group_analysed"
-        ],
-        "oneOf": [
-            { "required": ["excluded"] },
-            { "required": ["excluded_before_randomization"] }
+            "allocated_to_intervention",
+            "received_allocated_intervention",
+            "did_not_receive_allocated_intervention",
+            "lost_to_follow_up",
+            "discontinued_intervention",
+            "analysed",
+            "excluded_from_analysis"
         ]
     },
     "else": {
@@ -243,9 +247,7 @@
             }
         }
     },
-    "properties": {
-        "style": {
-            "$ref": "#/definitions/style"
-        }
-    }
+    "required": [
+        "diagram_type"
+    ]
 }

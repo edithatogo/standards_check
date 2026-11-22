@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Research Artifacts Library</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -73,20 +73,18 @@
         }
 
         function toggleJsonInput() {
-            var jsonToggle = document.getElementById('json_toggle');
-            var dynamicForm = document.getElementById('dynamic_form');
-            var jsonInput = document.getElementById('json_input');
-            if (jsonToggle.checked) {
-                dynamicForm.style.display = 'none';
-                jsonInput.style.display = 'block';
-            } else {
-                dynamicForm.style.display = 'block';
-                jsonInput.style.display = 'none';
-            }
+            const rawJson = document.getElementById('json_toggle').checked;
+            const dynamicForm = document.getElementById('dynamic_form');
+            dynamicForm.style.display = rawJson ? 'none' : 'block';
+            dynamicForm.querySelectorAll('input, select, textarea, button').forEach(input => {
+                input.disabled = rawJson;
+            });
+            document.getElementById('json_input').style.display = rawJson ? 'block' : 'none';
+            document.getElementById('json_data').disabled = !rawJson;
         }
     </script>
 </head>
-<body>
+<body onload="toggleJsonInput()">
     <h1>Research Artifacts Library</h1>
     <form method="POST">
         <label for="checklist_type">Checklist Type:</label>
@@ -99,7 +97,7 @@
             <option value="CARE">CARE</option>
         </select>
         <br>
-        <input type="checkbox" id="json_toggle" onchange="toggleJsonInput()">
+        <input type="checkbox" id="json_toggle" name="json_toggle" onchange="toggleJsonInput()">
         <label for="json_toggle">Use Raw JSON Input</label>
         <br>
 

@@ -1,27 +1,26 @@
+// CONSORT 2010 Flow Diagram
 digraph {
-	A [label="Assessed for eligibility (n=1000)"]
-	B [label="Excluded (n=200)"]
-	C [label="Randomized (n=800)"]
-	D [label="Allocated to intervention (n=400)"]
-	E [label="Received intervention (n=380)"]
-	F [label="Lost to follow-up (n=10)"]
-	G [label="Discontinued intervention (n=10)"]
-	H [label="Analysed (n=350)"]
-	I [label="Allocated to control (n=400)"]
-	J [label="Received control (n=390)"]
-	K [label="Lost to follow-up (n=5)"]
-	L [label="Discontinued control (n=5)"]
-	M [label="Analysed (n=380)"]
+	node [shape=box]
+	A [label="Assessed for eligibility (n=100 clusters)"]
+	B [label="Excluded (n=20 clusters)
+Not meeting inclusion criteria (n=15)
+Declined to participate (n=5)"]
+	C [label="Randomized (n=80 clusters)"]
+	D [label="Allocated to intervention (n=40 clusters, n=4000 individuals)"]
+	E [label="Lost to follow-up (n=5 clusters, n=500 individuals)
+Unable to contact (n=3)
+Withdrew consent (n=2)"]
+	F [label="Discontinued intervention (n=2 clusters, n=200 individuals)
+Adverse event (n=1)
+Protocol violation (n=1)"]
+	G [label="Analysed (n=33 clusters, n=3300 individuals)"]
+	H [label="Excluded from analysis (n=2 clusters, n=200 individuals)
+Incomplete data (n=2)"]
 	A -> C
 	A -> B
 	C -> D
-	C -> I
 	D -> E
-	E -> F
-	E -> G
-	E -> H
-	I -> J
-	J -> K
-	J -> L
-	J -> M
+	D -> F
+	D -> G
+	G -> H
 }
