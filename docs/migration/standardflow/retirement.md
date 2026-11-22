@@ -3,8 +3,11 @@
 Recorded on **22 November 2026**. `edithatogo/standards_check` remains the public
 development repository and issue destination. The user authorised importing
 `edithatogo/standardflow`, then making that source repository private and archived.
-**Source privacy and archival are pending:** the latest settings read still
-returned `private: false` and `archived: false`.
+**Receiving integration is merged; source retirement is blocked on account
+reauthentication.** GitHub displayed Confirm access (sudo/passkey) before applying
+the privacy change. The API observation at **14:48:07 UTC on 22 November 2026**
+still returned source `private: false` and `archived: false`; the receiving
+repository remained public and active. Neither source mutation has been applied.
 
 ## Preserved implementation and history
 
@@ -19,8 +22,11 @@ head `41c3e174...`, and initial repair `d89a5dba...` in history.
 Preparation child
 [`cda5469d6107fe9729f274165ba9dd01fcba25f2`](https://github.com/edithatogo/standards_check/commit/cda5469d6107fe9729f274165ba9dd01fcba25f2)
 retains the transfer and records the completed import. The exact source tree and
-original Apache-2.0 licence are retained. **Transfer is complete; the final main
-merge and source privacy/archive settings remain pending.**
+original Apache-2.0 licence are retained. **Transfer and receiving-main integration
+are complete.** Normal merge
+[`15184da899f21a62565cfc3145d1a4719baf4ad4`](https://github.com/edithatogo/standards_check/commit/15184da899f21a62565cfc3145d1a4719baf4ad4)
+has the verified PR #88 tree, the exact current source subtree and all nine
+source ancestors. Source retirement remains blocked as described above.
 
 All nine receiving branches below were created and independently read back at
 the listed SHAs. Each name is prefixed with `archive/standardflow/` in the
@@ -38,13 +44,11 @@ receiving repository; these are preserved snapshots, not accepted runtime change
 | `renovate/ipykernel-6.x` | `fb91d00d4f49d9b29e1a1a8dc73b1110b2518e00` |
 | `renovate/jsonschema-4.x` | `59c119a933376d5f2e76d1b0088ad92f14d0fc60` |
 
-All nine tips are preserved as ancestors of the completed transfer. Final
-integration into receiving main must retain that ancestry, including the four
-Renovate tips created after the original export. Use a **merge commit**, not
-squash or rebase. Record the resulting receiving main SHA, recheck ancestry and
-`HEAD:legacy/standardflow` against the pinned tree, and recheck live source refs
-before retiring the source. The one-off write-capable import workflow must be
-absent from receiving main; source workflows inside the retained subtree are inert.
+All nine tips are verified ancestors of receiving main merge `15184da8...`,
+including the four Renovate tips created after the original export. The merge
+retains the tested PR tree and exact pinned source subtree. Live source refs were
+rechecked unchanged. Preserve that history when making later changes; source
+workflows inside the retained subtree are inert.
 
 ## Acceptance and outstanding work
 
@@ -53,9 +57,17 @@ receiving copies passing 52 tests each, including 11 notebooks, with all nine ti
 preserved and identical
 outputs for six diagram and three checklist CLI canaries. Invalid PRISMA input
 also failed without output. This is same-environment legacy behaviour evidence.
-Final hosted receiving checks and the main merge are not claimed complete here.
-The source's offline security check had no execution receipt; queued work is not
-a passed check or a waiver.
+Final hosted receiving results were **24 successes, one expected deployment
+skip and zero hosted failures**. Two offline security jobs remain queued without
+execution receipts; this is not a passed check or waiver.
+
+The [legacy hosted job](https://github.com/edithatogo/standards_check/actions/runs/45034143605/job/137244023298)
+passed four provenance tests, 52 source and 52 receiving parity tests, 52 Docker
+tests, and the default-command HTTP smoke test through the published host port.
+The [Python job](https://github.com/edithatogo/standards_check/actions/runs/45034143412/job/137244022542)
+passed 201 tests; the [CodeQL aggregate](https://github.com/edithatogo/standards_check/runs/137244165310)
+succeeded. These receipts qualify the legacy compatibility work within the
+boundaries below.
 
 The [source inventory](source-inventory.md) and its
 [structured snapshot](source-inventory.json) preserve source issue/PR bodies,
@@ -81,10 +93,17 @@ clear third-party text. The ten mislabelled STARD copies on
 standards. See the [receiving instructions](../../../legacy/README.md) and
 [Conductor track](../../../conductor/tracks/03-standardflow-import/plan.md).
 
-Known active downstream references are the repository-standards registry and
-Voiage's deferred consumer link, identified in the inventory. Their actual
-updates, the final receiving merge/check receipts and observed source privacy
-and archive settings remain retirement completion evidence to add here.
+The [Voiage reference update, PR #1394](https://github.com/edithatogo/voiage/pull/1394),
+is published with all 17 required checks passing. Its unsigned commit is blocked
+by main's verified-signature requirement, so it is not merged. The
+repository-standards registry removal is prepared and tested: 311 tests passed,
+38 capability skips, and 168 schema entries. The prepared change is not merged pending actual source
+archival; any draft publication leaves active registry/main unchanged. These downstream states are retained without claiming they are complete.
+
+The immediate source-retirement blocker is **account reauthentication**. After
+the account owner completes GitHub Confirm access, resume the authorized privacy
+and archive changes and verify both through the API. Source retirement must not
+be reported complete while the source remains public and unarchived.
 
 ## Recovery without access to the source repository
 

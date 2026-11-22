@@ -27,8 +27,13 @@ The imported `legacy/standardflow` subtree exactly matches current dc51's tree
 ancestors. Preparation child
 [`cda5469...`](https://github.com/edithatogo/standards_check/commit/cda5469d6107fe9729f274165ba9dd01fcba25f2)
 retains that transfer. The [functional receipt](functional-parity.json) records
-same-environment parity for this current baseline. Final hosted receiving
-acceptance, the main merge, source privacy and source archival remain pending.
+same-environment parity for this current baseline. Normal receiving-main merge
+[`15184da899f21a62565cfc3145d1a4719baf4ad4`](https://github.com/edithatogo/standards_check/commit/15184da899f21a62565cfc3145d1a4719baf4ad4)
+is complete; its tree matches the verified PR #88 head, with the exact source
+subtree and all nine source tips retained as ancestors. Final hosted results are
+24 successes, one expected deployment skip and zero hosted failures. Two offline
+security jobs remain queued without execution receipts. Source retirement is
+blocked on GitHub account reauthentication.
 
 ## Nine current source branches
 
@@ -63,10 +68,13 @@ receipt.
 
 The source container command explicitly ran unittest instead of the image's
 default command. It therefore does not establish that the default startup
-accepts connections through a published host port. The receiving default-command
-startup probe, final receiving tests, exact ancestry and rollback receipt remain
-separate acceptance evidence. The initial d89 source tests and check states are
-retained in the seven-branch historical snapshot.
+accepts connections through a published host port. The receiving [legacy job](https://github.com/edithatogo/standards_check/actions/runs/45034143605/job/137244023298)
+now supplies that separate evidence: four provenance tests, 52 source plus 52
+receiving parity tests, 52 Docker tests, and the default-command HTTP smoke test
+all passed. The [Python job](https://github.com/edithatogo/standards_check/actions/runs/45034143412/job/137244022542)
+passed 201 tests, and the [CodeQL aggregate](https://github.com/edithatogo/standards_check/runs/137244165310)
+succeeded. The initial d89 source tests and check states remain in the
+seven-branch historical snapshot.
 
 The [current source review report](https://github.com/edithatogo/standardflow/blob/dc51d8e392858d5cb4e653aed199563514191efb/docs/reviews/2026-11-22-pull-request-review.md)
 records both the initial compatibility repair and this follow-up. The source
@@ -90,8 +98,8 @@ tests passed with actual PNG, SVG and PDF output.
 was subsequently observed dismissed as a false positive. The recorded
 disposition and detailed evidence remain intact in the JSON. The latest source
 follow-up separately selects literal filenames from a server-side mapping.
-The earlier dismissal does not substitute for reading the new receiving
-revision's code-scanning result.
+The earlier dismissal does not substitute for the new receiving result; the
+final CodeQL aggregate subsequently succeeded, as recorded above.
 
 ## Held work and four dependency candidates
 
@@ -154,7 +162,12 @@ The historical adoption manifest retains source `76f2c27...` and target
 `f1e7b6c...` preparation pins. Record receiving evidence without promoting its
 separate activation gates.
 
-The refreshed live source remains **public and unarchived**, with four open
+The API observation at **14:48:07 UTC on 22 November 2026** confirmed that the
+source remains **public and unarchived**. The retirement status is
+`blocked_on_account_reauthentication`: GitHub Confirm access (sudo/passkey)
+appeared before the privacy change was applied. Neither privacy nor archival
+has changed; the receiving repository remains public and active. The source
+inventory records four open
 issues and seven open PRs. There are no observed releases, tag refs, Pages, wiki,
 projects, discussions or forks. The initial settings observation found
 unprotected main and no rulesets; this does not prove that external consumers
@@ -166,8 +179,15 @@ and [Voiage's deferred optional report-consumer reference](https://github.com/ed
 The latter does not establish a runtime integration. Preserve historical
 baseline/review snapshots when updating active destinations.
 
-Before reporting retirement complete, recheck that the nine preserved source
-heads have not advanced, record final receiving acceptance and pending-work dispositions,
-reconcile active references, and observe the actual visibility/archive settings.
-Public recovery must point to the receiving repository once the source is
-private. Source retirement and final receiving-main acceptance remain pending.
+The [Voiage update, PR #1394](https://github.com/edithatogo/voiage/pull/1394), is
+published and all 17 required checks pass, but its unsigned commit cannot merge
+while main requires verified signatures. The registry removal is prepared and
+tested with 311 passes, 38 capability skips and 168 schema entries; the prepared change is not merged pending actual source
+archival. Any draft publication leaves active registry/main unchanged.
+
+Receiving-main integration and hosted compatibility receipts are complete.
+To resume source retirement, the account owner must complete GitHub
+reauthentication, after which the authorized privacy/archive actions can proceed
+and their actual API state must be verified. Public recovery already exists in
+the receiver. Do not report source retirement complete while its API settings
+remain public and unarchived.

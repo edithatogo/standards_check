@@ -1,8 +1,8 @@
 # StandardFlow export verification
 
-This receipt records evidence observed before the receiving merge. Final receiving
-checks, the main-branch merge and the source's private/archive settings are recorded
-in the receiving pull request. These claims concern repository preservation and the
+This receipt records the source export and receiving acceptance. Final receiving
+checks and the main-branch merge are recorded below and in PR #88. Source
+private/archive settings remain pending account re-authentication. These claims concern repository preservation and the
 legacy runtime; they do not qualify Rust parity, source rights or methodology.
 
 ## Initial source repair
@@ -110,3 +110,31 @@ parity passed 52 tests in each copy, all 11 notebook examples, the nine positive
 cases and 21 identical output files against this final source snapshot. Four provenance
 regressions passed again. The new default-container HTTP smoke still requires the
 final receiving hosted run; no result is inferred from its configuration.
+
+## Final receiving acceptance and main verification
+
+Final head `906c025d67b03322e5c1b41a63aea88e150672e5` completed 24 applicable hosted
+checks successfully, with one expected deployment skip and no applicable hosted
+failures. CodeQL's four language analyses and aggregate succeeded. Two separate
+offline-security jobs remained queued without execution receipts.
+
+- [Legacy run/job](https://github.com/edithatogo/standards_check/actions/runs/45034143605/job/137244023298):
+  four provenance tests, nine preserved source revisions, 52 source and 52 receiving
+  tests, 52 container tests, parity artifact upload and the default-container HTTP
+  smoke all passed. The smoke launched the image without overriding its command.
+- [Primary Python job](https://github.com/edithatogo/standards_check/actions/runs/45034143412/job/137244022542):
+  201 tests passed.
+- [CodeQL aggregate](https://github.com/edithatogo/standards_check/runs/137244165310):
+  success after all language analyses completed.
+
+PR #88 merged using a normal merge commit,
+`15184da899f21a62565cfc3145d1a4719baf4ad4`. The integration merge's tree is
+`ed03a2b652b1812661a779c2c1fccf8ea364480d`, identical to the tested final PR head.
+The provenance validator passed on that main commit; the exact `62d8a0e...` subtree
+and all nine source ancestors remain intact. The live source inventory still
+matched all nine manifest refs immediately before the privacy attempt.
+
+GitHub's account re-authentication screen stopped the privacy change before it
+applied. At 14:48:07 UTC on 22 November 2026, API readback still showed source
+`private: false`, `archived: false`; the primary repository was also public and
+active as intended. No private/archive completion is claimed.

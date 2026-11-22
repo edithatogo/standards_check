@@ -17,8 +17,6 @@
   "base_branch": "main",
   "source_retirement_authorization": "User explicitly requested export followed by private archival on 2026-11-22.",
   "remaining_evidence_gates": [
-    "hosted import and runtime checks",
-    "receiving main verification",
     "observed source private/archive settings",
     "legacy-to-Rust semantic parity",
     "legacy item-level rights and provenance",
@@ -28,7 +26,14 @@
   "preserved_export_pull_request": 92,
   "functional_parity_receipt": "../../../docs/migration/standardflow/functional-parity.json",
   "retirement_receipt": "../../../docs/migration/standardflow/retirement.md",
-  "source_privacy": "pending",
-  "source_archival": "pending",
-  "canonical_content_promotion": false
+  "source_privacy": "blocked_on_account_reauthentication",
+  "source_archival": "pending_source_privacy",
+  "canonical_content_promotion": false,
+  "receiving_accepted_head": "906c025d67b03322e5c1b41a63aea88e150672e5",
+  "receiving_merge_commit": "15184da899f21a62565cfc3145d1a4719baf4ad4",
+  "source_settings_last_observed": {
+    "at": "2026-11-22T14:48:07Z",
+    "private": false,
+    "archived": false
+  }
 }

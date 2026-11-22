@@ -1,6 +1,6 @@
 {
   "observed_on": "2026-11-22",
-  "observation_scope": "Current dc51d8e3 source tree and all nine source tips are transferred into receiving commit6c675275. Exact subtree identity, nine-tip ancestry and all nine named archive refs are independently verified. Preparation childcda5469 preserves that transfer. Final receiving hosted acceptance/main merge, source privacy and source archival are not claimed complete.",
+  "observation_scope": "Receiving main normal merge15184da8 preserves the exact dc51 source tree and all nine tips; live source refs remained unchanged. Final hosted checks completed with24 successes, one expected deployment skip and zero hosted failures; two offline security jobs remain queued without execution receipts. Source privacy/archival are blocked on GitHub account reauthentication; the14:48:07UTC API observation still shows source public and unarchived.",
   "source_repository": "edithatogo/standardflow",
   "receiving_repository": "edithatogo/standards_check",
   "source_main_revision": "af299f724bcf456c131b43a143b3eabc1d81245b",
@@ -158,7 +158,9 @@
     "web_commit_signoff_required": true,
     "allow_merge_commit": false,
     "allow_squash_merge": true,
-    "allow_rebase_merge": false
+    "allow_rebase_merge": false,
+    "private": false,
+    "last_observed_at": "2026-11-22T14:48:07Z"
   },
   "releases": [],
   "tags": [],
@@ -310,7 +312,7 @@
       "head_sha": "dc51d8e392858d5cb4e653aed199563514191efb",
       "reported_base_sha": "af299f724bcf456c131b43a143b3eabc1d81245b",
       "state": "open",
-      "receiving_disposition": "Current dc51 tree transferred exactly in receiving6c675275 with all nine source tips preserved. Preparation childcda5469 retains the transfer. Final hosted acceptance, main merge and source retirement remain pending.",
+      "receiving_disposition": "Current dc51 tree is merged in receiving main15184da8 with all nine source tips and exact archive refs preserved. Hosted compatibility checks succeeded. Source privacy/archive remains blocked on account reauthentication; offline security is still queued.",
       "receiving_url": null
     }
   ],
@@ -410,7 +412,7 @@
     "offline_security_status": "queued_without_execution_receipt",
     "reported_receiving_import": "https://github.com/edithatogo/standards_check/commit/989f2fa5c26b22b8294e20b442a6f602d9d124ed",
     "reported_receiving_import_evidence": "The source PR body retains the earlier989f2fa/d89 receipt. The current dc51 tree is independently verified in receiving6c675275; all nine source tips are ancestors and exact named archive refs. Final receiving-main admission remains pending.",
-    "receiving_acceptance": "dc51_exact_tree_transfer_and_nine_tip_preservation_complete; final_hosted_acceptance_main_merge_and_retirement_pending",
+    "receiving_acceptance": "dc51 exact-tree legacy import merged to receiving main15184da8 with hosted compatibility receipts and nine-tip preservation; source retirement blocked on account reauthentication; offline security unexecuted",
     "claim_boundary": "Legacy compatibility evidence does not establish Rust parity, item-level rights, methodological validation, external accessibility or publication readiness.",
     "preceding_repaired_head": "d89a5dbacc207cdce11f19efd667b83fdb09df18",
     "follow_up_delta": {
@@ -738,9 +740,14 @@
       "method": "Latest preparation commit parent inspection",
       "url": "https://api.github.com/repos/edithatogo/standards_check/git/commits/cda5469d6107fe9729f274165ba9dd01fcba25f2",
       "result": "cda5469 has receiving transfer6c675275 as its sole parent. Final main merge and source retirement are not asserted."
+    },
+    {
+      "method": "Parent-provided post-merge and retirement-blocker receipt",
+      "observed_at": "2026-11-22T14:48:07Z",
+      "result": "Normal main merge15184da8, exact dc51 subtree, nine ancestors/unchanged refs,24 hosted successes and one expected skip, zero hosted failures; two offline jobs queued. GitHub Confirm access blocked privacy before mutation; source remains public/unarchived."
     }
   ],
-  "snapshot_id": "transfer-2026-11-22-dc51d8e3-nine-branches",
+  "snapshot_id": "post-merge-2026-11-22-15184da8-retirement-reauthentication-blocked",
   "previous_snapshots": [
     {
       "snapshot_id": "initial-2026-11-22-41c3e174-five-branches",
@@ -1789,10 +1796,13 @@
     ],
     "pending_branches": [],
     "transfer_status": "complete",
-    "receiving_main_merge_observed": false,
+    "receiving_main_merge_observed": true,
     "source_retirement_observed": false,
-    "distinction": "Transfer and named-ref preservation are complete for the nine observed source heads. Final receiving-main admission and source privacy/archive settings are separate pending states.",
-    "historical_seven_ref_snapshot": "previous_snapshots[1].receiving_preservation"
+    "distinction": "Transfer, exact named-ref preservation and normal receiving-main integration are complete for all nine source tips. Source privacy/archive actions are blocked on account reauthentication; offline security remains unexecuted.",
+    "historical_seven_ref_snapshot": "previous_snapshots[1].receiving_preservation",
+    "receiving_main_commit": "15184da899f21a62565cfc3145d1a4719baf4ad4",
+    "all_current_source_heads_in_main_ancestry": true,
+    "source_refs_rechecked_unchanged": true
   },
   "receiving_candidate_checks": {
     "observed_on": "2026-11-22",
@@ -2028,7 +2038,7 @@
       },
       "code_change_recommendation": "No source code change is needed for this finding; preserve exact repaired import and record the evidence-based alert disposition."
     },
-    "snapshot_scope": "Historical c64 check snapshot. Its alert4 disposition is recorded separately; it is not the current dc51/cda receiving acceptance result."
+    "snapshot_scope": "Historical c64 check snapshot. Current post-merge hosted receipts are in post_merge_receipt; alert4 historical disposition is retained separately."
   },
   "posted_receiving_handoffs": {
     "source_issue_12": "https://github.com/edithatogo/standards_check/issues/29",
@@ -2053,11 +2063,13 @@
     "source_tree": "62d8a0e738f0255cc59822ae4e661568090a213e",
     "receiving_import": "6c67527512ad5b603307ac6415ba214d3333c42a",
     "latest_preparation_commit": "cda5469d6107fe9729f274165ba9dd01fcba25f2",
-    "baseline_status": "transferred_compatibility_baseline_with_local_parity_receipt",
-    "basis": "The current exact source tree is remotely transferred; functional-parity.json records same-environment source/subtree parity for this revision and nine preserved tips. Final receiving hosted acceptance and main merge remain pending.",
+    "baseline_status": "merged_legacy_compatibility_baseline_with_hosted_receipts",
+    "basis": "Normal receiving main merge15184da8 has the verified PR88 tree, exact dc51 legacy subtree and all nine source ancestors. Hosted legacy provenance/parity/Docker/default-HTTP-smoke,201 Python tests and CodeQL aggregate succeeded. Two offline security jobs remain queued without execution receipts.",
     "functional_receipt": "docs/migration/standardflow/functional-parity.json",
-    "final_hosted_acceptance_observed": false,
-    "receiving_main_merge_observed": false
+    "final_hosted_acceptance_observed": true,
+    "receiving_main_merge_observed": true,
+    "receiving_main_commit": "15184da899f21a62565cfc3145d1a4719baf4ad4",
+    "offline_security_execution_observed": false
   },
   "proposed_additional_receiving_handoffs": {
     "source_prs_28_29": {
@@ -2146,5 +2158,78 @@
     "scope": "Historical local preparation before verified remote transfer.",
     "superseded_by_receiving_transfer": "6c67527512ad5b603307ac6415ba214d3333c42a"
   },
-  "codeql_disposition_scope": "Historical alert4 disposition at the earlier guarded d89 implementation. Current dc51 separately selects fixed server-side filenames; final receiving checks remain separate."
+  "codeql_disposition_scope": "Historical alert4 disposition at the earlier guarded d89 implementation. Current dc51 separately selects fixed server-side filenames; final receiving checks remain separate.",
+  "post_merge_receipt": {
+    "observed_on": "2026-11-22",
+    "receiving_main_commit": "15184da899f21a62565cfc3145d1a4719baf4ad4",
+    "receiving_main_url": "https://github.com/edithatogo/standards_check/commit/15184da899f21a62565cfc3145d1a4719baf4ad4",
+    "merge_method": "normal_merge_commit",
+    "pull_request_url": "https://github.com/edithatogo/standards_check/pull/88",
+    "receiving_tree_prefix": "ed03",
+    "verified_pull_request_head_prefix": "906c",
+    "merge_tree_matches_verified_pull_request_head": true,
+    "source_revision": "dc51d8e392858d5cb4e653aed199563514191efb",
+    "source_tree": "62d8a0e738f0255cc59822ae4e661568090a213e",
+    "exact_source_subtree_on_main_verified": true,
+    "source_tips_verified_as_main_ancestors": 9,
+    "live_source_refs_rechecked_unchanged": true,
+    "hosted_checks": {
+      "success": 24,
+      "expected_deployment_skip": 1,
+      "failure": 0,
+      "offline_queued_unexecuted": 2
+    },
+    "legacy_job": {
+      "url": "https://github.com/edithatogo/standards_check/actions/runs/45034143605/job/137244023298",
+      "provenance_tests_passed": 4,
+      "source_parity_tests_passed": 52,
+      "receiving_parity_tests_passed": 52,
+      "docker_tests_passed": 52,
+      "default_command_published_http_smoke": "success"
+    },
+    "python_job": {
+      "url": "https://github.com/edithatogo/standards_check/actions/runs/45034143412/job/137244022542",
+      "tests_passed": 201
+    },
+    "codeql_aggregate": {
+      "url": "https://github.com/edithatogo/standards_check/runs/137244165310",
+      "result": "success"
+    },
+    "evidence_origin": "Parent supplied observed merge, ancestry, live-ref, hosted-job and API receipts; no new remote actions were performed by this documentation update.",
+    "claim_boundary": "Legacy compatibility and completed hosted checks; offline security has no execution receipt, and methodology, rights and external accessibility gates remain separate."
+  },
+  "source_retirement": {
+    "status": "blocked_on_account_reauthentication",
+    "observed_at": "2026-11-22T14:48:07Z",
+    "source_repository": "edithatogo/standardflow",
+    "private": false,
+    "archived": false,
+    "blocker": "GitHub Confirm access required sudo/passkey reauthentication before the privacy mutation could be applied.",
+    "privacy_change_applied": false,
+    "archive_change_applied": false,
+    "next_action": "The account owner completes GitHub reauthentication; then resume the already-authorized privacy/archive actions and verify the resulting API state.",
+    "receiving_repository_state": {
+      "repository": "edithatogo/standards_check",
+      "private": false,
+      "archived": false
+    },
+    "completed": false
+  },
+  "downstream_receipts": {
+    "voiage": {
+      "pull_request_url": "https://github.com/edithatogo/voiage/pull/1394",
+      "status": "published_blocked_unsigned_commit",
+      "required_checks_passed": 17,
+      "blocker": "Main requires verified commit signatures; the published commit is unsigned.",
+      "merged": false
+    },
+    "repository_standards_registry": {
+      "status": "prepared_not_merged_pending_actual_archival",
+      "tests_passed": 311,
+      "capability_skips": 38,
+      "schema_entries": 168,
+      "merged": false,
+      "merge_gate": "Observed source private=true and archived=true; any draft publication does not change the active registry/main."
+    }
+  }
 }
