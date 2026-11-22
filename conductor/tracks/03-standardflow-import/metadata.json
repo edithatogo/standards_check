@@ -17,7 +17,7 @@
   "base_branch": "main",
   "source_retirement_authorization": "User explicitly requested export followed by private archival on 2026-11-22.",
   "remaining_evidence_gates": [
-    "external-consumer reconciliation (Voiage PR #1394)",
+    "receiving-main execution after host dependency admission (PR #98)",
     "offline AI-security execution",
     "legacy-to-Rust semantic parity",
     "legacy item-level rights and provenance",
@@ -77,13 +77,48 @@
   },
   "voiage_reconciliation": {
     "pull_request": "https://github.com/edithatogo/voiage/pull/1394",
-    "status": "open_verified_signed_current_base_checks_pending",
+    "status": "merged_and_observed_on_main",
     "head": "3bc04fdc1df6f30981765eee49c0c9dbce490cde",
     "tree": "7c0099a9c465c19648db7aca89e187141855c2c2",
     "signature_verified": true,
-    "up_to_date_with_base": true,
-    "hosted_checks": "pending",
-    "required_local_gate": "pending",
-    "merged": false
+    "hosted_checks": {
+      "reviewed_head": "3bc04fdc1df6f30981765eee49c0c9dbce490cde",
+      "success": 51,
+      "expected_skips": 3,
+      "required_names_matched_success": 17
+    },
+    "merged": true,
+    "merged_at": "2026-11-22T23:32:28Z",
+    "merge_commit": "a921d6471822eaac7fbc22f507760bd943ba9f6a",
+    "observed_main_commit": "a921d6471822eaac7fbc22f507760bd943ba9f6a",
+    "merge_signature_verified": true,
+    "merged_tree_matches_reviewed_head": true,
+    "full_local_tox_passed": false,
+    "required_command_evidence": "Thirteen local environment checks passed. Existing current-input hosted coverage and docs jobs cover the remaining required commands; the full local attempt did not pass.",
+    "qualification_receipt": "verification.md#voiage-downstream-merge-and-command-evidence",
+    "post_merge_ci_acceptance_claimed": false
+  },
+  "latest_verified_receiving_main_scope": "Historical actual-main runtime acceptance before PR #98 host dependency admission. Execution at the new receiving main remains separately pending.",
+  "current_host_dependency_admission": {
+    "status": "admitted_with_reviewed_head_qualification",
+    "pull_request": "https://github.com/edithatogo/standards_check/pull/98",
+    "merged_at": "2026-11-22T23:35:27Z",
+    "merge_commit": "d213085a268a4cd82d522e6e17d27f3dee15bf5f",
+    "merge_tree": "4a34e69ae1cd857a178cf7e28245d2953a140dec",
+    "reviewed_head": "08d9ffef20675efc80484d108b32f1d1ee759921",
+    "admitted_versions": {
+      "click": "8.5.1",
+      "graphviz": "0.21",
+      "jsonschema": "4.26.0"
+    },
+    "profile_sha256": "27ba903aba19f5851baf887a177699ac1c9604c9ec5a7666edac573aefbe0568",
+    "qualification_receipt": "../../../docs/migration/standardflow/dependency-qualification-20261123.json",
+    "reviewed_head_workflow": "https://github.com/edithatogo/standards_check/actions/runs/45082189553",
+    "ordinary_checks_passed": 9,
+    "offline_checks_queued": 2,
+    "receiving_main_execution": "pending_separate_receipt",
+    "ipykernel_6_31_0_admitted": false,
+    "issue_94_status": "open_for_optional_kernel_qualification_and_updater_observation",
+    "interactive_kernel_parity_established": false
   }
 }

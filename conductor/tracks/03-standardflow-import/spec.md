@@ -88,3 +88,10 @@ contract deliberately and rerun the receiving tests. Full legacy-to-Rust semanti
 parity, source rights, independent method/accessibility review and release qualification
 remain open. Source retirement is an explicit user-directed administrative action;
 it does not mark those gates complete.
+
+The maintained host dependency profile is separate from the exact source snapshot and
+historical Docker requirements. The [23 November dependency qualification](../../../docs/migration/standardflow/dependency-qualification-20261123.json)
+records independent and combined Click, graphviz and jsonschema upgrades with unchanged
+application artefacts. The optional interactive ipykernel update is not admitted to
+that profile. Follow the [receiving runtime instructions](../../../legacy/README.md)
+for the maintained host setup; the original commands above retain the historical setup.

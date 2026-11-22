@@ -1,6 +1,6 @@
 {
   "observed_on": "2026-11-22",
-  "observation_scope": "Exact receiving main 2b0c579454a1dd469cd12cfb9538d23c96785370 and source state observed on 2026-11-22 UTC. The owner completed source privacy and archival; the independent repository API read at 2026-11-22T22:55:19Z returned private=true, archived=true and open_issues_count=1. Hosted receiving provenance, parity, container and HTTP checks succeeded at the recorded main. All nine export tips remain preserved. The four-live-source-ref observation is separately dated 2026-11-22T20:53:25Z. Registry PR #172 is merged at a3cc8dccdb67e6f122c71cec713194cdec792d07, removing only the retired source entry. Voiage PR #1394 has a verified signed, current-base head but remains pending hosted and required local checks before merge. These receipts do not qualify any later receiving revision.",
+  "observation_scope": "Completed historical receiving-main runtime receipt at 2b0c579454a1dd469cd12cfb9538d23c96785370 and source state observed on 2026-11-22 UTC. The owner completed source privacy and archival; the independent repository API read at 2026-11-22T22:55:19Z returned private=true, archived=true and open_issues_count=1. Hosted receiving provenance, parity, container and HTTP checks succeeded at that historical revision. PR #98 subsequently admitted three maintained host versions at d213085a268a4cd82d522e6e17d27f3dee15bf5f, with reviewed-head qualification and separately pending receiving-main execution. All nine export tips and the exact imported source remain preserved. The four-live-source-ref observation is separately dated 2026-11-22T20:53:25Z. Registry PR #172 is merged at a3cc8dccdb67e6f122c71cec713194cdec792d07, removing only the retired source entry. Voiage PR #1394 merged at a921d6471822eaac7fbc22f507760bd943ba9f6a with verified signature and the exact reviewed tree. Its required-command evidence combines local results with existing hosted coverage/docs jobs; the full local tox attempt did not pass. Reviewed-head acceptance does not claim post-merge CI completion. ipykernel 6.31.0 remains unadmitted, and issue #94 remains open.",
   "source_repository": "edithatogo/standardflow",
   "receiving_repository": "edithatogo/standards_check",
   "source_main_revision": "af299f724bcf456c131b43a143b3eabc1d81245b",
@@ -702,9 +702,46 @@
       "method": "Integrator re-read the main offline-security run.",
       "url": "https://github.com/edithatogo/standards_check/actions/runs/45070791434",
       "result": "Still queued, with no execution receipt."
+    },
+    {
+      "observed_at": "2026-11-22T23:17:53Z",
+      "method": "Integrator read all terminal Voiage PR-head hosted checks and matched required names.",
+      "url": "https://github.com/edithatogo/voiage/pull/1394",
+      "head": "3bc04fdc1df6f30981765eee49c0c9dbce490cde",
+      "result": "51 successful checks, three expected skips and no failures; all 17 required names explicitly matched successful checks."
+    },
+    {
+      "method": "Integrator retained the full local tox attempt results and independently reviewed existing hosted command evidence.",
+      "head": "3bc04fdc1df6f30981765eee49c0c9dbce490cde",
+      "coverage_job_url": "https://github.com/edithatogo/voiage/actions/runs/45081240057/job/137390005725",
+      "docs_job_url": "https://github.com/edithatogo/voiage/actions/runs/45081240057/job/137390005956",
+      "result": "Thirteen local environment checks passed, but the full local attempt did not pass: coverage had six missing-/usr/bin/time failures and docs dependency installation stalled and was interrupted. Existing hosted coverage and docs jobs cover the remaining required commands on the reviewed inputs. No all-local pass, separate full-tox dispatch or final guard/peak-memory receipt is claimed."
+    },
+    {
+      "observed_at": "2026-11-22T23:32:28Z",
+      "method": "Integrator confirmed policy-enforced squash merge and read back verified signature, main and exact tree.",
+      "url": "https://github.com/edithatogo/voiage/pull/1394",
+      "merge_commit": "a921d6471822eaac7fbc22f507760bd943ba9f6a",
+      "tree": "7c0099a9c465c19648db7aca89e187141855c2c2",
+      "result": "Merged and verified on main. Tree exactly matches reviewed head; one file changed with one insertion and one deletion. Target blob4849e4fc167c7da484d95f9ef652701181b30a5b."
+    },
+    {
+      "observed_at": "2026-11-22T23:35:27Z",
+      "method": "Integrator confirmed receiving PR #98 merge and read back main and the qualification receipt.",
+      "url": "https://github.com/edithatogo/standards_check/pull/98",
+      "merge_commit": "d213085a268a4cd82d522e6e17d27f3dee15bf5f",
+      "tree": "4a34e69ae1cd857a178cf7e28245d2953a140dec",
+      "reviewed_head": "08d9ffef20675efc80484d108b32f1d1ee759921",
+      "workflow_url": "https://github.com/edithatogo/standards_check/actions/runs/45082189553",
+      "result": "Click 8.5.1, graphviz 0.21 and jsonschema 4.26.0 admitted in the maintained host profile. Reviewed-head legacy run passed, nine ordinary checks succeeded and two offline checks queued. Receiving-main execution remains separately pending; earlier 2b0c5794 actual-main results retain their original scope."
+    },
+    {
+      "method": "Integrator reported the updated open issue #94 and its published optional-kernel attempt receipt.",
+      "url": "https://github.com/edithatogo/standards_check/issues/94",
+      "result": "ipykernel 6.31.0 remains unadmitted. Old/new kernel profiles each passed 52 application tests, but both startups were blocked before kernel_info and no cells executed. Optional interactive-kernel qualification and updater observation remain open; no kernel parity is established."
     }
   ],
-  "snapshot_id": "receiving-2b0c5794-2026-11-22-source-private-archived",
+  "snapshot_id": "receiving-d213085a-2026-11-22-host-profile-admitted-source-retired",
   "previous_snapshots": [
     {
       "snapshot_id": "initial-2026-11-22-41c3e174-five-branches",
@@ -2037,7 +2074,8 @@
     "integration_merge_commit": "15184da899f21a62565cfc3145d1a4719baf4ad4",
     "hosted_workflow_run": "https://github.com/edithatogo/standards_check/actions/runs/45070791156",
     "hosted_job": "https://github.com/edithatogo/standards_check/actions/runs/45070791156/job/137357038355",
-    "hosted_parity_artifact": "https://github.com/edithatogo/standards_check/actions/runs/45070791156/artifacts/14773685812"
+    "hosted_parity_artifact": "https://github.com/edithatogo/standards_check/actions/runs/45070791156/artifacts/14773685812",
+    "record_scope": "Historical completed actual-main runtime acceptance at 2b0c5794 before the three host versions were admitted through PR #98. See current_host_dependency_qualification for the new profile and its separate pending receiving-main execution; these earlier checks are not relabelled."
   },
   "proposed_additional_receiving_handoffs": {
     "source_prs_28_29": {
@@ -2178,7 +2216,7 @@
     "blocker": null,
     "privacy_change_applied": true,
     "archive_change_applied": true,
-    "next_action": "Complete hosted and required local checks for Voiage PR #1394 and record its eventual merge receipt. The active-registry removal is already merged.",
+    "next_action": "Source private archival and the two identified downstream updates are complete. Continue the separately tracked offline-security, semantic-parity, rights and independent qualification work.",
     "receiving_repository_state": {
       "repository": "edithatogo/standards_check",
       "private": false,
@@ -2197,8 +2235,8 @@
   "downstream_receipts": {
     "voiage": {
       "pull_request_url": "https://github.com/edithatogo/voiage/pull/1394",
-      "status": "open_verified_signed_current_base_checks_pending",
-      "merged": false,
+      "status": "merged_and_observed_on_main",
+      "merged": true,
       "prior_gate_observation": {
         "head": "e5351cc09fa884ce3348db1c856845d5fdaba8e4",
         "required_checks_passed": 17,
@@ -2208,11 +2246,107 @@
       "head": "3bc04fdc1df6f30981765eee49c0c9dbce490cde",
       "tree": "7c0099a9c465c19648db7aca89e187141855c2c2",
       "signature_verified": true,
-      "up_to_date_with_base": true,
       "diff_summary": "Exact intended one-line consumer-link replacement.",
-      "hosted_checks": "pending",
-      "required_local_gate": "pending",
-      "evidence_origin": "Integrator confirmed the signed current-base head and exact one-line diff; hosted and local qualification remain pending."
+      "hosted_checks": {
+        "head": "3bc04fdc1df6f30981765eee49c0c9dbce490cde",
+        "observed_at": "2026-11-22T23:17:53Z",
+        "success": 51,
+        "expected_skips": 3,
+        "failures": 0,
+        "required_names_matched_success": 17,
+        "scope": "Terminal results at the reviewed PR head; not a post-merge CI acceptance claim."
+      },
+      "evidence_origin": "Integrator independently confirmed the policy-enforced merge, verified signature, main SHA, exact merged tree and one-line diff. Independent review reconciled the failed/incomplete local attempt with existing successful current-input hosted jobs.",
+      "merged_at": "2026-11-22T23:32:28Z",
+      "merge_method": "policy_enforced_squash",
+      "merge_commit": "a921d6471822eaac7fbc22f507760bd943ba9f6a",
+      "observed_main_commit": "a921d6471822eaac7fbc22f507760bd943ba9f6a",
+      "merge_signature_verified": true,
+      "reviewed_head": "3bc04fdc1df6f30981765eee49c0c9dbce490cde",
+      "merged_tree": "7c0099a9c465c19648db7aca89e187141855c2c2",
+      "merged_tree_matches_reviewed_head": true,
+      "files_changed": 1,
+      "additions": 1,
+      "deletions": 1,
+      "target_blob": "4849e4fc167c7da484d95f9ef652701181b30a5b",
+      "local_tox_attempt": {
+        "conclusion": "not_passed",
+        "environment_checks_passed": 13,
+        "environment_count": 15,
+        "coverage": {
+          "passed": 6176,
+          "failed": 6,
+          "skipped": 46,
+          "xfailed": 1,
+          "subtests": 2,
+          "coverage_percent": 95.01,
+          "failure_cause": "All six failures required absent /usr/bin/time; normal installation was blocked at UID 1000."
+        },
+        "docs": {
+          "validator": "passed",
+          "python_assertion": "passed",
+          "dependency_install": "stalled_and_interrupted",
+          "stall_cause": "not_proven",
+          "owned_session_exit_code": 130,
+          "installation": ".[docs] with explicit interpreter",
+          "python": "3.15.2",
+          "griffe": "1.15.0"
+        },
+        "final_guard_receipt": false,
+        "peak_memory_receipt": false
+      },
+      "existing_hosted_coverage_evidence": {
+        "job_url": "https://github.com/edithatogo/voiage/actions/runs/45081240057/job/137390005725",
+        "head": "3bc04fdc1df6f30981765eee49c0c9dbce490cde",
+        "tox_environment": "coverage",
+        "exact_environment_independently_verified": true,
+        "conclusion": "success",
+        "passed": 6193,
+        "skipped": 35,
+        "xfailed": 1,
+        "subtests": 2,
+        "coverage_percent": 95.01,
+        "required_coverage_percent": 90,
+        "all_six_native_cases_passed": true
+      },
+      "existing_hosted_docs_evidence": {
+        "job_url": "https://github.com/edithatogo/voiage/actions/runs/45081240057/job/137390005956",
+        "tested_commit": "5f50965d008daeb7900a6381828050903586add9",
+        "tested_tree": "7c0099a9c465c19648db7aca89e187141855c2c2",
+        "submodule_commit": "054d11e08d8b28fd50821ede8a97f8be3ad50447",
+        "tree_and_submodule_match_reviewed_inputs": true,
+        "conclusion": "success",
+        "commands_passed": [
+          "pnpm install --frozen-lockfile",
+          "pnpm check",
+          "pnpm build"
+        ],
+        "errors": 0,
+        "warnings": 0,
+        "api_pages": 962,
+        "site_pages": 1085,
+        "installation": "Locked root virtual environment without installing the project",
+        "python": "3.15.2",
+        "griffe": "1.15.0",
+        "node": "22.23.5",
+        "pnpm": "10.34.9"
+      },
+      "required_command_evidence": {
+        "conclusion": "covered_by_combined_current_input_results",
+        "basis": "Independent review verified that the existing hosted coverage and docs jobs execute the remaining required commands on the reviewed inputs, supplementing the 13 successful local environment checks.",
+        "full_local_tox_passed": false,
+        "existing_hosted_results_reused": true,
+        "separate_full_tox_dispatch_claimed": false,
+        "gates_reduced": false,
+        "environment_difference": "Hosted docs used the locked root virtual environment without installing the project; local docs used .[docs] with an explicit interpreter. Both used Python 3.15.2 and griffe 1.15.0. Hosted Node/pnpm versions are recorded separately.",
+        "scope": "Required command coverage does not create a completed all-local run or a final guard/peak-memory receipt."
+      },
+      "post_merge_ci": {
+        "last_observed_on": "2026-11-22",
+        "last_observed_utc_approximate": "23:35",
+        "status": "starting",
+        "acceptance_claimed": false
+      }
     },
     "repository_standards_registry": {
       "status": "merged_and_observed_on_main",
@@ -2504,7 +2638,8 @@
     "artifact_url": "https://github.com/edithatogo/standards_check/actions/runs/45070791156/artifacts/14773685812",
     "observed_successful_checks": 26,
     "deployment_observed_success": true,
-    "evidence_origin": "Integrator independently read the actual-main workflow/job/artifact and main check results from GitHub."
+    "evidence_origin": "Integrator independently read the actual-main workflow/job/artifact and main check results from GitHub.",
+    "record_scope": "Historical completed actual-main receipt at 2b0c5794, preceding PR #98 host dependency admission. New receiving-main execution remains separately pending."
   },
   "historical_source_issues_before_transfer": {
     "record_scope": "Original source issue bodies before the parent recorded receiving links and closed source issues12,13,14 as transferred. Underlying obligations remain open in receiving issues29,30,31.",
@@ -2705,5 +2840,71 @@
       "prepared_branch_url": "https://github.com/edithatogo/repository-standards/tree/codex/standardflow-archive-followup-20261122",
       "validation_scope": "Historical prepared-patch validation against base e6425228dea09637eb0a45a3787421e7bce42b3b; no new execution or merge is claimed by this inventory update."
     }
+  },
+  "historical_voiage_pending_checks": {
+    "pull_request_url": "https://github.com/edithatogo/voiage/pull/1394",
+    "status": "open_verified_signed_current_base_checks_pending",
+    "merged": false,
+    "prior_gate_observation": {
+      "head": "e5351cc09fa884ce3348db1c856845d5fdaba8e4",
+      "required_checks_passed": 17,
+      "blocker": "Main requires verified commit signatures; the published commit is unsigned.",
+      "scope": "Earlier recorded checks and signature gate; reread current base/policy before merging."
+    },
+    "head": "3bc04fdc1df6f30981765eee49c0c9dbce490cde",
+    "tree": "7c0099a9c465c19648db7aca89e187141855c2c2",
+    "signature_verified": true,
+    "up_to_date_with_base": true,
+    "diff_summary": "Exact intended one-line consumer-link replacement.",
+    "hosted_checks": "pending",
+    "required_local_gate": "pending",
+    "evidence_origin": "Integrator confirmed the signed current-base head and exact one-line diff; hosted and local qualification remain pending."
+  },
+  "current_host_dependency_qualification": {
+    "pull_request_url": "https://github.com/edithatogo/standards_check/pull/98",
+    "status": "admitted_with_reviewed_head_qualification",
+    "merged": true,
+    "merged_at": "2026-11-22T23:35:27Z",
+    "merge_commit": "d213085a268a4cd82d522e6e17d27f3dee15bf5f",
+    "merge_tree": "4a34e69ae1cd857a178cf7e28245d2953a140dec",
+    "reviewed_head": "08d9ffef20675efc80484d108b32f1d1ee759921",
+    "admitted_versions": {
+      "click": "8.5.1",
+      "graphviz": "0.21",
+      "jsonschema": "4.26.0"
+    },
+    "profile": "requirements/legacy-standardflow.txt",
+    "profile_sha256": "27ba903aba19f5851baf887a177699ac1c9604c9ec5a7666edac573aefbe0568",
+    "qualification_receipt": "docs/migration/standardflow/dependency-qualification-20261123.json",
+    "reviewed_head_workflow": "https://github.com/edithatogo/standards_check/actions/runs/45082189553",
+    "reviewed_head_legacy_workflow_conclusion": "success",
+    "ordinary_checks_passed": 9,
+    "offline_checks_queued": 2,
+    "receiving_main_execution": {
+      "commit": "d213085a268a4cd82d522e6e17d27f3dee15bf5f",
+      "status": "pending_separate_receipt",
+      "acceptance_claimed": false
+    },
+    "exact_imported_source_changed": false,
+    "historical_docker_profile_changed": false,
+    "preserved_source_dependency_branches_merged": false,
+    "ipykernel_6_31_0_admitted": false,
+    "issue_94": {
+      "url": "https://github.com/edithatogo/standards_check/issues/94",
+      "status": "open",
+      "remaining_work": [
+        "optional interactive-kernel qualification",
+        "updater observation"
+      ],
+      "published_kernel_attempt_receipt": {
+        "old_profile_ipykernel": "6.25.0",
+        "new_profile_ipykernel": "6.31.0",
+        "application_tests_passed_in_each_profile": 52,
+        "kernel_startup_in_both_profiles": "blocked_before_kernel_info",
+        "cells_executed": 0,
+        "interactive_kernel_parity_established": false
+      }
+    },
+    "claim_boundary": "The PR #97 integration promoted no held source dependency or guideline candidate. PR #98 separately admits the three maintained host versions without changing the exact source snapshot or merging historical source PRs. Successful reviewed-head qualification does not relabel the historical 2b0c5794 actual-main checks or establish receiving-main execution for d213085a."
   }
 }

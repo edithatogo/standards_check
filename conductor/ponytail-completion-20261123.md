@@ -33,7 +33,13 @@ receipt and the dependency heads below as ancestors, with the reviewed tree.
 The exact legacy subtree remains
 `62d8a0e738f0255cc59822ae4e661568090a213e`, from source commit
 `dc51d8e392858d5cb4e653aed199563514191efb`. All nine exported histories remain
-ancestors. No held legacy dependency or guideline candidate was promoted.
+ancestors. The PR #97 integration promoted no held legacy dependency or guideline
+candidate. Separate [PR #98](https://github.com/edithatogo/standards_check/pull/98)
+subsequently merged as `d213085a268a4cd82d522e6e17d27f3dee15bf5f`, admitting Click
+8.5.1, graphviz 0.21 and jsonschema 4.26.0 in the maintained host profile. The
+[qualification receipt](../docs/migration/standardflow/dependency-qualification-20261123.json)
+retains its exact profile and evidence. ipykernel 6.31.0 remains unadmitted;
+issue #94 remains open for optional kernel qualification and updater observation.
 
 ## Local integration evidence
 
@@ -71,12 +77,21 @@ reauthentication blocker and unavailable browser are historical.
 has merged at `a3cc8dccdb67e6f122c71cec713194cdec792d07`, with the same tree as
 its tested candidate. It removes only the retired source entry and retains
 `standards_check`. Nine PR checks succeeded, two expected checks skipped, and local
-qualification recorded 311 passes with 38 capability skips. Voiage's link PR #1394
-remains open at verified signed, current-base head
-`3bc04fdc1df6f30981765eee49c0c9dbce490cde`; its hosted and required local checks
-must complete before merge.
+qualification recorded 311 passes with 38 capability skips.
 
-The latest accepted receiving runtime is main
+[Voiage PR #1394](https://github.com/edithatogo/voiage/pull/1394) merged through a
+policy-enforced squash at `2026-11-22T23:32:28Z`, verified commit
+`a921d6471822eaac7fbc22f507760bd943ba9f6a`. Its main tree exactly matches reviewed
+head `3bc04fdc1df6f30981765eee49c0c9dbce490cde`. At that reviewed head, all 51 hosted
+checks succeeded, three expected checks skipped, and all 17 required names matched
+successful checks.
+The full local tox attempt did not pass. Thirteen local environment checks passed;
+existing hosted coverage and docs jobs supplied the remaining command evidence on
+the current inputs. The [Voiage verification receipt](tracks/03-standardflow-import/verification.md#voiage-downstream-merge-and-command-evidence)
+retains the six local coverage failures, interrupted docs installation, environment
+differences and the absence of a final local guard/peak-memory receipt.
+
+The completed actual-main runtime receipt before PR #98 is bound to
 `2b0c579454a1dd469cd12cfb9538d23c96785370`. Its
 [actual-main job](https://github.com/edithatogo/standards_check/actions/runs/45070791156/job/137357038355)
 passed provenance, parity, container and default-startup HTTP checks; the
@@ -85,6 +100,13 @@ retains the result. At that main revision, 26 observed checks succeeded, includi
 deployment. The separate
 [offline security run](https://github.com/edithatogo/standards_check/actions/runs/45070791434)
 was still queued when re-read at approximately 22:58 UTC on 22 November.
+
+PR #98's reviewed head `08d9ffef20675efc80484d108b32f1d1ee759921` passed its
+[legacy workflow](https://github.com/edithatogo/standards_check/actions/runs/45082189553)
+and all nine ordinary checks; two offline checks remained queued. Execution on
+receiving main after this admission is separately pending. The old/new optional
+kernel profiles each passed 52 application tests, but both startups stopped before
+`kernel_info` and executed no cells; interactive-kernel parity is not established.
 
 Receiving #29–31, #82, #94 and #95 remain open for their documented obligations.
 Queued offline security work has no execution receipt. Branch enforcement,
@@ -96,4 +118,4 @@ reconciliation without publishing unqualified content changes.
 
 The receiving repository remains the active public home. See the
 [retirement record](../docs/migration/standardflow/retirement.md) for recovery and
-the completed source settings and remaining downstream reconciliation.
+the completed source settings, identified downstream updates and remaining qualification gates.

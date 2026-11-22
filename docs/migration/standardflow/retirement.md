@@ -9,7 +9,9 @@ After the owner applied the authorized settings, an independent
 at **2026-11-22T22:55:19Z** returned `private: true`, `archived: true` and
 `open_issues_count: 1`. The registry cleanup is also merged through
 [repository-standards PR #172](https://github.com/edithatogo/repository-standards/pull/172).
-Voiage's separate consumer-link change still awaits its current checks and merge.
+Voiage's consumer-link update is also merged through
+[PR #1394](https://github.com/edithatogo/voiage/pull/1394); its command-evidence
+distinctions are recorded below.
 
 The earlier authentication blocker is historical: the first visibility attempt
 reached GitHub's **Confirm access** screen, and the 21:00 UTC settings read still
@@ -69,7 +71,7 @@ preserved and identical
 outputs for six diagram and three checklist CLI canaries. Invalid PRISMA input
 also failed without output. This is same-environment legacy behaviour evidence.
 
-The latest accepted receiving main is
+The completed actual-main runtime receipt preceding host dependency admission is bound to
 [`2b0c579454a1dd469cd12cfb9538d23c96785370`](https://github.com/edithatogo/standards_check/commit/2b0c579454a1dd469cd12cfb9538d23c96785370).
 [Actual-main workflow 45070791156](https://github.com/edithatogo/standards_check/actions/runs/45070791156),
 [job 137357038355](https://github.com/edithatogo/standards_check/actions/runs/45070791156/job/137357038355)
@@ -80,6 +82,14 @@ main revision, 26 observed checks succeeded, including deployment. The separate
 [offline AI-security run 45070791434](https://github.com/edithatogo/standards_check/actions/runs/45070791434)
 was still queued when re-read at approximately 22:58 UTC on 22 November and has
 no execution receipt.
+
+The maintained host profile subsequently admitted Click 8.5.1, graphviz 0.21 and
+jsonschema 4.26.0 through [PR #98](https://github.com/edithatogo/standards_check/pull/98),
+merged as `d213085a268a4cd82d522e6e17d27f3dee15bf5f`. Its reviewed-head
+[legacy workflow](https://github.com/edithatogo/standards_check/actions/runs/45082189553)
+passed; receiving-main execution remains separately pending. The
+[dependency receipt](dependency-qualification-20261123.json) records the exact
+profile and qualification. The historical `2b0c5794` results above are unchanged.
 
 Earlier integration acceptance remains bound to its original revision:
 
@@ -107,8 +117,10 @@ from source #23 maps to receiving
 [#76](https://github.com/edithatogo/standards_check/issues/76).
 The three receiving issue bodies retain their transferred obligations. Source PR #9
 supplies the repaired snapshot; the receiving workflow uses the harden-runner and
-setup-python pins represented by PR #24/#25. Dependency PRs #26/#27/#28/#29 are held in
-[#94](https://github.com/edithatogo/standards_check/issues/94); unqualified guideline
+setup-python pins represented by PR #24/#25. Dependency PRs #26/#27/#28/#29 remain
+unmerged source history; three corresponding host versions were separately admitted
+through receiving PR #98. Optional ipykernel qualification and updater observation
+remain in [#94](https://github.com/edithatogo/standards_check/issues/94); unqualified guideline
 datasets are held in [#95](https://github.com/edithatogo/standards_check/issues/95).
 Preserving their commits does not admit their changes.
 
@@ -126,10 +138,14 @@ closed as exported or superseded, not merged into the old source's main branch.
 | [#9: legacy compatibility repair](https://github.com/edithatogo/standardflow/pull/9) | Repaired source `dc51d8e` is preserved exactly by receiving PRs #92 and #88. |
 | [#24: StepSecurity workflow hardening](https://github.com/edithatogo/standardflow/pull/24) | History retained; audited Harden Runner pin is used by the receiving workflow. |
 | [#25: setup-python update](https://github.com/edithatogo/standardflow/pull/25) | History retained; audited setup-python pin is used by the receiving workflow. |
-| [#26: Click update](https://github.com/edithatogo/standardflow/pull/26) | History only; dependency admission remains in receiving [#94](https://github.com/edithatogo/standards_check/issues/94). |
-| [#27: graphviz update](https://github.com/edithatogo/standardflow/pull/27) | History only; dependency admission remains in receiving [#94](https://github.com/edithatogo/standards_check/issues/94). |
-| [#28: ipykernel update](https://github.com/edithatogo/standardflow/pull/28) | History only; dependency admission remains in receiving [#94](https://github.com/edithatogo/standards_check/issues/94). |
-| [#29: jsonschema update](https://github.com/edithatogo/standardflow/pull/29) | History only; dependency admission remains in receiving [#94](https://github.com/edithatogo/standards_check/issues/94). |
+| [#26: Click update](https://github.com/edithatogo/standardflow/pull/26) | Source branch retained unmerged; maintained host Click 8.5.1 separately admitted through receiving PR #98. |
+| [#27: graphviz update](https://github.com/edithatogo/standardflow/pull/27) | Source branch retained unmerged; maintained host graphviz 0.21 separately admitted through receiving PR #98. |
+| [#28: ipykernel update](https://github.com/edithatogo/standardflow/pull/28) | Source branch retained unmerged; ipykernel 6.31.0 remains unadmitted, with optional qualification in receiving [#94](https://github.com/edithatogo/standards_check/issues/94). |
+| [#29: jsonschema update](https://github.com/edithatogo/standardflow/pull/29) | Source branch retained unmerged; maintained host jsonschema 4.26.0 separately admitted through receiving PR #98. |
+
+Issue #94 remains open. Its old/new kernel-profile attempts each passed 52
+application tests, but both startups were blocked before `kernel_info` and no
+cells executed. Interactive-kernel parity is not established.
 
 The optional runtime does not replace Rust contracts or canonical packs. Its
 tests do not establish scientific correctness, Rust equivalence, independent
@@ -148,13 +164,25 @@ The only registry change removes retired `standardflow`, reducing 169 entries to
 checks skipped; required policy and Actions/Python analysis succeeded. Local
 qualification recorded 311 passes and 38 capability skips.
 
-[Voiage PR #1394](https://github.com/edithatogo/voiage/pull/1394) is verified signed
-and current with main at `3bc04fdc1df6f30981765eee49c0c9dbce490cde`, containing the
-intended one-line consumer link. Hosted checks and its required local gate remain
-pending before merge. The [structured inventory](source-inventory.json) retains
-the exact candidate tree and earlier downstream observations. Source private
-archival and registry completion do not qualify the pending downstream, security,
-rights or semantic-migration work.
+[Voiage PR #1394](https://github.com/edithatogo/voiage/pull/1394) merged through a
+policy-enforced squash at `2026-11-22T23:32:28Z`, verified commit
+`a921d6471822eaac7fbc22f507760bd943ba9f6a`, also observed on main. The merged tree
+`7c0099a9c465c19648db7aca89e187141855c2c2` exactly matches reviewed head
+`3bc04fdc1df6f30981765eee49c0c9dbce490cde`. The intended link is the only change:
+one file, one insertion and one deletion. At the reviewed head, all 51 hosted checks
+succeeded, three expected checks skipped, and all 17 required names matched
+successful results.
+
+The full local tox attempt did not pass: 13 environment checks passed, local
+coverage had six failures from missing `/usr/bin/time`, and local docs dependency
+installation stalled and was interrupted. Existing hosted coverage and docs jobs
+supplied successful execution of the remaining required commands on the reviewed
+inputs. The [verification receipt](../../../conductor/tracks/03-standardflow-import/verification.md#voiage-downstream-merge-and-command-evidence)
+records exact results, environment differences and the absence of a final local
+guard/peak-memory receipt. The [structured inventory](source-inventory.json) retains
+the exact merge, blob and earlier downstream observations. Source private archival
+and both identified downstream updates are complete; security, rights and
+semantic-migration qualification remain separate.
 
 ## Recovery without access to the source repository
 

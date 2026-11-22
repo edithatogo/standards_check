@@ -1,10 +1,11 @@
 # StandardFlow source inventory and pending work
 
 Reconciled on **23 November 2026 (Australia/Brisbane)** from GitHub observations
-on 22 November UTC. The receiving snapshot is exactly
+on 22 November UTC. The historical actual-main runtime acceptance below is bound to
 [`2b0c579454a1dd469cd12cfb9538d23c96785370`](https://github.com/edithatogo/standards_check/commit/2b0c579454a1dd469cd12cfb9538d23c96785370).
-These results apply to that recorded revision. Later dependency or runtime changes
-require their own acceptance receipts.
+Those results apply to that recorded revision. PR #98 subsequently admitted three
+maintained host versions at receiving main `d213085a268a4cd82d522e6e17d27f3dee15bf5f`;
+its qualification and separately pending receiving-main execution are recorded below.
 
 The structured [source inventory](source-inventory.json) retains the original
 five-branch and seven-branch snapshots, all nine exported tips, source issue/PR
@@ -20,8 +21,8 @@ source and all nine export histories. The integration merge is
 `15184da899f21a62565cfc3145d1a4719baf4ad4`; [PR #96](https://github.com/edithatogo/standards_check/pull/96)
 then recorded actual-main acceptance at `cf7d14da7bfb4d32c2c8746ec1111a6643c4a716`
 while source authentication was pending. That earlier observation is historical;
-the source is now private and archived, and latest runtime acceptance is bound to
-the receiving snapshot pinned above.
+the source is now private and archived. The completed actual-main runtime receipt
+remains bound to the earlier receiving snapshot pinned above.
 
 The imported `legacy/standardflow` tree is
 `62d8a0e738f0255cc59822ae4e661568090a213e`, exactly matching repaired source
@@ -100,8 +101,10 @@ Source PRs **#9 and #24 through #29 are closed**, leaving zero open source PRs.
 They were closed as exported or superseded; their changes were not merged into
 the old source's main branch. PR #9 supplies the repaired compatibility snapshot.
 PR #24/#25 history is retained and the receiving workflow uses their audited
-Harden Runner and setup-python pins. PR #26–#29 remain held dependency candidates
-in receiving [#94](https://github.com/edithatogo/standards_check/issues/94).
+Harden Runner and setup-python pins. PR #26–#29 remain unmerged source history;
+three corresponding host versions were separately admitted through receiving PR #98.
+Optional ipykernel qualification and updater observation remain in receiving
+[#94](https://github.com/edithatogo/standards_check/issues/94).
 The [retirement record](retirement.md) retains the individual PR dispositions.
 
 The source testing, security and umbrella issues have also been relocated. Their
@@ -130,17 +133,30 @@ also predates the repaired runtime. Its history remains recoverable; receiving
 [#95](https://github.com/edithatogo/standards_check/issues/95) owns substantive
 qualification before any dataset or pack admission.
 
-| Preserved dependency candidate | Qualification needed |
+| Preserved dependency candidate | Receiving disposition |
 | --- | --- |
-| Click 8.1.3 → 8.5.1, source #26 | CLI overrides, errors and module entry point. |
-| graphviz 0.20.1 → 0.21, source #27 | Actual output bytes, six variant goldens and notebooks. |
-| ipykernel 6.25.0 → 6.31.0, source #28 | Notebook execution and interactive kernel compatibility. |
-| jsonschema 4.17.3 → 4.26.0, source #29 | Accepted/rejected fixtures, references and diagnostics. |
+| Click 8.1.3 → 8.5.1, source #26 | Maintained host version 8.5.1 admitted through PR #98; source branch remains unmerged. |
+| graphviz 0.20.1 → 0.21, source #27 | Maintained host version 0.21 admitted through PR #98; source branch remains unmerged. |
+| ipykernel 6.25.0 → 6.31.0, source #28 | Version 6.31.0 remains unadmitted; optional kernel qualification remains in #94. |
+| jsonschema 4.17.3 → 4.26.0, source #29 | Maintained host version 4.26.0 admitted through PR #98; source branch remains unmerged. |
 
-The export preserves these four candidates without activating them. Issue #94
-requires independent compatibility checks against the accepted repaired runtime;
-notebook fixture execution alone does not qualify interactive kernel behaviour.
-Later dependency admission must record its own exact revision and results.
+The export and PR #97 integration preserved these candidates without activating
+them. Separate receiving [PR #98](https://github.com/edithatogo/standards_check/pull/98)
+merged at `2026-11-22T23:35:27Z` as `d213085a268a4cd82d522e6e17d27f3dee15bf5f`, tree
+`4a34e69ae1cd857a178cf7e28245d2953a140dec`. Its reviewed head
+`08d9ffef20675efc80484d108b32f1d1ee759921` passed
+[legacy run 45082189553](https://github.com/edithatogo/standards_check/actions/runs/45082189553),
+with nine ordinary checks successful and two offline checks queued. Receiving-main
+execution is separately pending; the earlier `2b0c5794` receipts retain their scope.
+
+The [qualification receipt](dependency-qualification-20261123.json) binds the
+maintained host profile to SHA-256
+`27ba903aba19f5851baf887a177699ac1c9604c9ec5a7666edac573aefbe0568`.
+The exact imported source and historical Docker dependencies remain unchanged.
+Issue #94 stays open for optional interactive-kernel qualification and updater
+observation. Both old/new kernel profiles passed 52 application tests, but both
+startups were blocked before `kernel_info`; no cells executed. Those results do
+not establish interactive-kernel parity or admit ipykernel 6.31.0.
 
 ## CodeQL disposition retained
 
@@ -168,13 +184,23 @@ unarchived, are historical. The earlier visibility attempt had reached GitHub
 structured inventory retains that blocker receipt separately from the completed
 settings observation; issue relocation alone did not establish the settings change.
 
-The [Voiage link PR #1394](https://github.com/edithatogo/voiage/pull/1394) remains
-open at verified signed, current-base head
-`3bc04fdc1df6f30981765eee49c0c9dbce490cde`, tree
-`7c0099a9c465c19648db7aca89e187141855c2c2`. The exact diff is the intended one-line
-consumer-link replacement. Hosted checks and the required local gate remain
-pending before merge. The earlier unsigned head, outdated base and check results
-remain historical evidence in the structured inventory.
+The [Voiage link PR #1394](https://github.com/edithatogo/voiage/pull/1394) merged
+through a policy-enforced squash at `2026-11-22T23:32:28Z`, verified commit
+`a921d6471822eaac7fbc22f507760bd943ba9f6a`, also read back on main. Tree
+`7c0099a9c465c19648db7aca89e187141855c2c2` exactly matches reviewed head
+`3bc04fdc1df6f30981765eee49c0c9dbce490cde`. The intended consumer-link replacement
+is one insertion and one deletion in one file, producing blob
+`4849e4fc167c7da484d95f9ef652701181b30a5b`.
+
+At the reviewed head, all 51 hosted checks succeeded, three expected checks skipped,
+and all 17 required names matched successful checks. The full local tox attempt did not pass: 13
+environment checks passed, coverage had six missing-`/usr/bin/time` failures, and
+docs installation stalled and was interrupted. Existing hosted coverage and docs
+jobs cover the remaining required commands on the reviewed inputs. Their exact
+results, toolchain differences and missing final local guard/peak-memory receipt
+are in the [verification record](../../../conductor/tracks/03-standardflow-import/verification.md#voiage-downstream-merge-and-command-evidence).
+The earlier unsigned head, outdated base and pending-check observations remain
+historical evidence in the structured inventory.
 
 The repository-standards registry removal is complete.
 [PR #172](https://github.com/edithatogo/repository-standards/pull/172) merged through
@@ -194,6 +220,7 @@ compatibility tests do not establish scientific correctness, Rust equivalence,
 independent accessibility or publication readiness. The historical adoption
 manifest's source/target pins remain historical preparation evidence.
 
-The recorded receiving import, source private archival and registry cleanup are complete.
-Voiage acceptance, offline security execution, legacy-to-Rust semantic qualification, item-level
-rights and independent methodology/accessibility work retain their separate gates.
+The recorded receiving import, source private archival, registry cleanup and Voiage
+link update are complete. Offline security execution, legacy-to-Rust semantic
+qualification, item-level rights and independent methodology/accessibility work
+retain their separate gates.

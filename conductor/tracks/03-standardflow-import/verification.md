@@ -198,7 +198,7 @@ at **2026-11-22T22:55:19Z** (23 November in Australia/Brisbane) returned
 privacy and archival are complete. The remaining dashboard and transferred
 receiving obligations are not marked complete by those settings.
 
-The latest accepted receiving main is
+The completed actual-main runtime receipt preceding PR #98 is bound to
 [`2b0c579454a1dd469cd12cfb9538d23c96785370`](https://github.com/edithatogo/standards_check/commit/2b0c579454a1dd469cd12cfb9538d23c96785370).
 Its [workflow 45070791156](https://github.com/edithatogo/standards_check/actions/runs/45070791156),
 [job 137357038355](https://github.com/edithatogo/standards_check/actions/runs/45070791156/job/137357038355)
@@ -223,12 +223,81 @@ Nine PR checks succeeded and two expected PR checks skipped, including success
 for required policy and Actions/Python analysis. Local qualification recorded
 311 passes and 38 capability skips.
 
-[Voiage PR #1394](https://github.com/edithatogo/voiage/pull/1394) remains open at
-verified signed, current-base head `3bc04fdc1df6f30981765eee49c0c9dbce490cde`, tree
-`7c0099a9c465c19648db7aca89e187141855c2c2`. Its exact change is the intended one-line
-consumer link. Hosted checks and the required local gate remain pending; no merge
-is claimed. Legacy-to-Rust semantic parity, item-level rights and provenance,
-independent methodology and accessibility qualification remain open. See the
+## Host dependency admission through PR #98
+
+[PR #98](https://github.com/edithatogo/standards_check/pull/98) merged at
+**2026-11-22T23:35:27Z**, commit `d213085a268a4cd82d522e6e17d27f3dee15bf5f`, tree
+`4a34e69ae1cd857a178cf7e28245d2953a140dec`. It admits Click 8.5.1, graphviz 0.21
+and jsonschema 4.26.0 in the maintained root host profile. Reviewed head
+`08d9ffef20675efc80484d108b32f1d1ee759921` passed its
+[legacy workflow 45082189553](https://github.com/edithatogo/standards_check/actions/runs/45082189553);
+all nine ordinary checks succeeded and two offline checks remained queued.
+Receiving-main execution after this admission is separately pending. The earlier
+`2b0c5794` checks above retain their original revision and dependency scope.
+
+The [qualification receipt](../../../docs/migration/standardflow/dependency-qualification-20261123.json)
+binds the maintained profile to SHA-256
+`27ba903aba19f5851baf887a177699ac1c9604c9ec5a7666edac573aefbe0568`.
+The exact imported source, historical Docker dependencies and source PRs closed
+without merging remain unchanged. Admission of the three host versions does not
+merge the preserved source dependency branches.
+
+ipykernel 6.31.0 remains unadmitted.
+[Issue #94](https://github.com/edithatogo/standards_check/issues/94) remains open for
+optional interactive-kernel qualification and updater observation. Its published
+attempt receipt records 52 application tests passing in each old/new kernel
+profile, but both kernel startups were blocked before `kernel_info`; no cells
+executed. Those application results do not establish interactive-kernel parity.
+
+## Voiage downstream merge and command evidence
+
+[Voiage PR #1394](https://github.com/edithatogo/voiage/pull/1394) merged through a
+policy-enforced squash at **2026-11-22T23:32:28Z**, commit
+[`a921d6471822eaac7fbc22f507760bd943ba9f6a`](https://github.com/edithatogo/voiage/commit/a921d6471822eaac7fbc22f507760bd943ba9f6a).
+GitHub verified the merge signature, and the repository API returned that commit
+on main. Its tree `7c0099a9c465c19648db7aca89e187141855c2c2` exactly equals reviewed
+head `3bc04fdc1df6f30981765eee49c0c9dbce490cde`. The intended consumer-link change
+affects one file, with one insertion and one deletion; its resulting blob is
+`4849e4fc167c7da484d95f9ef652701181b30a5b`.
+
+All 51 hosted checks succeeded and three expected checks skipped. All 17 required
+check names explicitly matched successful results at the reviewed head; this
+terminal hosted state was observed at 23:17:53 UTC. The local and hosted command
+evidence has distinct scopes:
+
+| Execution | Observed result |
+| --- | --- |
+| Full local tox attempt | Thirteen environment checks passed. The overall attempt did not pass. |
+| Local coverage environment | 6,176 passed, six failed, 46 skipped, one expected failure and two subtests; coverage was 95.01%. All six failures required absent `/usr/bin/time`; normal installation was blocked at UID 1000. |
+| Local docs environment | The docs validator and Python assertion passed. Dependency installation stalled and was interrupted; the owned session exited 130. No final guard or peak-memory receipt was produced. |
+| Existing hosted coverage environment | 6,193 passed, 35 skipped, one expected failure and two subtests; 95.01% coverage met the 90% threshold. All six native cases that failed locally passed. |
+| Existing hosted docs commands | Frozen pnpm installation, check and build all passed, with zero errors or warnings; output included 962 API pages and 1,085 site pages. |
+
+Independent review verified that the existing
+[Coverage Report job 137390005725](https://github.com/edithatogo/voiage/actions/runs/45081240057/job/137390005725)
+executed the exact tox coverage environment at reviewed head `3bc04fdc...`.
+The [docs job 137390005956](https://github.com/edithatogo/voiage/actions/runs/45081240057/job/137390005956)
+in the same run executed all three remaining docs commands. It used synthetic
+commit `5f50965d008daeb7900a6381828050903586add9`, whose tree was exactly
+`7c0099a9c465c19648db7aca89e187141855c2c2`, including submodule
+`054d11e08d8b28fd50821ede8a97f8be3ad50447`.
+
+Hosted docs used the locked root virtual environment without installing the
+project; local docs used `.[docs]` with an explicit interpreter. Both used
+Python 3.15.2 and griffe 1.15.0. Hosted docs used Node 22.23.5 and pnpm 10.34.9.
+These environment differences are retained alongside the exact tree and command
+receipts. Combined evidence on the current inputs covers every required command
+without reducing the gates. Existing hosted results were reused; this is not an
+all-local pass, a separately dispatched full tox run, or a final guard/peak-memory
+receipt.
+
+Post-merge CI was only starting at approximately 23:35 UTC. Acceptance here is
+bound to the successful reviewed-head checks and verified identical merged tree;
+it does not claim that post-merge CI has completed.
+
+Source private archival and the two identified downstream updates are complete.
+Legacy-to-Rust semantic parity, item-level rights and provenance, independent
+methodology and accessibility qualification remain open. See the
 [retirement record](../../../docs/migration/standardflow/retirement.md) for recovery
 and the [source inventory](../../../docs/migration/standardflow/source-inventory.json)
 for the preserved historical observations.
