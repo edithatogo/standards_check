@@ -5,6 +5,22 @@
   ],
   "automerge": false,
   "platformAutomerge": false,
+  "ignorePaths": [
+    "**/node_modules/**",
+    "**/bower_components/**",
+    "**/vendor/**",
+    "**/examples/**",
+    "**/__tests__/**",
+    "**/test/**",
+    "**/tests/**",
+    "**/__fixtures__/**",
+    "**/.mise/locks/**",
+    "**/.config/mise/locks/**",
+    "legacy/standardflow/**"
+  ],
+  "pip_requirements": {
+    "managerFilePatterns": ["requirements/*.txt"]
+  },
   "packageRules": [
     {
       "description": "Keep updates reviewable until required repository checks are configured",
