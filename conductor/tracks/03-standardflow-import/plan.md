@@ -17,11 +17,17 @@
   default-container HTTP smoke test.
 - [x] Add same-environment source/receiving parity, 21 byte-identical outputs and an
   isolated 27-package dependency closure alongside provenance and container checks.
-- [ ] Observe receiving hosted checks and merge without squashing ancestry.
+- [x] Observe receiving hosted checks and merge without squashing ancestry: PR #92
+  through PR #88 reached main `15184da899f21a62565cfc3145d1a4719baf4ad4`.
 - [x] Rehearse recovery from preserved commits without the source remote.
 - [x] Verify all nine named recovery refs against the final source inventory.
-- [ ] Verify receiving main.
-- [ ] Make the source private, archive it and record the observed repository settings.
+- [x] Verify receiving main: workflow `45034583489` passed provenance, source/receiving
+  parity, the container suite and the default-container HTTP smoke test.
+- [x] Close source PRs #9 and #24 through #29 as exported or superseded, preserving
+  their histories and receiving dispositions.
+- [ ] Complete owner account reauthentication, make the source private, archive it
+  and record the observed repository settings. GitHub's Confirm access screen blocks
+  the settings change; at 14:53 UTC on 22 November the source remained public and unarchived.
 - [ ] Reconcile the active repository registry and current downstream StandardFlow links.
 
 ## Remaining semantic migration
@@ -34,6 +40,7 @@
 The source-private/archive action is explicitly authorized after verified repository
 export. The remaining semantic tasks stay open in this primary repository.
 
-The receiving PR records the final hosted, merge and administrative receipts. See
-[verification.md](verification.md) for the independently observed application and
-recovery evidence available before that merge.
+See [verification.md](verification.md) for the actual-main hosted, application and
+recovery receipts, and the [retirement record](../../../docs/migration/standardflow/retirement.md)
+for source PR dispositions and the pending account reauthentication. No successful
+privacy or archival change is inferred from the completed export.
