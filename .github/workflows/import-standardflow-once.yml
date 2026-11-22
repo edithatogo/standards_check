@@ -52,6 +52,8 @@ jobs:
               "refs/heads/dependabot/github_actions/actions/setup-python-7.1.0": "7d2e233217d5d3d6c4ca9c5866f64158d117099e",
               "refs/heads/renovate/click-8.x": "3f850b81be3feb1a4d84d003b2ec6c166059a68e",
               "refs/heads/renovate/graphviz-0.x": "38c6327a9fe507150ee2bd655f36269345cf04a8",
+              "refs/heads/renovate/ipykernel-6.x": "fb91d00d4f49d9b29e1a1a8dc73b1110b2518e00",
+              "refs/heads/renovate/jsonschema-4.x": "59c119a933376d5f2e76d1b0088ad92f14d0fc60",
           }
           manifest = json.loads(Path("conductor/tracks/03-standardflow-import/import.json").read_text())
           if (
@@ -78,13 +80,13 @@ jobs:
           live_refs = {ref: sha for sha, ref in (row.split("\t") for row in live.splitlines())}
           if fetched_refs != expected or live_refs != expected:
               raise SystemExit("Source branch inventory or tips changed; no replacement is authorized")
-          print("Verified all seven source heads against the receiving manifest")
+          print("Verified all nine source heads against the receiving manifest")
           PY
           test "$(git rev-parse dc51d8e392858d5cb4e653aed199563514191efb^1)" = d89a5dbacc207cdce11f19efd667b83fdb09df18
           test "$(git rev-parse dc51d8e392858d5cb4e653aed199563514191efb^{tree})" = 62d8a0e738f0255cc59822ae4e661568090a213e
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git merge --no-ff --no-commit -s ours dc51d8e392858d5cb4e653aed199563514191efb
+          git merge --no-ff --no-commit -s ours dc51d8e392858d5cb4e653aed199563514191efb fb91d00d4f49d9b29e1a1a8dc73b1110b2518e00 59c119a933376d5f2e76d1b0088ad92f14d0fc60
           git rm -r --quiet -- legacy/standardflow
           git read-tree --prefix=legacy/standardflow/ -u dc51d8e392858d5cb4e653aed199563514191efb
           import_tree=$(git write-tree)

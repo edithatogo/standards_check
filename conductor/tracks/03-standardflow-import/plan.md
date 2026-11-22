@@ -6,12 +6,12 @@
 - [x] Pin the repaired tree and inventory every source branch tip.
 - [x] Keep unqualified guideline work in history only.
 - [x] Define tree, ancestry and drift checks with negative regression cases.
-- [x] Import the exact tree and preserve all seven branch histories.
+- [x] Import the exact tree and preserve the recorded source branch histories.
 - [x] Run the relocated application, notebooks and initial provenance checks.
 - [x] Verify primary validators and unchanged Rust/PRISMA assets.
 - [ ] Observe receiving hosted checks and merge without squashing ancestry.
 - [x] Rehearse recovery from preserved commits without the source remote.
-- [ ] Verify receiving main and the final seven-ref inventory.
+- [ ] Verify receiving main and the final nine-ref inventory.
 - [ ] Make the source private, archive it and record the observed repository settings.
 
 ## Remaining semantic migration

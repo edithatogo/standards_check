@@ -58,10 +58,10 @@ schemas and self-generating snapshots do not prove guideline support. Do not pro
 that branch's data into active code or standards packs.
 
 The source CI PRs #24 and #25 are retained in history. The root receiving workflow uses
-their audited Harden Runner and setup-python pins. Renovate PRs #26 and #27 appeared
-during export; their Click and graphviz requirement updates are also preserved only
-in history, without claiming those upgrades were tested. The final inventory has
-seven branch heads and no tags.
+their audited Harden Runner and setup-python pins. Renovate PRs #26–29 appeared
+during export; their Click, graphviz, ipykernel and jsonschema requirement updates
+are also preserved only in history, without claiming those upgrades were tested.
+The final inventory has nine branch heads and no tags.
 
 The following source issues remain assurance work under primary Track 05. Archival
 does not mark their underlying tasks complete; their historical inventory claims

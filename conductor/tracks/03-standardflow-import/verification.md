@@ -80,3 +80,7 @@ initial `d89a5db` source remains an ancestor. All 52 tests passed locally again,
 including the existing invalid-format cases. The Dockerfile command served HTTP 200
 when run as a local process; actual container startup acceptance is a hosted check.
 The final receiving PR receipt binds those checks to its corrected revision.
+
+The refresh inventory guard also detected two later source dependency branches,
+PRs #28 and #29. Their commits are retained as additional history-only parents and
+recorded in the nine-ref manifest; the active application dependencies are unchanged.
