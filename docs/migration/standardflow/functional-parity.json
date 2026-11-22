@@ -1,0 +1,155 @@
+{
+  "checklist_cases": [
+    "consort_checklist",
+    "strobe_cohort_checklist",
+    "stard_checklist"
+  ],
+  "claim": "same-environment source-to-subtree legacy behaviour parity",
+  "claim_limits": [
+    "not Rust replacement parity",
+    "not scientific validation",
+    "not accessibility certification",
+    "not third-party content rights clearance",
+    "legacy count validation is not comprehensive arithmetic or methodological validation"
+  ],
+  "dependencies": {
+    "Flask": "3.1.3",
+    "Jinja2": "3.1.6",
+    "MarkupSafe": "3.0.4",
+    "Pygments": "2.21.0",
+    "Werkzeug": "3.1.9",
+    "asttokens": "3.0.2",
+    "attrs": "26.1.0",
+    "blinker": "1.9.0",
+    "click": "8.1.3",
+    "executing": "2.3.0",
+    "graphviz": "0.20.1",
+    "ipython": "9.18.1",
+    "ipython_pygments_lexers": "1.1.1",
+    "itsdangerous": "2.2.0",
+    "jedi": "0.20.1",
+    "jsonschema": "4.17.3",
+    "matplotlib-inline": "0.2.2",
+    "parso": "0.8.7",
+    "pexpect": "4.9.0",
+    "prompt_toolkit": "3.0.53",
+    "psutil": "7.2.2",
+    "ptyprocess": "0.7.0",
+    "pure_eval": "0.2.4",
+    "pyrsistent": "0.20.0",
+    "stack-data": "0.6.3",
+    "traitlets": "5.16.1",
+    "wcwidth": "0.9.5"
+  },
+  "diagram_cases": [
+    "prisma_data",
+    "prisma_2020_updated_data",
+    "consort_data",
+    "consort_cluster_data",
+    "strobe_data",
+    "strobe_cohort_data"
+  ],
+  "files": {
+    "consort_checklist/Introduction.md": {
+      "bytes": 135,
+      "sha256": "e2d734f7e40c42d531af42b55f0e7498bdb14b92a8f0445f21b067cd13a6ef15"
+    },
+    "consort_checklist/Title_and_abstract.md": {
+      "bytes": 170,
+      "sha256": "b58f6bb175e032d28448e82045cb40385b2f0a00f8bee484435b4781444aa685"
+    },
+    "consort_cluster_data.svg": {
+      "bytes": 5790,
+      "sha256": "8a84a8761290ff6e1b0dd27b041352113c4c9cd23cb8f7837410ef0623fdf82d"
+    },
+    "consort_data.svg": {
+      "bytes": 7047,
+      "sha256": "7590ec6a0cbae6d3948acf7b70da2fbbc15154f8a344f59ce037d32cc0a3b641"
+    },
+    "prisma_2020_updated_data.svg": {
+      "bytes": 7166,
+      "sha256": "962e5f222f9c4fabccb9267ebaf77a4b2fa484d5da2e3a88df10a153c68418cc"
+    },
+    "prisma_data.svg": {
+      "bytes": 5690,
+      "sha256": "08a3d56356e882f0748915a15a79b7a00ec0be6bad94f2c5cada65a278e0d4df"
+    },
+    "stard_checklist/Abstract.md": {
+      "bytes": 144,
+      "sha256": "12190d06d415b320b5844b9fbfa21858ed7d34c9b424d164dc0525bf6eed66a3"
+    },
+    "stard_checklist/Discussion.md": {
+      "bytes": 244,
+      "sha256": "a4dbf9acde7152b2a96e547fe7f55adbde445aa071b0d151b66ef826e72bffd1"
+    },
+    "stard_checklist/Introduction.md": {
+      "bytes": 181,
+      "sha256": "ea8d4efbe815afe5ca05728708a525873ea0ca50bb6f86edfaa39b93dd637ae7"
+    },
+    "stard_checklist/Methods.md": {
+      "bytes": 1889,
+      "sha256": "939b7a02f44f2bd9a3161040a30a23a49ed0adb39903d6a3ac3320e80734891a"
+    },
+    "stard_checklist/Other_information.md": {
+      "bytes": 219,
+      "sha256": "9b95ee8e5ea986ed648214dceb5f56718004943254cc52fa9b4c672e27a8bccd"
+    },
+    "stard_checklist/Results.md": {
+      "bytes": 895,
+      "sha256": "2a35ff3c480cffe2ab1eed7b97ceaa7a99fa79bf525b28c4b31cadc93b40f5e3"
+    },
+    "stard_checklist/Title_or_abstract.md": {
+      "bytes": 175,
+      "sha256": "f16fba55819268c2d2f62be6301e8e3383e91eebd97c9d730e6e0f3f76bda4c4"
+    },
+    "strobe_cohort_checklist/Discussion.md": {
+      "bytes": 613,
+      "sha256": "22b5a4208232df9c482cf91b0f88b9bba5330f0a81454fb810a5517102f10363"
+    },
+    "strobe_cohort_checklist/Introduction.md": {
+      "bytes": 232,
+      "sha256": "0cc602355fe6b6c01a4092a6157e9827a19954b88e36f1fa023bb3ded4342737"
+    },
+    "strobe_cohort_checklist/Methods.md": {
+      "bytes": 1506,
+      "sha256": "0637b7350a853c36e8729f5c8dcff11ed166d699662c01dea4bc64984b1a381e"
+    },
+    "strobe_cohort_checklist/Other_information.md": {
+      "bytes": 192,
+      "sha256": "1fade759f99d1d199642f4445ddd2d64107101ea7ba7846861f7139e94ceb7fe"
+    },
+    "strobe_cohort_checklist/Results.md": {
+      "bytes": 1318,
+      "sha256": "d13df34ded586e08cff647c1267a5727fb8d8fca187001d26b91eed702e1a9cf"
+    },
+    "strobe_cohort_checklist/Title_and_abstract.md": {
+      "bytes": 213,
+      "sha256": "b75d91a4b41dbc756365477aef585af8dfc7beb8005e1740e6c86d61c7449b02"
+    },
+    "strobe_cohort_data.svg": {
+      "bytes": 8295,
+      "sha256": "36d20ca1b7bb8bdcf03626511913b2ac11ae39bff7c2c3c448e2b048f41f0495"
+    },
+    "strobe_data.svg": {
+      "bytes": 4817,
+      "sha256": "732adc970980a7f37c62ff7a4109e1a5c2959e0352b1d079405d7d7e3de15fad"
+    }
+  },
+  "graphviz": "dot - graphviz version 2.42.4 (0)",
+  "history_preserved": true,
+  "imagemagick": "Version: ImageMagick 7.1.1-43 Q16 x86_64 22550 https://imagemagick.org",
+  "invalid_prisma_fixture": {
+    "error": "'invalid_data' is not of type 'integer'",
+    "exit_code": 1,
+    "output_created": false
+  },
+  "module_entrypoint_requires_pythonpath": false,
+  "preserved_revisions": 7,
+  "python": "3.12.14",
+  "received_subtree": "legacy/standardflow",
+  "received_tree": "e48c081ff946d0fac6a1a4b65a3599c6b7aa3352",
+  "result": "pass",
+  "source_revision": "d89a5dbacc207cdce11f19efd667b83fdb09df18",
+  "source_tree": "e48c081ff946d0fac6a1a4b65a3599c6b7aa3352",
+  "tests": 52
+}

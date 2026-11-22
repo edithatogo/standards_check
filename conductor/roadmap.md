@@ -11,7 +11,7 @@ The roadmap deliberately separates standards knowledge, canonical representation
 - Replace Markdown-to-JSON reverse parsing with canonical data → generated views.
 - Build generic checklist/form and semantic diagram/scene-graph kernels.
 - Implement all four PRISMA 2020 flow templates, arithmetic checks and accessible text equivalents.
-- Import `standardflow` history into a quarantine namespace; retain Apache-2.0 notices and prove parity before cutover.
+- Preserve `standardflow` history under `legacy/standardflow` with Apache-2.0 notices and recovery checks; complete the user-directed private archival of the old remote after export. Prove semantic parity before replacing legacy consumers with Rust.
 - Establish immutable-pinned CI, contract drift checks, hostile-input controls and evidence receipts.
 
 ## Medium horizon: make the platform operationally useful

@@ -1,0 +1,76 @@
+name: StandardFlow legacy import
+
+on:
+  pull_request:
+    paths:
+      - "legacy/**"
+      - "scripts/check_standardflow_import.py"
+      - "scripts/verify_legacy_standardflow.py"
+      - "requirements/legacy-standardflow.txt"
+      - "tests/test_standardflow_import.py"
+      - "conductor/tracks/03-standardflow-import/**"
+      - ".github/workflows/standardflow-legacy.yml"
+  push:
+    branches: [main]
+    paths:
+      - "legacy/**"
+      - "scripts/check_standardflow_import.py"
+      - "scripts/verify_legacy_standardflow.py"
+      - "requirements/legacy-standardflow.txt"
+      - "tests/test_standardflow_import.py"
+      - "conductor/tracks/03-standardflow-import/**"
+      - ".github/workflows/standardflow-legacy.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: standardflow-legacy-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  legacy-import:
+    name: Imported history and Python 3.12 compatibility
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
+        with:
+          egress-policy: audit
+      - name: Check out complete imported history
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          submodules: false
+      - name: Set up Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+      - name: Verify imported bytes and preserved ancestry
+        run: python scripts/check_standardflow_import.py
+      - name: Test import provenance checks
+        run: python -m unittest tests.test_standardflow_import -v
+      - name: Install diagram renderers
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes graphviz imagemagick
+      - name: Install legacy dependencies
+        run: python -m pip install --disable-pip-version-check --no-deps -r requirements/legacy-standardflow.txt
+      - name: Check dependency consistency
+        run: python -m pip check
+      - name: Compare preserved source and receiving runtime behaviour
+        run: python scripts/verify_legacy_standardflow.py --output "$RUNNER_TEMP/standardflow-parity.json"
+      - name: Retain receiving parity receipt
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: legacy-standardflow-parity
+          path: ${{ runner.temp }}/standardflow-parity.json
+          if-no-files-found: error
+      - name: Verify imported container runtime
+        working-directory: legacy/standardflow
+        run: |
+          docker build --tag standardflow-legacy-ci .
+          docker run --rm standardflow-legacy-ci python -m unittest discover -s tests -v

@@ -53,3 +53,8 @@ Status: **implementation complete; hosted integration accepted**. Implementation
 
 Passing SVG semantics and accessibility assertions establish only the tested fixture properties;
 they do not certify general accessibility, methodological validity or third-party recipe safety.
+
+## Ponytail review — 22 November 2026
+
+- [x] SVG reading order, accessibility gate and identifier bounds: published at `c64c61a0a978b4b50f8d525fc76d6548d2e75718`; verification is linked below.
+- [x] Retain findings, negative regressions, local receipts and outstanding gates in the [review record](../../ponytail-review-20261122.md).

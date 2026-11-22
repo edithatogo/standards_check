@@ -1,0 +1,1267 @@
+{
+  "observed_on": "2026-11-22",
+  "observation_scope": "Refreshed read-only pre-retirement snapshot. Source repaired-head tests and all seven exact receiving archive refs are observed. Receiving admission, final-head qualification, pending-work handoffs and source retirement remain separate.",
+  "source_repository": "edithatogo/standardflow",
+  "receiving_repository": "edithatogo/standards_check",
+  "source_main_revision": "af299f724bcf456c131b43a143b3eabc1d81245b",
+  "source_branches": [
+    {
+      "name": "chore/GHA-190519-stepsecurity-remediation",
+      "sha": "eb7d0703b86aaa82e3cd738a273db7c60a70f6c9",
+      "pull_request": 24,
+      "preservation_target_ref": "refs/heads/archive/standardflow/chore/GHA-190519-stepsecurity-remediation",
+      "preservation_status": "verified_remote_ref_exact_sha",
+      "archival_ref": "refs/heads/archive/standardflow/chore/GHA-190519-stepsecurity-remediation",
+      "archival_ref_url": "https://github.com/edithatogo/standards_check/tree/archive/standardflow/chore/GHA-190519-stepsecurity-remediation",
+      "preserved_commit_url": "https://github.com/edithatogo/standards_check/commit/eb7d0703b86aaa82e3cd738a273db7c60a70f6c9"
+    },
+    {
+      "name": "dependabot/github_actions/actions/setup-python-7.1.0",
+      "sha": "7d2e233217d5d3d6c4ca9c5866f64158d117099e",
+      "pull_request": 25,
+      "preservation_target_ref": "refs/heads/archive/standardflow/dependabot/github_actions/actions/setup-python-7.1.0",
+      "preservation_status": "verified_remote_ref_exact_sha",
+      "archival_ref": "refs/heads/archive/standardflow/dependabot/github_actions/actions/setup-python-7.1.0",
+      "archival_ref_url": "https://github.com/edithatogo/standards_check/tree/archive/standardflow/dependabot/github_actions/actions/setup-python-7.1.0",
+      "preserved_commit_url": "https://github.com/edithatogo/standards_check/commit/7d2e233217d5d3d6c4ca9c5866f64158d117099e"
+    },
+    {
+      "name": "feature/implement-guidelines",
+      "sha": "f1680778b4141bb5553b0e80af22bbdf5c75c862",
+      "pull_request": null,
+      "preservation_target_ref": "refs/heads/archive/standardflow/feature/implement-guidelines",
+      "preservation_status": "verified_remote_ref_exact_sha",
+      "archival_ref": "refs/heads/archive/standardflow/feature/implement-guidelines",
+      "archival_ref_url": "https://github.com/edithatogo/standards_check/tree/archive/standardflow/feature/implement-guidelines",
+      "preserved_commit_url": "https://github.com/edithatogo/standards_check/commit/f1680778b4141bb5553b0e80af22bbdf5c75c862"
+    },
+    {
+      "name": "feature/refactor-and-document",
+      "sha": "d89a5dbacc207cdce11f19efd667b83fdb09df18",
+      "pull_request": 9,
+      "preservation_target_ref": "refs/heads/archive/standardflow/feature/refactor-and-document",
+      "preservation_status": "verified_remote_ref_exact_sha",
+      "archival_ref": "refs/heads/archive/standardflow/feature/refactor-and-document",
+      "archival_ref_url": "https://github.com/edithatogo/standards_check/tree/archive/standardflow/feature/refactor-and-document",
+      "preserved_commit_url": "https://github.com/edithatogo/standards_check/commit/d89a5dbacc207cdce11f19efd667b83fdb09df18"
+    },
+    {
+      "name": "main",
+      "sha": "af299f724bcf456c131b43a143b3eabc1d81245b",
+      "pull_request": null,
+      "preservation_target_ref": "refs/heads/archive/standardflow/main",
+      "preservation_status": "verified_remote_ref_exact_sha",
+      "archival_ref": "refs/heads/archive/standardflow/main",
+      "archival_ref_url": "https://github.com/edithatogo/standards_check/tree/archive/standardflow/main",
+      "preserved_commit_url": "https://github.com/edithatogo/standards_check/commit/af299f724bcf456c131b43a143b3eabc1d81245b"
+    },
+    {
+      "name": "renovate/click-8.x",
+      "sha": "3f850b81be3feb1a4d84d003b2ec6c166059a68e",
+      "pull_request": 26,
+      "preservation_target_ref": "refs/heads/archive/standardflow/renovate/click-8.x",
+      "preservation_status": "verified_remote_ref_exact_sha",
+      "archival_ref": "refs/heads/archive/standardflow/renovate/click-8.x",
+      "archival_ref_url": "https://github.com/edithatogo/standards_check/tree/archive/standardflow/renovate/click-8.x",
+      "preserved_commit_url": "https://github.com/edithatogo/standards_check/commit/3f850b81be3feb1a4d84d003b2ec6c166059a68e"
+    },
+    {
+      "name": "renovate/graphviz-0.x",
+      "sha": "38c6327a9fe507150ee2bd655f36269345cf04a8",
+      "pull_request": 27,
+      "preservation_target_ref": "refs/heads/archive/standardflow/renovate/graphviz-0.x",
+      "preservation_status": "verified_remote_ref_exact_sha",
+      "archival_ref": "refs/heads/archive/standardflow/renovate/graphviz-0.x",
+      "archival_ref_url": "https://github.com/edithatogo/standards_check/tree/archive/standardflow/renovate/graphviz-0.x",
+      "preserved_commit_url": "https://github.com/edithatogo/standards_check/commit/38c6327a9fe507150ee2bd655f36269345cf04a8"
+    }
+  ],
+  "repository_settings": {
+    "visibility": "public",
+    "archived": false,
+    "disabled": false,
+    "default_branch": "main",
+    "has_pages": false,
+    "has_wiki": false,
+    "has_projects": false,
+    "has_discussions": false,
+    "forks_count": 0,
+    "network_count": 0,
+    "open_issues_including_pull_requests": 9,
+    "main_protected": false,
+    "rulesets": [],
+    "web_commit_signoff_required": true,
+    "allow_merge_commit": false,
+    "allow_squash_merge": true,
+    "allow_rebase_merge": false
+  },
+  "releases": [],
+  "tags": [],
+  "open_issues": [
+    {
+      "number": 23,
+      "url": "https://github.com/edithatogo/standardflow/issues/23",
+      "title": "Dependency Dashboard",
+      "body": "This issue lists Renovate updates and detected dependencies. Read the [Dependency Dashboard](https://docs.renovatebot.com/key-concepts/dashboard/) docs to learn more.<br>[View this repository on the Mend.io Web Portal](https://developer.mend.io/github/edithatogo/standardflow).\n\n## Pending Approval\n\nThe following branches are pending approval. To create them, click on a checkbox below.\n\n - [ ] <!-- approve-branch=renovate/ipykernel-7.x -->Update dependency ipykernel to v7\n - [ ] <!-- approve-branch=renovate/major-github-actions -->Update dependency ubuntu to v26\n - [ ] <!-- approve-all-pending-prs -->🔐 **Create all pending approval PRs at once** 🔐\n\n## Rate-Limited\n\nThe following updates are currently rate-limited. To force their creation now, click on a checkbox below.\n\n - [ ] <!-- unlimit-branch=renovate/ipykernel-6.x -->Update dependency ipykernel to v6.31.0\n - [ ] <!-- unlimit-branch=renovate/jsonschema-4.x -->Update dependency jsonschema to v4.26.0\n - [ ] <!-- unlimit-branch=renovate/github-actions -->Update github-actions (`actions/setup-python`, `python`)\n - [ ] <!-- unlimit-branch=renovate/python-3.x -->Update python Docker tag to v3.15\n - [ ] <!-- create-all-rate-limited-prs -->🔐 **Create all rate-limited PRs at once** 🔐\n\n## Open\n\nThe following updates have all been created. To force a retry/rebase of any, click on a checkbox below.\n\n - [ ] <!-- rebase-branch=renovate/click-8.x -->[Update dependency Click to v8.5.1](../pull/26)\n - [ ] <!-- rebase-branch=renovate/graphviz-0.x -->[Update dependency graphviz to v0.21](../pull/27)\n - [ ] <!-- rebase-all-open-prs -->**Click on this checkbox to rebase all open PRs at once**\n\n## Detected Dependencies\n\n<details><summary>dockerfile (1)</summary>\n<blockquote>\n\n<details><summary>Dockerfile (1)</summary>\n\n - `python 3.12-slim@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b` → [Updates: `3.15-slim`]\n\n</details>\n\n</blockquote>\n</details>\n\n<details><summary>github-actions (3)</summary>\n<blockquote>\n\n<details><summary>.github/workflows/primary-adoption.yml (3)</summary>\n\n - `actions/checkout v7.0.1@3d3c42e5aac5ba805825da76410c181273ba90b1`\n - `actions/setup-python v7.0.0@5fda3b95a4ea91299a34e894583c3862153e4b97` → [Updates: `v7.1.0`]\n - `python 3.14` → [Updates: `3.15`]\n\n</details>\n\n<details><summary>.github/workflows/privacy-secrets.yml (3)</summary>\n\n - `step-security/harden-runner v2`\n - `actions/checkout v7.0.1@3d3c42e5aac5ba805825da76410c181273ba90b1`\n - `ubuntu 24.04` → [Updates: `26.04`]\n\n</details>\n\n<details><summary>.github/workflows/tests.yml (4)</summary>\n\n - `actions/checkout v7.0.1@3d3c42e5aac5ba805825da76410c181273ba90b1`\n - `actions/setup-python v7.1.0@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0`\n - `ubuntu 24.04` → [Updates: `26.04`]\n - `python 3.12` → [Updates: `3.15`]\n\n</details>\n\n</blockquote>\n</details>\n\n<details><summary>pip_requirements (1)</summary>\n<blockquote>\n\n<details><summary>requirements.txt (6)</summary>\n\n - `graphviz ==0.20.1` → [Updates: `==0.21`]\n - `jsonschema ==4.17.3` → [Updates: `==4.26.0`]\n - `Click ==8.1.3` → [Updates: `==8.5.1`]\n - `ipykernel ==6.25.0` → [Updates: `==6.31.0`, `==7.4.0`]\n - `Flask ==3.1.3`\n - `Werkzeug ==3.1.9`\n\n</details>\n\n</blockquote>\n</details>\n\n---\n\n- [ ] <!-- manual job -->Check this box to trigger a request for Renovate to run again on this repository\n\n",
+      "labels": [],
+      "receiving_disposition": "Retain dependency inventory. Receiving dependency authority must cover any activated legacy dependencies; stop duplicate source bot work as part of repository retirement.",
+      "proposed_receiving_url": "https://github.com/edithatogo/standards_check/issues/76",
+      "receiving_status": "recommended_existing_destination_not_posted_by_inventory_agent"
+    },
+    {
+      "number": 14,
+      "url": "https://github.com/edithatogo/standardflow/issues/14",
+      "title": "[Quality frontier] Complete evidence-based repository hardening",
+      "body": "## Refined audit snapshot\n\nDefault branch: **main**; kind: **software**; workflows: **0**.\n\n| Technique | Present | Warranted |\n|---|---:|---:|\n| Property-based | no | yes |\n| Mutation | no | yes |\n| DST | no | no |\n| MT | no | no |\n| Contract | no | yes |\n\n## Subissues\n\n- [ ] #12\n- [ ] #13\n\nClose only when every subissue is complete or records an evidence-backed exclusion. Keep the repository operable by one maintainer.",
+      "labels": [],
+      "receiving_disposition": "Transfer umbrella with links to receiving counterparts of issues 12 and 13; close source only after those destinations exist.",
+      "proposed_receiving_url": "https://github.com/edithatogo/standards_check/issues/31",
+      "receiving_status": "recommended_existing_destination_not_posted_by_inventory_agent"
+    },
+    {
+      "number": 13,
+      "url": "https://github.com/edithatogo/standardflow/issues/13",
+      "title": "[Quality frontier] Maximise security and solo-maintainer context",
+      "body": "## Refined evidence\n\n- Protection/rulesets: **no / 0**\n- Context gaps: **agents, security_policy, pull_request_template, issue_templates, one_command_harness**\n- Setting follow-up: **secret scanning and push protection (GitHub returned 422)**\n\n## Done when\n\n- [ ] Add a ruleset blocking force-push/deletion and requiring only stable checks after inventorying bots.\n- [ ] Keep solo operation: no approval/CODEOWNERS/team gate; retain owner recovery.\n- [ ] Resolve setting failures; add canonical agent/security/contribution context, one-command validation, and a drift receipt.\n\n<!-- estate-dependency-coverage-plan -->\n## Renovate and Codecov rollout\n\n- [ ] Grant the hosted Renovate app access to this repository and verify its Dependency Dashboard or first pull request.\n- [ ] Inherit github>edithatogo/renovate-config; retain any justified repository-specific overrides.\n- [ ] Remove .github/dependabot.yml only after Renovate is confirmed healthy, avoiding an update-coverage gap or competing bots.\n- [ ] Produce real test coverage, upload with Codecov OIDC (id-token: write), and verify both the Codecov repository and commit status are active.\n- [ ] Keep zero mandatory human approvals; use required automated checks as the merge gate.\n<!-- /estate-dependency-coverage-plan -->\n",
+      "labels": [],
+      "receiving_disposition": "Transfer applicable security and solo-maintainer obligations; reconcile source retirement in repository-standards registry; do not imply private Codecov or offline security acceptance.",
+      "proposed_receiving_url": "https://github.com/edithatogo/standards_check/issues/30",
+      "receiving_status": "recommended_existing_destination_not_posted_by_inventory_agent"
+    },
+    {
+      "number": 12,
+      "url": "https://github.com/edithatogo/standardflow/issues/12",
+      "title": "[Quality frontier] Close warranted testing and CI/CD gaps",
+      "body": "## Refined evidence\n\n- Kind/code/tests/workflows: **software / 23 / 33 / 0**\n- Warranted gaps: **Property-based, Mutation, Contract**\n- CI gaps: **permissions, concurrency, pinned_actions, dependabot, codeql, dependency_review, workflow_lint, secret_scan**\n\n## Done when\n\n- [ ] Confirm applicability and document exclusions.\n- [ ] Add warranted deterministic, replayable suites with bounded runtime and thresholds.\n- [ ] Add least-privilege, concurrency, immutable actions, updates, linting, and applicable gates.\n- [ ] Keep PR checks fast; schedule expensive lanes and retain evidence.",
+      "labels": [],
+      "receiving_disposition": "Transfer applicable deterministic testing and CI gaps to receiving assurance track; update stale zero-workflow snapshot; retain unexecuted quality gates.",
+      "proposed_receiving_url": "https://github.com/edithatogo/standards_check/issues/29",
+      "receiving_status": "recommended_existing_destination_not_posted_by_inventory_agent"
+    }
+  ],
+  "open_pull_requests": [
+    {
+      "number": 27,
+      "url": "https://github.com/edithatogo/standardflow/pull/27",
+      "title": "Update dependency graphviz to v0.21",
+      "body": "This PR contains the following updates:\n\n| Package | Change | [Age](https://docs.renovatebot.com/merge-confidence/) | [Confidence](https://docs.renovatebot.com/merge-confidence/) |\n|---|---|---|---|\n| [graphviz](https://redirect.github.com/xflr6/graphviz) ([changelog](https://graphviz.readthedocs.io/en/latest/changelog.html)) | `==0.20.1` → `==0.21` | ![age](https://developer.mend.io/api/mc/badges/age/pypi/graphviz/0.21?slim=true) | ![confidence](https://developer.mend.io/api/mc/badges/confidence/pypi/graphviz/0.20.1/0.21?slim=true) |\n\n---\n\n### Release Notes\n\n<details>\n<summary>xflr6/graphviz (graphviz)</summary>\n\n### [`v0.21`](https://redirect.github.com/xflr6/graphviz/blob/HEAD/CHANGES.rst#Version-021)\n\n[Compare Source](https://redirect.github.com/xflr6/graphviz/compare/0.20.3...0.21)\n\nDrop Python 3.8 support (end of life 2024-10-07).\n\nTag Python 3.13 support.\n\nAdd support for `format='svg_inline'`, available since upstream Graphviz 10.0.1.\nProduces header-less SVG suitable for inlining into HTML\n(see <https://www.graphviz.org/docs/outputs/svg/>).\n\nSwitch project to `pyproject.toml` and build to `python -m build`)\n(<https://build.pypa.io>). This changes the source distribution format from `.zip`\nto PEP 625 compliant `.tar.gz` (<https://peps.python.org/pep-0625/>).\n\n### [`v0.20.3`](https://redirect.github.com/xflr6/graphviz/blob/HEAD/CHANGES.rst#Version-0203)\n\n[Compare Source](https://redirect.github.com/xflr6/graphviz/compare/0.20.2...0.20.3)\n\nRevert improvements to the internal `tools.deprecate_positional_args()`\ndecorator that caused false positive\n`PendingDeprecationWarning: The signature of ... will be reduced`\nwarnings that have been misinterpreted in the `0.20.2` release process.\n\n### [`v0.20.2`](https://redirect.github.com/xflr6/graphviz/blob/HEAD/CHANGES.rst#Version-0202)\n\n[Compare Source](https://redirect.github.com/xflr6/graphviz/compare/0.20.1...0.20.2)\n\nDrop Python 3.7 support (end of life 2023-06-27).\n\nTag Python 3.11 and 3.12 support.\n\nAdd caveat about `labe` escaping/quoting to `.node()` and `.render()`\nAPI docs.\n\nDocument that `doctest_skip_exe()` lines in doctest should be ignored.\n\nImprove internal `tools.deprecate_positional_args()` decorator\nand fix incorect test assertion.\n\nUpdate GitHub actions.\n\nPin `pytest` test dependency to `<8.1` as a workaround\nfor `import file mismatch error` related to `conftest.py` files,\nin `pytest` `8.1.1`, see [pytest-dev/pytest#12123](https://redirect.github.com/pytest-dev/pytest/issues/12123).\n\n</details>\n\n---\n\n### Configuration\n\n📅 **Schedule**: (in timezone Australia/Sydney)\n\n- Branch creation\n  - \"before 6am on Monday\"\n- Automerge\n  - At any time (no schedule defined)\n\n🚦 **Automerge**: Disabled by config. Please merge this manually once you are satisfied.\n\n♻ **Rebasing**: Whenever PR is behind base branch, or you tick the rebase/retry checkbox.\n\n🔕 **Ignore**: Close this PR and you won't be reminded about this update again.\n\n---\n\n - [ ] <!-- rebase-check -->If you want to rebase/retry this PR, check this box\n\n---\n\nThis PR was generated by [Mend Renovate](https://mend.io/renovate/). View the [repository job log](https://developer.mend.io/github/edithatogo/standardflow).\n<!--renovate-debug:eyJjcmVhdGVkSW5WZXIiOiI0NC4yNTcuMyIsInVwZGF0ZWRJblZlciI6IjQ0LjI1Ny4zIiwidGFyZ2V0QnJhbmNoIjoibWFpbiIsImxhYmVscyI6WyJkZXBlbmRlbmNpZXMiXX0=-->\n",
+      "head_ref": "renovate/graphviz-0.x",
+      "head_sha": "38c6327a9fe507150ee2bd655f36269345cf04a8",
+      "reported_base_sha": "af299f724bcf456c131b43a143b3eabc1d81245b",
+      "state": "open",
+      "receiving_disposition": "Preserve exact source branch and transfer graphviz 0.20.1 to 0.21 candidate into receiving dependency follow-up; qualify real output bytes and six variant golden fixtures before upgrade admission.",
+      "receiving_url": null
+    },
+    {
+      "number": 26,
+      "url": "https://github.com/edithatogo/standardflow/pull/26",
+      "title": "Update dependency Click to v8.5.1",
+      "body": "This PR contains the following updates:\n\n| Package | Change | [Age](https://docs.renovatebot.com/merge-confidence/) | [Confidence](https://docs.renovatebot.com/merge-confidence/) |\n|---|---|---|---|\n| [Click](https://redirect.github.com/pallets/click) ([changelog](https://click.palletsprojects.com/page/changes/)) | `==8.1.3` → `==8.5.1` | ![age](https://developer.mend.io/api/mc/badges/age/pypi/click/8.5.1?slim=true) | ![confidence](https://developer.mend.io/api/mc/badges/confidence/pypi/click/8.1.3/8.5.1?slim=true) |\n\n---\n\n### Release Notes\n\n<details>\n<summary>pallets/click (Click)</summary>\n\n### [`v8.5.1`](https://redirect.github.com/pallets/click/blob/HEAD/CHANGES.md#Version-851)\n\n[Compare Source](https://redirect.github.com/pallets/click/compare/8.5.0...8.5.1)\n\nReleased 2026-11-09\n\n- Fix `copy.deepcopy()` and `pickle` on a `Parameter`, `Option` or `Command`. {pr}`3805`\n- A `KeyboardInterrupt` arriving while `Command.main()` reports an abort or an error,\n  or while it exits, no longer escapes as an unhandled traceback. The command still\n  exits with the intended code; only the message may be lost. {issue}`3802`\n- Add {meth}`Option.get_help_spec`, which returns the option's left help\n  column even when the option is hidden. {meth}`Option.get_help_record` still\n  returns `None` for hidden options, so help screens are unchanged. {pr}`3821`\n- The `Positional arguments` help section lists every argument of the command,\n  not only the documented ones. An argument with no `help` gets an empty\n  description, the same way an option with no `help` does. {pr}`3860`\n- {meth}`Argument.get_help_record` always returns a tuple. It used to return\n  `None` for an argument with no `help`. {pr}`3860`\n- Document which types are inferred from `default`, and what an unrecognized\n  `type` callable does to a command-line value. {issue}`3036` {pr}`3808`\n- `path_type` narrows the converted value's type for `convert` and `prompt`.\n  {issue}`3822` {pr}`3858`\n- {class}`Parameter` accepts a new `help` argument and {class}`Option` and {class}`Argument`\n  inherits it. {meth}`Parameter.to_info_dict` now reports `help` for every kind of parameter.\n  {pr}`3861`\n- A command's short help no longer stops at an abbreviation such as `vs.` or `e.g.`\n  inside the first sentence. A period ends the sentence only when it closes the text\n  or the next word does not start in lowercase. {pr}`3865`\n- With `show_envvar=True`, an option's error message now prints all variables of an\n  `envvar` sequence instead of the `repr` of the sequence. {pr}`3884`\n- An empty `envvar`, such as `[]` or `\"\"`, shows the same help and error message as\n  no `envvar` when `show_envvar=True`. The help screen used to show `[env var: ]`.\n  {pr}`3884`\n- Align command's deprecated help text to options and arguments: do not translate the\n  command's own help text, only the `(DEPRECATED)` label. {pr}`3901`\n\n### [`v8.5.0`](https://redirect.github.com/pallets/click/blob/HEAD/CHANGES.md#Version-850)\n\n[Compare Source](https://redirect.github.com/pallets/click/compare/8.4.2...8.5.0)\n\nReleased 2026-08-24\n\n- Add built-in shell completion support for PowerShell (Windows PowerShell\n  5.1+ and pwsh 7+) alongside the existing `bash`, `zsh`, and `fish`\n  completers. Use `_FOO_BAR_COMPLETE=powershell_source foo-bar` to generate\n  the completion script. {issue}`2672` {pr}`3637`\n- Supported versions of Windows enable ANSI terminal styles by default.\n  Colorama is no longer a dependency and is not used. {issue}`2986` {pr}`3505`\n- {class}`Argument` accepts a `help` parameter, and help output includes\n  a `Positional arguments` section when argument help is available. {issue}`2983` {pr}`3473`\n- `confirm()` and `prompt()` strip ANSI color and style codes from the\n  prompt when the output stream does not support them, matching `echo()`.\n  This stripping was lost in `8.4.0` when {pr}`2969` began writing the\n  prompt with `input()` directly. {issue}`3572` {pr}`3653`\n- Fix test failures when using pytest >= 9.1. {pr}`3656`\n- {class}`Path` with `allow_dash=True` no longer triggers a `BytesWarning`,\n  an error under `python -bb`, when checking a value against the `-`\n  convention. {issue}`2877` {pr}`3642`\n- Add {func}`custom_version_option`, a `--version` option whose output is\n  produced by a callback, covering cases {func}`version_option` intentionally\n  does not. The feature set of {func}`version_option` is now frozen. {pr}`3581`\n- `style()` and `secho()` no longer silently drop the 256-color index `0`\n  (black) passed as `fg` or `bg`, and now validate color arguments. Invalid\n  colors raise a `ValueError` instead of a `TypeError`. {pr}`3677`\n- The automatic help option stores its value under the reserved name\n  `_click_default_help` instead of `help`, so a parameter named `help` no\n  longer breaks parsing. The new name is visible in\n  {meth}`Command.to_info_dict` output. Parameters that overwrite each other's\n  value trigger a warning: an argument sharing its name with another\n  parameter, or any parameter claiming the reserved name. Options may still\n  share a name to compete for the same value (feature switches).\n  {issue}`2819` {pr}`3678`\n- `unstyle` and the ANSI handling behind help-text wrapping now strip the full\n  CSI escape-sequence grammar. {pr}`3681`\n- Streamline `Option` flag handling: the flag-kind, type, lazy-default and\n  validation steps in `Option.__init__` move into focused helpers, and\n  `flag_value` and `default` keep their unset sentinel at construction\n  (resolved lazily on read) so `is UNSET` reliably tells a user-supplied value\n  from an auto-derived one. Runtime behavior is unchanged, but\n  {meth}`Parameter.to_info_dict` now resolves `default=True` on a feature\n  switch to its `flag_value`, matching what the function receives at call\n  time. {pr}`3641`\n- {func}`get_binary_stream` and {func}`get_text_stream` are deprecated and\n  will be removed in Click 9.0. {issue}`3481` {pr}`3695`\n- The following `click.utils` names were never intentionally public and are\n  now private (`_`-prefixed). The old names remain available with a\n  `DeprecationWarning` until Click 9.0: `LazyFile`, `KeepOpenFile`,\n  `make_default_short_help`, `PacifyFlushWrapper`, and `safecall`.\n  {issue}`3099` {pr}`3695`\n- Deprecate {meth}`CliRunner.isolated_filesystem`. It relies on\n  {func}`os.chdir`, which mutates process-global state and is not\n  thread-safe. The helper predates Python 3 and modern pytest: use a\n  temporary directory ({class}`tempfile.TemporaryDirectory` or pytest's\n  `tmp_path` fixture) with absolute paths instead. For running tests in\n  parallel, use process-based isolation (such as `pytest-xdist`) rather\n  than threads, since {meth}`CliRunner.invoke` also redirects the\n  process-global standard streams. {issue}`3501` {issue}`3700` {pr}`3704`\n- `prompt()` is now generically typed and returns the type produced by\n  `type`, `value_proc`, or a matching `default` instead of `Any`.\n  {class}`ParamType` takes a second optional type parameter describing the\n  input value it accepts (`ParamType[int, str]` for a type converting\n  strings to integers), defaulting to `Any`. {pr}`3407`\n- {meth}`Command.get_help_option_names` returns the help option names in the\n  order they were declared. {pr}`3728`\n- {func}`get_pager_file` yields a text stream on Windows again. The temporary\n  file backend opened its file in binary mode, so writing a `str` to the pager\n  raised `TypeError: a bytes-like object is required, not 'str'`, and the\n  `color` argument was ignored on that path. Regression introduced in `8.4.0`\n  by {pr}`1572`. {issue}`3731` {issue}`3732` {issue}`3740` {pr}`3739`\n- {func}`progressbar` settles on its final position when `update_min_steps`\n  does not divide the total. Steps below that threshold are applied when the\n  bar finishes, so `show_pos` renders `20/20` rather than the last multiple\n  it reached. {issue}`3571` {pr}`3769`\n- An error raised while writing to the pager no longer gets replaced by\n  `PermissionError: [WinError 32]` on Windows. The temporary file backend\n  unlinked its file without closing it first, and Windows refuses to remove a\n  file the process still holds open, so the cleanup failure masked the real\n  exception. {issue}`3731` {pr}`3764`\n- The temporary file the pager writes to on Windows is opened with the encoding\n  {func}`get_pager_file` picked for the output stream, and with\n  `errors=\"replace\"` to match the pipe backend. Any text stdout can encode\n  reaches the pager.\n- The temporary file pager backend forwards any parameters the user set in\n  `PAGER` to the pager command instead of silently dropping them. On Windows,\n  `PAGER=\"less -R\"` now invokes `less -R` on the temporary file rather than\n  bare `less`. {pr}`3777`\n- Improve raw mode detection by parsing the option tokens. {issue}`3416`\n  {pr}`3777`\n- {func}`edit` accepts `os.PathLike` values for `filename`, in addition to\n  strings. {issue}`2869` {pr}`3781`\n\n### [`v8.4.2`](https://redirect.github.com/pallets/click/blob/HEAD/CHANGES.md#Version-842)\n\n[Compare Source](https://redirect.github.com/pallets/click/compare/8.4.1...8.4.2)\n\nReleased 2026-06-24\n\n- Fix Fish shell completion broken in `8.4.0` by {pr}`3126`. Newlines and\n  tabs in option help text are now escaped, keeping the original completion\n  format while still supporting multi-line help. {issue}`3502`\n  {issue}`3043` {pr}`3504` {pr}`3508`\n- Deprecated commands and options with empty or missing help text no longer\n  render a stray leading space before the `(DEPRECATED)` label. {pr}`3509`\n- A {class}`Group` with `invoke_without_command=True` marks its subcommand as\n  optional in the usage help, showing `[COMMAND]` instead of `COMMAND`.\n  {issue}`3059` {pr}`3507`\n- `echo_via_pager` flushes after each write, so passing a generator streams\n  output to the pager incrementally instead of staying hidden until the pipe\n  buffer fills. {issue}`3242` {issue}`2542` {pr}`3534`\n- `echo_via_pager` and `get_pager_file` no longer close a borrowed stdout\n  stream when no external pager runs, completing the partial\n  `I/O operation on closed file` fix from {pr}`3482`. {issue}`3449`\n  {pr}`3533`\n- Fix CLI usage symopsis for optional arguments producing double square brackets\n  `[[a|b|c]]...` whose type already brackets their metavar. {pr}`3578`\n- {func}`version_option` resolves a `package_name` that does not match an\n  installed distribution as an import (top-level module) name via\n  {func}`importlib.metadata.packages_distributions`. Packages whose\n  top-level module name differs from their distribution name (`PIL` vs\n  `Pillow`, `jwt` vs `PyJWT`) no longer raise `RuntimeError` out of the\n  box. {issue}`2331` {issue}`1884` {issue}`3125` {pr}`3582`\n\n### [`v8.4.1`](https://redirect.github.com/pallets/click/blob/HEAD/CHANGES.md#Version-841)\n\n[Compare Source](https://redirect.github.com/pallets/click/compare/8.4.0...8.4.1)\n\nReleased 2026-05-21\n\n- `get_parameter_source()` is available during eager callbacks and type\n  conversion again. {issue}`3458` {pr}`3484`\n- Zsh completion scripts parse correctly on Windows. {issue}`3277` {pr}`3466`\n- Shell completion of `Enum` values used as `Choice` options produces a\n  valid completion result. {issue}`3015` {pr}`3471`\n- Fix empty byte-string handling in echo. {issue}`3487` {pr}`3493`\n- Fix closed file error with `echo_via_pager`. {issue}`3449` {pr}`3482`\n- Fix `open_url` on Windows when the file path contains spaces.\n  {issue}`2994` {pr}`3478`\n\n### [`v8.4.0`](https://redirect.github.com/pallets/click/blob/HEAD/CHANGES.md#Version-840)\n\n[Compare Source](https://redirect.github.com/pallets/click/compare/8.3.3...8.4.0)\n\nReleased 2026-05-17\n\n- {class}`ParamType` typing improvements. {pr}`3371`\n\n  - {class}`ParamType` is now a generic abstract base class,\n    parameterized by its converted value type.\n  - {meth}`~ParamType.convert` return types are narrowed on all\n    concrete types (`str` for {class}`STRING`, `int` for\n    {class}`INT`, etc.).\n  - {meth}`~ParamType.to_info_dict` returns specific\n    {class}`~typing.TypedDict` subclasses instead of\n    `dict[str, Any]`.\n  - {class}`CompositeParamType` and the number-range base are now\n    generic with abstract methods.\n\n- Refactor `convert_type` to extract type inference into a private\n  `_guess_type` helper, and add {func}`typing.overload` signatures.\n  {pr}`3372`\n\n- {class}`Parameter` typing improvements. {pr}`2805`\n\n  - {class}`Parameter` is now an abstract base class, making explicit\n    that it cannot be instantiated directly.\n  - {attr}`Parameter.name` is now `str` instead of `str | None`.\n    When `expose_value=False`, the name is set to `\"\"` instead\n    of `None`.\n  - The `ctx` parameter of {meth}`Parameter.get_error_hint` is now\n    typed as `Context | None`, matching the runtime behavior.\n\n- Split string values from `default_map` for parameters with `nargs > 1`\n  or {class}`Tuple` type, matching environment variable behavior.\n  {issue}`2745` {pr}`3364`\n\n- Auto-detect `type=UNPROCESSED` for `flag_value` of non-basic types\n  (not `str`, `int`, `float`, or `bool`), so programmer-provided\n  Python objects like classes and enum members are passed through unchanged\n  instead of being stringified. Previously `type=click.UNPROCESSED` had\n  to be set explicitly. {issue}`2012` {pr}`3363`\n\n- The error hint now uses {meth}`Command.get_help_option_names` to pick\n  non-shadowed help option names, so `Try '... -h'` no longer points to a\n  subcommand option that shadows `-h`. The longest surviving name is\n  shown (`--help` over `-h`) for readability. {issue}`2790` {pr}`3208`\n\n- Fix readline functionality on non-Windows platforms. Prompt text is now\n  passed directly to readline instead of being printed separately, allowing\n  proper backspace, line editing, and line wrapping behavior. {issue}`2968`\n  {pr}`2969`\n\n- Use {func}`os.startfile` on Windows to open URLs in {func}`open_url`,\n  replacing the `start` built-in which cannot be invoked without\n  `shell=True`. {issue}`2868` {issue}`3164` {pr}`3186`\n\n- Fix Fish shell completion errors when option help text contains newlines.\n  {issue}`3043` {pr}`3126`\n\n- Add {class}`NoSuchCommand` exception with suggestions for misspelled\n  commands. {issue}`3107` {pr}`3228`\n\n- Use {class}`ValueError` message when conversion in {class}`FuncParamType` would\n  fail. {issue}`3105` {pr}`3211`\n\n- Add `click.get_pager_file` for file-like access to an output\n  pager. {pr}`1572` {pr}`3405`\n\n- {func}`~click.formatting.wrap_text` now measures line width in visible\n  characters, ignoring ANSI escape sequences. {pr}`3420`\n\n- Fix {meth}`HelpFormatter.write_usage` emitting only a blank line when\n  called without `args`. The usage prefix and program name are now\n  written even when no arguments follow, and the trailing separator\n  space is stripped so the line ends at the program name.\n  {issue}`3360` {pr}`3434`\n\n- Show custom error messages from types when {func}`prompt` with\n  `hide_input=True` fails validation, instead of always showing a\n  generic message. Built-in type messages mask the input value.\n  {issue}`2809` {pr}`3256`\n\n- Add `capture` parameter to {class}`CliRunner` with two modes: `sys`\n  (default) and `fd`. `fd` redirects file descriptors `1` and `2`\n  via {func}`os.dup2` so output that bypasses `sys.stdout` (stale stream\n  references, C extensions, subprocesses, `faulthandler`) is captured\n  with proper isolation. {issue}`854` {issue}`2412` {issue}`2468`\n  {issue}`2497` {issue}`2761` {issue}`2827` {issue}`2865` {pr}`3391`\n\n- Revert the `8.3.3` change that exposed the original file descriptor\n  via `fileno()` on the redirected `CliRunner` streams in the default\n  capture mode. `os.dup2(w, sys.stdout.fileno())` calls inside a CLI no\n  longer mutate the host runner's stdout, which broke Pytest's `fd`-level\n  capture teardown. C-level consumers that need a real `fd` should use\n  `capture=\"fd\"`. {issue}`3384` {pr}`3391`\n\n- Mark additional built-in strings with `gettext()` to extend translation\n  coverage. {pr}`2902`\n\n- Fix feature switch groups (several `flag_value` options sharing one\n  parameter name) silently dropping an explicit `default` when a sibling\n  option without an explicit default was declared first. Arbitration is now\n  source-aware: a more explicit {class}`ParameterSource` always wins, and\n  within `ParameterSource.DEFAULT`, an option that received an explicit\n  `default=` keyword wins over a sibling whose default was auto-derived.\n  The 8.3.x first-wins fallback for remaining ties was reverted to the\n  pre-8.3.x last-wins fallback. {issue}`3403` {pr}`3404`\n\n- Fix missing space between option help text and the `(DEPRECATED)`\n  label, and localize the option label so it matches the command label.\n  The label and the `DeprecationWarning` reason suffix are now produced\n  by shared helpers. {pr}`3423`\n\n- Document short option stacking (`-abc` is parsed as `-a -b -c`) and\n  clarify that multi-character short option names are not supported.\n  {issue}`2779` {pr}`3431`\n\n### [`v8.3.3`](https://redirect.github.com/pallets/click/blob/HEAD/CHANGES.md#Version-833)\n\n[Compare Source](https://redirect.github.com/pallets/click/compare/8.3.2...8.3.3)\n\nReleased 2026-04-20\n\n- Use {func}`shlex.split` to split pager and editor commands into `argv`\n  lists for {class}`subprocess.Popen`, removing `shell=True`.\n  {issue}`1026` {pr}`1477` {pr}`2775`\n- Fix `TypeError` when rendering help for an option whose default value is\n  an object that doesn't support equality comparison with strings, such as\n  `semver.Version`. {issue}`3298` {pr}`3299`\n- Fix pager test pollution under parallel execution by using pytest's\n  `tmp_path` fixture instead of a shared temporary file path. {pr}`3238`\n- Treat `Sentinel.UNSET` values in a `default_map` as absent, so they fall\n  through to the next default source instead of being used as the value.\n  {issue}`3224` {pr}`3240`\n- Patch `pdb.Pdb` in `CliRunner` isolation so `pdb.set_trace()`,\n  `breakpoint()`, and debuggers subclassing `pdb.Pdb` (ipdb, pdbpp) can\n  interact with the real terminal instead of the captured I/O streams.\n  {issue}`654` {issue}`824` {issue}`843` {pr}`951` {pr}`3235`\n- Add optional randomized parallel test execution using `pytest-randomly` and\n  `pytest-xdist` to detect test pollution and race conditions. {pr}`3151`\n- Add contributor documentation for running stress tests, randomized\n  parallel tests, and Flask smoke tests. {pr}`3151` {pr}`3177`\n- Show custom `show_default` string in prompts, matching the existing\n  help text behavior. {issue}`2836` {pr}`2837` {pr}`3165` {pr}`3262` {pr}`3280`\n  {pr}`3328`\n- Fix `default=True` with boolean `flag_value` always returning the\n  `flag_value` instead of `True`. The `default=True` to `flag_value`\n  substitution now only applies to non-boolean flags, where `True` acts as a\n  sentinel meaning \"activate this flag by default\". For boolean flags,\n  `default=True` is returned as a literal value. {issue}`3111` {pr}`3239`\n- Mark `make_default_short_help` as private API. {issue}`3189` {pr}`3250`\n- `CliRunner`'s redirected streams now expose the original file descriptor\n  via `fileno()`, so that `faulthandler`, `subprocess`, and other\n  C-level consumers no longer crash with `io.UnsupportedOperation`.\n  {issue}`2865`\n- Change {class}`ParameterSource` to an {class}`~enum.IntEnum` and reorder\n  its members from most to least explicit, so values can be compared to\n  check whether a parameter was explicitly provided. {issue}`2879` {pr}`3248`\n\n### [`v8.3.2`](https://redirect.github.com/pallets/click/blob/HEAD/CHANGES.md#Version-832)\n\n[Compare Source](https://redirect.github.com/pallets/click/compare/8.3.1...8.3.2)\n\nReleased 2026-04-02\n\n- Fix handling of `flag_value` when `is_flag=False` to allow such options to be\n  used without an explicit value. {issue}`3084` {pr}`3152`\n- Hide `Sentinel.UNSET` values as `None` when using `lookup_default()`.\n  {issue}`3136` {pr}`3199` {pr}`3202` {pr}`3209` {pr}`3212` {pr}`3224`\n- Prevent `_NamedTextIOWrapper` from closing streams owned by `StreamMixer`.\n  {issue}`824` {issue}`2991` {issue}`2993` {issue}`3110` {pr}`3139` {pr}`3140`\n- Add comprehensive tests for `CliRunner` stream lifecycle, covering\n  logging interaction, multi-threaded safety, and sequential invocation\n  isolation. Add high-iteration stress tests behind a `stress` marker\n  with a dedicated CI job. {pr}`3139`\n- Fix callable `flag_value` being instantiated when used as a default via\n  `default=True`. {issue}`3121` {pr}`3201` {pr}`3213` {pr}`3225`\n\n### [`v8.3.1`](https://redirect.github.com/pallets/click/blob/HEAD/CHANGES.md#Version-831)\n\n[Compare Source](https://redirect.github.com/pallets/click/compare/8.3.0...8.3.1)\n\nReleased 2025-11-15\n\n- Don't discard pager arguments by correctly using `subprocess.Popen`. {issue}`3039`\n  {pr}`3055`\n- Replace `Sentinel.UNSET` default values by `None` as they're passed through\n  the `Context.invoke()` method. {issue}`3066` {issue}`3065` {pr}`3068`\n- Fix conversion of `Sentinel.UNSET` happening too early, which caused incorrect\n  behavior for multiple parameters using the same name. {issue}`3071` {pr}`3079`\n- Hide `Sentinel.UNSET` values as `None` when looking up for other parameters\n  through the context inside parameter callbacks. {issue}`3136` {pr}`3137`\n- Fix rendering when `prompt` and `confirm` parameter `prompt_suffix` is\n  empty. {issue}`3019` {pr}`3021`\n- When `Sentinel.UNSET` is found during parsing, it will skip calls to\n  `type_cast_value`. {issue}`3069` {pr}`3090`\n\n### [`v8.3.0`](https://redirect.github.com/pallets/click/blob/HEAD/CHANGES.md#Version-830)\n\n[Compare Source](https://redirect.github.com/pallets/click/compare/8.2.2...8.3.0)\n\nReleased 2025-09-17\n\n- **Improved flag option handling**: Reworked the relationship between `flag_value`\n  and `default` parameters for better consistency:\n\n  - The `default` parameter value is now preserved as-is and passed directly\n    to CLI functions (no more unexpected transformations)\n  - Exception: flag options with `default=True` maintain backward compatibility\n    by defaulting to their `flag_value`\n  - The `default` parameter can now be any type (`bool`, `None`, etc.)\n  - Fixes inconsistencies reported in: {issue}`1992` {issue}`2514` {issue}`2610`\n    {issue}`3024` {pr}`3030`\n\n- Allow `default` to be set on `Argument` for `nargs = -1`. {issue}`2164`\n  {pr}`3030`\n\n- Show correct auto complete value for `nargs` option in combination with flag\n  option {issue}`2813`\n\n- Fix handling of quoted and escaped parameters in Fish autocompletion. {issue}`2995` {pr}`3013`\n\n- Lazily import `shutil`. {pr}`3023`\n\n- Properly forward exception information to resources registered with\n  `click.core.Context.with_resource()`. {issue}`2447` {pr}`3058`\n\n- Fix regression related to EOF handling in `CliRunner`. {issue}`2939` {pr}`2940`\n\n### [`v8.2.2`](https://redirect.github.com/pallets/click/blob/HEAD/CHANGES.md#Version-822)\n\n[Compare Source](https://redirect.github.com/pallets/click/compare/8.2.1...8.2.2)\n\nReleased 2025-07-31\n\n- Fix reconciliation of `default`, `flag_value` and `type` parameters for\n  flag options, as well as parsing and normalization of environment variables.\n  {issue}`2952` {pr}`2956`\n- Fix typing issue in `BadParameter` and `MissingParameter` exceptions for the\n  parameter `param_hint` that did not allow for a sequence of string where the\n  underlying function `_join_param_hints` allows for it. {issue}`2777` {pr}`2990`\n- Use the value of `Enum` choices to render their default value in help\n  screen. Refs {issue}`2911` {pr}`3004`\n- Fix completion for the Z shell (`zsh`) for completion items containing\n  colons. {issue}`2703` {pr}`2846`\n- Don't include envvar in error hint when not configured. {issue}`2971` {pr}`2972`\n- Fix a rare race in `click.testing.StreamMixer`'s finalization that manifested\n  as a `ValueError` on close in a multi-threaded test session.\n  {issue}`2993` {pr}`2991`\n\n### [`v8.2.1`](https://redirect.github.com/pallets/click/blob/HEAD/CHANGES.md#Version-821)\n\n[Compare Source](https://redirect.github.com/pallets/click/compare/8.2.0...8.2.1)\n\nReleased 2025-05-20\n\n- Fix flag value handling for flag options with a provided type. {issue}`2894`\n  {issue}`2897` {pr}`2930`\n- Fix shell completion for nested groups. {issue}`2906` {pr}`2907`\n- Flush `sys.stderr` at the end of `CliRunner.invoke`. {issue}`2682`\n- Fix EOF handling for stdin input in CliRunner. {issue}`2787`\n\n### [`v8.2.0`](https://redirect.github.com/pallets/click/blob/HEAD/CHANGES.md#Version-820)\n\n[Compare Source](https://redirect.github.com/pallets/click/compare/8.1.8...8.2.0)\n\nReleased 2025-05-10\n\n- Drop support for Python 3.7, 3.8, and 3.9. {pr}`2588` {pr}`2893`\n\n- Use modern packaging metadata with `pyproject.toml` instead of `setup.cfg`.\n  {pr}`2438`\n\n- Use `flit_core` instead of `setuptools` as build backend. {pr}`2543`\n\n- Deprecate the `__version__` attribute. Use feature detection, or\n  `importlib.metadata.version(\"click\")`, instead. {issue}`2598`\n\n- `BaseCommand` is deprecated. `Command` is the base class for all\n  commands. {issue}`2589`\n\n- `MultiCommand` is deprecated. `Group` is the base class for all group\n  commands. {issue}`2590`\n\n- The current parser and related classes and methods, are deprecated.\n  {issue}`2205`\n\n  - `OptionParser` and the `parser` module, which is a modified copy of\n    `optparse` in the standard library.\n  - `Context.protected_args` is unneeded. `Context.args` contains any\n    remaining arguments while parsing.\n  - `Parameter.add_to_parser` (on both `Argument` and `Option`) is\n    unneeded. Parsing works directly without building a separate parser.\n  - `split_arg_string` is moved from `parser` to `shell_completion`.\n\n- Enable deferred evaluation of annotations with\n  `from __future__ import annotations`. {pr}`2270`\n\n- When generating a command's name from a decorated function's name, the\n  suffixes `_command`, `_cmd`, `_group`, and `_grp` are removed.\n  {issue}`2322`\n\n- Show the `types.ParamType.name` for `types.Choice` options within\n  `--help` message if `show_choices=False` is specified.\n  {issue}`2356`\n\n- Do not display default values in prompts when `Option.show_default` is\n  `False`. {pr}`2509`\n\n- Add `get_help_extra` method on `Option` to fetch the generated extra\n  items used in `get_help_record` to render help text. {issue}`2516`\n  {pr}`2517`\n\n- Keep stdout and stderr streams independent in `CliRunner`. Always\n  collect stderr output and never raise an exception. Add a new\n  output stream to simulate what the user sees in its terminal. Removes\n  the `mix_stderr` parameter in `CliRunner`. {issue}`2522` {pr}`2523`\n\n- `Option.show_envvar` now also shows environment variable in error messages.\n  {issue}`2695` {pr}`2696`\n\n- `Context.close` will be called on exit. This results in all\n  `Context.call_on_close` callbacks and context managers added via\n  `Context.with_resource` to be closed on exit as well. {pr}`2680`\n\n- Add `ProgressBar(hidden: bool)` to allow hiding the progressbar. {issue}`2609`\n\n- A `UserWarning` will be shown when multiple parameters attempt to use the\n  same name. {issue}`2396`\n\n- When using `Option.envvar` with `Option.flag_value`, the `flag_value`\n  will always be used instead of the value of the environment variable.\n  {issue}`2746` {pr}`2788`\n\n- Add `Choice.get_invalid_choice_message` method for customizing the\n  invalid choice message. {issue}`2621` {pr}`2622`\n\n- If help is shown because `no_args_is_help` is enabled (defaults to `True`\n  for groups, `False` for commands), the exit code is 2 instead of 0.\n  {issue}`1489` {pr}`1489`\n\n- Contexts created during shell completion are closed properly, fixing\n  a `ResourceWarning` when using `click.File`. {issue}`2644` {pr}`2800`\n  {pr}`2767`\n\n- `click.edit(filename)` now supports passing an iterable of filenames in\n  case the editor supports editing multiple files at once. Its return type\n  is now also typed: `AnyStr` if `text` is passed, otherwise `None`.\n  {issue}`2067` {pr}`2068`\n\n- Specialized typing of `progressbar(length=...)` as `ProgressBar[int]`.\n  {pr}`2630`\n\n- Improve `echo_via_pager` behaviour in face of errors.\n  {issue}`2674`\n\n  - Terminate the pager in case a generator passed to `echo_via_pager`\n    raises an exception.\n  - Ensure to always close the pipe to the pager process and wait for it\n    to terminate.\n  - `echo_via_pager` will not ignore `KeyboardInterrupt` anymore. This\n    allows the user to search for future output of the generator when\n    using less and then aborting the program using ctrl-c.\n\n- `deprecated: bool | str` can now be used on options and arguments. This\n  previously was only available for `Command`. The message can now also be\n  customised by using a `str` instead of a `bool`. {issue}`2263` {pr}`2271`\n\n  - `Command.deprecated` formatting in `--help` changed from\n    `(Deprecated) help` to `help (DEPRECATED)`.\n  - Parameters cannot be required nor prompted or an error is raised.\n  - A warning will be printed when something deprecated is used.\n\n- Add a `catch_exceptions` parameter to `CliRunner`. If\n  `catch_exceptions` is not passed to `CliRunner.invoke`, the value\n  from `CliRunner` is used. {issue}`2817` {pr}`2818`\n\n- `Option.flag_value` will no longer have a default value set based on\n  `Option.default` if `Option.is_flag` is `False`. This results in\n  `Option.default` not needing to implement `__bool__`. {pr}`2829`\n\n- Incorrect `click.edit` typing has been corrected. {pr}`2804`\n\n- `Choice` is now generic and supports any iterable value.\n  This allows you to use enums and other non-`str` values. {pr}`2796`\n  {issue}`605`\n\n- Fix setup of help option's defaults when using a custom class on its\n  decorator. Removes `HelpOption`. {issue}`2832` {pr}`2840`\n\n### [`v8.1.8`](https://redirect.github.com/pallets/click/blob/HEAD/CHANGES.md#Version-818)\n\n[Compare Source](https://redirect.github.com/pallets/click/compare/8.1.7...8.1.8)\n\nReleased 2024-12-19\n\n- Fix an issue with type hints for `click.open_file()`. {issue}`2717`\n- Fix issue where error message for invalid `click.Path` displays on\n  multiple lines. {issue}`2697`\n- Fixed issue that prevented a default value of `\"\"` from being displayed in\n  the help for an option. {issue}`2500`\n- The test runner handles stripping color consistently on Windows.\n  {issue}`2705`\n- Show correct value for flag default when using `default_map`.\n  {issue}`2632`\n- Fix `click.echo(color=...)` passing `color` to coloroma so it can be\n  forced on Windows. {issue}`2606`.\n- More robust bash version check, fixing problem on Windows with git-bash.\n  {issue}`2638`\n- Cache the help option generated by the `help_option_names` setting to\n  respect its eagerness. {pr}`2811`\n- Replace uses of `os.system` with `subprocess.Popen`. {issue}`1476`\n- Exceptions generated during a command will use the context's `color`\n  setting when being displayed. {issue}`2193`\n- Error message when defining option with invalid name is more descriptive.\n  {issue}`2452`\n- Refactor code generating default `--help` option to deduplicate code.\n  {pr}`2563`\n- Test `CLIRunner` resets patched `_compat.should_strip_ansi`.\n  {issue}`2732`\n\n### [`v8.1.7`](https://redirect.github.com/pallets/click/blob/HEAD/CHANGES.md#Version-817)\n\n[Compare Source](https://redirect.github.com/pallets/click/compare/8.1.6...8.1.7)\n\nReleased 2023-08-17\n\n- Fix issue with regex flags in shell completion. {issue}`2581`\n- Bash version detection issues a warning instead of an error. {issue}`2574`\n- Fix issue with completion script for Fish shell. {issue}`2567`\n\n### [`v8.1.6`](https://redirect.github.com/pallets/click/blob/HEAD/CHANGES.md#Version-816)\n\n[Compare Source](https://redirect.github.com/pallets/click/compare/8.1.5...8.1.6)\n\nReleased 2023-07-18\n\n- Fix an issue with type hints for `@click.group()`. {issue}`2558`\n\n### [`v8.1.5`](https://redirect.github.com/pallets/click/blob/HEAD/CHANGES.md#Version-815)\n\n[Compare Source](https://redirect.github.com/pallets/click/compare/8.1.4...8.1.5)\n\nReleased 2023-07-13\n\n- Fix an issue with type hints for `@click.command()`, `@click.option()`, and\n  other decorators. Introduce typing tests. {issue}`2558`\n\n### [`v8.1.4`](https://redirect.github.com/pallets/click/blob/HEAD/CHANGES.md#Version-814)\n\n[Compare Source](https://redirect.github.com/pallets/click/compare/8.1.3...8.1.4)\n\nReleased 2023-07-06\n\n- Replace all `typing.Dict` occurrences to `typing.MutableMapping` for\n  parameter hints. {issue}`2255`\n- Improve type hinting for decorators and give all generic types parameters.\n  {issue}`2398`\n- Fix return value and type signature of `shell_completion.add_completion_class`\n  function. {pr}`2421`\n- Bash version detection doesn't fail on Windows. {issue}`2461`\n- Completion works if there is a dot (`.`) in the program name. {issue}`2166`\n- Improve type annotations for pyright type checker. {issue}`2268`\n- Improve responsiveness of `click.clear()`. {issue}`2284`\n- Improve command name detection when using Shiv or PEX. {issue}`2332`\n- Avoid showing empty lines if command help text is empty. {issue}`2368`\n- ZSH completion script works when loaded from `fpath`. {issue}`2344`.\n- `EOFError` and `KeyboardInterrupt` tracebacks are not suppressed when\n  `standalone_mode` is disabled. {issue}`2380`\n- `@group.command` does not fail if the group was created with a custom\n  `command_class`. {issue}`2416`\n- `multiple=True` is allowed for flag options again and does not require\n  setting `default=()`. {issue}`2246, 2292, 2295`\n- Make the decorators returned by `@argument()` and `@option()` reusable when the\n  `cls` parameter is used. {issue}`2294`\n- Don't fail when writing filenames to streams with strict errors. Replace invalid\n  bytes with the replacement character (`�`). {issue}`2395`\n- Remove unnecessary attempt to detect MSYS2 environment. {issue}`2355`\n- Remove outdated and unnecessary detection of App Engine environment. {pr}`2554`\n- `echo()` does not fail when no streams are attached, such as with `pythonw` on\n  Windows. {issue}`2415`\n- Argument with `expose_value=False` do not cause completion to fail. {issue}`2336`\n\n</details>\n\n---\n\n### Configuration\n\n📅 **Schedule**: (in timezone Australia/Sydney)\n\n- Branch creation\n  - \"before 6am on Monday\"\n- Automerge\n  - At any time (no schedule defined)\n\n🚦 **Automerge**: Disabled by config. Please merge this manually once you are satisfied.\n\n♻ **Rebasing**: Whenever PR is behind base branch, or you tick the rebase/retry checkbox.\n\n🔕 **Ignore**: Close this PR and you won't be reminded about this update again.\n\n---\n\n - [ ] <!-- rebase-check -->If you want to rebase/retry this PR, check this box\n\n---\n\nThis PR was generated by [Mend Renovate](https://mend.io/renovate/). View the [repository job log](https://developer.mend.io/github/edithatogo/standardflow).\n<!--renovate-debug:eyJjcmVhdGVkSW5WZXIiOiI0NC4yNTcuMyIsInVwZGF0ZWRJblZlciI6IjQ0LjI1Ny4zIiwidGFyZ2V0QnJhbmNoIjoibWFpbiIsImxhYmVscyI6WyJkZXBlbmRlbmNpZXMiXX0=-->\n",
+      "head_ref": "renovate/click-8.x",
+      "head_sha": "3f850b81be3feb1a4d84d003b2ec6c166059a68e",
+      "reported_base_sha": "af299f724bcf456c131b43a143b3eabc1d81245b",
+      "state": "open",
+      "receiving_disposition": "Preserve exact source branch and transfer Click 8.1.3 to 8.5.1 candidate into receiving dependency follow-up; do not silently change the parity baseline or mark upgrade accepted.",
+      "receiving_url": null
+    },
+    {
+      "number": 25,
+      "url": "https://github.com/edithatogo/standardflow/pull/25",
+      "title": "build(deps): bump actions/setup-python from 7.0.0 to 7.1.0",
+      "body": "Bumps [actions/setup-python](https://github.com/actions/setup-python) from 7.0.0 to 7.1.0.\n<details>\n<summary>Release notes</summary>\n<p><em>Sourced from <a href=\"https://github.com/actions/setup-python/releases\">actions/setup-python's releases</a>.</em></p>\n<blockquote>\n<h2>v7.1.0</h2>\n<h2>What's Changed</h2>\n<h3>Enhancements</h3>\n<ul>\n<li>Add <code>mirror</code> and <code>mirror-token</code> inputs for custom Python distribution sources by <a href=\"https://github.com/luhenry\"><code>@​luhenry</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1302\">actions/setup-python#1302</a></li>\n<li>Improve error message clarity by <a href=\"https://github.com/v-lmvysakh\"><code>@​v-lmvysakh</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1351\">actions/setup-python#1351</a></li>\n</ul>\n<h3>Dependency Upgrade</h3>\n<ul>\n<li>Upgrade browserslist from 4.28.2 to 4.28.9 by <a href=\"https://github.com/dependabot\"><code>@​dependabot</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1353\">actions/setup-python#1353</a></li>\n<li>Upgrade <code>@​typescript-eslint/parser</code> from 8.62.0 to 8.70.0 by <a href=\"https://github.com/dependabot\"><code>@​dependabot</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1343\">actions/setup-python#1343</a></li>\n<li>Upgrade eslint-plugin-jest from 29.15.2 to 29.16.6 by <a href=\"https://github.com/dependabot\"><code>@​dependabot</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1342\">actions/setup-python#1342</a></li>\n<li>Upgrade <code>@​vercel/ncc</code> from 0.44.0 to 0.45.0 by <a href=\"https://github.com/dependabot\"><code>@​dependabot</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1357\">actions/setup-python#1357</a></li>\n<li>Upgrade <code>@​types/semver</code> from 7.7.1 to 7.8.0 by <a href=\"https://github.com/dependabot\"><code>@​dependabot</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1359\">actions/setup-python#1359</a></li>\n<li>Upgrade undici from 6.28.0 to 6.29.0 by <a href=\"https://github.com/dependabot\"><code>@​dependabot</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1364\">actions/setup-python#1364</a></li>\n<li>Upgrade ts-jest from 29.4.11 to 29.4.14 by <a href=\"https://github.com/dependabot\"><code>@​dependabot</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1361\">actions/setup-python#1361</a></li>\n<li>Upgrade brace-expansion from 5.0.9 to 5.0.12 by <a href=\"https://github.com/dependabot\"><code>@​dependabot</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1365\">actions/setup-python#1365</a></li>\n<li>Upgrade prettier from 3.8.4 to 3.9.9 and package.json from 7.0.0 to 7.1.0 by <a href=\"https://github.com/dependabot\"><code>@​dependabot</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1363\">actions/setup-python#1363</a></li>\n<li>Upgrade <code>@​typescript-eslint/eslint-plugin</code> from 8.62.0 to 8.71.1 by <a href=\"https://github.com/dependabot\"><code>@​dependabot</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1369\">actions/setup-python#1369</a></li>\n<li>Upgrade actions/checkout from 7.0.0 to 7.0.1 by <a href=\"https://github.com/dependabot\"><code>@​dependabot</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1345\">actions/setup-python#1345</a></li>\n<li>Upgrade cache to 6.3.0 by <a href=\"https://github.com/v-HarithaVattikuti\"><code>@​v-HarithaVattikuti</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1370\">actions/setup-python#1370</a></li>\n<li>Resolve Basic Validation audit failures by <a href=\"https://github.com/v-HarithaVattikuti\"><code>@​v-HarithaVattikuti</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1347\">actions/setup-python#1347</a></li>\n<li>Resolve npm audit failures by <a href=\"https://github.com/v-HarithaVattikuti\"><code>@​v-HarithaVattikuti</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1350\">actions/setup-python#1350</a></li>\n</ul>\n<h2>New Contributors</h2>\n<ul>\n<li><a href=\"https://github.com/luhenry\"><code>@​luhenry</code></a> made their first contribution in <a href=\"https://redirect.github.com/actions/setup-python/pull/1302\">actions/setup-python#1302</a></li>\n</ul>\n<p><strong>Full Changelog</strong>: <a href=\"https://github.com/actions/setup-python/compare/v7.0.0...v7.1.0\">https://github.com/actions/setup-python/compare/v7.0.0...v7.1.0</a></p>\n</blockquote>\n</details>\n<details>\n<summary>Commits</summary>\n<ul>\n<li>See full diff in <a href=\"https://github.com/actions/setup-python/compare/v7...6d4fd22b20465ccc0f7354476588e8df7c9ca0e0\">compare view</a></li>\n</ul>\n</details>\n<br />\n\n\n[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=actions/setup-python&package-manager=github_actions&previous-version=7.0.0&new-version=7.1.0)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)\n\nDependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.\n\n[//]: # (dependabot-automerge-start)\n[//]: # (dependabot-automerge-end)\n\n---\n\n<details>\n<summary>Dependabot commands and options</summary>\n<br />\n\nYou can trigger Dependabot actions by commenting on this PR:\n- `@dependabot rebase` will rebase this PR\n- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it\n- `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency\n- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)\n- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)\n- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)\n\n\n</details>",
+      "head_ref": "dependabot/github_actions/actions/setup-python-7.1.0",
+      "head_sha": "7d2e233217d5d3d6c4ca9c5866f64158d117099e",
+      "reported_base_sha": "af299f724bcf456c131b43a143b3eabc1d81245b",
+      "state": "open",
+      "receiving_disposition": "Preserve exact head. Receiving CI already pins setup-python to 6d4fd22b20465ccc0f7354476588e8df7c9ca0e0. Record workflow supersession before closing source PR.",
+      "receiving_url": null
+    },
+    {
+      "number": 24,
+      "url": "https://github.com/edithatogo/standardflow/pull/24",
+      "title": "[StepSecurity] Apply security best practices",
+      "body": "## Summary\n\nThis pull request has been generated by [StepSecurity](https://app.stepsecurity.io/github/edithatogo/actions/dashboard) as part of your enterprise subscription to ensure compliance with recommended security best practices. Please review and merge the pull request to apply these security enhancements.\n\n## Security Fixes\n\n### Harden Runner\n\nHarden-Runner is an open-source security agent for the GitHub-hosted runner to prevent software supply chain attacks. It prevents exfiltration of credentials, detects tampering of source code during build, and enables running jobs without sudo access.\n\n- [GitHub Security Guide](https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions)\n- [The Open Source Security Foundation (OpenSSF) Security Guide](https://github.com/ossf/scorecard/blob/main/docs/checks.md#dangerous-workflow)\n\n### Pinned Dependencies\n\nPinning GitHub Actions to specific versions or commit SHAs ensures that your workflows remain consistent and secure.\nUnpinned actions can lead to unexpected changes or vulnerabilities caused by upstream updates.\n\n- [GitHub Security Guide](https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions#using-third-party-actions)\n- [The Open Source Security Foundation (OpenSSF) Security Guide](https://github.com/ossf/scorecard/blob/main/docs/checks.md#pinned-dependencies)\n\n\n## Feedback\nFor bug reports, feature requests, and general feedback; please create an issue in [step-security/secure-repo](https://github.com/step-security/secure-repo) or contact us via [our website](https://www.stepsecurity.io/).\n\n\n",
+      "head_ref": "chore/GHA-190519-stepsecurity-remediation",
+      "head_sha": "eb7d0703b86aaa82e3cd738a273db7c60a70f6c9",
+      "reported_base_sha": "af299f724bcf456c131b43a143b3eabc1d81245b",
+      "state": "open",
+      "receiving_disposition": "Preserve exact head. Reconcile against receiving CI, which already pins harden-runner to aebdcf6156ab6691adf63218240e476564a1ed4c; record supersession or port any still-applicable workflow changes before closing source PR.",
+      "receiving_url": null
+    },
+    {
+      "number": 9,
+      "url": "https://github.com/edithatogo/standardflow/pull/9",
+      "title": "Restore legacy renderer compatibility and prepare StandardFlow export",
+      "body": "## Summary\n\nThe original refactor broke checklist generation, diagram variants, styling, JSON/form submissions and TIFF export. This repair reconciles current main and reuses the mature renderers and golden fixtures, then fixes schema validation and shared CLI/web handling. Duplicated examples and generated debris are removed.\n\nThe user has now directed consolidation into `edithatogo/standards_check`, followed by private archival of this source repository. The repaired source is being exported with all branch histories; this PR is a source receipt for that transfer.\n\n## Validation\n\nReviewed repair: `d89a5dbacc207cdce11f19efd667b83fdb09df18`.\n\n- 52 local Python 3.12 tests passed, including all 11 notebooks, actual format bytes, all six legacy variants, golden snapshots and web/CLI regressions.\n- Primary adoption contract and dependency consistency passed.\n- Hosted application/container tests: https://github.com/edithatogo/standardflow/actions/runs/45029941592 — passed.\n- Hosted privacy/secrets: https://github.com/edithatogo/standardflow/actions/runs/45029941603 — passed.\n- Hosted adoption: https://github.com/edithatogo/standardflow/actions/runs/45029941643 — passed.\n- Offline AI security remains queued without an execution receipt; no waiver or all-checks-green claim.\n\n## Impact and scope\n\nRestores legacy behavior while retaining validated CLI overrides, single-file Markdown and SVG-backed Typst diagrams. Native PNG/SVG/PDF web downloads replace shared files; checklist ZIPs are generated from their own submitted payload. The broken interactive CLI wizard and unused Markdown dependency are removed.\n\nThis is legacy compatibility evidence, not comprehensive scientific-standard validation or equivalence with the primary Rust engine. Existing item-level rights, methodological and accessibility gates remain separate.\n\n## Migration\n\nPrimary import commit: https://github.com/edithatogo/standards_check/commit/989f2fa5c26b22b8294e20b442a6f602d9d124ed\n\nThe import preserves the exact repaired tree and all source branch tips as ancestors. `feature/implement-guidelines` is preserved only in history: its purported new guideline arrays duplicate STARD and are not promoted into runtime or canonical packs. Receiving checks and retirement evidence will be recorded in primary Track 03.",
+      "head_ref": "feature/refactor-and-document",
+      "head_sha": "d89a5dbacc207cdce11f19efd667b83fdb09df18",
+      "reported_base_sha": "af299f724bcf456c131b43a143b3eabc1d81245b",
+      "state": "open",
+      "receiving_disposition": "Preserve repaired source d89a5dba and original ancestry. Repaired legacy tree is the import candidate; source hosted app/container, privacy and adoption checks passed. Receiving acceptance remains conditional on exact receiving tree, ancestry, tests and rollback evidence. Historical seven findings are not asserted as current defects.",
+      "receiving_url": null
+    }
+  ],
+  "pull_request_9": {
+    "head_sha": "d89a5dbacc207cdce11f19efd667b83fdb09df18",
+    "title": "Restore legacy renderer compatibility and prepare StandardFlow export",
+    "base_sha": "af299f724bcf456c131b43a143b3eabc1d81245b",
+    "merged": false,
+    "mergeable": true,
+    "mergeable_state": "unstable",
+    "commits_relative_to_reported_base": 9,
+    "changed_files_relative_to_reported_base": 52,
+    "additions_relative_to_reported_base": 1446,
+    "deletions_relative_to_reported_base": 1190,
+    "tree_sha": "e48c081ff946d0fac6a1a4b65a3599c6b7aa3352",
+    "parent_shas": [
+      "41c3e174fd7932d308992c4ef96d055273dabdbd",
+      "af299f724bcf456c131b43a143b3eabc1d81245b"
+    ],
+    "historical_head": "41c3e174fd7932d308992c4ef96d055273dabdbd",
+    "historical_review_findings_reference": "previous_snapshots[0].pull_request_9",
+    "historical_review_disposition": "The seven review findings were anchored to 41c3e174 and their current REST line values are null. Preserve them as historical. Source repair report states those regression paths were repaired; no code-review receipt for d89a5dba was returned by the review API.",
+    "code_review_receipts": [
+      {
+        "url": "https://github.com/edithatogo/standardflow/pull/9#pullrequestreview-3086862596",
+        "id": 3086862596,
+        "commit_id": "318c19f49b61e7e1169fe7fc6f6824e42d656e76",
+        "state": "COMMENTED",
+        "submitted_at": "2025-08-05T07:01:17Z"
+      },
+      {
+        "url": "https://github.com/edithatogo/standardflow/pull/9#pullrequestreview-3086870697",
+        "id": 3086870697,
+        "commit_id": "318c19f49b61e7e1169fe7fc6f6824e42d656e76",
+        "state": "COMMENTED",
+        "submitted_at": "2025-08-05T07:04:17Z"
+      },
+      {
+        "url": "https://github.com/edithatogo/standardflow/pull/9#pullrequestreview-5956165446",
+        "id": 5956165446,
+        "commit_id": "41c3e174fd7932d308992c4ef96d055273dabdbd",
+        "state": "COMMENTED",
+        "submitted_at": "2026-11-18T12:01:58Z"
+      }
+    ],
+    "current_head_code_review_receipt_observed": false,
+    "repair_report_url": "https://github.com/edithatogo/standardflow/blob/d89a5dbacc207cdce11f19efd667b83fdb09df18/docs/reviews/2026-11-22-pull-request-review.md",
+    "observed_checks": [
+      {
+        "name": "offline-ai-security / offline-security",
+        "head_sha": "d89a5dbacc207cdce11f19efd667b83fdb09df18",
+        "status": "queued",
+        "conclusion": null,
+        "url": "https://github.com/edithatogo/standardflow/actions/runs/45029942019/job/137231095693"
+      },
+      {
+        "name": "privacy-and-secrets",
+        "head_sha": "d89a5dbacc207cdce11f19efd667b83fdb09df18",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/edithatogo/standardflow/actions/runs/45029941603/job/137231094674"
+      },
+      {
+        "name": "contract",
+        "head_sha": "d89a5dbacc207cdce11f19efd667b83fdb09df18",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/edithatogo/standardflow/actions/runs/45029941643/job/137231094586"
+      },
+      {
+        "name": "Python 3.12 app and artifact tests",
+        "head_sha": "d89a5dbacc207cdce11f19efd667b83fdb09df18",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/edithatogo/standardflow/actions/runs/45029941592/job/137231094572"
+      },
+      {
+        "name": ".github/dependabot.yml",
+        "head_sha": "d89a5dbacc207cdce11f19efd667b83fdb09df18",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/edithatogo/standardflow/runs/137231080012"
+      }
+    ],
+    "observed_test_log": {
+      "url": "https://github.com/edithatogo/standardflow/actions/runs/45029941592/job/137231094572",
+      "host": {
+        "tests": 52,
+        "result": "OK",
+        "seconds": 2.497
+      },
+      "container": {
+        "tests": 52,
+        "result": "OK",
+        "seconds": 2.109
+      },
+      "inspection": "Decoded hosted job log inspected; these are observed source-head runs, not receiving runs."
+    },
+    "offline_security_status": "queued_without_execution_receipt",
+    "reported_receiving_import": "https://github.com/edithatogo/standards_check/commit/989f2fa5c26b22b8294e20b442a6f602d9d124ed",
+    "reported_receiving_import_evidence": "Linked by source PR body; receiving candidate c64c61a has 989f2fa as an observed parent, and exact current source archive refs are verified. This does not assert receiving main admission or final-head acceptance.",
+    "receiving_acceptance": "conditional_pending_final_receiving_head_qualification_and_cutover_receipts",
+    "claim_boundary": "Legacy compatibility evidence does not establish Rust parity, item-level rights, methodological validation, external accessibility or publication readiness."
+  },
+  "unmerged_guideline_branch": {
+    "name": "feature/implement-guidelines",
+    "sha": "f1680778b4141bb5553b0e80af22bbdf5c75c862",
+    "disposition": "Preserve this historical candidate separately as held receiving work. It forks from old 41c3e174, does not contain repaired d89a5dba, and must not replace the repaired runtime. Ten copied checklist labels remain unqualified.",
+    "copied_checklists": [
+      {
+        "path": "data/agree_checklist.json",
+        "item_count": 30,
+        "items_exactly_equal_to": "data/stard_checklist.json",
+        "admission": "rejected_pending_independent_source_reconciliation"
+      },
+      {
+        "path": "data/arrive_checklist.json",
+        "item_count": 30,
+        "items_exactly_equal_to": "data/stard_checklist.json",
+        "admission": "rejected_pending_independent_source_reconciliation"
+      },
+      {
+        "path": "data/cheers_checklist.json",
+        "item_count": 30,
+        "items_exactly_equal_to": "data/stard_checklist.json",
+        "admission": "rejected_pending_independent_source_reconciliation"
+      },
+      {
+        "path": "data/coreq_checklist.json",
+        "item_count": 30,
+        "items_exactly_equal_to": "data/stard_checklist.json",
+        "admission": "rejected_pending_independent_source_reconciliation"
+      },
+      {
+        "path": "data/prisma_p_checklist.json",
+        "item_count": 30,
+        "items_exactly_equal_to": "data/stard_checklist.json",
+        "admission": "rejected_pending_independent_source_reconciliation"
+      },
+      {
+        "path": "data/right_checklist.json",
+        "item_count": 30,
+        "items_exactly_equal_to": "data/stard_checklist.json",
+        "admission": "rejected_pending_independent_source_reconciliation"
+      },
+      {
+        "path": "data/spirit_checklist.json",
+        "item_count": 30,
+        "items_exactly_equal_to": "data/stard_checklist.json",
+        "admission": "rejected_pending_independent_source_reconciliation"
+      },
+      {
+        "path": "data/squire_checklist.json",
+        "item_count": 30,
+        "items_exactly_equal_to": "data/stard_checklist.json",
+        "admission": "rejected_pending_independent_source_reconciliation"
+      },
+      {
+        "path": "data/srqr_checklist.json",
+        "item_count": 30,
+        "items_exactly_equal_to": "data/stard_checklist.json",
+        "admission": "rejected_pending_independent_source_reconciliation"
+      },
+      {
+        "path": "data/tripod_checklist.json",
+        "item_count": 30,
+        "items_exactly_equal_to": "data/stard_checklist.json",
+        "admission": "rejected_pending_independent_source_reconciliation"
+      }
+    ],
+    "comparison_method": "Compare parsed JSON items arrays at this exact branch SHA; canonical digest uses json.dumps(items, sort_keys=True, separators=(',', ':'), ensure_ascii=False).encode('utf-8').",
+    "reference_items_sha256": "3526bd36acc55e63431cabfbd1335606497e0a54ba1eec29d3064041a2ed6696",
+    "contains_historical_pr_9_head": true,
+    "historical_pr_9_head": "41c3e174fd7932d308992c4ef96d055273dabdbd",
+    "contains_current_repaired_pr_9_head": false,
+    "additional_commit_count_after_historical_pr_9": 1,
+    "additional_files_changed_after_historical_pr_9": 127,
+    "additional_insertions_after_historical_pr_9": 4541,
+    "additional_deletions_after_historical_pr_9": 42
+  },
+  "rights_inventory": {
+    "repository_authored_code_licence": "Apache-2.0",
+    "licence_evidence": {
+      "path": "LICENSE",
+      "git_blob_sha": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+      "source_revision": "af299f724bcf456c131b43a143b3eabc1d81245b"
+    },
+    "citation_evidence": {
+      "path": "CITATION.cff",
+      "git_blob_sha": "43d08afc6f50229f467673d1f4e9a6522c10d88f",
+      "source_revision": "af299f724bcf456c131b43a143b3eabc1d81245b"
+    },
+    "notice_file_observed": false,
+    "licence_preservation": "Keep imported code under Apache-2.0 in its isolated namespace with source history, LICENSE and existing notices. This inventory grants no new third-party rights.",
+    "checklist_corpus": {
+      "main_checklist_json_files": 22,
+      "pr_9_checklist_json_files": 22,
+      "unmerged_guideline_branch_checklist_json_files": 32,
+      "item_level_rights_or_provenance_fields_found": false,
+      "observed_top_level_keys": [
+        "checklist_type",
+        "title",
+        "items"
+      ],
+      "status": "rights_review_incomplete"
+    },
+    "test_and_example_status": "Legacy behavior and candidate fixtures only. Source rights, standard fidelity and synthetic provenance are not established by passing snapshots or the repository-level code licence.",
+    "canonical_admission": false,
+    "methodological_validation": false,
+    "external_accessibility_acceptance": false
+  },
+  "existing_source_migration_contract": {
+    "manifest": "integration/standards-check-adoption.json",
+    "recorded_legacy_revision": "76f2c27f0920ee0444a586c2a20abb9d46d5d0b2",
+    "recorded_proposed_primary_revision": "f1e7b6c6e283865c1b7dbb34dbe33d8bf6f6c799",
+    "revision_status": "Historical preparation pins; source main and receiving main have advanced.",
+    "runtime_dependency": false,
+    "default_network": false,
+    "default_external_writes": false,
+    "activation_gates": [
+      "history_preserved",
+      "apache_notice_preserved",
+      "rights_review_complete",
+      "differential_fixtures_pass",
+      "accessibility_review_complete",
+      "rollback_rehearsed"
+    ],
+    "claim_boundary": "Existing source metadata only proves migration preparation. Separate receiving receipts must establish history, compatibility and retirement actions without promoting rights, accessibility or methodology claims."
+  },
+  "downstream_references": [
+    {
+      "repository": "edithatogo/standardflow",
+      "path": "README.md",
+      "url": "https://github.com/edithatogo/standardflow/blob/af299f724bcf456c131b43a143b3eabc1d81245b/README.md",
+      "role": "Current-use clone instructions",
+      "disposition": "Publish receiving location and retirement receipt before source visibility/archival changes."
+    },
+    {
+      "repository": "edithatogo/standardflow",
+      "path": "CITATION.cff",
+      "url": "https://github.com/edithatogo/standardflow/blob/af299f724bcf456c131b43a143b3eabc1d81245b/CITATION.cff",
+      "role": "Legacy repository-code and URL metadata",
+      "disposition": "Retain historical citation; receiving documentation must supply a public preserved-revision location."
+    },
+    {
+      "repository": "edithatogo/repository-standards",
+      "path": "registry/repositories.json",
+      "url": "https://github.com/edithatogo/repository-standards/blob/e6425228dea09637eb0a45a3787421e7bce42b3b/registry/repositories.json",
+      "role": "Active estate registry and source quality issue pointer",
+      "observed_entry": {
+        "support_status": "active",
+        "visibility": "private",
+        "quality_issue": "https://github.com/edithatogo/standardflow/issues/13",
+        "canonical_status": "review_required"
+      },
+      "disposition": "Reconcile lifecycle and replacement repository; visibility was stale relative to this live public-source snapshot."
+    },
+    {
+      "repository": "edithatogo/voiage",
+      "path": "conductor/tracks/agent_safe_engineering_20260907/repository-boundaries.md",
+      "url": "https://github.com/edithatogo/voiage/blob/f6d80e0d7adc500e2d356627469225d1b7ae557f/conductor/tracks/agent_safe_engineering_20260907/repository-boundaries.md",
+      "role": "Deferred optional exported-report consumer; explicitly no renderer inside VOI core",
+      "disposition": "Update active destination when adoption is accepted; do not claim a runtime integration exists."
+    },
+    {
+      "repository": "edithatogo/voiage",
+      "path": "conductor/tracks/agent_safe_engineering_20260907/github-integration-review.json",
+      "url": "https://github.com/edithatogo/voiage/blob/f6d80e0d7adc500e2d356627469225d1b7ae557f/conductor/tracks/agent_safe_engineering_20260907/github-integration-review.json",
+      "role": "Historical README inspection, no runtime qualification",
+      "disposition": "Preserve original observation and add a receiving-reference note rather than rewriting historical evidence."
+    },
+    {
+      "repository": "edithatogo/repository-standards",
+      "path": "registry/product-metadata-baseline-2026-07-31.json",
+      "url": "https://github.com/edithatogo/repository-standards/blob/e6425228dea09637eb0a45a3787421e7bce42b3b/registry/product-metadata-baseline-2026-07-31.json",
+      "role": "Historical product metadata baseline",
+      "disposition": "Keep historical snapshot; reconcile current registry separately."
+    }
+  ],
+  "downstream_search_limits": "Connected GitHub code search for github.com/edithatogo/standardflow under owner edithatogo returned six matching files. No runtime consumer was found in these results; this is not exhaustive evidence that no external consumers exist.",
+  "observations": [
+    {
+      "method": "GitHub REST connector",
+      "url": "https://api.github.com/repos/edithatogo/standardflow"
+    },
+    {
+      "method": "GitHub REST connector",
+      "url": "https://api.github.com/repos/edithatogo/standardflow/pulls?state=open&per_page=100"
+    },
+    {
+      "method": "GitHub REST connector",
+      "url": "https://api.github.com/repos/edithatogo/standardflow/issues?state=open&per_page=100"
+    },
+    {
+      "method": "GitHub REST connector",
+      "url": "https://api.github.com/repos/edithatogo/standardflow/releases?per_page=100"
+    },
+    {
+      "method": "Git remote advertisement",
+      "command": "git ls-remote --heads --tags origin",
+      "result": "Five branches, no tag refs."
+    },
+    {
+      "method": "GitHub REST connector",
+      "url": "https://api.github.com/repos/edithatogo/standardflow/branches/main"
+    },
+    {
+      "method": "GitHub REST connector",
+      "url": "https://api.github.com/repos/edithatogo/standardflow/rulesets"
+    },
+    {
+      "method": "GitHub REST connector",
+      "url": "https://api.github.com/repos/edithatogo/standardflow/pulls/9/comments?per_page=100"
+    },
+    {
+      "method": "Git object comparison",
+      "source": "Local read-only full source clone, exact refs recorded above"
+    },
+    {
+      "method": "Refreshed GitHub REST branch and PR inventory",
+      "url": "https://api.github.com/repos/edithatogo/standardflow/branches?per_page=100",
+      "result": "Seven source branch heads; source main unchanged."
+    },
+    {
+      "method": "Refreshed Git remote advertisement",
+      "command": "git ls-remote --heads --tags origin",
+      "result": "Seven branches, no tag refs."
+    },
+    {
+      "method": "Repaired-head commit parent inspection",
+      "url": "https://api.github.com/repos/edithatogo/standardflow/git/commits/d89a5dbacc207cdce11f19efd667b83fdb09df18"
+    },
+    {
+      "method": "Hosted source test log inspection",
+      "url": "https://github.com/edithatogo/standardflow/actions/runs/45029941592/job/137231094572",
+      "result": "52 host tests OK; 52 container tests OK."
+    },
+    {
+      "method": "Current PR9 check-run inspection",
+      "url": "https://api.github.com/repos/edithatogo/standardflow/commits/d89a5dbacc207cdce11f19efd667b83fdb09df18/check-runs"
+    },
+    {
+      "method": "Receiving dashboard lookup",
+      "url": "https://github.com/edithatogo/standards_check/issues/76",
+      "result": "Existing dashboard found; no remote mutation performed."
+    },
+    {
+      "method": "Receiving exact archive-ref verification",
+      "url": "https://api.github.com/repos/edithatogo/standards_check/git/matching-refs/heads/archive/standardflow/",
+      "result": "All seven current source heads match their receiving archive refs."
+    },
+    {
+      "method": "Receiving candidate commit and main inspection",
+      "url": "https://api.github.com/repos/edithatogo/standards_check/git/commits/c64c61a0a978b4b50f8d525fc76d6548d2e75718",
+      "result": "Candidate parents 99a9b8f and repaired import 989f2fa; main remains 1aef9b5b at observation."
+    },
+    {
+      "method": "Receiving candidate check-runs inspection",
+      "url": "https://api.github.com/repos/edithatogo/standards_check/commits/c64c61a0a978b4b50f8d525fc76d6548d2e75718/check-runs",
+      "result": "Separate CodeQL check failed with one new high-severity alert despite successful Analyze jobs; final-head qualification not claimed."
+    }
+  ],
+  "snapshot_id": "refresh-2026-11-22-d89a5dba-seven-branches",
+  "previous_snapshots": [
+    {
+      "snapshot_id": "initial-2026-11-22-41c3e174-five-branches",
+      "observed_on": "2026-11-22",
+      "source_main_revision": "af299f724bcf456c131b43a143b3eabc1d81245b",
+      "source_branches": [
+        {
+          "name": "main",
+          "sha": "af299f724bcf456c131b43a143b3eabc1d81245b",
+          "pull_request": null,
+          "preservation_target_ref": "refs/heads/archive/standardflow/main",
+          "preservation_status": "requested_not_verified_by_this_inventory"
+        },
+        {
+          "name": "feature/refactor-and-document",
+          "sha": "41c3e174fd7932d308992c4ef96d055273dabdbd",
+          "pull_request": 9,
+          "preservation_target_ref": "refs/heads/archive/standardflow/feature/refactor-and-document",
+          "preservation_status": "requested_not_verified_by_this_inventory"
+        },
+        {
+          "name": "feature/implement-guidelines",
+          "sha": "f1680778b4141bb5553b0e80af22bbdf5c75c862",
+          "pull_request": null,
+          "preservation_target_ref": "refs/heads/archive/standardflow/feature/implement-guidelines",
+          "preservation_status": "requested_not_verified_by_this_inventory"
+        },
+        {
+          "name": "chore/GHA-190519-stepsecurity-remediation",
+          "sha": "eb7d0703b86aaa82e3cd738a273db7c60a70f6c9",
+          "pull_request": 24,
+          "preservation_target_ref": "refs/heads/archive/standardflow/chore/GHA-190519-stepsecurity-remediation",
+          "preservation_status": "requested_not_verified_by_this_inventory"
+        },
+        {
+          "name": "dependabot/github_actions/actions/setup-python-7.1.0",
+          "sha": "7d2e233217d5d3d6c4ca9c5866f64158d117099e",
+          "pull_request": 25,
+          "preservation_target_ref": "refs/heads/archive/standardflow/dependabot/github_actions/actions/setup-python-7.1.0",
+          "preservation_status": "requested_not_verified_by_this_inventory"
+        }
+      ],
+      "repository_settings": {
+        "visibility": "public",
+        "archived": false,
+        "disabled": false,
+        "default_branch": "main",
+        "has_pages": false,
+        "has_wiki": false,
+        "has_projects": false,
+        "has_discussions": false,
+        "forks_count": 0,
+        "network_count": 0,
+        "open_issues_including_pull_requests": 7,
+        "main_protected": false,
+        "rulesets": [],
+        "web_commit_signoff_required": true,
+        "allow_merge_commit": false,
+        "allow_squash_merge": true,
+        "allow_rebase_merge": false
+      },
+      "open_issues": [
+        {
+          "number": 23,
+          "url": "https://github.com/edithatogo/standardflow/issues/23",
+          "title": "Dependency Dashboard",
+          "body": "This issue lists Renovate updates and detected dependencies. Read the [Dependency Dashboard](https://docs.renovatebot.com/key-concepts/dashboard/) docs to learn more.<br>[View this repository on the Mend.io Web Portal](https://developer.mend.io/github/edithatogo/standardflow).\n\n## Pending Approval\n\nThe following branches are pending approval. To create them, click on a checkbox below.\n\n - [ ] <!-- approve-branch=renovate/ipykernel-7.x -->Update dependency ipykernel to v7\n - [ ] <!-- approve-branch=renovate/major-github-actions -->Update dependency ubuntu to v26\n - [ ] <!-- approve-all-pending-prs -->🔐 **Create all pending approval PRs at once** 🔐\n\n## Awaiting Schedule\n\nThe following updates are awaiting their schedule. To get an update now, click on a checkbox below.\n\n - [ ] <!-- unschedule-branch=renovate/click-8.x -->Update dependency Click to v8.5.1\n - [ ] <!-- unschedule-branch=renovate/graphviz-0.x -->Update dependency graphviz to v0.21\n - [ ] <!-- unschedule-branch=renovate/ipykernel-6.x -->Update dependency ipykernel to v6.31.0\n - [ ] <!-- unschedule-branch=renovate/jsonschema-4.x -->Update dependency jsonschema to v4.26.0\n - [ ] <!-- unschedule-branch=renovate/github-actions -->Update github-actions (`actions/setup-python`, `python`)\n - [ ] <!-- unschedule-branch=renovate/python-3.x -->Update python Docker tag to v3.15\n - [ ] <!-- create-all-awaiting-schedule-prs -->🔐 **Create all awaiting schedule PRs at once** 🔐\n\n## Detected Dependencies\n\n<details><summary>dockerfile (1)</summary>\n<blockquote>\n\n<details><summary>Dockerfile (1)</summary>\n\n - `python 3.12-slim@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b` → [Updates: `3.15-slim`]\n\n</details>\n\n</blockquote>\n</details>\n\n<details><summary>github-actions (3)</summary>\n<blockquote>\n\n<details><summary>.github/workflows/primary-adoption.yml (3)</summary>\n\n - `actions/checkout v7.0.1@3d3c42e5aac5ba805825da76410c181273ba90b1`\n - `actions/setup-python v7.0.0@5fda3b95a4ea91299a34e894583c3862153e4b97` → [Updates: `v7.1.0`]\n - `python 3.14` → [Updates: `3.15`]\n\n</details>\n\n<details><summary>.github/workflows/privacy-secrets.yml (3)</summary>\n\n - `step-security/harden-runner v2`\n - `actions/checkout v7.0.1@3d3c42e5aac5ba805825da76410c181273ba90b1`\n - `ubuntu 24.04` → [Updates: `26.04`]\n\n</details>\n\n<details><summary>.github/workflows/tests.yml (4)</summary>\n\n - `actions/checkout v7.0.1@3d3c42e5aac5ba805825da76410c181273ba90b1`\n - `actions/setup-python v7.1.0@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0`\n - `ubuntu 24.04` → [Updates: `26.04`]\n - `python 3.12` → [Updates: `3.15`]\n\n</details>\n\n</blockquote>\n</details>\n\n<details><summary>pip_requirements (1)</summary>\n<blockquote>\n\n<details><summary>requirements.txt (6)</summary>\n\n - `graphviz ==0.20.1` → [Updates: `==0.21`]\n - `jsonschema ==4.17.3` → [Updates: `==4.26.0`]\n - `Click ==8.1.3` → [Updates: `==8.5.1`]\n - `ipykernel ==6.25.0` → [Updates: `==6.31.0`, `==7.4.0`]\n - `Flask ==3.1.3`\n - `Werkzeug ==3.1.9`\n\n</details>\n\n</blockquote>\n</details>\n\n---\n\n- [ ] <!-- manual job -->Check this box to trigger a request for Renovate to run again on this repository\n\n",
+          "labels": [],
+          "receiving_disposition": "Retain dependency inventory. Receiving dependency authority must cover any activated legacy dependencies; stop duplicate source bot work as part of repository retirement.",
+          "receiving_url": null
+        },
+        {
+          "number": 14,
+          "url": "https://github.com/edithatogo/standardflow/issues/14",
+          "title": "[Quality frontier] Complete evidence-based repository hardening",
+          "body": "## Refined audit snapshot\n\nDefault branch: **main**; kind: **software**; workflows: **0**.\n\n| Technique | Present | Warranted |\n|---|---:|---:|\n| Property-based | no | yes |\n| Mutation | no | yes |\n| DST | no | no |\n| MT | no | no |\n| Contract | no | yes |\n\n## Subissues\n\n- [ ] #12\n- [ ] #13\n\nClose only when every subissue is complete or records an evidence-backed exclusion. Keep the repository operable by one maintainer.",
+          "labels": [],
+          "receiving_disposition": "Transfer umbrella with links to receiving counterparts of issues 12 and 13; close source only after those destinations exist.",
+          "receiving_url": null
+        },
+        {
+          "number": 13,
+          "url": "https://github.com/edithatogo/standardflow/issues/13",
+          "title": "[Quality frontier] Maximise security and solo-maintainer context",
+          "body": "## Refined evidence\n\n- Protection/rulesets: **no / 0**\n- Context gaps: **agents, security_policy, pull_request_template, issue_templates, one_command_harness**\n- Setting follow-up: **secret scanning and push protection (GitHub returned 422)**\n\n## Done when\n\n- [ ] Add a ruleset blocking force-push/deletion and requiring only stable checks after inventorying bots.\n- [ ] Keep solo operation: no approval/CODEOWNERS/team gate; retain owner recovery.\n- [ ] Resolve setting failures; add canonical agent/security/contribution context, one-command validation, and a drift receipt.\n\n<!-- estate-dependency-coverage-plan -->\n## Renovate and Codecov rollout\n\n- [ ] Grant the hosted Renovate app access to this repository and verify its Dependency Dashboard or first pull request.\n- [ ] Inherit github>edithatogo/renovate-config; retain any justified repository-specific overrides.\n- [ ] Remove .github/dependabot.yml only after Renovate is confirmed healthy, avoiding an update-coverage gap or competing bots.\n- [ ] Produce real test coverage, upload with Codecov OIDC (id-token: write), and verify both the Codecov repository and commit status are active.\n- [ ] Keep zero mandatory human approvals; use required automated checks as the merge gate.\n<!-- /estate-dependency-coverage-plan -->\n",
+          "labels": [],
+          "receiving_disposition": "Transfer applicable security and solo-maintainer obligations; reconcile source retirement in repository-standards registry; do not imply private Codecov or offline security acceptance.",
+          "receiving_url": null
+        },
+        {
+          "number": 12,
+          "url": "https://github.com/edithatogo/standardflow/issues/12",
+          "title": "[Quality frontier] Close warranted testing and CI/CD gaps",
+          "body": "## Refined evidence\n\n- Kind/code/tests/workflows: **software / 23 / 33 / 0**\n- Warranted gaps: **Property-based, Mutation, Contract**\n- CI gaps: **permissions, concurrency, pinned_actions, dependabot, codeql, dependency_review, workflow_lint, secret_scan**\n\n## Done when\n\n- [ ] Confirm applicability and document exclusions.\n- [ ] Add warranted deterministic, replayable suites with bounded runtime and thresholds.\n- [ ] Add least-privilege, concurrency, immutable actions, updates, linting, and applicable gates.\n- [ ] Keep PR checks fast; schedule expensive lanes and retain evidence.",
+          "labels": [],
+          "receiving_disposition": "Transfer applicable deterministic testing and CI gaps to receiving assurance track; update stale zero-workflow snapshot; retain unexecuted quality gates.",
+          "receiving_url": null
+        }
+      ],
+      "open_pull_requests": [
+        {
+          "number": 25,
+          "url": "https://github.com/edithatogo/standardflow/pull/25",
+          "title": "build(deps): bump actions/setup-python from 7.0.0 to 7.1.0",
+          "body": "Bumps [actions/setup-python](https://github.com/actions/setup-python) from 7.0.0 to 7.1.0.\n<details>\n<summary>Release notes</summary>\n<p><em>Sourced from <a href=\"https://github.com/actions/setup-python/releases\">actions/setup-python's releases</a>.</em></p>\n<blockquote>\n<h2>v7.1.0</h2>\n<h2>What's Changed</h2>\n<h3>Enhancements</h3>\n<ul>\n<li>Add <code>mirror</code> and <code>mirror-token</code> inputs for custom Python distribution sources by <a href=\"https://github.com/luhenry\"><code>@​luhenry</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1302\">actions/setup-python#1302</a></li>\n<li>Improve error message clarity by <a href=\"https://github.com/v-lmvysakh\"><code>@​v-lmvysakh</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1351\">actions/setup-python#1351</a></li>\n</ul>\n<h3>Dependency Upgrade</h3>\n<ul>\n<li>Upgrade browserslist from 4.28.2 to 4.28.9 by <a href=\"https://github.com/dependabot\"><code>@​dependabot</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1353\">actions/setup-python#1353</a></li>\n<li>Upgrade <code>@​typescript-eslint/parser</code> from 8.62.0 to 8.70.0 by <a href=\"https://github.com/dependabot\"><code>@​dependabot</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1343\">actions/setup-python#1343</a></li>\n<li>Upgrade eslint-plugin-jest from 29.15.2 to 29.16.6 by <a href=\"https://github.com/dependabot\"><code>@​dependabot</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1342\">actions/setup-python#1342</a></li>\n<li>Upgrade <code>@​vercel/ncc</code> from 0.44.0 to 0.45.0 by <a href=\"https://github.com/dependabot\"><code>@​dependabot</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1357\">actions/setup-python#1357</a></li>\n<li>Upgrade <code>@​types/semver</code> from 7.7.1 to 7.8.0 by <a href=\"https://github.com/dependabot\"><code>@​dependabot</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1359\">actions/setup-python#1359</a></li>\n<li>Upgrade undici from 6.28.0 to 6.29.0 by <a href=\"https://github.com/dependabot\"><code>@​dependabot</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1364\">actions/setup-python#1364</a></li>\n<li>Upgrade ts-jest from 29.4.11 to 29.4.14 by <a href=\"https://github.com/dependabot\"><code>@​dependabot</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1361\">actions/setup-python#1361</a></li>\n<li>Upgrade brace-expansion from 5.0.9 to 5.0.12 by <a href=\"https://github.com/dependabot\"><code>@​dependabot</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1365\">actions/setup-python#1365</a></li>\n<li>Upgrade prettier from 3.8.4 to 3.9.9 and package.json from 7.0.0 to 7.1.0 by <a href=\"https://github.com/dependabot\"><code>@​dependabot</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1363\">actions/setup-python#1363</a></li>\n<li>Upgrade <code>@​typescript-eslint/eslint-plugin</code> from 8.62.0 to 8.71.1 by <a href=\"https://github.com/dependabot\"><code>@​dependabot</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1369\">actions/setup-python#1369</a></li>\n<li>Upgrade actions/checkout from 7.0.0 to 7.0.1 by <a href=\"https://github.com/dependabot\"><code>@​dependabot</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1345\">actions/setup-python#1345</a></li>\n<li>Upgrade cache to 6.3.0 by <a href=\"https://github.com/v-HarithaVattikuti\"><code>@​v-HarithaVattikuti</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1370\">actions/setup-python#1370</a></li>\n<li>Resolve Basic Validation audit failures by <a href=\"https://github.com/v-HarithaVattikuti\"><code>@​v-HarithaVattikuti</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1347\">actions/setup-python#1347</a></li>\n<li>Resolve npm audit failures by <a href=\"https://github.com/v-HarithaVattikuti\"><code>@​v-HarithaVattikuti</code></a> in <a href=\"https://redirect.github.com/actions/setup-python/pull/1350\">actions/setup-python#1350</a></li>\n</ul>\n<h2>New Contributors</h2>\n<ul>\n<li><a href=\"https://github.com/luhenry\"><code>@​luhenry</code></a> made their first contribution in <a href=\"https://redirect.github.com/actions/setup-python/pull/1302\">actions/setup-python#1302</a></li>\n</ul>\n<p><strong>Full Changelog</strong>: <a href=\"https://github.com/actions/setup-python/compare/v7.0.0...v7.1.0\">https://github.com/actions/setup-python/compare/v7.0.0...v7.1.0</a></p>\n</blockquote>\n</details>\n<details>\n<summary>Commits</summary>\n<ul>\n<li>See full diff in <a href=\"https://github.com/actions/setup-python/compare/v7...6d4fd22b20465ccc0f7354476588e8df7c9ca0e0\">compare view</a></li>\n</ul>\n</details>\n<br />\n\n\n[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=actions/setup-python&package-manager=github_actions&previous-version=7.0.0&new-version=7.1.0)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)\n\nDependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.\n\n[//]: # (dependabot-automerge-start)\n[//]: # (dependabot-automerge-end)\n\n---\n\n<details>\n<summary>Dependabot commands and options</summary>\n<br />\n\nYou can trigger Dependabot actions by commenting on this PR:\n- `@dependabot rebase` will rebase this PR\n- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it\n- `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency\n- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)\n- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)\n- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)\n\n\n</details>",
+          "head_ref": "dependabot/github_actions/actions/setup-python-7.1.0",
+          "head_sha": "7d2e233217d5d3d6c4ca9c5866f64158d117099e",
+          "reported_base_sha": "af299f724bcf456c131b43a143b3eabc1d81245b",
+          "state": "open",
+          "receiving_disposition": "Preserve exact head. Receiving CI already pins setup-python to 6d4fd22b20465ccc0f7354476588e8df7c9ca0e0. Record workflow supersession before closing source PR.",
+          "receiving_url": null
+        },
+        {
+          "number": 24,
+          "url": "https://github.com/edithatogo/standardflow/pull/24",
+          "title": "[StepSecurity] Apply security best practices",
+          "body": "## Summary\n\nThis pull request has been generated by [StepSecurity](https://app.stepsecurity.io/github/edithatogo/actions/dashboard) as part of your enterprise subscription to ensure compliance with recommended security best practices. Please review and merge the pull request to apply these security enhancements.\n\n## Security Fixes\n\n### Harden Runner\n\nHarden-Runner is an open-source security agent for the GitHub-hosted runner to prevent software supply chain attacks. It prevents exfiltration of credentials, detects tampering of source code during build, and enables running jobs without sudo access.\n\n- [GitHub Security Guide](https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions)\n- [The Open Source Security Foundation (OpenSSF) Security Guide](https://github.com/ossf/scorecard/blob/main/docs/checks.md#dangerous-workflow)\n\n### Pinned Dependencies\n\nPinning GitHub Actions to specific versions or commit SHAs ensures that your workflows remain consistent and secure.\nUnpinned actions can lead to unexpected changes or vulnerabilities caused by upstream updates.\n\n- [GitHub Security Guide](https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions#using-third-party-actions)\n- [The Open Source Security Foundation (OpenSSF) Security Guide](https://github.com/ossf/scorecard/blob/main/docs/checks.md#pinned-dependencies)\n\n\n## Feedback\nFor bug reports, feature requests, and general feedback; please create an issue in [step-security/secure-repo](https://github.com/step-security/secure-repo) or contact us via [our website](https://www.stepsecurity.io/).\n\n\n",
+          "head_ref": "chore/GHA-190519-stepsecurity-remediation",
+          "head_sha": "eb7d0703b86aaa82e3cd738a273db7c60a70f6c9",
+          "reported_base_sha": "af299f724bcf456c131b43a143b3eabc1d81245b",
+          "state": "open",
+          "receiving_disposition": "Preserve exact head. Reconcile against receiving CI, which already pins harden-runner to aebdcf6156ab6691adf63218240e476564a1ed4c; record supersession or port any still-applicable workflow changes before closing source PR.",
+          "receiving_url": null
+        },
+        {
+          "number": 9,
+          "url": "https://github.com/edithatogo/standardflow/pull/9",
+          "title": "Update example notebooks and data",
+          "body": "\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai -->\n## Summary by CodeRabbit\n\n* **New Features**\n  * Added many new checklists (PRISMA, CONSORT variants, STROBE, CARE, STARD, etc.), diagram types, example data, notebooks and scripts; added PNG/SVG/PDF/Typst output support and download endpoints in the web UI.\n* **Bug Fixes**\n  * Expanded snapshot and unit tests to lock output consistency across diagrams and checklists.\n* **Refactor**\n  * Streamlined diagram/checklist generation and save workflow for more consistent outputs.\n* **Documentation**\n  * README expanded with CLI usage, commands, examples and output-format guidance.\n* **Style**\n  * Web UI: dynamic form ↔ raw JSON toggle and improved checklist editor.\n* **Chores**\n  * Updated runtime dependencies.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "head_ref": "feature/refactor-and-document",
+          "head_sha": "41c3e174fd7932d308992c4ef96d055273dabdbd",
+          "reported_base_sha": "76f2c27f0920ee0444a586c2a20abb9d46d5d0b2",
+          "state": "open",
+          "receiving_disposition": "Preserve exact history and transfer as held receiving work; do not overwrite adopted main with this conflicted branch. Carry current review findings into the receiving draft. Some checklist data already match source main, but code, fixtures and examples remain materially different.",
+          "receiving_url": null
+        }
+      ],
+      "pull_request_9": {
+        "head_sha": "41c3e174fd7932d308992c4ef96d055273dabdbd",
+        "merged": false,
+        "mergeable": false,
+        "mergeable_state": "dirty",
+        "commits_relative_to_reported_base": 8,
+        "changed_files_relative_to_reported_base": 142,
+        "additions_relative_to_reported_base": 6709,
+        "deletions_relative_to_reported_base": 1316,
+        "comparison_with_current_source_main": {
+          "identical_file_paths": 58,
+          "source_main_file_count": 120,
+          "pr_head_file_count": 162,
+          "checklist_json_files": 22,
+          "checklist_item_files_already_equal_to_main": 22,
+          "qualification": "Partial overlap does not establish supersession. Seven shared src modules differ and seven src paths are additional; data contracts, CLI/web handling, output APIs and examples differ."
+        },
+        "review_summary_url": "https://github.com/edithatogo/standardflow/pull/9#issuecomment-6977930141",
+        "review_summary_reports_unresolved_findings": true,
+        "review_comments": [
+          {
+            "url": "https://github.com/edithatogo/standardflow/pull/9#discussion_r2253351993",
+            "path": "examples/notebooks/consort_cluster_diagram_example.ipynb",
+            "line": null,
+            "original_line": 33,
+            "commit_id": "41c3e174fd7932d308992c4ef96d055273dabdbd",
+            "created_at": "2025-08-05T07:04:16Z",
+            "body": "![critical](https://www.gstatic.com/codereviewagent/critical.svg)\n\nThe method `consort.save()` is called here, but it does not exist on the `ConsortDiagram` class or its parent `Diagram` class. The new base class provides `to_png()`, `to_dot()`, and `to_markdown()`. This will cause a runtime error.\n\nPlease update the method call to a valid one, for example `to_png()`.\n\n```\nconsort.to_png('consort_cluster_diagram.png')\n```",
+            "current_2026_review": false,
+            "thread_resolution": "not_returned_by_REST_comment_snapshot"
+          },
+          {
+            "url": "https://github.com/edithatogo/standardflow/pull/9#discussion_r2253352001",
+            "path": "src/main.py",
+            "line": null,
+            "original_line": 33,
+            "commit_id": "41c3e174fd7932d308992c4ef96d055273dabdbd",
+            "created_at": "2025-08-05T07:04:16Z",
+            "body": "![critical](https://www.gstatic.com/codereviewagent/critical.svg)\n\nThe logic for handling different artifact types has been simplified, but it no longer supports diagram subtypes like `CONSORT_CLUSTER`, `STROBE_COHORT`, or `PRISMA_2020_UPDATED`. Since these are mentioned in the updated `README.md`, this constitutes a feature regression.\n\nThe application will fail to find the corresponding schemas and won't be able to generate these specific diagrams. Please update the logic to correctly handle these subtypes.",
+            "current_2026_review": false,
+            "thread_resolution": "not_returned_by_REST_comment_snapshot"
+          },
+          {
+            "url": "https://github.com/edithatogo/standardflow/pull/9#discussion_r2253352006",
+            "path": "web/templates/checklist.html",
+            "line": 79,
+            "original_line": 79,
+            "commit_id": "41c3e174fd7932d308992c4ef96d055273dabdbd",
+            "created_at": "2025-08-05T07:04:16Z",
+            "body": "![critical](https://www.gstatic.com/codereviewagent/critical.svg)\n\nThe JavaScript logic for adding and removing checklist items is not robust. The server-side code in `web/app.py` expects item IDs to be contiguous (e.g., `id-1`, `id-2`, `id-3`). However, if a user adds three items and then removes the second one, the form will submit `id-1` and `id-3`. The server-side loop will stop after processing `id-1` because `id-2` is missing, causing data loss.\n\nTo fix this, you could either re-index the items in JavaScript when one is removed or, more simply, include a hidden input field that tracks the total number of items and their IDs, which the server can then use for parsing.",
+            "current_2026_review": false,
+            "thread_resolution": "not_returned_by_REST_comment_snapshot"
+          },
+          {
+            "url": "https://github.com/edithatogo/standardflow/pull/9#discussion_r2253352008",
+            "path": "tests/test_consort_cluster.py",
+            "line": null,
+            "original_line": 35,
+            "commit_id": "41c3e174fd7932d308992c4ef96d055273dabdbd",
+            "created_at": "2025-08-05T07:04:16Z",
+            "body": "![critical](https://www.gstatic.com/codereviewagent/critical.svg)\n\nThis test calls `self.consort._build_graph()`, but this method was removed from the `ConsortDiagram` class during the refactoring. This test will fail.\n\nAdditionally, the `ConsortDiagram` class no longer supports cluster diagrams. The test and the implementation need to be updated to restore this functionality.\n\n```python\nself.consort.build_graph()\n```",
+            "current_2026_review": false,
+            "thread_resolution": "not_returned_by_REST_comment_snapshot"
+          },
+          {
+            "url": "https://github.com/edithatogo/standardflow/pull/9#discussion_r2253352016",
+            "path": "data/consort_harms_checklist.json",
+            "line": 50,
+            "original_line": 50,
+            "commit_id": "41c3e174fd7932d308992c4ef96d055273dabdbd",
+            "created_at": "2025-08-05T07:04:16Z",
+            "body": "![high](https://www.gstatic.com/codereviewagent/high-priority.svg)\n\nThere's a duplicate `id: \"19\"` for two different items in this checklist, one under the \"Methods\" section and another under \"Results\". Item IDs within a checklist should be unique to avoid ambiguity and potential issues in processing or rendering the checklist data. Please assign a unique ID to one of these items.",
+            "current_2026_review": false,
+            "thread_resolution": "not_returned_by_REST_comment_snapshot"
+          },
+          {
+            "url": "https://github.com/edithatogo/standardflow/pull/9#discussion_r2253352023",
+            "path": "data/strobe_data.json",
+            "line": 10,
+            "original_line": 10,
+            "commit_id": "41c3e174fd7932d308992c4ef96d055273dabdbd",
+            "created_at": "2025-08-05T07:04:16Z",
+            "body": "![high](https://www.gstatic.com/codereviewagent/high-priority.svg)\n\nThe data in this file appears to be inconsistent. The number of participants in the study is accounted for by the `lost_to_follow_up`, `incomplete_data`, and `analysed` fields (800 = 50 + 50 + 700). The additional `excluded: 100` field doesn't seem to fit into this calculation and its purpose is unclear. This could lead to incorrect diagram generation. Please verify the data and ensure all fields are consistent with the STROBE reporting guidelines.",
+            "current_2026_review": false,
+            "thread_resolution": "not_returned_by_REST_comment_snapshot"
+          },
+          {
+            "url": "https://github.com/edithatogo/standardflow/pull/9#discussion_r2253352037",
+            "path": "src/strobe.py",
+            "line": null,
+            "original_line": 24,
+            "commit_id": "41c3e174fd7932d308992c4ef96d055273dabdbd",
+            "created_at": "2025-08-05T07:04:16Z",
+            "body": "![high](https://www.gstatic.com/codereviewagent/high-priority.svg)\n\nThe logic for the STROBE diagram appears to be incorrect. The edge `G -> H` suggests that participants are excluded from analysis *after* being analysed, which is logically flawed. \n\nTypically, participants are excluded from the main analysis for various reasons (e.g., incomplete data), and this should be represented as a branch from the 'Included in study' node, parallel to the 'Analysed' group. Please review the STROBE guidelines and correct the graph structure.",
+            "current_2026_review": false,
+            "thread_resolution": "not_returned_by_REST_comment_snapshot"
+          },
+          {
+            "url": "https://github.com/edithatogo/standardflow/pull/9#discussion_r2253352041",
+            "path": "consort_diagram.dot",
+            "line": 12,
+            "original_line": 12,
+            "commit_id": "41c3e174fd7932d308992c4ef96d055273dabdbd",
+            "created_at": "2025-08-05T07:04:17Z",
+            "body": "![medium](https://www.gstatic.com/codereviewagent/medium-priority.svg)\n\nThere are unnecessary trailing newlines (`\\n`) within several `label` attributes in this DOT file. While many Graphviz renderers might ignore this, it's best practice to remove them for cleaner code and to prevent potential parsing issues with stricter tools.\n\nThis issue is also present on lines 32, 38, 44, and 55.\n\n```\nlabel=\"Excluded (n=200)\",\n```",
+            "current_2026_review": false,
+            "thread_resolution": "not_returned_by_REST_comment_snapshot"
+          },
+          {
+            "url": "https://github.com/edithatogo/standardflow/pull/9#discussion_r4613577266",
+            "path": "src/main.py",
+            "line": 16,
+            "original_line": 16,
+            "commit_id": "41c3e174fd7932d308992c4ef96d055273dabdbd",
+            "created_at": "2026-11-18T12:01:58Z",
+            "body": "**<sub><sub>![P1 Badge](https://img.shields.io/badge/P1-orange?style=flat)</sub></sub>  Preserve checklist_type-based artifact generation**\n\nAll supplied checklist files, including `data/consort_checklist.json` and the new `data/care_checklist.json`, identify themselves with `checklist_type`, not `diagram_type`. Generation now calls this validator before dispatching, so these inputs immediately raise `ValueError` instead of producing a checklist. Adding `diagram_type: CONSORT` would instead select diagram validation and rendering. Retain a separate checklist dispatch path using `checklist_type` and the appropriate checklist schema.\n\nUseful? React with 👍 / 👎.\n\n<!-- codex-code-review-finding:v1 -->",
+            "current_2026_review": true,
+            "thread_resolution": "not_returned_by_REST_comment_snapshot"
+          },
+          {
+            "url": "https://github.com/edithatogo/standardflow/pull/9#discussion_r4613577276",
+            "path": "src/main.py",
+            "line": 17,
+            "original_line": 17,
+            "commit_id": "41c3e174fd7932d308992c4ef96d055273dabdbd",
+            "created_at": "2026-11-18T12:01:58Z",
+            "body": "**<sub><sub>![P1 Badge](https://img.shields.io/badge/P1-orange?style=flat)</sub></sub>  Restore routing for the supported diagram variants**\n\nInputs with `PRISMA_2020_UPDATED`, `CONSORT_CLUSTER`, or `STROBE_COHORT` now resolve to variant-specific schema filenames and fail with `FileNotFoundError`. A repository-wide file search finds only the shared PRISMA, CONSORT, and STROBE schemas, which previously validated these variants; the generation dispatcher also no longer handles any of these identifiers. All three remain selectable in `web/templates/index.html`. Restore shared-schema resolution and the corresponding variant renderers rather than rejecting these previously supported diagram types.\n\nUseful? React with 👍 / 👎.\n\n<!-- codex-code-review-finding:v1 -->",
+            "current_2026_review": true,
+            "thread_resolution": "not_returned_by_REST_comment_snapshot"
+          },
+          {
+            "url": "https://github.com/edithatogo/standardflow/pull/9#discussion_r4613577295",
+            "path": "src/prisma.py",
+            "line": 12,
+            "original_line": 12,
+            "commit_id": "41c3e174fd7932d308992c4ef96d055273dabdbd",
+            "created_at": "2026-11-18T12:01:58Z",
+            "body": "**<sub><sub>![P1 Badge](https://img.shields.io/badge/P1-orange?style=flat)</sub></sub>  Keep the PRISMA renderer compatible with its validated inputs**\n\nA PRISMA input containing the fields required by `schemas/prisma_schema.json` now passes validation but fails here with `KeyError: 'databases'`. The renderer unconditionally requires new fields such as `databases`, `registers`, and `retrieved_reports`, while the schema, README styling example, and web form still use `records_identified`, `full_text_articles_assessed`, and the other existing names. Adding both sets of fields to `data/prisma_data.json` masks this failure in that fixture without fixing other valid inputs. Normalize the existing fields or preserve their rendering support.\n\nUseful? React with 👍 / 👎.\n\n<!-- codex-code-review-finding:v1 -->",
+            "current_2026_review": true,
+            "thread_resolution": "not_returned_by_REST_comment_snapshot"
+          },
+          {
+            "url": "https://github.com/edithatogo/standardflow/pull/9#discussion_r4613577312",
+            "path": "src/prisma.py",
+            "line": 10,
+            "original_line": 10,
+            "commit_id": "41c3e174fd7932d308992c4ef96d055273dabdbd",
+            "created_at": "2026-11-18T12:01:58Z",
+            "body": "**<sub><sub>![P1 Badge](https://img.shields.io/badge/P1-orange?style=flat)</sub></sub>  Render remaining records rather than the duplicate count**\n\nFor the supplied `data/prisma_data.json`, `duplicates` is 20, whereas `records_after_duplicates_removed` and `records_screened` are both 130. These lines therefore label both remaining and screened records as 20, silently corrupting the flow diagram even when generation succeeds. Use the corresponding remaining/screened counts, or calculate remaining records by subtracting duplicates from the identified total.\n\nUseful? React with 👍 / 👎.\n\n<!-- codex-code-review-finding:v1 -->",
+            "current_2026_review": true,
+            "thread_resolution": "not_returned_by_REST_comment_snapshot"
+          },
+          {
+            "url": "https://github.com/edithatogo/standardflow/pull/9#discussion_r4613577331",
+            "path": "web/app.py",
+            "line": 23,
+            "original_line": 23,
+            "commit_id": "41c3e174fd7932d308992c4ef96d055273dabdbd",
+            "created_at": "2026-11-18T12:01:58Z",
+            "body": "**<sub><sub>![P1 Badge](https://img.shields.io/badge/P1-orange?style=flat)</sub></sub>  Deserialize raw JSON submissions before generating diagrams**\n\nWhen a user selects “Use Raw JSON Input,” `web/templates/index.html` submits the document in `json_data`, but this handler writes the surrounding form dictionary instead of parsing that document. Consequently, valid JSON counts and styling never reach validation or rendering; hidden dynamic-form fields are submitted instead, and the current PRISMA form lacks the new renderer's required fields. Parse `json_data` when raw input is selected and normalize structured form submissions separately.\n\nUseful? React with 👍 / 👎.\n\n<!-- codex-code-review-finding:v1 -->",
+            "current_2026_review": true,
+            "thread_resolution": "not_returned_by_REST_comment_snapshot"
+          },
+          {
+            "url": "https://github.com/edithatogo/standardflow/pull/9#discussion_r4613577341",
+            "path": "web/app.py",
+            "line": 35,
+            "original_line": 35,
+            "commit_id": "41c3e174fd7932d308992c4ef96d055273dabdbd",
+            "created_at": "2026-11-18T12:01:58Z",
+            "body": "**<sub><sub>![P1 Badge](https://img.shields.io/badge/P1-orange?style=flat)</sub></sub>  Build checklist data instead of submitting it as a diagram**\n\nSubmitting `/checklist` now forwards flat fields such as `id-1` and `description-1`, sets `diagram_type` to values such as `CONSORT` or `CARE`, and calls the diagram-generation pipeline. The default CONSORT submission consequently fails diagram validation, while CARE looks for the nonexistent `schemas/care_schema.json`; neither path reconstructs the `items` array or parses `json_data`. Convert the editor or raw JSON submission into checklist data and route it through checklist validation and rendering so this page can generate an artifact.\n\nUseful? React with 👍 / 👎.\n\n<!-- codex-code-review-finding:v1 -->",
+            "current_2026_review": true,
+            "thread_resolution": "not_returned_by_REST_comment_snapshot"
+          },
+          {
+            "url": "https://github.com/edithatogo/standardflow/pull/9#discussion_r4613577355",
+            "path": "src/diagram.py",
+            "line": 7,
+            "original_line": 7,
+            "commit_id": "41c3e174fd7932d308992c4ef96d055273dabdbd",
+            "created_at": "2026-11-18T12:01:58Z",
+            "body": "**<sub><sub>![P2 Badge](https://img.shields.io/badge/P2-yellow?style=flat)</sub></sub>  Apply diagram styles in the shared renderer**\n\nFor inputs containing a `style` object, the refactored diagram classes no longer apply any of its attributes: their previous `_apply_styles()` implementations were removed, and the shared base only constructs an unconfigured `Digraph`. Thus `box_color`, `font_color`, `font_name`, `font_size`, and `arrow_color` are silently ignored, including styles supplied through the new `style_path` argument. Apply these settings in the shared base before rendering to preserve the documented styling behavior.\n\nUseful? React with 👍 / 👎.\n\n<!-- codex-code-review-finding:v1 -->",
+            "current_2026_review": true,
+            "thread_resolution": "not_returned_by_REST_comment_snapshot"
+          }
+        ],
+        "current_findings_to_transfer": [
+          {
+            "priority": "P1",
+            "path": "src/main.py",
+            "finding": "Preserve checklist_type-based generation",
+            "comment_id": 4613577266
+          },
+          {
+            "priority": "P1",
+            "path": "src/main.py",
+            "finding": "Restore supported diagram variant routing",
+            "comment_id": 4613577276
+          },
+          {
+            "priority": "P1",
+            "path": "src/prisma.py",
+            "finding": "Restore compatibility with schema-valid PRISMA inputs",
+            "comment_id": 4613577295
+          },
+          {
+            "priority": "P1",
+            "path": "src/prisma.py",
+            "finding": "Do not render duplicate-removal counts as remaining/screened records",
+            "comment_id": 4613577312
+          },
+          {
+            "priority": "P1",
+            "path": "web/app.py",
+            "finding": "Deserialize raw JSON submissions",
+            "comment_id": 4613577331
+          },
+          {
+            "priority": "P1",
+            "path": "web/app.py",
+            "finding": "Reconstruct checklist form data and use checklist dispatch",
+            "comment_id": 4613577341
+          },
+          {
+            "priority": "P2",
+            "path": "src/diagram.py",
+            "finding": "Preserve shared renderer styling",
+            "comment_id": 4613577355
+          }
+        ]
+      },
+      "interpretation": "These are the initial observations at old PR9 head 41c3e174. Its conflicts, file counts and seven review findings must not be projected onto repaired head d89a5dba."
+    }
+  ],
+  "refresh_changes": {
+    "main_unchanged": true,
+    "branch_advanced": {
+      "name": "feature/refactor-and-document",
+      "from": "41c3e174fd7932d308992c4ef96d055273dabdbd",
+      "to": "d89a5dbacc207cdce11f19efd667b83fdb09df18",
+      "history": "new commit has old PR9 head and current source main as parents"
+    },
+    "new_branches": [
+      "renovate/click-8.x",
+      "renovate/graphviz-0.x"
+    ],
+    "new_pull_requests": [
+      26,
+      27
+    ],
+    "dependency_dashboard_changed": true,
+    "source_remains_public_unarchived": true,
+    "retirement_recheck": "Re-read source refs immediately before retirement; preserve any further heads and reconcile their work before making retirement claims."
+  },
+  "receiving_work_recommendations": [
+    {
+      "source_issues": [
+        12
+      ],
+      "proposed_target_url": "https://github.com/edithatogo/standards_check/issues/29",
+      "action": "Append a migration subsection to existing testing issue, avoiding a duplicate umbrella",
+      "body": "## Legacy StandardFlow testing obligations transferred\n\nSource: edithatogo/standardflow#12; repaired legacy candidate d89a5dbacc207cdce11f19efd667b83fdb09df18.\n\nThe source's zero-workflow snapshot is historical. Its repaired head has observed 52-test host and 52-test container success. Receiving qualification remains a separate receipt.\n\n- [ ] Record the exact receiving commit, imported tree identity, ancestry and 52-test result.\n- [ ] Preserve applicable contract/property/mutation work in Track 05 with bounded scope and evidence-backed exclusions.\n- [ ] Keep semantic Rust parity, source rights and external accessibility acceptance separate from repository consolidation.\n- [ ] Link this receiving disposition from the source issue before closing it as transferred."
+    },
+    {
+      "source_issues": [
+        13
+      ],
+      "proposed_target_url": "https://github.com/edithatogo/standards_check/issues/30",
+      "action": "Append source obligations to existing security/context issue",
+      "body": "## Legacy StandardFlow security and maintenance obligations transferred\n\nSource: edithatogo/standardflow#13. Retain single-maintainer operation with zero mandatory human approvals and explicit owner recovery.\n\n- [ ] Reconcile applicable ruleset, managed-file, coverage/Codecov and dependency-update obligations against the current receiving repository, recording actual settings and receipts.\n- [ ] Qualify updater coverage of legacy/standardflow/requirements.txt after import.\n- [ ] Keep offline AI security explicitly unexecuted/queued until a qualified runner records execution; source application/privacy checks do not satisfy this gate.\n- [ ] Link the receiving issue and exact preservation refs before closing the source obligation as transferred."
+    },
+    {
+      "source_issues": [
+        14
+      ],
+      "proposed_target_url": "https://github.com/edithatogo/standards_check/issues/31",
+      "action": "Map source quality umbrella to existing receiving umbrella",
+      "body": "## Legacy StandardFlow quality umbrella transferred\n\nSource: edithatogo/standardflow#14. Its child obligations map to receiving #29 (source #12) and #30 (source #13); source dependency dashboard #23 maps to receiving #76 plus the focused legacy dependency follow-up.\n\n- [ ] Record these receiving destinations and the Track 03 consolidation receipt.\n- [ ] Preserve open obligations rather than marking them complete because the source was archived.\n- [ ] Close the source umbrella only as transferred after its child destinations are recorded."
+    },
+    {
+      "source_issues": [
+        23
+      ],
+      "proposed_target_url": "https://github.com/edithatogo/standards_check/issues/76",
+      "action": "Link existing receiving Renovate dashboard; use a separate manual issue for held candidates because bot-owned dashboard bodies are regenerated",
+      "body": "## Legacy StandardFlow dependency handoff\n\nSource dashboard: edithatogo/standardflow#23. Preserve source PR26 (Click 8.1.3 -> 8.5.1 at 3f850b81be3feb1a4d84d003b2ec6c166059a68e) and PR27 (graphviz 0.20.1 -> 0.21 at 38c6327a9fe507150ee2bd655f36269345cf04a8).\n\n- [ ] Confirm receiving Renovate discovery includes legacy/standardflow/requirements.txt after main accepts the import.\n- [ ] Keep candidate updates in a manually owned follow-up until compatibility checks establish an admitted dependency baseline.\n- [ ] Reconcile source duplicate updater activity only after receiving responsibility is recorded."
+    },
+    {
+      "source_pull_requests": [
+        26,
+        27
+      ],
+      "proposed_target_url": null,
+      "action": "Create one focused receiving held-work issue for two small independent dependency candidates",
+      "title": "Qualify preserved legacy Click and graphviz dependency updates",
+      "body": "## Why\n\nSource repository retirement must preserve pending dependency work without changing the imported compatibility baseline silently.\n\nPreserved candidates:\n\n- Source PR26: Click 8.1.3 -> 8.5.1, commit 3f850b81be3feb1a4d84d003b2ec6c166059a68e, archive/standardflow/renovate/click-8.x.\n- Source PR27: graphviz 0.20.1 -> 0.21, commit 38c6327a9fe507150ee2bd655f36269345cf04a8, archive/standardflow/renovate/graphviz-0.x.\n\n## Acceptance\n\n- [ ] Start from the accepted receiving legacy tree corresponding to repaired source d89a5dbacc207cdce11f19efd667b83fdb09df18.\n- [ ] Evaluate each one-line requirements change independently with dependency consistency and the 52-test legacy suite.\n- [ ] For Click, retain CLI validation, overrides, error statuses and module entry point behavior.\n- [ ] For graphviz, retain actual format bytes, six diagram variants, golden outputs and notebook execution; do not silently rewrite goldens to conceal drift.\n- [ ] Record accepted or evidence-backed rejected dispositions, exact commits and tests for both candidates.\n- [ ] Confirm receiving updater ownership through #76/#30. This issue does not qualify legacy standard text, methodology or Rust parity."
+    }
+  ],
+  "receiving_preservation": {
+    "observed_on": "2026-11-22",
+    "method": "GET matching-refs heads/archive/standardflow/ compared to all seven current source heads",
+    "api_url": "https://api.github.com/repos/edithatogo/standards_check/git/matching-refs/heads/archive/standardflow/",
+    "matching_refs": 7,
+    "all_current_source_heads_preserved": true,
+    "receiving_main_at_observation": "1aef9b5b95582d447d9b539c94d4b5dcf4366679",
+    "receiving_candidate_commit": "c64c61a0a978b4b50f8d525fc76d6548d2e75718",
+    "receiving_candidate_parents": [
+      "99a9b8fd23d5e6d78eee1627afeab713ff0aa3e6",
+      "989f2fa5c26b22b8294e20b442a6f602d9d124ed"
+    ],
+    "repaired_import_commit": "989f2fa5c26b22b8294e20b442a6f602d9d124ed",
+    "distinction": "Verified archive refs provide receiving recovery. Candidate ancestry includes the repaired import; admission to receiving main and all-head main ancestry are not asserted by this snapshot.",
+    "source_retirement_observed": false
+  },
+  "receiving_candidate_checks": {
+    "observed_on": "2026-11-22",
+    "head_sha": "c64c61a0a978b4b50f8d525fc76d6548d2e75718",
+    "api_url": "https://api.github.com/repos/edithatogo/standards_check/commits/c64c61a0a978b4b50f8d525fc76d6548d2e75718/check-runs",
+    "checks": [
+      {
+        "name": "deploy",
+        "status": "completed",
+        "conclusion": "skipped",
+        "url": "https://github.com/edithatogo/standards_check/actions/runs/45030744242/job/137234215595"
+      },
+      {
+        "name": "CodeQL",
+        "status": "completed",
+        "conclusion": "failure",
+        "url": "https://github.com/edithatogo/standards_check/runs/137233716761"
+      },
+      {
+        "name": "build",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/edithatogo/standards_check/actions/runs/45030744242/job/137233625088"
+      },
+      {
+        "name": "offline-ai-security / offline-security",
+        "status": "queued",
+        "conclusion": null,
+        "url": "https://github.com/edithatogo/standards_check/actions/runs/45030744583/job/137233559598"
+      },
+      {
+        "name": "cross-platform (ubuntu-latest)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/edithatogo/standards_check/actions/runs/45030744430/job/137233559529"
+      },
+      {
+        "name": "cross-platform (macos-latest)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/edithatogo/standards_check/actions/runs/45030744430/job/137233559523"
+      },
+      {
+        "name": "authoritative-pdf-comparison",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/edithatogo/standards_check/actions/runs/45030744430/job/137233559424"
+      },
+      {
+        "name": "rust-quality",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/edithatogo/standards_check/actions/runs/45030744430/job/137233559383"
+      },
+      {
+        "name": "cross-platform (windows-latest)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/edithatogo/standards_check/actions/runs/45030744430/job/137233559356"
+      },
+      {
+        "name": "contracts",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/edithatogo/standards_check/actions/runs/45030744430/job/137233559191"
+      },
+      {
+        "name": "cross-platform (ubuntu-latest)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/edithatogo/standards_check/actions/runs/45030744207/job/137233559153"
+      },
+      {
+        "name": "contracts-and-accessibility",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/edithatogo/standards_check/actions/runs/45030744207/job/137233559068"
+      },
+      {
+        "name": "deterministic-generation",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/edithatogo/standards_check/actions/runs/45030744207/job/137233559016"
+      },
+      {
+        "name": "validate",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/edithatogo/standards_check/actions/runs/45030744242/job/137233559013"
+      },
+      {
+        "name": "rust",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/edithatogo/standards_check/actions/runs/45030744261/job/137233558984"
+      },
+      {
+        "name": "cross-platform (windows-latest)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/edithatogo/standards_check/actions/runs/45030744207/job/137233558973"
+      },
+      {
+        "name": "cross-platform (macos-latest)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/edithatogo/standards_check/actions/runs/45030744207/job/137233558956"
+      },
+      {
+        "name": "privacy-and-secrets",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/edithatogo/standards_check/actions/runs/45030744220/job/137233558918"
+      },
+      {
+        "name": "contracts",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/edithatogo/standards_check/actions/runs/45030744261/job/137233558838"
+      },
+      {
+        "name": "rust-quality",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/edithatogo/standards_check/actions/runs/45030744207/job/137233558783"
+      },
+      {
+        "name": "offline-python",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/edithatogo/standards_check/actions/runs/45030744201/job/137233558754"
+      },
+      {
+        "name": "preserve",
+        "status": "completed",
+        "conclusion": "failure",
+        "url": "https://github.com/edithatogo/standards_check/actions/runs/45030744188/job/137233558565"
+      },
+      {
+        "name": "Analyze (javascript-typescript)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/edithatogo/standards_check/actions/runs/45030740433/job/137233550611"
+      },
+      {
+        "name": "Analyze (actions)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/edithatogo/standards_check/actions/runs/45030740433/job/137233550607"
+      },
+      {
+        "name": "Analyze (python)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/edithatogo/standards_check/actions/runs/45030740433/job/137233550436"
+      },
+      {
+        "name": "Analyze (rust)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/edithatogo/standards_check/actions/runs/45030740433/job/137233550292"
+      },
+      {
+        "name": "offline-ai-security / offline-security",
+        "status": "queued",
+        "conclusion": null,
+        "url": "https://github.com/edithatogo/standards_check/actions/runs/45030739913/job/137233546151"
+      }
+    ],
+    "qualification": "Most hosted tests and all CodeQL Analyze jobs succeeded. The separate CodeQL result check reports one high-severity new alert. Independent code and runtime inspection supports a false-positive path-injection disposition; no remote dismissal is asserted. The preserve job failed, while its seven-ref preservation objective was independently verified through the receiving API. Offline security remains queued. Final-head receiving acceptance is recorded separately.",
+    "codeql_triage": {
+      "observed_on": "2026-11-22",
+      "check_url": "https://github.com/edithatogo/standards_check/runs/137233716761",
+      "annotations_url": "https://api.github.com/repos/edithatogo/standards_check/check-runs/137233716761/annotations",
+      "annotation": {
+        "path": "legacy/standardflow/web/app.py",
+        "line": 49,
+        "title": "Uncontrolled data used in path expression",
+        "message": "This path depends on a user-provided value."
+      },
+      "inspected_file_blob": "970462b06c07df7b3bbe5f6ecd37ac82e935868a",
+      "disposition_recommendation": "false_positive",
+      "remote_dismissal_observed": false,
+      "numbered_alert_url": null,
+      "numbered_alert_lookup_limit": "Unauthenticated code-scanning alert-list API returned HTTP 401; the connector does not expose code-scanning alert endpoints. Public check-run annotations and HTML were inspected.",
+      "call_chain": "request.form.get('output_format', 'png') -> exact membership check against fixed keys png/svg/pdf -> abort(400) for every other value -> Path(request-local TemporaryDirectory) / 'diagram.' + approved suffix -> output.read_bytes()",
+      "static_evidence": "The membership guard dominates TemporaryDirectory creation, output path construction and reading; output_format is assigned once and not modified after the guard. Request.form supplies strings and selects the first repeated field. No user input controls the temporary directory root.",
+      "canary_receipt": {
+        "interpreter": "/workspace/scratch/f0938f622e17/legacy-runtime-venv/bin/python",
+        "working_directory": "standards-receiving/legacy/standardflow",
+        "result": "PASS",
+        "invalid_formats": [
+          "../svg",
+          "../../canary",
+          "/tmp/canary",
+          "..\\svg",
+          "C:\\canary",
+          "svg/../../canary",
+          "svg\u0000../canary",
+          "SVG",
+          " svg",
+          "svg ",
+          "svg\n",
+          "%2e%2e%2fsvg",
+          "..%2fsvg",
+          "%252e%252e%252fsvg",
+          "svg?../../canary",
+          "svg#../../canary",
+          "",
+          "ｓｖｇ",
+          "html",
+          "typ"
+        ],
+        "invalid_behavior": "All 20 cases returned HTTP 400 with both renderer and TemporaryDirectory never called.",
+        "accepted_cases": [
+          "png",
+          "svg",
+          "pdf",
+          "missing format defaults to png",
+          "first value svg followed by malicious duplicate ../../canary"
+        ],
+        "accepted_behavior": "All five cases returned HTTP 200, used the expected fixed basename inside the request-local temporary directory and removed the temporary output after the response.",
+        "hostile_first_duplicate": "First value ../../canary followed by svg returned HTTP 400 without renderer or TemporaryDirectory call."
+      },
+      "existing_regression_receipt": {
+        "command": "python -m unittest tests.test_web.TestWebApp.test_invalid_diagram_inputs_return_400 tests.test_web.TestWebApp.test_download_formats_and_temporary_cleanup",
+        "result": "2 tests passed",
+        "observed_outputs": [
+          "actual PNG",
+          "actual SVG",
+          "actual PDF"
+        ]
+      },
+      "code_change_recommendation": "No source code change is needed for this finding; preserve exact repaired import and record the evidence-based alert disposition."
+    }
+  },
+  "posted_receiving_handoffs": {
+    "source_issue_12": "https://github.com/edithatogo/standards_check/issues/29",
+    "source_issue_13": "https://github.com/edithatogo/standards_check/issues/30",
+    "source_issue_14": "https://github.com/edithatogo/standards_check/issues/31",
+    "source_issue_23": "https://github.com/edithatogo/standards_check/issues/76",
+    "source_prs_26_27": "https://github.com/edithatogo/standards_check/issues/94",
+    "held_guidelines": "https://github.com/edithatogo/standards_check/issues/95",
+    "issue_bodies_29_30_31_updated": true
+  },
+  "codeql_disposition": {
+    "alert_url": "https://github.com/edithatogo/standards_check/security/code-scanning/4",
+    "state": "dismissed",
+    "reason": "false_positive",
+    "observed_in_authenticated_ui": true,
+    "runtime_changed": false,
+    "evidence": "Dominating fixed-format allowlist, 20 hostile inputs and duplicate-field canaries; detailed local evidence retained in receiving_candidate_checks."
+  }
+}

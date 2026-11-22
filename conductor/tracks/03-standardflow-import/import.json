@@ -1,0 +1,33 @@
+{
+  "schema_version": "dev.standardflow.legacy-import.v1",
+  "source_repository": "edithatogo/standardflow",
+  "source_commit": "d89a5dbacc207cdce11f19efd667b83fdb09df18",
+  "source_tree": "e48c081ff946d0fac6a1a4b65a3599c6b7aa3352",
+  "import_prefix": "legacy/standardflow",
+  "source_refs": {
+    "refs/heads/main": "af299f724bcf456c131b43a143b3eabc1d81245b",
+    "refs/heads/feature/refactor-and-document": "d89a5dbacc207cdce11f19efd667b83fdb09df18",
+    "refs/heads/feature/implement-guidelines": "f1680778b4141bb5553b0e80af22bbdf5c75c862",
+    "refs/heads/chore/GHA-190519-stepsecurity-remediation": "eb7d0703b86aaa82e3cd738a273db7c60a70f6c9",
+    "refs/heads/dependabot/github_actions/actions/setup-python-7.1.0": "7d2e233217d5d3d6c4ca9c5866f64158d117099e",
+    "refs/heads/renovate/click-8.x": "3f850b81be3feb1a4d84d003b2ec6c166059a68e",
+    "refs/heads/renovate/graphviz-0.x": "38c6327a9fe507150ee2bd655f36269345cf04a8"
+  },
+  "original_pr9_commit": "41c3e174fd7932d308992c4ef96d055273dabdbd",
+  "primary_baseline": "1aef9b5b95582d447d9b539c94d4b5dcf4366679",
+  "history_only_branches": [
+    "feature/implement-guidelines",
+    "chore/GHA-190519-stepsecurity-remediation",
+    "dependabot/github_actions/actions/setup-python-7.1.0",
+    "renovate/click-8.x",
+    "renovate/graphviz-0.x"
+  ],
+  "source_code_licence": "Apache-2.0",
+  "runtime_dependency": false,
+  "automatic_revision_updates": false,
+  "canonical_pack_promotion": false,
+  "source_retirement_authorized": true,
+  "intended_source_visibility": "private",
+  "intended_source_archived": true,
+  "claim_boundary": "Preserves a runnable legacy tree and all source branch histories. Does not establish equivalence with the Rust engine, item-level rights clearance, methodological or accessibility qualification. Actual source retirement is verified separately after the receiving merge."
+}
