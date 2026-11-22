@@ -11,7 +11,8 @@
 - [x] Verify primary validators and unchanged Rust/PRISMA assets.
 - [ ] Observe receiving hosted checks and merge without squashing ancestry.
 - [x] Rehearse recovery from preserved commits without the source remote.
-- [ ] Verify receiving main and the final nine-ref inventory.
+- [x] Verify the final nine-ref inventory and independently reproduce the corrected receiving tree.
+- [ ] Verify receiving main.
 - [ ] Make the source private, archive it and record the observed repository settings.
 
 ## Remaining semantic migration

@@ -84,3 +84,13 @@ The final receiving PR receipt binds those checks to its corrected revision.
 The refresh inventory guard also detected two later source dependency branches,
 PRs #28 and #29. Their commits are retained as additional history-only parents and
 recorded in the nine-ref manifest; the active application dependencies are unchanged.
+
+The corrected import was published at
+`6c67527512ad5b603307ac6415ba214d3333c42a` by the successful
+[receiving refresh job](https://github.com/edithatogo/standards_check/actions/runs/45032696354).
+Its whole repository tree, `23987b52e3a1486aa5c688c8a642673ba2b62641`, exactly matches
+an independent local reconstruction before importer removal. That reconstruction
+passed the imported 52-test suite, four provenance regressions, all nine source-ref
+checks, Markdown/index validation and preservation of the recorded primary runtime
+OIDs. The queued Ubuntu 24.04 attempt was replaced by Ubuntu 22.04 for this bounded
+Git transfer; maintained application and security validation were unchanged.
