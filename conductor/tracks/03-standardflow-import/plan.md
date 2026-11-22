@@ -29,11 +29,29 @@
   #29 through #31, retaining original bodies and unresolved receiving obligations.
 - [x] Reconcile the two inventory files with actual-main acceptance, nine preserved
   export tips, four remaining live source branches and the closed source PRs.
-- [ ] Complete owner account reauthentication, make the source private, archive it
-  and record the observed repository settings. GitHub's Confirm access screen blocks
-  the settings change; at 21:00 UTC on 22 November the source remained public and unarchived.
-  The connected browser was unavailable in the follow-up chat.
-- [ ] Reconcile the active repository registry and current downstream StandardFlow links.
+- [x] Observe the owner-completed source privacy and archival changes: GitHub's
+  repository API returned `private: true` and `archived: true` at
+  `2026-11-22T22:55:19Z`, with one remaining issue. The earlier Confirm access and
+  unavailable-browser observations are retained as history in the retirement receipt.
+- [x] Verify recorded receiving main `2b0c579454a1dd469cd12cfb9538d23c96785370`:
+  workflow `45070791156`, job `137357038355` and artifact `14773685812` record
+  successful provenance, source/receiving parity, container and HTTP checks.
+- [x] Reconcile the active repository registry: repository-standards PR #172 merged
+  at `a3cc8dccdb67e6f122c71cec713194cdec792d07`, removing only the retired source
+  entry while retaining `standards_check`; the merged tree matches the tested candidate.
+- [x] Complete Voiage's downstream link PR #1394: policy-enforced squash merge
+  `a921d6471822eaac7fbc22f507760bd943ba9f6a` was verified on main at
+  `2026-11-22T23:32:28Z`, with the exact reviewed tree. Record the combined local
+  and existing hosted command evidence in verification.md; the full local attempt
+  did not pass.
+- [x] Admit Click 8.5.1, graphviz 0.21 and jsonschema 4.26.0 in the maintained host
+  profile through PR #98, merged at `d213085a268a4cd82d522e6e17d27f3dee15bf5f`.
+  Preserve the exact source snapshot and historical source PR dispositions.
+- [ ] Record receiving-main execution after PR #98 separately from its successful
+  reviewed-head checks and the historical `2b0c5794` runtime receipt.
+- [ ] Retain issue #94 for optional interactive-kernel qualification and updater
+  observation. ipykernel 6.31.0 remains unadmitted; neither attempted kernel profile
+  reached `kernel_info` or executed cells.
 
 ## Remaining semantic migration
 
@@ -47,5 +65,6 @@ export. The remaining semantic tasks stay open in this primary repository.
 
 See [verification.md](verification.md) for the actual-main hosted, application and
 recovery receipts, and the [retirement record](../../../docs/migration/standardflow/retirement.md)
-for source PR dispositions and the pending account reauthentication. No successful
-privacy or archival change is inferred from the completed export.
+for source PR dispositions, the observed private/archive settings and the historical
+authentication blocker. The two identified downstream references are reconciled;
+semantic and independent qualification remain separate.
