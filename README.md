@@ -49,8 +49,9 @@ Read:
 ## Conductor
 
 The official `gemini-cli-extensions/conductor` plugin is installed as an exact gitlink at
-`.agents/plugins/conductor`, pinned to `f06add33b598f4262a190f234828dda551db70d7`.
-The local router skill is `.agents/skills/conductor/SKILL.md`.
+`.agents/plugins/conductor`. The expected revision is recorded in
+[`metadata.revision` in the local router](.agents/skills/conductor/SKILL.md) and checked
+against the gitlink by `scripts/audit_foundation.py`.
 
 Initialise submodules after cloning:
 
