@@ -2,7 +2,7 @@
 
 Reconciled on **23 November 2026 (Australia/Brisbane)** from GitHub observations
 on 22 November UTC. The receiving snapshot is exactly
-[`cf7d14da7bfb4d32c2c8746ec1111a6643c4a716`](https://github.com/edithatogo/standards_check/commit/cf7d14da7bfb4d32c2c8746ec1111a6643c4a716).
+[`2b0c579454a1dd469cd12cfb9538d23c96785370`](https://github.com/edithatogo/standards_check/commit/2b0c579454a1dd469cd12cfb9538d23c96785370).
 These results apply to that recorded revision. Later dependency or runtime changes
 require their own acceptance receipts.
 
@@ -18,8 +18,10 @@ observations. Historical bodies and check results are not current status claims.
 [#88](https://github.com/edithatogo/standards_check/pull/88) preserve the repaired
 source and all nine export histories. The integration merge is
 `15184da899f21a62565cfc3145d1a4719baf4ad4`; [PR #96](https://github.com/edithatogo/standards_check/pull/96)
-then records actual-main acceptance and pending source authentication at the
-receiving snapshot pinned above.
+then recorded actual-main acceptance at `cf7d14da7bfb4d32c2c8746ec1111a6643c4a716`
+while source authentication was pending. That earlier observation is historical;
+the source is now private and archived, and latest runtime acceptance is bound to
+the receiving snapshot pinned above.
 
 The imported `legacy/standardflow` tree is
 `62d8a0e738f0255cc59822ae4e661568090a213e`, exactly matching repaired source
@@ -29,17 +31,23 @@ filenames/MIME types, `Dockerfile` starts Flask on `0.0.0.0:5000`, and the sourc
 review document records the follow-up. The original seven review findings at
 `41c3e174...` remain historical findings in the retained snapshots.
 
-[Recorded-main workflow 45035654999](https://github.com/edithatogo/standards_check/actions/runs/45035654999)
-and [job 137248723322](https://github.com/edithatogo/standards_check/actions/runs/45035654999/job/137248723322)
-completed successfully at `cf7d14da...`. Every step passed, including exact
+[Recorded-main workflow 45070791156](https://github.com/edithatogo/standards_check/actions/runs/45070791156)
+and [job 137357038355](https://github.com/edithatogo/standards_check/actions/runs/45070791156/job/137357038355)
+completed successfully at `2b0c5794...`. Every step passed, including exact
 subtree/ancestry verification, provenance regressions, dependency consistency,
 source/receiving parity, container tests and the default-command HTTP smoke.
-The privacy, foundation and dynamic analysis runs selected for that documentation
-revision also succeeded. [Offline-security run 45035655216](https://github.com/edithatogo/standards_check/actions/runs/45035655216)
-remained queued and has no execution receipt.
+The [parity artifact 14773685812](https://github.com/edithatogo/standards_check/actions/runs/45070791156/artifacts/14773685812)
+retains the receiving result. At this main revision, 26 observed checks succeeded,
+including deployment. [Offline-security run 45070791434](https://github.com/edithatogo/standards_check/actions/runs/45070791434)
+was still queued when re-read at approximately 22:58 UTC on 22 November and has
+no execution receipt.
 
 Earlier acceptance remains separately bound to its actual revisions:
 
+- The [earlier documentation-main job](https://github.com/edithatogo/standards_check/actions/runs/45035654999/job/137248723322)
+  passed provenance, parity, container and HTTP checks at `cf7d14da...`. Its selected
+  privacy, foundation and dynamic-analysis runs also succeeded; offline run
+  `45035655216` remained queued at that observation.
 - The [integration-main job](https://github.com/edithatogo/standards_check/actions/runs/45034583489/job/137245366320)
   verified the same source tree and nine histories, four provenance tests, 52 tests
   in each isolated source/receiving copy, 52 container tests and the default-image
@@ -60,10 +68,11 @@ receiving acceptance or qualifies a future receiving head automatically.
 ## Nine preserved export tips and four remaining source branches
 
 All nine `archive/standardflow/<source-branch>` refs were independently read back
-at their exact manifest SHAs. All nine tips were also independently verified as
-ancestors of recorded receiving main `cf7d14da...`.
+at their exact manifest SHAs. All nine tips were independently verified as ancestors
+of receiving main `cf7d14da...`; the latest hosted provenance check confirms their
+preservation at `2b0c5794...`.
 
-The source advertisement subsequently contains **four live branches**. Each
+The source advertisement at **2026-11-22T20:53:25Z** contained **four live branches**. Each
 remaining tip matches the export manifest. Five other source refs are no longer
 advertised after source PR closure; their receiving refs and ancestry remain
 intact. This change in the source ref set does not represent lost history.
@@ -80,10 +89,9 @@ intact. This change in the source ref set does not represent lost history.
 | `renovate/ipykernel-6.x` | `fb91d00d4f49d9b29e1a1a8dc73b1110b2518e00` | No |
 | `renovate/jsonschema-4.x` | `59c119a933376d5f2e76d1b0088ad92f14d0fc60` | No |
 
-Source main remains `af299f724...`. No remaining source tip advanced and no new
-source branch appeared in this observation. Before retirement, compare the then
-live source refs with the preserved manifest again, distinguishing a new/advanced
-tip from an already-preserved branch that is no longer advertised. Recovery uses
+Source main was `af299f724...`. No remaining source tip advanced and no new
+source branch appeared in that observation. This four-ref snapshot is historical;
+the later private/archive settings read is recorded separately below. Recovery uses
 the receiving history and refs, without access to the old remote.
 
 ## Source PR and issue dispositions
@@ -149,25 +157,35 @@ The historical dismissal is not a replacement for scanning later code revisions.
 
 ## Privacy, downstream cleanup and remaining gates
 
-The source API observation at **2026-11-22 20:53:25 UTC** still showed
-`private: false` and `archived: false`. The last attempted visibility change
-reached GitHub **Confirm access**, requiring owner reauthentication. No successful
-reauthentication, privacy change or archive change has been observed. The later
-source issue transfers do not alter that administrative status.
+The owner completed the requested source privacy and archival changes. An independent
+[GitHub repository API read](https://api.github.com/repos/edithatogo/standardflow)
+at **2026-11-22T22:55:19Z** returned `private: true`, `archived: true` and
+`open_issues_count: 1`. Source retirement through private archival is complete.
+
+The source observations at 20:53:25 and 21:00 UTC, when it was still public and
+unarchived, are historical. The earlier visibility attempt had reached GitHub
+**Confirm access**, and owner reauthentication was still outstanding then. The
+structured inventory retains that blocker receipt separately from the completed
+settings observation; issue relocation alone did not establish the settings change.
 
 The [Voiage link PR #1394](https://github.com/edithatogo/voiage/pull/1394) remains
-open at `e5351cc09fa884ce3348db1c856845d5fdaba8e4`; its later reported merge state
-is `behind`. Earlier checks and the unsigned-commit policy finding remain
-historical evidence. Reconcile the current base and applicable gates before
-merging, without weakening repository rules.
+open at verified signed, current-base head
+`3bc04fdc1df6f30981765eee49c0c9dbce490cde`, tree
+`7c0099a9c465c19648db7aca89e187141855c2c2`. The exact diff is the intended one-line
+consumer-link replacement. Hosted checks and the required local gate remain
+pending before merge. The earlier unsigned head, outdated base and check results
+remain historical evidence in the structured inventory.
 
-The repository-standards registry removal is preserved on
-[the prepared branch](https://github.com/edithatogo/repository-standards/tree/codex/standardflow-archive-followup-20261122)
-at `caed59dbcb6f4cc75a8fa17e24275d0ff1b61e6b`. Its earlier prepared-patch validation
-recorded 311 test passes, 38 capability skips and 168 schema-valid entries against
-base `e6425228dea09637eb0a45a3787421e7bce42b3b`. This inventory does not rerun or
-extend those results. The active registry change remains unmerged pending
-observed source private/archive settings and current-base reconciliation.
+The repository-standards registry removal is complete.
+[PR #172](https://github.com/edithatogo/repository-standards/pull/172) merged through
+a permitted squash at `a3cc8dccdb67e6f122c71cec713194cdec792d07`, the observed main.
+Its tree `e884b86ea9bb1121422503122206041e086256ac` exactly matches tested candidate
+`caed59dbcb6f4cc75a8fa17e24275d0ff1b61e6b`. Only retired `standardflow` was removed:
+the registry changed from 169 entries to 168 and retained `standards_check`.
+Nine PR checks succeeded and two expected PR checks skipped; required policy and
+Actions/Python analysis succeeded. Local qualification recorded 311 passes and
+38 capability skips. The earlier prepared-branch validation remains separately
+identified in the JSON.
 
 Retain the original Apache-2.0 code licence, authorship, history and citation
 metadata. The 22 main checklist JSON files lack item-level rights/provenance
@@ -176,7 +194,6 @@ compatibility tests do not establish scientific correctness, Rust equivalence,
 independent accessibility or publication readiness. The historical adoption
 manifest's source/target pins remain historical preparation evidence.
 
-The recorded receiving import is complete. Source retirement, downstream cleanup,
-offline security execution, legacy-to-Rust semantic qualification, item-level
+The recorded receiving import, source private archival and registry cleanup are complete.
+Voiage acceptance, offline security execution, legacy-to-Rust semantic qualification, item-level
 rights and independent methodology/accessibility work retain their separate gates.
-Do not report retirement complete while the source is public and unarchived.

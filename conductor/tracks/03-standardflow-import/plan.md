@@ -29,11 +29,19 @@
   #29 through #31, retaining original bodies and unresolved receiving obligations.
 - [x] Reconcile the two inventory files with actual-main acceptance, nine preserved
   export tips, four remaining live source branches and the closed source PRs.
-- [ ] Complete owner account reauthentication, make the source private, archive it
-  and record the observed repository settings. GitHub's Confirm access screen blocks
-  the settings change; at 21:00 UTC on 22 November the source remained public and unarchived.
-  The connected browser was unavailable in the follow-up chat.
-- [ ] Reconcile the active repository registry and current downstream StandardFlow links.
+- [x] Observe the owner-completed source privacy and archival changes: GitHub's
+  repository API returned `private: true` and `archived: true` at
+  `2026-11-22T22:55:19Z`, with one remaining issue. The earlier Confirm access and
+  unavailable-browser observations are retained as history in the retirement receipt.
+- [x] Verify the latest receiving main `2b0c579454a1dd469cd12cfb9538d23c96785370`:
+  workflow `45070791156`, job `137357038355` and artifact `14773685812` record
+  successful provenance, source/receiving parity, container and HTTP checks.
+- [x] Reconcile the active repository registry: repository-standards PR #172 merged
+  at `a3cc8dccdb67e6f122c71cec713194cdec792d07`, removing only the retired source
+  entry while retaining `standards_check`; the merged tree matches the tested candidate.
+- [ ] Complete Voiage's downstream link PR #1394. Its verified signed, current-base
+  head is `3bc04fdc1df6f30981765eee49c0c9dbce490cde`; hosted and required local
+  checks remain pending before merge.
 
 ## Remaining semantic migration
 
@@ -47,5 +55,5 @@ export. The remaining semantic tasks stay open in this primary repository.
 
 See [verification.md](verification.md) for the actual-main hosted, application and
 recovery receipts, and the [retirement record](../../../docs/migration/standardflow/retirement.md)
-for source PR dispositions and the pending account reauthentication. No successful
-privacy or archival change is inferred from the completed export.
+for source PR dispositions, the observed private/archive settings and the historical
+authentication blocker. Downstream reconciliation and semantic qualification remain separate.

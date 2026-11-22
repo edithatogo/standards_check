@@ -60,12 +60,31 @@ not substitute for an unexecuted hosted job.
 
 ## Open boundaries
 
-The old `edithatogo/standardflow` repository was still public and unarchived at
-21:00 UTC on 22 November. Its authorized privacy/archive change remains blocked
-by GitHub account reauthentication; the connected browser was unavailable in
-this follow-up chat. The prepared active-registry removal must wait for observed
-archival. Voiage's link PR #1394 remains a separate downstream change requiring
-current-base checks and its repository's merge policy.
+The owner completed the authorized privacy/archive changes to
+`edithatogo/standardflow`. An independent repository API read at
+`2026-11-22T22:55:19Z` returned `private: true` and `archived: true`; the
+[retirement record](../docs/migration/standardflow/retirement.md) preserves the
+evidence. The earlier 21:00 UTC public/unarchived observation, GitHub account
+reauthentication blocker and unavailable browser are historical.
+
+[Repository-standards PR #172](https://github.com/edithatogo/repository-standards/pull/172)
+has merged at `a3cc8dccdb67e6f122c71cec713194cdec792d07`, with the same tree as
+its tested candidate. It removes only the retired source entry and retains
+`standards_check`. Nine PR checks succeeded, two expected checks skipped, and local
+qualification recorded 311 passes with 38 capability skips. Voiage's link PR #1394
+remains open at verified signed, current-base head
+`3bc04fdc1df6f30981765eee49c0c9dbce490cde`; its hosted and required local checks
+must complete before merge.
+
+The latest accepted receiving runtime is main
+`2b0c579454a1dd469cd12cfb9538d23c96785370`. Its
+[actual-main job](https://github.com/edithatogo/standards_check/actions/runs/45070791156/job/137357038355)
+passed provenance, parity, container and default-startup HTTP checks; the
+[parity artifact](https://github.com/edithatogo/standards_check/actions/runs/45070791156/artifacts/14773685812)
+retains the result. At that main revision, 26 observed checks succeeded, including
+deployment. The separate
+[offline security run](https://github.com/edithatogo/standards_check/actions/runs/45070791434)
+was still queued when re-read at approximately 22:58 UTC on 22 November.
 
 Receiving #29–31, #82, #94 and #95 remain open for their documented obligations.
 Queued offline security work has no execution receipt. Branch enforcement,
@@ -77,4 +96,4 @@ reconciliation without publishing unqualified content changes.
 
 The receiving repository remains the active public home. See the
 [retirement record](../docs/migration/standardflow/retirement.md) for recovery and
-the exact outstanding administrative step.
+the completed source settings and remaining downstream reconciliation.

@@ -5,7 +5,7 @@
   "title": "History-preserving StandardFlow import",
   "status": "in_progress",
   "implementation_state": "source_implemented",
-  "evidence_level": "receiving_main_runtime_and_recovery_verified",
+  "evidence_level": "receiving_main_runtime_recovery_and_source_retirement_verified",
   "dependencies": [
     "00-platform-foundation",
     "01-canonical-standard-pack",
@@ -17,8 +17,7 @@
   "base_branch": "main",
   "source_retirement_authorization": "User explicitly requested export followed by private archival on 2026-11-22.",
   "remaining_evidence_gates": [
-    "observed source private/archive settings",
-    "active repository registry and external-consumer reconciliation",
+    "external-consumer reconciliation (Voiage PR #1394)",
     "offline AI-security execution",
     "legacy-to-Rust semantic parity",
     "legacy item-level rights and provenance",
@@ -30,24 +29,61 @@
   "receiving_workflow_run": "https://github.com/edithatogo/standards_check/actions/runs/45034583489",
   "functional_parity_receipt": "../../../docs/migration/standardflow/functional-parity.json",
   "retirement_receipt": "../../../docs/migration/standardflow/retirement.md",
-  "source_privacy": "pending_owner_reauthentication",
-  "source_archival": "pending_owner_reauthentication",
-  "source_retirement_blocker": "GitHub owner account reauthentication remains pending. The connected browser was unavailable during the follow-up chat; no privacy or archive setting was applied.",
+  "source_privacy": "private_observed",
+  "source_archival": "archived_observed",
+  "source_retirement_blocker": null,
   "source_settings_observed": {
-    "observed_at": "2026-11-22T21:00:10Z",
-    "private": false,
-    "archived": false,
-    "open_pull_requests": 0,
-    "open_issues": 1,
-    "live_branch_count": 4,
-    "preserved_export_tip_count": 9
+    "observed_at": "2026-11-22T22:55:19Z",
+    "api_url": "https://api.github.com/repos/edithatogo/standardflow",
+    "private": true,
+    "archived": true,
+    "open_issues_including_pull_requests": 1,
+    "settings_applied_by": "repository_owner",
+    "evidence_origin": "Independent GitHub repository API read by the integrator after the owner applied the authorized settings."
   },
   "canonical_content_promotion": false,
-  "latest_verified_receiving_main": "cf7d14da7bfb4d32c2c8746ec1111a6643c4a716",
-  "latest_verified_receiving_run": "https://github.com/edithatogo/standards_check/actions/runs/45035654999",
+  "latest_verified_receiving_main": "2b0c579454a1dd469cd12cfb9538d23c96785370",
+  "latest_verified_receiving_run": "https://github.com/edithatogo/standards_check/actions/runs/45070791156",
   "source_issue_transfers": {
     "12": 29,
     "13": 30,
     "14": 31
+  },
+  "historical_source_retirement_blocker": {
+    "record_scope": "Historical 21:00 UTC observation before the owner completed source privacy and archival; superseded by source_settings_observed.",
+    "source_privacy": "pending_owner_reauthentication",
+    "source_archival": "pending_owner_reauthentication",
+    "source_retirement_blocker": "GitHub owner account reauthentication remains pending. The connected browser was unavailable during the follow-up chat; no privacy or archive setting was applied.",
+    "source_settings_observed": {
+      "observed_at": "2026-11-22T21:00:10Z",
+      "private": false,
+      "archived": false,
+      "open_pull_requests": 0,
+      "open_issues": 1,
+      "live_branch_count": 4,
+      "preserved_export_tip_count": 9
+    }
+  },
+  "latest_verified_receiving_job": "https://github.com/edithatogo/standards_check/actions/runs/45070791156/job/137357038355",
+  "latest_verified_receiving_artifact": "https://github.com/edithatogo/standards_check/actions/runs/45070791156/artifacts/14773685812",
+  "active_registry_retirement": {
+    "status": "merged",
+    "pull_request": "https://github.com/edithatogo/repository-standards/pull/172",
+    "main_commit": "a3cc8dccdb67e6f122c71cec713194cdec792d07",
+    "tree": "e884b86ea9bb1121422503122206041e086256ac",
+    "tested_candidate_tree_matches_main": true,
+    "retired_source_entry_removed": true,
+    "standards_check_entry_retained": true
+  },
+  "voiage_reconciliation": {
+    "pull_request": "https://github.com/edithatogo/voiage/pull/1394",
+    "status": "open_verified_signed_current_base_checks_pending",
+    "head": "3bc04fdc1df6f30981765eee49c0c9dbce490cde",
+    "tree": "7c0099a9c465c19648db7aca89e187141855c2c2",
+    "signature_verified": true,
+    "up_to_date_with_base": true,
+    "hosted_checks": "pending",
+    "required_local_gate": "pending",
+    "merged": false
   }
 }

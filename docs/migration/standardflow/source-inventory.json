@@ -1,6 +1,6 @@
 {
   "observed_on": "2026-11-22",
-  "observation_scope": "Exact receiving main cf7d14da7bfb4d32c2c8746ec1111a6643c4a716 and source state observed on 2026-11-22 UTC. PR88/92 integration and PR96 acceptance documentation are merged. All nine export tips remain named recovery refs and main ancestors. Four live source branches match their exported tips; five other source refs are no longer advertised after closure of the seven source PRs. Source remains public and unarchived, with account reauthentication still required by the last attempted settings change. These receipts do not qualify any later receiving revision.",
+  "observation_scope": "Exact receiving main 2b0c579454a1dd469cd12cfb9538d23c96785370 and source state observed on 2026-11-22 UTC. The owner completed source privacy and archival; the independent repository API read at 2026-11-22T22:55:19Z returned private=true, archived=true and open_issues_count=1. Hosted receiving provenance, parity, container and HTTP checks succeeded at the recorded main. All nine export tips remain preserved. The four-live-source-ref observation is separately dated 2026-11-22T20:53:25Z. Registry PR #172 is merged at a3cc8dccdb67e6f122c71cec713194cdec792d07, removing only the retired source entry. Voiage PR #1394 has a verified signed, current-base head but remains pending hosted and required local checks before merge. These receipts do not qualify any later receiving revision.",
   "source_repository": "edithatogo/standardflow",
   "receiving_repository": "edithatogo/standards_check",
   "source_main_revision": "af299f724bcf456c131b43a143b3eabc1d81245b",
@@ -169,8 +169,8 @@
     }
   ],
   "repository_settings": {
-    "visibility": "public",
-    "archived": false,
+    "visibility": "private",
+    "archived": true,
     "disabled": false,
     "default_branch": "main",
     "has_pages": false,
@@ -186,9 +186,10 @@
     "allow_merge_commit": false,
     "allow_squash_merge": true,
     "allow_rebase_merge": false,
-    "private": false,
-    "last_observed_at": "2026-11-22T20:53:25Z",
-    "issue_count_scope": "Updated after the parent-observed issue12/13/14 transfer closures; the visibility/archive observation time is recorded separately and is not a claim that these closures occurred at that earlier time."
+    "private": true,
+    "last_observed_at": "2026-11-22T22:55:19Z",
+    "issue_count_scope": "GitHub repository API open_issues_count=1 at the settings observation; this counter includes pull requests.",
+    "observation_scope": "Visibility, private, archived and open_issues_count are from the latest API read. Other repository configuration values retain their earlier observation scope."
   },
   "releases": [],
   "tags": [],
@@ -299,7 +300,7 @@
     "offline_security_status": "queued_without_execution_receipt",
     "reported_receiving_import": "https://github.com/edithatogo/standards_check/commit/989f2fa5c26b22b8294e20b442a6f602d9d124ed",
     "reported_receiving_import_evidence": "Earlier989f2fa/d89 links are retained historical observations. The finaldc51 tree is preserved in receiving integration15184da8, with accepted actual-main receipts subsequently recorded by PR96; source PR9 is closed as exported.",
-    "receiving_acceptance": "Exact dc51 legacy subtree and nine export tips remain preserved at receiving main cf7d14da7bfb4d32c2c8746ec1111a6643c4a716. Its hosted provenance/parity/container/default-startup job succeeded. Source privacy and archival remain pending account reauthentication.",
+    "receiving_acceptance": "Exact dc51 legacy subtree and nine export tips remain preserved at receiving main 2b0c579454a1dd469cd12cfb9538d23c96785370. Its hosted provenance/parity/container/default-startup job succeeded. Source private=true and archived=true were independently observed at 2026-11-22T22:55:19Z after the owner applied the settings.",
     "claim_boundary": "Legacy compatibility evidence does not establish Rust parity, item-level rights, methodological validation, external accessibility or publication readiness.",
     "preceding_repaired_head": "d89a5dbacc207cdce11f19efd667b83fdb09df18",
     "follow_up_delta": {
@@ -666,9 +667,44 @@
       "method": "Parent-provided source issue transfer readbacks",
       "observed_on": "2026-11-22",
       "result": "Source issues12,13,14 received receiving links and exact preservation evidence, retained their original bodies, then closed with reasonnot_planned as relocated work. The bot-owned dashboard23 remains open and unchanged; no privacy/archive change occurred."
+    },
+    {
+      "observed_at": "2026-11-22T22:55:19Z",
+      "method": "Independent GitHub repository API read by the integrator after the owner applied the authorized settings.",
+      "url": "https://api.github.com/repos/edithatogo/standardflow",
+      "result": "private=true, archived=true, open_issues_count=1. The user-directed source private archival is complete; downstream reconciliation and assurance obligations remain separate."
+    },
+    {
+      "observed_on": "2026-11-22",
+      "method": "Integrator read the actual-main workflow/job/artifact and main checks.",
+      "receiving_commit": "2b0c579454a1dd469cd12cfb9538d23c96785370",
+      "url": "https://github.com/edithatogo/standards_check/actions/runs/45070791156/job/137357038355",
+      "artifact_url": "https://github.com/edithatogo/standards_check/actions/runs/45070791156/artifacts/14773685812",
+      "result": "Provenance, source/receiving parity, container and HTTP steps succeeded. At this main revision, 26 observed checks succeeded including deployment. Offline run45070791434 was queued at the last observation."
+    },
+    {
+      "method": "Integrator confirmed registry PR #172 merge and read back main and tree.",
+      "url": "https://github.com/edithatogo/repository-standards/pull/172",
+      "merge_commit": "a3cc8dccdb67e6f122c71cec713194cdec792d07",
+      "tree": "e884b86ea9bb1121422503122206041e086256ac",
+      "result": "Permitted squash merged; tree exactly matches tested caed59db candidate. Only the retired source entry was removed (169 to 168 entries), retaining standards_check. Nine PR checks succeeded and two expected PR checks skipped; required policy and Actions/Python analysis succeeded. Local qualification: 311 passes and 38 capability skips."
+    },
+    {
+      "method": "Integrator confirmed refreshed Voiage PR head and exact diff.",
+      "url": "https://github.com/edithatogo/voiage/pull/1394",
+      "head": "3bc04fdc1df6f30981765eee49c0c9dbce490cde",
+      "tree": "7c0099a9c465c19648db7aca89e187141855c2c2",
+      "result": "Verified signed, current-base head contains the exact intended one-line consumer-link replacement. Hosted checks and required local gate remain pending; no merge is claimed."
+    },
+    {
+      "observed_on": "2026-11-22",
+      "observed_utc_approximate": "22:58",
+      "method": "Integrator re-read the main offline-security run.",
+      "url": "https://github.com/edithatogo/standards_check/actions/runs/45070791434",
+      "result": "Still queued, with no execution receipt."
     }
   ],
-  "snapshot_id": "receiving-cf7d14da-2026-11-22-four-live-source-branches-retirement-pending",
+  "snapshot_id": "receiving-2b0c5794-2026-11-22-source-private-archived",
   "previous_snapshots": [
     {
       "snapshot_id": "initial-2026-11-22-41c3e174-five-branches",
@@ -1613,20 +1649,22 @@
   "refresh_changes": {
     "receiving_integration_merged": true,
     "receiving_documentation_pr96_merged": true,
-    "verified_receiving_commit": "cf7d14da7bfb4d32c2c8746ec1111a6643c4a716",
+    "verified_receiving_commit": "2b0c579454a1dd469cd12cfb9538d23c96785370",
     "source_open_pull_requests": 0,
     "live_source_branch_count": 4,
     "preserved_export_tip_count": 9,
     "source_main_unchanged": true,
     "remaining_source_refs_match_manifest": true,
-    "source_remains_public_unarchived": true,
+    "source_remains_public_unarchived": false,
     "later_receiving_revisions_require_their_own_receipts": true,
     "source_open_issues_after_transfer": 1,
     "source_issues_closed_as_transferred": [
       12,
       13,
       14
-    ]
+    ],
+    "source_private_archived_observed": true,
+    "source_settings_observed_at": "2026-11-22T22:55:19Z"
   },
   "receiving_work_recommendations": [
     {
@@ -1690,7 +1728,7 @@
   ],
   "receiving_preservation": {
     "observed_on": "2026-11-22",
-    "method": "Receiving branches API readback and nine receiving compare API checks; each source tip is the merge base with zero behind count against recorded main.",
+    "method": "Earlier receiving branches API readback and nine compare API checks established the preserved refs at cf7d14da. The latest hosted provenance job verifies the exact subtree and all nine histories at receiving main 2b0c5794.",
     "api_url": "https://api.github.com/repos/edithatogo/standards_check/git/matching-refs/heads/archive/standardflow/",
     "matching_refs": 9,
     "verified_current_source_heads": 4,
@@ -1716,18 +1754,19 @@
     "pending_branches": [],
     "transfer_status": "complete",
     "receiving_main_merge_observed": true,
-    "source_retirement_observed": false,
-    "distinction": "All nine exported tips remain recoverable as exact archive refs and ancestors of recorded receiving main. Four source branches remain live at their original tips; the other five refs are absent from the later source advertisement. Source privacy/archive settings remain unchanged.",
+    "source_retirement_observed": true,
+    "distinction": "All nine exported tips remain recoverable from the receiving history. The four-source-branch observation and exact archive-ref readbacks are retained at their original dates. The later independent repository API read confirms owner-completed source privacy and archival.",
     "historical_seven_ref_snapshot": "previous_snapshots[1].receiving_preservation",
     "receiving_main_commit": "15184da899f21a62565cfc3145d1a4719baf4ad4",
     "all_current_source_heads_in_main_ancestry": true,
     "source_refs_rechecked_unchanged": false,
     "verified_exported_source_tips": 9,
     "all_exported_source_tips_preserved": true,
-    "verified_receiving_main": "cf7d14da7bfb4d32c2c8746ec1111a6643c4a716",
+    "verified_receiving_main": "2b0c579454a1dd469cd12cfb9538d23c96785370",
     "all_exported_source_tips_in_main_ancestry": true,
     "all_remaining_source_refs_match_manifest": true,
-    "source_ref_observation_scope": "source_refs_rechecked_unchanged is false because the advertised source ref set shrank after source PR closure, not because a remaining tip advanced or receiving history was lost."
+    "source_ref_observation_scope": "source_refs_rechecked_unchanged is false because the advertised source ref set shrank after source PR closure, not because a remaining tip advanced or receiving history was lost.",
+    "latest_hosted_provenance_job": "https://github.com/edithatogo/standards_check/actions/runs/45070791156/job/137357038355"
   },
   "receiving_candidate_checks": {
     "observed_on": "2026-11-22",
@@ -1989,15 +2028,16 @@
     "receiving_import": "6c67527512ad5b603307ac6415ba214d3333c42a",
     "latest_preparation_commit": "cda5469d6107fe9729f274165ba9dd01fcba25f2",
     "baseline_status": "verified_legacy_compatibility_at_recorded_receiving_commit",
-    "basis": "The exact recorded receiving commit cf7d14da7bfb4d32c2c8746ec1111a6643c4a716 retains integration15184da8 and PR96 documentation. Its hosted legacy job passed provenance, parity, container and default-command HTTP startup; all nine source tips remain ancestors. Offline security remains queued. Later revisions require separate qualification.",
+    "basis": "The exact recorded receiving main 2b0c579454a1dd469cd12cfb9538d23c96785370 passed hosted provenance, source/receiving parity, container and default-command HTTP checks. All nine source tips and the exact imported subtree remain preserved. At this revision, 26 observed checks succeeded, including deployment. Offline security has no execution receipt; later revisions require separate qualification.",
     "functional_receipt": "docs/migration/standardflow/functional-parity.json",
     "final_hosted_acceptance_observed": true,
     "receiving_main_merge_observed": true,
-    "receiving_main_commit": "cf7d14da7bfb4d32c2c8746ec1111a6643c4a716",
+    "receiving_main_commit": "2b0c579454a1dd469cd12cfb9538d23c96785370",
     "offline_security_execution_observed": false,
     "integration_merge_commit": "15184da899f21a62565cfc3145d1a4719baf4ad4",
-    "hosted_workflow_run": "https://github.com/edithatogo/standards_check/actions/runs/45035654999",
-    "hosted_job": "https://github.com/edithatogo/standards_check/actions/runs/45035654999/job/137248723322"
+    "hosted_workflow_run": "https://github.com/edithatogo/standards_check/actions/runs/45070791156",
+    "hosted_job": "https://github.com/edithatogo/standards_check/actions/runs/45070791156/job/137357038355",
+    "hosted_parity_artifact": "https://github.com/edithatogo/standards_check/actions/runs/45070791156/artifacts/14773685812"
   },
   "proposed_additional_receiving_handoffs": {
     "source_prs_28_29": {
@@ -2130,30 +2170,34 @@
     "verified_pull_request_head": "906c025d67b03322e5c1b41a63aea88e150672e5"
   },
   "source_retirement": {
-    "status": "blocked_on_account_reauthentication",
-    "observed_at": "2026-11-22T20:53:25Z",
+    "status": "complete_private_archived",
+    "observed_at": "2026-11-22T22:55:19Z",
     "source_repository": "edithatogo/standardflow",
-    "private": false,
-    "archived": false,
-    "blocker": "The last visibility attempt reached GitHub Confirm access; successful owner reauthentication or changed settings have not been observed. Fresh repository API state still shows public and unarchived.",
-    "privacy_change_applied": false,
-    "archive_change_applied": false,
-    "next_action": "The account owner completes GitHub reauthentication; then resume the already-authorized privacy/archive actions and verify the resulting API state.",
+    "private": true,
+    "archived": true,
+    "blocker": null,
+    "privacy_change_applied": true,
+    "archive_change_applied": true,
+    "next_action": "Complete hosted and required local checks for Voiage PR #1394 and record its eventual merge receipt. The active-registry removal is already merged.",
     "receiving_repository_state": {
       "repository": "edithatogo/standards_check",
       "private": false,
       "archived": false
     },
-    "completed": false,
+    "completed": true,
     "current_live_source_branch_count": 4,
     "current_open_source_pull_requests": 0,
     "current_open_source_issues": 1,
-    "source_issue_count_evidence": "source_issue_transfer_receipt; this later transfer count is separate from the earlier visibility/archive API observation."
+    "source_issue_count_evidence": "The latest GitHub API open_issues_count is 1. The existing issue-transfer receipt identifies the remaining bot-owned dashboard separately.",
+    "api_url": "https://api.github.com/repos/edithatogo/standardflow",
+    "settings_applied_by": "repository_owner",
+    "evidence_origin": "Independent GitHub repository API read by the integrator after the owner applied the authorized settings.",
+    "source_ref_and_pull_request_scope": "Four live source refs and zero open source PRs are earlier observations; the settings read does not constitute a fresh source-ref inventory."
   },
   "downstream_receipts": {
     "voiage": {
       "pull_request_url": "https://github.com/edithatogo/voiage/pull/1394",
-      "status": "open_not_merged_requires_current_base_and_policy_requalification",
+      "status": "open_verified_signed_current_base_checks_pending",
       "merged": false,
       "prior_gate_observation": {
         "head": "e5351cc09fa884ce3348db1c856845d5fdaba8e4",
@@ -2161,21 +2205,46 @@
         "blocker": "Main requires verified commit signatures; the published commit is unsigned.",
         "scope": "Earlier recorded checks and signature gate; reread current base/policy before merging."
       },
-      "head": "e5351cc09fa884ce3348db1c856845d5fdaba8e4",
-      "observed_mergeable_state": "behind",
-      "observed_on": "2026-11-22"
+      "head": "3bc04fdc1df6f30981765eee49c0c9dbce490cde",
+      "tree": "7c0099a9c465c19648db7aca89e187141855c2c2",
+      "signature_verified": true,
+      "up_to_date_with_base": true,
+      "diff_summary": "Exact intended one-line consumer-link replacement.",
+      "hosted_checks": "pending",
+      "required_local_gate": "pending",
+      "evidence_origin": "Integrator confirmed the signed current-base head and exact one-line diff; hosted and local qualification remain pending."
     },
     "repository_standards_registry": {
-      "status": "prepared_not_merged_pending_actual_archival",
+      "status": "merged_and_observed_on_main",
       "tests_passed": 311,
       "capability_skips": 38,
       "schema_entries": 168,
-      "merged": false,
-      "merge_gate": "Observed source private=true and archived=true; any draft publication does not change the active registry/main.",
+      "merged": true,
+      "merge_gate": "Satisfied: source private/archive observed, required policy and analysis checks succeeded, and the permitted squash merge was read back on main.",
       "prepared_commit": "caed59dbcb6f4cc75a8fa17e24275d0ff1b61e6b",
       "prepared_branch": "codex/standardflow-archive-followup-20261122",
       "prepared_branch_url": "https://github.com/edithatogo/repository-standards/tree/codex/standardflow-archive-followup-20261122",
-      "validation_scope": "Historical prepared-patch validation against base e6425228dea09637eb0a45a3787421e7bce42b3b; no new execution or merge is claimed by this inventory update."
+      "validation_scope": "Local qualification recorded 311 passes, 38 capability skips and 168 schema-valid entries. The nine successful PR checks and two expected PR skips are terminal. Observed main has exactly the tested candidate tree; prior prepared-patch evidence is retained in historical_downstream_receipts.",
+      "source_archival_precondition_observed_at": "2026-11-22T22:55:19Z",
+      "pull_request_url": "https://github.com/edithatogo/repository-standards/pull/172",
+      "merge_method": "permitted_squash",
+      "merge_commit": "a3cc8dccdb67e6f122c71cec713194cdec792d07",
+      "observed_main_commit": "a3cc8dccdb67e6f122c71cec713194cdec792d07",
+      "merged_tree": "e884b86ea9bb1121422503122206041e086256ac",
+      "tested_candidate_tree_matches_main": true,
+      "entries_before": 169,
+      "entries_after": 168,
+      "retired_source_entry_removed": true,
+      "standards_check_entry_retained": true,
+      "other_entries_changed": false,
+      "hosted_checks": {
+        "success": 9,
+        "expected_pull_request_skips": 2,
+        "required_policy": "success",
+        "analyze_actions": "success",
+        "analyze_python": "success"
+      },
+      "evidence_origin": "Integrator confirmed the permitted squash merge, observed main SHA, exact tree match, registry-only diff and check results."
     }
   },
   "source_branches_scope": "Nine source tips preserved at export; this array is a recovery inventory, not the current live source branch count. See current_source_ref_inventory for the subsequent four-ref observation.",
@@ -2396,15 +2465,14 @@
   },
   "receiving_main_acceptance": {
     "observed_on": "2026-11-22",
-    "commit": "cf7d14da7bfb4d32c2c8746ec1111a6643c4a716",
+    "commit": "2b0c579454a1dd469cd12cfb9538d23c96785370",
     "integration_merge_commit": "15184da899f21a62565cfc3145d1a4719baf4ad4",
-    "documentation_merge_pull_request": 96,
     "source_revision": "dc51d8e392858d5cb4e653aed199563514191efb",
     "source_tree": "62d8a0e738f0255cc59822ae4e661568090a213e",
     "all_nine_export_tips_are_main_ancestors": true,
     "all_nine_archive_refs_match_manifest": true,
-    "workflow_url": "https://github.com/edithatogo/standards_check/actions/runs/45035654999",
-    "job_url": "https://github.com/edithatogo/standards_check/actions/runs/45035654999/job/137248723322",
+    "workflow_url": "https://github.com/edithatogo/standards_check/actions/runs/45070791156",
+    "job_url": "https://github.com/edithatogo/standards_check/actions/runs/45070791156/job/137357038355",
     "conclusion": "success",
     "successful_steps": [
       "Verify imported bytes and preserved ancestry",
@@ -2417,34 +2485,26 @@
     ],
     "other_observed_runs": [
       {
-        "run_id": 45035654938,
-        "name": "Privacy and secrets",
-        "conclusion": "success"
-      },
-      {
-        "run_id": 45035655024,
-        "name": "StandardFlow foundation",
-        "conclusion": "success"
-      },
-      {
-        "run_id": 45035654791,
-        "name": "Push on main",
-        "event": "dynamic",
-        "conclusion": "success"
-      },
-      {
-        "run_id": 45035655216,
+        "run_id": 45070791434,
+        "url": "https://github.com/edithatogo/standards_check/actions/runs/45070791434",
         "name": "Offline AI security",
         "status": "queued",
-        "conclusion": null
+        "conclusion": null,
+        "scope": "Re-read at approximately 22:58 UTC; still queued with no execution success or exemption.",
+        "last_observed_on": "2026-11-22",
+        "last_observed_utc_approximate": "22:58"
       }
     ],
     "earlier_main_receipt": {
-      "commit": "15184da899f21a62565cfc3145d1a4719baf4ad4",
-      "workflow_url": "https://github.com/edithatogo/standards_check/actions/runs/45034583489",
-      "recorded_by_pull_request": 96
+      "commit": "cf7d14da7bfb4d32c2c8746ec1111a6643c4a716",
+      "workflow_url": "https://github.com/edithatogo/standards_check/actions/runs/45035654999",
+      "recorded_in": "historical_receiving_main_acceptance"
     },
-    "claim_boundary": "Observed results for this exact commit and paths selected by these runs; not qualification of later code, methodology, item-level rights, independent accessibility or offline security."
+    "claim_boundary": "Observed results for this exact commit and paths selected by these runs; not qualification of later code, methodology, item-level rights, independent accessibility or offline security.",
+    "artifact_url": "https://github.com/edithatogo/standards_check/actions/runs/45070791156/artifacts/14773685812",
+    "observed_successful_checks": 26,
+    "deployment_observed_success": true,
+    "evidence_origin": "Integrator independently read the actual-main workflow/job/artifact and main check results from GitHub."
   },
   "historical_source_issues_before_transfer": {
     "record_scope": "Original source issue bodies before the parent recorded receiving links and closed source issues12,13,14 as transferred. Underlying obligations remain open in receiving issues29,30,31.",
@@ -2516,6 +2576,134 @@
       23
     ],
     "body_preservation": "Receiving links, cf7 Track03 verification and exact source/nine-history evidence were prepended; original issue bodies remain as historical snapshots.",
-    "claim_boundary": "Closure records relocation only. Receiving testing, security and quality obligations remain open; source privacy and archival remain unapplied."
+    "claim_boundary": "Closure records relocation only. Receiving testing, security and quality obligations remain open; source privacy and archival remain unapplied.",
+    "record_scope": "Historical issue-relocation receipt before owner-completed private archival. Its then-pending source-settings claim is superseded by source_retirement; receiving obligations remain open."
+  },
+  "historical_retirement_blocker_receipt": {
+    "record_scope": "Historical source-settings and authentication-blocker observation before owner-completed private archival; superseded by source_retirement.",
+    "repository_settings": {
+      "visibility": "public",
+      "archived": false,
+      "disabled": false,
+      "default_branch": "main",
+      "has_pages": false,
+      "has_wiki": false,
+      "has_projects": false,
+      "has_discussions": false,
+      "forks_count": 0,
+      "network_count": 0,
+      "open_issues_including_pull_requests": 1,
+      "main_protected": false,
+      "rulesets": [],
+      "web_commit_signoff_required": true,
+      "allow_merge_commit": false,
+      "allow_squash_merge": true,
+      "allow_rebase_merge": false,
+      "private": false,
+      "last_observed_at": "2026-11-22T20:53:25Z",
+      "issue_count_scope": "Updated after the parent-observed issue12/13/14 transfer closures; the visibility/archive observation time is recorded separately and is not a claim that these closures occurred at that earlier time."
+    },
+    "source_retirement": {
+      "status": "blocked_on_account_reauthentication",
+      "observed_at": "2026-11-22T20:53:25Z",
+      "source_repository": "edithatogo/standardflow",
+      "private": false,
+      "archived": false,
+      "blocker": "The last visibility attempt reached GitHub Confirm access; successful owner reauthentication or changed settings have not been observed. Fresh repository API state still shows public and unarchived.",
+      "privacy_change_applied": false,
+      "archive_change_applied": false,
+      "next_action": "The account owner completes GitHub reauthentication; then resume the already-authorized privacy/archive actions and verify the resulting API state.",
+      "receiving_repository_state": {
+        "repository": "edithatogo/standards_check",
+        "private": false,
+        "archived": false
+      },
+      "completed": false,
+      "current_live_source_branch_count": 4,
+      "current_open_source_pull_requests": 0,
+      "current_open_source_issues": 1,
+      "source_issue_count_evidence": "source_issue_transfer_receipt; this later transfer count is separate from the earlier visibility/archive API observation."
+    }
+  },
+  "historical_receiving_main_acceptance": {
+    "observed_on": "2026-11-22",
+    "commit": "cf7d14da7bfb4d32c2c8746ec1111a6643c4a716",
+    "integration_merge_commit": "15184da899f21a62565cfc3145d1a4719baf4ad4",
+    "documentation_merge_pull_request": 96,
+    "source_revision": "dc51d8e392858d5cb4e653aed199563514191efb",
+    "source_tree": "62d8a0e738f0255cc59822ae4e661568090a213e",
+    "all_nine_export_tips_are_main_ancestors": true,
+    "all_nine_archive_refs_match_manifest": true,
+    "workflow_url": "https://github.com/edithatogo/standards_check/actions/runs/45035654999",
+    "job_url": "https://github.com/edithatogo/standards_check/actions/runs/45035654999/job/137248723322",
+    "conclusion": "success",
+    "successful_steps": [
+      "Verify imported bytes and preserved ancestry",
+      "Test import provenance checks",
+      "Check dependency consistency",
+      "Compare preserved source and receiving runtime behaviour",
+      "Retain receiving parity receipt",
+      "Verify imported container runtime",
+      "Smoke-test the default container web startup"
+    ],
+    "other_observed_runs": [
+      {
+        "run_id": 45035654938,
+        "name": "Privacy and secrets",
+        "conclusion": "success"
+      },
+      {
+        "run_id": 45035655024,
+        "name": "StandardFlow foundation",
+        "conclusion": "success"
+      },
+      {
+        "run_id": 45035654791,
+        "name": "Push on main",
+        "event": "dynamic",
+        "conclusion": "success"
+      },
+      {
+        "run_id": 45035655216,
+        "name": "Offline AI security",
+        "status": "queued",
+        "conclusion": null
+      }
+    ],
+    "earlier_main_receipt": {
+      "commit": "15184da899f21a62565cfc3145d1a4719baf4ad4",
+      "workflow_url": "https://github.com/edithatogo/standards_check/actions/runs/45034583489",
+      "recorded_by_pull_request": 96
+    },
+    "claim_boundary": "Observed results for this exact commit and paths selected by these runs; not qualification of later code, methodology, item-level rights, independent accessibility or offline security.",
+    "record_scope": "Earlier cf7d14da receiving-main acceptance, retained without promoting its checks to the later main revision."
+  },
+  "historical_downstream_receipts": {
+    "voiage": {
+      "pull_request_url": "https://github.com/edithatogo/voiage/pull/1394",
+      "status": "open_not_merged_requires_current_base_and_policy_requalification",
+      "merged": false,
+      "prior_gate_observation": {
+        "head": "e5351cc09fa884ce3348db1c856845d5fdaba8e4",
+        "required_checks_passed": 17,
+        "blocker": "Main requires verified commit signatures; the published commit is unsigned.",
+        "scope": "Earlier recorded checks and signature gate; reread current base/policy before merging."
+      },
+      "head": "e5351cc09fa884ce3348db1c856845d5fdaba8e4",
+      "observed_mergeable_state": "behind",
+      "observed_on": "2026-11-22"
+    },
+    "repository_standards_registry": {
+      "status": "prepared_not_merged_pending_actual_archival",
+      "tests_passed": 311,
+      "capability_skips": 38,
+      "schema_entries": 168,
+      "merged": false,
+      "merge_gate": "Observed source private=true and archived=true; any draft publication does not change the active registry/main.",
+      "prepared_commit": "caed59dbcb6f4cc75a8fa17e24275d0ff1b61e6b",
+      "prepared_branch": "codex/standardflow-archive-followup-20261122",
+      "prepared_branch_url": "https://github.com/edithatogo/repository-standards/tree/codex/standardflow-archive-followup-20261122",
+      "validation_scope": "Historical prepared-patch validation against base e6425228dea09637eb0a45a3787421e7bce42b3b; no new execution or merge is claimed by this inventory update."
+    }
   }
 }

@@ -3,13 +3,19 @@
 Updated on **23 November 2026 (Australia/Brisbane)**. `edithatogo/standards_check` remains the public
 development repository and issue destination. The user authorised importing
 `edithatogo/standardflow`, then making that source repository private and archived.
-**The export is merged and verified; source privacy and archival are blocked on
-owner account reauthentication.** The authorized visibility change reached GitHub's
-**Confirm access** screen, requiring the owner's passkey or authenticator. Successful
-reauthentication has not been observed. The latest settings read still returned
-`private: false` and `archived: false` at 21:00 UTC on 22 November, with zero open
-source PRs and only the bot-owned dependency dashboard still open. The connected
-browser was unavailable in the follow-up chat; no further settings action was applied.
+**The export is merged and verified, and the source is now private and archived.**
+After the owner applied the authorized settings, an independent
+[GitHub repository API read](https://api.github.com/repos/edithatogo/standardflow)
+at **2026-11-22T22:55:19Z** returned `private: true`, `archived: true` and
+`open_issues_count: 1`. The registry cleanup is also merged through
+[repository-standards PR #172](https://github.com/edithatogo/repository-standards/pull/172).
+Voiage's separate consumer-link change still awaits its current checks and merge.
+
+The earlier authentication blocker is historical: the first visibility attempt
+reached GitHub's **Confirm access** screen, and the 21:00 UTC settings read still
+showed `private: false` and `archived: false`. The connected browser was unavailable
+in that follow-up chat. Those observations are retained in the structured inventory;
+the later API read above establishes the completed source settings.
 
 ## Preserved implementation and history
 
@@ -62,6 +68,20 @@ receiving copies passing 52 tests each, including 11 notebooks, with all nine ti
 preserved and identical
 outputs for six diagram and three checklist CLI canaries. Invalid PRISMA input
 also failed without output. This is same-environment legacy behaviour evidence.
+
+The latest accepted receiving main is
+[`2b0c579454a1dd469cd12cfb9538d23c96785370`](https://github.com/edithatogo/standards_check/commit/2b0c579454a1dd469cd12cfb9538d23c96785370).
+[Actual-main workflow 45070791156](https://github.com/edithatogo/standards_check/actions/runs/45070791156),
+[job 137357038355](https://github.com/edithatogo/standards_check/actions/runs/45070791156/job/137357038355)
+and [parity artifact 14773685812](https://github.com/edithatogo/standards_check/actions/runs/45070791156/artifacts/14773685812)
+record successful provenance, source/receiving parity, container and default-command
+HTTP checks. The exact legacy tree and all nine histories remain preserved. At that
+main revision, 26 observed checks succeeded, including deployment. The separate
+[offline AI-security run 45070791434](https://github.com/edithatogo/standards_check/actions/runs/45070791434)
+was still queued when re-read at approximately 22:58 UTC on 22 November and has
+no execution receipt.
+
+Earlier integration acceptance remains bound to its original revision:
 
 [Actual-main workflow 45034583489](https://github.com/edithatogo/standards_check/actions/runs/45034583489)
 passed at `15184da899f21a62565cfc3145d1a4719baf4ad4`: exact tree and all nine
@@ -120,12 +140,21 @@ clear third-party text. The ten mislabelled STARD copies on
 standards. See the [receiving instructions](../../../legacy/README.md) and
 [Conductor track](../../../conductor/tracks/03-standardflow-import/plan.md).
 
-Known active downstream references are the repository-standards registry and
-Voiage's deferred consumer link, identified in the inventory. Their reconciliation
-still requires its own receipts. Source privacy and archive
-settings must be applied after owner reauthentication and read back from GitHub before
-retirement can be marked complete. The user has already authorized those settings;
-the outstanding account check is an authentication requirement, not new scope approval.
+The repository-standards registry cleanup merged at
+`a3cc8dccdb67e6f122c71cec713194cdec792d07`; observed main tree
+`e884b86ea9bb1121422503122206041e086256ac` equals the tested candidate tree exactly.
+The only registry change removes retired `standardflow`, reducing 169 entries to
+168 while retaining `standards_check`. Nine PR checks succeeded and two expected
+checks skipped; required policy and Actions/Python analysis succeeded. Local
+qualification recorded 311 passes and 38 capability skips.
+
+[Voiage PR #1394](https://github.com/edithatogo/voiage/pull/1394) is verified signed
+and current with main at `3bc04fdc1df6f30981765eee49c0c9dbce490cde`, containing the
+intended one-line consumer link. Hosted checks and its required local gate remain
+pending before merge. The [structured inventory](source-inventory.json) retains
+the exact candidate tree and earlier downstream observations. Source private
+archival and registry completion do not qualify the pending downstream, security,
+rights or semantic-migration work.
 
 ## Recovery without access to the source repository
 
