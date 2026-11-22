@@ -308,6 +308,18 @@ Reports of total included studies
         <tspan x="778" dy="20">Total removed (n = 30)</tspan>
       </text>
     </g>
+    <g id="node-other-identified" class="standardflow-node standardflow-node--source" role="listitem" aria-label="Records identified from other methods:; Websites (n = 8); Organisations (n = 4); Citation searching (n = 6); Other sources (n = 2); Total (n = 20)">
+      <rect x="1120" y="40" width="300" height="176" rx="6" ry="6" />
+      <text class="standardflow-label" x="1138" y="72">
+        <tspan x="1138" dy="0">Records identified from other</tspan>
+        <tspan x="1138" dy="20">methods:</tspan>
+        <tspan x="1138" dy="20">Websites (n = 8)</tspan>
+        <tspan x="1138" dy="20">Organisations (n = 4)</tspan>
+        <tspan x="1138" dy="20">Citation searching (n = 6)</tspan>
+        <tspan x="1138" dy="20">Other sources (n = 2)</tspan>
+        <tspan x="1138" dy="20">Total (n = 20)</tspan>
+      </text>
+    </g>
     <g id="node-db-screened" class="standardflow-node standardflow-node--process" role="listitem" aria-label="Records screened; (n = 120)">
       <rect x="400" y="271" width="300" height="92" rx="6" ry="6" />
       <text class="standardflow-label" x="418" y="311">
@@ -322,6 +334,20 @@ Reports of total included studies
         <tspan x="778" dy="20">(n = 70)</tspan>
       </text>
     </g>
+    <g id="node-other-reports-sought" class="standardflow-node standardflow-node--process" role="listitem" aria-label="Reports sought for retrieval; (n = 20)">
+      <rect x="1120" y="271" width="300" height="92" rx="6" ry="6" />
+      <text class="standardflow-label" x="1138" y="311">
+        <tspan x="1138" dy="0">Reports sought for retrieval</tspan>
+        <tspan x="1138" dy="20">(n = 20)</tspan>
+      </text>
+    </g>
+    <g id="node-other-reports-not-retrieved" class="standardflow-node standardflow-node--exclusion" role="listitem" aria-label="Reports not retrieved; (n = 2)">
+      <rect x="1480" y="271" width="300" height="92" rx="6" ry="6" />
+      <text class="standardflow-label" x="1498" y="311">
+        <tspan x="1498" dy="0">Reports not retrieved</tspan>
+        <tspan x="1498" dy="20">(n = 2)</tspan>
+      </text>
+    </g>
     <g id="node-db-reports-sought" class="standardflow-node standardflow-node--process" role="listitem" aria-label="Reports sought for retrieval; (n = 50)">
       <rect x="400" y="418" width="300" height="96" rx="6" ry="6" />
       <text class="standardflow-label" x="418" y="460">
@@ -334,6 +360,22 @@ Reports of total included studies
       <text class="standardflow-label" x="778" y="460">
         <tspan x="778" dy="0">Reports not retrieved</tspan>
         <tspan x="778" dy="20">(n = 5)</tspan>
+      </text>
+    </g>
+    <g id="node-other-reports-assessed" class="standardflow-node standardflow-node--process" role="listitem" aria-label="Reports assessed for eligibility; (n = 18)">
+      <rect x="1120" y="418" width="300" height="96" rx="6" ry="6" />
+      <text class="standardflow-label" x="1138" y="460">
+        <tspan x="1138" dy="0">Reports assessed for eligibility</tspan>
+        <tspan x="1138" dy="20">(n = 18)</tspan>
+      </text>
+    </g>
+    <g id="node-other-reports-excluded" class="standardflow-node standardflow-node--exclusion" role="listitem" aria-label="Reports excluded (n = 8):; Duplicate report (n = 5)
+Insufficient information (n = 3)">
+      <rect x="1480" y="418" width="300" height="96" rx="6" ry="6" />
+      <text class="standardflow-label" x="1498" y="450">
+        <tspan x="1498" dy="0">Reports excluded (n = 8):</tspan>
+        <tspan x="1498" dy="20">Duplicate report (n = 5)</tspan>
+        <tspan x="1498" dy="20">Insufficient information (n = 3)</tspan>
       </text>
     </g>
     <g id="node-db-reports-assessed" class="standardflow-node standardflow-node--process" role="listitem" aria-label="Reports assessed for eligibility; (n = 45)">
@@ -352,48 +394,6 @@ Wrong study design (n = 7)">
         <tspan x="778" dy="20">Wrong population (n = 10)</tspan>
         <tspan x="778" dy="20">Wrong intervention (n = 8)</tspan>
         <tspan x="778" dy="20">Wrong study design (n = 7)</tspan>
-      </text>
-    </g>
-    <g id="node-other-identified" class="standardflow-node standardflow-node--source" role="listitem" aria-label="Records identified from other methods:; Websites (n = 8); Organisations (n = 4); Citation searching (n = 6); Other sources (n = 2); Total (n = 20)">
-      <rect x="1120" y="40" width="300" height="176" rx="6" ry="6" />
-      <text class="standardflow-label" x="1138" y="72">
-        <tspan x="1138" dy="0">Records identified from other</tspan>
-        <tspan x="1138" dy="20">methods:</tspan>
-        <tspan x="1138" dy="20">Websites (n = 8)</tspan>
-        <tspan x="1138" dy="20">Organisations (n = 4)</tspan>
-        <tspan x="1138" dy="20">Citation searching (n = 6)</tspan>
-        <tspan x="1138" dy="20">Other sources (n = 2)</tspan>
-        <tspan x="1138" dy="20">Total (n = 20)</tspan>
-      </text>
-    </g>
-    <g id="node-other-reports-sought" class="standardflow-node standardflow-node--process" role="listitem" aria-label="Reports sought for retrieval; (n = 20)">
-      <rect x="1120" y="271" width="300" height="92" rx="6" ry="6" />
-      <text class="standardflow-label" x="1138" y="311">
-        <tspan x="1138" dy="0">Reports sought for retrieval</tspan>
-        <tspan x="1138" dy="20">(n = 20)</tspan>
-      </text>
-    </g>
-    <g id="node-other-reports-not-retrieved" class="standardflow-node standardflow-node--exclusion" role="listitem" aria-label="Reports not retrieved; (n = 2)">
-      <rect x="1480" y="271" width="300" height="92" rx="6" ry="6" />
-      <text class="standardflow-label" x="1498" y="311">
-        <tspan x="1498" dy="0">Reports not retrieved</tspan>
-        <tspan x="1498" dy="20">(n = 2)</tspan>
-      </text>
-    </g>
-    <g id="node-other-reports-assessed" class="standardflow-node standardflow-node--process" role="listitem" aria-label="Reports assessed for eligibility; (n = 18)">
-      <rect x="1120" y="418" width="300" height="96" rx="6" ry="6" />
-      <text class="standardflow-label" x="1138" y="460">
-        <tspan x="1138" dy="0">Reports assessed for eligibility</tspan>
-        <tspan x="1138" dy="20">(n = 18)</tspan>
-      </text>
-    </g>
-    <g id="node-other-reports-excluded" class="standardflow-node standardflow-node--exclusion" role="listitem" aria-label="Reports excluded (n = 8):; Duplicate report (n = 5)
-Insufficient information (n = 3)">
-      <rect x="1480" y="418" width="300" height="96" rx="6" ry="6" />
-      <text class="standardflow-label" x="1498" y="450">
-        <tspan x="1498" dy="0">Reports excluded (n = 8):</tspan>
-        <tspan x="1498" dy="20">Duplicate report (n = 5)</tspan>
-        <tspan x="1498" dy="20">Insufficient information (n = 3)</tspan>
       </text>
     </g>
     <g id="node-previous-included" class="standardflow-node standardflow-node--prior" role="listitem" aria-label="Studies included in previous version; (n = 40); Reports of previous studies; (n = 50)">

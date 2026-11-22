@@ -1,0 +1,138 @@
+{
+    "checklist_type": "PRISMA_SCOPING_REVIEWS",
+    "title": "PRISMA for Scoping Reviews Checklist",
+    "items": [
+        {
+            "section": "Title",
+            "id": "1",
+            "description": "Indicate the study is a scoping review in the title",
+            "type": "boolean"
+        },
+        {
+            "section": "Abstract",
+            "id": "2",
+            "description": "Provide a structured summary that includes, as a minimum: background, objectives, eligibility criteria, sources of evidence, charting methods, results, and conclusions that relate to the review’s objective and questions",
+            "type": "boolean"
+        },
+        {
+            "section": "Introduction",
+            "id": "3",
+            "description": "Rationale: Describe the background for the review, including a rationale for why a scoping review is appropriate",
+            "type": "boolean"
+        },
+        {
+            "section": "Introduction",
+            "id": "4",
+            "description": "Objectives: Provide a clear statement of the questions and objective(s) that the scoping review will address",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "5",
+            "description": "Protocol and registration: Indicate if a protocol exists. If so, provide registration information (e.g., number) or where the protocol can be accessed",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "6",
+            "description": "Eligibility criteria: Specify the eligibility criteria (e.g., participants, concept, context, study designs) for the review and provide a rationale",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "7",
+            "description": "Information sources: Describe the information sources (e.g., electronic databases, contact with authors, trial registers, grey literature) to be searched and the date ranges to be applied",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "8",
+            "description": "Search: Present the full search strategy for at least one electronic database, including any limits used, such that it could be repeated",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "9",
+            "description": "Selection of sources of evidence: Describe the process for selecting studies (i.e., screening and eligibility assessment), including the number of reviewers who will conduct each step and how discrepancies will be resolved",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "10",
+            "description": "Data charting process: Describe the process of data charting (e.g., the number of reviewers, calibration exercises, and a data charting form to be used)",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "11",
+            "description": "Data items: List and define all variables for which data will be sought, including any pre-planned grouping of variables",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "12",
+            "description": "Critical appraisal of individual sources of evidence: If done, provide the rationale for critically appraising the sources of evidence, describe the methods used (including the tool) and how this information will be used in any data synthesis",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "13",
+            "description": "Synthesis of results: Describe the methods of handling and summarizing the data that were charted",
+            "type": "boolean"
+        },
+        {
+            "section": "Results",
+            "id": "14",
+            "description": "Selection of sources of evidence: Describe the results of the search and selection process, from the number of records identified in the search to the number of sources of evidence included in the scoping review, preferably using a flow diagram",
+            "type": "boolean"
+        },
+        {
+            "section": "Results",
+            "id": "15",
+            "description": "Characteristics of sources of evidence: Summarize the characteristics of the included sources of evidence",
+            "type": "boolean"
+        },
+        {
+            "section": "Results",
+            "id": "16",
+            "description": "Critical appraisal within sources of evidence: If done, present the results of any critical appraisal that was conducted on the included sources of evidence",
+            "type": "boolean"
+        },
+        {
+            "section": "Results",
+            "id": "17",
+            "description": "Results of individual sources of evidence: For each included source of evidence, present the relevant data that were charted",
+            "type": "boolean"
+        },
+        {
+            "section": "Results",
+            "id": "18",
+            "description": "Synthesis of results: Summarize and/or present the results from the charted data that relate to the review’s objective and questions",
+            "type": "boolean"
+        },
+        {
+            "section": "Discussion",
+            "id": "19",
+            "description": "Summary of evidence: Summarize the main results, including a description of how the results relate to the review’s objective and questions",
+            "type": "boolean"
+        },
+        {
+            "section": "Discussion",
+            "id": "20",
+            "description": "Limitations: Discuss the limitations of the scoping review process",
+            "type": "boolean"
+        },
+        {
+            "section": "Discussion",
+            "id": "21",
+            "description": "Conclusions: Provide a general interpretation of the results with respect to the review questions and objective(s), as well as implications for future research, practice, and/or policy",
+            "type": "boolean"
+        },
+        {
+            "section": "Funding",
+            "id": "22",
+            "description": "Describe the sources of funding for the scoping review",
+            "type": "boolean"
+        }
+    ]
+}

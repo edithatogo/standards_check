@@ -268,11 +268,11 @@ impl Scene {
         let mut node_indexes = BTreeMap::new();
         for (index, node) in self.nodes.iter().enumerate() {
             let path = format!("/nodes/{index}");
-            if !is_portable_id(&node.id) {
+            if !is_portable_id(&node.id) || node.id.len() > MAX_IDENTIFIER_BYTES {
                 report.push(Diagnostic::error(
                     "SF-SCENE-005",
                     format!("{path}/id"),
-                    "node id is not portable",
+                    "node id must be a bounded portable identifier",
                 ));
             }
             if node_indexes.insert(node.id.as_str(), index).is_some() {

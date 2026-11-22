@@ -1,5 +1,13 @@
 # Repository Guidelines
 
+## Authority and Current Work
+- Read `conductor/index.md`, `conductor/workflow.md`, and the affected track before changes.
+- `packs/`, `schemas/`, `contracts/`, and `recipes/` define StandardFlow's structured contracts;
+  `crates/` contains the Rust core, artefact engine, and CLI.
+- The document pipeline below is a legacy compatibility surface. Its generated views are not
+  canonical Standard Packs and do not establish source rights or methodological validity.
+- Keep exact-commit verification receipts and remaining gates in the existing Conductor tracks.
+
 ## Project Structure & Module Organization
 - Pipeline: `source/` → `markdown/` → `typst/` → `latex/`.
 - Two tracks in each stage:
@@ -7,7 +15,8 @@
   - `variants/` — extensions/discipline-specific variants (e.g., `prisma-scr-2018`).
 - Directories:
   - `source/{archetypes,variants}/` — originals + sidecar metadata.
-  - `markdown/{archetypes,variants}/` — canonical `.md`.
+  - `markdown/en/{archetypes,variants}/` — current English `.md` views; older scaffold tooling
+    also supports `markdown/{archetypes,variants}/`.
   - `typst/{archetypes,variants}/` — `.typ`.
   - `latex/{archetypes,variants}/` — `.tex`.
   - `scripts/` — validation and helpers.
@@ -15,6 +24,15 @@
 - Naming: kebab-case mirrored across stages (e.g., `prisma-2020.md|.typ|.tex`).
 
 ## Build, Test, and Development Commands
+- Install Python regression dependencies with `python -m pip install -r requirements/python-tests.txt`.
+- Run offline regressions: `HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 HF_HUB_DISABLE_TELEMETRY=1 python -m pytest --import-mode=importlib tests test_extract_and_convert.py`.
+- Validate structured contracts: `python scripts/validate_foundation.py`,
+  `python scripts/validate_packs.py`, and `python scripts/validate_artifacts.py`.
+- Use the exact Rust toolchain in `rust-toolchain.toml`:
+  `cargo fmt --all -- --check`,
+  `cargo clippy --workspace --all-targets --all-features --locked -- -D warnings`, and
+  `cargo test --workspace --all-targets --all-features --locked`.
+- Run `make validate` for the legacy corpus and `make html` for its HTML views.
 - Validate Markdown basics: `bash scripts/validate_md.sh` (checks H1 + naming, nested folders).
 - Manual flow:
   1) Place raw files in `source/` with a short `README` block at top or sidecar notes.
@@ -31,7 +49,11 @@
 
 ## Testing Guidelines
 - Run `scripts/validate_md.sh` and `scripts/validate_index.sh` before PRs.
-- Ensure file triplets exist per checklist within the correct track: `source/{archetypes|variants}/<name>.*`, `markdown/{archetypes|variants}/<name>.md`, `typst/{archetypes|variants}/<name>.typ`, `latex/{archetypes|variants}/<name>.tex`.
+- For legacy checklist changes, verify matching names across `source/`, `markdown/en/`, `typst/`,
+  and `latex/` within the appropriate archetype or variant directory.
+- Regression tests must demonstrate rejection of invalid input as well as successful input.
+  A validator that prints an error must return a nonzero exit status.
+- Regenerate changed artefacts and compare them against the committed reference files.
 - Visual/manual check: numbering, section headings, and item text must match across stages.
 
 ## Commit & Pull Request Guidelines

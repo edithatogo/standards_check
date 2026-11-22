@@ -1,0 +1,32 @@
+// CONSORT 2010 Flow Diagram
+digraph {
+	node [shape=box]
+	A [label="Assessed for eligibility (n=1000)"]
+	B [label="Excluded (n=200)
+Not meeting inclusion criteria (n=150)
+Declined to participate (n=50)"]
+	C [label="Randomized (n=800)"]
+	D [label="Allocated to intervention (n=400)"]
+	E [label="Received allocated intervention (n=380)"]
+	F [label="Did not receive allocated intervention (n=20)
+Patient refusal (n=10)
+Contraindication (n=10)"]
+	G [label="Lost to follow-up (n=30)
+Unable to contact (n=20)
+Withdrew consent (n=10)"]
+	H [label="Discontinued intervention (n=10)
+Adverse event (n=5)
+Protocol violation (n=5)"]
+	I [label="Analysed (n=340)"]
+	J [label="Excluded from analysis (n=10)
+Incomplete data (n=10)"]
+	A -> C
+	A -> B
+	C -> D
+	D -> E
+	D -> F
+	E -> G
+	E -> H
+	E -> I
+	I -> J
+}

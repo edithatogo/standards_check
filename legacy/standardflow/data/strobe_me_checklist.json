@@ -1,0 +1,30 @@
+{
+    "checklist_type": "STROBE_ME",
+    "title": "STROBE-ME Checklist for Molecular Epidemiology",
+    "items": [
+        {
+            "section": "Title and abstract",
+            "id": "1",
+            "description": "(a) Indicate the study’s design with a commonly used term in the title or the abstract\n(b) Provide in the abstract an informative and balanced summary of what was done and what was found, including biomarker information",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "8",
+            "description": "Data sources/ measurement: For each variable of interest, give sources of data and details of methods of assessment (measurement). Describe comparability of assessment methods if there is more than one group. Specify laboratory methods, including specimen handling and quality control.",
+            "type": "boolean"
+        },
+        {
+            "section": "Results",
+            "id": "14",
+            "description": "Descriptive data: (a) Give characteristics of study participants (eg demographic, clinical, social) and information on exposures and potential confounders\n(b) Indicate number of participants with missing data for each variable of interest\n(c) Summarise follow-up time (eg, average and total amount)\n(d) Report biomarker distributions",
+            "type": "boolean"
+        },
+        {
+            "section": "Discussion",
+            "id": "20",
+            "description": "Interpretation: Give a cautious overall interpretation of results considering objectives, limitations, multiplicity of analyses, results from similar studies, and other relevant evidence, including the potential for measurement error and selection bias",
+            "type": "boolean"
+        }
+    ]
+}

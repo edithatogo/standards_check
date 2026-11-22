@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+[[ -d markdown ]] || { echo "[ERROR] markdown directory not found" >&2; exit 1; }
+
 fail=0
 while IFS= read -r -d '' f; do
   bn=$(basename "$f")
@@ -22,4 +24,4 @@ else
   echo "Markdown validation failed." >&2
 fi
 
-exit 0
+exit "$fail"

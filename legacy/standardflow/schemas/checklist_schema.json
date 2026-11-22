@@ -1,0 +1,94 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://www.equator-network.org/schemas/checklist_schema.json",
+    "title": "Checklist schema",
+    "description": "A schema for generating checklists.",
+    "type": "object",
+    "properties": {
+        "checklist_type": {
+            "description": "The type of checklist to generate.",
+            "type": "string"
+        },
+        "title": {
+            "description": "The title of the checklist.",
+            "type": "string"
+        },
+        "items": {
+            "description": "The items in the checklist.",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "section": {
+                        "description": "The section of the checklist.",
+                        "type": "string"
+                    },
+                    "id": {
+                        "description": "The ID of the item.",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "The description of the item.",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description": "The type of the item.",
+                        "type": "string",
+                        "enum": [
+                            "boolean",
+                            "string",
+                            "integer",
+                            "multiple_choice"
+                        ]
+                    },
+                    "options": {
+                        "description": "The options for a multiple choice question.",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "condition": {
+                        "description": "The condition for displaying the item.",
+                        "type": "object",
+                        "properties": {
+                            "item": {
+                                "type": "string"
+                            },
+                            "value": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "required": [
+                    "section",
+                    "id",
+                    "description",
+                    "type"
+                ],
+                "allOf": [
+                    {
+                        "if": {
+                            "properties": {
+                                "type": {
+                                    "const": "multiple_choice"
+                                }
+                            }
+                        },
+                        "then": {
+                            "required": [
+                                "options"
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "required": [
+        "checklist_type",
+        "title",
+        "items"
+    ]
+}

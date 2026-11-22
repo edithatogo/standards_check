@@ -4,15 +4,17 @@
 
 set -uo pipefail
 
+[[ -d source ]] || { echo "[ERROR] source directory not found" >&2; exit 1; }
+
 required=("id" "title")
 optional=("group" "version" "date" "publisher" "source_url" "retrieved_at" "preferred_format" "checksum" "license")
 fail=0
 
-find source -type f -name "*.yml" -print0 | while IFS= read -r -d '' y; do
+while IFS= read -r -d '' y; do
   bn=$(basename "$y")
 
-  # Skip templates/placeholders
-  if [[ "$bn" == "_meta.template.yml" ]]; then
+  # The root index has its own validator; template metadata is not a sidecar.
+  if [[ "$y" == "source/index.yml" || "$bn" == "_meta.template.yml" ]]; then
     continue
   fi
 
@@ -20,7 +22,7 @@ find source -type f -name "*.yml" -print0 | while IFS= read -r -d '' y; do
   id_line=$(grep -m1 -E '^id:' "$y" || true)
   sid=$(echo "$id_line" | sed -E 's/^id:[[:space:]]*//')
 
-  if [[ -z "$sid" ]] || [[ "$sid" == "<kebab-case-id>" ]]; then
+  if [[ "$sid" == "<kebab-case-id>" ]]; then
     continue
   fi
 
@@ -44,7 +46,7 @@ find source -type f -name "*.yml" -print0 | while IFS= read -r -d '' y; do
     echo "[ERROR] $bn: id '$sid' does not match filename '$name'" >&2
     fail=1
   fi
-done
+done < <(find source -type f -name "*.yml" -print0)
 
 if (( fail == 0 )); then
   echo "Sidecar validation passed."

@@ -1,0 +1,192 @@
+{
+    "checklist_type": "PRISMA_PROTOCOLS",
+    "title": "PRISMA for Protocols Checklist",
+    "items": [
+        {
+            "section": "Administrative information",
+            "id": "1a",
+            "description": "Title: Identification of the report as a protocol of a systematic review",
+            "type": "boolean"
+        },
+        {
+            "section": "Administrative information",
+            "id": "1b",
+            "description": "Title: Indication of whether the review will be living (that is, updated on an ongoing basis to incorporate new evidence as it becomes available)",
+            "type": "boolean"
+        },
+        {
+            "section": "Administrative information",
+            "id": "2",
+            "description": "Registration: If the protocol is registered, specification of where it can be accessed (for example, a registration number and website)",
+            "type": "boolean"
+        },
+        {
+            "section": "Administrative information",
+            "id": "3a",
+            "description": "Authors: Contact information for the corresponding author",
+            "type": "boolean"
+        },
+        {
+            "section": "Administrative information",
+            "id": "3b",
+            "description": "Authors: Authors’ affiliations",
+            "type": "boolean"
+        },
+        {
+            "section": "Administrative information",
+            "id": "4a",
+            "description": "Amendments: If the protocol is an amendment to a previously completed or published protocol, identification of the amendment and its date",
+            "type": "boolean"
+        },
+        {
+            "section": "Administrative information",
+            "id": "4b",
+            "description": "Amendments: Description of the rationale for the amendment",
+            "type": "boolean"
+        },
+        {
+            "section": "Administrative information",
+            "id": "5a",
+            "description": "Support: Sources of financial or non-financial support for the review",
+            "type": "boolean"
+        },
+        {
+            "section": "Administrative information",
+            "id": "5b",
+            "description": "Support: Role of the funder or sponsor in the development of the protocol",
+            "type": "boolean"
+        },
+        {
+            "section": "Administrative information",
+            "id": "6",
+            "description": "Competing interests: Declaration of any competing interests of the review authors",
+            "type": "boolean"
+        },
+        {
+            "section": "Administrative information",
+            "id": "7",
+            "description": "Contributions: Statement of the contributions of each author to the protocol",
+            "type": "boolean"
+        },
+        {
+            "section": "Introduction",
+            "id": "8",
+            "description": "Rationale: Description of the condition or problem of interest and the intervention(s), test(s), or exposure(s) to be reviewed",
+            "type": "boolean"
+        },
+        {
+            "section": "Introduction",
+            "id": "9",
+            "description": "Objectives: Explicit statement of the question(s) the review will address, with reference to the eligibility criteria (for example, using a PICO framework)",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "10",
+            "description": "Eligibility criteria: Specification of the inclusion and exclusion criteria for the review (for example, relating to study design, participants, interventions, tests, exposures, outcomes)",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "11",
+            "description": "Information sources: Description of the information sources to be searched (for example, electronic databases, contact with authors, trial registers, grey literature) and the date ranges to be applied",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "12",
+            "description": "Search strategy: Presentation of the planned search strategy for at least one electronic database, including planned limits and search terms, such that it could be repeated",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "13a",
+            "description": "Study records: data management: Description of how study records will be managed (for example, from search results to inclusion in the review)",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "13b",
+            "description": "Study records: selection process: Description of the process for selecting studies (that is, screening and eligibility assessment), including the number of reviewers who will conduct each step and how discrepancies will be resolved",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "13c",
+            "description": "Study records: data collection process: Description of the process of data collection from reports (for example, the number of reviewers, calibration exercises, and a data collection form to be used)",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "14a",
+            "description": "Data items: List and definition of all variables for which data will be sought, including outcome and exposure definitions and any other data that will be collected (for example, funding source, publication status)",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "14b",
+            "description": "Data items: Description of any assumptions that will be made if information is reported unclearly",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "15",
+            "description": "Outcomes and prioritization: Specification of all outcomes for which data will be sought and a description of how they will be grouped or prioritized",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "16",
+            "description": "Risk of bias in individual studies: Description of the methods that will be used to assess the risk of bias in included studies, including details of the tool(s) to be used and how the results of the assessment will be used in data synthesis",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "17a",
+            "description": "Data synthesis: Description of the criteria that will be used to decide whether and how to synthesize the results of included studies quantitatively (for example, if meta-analysis is to be performed)",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "17b",
+            "description": "Data synthesis: If meta-analysis is planned, specification of the measure(s) of treatment effect (for example, risk ratio, difference in means)",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "17c",
+            "description": "Data synthesis: Description of the statistical method(s) that will be used to combine the results of studies",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "17d",
+            "description": "Data synthesis: Description of the method(s) that will be used to assess statistical heterogeneity",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "17e",
+            "description": "Data synthesis: Description of any methods that will be used to conduct subgroup analyses",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "17f",
+            "description": "Data synthesis: Description of any sensitivity analyses that will be conducted to assess the robustness of the synthesized results",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "18",
+            "description": "Meta-bias(es): Description of any methods that will be used to assess the risk of bias due to missing results in a synthesis (for example, publication bias)",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "19",
+            "description": "Confidence in cumulative evidence: Description of how the strength of the body of evidence will be assessed (for example, by using the GRADE approach)",
+            "type": "boolean"
+        }
+    ]
+}

@@ -1,0 +1,12 @@
+{
+    "diagram_type": "PRISMA_2020_UPDATED",
+    "previous_studies": 10,
+    "new_records_identified": 500,
+    "new_records_after_duplicates_removed": 400,
+    "new_records_screened": 400,
+    "new_records_excluded": 100,
+    "new_full_text_articles_assessed": 300,
+    "new_full_text_articles_excluded": 150,
+    "new_studies_included": 150,
+    "total_studies_included": 160
+}

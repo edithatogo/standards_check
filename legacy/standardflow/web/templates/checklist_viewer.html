@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Checklist</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Generated Checklist</h1>
+    <form action="{{ url_for('download_checklist') }}" method="post">
+        <input type="hidden" name="json_toggle" value="on">
+        <input type="hidden" name="json_data" value="{{ data|tojson|forceescape }}">
+        <button type="submit">Download Checklist</button>
+    </form>
+    <hr>
+    {% for section, markdown in sections.items() %}
+        <h2>{{ section }}</h2>
+        <pre style="white-space: pre-wrap;">{{ markdown }}</pre>
+    {% endfor %}
+</body>
+</html>

@@ -10,6 +10,7 @@ on:
       - "source/**"
       - "reconciliations/**"
       - "pandoc.yaml"
+      - "Makefile"
       - ".github/workflows/build-docs.yml"
   pull_request:
     paths:
@@ -19,6 +20,7 @@ on:
       - "source/**"
       - "reconciliations/**"
       - "pandoc.yaml"
+      - "Makefile"
       - ".github/workflows/build-docs.yml"
   workflow_dispatch:
 

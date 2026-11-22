@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Research Artifacts Library</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        let itemId = 0;
+
+        function addItem() {
+            itemId++;
+            const itemDiv = document.createElement('div');
+            itemDiv.setAttribute('class', 'item');
+            itemDiv.setAttribute('id', `item-${itemId}`);
+            itemDiv.innerHTML = `
+                <h3>Item ${itemId}</h3>
+                <label for="id-${itemId}">ID:</label>
+                <input type="text" name="id-${itemId}" id="id-${itemId}" value="${itemId}">
+                <label for="section-${itemId}">Section:</label>
+                <input type="text" name="section-${itemId}" id="section-${itemId}">
+                <br>
+                <label for="description-${itemId}">Description:</label>
+                <br>
+                <textarea name="description-${itemId}" id="description-${itemId}" rows="3" cols="80"></textarea>
+                <br>
+                <label for="type-${itemId}">Type:</label>
+                <select name="type-${itemId}" id="type-${itemId}" onchange="handleTypeChange(${itemId})">
+                    <option value="boolean">Boolean</option>
+                    <option value="string">String</option>
+                    <option value="integer">Integer</option>
+                    <option value="multiple_choice">Multiple Choice</option>
+                </select>
+                <div id="options-container-${itemId}" style="display: none;">
+                    <label>Options:</label>
+                    <div id="options-${itemId}">
+                        <input type="text" name="option-${itemId}-1">
+                    </div>
+                    <button type="button" onclick="addOption(${itemId})">Add Option</button>
+                </div>
+                <button type="button" onclick="removeItem(${itemId})">Remove Item</button>
+                <hr>
+            `;
+            document.getElementById('items-container').appendChild(itemDiv);
+        }
+
+        function removeItem(id) {
+            const itemDiv = document.getElementById(`item-${id}`);
+            itemDiv.parentNode.removeChild(itemDiv);
+        }
+
+        function handleTypeChange(id) {
+            const type = document.getElementById(`type-${id}`).value;
+            const optionsContainer = document.getElementById(`options-container-${id}`);
+            if (type === 'multiple_choice') {
+                optionsContainer.style.display = 'block';
+            } else {
+                optionsContainer.style.display = 'none';
+            }
+        }
+
+        let optionCounts = {};
+
+        function addOption(itemId) {
+            if (!optionCounts[itemId]) {
+                optionCounts[itemId] = 1;
+            }
+            optionCounts[itemId]++;
+            const optionsDiv = document.getElementById(`options-${itemId}`);
+            const newOption = document.createElement('input');
+            newOption.setAttribute('type', 'text');
+            newOption.setAttribute('name', `option-${itemId}-${optionCounts[itemId]}`);
+            optionsDiv.appendChild(document.createElement('br'));
+            optionsDiv.appendChild(newOption);
+        }
+
+        function toggleJsonInput() {
+            const rawJson = document.getElementById('json_toggle').checked;
+            const dynamicForm = document.getElementById('dynamic_form');
+            dynamicForm.style.display = rawJson ? 'none' : 'block';
+            dynamicForm.querySelectorAll('input, select, textarea, button').forEach(input => {
+                input.disabled = rawJson;
+            });
+            document.getElementById('json_input').style.display = rawJson ? 'block' : 'none';
+            document.getElementById('json_data').disabled = !rawJson;
+        }
+    </script>
+</head>
+<body onload="toggleJsonInput()">
+    <h1>Research Artifacts Library</h1>
+    <form method="POST">
+        <label for="checklist_type">Checklist Type:</label>
+        <select name="checklist_type" id="checklist_type">
+            <option value="CONSORT">CONSORT</option>
+            <option value="STROBE_COHORT">STROBE (Cohort)</option>
+            <option value="STROBE_CASE_CONTROL">STROBE (Case-Control)</option>
+            <option value="STROBE_CROSS_SECTIONAL">STROBE (Cross-Sectional)</option>
+            <option value="STARD">STARD</option>
+            <option value="CARE">CARE</option>
+        </select>
+        <br>
+        <input type="checkbox" id="json_toggle" name="json_toggle" onchange="toggleJsonInput()">
+        <label for="json_toggle">Use Raw JSON Input</label>
+        <br>
+
+        <div id="dynamic_form">
+            <div id="items-container">
+            </div>
+            <button type="button" onclick="addItem()">Add Item</button>
+        </div>
+        <div id="json_input" style="display: none;">
+            <label for="json_data">JSON Data:</label>
+            <br>
+            <textarea name="json_data" id="json_data" rows="20" cols="80"></textarea>
+        </div>
+        <br>
+        <input type="submit" value="Generate Checklist">
+    </form>
+</body>
+</html>

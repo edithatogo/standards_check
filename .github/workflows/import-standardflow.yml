@@ -1,8 +1,8 @@
-name: Import StandardFlow history once
+name: Preserve final StandardFlow branch heads
 
 on:
   pull_request:
-    types: [opened, reopened]
+    types: [opened, reopened, synchronize]
     paths:
       - ".github/workflows/import-standardflow.yml"
 
@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 jobs:
-  import:
+  preserve:
     if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'codex/ponytail-validation-review-20261122'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
@@ -24,7 +24,7 @@ jobs:
           ref: codex/ponytail-validation-review-20261122
           fetch-depth: 0
           persist-credentials: true
-      - name: Preserve exact legacy commits and isolated source tree
+      - name: Verify and preserve all seven source branch heads
         shell: bash
         run: |
           set -euo pipefail
@@ -32,23 +32,19 @@ jobs:
           python - <<'PY'
           import subprocess
           expected = {
-              "main": "af299f724bcf456c131b43a143b3eabc1d81245b",
-              "feature/refactor-and-document": "41c3e174fd7932d308992c4ef96d055273dabdbd",
-              "feature/implement-guidelines": "f1680778b4141bb5553b0e80af22bbdf5c75c862",
               "chore/GHA-190519-stepsecurity-remediation": "eb7d0703b86aaa82e3cd738a273db7c60a70f6c9",
               "dependabot/github_actions/actions/setup-python-7.1.0": "7d2e233217d5d3d6c4ca9c5866f64158d117099e",
+              "feature/implement-guidelines": "f1680778b4141bb5553b0e80af22bbdf5c75c862",
+              "feature/refactor-and-document": "d89a5dbacc207cdce11f19efd667b83fdb09df18",
+              "main": "af299f724bcf456c131b43a143b3eabc1d81245b",
+              "renovate/click-8.x": "3f850b81be3feb1a4d84d003b2ec6c166059a68e",
+              "renovate/graphviz-0.x": "38c6327a9fe507150ee2bd655f36269345cf04a8",
           }
           output = subprocess.check_output(["git", "for-each-ref", "--format=%(refname:strip=3) %(objectname)", "refs/remotes/standardflow-import"], text=True)
           actual = dict(row.split() for row in output.splitlines())
           if actual != expected:
-              raise SystemExit("Source refs changed; reconcile before importing")
+              raise SystemExit("Source refs changed; reconcile before preserving")
           PY
-          test ! -e legacy/standardflow
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git merge --no-commit --no-ff --allow-unrelated-histories -s ours af299f724bcf456c131b43a143b3eabc1d81245b
-          git read-tree --prefix=legacy/standardflow/ -u af299f724bcf456c131b43a143b3eabc1d81245b
-          git commit -m "feat(migration): preserve StandardFlow source and full history"
-          test "$(git rev-parse HEAD:legacy/standardflow)" = a4527d66180a059883f7f6848eebf2c7e12fb94c
-          git merge-base --is-ancestor af299f724bcf456c131b43a143b3eabc1d81245b HEAD
-          git push origin HEAD:refs/heads/codex/ponytail-validation-review-20261122 'refs/remotes/standardflow-import/*:refs/heads/archive/standardflow/*'
+          test "$(git rev-parse HEAD:legacy/standardflow)" = e48c081ff946d0fac6a1a4b65a3599c6b7aa3352
+          git merge-base --is-ancestor d89a5dbacc207cdce11f19efd667b83fdb09df18 HEAD
+          git push origin 'refs/remotes/standardflow-import/*:refs/heads/archive/standardflow/*'

@@ -23,11 +23,12 @@ if (( errors > 0 )); then
 fi
 
 echo "[INFO] Checking for TBD values"
-if bash scripts/list_tbd.sh | grep -q "TBD"; then
-  echo "[WARNING] TBD values found. Please complete them."
-else
-  echo "[INFO] No TBD values found."
-fi
+grep -rI -- "TBD" source/ > /dev/null
+case $? in
+  0) echo "[WARNING] TBD values found. Please complete them." ;;
+  1) echo "[INFO] No TBD values found." ;;
+  *) echo "[ERROR] Could not search source for TBD values." >&2; exit 1 ;;
+esac
 
 echo "Repo validation passed."
 exit 0

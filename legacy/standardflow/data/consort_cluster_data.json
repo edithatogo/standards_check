@@ -1,0 +1,31 @@
+{
+    "diagram_type": "CONSORT_CLUSTER",
+    "clusters_assessed_for_eligibility": 100,
+    "clusters_excluded": 20,
+    "reasons_for_cluster_exclusion": [
+        "Not meeting inclusion criteria (n=15)",
+        "Declined to participate (n=5)"
+    ],
+    "clusters_randomized": 80,
+    "clusters_allocated_to_intervention": 40,
+    "individuals_in_clusters_allocated_to_intervention": 4000,
+    "clusters_lost_to_follow_up": 5,
+    "individuals_lost_to_follow_up": 500,
+    "reasons_for_cluster_loss_to_follow_up": [
+        "Unable to contact (n=3)",
+        "Withdrew consent (n=2)"
+    ],
+    "clusters_discontinued_intervention": 2,
+    "individuals_discontinued_intervention": 200,
+    "reasons_for_cluster_discontinuation": [
+        "Adverse event (n=1)",
+        "Protocol violation (n=1)"
+    ],
+    "clusters_analysed": 33,
+    "individuals_analysed": 3300,
+    "clusters_excluded_from_analysis": 2,
+    "individuals_excluded_from_analysis": 200,
+    "reasons_for_cluster_exclusion_from_analysis": [
+        "Incomplete data (n=2)"
+    ]
+}

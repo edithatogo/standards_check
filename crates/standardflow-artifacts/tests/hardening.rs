@@ -109,6 +109,60 @@ fn text_and_svg_describe_directed_relationships() -> Result<(), Box<dyn std::err
 }
 
 #[test]
+fn svg_nodes_follow_reading_order_independently_of_storage_order()
+-> Result<(), Box<dyn std::error::Error>> {
+    let mut scene = parse_prisma_flow(FLOW)?.build_scene()?;
+    let svg = render_svg(&scene)?;
+    let mut previous_position = 0;
+    for id in &scene.reading_order {
+        let marker = format!("<g id=\"node-{id}\"");
+        let position = svg
+            .find(&marker)
+            .ok_or_else(|| std::io::Error::other(format!("SVG is missing node {id}")))?;
+        assert!(
+            position > previous_position,
+            "SVG node {id} is out of reading order"
+        );
+        previous_position = position;
+    }
+    scene.nodes.reverse();
+    assert!(scene.validate().is_valid());
+    assert_eq!(render_svg(&scene)?, svg);
+    Ok(())
+}
+
+#[test]
+fn isolated_scene_node_identifiers_obey_the_schema_limit() -> Result<(), Box<dyn std::error::Error>>
+{
+    let mut scene = parse_prisma_flow(FLOW)?.build_scene()?;
+    scene.nodes.truncate(1);
+    scene.edges.clear();
+    let node = scene
+        .nodes
+        .first_mut()
+        .ok_or_else(|| std::io::Error::other("fixture has no node"))?;
+    node.id = "x".repeat(256);
+    scene.reading_order = vec![node.id.clone()];
+    assert!(scene.validate().is_valid());
+
+    let node = scene
+        .nodes
+        .first_mut()
+        .ok_or_else(|| std::io::Error::other("fixture has no node"))?;
+    node.id.push('x');
+    scene.reading_order = vec![node.id.clone()];
+    assert!(
+        scene
+            .validate()
+            .diagnostics
+            .iter()
+            .any(|item| item.code == "SF-SCENE-005")
+    );
+    assert!(render_svg(&scene).is_err());
+    Ok(())
+}
+
+#[test]
 fn xml_invalid_text_is_rejected_before_rendering() -> Result<(), Box<dyn std::error::Error>> {
     let mut scene = parse_prisma_flow(FLOW)?.build_scene()?;
     scene.title.push('\u{1}');

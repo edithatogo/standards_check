@@ -1,0 +1,33 @@
+// PRISMA 2020 Flow Diagram
+digraph {
+	node [shape=box]
+	A [label="Studies included in previous version of review
+(n = 10)"]
+	B [label="New records identified
+(n = 500)"]
+	C [label="New records after duplicates removed
+(n = 400)"]
+	D [label="New records screened
+(n = 400)"]
+	E [label="New records excluded
+(n = 100)"]
+	F [label="New full-text articles assessed for eligibility
+(n = 300)"]
+	G [label="New full-text articles excluded, with reasons
+(n = 150)"]
+	H [label="New studies included in qualitative synthesis
+(n = 150)"]
+	I [label="Total studies included in qualitative synthesis
+(n = 160)"]
+	J [label="Total studies included in quantitative synthesis (meta-analysis)
+(n = 160)"]
+	A -> I
+	B -> C
+	C -> D
+	D -> E
+	D -> F
+	F -> G
+	F -> H
+	H -> I
+	I -> J
+}

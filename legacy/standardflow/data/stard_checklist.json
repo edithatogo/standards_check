@@ -1,0 +1,186 @@
+{
+  "title": "STARD checklist",
+  "checklist_type": "STARD",
+  "items": [
+    {
+      "id": "1",
+      "section": "Title or abstract",
+      "description": "Identification as a study of diagnostic accuracy using at least one measure of accuracy (such as sensitivity, specificity, predictive values, or AUC).",
+      "type": "boolean"
+    },
+    {
+      "id": "2",
+      "section": "Abstract",
+      "description": "Structured summary of study design, methods, results, and conclusions (for specific guidance, see STARD for Abstracts).",
+      "type": "boolean"
+    },
+    {
+      "id": "3",
+      "section": "Introduction",
+      "description": "Scientific and clinical background, including the intended use and clinical role of the index test.",
+      "type": "boolean"
+    },
+    {
+      "id": "4",
+      "section": "Introduction",
+      "description": "Study objectives and hypotheses.",
+      "type": "boolean"
+    },
+    {
+      "id": "5",
+      "section": "Methods",
+      "description": "Study design. Whether data collection was planned before the index test and reference standard were performed (prospective study) or after (retrospective study).",
+      "type": "boolean"
+    },
+    {
+      "id": "6",
+      "section": "Methods",
+      "description": "Participants. Eligibility criteria.",
+      "type": "boolean"
+    },
+    {
+      "id": "7",
+      "section": "Methods",
+      "description": "Participants. On what basis potentially eligible participants were identified (such as symptoms, results from previous tests, inclusion in registry).",
+      "type": "boolean"
+    },
+    {
+      "id": "8",
+      "section": "Methods",
+      "description": "Participants. Where and when potentially eligible participants were identified (setting, location and dates).",
+      "type": "boolean"
+    },
+    {
+      "id": "9",
+      "section": "Methods",
+      "description": "Participants. Whether participants formed a consecutive, random or convenience series.",
+      "type": "boolean"
+    },
+    {
+      "id": "10",
+      "section": "Methods",
+      "description": "Test methods. Index and reference tests in sufficient detail to allow replication.",
+      "type": "boolean"
+    },
+    {
+      "id": "11",
+      "section": "Methods",
+      "description": "Test methods. Rationale for choosing the reference standard (if alternatives exist).",
+      "type": "boolean"
+    },
+    {
+      "id": "12",
+      "section": "Methods",
+      "description": "Test methods. Definition of and rationale for test positivity cut-offs or result categories of the index and reference tests, distinguishing pre-specified from exploratory.",
+      "type": "boolean"
+    },
+    {
+      "id": "13",
+      "section": "Methods",
+      "description": "Test methods. Whether clinical information and reference standard results were available to the performers / readers of the index test; Whether clinical information and index test results were available to the assessors of the reference standard.",
+      "type": "boolean"
+    },
+    {
+      "id": "14",
+      "section": "Methods",
+      "description": "Analysis. Methods for estimating or comparing measures of diagnostic accuracy.",
+      "type": "boolean"
+    },
+    {
+      "id": "15",
+      "section": "Methods",
+      "description": "Analysis. How indeterminate index test or reference standard results were handled.",
+      "type": "boolean"
+    },
+    {
+      "id": "16",
+      "section": "Methods",
+      "description": "Analysis. How missing data on the index test and reference standard were handled.",
+      "type": "boolean"
+    },
+    {
+      "id": "17",
+      "section": "Methods",
+      "description": "Analysis. Any analyses of variability in diagnostic accuracy, distinguishing pre-specified from exploratory.",
+      "type": "boolean"
+    },
+    {
+      "id": "18",
+      "section": "Methods",
+      "description": "Analysis. Intended sample size and how it was determined.",
+      "type": "boolean"
+    },
+    {
+      "id": "19",
+      "section": "Results",
+      "description": "Participants. Flow of participants, using a diagram.",
+      "type": "boolean"
+    },
+    {
+      "id": "20",
+      "section": "Results",
+      "description": "Participants. Baseline demographic and clinical characteristics of participants.",
+      "type": "boolean"
+    },
+    {
+      "id": "21",
+      "section": "Results",
+      "description": "Participants. Distribution of severity of disease in those with the target condition, and distribution of alternative diagnoses in those without the target condition.",
+      "type": "boolean"
+    },
+    {
+      "id": "22",
+      "section": "Results",
+      "description": "Participants. Time interval and any clinical interventions between index test and reference standard.",
+      "type": "boolean"
+    },
+    {
+      "id": "23",
+      "section": "Results",
+      "description": "Test results. Cross tabulation of the index test results (or their distribution) by the results of the reference standard.",
+      "type": "boolean"
+    },
+    {
+      "id": "24",
+      "section": "Results",
+      "description": "Test results. Estimates of diagnostic accuracy and their precision (such as 95% confidence intervals).",
+      "type": "boolean"
+    },
+    {
+      "id": "25",
+      "section": "Results",
+      "description": "Test results. Any adverse events from performing the index test or the reference standard.",
+      "type": "boolean"
+    },
+    {
+      "id": "26",
+      "section": "Discussion",
+      "description": "Study limitations, including sources of potential bias, statistical uncertainty, and generalisability.",
+      "type": "boolean"
+    },
+    {
+      "id": "27",
+      "section": "Discussion",
+      "description": "Implications for practice, including the intended use and clinical role of the index test.",
+      "type": "boolean"
+    },
+    {
+      "id": "28",
+      "section": "Other information",
+      "description": "Registration number and name of registry.",
+      "type": "boolean"
+    },
+    {
+      "id": "29",
+      "section": "Other information",
+      "description": "Where the full study protocol can be accessed.",
+      "type": "boolean"
+    },
+    {
+      "id": "30",
+      "section": "Other information",
+      "description": "Sources of funding and other support; role of funders.",
+      "type": "boolean"
+    }
+  ]
+}
