@@ -67,6 +67,18 @@ cargo clippy --workspace --all-targets --all-features --locked -- -D warnings
 cargo test --workspace --all-targets --all-features --locked
 ```
 
+## Imported legacy renderer
+
+The Python/Graphviz reference application is retained under
+[`legacy/standardflow`](legacy/standardflow). This repository is its maintained
+home; use the [Track 03 runbook](conductor/tracks/03-standardflow-import/spec.md)
+for CLI, web, notebooks and Docker commands. The import preserves the repaired
+source tree and all recorded branch histories. Legacy checklist text and diagrams
+remain reference material, separate from the Rust engine and canonical packs.
+
+The user has directed private archival of the old `edithatogo/standardflow` remote
+after verified export. Full legacy-to-Rust semantic parity remains tracked here.
+
 ## Legacy corpus workflow
 
 Until the canonical migration is complete:

@@ -1,43 +1,92 @@
-name: Import legacy StandardFlow history
+name: Preserve final StandardFlow source heads
+
 on:
   push:
     branches: [codex/import-standardflow-20261122]
     paths: [.github/workflows/import-standardflow-once.yml]
+
 permissions:
   contents: read
+
 concurrency:
   group: import-standardflow-once
   cancel-in-progress: false
+
 jobs:
-  import:
+  preserve-final-heads:
+    if: github.repository == 'edithatogo/standards_check' && github.ref == 'refs/heads/codex/import-standardflow-20261122'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
       contents: write
     steps:
-      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
         with:
           egress-policy: audit
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Check out the triggering migration revision
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
-          ref: codex/import-standardflow-20261122
-      - name: Preserve exact source tree and all source branch histories
+          ref: ${{ github.sha }}
+          submodules: false
+      - name: Preserve the two additional source histories without activating their code
         shell: bash
         run: |
           set -euo pipefail
-          test ! -e legacy/standardflow
-          git -c http.https://github.com/.extraheader= fetch --no-tags https://github.com/edithatogo/standardflow.git '+refs/heads/*:refs/remotes/legacy-source/*'
-          test "$(git rev-parse refs/remotes/legacy-source/feature/refactor-and-document)" = d89a5dbacc207cdce11f19efd667b83fdb09df18
-          test "$(git rev-parse refs/remotes/legacy-source/main)" = af299f724bcf456c131b43a143b3eabc1d81245b
-          test "$(git rev-parse refs/remotes/legacy-source/feature/implement-guidelines)" = f1680778b4141bb5553b0e80af22bbdf5c75c862
-          test "$(git rev-parse refs/remotes/legacy-source/chore/GHA-190519-stepsecurity-remediation)" = eb7d0703b86aaa82e3cd738a273db7c60a70f6c9
-          test "$(git rev-parse refs/remotes/legacy-source/dependabot/github_actions/actions/setup-python-7.1.0)" = 7d2e233217d5d3d6c4ca9c5866f64158d117099e
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git rev-parse HEAD:legacy/standardflow)" = e48c081ff946d0fac6a1a4b65a3599c6b7aa3352
+          git diff --quiet
+          git diff --cached --quiet
+          git -c http.https://github.com/.extraheader= fetch --prune --no-tags https://github.com/edithatogo/standardflow.git '+refs/heads/*:refs/remotes/legacy-source/*'
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          import subprocess
+
+          expected = {
+              "refs/heads/main": "af299f724bcf456c131b43a143b3eabc1d81245b",
+              "refs/heads/feature/refactor-and-document": "d89a5dbacc207cdce11f19efd667b83fdb09df18",
+              "refs/heads/feature/implement-guidelines": "f1680778b4141bb5553b0e80af22bbdf5c75c862",
+              "refs/heads/chore/GHA-190519-stepsecurity-remediation": "eb7d0703b86aaa82e3cd738a273db7c60a70f6c9",
+              "refs/heads/dependabot/github_actions/actions/setup-python-7.1.0": "7d2e233217d5d3d6c4ca9c5866f64158d117099e",
+              "refs/heads/renovate/click-8.x": "3f850b81be3feb1a4d84d003b2ec6c166059a68e",
+              "refs/heads/renovate/graphviz-0.x": "38c6327a9fe507150ee2bd655f36269345cf04a8",
+          }
+          manifest = json.loads(Path("conductor/tracks/03-standardflow-import/import.json").read_text())
+          if (
+              manifest["source_refs"] != expected
+              or manifest["source_repository"] != "edithatogo/standardflow"
+              or manifest["source_commit"] != expected["refs/heads/feature/refactor-and-document"]
+              or manifest["source_tree"] != "e48c081ff946d0fac6a1a4b65a3599c6b7aa3352"
+              or manifest["import_prefix"] != "legacy/standardflow"
+          ):
+              raise SystemExit("The receiving manifest differs from the authorized source snapshot")
+          fetched = subprocess.check_output([
+              "git", "for-each-ref", "--format=%(refname)%09%(objectname)",
+              "refs/remotes/legacy-source/",
+          ], text=True)
+          fetched_refs = {
+              ref.replace("refs/remotes/legacy-source/", "refs/heads/", 1): sha
+              for ref, sha in (row.split("\t") for row in fetched.splitlines())
+          }
+          live = subprocess.check_output([
+              "git", "-c", "http.https://github.com/.extraheader=", "ls-remote",
+              "--heads", "https://github.com/edithatogo/standardflow.git",
+          ], text=True)
+          live_refs = {ref: sha for sha, ref in (row.split("\t") for row in live.splitlines())}
+          if fetched_refs != expected or live_refs != expected:
+              raise SystemExit("Source branch inventory or tips changed; no archival merge is authorized")
+          print("Verified all seven source heads against the receiving manifest")
+          PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git merge --no-ff --no-commit --allow-unrelated-histories -s ours d89a5dbacc207cdce11f19efd667b83fdb09df18 f1680778b4141bb5553b0e80af22bbdf5c75c862 eb7d0703b86aaa82e3cd738a273db7c60a70f6c9 7d2e233217d5d3d6c4ca9c5866f64158d117099e
-          git read-tree --prefix=legacy/standardflow/ -u d89a5dbacc207cdce11f19efd667b83fdb09df18
+          git merge --no-ff --no-commit --allow-unrelated-histories -s ours 3f850b81be3feb1a4d84d003b2ec6c166059a68e 38c6327a9fe507150ee2bd655f36269345cf04a8
           import_tree=$(git write-tree)
+          test "$import_tree" = "$(git rev-parse HEAD^{tree})"
           test "$(git rev-parse "$import_tree:legacy/standardflow")" = e48c081ff946d0fac6a1a4b65a3599c6b7aa3352
-          git commit -s -m 'chore(migration): preserve StandardFlow source history and repaired tree' -m 'Import repaired d89a5db into legacy/standardflow. Additional parents retain all unmerged branch histories without activating their contents. Source tree: e48c081ff946d0fac6a1a4b65a3599c6b7aa3352.'
+          git commit --signoff -m 'chore(migration): preserve final source heads' -m 'Retain the two Renovate branch histories without changing the receiving tree. The temporary importer is removed in the final receiving commit before review.'
+          test -z "$(git diff --name-only HEAD^1 HEAD)"
+          git merge-base --is-ancestor 3f850b81be3feb1a4d84d003b2ec6c166059a68e HEAD
+          git merge-base --is-ancestor 38c6327a9fe507150ee2bd655f36269345cf04a8 HEAD
           git push origin HEAD:refs/heads/codex/import-standardflow-20261122
