@@ -8,11 +8,29 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-PIN = "f06add33b598f4262a190f234828dda551db70d7"
 AREAS = ("source", "markdown", "html", "pdf", "docx", "latex", "typst",
          "schemas", "tests", "crates", "packs")
 LINK = re.compile(r"\]\((\.\.?/[^)#]+)(?:#[^)]*)?\)")
 DEBT = re.compile(r"\[TBD\]|\bTODO\b|<kebab-case-id>", re.I)
+
+
+def conductor_revision(router):
+    """Read the router's explicit pin; unsupported or ambiguous metadata fails closed."""
+    text = router.read_text(encoding="utf-8")
+    header = re.match(r"\A---\n(.*?)\n---(?:\n|$)", text, re.S)
+    if header is None:
+        raise ValueError("Conductor router frontmatter missing")
+    blocks = re.findall(r"(?m)^metadata:\n((?:[ \t]+[^\n]*(?:\n|$))*)",
+                        header.group(1) + "\n")
+    if len(blocks) != 1:
+        raise ValueError("Conductor router metadata must occur once")
+    upstream = re.findall(r"(?m)^  upstream:[ \t]*(.*?)\s*$", blocks[0])
+    revisions = re.findall(r"(?m)^  revision:[ \t]*(.*?)\s*$", blocks[0])
+    if upstream != ["gemini-cli-extensions/conductor"]:
+        raise ValueError("Conductor router upstream invalid")
+    if len(revisions) != 1 or re.fullmatch(r"[0-9a-f]{40}", revisions[0]) is None:
+        raise ValueError("Conductor router must declare one exact revision")
+    return revisions[0]
 
 
 def inventory(root, entries):
@@ -43,15 +61,22 @@ def inventory(root, entries):
 def context_errors(root, entries):
     index = {path: (mode, sha) for path, mode, sha in entries}
     errors = []
-    if index.get(".agents/plugins/conductor") != ("160000", PIN):
-        errors.append("Conductor exact gitlink is absent or different")
+    router = root / ".agents/skills/conductor/SKILL.md"
+    if not router.is_file():
+        errors.append("Conductor router skill missing")
+    else:
+        try:
+            revision = conductor_revision(router)
+        except (OSError, UnicodeError, ValueError) as exc:
+            errors.append("Conductor router revision invalid: " + str(exc))
+        else:
+            if index.get(".agents/plugins/conductor") != ("160000", revision):
+                errors.append("Conductor exact gitlink is absent or different")
     modules = (root / ".gitmodules").read_text(encoding="utf-8")
     if not re.search(r"(?m)^\s*path\s*=\s*\.agents/plugins/conductor\s*$", modules):
         errors.append("Conductor gitmodules path invalid")
     if not re.search(r"(?m)^\s*url\s*=\s*https://github\.com/gemini-cli-extensions/conductor\.git\s*$", modules):
         errors.append("Conductor gitmodules URL invalid")
-    if not (root / ".agents/skills/conductor/SKILL.md").is_file():
-        errors.append("Conductor router skill missing")
     for name in ("index", "product", "tech-stack", "workflow", "roadmap", "tracks"):
         path = root / "conductor" / (name + ".md")
         if not path.is_file():

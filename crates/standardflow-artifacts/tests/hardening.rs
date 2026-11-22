@@ -1,7 +1,8 @@
 //! Adversarial resource, schema-parity and accessibility regression tests.
 
 use standardflow_artifacts::{
-    DiagramRecipe, PrismaError, RecipeError, parse_prisma_flow, render_svg, render_text,
+    DiagramRecipe, PrismaError, RecipeError, Scene, parse_prisma_flow, render_scene_json,
+    render_svg, render_text,
 };
 
 const FLOW: &[u8] = include_bytes!(
@@ -233,5 +234,179 @@ fn optional_edge_labels_cannot_be_blank() -> Result<(), Box<dyn std::error::Erro
             .iter()
             .any(|item| item.code == "SF-RECIPE-019")
     );
+    Ok(())
+}
+
+#[test]
+fn compact_recipe_metrics_survive_scene_roundtrip_and_svg_rendering()
+-> Result<(), Box<dyn std::error::Error>> {
+    let mut recipe = single_node_recipe("First\nSecond\nThird\nFourth")?;
+    recipe.layout.padding = 4;
+    recipe.layout.line_height = 10;
+
+    let scene = recipe.build_scene(&std::collections::BTreeMap::new())?;
+    let json = render_scene_json(&scene)?;
+    let serialized: serde_json::Value = serde_json::from_str(&json)?;
+    assert_eq!(serialized.get("node_padding"), Some(&serde_json::json!(4)));
+    assert_eq!(serialized.get("line_height"), Some(&serde_json::json!(10)));
+    let restored: Scene = serde_json::from_str(&json)?;
+    assert_eq!(restored, scene);
+    let svg = render_svg(&restored)?;
+    assert!(svg.contains("font-size: 10px;"));
+    assert!(svg.contains("<rect x=\"40\" y=\"40\" width=\"80\" height=\"48\""));
+    assert!(svg.contains("<text class=\"standardflow-label\" x=\"44\" y=\"54\">"));
+    assert!(svg.contains("<tspan x=\"44\" dy=\"0\">First</tspan>"));
+    for line in ["Second", "Third", "Fourth"] {
+        assert!(svg.contains(&format!("<tspan x=\"44\" dy=\"10\">{line}</tspan>")));
+    }
+    // Four 10px lines fit between y=44 and y=84, inside the 4px node padding.
+    assert_eq!(render_text(&restored)?, render_text(&scene)?);
+    Ok(())
+}
+
+#[test]
+fn narrow_node_interiors_bound_words_and_unbroken_labels() -> Result<(), Box<dyn std::error::Error>>
+{
+    let label = "ABCDEFGHIJKLMN O PQ R S";
+    for (padding, capacity) in [(36, 1), (32, 2)] {
+        let mut recipe = single_node_recipe(label)?;
+        recipe.layout.padding = padding;
+        recipe.layout.character_width = 7;
+        let scene = recipe.build_scene(&std::collections::BTreeMap::new())?;
+        let node = scene
+            .nodes
+            .first()
+            .ok_or_else(|| std::io::Error::other("fixture has no node"))?;
+        assert_eq!(node.rect.width, 80);
+        assert!(
+            node.lines
+                .iter()
+                .all(|line| line.chars().count() <= capacity)
+        );
+        assert_eq!(node.lines.concat(), "ABCDEFGHIJKLMNOPQRS");
+        assert!(render_text(&scene)?.contains(label));
+        assert!(render_svg(&scene).is_ok());
+    }
+    Ok(())
+}
+
+#[test]
+fn node_spans_require_room_for_at_least_one_estimated_character()
+-> Result<(), Box<dyn std::error::Error>> {
+    for (padding, character_width) in [(39, 7), (40, 7), (41, 7), (36, 0)] {
+        let mut recipe = single_node_recipe("Narrow")?;
+        recipe.layout.padding = padding;
+        recipe.layout.character_width = character_width;
+        assert!(
+            recipe
+                .validate()
+                .diagnostics
+                .iter()
+                .any(|item| item.code == "SF-RECIPE-022" && item.path == "/nodes/0")
+        );
+        assert!(matches!(
+            recipe.build_scene(&std::collections::BTreeMap::new()),
+            Err(RecipeError::Validation(_))
+        ));
+    }
+    // A two-column node can fit even when a one-column node on the same grid cannot.
+    let mut recipe = single_node_recipe("A wider node")?;
+    recipe.layout.columns = 2;
+    recipe.layout.padding = 39;
+    recipe.layout.character_width = 7;
+    assert!(!recipe.validate().is_valid());
+    recipe
+        .nodes
+        .first_mut()
+        .ok_or_else(|| std::io::Error::other("fixture has no node"))?
+        .column_span = 2;
+    assert!(recipe.validate().is_valid());
+    let scene = recipe.build_scene(&std::collections::BTreeMap::new())?;
+    assert!(render_svg(&scene).is_ok());
+    Ok(())
+}
+
+fn single_node_recipe(label: &str) -> Result<DiagramRecipe, Box<dyn std::error::Error>> {
+    let mut recipe = DiagramRecipe::from_json(RECIPE)?;
+    recipe.title_template = String::from("Compact layout");
+    recipe.description_template = String::from("Synthetic label geometry");
+    recipe.layout.columns = 1;
+    recipe.layout.column_width = 80;
+    recipe.layout.minimum_node_height = 40;
+    recipe.nodes.truncate(1);
+    recipe.edges.clear();
+    let node = recipe
+        .nodes
+        .first_mut()
+        .ok_or_else(|| std::io::Error::other("fixture has no node"))?;
+    label.clone_into(&mut node.label_template);
+    node.aria_template.clone_from(&node.label_template);
+    recipe.reading_order = vec![node.id.clone()];
+    Ok(recipe)
+}
+
+#[test]
+fn existing_scene_json_keeps_default_metrics_and_identical_outputs()
+-> Result<(), Box<dyn std::error::Error>> {
+    let json = include_str!(
+        "../../../examples/generated/prisma-2020/new-databases-registers-other-sources.scene.json"
+    );
+    let scene: Scene = serde_json::from_str(json)?;
+    assert!(scene.validate().is_valid());
+    assert_eq!(render_scene_json(&scene)?, json);
+    assert_eq!(
+        render_svg(&scene)?,
+        include_str!(
+            "../../../examples/generated/prisma-2020/new-databases-registers-other-sources.svg"
+        )
+    );
+    Ok(())
+}
+
+#[test]
+fn isolated_scenes_reject_unsafe_or_uncontainable_text_metrics()
+-> Result<(), Box<dyn std::error::Error>> {
+    let scene = parse_prisma_flow(FLOW)?.build_scene()?;
+    for (field, value) in [
+        ("node_padding", 3_u32),
+        ("node_padding", 201),
+        ("node_padding", u32::MAX),
+        ("line_height", 9),
+        ("line_height", 101),
+        ("line_height", u32::MAX),
+    ] {
+        let mut json = serde_json::to_value(&scene)?;
+        json.as_object_mut()
+            .ok_or_else(|| std::io::Error::other("scene is not an object"))?
+            .insert(field.to_owned(), serde_json::Value::from(value));
+        let invalid: Scene = serde_json::from_value(json)?;
+        assert!(
+            invalid
+                .validate()
+                .diagnostics
+                .iter()
+                .any(|item| item.code == "SF-SCENE-019")
+        );
+        assert!(render_svg(&invalid).is_err());
+        assert!(render_text(&invalid).is_err());
+        assert!(render_scene_json(&invalid).is_err());
+    }
+    for (width, height) in [(36, 500), (500, 1)] {
+        let mut invalid = scene.clone();
+        let node = invalid
+            .nodes
+            .first_mut()
+            .ok_or_else(|| std::io::Error::other("fixture has no node"))?;
+        node.rect.width = width;
+        node.rect.height = height;
+        assert!(
+            invalid
+                .validate()
+                .diagnostics
+                .iter()
+                .any(|item| item.code == "SF-SCENE-020")
+        );
+        assert!(render_svg(&invalid).is_err());
+    }
     Ok(())
 }

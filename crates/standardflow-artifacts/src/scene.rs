@@ -181,6 +181,18 @@ pub struct Scene {
     pub description: String,
     /// Canvas dimensions.
     pub canvas: Canvas,
+    /// Inner label inset in CSS pixels; omitted v1 documents use 18.
+    #[serde(
+        default = "default_node_padding",
+        skip_serializing_if = "is_default_node_padding"
+    )]
+    pub node_padding: u32,
+    /// Text line height in CSS pixels; omitted v1 documents use 20.
+    #[serde(
+        default = "default_line_height",
+        skip_serializing_if = "is_default_line_height"
+    )]
+    pub line_height: u32,
     /// Positioned nodes.
     pub nodes: Vec<SceneNode>,
     /// Semantic edges.
@@ -189,6 +201,30 @@ pub struct Scene {
     pub reading_order: Vec<String>,
     /// Complete non-visual equivalent.
     pub text_equivalent: String,
+}
+
+const fn default_node_padding() -> u32 {
+    18
+}
+
+const fn default_line_height() -> u32 {
+    20
+}
+
+#[allow(
+    clippy::trivially_copy_pass_by_ref,
+    reason = "serde skip_serializing_if predicates borrow the field"
+)]
+const fn is_default_node_padding(value: &u32) -> bool {
+    *value == default_node_padding()
+}
+
+#[allow(
+    clippy::trivially_copy_pass_by_ref,
+    reason = "serde skip_serializing_if predicates borrow the field"
+)]
+const fn is_default_line_height(value: &u32) -> bool {
+    *value == default_line_height()
 }
 
 impl Scene {
@@ -240,6 +276,18 @@ impl Scene {
                 "/canvas",
                 "canvas dimensions must be positive",
             ));
+        }
+        for (value, range, path) in [
+            (self.node_padding, 4..=200, "/node_padding"),
+            (self.line_height, 10..=100, "/line_height"),
+        ] {
+            if !range.contains(&value) {
+                report.push(Diagnostic::error(
+                    "SF-SCENE-019",
+                    path,
+                    "node padding and line height must stay within the recipe's safe ranges",
+                ));
+            }
         }
         if self.title.trim().is_empty()
             || self.description.trim().is_empty()
@@ -313,6 +361,20 @@ impl Scene {
                     format!("{path}/rect"),
                     "node bounds must be positive and remain inside the canvas",
                 )),
+            }
+            let doubled_padding = self.node_padding.checked_mul(2);
+            let content_height = u32::try_from(node.lines.len())
+                .ok()
+                .and_then(|count| count.checked_mul(self.line_height))
+                .and_then(|height| doubled_padding.and_then(|padding| height.checked_add(padding)));
+            if doubled_padding.is_none_or(|padding| padding >= node.rect.width)
+                || content_height.is_none_or(|height| height > node.rect.height)
+            {
+                report.push(Diagnostic::error(
+                    "SF-SCENE-020",
+                    format!("{path}/rect"),
+                    "node bounds must contain its padded text-line geometry",
+                ));
             }
         }
 

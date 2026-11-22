@@ -1,13 +1,15 @@
 # StandardFlow retirement and recovery record
 
-Recorded on **22 November 2026, 14:53 UTC**. `edithatogo/standards_check` remains the public
+Updated on **23 November 2026 (Australia/Brisbane)**. `edithatogo/standards_check` remains the public
 development repository and issue destination. The user authorised importing
 `edithatogo/standardflow`, then making that source repository private and archived.
 **The export is merged and verified; source privacy and archival are blocked on
 owner account reauthentication.** The authorized visibility change reached GitHub's
 **Confirm access** screen, requiring the owner's passkey or authenticator. Successful
 reauthentication has not been observed. The latest settings read still returned
-`private: false` and `archived: false`, with zero open source PRs.
+`private: false` and `archived: false` at 21:00 UTC on 22 November, with zero open
+source PRs and only the bot-owned dependency dashboard still open. The connected
+browser was unavailable in the follow-up chat; no further settings action was applied.
 
 ## Preserved implementation and history
 
@@ -16,7 +18,7 @@ The current transferred compatibility baseline is source commit
 `62d8a0e738f0255cc59822ae4e661568090a213e`, under `legacy/standardflow/`.
 Receiving import
 [`6c67527512ad5b603307ac6415ba214d3333c42a`](https://github.com/edithatogo/standards_check/commit/6c67527512ad5b603307ac6415ba214d3333c42a)
-contains that exact subtree, and all nine current source tips are independently
+contains that exact subtree, and all nine preserved export tips are independently
 verified ancestors. It retains original main `af299f724...`, the earlier PR #9
 head `41c3e174...`, and initial repair `d89a5dba...` in history.
 Preparation child
@@ -47,8 +49,10 @@ receiving repository; these are preserved snapshots, not accepted runtime change
 All nine tips are verified ancestors of receiving main `15184da8`, including the
 four Renovate tips created after the original export. Normal merge commits retained
 this ancestry; no squash or rebase was used. The exact `legacy/standardflow` tree
-was rechecked on main, and all nine live source refs still matched the inventory
-before the attempted privacy change. Temporary write-capable import workflows are
+was rechecked on main. All nine live source refs matched the export inventory before
+the original privacy attempt. Following source PR closure, four live source branches
+remain and match their recorded tips; the five removed source refs remain recoverable
+through the nine named receiving refs and main's ancestry. Temporary import workflows are
 absent from receiving main; source workflows inside the retained subtree are inert.
 
 ## Acceptance and outstanding work
@@ -87,6 +91,12 @@ setup-python pins represented by PR #24/#25. Dependency PRs #26/#27/#28/#29 are 
 [#94](https://github.com/edithatogo/standards_check/issues/94); unqualified guideline
 datasets are held in [#95](https://github.com/edithatogo/standards_check/issues/95).
 Preserving their commits does not admit their changes.
+
+Source issues #12, #13 and #14 now link to receiving #29, #30 and #31 and are closed
+as relocated (`not_planned` in the retired-source issue tracker). Their original
+bodies remain in the issues and inventory. Testing and security obligations continue
+in the open receiving issues. Source dashboard #23 remains bot-owned; no dependency
+upgrade was activated by the transfer bookkeeping.
 
 All seven source PRs were closed on 22 November 2026 after preservation. They were
 closed as exported or superseded, not merged into the old source's main branch.

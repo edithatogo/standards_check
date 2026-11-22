@@ -45,10 +45,12 @@ success, a configured job, a neutral check or a cancelled offline-security job i
 
 ## Remaining work
 
-1. Track 02: carry generic recipe padding and line-height through the scene/rendering contract.
-   Recipes accept custom metrics while the SVG renderer currently uses 18/20. Built-in recipes
-   use those defaults; nondefault metrics can overflow. Add a small-metrics multiline fixture,
-   define backwards-compatible scene fields, then regenerate and validate all projections.
+1. Track 02 follow-up implemented on 23 November: generic recipe padding and line-height now
+   survive the scene/rendering contract; wrapping respects each node's available text width.
+   Five regressions and all 12 unchanged reference projections are recorded in the
+   [metrics receipt](tracks/02-semantic-diagram-prisma/recipe-text-metrics-20261123.md).
+   See the [completion receipt](ponytail-completion-20261123.md) for combined validation
+   and the remaining independent qualification gates.
 2. Track 00 / issues #29–31: repository-standards profile, branch enforcement, coverage and
    managed-file reconciliation remain separate. The cancelled offline security pipeline still
    needs a qualified runner and an execution receipt.

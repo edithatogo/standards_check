@@ -58,3 +58,14 @@ they do not certify general accessibility, methodological validity or third-part
 
 - [x] SVG reading order, accessibility gate and identifier bounds: published at `c64c61a0a978b4b50f8d525fc76d6548d2e75718`; verification is linked below.
 - [x] Retain findings, negative regressions, local receipts and outstanding gates in the [review record](../../ponytail-review-20261122.md).
+
+## Recipe text-metric correction — 23 November 2026
+
+- [x] Carry recipe padding and line height through the scene contract into SVG rendering.
+- [x] Reject invalid metrics and text boxes that cannot contain their declared line geometry.
+- [x] Bound word and token wrapping by each node's computed inner width, rejecting impossible character capacity before layout.
+- [x] Verify compact multiline labels and scene JSON round-trips while retaining all 12 default golden bytes.
+- [ ] Record exact-revision hosted acceptance separately from local synthetic checks.
+
+Local evidence and wire-compatibility details are recorded in
+[the text-metric correction receipt](recipe-text-metrics-20261123.md).
