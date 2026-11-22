@@ -1,0 +1,253 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://www.equator-network.org/schemas/consort_schema.json",
+    "title": "CONSORT 2010 flow diagram schema",
+    "description": "A schema for generating CONSORT 2010 flow diagrams.",
+    "type": "object",
+    "properties": {
+        "diagram_type": {
+            "description": "The type of diagram to generate.",
+            "type": "string",
+            "enum": [
+                "CONSORT",
+                "CONSORT_CLUSTER"
+            ]
+        },
+        "clusters_assessed_for_eligibility": {
+            "description": "Number of clusters assessed for eligibility.",
+            "type": "integer",
+            "minimum": 0
+        },
+        "clusters_excluded": {
+            "description": "Number of clusters excluded.",
+            "type": "integer",
+            "minimum": 0
+        },
+        "reasons_for_cluster_exclusion": {
+            "description": "Reasons for cluster exclusion.",
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "clusters_randomized": {
+            "description": "Number of clusters randomized.",
+            "type": "integer",
+            "minimum": 0
+        },
+        "clusters_allocated_to_intervention": {
+            "description": "Number of clusters allocated to intervention.",
+            "type": "integer",
+            "minimum": 0
+        },
+        "individuals_in_clusters_allocated_to_intervention": {
+            "description": "Number of individuals in clusters allocated to intervention.",
+            "type": "integer",
+            "minimum": 0
+        },
+        "clusters_lost_to_follow_up": {
+            "description": "Number of clusters lost to follow-up.",
+            "type": "integer",
+            "minimum": 0
+        },
+        "individuals_lost_to_follow_up": {
+            "description": "Number of individuals lost to follow-up.",
+            "type": "integer",
+            "minimum": 0
+        },
+        "reasons_for_cluster_loss_to_follow_up": {
+            "description": "Reasons for cluster loss to follow-up.",
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "clusters_discontinued_intervention": {
+            "description": "Number of clusters that discontinued intervention.",
+            "type": "integer",
+            "minimum": 0
+        },
+        "individuals_discontinued_intervention": {
+            "description": "Number of individuals who discontinued intervention.",
+            "type": "integer",
+            "minimum": 0
+        },
+        "reasons_for_cluster_discontinuation": {
+            "description": "Reasons for cluster discontinuation.",
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "clusters_analysed": {
+            "description": "Number of clusters analysed.",
+            "type": "integer",
+            "minimum": 0
+        },
+        "individuals_analysed": {
+            "description": "Number of individuals analysed.",
+            "type": "integer",
+            "minimum": 0
+        },
+        "clusters_excluded_from_analysis": {
+            "description": "Number of clusters excluded from analysis.",
+            "type": "integer",
+            "minimum": 0
+        },
+        "individuals_excluded_from_analysis": {
+            "description": "Number of individuals excluded from analysis.",
+            "type": "integer",
+            "minimum": 0
+        },
+        "reasons_for_cluster_exclusion_from_analysis": {
+            "description": "Reasons for cluster exclusion from analysis.",
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "style": {
+            "$ref": "#/definitions/style"
+        },
+        "assessed_for_eligibility": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "excluded": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "randomized": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "allocated_to_intervention": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "received_allocated_intervention": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "did_not_receive_allocated_intervention": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "lost_to_follow_up": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "discontinued_intervention": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "analysed": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "excluded_from_analysis": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "reasons_for_exclusion": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "reasons_for_not_receiving_intervention": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "reasons_for_loss_to_follow_up": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "reasons_for_discontinuing_intervention": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "reasons_for_exclusion_from_analysis": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
+    },
+    "if": {
+        "properties": {
+            "diagram_type": {
+                "const": "CONSORT"
+            }
+        }
+    },
+    "then": {
+        "required": [
+            "diagram_type",
+            "assessed_for_eligibility",
+            "excluded",
+            "randomized",
+            "allocated_to_intervention",
+            "received_allocated_intervention",
+            "did_not_receive_allocated_intervention",
+            "lost_to_follow_up",
+            "discontinued_intervention",
+            "analysed",
+            "excluded_from_analysis"
+        ]
+    },
+    "else": {
+        "required": [
+            "diagram_type",
+            "clusters_assessed_for_eligibility",
+            "clusters_excluded",
+            "clusters_randomized",
+            "clusters_allocated_to_intervention",
+            "individuals_in_clusters_allocated_to_intervention",
+            "clusters_lost_to_follow_up",
+            "individuals_lost_to_follow_up",
+            "clusters_discontinued_intervention",
+            "individuals_discontinued_intervention",
+            "clusters_analysed",
+            "individuals_analysed",
+            "clusters_excluded_from_analysis",
+            "individuals_excluded_from_analysis"
+        ]
+    },
+    "definitions": {
+        "style": {
+            "type": "object",
+            "properties": {
+                "box_color": {
+                    "type": "string",
+                    "description": "The background color of the boxes."
+                },
+                "font_color": {
+                    "type": "string",
+                    "description": "The color of the text in the boxes."
+                },
+                "font_name": {
+                    "type": "string",
+                    "description": "The name of the font to use for the text."
+                },
+                "font_size": {
+                    "type": "string",
+                    "description": "The size of the font to use for the text."
+                },
+                "arrow_color": {
+                    "type": "string",
+                    "description": "The color of the arrows."
+                }
+            }
+        }
+    },
+    "required": [
+        "diagram_type"
+    ]
+}

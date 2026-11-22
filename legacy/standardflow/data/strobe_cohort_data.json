@@ -1,0 +1,31 @@
+{
+    "diagram_type": "STROBE_COHORT",
+    "exposed_group_potentially_eligible": 500,
+    "exposed_group_assessed_for_eligibility": 400,
+    "exposed_group_excluded": 100,
+    "reasons_for_exposed_group_exclusion": [
+        "Did not meet inclusion criteria (n=75)",
+        "Declined to participate (n=25)"
+    ],
+    "exposed_group_included": 300,
+    "exposed_group_lost_to_follow_up": 50,
+    "reasons_for_exposed_group_loss_to_follow_up": [
+        "Unable to contact (n=30)",
+        "Withdrew consent (n=20)"
+    ],
+    "exposed_group_analysed": 250,
+    "unexposed_group_potentially_eligible": 500,
+    "unexposed_group_assessed_for_eligibility": 400,
+    "unexposed_group_excluded": 100,
+    "reasons_for_unexposed_group_exclusion": [
+        "Did not meet inclusion criteria (n=75)",
+        "Declined to participate (n=25)"
+    ],
+    "unexposed_group_included": 300,
+    "unexposed_group_lost_to_follow_up": 50,
+    "reasons_for_unexposed_group_loss_to_follow_up": [
+        "Unable to contact (n=30)",
+        "Withdrew consent (n=20)"
+    ],
+    "unexposed_group_analysed": 250
+}

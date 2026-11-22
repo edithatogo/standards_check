@@ -1,0 +1,24 @@
+{
+    "checklist_type": "STARD_BLCM",
+    "title": "STARD-BLCM Checklist for Bayesian Latent Class Models",
+    "items": [
+        {
+            "section": "Title and abstract",
+            "id": "1",
+            "description": "Identification as a study of diagnostic accuracy using Bayesian latent class models in the title",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "14",
+            "description": "Analysis. Methods for estimating or comparing measures of diagnostic accuracy, including the specification of the Bayesian latent class model",
+            "type": "boolean"
+        },
+        {
+            "section": "Results",
+            "id": "24",
+            "description": "Test results. Estimates of diagnostic accuracy and their precision (such as 95% credible intervals), from the Bayesian latent class model",
+            "type": "boolean"
+        }
+    ]
+}

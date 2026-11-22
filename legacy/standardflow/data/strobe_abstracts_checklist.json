@@ -1,0 +1,66 @@
+{
+    "checklist_type": "STROBE_ABSTRACTS",
+    "title": "STROBE for Abstracts Checklist",
+    "items": [
+        {
+            "section": "Title",
+            "id": "1",
+            "description": "Indicate the study’s design in the title",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "2",
+            "description": "Describe the study design",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "3",
+            "description": "Describe the setting, including recruitment period",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "4",
+            "description": "Describe the participants (inclusion/exclusion criteria)",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "5",
+            "description": "State the sample size",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "6",
+            "description": "Define the exposure and outcome variables",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "7",
+            "description": "Describe the statistical methods",
+            "type": "boolean"
+        },
+        {
+            "section": "Results",
+            "id": "8",
+            "description": "Report the number of participants",
+            "type": "boolean"
+        },
+        {
+            "section": "Results",
+            "id": "9",
+            "description": "Report the main results, including estimates and their precision",
+            "type": "boolean"
+        },
+        {
+            "section": "Conclusions",
+            "id": "10",
+            "description": "State the main conclusions",
+            "type": "boolean"
+        }
+    ]
+}

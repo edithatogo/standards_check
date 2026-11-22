@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Research Artifacts Library</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        function updateForm() {
+            const diagramType = document.getElementById('diagram_type').value;
+            const rawJson = document.getElementById('json_toggle').checked;
+            const groups = {
+                prisma_fields: 'PRISMA',
+                prisma_updated_fields: 'PRISMA_2020_UPDATED',
+                consort_fields: 'CONSORT',
+                consort_cluster_fields: 'CONSORT_CLUSTER',
+                strobe_fields: 'STROBE',
+                strobe_cohort_fields: 'STROBE_COHORT'
+            };
+            for (const [id, type] of Object.entries(groups)) {
+                const group = document.getElementById(id);
+                const active = type === diagramType && !rawJson;
+                group.style.display = active ? 'block' : 'none';
+                group.querySelectorAll('input').forEach(input => { input.disabled = !active; });
+            }
+            document.getElementById('dynamic_form').style.display = rawJson ? 'none' : 'block';
+            document.getElementById('json_input').style.display = rawJson ? 'block' : 'none';
+            document.getElementById('json_data').disabled = !rawJson;
+        }
+    </script>
+</head>
+<body onload="updateForm()">
+    <h1>Research Artifacts Library</h1>
+    <form method="POST">
+        <label for="diagram_type">Diagram Type:</label>
+        <select name="diagram_type" id="diagram_type" onchange="updateForm()">
+            <option value="PRISMA">PRISMA</option>
+            <option value="PRISMA_2020_UPDATED">PRISMA 2020 (Updated)</option>
+            <option value="CONSORT">CONSORT</option>
+            <option value="CONSORT_CLUSTER">CONSORT (Cluster)</option>
+            <option value="STROBE">STROBE</option>
+            <option value="STROBE_COHORT">STROBE (Cohort)</option>
+        </select>
+        <br>
+        <input type="checkbox" id="json_toggle" name="json_toggle" onchange="updateForm()">
+        <label for="json_toggle">Use Raw JSON Input</label>
+        <br>
+        <label for="output_format">Output Format:</label>
+        <select name="output_format" id="output_format">
+            <option value="png">PNG</option>
+            <option value="svg">SVG</option>
+            <option value="pdf">PDF</option>
+        </select>
+        <br>
+
+        <div id="dynamic_form">
+            <div id="prisma_fields">
+            <h2>PRISMA Fields</h2>
+            <label for="records_identified">Records identified through database searching:</label>
+            <input type="number" name="records_identified" value="1000"><br>
+            <label for="records_after_duplicates_removed">Records after duplicates removed:</label>
+            <input type="number" name="records_after_duplicates_removed" value="800"><br>
+            <label for="records_screened">Records screened:</label>
+            <input type="number" name="records_screened" value="800"><br>
+            <label for="records_excluded">Records excluded:</label>
+            <input type="number" name="records_excluded" value="200"><br>
+            <label for="full_text_articles_assessed">Full-text articles assessed for eligibility:</label>
+            <input type="number" name="full_text_articles_assessed" value="600"><br>
+            <label for="full_text_articles_excluded">Full-text articles excluded, with reasons:</label>
+            <input type="number" name="full_text_articles_excluded" value="300"><br>
+            <label for="studies_included">Studies included in qualitative synthesis:</label>
+            <input type="number" name="studies_included" value="300"><br>
+        </div>
+
+        <div id="prisma_updated_fields" style="display: none;">
+            <h2>PRISMA 2020 (Updated) Fields</h2>
+            <label for="previous_studies">Studies included in previous version of review:</label>
+            <input type="number" name="previous_studies" value="10"><br>
+            <label for="new_records_identified">New records identified:</label>
+            <input type="number" name="new_records_identified" value="500"><br>
+            <label for="new_records_after_duplicates_removed">New records after duplicates removed:</label>
+            <input type="number" name="new_records_after_duplicates_removed" value="400"><br>
+            <label for="new_records_screened">New records screened:</label>
+            <input type="number" name="new_records_screened" value="400"><br>
+            <label for="new_records_excluded">New records excluded:</label>
+            <input type="number" name="new_records_excluded" value="100"><br>
+            <label for="new_full_text_articles_assessed">New full-text articles assessed for eligibility:</label>
+            <input type="number" name="new_full_text_articles_assessed" value="300"><br>
+            <label for="new_full_text_articles_excluded">New full-text articles excluded, with reasons:</label>
+            <input type="number" name="new_full_text_articles_excluded" value="150"><br>
+            <label for="new_studies_included">New studies included in qualitative synthesis:</label>
+            <input type="number" name="new_studies_included" value="150"><br>
+            <label for="total_studies_included">Total studies included in qualitative synthesis:</label>
+            <input type="number" name="total_studies_included" value="160"><br>
+        </div>
+
+        <div id="consort_fields" style="display: none;">
+            <h2>CONSORT Fields</h2>
+            <label for="assessed_for_eligibility">Assessed for eligibility:</label>
+            <input type="number" name="assessed_for_eligibility" value="1000"><br>
+            <label for="excluded">Excluded:</label>
+            <input type="number" name="excluded" value="200"><br>
+            <label for="randomized">Randomized:</label>
+            <input type="number" name="randomized" value="800"><br>
+            <label for="allocated_to_intervention">Allocated to intervention:</label>
+            <input type="number" name="allocated_to_intervention" value="400"><br>
+            <label for="received_allocated_intervention">Received allocated intervention:</label>
+            <input type="number" name="received_allocated_intervention" value="380"><br>
+            <label for="did_not_receive_allocated_intervention">Did not receive allocated intervention:</label>
+            <input type="number" name="did_not_receive_allocated_intervention" value="20"><br>
+            <label for="lost_to_follow_up">Lost to follow-up:</label>
+            <input type="number" name="lost_to_follow_up" value="30"><br>
+            <label for="discontinued_intervention">Discontinued intervention:</label>
+            <input type="number" name="discontinued_intervention" value="10"><br>
+            <label for="analysed">Analysed:</label>
+            <input type="number" name="analysed" value="340"><br>
+            <label for="excluded_from_analysis">Excluded from analysis:</label>
+            <input type="number" name="excluded_from_analysis" value="10"><br>
+        </div>
+
+        <div id="consort_cluster_fields" style="display: none;">
+            <h2>CONSORT (Cluster) Fields</h2>
+            <label for="clusters_assessed_for_eligibility">Clusters assessed for eligibility:</label>
+            <input type="number" name="clusters_assessed_for_eligibility" value="100"><br>
+            <label for="clusters_excluded">Clusters excluded:</label>
+            <input type="number" name="clusters_excluded" value="20"><br>
+            <label for="clusters_randomized">Clusters randomized:</label>
+            <input type="number" name="clusters_randomized" value="80"><br>
+            <label for="clusters_allocated_to_intervention">Clusters allocated to intervention:</label>
+            <input type="number" name="clusters_allocated_to_intervention" value="40"><br>
+            <label for="individuals_in_clusters_allocated_to_intervention">Individuals in clusters allocated to intervention:</label>
+            <input type="number" name="individuals_in_clusters_allocated_to_intervention" value="4000"><br>
+            <label for="clusters_lost_to_follow_up">Clusters lost to follow-up:</label>
+            <input type="number" name="clusters_lost_to_follow_up" value="5"><br>
+            <label for="individuals_lost_to_follow_up">Individuals lost to follow-up:</label>
+            <input type="number" name="individuals_lost_to_follow_up" value="500"><br>
+            <label for="clusters_discontinued_intervention">Clusters discontinued intervention:</label>
+            <input type="number" name="clusters_discontinued_intervention" value="2"><br>
+            <label for="individuals_discontinued_intervention">Individuals discontinued intervention:</label>
+            <input type="number" name="individuals_discontinued_intervention" value="200"><br>
+            <label for="clusters_analysed">Clusters analysed:</label>
+            <input type="number" name="clusters_analysed" value="33"><br>
+            <label for="individuals_analysed">Individuals analysed:</label>
+            <input type="number" name="individuals_analysed" value="3300"><br>
+            <label for="clusters_excluded_from_analysis">Clusters excluded from analysis:</label>
+            <input type="number" name="clusters_excluded_from_analysis" value="2"><br>
+            <label for="individuals_excluded_from_analysis">Individuals excluded from analysis:</label>
+            <input type="number" name="individuals_excluded_from_analysis" value="200"><br>
+        </div>
+
+        <div id="strobe_fields" style="display: none;">
+            <h2>STROBE Fields</h2>
+            <label for="potentially_eligible">Potentially eligible participants:</label>
+            <input type="number" name="potentially_eligible" value="1200"><br>
+            <label for="assessed_for_eligibility">Assessed for eligibility:</label>
+            <input type="number" name="assessed_for_eligibility" value="1000"><br>
+            <label for="excluded_before_study">Excluded before study:</label>
+            <input type="number" name="excluded_before_study" value="200"><br>
+            <label for="included_in_study">Included in study:</label>
+            <input type="number" name="included_in_study" value="800"><br>
+            <label for="lost_to_follow_up">Lost to follow-up:</label>
+            <input type="number" name="lost_to_follow_up" value="50"><br>
+            <label for="incomplete_data">Incomplete data:</label>
+            <input type="number" name="incomplete_data" value="30"><br>
+            <label for="analysed">Analysed:</label>
+            <input type="number" name="analysed" value="720"><br>
+        </div>
+
+        <div id="strobe_cohort_fields" style="display: none;">
+            <h2>STROBE (Cohort) Fields</h2>
+            <h3>Exposed Group</h3>
+            <label for="exposed_group_potentially_eligible">Potentially eligible:</label>
+            <input type="number" name="exposed_group_potentially_eligible" value="500"><br>
+            <label for="exposed_group_assessed_for_eligibility">Assessed for eligibility:</label>
+            <input type="number" name="exposed_group_assessed_for_eligibility" value="400"><br>
+            <label for="exposed_group_excluded">Excluded:</label>
+            <input type="number" name="exposed_group_excluded" value="100"><br>
+            <label for="exposed_group_included">Included in study:</label>
+            <input type="number" name="exposed_group_included" value="300"><br>
+            <label for="exposed_group_lost_to_follow_up">Lost to follow-up:</label>
+            <input type="number" name="exposed_group_lost_to_follow_up" value="50"><br>
+            <label for="exposed_group_analysed">Analysed:</label>
+            <input type="number" name="exposed_group_analysed" value="250"><br>
+            <h3>Unexposed Group</h3>
+            <label for="unexposed_group_potentially_eligible">Potentially eligible:</label>
+            <input type="number" name="unexposed_group_potentially_eligible" value="500"><br>
+            <label for="unexposed_group_assessed_for_eligibility">Assessed for eligibility:</label>
+            <input type="number" name="unexposed_group_assessed_for_eligibility" value="400"><br>
+            <label for="unexposed_group_excluded">Excluded:</label>
+            <input type="number" name="unexposed_group_excluded" value="100"><br>
+            <label for="unexposed_group_included">Included in study:</label>
+            <input type="number" name="unexposed_group_included" value="300"><br>
+            <label for="unexposed_group_lost_to_follow_up">Lost to follow-up:</label>
+            <input type="number" name="unexposed_group_lost_to_follow_up" value="50"><br>
+            <label for="unexposed_group_analysed">Analysed:</label>
+            <input type="number" name="unexposed_group_analysed" value="250"><br>
+            </div>
+        </div>
+        <div id="json_input" style="display: none;">
+            <label for="json_data">JSON Data:</label>
+            <br>
+            <textarea name="json_data" id="json_data" rows="20" cols="80"></textarea>
+        </div>
+        <br>
+        <input type="submit" value="Generate Diagram">
+    </form>
+</body>
+</html>

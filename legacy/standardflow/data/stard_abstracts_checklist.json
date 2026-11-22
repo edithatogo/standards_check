@@ -1,0 +1,54 @@
+{
+    "checklist_type": "STARD_ABSTRACTS",
+    "title": "STARD for Abstracts Checklist",
+    "items": [
+        {
+            "section": "Title",
+            "id": "1",
+            "description": "Identification as a study of diagnostic accuracy",
+            "type": "boolean"
+        },
+        {
+            "section": "Objectives",
+            "id": "2",
+            "description": "State the study objectives and hypotheses",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "3",
+            "description": "Describe the study design (e.g., cohort, case-control)",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "4",
+            "description": "Describe the participants, including setting, inclusion/exclusion criteria",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "5",
+            "description": "Describe the index test and reference standard",
+            "type": "boolean"
+        },
+        {
+            "section": "Results",
+            "id": "6",
+            "description": "Report the number of participants",
+            "type": "boolean"
+        },
+        {
+            "section": "Results",
+            "id": "7",
+            "description": "Report the estimates of diagnostic accuracy and their precision (e.g., 95% confidence intervals)",
+            "type": "boolean"
+        },
+        {
+            "section": "Conclusions",
+            "id": "8",
+            "description": "State the conclusions, including the implications for practice",
+            "type": "boolean"
+        }
+    ]
+}

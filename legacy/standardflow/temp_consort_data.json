@@ -1,0 +1,13 @@
+{
+    "diagram_type": "CONSORT",
+    "assessed_for_eligibility": 800,
+    "excluded": 200,
+    "randomized": 600,
+    "allocated_to_intervention": 300,
+    "received_allocated_intervention": 280,
+    "did_not_receive_allocated_intervention": 20,
+    "lost_to_follow_up": 10,
+    "discontinued_intervention": 10,
+    "analysed": 280,
+    "excluded_from_analysis": 0
+}

@@ -1,0 +1,220 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://www.equator-network.org/schemas/strobe_schema.json",
+    "title": "STROBE 2007 flow diagram schema",
+    "description": "A schema for generating STROBE 2007 flow diagrams.",
+    "type": "object",
+    "properties": {
+        "diagram_type": {
+            "description": "The type of diagram to generate.",
+            "type": "string",
+            "enum": [
+                "STROBE",
+                "STROBE_COHORT"
+            ]
+        },
+        "exposed_group_potentially_eligible": {
+            "description": "Number of potentially eligible participants in the exposed group.",
+            "type": "integer",
+            "minimum": 0
+        },
+        "exposed_group_assessed_for_eligibility": {
+            "description": "Number of participants in the exposed group assessed for eligibility.",
+            "type": "integer",
+            "minimum": 0
+        },
+        "exposed_group_excluded": {
+            "description": "Number of participants in the exposed group excluded.",
+            "type": "integer",
+            "minimum": 0
+        },
+        "reasons_for_exposed_group_exclusion": {
+            "description": "Reasons for exclusion in the exposed group.",
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "exposed_group_included": {
+            "description": "Number of participants in the exposed group included in the study.",
+            "type": "integer",
+            "minimum": 0
+        },
+        "exposed_group_lost_to_follow_up": {
+            "description": "Number of participants in the exposed group lost to follow-up.",
+            "type": "integer",
+            "minimum": 0
+        },
+        "reasons_for_exposed_group_loss_to_follow_up": {
+            "description": "Reasons for loss to follow-up in the exposed group.",
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "exposed_group_analysed": {
+            "description": "Number of participants in the exposed group analysed.",
+            "type": "integer",
+            "minimum": 0
+        },
+        "unexposed_group_potentially_eligible": {
+            "description": "Number of potentially eligible participants in the unexposed group.",
+            "type": "integer",
+            "minimum": 0
+        },
+        "unexposed_group_assessed_for_eligibility": {
+            "description": "Number of participants in the unexposed group assessed for eligibility.",
+            "type": "integer",
+            "minimum": 0
+        },
+        "unexposed_group_excluded": {
+            "description": "Number of participants in the unexposed group excluded.",
+            "type": "integer",
+            "minimum": 0
+        },
+        "reasons_for_unexposed_group_exclusion": {
+            "description": "Reasons for exclusion in the unexposed group.",
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "unexposed_group_included": {
+            "description": "Number of participants in the unexposed group included in the study.",
+            "type": "integer",
+            "minimum": 0
+        },
+        "unexposed_group_lost_to_follow_up": {
+            "description": "Number of participants in the unexposed group lost to follow-up.",
+            "type": "integer",
+            "minimum": 0
+        },
+        "reasons_for_unexposed_group_loss_to_follow_up": {
+            "description": "Reasons for loss to follow-up in the unexposed group.",
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "unexposed_group_analysed": {
+            "description": "Number of participants in the unexposed group analysed.",
+            "type": "integer",
+            "minimum": 0
+        },
+        "style": {
+            "$ref": "#/definitions/style"
+        },
+        "potentially_eligible": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "assessed_for_eligibility": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "excluded_before_study": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "included_in_study": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "lost_to_follow_up": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "incomplete_data": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "analysed": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "reasons_for_exclusion_before_study": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "reasons_for_loss_to_follow_up": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "reasons_for_incomplete_data": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
+    },
+    "if": {
+        "properties": {
+            "diagram_type": {
+                "const": "STROBE"
+            }
+        }
+    },
+    "then": {
+        "required": [
+            "diagram_type",
+            "potentially_eligible",
+            "assessed_for_eligibility",
+            "excluded_before_study",
+            "included_in_study",
+            "lost_to_follow_up",
+            "incomplete_data",
+            "analysed"
+        ]
+    },
+    "else": {
+        "required": [
+            "diagram_type",
+            "exposed_group_potentially_eligible",
+            "exposed_group_assessed_for_eligibility",
+            "exposed_group_excluded",
+            "exposed_group_included",
+            "exposed_group_lost_to_follow_up",
+            "exposed_group_analysed",
+            "unexposed_group_potentially_eligible",
+            "unexposed_group_assessed_for_eligibility",
+            "unexposed_group_excluded",
+            "unexposed_group_included",
+            "unexposed_group_lost_to_follow_up",
+            "unexposed_group_analysed"
+        ]
+    },
+    "definitions": {
+        "style": {
+            "type": "object",
+            "properties": {
+                "box_color": {
+                    "type": "string",
+                    "description": "The background color of the boxes."
+                },
+                "font_color": {
+                    "type": "string",
+                    "description": "The color of the text in the boxes."
+                },
+                "font_name": {
+                    "type": "string",
+                    "description": "The name of the font to use for the text."
+                },
+                "font_size": {
+                    "type": "string",
+                    "description": "The size of the font to use for the text."
+                },
+                "arrow_color": {
+                    "type": "string",
+                    "description": "The color of the arrows."
+                }
+            }
+        }
+    },
+    "required": [
+        "diagram_type"
+    ]
+}

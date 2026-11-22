@@ -1,0 +1,24 @@
+{
+    "checklist_type": "STROBE_CASE_CONTROL",
+    "title": "STROBE Checklist for Case-Control Studies",
+    "items": [
+        {
+            "section": "Title and abstract",
+            "id": "1",
+            "description": "(a) Indicate the study’s design with a commonly used term in the title or the abstract\n(b) Provide in the abstract an informative and balanced summary of what was done and what was found",
+            "type": "boolean"
+        },
+        {
+            "section": "Introduction",
+            "id": "2",
+            "description": "Background/rationale: Explain the scientific background and rationale for the investigation being reported",
+            "type": "boolean"
+        },
+        {
+            "section": "Introduction",
+            "id": "3",
+            "description": "Objectives: State specific objectives, including any prespecified hypotheses",
+            "type": "boolean"
+        }
+    ]
+}

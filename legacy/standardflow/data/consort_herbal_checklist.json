@@ -1,0 +1,36 @@
+{
+    "checklist_type": "CONSORT_HERBAL",
+    "title": "CONSORT for Herbal Interventions Checklist",
+    "items": [
+        {
+            "section": "Title and abstract",
+            "id": "1a",
+            "description": "Identification as a randomised trial of a herbal medicine intervention in the title",
+            "type": "boolean"
+        },
+        {
+            "section": "Introduction",
+            "id": "2b",
+            "description": "Specific objectives or hypotheses, including any specific claims for the herbal medicine",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "5",
+            "description": "The interventions for each group with sufficient details to allow replication, including:\n(a) Herbal medicine name (and Latin binomial)\n(b) Part of plant used\n(c) Type of extract and solvent\n(d) Dosage and frequency\n(e) Method of standardization, if any\n(f) Control intervention",
+            "type": "boolean"
+        },
+        {
+            "section": "Results",
+            "id": "17a",
+            "description": "For each primary and secondary outcome, results for each group, and the estimated effect size and its precision (such as 95% confidence interval)",
+            "type": "boolean"
+        },
+        {
+            "section": "Discussion",
+            "id": "22",
+            "description": "Interpretation consistent with results, balancing benefits and harms, and considering other relevant evidence, including the specific context of the herbal medicine",
+            "type": "boolean"
+        }
+    ]
+}

@@ -1,0 +1,108 @@
+{
+    "checklist_type": "CONSORT_ABSTRACTS",
+    "title": "CONSORT for Abstracts Checklist",
+    "items": [
+        {
+            "section": "Title",
+            "id": "1",
+            "description": "Identification of the study as a randomized trial in the title",
+            "type": "boolean"
+        },
+        {
+            "section": "Authors",
+            "id": "2",
+            "description": "Contact details for the corresponding author",
+            "type": "boolean"
+        },
+        {
+            "section": "Trial design",
+            "id": "3",
+            "description": "Description of the trial design (eg, parallel, cluster, non-inferiority)",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "4",
+            "description": "Participants: Eligibility criteria for participants and the settings where the data were collected",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "5",
+            "description": "Interventions: Interventions intended for each group",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "6",
+            "description": "Objective: Specific objective or hypothesis",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "7",
+            "description": "Outcome: Clearly defined primary outcome for this report",
+            "type": "boolean"
+        },
+        {
+            "section": "Randomization",
+            "id": "8",
+            "description": "How participants were allocated to interventions",
+            "type": "boolean"
+        },
+        {
+            "section": "Blinding (masking)",
+            "id": "9",
+            "description": "Whether or not participants, care givers, and those assessing the outcomes were blinded to group assignment",
+            "type": "boolean"
+        },
+        {
+            "section": "Results",
+            "id": "10",
+            "description": "Numbers randomized: Number of participants randomized to each group",
+            "type": "boolean"
+        },
+        {
+            "section": "Results",
+            "id": "11",
+            "description": "Recruitment: Trial status",
+            "type": "boolean"
+        },
+        {
+            "section": "Results",
+            "id": "12",
+            "description": "Numbers analyzed: Number of participants analyzed in each group",
+            "type": "boolean"
+        },
+        {
+            "section": "Results",
+            "id": "13",
+            "description": "Outcome: For the primary outcome, a result for each group, and the estimated effect size and its precision (eg, 95% confidence interval)",
+            "type": "boolean"
+        },
+        {
+            "section": "Results",
+            "id": "14",
+            "description": "Harms: Important adverse events or side effects",
+            "type": "boolean"
+        },
+        {
+            "section": "Conclusions",
+            "id": "15",
+            "description": "General interpretation of the results",
+            "type": "boolean"
+        },
+        {
+            "section": "Trial registration",
+            "id": "16",
+            "description": "Registration number and name of trial register",
+            "type": "boolean"
+        },
+        {
+            "section": "Funding",
+            "id": "17",
+            "description": "Source of funding",
+            "type": "boolean"
+        }
+    ]
+}

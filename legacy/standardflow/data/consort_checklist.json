@@ -1,0 +1,30 @@
+{
+    "checklist_type": "CONSORT",
+    "title": "CONSORT 2010 Checklist of Information to Include When Reporting a Randomised Trial",
+    "items": [
+        {
+            "section": "Title and abstract",
+            "id": "1a",
+            "description": "Identification as a randomised trial in the title",
+            "type": "boolean"
+        },
+        {
+            "section": "Title and abstract",
+            "id": "1b",
+            "description": "Structured summary of trial design, methods, results, and conclusions",
+            "type": "boolean"
+        },
+        {
+            "section": "Introduction",
+            "id": "2a",
+            "description": "Scientific background and explanation of rationale",
+            "type": "boolean"
+        },
+        {
+            "section": "Introduction",
+            "id": "2b",
+            "description": "Specific objectives or hypotheses",
+            "type": "boolean"
+        }
+    ]
+}

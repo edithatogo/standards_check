@@ -1,0 +1,32 @@
+{
+    "diagram_type": "CONSORT",
+    "assessed_for_eligibility": 1000,
+    "excluded": 200,
+    "reasons_for_exclusion": [
+        "Not meeting inclusion criteria (n=150)",
+        "Declined to participate (n=50)"
+    ],
+    "randomized": 800,
+    "allocated_to_intervention": 400,
+    "received_allocated_intervention": 380,
+    "did_not_receive_allocated_intervention": 20,
+    "reasons_for_not_receiving_intervention": [
+        "Patient refusal (n=10)",
+        "Contraindication (n=10)"
+    ],
+    "lost_to_follow_up": 30,
+    "reasons_for_loss_to_follow_up": [
+        "Unable to contact (n=20)",
+        "Withdrew consent (n=10)"
+    ],
+    "discontinued_intervention": 10,
+    "reasons_for_discontinuing_intervention": [
+        "Adverse event (n=5)",
+        "Protocol violation (n=5)"
+    ],
+    "analysed": 340,
+    "excluded_from_analysis": 10,
+    "reasons_for_exclusion_from_analysis": [
+        "Incomplete data (n=10)"
+    ]
+}
