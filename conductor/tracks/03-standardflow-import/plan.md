@@ -25,9 +25,14 @@
   parity, the container suite and the default-container HTTP smoke test.
 - [x] Close source PRs #9 and #24 through #29 as exported or superseded, preserving
   their histories and receiving dispositions.
+- [x] Link and close source issues #12 through #14 as relocated to receiving
+  #29 through #31, retaining original bodies and unresolved receiving obligations.
+- [x] Reconcile the two inventory files with actual-main acceptance, nine preserved
+  export tips, four remaining live source branches and the closed source PRs.
 - [ ] Complete owner account reauthentication, make the source private, archive it
   and record the observed repository settings. GitHub's Confirm access screen blocks
-  the settings change; at 14:53 UTC on 22 November the source remained public and unarchived.
+  the settings change; at 21:00 UTC on 22 November the source remained public and unarchived.
+  The connected browser was unavailable in the follow-up chat.
 - [ ] Reconcile the active repository registry and current downstream StandardFlow links.
 
 ## Remaining semantic migration

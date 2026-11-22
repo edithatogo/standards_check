@@ -24,7 +24,8 @@
 
 - [Conductor router](../.agents/skills/conductor/SKILL.md)
 - Exact upstream plugin gitlink: `.agents/plugins/conductor`
-- Pinned upstream revision: `f06add33b598f4262a190f234828dda551db70d7`
+- Expected upstream revision: `metadata.revision` in the [router](../.agents/skills/conductor/SKILL.md),
+  checked against the gitlink by `scripts/audit_foundation.py`.
 
 ## Evidence rule
 

@@ -3,13 +3,14 @@ name: standardflow-conductor-router
 description: Routes StandardFlow work through the exact-pinned upstream Conductor plugin and this repository's evidence-aware project context.
 metadata:
   upstream: gemini-cli-extensions/conductor
-  revision: f06add33b598f4262a190f234828dda551db70d7
+  revision: 6e8f9a860bcdd6a2c423473c12e745200688c633
 ---
 
 # StandardFlow Conductor router
 
 Read `conductor/index.md` before material work. The implementation protocols live in
 `.agents/plugins/conductor/skills/` at the exact gitlink revision recorded above.
+The `metadata.revision` value is the authoritative expected pin for the foundation audit.
 
 Route intentions as follows:
 

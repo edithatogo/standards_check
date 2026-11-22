@@ -11,7 +11,7 @@
     "01-canonical-standard-pack",
     "02-semantic-diagram-prisma"
   ],
-  "updated": "2026-11-22",
+  "updated": "2026-11-23",
   "import_manifest": "import.json",
   "verification_receipt": "verification.md",
   "base_branch": "main",
@@ -32,12 +32,22 @@
   "retirement_receipt": "../../../docs/migration/standardflow/retirement.md",
   "source_privacy": "pending_owner_reauthentication",
   "source_archival": "pending_owner_reauthentication",
-  "source_retirement_blocker": "GitHub Confirm access requires the owner's passkey or authenticator; successful account reauthentication has not been observed.",
+  "source_retirement_blocker": "GitHub owner account reauthentication remains pending. The connected browser was unavailable during the follow-up chat; no privacy or archive setting was applied.",
   "source_settings_observed": {
-    "observed_at": "2026-11-22T14:53:00Z",
+    "observed_at": "2026-11-22T21:00:10Z",
     "private": false,
     "archived": false,
-    "open_pull_requests": 0
+    "open_pull_requests": 0,
+    "open_issues": 1,
+    "live_branch_count": 4,
+    "preserved_export_tip_count": 9
   },
-  "canonical_content_promotion": false
+  "canonical_content_promotion": false,
+  "latest_verified_receiving_main": "cf7d14da7bfb4d32c2c8746ec1111a6643c4a716",
+  "latest_verified_receiving_run": "https://github.com/edithatogo/standards_check/actions/runs/45035654999",
+  "source_issue_transfers": {
+    "12": 29,
+    "13": 30,
+    "14": 31
+  }
 }

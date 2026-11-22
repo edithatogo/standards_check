@@ -285,6 +285,17 @@ impl DiagramRecipe {
                     "node column and span must remain inside the configured grid",
                 ));
             }
+            if node_width(self.layout, node.column_span)
+                .ok()
+                .and_then(|width| label_capacity(self.layout, width))
+                .is_none()
+            {
+                report.push(Diagnostic::error(
+                    "SF-RECIPE-022",
+                    path.clone(),
+                    "node padding must leave room for at least one estimated text character",
+                ));
+            }
             if node.label_template.trim().is_empty() || node.aria_template.trim().is_empty() {
                 report.push(Diagnostic::error(
                     "SF-RECIPE-006",
@@ -517,6 +528,8 @@ impl DiagramRecipe {
             title,
             description,
             canvas: Canvas { width, height },
+            node_padding: self.layout.padding,
+            line_height: self.layout.line_height,
             nodes,
             edges,
             reading_order: self.reading_order.clone(),
@@ -563,6 +576,9 @@ pub enum RecipeError {
     /// Integer layout arithmetic overflowed.
     #[error("integer layout arithmetic overflowed")]
     LayoutOverflow,
+    /// A node has no room for one character at the recipe's declared width.
+    #[error("node padding leaves no room for one estimated text character")]
+    InsufficientTextWidth,
     /// Generated scene violated renderer-neutral invariants.
     #[error("generated scene validation failed with {} error(s)", .0.error_count())]
     GeneratedScene(ValidationReport),
@@ -703,9 +719,18 @@ fn interpolate(template: &str, bindings: &BTreeMap<String, String>) -> Result<St
     Ok(output)
 }
 
+fn label_capacity(layout: GridLayout, width: u32) -> Option<usize> {
+    layout
+        .padding
+        .checked_mul(2)
+        .and_then(|padding| width.checked_sub(padding))
+        .and_then(|available| available.checked_div(layout.character_width))
+        .filter(|maximum| *maximum > 0)
+        .and_then(|maximum| usize::try_from(maximum).ok())
+}
+
 fn wrap_label(label: &str, layout: GridLayout, width: u32) -> Result<Vec<String>, RecipeError> {
-    let available = width.saturating_sub(layout.padding.saturating_mul(2));
-    let maximum = usize::try_from((available / layout.character_width).max(12)).unwrap_or(12);
+    let maximum = label_capacity(layout, width).ok_or(RecipeError::InsufficientTextWidth)?;
     let mut lines = Vec::new();
     for paragraph in label.lines() {
         wrap_paragraph(paragraph, maximum, &mut lines);

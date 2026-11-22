@@ -15,6 +15,7 @@ on:
       - "scripts/audit_foundation.py"
       - "tests/test_foundation_audit.py"
       - ".gitmodules"
+      - ".agents/plugins/conductor"
       - ".agents/skills/conductor/**"
       - ".github/workflows/standardflow-foundation.yml"
   push:
@@ -32,6 +33,7 @@ on:
       - "scripts/audit_foundation.py"
       - "tests/test_foundation_audit.py"
       - ".gitmodules"
+      - ".agents/plugins/conductor"
       - ".agents/skills/conductor/**"
       - ".github/workflows/standardflow-foundation.yml"
 

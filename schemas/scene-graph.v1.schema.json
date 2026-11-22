@@ -55,6 +55,20 @@
         }
       }
     },
+    "node_padding": {
+      "description": "Inner label inset in CSS pixels; omitted v1 documents use 18.",
+      "type": "integer",
+      "minimum": 4,
+      "maximum": 200,
+      "default": 18
+    },
+    "line_height": {
+      "description": "Text line height in CSS pixels; omitted v1 documents use 20.",
+      "type": "integer",
+      "minimum": 10,
+      "maximum": 100,
+      "default": 20
+    },
     "nodes": {
       "type": "array",
       "minItems": 1,

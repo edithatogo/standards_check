@@ -161,3 +161,23 @@ not been observed. Export completion does not complete this administrative step.
 Actual source private/archive settings and downstream registry/consumer updates
 still require receipts. Legacy-to-Rust semantic parity, item-level rights and
 provenance, independent methodology and accessibility qualification remain open.
+
+## Follow-up reconciliation — 23 November 2026
+
+The two source-inventory files now include acceptance at recorded receiving main
+`cf7d14da7bfb4d32c2c8746ec1111a6643c4a716`, whose
+[legacy run 45035654999](https://github.com/edithatogo/standards_check/actions/runs/45035654999/job/137248723322)
+passed every step, including provenance, parity, container tests and default web startup.
+All nine export tips remain named receiving refs and ancestors of that main. Four
+source branches remain after the five exported bot branches were removed; their
+remaining tips still match the original manifest.
+
+Source issues #12 through #14 now retain receiving links and original bodies and
+are closed as relocated to receiving #29 through #31. The receiving obligations
+remain open. Source dashboard #23 remains open and bot-owned.
+
+At 21:00 UTC on 22 November, the API still returned source `private: false`,
+`archived: false`, and one open issue. The connected browser was unavailable in
+this follow-up chat. The recorded account-reauthentication requirement and the
+requested source retirement remain pending; neither administrative setting is
+inferred from successful code or history checks.

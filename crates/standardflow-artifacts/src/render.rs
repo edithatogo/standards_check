@@ -7,8 +7,6 @@ use thiserror::Error;
 
 use crate::scene::{Anchor, EdgeKind, NodeRole, Point, Scene, SceneEdge};
 
-const NODE_PADDING: u32 = 18;
-const LINE_HEIGHT: u32 = 20;
 const FONT_SIZE: u32 = 14;
 
 /// Renderer output format.
@@ -94,6 +92,7 @@ pub fn render(scene: &Scene, format: RenderFormat) -> Result<Vec<u8>, RenderErro
 )]
 pub fn render_svg(scene: &Scene) -> Result<String, RenderError> {
     validate_scene(scene)?;
+    let font_size = FONT_SIZE.min(scene.line_height);
     let mut output = String::new();
     writeln!(
         output,
@@ -125,9 +124,11 @@ pub fn render_svg(scene: &Scene) -> Result<String, RenderError> {
     output.push_str(
         "  <defs>\n    <marker id=\"standardflow-arrow\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"3\" orient=\"auto\" markerUnits=\"strokeWidth\"><path d=\"M0,0 L0,6 L9,3 z\" /></marker>\n  </defs>\n",
     );
-    output.push_str(
-        "  <style>\n    .standardflow-node rect { fill: white; stroke: currentColor; stroke-width: 2; }\n    .standardflow-node--exclusion rect { stroke-dasharray: 7 4; }\n    .standardflow-node--outcome rect { stroke-width: 3; }\n    .standardflow-label { fill: currentColor; font-family: system-ui, sans-serif; font-size: 14px; }\n    .standardflow-edge { fill: none; stroke: currentColor; stroke-width: 2; marker-end: url(#standardflow-arrow); }\n    .standardflow-edge--exclusion { stroke-dasharray: 7 4; }\n    .standardflow-edge-label { fill: currentColor; font-family: system-ui, sans-serif; font-size: 12px; }\n  </style>\n",
-    );
+    write!(
+        output,
+        "  <style>\n    .standardflow-node rect {{ fill: white; stroke: currentColor; stroke-width: 2; }}\n    .standardflow-node--exclusion rect {{ stroke-dasharray: 7 4; }}\n    .standardflow-node--outcome rect {{ stroke-width: 3; }}\n    .standardflow-label {{ fill: currentColor; font-family: system-ui, sans-serif; font-size: {font_size}px; }}\n    .standardflow-edge {{ fill: none; stroke: currentColor; stroke-width: 2; marker-end: url(#standardflow-arrow); }}\n    .standardflow-edge--exclusion {{ stroke-dasharray: 7 4; }}\n    .standardflow-edge-label {{ fill: currentColor; font-family: system-ui, sans-serif; font-size: 12px; }}\n  </style>\n",
+    )
+    .map_err(|_| RenderError::Formatting)?;
 
     output.push_str("  <g id=\"standardflow-edges\" aria-hidden=\"true\">\n");
     for edge in &scene.edges {
@@ -171,25 +172,25 @@ pub fn render_svg(scene: &Scene) -> Result<String, RenderError> {
         .map_err(|_| RenderError::Formatting)?;
         let text_height = u32::try_from(node.lines.len())
             .ok()
-            .and_then(|count| count.checked_mul(LINE_HEIGHT))
+            .and_then(|count| count.checked_mul(scene.line_height))
             .unwrap_or(node.rect.height);
         let initial_y = node
             .rect
             .y
             .saturating_add(node.rect.height.saturating_sub(text_height) / 2)
-            .saturating_add(FONT_SIZE);
+            .saturating_add(font_size);
         writeln!(
             output,
             "      <text class=\"standardflow-label\" x=\"{}\" y=\"{initial_y}\">",
-            node.rect.x.saturating_add(NODE_PADDING)
+            node.rect.x.saturating_add(scene.node_padding)
         )
         .map_err(|_| RenderError::Formatting)?;
         for (index, line) in node.lines.iter().enumerate() {
-            let dy = if index == 0 { 0 } else { LINE_HEIGHT };
+            let dy = if index == 0 { 0 } else { scene.line_height };
             writeln!(
                 output,
                 "        <tspan x=\"{}\" dy=\"{dy}\">{}</tspan>",
-                node.rect.x.saturating_add(NODE_PADDING),
+                node.rect.x.saturating_add(scene.node_padding),
                 escape_xml(line)
             )
             .map_err(|_| RenderError::Formatting)?;
