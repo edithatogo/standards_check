@@ -58,7 +58,7 @@ python -m unittest discover -s tests -v
 python scripts/check_primary_adoption.py
 ```
 
-Repair result: **52 tests passed** on Python 3.12.14 with Graphviz and ImageMagick.
+Initial repair result: **52 tests passed** on Python 3.12.14 with Graphviz and ImageMagick.
 The suite runs all 11 notebook examples in an isolated copy; validates 29 valid
 fixtures and rejects the intentionally invalid fixture; checks actual artifact
 bytes, all six variant outputs, original golden snapshots, and web/CLI regressions.
@@ -82,6 +82,21 @@ runner or any executed steps. Runs `44464340646` and `44783093965` require a run
 labelled `self-hosted`, `linux`, `x64`, `ai-security-offline` and the configured
 pinned offline security image. This review neither waives that gate nor claims
 security execution. The repair's own hosted result must be read at its new head.
+
+## Receiving review follow-up
+
+[Primary PR #92](https://github.com/edithatogo/standards_check/pull/92) identified a
+default-container startup gap: overriding the image command with unittest did not
+exercise Flask's bind address. The image now starts Flask explicitly on
+`0.0.0.0:5000`; local `python -m web.app` retains its loopback default. Receiving CI
+also starts the image with its unmodified default command and probes the published
+host port before accepting the export.
+
+CodeQL also flagged the request-derived diagram output path. The existing exact
+PNG/SVG/PDF allowlist prevented arbitrary path input; the reviewed change selects a
+fixed filename and MIME type from a server-side mapping. No request text is used to
+construct the output path. The receiving code-scanning check must be observed again
+at the updated source/import revision; no alert is suppressed or waived.
 
 ## Export and receiving requirements
 
