@@ -5,7 +5,7 @@ checks, the main-branch merge and the source's private/archive settings are reco
 in the receiving pull request. These claims concern repository preservation and the
 legacy runtime; they do not qualify Rust parity, source rights or methodology.
 
-## Source repair
+## Initial source repair
 
 - Source revision: `d89a5dbacc207cdce11f19efd667b83fdb09df18`.
 - Exact tree: `e48c081ff946d0fac6a1a4b65a3599c6b7aa3352`.
@@ -59,3 +59,24 @@ configured remotes and no tracked worktree changes.
 All source branch tips, including subsequent preserved dependency branches, remain
 explicit in `import.json`. Recovery uses those reachable commits rather than a
 future fetch from the private archived source. Root CI enforces the final manifest.
+
+## Receiving review corrections
+
+Review of receiving PR #92 found that the image's default command bound Flask only
+to loopback inside the container. The source Dockerfile now starts Flask explicitly
+on `0.0.0.0:5000`; local module startup keeps its loopback default. Receiving CI runs
+the image's default command and probes the published host port under a 30-second
+timeout, then removes the container. Container unit tests alone did not cover this
+behavior.
+
+CodeQL reported a request-derived output path despite the existing exact format
+allowlist. The web handler now looks up constant filenames and MIME types. No request
+text is interpolated into a path, and unknown formats are still rejected. The alert
+is not suppressed; the final receiving code-scanning result must be observed again.
+
+The corrected source is `dc51d8e392858d5cb4e653aed199563514191efb`, tree
+`62d8a0e738f0255cc59822ae4e661568090a213e`, recorded in the canonical manifest. The
+initial `d89a5db` source remains an ancestor. All 52 tests passed locally again,
+including the existing invalid-format cases. The Dockerfile command served HTTP 200
+when run as a local process; actual container startup acceptance is a hosted check.
+The final receiving PR receipt binds those checks to its corrected revision.

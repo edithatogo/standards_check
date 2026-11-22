@@ -66,3 +66,19 @@ jobs:
         run: |
           docker build --tag standardflow-legacy-ci .
           docker run --rm standardflow-legacy-ci python -m unittest discover -s tests -v
+      - name: Smoke-test the default container web startup
+        shell: bash
+        run: |
+          set -euo pipefail
+          smoke_container="standardflow-legacy-startup-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          cleanup() {
+            smoke_status=$?
+            if [ "$smoke_status" -ne 0 ]; then
+              docker logs "$smoke_container" || true
+            fi
+            docker rm --force "$smoke_container" >/dev/null 2>&1 || true
+            exit "$smoke_status"
+          }
+          trap cleanup EXIT
+          docker run --detach --name "$smoke_container" --publish 127.0.0.1:5000:5000 standardflow-legacy-ci
+          timeout 30 bash -c 'until curl --fail --silent --max-time 2 http://127.0.0.1:5000/ >/dev/null; do sleep 1; done'
