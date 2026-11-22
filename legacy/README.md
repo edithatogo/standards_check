@@ -6,7 +6,7 @@ Source revision `dc51d8e392858d5cb4e653aed199563514191efb` includes the original
 and the reviewed compatibility repairs. Its exact tree is
 `62d8a0e738f0255cc59822ae4e661568090a213e`.
 The imported tree is an exact snapshot, not a new canonical standards authority.
-Use this repository for development and issues; the old repository is being retired.
+Use this repository for development and issues; the old repository is private and archived.
 
 ## Run the legacy implementation
 
