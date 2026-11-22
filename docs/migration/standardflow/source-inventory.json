@@ -2298,7 +2298,7 @@
       "existing_hosted_coverage_evidence": {
         "job_url": "https://github.com/edithatogo/voiage/actions/runs/45081240057/job/137390005725",
         "head": "3bc04fdc1df6f30981765eee49c0c9dbce490cde",
-        "tox_environment": "coverage",
+        "tox_environment": "coverage_report",
         "exact_environment_independently_verified": true,
         "conclusion": "success",
         "passed": 6193,
@@ -2318,8 +2318,8 @@
         "conclusion": "success",
         "commands_passed": [
           "pnpm install --frozen-lockfile",
-          "pnpm check",
-          "pnpm build"
+          "pnpm run check",
+          "pnpm exec astro build"
         ],
         "errors": 0,
         "warnings": 0,
