@@ -13,7 +13,6 @@
   "base_branch": "main",
   "source_retirement_authorization": "User explicitly requested export followed by private archival on 2026-11-22.",
   "remaining_evidence_gates": [
-    "final seven-ref source inventory",
     "hosted import and runtime checks",
     "receiving main verification",
     "observed source private/archive settings",

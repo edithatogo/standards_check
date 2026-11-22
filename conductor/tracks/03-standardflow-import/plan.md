@@ -6,7 +6,7 @@
 - [x] Pin the repaired tree and inventory every source branch tip.
 - [x] Keep unqualified guideline work in history only.
 - [x] Define tree, ancestry and drift checks with negative regression cases.
-- [ ] Import the exact tree and preserve all branch histories.
+- [x] Import the exact tree and preserve all seven branch histories.
 - [x] Run the relocated application, notebooks and initial provenance checks.
 - [x] Verify primary validators and unchanged Rust/PRISMA assets.
 - [ ] Observe receiving hosted checks and merge without squashing ancestry.
