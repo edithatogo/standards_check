@@ -1,0 +1,84 @@
+{
+    "checklist_type": "CARE",
+    "title": "CARE Checklist for Case Reports",
+    "items": [
+        {
+            "section": "Title",
+            "id": "1",
+            "description": "The words “case report” should be in the title along with the area of focus",
+            "type": "boolean"
+        },
+        {
+            "section": "Key Words",
+            "id": "2",
+            "description": "2 to 5 key words that identify areas covered in this case report",
+            "type": "boolean"
+        },
+        {
+            "section": "Abstract",
+            "id": "3",
+            "description": "(a) Introduction – What does this case report add?\n(b) Case presentation – What happened during this case?\n(c) Conclusion – What did you learn from this case?",
+            "type": "boolean"
+        },
+        {
+            "section": "Introduction",
+            "id": "4",
+            "description": "One or two sentences summarizing why this case report is important",
+            "type": "boolean"
+        },
+        {
+            "section": "Patient Information",
+            "id": "5",
+            "description": "(a) De-identified patient information\n(b) Primary concerns and symptoms of the patient\n(c) Medical, family, and psychosocial history",
+            "type": "boolean"
+        },
+        {
+            "section": "Clinical Findings",
+            "id": "6",
+            "description": "Describe the relevant physical examination (PE) and other significant clinical findings",
+            "type": "boolean"
+        },
+        {
+            "section": "Timeline",
+            "id": "7",
+            "description": "Historical and current information from this episode of care organized as a timeline",
+            "type": "boolean"
+        },
+        {
+            "section": "Diagnostic Assessment",
+            "id": "8",
+            "description": "(a) Diagnostic methods (e.g., PE, laboratory testing, imaging)\n(b) Diagnostic challenges (e.g., financial, linguistic)\n(c) Diagnostic reasoning including other diagnoses considered\n(d) Prognostic characteristics (e.g., staging) where applicable",
+            "type": "boolean"
+        },
+        {
+            "section": "Therapeutic Intervention",
+            "id": "9",
+            "description": "(a) Types of intervention (e.g., pharmacologic, surgical, preventive)\n(b) Administration of intervention (e.g., dosage, strength, duration)\n(c) Changes in intervention (with rationale)",
+            "type": "boolean"
+        },
+        {
+            "section": "Follow-up and Outcomes",
+            "id": "10",
+            "description": "(a) Clinician and patient-assessed outcomes\n(b) Important follow-up diagnostic and other test results\n(c) Intervention adherence and tolerability (and how this was assessed)\n(d) Adverse and unanticipated events",
+            "type": "boolean"
+        },
+        {
+            "section": "Discussion",
+            "id": "11",
+            "description": "(a) Strengths and limitations in your approach to this case\n(b) Discussion of the relevant medical literature\n(c) The rationale for your conclusions\n(d) The primary “take-away” lessons from this case report",
+            "type": "boolean"
+        },
+        {
+            "section": "Patient Perspective",
+            "id": "12",
+            "description": "The patient should share their perspective on the treatment(s) they received",
+            "type": "boolean"
+        },
+        {
+            "section": "Informed Consent",
+            "id": "13",
+            "description": "The patient gave their informed consent",
+            "type": "boolean"
+        }
+    ]
+}

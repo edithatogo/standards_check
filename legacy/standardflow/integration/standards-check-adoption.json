@@ -1,0 +1,30 @@
+{
+  "schema_version": "dev.standardflow.legacy-adoption.v1",
+  "legacy_repository": "edithatogo/standardflow",
+  "legacy_revision": "76f2c27f0920ee0444a586c2a20abb9d46d5d0b2",
+  "primary_repository": "edithatogo/standards_check",
+  "proposed_primary_revision": "f1e7b6c6e283865c1b7dbb34dbe33d8bf6f6c799",
+  "automatic_revision_updates": false,
+  "runtime_dependency": false,
+  "default_network": false,
+  "default_external_writes": false,
+  "licence": "Apache-2.0",
+  "components": [
+    {"source": "src/diagram.py", "target_role": "renderer_compatibility_fixture"},
+    {"source": "src/prisma.py", "target_role": "prisma_recipe_and_golden_fixture"},
+    {"source": "src/consort.py", "target_role": "consort_recipe_and_golden_fixture"},
+    {"source": "src/strobe.py", "target_role": "strobe_recipe_and_golden_fixture"},
+    {"source": "src/checklist.py", "target_role": "checklist_renderer_fixture"},
+    {"source": "schemas", "target_role": "schema_migration_input"},
+    {"source": "tests", "target_role": "differential_regression_suite"}
+  ],
+  "activation_gates": [
+    "history_preserved",
+    "apache_notice_preserved",
+    "rights_review_complete",
+    "differential_fixtures_pass",
+    "accessibility_review_complete",
+    "rollback_rehearsed"
+  ],
+  "claim_boundary": "This manifest prepares migration only; it does not prove parity, cutover, archival or primary-repository acceptance."
+}

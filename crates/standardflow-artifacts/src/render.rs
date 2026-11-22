@@ -153,7 +153,8 @@ pub fn render_svg(scene: &Scene) -> Result<String, RenderError> {
     output.push_str("  </g>\n");
 
     output.push_str("  <g id=\"standardflow-nodes\" role=\"list\">\n");
-    for node in &scene.nodes {
+    // Scene validation guarantees that each reading-order ID resolves exactly once.
+    for node in scene.reading_order.iter().filter_map(|id| scene.node(id)) {
         writeln!(
             output,
             "    <g id=\"node-{}\" class=\"standardflow-node standardflow-node--{}\" role=\"listitem\" aria-label=\"{}\">",

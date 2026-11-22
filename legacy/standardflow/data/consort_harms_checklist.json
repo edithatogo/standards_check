@@ -1,0 +1,60 @@
+{
+    "checklist_type": "CONSORT_HARMS",
+    "title": "CONSORT Harms 2022 Checklist",
+    "items": [
+        {
+            "section": "Title and abstract",
+            "id": "1a",
+            "description": "Identification as a randomised trial in the title",
+            "type": "boolean"
+        },
+        {
+            "section": "Title and abstract",
+            "id": "1b",
+            "description": "Structured summary of trial design, methods, results, and conclusions, with a focus on harms",
+            "type": "boolean"
+        },
+        {
+            "section": "Introduction",
+            "id": "2a",
+            "description": "Scientific background and explanation of rationale, including the importance of harms",
+            "type": "boolean"
+        },
+        {
+            "section": "Introduction",
+            "id": "2b",
+            "description": "Specific objectives or hypotheses related to harms",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "6a",
+            "description": "Completely defined pre-specified primary and secondary harm outcomes, including how and when they were assessed",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "6b",
+            "description": "Any changes to harm outcomes after the trial commenced, with reasons",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "19",
+            "description": "How harms were defined, assessed, and collected",
+            "type": "boolean"
+        },
+        {
+            "section": "Results",
+            "id": "19",
+            "description": "For each group, the number of participants who experienced each harm and the number of harms",
+            "type": "boolean"
+        },
+        {
+            "section": "Discussion",
+            "id": "22",
+            "description": "Interpretation consistent with results, balancing benefits and harms, and considering other relevant evidence",
+            "type": "boolean"
+        }
+    ]
+}

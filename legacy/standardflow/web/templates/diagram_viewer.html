@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Diagram</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Generated Diagram</h1>
+    {% if preview %}
+        <img src="{{ diagram_url }}" alt="Generated Diagram">
+    {% else %}
+        <p>Your diagram has been generated. You can download it using the link below.</p>
+    {% endif %}
+    <p><a href="{{ diagram_url }}" download="{{ diagram_file }}">Download Diagram</a></p>
+</body>
+</html>

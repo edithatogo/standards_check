@@ -43,3 +43,8 @@ prove legacy migration parity or establish publication and external acceptance.
 See [brownfield-audit.md](brownfield-audit.md) for classified authority and migration debt. Exact-head PR #79 CI verified the inventory and context checks; receiving-main CI is independently tracked in the dated reconciliation.
 
 The [19 November 2026 quality-frontier reconciliation](../../quality-frontier-20261119.md) records issue #29-31 gates and exact-head evidence. Upstream profile alignment is **not** yet accepted.
+
+## Ponytail review — 22 November 2026
+
+- [x] Legacy validation, HTML build and current agent guidance: published at `c64c61a0a978b4b50f8d525fc76d6548d2e75718`; verification is linked below.
+- [x] Retain findings, negative regressions, local receipts and outstanding gates in the [review record](../../ponytail-review-20261122.md).

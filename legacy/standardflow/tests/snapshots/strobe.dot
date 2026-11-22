@@ -1,0 +1,22 @@
+// STROBE 2007 Flow Diagram
+digraph {
+	node [shape=box]
+	A [label="Potentially eligible participants (n=1200)"]
+	B [label="Assessed for eligibility (n=1000)"]
+	C [label="Excluded before study (n=200)
+Did not meet inclusion criteria (n=150)
+Declined to participate (n=50)"]
+	D [label="Included in study (n=800)"]
+	E [label="Lost to follow-up (n=50)
+Unable to contact (n=30)
+Withdrew consent (n=20)"]
+	F [label="Incomplete data (n=30)
+Missing key variables (n=30)"]
+	G [label="Analysed (n=720)"]
+	A -> B
+	B -> C
+	B -> D
+	D -> E
+	D -> F
+	D -> G
+}

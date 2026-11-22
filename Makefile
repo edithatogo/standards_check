@@ -1,4 +1,4 @@
-.PHONY: validate build clean scaffold citations citations
+.PHONY: validate build clean scaffold citations html petri-nets index list-tbd
 
 validate:
 	bash scripts/validate_repo.sh
@@ -6,43 +6,30 @@ validate:
 build:
 	FORMS=eforms bash scripts/build_pandoc.sh
 	bash scripts/generate_citations.sh
-	bash scripts/generate_citations.sh
 
 # --- HTML Generation ---
 HTML_DIR := html
-HTML_ARCHETYPES_DIR := $(HTML_DIR)/archetypes
-HTML_VARIANTS_DIR := $(HTML_DIR)/variants
-MARKDOWN_ARCHETYPES := $(wildcard markdown/archetypes/*.md)
-MARKDOWN_VARIANTS := $(wildcard markdown/variants/*.md)
-HTML_ARCHETYPE_FILES := $(patsubst markdown/archetypes/%.md,$(HTML_ARCHETYPES_DIR)/%.html,$(MARKDOWN_ARCHETYPES))
-HTML_VARIANT_FILES := $(patsubst markdown/variants/%.md,$(HTML_VARIANTS_DIR)/%.html,$(MARKDOWN_VARIANTS))
+HTML_SOURCES := $(patsubst markdown/en/%,%,$(wildcard markdown/en/archetypes/*.md markdown/en/variants/*.md))
+HTML_SOURCES += $(patsubst markdown/%,%,$(wildcard markdown/archetypes/*.md markdown/variants/*.md))
+HTML_FILES := $(sort $(patsubst %.md,$(HTML_DIR)/%.html,$(HTML_SOURCES)))
+# Prefer the maintained English corpus when a legacy scaffold has the same name.
+vpath %.md markdown/en markdown
 
-.PHONY: html
-html: $(HTML_ARCHETYPE_FILES) $(HTML_VARIANT_FILES) ## Generate HTML versions of all checklists
+html: $(HTML_FILES) ## Generate HTML versions of all checklists
 	@echo "--> Generating HTML index..."
 	@./scripts/generate_html_index.sh
 
-$(HTML_ARCHETYPES_DIR)/%.html: markdown/archetypes/%.md
-	@mkdir -p $(HTML_ARCHETYPES_DIR)
+$(HTML_DIR)/%.html: %.md templates/pandoc/html_template.html
+	@mkdir -p "$(@D)"
 	@echo "--> Generating HTML for $<"
-	@pandoc $<
-		--to=html
-		--template=templates/pandoc/html_template.html
-		--output=$@
-
-$(HTML_VARIANTS_DIR)/%.html: markdown/variants/%.md
-	@mkdir -p $(HTML_VARIANTS_DIR)
-	@echo "--> Generating HTML for $<"
-	@pandoc $<
-		--to=html
-		--template=templates/pandoc/html_template.html
-		--output=$@
+	@pandoc "$<" \
+		--to=html \
+		--template="templates/pandoc/html_template.html" \
+		--metadata title="$$(sed -n '/^# /{s/^# //;p;q;}' "$<")" \
+		--output="$@"
 
 scaffold:
 	bash scripts/scaffold_from_index.sh
-
-citations:
-	bash scripts/generate_citations.sh
 
 citations:
 	bash scripts/generate_citations.sh
@@ -57,7 +44,6 @@ list-tbd:
 	bash scripts/list_tbd.sh
 
 clean:
-	rm -rf pdf/* latex/* docx/* citations/* citations/*
+	rm -rf pdf/* latex/* docx/* citations/*
 	find . -name ".DS_Store" -delete
-.PHONY: validate build scaffold index clean citations
 

@@ -1,0 +1,60 @@
+digraph {
+	graph [bb="0,0,848.5,396"];
+	node [label="\N",
+		shape=box
+	];
+	A	[height=0.5,
+		label="Assessed for eligibility (n=800)",
+		pos="419,378",
+		width=3.3611];
+	B	[height=0.5,
+		label="Excluded (n=200)
+",
+		pos="332,306",
+		width=2.0278];
+	A -> B	[pos="e,353.26,324.1 397.49,359.7 386.54,350.88 373.05,340.03 361.18,330.47"];
+	C	[height=0.5,
+		label="Randomized (n=600)",
+		pos="507,306",
+		width=2.3194];
+	A -> C	[pos="e,485.5,324.1 440.75,359.7 451.84,350.88 465.47,340.03 477.49,330.47"];
+	D	[height=0.5,
+		label="Allocated to intervention (n=300)",
+		pos="507,234",
+		width=3.5694];
+	C -> D	[pos="e,507,252.1 507,287.7 507,279.98 507,270.71 507,262.11"];
+	E	[height=0.5,
+		label="Received allocated intervention (n=280)",
+		pos="337,162",
+		width=4.2361];
+	D -> E	[pos="e,378.45,180.07 465.41,215.88 441.97,206.22 412.5,194.09 387.7,183.88"];
+	F	[height=0.5,
+		label="Did not receive allocated intervention (n=20)
+",
+		pos="678,162",
+		width=4.7361];
+	D -> F	[pos="e,636.3,180.07 548.83,215.88 572.42,206.22 602.06,194.09 627,183.88"];
+	G	[height=0.5,
+		label="Lost to follow-up (n=10)
+",
+		pos="95,90",
+		width=2.6389];
+	E -> G	[pos="e,154.15,108.11 278.11,143.97 243.71,134.01 200.12,121.41 164.1,110.99"];
+	H	[height=0.5,
+		label="Discontinued intervention (n=10)
+",
+		pos="337,90",
+		width=3.5694];
+	E -> H	[pos="e,337,108.1 337,143.7 337,135.98 337,126.71 337,118.11"];
+	I	[height=0.5,
+		label="Analysed (n=280)",
+		pos="556,90",
+		width=2];
+	E -> I	[pos="e,502.47,108.11 390.29,143.97 421.16,134.1 460.2,121.62 492.63,111.25"];
+	J	[height=0.5,
+		label="Excluded from analysis (n=0)
+",
+		pos="556,18",
+		width=3.1667];
+	I -> J	[pos="e,556,36.104 556,71.697 556,63.983 556,54.712 556,46.112"];
+}

@@ -1,0 +1,30 @@
+{
+    "checklist_type": "STARD_DEMENTIA",
+    "title": "STARDdem Checklist for Dementia Studies",
+    "items": [
+        {
+            "section": "Title and abstract",
+            "id": "1",
+            "description": "Identification as a study of diagnostic accuracy in dementia in the title",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "6",
+            "description": "Participants: Eligibility criteria, including the definition of dementia and the method of recruitment",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "10",
+            "description": "Test methods: Index and reference tests in sufficient detail to allow replication, including details of any cognitive tests used",
+            "type": "boolean"
+        },
+        {
+            "section": "Results",
+            "id": "20",
+            "description": "Participants. Baseline demographic and clinical characteristics of participants, including cognitive scores",
+            "type": "boolean"
+        }
+    ]
+}

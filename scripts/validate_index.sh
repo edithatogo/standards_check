@@ -67,4 +67,4 @@ else
   echo "Index validation failed." >&2
 fi
 
-exit 0
+exit "$err"

@@ -1,0 +1,102 @@
+{
+    "checklist_type": "CONSORT_NON_INFERIORITY",
+    "title": "CONSORT Non-Inferiority Checklist",
+    "items": [
+        {
+            "section": "Title and abstract",
+            "id": "1a",
+            "description": "Identification as a non-inferiority trial in the title",
+            "type": "boolean"
+        },
+        {
+            "section": "Title and abstract",
+            "id": "1b",
+            "description": "Structured summary of trial design, methods, results, and conclusions, with a focus on non-inferiority",
+            "type": "boolean"
+        },
+        {
+            "section": "Introduction",
+            "id": "2a",
+            "description": "Scientific background and explanation of rationale, including the choice of the non-inferiority margin",
+            "type": "boolean"
+        },
+        {
+            "section": "Introduction",
+            "id": "2b",
+            "description": "Specific objectives or hypotheses related to non-inferiority",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "3a",
+            "description": "Description of trial design (such as parallel, factorial) including allocation ratio",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "3b",
+            "description": "Important changes to methods after trial commencement (such as eligibility criteria), with reasons",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "4a",
+            "description": "Eligibility criteria for participants",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "4b",
+            "description": "Settings and locations where the data were collected",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "5",
+            "description": "The interventions for each group with sufficient details to allow replication, including how and when they were actually administered",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "6a",
+            "description": "Completely defined pre-specified primary and secondary outcome measures, including how and when they were assessed",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "6b",
+            "description": "Any changes to trial outcomes after the trial commenced, with reasons",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "7a",
+            "description": "How sample size was determined, including the non-inferiority margin",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "7b",
+            "description": "When applicable, explanation of any interim analyses and stopping guidelines",
+            "type": "boolean"
+        },
+        {
+            "section": "Methods",
+            "id": "12a",
+            "description": "Statistical methods used to compare groups for primary and secondary outcomes, including the analysis population (e.g., intention-to-treat, per-protocol) and the statistical test used to assess non-inferiority",
+            "type": "boolean"
+        },
+        {
+            "section": "Results",
+            "id": "17a",
+            "description": "For each primary and secondary outcome, results for each group, and the estimated effect size and its precision (such as 95% confidence interval), including the results of the non-inferiority analysis",
+            "type": "boolean"
+        },
+        {
+            "section": "Discussion",
+            "id": "22",
+            "description": "Interpretation consistent with results, balancing benefits and harms, and considering other relevant evidence, with a focus on the non-inferiority conclusion",
+            "type": "boolean"
+        }
+    ]
+}
