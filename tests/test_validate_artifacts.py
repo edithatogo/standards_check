@@ -2,6 +2,7 @@
 
 from contextlib import redirect_stderr, redirect_stdout
 import io
+import json
 from pathlib import Path
 import shutil
 import tempfile
@@ -74,6 +75,34 @@ class TestValidateArtifacts(unittest.TestCase):
         collection = root.find(".//svg:g[@role='list']", self.namespace)
         collection[:] = list(reversed(collection))
         self.assert_rejected(root, "reading order differs")
+
+    def test_nonempty_accessible_label_must_match_the_scene(self):
+        root = ET.fromstring(self.original)
+        node = root.find(".//svg:g[@role='listitem']", self.namespace)
+        node.set("aria-label", "Wrong count (n = 999999)")
+        self.assert_rejected(root, "accessible label differs from its scene")
+
+    def test_title_description_and_metadata_must_match_the_scene(self):
+        for selector, replacement in (
+            ("svg:title", "A different review"),
+            ("svg:desc", "Flow relationships: omitted"),
+            ("svg:metadata", "omitted"),
+        ):
+            with self.subTest(selector=selector):
+                root = ET.fromstring(self.original)
+                root.find(selector, self.namespace).text = replacement
+                self.assert_rejected(root, f"{selector} differs from its scene")
+
+    def test_visible_node_text_must_match_the_scene(self):
+        root = ET.fromstring(self.original)
+        node = root.find(".//svg:g[@role='listitem']", self.namespace)
+        node.find(".//svg:tspan", self.namespace).text = "Wrong count (n = 999999)"
+        self.assert_rejected(root, "visible text differs from its scene")
+
+    def test_text_equivalent_cannot_be_just_the_review_id(self):
+        flow = json.loads((validate_artifacts.INPUTS / f"{self.stem}.json").read_text())
+        (self.root / f"{self.stem}.txt").write_text(flow["review_id"] + "\n")
+        self.assert_rejected(ET.fromstring(self.original), "text equivalent differs from its scene")
 
 
 if __name__ == "__main__":
