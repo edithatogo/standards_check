@@ -40,6 +40,44 @@ class ReconcileEquatorSourcesTests(unittest.TestCase):
         self.assertEqual(row["admission"], "unverified_candidate")
         self.assertEqual(row["rights"], "unassessed")
 
+
+    def test_unindexed_filename_alias_is_inventoried_but_not_accepted(self):
+        self.index('  - id: squire-2-0\n    title: SQUIRE 2.0 Guidelines Checklist\n    group: squire\n    version: "2.0"\n    status: mapped\n')
+        folder = self.root / "source/archetypes"
+        folder.mkdir()
+        alias = folder / "squire-2016.pdf"
+        alias.write_bytes(b"unverified synthetic source bytes")
+        import hashlib
+        digest = hashlib.sha256(alias.read_bytes()).hexdigest()
+        (folder / "squire-2016.yml").write_text(
+            'id: squire-2016\n'
+            'title: SQUIRE 2.0 Guidelines Checklist\n'
+            'group: squire\n'
+            'version: "2.0"\n'
+            f'checksum: "{digest}"\n'
+        )
+        row = reconcile(self.root, self.catalogue)["legacy_items"][0]
+        self.assertEqual(row["source_assets"][0]["path"], "source/archetypes/squire-2016.pdf")
+        self.assertEqual(row["source_assets"][0]["sha256"], digest)
+        self.assertEqual(row["source_assets"][0]["match_basis"], "sidecar_title_group_edition_candidate")
+        self.assertTrue(row["source_assets"][0]["sidecar_digest_matches"])
+        self.assertIn("source_asset_filename_alias_unverified", row["findings"])
+        self.assertNotIn("no_original_asset", row["findings"])
+        self.assertEqual(row["admission"], "unresolved")
+
+    def test_aliases_do_not_match_unrelated_guideline_titles(self):
+        self.index('  - id: squire-2-0\n    title: SQUIRE 2.0 Guidelines Checklist\n    group: squire\n    version: "2.0"\n')
+        folder = self.root / "source/archetypes"
+        folder.mkdir()
+        (folder / "squire-2016.pdf").write_bytes(b"unverified synthetic source bytes")
+        (folder / "squire-2016.yml").write_text(
+            'title: A Different Publication\n'
+            'group: squire\nversion: "2.0"\n'
+        )
+        row = reconcile(self.root, self.catalogue)["legacy_items"][0]
+        self.assertEqual(row["source_assets"], [])
+        self.assertIn("no_original_asset", row["findings"])
+
     def test_hashes_original_but_never_uses_it_as_ground_truth(self):
         self.index('  - id: prisma-2020\n    title: PRISMA 2020 Checklist\n    url: https://www.prisma-statement.org/\n    group: prisma\n    version: "2020"\n    status: mapped\n')
         folder = self.root / "source" / "archetypes"
