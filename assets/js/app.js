@@ -127,6 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Create "Add Note" Button and Text Area ---
     const noteButton = document.createElement('button');
     noteButton.textContent = 'Add Note';
+    noteButton.type = 'button';
     noteButton.className = 'btn btn-outline-secondary btn-sm ms-auto';
     
     item.appendChild(noteButton);
@@ -137,6 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
         noteArea = document.createElement('textarea');
         noteArea.className = 'form-control mt-2';
         noteArea.placeholder = 'Enter your notes here...';
+        noteArea.setAttribute('aria-label', `Notes for checklist item ${index + 1}`);
         noteArea.rows = 3;
         noteArea.value = state.notes[itemId] || '';
         item.appendChild(noteArea);

@@ -17,11 +17,13 @@ from pathlib import Path
 parser = argparse.ArgumentParser()
 parser.add_argument("source")
 parser.add_argument("--to", choices=["html"], required=True)
+parser.add_argument("--shift-heading-level-by", type=int, required=True)
 parser.add_argument("--template", required=True)
 parser.add_argument("--output", required=True)
 parser.add_argument("--metadata", required=True)
 args = parser.parse_args()
 assert args.metadata.startswith("title=")
+assert args.shift_heading_level_by == 1
 title = args.metadata.removeprefix("title=")
 body = Path(args.source).read_text(encoding="utf-8")
 template = Path(args.template).read_text(encoding="utf-8")
