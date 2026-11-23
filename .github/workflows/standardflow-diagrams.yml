@@ -7,17 +7,28 @@ on:
       - "Cargo.lock"
       - "rust-toolchain.toml"
       - "requirements/standardflow-foundation.txt"
+      - "requirements/legacy-standardflow.txt"
+      - "crates/standardflow-core/**"
       - "crates/standardflow-artifacts/**"
       - "crates/standardflow-cli/**"
       - "contracts/examples/prisma-flow/**"
+      - "contracts/examples/legacy-prisma-parity.json"
       - "recipes/prisma-2020/**"
       - "schemas/artifact-recipe.v1.schema.json"
       - "schemas/prisma-flow.v1.schema.json"
       - "schemas/scene-graph.v1.schema.json"
       - "examples/generated/prisma-2020/**"
       - "scripts/validate_artifacts.py"
+      - "scripts/__init__.py"
+      - "scripts/qualify_legacy_prisma.py"
+      - "scripts/verify_legacy_standardflow.py"
+      - "scripts/check_standardflow_import.py"
       - "tests/test_validate_artifacts.py"
+      - "tests/test_legacy_prisma_qualification.py"
+      - "legacy/standardflow/**"
+      - "docs/migration/standardflow/legacy-prisma-contract.md"
       - "conductor/tracks/02-semantic-diagram-prisma/**"
+      - "conductor/tracks/03-standardflow-import/import.json"
       - ".github/workflows/bootstrap-track02-generated.yml"
       - ".github/workflows/standardflow-diagrams.yml"
   push:
@@ -27,17 +38,28 @@ on:
       - "Cargo.lock"
       - "rust-toolchain.toml"
       - "requirements/standardflow-foundation.txt"
+      - "requirements/legacy-standardflow.txt"
+      - "crates/standardflow-core/**"
       - "crates/standardflow-artifacts/**"
       - "crates/standardflow-cli/**"
       - "contracts/examples/prisma-flow/**"
+      - "contracts/examples/legacy-prisma-parity.json"
       - "recipes/prisma-2020/**"
       - "schemas/artifact-recipe.v1.schema.json"
       - "schemas/prisma-flow.v1.schema.json"
       - "schemas/scene-graph.v1.schema.json"
       - "examples/generated/prisma-2020/**"
       - "scripts/validate_artifacts.py"
+      - "scripts/__init__.py"
+      - "scripts/qualify_legacy_prisma.py"
+      - "scripts/verify_legacy_standardflow.py"
+      - "scripts/check_standardflow_import.py"
       - "tests/test_validate_artifacts.py"
+      - "tests/test_legacy_prisma_qualification.py"
+      - "legacy/standardflow/**"
+      - "docs/migration/standardflow/legacy-prisma-contract.md"
       - "conductor/tracks/02-semantic-diagram-prisma/**"
+      - "conductor/tracks/03-standardflow-import/import.json"
       - ".github/workflows/standardflow-diagrams.yml"
   workflow_dispatch:
 
@@ -78,6 +100,87 @@ jobs:
         run: python scripts/validate_artifacts.py
       - name: Check invalid SVG accessibility and reading-order regressions
         run: python -m unittest tests.test_validate_artifacts
+
+  legacy-prisma-qualification:
+    name: Bounded legacy-to-Rust PRISMA qualification
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
+        with:
+          egress-policy: audit
+      - name: Check out complete imported history
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          submodules: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements/legacy-standardflow.txt
+      - uses: dtolnay/rust-toolchain@4cda84d5c5c54efe2404f9d843567869ab1699d4
+        with:
+          toolchain: 1.98.1
+      - name: Install Graphviz
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes graphviz
+      - name: Install the exact maintained legacy dependency closure
+        run: python -m pip install --disable-pip-version-check --no-deps --requirement requirements/legacy-standardflow.txt
+      - name: Check dependency consistency
+        run: python -m pip check
+      - name: Fetch the exact locked Rust dependency graph
+        run: cargo fetch --locked
+      - name: Build the actual Rust CLI offline
+        env:
+          CARGO_NET_OFFLINE: "true"
+        run: cargo build --locked -p standardflow-cli
+      - name: Check artifact fidelity and bounded consumer-contract regressions
+        run: python -m unittest tests.test_validate_artifacts tests.test_legacy_prisma_qualification -v
+      - name: Exercise both CLIs and intentional validation differences
+        id: qualification
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m scripts.qualify_legacy_prisma \
+            --rust-cli target/debug/standardflow \
+            --output "$RUNNER_TEMP/legacy-prisma-qualification.json" \
+            2>&1 | tee "$RUNNER_TEMP/legacy-prisma-qualification.log"
+      - name: Record missing qualification evidence without claiming success
+        if: always()
+        env:
+          QUALIFICATION_OUTCOME: ${{ steps.qualification.outcome }}
+        shell: bash
+        run: |
+          if [ ! -f "$RUNNER_TEMP/legacy-prisma-qualification.json" ]; then
+            python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          outcome = os.environ["QUALIFICATION_OUTCOME"]
+          receipt = {
+              "result": "not_run" if outcome == "skipped" else "fail",
+              "repository_revision": os.environ["GITHUB_SHA"],
+              "qualification_step_outcome": outcome,
+              "claim": "No complete qualification receipt was produced; inspect the job and qualifier logs.",
+          }
+          path = Path(os.environ["RUNNER_TEMP"]) / "legacy-prisma-qualification.json"
+          path.write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
+          PY
+          fi
+      - name: Retain the qualification receipt and execution log
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: legacy-prisma-qualification
+          path: |
+            ${{ runner.temp }}/legacy-prisma-qualification.json
+            ${{ runner.temp }}/legacy-prisma-qualification.log
+          if-no-files-found: error
 
   rust-quality:
     runs-on: ubuntu-latest

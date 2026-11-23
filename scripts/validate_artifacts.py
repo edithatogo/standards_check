@@ -77,7 +77,7 @@ def validate(path: Path, validator: Draft202012Validator) -> dict[str, Any]:
     return value
 
 
-def validate_svg(path: Path, reading_order: list[str]) -> None:
+def validate_svg(path: Path, scene: dict[str, Any]) -> None:
     try:
         root = ET.fromstring(path.read_text(encoding="utf-8"))
     except (OSError, UnicodeError, ET.ParseError) as error:
@@ -91,18 +91,20 @@ def validate_svg(path: Path, reading_order: list[str]) -> None:
     if root.attrib.get("aria-describedby") != "standardflow-description":
         fail(f"{path.relative_to(ROOT)} must identify its complete accessible description")
     namespace = {"svg": "http://www.w3.org/2000/svg"}
-    for selector, identifier in (
-        ("svg:title", "standardflow-title"),
-        ("svg:desc", "standardflow-description"),
-        ("svg:metadata", None),
+    for selector, identifier, expected in (
+        ("svg:title", "standardflow-title", scene["title"]),
+        ("svg:desc", "standardflow-description", scene["text_equivalent"]),
+        ("svg:metadata", "standardflow-text-equivalent", scene["text_equivalent"]),
     ):
         element = root.find(selector, namespace)
         if element is None or not "".join(element.itertext()).strip():
             fail(f"{path.relative_to(ROOT)} is missing non-empty {selector}")
-        if identifier is not None and [
+        if [
             candidate for candidate in root.iter() if candidate.get("id") == identifier
         ] != [element]:
             fail(f"{path.relative_to(ROOT)} {identifier} must resolve uniquely to {selector}")
+        if "".join(element.itertext()) != expected:
+            fail(f"{path.relative_to(ROOT)} {selector} differs from its scene")
     description = root.find("svg:desc", namespace)
     if description is None or "Flow relationships:" not in "".join(description.itertext()):
         fail(f"{path.relative_to(ROOT)} accessible description omits flow relationships")
@@ -112,8 +114,22 @@ def validate_svg(path: Path, reading_order: list[str]) -> None:
     nodes = [node for node in root.iter() if node.attrib.get("role") == "listitem"]
     if not nodes or any(not node.attrib.get("aria-label", "").strip() for node in nodes):
         fail(f"{path.relative_to(ROOT)} must expose labelled list-item nodes")
-    if [node.attrib.get("id") for node in nodes] != [f"node-{node_id}" for node_id in reading_order]:
+    if [node.attrib.get("id") for node in nodes] != [
+        f"node-{node_id}" for node_id in scene["reading_order"]
+    ]:
         fail(f"{path.relative_to(ROOT)} DOM reading order differs from its scene")
+    expected_nodes = {f"node-{node['id']}": node for node in scene["nodes"]}
+    for node in nodes:
+        expected = expected_nodes.get(node.get("id"))
+        if expected is None:
+            fail(f"{path.relative_to(ROOT)} contains a node absent from its scene")
+        # XML normalizes literal attribute whitespace before exposing the DOM.
+        label = expected["aria_label"].replace("\r\n", "\n").translate({9: " ", 10: " ", 13: " "})
+        if node.get("aria-label") != label:
+            fail(f"{path.relative_to(ROOT)} accessible label differs from its scene")
+        lines = ["".join(line.itertext()) for line in node.findall(".//svg:tspan", namespace)]
+        if lines != expected["lines"]:
+            fail(f"{path.relative_to(ROOT)} visible text differs from its scene")
 
 
 def main() -> None:
@@ -164,10 +180,10 @@ def main() -> None:
             fail(f"{scene_path.relative_to(ROOT)} reading order differs from its recipe")
         if len(scene.get("nodes", [])) != len(recipe.get("nodes", [])):
             fail(f"{scene_path.relative_to(ROOT)} node count differs from its recipe")
-        validate_svg(svg_path, scene["reading_order"])
+        validate_svg(svg_path, scene)
         text = text_path.read_text(encoding="utf-8")
-        if not text.strip() or flow["review_id"] not in text:
-            fail(f"{text_path.relative_to(ROOT)} is not a complete text equivalent")
+        if text != scene["text_equivalent"]:
+            fail(f"{text_path.relative_to(ROOT)} text equivalent differs from its scene")
 
     print(f"Validated {len(VARIANTS)} PRISMA 2020 recipe/input families")
 

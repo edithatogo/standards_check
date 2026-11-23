@@ -1,0 +1,99 @@
+{
+  "schema_version": "dev.standardflow.legacy-prisma-qualification.v1",
+  "purpose": "Synthetic count-preservation examples, not an automatic migration or full semantic equivalence claim",
+  "cases": [
+    {
+      "id": "new-database-only",
+      "legacy_fixture": "data/prisma_data.json",
+      "conditions": {
+        "database_records_only": true,
+        "duplicates_are_only_prescreen_removal": true,
+        "all_sought_reports_retrieved": true,
+        "legacy_full_text_articles_are_reports": true,
+        "one_report_per_included_study": true,
+        "exclusion_reason_partition_supplied": true
+      },
+      "expected_counts": {
+        "identified": 1000,
+        "duplicates": 200,
+        "screened": 800,
+        "records_excluded": 200,
+        "assessed": 600,
+        "reports_excluded": 300,
+        "new_studies": 300,
+        "previous_studies": 0,
+        "total_studies": 300
+      },
+      "rust_input": {
+        "schema_version": "dev.standardflow.prisma-flow.v1",
+        "review_id": "synthetic-legacy-new-database-only",
+        "template": "new_databases_registers",
+        "databases_registers": {
+          "databases": 1000,
+          "registers": 0,
+          "duplicate_records_removed": 200,
+          "records_marked_ineligible_by_automation": 0,
+          "records_removed_other_reasons": 0,
+          "records_screened": 800,
+          "records_excluded": 200,
+          "reports_sought": 600,
+          "reports_not_retrieved": 0,
+          "reports_assessed": 600,
+          "reports_excluded": [{"reason": "Synthetic exclusion", "reports": 300}],
+          "reports_included": 300
+        },
+        "other_methods": null,
+        "previous_review": null,
+        "new_included": {"studies": 300, "reports": 300},
+        "total_included": {"studies": 300, "reports": 300}
+      }
+    },
+    {
+      "id": "updated-database-only",
+      "legacy_fixture": "data/prisma_2020_updated_data.json",
+      "conditions": {
+        "database_records_only": true,
+        "duplicates_are_only_prescreen_removal": true,
+        "all_sought_reports_retrieved": true,
+        "legacy_full_text_articles_are_reports": true,
+        "one_report_per_included_study": true,
+        "exclusion_reason_partition_supplied": true,
+        "previous_and_new_studies_disjoint": true
+      },
+      "expected_counts": {
+        "identified": 500,
+        "duplicates": 100,
+        "screened": 400,
+        "records_excluded": 100,
+        "assessed": 300,
+        "reports_excluded": 150,
+        "new_studies": 150,
+        "previous_studies": 10,
+        "total_studies": 160
+      },
+      "rust_input": {
+        "schema_version": "dev.standardflow.prisma-flow.v1",
+        "review_id": "synthetic-legacy-updated-database-only",
+        "template": "updated_databases_registers",
+        "databases_registers": {
+          "databases": 500,
+          "registers": 0,
+          "duplicate_records_removed": 100,
+          "records_marked_ineligible_by_automation": 0,
+          "records_removed_other_reasons": 0,
+          "records_screened": 400,
+          "records_excluded": 100,
+          "reports_sought": 300,
+          "reports_not_retrieved": 0,
+          "reports_assessed": 300,
+          "reports_excluded": [{"reason": "Synthetic exclusion", "reports": 150}],
+          "reports_included": 150
+        },
+        "other_methods": null,
+        "previous_review": {"studies": 10, "reports": 10},
+        "new_included": {"studies": 150, "reports": 150},
+        "total_included": {"studies": 160, "reports": 160}
+      }
+    }
+  ]
+}
