@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "repository": "edithatogo/standards_check",
+  "revision": "dd3f995c473db0cc1cd6dad9d392b3744166958b",
+  "generated_at": "2026-11-23T03:39:26Z",
+  "result": "partial",
+  "checks": [
+    {
+      "name": "implementation identity and protected merge",
+      "result": "pass",
+      "evidence": "PR107 4e8e13a632777f2916b183101774cf2ff5389823, tested merge f8d86bcf61ba9f22b8a1bebd2bae078ae9e19b9b and main dd3f995c473db0cc1cd6dad9d392b3744166958b share tree 3bdbebf0bb72a7f7edf9c90a7c4fc10412d98200; normal merge after addressed review."
+    },
+    {
+      "name": "Python component coverage and contracts",
+      "result": "pass",
+      "evidence": "265 tests; 28 modules; 1700/2151 statements and 520/744 branches; 76.6839378238342% combined against 75%. Six validators and two authored real CLI PRISMA pairs plus two intentional differences passed on actual main."
+    },
+    {
+      "name": "Rust component coverage",
+      "result": "pass",
+      "evidence": "72 tests; 2742/3430 lines, 79.94169096209912% against 79%. Source-file reporting includes embedded tests; branch coverage is not measured."
+    },
+    {
+      "name": "API component coverage and path contracts",
+      "result": "pass",
+      "evidence": "41 tests; 143/143 lines; 41/42 branches, 97.61904761904762%, against unchanged 98% line/90% branch floors. Both endpoint regular-entry boundaries and invalid/error cases passed."
+    },
+    {
+      "name": "bounded properties and metamorphic contracts",
+      "result": "pass",
+      "evidence": "Eight Rust properties, 256 cases each under three recorded seeds (6144 examples), canonicalization/lock/count/render relations and API list/item equality; see rust-qualification-20261123.md and verification.md."
+    },
+    {
+      "name": "bounded native Rust mutation campaign",
+      "result": "pass",
+      "evidence": "Historical hosted run 45097644451 at 12b7:26 selected, 25 viable caught, 1 identified unviable, 0 miss/timeout. Native selected-package baseline 61 is distinct from workspace 72. Inputs remain unchanged; no final-head rerun or global score is claimed."
+    },
+    {
+      "name": "bounded schema and API mutations",
+      "result": "pass",
+      "evidence": "Actual main dd3: two clean baselines; ten assertion kills; zero survivors/unviable/timeouts; all 83 source bindings verified."
+    },
+    {
+      "name": "process-local rate-budget clock contract",
+      "result": "pass",
+      "evidence": "Mocked-clock exhaustion and expiry/recovery contract passed. No distributed scheduler, replicated state or shared-store behavior is claimed."
+    },
+    {
+      "name": "native dependency inventories",
+      "result": "pass",
+      "evidence": "Actual main run 45106620577 / job 137469275648 / artifact 14787249909: nine inventories, 48 checksums, 15 source inputs plus generator, complete package identities and clean checkout binding verified. Python test transitives are observed environment resolution."
+    },
+    {
+      "name": "workflow policy and dependency review",
+      "result": "pass",
+      "evidence": "Pinned actionlint 1.7.12 / zizmor 1.33.1 and PR dependency-review 5.0.1 gates passed on final PR 4e. Dependency review is intentionally skipped on main push; native component floors remain enforced."
+    },
+    {
+      "name": "main secret and privacy gate",
+      "result": "pass",
+      "evidence": "Main job 137469276069: Gitleaks 8.30.1 zero detected findings/zero reviewed exceptions; Presidio zero blocking and seven advisory checksum-looking matches. No scanner exceptions or weakened configuration."
+    },
+    {
+      "name": "observed main CodeQL alert resolution",
+      "result": "pass",
+      "evidence": "Live main inventory: 0 open / 4 closed. #1/#2 Fixed via PR100; #5/#6 Fixed via PR107, not dismissed. This is an observed alert inventory, not vulnerability freedom."
+    },
+    {
+      "name": "repository protection and owner recovery path",
+      "result": "pass",
+      "evidence": "Active ruleset 27871801: PR/resolved conversations, strict seven app 15368 checks, zero human approvals, no force/delete/bypass; normal merge verified. Owner edit/reauthentication correction and re-verification path documented; no recovery change rehearsed."
+    },
+    {
+      "name": "Codecov uploads and observed provider result",
+      "result": "pass",
+      "evidence": "Three exact main reports/checksums uploaded with OIDC and dd3 processing URLs. Legacy patch 59621115216 succeeds; no main App 254 or project status observed. Final PR App 254 patch 137468737189 is 100% against 80%."
+    },
+    {
+      "name": "Pages recovery",
+      "result": "pass",
+      "evidence": "Historical receiving-main8029 native job 137460173154: exact artifact 14786298400 github-pages-1 passed probe and native deployment. No new dd3 Pages deployment is inferred."
+    },
+    {
+      "name": "preserved source import",
+      "result": "pass",
+      "evidence": "check_standardflow_import.py passes on dd3: exact source tree 62d8a0e738f0255cc59822ae4e661568090a213e and nine preserved revisions. Source rights and migration acceptance remain separate."
+    },
+    {
+      "name": "coverage history integrity and addressed review",
+      "result": "pass",
+      "evidence": "Historical API/tests/report exactly equal main8029; every remaining current field equals19b. Old40-test/146-line/36-of-38-branch report and current41-test/143-line/41-of-42 report were independently rehashed. Published 4e resolved the valid review before normal merge."
+    },
+    {
+      "name": "managed policy local specialization",
+      "result": "pass",
+      "evidence": "Review against central 2efdbd988064f6857795b9fa9ed4e1d08d18791d: node/baseline dependency review and inventories implemented; stronger local Python/Rust/API and isolated OIDC preserved through the existing semantic-conflict route in #30. No exact thin-reusable-call or byte-equality claim."
+    },
+    {
+      "name": "main Codecov App and project status",
+      "result": "skip",
+      "reason": "Not observed in the final exact-main provider snapshot; successful legacy patch and uploads are separately recorded. This is not a new required check."
+    },
+    {
+      "name": "offline security execution",
+      "result": "skip",
+      "reason": "No executed receipt. Existing #30 prerequisites remain: qualified pinned central image and assets, matching isolated self-hosted runner, reviewed consumer pin where needed and an actual run. Queued work does not satisfy them."
+    },
+    {
+      "name": "protected dependency updater handover",
+      "result": "skip",
+      "reason": "Installation/discovery and earlier bot merges do not qualify protected ecosystem update/normal-merge/receiving results. Retain Dependabot until the existing handover is demonstrated."
+    },
+    {
+      "name": "complete migration and content admission",
+      "result": "skip",
+      "reason": "Bounded two-pair PRISMA and optional kernels do not establish all legacy consumer semantics. #82 independent interpretation/evidence and #95 item-level source/rights/provenance remain open."
+    },
+    {
+      "name": "release and independent programme acceptance",
+      "result": "skip",
+      "reason": "Track 04 contracts, release/offline reproducibility, binary/image SBOM, provenance/signatures, downstream cutover/rollback and independent methodology/accessibility/publication remain open."
+    },
+    {
+      "name": "nonselected baseline supply-chain controls",
+      "result": "skip",
+      "reason": "Scorecard, Security Insights and SLSA are not selected by current node/baseline. This applicability record does not waive future release requirements."
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "conductor/tracks/05-maximal-assurance/coverage-20261123.json",
+      "sha256": "c9dcbf800eb99587d6e119375908c53100ccd0ba86af46df31c16ff7af46860f"
+    },
+    {
+      "path": "conductor/tracks/05-maximal-assurance/api-path-selection-20261123.json",
+      "sha256": "cac65f739a78ffffa25764cb08951ea7b9a70445bc3f90924e9b9f918f064c02"
+    },
+    {
+      "path": "conductor/tracks/05-maximal-assurance/rust-qualification-20261123.json",
+      "sha256": "fdfca60f4d3088491573597828113a0c9234d9f6303e9e1f7f999817259a9ca5"
+    },
+    {
+      "path": "conductor/tracks/05-maximal-assurance/rust-hosted-first-head-20261123.json",
+      "sha256": "5ff65875ed9df5749272f8dd6d7adb59625eecee55eb92b677dd073a5300b3b1"
+    },
+    {
+      "path": "conductor/tracks/05-maximal-assurance/boundary-mutation-20261123.md",
+      "sha256": "09acfe514c2534944d40736776bd99398a16da58b35b6910ed7e931b35e4c59a"
+    },
+    {
+      "path": "conductor/tracks/05-maximal-assurance/managed-file-drift-20261123.json",
+      "sha256": "90016cb7120b9131d293514ad1a6c1592436dbc57b707c7a5588e04753c38beb"
+    },
+    {
+      "path": "conductor/tracks/05-maximal-assurance/sbom-20261123.md",
+      "sha256": "bff52b0c72284525c2a5ee1d950d7aa331d3008c74f751099da2c869b2270ad6"
+    },
+    {
+      "path": "conductor/tracks/05-maximal-assurance/hosted-first-head-20261123.json",
+      "sha256": "0360dc66f053016927299f8a946d4a22c7e30213a9a80323faa9beaed535afc1"
+    },
+    {
+      "path": "conductor/tracks/05-maximal-assurance/hosted-status-20261123.json",
+      "sha256": "e36324412ac22dd8f8e25a5d89a089fec54458afdc9c59575ada8e6677912af5"
+    },
+    {
+      "path": "https://api.github.com/repos/edithatogo/standards_check/actions/artifacts/14787870869",
+      "sha256": "06d5b3f0f551bd527fa284297fb0d946acb6f3cad6cc7833cf4b3c9ac27aab2b"
+    },
+    {
+      "path": "https://api.github.com/repos/edithatogo/standards_check/actions/artifacts/14787762444",
+      "sha256": "8c2ce029cee1ddb5de410637cae773568f2c9af29caa68deb3fe9d6cc35c08e7"
+    },
+    {
+      "path": "https://api.github.com/repos/edithatogo/standards_check/actions/artifacts/14787687510",
+      "sha256": "bc617f3bf4d758077679c2b12eed19f141e359b1d1f9b9676e5daeec9b3ab9c2"
+    },
+    {
+      "path": "https://api.github.com/repos/edithatogo/standards_check/actions/artifacts/14787538638",
+      "sha256": "eff3fe770949722b630847a554604509bc423627573f596baa9303d780d2bfd4"
+    },
+    {
+      "path": "https://api.github.com/repos/edithatogo/standards_check/actions/artifacts/14787249909",
+      "sha256": "5b331712f3ed9248adf713043e79e431f377fe28c7a89b88ea81a0ea97a204f9"
+    }
+  ]
+}

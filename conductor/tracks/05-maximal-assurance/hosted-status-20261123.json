@@ -1,0 +1,1743 @@
+{
+  "schema_version": "dev.standardflow.hosted-status.v1",
+  "observed_at": "2026-11-23T03:39:26Z",
+  "repository": "edithatogo/standards_check",
+  "purpose": "Accepted implementation dd3 with exact hosted bindings, preserved failures and separate remaining programme gates.",
+  "accepted_implementation": {
+    "revision": "dd3f995c473db0cc1cd6dad9d392b3744166958b",
+    "tree": "3bdbebf0bb72a7f7edf9c90a7c4fc10412d98200",
+    "parents": [
+      "8029b1a55fb4273878510681c1a5a7b5c02b57f0",
+      "4e8e13a632777f2916b183101774cf2ff5389823"
+    ],
+    "pull_request": 107,
+    "head": "4e8e13a632777f2916b183101774cf2ff5389823",
+    "tested_pr_merge": "f8d86bcf61ba9f22b8a1bebd2bae078ae9e19b9b",
+    "all_three_trees_equal": true,
+    "normal_protected_merge": {
+      "sha": "dd3f995c473db0cc1cd6dad9d392b3744166958b",
+      "merged": true,
+      "message": "Pull Request successfully merged"
+    },
+    "premerge_check_snapshot": {
+      "total": 24,
+      "success": 22,
+      "offline_queued": 2
+    },
+    "main_check_snapshot": {
+      "total": 21,
+      "success": 19,
+      "expected_pr_only_skip": 1,
+      "offline_queued": 1
+    },
+    "native_run": {
+      "id": 45106620582,
+      "url": "https://github.com/edithatogo/standards_check/actions/runs/45106620582",
+      "head_sha": "dd3f995c473db0cc1cd6dad9d392b3744166958b",
+      "event": "push",
+      "jobs": [
+        {
+          "id": 137469276587,
+          "name": "coverage (python)",
+          "status": "completed",
+          "conclusion": "success",
+          "measurement_step": {
+            "name": "Measure Python regressions and existing validators",
+            "conclusion": "success"
+          },
+          "url": "https://github.com/edithatogo/standards_check/actions/runs/45106620582/job/137469276587"
+        },
+        {
+          "id": 137469276491,
+          "name": "coverage (rust)",
+          "status": "completed",
+          "conclusion": "success",
+          "measurement_step": {
+            "name": "Measure the Rust workspace",
+            "conclusion": "success"
+          },
+          "url": "https://github.com/edithatogo/standards_check/actions/runs/45106620582/job/137469276491"
+        },
+        {
+          "id": 137469276443,
+          "name": "coverage (api)",
+          "status": "completed",
+          "conclusion": "success",
+          "measurement_step": {
+            "name": "Measure the maintained API",
+            "conclusion": "success"
+          },
+          "url": "https://github.com/edithatogo/standards_check/actions/runs/45106620582/job/137469276443"
+        },
+        {
+          "id": 137469276202,
+          "name": "boundary-mutations",
+          "status": "completed",
+          "conclusion": "success",
+          "measurement_step": {
+            "name": "Execute the hand-selected schema and API mutation campaign",
+            "conclusion": "success"
+          },
+          "url": "https://github.com/edithatogo/standards_check/actions/runs/45106620582/job/137469276202"
+        }
+      ],
+      "aggregate": [
+        {
+          "id": 137469891117,
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    "measurements": {
+      "python": {
+        "result": "pass",
+        "tests_passed": 265,
+        "module_count": 28,
+        "covered_statements": 1700,
+        "total_statements": 2151,
+        "covered_branches": 520,
+        "total_branches": 744,
+        "combined_percent": 76.6839378238342,
+        "excluded_lines": 0,
+        "floor_percent": 75,
+        "report_sha256": "2c3691a4dec16e45eac924fb17cafec0c2f5cfea175f7c839045c0955a5fc208",
+        "six_validators_passed": [
+          "validate_foundation",
+          "validate_packs",
+          "validate_artifacts",
+          "validate_costing_reconciliation",
+          "validate_prisma_source_assurance",
+          "audit_foundation"
+        ],
+        "real_prisma_cli_qualification": {
+          "result": "pass",
+          "authored_pairs": 2,
+          "intentional_validation_differences": [
+            {
+              "id": "screening-conservation",
+              "legacy_exit_code": 0,
+              "rust_diagnostic_codes": [
+                "SF-PRISMA-010",
+                "SF-PRISMA-011"
+              ],
+              "rust_exit_code": 1,
+              "rust_output_created": false
+            },
+            {
+              "id": "updated-total-conservation",
+              "legacy_exit_code": 0,
+              "rust_diagnostic_codes": [
+                "SF-PRISMA-040"
+              ],
+              "rust_exit_code": 1,
+              "rust_output_created": false
+            }
+          ],
+          "working_tree_clean": true,
+          "corpus_sha256": "d0305a141ba5682d72c6924f296acd84e67e667d0caa6a3314dff305f5ec2e12",
+          "rust_executable_sha256": "dfbf10bc8c5fa4cf48788f4b56f78b4b2d896e9e94913581f9105a9531b09429"
+        }
+      },
+      "rust": {
+        "result": "pass",
+        "tests_passed": 72,
+        "covered_lines": 2742,
+        "total_lines": 3430,
+        "line_percent": 79.94169096209912,
+        "floor_percent": 79,
+        "report_sha256": "f3c8b50609253a7557b0999cd15c8b08be17c080f8cd1c4811d77b5076aad1ba"
+      },
+      "api": {
+        "result": "pass",
+        "tests_passed": 41,
+        "covered_lines": 143,
+        "total_lines": 143,
+        "line_percent": 100.0,
+        "covered_branches": 41,
+        "total_branches": 42,
+        "branch_percent": 97.61904761904762,
+        "line_floor_percent": 98,
+        "branch_floor_percent": 90,
+        "report_sha256": "b71ec07177fbac978ed1c470d3064c0c16436b48d8739bcaa30752b202a62681",
+        "new_boundary_test_passed": "symlinked corpus entries cannot be listed or selected by a valid ID"
+      },
+      "boundary_mutations": {
+        "result": "pass",
+        "baselines_passed": 2,
+        "assertion_kills": 10,
+        "survivors": 0,
+        "unviable": 0,
+        "timeouts": 0,
+        "source_hashes_match_main_tree": true,
+        "source_files_verified": 83,
+        "source_byte_comparison_commit": "4e8e13a632777f2916b183101774cf2ff5389823"
+      }
+    },
+    "native_bindings": {
+      "all_three_coverage_commit_files": "dd3f995c473db0cc1cd6dad9d392b3744166958b",
+      "all_three_native_report_sha256_files_verified": true,
+      "boundary_report_base_commit": "dd3f995c473db0cc1cd6dad9d392b3744166958b",
+      "real_prisma_receipt_revision": "dd3f995c473db0cc1cd6dad9d392b3744166958b",
+      "real_prisma_working_tree_clean": true,
+      "all_four_archive_digests_verified": true
+    },
+    "native_artifacts": [
+      {
+        "id": 14787870869,
+        "name": "coverage-api-dd3f995c473db0cc1cd6dad9d392b3744166958b",
+        "digest": "sha256:06d5b3f0f551bd527fa284297fb0d946acb6f3cad6cc7833cf4b3c9ac27aab2b",
+        "size_in_bytes": 1359,
+        "head_sha": "dd3f995c473db0cc1cd6dad9d392b3744166958b",
+        "run_id": 45106620582,
+        "url": "https://api.github.com/repos/edithatogo/standards_check/actions/artifacts/14787870869",
+        "digest_verified": true
+      },
+      {
+        "id": 14787762444,
+        "name": "coverage-rust-dd3f995c473db0cc1cd6dad9d392b3744166958b",
+        "digest": "sha256:8c2ce029cee1ddb5de410637cae773568f2c9af29caa68deb3fe9d6cc35c08e7",
+        "size_in_bytes": 24734,
+        "head_sha": "dd3f995c473db0cc1cd6dad9d392b3744166958b",
+        "run_id": 45106620582,
+        "url": "https://api.github.com/repos/edithatogo/standards_check/actions/artifacts/14787762444",
+        "digest_verified": true
+      },
+      {
+        "id": 14787687510,
+        "name": "boundary-mutations-dd3f995c473db0cc1cd6dad9d392b3744166958b",
+        "digest": "sha256:bc617f3bf4d758077679c2b12eed19f141e359b1d1f9b9676e5daeec9b3ab9c2",
+        "size_in_bytes": 16927,
+        "head_sha": "dd3f995c473db0cc1cd6dad9d392b3744166958b",
+        "run_id": 45106620582,
+        "url": "https://api.github.com/repos/edithatogo/standards_check/actions/artifacts/14787687510",
+        "digest_verified": true
+      },
+      {
+        "id": 14787538638,
+        "name": "coverage-python-dd3f995c473db0cc1cd6dad9d392b3744166958b",
+        "digest": "sha256:eff3fe770949722b630847a554604509bc423627573f596baa9303d780d2bfd4",
+        "size_in_bytes": 25252,
+        "head_sha": "dd3f995c473db0cc1cd6dad9d392b3744166958b",
+        "run_id": 45106620582,
+        "url": "https://api.github.com/repos/edithatogo/standards_check/actions/artifacts/14787538638",
+        "digest_verified": true
+      }
+    ],
+    "native_scope_limits": [
+      "PRISMA evidence here comes from the real CLI qualification executed in the Python coverage job; no separate diagrams-workflow run is claimed for this API/receipt change.",
+      "Two authored PRISMA count-preservation pairs and two intentional validation differences do not establish full legacy compatibility.",
+      "Ten hand-selected boundary mutation kills are not a global mutation score.",
+      "Rust coverage is a line measurement; no branch coverage claim."
+    ],
+    "pr_native_scope": "Changed API and boundary artifacts independently downloaded for final PR 4e; unchanged Python/Rust inputs compared to main8029. All four native artifacts independently downloaded and verified on actual main dd3.",
+    "sbom": {
+      "run": {
+        "conclusion": "success",
+        "event": "push",
+        "head_branch": "main",
+        "head_sha": "dd3f995c473db0cc1cd6dad9d392b3744166958b",
+        "html_url": "https://github.com/edithatogo/standards_check/actions/runs/45106620577",
+        "id": 45106620577,
+        "name": "Dependency inventories",
+        "run_attempt": 1,
+        "status": "completed",
+        "updated_at": "2026-11-23T03:34:56Z"
+      },
+      "job": {
+        "all_steps_succeeded": true,
+        "id": 137469275648,
+        "url": "https://github.com/edithatogo/standards_check/actions/runs/45106620577/job/137469275648"
+      },
+      "artifact": {
+        "created_at": "2026-11-23T03:34:50Z",
+        "digest": "sha256:5b331712f3ed9248adf713043e79e431f377fe28c7a89b88ea81a0ea97a204f9",
+        "expires_at": "2026-12-23T03:34:48Z",
+        "id": 14787249909,
+        "name": "sbom-dd3f995c473db0cc1cd6dad9d392b3744166958b",
+        "size_in_bytes": 1066676
+      },
+      "archive_sha256": "5b331712f3ed9248adf713043e79e431f377fe28c7a89b88ea81a0ea97a204f9",
+      "verified_checksum_entries": 48,
+      "archive_members": 57,
+      "profiles": [
+        {
+          "all_checks_passed": true,
+          "bom_sha256": "9567f05bee55b2641b32a4b58ec74ba84b78d0dd9b962848f3f8807f813fad2b",
+          "component": "rust",
+          "components": 89,
+          "cyclonedx_version": "1.6",
+          "dependency_records": 89,
+          "identified_packages": 86,
+          "receipt_sha256": "9e482031ed13be769bc278335becaf018d7eb926cc6ede1b59d9ea27c0b1d926"
+        },
+        {
+          "all_checks_passed": true,
+          "bom_sha256": "c3fb04ce944c20885a58ba9626cdee4a787191984b115a72995ca68e565c56f2",
+          "component": "node",
+          "components": 3,
+          "cyclonedx_version": "1.5",
+          "dependency_records": 4,
+          "identified_packages": 3,
+          "locked_package_records": 3,
+          "node": "v24.22.3",
+          "npm": "11.19.1",
+          "receipt_sha256": "c6cd4ee4f1dd23344ad4bbf685b6664aeb468ca96c48ae2eed662038dffdf8ec"
+        },
+        {
+          "all_checks_passed": true,
+          "bom_sha256": "4ff363d069480506d17cea6ac6b10e8a8db94e64dea75a21faa7b4f127a910f2",
+          "component": "api",
+          "components": 72,
+          "cyclonedx_version": "1.5",
+          "dependency_records": 73,
+          "identified_packages": 72,
+          "locked_package_records": 73,
+          "node": "v24.22.3",
+          "npm": "11.19.1",
+          "rate_limiter_and_address_dependency_present": true,
+          "receipt_sha256": "bb0384874a439a12673603dc01f149c941cbf08f37404a91e13e99fd2a2afa07"
+        },
+        {
+          "all_checks_passed": true,
+          "bom_sha256": "660bf0a50529be9d1424c9750c53a7d23e2c26c4b47c3341ab5fcc2429553d6d",
+          "bootstrap_pip_included": true,
+          "component": "python-foundation",
+          "components": 6,
+          "cyclonedx_version": "1.7",
+          "declared_pins": 5,
+          "dependency_records": 3,
+          "identified_packages": 6,
+          "python": "3.14.10",
+          "receipt_sha256": "281881af1c08866a1d05c89b648f867f87a0137cc9d9427b10dbbc12e667a52c",
+          "resolution": "exact profile closure plus bootstrap pip"
+        },
+        {
+          "all_checks_passed": true,
+          "bom_sha256": "a192708310d320a20aa7efe3278d24d1585aeb56dfdd14b893ba1df7e60d1d40",
+          "bootstrap_pip_included": true,
+          "component": "python-legacy",
+          "components": 31,
+          "cyclonedx_version": "1.7",
+          "declared_pins": 30,
+          "dependency_records": 14,
+          "identified_packages": 31,
+          "python": "3.12.16",
+          "receipt_sha256": "5cead898f2cd34bcfb2f6b9bfe1732906a116352a4e34acf16a2adbbd5d5f876",
+          "resolution": "exact profile closure plus bootstrap pip"
+        },
+        {
+          "all_checks_passed": true,
+          "bom_sha256": "4ae29c04adb19e80b46509f54742d564c5a377dadafcb6b11569f7d3c6eed110",
+          "bootstrap_pip_included": true,
+          "component": "python-tests",
+          "components": 45,
+          "cyclonedx_version": "1.7",
+          "declared_pins": 8,
+          "dependency_records": 24,
+          "identified_packages": 45,
+          "python": "3.12.16",
+          "receipt_sha256": "ce8d6cec4ec01500eb439c86696a72544179854abb00dd50e1b04cfa9a678250",
+          "resolution": "observed transitive resolution; not a source lock"
+        },
+        {
+          "all_checks_passed": true,
+          "bom_sha256": "9a33ec204c8de56ffad4a992360b56bc4e364f4dbe238df82dfd960c0daa95f8",
+          "bootstrap_pip_included": true,
+          "component": "python-assurance",
+          "components": 3,
+          "cyclonedx_version": "1.7",
+          "declared_pins": 2,
+          "dependency_records": 0,
+          "identified_packages": 3,
+          "python": "3.12.16",
+          "receipt_sha256": "819e3d1ee93f9f8843f890b074081236ef996d4d9d363a1de3d6ebb23881c9f9",
+          "resolution": "exact profile closure plus bootstrap pip"
+        },
+        {
+          "all_checks_passed": true,
+          "bom_sha256": "031e32e29690607110d22b7a3094bba7ecb729889b0bd0bd53641f740ce01aba",
+          "bootstrap_pip_included": true,
+          "component": "python-kernel-baseline",
+          "components": 43,
+          "cyclonedx_version": "1.7",
+          "declared_pins": 42,
+          "dependency_records": 19,
+          "identified_packages": 43,
+          "kernel_version": "6.25.0",
+          "python": "3.12.16",
+          "receipt_sha256": "a0bdeba282be4d871df2ff248be7a0026c656631cc6cc3f9f860e8f7e27a8f51",
+          "resolution": "exact profile closure plus bootstrap pip"
+        },
+        {
+          "all_checks_passed": true,
+          "bom_sha256": "33f7a69ff7b9d86212eb72fac8ca21ac06c86f75125d23036670cbff7a11b3d3",
+          "bootstrap_pip_included": true,
+          "component": "python-kernel-candidate",
+          "components": 43,
+          "cyclonedx_version": "1.7",
+          "declared_pins": 42,
+          "dependency_records": 19,
+          "identified_packages": 43,
+          "kernel_version": "6.31.0",
+          "python": "3.12.16",
+          "receipt_sha256": "b7ed10060825c5592c08b0223c900ded896285b5ab6a51ddf8f0d447f7d493ed",
+          "resolution": "exact profile closure plus bootstrap pip"
+        }
+      ],
+      "source_input_hashes": {
+        ".github/workflows/standardflow-legacy.yml": "8f9e4404ff90a25c50dca4bdaaddae502a93a6c94f6a5da7b089a39d80de1ce2",
+        "Cargo.lock": "33c6f6e885c65ec5fa88948e4d508e180520e873f725f13b467d2ff8bfaf72ea",
+        "Cargo.toml": "6736f253aa3707808be62ea08fba13fb117814690d2e6c180fd5f62036a1a5a2",
+        "api/package-lock.json": "26c0c363d91a843032ed296d37661adc23c79764eddb36023fbd8a74abd19e8b",
+        "api/package.json": "a0f14913f02e2eaba3737e45fcdcfbaaf0a92cf8449f0930100631a70198fb0b",
+        "crates/standardflow-artifacts/Cargo.toml": "c9962dc7ff160828dfb3bbf9ab388ff6660953ec768e1b0d4520ff7281242370",
+        "crates/standardflow-cli/Cargo.toml": "0ed7a45438d484f7dc45562cd27178834babf7d87f1079021360e12a505823da",
+        "crates/standardflow-core/Cargo.toml": "0bfbcf38b63b791c1673bf6c8f69735f4584ab10cadcd5b973c6db5a3d560209",
+        "package-lock.json": "0ffe661baae05145b7fad16a2fc8fff40bcaa8ac2e6d40f25d622b2607916c7d",
+        "package.json": "e5f7a818c97d5ade3c488b566a074c98035d0d7342826981616404ecacd613e2",
+        "requirements/assurance-tools.txt": "45b28efc387f40cee01fb1ee08f366502afcf87fd95a15a9d6d8a975ce306337",
+        "requirements/legacy-kernel-qualification.txt": "b205079d09753f08724bb7fe594860266a4ab2c01fb8517fd95a4a4730d2d717",
+        "requirements/legacy-standardflow.txt": "27ba903aba19f5851baf887a177699ac1c9604c9ec5a7666edac573aefbe0568",
+        "requirements/python-tests.txt": "274aa2714421edd0e0f9074fa2544da3c3a1914029eeffa04ba6bcaa5c1e2aa4",
+        "requirements/standardflow-foundation.txt": "881be09efe871427b506145592616dab33589034eda119d615c65785c1e358d4"
+      },
+      "generator_sha256": "0e63ce193bbf8487f80b7506667153ada262c6b306bb71774f9082b0cf21573c",
+      "checks": [
+        "archive matches GitHub digest and byte count",
+        "all nine expected profiles present with no extra members",
+        "every source input and generator hash matches the published Git tree",
+        "every receipt and BOM metadata binds to the clean checkout",
+        "every retained file checksum verified",
+        "every BOM package identity matches its lockfile or retained Python environment",
+        "Rust registry hashes match Cargo.lock",
+        "every dependency reference resolves within its BOM",
+        "Python installation reports match installed distributions; pip check passes",
+        "closed Python profiles match declared pins plus pip",
+        "kernel pins match the qualification workflow",
+        "Syft archive/binary/version match the pinned central tool"
+      ],
+      "claim_limits": [
+        "source-lock or isolated Python inventory; not release/binary/container composition",
+        "Python test transitives are observed resolution, not source-locked",
+        "Python environments are Linux amd64 with recorded interpreter versions",
+        "excludes OS packages, interpreter/compiler binaries, bundled native libraries and build downloads",
+        "does not establish vulnerability freedom, licence approval, notebook execution, methodology or accessibility acceptance"
+      ]
+    },
+    "source_dependency_graphs_equal_main8029": true,
+    "codecov": {
+      "observed_at": "2026-11-23 03:37:59 UTC",
+      "provider_snapshot": {
+        "observed_at": "2026-11-23 03:37:59 UTC",
+        "check_runs_source": "https://api.github.com/repos/edithatogo/standards_check/commits/dd3f995c473db0cc1cd6dad9d392b3744166958b/check-runs?per_page=100",
+        "check_runs_total": 21,
+        "check_runs_returned": 21,
+        "codecov_app_254_check_runs": [],
+        "github_actions_upload_jobs": [
+          {
+            "id": 137469891156,
+            "name": "codecov (rust)",
+            "status": "completed",
+            "conclusion": "success",
+            "app": 15368
+          },
+          {
+            "id": 137469891138,
+            "name": "codecov (python)",
+            "status": "completed",
+            "conclusion": "success",
+            "app": 15368
+          },
+          {
+            "id": 137469891135,
+            "name": "codecov (api)",
+            "status": "completed",
+            "conclusion": "success",
+            "app": 15368
+          }
+        ],
+        "statuses_source": "https://api.github.com/repos/edithatogo/standards_check/commits/dd3f995c473db0cc1cd6dad9d392b3744166958b/status",
+        "status_commit": "dd3f995c473db0cc1cd6dad9d392b3744166958b",
+        "combined_state": "success",
+        "status_total": 1,
+        "codecov_legacy_statuses": [
+          {
+            "id": 59621115216,
+            "context": "codecov/patch",
+            "state": "success",
+            "target_url": "https://app.codecov.io/gh/edithatogo/standards_check/commit/dd3f995c473db0cc1cd6dad9d392b3744166958b",
+            "description": "Coverage not affected when comparing 4e8e13a...dd3f995",
+            "created_at": "2026-11-23T03:35:37Z",
+            "updated_at": "2026-11-23T03:35:37Z",
+            "creator_returned": false
+          }
+        ],
+        "patch_app_check": "absent",
+        "project_app_check": "absent",
+        "patch_legacy_status": "success",
+        "project_legacy_status": "absent",
+        "interpretation": "GitHub reports a successful legacy codecov/patch status for the actual receiving-main commit. No Codecov App254 check-run or project status was returned. GitHub Actions uploader checks are distinct from provider checks. The combined-status payload did not include creator attribution."
+      },
+      "commit_binding_note": "Each uploader checked out actual main dd3, downloaded its matching coverage artifact, verified the native report checksum and received a Codecov processing URL naming dd3. On these push jobs CC_SHA is empty and there is no explicit --sha CLI override; correct checkout-based detection is verified."
+    },
+    "oidc_uploads": {
+      "python": {
+        "job_id": 137469891138,
+        "job_url": "https://github.com/edithatogo/standards_check/actions/runs/45106620582/job/137469891138",
+        "oidc_acquisition": "success",
+        "downloaded_artifact_id": 14787538638,
+        "downloaded_artifact_digest": "sha256:eff3fe770949722b630847a554604509bc423627573f596baa9303d780d2bfd4",
+        "report": "target/coverage/python.xml",
+        "report_sha256": "2c3691a4dec16e45eac924fb17cafec0c2f5cfea175f7c839045c0955a5fc208",
+        "native_report_checksum_verified_before_upload": true,
+        "upload_flag": "python",
+        "disable_search": true,
+        "fail_on_error": true,
+        "checkout_commit": "dd3f995c473db0cc1cd6dad9d392b3744166958b",
+        "commit_selection": "Push checkout detected by Codecov; CC_SHA empty and no explicit --sha CLI override.",
+        "explicit_sha_override_present": false,
+        "provider_returned_commit_url": "https://app.codecov.io/github/edithatogo/standards_check/commit/dd3f995c473db0cc1cd6dad9d392b3744166958b",
+        "upload_receipt": "queued for processing complete",
+        "log_sha256": "fbfc965443132c0c662fb67cd7556c642aee2fb7b4b7b1ed96b7774fc92b059d",
+        "log_bytes": 102296
+      },
+      "rust": {
+        "job_id": 137469891156,
+        "job_url": "https://github.com/edithatogo/standards_check/actions/runs/45106620582/job/137469891156",
+        "oidc_acquisition": "success",
+        "downloaded_artifact_id": 14787762444,
+        "downloaded_artifact_digest": "sha256:8c2ce029cee1ddb5de410637cae773568f2c9af29caa68deb3fe9d6cc35c08e7",
+        "report": "target/coverage/rust.lcov",
+        "report_sha256": "f3c8b50609253a7557b0999cd15c8b08be17c080f8cd1c4811d77b5076aad1ba",
+        "native_report_checksum_verified_before_upload": true,
+        "upload_flag": "rust",
+        "disable_search": true,
+        "fail_on_error": true,
+        "checkout_commit": "dd3f995c473db0cc1cd6dad9d392b3744166958b",
+        "commit_selection": "Push checkout detected by Codecov; CC_SHA empty and no explicit --sha CLI override.",
+        "explicit_sha_override_present": false,
+        "provider_returned_commit_url": "https://app.codecov.io/github/edithatogo/standards_check/commit/dd3f995c473db0cc1cd6dad9d392b3744166958b",
+        "upload_receipt": "queued for processing complete",
+        "log_sha256": "d0cae63accc394681e1cb09f4d348eec600c792cad7c3d6eb8ed10c629545d03",
+        "log_bytes": 101712
+      },
+      "api": {
+        "job_id": 137469891135,
+        "job_url": "https://github.com/edithatogo/standards_check/actions/runs/45106620582/job/137469891135",
+        "oidc_acquisition": "success",
+        "downloaded_artifact_id": 14787870869,
+        "downloaded_artifact_digest": "sha256:06d5b3f0f551bd527fa284297fb0d946acb6f3cad6cc7833cf4b3c9ac27aab2b",
+        "report": "target/coverage/api.lcov",
+        "report_sha256": "b71ec07177fbac978ed1c470d3064c0c16436b48d8739bcaa30752b202a62681",
+        "native_report_checksum_verified_before_upload": true,
+        "upload_flag": "api",
+        "disable_search": true,
+        "fail_on_error": true,
+        "checkout_commit": "dd3f995c473db0cc1cd6dad9d392b3744166958b",
+        "commit_selection": "Push checkout detected by Codecov; CC_SHA empty and no explicit --sha CLI override.",
+        "explicit_sha_override_present": false,
+        "provider_returned_commit_url": "https://app.codecov.io/github/edithatogo/standards_check/commit/dd3f995c473db0cc1cd6dad9d392b3744166958b",
+        "upload_receipt": "queued for processing complete",
+        "log_sha256": "c6913052a611cbe4e69f8edd9ce8f62f2ff9792f7ac93e24670889ea610eb701",
+        "log_bytes": 101716
+      }
+    },
+    "pr_codecov_patch": {
+      "id": 137468737189,
+      "name": "codecov/patch",
+      "app_id": 254,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "4e8e13a632777f2916b183101774cf2ff5389823",
+      "url": "https://github.com/edithatogo/standards_check/runs/137468737189",
+      "title": "100.00% of diff hit (target 80.00%)"
+    },
+    "main_code_scanning": {
+      "branch": "main",
+      "open_alerts": 0,
+      "closed_alerts": 4,
+      "original_alerts": [
+        {
+          "id": 1,
+          "state": "fixed",
+          "merged_by": 100,
+          "receiving_commit": "8029b1a55fb4273878510681c1a5a7b5c02b57f0"
+        },
+        {
+          "id": 2,
+          "state": "fixed",
+          "merged_by": 100,
+          "receiving_commit": "8029b1a55fb4273878510681c1a5a7b5c02b57f0"
+        }
+      ],
+      "corrective_alerts": [
+        {
+          "id": 5,
+          "state": "fixed",
+          "merged_by": 107
+        },
+        {
+          "id": 6,
+          "state": "fixed",
+          "merged_by": 107
+        }
+      ]
+    },
+    "main_privacy": {
+      "job_id": 137469276069,
+      "status": "success",
+      "gitleaks_detected": 0,
+      "reviewed_exceptions": 0,
+      "presidio_blocking": 0,
+      "presidio_advisory": 7
+    },
+    "preserved_import": {
+      "command": "python scripts/check_standardflow_import.py",
+      "status": "passed",
+      "preserved_revisions": 9,
+      "source_commit": "dc51d8e392858d5cb4e653aed199563514191efb",
+      "source_tree": "62d8a0e738f0255cc59822ae4e661568090a213e"
+    },
+    "api_path_correction": {
+      "receipt": "api-path-selection-20261123.json",
+      "both_endpoints": "Select only regular Dirent entries from fixed directories; validated IDs compare to names and do not supply filesystem paths.",
+      "failure_first_symlink_regression": "200 before fix; 404 after fix",
+      "independent_review": "Both directories, real and dangling symlinks, non-files, malformed aliases and enumeration errors exercised; no blocking finding.",
+      "trusted_corpus_limit": "Enumeration/read is not atomic against a local writer replacing files; hostile mounts or concurrent local mutation are not qualified.",
+      "alerts_5_and_6_fixed_via_pr107": true,
+      "dismissed": false
+    },
+    "historical_api_integrity": {
+      "finding": "A Python object alias copied current API hashes/coverage into a historical record retaining the old 40-test count and old report.",
+      "review_thread": "PRRT_kwDOPbFwGs66rmvp",
+      "reviewed_local_candidate": "dfe9cf579c5232188060b9c76560c1305732df51",
+      "published_head": "4e8e13a632777f2916b183101774cf2ff5389823",
+      "tree": "3bdbebf0bb72a7f7edf9c90a7c4fc10412d98200",
+      "only_changed_path_from_19b": "conductor/tracks/05-maximal-assurance/coverage-20261123.json",
+      "historical_api_tests_report_equal_main8029": true,
+      "all_remaining_fields_equal_19b": true,
+      "historical_measurement": {
+        "tests": 40,
+        "totals": {
+          "FNF": 10,
+          "FNH": 10,
+          "BRF": 38,
+          "BRH": 36,
+          "LH": 146,
+          "LF": 146
+        },
+        "report": {
+          "sha256": "5155173bb1e7d2044055177a04d90e541ce07f0681bacd84383ce2452713b6b4",
+          "bytes": 2463
+        }
+      },
+      "current_measurement": {
+        "tests": 41,
+        "totals": {
+          "LF": 143,
+          "LH": 143,
+          "BRF": 42,
+          "BRH": 41,
+          "FNF": 11,
+          "FNH": 11
+        },
+        "report": {
+          "sha256": "b71ec07177fbac978ed1c470d3064c0c16436b48d8739bcaa30752b202a62681",
+          "bytes": 2545
+        }
+      },
+      "production_source_changed_by_metadata_repair": false,
+      "pinned_full_main_to_candidate_scan": "zero detected findings; zero reviewed exceptions",
+      "resolved_only_after_corrective_publication": true,
+      "normal_merge_followed_resolution": true,
+      "coverage_receipt_sha256": "c9dcbf800eb99587d6e119375908c53100ccd0ba86af46df31c16ff7af46860f"
+    },
+    "accepted_scope": "Bounded maintained software assurance, baseline dependency inventories, observed privacy/CodeQL controls and applied repository protection. Broader programme and operational obligations remain open.",
+    "documentation_revision_rule": "Evidence binds this implementation commit. A later documentation-only commit records these observations; it does not recursively require a new implementation acceptance receipt."
+  },
+  "acceptance": {
+    "bounded_implementation": true,
+    "actual_receiving_main_native_assurance": true,
+    "actual_receiving_main_sbom": true,
+    "actual_receiving_main_oidc_uploads": true,
+    "actual_receiving_main_legacy_patch_status": true,
+    "actual_main_codeql_inventory_observed": true,
+    "all_four_observed_codeql_alerts_fixed": true,
+    "actual_main_privacy_gate": true,
+    "repository_protection_applied": true,
+    "owner_recovery_path_documented": true,
+    "normal_protected_merge": true,
+    "managed_local_specialization_review": true,
+    "pages_recovery_on_main8029": true,
+    "offline_security_executed": false,
+    "protected_updater_lifecycle": false,
+    "full_release_or_programme_acceptance": false,
+    "false_flags_mean": "The named broader scope remains unqualified; no queued job is counted as an execution."
+  },
+  "repository_protection": {
+    "provenance": "Root-saved live API readback after the normal PR107 merge; same active ruleset and seven app-bound checks.",
+    "id": 27871801,
+    "name": "Solo maintainer main protection",
+    "url": "https://github.com/edithatogo/standards_check/rules/27871801",
+    "api_url": "https://api.github.com/repos/edithatogo/standards_check/rulesets/27871801",
+    "enforcement": "active",
+    "target": "branch",
+    "conditions": {
+      "ref_name": {
+        "exclude": [],
+        "include": [
+          "~DEFAULT_BRANCH"
+        ]
+      }
+    },
+    "created_at": "2026-11-23T12:49:53.889+10:00",
+    "updated_at": "2026-11-23T12:49:54.009+10:00",
+    "required_checks": [
+      {
+        "context": "privacy-and-secrets",
+        "integration_id": 15368
+      },
+      {
+        "context": "Analyze (actions)",
+        "integration_id": 15368
+      },
+      {
+        "context": "Analyze (javascript-typescript)",
+        "integration_id": 15368
+      },
+      {
+        "context": "Analyze (python)",
+        "integration_id": 15368
+      },
+      {
+        "context": "Analyze (rust)",
+        "integration_id": 15368
+      },
+      {
+        "context": "assurance",
+        "integration_id": 15368
+      },
+      {
+        "context": "Maintained dependency inventories",
+        "integration_id": 15368
+      }
+    ],
+    "strict_up_to_date": true,
+    "required_approvals": 0,
+    "conversation_resolution": true,
+    "bypass_actors": [],
+    "current_user_can_bypass": "never",
+    "deletion_prohibited": true,
+    "force_push_prohibited": true,
+    "code_scanning": {
+      "code_scanning_tools": [
+        {
+          "tool": "CodeQL",
+          "security_alerts_threshold": "high_or_higher",
+          "alerts_threshold": "errors"
+        }
+      ]
+    },
+    "normal_protected_merge_observed": true,
+    "owner_recovery_exercised": false,
+    "post_merge_configuration_unchanged": true,
+    "owner_recovery_path": {
+      "url": "https://github.com/edithatogo/standards_check/settings/rules/27871801",
+      "edit_controls_access_observed": true,
+      "provenance": "Parent observed authenticated owner access to edit controls.",
+      "path": "After GitHub reauthentication, the owner can correct a renamed or misconfigured required check in the named ruleset, then restore and verify protections.",
+      "standing_bypass": false,
+      "recovery_change_exercised": false,
+      "scope": "Documented owner recovery path; no destructive rehearsal is an acceptance requirement."
+    },
+    "receiving_main": "dd3f995c473db0cc1cd6dad9d392b3744166958b"
+  },
+  "managed_policy_disposition": {
+    "central_revision": "2efdbd988064f6857795b9fa9ed4e1d08d18791d",
+    "consumer_revision": "dd3f995c473db0cc1cd6dad9d392b3744166958b",
+    "registered_profile": "node",
+    "selected_supply_chain_profile": "baseline",
+    "required_baseline_controls": [
+      "dependency review",
+      "maintained dependency inventories"
+    ],
+    "local_implementation": ".github/workflows/ci.yml retains specialized Python, Rust and API jobs; isolated trusted explicit-report OIDC uploads remain.",
+    "semantic_disposition": "Accepted repository-local specialization under the existing policy conflict-review route in issue #30; no profile change, waiver or additional approval requirement.",
+    "exact_thin_reusable_call_conformance": false,
+    "exact_managed_template_byte_equality": false,
+    "unimplemented_native_test_type_identified": false,
+    "controls_not_selected_by_baseline": [
+      "Scorecard",
+      "Security Insights",
+      "SLSA"
+    ],
+    "quick_harness": "One-command integration is an optional improvement under the current should wording, not a new gate for this accepted implementation.",
+    "tracking_issue": "https://github.com/edithatogo/standards_check/issues/30",
+    "policy_sources": [
+      "https://github.com/edithatogo/repository-standards/blob/2efdbd988064f6857795b9fa9ed4e1d08d18791d/profiles/archetype-profiles.json",
+      "https://github.com/edithatogo/repository-standards/blob/2efdbd988064f6857795b9fa9ed4e1d08d18791d/managed-files/manifest.json",
+      "https://github.com/edithatogo/repository-standards/blob/2efdbd988064f6857795b9fa9ed4e1d08d18791d/docs/continuous-conformance-standard.md",
+      "https://github.com/edithatogo/repository-standards/blob/2efdbd988064f6857795b9fa9ed4e1d08d18791d/conductor/tracks/frontier_02_enforcement_20261113/spec.md"
+    ]
+  },
+  "historical_observations": {
+    "first_head": {
+      "head": "12b7b00737124aa7c0feaead893c930124332489",
+      "receipt": "hosted-first-head-20261123.json",
+      "boundary_setup": "failed_before_mutation",
+      "aggregate": "failure",
+      "codecov_patch_percent": 94.59,
+      "native_rust_receipt": "rust-hosted-first-head-20261123.json",
+      "native_rust_campaign": {
+        "selected": 26,
+        "caught": 25,
+        "known_unviable": 1,
+        "missed": 0,
+        "timeout": 0
+      },
+      "limit": "Historical result; the native Rust campaign was not rerun on the final revision."
+    },
+    "d67": {
+      "head": "d67d9e992d7b9438ff2ae1404f2f5fea9e20370c",
+      "tree": "3d3e3afbd539532e0d69f16deaca567c83412f4c",
+      "tested_merge": "944ce041fb69915b8cac3516fa5868d79fa20ee1",
+      "tree_equal": true,
+      "assurance_run_id": 45098578195,
+      "coverage": {
+        "python": {
+          "job_id": 137443886087,
+          "tests": 252,
+          "report_sha256": "5a09419add6822b56a2d81dbae10a4bb45d7466c39462f0b3edc927f87fe0282",
+          "lines": [
+            1699,
+            2150
+          ],
+          "branches": [
+            518,
+            742
+          ],
+          "combined_percent": 76.65975103734439,
+          "modules": 28,
+          "six_validators": "passed",
+          "authored_prisma_pairs": 2,
+          "intentional_prisma_validation_differences": 2
+        },
+        "rust": {
+          "job_id": 137443886043,
+          "tests": 72,
+          "report_sha256": "f3c8b50609253a7557b0999cd15c8b08be17c080f8cd1c4811d77b5076aad1ba",
+          "lines": [
+            2742,
+            3430
+          ],
+          "lines_percent": 79.94169096209912,
+          "branch_measurement": null
+        },
+        "api": {
+          "job_id": 137443886099,
+          "tests": 40,
+          "report_sha256": "3a6923522728868b667524b7f381de8f28eaeb17774b001340e101129d076527",
+          "lines": [
+            146,
+            146
+          ],
+          "branches": [
+            36,
+            38
+          ],
+          "lines_percent": 100.0,
+          "branches_percent": 94.73684210526316
+        }
+      },
+      "boundary_mutations": {
+        "job_id": 137443886104,
+        "clean_baselines": 2,
+        "assertion_kills": 10,
+        "survivors": 0,
+        "unviable": 0,
+        "timeouts": 0,
+        "original_sources_unchanged": true,
+        "report_sha256": "b97c05fb97f0a1fcaf5f19705de0e35dbbbffc27d34a4a12f47455dce260f662",
+        "scope": "Ten hand-selected schema/API mutations; no repository-wide score."
+      },
+      "aggregate": {
+        "job_id": 137444595405,
+        "conclusion": "success"
+      },
+      "oidc_uploads": {
+        "api": {
+          "job_id": 137444595407,
+          "uploaded_sha": "d67d9e992d7b9438ff2ae1404f2f5fea9e20370c",
+          "token_acquisition": "success",
+          "log_sha256": "20698e78e7695f1c99b0234704059fb76036cf940725e764be34f310af74bd23"
+        },
+        "python": {
+          "job_id": 137444595391,
+          "uploaded_sha": "d67d9e992d7b9438ff2ae1404f2f5fea9e20370c",
+          "token_acquisition": "success",
+          "log_sha256": "01d7500fb8dc2cdd995bb0d71a580b8214da3c98974f59d42cf795cde4538314"
+        },
+        "rust": {
+          "job_id": 137444595426,
+          "uploaded_sha": "d67d9e992d7b9438ff2ae1404f2f5fea9e20370c",
+          "token_acquisition": "success",
+          "log_sha256": "3072bbc38c51ddcaaad10dd7d5f3fbb86285fb2d3742a3c3b14ea5e05cd2aade"
+        }
+      },
+      "codecov": {
+        "patch_check_id": 137444925962,
+        "conclusion": "success",
+        "diff_percent": 91.18,
+        "target_percent": 80,
+        "url": "https://github.com/edithatogo/standards_check/runs/137444925962",
+        "project_check_observed": false
+      },
+      "policy_jobs": {
+        "CodeQL": {
+          "id": 137444093405,
+          "conclusion": "success"
+        },
+        "privacy-and-secrets": {
+          "id": 137443886366,
+          "conclusion": "success"
+        },
+        "workflow-policy": {
+          "id": 137443886074,
+          "conclusion": "success"
+        },
+        "dependency-review": {
+          "id": 137443885743,
+          "conclusion": "success"
+        }
+      },
+      "sbom": {
+        "run_id": 45098578236,
+        "job_id": 137443886044,
+        "artifact": {
+          "created_at": "2026-11-23T02:11:34Z",
+          "digest": "sha256:8c14f9f302ed14a3b438767049d2495a5727882919c54ecc46ce0c7a49ff34ac",
+          "expires_at": "2026-12-23T02:11:32Z",
+          "id": 14784711169,
+          "name": "sbom-944ce041fb69915b8cac3516fa5868d79fa20ee1",
+          "size_in_bytes": 1071662
+        },
+        "source_input_files_verified": 15,
+        "generator_binding_verified": true,
+        "component_counts": {
+          "rust": 89,
+          "node": 3,
+          "api": 72,
+          "python-foundation": 6,
+          "python-legacy": 31,
+          "python-tests": 45,
+          "python-assurance": 3,
+          "python-kernel-baseline": 43,
+          "python-kernel-candidate": 43
+        },
+        "rust_registry_identities": 86,
+        "api_lock_records": 73,
+        "verified_checksum_entries": 48,
+        "archive_members": 57,
+        "all_package_identity_sets_verified": true
+      },
+      "separate_prisma_first_attempt": {
+        "run_id": 45098578198,
+        "job_id": 137443886445,
+        "outcome": "failed_before_qualification",
+        "error": "rustup: failed to install rustfmt-preview-x86_64-unknown-linux-gnu; detected conflict: bin/cargo-fmt",
+        "log_sha256": "f5105288da04a4ac8bf2ba4c310dec1e7dc63c8a1991c5988880191196962646",
+        "retry": [
+          {
+            "id": 137445922646,
+            "name": "Bounded legacy-to-Rust PRISMA qualification",
+            "status": "completed",
+            "conclusion": "cancelled",
+            "steps_observed": 0
+          }
+        ]
+      },
+      "offline_security_executed": false,
+      "overall_candidate_qualified": false,
+      "limit": "PRISMA passed inside coverage; its separate first attempt failed during toolchain setup and its retry was cancelled without steps. These observations do not qualify the final head."
+    },
+    "b615_sbom": {
+      "head": "b6152790c60943aa75aa3f98b1adc5295de61405",
+      "run_id": 45099909868,
+      "job_id": 137448115822,
+      "conclusion": "cancelled",
+      "executed": false,
+      "artifacts": [],
+      "context": "Superseded by the final PR106 integration."
+    },
+    "final_head_initial_queue": {
+      "head": "92e61459ba9b79a6b32c9c8cdaf4e67a6cc552be",
+      "observed_at": "2026-11-23 02:45:08 UTC",
+      "sbom_run_id": 45101705926,
+      "sbom_job_id": 137453808212,
+      "sbom_status": "queued",
+      "sbom_steps": [],
+      "sbom_artifacts": [],
+      "receipt": "sbom-hosted-92e6145-pending.json",
+      "scope": "Preserved initial observation, superseded by the verified successful artifact."
+    },
+    "initial_ruleset_submission": {
+      "applied": false,
+      "rulesets_api": [],
+      "blocker": "GitHub Confirm access/passkey prevented saving the prepared ruleset; parent observed an empty rulesets API inventory.",
+      "scope": "Historical pre-authentication observation. Superseded by active ruleset 27871801."
+    },
+    "final_head_intermediate_policy": {
+      "observed_at": "2026-11-23 02:56:46 UTC",
+      "receipt": "security-policy-sources/pr100-92e-postauth-policy-provider-20261123.json",
+      "scope": "Intermediate observation before the final aggregate and Codecov results."
+    },
+    "first_path_correction_candidate": {
+      "head": "5a5d0ebad6cbc6bf6bb3d79507405e63dae06891",
+      "tree": "f1e8d629816face93cfc0aca7838e153475b2d82",
+      "privacy_result": "failed: public report checksum presentation matched generic-api-key",
+      "disposition": "superseded by receipt-only correction; scanner and production/regression sources unchanged",
+      "corrected_local_scan": "exact pinned Gitleaks 8.30.1: zero detected findings and zero reviewed exceptions",
+      "provenance": "Exact pinned scanner reproduced the original finding; the receipt-only replacement and final main subsequently passed. No scanner suppression or production-source change."
+    },
+    "receipt_representation_correction": {
+      "head": "19b17bf966745adac34e824b99021e8418a0f729",
+      "tree": "71142cf26a0fce0d860cd0f8cd5fe3f914ffe8aa",
+      "change": "Replace filename-keyed digest scalars with explicit path/sha256 records; retained values unchanged.",
+      "pinned_tooling_revision": "b30b07bcdaa6aebad2c6a57a4d0adc3616dabfe4",
+      "gitleaks_version": "8.30.1",
+      "original_findings_reproduced": 1,
+      "corrected_findings": 0,
+      "reviewed_exceptions": 0,
+      "scanner_configuration_changed": false,
+      "production_and_regression_bytes_unchanged": true,
+      "hosted_native_scope": "41 API tests; 143/143 lines; 41/42 branches; ten assertion kills.",
+      "premerge_snapshot": {
+        "success": 22,
+        "offline_queued": 2
+      },
+      "merge_blocked_by_valid_review": true,
+      "disposition": "Not accepted as main: review correctly identified inconsistent historical API provenance."
+    },
+    "historical_api_review_correction": {
+      "finding": "A Python object alias copied current API hashes/coverage into a historical record retaining the old 40-test count and old report.",
+      "review_thread": "PRRT_kwDOPbFwGs66rmvp",
+      "reviewed_local_candidate": "dfe9cf579c5232188060b9c76560c1305732df51",
+      "published_head": "4e8e13a632777f2916b183101774cf2ff5389823",
+      "tree": "3bdbebf0bb72a7f7edf9c90a7c4fc10412d98200",
+      "only_changed_path_from_19b": "conductor/tracks/05-maximal-assurance/coverage-20261123.json",
+      "historical_api_tests_report_equal_main8029": true,
+      "all_remaining_fields_equal_19b": true,
+      "historical_measurement": {
+        "tests": 40,
+        "totals": {
+          "FNF": 10,
+          "FNH": 10,
+          "BRF": 38,
+          "BRH": 36,
+          "LH": 146,
+          "LF": 146
+        },
+        "report": {
+          "sha256": "5155173bb1e7d2044055177a04d90e541ce07f0681bacd84383ce2452713b6b4",
+          "bytes": 2463
+        }
+      },
+      "current_measurement": {
+        "tests": 41,
+        "totals": {
+          "LF": 143,
+          "LH": 143,
+          "BRF": 42,
+          "BRH": 41,
+          "FNF": 11,
+          "FNH": 11
+        },
+        "report": {
+          "sha256": "b71ec07177fbac978ed1c470d3064c0c16436b48d8739bcaa30752b202a62681",
+          "bytes": 2545
+        }
+      },
+      "production_source_changed_by_metadata_repair": false,
+      "pinned_full_main_to_candidate_scan": "zero detected findings; zero reviewed exceptions",
+      "resolved_only_after_corrective_publication": true,
+      "normal_merge_followed_resolution": true,
+      "coverage_receipt_sha256": "c9dcbf800eb99587d6e119375908c53100ccd0ba86af46df31c16ff7af46860f"
+    },
+    "qualified_pr100": {
+      "head": "92e61459ba9b79a6b32c9c8cdaf4e67a6cc552be",
+      "tree": "b91ab73b96fc2246002c69d453701522ea58b6c6",
+      "tested_merge": "444624a3218d5dc81635040b88ce04313d116092",
+      "receiving_main": {
+        "sha": "8029b1a55fb4273878510681c1a5a7b5c02b57f0",
+        "tree": "b91ab73b96fc2246002c69d453701522ea58b6c6",
+        "parents": [
+          "5f3f2883b4cbfc7809d5dc5c2e9769b8890d86d0",
+          "92e61459ba9b79a6b32c9c8cdaf4e67a6cc552be"
+        ],
+        "url": "https://github.com/edithatogo/standards_check/commit/8029b1a55fb4273878510681c1a5a7b5c02b57f0"
+      },
+      "check_snapshot": {
+        "success": 41,
+        "skipped": 2,
+        "queued": 2
+      },
+      "all_seven_required_checks_passed": true,
+      "coverage": {
+        "python": {
+          "result": "pass",
+          "tests_passed": 265,
+          "module_count": 28,
+          "covered_statements": 1700,
+          "total_statements": 2151,
+          "covered_branches": 520,
+          "total_branches": 744,
+          "combined_percent": 76.6839378238342,
+          "excluded_lines": 0,
+          "floor_percent": 75,
+          "report_sha256": "9efc58fcd9fb5b1d67f6340be8221d807bce345cdf30803e1d2d73ad320d9bd8",
+          "six_validators_passed": [
+            "validate_foundation",
+            "validate_packs",
+            "validate_artifacts",
+            "validate_costing_reconciliation",
+            "validate_prisma_source_assurance",
+            "audit_foundation"
+          ],
+          "real_prisma_cli_pairs_passed": 2
+        },
+        "rust": {
+          "result": "pass",
+          "tests_passed": 72,
+          "covered_lines": 2742,
+          "total_lines": 3430,
+          "line_percent": 79.94169096209912,
+          "floor_percent": 79,
+          "report_sha256": "f3c8b50609253a7557b0999cd15c8b08be17c080f8cd1c4811d77b5076aad1ba"
+        },
+        "api": {
+          "result": "pass",
+          "tests_passed": 40,
+          "covered_lines": 146,
+          "total_lines": 146,
+          "line_percent": 100.0,
+          "covered_branches": 36,
+          "total_branches": 38,
+          "branch_percent": 94.73684210526316,
+          "line_floor_percent": 98,
+          "branch_floor_percent": 90,
+          "report_sha256": "3a6923522728868b667524b7f381de8f28eaeb17774b001340e101129d076527"
+        }
+      },
+      "boundary_mutations": {
+        "result": "pass",
+        "baselines_passed": 2,
+        "assertion_kills": 10,
+        "survivors": 0,
+        "unviable": 0,
+        "timeouts": 0,
+        "all_source_hashes_match_final_head": true,
+        "source_files_verified": 83
+      },
+      "native_artifacts": [
+        {
+          "id": 14786063249,
+          "name": "coverage-rust-444624a3218d5dc81635040b88ce04313d116092",
+          "digest": "sha256:4702807787c7ccfa419101e4a294e52dff6a942c8a1d57609fd8624aa5d9fda4",
+          "size_in_bytes": 24733,
+          "run_id": 45101705885,
+          "digest_verified": true
+        },
+        {
+          "id": 14785974376,
+          "name": "coverage-api-444624a3218d5dc81635040b88ce04313d116092",
+          "digest": "sha256:8be5126a797d594741eadf48ca51753754f27d4c4f5af89fc37c64a454ccfded",
+          "size_in_bytes": 1333,
+          "run_id": 45101705885,
+          "digest_verified": true
+        },
+        {
+          "id": 14785964432,
+          "name": "boundary-mutations-444624a3218d5dc81635040b88ce04313d116092",
+          "digest": "sha256:c31d0a397b655c7c6246db8b49a003c3e6600a006ab3fc5ccf3fbd7a5a2080a8",
+          "size_in_bytes": 16560,
+          "run_id": 45101705885,
+          "digest_verified": true
+        },
+        {
+          "id": 14785849499,
+          "name": "coverage-python-444624a3218d5dc81635040b88ce04313d116092",
+          "digest": "sha256:67433817a79e8b700a155e8625f52ba95e68731b7cff206d3cde22bb80b19d11",
+          "size_in_bytes": 25256,
+          "run_id": 45101705885,
+          "digest_verified": true
+        },
+        {
+          "id": 14786266835,
+          "name": "legacy-prisma-qualification",
+          "digest": "sha256:2cf5caf9646612d46baf700f3870050af7b39321e51443e57182c12f706f2861",
+          "size_in_bytes": 3460,
+          "run_id": 45101706104,
+          "digest_verified": true
+        }
+      ],
+      "dedicated_prisma": {
+        "run": {
+          "run_id": 45101706104,
+          "job": {
+            "id": 137453808914,
+            "name": "Bounded legacy-to-Rust PRISMA qualification",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/edithatogo/standards_check/actions/runs/45101706104/job/137453808914"
+          }
+        },
+        "measurement": {
+          "result": "pass",
+          "authored_pairs": 2,
+          "intentional_validation_differences": [
+            {
+              "id": "screening-conservation",
+              "legacy_exit_code": 0,
+              "rust_diagnostic_codes": [
+                "SF-PRISMA-010",
+                "SF-PRISMA-011"
+              ],
+              "rust_exit_code": 1,
+              "rust_output_created": false
+            },
+            {
+              "id": "updated-total-conservation",
+              "legacy_exit_code": 0,
+              "rust_diagnostic_codes": [
+                "SF-PRISMA-040"
+              ],
+              "rust_exit_code": 1,
+              "rust_output_created": false
+            }
+          ],
+          "working_tree_clean": true,
+          "corpus_sha256": "d0305a141ba5682d72c6924f296acd84e67e667d0caa6a3314dff305f5ec2e12",
+          "receipt_sha256": "c61d273679c2b88f6498877919a8a9c07c21af3bd53e2e6a9a67f4498a015323"
+        }
+      },
+      "sbom": {
+        "run": {
+          "conclusion": "success",
+          "event": "pull_request",
+          "head_sha": "92e61459ba9b79a6b32c9c8cdaf4e67a6cc552be",
+          "html_url": "https://github.com/edithatogo/standards_check/actions/runs/45101705926",
+          "id": 45101705926,
+          "name": "Dependency inventories",
+          "run_attempt": 1,
+          "status": "completed",
+          "updated_at": "2026-11-23T02:52:51Z"
+        },
+        "artifact": {
+          "created_at": "2026-11-23T02:52:45Z",
+          "digest": "sha256:4d491440648489ef2a3ef6c5656f0220a36d69569d89cad023f2f1a6eac07210",
+          "expires_at": "2026-12-23T02:52:43Z",
+          "id": 14786470027,
+          "name": "sbom-444624a3218d5dc81635040b88ce04313d116092",
+          "size_in_bytes": 1066695
+        },
+        "verified_inventories": 9,
+        "verified_checksums": 48,
+        "checkout_commit": "444624a3218d5dc81635040b88ce04313d116092"
+      },
+      "oidc_uploads": {
+        "python": {
+          "job_id": 137458400752,
+          "url": "https://github.com/edithatogo/standards_check/actions/runs/45101705885/job/137458400752",
+          "conclusion": "success",
+          "explicit_uploaded_sha": "92e61459ba9b79a6b32c9c8cdaf4e67a6cc552be",
+          "native_report_sha256": "9efc58fcd9fb5b1d67f6340be8221d807bce345cdf30803e1d2d73ad320d9bd8",
+          "log_evidence": "Parent verified checksum OK, checkout identity, explicit head, explicit report and accepted upload.",
+          "digest_source": "Independently verified native coverage artifact, not a literal digest printed in the upload log."
+        },
+        "rust": {
+          "job_id": 137458400727,
+          "url": "https://github.com/edithatogo/standards_check/actions/runs/45101705885/job/137458400727",
+          "conclusion": "success",
+          "explicit_uploaded_sha": "92e61459ba9b79a6b32c9c8cdaf4e67a6cc552be",
+          "native_report_sha256": "f3c8b50609253a7557b0999cd15c8b08be17c080f8cd1c4811d77b5076aad1ba",
+          "log_evidence": "Parent verified checksum OK, checkout identity, explicit head, explicit report and accepted upload.",
+          "digest_source": "Independently verified native coverage artifact, not a literal digest printed in the upload log."
+        },
+        "api": {
+          "job_id": 137458400782,
+          "url": "https://github.com/edithatogo/standards_check/actions/runs/45101705885/job/137458400782",
+          "conclusion": "success",
+          "explicit_uploaded_sha": "92e61459ba9b79a6b32c9c8cdaf4e67a6cc552be",
+          "native_report_sha256": "3a6923522728868b667524b7f381de8f28eaeb17774b001340e101129d076527",
+          "log_evidence": "Parent verified checksum OK, checkout identity, explicit head, explicit report and accepted upload.",
+          "digest_source": "Independently verified native coverage artifact, not a literal digest printed in the upload log."
+        }
+      },
+      "codecov_provider": {
+        "check": {
+          "id": 137458926287,
+          "name": "codecov/patch",
+          "status": "completed",
+          "conclusion": "success",
+          "app_id": 254,
+          "head_sha": "92e61459ba9b79a6b32c9c8cdaf4e67a6cc552be",
+          "started_at": "2026-11-23T02:59:56Z",
+          "completed_at": "2026-11-23T02:59:56Z",
+          "html_url": "https://github.com/edithatogo/standards_check/runs/137458926287",
+          "details_url": "https://app.codecov.io/gh/edithatogo/standards_check/pull/100",
+          "output_title": "91.22% of diff hit (target 80.00%)"
+        },
+        "diff_percent": 91.22,
+        "target_percent": 80,
+        "project_check_observed": false
+      },
+      "normal_protected_merge": true,
+      "scope": "Accepted PR100 assurance slice. Later main alerts #5/#6 required PR107; this snapshot did not clear them."
+    },
+    "main8029_baseline": {
+      "identity": {
+        "sha": "8029b1a55fb4273878510681c1a5a7b5c02b57f0",
+        "tree": "b91ab73b96fc2246002c69d453701522ea58b6c6",
+        "parents": [
+          "5f3f2883b4cbfc7809d5dc5c2e9769b8890d86d0",
+          "92e61459ba9b79a6b32c9c8cdaf4e67a6cc552be"
+        ],
+        "url": "https://github.com/edithatogo/standards_check/commit/8029b1a55fb4273878510681c1a5a7b5c02b57f0"
+      },
+      "measurements": {
+        "python": {
+          "result": "pass",
+          "tests_passed": 265,
+          "module_count": 28,
+          "covered_statements": 1700,
+          "total_statements": 2151,
+          "covered_branches": 520,
+          "total_branches": 744,
+          "combined_percent": 76.6839378238342,
+          "excluded_lines": 0,
+          "floor_percent": 75,
+          "report_sha256": "55339bce242e4625729d754b58193e4e17ec799d9c35740083d212f080570450",
+          "six_validators_passed": [
+            "validate_foundation",
+            "validate_packs",
+            "validate_artifacts",
+            "validate_costing_reconciliation",
+            "validate_prisma_source_assurance",
+            "audit_foundation"
+          ],
+          "real_prisma_cli_pairs_passed": 2
+        },
+        "rust": {
+          "result": "pass",
+          "tests_passed": 72,
+          "covered_lines": 2742,
+          "total_lines": 3430,
+          "line_percent": 79.94169096209912,
+          "floor_percent": 79,
+          "report_sha256": "8136308c698c126d31acfb470bebecfaaa7b49375a20eef59588a4db286abe52"
+        },
+        "api": {
+          "result": "pass",
+          "tests_passed": 40,
+          "covered_lines": 146,
+          "total_lines": 146,
+          "line_percent": 100.0,
+          "covered_branches": 36,
+          "total_branches": 38,
+          "branch_percent": 94.73684210526316,
+          "line_floor_percent": 98,
+          "branch_floor_percent": 90,
+          "report_sha256": "385989b65632ff8d32dc4c7446585052213636120ef1de755a6f3345f551ef14"
+        },
+        "boundary_mutations": {
+          "result": "pass",
+          "baselines_passed": 2,
+          "assertion_kills": 10,
+          "survivors": 0,
+          "unviable": 0,
+          "timeouts": 0,
+          "source_hashes_match_main_tree": true,
+          "source_files_verified": 83,
+          "source_byte_comparison_commit": "92e61459ba9b79a6b32c9c8cdaf4e67a6cc552be"
+        },
+        "dedicated_prisma": {
+          "result": "pass",
+          "authored_pairs": 2,
+          "intentional_validation_differences": [
+            {
+              "id": "screening-conservation",
+              "legacy_exit_code": 0,
+              "rust_diagnostic_codes": [
+                "SF-PRISMA-010",
+                "SF-PRISMA-011"
+              ],
+              "rust_exit_code": 1,
+              "rust_output_created": false
+            },
+            {
+              "id": "updated-total-conservation",
+              "legacy_exit_code": 0,
+              "rust_diagnostic_codes": [
+                "SF-PRISMA-040"
+              ],
+              "rust_exit_code": 1,
+              "rust_output_created": false
+            }
+          ],
+          "working_tree_clean": true,
+          "corpus_sha256": "d0305a141ba5682d72c6924f296acd84e67e667d0caa6a3314dff305f5ec2e12",
+          "receipt_sha256": "247a1b024100d5f9aa0e07b296020f38aeb3f93dd71ef252251bc4b42b9a9bf0"
+        }
+      },
+      "native_runs": {
+        "assurance": {
+          "run_id": 45103418583,
+          "jobs": [
+            {
+              "id": 137459184831,
+              "name": "boundary-mutations",
+              "status": "completed",
+              "conclusion": "success",
+              "url": "https://github.com/edithatogo/standards_check/actions/runs/45103418583/job/137459184831"
+            },
+            {
+              "id": 137459184849,
+              "name": "coverage (rust)",
+              "status": "completed",
+              "conclusion": "success",
+              "url": "https://github.com/edithatogo/standards_check/actions/runs/45103418583/job/137459184849"
+            },
+            {
+              "id": 137459184933,
+              "name": "coverage (api)",
+              "status": "completed",
+              "conclusion": "success",
+              "url": "https://github.com/edithatogo/standards_check/actions/runs/45103418583/job/137459184933"
+            },
+            {
+              "id": 137459184941,
+              "name": "coverage (python)",
+              "status": "completed",
+              "conclusion": "success",
+              "url": "https://github.com/edithatogo/standards_check/actions/runs/45103418583/job/137459184941"
+            }
+          ]
+        },
+        "dedicated_prisma": {
+          "run_id": 45103418512,
+          "job": {
+            "id": 137459184613,
+            "name": "Bounded legacy-to-Rust PRISMA qualification",
+            "status": "completed",
+            "conclusion": "success",
+            "url": "https://github.com/edithatogo/standards_check/actions/runs/45103418512/job/137459184613"
+          }
+        }
+      },
+      "native_artifacts": [
+        {
+          "id": 14787025406,
+          "name": "boundary-mutations-8029b1a55fb4273878510681c1a5a7b5c02b57f0",
+          "digest": "sha256:28f0f13ec4bcde34064604d6f3428d5af7db75667aee779496aa2317a5a4baaf",
+          "size_in_bytes": 16553,
+          "run_id": 45103418583,
+          "digest_verified": true
+        },
+        {
+          "id": 14787000157,
+          "name": "coverage-api-8029b1a55fb4273878510681c1a5a7b5c02b57f0",
+          "digest": "sha256:2d0df1eead8bf5b5d9d392a6d8065bd9fbde07361edff0137c42e4c23fc129c2",
+          "size_in_bytes": 1333,
+          "run_id": 45103418583,
+          "digest_verified": true
+        },
+        {
+          "id": 14786641834,
+          "name": "coverage-python-8029b1a55fb4273878510681c1a5a7b5c02b57f0",
+          "digest": "sha256:550df13a83a98fcfc761af4ee2a910567767aa2feca0861e1b3dc2b3c0e789a1",
+          "size_in_bytes": 25255,
+          "run_id": 45103418583,
+          "digest_verified": true
+        },
+        {
+          "id": 14786392315,
+          "name": "coverage-rust-8029b1a55fb4273878510681c1a5a7b5c02b57f0",
+          "digest": "sha256:a6c52c6352125fbae9ca2d8ead347ad31f9a60bba1ca44fed943718ef41cea48",
+          "size_in_bytes": 24737,
+          "run_id": 45103418583,
+          "digest_verified": true
+        },
+        {
+          "id": 14787115071,
+          "name": "legacy-prisma-qualification",
+          "digest": "sha256:355e1c237a69f2af3b702f4c514023548171d9cf8ce507609013dec849ce33a3",
+          "size_in_bytes": 3462,
+          "run_id": 45103418512,
+          "digest_verified": true
+        }
+      ],
+      "native_bindings": {
+        "all_three_coverage_commit_files": "8029b1a55fb4273878510681c1a5a7b5c02b57f0",
+        "all_three_native_report_sha256_files_verified": true,
+        "boundary_report_base_commit": "8029b1a55fb4273878510681c1a5a7b5c02b57f0",
+        "both_prisma_receipt_revisions": "8029b1a55fb4273878510681c1a5a7b5c02b57f0",
+        "both_prisma_working_trees_clean": true,
+        "all_five_archive_digests_verified": true
+      },
+      "sbom": {
+        "verified_at": "2026-11-23 03:03:52 UTC",
+        "run": {
+          "conclusion": "success",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "8029b1a55fb4273878510681c1a5a7b5c02b57f0",
+          "html_url": "https://github.com/edithatogo/standards_check/actions/runs/45103418603",
+          "id": 45103418603,
+          "name": "Dependency inventories",
+          "run_attempt": 1,
+          "status": "completed",
+          "updated_at": "2026-11-23T03:03:27Z"
+        },
+        "job": {
+          "all_steps_succeeded": true,
+          "id": 137459184605,
+          "url": "https://github.com/edithatogo/standards_check/actions/runs/45103418603/job/137459184605"
+        },
+        "artifact": {
+          "created_at": "2026-11-23T03:03:20Z",
+          "digest": "sha256:7c63bf5441a3367f6092d00c2b96645d04cdf6f48ea5da34083c33f63501c21a",
+          "expires_at": "2026-12-23T03:03:19Z",
+          "id": 14786312926,
+          "name": "sbom-8029b1a55fb4273878510681c1a5a7b5c02b57f0",
+          "size_in_bytes": 1066700
+        },
+        "source_input_files_verified": 15,
+        "source_inputs_equal_qualified_pr": true,
+        "generator_sha256": "0e63ce193bbf8487f80b7506667153ada262c6b306bb71774f9082b0cf21573c",
+        "verified_inventories": 9,
+        "verified_checksums": 48,
+        "checkout_commit": "8029b1a55fb4273878510681c1a5a7b5c02b57f0",
+        "component_counts": {
+          "rust": 89,
+          "node": 3,
+          "api": 72,
+          "python-foundation": 6,
+          "python-legacy": 31,
+          "python-tests": 45,
+          "python-assurance": 3,
+          "python-kernel-baseline": 43,
+          "python-kernel-candidate": 43
+        },
+        "native_package_identity_sets_verified": true
+      },
+      "pages": {
+        "run_id": 45103418503,
+        "job_id": 137460173154,
+        "conclusion": "success",
+        "artifact_id": 14786298400,
+        "artifact_name": "github-pages-1",
+        "exact_probe_binding_verified": true,
+        "native_deployment_commit": "8029b1a55fb4273878510681c1a5a7b5c02b57f0",
+        "native_success_log_retained": true,
+        "url": "https://edithatogo.github.io/standards_check/"
+      },
+      "codecov": {
+        "observed_at": "2026-11-23 03:10:41 UTC",
+        "uploads": {
+          "python": {
+            "job_id": 137460215441,
+            "job_url": "https://github.com/edithatogo/standards_check/actions/runs/45103418583/job/137460215441",
+            "report": "target/coverage/python.xml",
+            "report_sha256": "55339bce242e4625729d754b58193e4e17ec799d9c35740083d212f080570450",
+            "oidc_acquisition": "success",
+            "native_report_checksum_verified_before_upload": true,
+            "checkout_commit": "8029b1a55fb4273878510681c1a5a7b5c02b57f0",
+            "explicit_sha_override_present": false,
+            "provider_returned_commit_url": "https://app.codecov.io/github/edithatogo/standards_check/commit/8029b1a55fb4273878510681c1a5a7b5c02b57f0",
+            "log_sha256": "eee3ac2b5db855e9310282d20db6d6d762d151dcf03825a57915e07d2275253d"
+          },
+          "rust": {
+            "job_id": 137460215390,
+            "job_url": "https://github.com/edithatogo/standards_check/actions/runs/45103418583/job/137460215390",
+            "report": "target/coverage/rust.lcov",
+            "report_sha256": "8136308c698c126d31acfb470bebecfaaa7b49375a20eef59588a4db286abe52",
+            "oidc_acquisition": "success",
+            "native_report_checksum_verified_before_upload": true,
+            "checkout_commit": "8029b1a55fb4273878510681c1a5a7b5c02b57f0",
+            "explicit_sha_override_present": false,
+            "provider_returned_commit_url": "https://app.codecov.io/github/edithatogo/standards_check/commit/8029b1a55fb4273878510681c1a5a7b5c02b57f0",
+            "log_sha256": "7e22adac6ec96f0f7e44db251b7173a9fd75a938e9f6083412b48a271e181fba"
+          },
+          "api": {
+            "job_id": 137460215530,
+            "job_url": "https://github.com/edithatogo/standards_check/actions/runs/45103418583/job/137460215530",
+            "report": "target/coverage/api.lcov",
+            "report_sha256": "385989b65632ff8d32dc4c7446585052213636120ef1de755a6f3345f551ef14",
+            "oidc_acquisition": "success",
+            "native_report_checksum_verified_before_upload": true,
+            "checkout_commit": "8029b1a55fb4273878510681c1a5a7b5c02b57f0",
+            "explicit_sha_override_present": false,
+            "provider_returned_commit_url": "https://app.codecov.io/github/edithatogo/standards_check/commit/8029b1a55fb4273878510681c1a5a7b5c02b57f0",
+            "log_sha256": "ec84301993c523301c61ae2a40418535ac7f34d669a8b007c574365178a1a5e1"
+          }
+        },
+        "commit_binding": "Each uploader checked out actual main8029, downloaded the matching main artifact, verified the report checksum and received a Codecov processing URL naming main8029. On these push jobs CC_SHA is empty and there is no explicit --sha CLI override; the recorded evidence establishes correct checkout-based detection rather than an explicit override.",
+        "legacy_patch_status": [
+          {
+            "id": 59619936682,
+            "context": "codecov/patch",
+            "state": "success",
+            "target_url": "https://app.codecov.io/gh/edithatogo/standards_check/commit/8029b1a55fb4273878510681c1a5a7b5c02b57f0",
+            "description": "Coverage not affected when comparing 92e6145...8029b1a",
+            "created_at": "2026-11-23T03:04:40Z",
+            "updated_at": "2026-11-23T03:04:40Z",
+            "creator_returned": false
+          }
+        ],
+        "app_254_check_runs": [],
+        "project_status_observed": false,
+        "scope": "Qualified main8029 baseline; not qualification of the unpublished API correction."
+      },
+      "original_alerts_fixed": [
+        1,
+        2
+      ],
+      "new_high_alerts_observed_open": [
+        5,
+        6
+      ],
+      "scope": "Qualified pre-correction baseline; current API measurement is separately bound to dd3."
+    }
+  },
+  "scope_limits": [
+    "Historical jobs qualify only their recorded commits and inputs.",
+    "SBOMs cover Cargo/npm source-lock graphs and isolated Python environments, excluding release binaries, images, OS packages and toolchain binaries.",
+    "Python test transitives are observed resolution, not a frozen source lock.",
+    "Optional kernel comparison, held-source identity rejection and two authored PRISMA pairs do not establish general notebook support, rights clearance or complete migration parity.",
+    "Interpretation/rights review, independent methodology/accessibility, Track04 contracts, release provenance and rollback remain open.",
+    "The actual main dd3 provider snapshot has successful legacy patch status 59621115216, with no App 254 check-run or project status observed.",
+    "Main dd3 PRISMA qualification executed inside Python coverage; no new dedicated diagrams-workflow run is claimed for the API/receipt correction.",
+    "Observed zero open CodeQL alerts and passing privacy checks do not establish vulnerability freedom or full privacy coverage.",
+    "Protected updater and offline-security execution, release controls, content rights, consumer migration and independent acceptance remain separate."
+  ],
+  "retained_receipt_path_scope": "Supporting session receipts retained independently; workflow and artifact URLs identify hosted evidence. These paths are not claims that every supporting file is committed.",
+  "retained_independent_receipts": [
+    {
+      "path": "sbom-hosted-92e6145-pending.json",
+      "sha256": "2b59a336ebaecba8d56e525cf5bc07a204ea932d746f596863f3767bef7834e2"
+    },
+    {
+      "path": "hosted-assurance-92e6145/receipt.json",
+      "sha256": "ed0fd98326c28f55a73a94e4bb52e22298bce3fcdf6a5e19af2aefe2d0a007d7"
+    },
+    {
+      "path": "security-policy-sources/pr100-92e-final-policy-provider-observation-20261123.json",
+      "sha256": "fda51234d56a168131eb70a7d9d476ddcd03cf6b5184f2c991b8f22548eac99b"
+    },
+    {
+      "path": "sbom-hosted-b615279-cancelled.json",
+      "sha256": "787dd5c364d66b8d9babcc19bdd3222a95053228932f07f7c4ce5a1a0b0747e7"
+    },
+    {
+      "path": "hosted-assurance-d67d9e9/receipt.json",
+      "sha256": "7f892b3e08c48215486cda6bd265c678ac77e877a942c4cc7700e80dd2856324"
+    },
+    {
+      "path": "security-policy-sources/pr100-d67-hosted-policy-provider-20261123.json",
+      "sha256": "94e1689c98106ed6887fc4fa9f5ff7a0491ad1ed5ab27b1908ede71e13b981c2"
+    },
+    {
+      "path": "sbom-hosted-d67d9e9.json",
+      "sha256": "346e6dd8fff00350cc493e9b568095683a29cdccb57c3ff2c7775cffec8dfadf"
+    },
+    {
+      "path": "sbom-hosted-92e6145.json",
+      "sha256": "e74ba285fa1a3e40f004f1123177a16ee4a8d216d8f62f18a5ed26afe783b0dc"
+    },
+    {
+      "path": "security-policy-sources/pr100-92e-postauth-policy-provider-20261123.json",
+      "sha256": "1a5d7088bc66aee8cd2755236fcf1385635fed7a6f57a359c5f180a725bc428c"
+    },
+    {
+      "path": "ruleset-active-20261123.json",
+      "sha256": "54c4ada514613f4381cc115d00938f7c4c3d77f6c4a239c32bbea20880f280b9"
+    },
+    {
+      "path": "hosted-assurance-92e6145/receipt-after-handoff.json",
+      "sha256": "d31a4ef85ab66da2b0e6e92919c8e41ef041a1025f04902c5e7e94cddc9ecb19"
+    },
+    {
+      "path": "pr100-merge-acceptance-20261123.json",
+      "sha256": "88737e008063753b551809488ae7d2d8a96bb70b4119f628ea78530f76cdcfcd"
+    },
+    {
+      "path": "sbom-hosted-main-8029b1a.json",
+      "sha256": "6162dbc3e93ee903e957299bb47be2cd57ffb3be3f678ca22839850d2189142f"
+    },
+    {
+      "path": "sbom-hosted-main-8029b1a-pending.json",
+      "sha256": "962cb70de39acbfa0d70ff2e816692d065b74420fbf9cbc2f133678bf641b07f"
+    },
+    {
+      "path": "hosted-assurance-main8029/receipt.json",
+      "sha256": "9b6493fd343c9b56dfd6c6aec2dbe1c5c912a5f64f0091caab4084ab1994d553"
+    },
+    {
+      "path": "main8029-pages-alerts-20261123.json",
+      "sha256": "69a47d9e89792f7058a78eb791fb62542fbf320960d06d154392abb5c3a4f04f"
+    },
+    {
+      "path": "security-policy-sources/api-path-boundary-20261123/receipt.json",
+      "sha256": "7b2591f16dd879639e40ba8ae0405c46f3f95b8400f0c1e8504716c4f74d1546"
+    },
+    {
+      "path": "api-path-fix-independent-review.json",
+      "sha256": "7e09c0d996953d3859288a1aea53b763859cf37dafd2e8b444b5692bdfcd08b1"
+    },
+    {
+      "path": "hosted-assurance-main8029/codecov-receipt.json",
+      "sha256": "c9ba961af18ed65c5be99f4445d92f0cb59818684dafb8c9da4e359237e53664"
+    },
+    {
+      "path": "pr107-merge-alerts-protection-20261123.json",
+      "sha256": "776288956ebfb64b019e89167d4f38c5e723c7e985baef7ba63e65f9b7a0ce4f"
+    },
+    {
+      "path": "hosted-assurance-pr107-19b17bf/receipt.json",
+      "sha256": "6c0cd8417746c977b9fc1ea0a13855a92e4b8d8b53a1f50875bf59a3a622b72e"
+    },
+    {
+      "path": "hosted-assurance-pr107-4e8e13a/receipt.json",
+      "sha256": "07e62f0e3dc0abbd79e34f1ebb11105959b50fdc3ab41acf6f7cd2b7a4488a41"
+    },
+    {
+      "path": "coverage-history-independent-review-20261123.json",
+      "sha256": "68d727bbc12fda38a006166a5e8f058d7d9c5dc4b397889634f02b9c44d5a80c"
+    },
+    {
+      "path": "security-policy-sources/api-receipt-privacy-20261123/receipt.json",
+      "sha256": "5a84bc2b07340ee6254e4fca1a992b8b203b9c8ccc87fd1f1190af1e5e86b160"
+    },
+    {
+      "path": "security-policy-sources/api-receipt-privacy-20261123/historical-api-metadata-dfe9-scan.json",
+      "sha256": "b4de05a05c1fc3bcf16b741a3681f4cbb620bfaeef6123552dc1b86e41f0e646"
+    },
+    {
+      "path": "hosted-assurance-maindd3/receipt.json",
+      "sha256": "7c654c15bd41571afa5894c5a86be1230ae156af5c26108519809e10c7936763"
+    },
+    {
+      "path": "hosted-assurance-maindd3/codecov-receipt.json",
+      "sha256": "ed8c04f5019a34cf6e28fd4755cd9ff72e78cbcde4cbe637004ab65dc88d796c"
+    },
+    {
+      "path": "sbom-hosted-main-dd3f995.json",
+      "sha256": "cee685cba9be19b89c4e4bf607a8da3e0b0b1515ddda4463610231a2f903d444"
+    },
+    {
+      "path": "security-policy-sources/registry-main-followup-prep-20261123/ci-policy-disposition.md",
+      "sha256": "7a6c3a068aedcc1c598132e70880ab0b59c0cb999774595ca0b8ca4ebc35efcb"
+    }
+  ]
+}

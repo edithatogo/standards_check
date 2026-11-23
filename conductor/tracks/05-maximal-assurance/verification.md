@@ -1,133 +1,196 @@
 # Track 05 verification
 
-## Evidence boundary, 23 November 2026
+## Accepted implementation, 23 November 2026
 
-The local assurance candidate began at `ba6b0888806e84276e5f54afc07e4e555220c4ea`;
-the individual receipts bind changed inputs by hash. Its first published head was
-`12b7b00737124aa7c0feaead893c930124332489` in PR #100. The follow-up fixes and receiving-main
-CI require fresh observations. At the reviewed base, eight ordinary checks passed and the
-offline-security job remained queued. Downstream Voiage main
-`a921d6471822eaac7fbc22f507760bd943ba9f6a` completed 52 successful checks and three expected
-skips. Those results complete earlier consolidation verification, not this new candidate.
+The bounded assurance implementation is qualified on actual main
+`dd3f995c473db0cc1cd6dad9d392b3744166958b`, tree
+`3bdbebf0bb72a7f7edf9c90a7c4fc10412d98200`. [PR #107](https://github.com/edithatogo/standards_check/pull/107)
+head `4e8e13a632777f2916b183101774cf2ff5389823` and its tested synthetic merge
+`f8d86bcf61ba9f22b8a1bebd2bae078ae9e19b9b` have the same tree. The PR merged normally
+after the valid review finding was corrected and its thread resolved. Protection remained active.
+
+The [exact-revision record](hosted-status-20261123.json) retains source/report/artifact hashes,
+job identities, settings observations and earlier failures. The
+[portable receipt](verification-receipt-20261123.json) is validated against the central
+verification-receipt schema and deliberately reports **partial**: accepted software controls
+do not complete updater, offline-security, release or independent programme obligations.
+This receipt names the implementation revision; a later documentation-only commit records it.
+
+## Actual main measurements
+
+[Assurance run 45106620582](https://github.com/edithatogo/standards_check/actions/runs/45106620582)
+passed all four measurement jobs and the aggregate. All four downloaded artifact digests,
+three native report checksums, checkout identities and 83 boundary-source bindings were
+independently verified against actual main.
+
+| Component | Observed result | Enforced floor and scope |
+| --- | --- | --- |
+| Maintained Python | 265 tests; 1,700/2,151 statements and 520/744 branches; **76.6839378238342% combined** across 28 modules. | 75% combined; zero exclusions. The denominator retains `simple_extract.py` at zero coverage. |
+| Rust workspace | 72 tests; 2,742/3,430 lines; **79.94169096209912%**. | 79% lines. Source-file coverage includes embedded unit tests; no branch measurement is claimed. |
+| Maintained API | 41 tests; 143/143 lines; 41/42 branches; **100% lines and 97.61904761904762% branches**. | 98% lines and 90% branches. Static generation and browser JavaScript are outside this component. |
+| Schema/API mutations | Two clean baselines; ten assertion kills; zero survivors, unviable mutations or timeouts. | Ten hand-selected operators, with source drift and invalid syntax rejected; no global mutation percentage. |
+| Existing validators and PRISMA contract | All six validators, two authored count-preservation pairs and two intentional validation differences passed. | Real CLI qualification ran inside Python coverage on clean main. No new dedicated diagrams-workflow run is claimed for this API/receipt change. |
+
+The [coverage receipt](coverage-20261123.json) retains local measurement inputs and the
+corrected historical API object. Native main report hashes are recorded separately in the
+revision record. Floors, denominators and exclusions were not weakened to obtain acceptance.
+
+### Dependency inventories
+
+[Run 45106620577](https://github.com/edithatogo/standards_check/actions/runs/45106620577/job/137469275648)
+produced artifact `14787249909`. Independent readback verified all nine inventories, all
+48 retained-file checksums, all 15 dependency source inputs plus the generator, clean main
+checkout binding, complete package identity sets and dependency references. Archive SHA-256:
+`5b331712f3ed9248adf713043e79e431f377fe28c7a89b88ea81a0ea97a204f9`.
+
+| Inventory | Components | Source scope |
+| --- | ---: | --- |
+| Rust | 89 | Cargo lock; 86 registry identities plus three workspace components. |
+| Root Node | 3 | Root npm lock. |
+| API | 72 | API npm lock; 73 locked records, including rate-limiter and address dependencies. |
+| Foundation Python | 6 | Exact active pins on Python 3.14, including bootstrap pip. |
+| Legacy Python | 31 | Maintained exact legacy-host profile on Python 3.12. |
+| Python tests | 45 | Observed isolated resolution; transitives are not a frozen source lock. |
+| Assurance tools | 3 | Exact maintained tool profile on Python 3.12. |
+| Kernel baseline / candidate | 43 each | Maintained legacy host plus qualification overlay and workflow-owned ipykernel 6.25.0 / 6.31.0. |
+
+Dependency inputs, generator and workflow are unchanged from accepted main8029; the new
+hosted artifact nevertheless binds every inventory to actual main `dd3f995`. No costly local
+imports were repeated. [Scope and procedure](sbom-20261123.md) distinguish native lock-derived
+inventories from installed Python environments. The conditional foundation pin supports only
+the deliberately narrow numeric `python_version <` marker; unsupported syntax fails before
+installation. Inventories exclude release binaries/images, operating-system packages,
+toolchain binaries, bundled native libraries and build downloads. They establish neither
+vulnerability freedom nor source/content licence approval.
+
+### Codecov and Pages observations
+
+All three main OIDC upload jobs verified their native reports, used explicit component files
+and returned processing URLs naming `dd3f995`. Push jobs correctly derived the SHA from the
+checkout; they did not use an explicit `--sha` override. At 03:37:59 UTC, legacy patch status
+`59621115216` succeeded; no Codecov App 254 check-run or project status was observed for main.
+The final PR's actual App patch check
+[`137468737189`](https://github.com/edithatogo/standards_check/runs/137468737189)
+passed at 100% against 80%. Uploader jobs and provider checks are distinct evidence.
+
+Trusted upload jobs alone request OIDC, verify native artifact identity and use pinned
+Codecov action 7.1.1/CLI 11.3.2. Fork PRs do not receive that upload permission. Component
+floors remain enforced independently of external provider processing.
+
+Pages recovery was observed on earlier receiving main8029 in
+[run 45103418503](https://github.com/edithatogo/standards_check/actions/runs/45103418503/job/137460173154):
+exact artifact `14786298400`, `github-pages-1`, passed the bounded metadata probe and native
+deployment. PR #106's eleven regressions exercise visibility, ambiguity, identity and expiry.
+The native deployment supplies the separate Actions Results observation; a new Pages
+deployment on `dd3f995` is not inferred.
+
+## API security correction and evidence integrity
+
+Main8029 marked rate-limit alert #1 and format-string alert #2 **Fixed via PR #100**, then
+exposed two new High path findings, #5/#6. PR #107 makes both endpoints enumerate fixed corpus
+directories and select only regular file entries. A validated request ID is compared with
+entry names; it does not supply the filesystem path. The failure-first symlink test served
+200 before the repair and returned 404 afterward. Invalid identifiers return 400,
+absent/non-file entries return 404, and enumeration/I/O failures return sanitized 500s.
+
+Independent review used actual symlinks in both directories, a dangling link, a Markdown-named
+directory, invalid aliases and injected enumeration errors. It found no publication blocker.
+The deployment-controlled corpus remains a limit: enumeration/read is not atomic against a
+local writer replacing files; hostile mounts or local races are not qualified by this fix.
+See [the path-selection receipt](api-path-selection-20261123.json).
+
+Two evidence corrections were necessary and remain visible:
+
+1. Initial head `5a5d0eb` failed privacy because a public LCOV checksum stored under the key
+   `api.lcov` matched `generic-api-key`. Exact b30-pinned tooling and Gitleaks 8.30.1 reproduced
+   the one finding. Head `19b17bf` replaced that mapping with explicit `path`/`sha256` records,
+   preserving all values and production/test bytes. The corrected scan found zero findings
+   and zero reviewed exceptions; scanner configuration and suppressions were unchanged.
+2. A valid Codex review then found that a Python object alias had copied current API hashes
+   and coverage into an old record retaining 40 tests and the old report. The only semantic
+   correction restored the historical API object from main8029. Independent deep comparison
+   proved the old API/tests/report equal that parent and all other current fields equal
+   `19b17bf`; both old/new reports were rehashed. Final head `4e8e13a` published the correction,
+   then thread `PRRT_kwDOPbFwGs66rmvp` was resolved before normal merge. No code rerun was
+   needed for this metadata-only proof; final hosted API and mutation checks still passed.
+
+The historical API result remains **40 tests, 146/146 lines and 36/38 branches**; the current
+result is **41 tests, 143/143 lines and 41/42 branches**. Neither is relabelled as the other.
+
+After normal merge, the live main inventory explicitly showed **0 open and 4 closed** CodeQL
+alerts. #5/#6 each read **Fixed via PR #107**, not dismissed; #6's activity linked actual
+`dd3f995`. Main privacy job `137469276069` passed with zero Gitleaks findings and reviewed
+exceptions, zero Presidio blocking findings and seven advisory checksum-looking matches.
+These observed controls do not certify full privacy coverage or vulnerability freedom.
 
 ## Technique applicability
 
-| Technique | Current application and evidence | Limits or justified exclusion |
+| Technique | Application | Limit |
 | --- | --- | --- |
-| Property testing | Eight Rust properties, 256 cases each under seeds 0, 721114987 and 20261123: 6,144 generated cases. [Bounds and replay](rust-qualification-20261123.md). | Covers the recorded generators, not every input. The finite read-only API and Python schema rejection cases use direct contracts instead of adding another property framework. |
-| Metamorphic testing | Canonical key-order/whitespace invariance and idempotence; lock construction order, reversible content/rename changes; count redistribution; renderer reading order; API list/item equality. | Identifier split mappings do not establish reversible semantic migration or equivalence with the imported legacy renderer. |
-| Mutation testing | Native six-function Rust campaign: 26 selected, two initial misses repaired, 25 viable caught in the final full rerun; one explicitly unviable excluded. [Ten schema/API operators](boundary-mutation-20261123.md) all assertion-killed. | Finite selections, no repository-wide score. Changed inventories, unresolved viable mutants and unexpected infrastructure failures require review. |
-| Contracts | Schema/pack guards, CLI errors, actual HTTP/CORS behavior, source-PDF comparison, lock checks and 12 diagram reference outputs. | The separate legacy 52-test/parity receipt qualifies the preserved Python runtime; it does not certify Rust semantic parity or standard-content validity. |
-| Deterministic simulation | The API request-budget test advances a mocked clock to verify exhaustion, rejection before parsing/I/O and recovery after expiry. | No distributed scheduler, retry queue or replica exists in this slice. The rate counter is process-local; shared-store/deployment semantics need their own qualification before adding workers. Synchronous Rust filesystem failure/race tests remain required. |
+| Properties | Eight Rust properties, 256 cases under each of seeds 0, 721114987 and 20261123: 6,144 examples. [Bounds/replay](rust-qualification-20261123.md). | Finite generators. Direct Python/API rejection contracts cover the bounded interfaces without another property framework. |
+| Metamorphic relations | Canonical key-order/whitespace invariance and idempotence; lock order and reversible content/rename changes; count redistribution; renderer reading order; API list/item equality. | Identifier splitting and authored pairs do not establish reversible semantic migration or general legacy-renderer equivalence. |
+| Native mutation | Six Rust functions, 26 selected; initial misses repaired; 25 viable caught and one unviable excluded. Hosted [first-head campaign](rust-hosted-first-head-20261123.md) at `12b7b007` verified the same outcomes. | Historical campaign, not a final-head rerun or global score. Native selected-package baseline 61 differs from workspace 72. |
+| Schema/API mutation and contracts | [Ten operators](boundary-mutation-20261123.md), schema/pack guards, CLI errors, actual HTTP/CORS behavior, source-PDF checks, locks and 12 diagram reference outputs. | Imported legacy 52-test runtime/parity qualification is separate from Rust semantics and scientific content acceptance. |
+| Deterministic simulation | Mocked API clock checks exhaustion, rejection before parsing/I/O and recovery after expiry. | Process-local counter only. No distributed scheduler, replica or shared-store claim; synchronous Rust filesystem failure/race tests remain applicable. |
 
-The [Rust receipt](rust-qualification-20261123.json) retains native outcomes, initial misses and
-input hashes. The [boundary receipt](boundary-mutation-20261123.md) explains the standard-library
-driver and its assertion-only classification. Rust mutation runs are scheduled/manual in the
-existing canonical-property workflow; bounded property checks remain available on relevant PRs.
-The [actual manual hosted run](rust-hosted-first-head-20261123.md) at first head `12b7b007`
-also passed: 72 workspace tests and the exact 25-caught/one-unviable native campaign, with
-downloaded artifacts verified. cargo-mutants' own selected-package baseline had 61 passing
-tests; it is distinct from the full-workspace gate. Those Rust inputs remain unchanged in
-the subsequent Python/API integration.
+## Historical failures and revision boundaries
 
-## Coverage and CI
+| Observation | Disposition retained |
+| --- | --- |
+| `12b7b007` first head | Component/provider checks passed; boundary setup failed under the wrong Python profile and the aggregate correctly failed. [Original receipt](hosted-first-head-20261123.json). |
+| `d67d9e9` | Native coverage, ten boundary kills, nine inventories and OIDC passed. Separate PRISMA failed during rustfmt installation before qualification; retry cancelled without steps. The same CLI contract passed inside coverage. |
+| `b615279` | Superseded by PR #106 integration; SBOM/native work cancelled without execution. |
+| `92e61459` / main8029 | Initial queued/passkey-blocked snapshots superseded by verified execution and active protection. PR: 41 successes, two expected skips and two offline jobs queued. Native assurance, dedicated two-pair PRISMA, SBOM and Pages qualified; later main path alerts required PR #107. |
+| `5a5d0eb` / `19b17bf` | Privacy presentation failure, then clean representation repair; the valid historical-API review still blocked merge. Neither head was accepted as main. |
+| `4e8e13a` / main `dd3f995` | Corrected history, addressed review, normal protected merge, native/SBOM/OIDC qualification and actual alert closure. Final PR: 22 successes/two offline jobs queued. Main: 19 successes, one PR-only skip and one offline job queued. |
 
-| Component | Local observation | Enforced floor |
-| --- | --- | --- |
-| Rust workspace | 2,742/3,430 lines, 79.94169096209912% | 79% lines |
-| Maintained API | 100% lines, 94.74% branches; 40 tests passed | 98% lines, 90% branches |
-| Maintained Python | 1,700/2,151 lines and 520/744 branches; 76.68% combined; 265 tests passed | 75% combined |
+PR #104/#105 explicitly request `rustfmt,clippy` at pinned Rust setup sites, retaining
+`llvm-tools-preview` for coverage. New Python modules initially reduced combined coverage
+to 71.47%; the existing real PRISMA CLI contract raised it above the unchanged 75% floor with
+no exclusions. Earlier `not_run` observations remain separate from later successful execution.
 
-The [coverage receipt](coverage-20261123.json) retains per-file counts, source/report hashes and
-the full denominator. Python keeps all 28 maintained modules, including `simple_extract.py` at zero coverage.
-The Rust source-file report includes embedded unit-test code and has no stable-toolchain branch
-measurement. Static API generation and browser JavaScript remain outside the API component.
+## Policy, protection and remaining gates
 
-`ci.yml` emits separate Python XML and Rust/API LCOV artifacts, hashes each report and
-binds it to the checked-out commit. The separate trusted Codecov job verifies that identity and
-requests OIDC only there; fork PRs do not receive that upload permission. Codecov action 7.1.1
-and CLI 11.3.2 are pinned. At first head `12b7b007`, all three OIDC uploads succeeded and the
-[Codecov App patch check](https://github.com/edithatogo/standards_check/runs/137437302663)
-passed with 94.59% diff coverage against the 80% target. No project check was observed at that
-head; legacy commit statuses were empty. Local component floors apply independently of the
-external service. Later revisions require their own upload/provider observations.
+The [managed-file receipt](managed-file-drift-20261123.json) records the original exact central
+comparison, local extensions and Unicode triage. Later semantic review against
+[`repository-standards@2efdbd9`](https://github.com/edithatogo/repository-standards/tree/2efdbd988064f6857795b9fa9ed4e1d08d18791d)
+confirms registered `node`/`baseline` requires dependency review and SBOM. Both are implemented;
+no missing native test type was identified. Scorecard, Security Insights and SLSA are not
+selected baseline controls, without waiving future release requirements.
 
-The integrated Python measurement adds the existing real legacy/Rust PRISMA comparison after
-its six validators. The new production modules initially reduced coverage to 71.47%; exercising
-the qualified CLI contract raised it to 76.66% without exclusions or a lower floor. Its full-history
-checkout, maintained legacy profile and exact Rust CLI build are explicit in CI.
+[Issue #30](https://github.com/edithatogo/standards_check/issues/30) records the local `ci.yml`
+specialization through the existing [semantic-conflict route](https://github.com/edithatogo/repository-standards/blob/2efdbd988064f6857795b9fa9ed4e1d08d18791d/docs/continuous-conformance-standard.md).
+The [managed-file contract](https://github.com/edithatogo/repository-standards/blob/2efdbd988064f6857795b9fa9ed4e1d08d18791d/managed-files/manifest.json)
+preserves local additions, and enforcement policy preserves stronger controls. Local
+Python/Rust/API jobs and separate trusted explicit-report uploads therefore remain. The
+manifest still describes a thin immutable reusable call; this review does not claim that call
+exists or that local files equal the template. No profile migration, new waiver or extra
+approval is required. Future central reusable-workflow adaptation must preserve these boundaries.
+A single quick-profile command remains an optional improvement, not an added acceptance gate.
 
-The later runtime integration retains PR #104/#105's fixes and requests the repository-declared
-`rustfmt,clippy` components explicitly at all eleven pinned Rust setup sites. The Rust coverage
-job also retains `llvm-tools-preview`. This removes the deferred component-installation phase
-that failed before PRISMA execution on both receiving main and the first integrated candidate;
-the original `not_run` observations remain distinct from successful contract receipts. The
-foundation profile's conditional dependency is evaluated by the SBOM guard for its selected
-interpreter, with unsupported marker forms rejected before installation.
+[Ruleset 27871801](https://github.com/edithatogo/standards_check/rules/27871801) is active on the
+default branch: PRs, resolved conversations, strict checks, zero human approvals, no force
+push/deletion and no bypass actors. All seven contexts are bound to GitHub Actions app 15368:
+privacy, four CodeQL analyses, `assurance` and `Maintained dependency inventories`. Native
+CodeQL thresholds are High-or-higher security and errors. Post-merge readback confirmed the
+same settings and `current_user_can_bypass: never`.
 
-PR #106 repairs two observed Pages deployment failures in
-[run 45097737175](https://github.com/edithatogo/standards_check/actions/runs/45097737175):
-metadata was initially unavailable, and a retry then found two artifacts with the old shared
-name. Upload and native deployment now share an attempt-specific name. A bounded REST guard
-requires the exact uploaded ID, name, workflow run and unexpired state; ambiguous or incomplete
-metadata fails. Eleven runnable regressions exercise the actual inline probe with controlled responses
-and clock, while the native deployment remains authoritative for its separate Actions Results
-lookup. Successful receiving-main Pages deployment is still required before claiming recovery.
+The original Confirm access/passkey block and empty API inventory remain historical. After
+owner authentication, activation and normal protected merges were observed. Recovery is the
+authenticated [named ruleset edit path](https://github.com/edithatogo/standards_check/settings/rules/27871801):
+reauthenticate when requested, correct a renamed/misconfigured check, restore and verify
+protections. Edit access was observed; no standing bypass exists and no recovery change was
+rehearsed. A destructive drill is not a new acceptance requirement.
 
-Workflow lint uses actionlint 1.7.12 and offline zizmor 1.33.1. PR dependency review uses the
-pinned 5.0.1 action with a low-severity threshold. Those jobs, all three component coverage
-jobs and the upgraded privacy action passed at the first head. Its mutation job failed before
-mutation because the five-package foundation profile was installed under Python 3.12. The
-[setup correction](boundary-mutation-20261123.md) uses the existing profile's qualified Python
-3.14 runtime and retains the failed observation. The stable aggregate correctly failed then.
-Existing CodeQL, privacy and offline-security evidence remain distinct; a queued offline job
-is not a completed security assessment. The authenticated runner settings page explicitly
-reported **no runners configured**. The pinned caller requires a self-hosted Linux/x64
-`ai-security-offline` runner with a preloaded digest-bound security image and isolated Docker
-execution; neither a hosted substitute nor a disabled check qualifies that requirement.
+Renovate installation/discovery and prior bot merges do not prove the protected updater
+lifecycle; Dependabot remains until the existing handover is qualified. Offline-security is
+still unexecuted. The observed runner inventory had no configured runners; #30 retains the
+qualified image/assets, matching isolated runner, consumer-pin and execution prerequisites.
+Ordinary hosted checks, CodeQL or a queued job do not substitute for them.
 
-Live security inspection found two High CodeQL alerts in the maintained API: missing rate
-limiting and request-derived log formatting. The follow-up adds the shared 100-request/minute
-budget and constant-format logging, with failure-first HTTP/clock regressions and unchanged
-coverage floors. Hosted alert resolution is still a separate observation; passing Analyze
-jobs alone does not establish an empty alert inventory.
-
-## Policy and remaining gates
-
-The [managed-file receipt](managed-file-drift-20261123.json) compares exact upstream
-`repository-standards@a3cc8dccdb67e6f122c71cec713194cdec792d07`, records local extensions and
-Unicode findings, and separates live dependency discovery from update/merge qualification.
-Root `SECURITY.md` preserves the shared policy with a receiving-project scope. The registered
-public/baseline controls require dependency review and a current dependency SBOM. Scorecard,
-Security Insights and SLSA are not selected by that profile; future publication may change
-their applicability. The [nine dependency inventories](sbom-20261123.md) cover current
-Cargo/npm locks and maintained Python profiles, including both optional kernel environments.
-Their standalone `Maintained dependency inventories` job is a separate required check; these
-are dependency inventories, not release binary/container provenance. Local multi-language assurance occupies the managed `ci.yml` path while
-preserving its specialized jobs; this is not byte equality with the central Node-only template.
-Registry/profile and managed-workflow divergence remain explicit.
-
-The authenticated security overview showed private vulnerability reporting, Dependabot alerts,
-CodeQL/code-scanning alerts and secret scanning enabled. The repository's installed-apps page
-showed Renovate. These are observed settings, not qualification of every updater's protected
-update/merge lifecycle. Dependabot's Actions configuration remains in place.
-
-The solo-maintainer ruleset is being prepared and is **not yet applied or verified**: required
-PRs and stable automation checks, zero human approvals, no force pushes/deletion, no routine
-bypass, conversation resolution and an explicit owner recovery path. It also requires CodeQL
-results with High-or-higher security alerts and error-level alerts blocked in the PR diff.
-That native rule does not independently clear pre-existing alerts; actual alert resolution
-still needs observation. Settings acceptance requires API/UI readback.
-
-The 23 November submission reached GitHub's **Confirm access / Passkey** prompt before saving.
-The complete form has Active selected, seven checks bound to GitHub Actions, no bypass actors
-and zero required approvals, but the API still returned an empty ruleset inventory. Activation
-requires the owner's GitHub reauthentication; the prepared form is not an enforced rule.
-
-Open gates remain for offline-security execution, independent normalized interpretation and
-evidence review (#82), legacy-to-Rust migration semantics, held guideline rights and source
-qualification (#95), Track 04 contracts, release/offline reproducibility and provenance,
-independent methodology/accessibility and publication. The optional kernel comparison (#94)
-is now qualified through #101. PRs #102/#103 add held-source identity rejection and bounded
-legacy PRISMA count parity; their broader source/content and consumer gates remain open.
-See [the plan](plan.md); this track does not mark those obligations complete.
+The [plan](plan.md) keeps independent interpretation/evidence review (#82), held guideline
+rights/provenance (#95), broader legacy consumer semantics, Track 04 contracts, release/offline
+reproducibility, provenance/signatures, downstream cutover/rollback and independent
+methodology/accessibility/publication open. Optional kernels (#94/#101), held-source identity
+rejection (#102) and bounded PRISMA parity (#103) retain their recorded limits. Track status
+remains in progress; accepted implementation is not completion of the whole programme.
