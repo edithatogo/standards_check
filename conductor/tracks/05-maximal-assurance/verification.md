@@ -235,7 +235,21 @@ Receiving baseline `f05578a0592dfd5437352d563af97f4115929173`: [build run
 45138844044](https://github.com/edithatogo/standards_check/actions/runs/45138844044)
 produced a 115-page HTML artifact. Inspection found 114 pages with 2–3
 `h1` elements, no skip-to-main links on any page, and an unnamed progress
-bar on 114 checklist views. The same run's representative PRISMA PDF was
+bar on 114 checklist views. 
+The same generated artifact retained **116 PDFs, of which 56 had a PDF
+structure tree and marked-content flag**, and 60 did not. All 116 had
+text, language and outlines in the sampled structural audit. Many
+untagged entries were legacy `en/` or otherwise stale tracked outputs;
+retaining them in the artifact falsely implied fresh, uniform build
+qualification. The revised clean-build step therefore discards the
+**generated output directories** `html/`, `pdf/`, `docx/` and
+`latex/` in the ephemeral checkout before regeneration, while
+preserving every tracked/historical source file on the remote. New
+artifact counts and PDF tag metadata must be independently verified
+on the candidate and receiving main. A structure tree is necessary
+evidence, not full PDF/UA or assistive-technology validation.
+
+The same run's representative PRISMA PDF was
 tagged (`/StructTreeRoot`, `/MarkInfo /Marked true`, `/Lang en-US`,
 outline present); this is **not** a PDF/UA or manual screen-reader certification.
 
