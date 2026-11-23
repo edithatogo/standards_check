@@ -1,0 +1,102 @@
+"""Source-based table reconciliation, including deliberately incorrect legacy text."""
+import copy
+import hashlib
+import tempfile
+import unittest
+from pathlib import Path
+
+from scripts.reconcile_authoritative_articles import (
+    extract_table, parse_legacy, reconcile_items, audit,
+)
+
+
+SPEC = {
+    "edition": "example-2025", "pmcid": "PMC123", "pmid": "456",
+    "doi": "10.1234/example", "licence": "CC-BY-4.0",
+    "table_label": "Table 3", "caption_contains": "Example checklist",
+    "id_from_right": 2, "text_from_right": 1,
+    "item_ids": ["1a", "1b", "2"], "legacy_path": "legacy.md",
+    "attribution": "Example authors (2025).",
+}
+
+XML = b"""<?xml version="1.0"?>
+<article xmlns:xlink="http://www.w3.org/1999/xlink">
+ <front><article-meta>
+  <article-id pub-id-type="doi">10.1234/example</article-id>
+  <article-id pub-id-type="pmc">123</article-id>
+  <article-id pub-id-type="pmid">456</article-id>
+  <permissions><license xlink:href="https://creativecommons.org/licenses/by/4.0/">
+  <license-p>Creative Commons Attribution 4.0 International.</license-p></license></permissions>
+ </article-meta></front>
+ <body><table-wrap id="Tab3"><label>Table 3.</label>
+  <caption><p>Example checklist</p></caption><table><tbody>
+   <tr><td colspan="3">ADMINISTRATIVE INFORMATION</td></tr>
+   <tr><td rowspan="2">Title</td><td>1a</td><td>Identify the protocol.</td></tr>
+   <tr><td>1b</td><td>Report any update.</td></tr>
+   <tr><td>Registration</td><td>2</td><td>Provide the registration identifier.</td></tr>
+  </tbody></table>
+ </table-wrap></body>
+</article>"""
+
+
+class AuthoritativeTableTests(unittest.TestCase):
+    def test_binds_source_identity_table_rows_and_subitems(self):
+        data = extract_table(XML, SPEC)
+        self.assertEqual([r["item_id"] for r in data["rows"]], SPEC["item_ids"])
+        self.assertEqual(data["source_sha256"], hashlib.sha256(XML).hexdigest())
+        self.assertEqual(data["rows"][1]["source_anchor"], "Tab3:row:3:item:1b")
+        self.assertEqual(data["rows"][1]["text"], "Report any update.")
+        self.assertEqual(data["rights"], "article_licence_observed_table_reuse_candidate")
+
+    def test_rejects_wrong_source_missing_row_duplicate_and_wrong_licence(self):
+        for raw in (
+            XML.replace(b"10.1234/example", b"10.1234/other"),
+            XML.replace(b">1b<", b">1a<"),
+            XML.replace(b">1b<", b">9<"),
+            XML.replace(b"/licenses/by/4.0/", b"/licenses/by-nc/4.0/"),
+            XML.replace(b"Example checklist", b"Different table"),
+            XML.replace(b'pub-id-type="pmc">123', b'pub-id-type="pmc">999'),
+        ):
+            with self.subTest(raw=raw[:90]), self.assertRaises(ValueError):
+                extract_table(raw, SPEC)
+
+    def test_requires_exact_source_pin_when_configured(self):
+        spec = {**SPEC, "source_sha256": "a" * 64}
+        with self.assertRaisesRegex(ValueError, "source checksum"):
+            extract_table(XML, spec)
+
+    def test_legacy_number_is_not_a_source_oracle(self):
+        data = extract_table(XML, SPEC)
+        legacy = parse_legacy(
+            "- [ ] **1a. Heading:** Identify the protocol.\n"
+            "- [ ] **1b. Wrong topic:** Provide the registration identifier.\n"
+            "- [ ] **2. Incorrect:** Invent a new requirement.\n"
+        )
+        report = reconcile_items(data["rows"], legacy)
+        self.assertEqual(report["source_item_count"], 3)
+        self.assertEqual(report["exact_unique_items"], 2)
+        self.assertEqual(report["items"][1]["same_number_legacy_positions"], [2])
+        self.assertEqual(report["items"][1]["exact_legacy_positions"], [])
+        self.assertEqual(report["items"][1]["status"], "not_exactly_reconciled")
+        self.assertEqual(report["items"][2]["exact_legacy_positions"], [2])
+        self.assertEqual(report["items"][2]["same_number_legacy_positions"], [3])
+        self.assertEqual(report["legacy_positions_without_exact_source_match"], [3])
+        self.assertEqual(report["canonical_packs_promoted"], 0)
+
+    def test_audit_preserves_unavailable_editions_and_actual_evidence(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "PMC123.xml").write_bytes(XML)
+            (root / "legacy.md").write_text("- [ ] **1a. Heading:** Identify the protocol.")
+            missing = {**SPEC, "edition": "absent", "pmcid": "PMC999"}
+            result = audit(root, root, [SPEC, missing])
+            self.assertEqual(result["summary"]["source_tables_reconciled"], 1)
+            self.assertEqual(result["summary"]["source_items_extracted"], 3)
+            self.assertEqual(result["summary"]["canonical_packs_promoted"], 0)
+            self.assertEqual(result["editions"][1]["status"], "held")
+            self.assertEqual(result["editions"][1]["error_type"], "FileNotFoundError")
+            self.assertEqual(result["editions"][0]["legacy"]["exact_unique_items"], 1)
+
+
+if __name__ == "__main__":
+    unittest.main()
