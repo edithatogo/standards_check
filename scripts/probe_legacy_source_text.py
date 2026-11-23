@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from collections import Counter
 import csv
 import hashlib
 import io
@@ -14,8 +15,10 @@ import unicodedata
 import yaml
 
 try:
+    from .legacy_checklist_structure import parse_legacy_tasks, split_label
     from .reconcile_equator_sources import scan_local, scan_alias_assets
 except ImportError:
+    from legacy_checklist_structure import parse_legacy_tasks, split_label
     from reconcile_equator_sources import scan_local, scan_alias_assets
 
 MAX_SOURCE_BYTES = 20_000_000
@@ -27,7 +30,8 @@ def normalise(text: str) -> str:
 
 
 def source_text(path: Path) -> tuple[str, str, str]:
-    source = path.read_bytes()
+    with path.open("rb") as stream:
+        source = stream.read(MAX_SOURCE_BYTES + 1)
     if len(source) > MAX_SOURCE_BYTES:
         raise ValueError("source_too_large")
     if path.suffix == ".pdf":
@@ -70,10 +74,7 @@ def evaluate_text(extracted: str, legacy_items: list[str]) -> dict:
     # ponytail: Phrase diagnostics only, not complete row or semantic equality.
     normalized = normalise(extracted)
     fidelity = fidelity_normalise(extracted)
-    # Legacy Markdown sometimes prepends a bold item number and section title,
-    # while the original PDF/DOCX arranges that label separately.
-    label = re.compile(r"^\s*\*\*\d+[a-z]?(?:\.\d+)?[.)]?\s+[^*]{1,160}\*\*\s*", re.I)
-    items = [label.sub("", item) for item in legacy_items]
+    items = [split_label(item)[1] for item in legacy_items]
     comparisons = []
     for ordinal, item in enumerate(items, 1):
         lexical = normalise(item)
@@ -111,10 +112,6 @@ def evaluate_text(extracted: str, legacy_items: list[str]) -> dict:
             "status": "triage_only_not_edition_verification"}
 
 
-def legacy_items_from_markdown(path: Path) -> list[str]:
-    return re.findall(r"^\s*[-*] \[[ xX]\]\s*(.+)$", path.read_text(encoding="utf-8"), re.M)
-
-
 def audit(root: Path) -> dict:
     index = yaml.safe_load((root / "source/index.yml").read_text(encoding="utf-8"))
     items = index["items"]
@@ -124,7 +121,22 @@ def audit(root: Path) -> dict:
         originals, views, _ = scan_local(root, item)
         if not originals:
             originals = scan_alias_assets(root, item, ids)
-        legacy = legacy_items_from_markdown(root / views[0]) if views else []
+        legacy_rows = []
+        legacy_structure = None
+        if views:
+            view_bytes = (root / views[0]).read_bytes()
+            legacy_rows = parse_legacy_tasks(view_bytes.decode("utf-8"))
+            declared = Counter(row["declared_item_id"] for row in legacy_rows
+                               if row["declared_item_id"] is not None)
+            legacy_structure = {
+                "view_path": views[0],
+                "view_sha256": hashlib.sha256(view_bytes).hexdigest(),
+                "duplicate_declared_item_ids": sorted(key for key, count in declared.items() if count > 1),
+                "items": [{key: value for key, value in row.items() if key not in {"text", "raw_text"}}
+                          for row in legacy_rows],
+                "status": "legacy_structure_only_not_source_authority",
+            }
+        legacy = [row["raw_text"] for row in legacy_rows]
         probes = []
         for original in originals:
             path = root / original["path"]
@@ -146,9 +158,10 @@ def audit(root: Path) -> dict:
                 entry["error_type"] = type(exc).__name__
             probes.append(entry)
         records.append({"legacy_id": item["id"], "legacy_view_count": len(views),
-                        "legacy_item_count": len(legacy), "source_probes": probes,
+                        "legacy_item_count": len(legacy), "legacy_structure": legacy_structure,
+                        "source_probes": probes,
                         "qualification": "unverified_original_and_legacy_text"})
-    return {"schema_version": 1, "authority": "no_source_or_legacy_content_admission",
+    return {"schema_version": 2, "authority": "no_source_or_legacy_content_admission",
             "legacy_item_count": len(records),
             "summary": {"records_with_original_candidates": sum(bool(row["source_probes"]) for row in records),
                         "source_probes": sum(len(row["source_probes"]) for row in records),
