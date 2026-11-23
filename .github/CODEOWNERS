@@ -1,14 +1,3 @@
-# CODEOWNERS
-# Replace the placeholder team or usernames with your actual reviewers.
-
-# Default owners for docs and scripts
-* @your-org/docs-team
-
-# Checklist content
-/markdown/ @your-org/docs-team
-/source/ @your-org/docs-team
-
-# Build scripts and templates
-/scripts/ @your-org/infra
-/templates/ @your-org/infra
-
+# One accountable owner; the protected main branch requires automated gates,
+# not a second human reviewer or a mandatory code-owner approval.
+* @edithatogo
