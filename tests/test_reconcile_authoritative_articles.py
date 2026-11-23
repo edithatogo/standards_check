@@ -6,7 +6,7 @@ import unittest
 from pathlib import Path
 
 from scripts.reconcile_authoritative_articles import (
-    extract_table, parse_legacy, reconcile_items, audit,
+    extract_table, parse_legacy, reconcile_items, audit, snapshot_table,
 )
 
 
@@ -110,6 +110,32 @@ class AuthoritativeTableTests(unittest.TestCase):
                            ("table_rows_sha256", "f"*64)):
             with self.subTest(key=key), self.assertRaises(ValueError):
                 extract_table(XML, {**pinned, key: value})
+
+    def test_offline_snapshot_preserves_source_rows_and_rejects_mutation(self):
+        source = extract_table(XML, SPEC)
+        spec = {**SPEC, "source_sha256": source["source_sha256"],
+                "source_bytes": source["source_bytes"], "table_id": source["table_id"],
+                "table_rows_sha256": source["table_rows_sha256"]}
+        snapshot = {
+            "edition": SPEC["edition"], "doi": SPEC["doi"], "pmcid": SPEC["pmcid"],
+            "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC123/fullTextXML",
+            "source_sha256": source["source_sha256"],
+            "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+            "attribution": SPEC["attribution"],
+            "rows": [{k:v for k,v in row.items() if k != "normalized_text_sha256"}
+                     for row in source["rows"]],
+        }
+        self.assertEqual(snapshot_table(snapshot, spec)["rows"], source["rows"])
+        for key, bad in (("doi", "10.1234/wrong"), ("licence_url", "https://creativecommons.org/licenses/by-nc/4.0/"),
+                         ("attribution", "wrong attribution"), ("source_sha256", "f"*64)):
+            with self.subTest(key=key), self.assertRaises(ValueError):
+                snapshot_table({**snapshot, key:bad}, spec)
+        for field, value in (("text", "A changed requirement."), ("source_anchor", "wrong"),
+                             ("item_id", "9")):
+            mutated = copy.deepcopy(snapshot)
+            mutated["rows"][0][field] = value
+            with self.subTest(field=field), self.assertRaises(ValueError):
+                snapshot_table(mutated, spec)
 
     def test_audit_preserves_unavailable_editions_and_actual_evidence(self):
         with tempfile.TemporaryDirectory() as directory:
