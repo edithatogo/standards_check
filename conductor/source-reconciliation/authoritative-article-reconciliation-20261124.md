@@ -41,12 +41,17 @@ licence/attribution, item-level verification, exact structure, contract and
 lock checks. Legacy text cannot certify the new source. CHEERS is reporting
 guidance and must not be turned into a methodological quality score.
 
-Reproduce offline with the same explicitly acquired XML files:
+Reproduce routinely from retained source-table snapshots (network-free), or supply the original pinned XML files to reproduce the extraction:
 
     python -m unittest tests.test_reconcile_authoritative_articles -v
+    python -m scripts.reconcile_authoritative_articles --output /tmp/offline-reconciliation.json --require-all
     python -m scripts.reconcile_authoritative_articles --source-dir /path/to/xml \
         --output /tmp/authoritative-article-reconciliation.json --require-all
 
 ## First acquisition evidence
 
 [Run 45268251861, job 138020843759](https://github.com/edithatogo/standards_check/actions/runs/45268251861/job/138020843759) successfully acquired all four selected XML articles and extracted **82/82** expected item IDs. The [source-table and item comparison artifact](https://github.com/edithatogo/standards_check/actions/runs/45268251861/artifacts/14864257046) was inspected and the ordered row digests independently recomputed before committing the pins. That first run contained a strict zero-match diagnostic; it did not account for unnumbered CHEERS labels or terminal full-stop-only differences. The follow-up comparison corrects these diagnostics without changing any primary-source text or source pin. It remains a source-reconstruction candidate; no canonical pack is promoted.
+
+## Durable source row snapshot and routine CI
+
+The attributed 82-item table extract is retained at `source/official/authoritative-article-rows.json` (Git blob `c29794b3bcf7863e9f30c4ebc83e70b8d1b05450`). The independently reconstructed artifact-derived Git blob matched exactly. It is a normalized table projection, not the original XML itself. Offline validation reconstructs each item text digest and checks the complete ordered table hash, item IDs, anchor, exact DOI/PMCID, licence and attribution against the pinned manifest. On changed source rows/manifest/comparator, or explicit workflow dispatch, the same workflow also reacquires the selected XML and verifies full article bytes and ordered row hash. An incidental publisher/archival XML revision is reported as drift; there is no automatic repin. Routine comparison does not depend on publisher network access.
