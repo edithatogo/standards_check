@@ -83,6 +83,50 @@ adversarial false-match cases. No new embedding service, AI dependency or
 LLM attestation is required by the first increment. High similarity is
 neither source authenticity nor entailment of reporting requirements.
 
+## Hosted first-pass alignment evidence
+
+At candidate head `91de403c676be189c563aaa0b8749d36c894165b`,
+the [read-only extraction job](https://github.com/edithatogo/standards_check/actions/runs/45144383189/job/137589937451)
+executed **seven** Python regression tests successfully, then reconciled the
+**56** existing entries against **719** upstream published pages at
+EQUATOR `bbd7bc55fcb0698ef493ae66685924b5b2ddc276`. The
+[retained source and alignment artifact](https://github.com/edithatogo/standards_check/actions/runs/45144383189/artifacts/14802458653)
+contains the full metadata and original-file SHA-256 evidence. One upstream
+page changed relative to the committed `discovery.json` pin; no update was
+silently made.
+
+| First-pass observation | Count | Interpretation |
+| --- | ---: | --- |
+| EQUATOR candidates | 42 | 9 direct EQUATOR URLs, 3 DOI candidates, 20 exact slug candidates, 7 family slug candidates, 3 acronym candidates; **none** is source-content admission |
+| No confident candidate | 14 | Source-identity investigation required; includes the ACE appraisal-tool mismatch and alias/edition ambiguities |
+| Present original-file assets | 17/56 | SHA-256 recorded, but a local copy is not proof that it is the authoritative edition |
+| Existing legacy Markdown | 55/56 | Text/item counts are evidence to audit, **not** verification or a source oracle |
+| Repeated legacy item arrays | 4 records | Duplicate 3-item placeholder structures must not be accepted as distinct standards |
+| Orphan legacy parent references | 3 | SPIRIT extension references to absent `spirit-2013` |
+| Possible edition mismatches | 5 | Includes CONSORT 2010 against the current CONSORT page |
+| Counts inconsistent with independent item-ID fixtures | 5 | ARRIVE 22 vs 21; CHEERS 27 vs 28; COREQ 26 vs 32; PRISMA-P 19 vs 26; SPIRIT 32 vs 53 |
+| Legacy PRISMA vs canonical pack | 27 vs 42 | An old aggregate view is not the current 42-item pack |
+| Index/sidecar licence declaration differences | 29 | Differences in **claims**, not an automated copyright verdict |
+| Index checksum discrepancies | 2 | CONSORT 2010 and STROBE 2007 index digests differ from present assets and sidecar claims |
+| Other sidecar checksum discrepancy | 1 | PRISMA-EcoEvo: investigate the intended format/source bytes |
+| Sidecars claiming `verified: true` | 17 | Historical flag has no authority to promote a canonical pack |
+
+The initial acronym heuristic falsely suggested PRISMA for Abstracts
+(`prisma-a`) was PRISMA for Acupuncture because EQUATOR uses the overlapping
+PRISMA-A label. A failing synthetic regression preceded the correction: acronym
+matching must now have a discriminating title-token agreement. The revised
+source-only job confirms **14 unresolved candidates** rather than silently
+assigning this false pair.
+
+**Next automated stage:** for each selected edition, first obtain and pin
+the issuing body's versioned source (when access and rights permit); use
+separate publisher/DOI/PMID and source-file evidence; extract complete
+numbered item/subitem spans; compare exact normalized wording and chapter
+anchors to the local legacy text and the canonical pack, recording discrepancy
+receipts and independent extractor disagreement. Optional NLP/NLI may route
+cases for investigation, not confer a source-rights, method or licence decision.
+All unresolved records remain unadmitted indefinitely in a no-human workflow.
+
 ## Reproducible diagrams
 
 StandardFlow Track 02 already has a deterministic versioned recipe +
