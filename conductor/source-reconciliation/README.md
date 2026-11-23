@@ -31,3 +31,7 @@ The comparator requires the pinned PDF bytes, complete numbered rows, exact expe
 - Independent methodological, usability/accessibility and publication acceptance. `source_reconciled` does not mean `externally_validated`.
 
 The original draft is an auditable migration input. Its existence alone is not a complete source-verification receipt.
+
+## Additional authoritative-edition source candidates
+
+[Primary article table reconciliation](authoritative-article-reconciliation-20261124.md) describes the first additional cohort of four primary, open-access editions and 82 independently sourced numbered rows. The retained source-table snapshot and manifest under `source/official/` enable deterministic legacy discrepancy reports and explicit primary-source reacquisition. They do not yet constitute additional admitted canonical packs or validated migration semantics.
