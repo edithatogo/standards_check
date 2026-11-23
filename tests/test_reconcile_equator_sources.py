@@ -61,6 +61,37 @@ class ReconcileEquatorSourcesTests(unittest.TestCase):
         self.assertIn("no_original_asset",row["findings"])
         self.assertEqual(row["admission"],"unresolved")
 
+    def test_same_acronym_not_enough_for_abstracts_vs_acupuncture(self):
+        self.index('  - id: prisma-a\n    title: PRISMA for Abstracts Checklist\n    group: prisma\n')
+        self.catalogue["guidelines"].append({
+            "id": "equator:prisma-acupuncture",
+            "page_url": "https://equator-network.org/reporting-guidelines/prisma-acupuncture/",
+            "source_path": "reporting-guidelines/prisma-acupuncture/index.qmd",
+            "source_blob_sha": "e" * 40,
+            "metadata_status": "extracted_unverified",
+            "title": "Reporting items for systematic reviews of acupuncture: the PRISMA for acupuncture checklist",
+            "acronym": "PRISMA-A",
+        })
+        self.catalogue["published_count"] += 1
+        result = reconcile(self.root, self.catalogue)
+        self.assertIsNone(result["legacy_items"][0]["equator_candidate"])
+
+    def test_independently_scoped_count_evidence_never_promotes_legacy(self):
+        import json
+        self.index('  - id: spirit-2025\n    title: SPIRIT 2025 Checklist\n    version: "2025"\n')
+        folder = self.root / "tests/fixtures/held-guidelines"
+        folder.mkdir(parents=True)
+        (folder / "source-item-identities.json").write_text(
+            json.dumps({"editions": {"spirit-2025": {"item_ids": [str(i) for i in range(1, 54)]}}})
+        )
+        md = self.root / "markdown/en/archetypes/spirit-2025.md"
+        md.parent.mkdir(parents=True)
+        md.write_text("# SPIRIT\n" + "- [ ] item\n" * 32)
+        result = reconcile(self.root, self.catalogue)
+        self.assertEqual(result["legacy_items"][0]["independent_identifier_count"], 53)
+        self.assertIn("legacy_count_differs_from_independent_identifier_fixture", result["legacy_items"][0]["findings"])
+        self.assertEqual(result["summary"]["verified_legacy_checklists"], 0)
+
     def test_catalogue_identity_count_and_duplicate_sources_fail_closed(self):
         self.index('  - id: prisma-2020\n    title: PRISMA 2020 Checklist\n')
         broken = {**self.catalogue, "published_count": 5}

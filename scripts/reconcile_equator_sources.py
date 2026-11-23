@@ -16,6 +16,20 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 PAGE = re.compile(r"^reporting-guidelines/([^/]+)/index\.qmd$")
 YEAR = re.compile(r"\b(?:19|20)\d{2}\b")
+# Explicit, source-edition-scoped identifier fixtures; never used for text or rights approval.
+IDENTIFIER_FIXTURES = {
+    "arrive-2020": "arrive-2.0-2020", "cheers-2022": "cheers-2022",
+    "coreq-2007": "coreq-2007", "prisma-p": "prisma-p-2015",
+    "spirit-2025": "spirit-2025", "squire-2-0": "squire-2.0-2015",
+    "srqr-2014": "srqr-2014",
+}
+GENERIC_TITLE_WORDS = {
+    "prisma", "consort", "spirit", "strobe", "squire", "stard", "tripod",
+    "arrive", "cheers", "coreq", "moose", "tidier", "conserve", "care",
+    "the", "for", "and", "of", "reporting", "guidelines", "guideline",
+    "checklist", "statement", "standards", "on", "a", "an",
+}
+
 
 
 def words(value: object) -> str:
@@ -123,7 +137,12 @@ def suggest(item: dict, rows: list[dict]) -> tuple[dict | None, str, list[dict]]
         acronym = words(item["id"].replace("-", " "))
         same = [row for row in rows if row.get("acronym") and words(row["acronym"]) == acronym]
         if len(same) == 1:
-            chosen, basis = same[0], "same_acronym_candidate"
+            # An acronym can denote unrelated extensions (PRISMA-A is
+            # acupuncture, not PRISMA for Abstracts); require title support.
+            signal = set(words(item.get("title")).split()) - GENERIC_TITLE_WORDS
+            comparison = set(words(same[0].get("title")).split()) - GENERIC_TITLE_WORDS
+            if signal and len(signal & comparison) * 2 >= len(signal):
+                chosen, basis = same[0], "same_acronym_candidate"
     scored = []
     title = words(item.get("title"))
     if title:
@@ -155,6 +174,8 @@ def reconcile(root: Path, catalogue: dict) -> dict:
     ids = [item.get("id") for item in items]
     if any(not isinstance(x, str) or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", x) for x in ids) or len(set(ids)) != len(ids):
         raise ValueError("duplicate or invalid legacy source ID")
+    fixture_path = root / "tests/fixtures/held-guidelines/source-item-identities.json"
+    fixtures = json.loads(fixture_path.read_text(encoding="utf-8")).get("editions", {}) if fixture_path.is_file() else {}
     found = []
     for item in items:
         candidate, basis, alternatives = suggest(item, rows)
@@ -173,11 +194,24 @@ def reconcile(root: Path, catalogue: dict) -> dict:
                 findings.append("possible_edition_difference")
         if candidate and basis in {"title_similarity_suggestion", "family_slug_candidate", "same_acronym_candidate"}:
             findings.append("identity_requires_source_confirmation")
+        fixture = fixtures.get(IDENTIFIER_FIXTURES.get(item["id"], ""))
+        identifier_count = len(fixture["item_ids"]) if fixture and isinstance(fixture.get("item_ids"), list) else None
+        if identifier_count is not None and content and content["item_count"] != identifier_count:
+            findings.append("legacy_count_differs_from_independent_identifier_fixture")
+        canonical_count = None
+        if item["id"] == "prisma-2020":
+            pack_path = root / "packs/org.prisma/prisma/2020/pack.json"
+            if pack_path.is_file():
+                pack = json.loads(pack_path.read_text(encoding="utf-8"))
+                canonical_count = len(pack["requirements"])
+                if content and canonical_count != content["item_count"]:
+                    findings.append("legacy_count_differs_from_canonical_pack")
         entry = {
             "legacy_id": item["id"], "legacy_title": item.get("title"), "legacy_status": item.get("status", "unset"),
             "legacy_version": version or None, "legacy_group": item.get("group"), "legacy_variant_of": item.get("variant_of"),
             "equator_candidate": candidate, "link_basis": basis, "alternatives": alternatives,
             "source_assets": assets, "legacy_views": views, "legacy_item_inventory": content,
+            "independent_identifier_count": identifier_count, "canonical_pack_item_count": canonical_count,
             "rights": "unassessed", "admission": "unverified_candidate" if candidate else "unresolved", "findings": sorted(findings),
         }
         found.append(entry)
