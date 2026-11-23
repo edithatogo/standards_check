@@ -1,5 +1,6 @@
 """Source-alignment guards: candidates are not validated checklist content."""
 from pathlib import Path
+import json
 import tempfile
 import unittest
 
@@ -105,6 +106,81 @@ class ReconcileEquatorSourcesTests(unittest.TestCase):
         self.assertIn("legacy_license_claim_conflict", row["findings"])
         self.assertIn("index_sidecar_checksum_conflict", row["findings"])
         self.assertEqual(row["admission"], "unverified_candidate")
+
+    def test_catalogue_rights_identity_revision_and_duplicate_guards(self):
+        self.index('  - id: x\n    title: X\n')
+        for key, value in (
+            ("rights_status", "cleared"), ("source_revision", "unknown"),
+            ("guidelines", [None, *self.catalogue["guidelines"][1:]]),
+        ):
+            with self.subTest(key=key), self.assertRaises(ValueError):
+                reconcile(self.root, {**self.catalogue, key: value})
+        invalid = json.loads(json.dumps(self.catalogue))
+        invalid["guidelines"][0]["source_path"] = "reporting-guidelines/under-development/index.qmd"
+        with self.assertRaises(ValueError):reconcile(self.root, invalid)
+        duplicate = json.loads(json.dumps(self.catalogue))
+        duplicate["guidelines"][1] = duplicate["guidelines"][0]
+        with self.assertRaises(ValueError):reconcile(self.root, duplicate)
+
+    def test_source_url_doi_and_title_match_are_only_candidates(self):
+        for id_,title,url,expected_basis in (
+            ("consort-2025", "CONSORT 2025", "https://doi.org/10.1136/bmj-2024-081123", "same_doi_candidate"),
+            ("alias-prisma", "The PRISMA 2020 statement: An updated guideline for reporting systematic reviews", "", "title_similarity_suggestion"),
+        ):
+            with self.subTest(identifier=id_):
+                self.index(f'  - id: {id_}\n    title: {json.dumps(title)}\n    url: "{url}"\n')
+                row = reconcile(self.root, self.catalogue)["legacy_items"][0]
+                self.assertEqual(row["link_basis"], expected_basis)
+                self.assertEqual(row["admission"], "unverified_candidate")
+
+    def test_malformed_missing_and_multiple_legacy_sidecars_are_flagged(self):
+        self.index('  - id: coreq-2007\n    title: COREQ checklist\n    level: variant\n')
+        x = self.root / "source/archetypes/coreq-2007.yml"
+        x.parent.mkdir(parents=True)
+        x.write_text("license: [\n")
+        row = reconcile(self.root, self.catalogue)["legacy_items"][0]
+        self.assertIn("malformed_legacy_sidecar", row["findings"])
+        x.write_text("null")
+        row = reconcile(self.root, self.catalogue)["legacy_items"][0]
+        self.assertIn("malformed_legacy_sidecar", row["findings"])
+        x.write_text("verified: false")
+        y = self.root / "source/variants/coreq-2007.yml"
+        y.parent.mkdir(parents=True)
+        y.write_text("verified: false")
+        row = reconcile(self.root, self.catalogue)["legacy_items"][0]
+        self.assertIn("multiple_legacy_sidecars", row["findings"])
+        self.assertEqual(row["legacy_sidecar"]["path"], "source/variants/coreq-2007.yml")
+
+    def test_duplicate_legacy_items_and_canonical_pack_difference(self):
+        self.index('  - id: prisma-2020\n    title: PRISMA 2020\n  - id: strobe-2007\n    title: STROBE\n')
+        for id_ in ("prisma-2020", "strobe-2007"):
+            md = self.root / f"markdown/en/archetypes/{id_}.md"
+            md.parent.mkdir(parents=True, exist_ok=True)
+            md.write_text("# Title\n- [ ] Shared item\n")
+        pack = self.root / "packs/org.prisma/prisma/2020/pack.json"
+        pack.parent.mkdir(parents=True)
+        pack.write_text(json.dumps({"requirements":[{"id":str(i)} for i in range(42)]}))
+        result = reconcile(self.root, self.catalogue)
+        rows = result["legacy_items"]
+        self.assertTrue(all("duplicate_legacy_item_text" in x["findings"] for x in rows))
+        self.assertIn("legacy_count_differs_from_canonical_pack", rows[0]["findings"])
+        self.assertEqual(rows[0]["canonical_pack_item_count"], 42)
+
+    def test_cli_output_is_deterministic_and_never_promotes(self):
+        import subprocess, sys
+        self.index('  - id: prisma-2020\n    title: PRISMA 2020 Checklist\n')
+        cat = self.root / "catalogue.json"
+        cat.write_text(json.dumps(self.catalogue))
+        target = self.root / "report/alignment.json"
+        code = Path(__file__).resolve().parents[1] / "scripts/reconcile_equator_sources.py"
+        args = [sys.executable,str(code),"--root",str(self.root),"--catalogue",str(cat),"--output",str(target)]
+        first = subprocess.run(args,text=True,capture_output=True)
+        self.assertEqual(first.returncode,0,first.stderr)
+        original = target.read_bytes()
+        second = subprocess.run(args,text=True,capture_output=True)
+        self.assertEqual(second.returncode,0,second.stderr)
+        self.assertEqual(target.read_bytes(),original)
+        self.assertEqual(json.loads(original)["summary"]["verified_legacy_checklists"],0)
 
     def test_catalogue_identity_count_and_duplicate_sources_fail_closed(self):
         self.index('  - id: prisma-2020\n    title: PRISMA 2020 Checklist\n')

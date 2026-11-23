@@ -125,7 +125,8 @@ def scan_sidecar(root: Path, item: dict, assets: list[dict]) -> tuple[dict | Non
     if not paths:
         return None, findings
     # Prefer the index's declared track, but never infer that its contents are true.
-    path = next((p for p in paths if p.parent.name == item.get("level")), paths[0])
+    preferred_dir = {"archetype": "archetypes", "variant": "variants"}.get(item.get("level"))
+    path = next((p for p in paths if p.parent.name == preferred_dir), paths[0])
     try:
         data = yaml.safe_load(path.read_text(encoding="utf-8"))
     except yaml.YAMLError:
