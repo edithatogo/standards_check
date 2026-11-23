@@ -15,7 +15,6 @@ Install [Rust](https://rustup.rs/) (the repository pins its toolchain in
 `rust-toolchain.toml`). For a minimal canonical-pack smoke check:
 
 ```bash
-cargo run --locked -p standardflow-cli -- --help
 cargo run --locked -p standardflow-cli -- --json pack validate packs/org.prisma/prisma/2020/pack.json
 ```
 
