@@ -35,3 +35,5 @@ The original draft is an auditable migration input. Its existence alone is not a
 ## Additional authoritative-edition source candidates
 
 [Primary article table reconciliation](authoritative-article-reconciliation-20261124.md) describes the first additional cohort of four primary, open-access editions and 82 independently sourced numbered rows. The retained source-table snapshot and manifest under `source/official/` enable deterministic legacy discrepancy reports and explicit primary-source reacquisition. They do not yet constitute additional admitted canonical packs or validated migration semantics.
+
+- [EcoEvo cross-format benchmark](ecoevo-format-benchmark-20261124.md) — first observed candidate sub-item agreement, official-source and independent PDF parser experiment (T01.5b/c; not admission).

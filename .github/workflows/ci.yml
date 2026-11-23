@@ -56,7 +56,7 @@ jobs:
         if: matrix.component == 'python'
         run: |
           sudo apt-get update
-          sudo apt-get install --yes --no-install-recommends graphviz
+          sudo apt-get install --yes --no-install-recommends graphviz poppler-utils
           python -m pip install --disable-pip-version-check -r requirements/python-tests.txt
           python -m pip install --disable-pip-version-check --no-deps -r requirements/legacy-standardflow.txt
           python -m pip install --disable-pip-version-check --no-deps -r requirements/assurance-tools.txt
@@ -85,6 +85,34 @@ jobs:
           # Triage existing local original files only; no external downloads,
           # source-text export, licences, or Canonical Pack promotion.
           python -m scripts.probe_legacy_source_text --output target/coverage/legacy-source-text-triage.json
+          # Independent candidate comparison: actual local bytes, no source download in ordinary CI.
+          python -m scripts.compare_ecoevo_formats --root . \
+            --report target/coverage/legacy-source-text-triage.json \
+            --output target/coverage/ecoevo-format-comparison.json
+
+      - name: Compare explicitly selected official EcoEvo download bytes
+        if: matrix.component == 'python'
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Only changed benchmark code or an explicit workflow dispatch requests source acquisition.
+          if [ "$GITHUB_EVENT_NAME" != workflow_dispatch ] && git diff --quiet HEAD^1 HEAD -- scripts/compare_ecoevo_formats.py; then
+            exit 0
+          fi
+          official="$(mktemp -d "$RUNNER_TEMP/ecoevo-official.XXXXXX")"
+          trap 'rm -rf -- "$official"' EXIT
+          for name in PRISMA-EcoEvo_PDFChecklist.pdf PRISMA-EcoEvo_WordChecklist.docx PRISMA-EcoEvo_ExcelChecklist.xlsx; do
+            if ! curl --fail --silent --show-error --location --max-redirs 3 \
+              --connect-timeout 10 --max-time 45 --max-filesize 20000000 \
+              --proto '=https' --proto-redir '=https' \
+              "https://www.prisma-statement.org/s/$name" --output "$official/$name"; then
+              rm -f -- "$official/$name"
+              echo "::warning::Official EcoEvo source unavailable; leave identity held."
+            fi
+          done
+          python -m scripts.compare_ecoevo_formats --root . --official-dir "$official" \
+            --report target/coverage/legacy-source-text-triage.json \
+            --output target/coverage/ecoevo-official-byte-comparison.json
 
       - if: matrix.component == 'rust'
         uses: dtolnay/rust-toolchain@4cda84d5c5c54efe2404f9d843567869ab1699d4
