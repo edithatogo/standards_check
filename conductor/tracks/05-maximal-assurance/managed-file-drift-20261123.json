@@ -1,0 +1,600 @@
+{
+  "schema_version": 1,
+  "observation_date": "2026-11-23",
+  "timezone": "Australia/Brisbane",
+  "repository": "edithatogo/standards_check",
+  "baseline_revision": "ba6b0888806e84276e5f54afc07e4e555220c4ea",
+  "baseline_tree": "420f0d592fa48b0946332c758640180397216611",
+  "scope": "Exact-byte inventory and human-readable disposition of managed files, with separately scoped live Renovate discovery and local Unicode triage; not a full policy conformance or security-certification result.",
+  "candidate_binding": "Only SECURITY.md is changed by this policy adoption; its candidate byte hashes are recorded below. Other candidate entries deliberately refer to baseline bytes. Later workflow/code changes require their own receipt.",
+  "policy": {
+    "repository": "edithatogo/repository-standards",
+    "revision": "a3cc8dccdb67e6f122c71cec713194cdec792d07",
+    "sources": [
+      {
+        "path": "managed-files/manifest.json",
+        "present": true,
+        "bytes": 4557,
+        "sha256": "6bedb98b16527618b370fc383edc25273f4d4fd1489aa2e418e9d58ec0c5bc16",
+        "git_blob_sha1": "95163f33e7a73586842554a64bbfa935c01682ef"
+      },
+      {
+        "path": "profiles/archetype-profiles.json",
+        "present": true,
+        "bytes": 7349,
+        "sha256": "23cb0eac548b1fe42a28423109ea7eb608b6fa4a5e84b89e6b55d726512ab211",
+        "git_blob_sha1": "cc7fd616e18f7379e444e0d83cd97f7bc8e25e96"
+      },
+      {
+        "path": "registry/repositories.json",
+        "present": true,
+        "bytes": 201390,
+        "sha256": "c1aeb43bad05188b80e9e19b63b24a5dbc0640725cf914e987c81cb1d4f2c3ba",
+        "git_blob_sha1": "cd8bdaef1705dedba337c45a914cf19d956ebe9a"
+      },
+      {
+        "path": "scripts/audit_estate_conformance.py",
+        "present": true,
+        "bytes": 25656,
+        "sha256": "89294258871cfd571fad7bbf604007dee2a012964be5fb033d3e92df79d59193",
+        "git_blob_sha1": "562cdd0c486d478d2dcd88bbf37cc7f88dcb9884"
+      }
+    ],
+    "registered_profile": "node",
+    "registered_supply_chain_profile": "baseline",
+    "registered_sole_developer": true,
+    "registered_mandatory_human_approvals": 0,
+    "source_policy": {
+      "delivery": "pull_request_or_issue",
+      "never_force_overwrite": true,
+      "automerge": "only low-risk managed-file updates after stable required checks",
+      "local_extension": "repository-local additions are preserved",
+      "credential_gate": "cross-repository writes require a short-lived GitHub App installation token",
+      "change_model": "detect -> impact simulation -> managed pull request -> stable checks -> low-risk automerge",
+      "exception_expiry": "expired exceptions reopen their owning issue and cease suppressing controls"
+    }
+  },
+  "community": {
+    "repository": "edithatogo/.github",
+    "revision": "078000775f7fa5349e315cd56e3521ca0615313f",
+    "visibility_observed": "public",
+    "visibility_api": "https://api.github.com/repos/edithatogo/.github"
+  },
+  "managed_files": [
+    {
+      "path": "AGENTS.md",
+      "strategy": "materialise_if_missing_then_detect_drift",
+      "registered_profile_selected": true,
+      "upstream": {
+        "repository": "edithatogo/.github",
+        "revision": "078000775f7fa5349e315cd56e3521ca0615313f",
+        "path": "AGENTS.md",
+        "url": "https://github.com/edithatogo/.github/blob/078000775f7fa5349e315cd56e3521ca0615313f/AGENTS.md",
+        "present": true,
+        "bytes": 1823,
+        "sha256": "af299539f03f3608e856cc21f0b60c2d9798240390cc349de0ff0df3395b1414",
+        "git_blob_sha1": "85f70e4a9657922617dc5ff76eb83eb66f36c19d"
+      },
+      "baseline": {
+        "present": true,
+        "bytes": 4231,
+        "sha256": "26c25c76ae9020e77f34c3900d71f5efcc8fdddb945a8719d361d51617dcca0f",
+        "git_blob_sha1": "373b6beffe4df6b3d3d966358d248de4f3444a40"
+      },
+      "candidate": {
+        "present": true,
+        "bytes": 4231,
+        "sha256": "26c25c76ae9020e77f34c3900d71f5efcc8fdddb945a8719d361d51617dcca0f",
+        "git_blob_sha1": "373b6beffe4df6b3d3d966358d248de4f3444a40"
+      },
+      "byte_equal_to_upstream": false,
+      "disposition": "retained_local_extension",
+      "notes": "Local Conductor authority, project paths, exact Rust toolchain and rejection/artefact checks are retained unchanged. The shared operating defaults are a comparison source, not an instruction to replace project-specific guidance."
+    },
+    {
+      "path": "SECURITY.md",
+      "strategy": "materialise_if_missing_then_detect_drift",
+      "registered_profile_selected": true,
+      "upstream": {
+        "repository": "edithatogo/.github",
+        "revision": "078000775f7fa5349e315cd56e3521ca0615313f",
+        "path": "SECURITY.md",
+        "url": "https://github.com/edithatogo/.github/blob/078000775f7fa5349e315cd56e3521ca0615313f/SECURITY.md",
+        "present": true,
+        "bytes": 2807,
+        "sha256": "3d139de4e580a018fb86c293ac094249cb1a2bef69bac1783fd7b74d5a3c6585",
+        "git_blob_sha1": "d8f992f5441c08932b02b1bd400aed9a62461365"
+      },
+      "baseline": {
+        "present": false
+      },
+      "candidate": {
+        "present": true,
+        "bytes": 4474,
+        "sha256": "182e604a129d6bd6a04ceb4e41a120d60e6e34a998b4aca241ff793973f507b9",
+        "git_blob_sha1": "d40d1f60c2e4d146b3a6f6533f8266809c88034f"
+      },
+      "byte_equal_to_upstream": false,
+      "disposition": "materialised_with_local_extension",
+      "notes": "The complete pinned shared policy is retained as a prefix. The appended scope routes reports to standards_check and distinguishes maintained host dependencies from frozen historical files. Private vulnerability reporting is not asserted enabled."
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "strategy": "materialise_if_missing_then_detect_drift",
+      "registered_profile_selected": true,
+      "upstream": {
+        "repository": "edithatogo/.github",
+        "revision": "078000775f7fa5349e315cd56e3521ca0615313f",
+        "path": "CONTRIBUTING.md",
+        "url": "https://github.com/edithatogo/.github/blob/078000775f7fa5349e315cd56e3521ca0615313f/CONTRIBUTING.md",
+        "present": true,
+        "bytes": 3719,
+        "sha256": "1f8e9c9cc91b4a447e16df27ce23f458d456cddcdd4f6f13b6af97f2f77cf4b9",
+        "git_blob_sha1": "bd4df37fe560095009bca08ce574ba9c0306a666"
+      },
+      "baseline": {
+        "present": true,
+        "bytes": 2064,
+        "sha256": "bd2798142f9c8cd152337ca4f5819a63410d3a02a6cec56d602c7838649444de",
+        "git_blob_sha1": "e515ae6036903b4042fd96a3d30e9afd6d8f110b"
+      },
+      "candidate": {
+        "present": true,
+        "bytes": 2064,
+        "sha256": "bd2798142f9c8cd152337ca4f5819a63410d3a02a6cec56d602c7838649444de",
+        "git_blob_sha1": "e515ae6036903b4042fd96a3d30e9afd6d8f110b"
+      },
+      "byte_equal_to_upstream": false,
+      "disposition": "retained_local_extension",
+      "notes": "The local corpus/pipeline contribution commands, PR checklist and pre-commit setup remain byte-identical. Its documents-first introduction does not describe every newer Rust surface; AGENTS.md and Conductor remain the current authority."
+    },
+    {
+      "path": "renovate.json",
+      "strategy": "preset_reference",
+      "registered_profile_selected": true,
+      "upstream": {
+        "repository": "edithatogo/repository-standards",
+        "revision": "a3cc8dccdb67e6f122c71cec713194cdec792d07",
+        "path": "renovate/default.json",
+        "url": "https://github.com/edithatogo/repository-standards/blob/a3cc8dccdb67e6f122c71cec713194cdec792d07/renovate/default.json",
+        "present": true,
+        "bytes": 85,
+        "sha256": "7b2d59999b831348bc1b6d3d4960e1e8f6ceaa6a127ddce3bdad0c69feacfe54",
+        "git_blob_sha1": "0d784e098ae4b7a2bf860d3202f01b9dd2de25e7"
+      },
+      "baseline": {
+        "present": true,
+        "bytes": 779,
+        "sha256": "59aa60e8e4d31ab70d0d2e91a7973ec1325ddfe2c8f985651e81029dcfbce47d",
+        "git_blob_sha1": "7a880dac14a3702e1da8b631d6b4e1333aaebea1"
+      },
+      "candidate": {
+        "present": true,
+        "bytes": 779,
+        "sha256": "59aa60e8e4d31ab70d0d2e91a7973ec1325ddfe2c8f985651e81029dcfbce47d",
+        "git_blob_sha1": "7a880dac14a3702e1da8b631d6b4e1333aaebea1"
+      },
+      "byte_equal_to_upstream": false,
+      "disposition": "retained_local_configuration",
+      "notes": "The local> preset reference identifies the same owner/repository as the canonical github> reference. Local frozen-source exclusions, three maintained requirements profiles and disabled automerge are deliberately retained. Discovery is observed separately; this is not proof of protected end-to-end update completion."
+    },
+    {
+      "path": ".github/workflows/scorecard.yml",
+      "strategy": "materialise_public_published_or_high_risk_if_missing",
+      "registered_profile_selected": true,
+      "upstream": {
+        "repository": "edithatogo/repository-standards",
+        "revision": "a3cc8dccdb67e6f122c71cec713194cdec792d07",
+        "path": "managed-files/templates/scorecard.yml",
+        "url": "https://github.com/edithatogo/repository-standards/blob/a3cc8dccdb67e6f122c71cec713194cdec792d07/managed-files/templates/scorecard.yml",
+        "present": true,
+        "bytes": 1339,
+        "sha256": "e63ae940052634c9a18476a118f835de6b368f3881b9fc6880e916946775e72e",
+        "git_blob_sha1": "d72e8084e2f4907342ccace7017aa844a7a71a36"
+      },
+      "baseline": {
+        "present": false
+      },
+      "candidate": {
+        "present": false
+      },
+      "byte_equal_to_upstream": false,
+      "disposition": "not_required_by_registered_baseline_profile",
+      "notes": "The pinned upstream auditor requires this for public repositories with published/high_risk supply-chain profiles. The registered supply-chain profile is baseline. Reassess if release/profile classification changes."
+    },
+    {
+      "path": "security-insights.yml",
+      "strategy": "materialise_public_published_or_high_risk_if_missing_then_review",
+      "registered_profile_selected": true,
+      "upstream": {
+        "repository": "edithatogo/repository-standards",
+        "revision": "a3cc8dccdb67e6f122c71cec713194cdec792d07",
+        "path": "security-insights.yml",
+        "url": "https://github.com/edithatogo/repository-standards/blob/a3cc8dccdb67e6f122c71cec713194cdec792d07/security-insights.yml",
+        "present": true,
+        "bytes": 1178,
+        "sha256": "bda6fa2857e55c36a894d9d648a959a3c00e5ce20e6827e00e44b8737b9ea595",
+        "git_blob_sha1": "b4fe00428ff92568240b86fda32ff98ff2fd072f"
+      },
+      "baseline": {
+        "present": false
+      },
+      "candidate": {
+        "present": false
+      },
+      "byte_equal_to_upstream": false,
+      "disposition": "not_required_by_registered_baseline_profile",
+      "notes": "The pinned upstream auditor applies the same public published/high_risk qualifier. No assertion of release maturity or wider high-risk classification is made."
+    },
+    {
+      "path": ".github/workflows/slsa-verification.yml",
+      "strategy": "materialise_when_published_artifacts_exist",
+      "registered_profile_selected": true,
+      "upstream": {
+        "repository": "edithatogo/repository-standards",
+        "revision": "a3cc8dccdb67e6f122c71cec713194cdec792d07",
+        "path": "managed-files/templates/slsa-verification.yml",
+        "url": "https://github.com/edithatogo/repository-standards/blob/a3cc8dccdb67e6f122c71cec713194cdec792d07/managed-files/templates/slsa-verification.yml",
+        "present": true,
+        "bytes": 1294,
+        "sha256": "6fda417a2ab64442f35baafd78aed74f9d04ce0eb28123553c3059412b73d3e4",
+        "git_blob_sha1": "1bd38db749b15ebb311bf148a6feae4c545ed41a"
+      },
+      "baseline": {
+        "present": false
+      },
+      "candidate": {
+        "present": false
+      },
+      "byte_equal_to_upstream": false,
+      "disposition": "not_required_by_registered_baseline_profile",
+      "notes": "The registered baseline profile does not require provenance; this assessment does not qualify future published release artefacts. Re-evaluate when the project establishes an artefact publication profile."
+    },
+    {
+      "path": ".github/workflows/zizmor.yml",
+      "strategy": "materialise_repository_infrastructure_only",
+      "registered_profile_selected": false,
+      "upstream": {
+        "repository": "edithatogo/repository-standards",
+        "revision": "a3cc8dccdb67e6f122c71cec713194cdec792d07",
+        "path": "managed-files/templates/zizmor.yml",
+        "url": "https://github.com/edithatogo/repository-standards/blob/a3cc8dccdb67e6f122c71cec713194cdec792d07/managed-files/templates/zizmor.yml",
+        "present": true,
+        "bytes": 541,
+        "sha256": "0d199a61859c5e594cb8ba5075b46579660f50691bd52f793e22a0dc84b527f2",
+        "git_blob_sha1": "913365ab0d8239ae7698f98542cc1b837c1f1df8"
+      },
+      "baseline": {
+        "present": false
+      },
+      "candidate": {
+        "present": false
+      },
+      "byte_equal_to_upstream": false,
+      "disposition": "not_applicable_to_registered_profile",
+      "notes": "The manifest limits this template to repository-infrastructure; the registered profile is node. Workflow-security analysis may still be warranted independently."
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "strategy": "thin_immutable_reusable_workflow_call",
+      "registered_profile_selected": true,
+      "upstream": {
+        "repository": "edithatogo/repository-standards",
+        "revision": "a3cc8dccdb67e6f122c71cec713194cdec792d07",
+        "path": ".github/workflows/node-ci.yml",
+        "url": "https://github.com/edithatogo/repository-standards/blob/a3cc8dccdb67e6f122c71cec713194cdec792d07/.github/workflows/node-ci.yml",
+        "present": true,
+        "bytes": 771,
+        "sha256": "6583bca0c75a034bb34b885e66a7123637dbfe1e9a9f03cb3428c843d99ebd2c",
+        "git_blob_sha1": "0ccbd9f7778cad06e46aea6788fd2f6c977e15bd"
+      },
+      "baseline": {
+        "present": false
+      },
+      "candidate": {
+        "present": false
+      },
+      "byte_equal_to_upstream": false,
+      "disposition": "retained_local_workflows",
+      "notes": "The literal managed path is absent. Local workflows cover Node, Python, Rust, documents and contracts instead of the generic node-ci reusable call. This is recorded as an alternative, not byte alignment or full policy conformance."
+    },
+    {
+      "path": ".github/workflows/privacy-secrets.yml",
+      "strategy": "thin_immutable_composite_action_call_preserve_local_controls",
+      "registered_profile_selected": true,
+      "upstream": {
+        "repository": "edithatogo/repository-standards",
+        "revision": "a3cc8dccdb67e6f122c71cec713194cdec792d07",
+        "path": "managed-files/templates/privacy-secrets.yml",
+        "url": "https://github.com/edithatogo/repository-standards/blob/a3cc8dccdb67e6f122c71cec713194cdec792d07/managed-files/templates/privacy-secrets.yml",
+        "present": true,
+        "bytes": 1457,
+        "sha256": "422752fac206174e83df37e54bc18d8c272d76675b058e768995f88678b838de",
+        "git_blob_sha1": "16a4ac0716619d191c2508980f5a07b18c048ef7"
+      },
+      "baseline": {
+        "present": true,
+        "bytes": 1659,
+        "sha256": "00ba70d3fd3a6be0fa6a9fe38bdc1e71a54772c57f0e06eb6d9ee6e189e39eb0",
+        "git_blob_sha1": "36d2541bbe9b6bb2dac751394a5e8f58d7d74449"
+      },
+      "candidate": {
+        "present": true,
+        "bytes": 1659,
+        "sha256": "00ba70d3fd3a6be0fa6a9fe38bdc1e71a54772c57f0e06eb6d9ee6e189e39eb0",
+        "git_blob_sha1": "36d2541bbe9b6bb2dac751394a5e8f58d7d74449"
+      },
+      "byte_equal_to_upstream": false,
+      "disposition": "open_pin_divergence",
+      "notes": "The local composite pin is 985503bc8eae58e7d6ef36a6e5427d0077e0193c; the manifest prescribes b30b07bcdaa6aebad2c6a57a4d0adc3616dabfe4. Local runner hardening and Saturday schedule are retained. Any scanner upgrade needs its own qualification; the old Python 3.12 comment differs from the newer upstream Python 3.15.2 template."
+    }
+  ],
+  "live_dependency_inventory": {
+    "issue": "https://github.com/edithatogo/standards_check/issues/76",
+    "issue_updated_at": "2026-11-22T23:49:17Z",
+    "observed_on": "2026-11-23",
+    "managers": {
+      "cargo": {
+        "files": 2,
+        "dependencies": 6
+      },
+      "git-submodules": {
+        "files": 1,
+        "dependencies": 1
+      },
+      "github-actions": {
+        "files": 9,
+        "dependencies": 76
+      },
+      "npm": {
+        "files": 2,
+        "dependencies": 5
+      },
+      "pip_requirements": {
+        "files": 3,
+        "dependencies": 43
+      },
+      "regex": {
+        "files": 1,
+        "dependencies": 2
+      },
+      "rust-toolchain": {
+        "files": 1,
+        "dependencies": 1
+      }
+    },
+    "maintained_requirements": {
+      "requirements/legacy-standardflow.txt": 30,
+      "requirements/python-tests.txt": 8,
+      "requirements/standardflow-foundation.txt": 5
+    },
+    "frozen_source_manifest_listed": false,
+    "dependabot": "Retained for GitHub Actions; dashboard discovery alone does not prove every ecosystem update/merge lifecycle.",
+    "automerge": false,
+    "registry_drift": [
+      "The pinned registry still says dependabot_detected=false, but .github/dependabot.yml exists and covers GitHub Actions.",
+      "The registry describes Renovate activation as pending; actual hosted bot discovery is observed.",
+      "The registered node profile is incomplete as a description of the current Python/Rust/Node repository; profile migration has not been approved by this receipt."
+    ],
+    "acceptance_limits": [
+      "No app-installation settings or protected updater lifecycle was observed by this file comparison.",
+      "No pending dependency major was approved or batched by this policy change."
+    ]
+  },
+  "unicode_triage": {
+    "source_detector": {
+      "repository": "renovatebot/renovate",
+      "revision": "92f32eca531ee07a1f478c720d516fc46f46997f",
+      "unicode_path": "lib/util/unicode.ts",
+      "unicode_blob": "dbcd5a00490d9c24eaba895cb039375017085ad1",
+      "regex_path": "lib/util/regex.ts",
+      "regex_blob": "a059e268670c87be7f858ae3a3de36f5605edd86"
+    },
+    "regex": "[\\u00A0\\u1680\\u2000-\\u200A\\u2028\\u2029\\u202F\\u205F\\u3000\\u200B\\u200C\\uFEFF\\u200E\\u200F\\u202A-\\u202E\\u00AD]",
+    "baseline_revision": "ba6b0888806e84276e5f54afc07e4e555220c4ea",
+    "scan_method": "git archive of the exact baseline; regular files only; skip NUL in the first 8192 bytes; decode UTF-8 strictly; count the pinned detector character class. This local scan is not the hosted Renovate file-access log.",
+    "utf8_text_files_scanned": 996,
+    "binary_files_skipped": 485,
+    "non_utf8_files_skipped": [
+      "source/archive/processed/bmj.n857.full.pdf",
+      "source/archive/processed/s13063-018-2735-z.pdf"
+    ],
+    "matches": [
+      {
+        "path": "docs/migration/standardflow/source-inventory.json",
+        "sha256": "f2767f86ba30fad91b13315d64c941d902552e38da4de9a23977e92e0b26f62e",
+        "characters": [
+          {
+            "codepoint": "U+00A0",
+            "name": "NO-BREAK SPACE",
+            "count": 7
+          },
+          {
+            "codepoint": "U+200B",
+            "name": "ZERO WIDTH SPACE",
+            "count": 63
+          }
+        ]
+      },
+      {
+        "path": "html/archetypes/coreq-2007.html",
+        "sha256": "fd95763e81f97d7259bfe4bf40da3d7c70a07674f134b58453e6eb3727b3cf69",
+        "characters": [
+          {
+            "codepoint": "U+00A0",
+            "name": "NO-BREAK SPACE",
+            "count": 6
+          }
+        ]
+      },
+      {
+        "path": "html/en/archetypes/coreq-2007.html",
+        "sha256": "fd95763e81f97d7259bfe4bf40da3d7c70a07674f134b58453e6eb3727b3cf69",
+        "characters": [
+          {
+            "codepoint": "U+00A0",
+            "name": "NO-BREAK SPACE",
+            "count": 6
+          }
+        ]
+      },
+      {
+        "path": "html/en/variants/prisma-ecoevo.html",
+        "sha256": "8bc4c712a8e0a14ef4ac67adc299d4955510028b4e20de44a4d5eb97a88b2b6b",
+        "characters": [
+          {
+            "codepoint": "U+00A0",
+            "name": "NO-BREAK SPACE",
+            "count": 36
+          }
+        ]
+      },
+      {
+        "path": "html/en/variants/prisma-nma.html",
+        "sha256": "e103c933582c258fc9fe1a54e8f5ac8aadb768c04e097e5db64503b0cdd55550",
+        "characters": [
+          {
+            "codepoint": "U+00A0",
+            "name": "NO-BREAK SPACE",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "path": "html/variants/prisma-ecoevo.html",
+        "sha256": "8bc4c712a8e0a14ef4ac67adc299d4955510028b4e20de44a4d5eb97a88b2b6b",
+        "characters": [
+          {
+            "codepoint": "U+00A0",
+            "name": "NO-BREAK SPACE",
+            "count": 36
+          }
+        ]
+      },
+      {
+        "path": "html/variants/prisma-nma.html",
+        "sha256": "e103c933582c258fc9fe1a54e8f5ac8aadb768c04e097e5db64503b0cdd55550",
+        "characters": [
+          {
+            "codepoint": "U+00A0",
+            "name": "NO-BREAK SPACE",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "path": "references_combined.ris",
+        "sha256": "f1945cd6c19e56b3c1c78943ef5ec18116907a4ca1efc40a57d48ab1db7adfc5",
+        "characters": [
+          {
+            "codepoint": "U+FEFF",
+            "name": "ZERO WIDTH NO-BREAK SPACE",
+            "count": 1
+          }
+        ]
+      }
+    ],
+    "dispositions": [
+      "All 63 U+200B characters are immediately after @ in source PR25 body, repeated in two previous snapshots and the final exported PR inventory. They are consistent with bot mention suppression and remain byte-preserved historical data.",
+      "The source inventory contains seven U+00A0 characters in preserved code-review reaction text.",
+      "Six generated legacy HTML files contain 86 U+00A0 characters after e.g. or i.e. in visible prose. No executable/configuration file matched the detector character class.",
+      "references_combined.ris contains only one UTF-8 BOM (three bytes). The pinned detector treats a lone BOM as TRACE, not WARN."
+    ],
+    "mutation": "None: historical source bodies and generated typography are retained. No scanner disablement or broad allowlist was added.",
+    "hosted_warning_cleared": false,
+    "limit": "The live dashboard still displays its warning. Hosted Renovate per-file logs were not retrieved, so local triage does not assert the exact hosted triggering access or a cleared warning."
+  },
+  "remaining_gates": [
+    "Observe/qualify stable required automated checks and solo-maintainer repository protection separately.",
+    "Qualify the privacy composite upgrade or document a bounded divergence; this change does not upgrade it.",
+    "Produce real component/patch coverage and separately observe Codecov OIDC acceptance.",
+    "Retain upstream registry/profile drift until reconciled by its owner.",
+    "Private vulnerability reporting availability is unverified; SECURITY.md uses the conditional route and a safe request-for-contact fallback."
+  ],
+  "validation": {
+    "security_shared_prefix_byte_identical": true,
+    "agents_unchanged_from_baseline": true,
+    "contributing_unchanged_from_baseline": true,
+    "source_inventory_unchanged_from_baseline": true
+  },
+  "reproduction": [
+    "Resolve all source files at the exact repository revisions above; compute SHA-256 over raw bytes and Git blob SHA-1 over the standard blob header plus raw bytes.",
+    "Compare baseline files with git show <baseline_revision>:<path>; SECURITY.md candidate hashes bind the added policy independently of a later commit.",
+    "For Unicode triage, enumerate git archive <baseline_revision>, apply the documented binary/UTF-8 filters and count the recorded regex character class. Inspect source-inventory JSON string paths and visible HTML text before changing any character."
+  ],
+  "follow_up_20261123": {
+    "observed_at": "2026-11-23T01:55:15.600815+00:00",
+    "scope": "Subsequent observations supplement, not reinterpret, the baseline comparison above.",
+    "security_settings": {
+      "source": "https://github.com/edithatogo/standards_check/security",
+      "private_vulnerability_reporting": "enabled",
+      "dependabot_alerts": "enabled",
+      "codeql_code_scanning_alerts": "enabled",
+      "secret_scanning": "enabled"
+    },
+    "renovate_installation": {
+      "source": "https://github.com/edithatogo/standards_check/settings/installations?page=3",
+      "visible_entry": "Renovate, developed by mend, under Installed GitHub Apps",
+      "protected_update_lifecycle": "not_qualified"
+    },
+    "policy_applicability": {
+      "registered_profile": "node",
+      "supply_chain_profile": "baseline",
+      "required_now": [
+        "dependency_review",
+        "sbom"
+      ],
+      "not_selected_by_current_public_baseline": [
+        "scorecard",
+        "security-insights.yml",
+        "slsa_verification"
+      ],
+      "profile_interpretation": "This selects enforced policy; it is not merely a language inventory. Any future change requires explicit policy impact review."
+    },
+    "privacy_upgrade": {
+      "action": "b30b07bcdaa6aebad2c6a57a4d0adc3616dabfe4",
+      "accepted_head": "12b7b00737124aa7c0feaead893c930124332489",
+      "job_id": 137435997154,
+      "result": "success"
+    },
+    "managed_ci_path": {
+      "path": ".github/workflows/ci.yml",
+      "disposition": "Renamed local Assurance workflow to the selected managed path, retaining specialized Python/Rust/API jobs; not byte-equal to Node-only central template.",
+      "candidate_acceptance": "pending"
+    },
+    "registry_factual_correction": {
+      "pull_request": "https://github.com/edithatogo/repository-standards/pull/173",
+      "receiving_main": "2efdbd988064f6857795b9fa9ed4e1d08d18791d",
+      "tree": "7caade42e1ef76e438c07b9aed4b82a2e8f3227a",
+      "receipt": "registry-publication-20261123.json",
+      "renovate_current": "hosted_app_verified",
+      "dependabot_detected": true,
+      "codecov_current": "active_oidc_upload_verified",
+      "codecov_evidence_revision": "12b7b00737124aa7c0feaead893c930124332489",
+      "policy_profile_unchanged": true,
+      "scope": "Only standards_check entry factual state and its assessment; original pinned policy comparison remains historical. Other167 entries unchanged."
+    },
+    "codeql_alerts": {
+      "open_on_observed_main": [
+        "https://github.com/edithatogo/standards_check/security/code-scanning/1",
+        "https://github.com/edithatogo/standards_check/security/code-scanning/2"
+      ],
+      "candidate_fix": "api-security-20261123.json",
+      "hosted_resolution": "pending"
+    },
+    "ruleset": "Prepared, not yet applied or read back",
+    "offline_runner_inventory": {
+      "source": "https://github.com/edithatogo/standards_check/settings/actions/runners",
+      "visible_result": "There are no runners configured",
+      "required_labels": [
+        "self-hosted",
+        "linux",
+        "x64",
+        "ai-security-offline"
+      ],
+      "workflow_revision": "36362fa872e4ce747266a6e795fcefa3dd343f67",
+      "additional_prerequisite": "Preloaded localhost/offline-ai-security image and runner SECURITY_IMAGE_DIGEST matching sha256: plus 64 hex digits; isolated Docker execution",
+      "acceptance": "blocked_by_absent_qualified_runner; queued jobs are not successful execution"
+    }
+  }
+}

@@ -1,0 +1,2876 @@
+{
+  "kind": "bounded-rust-assurance",
+  "recorded_at": "2026-11-23T01:30:02.698201Z",
+  "local_date": "2026-11-23",
+  "local_timezone": "Australia/Brisbane",
+  "base_commit": "ba6b0888806e84276e5f54afc07e4e555220c4ea",
+  "revision_scope": "Modified working tree over base_commit; the SHA-256 input manifests bind each local campaign. Hosted acceptance must name its own commit.",
+  "toolchain": "Rust 1.98.1",
+  "final_inputs_sha256": {
+    "Cargo.lock": "33c6f6e885c65ec5fa88948e4d508e180520e873f725f13b467d2ff8bfaf72ea",
+    "Cargo.toml": "6736f253aa3707808be62ea08fba13fb117814690d2e6c180fd5f62036a1a5a2",
+    "crates/standardflow-artifacts/Cargo.toml": "c9962dc7ff160828dfb3bbf9ab388ff6660953ec768e1b0d4520ff7281242370",
+    "crates/standardflow-artifacts/src/lib.rs": "5ff06a3cb925fe1f88ee9cb81849777500fb8835ce6c4bb018878632861643a2",
+    "crates/standardflow-artifacts/src/limits.rs": "266e9e57ae232a236eecb5ca06659ec2c76b1f92fad603e2ffa4a71dc19c79cc",
+    "crates/standardflow-artifacts/src/prisma.rs": "1188e4462b4d704a56bbe0a16543307cf041ba864e88f8d9061f3d79d34c86e0",
+    "crates/standardflow-artifacts/src/recipe.rs": "0456ebf5d463a3718550bcd9234964a9e165805838d63f5ceec6102c16fff59f",
+    "crates/standardflow-artifacts/src/render.rs": "5b66618b293550c67e28af4331c08eccba0a1346c558903af8b92970efeecdaf",
+    "crates/standardflow-artifacts/src/scene.rs": "48351a82b4ff0f4762f7a41d96088d225fb284d589e1e3d8d590eb79999c6628",
+    "crates/standardflow-artifacts/tests/hardening.rs": "1d9fac67b6042994b9e9a6dbe1b9b749f9114283ae6fc55393d1efe3b8c97c6b",
+    "crates/standardflow-artifacts/tests/prisma.rs": "71e5100e9cce3f1a449bfc3628b8d9c7086ddf4a012d9e317a47375068922c3e",
+    "crates/standardflow-cli/Cargo.toml": "0ed7a45438d484f7dc45562cd27178834babf7d87f1079021360e12a505823da",
+    "crates/standardflow-cli/src/main.rs": "7e54f4a7b6b796f69ac1da08b698aeb6b25f821452e005d8a9c94698822fba75",
+    "crates/standardflow-cli/tests/cli.rs": "315190e440d8ba48fb29e3da5e40735a1afe951d01490cbfeb43b3c27441a503",
+    "crates/standardflow-cli/tests/diagram.rs": "d5917b102a9405aa311ee0f4effae20f567b37f8c2e22bf80fb3cc2165afad4d",
+    "crates/standardflow-cli/tests/diagram_limits.rs": "1994aa746a28050afc9291cb45816b9dbab73e7a70fb97d3332ffbfb3129713e",
+    "crates/standardflow-core/Cargo.toml": "0bfbcf38b63b791c1673bf6c8f69735f4584ab10cadcd5b973c6db5a3d560209",
+    "crates/standardflow-core/src/canonical.rs": "8f7d356ead2ad07914bb23617d9169a82a0539ae36cb0b093acc79e68bcad874",
+    "crates/standardflow-core/src/diagnostic.rs": "ce80618212fac664cbdf4166117c79a4ee178d76cdd366d3fe49f9c6b79c38d3",
+    "crates/standardflow-core/src/evidence.rs": "e7193a6af3be9caf3885d72f80ebd23af6b222735e1950c358a9910a415862b9",
+    "crates/standardflow-core/src/lib.rs": "2b6b71c19770d1eb99d1ebb1ad0d9366edd62ff0279d0c25031748ffc54f5c8a",
+    "crates/standardflow-core/src/lock.rs": "4e60c0f2af0ad5109d4a3059be5144585517f3ac79488dffb69a2747a86a39d9",
+    "crates/standardflow-core/src/pack.rs": "116f87d45906442979943063ab17c7af1278f1c609c35384e0a811b7021ef69b",
+    "crates/standardflow-core/tests/canonical_properties.rs": "fecdc7786f862aa4b6211e066025cb84581dc4a9be1ece968036a9b445a57b2e",
+    "crates/standardflow-core/tests/pack_contract.rs": "138b7d81a8c351cae23efa1013cd32f7d76bdffde347250f28b9a2e4a46d74d9",
+    "rust-toolchain.toml": "c910997cb152c6dc8ed13b1fdf9fa28a4ed30d6776123e27dd6170e5c66067a0"
+  },
+  "properties": {
+    "tool": "proptest 1.11.0 from committed Cargo.lock",
+    "cases_per_property": 256,
+    "max_shrink_iterations": 4096,
+    "seeds": [
+      0,
+      721114987,
+      20261123
+    ],
+    "seed_environment_variable": "PROPTEST_RNG_SEED",
+    "properties_per_seed": 8,
+    "successful_generated_cases": 6144,
+    "failure_persistence": "crates/*/tests/*.proptest-regressions; WithSource persistence, replay before generated cases. No unmutated regression file was produced.",
+    "commands": [
+      [
+        "cargo",
+        "test",
+        "--locked",
+        "-p",
+        "standardflow-core",
+        "--test",
+        "canonical_properties",
+        "--test",
+        "pack_contract",
+        "--",
+        "--test-threads=1"
+      ],
+      [
+        "cargo",
+        "test",
+        "--locked",
+        "-p",
+        "standardflow-artifacts",
+        "--test",
+        "prisma",
+        "--",
+        "--test-threads=1"
+      ]
+    ],
+    "logs": [
+      {
+        "scope": "core",
+        "seed": 0,
+        "sha256": "20f44125f5bb81baa50d5a4eed9958c8ca7a14145e0a1856d5853d2cd83d437f",
+        "summaries": [
+          "test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.41s",
+          "test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.37s"
+        ]
+      },
+      {
+        "scope": "arithmetic",
+        "seed": 0,
+        "sha256": "0921971fcd618494a5d329360dad720365e84e549dfd7833a1ca65a73db46744",
+        "summaries": [
+          "test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.20s"
+        ]
+      },
+      {
+        "scope": "core",
+        "seed": 721114987,
+        "sha256": "c022c33c7c0122b1832771f1a2778a552d8f5ada93f57e93e530d806bcda6fa8",
+        "summaries": [
+          "test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.58s",
+          "test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.23s"
+        ]
+      },
+      {
+        "scope": "arithmetic",
+        "seed": 721114987,
+        "sha256": "2bc783921e7f2e0806585aca68909744a21d2eaeaa70da2b9aa81903ddd4ee18",
+        "summaries": [
+          "test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.21s"
+        ]
+      },
+      {
+        "scope": "core",
+        "seed": 20261123,
+        "sha256": "4a845843d9dedfd5963cf4f935cd2363da93ce5f34ab6bfabd67666433414e31",
+        "summaries": [
+          "test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.05s",
+          "test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.14s"
+        ]
+      },
+      {
+        "scope": "arithmetic",
+        "seed": 20261123,
+        "sha256": "83709d2bf522072b807d85b1844c690f3b3858c878a8f8d786e4fd8ccedbdcc6",
+        "summaries": [
+          "test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.21s"
+        ]
+      }
+    ],
+    "limits": "Only the documented bounded generators and listed seeds are qualified. This is not exhaustive input-space, scientific, accessibility, source-rights or global coverage acceptance."
+  },
+  "mutation": {
+    "tool": {
+      "name": "cargo-mutants",
+      "version": "27.1.0",
+      "license": "MIT",
+      "owner": "StandardFlow maintainer, Track 05",
+      "purpose": "Bounded test-sensitivity qualification of canonical bytes, lock comparison, PRISMA arithmetic and count ceiling",
+      "removal_path": "External cargo-installed development tool only; remove the documented campaign and uninstall the tool; no runtime or workspace dependency was added."
+    },
+    "installation": [
+      "cargo",
+      "install",
+      "--locked",
+      "cargo-mutants",
+      "--version",
+      "27.1.0"
+    ],
+    "environment": {
+      "CARGO_BUILD_JOBS": "2",
+      "PROPTEST_RNG_SEED": "721114987"
+    },
+    "acceptance": "No unresolved viable mutant in this explicit selection. Keep unviable mutants outside the denominator, retain the initially missed cases, and rerun affected functions after strengthening assertions. No global mutation score is claimed.",
+    "result": {
+      "selected_mutants": 26,
+      "initial_caught": 23,
+      "initial_missed": 2,
+      "initial_unviable": 1,
+      "recheck_selected": 8,
+      "recheck_caught": 8,
+      "recheck_missed": 0,
+      "recheck_timeout": 0,
+      "unresolved_viable_selected_mutants": 0
+    },
+    "corrections": [
+      {
+        "mutant": "crates/standardflow-artifacts/src/prisma.rs:640:28: replace match guard total == assessed with true in validate_assessed_outcome",
+        "finding": "Other corrupt-count tests also tripped neighbouring validators, masking loss of the assessed/excluded/included equality guard.",
+        "check": "Each generated valid flow receives one uniquely named additional excluded report while every other count stays fixed; SF-PRISMA-030 and refusal to build the scene are required."
+      },
+      {
+        "mutant": "crates/standardflow-artifacts/src/prisma.rs:722:14: replace > with >= in validate_count",
+        "finding": "The previous tests rejected values above the limit but did not accept the exact upper endpoint.",
+        "check": "A fully balanced flow with 9,007,199,254,740,991 reports must validate and produce a valid scene."
+      }
+    ],
+    "unviable": {
+      "mutant": "crates/standardflow-core/src/lock.rs:185:5: replace verify_pack_lock -> Result<LockVerification, LockError> with Ok(Default::default())",
+      "reason": "Rust E0277: LockVerification does not implement Default. It cannot compile and is not counted as caught."
+    },
+    "initial": {
+      "command": [
+        "cargo",
+        "mutants",
+        "--gitignore=true",
+        "--test-workspace=true",
+        "--jobs",
+        "2",
+        "--timeout",
+        "30",
+        "--build-timeout",
+        "120",
+        "--no-shuffle",
+        "--re",
+        "write_value|verify_pack_lock|validate_difference|validate_updated_totals|validate_assessed_outcome|validate_count",
+        "--file",
+        "crates/standardflow-core/src/canonical.rs",
+        "--file",
+        "crates/standardflow-core/src/lock.rs",
+        "--file",
+        "crates/standardflow-artifacts/src/prisma.rs",
+        "--cargo-arg=--locked",
+        "--cargo-arg=--offline",
+        "--all-features",
+        "--",
+        "--all-targets"
+      ],
+      "exit_code": 2,
+      "inputs_sha256": {
+        "Cargo.lock": "33c6f6e885c65ec5fa88948e4d508e180520e873f725f13b467d2ff8bfaf72ea",
+        "Cargo.toml": "6736f253aa3707808be62ea08fba13fb117814690d2e6c180fd5f62036a1a5a2",
+        "crates/standardflow-artifacts/src/lib.rs": "5ff06a3cb925fe1f88ee9cb81849777500fb8835ce6c4bb018878632861643a2",
+        "crates/standardflow-artifacts/src/limits.rs": "266e9e57ae232a236eecb5ca06659ec2c76b1f92fad603e2ffa4a71dc19c79cc",
+        "crates/standardflow-artifacts/src/prisma.rs": "1188e4462b4d704a56bbe0a16543307cf041ba864e88f8d9061f3d79d34c86e0",
+        "crates/standardflow-artifacts/src/recipe.rs": "0456ebf5d463a3718550bcd9234964a9e165805838d63f5ceec6102c16fff59f",
+        "crates/standardflow-artifacts/src/render.rs": "5b66618b293550c67e28af4331c08eccba0a1346c558903af8b92970efeecdaf",
+        "crates/standardflow-artifacts/src/scene.rs": "48351a82b4ff0f4762f7a41d96088d225fb284d589e1e3d8d590eb79999c6628",
+        "crates/standardflow-artifacts/tests/hardening.rs": "98f214b122e9fe8ce1a4e2ecb1839932df7e418844077179e52259ad05b1d627",
+        "crates/standardflow-artifacts/tests/prisma.rs": "229e9a22b3871922c6b303cbdd720909f64f6d3f738c1fa9e227ef02d188b6fe",
+        "crates/standardflow-cli/src/main.rs": "7e54f4a7b6b796f69ac1da08b698aeb6b25f821452e005d8a9c94698822fba75",
+        "crates/standardflow-cli/tests/cli.rs": "315190e440d8ba48fb29e3da5e40735a1afe951d01490cbfeb43b3c27441a503",
+        "crates/standardflow-cli/tests/diagram.rs": "d5917b102a9405aa311ee0f4effae20f567b37f8c2e22bf80fb3cc2165afad4d",
+        "crates/standardflow-cli/tests/diagram_limits.rs": "1994aa746a28050afc9291cb45816b9dbab73e7a70fb97d3332ffbfb3129713e",
+        "crates/standardflow-core/src/canonical.rs": "8f7d356ead2ad07914bb23617d9169a82a0539ae36cb0b093acc79e68bcad874",
+        "crates/standardflow-core/src/diagnostic.rs": "ce80618212fac664cbdf4166117c79a4ee178d76cdd366d3fe49f9c6b79c38d3",
+        "crates/standardflow-core/src/evidence.rs": "e7193a6af3be9caf3885d72f80ebd23af6b222735e1950c358a9910a415862b9",
+        "crates/standardflow-core/src/lib.rs": "2b6b71c19770d1eb99d1ebb1ad0d9366edd62ff0279d0c25031748ffc54f5c8a",
+        "crates/standardflow-core/src/lock.rs": "4e60c0f2af0ad5109d4a3059be5144585517f3ac79488dffb69a2747a86a39d9",
+        "crates/standardflow-core/src/pack.rs": "116f87d45906442979943063ab17c7af1278f1c609c35384e0a811b7021ef69b",
+        "crates/standardflow-core/tests/canonical_properties.rs": "fecdc7786f862aa4b6211e066025cb84581dc4a9be1ece968036a9b445a57b2e",
+        "crates/standardflow-core/tests/pack_contract.rs": "138b7d81a8c351cae23efa1013cd32f7d76bdffde347250f28b9a2e4a46d74d9",
+        "rust-toolchain.toml": "c910997cb152c6dc8ed13b1fdf9fa28a4ed30d6776123e27dd6170e5c66067a0",
+        "crates/standardflow-core/Cargo.toml": "0bfbcf38b63b791c1673bf6c8f69735f4584ab10cadcd5b973c6db5a3d560209",
+        "crates/standardflow-artifacts/Cargo.toml": "c9962dc7ff160828dfb3bbf9ab388ff6660953ec768e1b0d4520ff7281242370",
+        "crates/standardflow-cli/Cargo.toml": "0ed7a45438d484f7dc45562cd27178834babf7d87f1079021360e12a505823da"
+      },
+      "native_outcomes": {
+        "outcomes": [
+          {
+            "scenario": "Baseline",
+            "summary": "Success",
+            "log_path": "log/baseline.log",
+            "diff_path": null,
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 15.670610375999999,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--package=standardflow-artifacts@0.1.0-alpha.1",
+                  "--package=standardflow-core@0.1.0-alpha.1",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.604715735,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--package=standardflow-artifacts@0.1.0-alpha.1",
+                  "--package=standardflow-core@0.1.0-alpha.1",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-artifacts/src/prisma.rs:637:5: replace validate_assessed_outcome with ()",
+                "package": "standardflow-artifacts",
+                "file": "crates/standardflow-artifacts/src/prisma.rs",
+                "function": {
+                  "function_name": "validate_assessed_outcome",
+                  "return_type": "",
+                  "span": {
+                    "start": {
+                      "line": 630,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 655,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 637,
+                    "column": 5
+                  },
+                  "end": {
+                    "line": 654,
+                    "column": 6
+                  }
+                },
+                "replacement": "()",
+                "genre": "FnValue"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-artifacts__src__prisma.rs_line_637_col_5.log",
+            "diff_path": "diff/crates__standardflow-artifacts__src__prisma.rs_line_637_col_5.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 6.8212974840000005,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.356376539,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-artifacts/src/prisma.rs:640:28: replace match guard total == assessed with false in validate_assessed_outcome",
+                "package": "standardflow-artifacts",
+                "file": "crates/standardflow-artifacts/src/prisma.rs",
+                "function": {
+                  "function_name": "validate_assessed_outcome",
+                  "return_type": "",
+                  "span": {
+                    "start": {
+                      "line": 630,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 655,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 640,
+                    "column": 28
+                  },
+                  "end": {
+                    "line": 640,
+                    "column": 45
+                  }
+                },
+                "replacement": "false",
+                "genre": "MatchArmGuard"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-artifacts__src__prisma.rs_line_640_col_28_001.log",
+            "diff_path": "diff/crates__standardflow-artifacts__src__prisma.rs_line_640_col_28_001.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 4.20718262,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.203229962,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-artifacts/src/prisma.rs:640:34: replace == with != in validate_assessed_outcome",
+                "package": "standardflow-artifacts",
+                "file": "crates/standardflow-artifacts/src/prisma.rs",
+                "function": {
+                  "function_name": "validate_assessed_outcome",
+                  "return_type": "",
+                  "span": {
+                    "start": {
+                      "line": 630,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 655,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 640,
+                    "column": 34
+                  },
+                  "end": {
+                    "line": 640,
+                    "column": 36
+                  }
+                },
+                "replacement": "!=",
+                "genre": "BinaryOperator"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-artifacts__src__prisma.rs_line_640_col_34.log",
+            "diff_path": "diff/crates__standardflow-artifacts__src__prisma.rs_line_640_col_34.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 1.629105961,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.151745553,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-artifacts/src/prisma.rs:722:5: replace validate_count with ()",
+                "package": "standardflow-artifacts",
+                "file": "crates/standardflow-artifacts/src/prisma.rs",
+                "function": {
+                  "function_name": "validate_count",
+                  "return_type": "",
+                  "span": {
+                    "start": {
+                      "line": 721,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 729,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 722,
+                    "column": 5
+                  },
+                  "end": {
+                    "line": 728,
+                    "column": 6
+                  }
+                },
+                "replacement": "()",
+                "genre": "FnValue"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-artifacts__src__prisma.rs_line_722_col_5.log",
+            "diff_path": "diff/crates__standardflow-artifacts__src__prisma.rs_line_722_col_5.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 1.722565659,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.103904634,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-artifacts/src/prisma.rs:722:14: replace > with == in validate_count",
+                "package": "standardflow-artifacts",
+                "file": "crates/standardflow-artifacts/src/prisma.rs",
+                "function": {
+                  "function_name": "validate_count",
+                  "return_type": "",
+                  "span": {
+                    "start": {
+                      "line": 721,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 729,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 722,
+                    "column": 14
+                  },
+                  "end": {
+                    "line": 722,
+                    "column": 15
+                  }
+                },
+                "replacement": "==",
+                "genre": "BinaryOperator"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-artifacts__src__prisma.rs_line_722_col_14.log",
+            "diff_path": "diff/crates__standardflow-artifacts__src__prisma.rs_line_722_col_14.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 1.728688477,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.101251984,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-artifacts/src/prisma.rs:722:14: replace > with < in validate_count",
+                "package": "standardflow-artifacts",
+                "file": "crates/standardflow-artifacts/src/prisma.rs",
+                "function": {
+                  "function_name": "validate_count",
+                  "return_type": "",
+                  "span": {
+                    "start": {
+                      "line": 721,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 729,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 722,
+                    "column": 14
+                  },
+                  "end": {
+                    "line": 722,
+                    "column": 15
+                  }
+                },
+                "replacement": "<",
+                "genre": "BinaryOperator"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-artifacts__src__prisma.rs_line_722_col_14_001.log",
+            "diff_path": "diff/crates__standardflow-artifacts__src__prisma.rs_line_722_col_14_001.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 1.1642565870000001,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.101351131,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-artifacts/src/prisma.rs:722:14: replace > with >= in validate_count",
+                "package": "standardflow-artifacts",
+                "file": "crates/standardflow-artifacts/src/prisma.rs",
+                "function": {
+                  "function_name": "validate_count",
+                  "return_type": "",
+                  "span": {
+                    "start": {
+                      "line": 721,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 729,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 722,
+                    "column": 14
+                  },
+                  "end": {
+                    "line": 722,
+                    "column": 15
+                  }
+                },
+                "replacement": ">=",
+                "genre": "BinaryOperator"
+              }
+            },
+            "summary": "MissedMutant",
+            "log_path": "log/crates__standardflow-artifacts__src__prisma.rs_line_722_col_14_002.log",
+            "diff_path": "diff/crates__standardflow-artifacts__src__prisma.rs_line_722_col_14_002.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 1.5242712040000002,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 1.177064531,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-artifacts/src/prisma.rs:740:5: replace validate_difference with ()",
+                "package": "standardflow-artifacts",
+                "file": "crates/standardflow-artifacts/src/prisma.rs",
+                "function": {
+                  "function_name": "validate_difference",
+                  "return_type": "",
+                  "span": {
+                    "start": {
+                      "line": 731,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 753,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 740,
+                    "column": 5
+                  },
+                  "end": {
+                    "line": 752,
+                    "column": 6
+                  }
+                },
+                "replacement": "()",
+                "genre": "FnValue"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-artifacts__src__prisma.rs_line_740_col_5.log",
+            "diff_path": "diff/crates__standardflow-artifacts__src__prisma.rs_line_740_col_5.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 2.02422435,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.151836847,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-artifacts/src/prisma.rs:640:28: replace match guard total == assessed with true in validate_assessed_outcome",
+                "package": "standardflow-artifacts",
+                "file": "crates/standardflow-artifacts/src/prisma.rs",
+                "function": {
+                  "function_name": "validate_assessed_outcome",
+                  "return_type": "",
+                  "span": {
+                    "start": {
+                      "line": 630,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 655,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 640,
+                    "column": 28
+                  },
+                  "end": {
+                    "line": 640,
+                    "column": 45
+                  }
+                },
+                "replacement": "true",
+                "genre": "MatchArmGuard"
+              }
+            },
+            "summary": "MissedMutant",
+            "log_path": "log/crates__standardflow-artifacts__src__prisma.rs_line_640_col_28.log",
+            "diff_path": "diff/crates__standardflow-artifacts__src__prisma.rs_line_640_col_28.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 22.976875143,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 1.063276087,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-artifacts/src/prisma.rs:741:27: replace match guard expected == observed with true in validate_difference",
+                "package": "standardflow-artifacts",
+                "file": "crates/standardflow-artifacts/src/prisma.rs",
+                "function": {
+                  "function_name": "validate_difference",
+                  "return_type": "",
+                  "span": {
+                    "start": {
+                      "line": 731,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 753,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 741,
+                    "column": 27
+                  },
+                  "end": {
+                    "line": 741,
+                    "column": 47
+                  }
+                },
+                "replacement": "true",
+                "genre": "MatchArmGuard"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-artifacts__src__prisma.rs_line_741_col_27.log",
+            "diff_path": "diff/crates__standardflow-artifacts__src__prisma.rs_line_741_col_27.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 0.960934709,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.100899848,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-artifacts/src/prisma.rs:741:27: replace match guard expected == observed with false in validate_difference",
+                "package": "standardflow-artifacts",
+                "file": "crates/standardflow-artifacts/src/prisma.rs",
+                "function": {
+                  "function_name": "validate_difference",
+                  "return_type": "",
+                  "span": {
+                    "start": {
+                      "line": 731,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 753,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 741,
+                    "column": 27
+                  },
+                  "end": {
+                    "line": 741,
+                    "column": 47
+                  }
+                },
+                "replacement": "false",
+                "genre": "MatchArmGuard"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-artifacts__src__prisma.rs_line_741_col_27_001.log",
+            "diff_path": "diff/crates__standardflow-artifacts__src__prisma.rs_line_741_col_27_001.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 1.4620675730000001,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.10448849,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-artifacts/src/prisma.rs:741:36: replace == with != in validate_difference",
+                "package": "standardflow-artifacts",
+                "file": "crates/standardflow-artifacts/src/prisma.rs",
+                "function": {
+                  "function_name": "validate_difference",
+                  "return_type": "",
+                  "span": {
+                    "start": {
+                      "line": 731,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 753,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 741,
+                    "column": 36
+                  },
+                  "end": {
+                    "line": 741,
+                    "column": 38
+                  }
+                },
+                "replacement": "!=",
+                "genre": "BinaryOperator"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-artifacts__src__prisma.rs_line_741_col_36.log",
+            "diff_path": "diff/crates__standardflow-artifacts__src__prisma.rs_line_741_col_36.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 1.477514477,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.101131412,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-artifacts/src/prisma.rs:761:5: replace validate_updated_totals with ()",
+                "package": "standardflow-artifacts",
+                "file": "crates/standardflow-artifacts/src/prisma.rs",
+                "function": {
+                  "function_name": "validate_updated_totals",
+                  "return_type": "",
+                  "span": {
+                    "start": {
+                      "line": 755,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 779,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 761,
+                    "column": 5
+                  },
+                  "end": {
+                    "line": 778,
+                    "column": 6
+                  }
+                },
+                "replacement": "()",
+                "genre": "FnValue"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-artifacts__src__prisma.rs_line_761_col_5.log",
+            "diff_path": "diff/crates__standardflow-artifacts__src__prisma.rs_line_761_col_5.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 1.3191605229999999,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.153710052,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-artifacts/src/prisma.rs:766:31: replace match guard expected == observed with true in validate_updated_totals",
+                "package": "standardflow-artifacts",
+                "file": "crates/standardflow-artifacts/src/prisma.rs",
+                "function": {
+                  "function_name": "validate_updated_totals",
+                  "return_type": "",
+                  "span": {
+                    "start": {
+                      "line": 755,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 779,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 766,
+                    "column": 31
+                  },
+                  "end": {
+                    "line": 766,
+                    "column": 51
+                  }
+                },
+                "replacement": "true",
+                "genre": "MatchArmGuard"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-artifacts__src__prisma.rs_line_766_col_31.log",
+            "diff_path": "diff/crates__standardflow-artifacts__src__prisma.rs_line_766_col_31.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 1.307655005,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.257226466,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-artifacts/src/prisma.rs:766:31: replace match guard expected == observed with false in validate_updated_totals",
+                "package": "standardflow-artifacts",
+                "file": "crates/standardflow-artifacts/src/prisma.rs",
+                "function": {
+                  "function_name": "validate_updated_totals",
+                  "return_type": "",
+                  "span": {
+                    "start": {
+                      "line": 755,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 779,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 766,
+                    "column": 31
+                  },
+                  "end": {
+                    "line": 766,
+                    "column": 51
+                  }
+                },
+                "replacement": "false",
+                "genre": "MatchArmGuard"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-artifacts__src__prisma.rs_line_766_col_31_001.log",
+            "diff_path": "diff/crates__standardflow-artifacts__src__prisma.rs_line_766_col_31_001.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 1.5200112460000001,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.202363352,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-artifacts/src/prisma.rs:766:40: replace == with != in validate_updated_totals",
+                "package": "standardflow-artifacts",
+                "file": "crates/standardflow-artifacts/src/prisma.rs",
+                "function": {
+                  "function_name": "validate_updated_totals",
+                  "return_type": "",
+                  "span": {
+                    "start": {
+                      "line": 755,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 779,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 766,
+                    "column": 40
+                  },
+                  "end": {
+                    "line": 766,
+                    "column": 42
+                  }
+                },
+                "replacement": "!=",
+                "genre": "BinaryOperator"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-artifacts__src__prisma.rs_line_766_col_40.log",
+            "diff_path": "diff/crates__standardflow-artifacts__src__prisma.rs_line_766_col_40.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 1.35927467,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.151266472,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-core/src/canonical.rs:75:32: replace || with && in write_value",
+                "package": "standardflow-core",
+                "file": "crates/standardflow-core/src/canonical.rs",
+                "function": {
+                  "function_name": "write_value",
+                  "return_type": "-> Result<(), CanonicalError>",
+                  "span": {
+                    "start": {
+                      "line": 68,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 117,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 75,
+                    "column": 32
+                  },
+                  "end": {
+                    "line": 75,
+                    "column": 34
+                  }
+                },
+                "replacement": "&&",
+                "genre": "BinaryOperator"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-core__src__canonical.rs_line_75_col_32.log",
+            "diff_path": "diff/crates__standardflow-core__src__canonical.rs_line_75_col_32.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 2.6299347539999998,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.782781373,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-core/src/canonical.rs:69:5: replace write_value -> Result<(), CanonicalError> with Ok(())",
+                "package": "standardflow-core",
+                "file": "crates/standardflow-core/src/canonical.rs",
+                "function": {
+                  "function_name": "write_value",
+                  "return_type": "-> Result<(), CanonicalError>",
+                  "span": {
+                    "start": {
+                      "line": 68,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 117,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 69,
+                    "column": 5
+                  },
+                  "end": {
+                    "line": 116,
+                    "column": 11
+                  }
+                },
+                "replacement": "Ok(())",
+                "genre": "FnValue"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-core__src__canonical.rs_line_69_col_5.log",
+            "diff_path": "diff/crates__standardflow-core__src__canonical.rs_line_69_col_5.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 3.701156536,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.151930631,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-core/src/canonical.rs:89:26: replace > with == in write_value",
+                "package": "standardflow-core",
+                "file": "crates/standardflow-core/src/canonical.rs",
+                "function": {
+                  "function_name": "write_value",
+                  "return_type": "-> Result<(), CanonicalError>",
+                  "span": {
+                    "start": {
+                      "line": 68,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 117,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 89,
+                    "column": 26
+                  },
+                  "end": {
+                    "line": 89,
+                    "column": 27
+                  }
+                },
+                "replacement": "==",
+                "genre": "BinaryOperator"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-core__src__canonical.rs_line_89_col_26.log",
+            "diff_path": "diff/crates__standardflow-core__src__canonical.rs_line_89_col_26.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 1.629427786,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.151531077,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-core/src/canonical.rs:89:26: replace > with < in write_value",
+                "package": "standardflow-core",
+                "file": "crates/standardflow-core/src/canonical.rs",
+                "function": {
+                  "function_name": "write_value",
+                  "return_type": "-> Result<(), CanonicalError>",
+                  "span": {
+                    "start": {
+                      "line": 68,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 117,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 89,
+                    "column": 26
+                  },
+                  "end": {
+                    "line": 89,
+                    "column": 27
+                  }
+                },
+                "replacement": "<",
+                "genre": "BinaryOperator"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-core__src__canonical.rs_line_89_col_26_001.log",
+            "diff_path": "diff/crates__standardflow-core__src__canonical.rs_line_89_col_26_001.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 3.7449977580000002,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.101850357,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-core/src/canonical.rs:89:26: replace > with >= in write_value",
+                "package": "standardflow-core",
+                "file": "crates/standardflow-core/src/canonical.rs",
+                "function": {
+                  "function_name": "write_value",
+                  "return_type": "-> Result<(), CanonicalError>",
+                  "span": {
+                    "start": {
+                      "line": 68,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 117,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 89,
+                    "column": 26
+                  },
+                  "end": {
+                    "line": 89,
+                    "column": 27
+                  }
+                },
+                "replacement": ">=",
+                "genre": "BinaryOperator"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-core__src__canonical.rs_line_89_col_26_002.log",
+            "diff_path": "diff/crates__standardflow-core__src__canonical.rs_line_89_col_26_002.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 2.541375601,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.154514774,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-core/src/canonical.rs:102:26: replace > with == in write_value",
+                "package": "standardflow-core",
+                "file": "crates/standardflow-core/src/canonical.rs",
+                "function": {
+                  "function_name": "write_value",
+                  "return_type": "-> Result<(), CanonicalError>",
+                  "span": {
+                    "start": {
+                      "line": 68,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 117,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 102,
+                    "column": 26
+                  },
+                  "end": {
+                    "line": 102,
+                    "column": 27
+                  }
+                },
+                "replacement": "==",
+                "genre": "BinaryOperator"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-core__src__canonical.rs_line_102_col_26.log",
+            "diff_path": "diff/crates__standardflow-core__src__canonical.rs_line_102_col_26.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 2.439319452,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.206814362,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-core/src/canonical.rs:102:26: replace > with < in write_value",
+                "package": "standardflow-core",
+                "file": "crates/standardflow-core/src/canonical.rs",
+                "function": {
+                  "function_name": "write_value",
+                  "return_type": "-> Result<(), CanonicalError>",
+                  "span": {
+                    "start": {
+                      "line": 68,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 117,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 102,
+                    "column": 26
+                  },
+                  "end": {
+                    "line": 102,
+                    "column": 27
+                  }
+                },
+                "replacement": "<",
+                "genre": "BinaryOperator"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-core__src__canonical.rs_line_102_col_26_001.log",
+            "diff_path": "diff/crates__standardflow-core__src__canonical.rs_line_102_col_26_001.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 2.575381364,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.151463935,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-core/src/lock.rs:185:5: replace verify_pack_lock -> Result<LockVerification, LockError> with Ok(Default::default())",
+                "package": "standardflow-core",
+                "file": "crates/standardflow-core/src/lock.rs",
+                "function": {
+                  "function_name": "verify_pack_lock",
+                  "return_type": "-> Result<LockVerification, LockError>",
+                  "span": {
+                    "start": {
+                      "line": 178,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 203,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 185,
+                    "column": 5
+                  },
+                  "end": {
+                    "line": 202,
+                    "column": 7
+                  }
+                },
+                "replacement": "Ok(Default::default())",
+                "genre": "FnValue"
+              }
+            },
+            "summary": "Unviable",
+            "log_path": "log/crates__standardflow-core__src__lock.rs_line_185_col_5.log",
+            "diff_path": "diff/crates__standardflow-core__src__lock.rs_line_185_col_5.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 0.607500991,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-core/src/canonical.rs:102:26: replace > with >= in write_value",
+                "package": "standardflow-core",
+                "file": "crates/standardflow-core/src/canonical.rs",
+                "function": {
+                  "function_name": "write_value",
+                  "return_type": "-> Result<(), CanonicalError>",
+                  "span": {
+                    "start": {
+                      "line": 68,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 117,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 102,
+                    "column": 26
+                  },
+                  "end": {
+                    "line": 102,
+                    "column": 27
+                  }
+                },
+                "replacement": ">=",
+                "genre": "BinaryOperator"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-core__src__canonical.rs_line_102_col_26_002.log",
+            "diff_path": "diff/crates__standardflow-core__src__canonical.rs_line_102_col_26_002.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 1.912510461,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.151520919,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-core/src/lock.rs:191:17: replace != with == in verify_pack_lock",
+                "package": "standardflow-core",
+                "file": "crates/standardflow-core/src/lock.rs",
+                "function": {
+                  "function_name": "verify_pack_lock",
+                  "return_type": "-> Result<LockVerification, LockError>",
+                  "span": {
+                    "start": {
+                      "line": 178,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 203,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 191,
+                    "column": 17
+                  },
+                  "end": {
+                    "line": 191,
+                    "column": 19
+                  }
+                },
+                "replacement": "==",
+                "genre": "BinaryOperator"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-core__src__lock.rs_line_191_col_17.log",
+            "diff_path": "diff/crates__standardflow-core__src__lock.rs_line_191_col_17.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 2.032069679,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.203728515,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          }
+        ],
+        "total_mutants": 26,
+        "missed": 2,
+        "caught": 23,
+        "timeout": 0,
+        "unviable": 1,
+        "success": 0,
+        "start_time": "2026-11-23T01:25:01.798726368Z",
+        "end_time": "2026-11-23T01:26:00.933395512Z",
+        "cargo_mutants_version": "27.1.0"
+      },
+      "native_outcomes_sha256": "47b3f87e8399bc9fe8af1d911901c8f338d4076e7a8621e1b40662a753400151",
+      "log_sha256": {
+        "log/baseline.log": "c49d440a2d2ac20b9456fd545952cc06cda1e96727216799dea8f62d1527eacf",
+        "log/crates__standardflow-artifacts__src__prisma.rs_line_637_col_5.log": "3fe8f8e58ad2e877a8ecb9b56a3bea5b5440801ee9ae7141e0bff516ed345945",
+        "log/crates__standardflow-artifacts__src__prisma.rs_line_640_col_28.log": "0e240241fbfb1db01265f0080276ad9dbcc1e82fef09c853d34727cfc6a740ad",
+        "log/crates__standardflow-artifacts__src__prisma.rs_line_640_col_28_001.log": "291f3698324c478fdf9652be482bf085a72a9d783d0122b1e22bcd4a2c332152",
+        "log/crates__standardflow-artifacts__src__prisma.rs_line_640_col_34.log": "6f6eafad5aca5c5fa96e86406ab407f3abea618391d4f9b7ea05456cb0d20b56",
+        "log/crates__standardflow-artifacts__src__prisma.rs_line_722_col_14.log": "4dffe4fc25758ff339317a16b9dccb3f23f2b8370eb8ef12c88c77261542cf2c",
+        "log/crates__standardflow-artifacts__src__prisma.rs_line_722_col_14_001.log": "cb1b2a696a85843bad8a97db167c65f8a4d056b2f6f8b175a9ff26402c24584f",
+        "log/crates__standardflow-artifacts__src__prisma.rs_line_722_col_14_002.log": "12a0b983268dfed7120109af3af590b07db0c6693cbaba1575687ecfb9f724a0",
+        "log/crates__standardflow-artifacts__src__prisma.rs_line_722_col_5.log": "ec028dbce672da3e9dd10734450ff22c15180281205396d580e5cc4f120f3286",
+        "log/crates__standardflow-artifacts__src__prisma.rs_line_740_col_5.log": "839e149dec0e16399d306f25f446ad8752372a92203ffede9129aba8b9b2473a",
+        "log/crates__standardflow-artifacts__src__prisma.rs_line_741_col_27.log": "fe70c4f7ed211a5384befe19b4fcf0aac57a96629c471b5cba467413c867457b",
+        "log/crates__standardflow-artifacts__src__prisma.rs_line_741_col_27_001.log": "0f20df706b90b78f78015723b4e3f6fc2759c1c6f4d0c0f09a6564b98c4b4366",
+        "log/crates__standardflow-artifacts__src__prisma.rs_line_741_col_36.log": "e98e6276c5c077ac4069149cb641c56d04438ea1bc03857270483a9acac4a4fb",
+        "log/crates__standardflow-artifacts__src__prisma.rs_line_761_col_5.log": "8e9183d413885aabbe7ae019925066f4411cff94c44a0a507a33045525d88e4e",
+        "log/crates__standardflow-artifacts__src__prisma.rs_line_766_col_31.log": "40ed1b65c0858830fa5383de566f9a872d3d6dbcc50710b988358210b8edeb06",
+        "log/crates__standardflow-artifacts__src__prisma.rs_line_766_col_31_001.log": "df247ba7adffcdc3cfe9dbf80c67fb82fedc5af8a8e9229d6a4bff20346a7942",
+        "log/crates__standardflow-artifacts__src__prisma.rs_line_766_col_40.log": "d2729ead158d04a75dabcf981bf716a5c4b8fada0eac7dff05006e4e3c35119b",
+        "log/crates__standardflow-core__src__canonical.rs_line_102_col_26.log": "42f64e019dc194d92b363253a77b2c9b0dfb4ec4b0df688f472daaec7a281f62",
+        "log/crates__standardflow-core__src__canonical.rs_line_102_col_26_001.log": "15bf39413d459da53d40ce70281add07c63f5125183854148574e3a84cfca5f2",
+        "log/crates__standardflow-core__src__canonical.rs_line_102_col_26_002.log": "f0f5637707800a829a3a5898275fb894e66847de5c109e480d3fb44d6df80670",
+        "log/crates__standardflow-core__src__canonical.rs_line_69_col_5.log": "91d3823997dcc07f09b1a4b1011328f15cf14562de7d83024fd0be8e249779c2",
+        "log/crates__standardflow-core__src__canonical.rs_line_75_col_32.log": "192749456b0499fc05781ad24b834188a3da688b485a350613814c75609e2ff4",
+        "log/crates__standardflow-core__src__canonical.rs_line_89_col_26.log": "76822fb48b6847ae9bd867712bd0fd3b13782e96bc505af9294f1205fc6a984d",
+        "log/crates__standardflow-core__src__canonical.rs_line_89_col_26_001.log": "a13506e4dfe7e5b2fb24ff3fb1bd2510baf278a5292cc537e885411f3c883f4f",
+        "log/crates__standardflow-core__src__canonical.rs_line_89_col_26_002.log": "c0a1474119c124ed212b61297efe2ed44e9aa6c0658fdeb3d8c6c1beaaa1080a",
+        "log/crates__standardflow-core__src__lock.rs_line_185_col_5.log": "34803d214921747c0a2030ffc993f0f3e733c9eee4a30490b3844ba7325329b2",
+        "log/crates__standardflow-core__src__lock.rs_line_191_col_17.log": "eb78b3f19c49e7184b87472a9f3d9393e34e6c0225a8bd8e0bac61b5393cce49"
+      }
+    },
+    "recheck": {
+      "command": [
+        "cargo",
+        "mutants",
+        "--gitignore=true",
+        "--test-workspace=true",
+        "--jobs",
+        "2",
+        "--timeout",
+        "30",
+        "--build-timeout",
+        "120",
+        "--no-shuffle",
+        "--re",
+        "validate_assessed_outcome|validate_count",
+        "--file",
+        "crates/standardflow-artifacts/src/prisma.rs",
+        "--cargo-arg=--locked",
+        "--cargo-arg=--offline",
+        "--all-features",
+        "--",
+        "--all-targets"
+      ],
+      "exit_code": 0,
+      "inputs": "final_inputs_sha256",
+      "native_outcomes": {
+        "outcomes": [
+          {
+            "scenario": "Baseline",
+            "summary": "Success",
+            "log_path": "log/baseline.log",
+            "diff_path": null,
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 14.78921399,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--package=standardflow-artifacts@0.1.0-alpha.1",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.15792379,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--package=standardflow-artifacts@0.1.0-alpha.1",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-artifacts/src/prisma.rs:637:5: replace validate_assessed_outcome with ()",
+                "package": "standardflow-artifacts",
+                "file": "crates/standardflow-artifacts/src/prisma.rs",
+                "function": {
+                  "function_name": "validate_assessed_outcome",
+                  "return_type": "",
+                  "span": {
+                    "start": {
+                      "line": 630,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 655,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 637,
+                    "column": 5
+                  },
+                  "end": {
+                    "line": 654,
+                    "column": 6
+                  }
+                },
+                "replacement": "()",
+                "genre": "FnValue"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-artifacts__src__prisma.rs_line_637_col_5.log",
+            "diff_path": "diff/crates__standardflow-artifacts__src__prisma.rs_line_637_col_5.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 6.699453612,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.251757415,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-artifacts/src/prisma.rs:640:28: replace match guard total == assessed with false in validate_assessed_outcome",
+                "package": "standardflow-artifacts",
+                "file": "crates/standardflow-artifacts/src/prisma.rs",
+                "function": {
+                  "function_name": "validate_assessed_outcome",
+                  "return_type": "",
+                  "span": {
+                    "start": {
+                      "line": 630,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 655,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 640,
+                    "column": 28
+                  },
+                  "end": {
+                    "line": 640,
+                    "column": 45
+                  }
+                },
+                "replacement": "false",
+                "genre": "MatchArmGuard"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-artifacts__src__prisma.rs_line_640_col_28_001.log",
+            "diff_path": "diff/crates__standardflow-artifacts__src__prisma.rs_line_640_col_28_001.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 2.722259863,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.151946865,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-artifacts/src/prisma.rs:640:34: replace == with != in validate_assessed_outcome",
+                "package": "standardflow-artifacts",
+                "file": "crates/standardflow-artifacts/src/prisma.rs",
+                "function": {
+                  "function_name": "validate_assessed_outcome",
+                  "return_type": "",
+                  "span": {
+                    "start": {
+                      "line": 630,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 655,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 640,
+                    "column": 34
+                  },
+                  "end": {
+                    "line": 640,
+                    "column": 36
+                  }
+                },
+                "replacement": "!=",
+                "genre": "BinaryOperator"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-artifacts__src__prisma.rs_line_640_col_34.log",
+            "diff_path": "diff/crates__standardflow-artifacts__src__prisma.rs_line_640_col_34.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 1.6203211560000002,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.152956315,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-artifacts/src/prisma.rs:722:5: replace validate_count with ()",
+                "package": "standardflow-artifacts",
+                "file": "crates/standardflow-artifacts/src/prisma.rs",
+                "function": {
+                  "function_name": "validate_count",
+                  "return_type": "",
+                  "span": {
+                    "start": {
+                      "line": 721,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 729,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 722,
+                    "column": 5
+                  },
+                  "end": {
+                    "line": 728,
+                    "column": 6
+                  }
+                },
+                "replacement": "()",
+                "genre": "FnValue"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-artifacts__src__prisma.rs_line_722_col_5.log",
+            "diff_path": "diff/crates__standardflow-artifacts__src__prisma.rs_line_722_col_5.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 1.839286269,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.155864841,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-artifacts/src/prisma.rs:722:14: replace > with == in validate_count",
+                "package": "standardflow-artifacts",
+                "file": "crates/standardflow-artifacts/src/prisma.rs",
+                "function": {
+                  "function_name": "validate_count",
+                  "return_type": "",
+                  "span": {
+                    "start": {
+                      "line": 721,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 729,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 722,
+                    "column": 14
+                  },
+                  "end": {
+                    "line": 722,
+                    "column": 15
+                  }
+                },
+                "replacement": "==",
+                "genre": "BinaryOperator"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-artifacts__src__prisma.rs_line_722_col_14.log",
+            "diff_path": "diff/crates__standardflow-artifacts__src__prisma.rs_line_722_col_14.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 1.620441822,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.101440866,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-artifacts/src/prisma.rs:722:14: replace > with < in validate_count",
+                "package": "standardflow-artifacts",
+                "file": "crates/standardflow-artifacts/src/prisma.rs",
+                "function": {
+                  "function_name": "validate_count",
+                  "return_type": "",
+                  "span": {
+                    "start": {
+                      "line": 721,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 729,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 722,
+                    "column": 14
+                  },
+                  "end": {
+                    "line": 722,
+                    "column": 15
+                  }
+                },
+                "replacement": "<",
+                "genre": "BinaryOperator"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-artifacts__src__prisma.rs_line_722_col_14_001.log",
+            "diff_path": "diff/crates__standardflow-artifacts__src__prisma.rs_line_722_col_14_001.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 1.302088567,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.101546477,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-artifacts/src/prisma.rs:722:14: replace > with >= in validate_count",
+                "package": "standardflow-artifacts",
+                "file": "crates/standardflow-artifacts/src/prisma.rs",
+                "function": {
+                  "function_name": "validate_count",
+                  "return_type": "",
+                  "span": {
+                    "start": {
+                      "line": 721,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 729,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 722,
+                    "column": 14
+                  },
+                  "end": {
+                    "line": 722,
+                    "column": 15
+                  }
+                },
+                "replacement": ">=",
+                "genre": "BinaryOperator"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-artifacts__src__prisma.rs_line_722_col_14_002.log",
+            "diff_path": "diff/crates__standardflow-artifacts__src__prisma.rs_line_722_col_14_002.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 1.93892649,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.202344763,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          },
+          {
+            "scenario": {
+              "Mutant": {
+                "name": "crates/standardflow-artifacts/src/prisma.rs:640:28: replace match guard total == assessed with true in validate_assessed_outcome",
+                "package": "standardflow-artifacts",
+                "file": "crates/standardflow-artifacts/src/prisma.rs",
+                "function": {
+                  "function_name": "validate_assessed_outcome",
+                  "return_type": "",
+                  "span": {
+                    "start": {
+                      "line": 630,
+                      "column": 1
+                    },
+                    "end": {
+                      "line": 655,
+                      "column": 2
+                    }
+                  }
+                },
+                "span": {
+                  "start": {
+                    "line": 640,
+                    "column": 28
+                  },
+                  "end": {
+                    "line": 640,
+                    "column": 45
+                  }
+                },
+                "replacement": "true",
+                "genre": "MatchArmGuard"
+              }
+            },
+            "summary": "CaughtMutant",
+            "log_path": "log/crates__standardflow-artifacts__src__prisma.rs_line_640_col_28.log",
+            "diff_path": "diff/crates__standardflow-artifacts__src__prisma.rs_line_640_col_28.diff",
+            "phase_results": [
+              {
+                "phase": "Build",
+                "duration": 20.764368667,
+                "process_status": "Success",
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--no-run",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline"
+                ]
+              },
+              {
+                "phase": "Test",
+                "duration": 0.152623728,
+                "process_status": {
+                  "Failure": 101
+                },
+                "argv": [
+                  "/workspace/scratch/f0938f622e17/task-rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+                  "test",
+                  "--verbose",
+                  "--workspace",
+                  "--all-features",
+                  "--locked",
+                  "--offline",
+                  "--all-targets"
+                ]
+              }
+            ]
+          }
+        ],
+        "total_mutants": 8,
+        "missed": 0,
+        "caught": 8,
+        "timeout": 0,
+        "unviable": 0,
+        "success": 0,
+        "start_time": "2026-11-23T01:26:56.207780538Z",
+        "end_time": "2026-11-23T01:27:33.094363997Z",
+        "cargo_mutants_version": "27.1.0"
+      },
+      "native_outcomes_sha256": "f74f39c916c09f4032ca807e4863a1cb8352fc8b411488fe3f074f388bbda2a8",
+      "log_sha256": {
+        "log/baseline.log": "3ee095f00cc598fc843889b4e84102eaf461608dc751c85a58a50b0b3fbd28eb",
+        "log/crates__standardflow-artifacts__src__prisma.rs_line_637_col_5.log": "aad50fb4e5ad175afe1da39b267520386ac9eb58f7fecae67548429141ccd94c",
+        "log/crates__standardflow-artifacts__src__prisma.rs_line_640_col_28.log": "688e996b5029e65656361413e40e0c413ac01de9d46a2fdc6a6e2220f2a3a03d",
+        "log/crates__standardflow-artifacts__src__prisma.rs_line_640_col_28_001.log": "e22f0263c00fe7f31dbf7c97dc34c6985739b549f09fffce99906a5e52b35f1d",
+        "log/crates__standardflow-artifacts__src__prisma.rs_line_640_col_34.log": "b5cc9805b54428fcc644ea3594644d19ec36a5ec22d2d950c07699d343789a95",
+        "log/crates__standardflow-artifacts__src__prisma.rs_line_722_col_14.log": "f35aca5a3808171a1f758e21235f9cc130029445ca5e96ab0c7e3a6db6fe042d",
+        "log/crates__standardflow-artifacts__src__prisma.rs_line_722_col_14_001.log": "a11236295634a023cafc052846b06851e99bee51456c9acff8728deea046233a",
+        "log/crates__standardflow-artifacts__src__prisma.rs_line_722_col_14_002.log": "be448acd973a06d1aca2b704aa5ba9f3ab66f4e8ec0809568faa5276906688d8",
+        "log/crates__standardflow-artifacts__src__prisma.rs_line_722_col_5.log": "dee50da103ff6e1c2698630d82e4f2fdb62b650ec176042ee32cfda7c59a6013"
+      }
+    },
+    "reuse": "The two affected functions were rerun completely (8 mutants). The remaining 18 selected mutants retain their initial outcomes: 17 caught and 1 unviable. Production Rust code is unchanged; the correction only adds assertions to the two arithmetic test files.",
+    "baseline": "Both campaigns independently built copied source trees and passed the selected-package baseline before injecting mutations: 60 tests for core+artifacts initially, 28 for artifacts in the recheck. cargo-mutants 27.1.0 applies --test-workspace=true to each mutant (all workspace tests), but its baseline still uses the selected mutated packages. A separate final unmutated workspace run passed all 72 tests."
+  },
+  "other_validation": {
+    "format": "cargo fmt --all -- --check passed",
+    "clippy": "cargo clippy --workspace --all-targets --all-features --locked -- -D warnings passed",
+    "full_workspace_tests": 72,
+    "full_workspace_evidence": {
+      "command": [
+        "cargo",
+        "test",
+        "--workspace",
+        "--all-targets",
+        "--all-features",
+        "--locked"
+      ],
+      "PROPTEST_RNG_SEED": "721114987",
+      "exit_code": 0,
+      "log_sha256": "4a381b49460f92a389a9754af94834df0de9406a6ee342b28729ef45d34a978f",
+      "summaries": [
+        "test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 16 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s",
+        "test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s",
+        "test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s",
+        "test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s",
+        "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s",
+        "test result: ok. 16 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.10s",
+        "test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.31s",
+        "test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s"
+      ]
+    }
+  },
+  "deterministic_simulation": {
+    "disposition": "not applicable to the current synchronous Rust pack/parser/arithmetic/rendering slice",
+    "evidence": "No distributed scheduler, network transport, virtual clock, retry queue, replica or concurrent state machine exists in this slice. File-lock output uses native filesystem operations and atomic replacement; concrete boundary/metamorphic and hostile-input checks apply, not a simulation framework. Reassess when asynchronous services or shared concurrent state are implemented. This exclusion does not waive filesystem-race or release/restore qualification."
+  },
+  "external_acceptance": "No scientific, methodological, independent accessibility, source-rights, offline security, release provenance or external service acceptance is inferred."
+}

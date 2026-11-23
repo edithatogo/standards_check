@@ -3,6 +3,7 @@
 use std::io;
 
 use proptest::prelude::*;
+use proptest::test_runner::FileFailurePersistence;
 use serde_json::Value;
 use standardflow_core::{
     PackError, PackId, RequirementId, VerificationStatus, parse_pack, sha256_hex,
@@ -264,6 +265,13 @@ fn licence_uris_and_dates_obey_the_wire_contract() -> Result<(), Box<dyn std::er
 }
 
 proptest! {
+    #![proptest_config(ProptestConfig {
+        cases: 256,
+        max_shrink_iters: 4096,
+        failure_persistence: Some(Box::new(FileFailurePersistence::WithSource("proptest-regressions"))),
+        ..ProptestConfig::default()
+    })]
+
     #[test]
     fn valid_requirement_identifiers_round_trip(
         first in "[A-Za-z0-9]",

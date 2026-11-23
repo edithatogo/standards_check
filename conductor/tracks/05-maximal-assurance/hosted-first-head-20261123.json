@@ -1,0 +1,224 @@
+{
+  "repository": "edithatogo/standards_check",
+  "pull_request": 100,
+  "kind": "historical_first_head_hosted_observation",
+  "observed_at_utc": "2026-11-23T01:48:26Z",
+  "head_sha": "12b7b00737124aa7c0feaead893c930124332489",
+  "tree_sha": "d78a8d83327a67172544f04a716e4eef5950a9aa",
+  "tested_merge_sha": "7246cfbe350a3718d19c06109e11d4abad655de7",
+  "tested_merge_tree_matches_head": true,
+  "tested_merge_parents": [
+    "ba6b0888806e84276e5f54afc07e4e555220c4ea",
+    "12b7b00737124aa7c0feaead893c930124332489"
+  ],
+  "assurance_run_id": 45096059220,
+  "assurance_run_url": "https://github.com/edithatogo/standards_check/actions/runs/45096059220",
+  "candidate_qualified": false,
+  "check_snapshot": {
+    "total": 39,
+    "by_outcome": {
+      "success": 34,
+      "failure": 2,
+      "skipped": 1,
+      "queued": 2
+    }
+  },
+  "relevant_checks": [
+    {
+      "name": "codecov/patch",
+      "id": 137437302663,
+      "app_id": 254,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/edithatogo/standards_check/runs/137437302663"
+    },
+    {
+      "name": "codecov (python)",
+      "id": 137436896235,
+      "app_id": 15368,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/edithatogo/standards_check/actions/runs/45096059220/job/137436896235"
+    },
+    {
+      "name": "codecov (rust)",
+      "id": 137436896229,
+      "app_id": 15368,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/edithatogo/standards_check/actions/runs/45096059220/job/137436896229"
+    },
+    {
+      "name": "assurance",
+      "id": 137436896228,
+      "app_id": 15368,
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/edithatogo/standards_check/actions/runs/45096059220/job/137436896228"
+    },
+    {
+      "name": "codecov (api)",
+      "id": 137436896212,
+      "app_id": 15368,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/edithatogo/standards_check/actions/runs/45096059220/job/137436896212"
+    },
+    {
+      "name": "coverage (api)",
+      "id": 137435997873,
+      "app_id": 15368,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/edithatogo/standards_check/actions/runs/45096059220/job/137435997873"
+    },
+    {
+      "name": "dependency-review",
+      "id": 137435997846,
+      "app_id": 15368,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/edithatogo/standards_check/actions/runs/45096059220/job/137435997846"
+    },
+    {
+      "name": "coverage (rust)",
+      "id": 137435997766,
+      "app_id": 15368,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/edithatogo/standards_check/actions/runs/45096059220/job/137435997766"
+    },
+    {
+      "name": "coverage (python)",
+      "id": 137435997679,
+      "app_id": 15368,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/edithatogo/standards_check/actions/runs/45096059220/job/137435997679"
+    },
+    {
+      "name": "boundary-mutations",
+      "id": 137435997658,
+      "app_id": 15368,
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/edithatogo/standards_check/actions/runs/45096059220/job/137435997658"
+    },
+    {
+      "name": "workflow-policy",
+      "id": 137435997369,
+      "app_id": 15368,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/edithatogo/standards_check/actions/runs/45096059220/job/137435997369"
+    },
+    {
+      "name": "privacy-and-secrets",
+      "id": 137435997154,
+      "app_id": 15368,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/edithatogo/standards_check/actions/runs/45096059195/job/137435997154"
+    }
+  ],
+  "measurements": {
+    "python": {
+      "tests_passed": 211,
+      "production_modules": 24,
+      "statements": 1507,
+      "missed_statements": 333,
+      "branches": 544,
+      "partial_branches": 91,
+      "combined_percent": 75.82,
+      "combined_floor_percent": 75,
+      "zero_covered_production_files_retained": [
+        "simple_extract.py",
+        "scripts/verify_legacy_standardflow.py"
+      ],
+      "test_driver_excluded": true,
+      "artifact_id": 14783437226
+    },
+    "rust": {
+      "tests_passed": 72,
+      "line_floor_percent": 79,
+      "line_floor_passed": true,
+      "scope": "Maintained production source; integration-test files excluded from LCOV.",
+      "artifact_id": 14783291645
+    },
+    "api": {
+      "tests_passed": 38,
+      "production_modules": [
+        "api/server.js",
+        "api/cors-options.js"
+      ],
+      "line_percent": 99.22,
+      "branch_percent": 94.59,
+      "function_percent": 90,
+      "artifact_id": 14783481664
+    }
+  },
+  "codecov": {
+    "upload_authentication": "OIDC",
+    "audience": "https://codecov.io",
+    "uploaded_commit_sha": "12b7b00737124aa7c0feaead893c930124332489",
+    "isolated_uploads": {
+      "components": [
+        "python",
+        "rust",
+        "api"
+      ],
+      "single_explicit_report_each": true,
+      "file_search_disabled": true,
+      "all_uploads_accepted": true,
+      "initial_state": "queued for processing"
+    },
+    "provider_check": {
+      "name": "codecov/patch",
+      "id": 137437302663,
+      "app_id": 254,
+      "app_slug": "codecov",
+      "conclusion": "success",
+      "completed_at_utc": "2026-11-23T01:46:54Z",
+      "diff_percent": 94.59,
+      "target_percent": 80,
+      "url": "https://github.com/edithatogo/standards_check/runs/137437302663"
+    },
+    "project_check_observed": false,
+    "legacy_statuses_count": 0,
+    "acceptance_scope": "Actual patch-check processing at the identified PR head; neither a successful project check nor whole-candidate or receiving-main qualification."
+  },
+  "boundary_failure": {
+    "job_id": 137435997658,
+    "artifact_id": 14783297063,
+    "artifact_zip_sha256": "ca75d67deabad423455c38f11ec862a78df21ebd7761d62e54bce84f3c370c5f",
+    "report_sha256": "0d06af228332d465e20df494a8116a8389e626dbb44d0e27a0a2b639047b3bd2",
+    "python_version": "3.12.16",
+    "root_cause": "The five-package foundation profile was installed with --no-deps under Python 3.12, without typing_extensions required by referencing 0.37.0 for Python <3.13.",
+    "observed_error": "TypeError: 'default' is an invalid keyword argument for typevar()",
+    "python_baseline_passed": false,
+    "api_baseline_passed": true,
+    "mutations_executed": 0,
+    "original_sources_unchanged": true,
+    "aggregate_failed_as_required": true
+  },
+  "supersession": {
+    "disposition": "Historical failed first-head observation; retain rather than reinterpret as successful.",
+    "prepared_boundary_correction": "Use Python 3.14, matching existing foundation validation, and run pip check after the isolated install. No mutation classifier or threshold change.",
+    "correction_local_evidence": {
+      "runtime": "Python 3.14.10",
+      "foundation_packages": 5,
+      "typing_extensions_installed": false,
+      "pip_check_passed": true,
+      "baselines_passed": true,
+      "mutations_killed_by_assertions": 10,
+      "survivors": 0,
+      "unviable": 0,
+      "timeouts": 0,
+      "sources_unchanged": true,
+      "report_sha256": "6770f47988c76ef498d0c1f1aaea35617f5a287cd30115317743fbc5add907e5"
+    },
+    "replacement_head_sha": null,
+    "replacement_hosted_qualification": "Must be established separately on the corrected final head; API security changes also require fresh measurement.",
+    "earlier_python312_local_observation": "Historical local success had typing_extensions 4.16.0 installed; it did not prove that the isolated five-package closure worked on Python 3.12."
+  }
+}

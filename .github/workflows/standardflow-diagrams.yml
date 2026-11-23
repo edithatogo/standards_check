@@ -233,6 +233,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@4cda84d5c5c54efe2404f9d843567869ab1699d4
         with:
           toolchain: 1.98.1
+          components: rustfmt,clippy
       - name: Fetch the exact locked dependency graph
         run: cargo fetch --locked
       - name: Regenerate and byte-compare all twelve reference artefacts
@@ -285,6 +286,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@4cda84d5c5c54efe2404f9d843567869ab1699d4
         with:
           toolchain: 1.98.1
+          components: rustfmt,clippy
       - name: Run all tests
         run: cargo test --workspace --all-targets --all-features --locked
       - name: Exercise deterministic scene output

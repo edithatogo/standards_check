@@ -3,6 +3,7 @@ const fs = require('fs').promises;
 const path = require('path');
 const { marked } = require('marked');
 const cors = require('cors');
+const { rateLimit } = require('express-rate-limit');
 const { createCorsOptions } = require('./cors-options');
 
 const app = express();
@@ -10,7 +11,19 @@ const port = 3000;
 
 const checklistsDir = path.join(__dirname, '../markdown/en');
 
-app.use(cors(createCorsOptions(process.env.CORS_ORIGIN)));
+app.use(cors({
+  ...createCorsOptions(process.env.CORS_ORIGIN),
+  exposedHeaders: ['RateLimit', 'RateLimit-Policy', 'Retry-After'],
+}));
+// ponytail: per-process counter; use a shared store before adding workers.
+app.use('/api/checklists', rateLimit({
+  windowMs: 60_000,
+  limit: 100,
+  standardHeaders: 'draft-8',
+  legacyHeaders: false,
+  ipv6Subnet: 56,
+  message: { error: 'Too many checklist requests; retry after the indicated delay' },
+}));
 app.use(express.json());
 
 // Helper function to parse markdown content into a structured JSON object.
@@ -77,10 +90,11 @@ app.get('/api/checklists', async (req, res) => {
 app.get('/api/checklists/:id', async (req, res) => {
     try {
         const checklistId = req.params.id;
+        if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(checklistId)) {
+            return res.status(400).json({ error: 'Invalid checklist ID' });
+        }
         const findChecklist = async (dir) => {
-            // Prevent directory traversal attacks
-            const safeChecklistId = path.basename(checklistId);
-            const targetPath = path.join(dir, `${safeChecklistId}.md`);
+            const targetPath = path.join(dir, `${checklistId}.md`);
             try {
                 await fs.access(targetPath);
                 return targetPath;
@@ -102,12 +116,16 @@ app.get('/api/checklists/:id', async (req, res) => {
             res.status(404).json({ error: 'Checklist not found' });
         }
     } catch (error) {
-        console.error(`Error fetching checklist ${req.params.id}:`, error);
+        console.error('Error fetching checklist %s:', req.params.id, error);
         res.status(500).json({ error: 'Failed to fetch checklist' });
     }
 });
 
 
-app.listen(port, () => {
-  console.log(`Checklist API server running at http://localhost:${port}`);
-});
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log(`Checklist API server running at http://localhost:${port}`);
+  });
+}
+
+module.exports = app;

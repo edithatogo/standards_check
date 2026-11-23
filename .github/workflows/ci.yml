@@ -1,0 +1,272 @@
+name: Assurance
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: assurance-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  coverage:
+    name: coverage (${{ matrix.component }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - component: python
+            report: python.xml
+          - component: rust
+            report: rust.lcov
+          - component: api
+            report: api.lcov
+    env:
+      CARGO_BUILD_JOBS: "2"
+      PROPTEST_CASES: "256"
+      PROPTEST_RNG_SEED: "721114987"
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      HF_HUB_DISABLE_TELEMETRY: "1"
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          submodules: false
+      - name: Prepare evidence directory
+        run: |
+          mkdir -p target/coverage
+          git rev-parse HEAD > target/coverage/commit.txt
+      - if: matrix.component == 'python'
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+      - name: Install Python test and measurement tools
+        if: matrix.component == 'python'
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends graphviz
+          python -m pip install --disable-pip-version-check -r requirements/python-tests.txt
+          python -m pip install --disable-pip-version-check --no-deps -r requirements/legacy-standardflow.txt
+          python -m pip install --disable-pip-version-check --no-deps -r requirements/assurance-tools.txt
+          python -m pip check
+      - name: Prepare the locked CLI for Python's cross-runtime contract
+        if: matrix.component == 'python'
+        uses: dtolnay/rust-toolchain@4cda84d5c5c54efe2404f9d843567869ab1699d4
+        with:
+          toolchain: "1.98.1"
+          components: rustfmt,clippy
+      - name: Measure Python regressions and existing validators
+        if: matrix.component == 'python'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m coverage run -m pytest --import-mode=importlib tests test_extract_and_convert.py 2>&1 | tee target/coverage/tests.log
+          for validator in validate_foundation validate_packs validate_artifacts validate_costing_reconciliation validate_prisma_source_assurance audit_foundation; do
+            python -m coverage run "scripts/${validator}.py"
+          done
+          cargo build --locked -p standardflow-cli
+          python -m coverage run -m scripts.qualify_legacy_prisma \
+            --rust-cli target/debug/standardflow --output target/coverage/legacy-prisma.json
+          python -m coverage combine
+          python -m coverage xml
+          python -m coverage json
+          python -m coverage report --fail-under=75 | tee target/coverage/summary.txt
+      - if: matrix.component == 'rust'
+        uses: dtolnay/rust-toolchain@4cda84d5c5c54efe2404f9d843567869ab1699d4
+        with:
+          toolchain: "1.98.1"
+          components: llvm-tools-preview,rustfmt,clippy
+      - name: Install pinned Rust measurement tool
+        if: matrix.component == 'rust'
+        run: cargo install cargo-llvm-cov --version 0.9.2 --locked
+      - name: Measure the Rust workspace
+        if: matrix.component == 'rust'
+        shell: bash
+        run: |
+          set -euo pipefail
+          cargo llvm-cov --workspace --all-targets --all-features --locked --lcov --output-path target/coverage/rust.lcov --fail-under-lines 79 2>&1 | tee target/coverage/tests.log
+          cargo llvm-cov report --json --summary-only --output-path target/coverage/rust-summary.json
+      - if: matrix.component == 'api'
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+      - name: Measure the maintained API
+        if: matrix.component == 'api'
+        run: |
+          npm ci --prefix api --ignore-scripts --no-audit --no-fund
+          node --test --experimental-test-coverage \
+            --test-coverage-include='api/server.js' --test-coverage-include='api/cors-options.js' \
+            --test-coverage-lines=98 --test-coverage-branches=90 \
+            --test-reporter=spec --test-reporter-destination=stdout \
+            --test-reporter=lcov --test-reporter-destination=target/coverage/api.lcov \
+            api/test/*.test.js api/test/security/*.test.cjs
+      - name: Bind report bytes to the tested checkout
+        env:
+          COVERAGE_REPORT: target/coverage/${{ matrix.report }}
+        run: |
+          test -s "$COVERAGE_REPORT"
+          sha256sum "$COVERAGE_REPORT" > target/coverage/report.sha256
+      - name: Retain component coverage evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: coverage-${{ matrix.component }}-${{ github.sha }}
+          path: target/coverage/
+          if-no-files-found: error
+          retention-days: 30
+
+  codecov:
+    name: codecov (${{ matrix.component }})
+    needs: coverage
+    if: github.event_name != 'pull_request' || (github.event.pull_request.head.repo.full_name == github.repository && github.actor != 'dependabot[bot]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - component: python
+            report: python.xml
+          - component: rust
+            report: rust.lcov
+          - component: api
+            report: api.lcov
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          submodules: false
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: coverage-${{ matrix.component }}-${{ github.sha }}
+          path: target/coverage
+      - name: Verify the report and tested checkout
+        run: |
+          test "$(cat target/coverage/commit.txt)" = "$(git rev-parse HEAD)"
+          sha256sum --check target/coverage/report.sha256
+      - name: Upload one explicit report with OIDC
+        uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
+        with:
+          use_oidc: true
+          version: v11.3.2
+          files: target/coverage/${{ matrix.report }}
+          flags: ${{ matrix.component }}
+          disable_search: true
+          disable_telem: true
+          fail_ci_if_error: true
+
+  workflow-policy:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          submodules: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+      - name: Install pinned workflow linters
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check --no-deps -r requirements/assurance-tools.txt
+          curl --fail --location --silent --show-error --max-time 90 \
+            https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_1.7.12_linux_amd64.tar.gz \
+            --output "$RUNNER_TEMP/actionlint.tar.gz"
+          echo "8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8  $RUNNER_TEMP/actionlint.tar.gz" | sha256sum --check
+          tar -xzf "$RUNNER_TEMP/actionlint.tar.gz" -C "$RUNNER_TEMP" actionlint
+      - name: Check workflow syntax and offline security policy
+        run: |
+          "$RUNNER_TEMP/actionlint" -color
+          zizmor --offline .github/workflows
+
+  boundary-mutations:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          submodules: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.14"
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+      - name: Install locked boundary-test dependencies
+        run: |
+          python -m pip install --disable-pip-version-check --no-deps -r requirements/standardflow-foundation.txt
+          python -m pip check
+          npm ci --prefix api --ignore-scripts --no-audit --no-fund
+      - name: Execute the hand-selected schema and API mutation campaign
+        run: python tests/mutation_campaign.py --output target/mutation-evidence/report.json
+      - name: Retain each baseline and mutation outcome
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: boundary-mutations-${{ github.sha }}
+          path: target/mutation-evidence/
+          if-no-files-found: error
+          retention-days: 30
+
+  dependency-review:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
+        with:
+          egress-policy: audit
+      - uses: actions/dependency-review-action@bbc44d14a204704ccc493733616cd1e93a0321ec # v5.0.1
+        with:
+          fail-on-severity: low
+          comment-summary-in-pr: never
+
+  assurance:
+    if: always()
+    needs: [coverage, workflow-policy, boundary-mutations, dependency-review]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      - name: Require each applicable local assurance check
+        env:
+          COVERAGE: ${{ needs.coverage.result }}
+          WORKFLOW_POLICY: ${{ needs.workflow-policy.result }}
+          BOUNDARY_MUTATIONS: ${{ needs.boundary-mutations.result }}
+          DEPENDENCY_REVIEW: ${{ needs.dependency-review.result }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          test "$COVERAGE" = success
+          test "$WORKFLOW_POLICY" = success
+          test "$BOUNDARY_MUTATIONS" = success
+          if [ "$EVENT_NAME" = pull_request ]; then
+            test "$DEPENDENCY_REVIEW" = success
+          else
+            test "$DEPENDENCY_REVIEW" = skipped
+          fi

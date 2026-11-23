@@ -1,6 +1,7 @@
 //! Contract, arithmetic, rendering and accessibility tests for the four PRISMA 2020 variants.
 
 use proptest::prelude::*;
+use proptest::test_runner::FileFailurePersistence;
 use serde_json::Value;
 use standardflow_artifacts::{
     DatabaseRegisterStream, ExclusionReason, IncludedCounts, PrismaError, PrismaFlow,
@@ -102,6 +103,13 @@ fn arithmetic_mismatch_fails_before_rendering() -> Result<(), Box<dyn std::error
 }
 
 proptest! {
+    #![proptest_config(ProptestConfig {
+        cases: 256,
+        max_shrink_iters: 4096,
+        failure_persistence: Some(Box::new(FileFailurePersistence::WithSource("proptest-regressions"))),
+        ..ProptestConfig::default()
+    })]
+
     #[test]
     fn derived_database_stream_arithmetic_remains_valid(
         databases in 1_u64..1_000_000,
@@ -164,5 +172,64 @@ proptest! {
             },
         };
         prop_assert!(flow.validate().is_valid());
+
+        // Moving records between identification sources preserves every later
+        // count. Changing one downstream count must break conservation.
+        let mut redistributed = flow;
+        redistributed.databases_registers.databases -= 1;
+        redistributed.databases_registers.registers += 1;
+        prop_assert!(redistributed.validate().is_valid());
+        let wire = serde_json::to_value(&redistributed)?;
+        for field in [
+            "records_screened", "records_excluded", "reports_sought",
+            "reports_not_retrieved", "reports_assessed", "reports_included",
+        ] {
+            let mut invalid = wire.clone();
+            let pointer = format!("/databases_registers/{field}");
+            let count = invalid.pointer_mut(&pointer)
+                .ok_or_else(|| TestCaseError::fail(format!("missing {pointer}")))?;
+            let original = count.as_u64()
+                .ok_or_else(|| TestCaseError::fail(format!("non-integer {pointer}")))?;
+            *count = Value::from(original + 1);
+            let invalid: PrismaFlow = serde_json::from_value(invalid)?;
+            prop_assert!(!invalid.validate().is_valid(), "accepted corruption of {field}");
+            prop_assert!(matches!(invalid.build_scene(), Err(PrismaError::Validation(_))));
+        }
+        let mut invalid = redistributed;
+        invalid.databases_registers.reports_excluded.push(ExclusionReason {
+            reason: String::from("Additional excluded report"),
+            reports: 1,
+        });
+        prop_assert!(invalid.validate().diagnostics.iter().any(|diagnostic| diagnostic.code == "SF-PRISMA-030"));
+        prop_assert!(matches!(invalid.build_scene(), Err(PrismaError::Validation(_))));
+    }
+
+    #[test]
+    fn updated_review_totals_preserve_addition_and_reject_one_count_drift(
+        previous_studies in 0_u64..1_000_000,
+        additional_reports in 0_u64..1_000_000,
+    ) {
+        let mut flow: PrismaFlow = serde_json::from_str(UPDATED_MIXED)?;
+        let previous_reports = previous_studies + additional_reports;
+        flow.previous_review = Some(IncludedCounts {
+            studies: previous_studies,
+            reports: previous_reports,
+        });
+        flow.total_included = IncludedCounts {
+            studies: previous_studies + flow.new_included.studies,
+            reports: previous_reports + flow.new_included.reports,
+        };
+        prop_assert!(flow.validate().is_valid());
+        for change_studies in [false, true] {
+            let mut invalid = flow.clone();
+            if change_studies {
+                invalid.total_included.studies += 1;
+            } else {
+                invalid.total_included.reports += 1;
+            }
+            let report = invalid.validate();
+            prop_assert!(report.diagnostics.iter().any(|diagnostic| diagnostic.code == "SF-PRISMA-040"));
+            prop_assert!(matches!(invalid.build_scene(), Err(PrismaError::Validation(_))));
+        }
     }
 }

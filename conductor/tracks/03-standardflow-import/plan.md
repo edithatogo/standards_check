@@ -47,15 +47,22 @@
 - [x] Admit Click 8.5.1, graphviz 0.21 and jsonschema 4.26.0 in the maintained host
   profile through PR #98, merged at `d213085a268a4cd82d522e6e17d27f3dee15bf5f`.
   Preserve the exact source snapshot and historical source PR dispositions.
-- [ ] Record receiving-main execution after PR #98 separately from its successful
-  reviewed-head checks and the historical `2b0c5794` runtime receipt.
-- [ ] Retain issue #94 for optional interactive-kernel qualification and updater
-  observation. ipykernel 6.31.0 remains unadmitted; neither attempted kernel profile
-  reached `kernel_info` or executed cells.
+- [x] Record successful receiving-main execution after PR #98 at admission merge
+  `d213085a` and retirement merge `ba6b0888`, separately from its reviewed-head checks
+  and the historical `2b0c5794` runtime receipt.
+- [x] Qualify both optional interactive-kernel profiles through PR #101 and close #94.
+  Actual hosted kernels executed all 11 notebooks / 43 cells per version, passed
+  protocol/lifecycle probes and matched notebook, image and CLI outputs. The ordinary
+  host profile remains unchanged; broader protected updater qualification stays in #30.
 
 ## Remaining semantic migration
 
-- [ ] Define legacy-to-Rust consumer contracts and differential arithmetic fixtures.
+- [x] Define and execute the bounded new/updated database-only PRISMA count contract
+  and two explicit rejection counterexamples through PR #103.
+- [ ] Extend consumer contracts to unsupported source streams, report/study mappings,
+  other families and real consumer formats before semantic cutover.
+- [x] Add independently sourced item-identity fixtures and a fail-closed rejection
+  guard for the ten held STARD copies through PR #102; no content is admitted.
 - [ ] Resolve legacy fixture rights, identities and provenance before pack promotion.
 - [ ] Complete independent methodology and accessibility qualification.
 - [ ] Replace legacy consumers only after their compatibility and rollback receipts.

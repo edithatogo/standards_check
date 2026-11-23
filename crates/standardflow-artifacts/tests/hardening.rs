@@ -60,6 +60,38 @@ fn rust_validation_mirrors_safe_integer_and_reason_limits() -> Result<(), Box<dy
 }
 
 #[test]
+fn safe_integer_ceiling_is_inclusive_for_consistent_counts()
+-> Result<(), Box<dyn std::error::Error>> {
+    let flow = serde_json::json!({
+        "schema_version": "dev.standardflow.prisma-flow.v1",
+        "review_id": "safe-integer-boundary",
+        "template": "new_databases_registers",
+        "databases_registers": {
+            "databases": MAX_SAFE_JSON_INTEGER,
+            "registers": 0,
+            "duplicate_records_removed": 0,
+            "records_marked_ineligible_by_automation": 0,
+            "records_removed_other_reasons": 0,
+            "records_screened": MAX_SAFE_JSON_INTEGER,
+            "records_excluded": 0,
+            "reports_sought": MAX_SAFE_JSON_INTEGER,
+            "reports_not_retrieved": 0,
+            "reports_assessed": MAX_SAFE_JSON_INTEGER,
+            "reports_excluded": [],
+            "reports_included": MAX_SAFE_JSON_INTEGER
+        },
+        "other_methods": null,
+        "previous_review": null,
+        "new_included": {"studies": 1, "reports": MAX_SAFE_JSON_INTEGER},
+        "total_included": {"studies": 1, "reports": MAX_SAFE_JSON_INTEGER}
+    });
+    let parsed = parse_prisma_flow(&serde_json::to_vec(&flow)?)?;
+    assert!(parsed.validate().is_valid());
+    assert!(parsed.build_scene()?.validate().is_valid());
+    Ok(())
+}
+
+#[test]
 fn recipes_reject_excessive_rows_before_layout() -> Result<(), Box<dyn std::error::Error>> {
     let mut recipe = DiagramRecipe::from_json(RECIPE)?;
     let node = recipe
@@ -114,6 +146,7 @@ fn svg_nodes_follow_reading_order_independently_of_storage_order()
 -> Result<(), Box<dyn std::error::Error>> {
     let mut scene = parse_prisma_flow(FLOW)?.build_scene()?;
     let svg = render_svg(&scene)?;
+    let text = render_text(&scene)?;
     let mut previous_position = 0;
     for id in &scene.reading_order {
         let marker = format!("<g id=\"node-{id}\"");
@@ -129,6 +162,7 @@ fn svg_nodes_follow_reading_order_independently_of_storage_order()
     scene.nodes.reverse();
     assert!(scene.validate().is_valid());
     assert_eq!(render_svg(&scene)?, svg);
+    assert_eq!(render_text(&scene)?, text);
     Ok(())
 }
 

@@ -1,0 +1,33 @@
+[run]
+branch = True
+relative_files = True
+source = .
+# Subprocesses can change cwd; directory exclusions must match the same source tree.
+omit =
+    */tests/*
+    test_*.py
+    */legacy/*
+    */.agents/*
+    */node_modules/*
+    */target/*
+patch = subprocess
+parallel = True
+data_file = target/coverage/.coverage
+
+[report]
+# Combined data can contain zero-hit discoveries from subprocesses or earlier runs.
+omit =
+    */tests/*
+    test_*.py
+    */legacy/*
+    */.agents/*
+    */node_modules/*
+    */target/*
+show_missing = True
+precision = 2
+
+[xml]
+output = target/coverage/python.xml
+
+[json]
+output = target/coverage/python.json

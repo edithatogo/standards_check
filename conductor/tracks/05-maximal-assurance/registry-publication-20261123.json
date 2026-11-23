@@ -1,0 +1,179 @@
+{
+  "repository": "edithatogo/repository-standards",
+  "pull_request": 173,
+  "url": "https://github.com/edithatogo/repository-standards/pull/173",
+  "base_sha": "a3cc8dccdb67e6f122c71cec713194cdec792d07",
+  "source_head_sha": "6e24bb707d7ac77197b47ed4c2131597c1e0690f",
+  "receiving_main_sha": "2efdbd988064f6857795b9fa9ed4e1d08d18791d",
+  "qualified_and_receiving_tree_sha": "7caade42e1ef76e438c07b9aed4b82a2e8f3227a",
+  "merged_at_utc": "2026-11-23T02:00:05Z",
+  "merge_method": "squash",
+  "expected_head_guard_used": true,
+  "bypass_used": false,
+  "live_rules_modified": false,
+  "files": [
+    {
+      "path": "registry/repositories.json",
+      "blob_sha": "8dd669df6067e4f6390ed519f509cd9f6884e827",
+      "sha256": "c349e8b98418da12d22913ab57c9d5ff426685e3d418a0b3adcd8658541eb3ae"
+    },
+    {
+      "path": "docs/standards-check-maintenance-assessment.md",
+      "blob_sha": "7900a46921ce0cfae047a8f401b2e514f858aadb",
+      "sha256": "90b9af486c926319fbd9b249de9a1d60f360bdf47bde80fbf43b8914b7b557b7"
+    }
+  ],
+  "scope": {
+    "registry_entries": 168,
+    "changed_entries": [
+      "edithatogo/standards_check"
+    ],
+    "other_entries_unchanged": 167,
+    "all_bytes_outside_entry_preserved": true,
+    "crlf_preserved": true,
+    "profile": "node",
+    "supply_chain_profile": "baseline",
+    "updater_removal_gate_unchanged": true,
+    "consumer_receiving_main_qualified": false
+  },
+  "local_validation": {
+    "python": "3.15.2",
+    "tests_discovered": 349,
+    "tests_passed": 311,
+    "capability_skips": {
+      "presidio": 26,
+      "gitleaks": 12
+    },
+    "all_entries_schema_valid": true,
+    "scientific_policy_passed": true,
+    "whitespace": "Passed with explicit cr-at-eol recognition."
+  },
+  "remote_readback": {
+    "head_parent_and_tree_match": true,
+    "both_blobs_match_reviewed_bytes": true,
+    "exact_two_file_scope": true,
+    "independent_agent_review": "Passed; no blocking findings."
+  },
+  "source_checks": [
+    {
+      "name": "publish-aggregate",
+      "id": 137440627313,
+      "app_id": 15368,
+      "conclusion": "skipped",
+      "url": "https://github.com/edithatogo/repository-standards/actions/runs/45097484246/job/137440627313"
+    },
+    {
+      "name": "reconcile-estate",
+      "id": 137440626790,
+      "app_id": 15368,
+      "conclusion": "skipped",
+      "url": "https://github.com/edithatogo/repository-standards/actions/runs/45097484246/job/137440626790"
+    },
+    {
+      "name": "zizmor",
+      "id": 137440614153,
+      "app_id": 57789,
+      "conclusion": "success",
+      "url": "https://github.com/edithatogo/repository-standards/runs/137440614153"
+    },
+    {
+      "name": "CodeQL",
+      "id": 137440555475,
+      "app_id": 57789,
+      "conclusion": "success",
+      "url": "https://github.com/edithatogo/repository-standards/runs/137440555475"
+    },
+    {
+      "name": "policy-gate",
+      "id": 137440425528,
+      "app_id": 15368,
+      "conclusion": "success",
+      "url": "https://github.com/edithatogo/repository-standards/actions/runs/45097484282/job/137440425528"
+    },
+    {
+      "name": "privacy-and-secrets",
+      "id": 137440425413,
+      "app_id": 15368,
+      "conclusion": "success",
+      "url": "https://github.com/edithatogo/repository-standards/actions/runs/45097484376/job/137440425413"
+    },
+    {
+      "name": "community-standards",
+      "id": 137440425233,
+      "app_id": 15368,
+      "conclusion": "success",
+      "url": "https://github.com/edithatogo/repository-standards/actions/runs/45097484282/job/137440425233"
+    },
+    {
+      "name": "validate-policy",
+      "id": 137440425125,
+      "app_id": 15368,
+      "conclusion": "success",
+      "url": "https://github.com/edithatogo/repository-standards/actions/runs/45097484246/job/137440425125"
+    },
+    {
+      "name": "zizmor",
+      "id": 137440424994,
+      "app_id": 15368,
+      "conclusion": "success",
+      "url": "https://github.com/edithatogo/repository-standards/actions/runs/45097484236/job/137440424994"
+    },
+    {
+      "name": "Analyze (python)",
+      "id": 137440421201,
+      "app_id": 15368,
+      "conclusion": "success",
+      "url": "https://github.com/edithatogo/repository-standards/actions/runs/45097482069/job/137440421201"
+    },
+    {
+      "name": "Analyze (actions)",
+      "id": 137440420944,
+      "app_id": 15368,
+      "conclusion": "success",
+      "url": "https://github.com/edithatogo/repository-standards/actions/runs/45097482069/job/137440420944"
+    }
+  ],
+  "receiving_observed_at_utc": "2026-11-23T02:01:22Z",
+  "receiving_checks": [
+    {
+      "name": "Analyze (python)",
+      "id": 137441008296,
+      "app_id": 15368,
+      "conclusion": "success",
+      "url": "https://github.com/edithatogo/repository-standards/actions/runs/45097667344/job/137441008296"
+    },
+    {
+      "name": "Analyze (actions)",
+      "id": 137441008025,
+      "app_id": 15368,
+      "conclusion": "success",
+      "url": "https://github.com/edithatogo/repository-standards/actions/runs/45097667344/job/137441008025"
+    },
+    {
+      "name": "analysis",
+      "id": 137441004931,
+      "app_id": 15368,
+      "conclusion": "success",
+      "url": "https://github.com/edithatogo/repository-standards/actions/runs/45097667934/job/137441004931"
+    },
+    {
+      "name": "privacy-and-secrets",
+      "id": 137441004674,
+      "app_id": 15368,
+      "conclusion": "success",
+      "url": "https://github.com/edithatogo/repository-standards/actions/runs/45097667852/job/137441004674"
+    },
+    {
+      "name": "zizmor",
+      "id": 137441004375,
+      "app_id": 15368,
+      "conclusion": "success",
+      "url": "https://github.com/edithatogo/repository-standards/actions/runs/45097667806/job/137441004375"
+    }
+  ],
+  "limits": [
+    "This corrects descriptive observations and does not declare every ecosystem's protected updater lifecycle complete.",
+    "Consumer PR100 first-head Codecov evidence remains revision-scoped; no consumer project-check or receiving-main qualification is inferred.",
+    "Central live estate acceptance, policy rollout and unrelated tracks retain their existing gates."
+  ]
+}

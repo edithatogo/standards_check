@@ -232,8 +232,14 @@ and jsonschema 4.26.0 in the maintained root host profile. Reviewed head
 `08d9ffef20675efc80484d108b32f1d1ee759921` passed its
 [legacy workflow 45082189553](https://github.com/edithatogo/standards_check/actions/runs/45082189553);
 all nine ordinary checks succeeded and two offline checks remained queued.
-Receiving-main execution after this admission is separately pending. The earlier
-`2b0c5794` checks above retain their original revision and dependency scope.
+Receiving-main execution subsequently passed at the admission merge in
+[run 45084073642](https://github.com/edithatogo/standards_check/actions/runs/45084073642)
+and retirement main `ba6b0888806e84276e5f54afc07e4e555220c4ea` in
+[run 45085224983](https://github.com/edithatogo/standards_check/actions/runs/45085224983).
+Job `137402195300` passed provenance, source/receiving parity, historical container tests
+and default HTTP startup; artifact `14778918783` retains the parity receipt. The latter
+main has eight successful ordinary checks; its offline-security job remains queued.
+The earlier `2b0c5794` checks above retain their original revision and dependency scope.
 
 The [qualification receipt](../../../docs/migration/standardflow/dependency-qualification-20261123.json)
 binds the maintained profile to SHA-256
@@ -242,12 +248,10 @@ The exact imported source, historical Docker dependencies and source PRs closed
 without merging remain unchanged. Admission of the three host versions does not
 merge the preserved source dependency branches.
 
-ipykernel 6.31.0 remains unadmitted.
-[Issue #94](https://github.com/edithatogo/standards_check/issues/94) remains open for
-optional interactive-kernel qualification and updater observation. Its published
-attempt receipt records 52 application tests passing in each old/new kernel
-profile, but both kernel startups were blocked before `kernel_info`; no cells
-executed. Those application results do not establish interactive-kernel parity.
+At that earlier host-admission boundary, ipykernel 6.31.0 was unqualified: both local
+kernel startups were blocked before `kernel_info` and no cells executed. The actual
+hosted qualification below supersedes that blocker for its bounded optional use;
+the earlier application-only results are not relabelled as kernel execution.
 
 ## Voiage downstream merge and command evidence
 
@@ -301,3 +305,40 @@ methodology and accessibility qualification remain open. See the
 [retirement record](../../../docs/migration/standardflow/retirement.md) for recovery
 and the [source inventory](../../../docs/migration/standardflow/source-inventory.json)
 for the preserved historical observations.
+
+## Completed downstream main checks
+
+Voiage main `a921d6471822eaac7fbc22f507760bd943ba9f6a` subsequently completed
+52 successful checks and three expected skips, with no failures or pending checks.
+[The commit checks](https://github.com/edithatogo/voiage/commit/a921d6471822eaac7fbc22f507760bd943ba9f6a/checks)
+are separate from the prior PR and local command receipts; the full local tox attempt
+above remains recorded as unsuccessful.
+
+## Parallel qualification integrated on 23 November 2026
+
+PRs #101–#103 reached receiving main `7a6df395a2853c4c2052a492078cceb8f79f817d` while
+the broader assurance candidate was being prepared. The candidate incorporates those
+changes without altering the frozen source or replacing a consumer:
+
+- [PR #101](https://github.com/edithatogo/standards_check/pull/101), merge
+  `79e64cf2c36e56c088f082cc6bc933ac3ce89f06`, qualifies ipykernel 6.25.0 versus 6.31.0
+  for the 11 frozen notebooks / 43 cells, tested protocol interactions and successful
+  shutdown. Reviewed head `86ed3d82da24c2126708ac966606940b01a80f05` passed
+  [the actual kernel job](https://github.com/edithatogo/standards_check/actions/runs/45096897786/job/137438587584).
+  The [runbook](kernel-qualification-20261123.md) and closed issue #94 retain artifact
+  identity and scope. The ordinary host renderer still has no kernel dependency.
+- [PR #102](https://github.com/edithatogo/standards_check/pull/102), merge
+  `756ac783564d7b848a7c231a542b301a39208391`, adds source-derived identifier fixtures
+  and exact archived-object rejection for all ten STARD copies. Its
+  [hosted foundation job](https://github.com/edithatogo/standards_check/actions/runs/45097073098/job/137439137943)
+  passed the 11 focused tests and detailed rejection guard. The
+  [source/rights ledger](../../../docs/migration/standardflow/held-guidelines-qualification.json)
+  still holds every array; wording, editions and item-level permissions remain in #95.
+- [PR #103](https://github.com/edithatogo/standards_check/pull/103), merge `7a6df395`,
+  adds the [bounded legacy PRISMA contract](../../../docs/migration/standardflow/legacy-prisma-contract.md):
+  two synthetic database-only examples and two explicit validation differences.
+  Scene/SVG/text structural checks do not constitute assistive-technology or
+  methodological acceptance. Unsupported mappings and real consumer cutover remain open.
+
+These receipts retain their reviewed revisions. Integrated assurance and receiving-main
+checks must still identify the actual revision they execute.

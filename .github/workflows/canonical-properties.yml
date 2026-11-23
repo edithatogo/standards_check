@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - "crates/standardflow-core/**"
+      - "crates/standardflow-artifacts/**"
       - "Cargo.toml"
       - "Cargo.lock"
       - "rust-toolchain.toml"
@@ -38,6 +39,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@4cda84d5c5c54efe2404f9d843567869ab1699d4
         with:
           toolchain: "1.98.1"
+          components: rustfmt,clippy
       - name: Build bounded canonical contract properties
         shell: bash
         run: |
@@ -46,12 +48,12 @@ jobs:
           rustc -Vv | tee target/property-evidence/compiler.log
           git rev-parse HEAD | tee target/property-evidence/commit.log
           printf 'PROPTEST_RNG_SEED=%s\nPROPTEST_CASES=%s\n' "$PROPTEST_RNG_SEED" "$PROPTEST_CASES" | tee target/property-evidence/campaign.log
-          timeout 540s cargo test --locked -p standardflow-core --test canonical_properties --no-run 2>&1 | tee target/property-evidence/build.log
-      - name: Execute canonical and identifier invariants
+          timeout 540s cargo test --workspace --all-targets --all-features --locked --no-run 2>&1 | tee target/property-evidence/build.log
+      - name: Execute canonical, lock, arithmetic and renderer invariants
         shell: bash
         run: |
           set -euo pipefail
-          timeout 120s cargo test --locked -p standardflow-core --test canonical_properties -- --test-threads=1 --nocapture 2>&1 | tee target/property-evidence/tests.log
+          timeout 120s cargo test --workspace --all-targets --all-features --locked -- --test-threads=1 --nocapture 2>&1 | tee target/property-evidence/tests.log
       - name: Preserve execution evidence and regression seeds
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
@@ -60,5 +62,86 @@ jobs:
           path: |
             target/property-evidence/*.log
             crates/standardflow-core/tests/*.proptest-regressions
+            crates/standardflow-artifacts/tests/*.proptest-regressions
+          if-no-files-found: warn
+          retention-days: 14
+
+  bounded-rust-mutation:
+    if: github.event_name != 'pull_request'
+    needs: canonical-contracts
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      CARGO_BUILD_JOBS: "2"
+      PROPTEST_RNG_SEED: "721114987"
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          submodules: false
+      - uses: dtolnay/rust-toolchain@4cda84d5c5c54efe2404f9d843567869ab1699d4
+        with:
+          toolchain: "1.98.1"
+          components: rustfmt,clippy
+      - name: Prepare the pinned mutation tool and locked dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p target/mutation-evidence
+          rustc -Vv | tee target/mutation-evidence/compiler.log
+          git rev-parse HEAD | tee target/mutation-evidence/commit.log
+          printf 'PROPTEST_RNG_SEED=%s\nCARGO_BUILD_JOBS=%s\n' "$PROPTEST_RNG_SEED" "$CARGO_BUILD_JOBS" | tee target/mutation-evidence/campaign.log
+          timeout 480s cargo install --locked cargo-mutants --version 27.1.0 2>&1 | tee target/mutation-evidence/install.log
+          cargo mutants --version | tee target/mutation-evidence/tool.log
+          timeout 120s cargo fetch --locked 2>&1 | tee target/mutation-evidence/fetch.log
+      - name: Mutate canonical, lock and arithmetic guards
+        shell: bash
+        run: |
+          set -euo pipefail
+          timeout 600s cargo mutants \
+            --gitignore=true --test-workspace=true --jobs 2 --timeout 30 \
+            --build-timeout 120 --no-shuffle \
+            --re 'write_value|verify_pack_lock|validate_difference|validate_updated_totals|validate_assessed_outcome|validate_count' \
+            --file crates/standardflow-core/src/canonical.rs \
+            --file crates/standardflow-core/src/lock.rs \
+            --file crates/standardflow-artifacts/src/prisma.rs \
+            --output target/mutation-evidence \
+            --cargo-arg=--locked --cargo-arg=--offline --all-features -- --all-targets \
+            2>&1 | tee target/mutation-evidence/execution.log
+      - name: Require the qualified mutant inventory and outcomes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          report = json.loads(Path("target/mutation-evidence/mutants.out/outcomes.json").read_text())
+          counts = tuple(report[key] for key in ("total_mutants", "caught", "missed", "timeout", "unviable"))
+          if counts != (26, 25, 0, 0, 1):
+              raise SystemExit(f"Mutation inventory/outcomes changed; review required: {counts}")
+          outcomes = [outcome for outcome in report["outcomes"] if isinstance(outcome["scenario"], dict)]
+          if len(outcomes) != 26 or not any(outcome["scenario"] == "Baseline" and outcome["summary"] == "Success" for outcome in report["outcomes"]):
+              raise SystemExit("Incomplete mutant inventory or missing successful baseline")
+          functions = {outcome["scenario"]["Mutant"]["function"]["function_name"] for outcome in outcomes}
+          if functions != {"write_value", "verify_pack_lock", "validate_difference", "validate_updated_totals", "validate_assessed_outcome", "validate_count"}:
+              raise SystemExit(f"Unexpected mutated functions: {sorted(functions)}")
+          unviable = [outcome["scenario"]["Mutant"] for outcome in outcomes if outcome["summary"] == "Unviable"]
+          identities = [(mutant["file"], mutant["function"]["function_name"], mutant["replacement"]) for mutant in unviable]
+          # LockVerification has no Default implementation. This is excluded,
+          # never counted as caught; every changed compile failure needs review.
+          if identities != [("crates/standardflow-core/src/lock.rs", "verify_pack_lock", "Ok(Default::default())")]:
+              raise SystemExit(f"Unexpected unviable mutants: {identities}")
+          print("25 viable mutants caught; one specifically identified unviable mutant excluded")
+          PY
+      - name: Preserve native mutation outcomes, diffs and logs
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: bounded-rust-mutation-1.98.1
+          path: target/mutation-evidence/
           if-no-files-found: warn
           retention-days: 14

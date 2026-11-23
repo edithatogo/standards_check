@@ -570,6 +570,56 @@ mod tests {
     }
 
     #[test]
+    fn lock_tracks_reversible_content_and_path_changes_but_not_creation_order()
+    -> Result<(), Box<dyn std::error::Error>> {
+        let first = TestDirectory::create()?;
+        let second = TestDirectory::create()?;
+        fs::write(first.path().join("pack.json"), minimal_pack())?;
+        fs::write(first.path().join("evidence.txt"), b"original")?;
+        fs::write(second.path().join("evidence.txt"), b"original")?;
+        fs::write(second.path().join("pack.json"), minimal_pack())?;
+        let original = write_pack_lock(first.path(), LockLimits::default())?;
+        assert_eq!(
+            original,
+            build_pack_lock(first.path(), LockLimits::default())?
+        );
+        assert_eq!(
+            original,
+            build_pack_lock(second.path(), LockLimits::default())?
+        );
+
+        // A same-length edit must be noticed, and reversing it restores the
+        // original digest without regenerating the lock.
+        fs::write(first.path().join("evidence.txt"), b"modified")?;
+        assert!(matches!(
+            verify_pack_lock(first.path(), LockLimits::default()),
+            Err(LockError::Mismatch { .. })
+        ));
+        fs::write(first.path().join("evidence.txt"), b"original")?;
+        assert_eq!(
+            verify_pack_lock(first.path(), LockLimits::default())?.tree_sha256,
+            original.tree_sha256
+        );
+        fs::rename(
+            first.path().join("evidence.txt"),
+            first.path().join("renamed.txt"),
+        )?;
+        assert!(matches!(
+            verify_pack_lock(first.path(), LockLimits::default()),
+            Err(LockError::Mismatch { .. })
+        ));
+        fs::rename(
+            first.path().join("renamed.txt"),
+            first.path().join("evidence.txt"),
+        )?;
+        assert_eq!(
+            original,
+            build_pack_lock(first.path(), LockLimits::default())?
+        );
+        Ok(())
+    }
+
+    #[test]
     fn lock_verification_bounds_the_lock_before_json_decoding()
     -> Result<(), Box<dyn std::error::Error>> {
         let directory = TestDirectory::create()?;
