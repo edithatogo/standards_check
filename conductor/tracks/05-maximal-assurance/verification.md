@@ -36,10 +36,10 @@ the subsequent Python/API integration.
 | --- | --- | --- |
 | Rust workspace | 2,742/3,430 lines, 79.94169096209912% | 79% lines |
 | Maintained API | 100% lines, 94.74% branches; 40 tests passed | 98% lines, 90% branches |
-| Maintained Python | 1,699/2,150 lines and 518/742 branches; 76.66% combined; 252 tests passed | 75% combined |
+| Maintained Python | 1,700/2,151 lines and 520/744 branches; 76.68% combined; 254 tests passed | 75% combined |
 
 The [coverage receipt](coverage-20261123.json) retains per-file counts, source/report hashes and
-the full denominator. Python keeps all 28 maintained modules, including two at zero coverage.
+the full denominator. Python keeps all 28 maintained modules, including `simple_extract.py` at zero coverage.
 The Rust source-file report includes embedded unit-test code and has no stable-toolchain branch
 measurement. Static API generation and browser JavaScript remain outside the API component.
 
@@ -56,6 +56,14 @@ The integrated Python measurement adds the existing real legacy/Rust PRISMA comp
 its six validators. The new production modules initially reduced coverage to 71.47%; exercising
 the qualified CLI contract raised it to 76.66% without exclusions or a lower floor. Its full-history
 checkout, maintained legacy profile and exact Rust CLI build are explicit in CI.
+
+The later runtime integration retains PR #104/#105's fixes and requests the repository-declared
+`rustfmt,clippy` components explicitly at all eleven pinned Rust setup sites. The Rust coverage
+job also retains `llvm-tools-preview`. This removes the deferred component-installation phase
+that failed before PRISMA execution on both receiving main and the first integrated candidate;
+the original `not_run` observations remain distinct from successful contract receipts. The
+foundation profile's conditional dependency is evaluated by the SBOM guard for its selected
+interpreter, with unsupported marker forms rejected before installation.
 
 Workflow lint uses actionlint 1.7.12 and offline zizmor 1.33.1. PR dependency review uses the
 pinned 5.0.1 action with a low-severity threshold. Those jobs, all three component coverage

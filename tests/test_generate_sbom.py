@@ -151,6 +151,63 @@ class SbomTests(unittest.TestCase):
                     self.assertEqual(sbom.main(), 1)
                 self.assertEqual((stale / "prior-evidence").read_text(), "preserve")
 
+    def test_python_version_marker_selects_numeric_boundary_and_exact_closure(self):
+        cases = [((3, 12), '"', True, True), ((3, 13), '"', False, True),
+                 ((3, 14), '"', False, True), ((3, 9), "'", True, True),
+                 ((3, 12), '"', False, False), ((3, 14), '"', True, False)]
+        for runtime, quote, installed_conditional, should_pass in cases:
+            with self.subTest(runtime=runtime, installed_conditional=installed_conditional), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                requirements = root / "requirements/fixture.txt"
+                requirements.parent.mkdir()
+                declared = f"example==1\ntyping-extensions==4.16.0; python_version < {quote}3.13{quote}\n"
+                requirements.write_text(declared)
+                packages = [("example", "1"), *([("typing-extensions", "4.16.0")] if installed_conditional else [])]
+                def command(args, **kwargs):
+                    if "inspect" in args:
+                        return json.dumps({"installed": [{"metadata": {"name": name, "version": pin}} for name, pin in packages]})
+                    if "version" in args:
+                        return json.dumps({"version": "1.57.2"})
+                    return json.dumps(bom(*packages, ecosystem="pypi")) if "scan" in args else ""
+                scanner = SimpleNamespace(download_tool=lambda name, output: (root / "syft", {"version": "1.57.2"}))
+                with patch.object(sbom, "ROOT", root), patch.object(sbom.sys, "version_info", runtime), \
+                     patch.dict(sbom.PYTHON_PROFILES, {"fixture": ("fixture", runtime, True)}), \
+                     patch.object(sbom, "run", side_effect=command) as run, patch.object(sbom, "central_helper", return_value=scanner):
+                    receipt = {"source_commit": "a" * 40}
+                    if should_pass:
+                        sbom.python_inventory("python-fixture", root, root, root, receipt)
+                        self.assertEqual(receipt["installed_distributions"], len(packages))
+                        install = next(call.args[0] for call in run.call_args_list if "install" in call.args[0])
+                        self.assertIn(str(requirements), install)
+                        self.assertIn("--no-deps", install)
+                    else:
+                        with self.assertRaisesRegex(ValueError, "declared dependency profile"):
+                            sbom.python_inventory("python-fixture", root, root, root, receipt)
+                self.assertEqual(requirements.read_text(), declared)
+
+    def test_unsupported_python_markers_fail_before_install_even_when_inactive(self):
+        declarations = [
+            'example==1; python_version <= "3.13"',
+            'example==1; python_version < "3.13" and sys_platform == "linux"',
+            'example==1; python_version < "3.13',
+            "example==1; python_version < '3.13\"",
+            'example==1; python_version < "3.13.0"',
+            'example==1; python_full_version < "3.13"',
+            'example>=1; python_version < "2.0"',
+            'example; python_version < "2.0"',
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            requirements = root / "requirements/fixture.txt"
+            requirements.parent.mkdir()
+            for declaration in declarations:
+                requirements.write_text(declaration + "\n")
+                with self.subTest(declaration=declaration), patch.object(sbom, "ROOT", root), \
+                     patch.dict(sbom.PYTHON_PROFILES, {"fixture": ("fixture", sys.version_info[:2], True)}), \
+                     patch.object(sbom, "run") as run, self.assertRaisesRegex(ValueError, "expected exact"):
+                    sbom.python_inventory("python-fixture", root, root, root, {})
+                run.assert_not_called()
+
     def test_kernel_inventory_uses_both_profiles_and_workflow_owned_pins(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

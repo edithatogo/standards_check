@@ -115,10 +115,15 @@ def python_inventory(component: str, output: Path, temporary: Path, policy: Path
     for line in lines:
         line = line.partition("#")[0].strip()
         if line:
-            match = re.fullmatch(r"([A-Za-z0-9_.-]+)==([A-Za-z0-9.!+-]+)", line)
+            # ponytail: only this Python-version marker is needed; extend when profiles require more.
+            match = re.fullmatch(
+                r"""([A-Za-z0-9_.-]+)==([A-Za-z0-9.!+-]+)(?:\s*;\s*python_version\s*<\s*(["'])([0-9]+)\.([0-9]+)\3)?""",
+                line,
+            )
             if match is None:
-                raise ValueError(f"expected exact unmarked dependency pin: {line}")
-            pins.add(package_id(*match.groups(), "pypi"))
+                raise ValueError(f"expected exact dependency pin with a supported marker: {line}")
+            if match[3] is None or sys.version_info[:2] < (int(match[4]), int(match[5])):
+                pins.add(package_id(match[1], match[2], "pypi"))
     environment = temporary / "environment"
     run([sys.executable, "-m", "venv", str(environment)])
     python = environment / "bin" / "python"
