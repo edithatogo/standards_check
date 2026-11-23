@@ -53,3 +53,26 @@ The initial [source and rights evidence assessment](../../prisma2020-source-righ
 PR #83 merged as `da7e780dad139980cadfc40fb0fec44d90f6af50` with 42 items, `source_reconciled` status and a regenerated lock. The retained 67,506-byte official PDF has SHA-256 `2eedbd5452741f9615307a0bce21a8198c0597ce2a0a8a0fd7e140d64b08c625`. All 42 current texts match its complete numbered rows after Unicode NFKC and whitespace normalization.
 
 The [receiving review](../../prisma2020-receiving-review-20261120.md) records the integration regressions and bounded repair: preserve the historical 27-item migration input, update current-pack test expectations while retaining unverified-fixture coverage, and bind both ledger and live pack to complete numbered PDF rows. Source reconciliation does not establish correctness of normalized interpretations, migration semantic parity, external methodological validity, accessibility or publication acceptance.
+
+## EQUATOR discovery and trial-reporting source decisions — 23 November 2026
+
+- [x] Accept [PR #112](https://github.com/edithatogo/standards_check/pull/112)'s
+  source-pinned **719-page descriptive directory** and monthly read-only
+  surveillance workflow on main `f02701c4`. One upstream page has a missing title
+  and remains `metadata_status: needs_review`; no guideline text or Canonical Pack
+  was admitted.
+- [ ] Independently adjudicate selected editions and rights for
+  [CONSORT 2025 / SPIRIT 2025 #120](https://github.com/edithatogo/standards_check/issues/120).
+  [PR #121](https://github.com/edithatogo/standards_check/pull/121) corrects
+  publication-date indexing, adds source-only TRIPOD+AI 2024, and labels
+  unqualified source entries explicitly; it **does not** create a pack.
+- [ ] Pin authoritative checklist bytes and licence scopes and reconcile all
+  item/subitem text, evidence expectations and mappings independently before
+  any versioned pack release. Keep [held STARD copies #95](https://github.com/edithatogo/standards_check/issues/95)
+  quarantined and [PRISMA interpretation #82](https://github.com/edithatogo/standards_check/issues/82)
+  open. No inherited compliance decisions on edition splits.
+
+The intake authority is the existing
+[guideline admission checklist](../../../CONTENT_POPULATION_WORKFLOW.md).
+The EQUATOR metadata catalogue is a *discovery projection* and does not
+replace the authoritative primary source or the pack lock.
