@@ -33,6 +33,38 @@ class SourceLinksTests(unittest.TestCase):
         links = extract_links(data, "https://equator-network.org/reporting-guidelines/cheers/")
         self.assertEqual([item["url"] for item in links], [ispor, elsevier])
 
+    def test_malformed_candidate_is_reported_and_later_links_survive(self):
+        issues = []
+        data = {"downloads": "[Broken](https://[not-a-valid-host/file.pdf) [Valid](https://example.org/checklist.pdf)"}
+        links = extract_links(data, "https://equator-network.org/reporting-guidelines/example/", issues)
+        self.assertEqual([x["url"] for x in links], ["https://example.org/checklist.pdf"])
+        self.assertIn("malformed_candidate_url", issues)
+
+    def test_ipv6_literal_is_not_truncated_or_rejected_as_malformed(self):
+        issues = []
+        links = extract_links(
+            {"downloads": "https://[2606:4700:4700::1111]/guide.pdf"},
+            "https://equator-network.org/reporting-guidelines/example/", issues)
+        self.assertEqual([x["url"] for x in links], ["https://[2606:4700:4700::1111]/guide.pdf"])
+        self.assertEqual(issues, [])
+
+    def test_unsafe_or_unrecognised_fields_do_not_create_leads(self):
+        data = {"downloads": ["not a string"], "relevant-urls": "[No](mailto:test@example.org) "
+                "[Local](http://localhost/file.pdf) "
+                "[Credential](https://user:pw@example.org/file.pdf) "
+                "[Safe](https://example.org/files/guide.CSV)"}
+        links = extract_links(data, "https://equator-network.org/reporting-guidelines/example/")
+        self.assertEqual([x["url"] for x in links], ["https://example.org/files/guide.CSV"])
+        self.assertEqual(links[0]["type"], "source_file_candidate")
+
+    def test_duplicate_links_across_fields_are_deduplicated(self):
+        url = "https://example.org/guide.pdf"
+        result = extract_links({"downloads": f"[Checklist]({url}) {url}",
+                                "relevant-urls": f"Read {url}."},
+                               "https://equator-network.org/reporting-guidelines/example/")
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0]["source_field"], "downloads")
+
     def test_bibliographic_links_are_candidates_not_primary_evidence(self):
         links = extract_links({"full-bibliographic-reference":
             "[Full text](https://www.bmj.com/content/383/bmj-2023-076386)\n"
