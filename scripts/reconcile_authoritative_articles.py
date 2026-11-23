@@ -113,6 +113,41 @@ def extract_table(raw: bytes, spec: dict) -> dict:
     }
 
 
+def snapshot_table(edition: dict, spec: dict) -> dict:
+    """Bind a retained attributed table projection to the observed primary source pins."""
+    expected = {
+        "edition": spec["edition"], "doi": spec["doi"], "pmcid": spec["pmcid"],
+        "source_sha256": spec["source_sha256"], "attribution": spec["attribution"],
+        "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/" + spec["pmcid"] + "/fullTextXML",
+        "licence_url": "https://" + LICENCE[spec["licence"]] + "/",
+    }
+    if any(edition.get(key) != value for key, value in expected.items()):
+        raise ValueError("snapshot edition identity, source pin, licence or attribution mismatch")
+    rows = []
+    for row in edition.get("rows", []):
+        if not isinstance(row, dict) or set(row) != {"item_id", "topic", "source_anchor", "text"}:
+            raise ValueError("invalid retained source row")
+        phrase = row["text"]
+        if (not isinstance(phrase, str) or not phrase or normalize(phrase) != phrase or
+            not isinstance(row["source_anchor"], str) or
+            not re.fullmatch(re.escape(spec["table_id"]) + r":row:[1-9]\d*:item:" +
+                             re.escape(row["item_id"]), row["source_anchor"])):
+            raise ValueError("invalid retained requirement or source anchor")
+        rows.append({**row, "normalized_text_sha256": digest(phrase)})
+    if [row["item_id"] for row in rows] != spec["item_ids"]:
+        raise ValueError("retained source item identity/order mismatch")
+    table_hash = digest(json.dumps(rows, ensure_ascii=False, sort_keys=True, separators=(",", ":")))
+    if table_hash != spec["table_rows_sha256"]:
+        raise ValueError("retained table digest differs from primary source pin")
+    return {"source_sha256": spec["source_sha256"], "source_bytes": spec["source_bytes"],
+            "doi": spec["doi"], "pmcid": spec["pmcid"], "table_id": spec["table_id"],
+            "table_label": spec["table_label"], "table_rows_sha256": table_hash,
+            "licence": spec["licence"], "attribution": spec["attribution"],
+            "rights": "article_licence_observed_table_reuse_candidate",
+            "pin_status": "retained_table_snapshot_matches_pinned_rows",
+            "rows": rows}
+
+
 def parse_legacy(markdown: str) -> list[dict]:
     rows = []
     for line in markdown.splitlines():
@@ -164,15 +199,26 @@ def reconcile_items(source: list[dict], legacy: list[dict]) -> dict:
             "items": items, "canonical_packs_promoted": 0}
 
 
-def audit(root: Path, source_dir: Path, specs: list[dict]) -> dict:
+def audit(root: Path, source_dir: Path | None, specs: list[dict]) -> dict:
+    snapshots = None
+    if source_dir is None:
+        ledger = json.loads((root / "source/official/authoritative-article-rows.json").read_text(encoding="utf-8"))
+        if ledger.get("schema_version") != 1:
+            raise ValueError("unsupported retained table snapshot schema")
+        snapshots = {edition["edition"]: edition for edition in ledger["editions"]}
+        if len(snapshots) != len(ledger["editions"]) or set(snapshots) != {spec["edition"] for spec in specs}:
+            raise ValueError("retained table edition coverage differs from manifest")
     editions = []
     for spec in specs:
         result = {key: spec[key] for key in ("edition", "doi", "pmcid", "legacy_path")}
         try:
-            with (source_dir / (spec["pmcid"] + ".xml")).open("rb") as stream:
-                raw = stream.read(MAX_BYTES + 1)
-            result["observed_source_sha256"] = hashlib.sha256(raw).hexdigest()
-            source = extract_table(raw, spec)
+            if snapshots is not None:
+                source = snapshot_table(snapshots[spec["edition"]], spec)
+            else:
+                with (source_dir / (spec["pmcid"] + ".xml")).open("rb") as stream:
+                    raw = stream.read(MAX_BYTES + 1)
+                result["observed_source_sha256"] = hashlib.sha256(raw).hexdigest()
+                source = extract_table(raw, spec)
             legacy = parse_legacy((root / spec["legacy_path"]).read_text(encoding="utf-8"))
             result["source"] = source
             result["legacy"] = reconcile_items(source["rows"], legacy)
@@ -195,7 +241,7 @@ def main() -> int:
     root = Path(__file__).resolve().parents[1]
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=root)
-    parser.add_argument("--source-dir", type=Path, required=True)
+    parser.add_argument("--source-dir", type=Path, help="Optional exact primary XML files; default uses checked-in table snapshots.")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--require-all", action="store_true")
     args = parser.parse_args()
