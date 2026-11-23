@@ -36,7 +36,7 @@ the subsequent Python/API integration.
 | --- | --- | --- |
 | Rust workspace | 2,742/3,430 lines, 79.94169096209912% | 79% lines |
 | Maintained API | 100% lines, 94.74% branches; 40 tests passed | 98% lines, 90% branches |
-| Maintained Python | 1,700/2,151 lines and 520/744 branches; 76.68% combined; 254 tests passed | 75% combined |
+| Maintained Python | 1,700/2,151 lines and 520/744 branches; 76.68% combined; 265 tests passed | 75% combined |
 
 The [coverage receipt](coverage-20261123.json) retains per-file counts, source/report hashes and
 the full denominator. Python keeps all 28 maintained modules, including `simple_extract.py` at zero coverage.
@@ -64,6 +64,15 @@ that failed before PRISMA execution on both receiving main and the first integra
 the original `not_run` observations remain distinct from successful contract receipts. The
 foundation profile's conditional dependency is evaluated by the SBOM guard for its selected
 interpreter, with unsupported marker forms rejected before installation.
+
+PR #106 repairs two observed Pages deployment failures in
+[run 45097737175](https://github.com/edithatogo/standards_check/actions/runs/45097737175):
+metadata was initially unavailable, and a retry then found two artifacts with the old shared
+name. Upload and native deployment now share an attempt-specific name. A bounded REST guard
+requires the exact uploaded ID, name, workflow run and unexpired state; ambiguous or incomplete
+metadata fails. Eleven runnable regressions exercise the actual inline probe with controlled responses
+and clock, while the native deployment remains authoritative for its separate Actions Results
+lookup. Successful receiving-main Pages deployment is still required before claiming recovery.
 
 Workflow lint uses actionlint 1.7.12 and offline zizmor 1.33.1. PR dependency review uses the
 pinned 5.0.1 action with a low-severity threshold. Those jobs, all three component coverage
@@ -109,6 +118,11 @@ bypass, conversation resolution and an explicit owner recovery path. It also req
 results with High-or-higher security alerts and error-level alerts blocked in the PR diff.
 That native rule does not independently clear pre-existing alerts; actual alert resolution
 still needs observation. Settings acceptance requires API/UI readback.
+
+The 23 November submission reached GitHub's **Confirm access / Passkey** prompt before saving.
+The complete form has Active selected, seven checks bound to GitHub Actions, no bypass actors
+and zero required approvals, but the API still returned an empty ruleset inventory. Activation
+requires the owner's GitHub reauthentication; the prepared form is not an enforced rule.
 
 Open gates remain for offline-security execution, independent normalized interpretation and
 evidence review (#82), legacy-to-Rust migration semantics, held guideline rights and source

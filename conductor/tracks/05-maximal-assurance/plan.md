@@ -18,6 +18,8 @@ slice. Evidence: **local qualification; published-head and receiving-main accept
 - [ ] Observe fixed alert state on the published receiving revision.
 - [x] Produce nine baseline dependency SBOMs for maintained Python, Rust and Node graphs, bound to local inputs; hosted acceptance remains separately pending.
 - [ ] Obtain exact published-head and receiving-main receipts for the new assurance jobs.
+- [x] Bind Pages upload/deployment to the current attempt and exact uploaded artifact; retain bounded visibility and rejection regressions.
+- [ ] Observe successful native Pages deployment on receiving main after the artifact-readiness repair.
 - [x] Observe all three Codecov OIDC uploads and actual patch-provider acceptance at first head `12b7b007`; later revisions need their own observations.
 - [ ] Apply and read back the solo-maintainer ruleset after confirming stable check names.
 - [ ] Qualify remaining managed-policy/profile divergence and the updater lifecycle; retain

@@ -103,9 +103,12 @@ jobs:
     timeout-minutes: 45
     needs: build
     permissions:
+      actions: read
       contents: read
       pages: write
       id-token: write
+    env:
+      PAGES_ARTIFACT_NAME: github-pages-${{ github.run_attempt }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -137,9 +140,60 @@ jobs:
           bash scripts/build_pandoc.sh
           bash scripts/generate_html_index.sh
       - name: Upload Pages artifact
+        id: pages_upload
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
+          name: ${{ env.PAGES_ARTIFACT_NAME }}
           path: ./html
+      - name: Wait for the uploaded Pages artifact metadata
+        timeout-minutes: 2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PAGES_ARTIFACT_ID: ${{ steps.pages_upload.outputs.artifact_id }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          import time
+          from urllib.parse import quote
+          from urllib.request import Request, urlopen
+
+          artifact_id = int(os.environ["PAGES_ARTIFACT_ID"])
+          run_id = int(os.environ["GITHUB_RUN_ID"])
+          name = os.environ["PAGES_ARTIFACT_NAME"]
+          url = (
+              f"{os.environ['GITHUB_API_URL']}/repos/{os.environ['GITHUB_REPOSITORY']}"
+              f"/actions/runs/{run_id}/artifacts?name={quote(name, safe='')}&per_page=100"
+          )
+          request = Request(url, headers={
+              "Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}",
+              "Accept": "application/vnd.github+json",
+              "X-GitHub-Api-Version": "2022-11-28",
+          })
+          deadline = time.monotonic() + 60
+          while True:
+              remaining = deadline - time.monotonic()
+              if remaining <= 0:
+                  raise SystemExit(f"Timed out waiting for Pages artifact {artifact_id} ({name})")
+              with urlopen(request, timeout=min(10, remaining)) as response:
+                  payload = json.load(response)
+              artifacts = payload["artifacts"]
+              if payload["total_count"] != len(artifacts):
+                  raise SystemExit("Artifact metadata is incomplete; refusing an ambiguous deployment")
+              matches = [artifact for artifact in artifacts if artifact["name"] == name]
+              if len(matches) > 1:
+                  raise SystemExit(f"Multiple artifacts match the current Pages attempt: {name}")
+              if matches:
+                  artifact = matches[0]
+                  if (artifact["id"] != artifact_id or artifact["expired"] is not False
+                          or artifact["workflow_run"]["id"] != run_id):
+                      raise SystemExit("Pages artifact ID, run or expiry does not match this upload")
+                  print(f"Pages artifact {artifact_id} ({name}) is visible for run {run_id}")
+                  break
+              time.sleep(min(2, max(0, deadline - time.monotonic())))
+          PY
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+        with:
+          artifact_name: ${{ env.PAGES_ARTIFACT_NAME }}

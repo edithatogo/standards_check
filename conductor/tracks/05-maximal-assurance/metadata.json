@@ -44,7 +44,7 @@
     "branches_covered": 520,
     "branches_total": 744,
     "production_modules": 28,
-    "tests": 254,
+    "tests": 265,
     "real_qualification": "two authored legacy/Rust PRISMA pairs plus two intentional validation differences"
   },
   "hosted_assurance_acceptance": "First head 12b7b007: component coverage, workflow policy, dependency review and privacy passed; boundary setup and aggregate failed; corrected candidate pending",
@@ -62,7 +62,7 @@
     "project_check": "not_observed",
     "later_revision_acceptance": "requires_fresh_observation"
   },
-  "solo_maintainer_ruleset": "pending_application_and_readback",
+  "solo_maintainer_ruleset": "prepared; save blocked by GitHub Confirm access/passkey; API inventory remains empty",
   "remaining_evidence_gates": [
     "new published-head and receiving-main assurance checks",
     "fresh Codecov observations for subsequent revisions; project check still unobserved",
@@ -87,5 +87,7 @@
     "timeout": 0,
     "receipt": "rust-hosted-first-head-20261123.json"
   },
-  "integrated_runtime_contribution": "54cf99363f04138f8e444817ef53bc7fadecf64a"
+  "integrated_runtime_contribution": "54cf99363f04138f8e444817ef53bc7fadecf64a",
+  "pages_recovery": "attempt-specific artifact binding and bounded REST visibility guard; receiving-main native deployment pending",
+  "integrated_pages_contribution": "71bc797a3f2f0eb18dc9b5677e41f13f2cb6b7d9"
 }

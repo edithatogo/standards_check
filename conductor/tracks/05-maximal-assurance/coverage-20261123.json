@@ -11,7 +11,7 @@
     "node": "24.22.3"
   },
   "tests": {
-    "python": 254,
+    "python": 265,
     "rust": 72,
     "api": 40
   },
@@ -571,34 +571,35 @@
     "zero_coverage_modules_retained": [
       "simple_extract.py"
     ],
-    "observed_at": "2026-11-23T02:22:08.631791+00:00",
-    "candidate_base": "d67d9e992d7b9438ff2ae1404f2f5fea9e20370c",
-    "identity_scope": "Python-only local observation on the uncommitted merge of PR100 head d67d9e992d7b9438ff2ae1404f2f5fea9e20370c with PR105 head 54cf99363f04138f8e444817ef53bc7fadecf64a, plus the bounded conditional-marker SBOM correction and explicit Rust components at the remaining five setup sites. Source hashes and the input manifest identify measured bytes. Prior local/hosted Python observations are retained below; API/Rust blocks and top-level historical observation fields are unchanged. A subsequently published head requires its own hosted receipt.",
+    "observed_at": "2026-11-23T02:41:29.141959+00:00",
+    "candidate_base": "b6152790c60943aa75aa3f98b1adc5295de61405",
+    "identity_scope": "Python-only local observation on the uncommitted merge of PR100 head b6152790c60943aa75aa3f98b1adc5295de61405 with PR106 head 71bc797a3f2f0eb18dc9b5677e41f13f2cb6b7d9, plus the retained Pages artifact-probe regression suite. Source hashes and the input manifest identify measured bytes. Prior local/hosted Python observations are retained below; API/Rust blocks and top-level historical observation fields are unchanged. A subsequently published head requires its own hosted receipt.",
     "inputs": {
       "manifest": "target/coverage/python-inputs.json",
-      "sha256": "63624b561801b4616c008c042416bc9f122ebdc2a336e60a29437c1dec6e7f3c",
-      "bytes": 8135,
-      "files": 78,
-      "test_and_fixture_files": 40,
+      "sha256": "5a41aef52a277af25e1f6a28ecde21801e0cd940069ef15d31d3a74913fff2b4",
+      "bytes": 8349,
+      "files": 80,
+      "test_and_fixture_files": 41,
       "configuration_sha256": {
         ".coveragerc": "e4ba87f4769b1744d96912c44fbca74c33f71526c99366ed059e9a38d3d29f77",
+        ".github/workflows/build-docs.yml": "186d5ed66906660ddc828c4ba699f6ba897f4928d9ecf89e64b1234299847e1d",
+        "Cargo.lock": "33c6f6e885c65ec5fa88948e4d508e180520e873f725f13b467d2ff8bfaf72ea",
+        "Cargo.toml": "6736f253aa3707808be62ea08fba13fb117814690d2e6c180fd5f62036a1a5a2",
+        "contracts/examples/legacy-prisma-parity.json": "d0305a141ba5682d72c6924f296acd84e67e667d0caa6a3314dff305f5ec2e12",
         "requirements/assurance-tools.txt": "45b28efc387f40cee01fb1ee08f366502afcf87fd95a15a9d6d8a975ce306337",
         "requirements/legacy-kernel-qualification.txt": "b205079d09753f08724bb7fe594860266a4ab2c01fb8517fd95a4a4730d2d717",
         "requirements/legacy-standardflow.txt": "27ba903aba19f5851baf887a177699ac1c9604c9ec5a7666edac573aefbe0568",
         "requirements/python-tests.txt": "274aa2714421edd0e0f9074fa2544da3c3a1914029eeffa04ba6bcaa5c1e2aa4",
         "requirements/standardflow-foundation.txt": "881be09efe871427b506145592616dab33589034eda119d615c65785c1e358d4",
-        "Cargo.lock": "33c6f6e885c65ec5fa88948e4d508e180520e873f725f13b467d2ff8bfaf72ea",
-        "Cargo.toml": "6736f253aa3707808be62ea08fba13fb117814690d2e6c180fd5f62036a1a5a2",
-        "rust-toolchain.toml": "c910997cb152c6dc8ed13b1fdf9fa28a4ed30d6776123e27dd6170e5c66067a0",
-        "contracts/examples/legacy-prisma-parity.json": "d0305a141ba5682d72c6924f296acd84e67e667d0caa6a3314dff305f5ec2e12"
+        "rust-toolchain.toml": "c910997cb152c6dc8ed13b1fdf9fa28a4ed30d6776123e27dd6170e5c66067a0"
       }
     },
     "execution": {
       "regression_command": "python -m coverage run -m pytest --import-mode=importlib tests test_extract_and_convert.py",
-      "regression_tests_passed": 254,
+      "regression_tests_passed": 265,
       "regression_log": {
-        "sha256": "ca2590250fd278da9a2182cab3afcbc5fa5db30a5773b86c93f866430a60d8dd",
-        "bytes": 3205
+        "sha256": "7b84bf64183626cfbc9ef6f5aa9b948daaa72046f50b3b57bac7b2ec7c39f72a",
+        "bytes": 3285
       },
       "validators": [
         {
@@ -678,12 +679,12 @@
         "rust_executable_sha256": "7073b3342cda86f9b16c4b33e64252cd980a9ec472b583adedebdffcf8f862ac",
         "corpus_sha256": "d0305a141ba5682d72c6924f296acd84e67e667d0caa6a3314dff305f5ec2e12",
         "receipt": {
-          "sha256": "14192c2434c7c0985bc192725a973edf401d9cba717da133131418e83a52ade4",
-          "bytes": 4601
+          "sha256": "2b7fe8a3564fa598979b5d2b3e998f4fc19f254897ee6b8f546b5657e4dafb33",
+          "bytes": 4427
         },
         "log": {
-          "sha256": "14192c2434c7c0985bc192725a973edf401d9cba717da133131418e83a52ade4",
-          "bytes": 4601
+          "sha256": "2b7fe8a3564fa598979b5d2b3e998f4fc19f254897ee6b8f546b5657e4dafb33",
+          "bytes": 4427
         }
       },
       "dependency_profile": "requirements/python-tests.txt plus the existing exact requirements/legacy-standardflow.txt profile and requirements/assurance-tools.txt; pip check passed before the final clean run",
@@ -698,14 +699,23 @@
         "python -m coverage json",
         "python -m coverage report --fail-under=75"
       ],
-      "scope_note": "The two added SBOM tests exercise active/inactive numeric marker boundaries, exact closure and unsupported syntax before installation. Coverage exclusions and the 75% floor remain unchanged. Genuine existing PRISMA CLI execution is included; real kernel execution is not claimed by this coverage observation.",
+      "scope_note": "The eleven added Pages tests execute the committed workflow heredoc with mocked REST responses and clock, including ten visibility/failure behaviors and a native upload/probe/deploy identity wiring guard. The synthetic compilation filename avoids interpreting YAML as a Python module. No production module, coverage exclusion or the 75% floor changed. Genuine existing PRISMA CLI execution is included; a real Pages deployment and real kernel execution are not claimed by this coverage observation.",
       "dependency_consistency_log": {
         "sha256": "9261363b733079a641c2e4cc9bc46ffa1d8336945a87f807b6cf68847dbc9b09",
         "bytes": 30
       },
       "build_log": {
-        "sha256": "2b34696728dc82b03cbf6311d7e3a6a41658bbde097834c3010a78bc82842c1a",
+        "sha256": "22e0df986057b9ba5be07526ac5fb348862a3dedef42108383cc3e088acbb889",
         "bytes": 72
+      },
+      "pages_probe": {
+        "tests": 11,
+        "workflow_sha256": "186d5ed66906660ddc828c4ba699f6ba897f4928d9ecf89e64b1234299847e1d",
+        "test_sha256": "9ebce305418e66fa156edead9b88429d51a35867da286ef0ea523a459ebc9124",
+        "compilation_filename": "<pages-artifact-probe>",
+        "network": "mocked urllib.request.urlopen",
+        "clock": "mocked time.monotonic and time.sleep",
+        "hosted_deployment_claimed": false
       }
     },
     "historical_observations": [
@@ -774,9 +784,62 @@
           "url": "https://github.com/edithatogo/standards_check/actions/runs/45098578195/job/137443886087",
           "same_summary": true
         }
+      },
+      {
+        "published_receipt_url": "https://github.com/edithatogo/standards_check/blob/b6152790c60943aa75aa3f98b1adc5295de61405/conductor/tracks/05-maximal-assurance/coverage-20261123.json",
+        "observed_at": "2026-11-23T02:22:08.631791+00:00",
+        "candidate_base": "d67d9e992d7b9438ff2ae1404f2f5fea9e20370c",
+        "integrated_parent": "54cf99363f04138f8e444817ef53bc7fadecf64a",
+        "regression_tests_passed": 254,
+        "summary": {
+          "covered_lines": 1700,
+          "num_statements": 2151,
+          "percent_covered": 76.6839378238342,
+          "percent_covered_display": "76.68",
+          "missing_lines": 451,
+          "excluded_lines": 0,
+          "percent_statements_covered": 79.03300790330078,
+          "percent_statements_covered_display": "79.03",
+          "num_branches": 744,
+          "num_partial_branches": 110,
+          "covered_branches": 520,
+          "missing_branches": 224,
+          "percent_branches_covered": 69.89247311827957,
+          "percent_branches_covered_display": "69.89"
+        },
+        "reports": {
+          "python.xml": {
+            "sha256": "9ebac7c96ad67bfcd6274c508f7984f088e797cb55c5bd87bb3153c320cfe0ee",
+            "bytes": 103174
+          },
+          "python.json": {
+            "sha256": "8a2c8cc883b8a5bb77cefb09232eba91097ce7e00d45145d91bae6d0153a28b2",
+            "bytes": 167883
+          }
+        },
+        "input_manifest": {
+          "manifest": "target/coverage/python-inputs.json",
+          "sha256": "63624b561801b4616c008c042416bc9f122ebdc2a336e60a29437c1dec6e7f3c",
+          "bytes": 8135,
+          "files": 78,
+          "test_and_fixture_files": 40,
+          "configuration_sha256": {
+            ".coveragerc": "e4ba87f4769b1744d96912c44fbca74c33f71526c99366ed059e9a38d3d29f77",
+            "requirements/assurance-tools.txt": "45b28efc387f40cee01fb1ee08f366502afcf87fd95a15a9d6d8a975ce306337",
+            "requirements/legacy-kernel-qualification.txt": "b205079d09753f08724bb7fe594860266a4ab2c01fb8517fd95a4a4730d2d717",
+            "requirements/legacy-standardflow.txt": "27ba903aba19f5851baf887a177699ac1c9604c9ec5a7666edac573aefbe0568",
+            "requirements/python-tests.txt": "274aa2714421edd0e0f9074fa2544da3c3a1914029eeffa04ba6bcaa5c1e2aa4",
+            "requirements/standardflow-foundation.txt": "881be09efe871427b506145592616dab33589034eda119d615c65785c1e358d4",
+            "Cargo.lock": "33c6f6e885c65ec5fa88948e4d508e180520e873f725f13b467d2ff8bfaf72ea",
+            "Cargo.toml": "6736f253aa3707808be62ea08fba13fb117814690d2e6c180fd5f62036a1a5a2",
+            "rust-toolchain.toml": "c910997cb152c6dc8ed13b1fdf9fa28a4ed30d6776123e27dd6170e5c66067a0",
+            "contracts/examples/legacy-prisma-parity.json": "d0305a141ba5682d72c6924f296acd84e67e667d0caa6a3314dff305f5ec2e12"
+          }
+        },
+        "identity_scope": "Prior local measurement published in the referenced commit; this record does not assert a hosted result for that commit."
       }
     ],
-    "integrated_parent": "54cf99363f04138f8e444817ef53bc7fadecf64a"
+    "integrated_parent": "71bc797a3f2f0eb18dc9b5677e41f13f2cb6b7d9"
   },
   "rust": {
     "scope": "Workspace source files with cargo-llvm-cov; includes tests embedded in src, excludes integration-test files. Stable Rust does not measure branch coverage in this profile.",
@@ -1277,11 +1340,11 @@
   },
   "reports": {
     "python.xml": {
-      "sha256": "9ebac7c96ad67bfcd6274c508f7984f088e797cb55c5bd87bb3153c320cfe0ee",
+      "sha256": "1d1eabcc6dcc6174effbd82abcfe034639a501abf8a335c878d9dcd18bceb52e",
       "bytes": 103174
     },
     "python.json": {
-      "sha256": "8a2c8cc883b8a5bb77cefb09232eba91097ce7e00d45145d91bae6d0153a28b2",
+      "sha256": "b7fb8be5c8d2a125a8ec3b27fba7c94dfca4ac79eb2f842287bd5827d1d2fd81",
       "bytes": 167883
     },
     "rust.lcov": {
