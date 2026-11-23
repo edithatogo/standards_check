@@ -83,6 +83,34 @@ class AuthoritativeTableTests(unittest.TestCase):
         self.assertEqual(report["legacy_positions_without_exact_source_match"], [3])
         self.assertEqual(report["canonical_packs_promoted"], 0)
 
+    def test_distinguishes_unnumbered_editorial_label_and_terminal_period(self):
+        source = extract_table(XML, SPEC)
+        legacy = parse_legacy(
+            "- [ ] **Title:** Identify the protocol\n"
+            "- [ ] **1b. Update:** Report any update.\n"
+            "- [ ] **Registration:** Provide the registration identifier.\n"
+        )
+        comparison = reconcile_items(source["rows"], legacy)
+        self.assertEqual(legacy[0]["declared_item_id"], None)
+        self.assertEqual(legacy[0]["text"], "Identify the protocol")
+        self.assertEqual(comparison["exact_unique_items"], 2)
+        self.assertEqual(comparison["items"][0]["exact_legacy_positions"], [])
+        self.assertEqual(comparison["items"][0]["terminal_period_only_legacy_positions"], [1])
+        self.assertEqual(comparison["terminal_period_only_unique_items"], 1)
+        self.assertEqual(comparison["items"][0]["status"], "not_exactly_reconciled")
+
+    def test_full_source_and_ordered_table_pin_are_enforced(self):
+        source = extract_table(XML, SPEC)
+        pinned = {**SPEC, "source_sha256": source["source_sha256"],
+                  "source_bytes": source["source_bytes"],
+                  "table_id": source["table_id"],
+                  "table_rows_sha256": source["table_rows_sha256"]}
+        self.assertEqual(extract_table(XML, pinned)["pin_status"], "matched_pinned_source")
+        for key, value in (("source_bytes", 1), ("table_id", "different"),
+                           ("table_rows_sha256", "f"*64)):
+            with self.subTest(key=key), self.assertRaises(ValueError):
+                extract_table(XML, {**pinned, key: value})
+
     def test_audit_preserves_unavailable_editions_and_actual_evidence(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
