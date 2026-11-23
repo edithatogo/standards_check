@@ -1,0 +1,14 @@
+# Optional notebook-kernel qualification only; Track 03 / issue #94 owns this profile.
+# Install alongside legacy-standardflow.txt and the explicitly compared ipykernel pin.
+# Remove when this historical comparison is superseded; it is not a server/runtime profile.
+comm==0.2.3
+debugpy==1.8.22
+jupyter-client==8.10.0
+jupyter-core==5.9.1
+nest-asyncio==1.6.0
+packaging==26.3
+platformdirs==4.14.8
+python-dateutil==4.0.0
+pyzmq==27.3.0
+tornado==6.6.1
+tzdata==2026.6

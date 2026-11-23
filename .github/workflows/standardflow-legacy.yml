@@ -6,8 +6,11 @@ on:
       - "legacy/**"
       - "scripts/check_standardflow_import.py"
       - "scripts/verify_legacy_standardflow.py"
+      - "scripts/qualify_legacy_kernel.py"
       - "requirements/legacy-standardflow.txt"
+      - "requirements/legacy-kernel-qualification.txt"
       - "tests/test_standardflow_import.py"
+      - "tests/test_legacy_kernel_qualification.py"
       - "conductor/tracks/03-standardflow-import/**"
       - ".github/workflows/standardflow-legacy.yml"
   push:
@@ -16,8 +19,11 @@ on:
       - "legacy/**"
       - "scripts/check_standardflow_import.py"
       - "scripts/verify_legacy_standardflow.py"
+      - "scripts/qualify_legacy_kernel.py"
       - "requirements/legacy-standardflow.txt"
+      - "requirements/legacy-kernel-qualification.txt"
       - "tests/test_standardflow_import.py"
+      - "tests/test_legacy_kernel_qualification.py"
       - "conductor/tracks/03-standardflow-import/**"
       - ".github/workflows/standardflow-legacy.yml"
   workflow_dispatch:
@@ -90,3 +96,56 @@ jobs:
           trap cleanup EXIT
           docker run --detach --name "$smoke_container" --publish 127.0.0.1:5000:5000 standardflow-legacy-ci
           timeout 30 bash -c 'until curl --fail --silent --max-time 2 http://127.0.0.1:5000/ >/dev/null; do sleep 1; done'
+
+  real-kernel:
+    name: Optional notebook kernel compatibility
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
+        with:
+          egress-policy: audit
+      - name: Check out complete imported history
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          submodules: false
+      - name: Set up Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+      - name: Test qualification failure and comparison handling
+        run: python -m unittest tests.test_legacy_kernel_qualification -v
+      - name: Install diagram renderers
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes graphviz imagemagick
+      - name: Execute both preserved kernel profiles and compare actual outputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          qualification_status=0
+          for kernel_version in 6.25.0 6.31.0; do
+            kernel_env="$RUNNER_TEMP/kernel-env-$kernel_version"
+            python -m venv "$kernel_env"
+            "$kernel_env/bin/python" -m pip install --disable-pip-version-check --no-deps \
+              -r requirements/legacy-standardflow.txt \
+              -r requirements/legacy-kernel-qualification.txt "ipykernel==$kernel_version"
+            "$kernel_env/bin/python" -m scripts.qualify_legacy_kernel \
+              --expected-version "$kernel_version" \
+              --output "$RUNNER_TEMP/kernel-qualification/$kernel_version/receipt.json" || qualification_status=1
+          done
+          python -m scripts.qualify_legacy_kernel --compare \
+            "$RUNNER_TEMP/kernel-qualification/6.25.0/receipt.json" \
+            "$RUNNER_TEMP/kernel-qualification/6.31.0/receipt.json" \
+            --output "$RUNNER_TEMP/kernel-qualification/comparison.json" || qualification_status=1
+          exit "$qualification_status"
+      - name: Retain real-kernel qualification evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: legacy-real-kernel-qualification
+          path: ${{ runner.temp }}/kernel-qualification/
+          if-no-files-found: error

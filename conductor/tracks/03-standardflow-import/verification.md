@@ -301,3 +301,26 @@ methodology and accessibility qualification remain open. See the
 [retirement record](../../../docs/migration/standardflow/retirement.md) for recovery
 and the [source inventory](../../../docs/migration/standardflow/source-inventory.json)
 for the preserved historical observations.
+
+## Receiving-main and optional-kernel follow-up — 23 November 2026
+
+Receiving main `ba6b0888806e84276e5f54afc07e4e555220c4ea` now has its own completed
+[legacy execution](https://github.com/edithatogo/standards_check/actions/runs/45085224983/job/137402195300).
+It passed exact source/tree and nine-history checks, four provenance regressions,
+the maintained host comparison, 52 Docker tests and default-container HTTP startup.
+Foundation, privacy and all four CodeQL analyses also succeeded on that commit.
+
+The [parity artifact](https://github.com/edithatogo/standards_check/actions/runs/45085224983/artifacts/14778918783)
+has archive SHA-256 `500482392a7efd16f7f35cce0370922edd34d19f55e16748d79a6855c30725bc`.
+The prior receiving-main observations remain historical; this is an additional
+execution receipt after host dependency admission and retirement. Offline run
+[45085225254](https://github.com/edithatogo/standards_check/actions/runs/45085225254)
+is still queued with no execution receipt.
+
+The [optional-kernel runbook](../../../docs/migration/standardflow/kernel-qualification.md)
+defines the new real-kernel comparison. Its twelve focused rejection/lifecycle
+regressions pass locally. A local real-kernel attempt correctly returns exit 1
+when ZeroMQ cannot discover loopback interfaces; no notebook cells execute in
+that attempt. Actual hosted positive acceptance is still required. The host
+profile and frozen source requirements are unchanged; the optional test profile
+does not claim a notebook GUI or server deployment.

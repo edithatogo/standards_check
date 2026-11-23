@@ -47,11 +47,24 @@
 - [x] Admit Click 8.5.1, graphviz 0.21 and jsonschema 4.26.0 in the maintained host
   profile through PR #98, merged at `d213085a268a4cd82d522e6e17d27f3dee15bf5f`.
   Preserve the exact source snapshot and historical source PR dispositions.
-- [ ] Record receiving-main execution after PR #98 separately from its successful
-  reviewed-head checks and the historical `2b0c5794` runtime receipt.
-- [ ] Retain issue #94 for optional interactive-kernel qualification and updater
-  observation. ipykernel 6.31.0 remains unadmitted; neither attempted kernel profile
-  reached `kernel_info` or executed cells.
+- [x] Record receiving-main execution after PR #98: `ba6b0888`, legacy run
+  `45085224983`, all eight hosted jobs passed; offline security remains queued.
+  Preserve the historical `2b0c5794` and reviewed-head receipts under their original scope.
+- [ ] Complete optional real-kernel qualification in issue #94. Receiving updater discovery
+  was observed in #76; the earlier workspace attempts did not reach `kernel_info`.
+  The new hosted comparison must pass before any real-kernel acceptance is recorded.
+
+## Optional real-kernel acceptance (issue #94)
+
+- [ ] Execute both preserved ipykernel versions in isolated, exactly pinned environments.
+- [ ] Execute all 11 original notebooks / 43 code cells through a real loopback kernel;
+  ignore saved outputs and verify the interpreter and package identity inside each kernel.
+- [ ] Compare visible notebook outputs, six freshly generated PNGs and the existing
+  52-test / 21-file application canary results between the two versions.
+- [ ] Exercise kernel information, completion, inspection, error recovery, interruption,
+  restart/state reset and shutdown replies; reject errors or incomplete receipts.
+- [ ] Retain actual hosted receipts before resolving the environment-blocked qualification.
+  This does not qualify a notebook GUI, arbitrary notebooks or a server deployment.
 
 ## Remaining semantic migration
 
