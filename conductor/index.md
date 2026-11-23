@@ -12,6 +12,10 @@
 - [Roadmap](./roadmap.md)
 - [Tracks](./tracks.md)
 
+## Source reconciliation
+
+- [EQUATOR directory discovery and rights boundary](./source-reconciliation/equator-catalogue-20261123.md) — version-pinned published-source inventory, not canonical checklist content.
+
 ## Architecture
 
 - [Platform architecture](../docs/architecture/STANDARDFLOW_ARCHITECTURE.md)
