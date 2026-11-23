@@ -76,9 +76,10 @@ jobs:
         uses: typst-community/setup-typst@00ad6338f0b34724ea002136bfb701a6c18585b0 # v5.3.2
         with:
           typst-version: "0.15.1"
-      - name: Build documents without stale checked-in HTML
+      - name: Build documents from a clean generated-output tree
         run: |
-          rm -rf html
+          # Retain source Git history, but never publish stale checked-in renderings.
+          rm -rf html pdf docx latex
           bash scripts/build_pandoc.sh
       - name: Generate HTML index
         run: bash scripts/generate_html_index.sh
