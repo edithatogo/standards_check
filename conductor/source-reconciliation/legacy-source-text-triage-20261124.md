@@ -97,3 +97,11 @@ rollback this additive parser, dispatch and dependency together.
 ### Review hardening
 
 The XLSX preflight now independently caps cumulative merged-range area across the workbook, not just the enclosing rectangular grid, before normal loading. Formula-bearing rows have no whole-row fingerprint; literal cell anchors remain eligible but formula cells and partial rows cannot count as exact structural matches. Two focused tests reproduced both failures against the existing XLSX function in an isolated local harness and passed after the repair (Python 3.13.5, openpyxl 3.1.5). The existing audit integration fixture now also checks that a formula-bearing row contributes only its literal-cell anchor. Full exact-head hosted checks remain required.
+
+## Static HTML table increment
+
+The existing structured-source dispatch additionally supports UTF-8 HTML via the existing lxml dependency. It preserves table ordinals, captions, row groups (including implicit body rows), physical cell coordinates, heading-cell scope, row/column spans and inherited cell anchors. Inline markup preserves word continuity and block markup separates text. Incomplete cells and rows (including rows with inherited text that was not physically repeated) cannot produce exact whole-cell/row digests. Nested tables and invalid spans are held. Script/style/media content is not executed or fetched; parser recovery and unevaluated rendered visibility are flagged. This is authored static table structure, not a browser rendering or whole-page checklist extractor. No source HTML candidates were present in the inspected tree; qualification is synthetic until genuine rights/edition-qualified sources are available.
+
+Four focused HTML tests passed in an isolated local harness, and the tested function and test-file Git blob hashes were checked before committing. The audit integration fixture remains for hosted verification. No new dependency, no new crawler, no new schema, no content promotion.
+
+Review hardening: non-element table children no longer split implicit row groups, and h1–h6 preserve block text boundaries. Both regressions reproduced RED and passed GREEN in the isolated local harness (six HTML tests passed). No source promotion or new dependency.

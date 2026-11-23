@@ -232,8 +232,134 @@ def xlsx_structure(raw: bytes) -> tuple[str, dict]:
     return "\n".join(texts), {"sheets": sheets, "issues": sorted(issues)}
 
 
+def html_structure(raw: bytes) -> tuple[str, dict]:
+    """Extract authored static table DOM, not browser-rendered visibility."""
+    from itertools import groupby
+    from lxml import html
+
+    parser = html.HTMLParser(no_network=True, recover=True)
+    root = html.document_fromstring(raw.decode("utf-8-sig"), parser=parser)
+    tables = root.xpath("//table")
+    if not tables or any(table.xpath("ancestor::table") for table in tables):
+        raise ValueError("missing or nested HTML tables")
+    issues = set()
+    if parser.error_log:
+        issues.add("html_parser_recovery")
+    if root.xpath("//script|//style|//link[@rel='stylesheet']|//*[@hidden or @style]"):
+        issues.add("rendered_visibility_not_qualified")
+    skip = {"script", "style", "template", "noscript", "img", "input", "select", "textarea",
+            "svg", "math", "iframe", "object", "video", "audio"}
+    blocks = {"p", "div", "li", "ol", "ul", "br", "dl", "dt", "dd", "blockquote", "pre", "hr",
+              "h1", "h2", "h3", "h4", "h5", "h6"}
+    count = 0
+
+    def content(node) -> tuple[str, bool]:
+        complete = True
+
+        def visit(element, depth: int) -> str:
+            nonlocal complete, count
+            count += 1
+            if count > MAX_CELLS or depth > MAX_DEPTH:
+                raise ValueError("HTML structure exceeds limit")
+            if not isinstance(element.tag, str):
+                return ""
+            if element.tag in skip:
+                complete = False
+                return " "
+            parts = [element.text or ""]
+            for child in element:
+                parts.extend((visit(child, depth + 1), child.tail or ""))
+            text = "".join(parts)
+            return " " + text + " " if element.tag in blocks else text
+
+        return " ".join(visit(node, 0).split()), complete
+
+    records, texts = [], []
+    for number, table in enumerate(tables, 1):
+        anchor = f"table/{number}"
+        groups = []
+        for tag, nodes in groupby((node for node in table if isinstance(node.tag, str)), key=lambda node: node.tag):
+            if tag == "tr":
+                groups.append(("implicit_tbody", list(nodes)))
+            elif tag in {"thead", "tbody", "tfoot"}:
+                for node in nodes:
+                    if any(child.tag != "tr" for child in node if isinstance(child.tag, str)):
+                        raise ValueError("unsupported HTML row group")
+                    groups.append((tag, node.findall("tr")))
+            elif isinstance(tag, str) and tag not in {"caption", "colgroup", "col"}:
+                issues.add("unsupported_table_child")
+        rows = []
+        position = 0
+        for group_number, (group, source_rows) in enumerate(groups, 1):
+            active = {}
+            for offset, row in enumerate(source_rows):
+                position += 1
+                count += 1
+                if count > MAX_CELLS:
+                    raise ValueError("HTML structure exceeds limit")
+                active = {col: span for col, span in active.items() if span[0] >= offset}
+                inherited = sorted({span[1] for span in active.values()})
+                occupied = set(active)
+                cells, row_text = [], []
+                complete = not inherited
+                column = 1
+                row_anchor = f"{anchor}/r{position}"
+                for cell in row:
+                    if not isinstance(cell.tag, str):
+                        continue
+                    if cell.tag not in {"td", "th"}:
+                        raise ValueError("unsupported HTML row child")
+                    while column in occupied:
+                        column += 1
+                    rowspan = int(cell.get("rowspan", "1")) or len(source_rows) - offset
+                    colspan = int(cell.get("colspan", "1"))
+                    if not (1 <= rowspan <= len(source_rows) - offset and
+                            1 <= colspan <= 128 and column + colspan <= 129):
+                        raise ValueError("unsupported or invalid HTML cell span")
+                    count += rowspan * colspan
+                    if count > MAX_CELLS:
+                        raise ValueError("HTML structure exceeds limit")
+                    covered = set(range(column, column + colspan))
+                    if occupied & covered:
+                        raise ValueError("overlapping HTML cell spans")
+                    cell_anchor = f"{row_anchor}/c{column}"
+                    value, cell_complete = content(cell)
+                    fields = cell_fields(value)
+                    if not cell_complete:
+                        issues.add("unsupported_cell_content")
+                        fields.update(text_sha256=None, item_id_candidate=None)
+                        complete = False
+                    scope = cell.get("scope")
+                    cells.append({"anchor": cell_anchor, "column": column, "rowspan": rowspan,
+                                  "colspan": colspan, "tag": cell.tag,
+                                  "scope": scope if scope in {"row", "col", "rowgroup", "colgroup"} else None,
+                                  **fields})
+                    row_text.append(value)
+                    occupied.update(covered)
+                    if rowspan > 1:
+                        active.update({col: (offset + rowspan - 1, cell_anchor) for col in covered})
+                    column += colspan
+                text = " ".join(row_text)
+                rows.append({"anchor": row_anchor, "group": group, "group_ordinal": group_number,
+                             "inherited_cells": inherited, "cells": cells,
+                             "text_sha256": fingerprint(text) if complete else None})
+                texts.append(text)
+        if not rows:
+            issues.add("empty_html_table")
+        caption = table.find("caption")
+        caption_hash = None
+        if caption is not None:
+            value, complete = content(caption)
+            if complete:
+                caption_hash = fingerprint(value)
+            else:
+                issues.add("unsupported_caption_content")
+        records.append({"anchor": anchor, "kind": "table", "caption_sha256": caption_hash, "rows": rows})
+    return "\n".join(texts), {"blocks": records, "issues": sorted(issues)}
+
+
 def extract_structure(raw: bytes, suffix: str) -> tuple[str, dict]:
-    readers = {".docx": docx_structure, ".csv": csv_structure, ".xlsx": xlsx_structure}
+    readers = {".docx": docx_structure, ".csv": csv_structure, ".xlsx": xlsx_structure, ".html": html_structure}
     if suffix not in readers:
         raise ValueError("unsupported structured source")
     text, report = readers[suffix](raw)
