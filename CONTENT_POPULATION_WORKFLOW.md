@@ -62,8 +62,11 @@ flowchart TD
 | CHEERS **2022** and CHEERS-AI | Resolve base versus extension and item-level reuse before economic-evaluation packs | [EQUATOR index](https://equator-network.org/reporting-guidelines/) |
 | AGREE, ARRIVE, COREQ, RIGHT, SQUIRE, SRQR and other preserved candidates | Remain held / link-only until independently qualified; AGREE reporting versus appraisal needs an explicit scope decision | [Held-source issue #95](https://github.com/edithatogo/standards_check/issues/95) |
 
-Do **not** bulk-import EQUATOR results or commit third-party PDFs/checklist text without
-edition-specific permission. Its [searchable guideline catalogue](https://equator-network.org/reporting-guidelines/)
+The [EQUATOR discovery catalogue (#111)](https://github.com/edithatogo/standards_check/issues/111)
+and its [source-pinned PR #112](https://github.com/edithatogo/standards_check/pull/112)
+may index public **descriptive metadata** in bulk. Do **not** bulk-admit checklist
+items or commit third-party PDFs/checklist text without edition-specific permission.
+Do not build a second importer. The [searchable guideline catalogue](https://equator-network.org/reporting-guidelines/)
 is useful for discovery, not a single blanket redistribution licence. PRISMA 2020's
 42-item fidelity and **unreviewed interpretations** are tracked separately in
 [issue #82](https://github.com/edithatogo/standards_check/issues/82).

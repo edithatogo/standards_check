@@ -35,8 +35,11 @@ For new reporting checklists or diagrams, follow the single
 [intake and publication checklist](../CONTENT_POPULATION_WORKFLOW.md): no catalogue-wide
 copying or admission of held sources. [#82](https://github.com/edithatogo/standards_check/issues/82)
 owns PRISMA interpretation and semantic migration; [#95](https://github.com/edithatogo/standards_check/issues/95)
-owns the unqualified historical guideline copies. Track 04 remains **planned** and
-does not need an empty adapter or scaffold before a consumer contract exists.
+owns the unqualified historical guideline copies. The [EQUATOR directory issue #111](https://github.com/edithatogo/standards_check/issues/111)
+owns descriptive source discovery and the future Searchright consumer handoff;
+[PR #112](https://github.com/edithatogo/standards_check/pull/112) is its separate
+source-only candidate. Track 04 remains **planned**: do not build an adapter or
+scaffold until the pinned consumer contract and tests are ready.
 
 ### Earlier historical receipts
 
