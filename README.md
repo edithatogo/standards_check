@@ -9,6 +9,15 @@ StandardFlow is being developed as a machine-actionable research-standards platf
 standards and provenance, deterministic applicability and evidence assessment, plus accessible
 checklists, forms, PRISMA/CONSORT/STROBE diagrams and publication artefacts.
 
+## Technical preview
+
+The [public legacy HTML checklist preview](https://edithatogo.github.io/standards_check/)
+is available for exploratory use, but not all displayed checklist entries are
+verified, current or licensed for redistribution. For a concise account of
+implemented versus planned functions, security evidence and what can responsibly
+be communicated to EQUATOR or early users, see
+[preview readiness and collaboration](docs/preview-readiness.md).
+
 ## Getting started
 
 Install [Rust](https://rustup.rs/) (the repository pins its toolchain in
