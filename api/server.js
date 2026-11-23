@@ -62,13 +62,13 @@ app.get('/api/checklists', async (req, res) => {
     const variantsPath = path.join(checklistsDir, 'variants');
 
     const readChecklistsFromDir = async (dir, type) => {
-      const files = await fs.readdir(dir);
+      const files = await fs.readdir(dir, { withFileTypes: true });
       const checklists = await Promise.all(
         files.map(async (file) => {
-          if (path.extname(file) !== '.md') return null;
-          const filePath = path.join(dir, file);
+          if (!file.isFile() || path.extname(file.name) !== '.md') return null;
+          const filePath = path.join(dir, file.name);
           const content = await fs.readFile(filePath, 'utf-8');
-          const checklistId = path.basename(file, '.md');
+          const checklistId = path.basename(file.name, '.md');
           const jsonData = parseMarkdown(content, checklistId);
           return { ...jsonData, type };
         })
@@ -94,13 +94,10 @@ app.get('/api/checklists/:id', async (req, res) => {
             return res.status(400).json({ error: 'Invalid checklist ID' });
         }
         const findChecklist = async (dir) => {
-            const targetPath = path.join(dir, `${checklistId}.md`);
-            try {
-                await fs.access(targetPath);
-                return targetPath;
-            } catch (error) {
-                return null;
-            }
+            // Select a regular corpus entry; request text never becomes a read path.
+            const files = await fs.readdir(dir, { withFileTypes: true });
+            const file = files.find(entry => entry.isFile() && entry.name === `${checklistId}.md`);
+            return file ? path.join(dir, file.name) : null;
         };
 
         const archetypesPath = path.join(checklistsDir, 'archetypes');

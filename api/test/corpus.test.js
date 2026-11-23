@@ -95,6 +95,40 @@ test('invalid identifiers cannot alias a real checklist or escape the corpus', a
   }
 });
 
+test('symlinked corpus entries cannot be listed or selected by a valid ID', async t => {
+  const directory = path.join(corpus, 'archetypes');
+  const linkedFile = path.join(directory, 'external-link.md');
+  const originalReaddir = fs.readdir;
+  const originalAccess = fs.access;
+  const originalReadFile = fs.readFile;
+  let linkedReads = 0;
+
+  // Model a corpus symlink to synthetic content outside the corpus, without
+  // writing transient fixtures into the shared checked-in corpus.
+  t.mock.method(fs, 'readdir', async (dir, options) => {
+    const files = await originalReaddir(dir, options);
+    if (dir !== directory) return files;
+    const entry = { name: 'external-link.md', isFile: () => false };
+    return files.concat(options?.withFileTypes ? entry : entry.name);
+  });
+  t.mock.method(fs, 'access', async (file, ...args) => {
+    if (file !== linkedFile) return originalAccess(file, ...args);
+  });
+  t.mock.method(fs, 'readFile', async (file, ...args) => {
+    if (file !== linkedFile) return originalReadFile(file, ...args);
+    linkedReads += 1;
+    return '# External synthetic content\n\n- Must not be served.\n';
+  });
+
+  const listed = await getJson('/api/checklists');
+  const selected = await getJson('/api/checklists/external-link');
+  assert.equal(selected.status, 404);
+  assert.deepEqual(selected.body, { error: 'Checklist not found' });
+  assert.equal(listed.status, 200);
+  assert.ok(listed.body.every(item => item.id !== 'external-link'));
+  assert.equal(linkedReads, 0);
+});
+
 test('file read failures return 500 without exposing internal details', async t => {
   t.mock.method(fs, 'readFile', async () => { throw new Error('private fixture path'); });
   const logged = t.mock.method(console, 'error', () => {});
