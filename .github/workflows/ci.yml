@@ -66,7 +66,6 @@ jobs:
         uses: dtolnay/rust-toolchain@4cda84d5c5c54efe2404f9d843567869ab1699d4
         with:
           toolchain: "1.98.1"
-          components: rustfmt,clippy
       - name: Measure Python regressions and existing validators
         if: matrix.component == 'python'
         shell: bash
@@ -124,6 +123,7 @@ jobs:
         with:
           name: coverage-${{ matrix.component }}-${{ github.sha }}
           path: target/coverage/
+          overwrite: true
           if-no-files-found: error
           retention-days: 30
 
@@ -201,6 +201,20 @@ jobs:
         run: |
           "$RUNNER_TEMP/actionlint" -color
           zizmor --offline .github/workflows
+      - name: Record Zizmor auditor-persona diagnostics (advisory)
+        shell: bash
+        run: |
+          mkdir -p target/workflow-audit
+          zizmor --offline --persona=auditor --format=json-v1 .github/workflows \
+            > target/workflow-audit/zizmor-auditor.json || true
+          python -m json.tool target/workflow-audit/zizmor-auditor.json >/dev/null
+      - name: Retain auditor diagnostics for triage
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: zizmor-auditor-${{ github.sha }}-${{ github.run_attempt }}
+          path: target/workflow-audit/zizmor-auditor.json
+          if-no-files-found: error
+          retention-days: 14
 
   boundary-mutations:
     runs-on: ubuntu-24.04
