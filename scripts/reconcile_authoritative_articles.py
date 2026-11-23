@@ -1,0 +1,193 @@
+#!/usr/bin/env python3
+"""Compare complete, selected open-access primary article checklist tables to legacy views."""
+from __future__ import annotations
+
+import argparse
+from difflib import SequenceMatcher
+import hashlib
+import json
+from pathlib import Path
+import re
+import unicodedata
+from xml.etree import ElementTree as ET
+
+MAX_BYTES = 8_000_000
+ITEM_ID = re.compile(r"^[0-9]{1,3}[a-z]?$", re.I)
+LEGACY_TASK = re.compile(r"^\s*[-*] \[[ xX]\]\s*(.+)$")
+LEGACY_LABEL = re.compile(r"^\s*\*\*(?:S)?([0-9]{1,3}[a-z]?)(?:[.)]|\s|:)([^*]*)\*\*\s*", re.I)
+LICENCE = {
+    "CC-BY-4.0": "creativecommons.org/licenses/by/4.0",
+    "CC0-1.0": "creativecommons.org/publicdomain/zero/1.0",
+}
+
+
+def normalize(text: str) -> str:
+    return " ".join(unicodedata.normalize("NFKC", text).split())
+
+
+def content(element: ET.Element | None) -> str:
+    return normalize("".join(element.itertext())) if element is not None else ""
+
+
+def digest(text: str) -> str:
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def extract_table(raw: bytes, spec: dict) -> dict:
+    if not raw or len(raw) > MAX_BYTES or re.search(rb"<!ENTITY", raw, re.I):
+        raise ValueError("empty, oversized or entity-bearing article XML")
+    checksum = hashlib.sha256(raw).hexdigest()
+    if spec.get("source_sha256") and checksum != spec["source_sha256"]:
+        raise ValueError("source checksum differs from pinned article")
+    try:
+        root = ET.fromstring(raw)
+    except ET.ParseError as exc:
+        raise ValueError("invalid article XML") from exc
+    if root.tag != "article":
+        raise ValueError("expected a primary JATS article")
+    meta = root.find("./front/article-meta")
+    if meta is None:
+        raise ValueError("missing article identity")
+    ids = {element.get("pub-id-type"): content(element)
+           for element in meta.findall("article-id")}
+    if ids.get("doi", "").lower() != spec["doi"].lower():
+        raise ValueError("article DOI differs from selected edition")
+    pmc = ids.get("pmc") or ids.get("pmcid")
+    if pmc and pmc.upper().removeprefix("PMC") != spec["pmcid"].removeprefix("PMC"):
+        raise ValueError("article PMCID differs from selected edition")
+    if ids.get("pmid") and ids["pmid"] != spec["pmid"]:
+        raise ValueError("article PMID differs from selected edition")
+    licences = meta.findall("./permissions/license")
+    licence_evidence = " ".join(
+        content(node) + " " + " ".join(v for el in node.iter() for v in el.attrib.values())
+        for node in licences
+    ).lower()
+    expected = LICENCE[spec["licence"]]
+    if not re.search(r"https?://" + re.escape(expected) + r"(?:/|(?=[\s.,;]|$))", licence_evidence):
+        raise ValueError("selected article licence not found in JATS permissions")
+    # Table-local rights/third-party attribution need separate review, not inference.
+    tables = [table for table in root.findall("./body//table-wrap")
+              if content(table.find("label")).rstrip(".").casefold() == spec["table_label"].casefold()
+              and spec["caption_contains"].casefold() in content(table.find("caption")).casefold()]
+    if len(tables) != 1:
+        raise ValueError("selected checklist table not uniquely identified")
+    table = tables[0]
+    table_id = table.get("id")
+    if not table_id:
+        raise ValueError("checklist table missing stable XML anchor")
+    if table.findall(".//permissions") or table.findall(".//license"):
+        raise ValueError("table has separate rights metadata requiring qualification")
+    rows = []
+    for position, row in enumerate(table.findall(".//tbody/tr"), start=1):
+        cells = [content(cell) for cell in row if cell.tag in {"td", "th"}]
+        if len(cells) < spec["id_from_right"]:
+            continue
+        item_id = cells[-spec["id_from_right"]].lower()
+        if not ITEM_ID.fullmatch(item_id):
+            continue
+        phrase = cells[-spec["text_from_right"]]
+        if not phrase:
+            raise ValueError("numbered source row lacks requirement text")
+        topic = cells[-spec["id_from_right"] - 1] if len(cells) > spec["id_from_right"] else None
+        rows.append({"item_id": item_id, "topic": topic,
+                     "source_anchor": f"{table_id}:row:{position}:item:{item_id}",
+                     "text": phrase, "normalized_text_sha256": digest(phrase)})
+    if [row["item_id"] for row in rows] != spec["item_ids"]:
+        raise ValueError("numbered checklist rows differ from independently specified IDs/order")
+    return {
+        "source_sha256": checksum, "source_bytes": len(raw), "doi": spec["doi"],
+        "pmcid": spec["pmcid"], "table_id": table_id, "table_label": spec["table_label"],
+        "licence": spec["licence"], "attribution": spec["attribution"],
+        "rights": "article_licence_observed_table_reuse_candidate",
+        "pin_status": "matched_pinned_source" if spec.get("source_sha256") else "newly_acquired_unpinned_source",
+        "rows": rows,
+    }
+
+
+def parse_legacy(markdown: str) -> list[dict]:
+    rows = []
+    for line in markdown.splitlines():
+        task = LEGACY_TASK.match(line)
+        if task:
+            phrase = task[1]
+            label = LEGACY_LABEL.match(phrase)
+            rows.append({"position": len(rows) + 1, "declared_item_id": label[1].lower() if label else None,
+                         "text": normalize(phrase[label.end():] if label else phrase)})
+    return rows
+
+
+def reconcile_items(source: list[dict], legacy: list[dict]) -> dict:
+    """No automatic matching based on printed numbers or approximate text."""
+    items = []
+    matched = set()
+    for row in source:
+        exact = [entry["position"] for entry in legacy if row["text"] == entry["text"]]
+        matched.update(exact)
+        same_number = [entry["position"] for entry in legacy if entry["declared_item_id"] == row["item_id"]]
+        scored = sorted(
+            ((round(SequenceMatcher(None, row["text"].casefold(), entry["text"].casefold(),
+                                   autojunk=False).ratio(), 4), entry["position"]) for entry in legacy),
+            key=lambda pair: (-pair[0], pair[1]))
+        best = {"legacy_position": scored[0][1], "similarity": scored[0][0]} if scored else None
+        items.append({
+            "source_item_id": row["item_id"], "source_anchor": row["source_anchor"],
+            "source_text_sha256": row["normalized_text_sha256"],
+            "same_number_legacy_positions": same_number, "exact_legacy_positions": exact,
+            "closest_text_candidate_only": best,
+            "status": ("exact_text_match_not_methodology" if len(exact) == 1 else
+                       "ambiguous_exact_text" if exact else "not_exactly_reconciled"),
+        })
+    return {"source_item_count": len(source), "legacy_task_count": len(legacy),
+            "exact_unique_items": sum(len(row["exact_legacy_positions"]) == 1 for row in items),
+            "legacy_positions_without_exact_source_match": [row["position"] for row in legacy
+                                                              if row["position"] not in matched],
+            "items": items, "canonical_packs_promoted": 0}
+
+
+def audit(root: Path, source_dir: Path, specs: list[dict]) -> dict:
+    editions = []
+    for spec in specs:
+        result = {key: spec[key] for key in ("edition", "doi", "pmcid", "legacy_path")}
+        try:
+            with (source_dir / (spec["pmcid"] + ".xml")).open("rb") as stream:
+                raw = stream.read(MAX_BYTES + 1)
+            result["observed_source_sha256"] = hashlib.sha256(raw).hexdigest()
+            source = extract_table(raw, spec)
+            legacy = parse_legacy((root / spec["legacy_path"]).read_text(encoding="utf-8"))
+            result["source"] = source
+            result["legacy"] = reconcile_items(source["rows"], legacy)
+            result["status"] = "table_items_extracted_legacy_compared"
+        except (OSError, UnicodeError, ValueError) as exc:
+            result["status"] = "held"
+            result["error_type"] = type(exc).__name__
+            result["error"] = str(exc)[:300]
+        editions.append(result)
+    good = [edition for edition in editions if edition["status"] == "table_items_extracted_legacy_compared"]
+    return {"schema_version": 1,
+            "claim_boundary": "Selected primary article table text and legacy comparison only; no pack, rights or methodological promotion.",
+            "summary": {"editions_attempted": len(editions), "source_tables_reconciled": len(good),
+                        "source_items_extracted": sum(len(e["source"]["rows"]) for e in good),
+                        "canonical_packs_promoted": 0},
+            "editions": editions}
+
+
+def main() -> int:
+    root = Path(__file__).resolve().parents[1]
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--root", type=Path, default=root)
+    parser.add_argument("--source-dir", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--require-all", action="store_true")
+    args = parser.parse_args()
+    specs = json.loads((args.root / "source/official/authoritative-article-editions.json").read_text(encoding="utf-8"))
+    report = audit(args.root, args.source_dir, specs)
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps(report["summary"]))
+    for edition in report["editions"]:
+        print(edition["edition"], edition["status"], edition.get("error", ""))
+    return int(args.require_all and report["summary"]["source_tables_reconciled"] != len(specs))
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
