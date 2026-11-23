@@ -172,7 +172,7 @@ def xlsx_structure(raw: bytes) -> tuple[str, dict]:
     # Preflight actual worksheet parts before openpyxl expands merged ranges.
     preview = load_workbook(io.BytesIO(raw), read_only=True, data_only=False, keep_links=False)
     try:
-        area = 0
+        area = merged_area = 0
         with ZipFile(io.BytesIO(raw)) as archive:
             for sheet in preview.worksheets:
                 root = etree.fromstring(archive.read(sheet._worksheet_path),
@@ -189,9 +189,13 @@ def xlsx_structure(raw: bytes) -> tuple[str, dict]:
                     if None in (left, top, right, bottom) or not (1 <= left <= right and 1 <= top <= bottom):
                         raise ValueError("invalid XLSX cell range")
                     max_row, max_col = max(max_row, bottom), max(max_col, right)
+                    if tag == "mergeCell":
+                        merged_area += (right - left + 1) * (bottom - top + 1)
                 area += max_row * max_col
                 if area > MAX_CELLS:
                     raise ValueError("XLSX grid exceeds limit")
+                if merged_area > MAX_CELLS:
+                    raise ValueError("XLSX merged range expansion exceeds limit")
     finally:
         preview.close()
     book = load_workbook(io.BytesIO(raw), data_only=False, keep_links=False)
@@ -216,7 +220,8 @@ def xlsx_structure(raw: bytes) -> tuple[str, dict]:
                     cells.append({"anchor": f"sheet/{number}/{get_column_letter(column)}{row_number}",
                                   "value_type": cell.data_type, **cell_fields(text)})
                 rows.append({"anchor": f"sheet/{number}/row/{row_number}", "row": row_number, "hidden": bool(sheet.row_dimensions[row_number].hidden),
-                             "cells": cells, "text_sha256": fingerprint(" ".join(row_text))})
+                             "cells": cells, "text_sha256": (None if any(cell["value_type"] == "f" for cell in cells)
+                                                             else fingerprint(" ".join(row_text)))})
                 texts.append(" ".join(row_text))
             sheets.append({"ordinal": number, "name_sha256": fingerprint(sheet.title), "state": sheet.sheet_state,
                            "merged_ranges": sorted(str(r) for r in sheet.merged_cells.ranges),

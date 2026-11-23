@@ -6,7 +6,7 @@ from unittest.mock import patch
 
 from docx import Document
 from openpyxl import Workbook
-from scripts.structured_source import extract_structure
+from scripts.structured_source import extract_structure, fingerprint
 
 
 class StructuredSourceTests(unittest.TestCase):
@@ -113,6 +113,38 @@ class StructuredSourceTests(unittest.TestCase):
                 extract_structure(buf.getvalue(), ".docx")
         with self.assertRaises(ValueError):
             extract_structure(b"anything", ".xls")
+
+
+    def test_repeated_merge_area_exceeds_cumulative_budget(self):
+        book = Workbook()
+        book.active.merge_cells('A1:B2')
+        original = io.BytesIO()
+        book.save(original)
+        book.close()
+        changed = io.BytesIO()
+        with ZipFile(original) as source, ZipFile(changed, 'w') as dest:
+            for item in source.infolist():
+                data = source.read(item)
+                if item.filename == 'xl/worksheets/sheet1.xml':
+                    data = data.replace(b'<mergeCell ref="A1:B2"/>', b'<mergeCell ref="A1:B2"/>' * 3)
+                dest.writestr(item.filename, data)
+        with patch('scripts.structured_source.MAX_CELLS', 8):
+            with self.assertRaisesRegex(ValueError, 'XLSX merged range expansion exceeds limit'):
+                extract_structure(changed.getvalue(), ".xlsx")
+
+    def test_formula_row_cannot_match_whole_row(self):
+        book = Workbook()
+        book.active.append(['Literal requirement.', '=1+1'])
+        book.active.append(['Literal second row.', None])
+        original = io.BytesIO()
+        book.save(original)
+        book.close()
+        text, report = extract_structure(original.getvalue(), ".xlsx")
+        rows = report['sheets'][0]['rows']
+        self.assertIsNone(rows[0]['text_sha256'])
+        self.assertEqual(rows[0]['cells'][0]['text_sha256'], fingerprint('Literal requirement.'))
+        self.assertEqual(rows[1]['text_sha256'], fingerprint('Literal second row.'))
+        self.assertNotIn('=1+1', text)
 
 
 if __name__ == "__main__":

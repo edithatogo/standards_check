@@ -130,7 +130,7 @@ class TextProbeTests(unittest.TestCase):
             archive = root / "source/archive/processed"
             archive.mkdir(parents=True)
             book = Workbook()
-            book.active.append(["1a", "Report all outcomes."])
+            book.active.append(["Report all outcomes.", "=1+1"])
             book.save(archive / "PRISMA-EcoEvo_ExcelChecklist.xlsx")
             book.close()
             view = root / "markdown/en/variants/prisma-ecoevo.md"
@@ -139,10 +139,10 @@ class TextProbeTests(unittest.TestCase):
             report = audit(root)
             self.assertEqual(report["summary"]["verified_by_this_process"], 0)
             self.assertEqual(report["summary"]["source_structure_status_counts"],
-                             {"structure_observed_not_qualified": 2})
+                             {"structure_observed_not_qualified": 1, "held_structural_discrepancy": 1})
             csv, xlsx = report["legacy_items"][0]["source_probes"]
             self.assertEqual(csv["item_comparisons"][0]["exact_structural_anchors"], ["row/2/c2"])
-            self.assertEqual(xlsx["item_comparisons"][0]["exact_structural_anchors"], ["sheet/1/B1"])
+            self.assertEqual(xlsx["item_comparisons"][0]["exact_structural_anchors"], ["sheet/1/A1"])
             self.assertEqual(xlsx["identity_basis"], "archive_filename_candidate_unverified")
             self.assertEqual(xlsx["rights"], "unassessed")
             self.assertNotIn("Report all outcomes.", str(report))

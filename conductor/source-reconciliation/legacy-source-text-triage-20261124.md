@@ -93,3 +93,7 @@ Python 3.13.5 with python-docx 1.2.0 and openpyxl 3.1.5; exact helper/test blob
 hashes matched. The end-to-end audit regression and actual archive probes
 require hosted qualification. Reuse existing Python coverage artifact;
 rollback this additive parser, dispatch and dependency together.
+
+### Review hardening
+
+The XLSX preflight now independently caps cumulative merged-range area across the workbook, not just the enclosing rectangular grid, before normal loading. Formula-bearing rows have no whole-row fingerprint; literal cell anchors remain eligible but formula cells and partial rows cannot count as exact structural matches. Two focused tests reproduced both failures against the existing XLSX function in an isolated local harness and passed after the repair (Python 3.13.5, openpyxl 3.1.5). The existing audit integration fixture now also checks that a formula-bearing row contributes only its literal-cell anchor. Full exact-head hosted checks remain required.
