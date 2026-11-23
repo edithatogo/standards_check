@@ -3,14 +3,14 @@
   "track_id": "00",
   "slug": "00-platform-foundation",
   "title": "Platform foundation",
-  "status": "in_progress",
+  "status": "implementation_complete",
   "implementation_state": "source_implemented",
   "evidence_level": "source_verified",
   "dependencies": [],
-  "updated": "2026-11-19",
+  "updated": "2026-11-23",
   "pull_request": 79,
   "merged_commit": "840b8431403035be7e5dec5f22b64ad3ddb20d2b",
-  "evidence_level_scope": "current integration source; revision-bound hosted compiler evidence is recorded separately",
+  "evidence_level_scope": "current integration source; revision-bound hosted compiler evidence is recorded separately; accepted local policy specialization is recorded but no exact template equality is claimed",
   "last_hosted_verification": {
     "commit": "baab246e62f3585237b987f87647eba743f2818e",
     "evidence_level": "compiler_verified",
@@ -22,8 +22,8 @@
   },
   "current_integration_hosted_checks": "passed_at_receiving_main_commit",
   "remaining_work": [
-    "repository-standards profile and managed-file drift reconciliation",
-    "authoritative rights/content review, history parity and public acceptance remain separate tracks"
+    "Exact thin reusable-call and template-byte equality remain unclaimed, not required for the accepted local specialization; reevaluate only if central policy changes",
+    "Rights/content review, semantic migration and public acceptance remain owned by Tracks 01–05"
   ],
   "current_integration_hosted_commit": "840b8431403035be7e5dec5f22b64ad3ddb20d2b",
   "receiving_main_verification": {
@@ -31,5 +31,13 @@
     "completed_success": 11,
     "failed": 0,
     "receipt": "https://github.com/edithatogo/standards_check/commit/840b8431403035be7e5dec5f22b64ad3ddb20d2b/checks"
+  },
+  "managed_policy_review": {
+    "status": "accepted_local_specialization",
+    "central_revision": "2efdbd988064f6857795b9fa9ed4e1d08d18791d",
+    "consumer_revision": "dd3f995c473db0cc1cd6dad9d392b3744166958b",
+    "tracking_issue": 30,
+    "documentation_merge": "54456f7b88f0f926e4f1513fe3321873159489b3",
+    "exact_managed_template_equality": false
   }
 }
