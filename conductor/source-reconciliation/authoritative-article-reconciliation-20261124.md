@@ -55,3 +55,30 @@ Reproduce routinely from retained source-table snapshots (network-free), or supp
 ## Durable source row snapshot and routine CI
 
 The attributed 82-item table extract is retained at `source/official/authoritative-article-rows.json` (Git blob `c29794b3bcf7863e9f30c4ebc83e70b8d1b05450`). The independently reconstructed artifact-derived Git blob matched exactly. It is a normalized table projection, not the original XML itself. Offline validation reconstructs each item text digest and checks the complete ordered table hash, item IDs, anchor, exact DOI/PMCID, licence and attribution against the pinned manifest. On changed source rows/manifest/comparator, or explicit workflow dispatch, the same workflow also reacquires the selected XML and verifies full article bytes and ordered row hash. An incidental publisher/archival XML revision is reported as drift; there is no automatic repin. Routine comparison does not depend on publisher network access.
+
+## T01.5b — independent structure receipt (additional candidate)
+
+The XML route now also records a fingerprint-only description of all body rows
+(including rows skipped by the numbered-item projection), candidate section
+headings, explicit and inherited cell coordinates, row/column spans, nested
+paragraph/list/definition blocks, and footnote IDs/references. Block-aware and
+flat text hashes are kept separate; a block-boundary difference, unclassified
+row, duplicate footnote ID or unresolved footnote reference is held for
+structural reconciliation. Nested tables, unsupported row groups and invalid
+spans are held, not guessed. This covers the selected bounded rectangular JATS
+dialect only; the structure is not an independently validated interpretation.
+No additional source text, existing row fields, source-byte pins or row
+digests are changed. The report schema advances to 2 with an explicit
+structure status count. Offline flat snapshots report
+`not_retained_in_flat_snapshot`: they cannot prove the original XML structure.
+The existing `--require-all` remains the exact-row acquisition gate, not a
+structural qualification gate. The raw pinned XML must be replayed to establish
+the additional evidence; unsupported or discrepant structure cannot be
+promoted by the existing row match.
+
+Five new synthetic structure tests ran RED/GREEN locally on Python 3.13.5
+against exact Git blobs. Four additional integration/negative tests exercise
+the current XML/snapshot/CLI paths and address the previous patch-coverage
+gap; hosted receipts and observed coverage are still required. Preserve
+the source-only scope, zero promotions and original attribution. Shared
+legacy reader integration remains a separate receiving change after #135.

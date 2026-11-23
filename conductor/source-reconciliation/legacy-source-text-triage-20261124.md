@@ -43,3 +43,9 @@ the software must not invent human/external approval.
 
 Rollback: revert the additive script/tests/CI invocation; no pack,
 repository index, rights metadata, original file or user progress is mutated.
+
+## T01.5a — additive item diagnostics
+
+The existing report retains its historical `exact_substring_matches` count for compatibility, not as an exact-text claim. New aggregate metrics count meaningful (at least 40 lexical characters) token-bounded lexical hits and case/punctuation-preserving NFKC/whitespace-normalized phrase hits separately. Every legacy task-list entry, including short or empty lexical entries, receives its ordinal (not a printed source ID), normalized text SHA-256, occurrence counts, short-item flag and diagnostic outcome. Repeated and overlapping hits remain ambiguous. No raw text is added to the artifact. A normalized phrase can occur inside a different row, in narrative text or even in a negated requirement; neither comparison is complete-row fidelity or semantic equivalence. Source identity, rights, external validation and `verified_by_this_process=0` remain unchanged.
+
+Synthetic regressions exercise partial-token false hits, case/punctuation differences, Unicode/whitespace normalization, repeated/empty/short items and negated-context phrase hits. The first three focused new tests were run RED/GREEN against the comparator extracted into an isolated local Python harness; full repository CI and receiving-main evidence are separate gates. Next: inspect the existing authoritative article-table work and actual diagnostics before adding another parser or NLP dependency.

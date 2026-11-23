@@ -1,12 +1,14 @@
 """Source-based table reconciliation, including deliberately incorrect legacy text."""
 import copy
 import hashlib
+import json
+from unittest.mock import patch
 import tempfile
 import unittest
 from pathlib import Path
 
 from scripts.reconcile_authoritative_articles import (
-    extract_table, parse_legacy, reconcile_items, audit, snapshot_table,
+    extract_table, parse_legacy, reconcile_items, audit, snapshot_table, main,
 )
 
 
@@ -150,6 +152,75 @@ class AuthoritativeTableTests(unittest.TestCase):
             self.assertEqual(result["editions"][1]["status"], "held")
             self.assertEqual(result["editions"][1]["error_type"], "FileNotFoundError")
             self.assertEqual(result["editions"][0]["legacy"]["exact_unique_items"], 1)
+
+
+    def test_live_structure_receipt_preserves_existing_row_projection(self):
+        source = extract_table(XML, SPEC)
+        self.assertEqual(source["structure"]["status"], "structure_observed_not_qualified")
+        self.assertEqual(source["structure"]["rows"][2]["inherited_cells"], ["Tab3:row:2:cell:1"])
+        self.assertEqual(source["structure"]["rows"][2]["source_anchor"], source["rows"][1]["source_anchor"])
+        self.assertIsNone(source["rows"][1]["topic"])  # Existing pinned row representation is unchanged.
+        bad_layout = XML.replace(b'rowspan="2"', b'rowspan="99"')
+        held = extract_table(bad_layout, SPEC)
+        self.assertEqual(held["structure"]["status"], "held_unsupported_structure")
+        self.assertEqual(held["rows"], source["rows"])
+        self.assertEqual(held["table_rows_sha256"], source["table_rows_sha256"])
+
+    def test_offline_audit_and_cli_are_explicit_about_absent_xml_structure(self):
+        source = extract_table(XML, SPEC)
+        spec = {**SPEC, "source_sha256": source["source_sha256"],
+                "source_bytes": source["source_bytes"], "table_id": source["table_id"],
+                "table_rows_sha256": source["table_rows_sha256"]}
+        snapshot = {"edition": SPEC["edition"], "doi": SPEC["doi"], "pmcid": SPEC["pmcid"],
+                    "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC123/fullTextXML",
+                    "source_sha256": source["source_sha256"],
+                    "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+                    "attribution": SPEC["attribution"],
+                    "rows": [{k: v for k, v in row.items() if k != "normalized_text_sha256"}
+                             for row in source["rows"]]}
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            official = root / "source/official"
+            official.mkdir(parents=True)
+            manifest = official / "authoritative-article-editions.json"
+            ledger = official / "authoritative-article-rows.json"
+            manifest.write_text(json.dumps([spec]), encoding="utf-8")
+            ledger.write_text(json.dumps({"schema_version": 1, "editions": [snapshot]}), encoding="utf-8")
+            (root / "legacy.md").write_text("- [ ] **1a.** Identify the protocol.\n", encoding="utf-8")
+            out = root / "reports/evidence.json"
+            with patch("sys.argv", ["reconcile", "--root", str(root), "--output", str(out), "--require-all"]):
+                self.assertEqual(main(), 0)
+            report = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(report["schema_version"], 2)
+            self.assertEqual(report["summary"]["structure_status_counts"], {"not_retained_in_flat_snapshot": 1})
+            self.assertEqual(report["summary"]["source_items_extracted"], 3)
+            self.assertEqual(report["summary"]["canonical_packs_promoted"], 0)
+            for invalid_ledger in ({"schema_version": 99, "editions": [snapshot]},
+                                   {"schema_version": 1, "editions": []},
+                                   {"schema_version": 1, "editions": [snapshot, snapshot]}):
+                ledger.write_text(json.dumps(invalid_ledger), encoding="utf-8")
+                with self.assertRaises(ValueError):
+                    audit(root, None, [spec])
+            corrupt = copy.deepcopy(snapshot)
+            corrupt["rows"][0]["text"] = "Different text."
+            ledger.write_text(json.dumps({"schema_version": 1, "editions": [corrupt]}), encoding="utf-8")
+            with patch("sys.argv", ["reconcile", "--root", str(root), "--output", str(out), "--require-all"]):
+                self.assertEqual(main(), 1)
+            self.assertEqual(json.loads(out.read_text())["editions"][0]["status"], "held")
+
+    def test_rejects_unsupported_or_unbound_primary_xml(self):
+        for raw in (b"", b"not XML", b"<not-article/>", b"<article/>",
+                    b"<!ENTITY a 'x'>", XML.replace(b"<table-wrap id=\"Tab3\">", b"<table-wrap>"),
+                    XML.replace(b">Identify the protocol.<", b"><"),
+                    XML.replace(b'<table><tbody>', b'<permissions/><table><tbody>'),
+                    XML.replace(b'pub-id-type="pmid">456', b'pub-id-type="pmid">789')):
+            with self.subTest(raw=raw[:60]), self.assertRaises(ValueError):
+                extract_table(raw, SPEC)
+
+    def test_empty_legacy_is_not_an_exact_match(self):
+        report = reconcile_items(extract_table(XML, SPEC)["rows"], [])
+        self.assertEqual(report["exact_unique_items"], 0)
+        self.assertIsNone(report["items"][0]["closest_text_candidate_only"])
 
 
 if __name__ == "__main__":

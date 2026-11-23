@@ -11,6 +11,11 @@ import re
 import unicodedata
 from xml.etree import ElementTree as ET
 
+if __package__:
+    from .jats_checklist_structure import describe_table
+else:
+    from jats_checklist_structure import describe_table
+
 MAX_BYTES = 8_000_000
 ITEM_ID = re.compile(r"^[0-9]{1,3}[a-z]?$", re.I)
 LEGACY_TASK = re.compile(r"^\s*[-*] \[[ xX]\]\s*(.+)$")
@@ -102,7 +107,12 @@ def extract_table(raw: bytes, spec: dict) -> dict:
     table_hash = digest(json.dumps(rows, ensure_ascii=False, sort_keys=True, separators=(",", ":")))
     if spec.get("table_rows_sha256") and table_hash != spec["table_rows_sha256"]:
         raise ValueError("source row digest differs from pinned table")
+    try:
+        structure = describe_table(table, rows)
+    except ValueError:
+        structure = {"status": "held_unsupported_structure", "issues": ["unsupported_table_layout"]}
     return {
+        "structure": structure,
         "table_rows_sha256": table_hash,
         "source_sha256": checksum, "source_bytes": len(raw), "doi": spec["doi"],
         "pmcid": spec["pmcid"], "table_id": table_id, "table_label": spec["table_label"],
@@ -145,6 +155,7 @@ def snapshot_table(edition: dict, spec: dict) -> dict:
             "licence": spec["licence"], "attribution": spec["attribution"],
             "rights": "article_licence_observed_table_reuse_candidate",
             "pin_status": "retained_table_snapshot_matches_pinned_rows",
+            "structure": {"status": "not_retained_in_flat_snapshot", "issues": ["pinned_xml_required"]},
             "rows": rows}
 
 
@@ -229,10 +240,15 @@ def audit(root: Path, source_dir: Path | None, specs: list[dict]) -> dict:
             result["error"] = str(exc)[:300]
         editions.append(result)
     good = [edition for edition in editions if edition["status"] == "table_items_extracted_legacy_compared"]
-    return {"schema_version": 1,
+    structure_statuses = {}
+    for edition in good:
+        status = edition["source"]["structure"]["status"]
+        structure_statuses[status] = structure_statuses.get(status, 0) + 1
+    return {"schema_version": 2,
             "claim_boundary": "Selected primary article table text and legacy comparison only; no pack, rights or methodological promotion.",
             "summary": {"editions_attempted": len(editions), "source_tables_reconciled": len(good),
                         "source_items_extracted": sum(len(e["source"]["rows"]) for e in good),
+                        "structure_status_counts": structure_statuses,
                         "canonical_packs_promoted": 0},
             "editions": editions}
 

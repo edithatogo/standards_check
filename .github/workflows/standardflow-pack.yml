@@ -16,6 +16,8 @@ on:
       - "scripts/build_prisma42_candidate.py"
       - "scripts/compare_prisma_source_pdf.py"
       - "scripts/reconcile_authoritative_articles.py"
+      - "scripts/jats_checklist_structure.py"
+      - "tests/test_jats_checklist_structure.py"
       - "tests/test_reconcile_authoritative_articles.py"
       - "tests/test_prisma_source_pdf.py"
       - "tests/test_prisma42_candidate.py"
@@ -40,6 +42,8 @@ on:
       - "scripts/build_prisma42_candidate.py"
       - "scripts/compare_prisma_source_pdf.py"
       - "scripts/reconcile_authoritative_articles.py"
+      - "scripts/jats_checklist_structure.py"
+      - "tests/test_jats_checklist_structure.py"
       - "tests/test_reconcile_authoritative_articles.py"
       - "tests/test_prisma_source_pdf.py"
       - "tests/test_prisma42_candidate.py"
@@ -180,7 +184,7 @@ jobs:
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: "3.12"
-      - run: python -m unittest tests.test_reconcile_authoritative_articles -v
+      - run: python -m unittest tests.test_reconcile_authoritative_articles tests.test_jats_checklist_structure -v
       - name: Verify retained table source pins and reconcile offline
         run: |
           python -m scripts.reconcile_authoritative_articles \
@@ -198,7 +202,8 @@ jobs:
              ! git diff --quiet HEAD^1 HEAD -- \
                source/official/authoritative-article-editions.json \
                source/official/authoritative-article-rows.json \
-               scripts/reconcile_authoritative_articles.py; then
+               scripts/reconcile_authoritative_articles.py \
+               scripts/jats_checklist_structure.py; then
             echo "live=true" >> "$GITHUB_OUTPUT"
           else
             echo "live=false" >> "$GITHUB_OUTPUT"
