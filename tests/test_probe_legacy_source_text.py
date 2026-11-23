@@ -148,6 +148,24 @@ class TextProbeTests(unittest.TestCase):
             self.assertNotIn("Report all outcomes.", str(report))
 
 
+    def test_html_audit_uses_structural_anchors_without_raw_text(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            original = root / "source/archetypes/example.html"
+            original.parent.mkdir(parents=True)
+            (root / "source/index.yml").write_text("items:\n  - id: example\n    title: Example\n")
+            original.write_text("<table><tr><td>1a</td><td>Report all outcomes.</td></tr></table>")
+            view = root / "markdown/en/archetypes/example.md"
+            view.parent.mkdir(parents=True)
+            view.write_text("- [ ] **1a.** Report all outcomes.\n")
+            report = audit(root)
+            probe = report["legacy_items"][0]["source_probes"][0]
+            self.assertEqual(probe["extractor"], "lxml_static_html_table_structure")
+            self.assertEqual(probe["item_comparisons"][0]["exact_structural_anchors"], ["table/1/r1/c2"])
+            self.assertEqual(report["summary"]["verified_by_this_process"], 0)
+            self.assertNotIn("Report all outcomes.", str(report))
+
+
 class ItemDiagnosticsTests(unittest.TestCase):
     def test_word_boundaries_and_punctuation_are_distinct_diagnostics(self):
         result = evaluate_text(

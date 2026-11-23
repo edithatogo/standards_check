@@ -43,10 +43,11 @@ def source_probe(path: Path) -> tuple[str, str, str, dict | None]:
                 raise ValueError("too_many_pages")
             text = "\n".join(page.extract_text() or "" for page in pdf.pages)
         method = "pdfplumber_text_only_no_ocr"
-    elif path.suffix in {".docx", ".csv", ".xlsx"}:
+    elif path.suffix in {".docx", ".csv", ".xlsx", ".html"}:
         text, structure = extract_structure(source, path.suffix)
         method = {".docx": "python_docx_ordered_structure", ".csv": "stdlib_csv_structured",
-                  ".xlsx": "openpyxl_structured_no_formula_evaluation"}[path.suffix]
+                  ".xlsx": "openpyxl_structured_no_formula_evaluation",
+                  ".html": "lxml_static_html_table_structure"}[path.suffix]
     elif path.suffix == ".txt":
         text = source.decode("utf-8")
         method = "stdlib_text"
