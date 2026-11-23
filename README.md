@@ -80,8 +80,11 @@ remain reference material, separate from the Rust engine and canonical packs.
 Use the [isolated receiving environment](legacy/README.md) for pinned dependencies
 and source-to-subtree parity checks, which work without access to the old remote.
 
-The user has directed private archival of the old `edithatogo/standardflow` remote
-after verified export. Full legacy-to-Rust semantic parity remains tracked here.
+The old `edithatogo/standardflow` remote is private and archived. This repository
+remains the active home, with the exact imported tree and all nine source histories
+preserved. The [Track 03 verification record](conductor/tracks/03-standardflow-import/verification.md)
+records consolidation and retirement; full legacy-to-Rust semantic parity remains
+tracked here.
 
 ## Legacy corpus workflow
 
