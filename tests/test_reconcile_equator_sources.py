@@ -92,6 +92,20 @@ class ReconcileEquatorSourcesTests(unittest.TestCase):
         self.assertIn("legacy_count_differs_from_independent_identifier_fixture", result["legacy_items"][0]["findings"])
         self.assertEqual(result["summary"]["verified_legacy_checklists"], 0)
 
+    def test_untrusted_legacy_sidecar_hash_and_licence_claims_are_checked(self):
+        self.index('  - id: prisma-2020\n    title: PRISMA 2020 Checklist\n    group: prisma\n    version: "2020"\n    checksum: "' + 'f'*64 + '"\n    license: CC BY 4.0\n')
+        folder = self.root / "source/archetypes"
+        folder.mkdir()
+        (folder / "prisma-2020.pdf").write_bytes(b"not the claimed file")
+        (folder / "prisma-2020.yml").write_text('verified: true\nlicense: All rights reserved\nchecksum: "' + 'e'*64 + '"\n')
+        row = reconcile(self.root, self.catalogue)["legacy_items"][0]
+        self.assertTrue(row["legacy_sidecar"]["claimed_verified"])
+        self.assertIn("legacy_sidecar_verified_not_evidence", row["findings"])
+        self.assertIn("legacy_checksum_disagrees_with_present_asset", row["findings"])
+        self.assertIn("legacy_license_claim_conflict", row["findings"])
+        self.assertIn("index_sidecar_checksum_conflict", row["findings"])
+        self.assertEqual(row["admission"], "unverified_candidate")
+
     def test_catalogue_identity_count_and_duplicate_sources_fail_closed(self):
         self.index('  - id: prisma-2020\n    title: PRISMA 2020 Checklist\n')
         broken = {**self.catalogue, "published_count": 5}

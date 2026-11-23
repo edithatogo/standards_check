@@ -115,6 +115,46 @@ def scan_local(root: Path, item: dict) -> tuple[list[dict], list[str], dict | No
     return sorted(assets, key=lambda x:x["path"]), sorted(views), content
 
 
+
+def scan_sidecar(root: Path, item: dict, assets: list[dict]) -> tuple[dict | None, list[str]]:
+    paths = [root / "source" / level / (item["id"] + ".yml") for level in ("archetypes", "variants")]
+    paths = [path for path in paths if path.is_file() and not path.is_symlink()]
+    findings = []
+    if len(paths) > 1:
+        findings.append("multiple_legacy_sidecars")
+    if not paths:
+        return None, findings
+    # Prefer the index's declared track, but never infer that its contents are true.
+    path = next((p for p in paths if p.parent.name == item.get("level")), paths[0])
+    try:
+        data = yaml.safe_load(path.read_text(encoding="utf-8"))
+    except yaml.YAMLError:
+        return {"path": path.relative_to(root).as_posix(), "parse_status": "invalid"}, [*findings, "malformed_legacy_sidecar"]
+    if not isinstance(data, dict):
+        return {"path": path.relative_to(root).as_posix(), "parse_status": "invalid"}, [*findings, "malformed_legacy_sidecar"]
+    recorded = str(data.get("checksum") or "").lower()
+    claimed = str(item.get("checksum") or "").lower()
+    actual = {a["sha256"] for a in assets}
+    if recorded and actual and recorded not in actual:
+        findings.append("legacy_checksum_disagrees_with_present_asset")
+    if claimed and recorded and claimed != recorded:
+        findings.append("index_sidecar_checksum_conflict")
+    if claimed and actual and claimed not in actual:
+        findings.append("index_checksum_disagrees_with_present_asset")
+    normal = lambda x: re.sub(r"[^a-z0-9]", "", str(x or "").lower())
+    if data.get("license") and item.get("license") and normal(data["license"]) != normal(item["license"]):
+        findings.append("legacy_license_claim_conflict")
+    if data.get("verified") is True:
+        findings.append("legacy_sidecar_verified_not_evidence")
+    return {
+        "path": path.relative_to(root).as_posix(),
+        "claimed_verified": data.get("verified") is True,
+        "claimed_license": data.get("license"),
+        "checksum_claim": data.get("checksum"),
+        "source_url_claim": data.get("source_url"),
+    }, findings
+
+
 def suggest(item: dict, rows: list[dict]) -> tuple[dict | None, str, list[dict]]:
     lookup = {row["id"].split(":", 1)[1]: row for row in rows}
     exact_doi = doi(item.get("url"))
@@ -180,7 +220,8 @@ def reconcile(root: Path, catalogue: dict) -> dict:
     for item in items:
         candidate, basis, alternatives = suggest(item, rows)
         assets, views, content = scan_local(root, item)
-        findings = ["legacy_content_not_authority", "rights_unassessed_for_legacy_text"]
+        sidecar, sidecar_findings = scan_sidecar(root, item, assets)
+        findings = ["legacy_content_not_authority", "rights_unassessed_for_legacy_text", *sidecar_findings]
         if not assets: findings.append("no_original_asset")
         if not views: findings.append("no_legacy_markdown")
         if item.get("variant_of") and item["variant_of"] not in ids:
@@ -210,7 +251,8 @@ def reconcile(root: Path, catalogue: dict) -> dict:
             "legacy_id": item["id"], "legacy_title": item.get("title"), "legacy_status": item.get("status", "unset"),
             "legacy_version": version or None, "legacy_group": item.get("group"), "legacy_variant_of": item.get("variant_of"),
             "equator_candidate": candidate, "link_basis": basis, "alternatives": alternatives,
-            "source_assets": assets, "legacy_views": views, "legacy_item_inventory": content,
+            "source_assets": assets, "legacy_sidecar": sidecar,
+            "legacy_views": views, "legacy_item_inventory": content,
             "independent_identifier_count": identifier_count, "canonical_pack_item_count": canonical_count,
             "rights": "unassessed", "admission": "unverified_candidate" if candidate else "unresolved", "findings": sorted(findings),
         }
