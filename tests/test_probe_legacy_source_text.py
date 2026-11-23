@@ -76,6 +76,48 @@ class TextProbeTests(unittest.TestCase):
             self.assertEqual(len(digest), 64)
 
 
+    def test_nested_legacy_structure_report_is_anchored_and_does_not_leak_text(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root / "source").mkdir()
+            (root / "source/index.yml").write_text("items:\n  - id: sample\n    title: Sample\n")
+            source = root / "source/archetypes/sample.txt"
+            source.parent.mkdir()
+            source.write_text("Report all outcomes, including adverse events.")
+            view = root / "markdown/en/archetypes/sample.md"
+            view.parent.mkdir(parents=True)
+            view.write_text("## Results\n- [ ] **2. Outcomes:** Report all outcomes,\n"
+                            "    including adverse events.\n"
+                            "    - [ ] **2a.** Describe exclusions.\n"
+                            "- [ ] **2a.** Report all missing data.\n", encoding="utf-8")
+            report = audit(root)
+            record = report["legacy_items"][0]
+            structure = record["legacy_structure"]
+            self.assertEqual(report["schema_version"], 2)
+            self.assertEqual(report["summary"]["verified_by_this_process"], 0)
+            self.assertEqual(record["legacy_item_count"], 3)
+            self.assertEqual(structure["duplicate_declared_item_ids"], ["2a"])
+            self.assertEqual(structure["items"][0]["line_numbers"], [2, 3])
+            self.assertEqual(structure["items"][1]["parent_position"], 1)
+            self.assertEqual(structure["items"][2]["section_line"], 1)
+            self.assertEqual(len(structure["view_sha256"]), 64)
+            self.assertEqual(record["source_probes"][0]["item_comparisons"][0]["outcome"],
+                             "fidelity_phrase_present")
+            self.assertNotIn("including adverse events", str(report))
+            self.assertNotIn("Describe exclusions", str(report))
+            self.assertNotIn("Report all missing data", str(report))
+
+    def test_source_size_limit_is_applied_to_the_bounded_read(self):
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "oversized.txt"
+            path.write_bytes(b"abcd")
+            with patch("scripts.probe_legacy_source_text.MAX_SOURCE_BYTES", 3):
+                with self.assertRaisesRegex(ValueError, "source_too_large"):
+                    source_text(path)
+
+
+
 
 class ItemDiagnosticsTests(unittest.TestCase):
     def test_word_boundaries_and_punctuation_are_distinct_diagnostics(self):
