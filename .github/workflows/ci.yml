@@ -63,9 +63,7 @@ jobs:
           python -m pip check
       - name: Prepare the locked CLI for Python's cross-runtime contract
         if: matrix.component == 'python'
-        uses: dtolnay/rust-toolchain@4cda84d5c5c54efe2404f9d843567869ab1699d4
-        with:
-          toolchain: "1.98.1" # Only cargo build is needed; clippy/rustfmt run in Rust quality jobs.
+        run: rustup toolchain install 1.98.1 --profile minimal # Python tests need cargo only, not clippy/rustfmt.
       - name: Measure Python regressions and existing validators
         if: matrix.component == 'python'
         shell: bash
@@ -75,7 +73,7 @@ jobs:
           for validator in validate_foundation validate_packs validate_artifacts validate_costing_reconciliation validate_prisma_source_assurance audit_foundation; do
             python -m coverage run "scripts/${validator}.py"
           done
-          cargo build --locked -p standardflow-cli
+          cargo +1.98.1 build --locked -p standardflow-cli
           python -m coverage run -m scripts.qualify_legacy_prisma \
             --rust-cli target/debug/standardflow --output target/coverage/legacy-prisma.json
           python -m coverage combine
