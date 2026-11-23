@@ -63,11 +63,13 @@ def test_missing_or_malformed_page_fails_closed(tmp_path):
     page = tmp_path / files[0][0]
     page.parent.mkdir(parents=True)
     page.write_text("---\ntitle: Missing closing delimiter", encoding="utf-8")
-    with pytest.raises(ValueError, match="Unterminated"):
-        catalog.build_catalog(tmp_path, SHA, files, metadata=True)
+    invalid = catalog.build_catalog(tmp_path, SHA, files, metadata=True)
+    assert invalid["guidelines"][0]["metadata_status"] == "needs_review"
+    assert "Unterminated" in invalid["guidelines"][0]["metadata_issue"]
     page.write_text("---\ntitle: Valid\ncategories: invalid-scalar\n---\n")
-    with pytest.raises(ValueError, match="Unexpected categories"):
-        catalog.build_catalog(tmp_path, SHA, files, metadata=True)
+    invalid = catalog.build_catalog(tmp_path, SHA, files, metadata=True)
+    assert invalid["guidelines"][0]["metadata_status"] == "needs_review"
+    assert "Unexpected categories" in invalid["guidelines"][0]["metadata_issue"]
 
 
 def test_rejects_unpublished_and_duplicate_ids(tmp_path):
@@ -106,3 +108,23 @@ def test_inventory_excludes_development_and_rejects_modified_checkout(tmp_path):
     (tmp_path / entries[0][0]).write_text("changed")
     with pytest.raises(ValueError, match="modified"):
         catalog.inventory(tmp_path)
+
+
+def test_missing_upstream_title_is_preserved_as_review_debt(tmp_path):
+    paths = [
+        ("reporting-guidelines/srqr/index.qmd", SHA),
+        ("reporting-guidelines/strobe-metepi/index.qmd", SHA),
+    ]
+    for path, title in ((paths[0][0], "SRQR"), (paths[1][0], "")):
+        file = tmp_path / path
+        file.parent.mkdir(parents=True, exist_ok=True)
+        file.write_text(f"---\ntitle: '{title}'\nacronym: TEST\n---\n", encoding="utf-8")
+    result = catalog.build_catalog(tmp_path, SHA, paths, metadata=True)
+    assert result["published_count"] == 2
+    assert result["metadata_issue_count"] == 1
+    assert result["guidelines"][0]["metadata_status"] == "extracted_unverified"
+    flagged = result["guidelines"][1]
+    assert flagged["id"] == "equator:strobe-metepi"
+    assert flagged["metadata_status"] == "needs_review"
+    assert "Missing guideline title" in flagged["metadata_issue"]
+    assert "title" not in flagged

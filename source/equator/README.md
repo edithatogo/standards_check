@@ -34,8 +34,10 @@ license all linked articles, PDF/DOCX checklists, diagrams or publisher works**.
 EQUATOR's [terms of use](https://equator-network.org/terms-of-use.html) and
 individual publisher rights still apply. The catalogue copies **only metadata**:
 no checklist items, full bibliographic text, file downloads, or rights assertions.
-Every row has `metadata_status` (not extracted / extracted but unverified), and
-the collection has an explicit `rights_status`. The existing `source/index.yml`
+Every row has `metadata_status` (not extracted / extracted but unverified /
+needs review); invalid source frontmatter is retained with `metadata_issue`
+while missing source files stop extraction. Full metadata exports record
+`metadata_issue_count`. The collection has an explicit `rights_status`. The existing `source/index.yml`
 and Canonical Standard Packs remain separately curated. Promotion of individual
 item text requires independently verified source, edition, item IDs, licence,
 anchors, comparison evidence and review; see existing issue #95.

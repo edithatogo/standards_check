@@ -63,6 +63,8 @@ jobs:
           }
           print(f"source: {after['source_revision']} / {after['published_count']} published")
           print(f"directory changes vs checked-in pin: {counts}")
+          metadata = json.loads((Path(os.environ["RUNNER_TEMP"]) / "equator-catalogue.json").read_text())
+          print(f"unresolved upstream metadata: {metadata['metadata_issue_count']}")
           PY
       - name: Retain source catalogue for review (not auto-admitted)
         if: always()

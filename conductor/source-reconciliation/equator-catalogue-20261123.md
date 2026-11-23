@@ -19,8 +19,10 @@ pages and **236** separate under-development pages at revision
 2. Metadata extraction accepts only Quarto YAML frontmatter and a whitelist of
    descriptive fields. It never imports original checklist item bodies, journal
    article contents, source files, or implied licences.
-3. A missing/invalid page, modified checkout or duplicate ID fails rather than
-   silently manufacturing metadata. `--check` detects reproducibility drift.
+3. A missing source file, modified checkout or duplicate ID fails. Missing or
+   invalid upstream frontmatter is retained with `metadata_status: needs_review`,
+   a reproducible diagnostic and a summary count; no title or DOI is invented.
+   `--check` detects reproducibility drift.
 4. Updates require human review of additions, removals and revisions; changing
    cataloguing metadata does not promote a Standard Pack or change Searchright
    research protocols, PRISMA ledgers, or method/evidence claims.
@@ -29,8 +31,10 @@ pages and **236** separate under-development pages at revision
 contracts but not that all upstream metadata fields are correct, that the site
 catalogue is complete, that publication rights are cleared, or that a full
 upstream checkout has been processed. The Git-tree-sourced `discovery.json`
-is pinned and leaves all metadata unextracted. Full metadata extraction and
-per-standard source/rights qualification are independent follow-on increments.
+is pinned and leaves all metadata unextracted. The first hosted source-check
+identified an empty title in `strobe-metepi`; it is treated as explicit review
+work, not dropped. Full metadata qualification and per-standard source/rights
+qualification remain separate from a successful parser run.
 
 **Rollback:** revert the additive catalogue commit; existing packs and review
 state are unchanged. Cross-repository linkage requires an exact consumer contract

@@ -64,7 +64,10 @@ def _list_field(data: dict, name: str) -> list[str]:
 
 
 def _identifiers(data: dict) -> tuple[str | None, str | None]:
-    raw_doi = (data.get("rg-doi") or "").strip()
+    raw_doi = data.get("rg-doi") or ""
+    if not isinstance(raw_doi, str):
+        raise ValueError("Unexpected DOI field in EQUATOR source")
+    raw_doi = raw_doi.strip()
     for prefix in ("https://doi.org/", "http://doi.org/", "https://dx.doi.org/"):
         if raw_doi.lower().startswith(prefix):
             raw_doi = raw_doi[len(prefix):]
@@ -94,21 +97,25 @@ def build_catalog(source: Path, revision: str, records: list[tuple[str, str]], *
             file = source / path
             if not file.is_file():
                 raise ValueError(f"Missing source page (check sparse checkout): {path}")
-            data = _frontmatter(file)
-            doi, pmid = _identifiers(data)
-            row.update({
-                "title": data["title"].strip(),
-                "acronym": str(data.get("acronym") or "").strip() or None,
-                "doi": doi,
-                "pmid": pmid,
-                "study_types": _list_field(data, "categories"),
-                "clinical_areas": _list_field(data, "clinical-specialty"),
-                "report_sections": _list_field(data, "report-section"),
-            })
+            try:
+                data = _frontmatter(file)
+                doi, pmid = _identifiers(data)
+                row.update({
+                    "title": data["title"].strip(),
+                    "acronym": str(data.get("acronym") or "").strip() or None,
+                    "doi": doi,
+                    "pmid": pmid,
+                    "study_types": _list_field(data, "categories"),
+                    "clinical_areas": _list_field(data, "clinical-specialty"),
+                    "report_sections": _list_field(data, "report-section"),
+                })
+            except (ValueError, yaml.YAMLError) as exc:
+                row["metadata_status"] = "needs_review"
+                row["metadata_issue"] = str(exc).replace(str(file), path)[:240]
         rows.append(row)
     if len({r["id"] for r in rows}) != len(rows):
         raise ValueError("Duplicate EQUATOR guideline ID")
-    return {
+    result = {
         "schema_version": 1,
         "source_repository": UPSTREAM,
         "source_revision": revision,
@@ -117,6 +124,11 @@ def build_catalog(source: Path, revision: str, records: list[tuple[str, str]], *
         "published_count": len(rows),
         "guidelines": rows,
     }
+    if metadata:
+        result["metadata_issue_count"] = sum(
+            row["metadata_status"] == "needs_review" for row in rows
+        )
+    return result
 
 
 def main() -> None:
@@ -135,7 +147,8 @@ def main() -> None:
     else:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_bytes(output)
-    print(f"{args.mode}: {result['published_count']} records at {revision}")
+    print(f"{args.mode}: {result['published_count']} records at {revision}"
+          + (f"; {result['metadata_issue_count']} need review" if args.mode == "catalogue" else ""))
 
 
 if __name__ == "__main__":
