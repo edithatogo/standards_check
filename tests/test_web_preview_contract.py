@@ -11,6 +11,8 @@ class WebPreviewContractTests(unittest.TestCase):
         template = (ROOT / "templates/pandoc/html_template.html").read_text()
         builder = (ROOT / "scripts/build_pandoc.sh").read_text()
         self.assertIn("--metadata checklist_page=true", builder)
+        makefile = (ROOT / "Makefile").read_text()
+        self.assertIn("--metadata checklist_page=true", makefile)
         self.assertIn('<script src="../assets/js/app.js"></script>', template)
         self.assertNotIn('src="/assets/js/app.js"', template)
         self.assertIn("$if(checklist_page)$", template)
