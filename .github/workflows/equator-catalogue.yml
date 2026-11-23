@@ -4,6 +4,12 @@ on:
   pull_request:
     paths:
       - "scripts/sync_equator_catalog.py"
+      - "scripts/reconcile_equator_sources.py"
+      - "tests/test_reconcile_equator_sources.py"
+      - "source/index.yml"
+      - "source/archetypes/**"
+      - "source/variants/**"
+      - "markdown/**"
       - "source/equator/**"
       - "tests/test_sync_equator_catalog.py"
       - ".github/workflows/equator-catalogue.yml"
@@ -49,6 +55,12 @@ jobs:
             --mode discover --output "$RUNNER_TEMP/equator-discovery.json"
           python scripts/sync_equator_catalog.py --source "$RUNNER_TEMP/equator-website" \
             --mode catalogue --output "$RUNNER_TEMP/equator-catalogue.json"
+      - name: Reconcile existing legacy checklists against source metadata
+        run: |
+          python -m unittest tests.test_reconcile_equator_sources -v
+          python scripts/reconcile_equator_sources.py \
+            --catalogue "$RUNNER_TEMP/equator-catalogue.json" \
+            --output "$RUNNER_TEMP/equator-legacy-alignment.json"
       - name: Report new, removed and changed published entries
         run: |
           python - <<'PY'
@@ -78,4 +90,5 @@ jobs:
           path: |
             ${{ runner.temp }}/equator-discovery.json
             ${{ runner.temp }}/equator-catalogue.json
+            ${{ runner.temp }}/equator-legacy-alignment.json
           if-no-files-found: warn
