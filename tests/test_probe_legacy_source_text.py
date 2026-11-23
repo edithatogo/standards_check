@@ -17,6 +17,17 @@ class TextProbeTests(unittest.TestCase):
         self.assertEqual(comparison["meaningful_legacy_items"], 2)
         self.assertEqual(comparison["status"], "triage_only_not_edition_verification")
 
+    def test_bold_item_heading_does_not_obscure_exact_requirement_text(self):
+        # SPIRIT 2025 legacy preview has editorial labels that can be elsewhere
+        # in the original document's table; compare requirement text only.
+        original = ("Roles and responsibilities 3a\n"
+                    "Names, affiliations, and roles of protocol contributors.")
+        markdown = "**5. Roles and responsibilities:** Names, affiliations, and roles of protocol contributors."
+        result = evaluate_text(original, [markdown])
+        self.assertEqual(result["meaningful_legacy_items"], 1)
+        self.assertEqual(result["exact_substring_matches"], 1)
+        self.assertEqual(result["status"], "triage_only_not_edition_verification")
+
     def test_local_original_and_absent_original_are_audited_without_text_leak(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
