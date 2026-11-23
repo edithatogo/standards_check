@@ -128,3 +128,78 @@ def test_missing_upstream_title_is_preserved_as_review_debt(tmp_path):
     assert flagged["metadata_status"] == "needs_review"
     assert "Missing guideline title" in flagged["metadata_issue"]
     assert "title" not in flagged
+
+
+def test_falsey_scalar_lists_are_review_debt(tmp_path):
+    path = tmp_path / "reporting-guidelines" / "invalid" / "index.qmd"
+    path.parent.mkdir(parents=True)
+    path.write_text("---\ntitle: Named\ncategories: 0\n---\n", encoding="utf-8")
+    result = catalog.build_catalog(tmp_path, SHA, [("reporting-guidelines/invalid/index.qmd", SHA)], metadata=True)
+    assert result["metadata_issue_count"] == 1
+    assert "Unexpected categories" in result["guidelines"][0]["metadata_issue"]
+
+
+def test_nontext_acronyms_and_pmids_are_review_debt(tmp_path):
+    path = tmp_path / "reporting-guidelines" / "invalid" / "index.qmd"
+    path.parent.mkdir(parents=True)
+    entry = ("reporting-guidelines/invalid/index.qmd", SHA)
+    path.write_text("---\ntitle: Named\nacronym: 123\n---\n", encoding="utf-8")
+    result = catalog.build_catalog(tmp_path, SHA, [entry], metadata=True)
+    assert result["guidelines"][0]["metadata_status"] == "needs_review"
+
+    path.write_text("---\ntitle: Named\npmid-id: [12345678]\n---\n", encoding="utf-8")
+    result = catalog.build_catalog(tmp_path, SHA, [entry], metadata=True)
+    assert result["guidelines"][0]["metadata_status"] == "needs_review"
+
+
+def test_identifier_fallback_and_ambiguous_values():
+    assert catalog._identifiers({"rg-doi": "not a DOI", "pmid-url": "https://pubmed.ncbi.nlm.nih.gov/24979285/"}) == (None, "24979285")
+    assert catalog._identifiers({"rg-doi": "https://dx.doi.org/10.1000/example", "pmid-id": "11111111 and 22222222"}) == ("10.1000/example", None)
+    with pytest.raises(ValueError, match="Unexpected DOI"):
+        catalog._identifiers({"rg-doi": ["10.1000/invalid"]})
+
+
+def test_frontmatter_handles_bom_and_reports_invalid_yaml(tmp_path):
+    file = tmp_path / "index.qmd"
+    file.write_text("\ufeff---\ntitle: Valid\n---\nUncopied body", encoding="utf-8")
+    assert catalog._frontmatter(file)["title"] == "Valid"
+    file.write_text("---\ntitle: [unterminated\n---\n", encoding="utf-8")
+    with pytest.raises(Exception):
+        catalog._frontmatter(file)
+    file.write_text("---\n- not a mapping\n---\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="Missing guideline title"):
+        catalog._frontmatter(file)
+
+
+def test_empty_published_tree_is_rejected(tmp_path):
+    import subprocess
+    subprocess.run(["git", "init", "-q", str(tmp_path)], check=True)
+    subprocess.run(["git", "-C", str(tmp_path), "-c", "user.name=Test", "-c", "user.email=test@example.invalid", "commit", "--allow-empty", "-qm", "empty"], check=True)
+    with pytest.raises(ValueError, match="No published"):
+        catalog.inventory(tmp_path)
+
+
+def test_cli_round_trip_and_check_drift(tmp_path):
+    import json
+    import subprocess
+    import sys
+
+    source = tmp_path / "upstream"
+    source.mkdir()
+    subprocess.run(["git", "init", "-q", str(source)], check=True)
+    page = source / "reporting-guidelines" / "trial" / "index.qmd"
+    page.parent.mkdir(parents=True)
+    page.write_text("---\ntitle: Trial\n---\nCopyrighted body not copied", encoding="utf-8")
+    subprocess.run(["git", "-C", str(source), "add", "."], check=True)
+    subprocess.run(["git", "-C", str(source), "-c", "user.name=Test", "-c", "user.email=test@example.invalid", "commit", "-qm", "initial"], check=True)
+    output = tmp_path / "catalogue.json"
+    command = [sys.executable, str(SCRIPT), "--source", str(source), "--mode", "catalogue", "--output", str(output)]
+    subprocess.run(command, check=True, capture_output=True, text=True)
+    data = json.loads(output.read_text(encoding="utf-8"))
+    assert data["guidelines"][0]["title"] == "Trial"
+    assert "Copyrighted body" not in str(data)
+    subprocess.run(command + ["--check"], check=True, capture_output=True, text=True)
+    output.write_text("altered", encoding="utf-8")
+    mismatch = subprocess.run(command + ["--check"], capture_output=True, text=True)
+    assert mismatch.returncode != 0
+    assert "differs from pinned source" in mismatch.stderr
