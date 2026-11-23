@@ -521,5 +521,80 @@
     "Resolve all source files at the exact repository revisions above; compute SHA-256 over raw bytes and Git blob SHA-1 over the standard blob header plus raw bytes.",
     "Compare baseline files with git show <baseline_revision>:<path>; SECURITY.md candidate hashes bind the added policy independently of a later commit.",
     "For Unicode triage, enumerate git archive <baseline_revision>, apply the documented binary/UTF-8 filters and count the recorded regex character class. Inspect source-inventory JSON string paths and visible HTML text before changing any character."
-  ]
+  ],
+  "follow_up_20261123": {
+    "observed_at": "2026-11-23T01:55:15.600815+00:00",
+    "scope": "Subsequent observations supplement, not reinterpret, the baseline comparison above.",
+    "security_settings": {
+      "source": "https://github.com/edithatogo/standards_check/security",
+      "private_vulnerability_reporting": "enabled",
+      "dependabot_alerts": "enabled",
+      "codeql_code_scanning_alerts": "enabled",
+      "secret_scanning": "enabled"
+    },
+    "renovate_installation": {
+      "source": "https://github.com/edithatogo/standards_check/settings/installations?page=3",
+      "visible_entry": "Renovate, developed by mend, under Installed GitHub Apps",
+      "protected_update_lifecycle": "not_qualified"
+    },
+    "policy_applicability": {
+      "registered_profile": "node",
+      "supply_chain_profile": "baseline",
+      "required_now": [
+        "dependency_review",
+        "sbom"
+      ],
+      "not_selected_by_current_public_baseline": [
+        "scorecard",
+        "security-insights.yml",
+        "slsa_verification"
+      ],
+      "profile_interpretation": "This selects enforced policy; it is not merely a language inventory. Any future change requires explicit policy impact review."
+    },
+    "privacy_upgrade": {
+      "action": "b30b07bcdaa6aebad2c6a57a4d0adc3616dabfe4",
+      "accepted_head": "12b7b00737124aa7c0feaead893c930124332489",
+      "job_id": 137435997154,
+      "result": "success"
+    },
+    "managed_ci_path": {
+      "path": ".github/workflows/ci.yml",
+      "disposition": "Renamed local Assurance workflow to the selected managed path, retaining specialized Python/Rust/API jobs; not byte-equal to Node-only central template.",
+      "candidate_acceptance": "pending"
+    },
+    "registry_factual_correction": {
+      "pull_request": "https://github.com/edithatogo/repository-standards/pull/173",
+      "receiving_main": "2efdbd988064f6857795b9fa9ed4e1d08d18791d",
+      "tree": "7caade42e1ef76e438c07b9aed4b82a2e8f3227a",
+      "receipt": "registry-publication-20261123.json",
+      "renovate_current": "hosted_app_verified",
+      "dependabot_detected": true,
+      "codecov_current": "active_oidc_upload_verified",
+      "codecov_evidence_revision": "12b7b00737124aa7c0feaead893c930124332489",
+      "policy_profile_unchanged": true,
+      "scope": "Only standards_check entry factual state and its assessment; original pinned policy comparison remains historical. Other167 entries unchanged."
+    },
+    "codeql_alerts": {
+      "open_on_observed_main": [
+        "https://github.com/edithatogo/standards_check/security/code-scanning/1",
+        "https://github.com/edithatogo/standards_check/security/code-scanning/2"
+      ],
+      "candidate_fix": "api-security-20261123.json",
+      "hosted_resolution": "pending"
+    },
+    "ruleset": "Prepared, not yet applied or read back",
+    "offline_runner_inventory": {
+      "source": "https://github.com/edithatogo/standards_check/settings/actions/runners",
+      "visible_result": "There are no runners configured",
+      "required_labels": [
+        "self-hosted",
+        "linux",
+        "x64",
+        "ai-security-offline"
+      ],
+      "workflow_revision": "36362fa872e4ce747266a6e795fcefa3dd343f67",
+      "additional_prerequisite": "Preloaded localhost/offline-ai-security image and runner SECURITY_IMAGE_DIGEST matching sha256: plus 64 hex digits; isolated Docker execution",
+      "acceptance": "blocked_by_absent_qualified_runner; queued jobs are not successful execution"
+    }
+  }
 }

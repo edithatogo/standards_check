@@ -14,6 +14,10 @@ on:
       - "scripts/validate_foundation.py"
       - "scripts/audit_foundation.py"
       - "tests/test_foundation_audit.py"
+      - "docs/migration/standardflow/held-guidelines-qualification.json"
+      - "scripts/validate_held_guidelines.py"
+      - "tests/test_held_guidelines.py"
+      - "tests/fixtures/held-guidelines/source-item-identities.json"
       - ".gitmodules"
       - ".agents/plugins/conductor"
       - ".agents/skills/conductor/**"
@@ -32,6 +36,10 @@ on:
       - "scripts/validate_foundation.py"
       - "scripts/audit_foundation.py"
       - "tests/test_foundation_audit.py"
+      - "docs/migration/standardflow/held-guidelines-qualification.json"
+      - "scripts/validate_held_guidelines.py"
+      - "tests/test_held_guidelines.py"
+      - "tests/fixtures/held-guidelines/source-item-identities.json"
       - ".gitmodules"
       - ".agents/plugins/conductor"
       - ".agents/skills/conductor/**"
@@ -56,6 +64,7 @@ jobs:
 
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          fetch-depth: 0
           persist-credentials: false
           submodules: false
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
@@ -67,6 +76,70 @@ jobs:
       - run: python scripts/validate_foundation.py
       - run: python -m unittest tests.test_foundation_audit
       - run: python scripts/audit_foundation.py
+      - run: python -m unittest tests.test_held_guidelines -v
+      - name: Verify held guideline rejection against preserved history
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import subprocess
+          import sys
+
+          result = subprocess.run(
+              [sys.executable, "scripts/validate_held_guidelines.py"],
+              capture_output=True, text=True,
+          )
+          assert result.returncode == 1, (result.returncode, result.stdout, result.stderr)
+          assert not result.stderr, result.stderr
+          report = json.loads(result.stdout)
+          assert "error" not in report, report
+          revision = "f1680778b4141bb5553b0e80af22bbdf5c75c862"
+          digest = "3526bd36acc55e63431cabfbd1335606497e0a54ba1eec29d3064041a2ed6696"
+          assert report["archive_revision"] == revision
+          expected = {
+              "AGREE": {"agree-reporting-2016": 23, "agree-ii-2009-manual-2017": 23},
+              "ARRIVE": {"arrive-2.0-2020": 21},
+              "CHEERS": {"cheers-2022": 28},
+              "COREQ": {"coreq-2007": 32},
+              "PRISMA-P": {"prisma-p-2015": 26},
+              "RIGHT": {"right-2017": 35},
+              "SPIRIT": {"spirit-2025": 53},
+              "SQUIRE": {"squire-2.0-2015": 18},
+              "SRQR": {"srqr-2014": 21},
+              "TRIPOD": {"tripod-ai-2024": 52},
+          }
+          sources = json.loads(Path(
+              "tests/fixtures/held-guidelines/source-item-identities.json"
+          ).read_text())["editions"]
+          archived_ids = {str(number) for number in range(1, 31)}
+          assert len(report["datasets"]) == 10
+          assert {row["label"] for row in report["datasets"]} == expected.keys()
+          for row in report["datasets"]:
+              assert row["exact_stard_items_copy"] is True, row
+              assert row["items_sha256"] == digest, row
+              name = row["label"].lower().replace("-", "_")
+              assert row["archive_path"] == f"data/{name}_checklist.json", row
+              assert row["comparisons"].keys() == expected[row["label"]].keys(), row
+              for edition, check in row["comparisons"].items():
+                  source_ids = sources[edition]["item_ids"]
+                  assert check["scope"] == "printed_identifiers_and_known_stard_copy_only"
+                  assert check["expected_items"] == expected[row["label"]][edition]
+                  assert check["actual_items"] == 30
+                  assert check["identifiers_match"] is False
+                  assert check["known_stard_copy"] is True
+                  assert check["stard_description_matches"] == 30
+                  assert check["malformed_item_positions"] == []
+                  assert check["duplicate_identifiers"] == []
+                  assert check["missing_identifiers"] == [
+                      value for value in source_ids if value not in archived_ids
+                  ]
+                  assert check["unexpected_identifiers"] == sorted(archived_ids - set(source_ids))
+                  assert check["errors"] == [
+                      "Printed identifiers do not match the independently sourced edition",
+                      "All descriptions are copied from STARD, even if IDs or count were changed",
+                  ]
+          print(f"Verified rejection of all 10 held STARD copies at {revision}")
+          PY
 
   rust:
     runs-on: ubuntu-latest

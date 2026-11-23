@@ -1,0 +1,128 @@
+{
+  "observed_on": "2026-11-23",
+  "scope": "Independent printed item identifiers for the held legacy families. No checklist wording is included. These facts distinguish the preserved STARD copies; they do not reconcile item text, normalized requirements, scoring, applicability or clinical methodology.",
+  "retrieval_note": "SHA-256 and byte counts identify the source bytes retrieved on the observation date, not redistributed files. Null receipts mean the item column was read through the cited web source but a byte download was blocked; no byte pin is claimed.",
+  "editions": {
+    "agree-reporting-2016": {
+      "title": "AGREE Reporting Checklist (2016)",
+      "doi": "10.1136/bmj.i1152",
+      "official_landing_url": "https://www.bmj.com/content/352/bmj.i1152",
+      "source_url": "https://www.agreetrust.org/wp-content/uploads/2016/02/AGREE-Reporting-Checklist-2016.pdf",
+      "source_sha256": "198098206a9a42f2e960cc9f8f4fecce2ce884cc8ed46db9e434155aaa9d0f52",
+      "source_bytes": 454067,
+      "identifier_location": "Numbered item headings 1-23 in the official reporting checklist PDF. Read with pdftotext -layout and checked in source order.",
+      "identifier_scope": "23 main reporting items. The further reporting criteria within each item are not separately reconciled.",
+      "item_ids": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"]
+    },
+    "agree-ii-2009-manual-2017": {
+      "title": "AGREE II (2009 instrument; December 2017 user manual)",
+      "doi": null,
+      "official_landing_url": "https://www.agreetrust.org/agree-ii/",
+      "source_url": "https://www.agreetrust.org/wp-content/uploads/2017/12/AGREE-II-Users-Manual-and-23-item-Instrument-2009-Update-2017.pdf",
+      "source_sha256": "d76bf30131606a15c92ab1488b5e65f5556f05abc990e9e9031af15d1a02836f",
+      "source_bytes": 1614951,
+      "identifier_location": "Official PDF: Structure and Content of the AGREE II, domain instrument and Overall Assessment sections.",
+      "identifier_scope": "23 domain appraisal items only. The instrument also has two overall assessments, excluded from this identifier list. This is a different work and purpose from the AGREE Reporting Checklist.",
+      "item_ids": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"]
+    },
+    "arrive-2.0-2020": {
+      "title": "ARRIVE guidelines 2.0 (2020)",
+      "doi": "10.1371/journal.pbio.3000410",
+      "official_landing_url": "https://arriveguidelines.org/arrive-guidelines",
+      "source_url": "https://journals.plos.org/plosbiology/article/file?id=10.1371/journal.pbio.3000410&type=manuscript",
+      "source_sha256": "eace6d0c1894a0dd2ca5092325bc3e52fa6eeb3cdbd722b5074d2cdf91b91d8d",
+      "source_bytes": 120464,
+      "identifier_location": "Publisher JATS tables pbio.3000410.t001 and pbio.3000410.t002, second td in each numbered row.",
+      "identifier_scope": "21 main numbered rows: Essential 10 (1-10) and Recommended Set (11-21). Internal lettered recommendations are not separately reconciled.",
+      "item_ids": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21"]
+    },
+    "cheers-2022": {
+      "title": "CHEERS 2022",
+      "doi": "10.1136/bmj-2021-067975",
+      "official_landing_url": "https://www.ispor.org/heor-resources/good-practices/cheers",
+      "source_url": "https://equator-network.org/reporting-guidelines/cheers/CHEERS-2022-checklist-1.pdf",
+      "source_sha256": null,
+      "source_bytes": null,
+      "identifier_location": "Authors' CHEERS 2022 checklist hosted by EQUATOR, Item No. column, read through web extraction; direct download returned HTTP 403.",
+      "identifier_scope": "28 numbered reporting items. This edition replaces CHEERS 2013; these items are not a methodological quality score.",
+      "item_ids": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28"]
+    },
+    "coreq-2007": {
+      "title": "COREQ (2007)",
+      "doi": "10.1093/intqhc/mzm042",
+      "official_landing_url": "https://academic.oup.com/intqhc/article/19/6/349/1791966",
+      "source_url": "https://onlinelibrary.wiley.com/pb-assets/assets/17416612/COREQ_Checklist-1556513515737.pdf",
+      "source_sha256": null,
+      "source_bytes": null,
+      "identifier_location": "Publisher-hosted COREQ checklist linked by EQUATOR; No. column on pages 1-2, cross-checked against the 2007 article abstract and table. Direct download returned HTTP 403.",
+      "identifier_scope": "32 numbered items across three domains for interviews and focus groups. The publisher-hosted checklist is labelled as developed from the 2007 paper; exact original-table text is not reconciled.",
+      "item_ids": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32"]
+    },
+    "prisma-p-2015": {
+      "title": "PRISMA-P (2015)",
+      "doi": "10.1186/2046-4053-4-1",
+      "official_landing_url": "https://www.prisma-statement.org/protocols",
+      "source_url": "https://www.prisma-statement.org/s/PRISMA-P-checklist-h7cd.pdf",
+      "source_sha256": "9b7a0029238bc4242b524c5f137e6ff63dba7121e97a1ae1a55ae09c237a3a51",
+      "source_bytes": 96199,
+      "identifier_location": "Official checklist PDF pages 1-2, Item No column; pdftotext -layout. Rights notice is on page 3.",
+      "identifier_scope": "26 printed item/subitem identifiers across 17 main numbers.",
+      "item_ids": ["1a", "1b", "2", "3a", "3b", "4", "5a", "5b", "5c", "6", "7", "8", "9", "10", "11a", "11b", "11c", "12", "13", "14", "15a", "15b", "15c", "15d", "16", "17"]
+    },
+    "right-2017": {
+      "title": "RIGHT (2017)",
+      "doi": "10.7326/M16-1565",
+      "official_landing_url": "https://www.right-statement.org/right-statement/checklist",
+      "source_url": "https://www.right-statement.org/country/english_checklist.pdf",
+      "source_sha256": "f3028c4fe5f1880c04f4859acd2569e71e98d22042dd069a087a9ea10c721651",
+      "source_bytes": 97316,
+      "identifier_location": "Official English checklist PDF, No. column; pdftotext -layout. Publication appeared online in 2016 and in the 2017 journal issue.",
+      "identifier_scope": "35 printed item/subitem identifiers across 22 main numbers.",
+      "item_ids": ["1a", "1b", "1c", "2", "3", "4", "5", "6", "7a", "7b", "8a", "8b", "9a", "9b", "10a", "10b", "11a", "11b", "12", "13a", "13b", "13c", "14a", "14b", "14c", "15", "16", "17", "18a", "18b", "19a", "19b", "20", "21", "22"]
+    },
+    "spirit-2025": {
+      "title": "SPIRIT 2025",
+      "doi": "10.1136/bmj-2024-081477",
+      "official_landing_url": "https://www.consort-spirit.org/",
+      "source_url": "https://www.consort-spirit.org/_files/ugd/b5740e_667c45b02102408ab983c9704525597b.docx?dn=SPIRIT+2025+editable+checklist.docx",
+      "source_sha256": "9159179d53b65f2615135c554e661d40259eedb2d61318c890617f4a49bd1f2d",
+      "source_bytes": 33782,
+      "identifier_location": "Official editable checklist, word/document.xml table item-number column. Its final paragraph carries the CC BY 4.0 notice.",
+      "identifier_scope": "53 printed item/subitem identifiers across 34 main numbers. SPIRIT 2013 and the separate schedule figure are outside this fixture.",
+      "item_ids": ["1a", "1b", "2", "3a", "3b", "3c", "3d", "4", "5", "6", "7a", "7b", "8", "9a", "9b", "10", "11", "12", "13", "14a", "14b", "15a", "15b", "15c", "15d", "16", "17", "18", "19", "20", "21a", "21b", "22", "23", "24a", "24b", "24c", "25a", "25b", "26", "27a", "27b", "27c", "27d", "28a", "28b", "29", "30", "31", "32a", "32b", "33", "34"]
+    },
+    "squire-2.0-2015": {
+      "title": "SQUIRE 2.0 (2015)",
+      "doi": "10.1136/bmjqs-2015-004411",
+      "official_landing_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5256233/",
+      "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC5256233/fullTextXML",
+      "source_sha256": "2e4816c23e8a187f37854350389329b7faf4f415cac12b85de760c9d74efd926",
+      "source_bytes": 60830,
+      "identifier_location": "Publisher article JATS archived by Europe PMC, table BMJQS2015004411TB1, numbered headings in the first column.",
+      "identifier_scope": "18 main numbered items; internal lettered components are not separately reconciled. Published online in 2015, journal issue December 2016.",
+      "item_ids": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18"]
+    },
+    "srqr-2014": {
+      "title": "SRQR (2014)",
+      "doi": "10.1097/ACM.0000000000000388",
+      "official_landing_url": "https://pubmed.ncbi.nlm.nih.gov/24979285/",
+      "source_url": "https://med.stanford.edu/content/dam/sm/chri2/documents/O%27Brien%20et%20al.%20-%202014%20-%20Standards%20for%20Reporting%20Qualitative%20Research%20A%20Sy.pdf",
+      "source_sha256": "15fa0ffd35af1a5bbb98a4f72a05899e18ce20dcfe9fcd612eb64e8017281098",
+      "source_bytes": 306419,
+      "identifier_location": "Original article facsimile hosted by Stanford, Table 1 on PDF pages 3-4; pdftotext -layout. Page 5 repeats identifiers in the alignment Table 2 and is not counted twice.",
+      "identifier_scope": "21 printed S-prefixed identifiers, S1-S21.",
+      "item_ids": ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9", "S10", "S11", "S12", "S13", "S14", "S15", "S16", "S17", "S18", "S19", "S20", "S21"]
+    },
+    "tripod-ai-2024": {
+      "title": "TRIPOD+AI (2024)",
+      "doi": "10.1136/bmj-2023-078378",
+      "official_landing_url": "https://www.tripod-statement.org/",
+      "source_url": "https://www.tripod-statement.org/wp-content/uploads/2019/12/TRIPODAI_checklist.pdf",
+      "source_sha256": "6d4bbe95dba216ed155c64938c8cd344a494d425d2fccf8412b4d39757cca179",
+      "source_bytes": 590767,
+      "identifier_location": "Official TRIPOD+AI checklist PDF, version 11-January-2024, Item column on pages 1-2; exclude page and reference numbers.",
+      "identifier_scope": "52 printed item/subitem identifiers across 27 main numbers. Development/evaluation applicability is a separate column and has not been reconciled here. The official site states this replaces TRIPOD 2015.",
+      "item_ids": ["1", "2", "3a", "3b", "3c", "4", "5a", "5b", "6a", "6b", "6c", "7", "8a", "8b", "8c", "9a", "9b", "9c", "10", "11", "12a", "12b", "12c", "12d", "12e", "12f", "12g", "13", "14", "15", "16", "17", "18a", "18b", "18c", "18d", "18e", "18f", "19", "20a", "20b", "20c", "21", "22", "23a", "23b", "24", "25", "26", "27a", "27b", "27c"]
+    }
+  }
+}

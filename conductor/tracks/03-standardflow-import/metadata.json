@@ -125,13 +125,18 @@
     "offline_checks_queued": 2,
     "receiving_main_execution": "passed_at_admission_merge_and_retirement_merge",
     "ipykernel_6_31_0_admitted": false,
-    "issue_94_status": "open_for_optional_kernel_qualification",
-    "interactive_kernel_parity_established": false,
+    "issue_94_status": "closed_after_bounded_hosted_kernel_qualification_in_pr_101",
+    "interactive_kernel_parity_established": true,
     "receiving_main_workflows": [
       "https://github.com/edithatogo/standards_check/actions/runs/45084073642",
       "https://github.com/edithatogo/standards_check/actions/runs/45085224983"
     ],
-    "receiving_updater_discovery": "observed_in_dashboard_76_after_merge"
+    "receiving_updater_discovery": "observed_in_dashboard_76_after_merge",
+    "historical_optional_kernel_observation": {
+      "issue_94_status": "open_for_optional_kernel_qualification",
+      "interactive_kernel_parity_established": false
+    },
+    "interactive_kernel_parity_scope": "11 frozen notebooks, 43 source cells, recorded protocol/lifecycle probes and output comparison only; ordinary host renderer unchanged"
   },
   "historical_pre_host_admission_acceptance": {
     "latest_verified_receiving_main": "2b0c579454a1dd469cd12cfb9538d23c96785370",
@@ -139,5 +144,28 @@
     "latest_verified_receiving_job": "https://github.com/edithatogo/standards_check/actions/runs/45070791156/job/137357038355",
     "latest_verified_receiving_artifact": "https://github.com/edithatogo/standards_check/actions/runs/45070791156/artifacts/14773685812",
     "latest_verified_receiving_main_scope": "Historical actual-main runtime acceptance before PR #98 host dependency admission. Execution at the new receiving main remains separately pending."
+  },
+  "parallel_qualifications": {
+    "integrated_main": "7a6df395a2853c4c2052a492078cceb8f79f817d",
+    "kernel": {
+      "pull_request": 101,
+      "merge_commit": "79e64cf2c36e56c088f082cc6bc933ac3ce89f06",
+      "reviewed_head": "86ed3d82da24c2126708ac966606940b01a80f05",
+      "receipt": "kernel-qualification-20261123.md",
+      "issue_94": "closed"
+    },
+    "held_guidelines": {
+      "pull_request": 102,
+      "merge_commit": "756ac783564d7b848a7c231a542b301a39208391",
+      "receipt": "../../../docs/migration/standardflow/held-guidelines-qualification.json",
+      "admitted": false,
+      "issue_95": "open"
+    },
+    "bounded_prisma": {
+      "pull_request": 103,
+      "merge_commit": "7a6df395a2853c4c2052a492078cceb8f79f817d",
+      "receipt": "../../../docs/migration/standardflow/legacy-prisma-contract.md",
+      "consumer_cutover": false
+    }
   }
 }

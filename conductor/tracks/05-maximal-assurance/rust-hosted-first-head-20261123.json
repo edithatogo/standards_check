@@ -1,0 +1,123 @@
+{
+  "kind": "hosted-bounded-rust-assurance",
+  "repository": "edithatogo/standards_check",
+  "source_commit": "12b7b00737124aa7c0feaead893c930124332489",
+  "source_tree": "d78a8d83327a67172544f04a716e4eef5950a9aa",
+  "run": {
+    "id": 45097644451,
+    "url": "https://github.com/edithatogo/standards_check/actions/runs/45097644451",
+    "event": "workflow_dispatch",
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "updated_at_utc": "2026-11-23T02:04:34Z",
+    "workflow_path": ".github/workflows/canonical-properties.yml",
+    "workflow_sha256": "4cbcd574cdd7e68fa1d0b02bf0ac866b2a1809b60b916d69a18346bad753f557"
+  },
+  "bounded_rust_campaign_qualified": true,
+  "whole_pr_candidate_qualified": false,
+  "scope": "Historical first-head qualification of the bounded Rust campaign; the separate first-head boundary-mutation and aggregate assurance failures remain recorded.",
+  "toolchain": {
+    "rust": "1.98.1",
+    "cargo_mutants": "27.1.0",
+    "proptest_seed": 721114987,
+    "canonical_cases_per_property": 256
+  },
+  "source_binding": {
+    "artifact_commit_logs": "12b7b00737124aa7c0feaead893c930124332489",
+    "all_26_tracked_rust_inputs_match_existing_final_manifest": true,
+    "all_26_inputs_and_workflow_match_working_tree_at_verification": true,
+    "existing_receipt": "rust-qualification-20261123.json",
+    "existing_receipt_sha256": "fdfca60f4d3088491573597828113a0c9234d9f6303e9e1f7f999817259a9ca5",
+    "manifest_json_pointer": "/final_inputs_sha256",
+    "manifest_sha256": "207908c4c865a912cf7d5d7a1e4f48239a198f43cff9f9c266c02b2a6aad00ac",
+    "manifest_digest_encoding": "UTF-8 JSON with sorted keys and compact separators"
+  },
+  "canonical": {
+    "job_id": 137440940618,
+    "job_url": "https://github.com/edithatogo/standards_check/actions/runs/45097644451/job/137440940618",
+    "conclusion": "success",
+    "tests_passed": 72,
+    "tests_failed": 0,
+    "tests_ignored": 0,
+    "scope": "Full workspace, all targets and features, locked dependencies; one hosted seed.",
+    "artifact_id": 14784485216,
+    "artifact_name": "canonical-properties-rust-1.98.1",
+    "artifact_bytes": 4747,
+    "artifact_zip_sha256": "11a881d99a77888e89b3b7ab42e50d1bf68be8b250270eef626c3d88422a34d8",
+    "test_log_path": "target/property-evidence/tests.log",
+    "test_log_sha256": "8854425ce5ba1f6d9d8c90c096253010babd44ae0086631382680a234e751017"
+  },
+  "mutation": {
+    "job_id": 137441198127,
+    "job_url": "https://github.com/edithatogo/standards_check/actions/runs/45097644451/job/137441198127",
+    "conclusion": "success",
+    "strict_outcome_step_passed": true,
+    "artifact_id": 14783734131,
+    "artifact_name": "bounded-rust-mutation-1.98.1",
+    "artifact_bytes": 195026,
+    "artifact_zip_sha256": "2e8da90feba351f2af5883edb6b1bbbe127a1d094714d9defb4339427fa157ae",
+    "outcomes_path": "mutants.out/outcomes.json",
+    "outcomes_sha256": "12a1d71c1b6bad8fcbb0d421eb9562bacbd469c67e983671282b1f9c8f1e5b51",
+    "start_time_utc": "2026-11-23T02:02:43.540947418Z",
+    "end_time_utc": "2026-11-23T02:04:28.641757596Z",
+    "selected": 26,
+    "caught": 25,
+    "missed": 0,
+    "timeout": 0,
+    "unviable": 1,
+    "other_outcomes": 0,
+    "baseline": {
+      "conclusion": "Success",
+      "tests_passed": 61,
+      "tests_failed": 0,
+      "tests_ignored": 0,
+      "scope": "Selected core and artifacts packages; cargo-mutants 27.1.0 baseline scope differs from its per-mutant workspace tests.",
+      "log_path": "mutants.out/log/baseline.log",
+      "log_sha256": "7db3946cfb455d0f13fadcbebb3351cda377bf96380e34495e1caaef54aff9b1"
+    },
+    "all_caught_builds_succeeded": true,
+    "all_caught_tests_used_workspace": true,
+    "all_caught_test_exit_codes": 101,
+    "exact_26_identities_match_original_inventory": true,
+    "inventory_reference": "rust-qualification-20261123.json#/mutation/initial/native_outcomes",
+    "sorted_identity_sha256": "5d8359484f1f5d3000d6cb2d90c2395886bdb5ea9164d955fbdf8b8f3dbb3c97",
+    "identity_digest_encoding": "UTF-8 compact JSON of sorted [file,function_name,name,replacement] tuples",
+    "functions": [
+      "validate_assessed_outcome",
+      "validate_count",
+      "validate_difference",
+      "validate_updated_totals",
+      "verify_pack_lock",
+      "write_value"
+    ],
+    "known_unviable": {
+      "file": "crates/standardflow-core/src/lock.rs",
+      "function": "verify_pack_lock",
+      "replacement": "Ok(Default::default())",
+      "reason": "Rust E0277: LockVerification does not implement Default.",
+      "counted_as_caught": false
+    }
+  },
+  "verification": {
+    "downloaded_archive_digests_match_github_metadata": true,
+    "artifact_metadata_head_and_commit_logs_match_source": true,
+    "strict_inventory_independently_rechecked_from_downloaded_outcomes": true,
+    "old_local_receipt_unchanged": true
+  },
+  "supersession": {
+    "replacement_head_sha": null,
+    "receiving_main_qualified": false,
+    "rule": "Later revisions need their own applicable qualification; reuse of this bounded Rust evidence requires unchanged complete Rust input manifest and workflow. It does not qualify later Python/API changes or an entire receiving revision."
+  },
+  "related_receipts": [
+    "rust-qualification-20261123.json",
+    "hosted-first-head-20261123.json",
+    "registry-publication-20261123.json"
+  ],
+  "limits": [
+    "One hosted property seed is observed here; the separate local receipt retains three-seed evidence.",
+    "Mutation acceptance covers only the stated 26-mutant selection and six functions, not a global mutation score.",
+    "GitHub artifacts expire after 14 days; their names, identities, native report/log digests and outcomes are retained here."
+  ]
+}

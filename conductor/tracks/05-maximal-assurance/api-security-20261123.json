@@ -1,0 +1,126 @@
+{
+  "kind": "api-rate-limit-and-log-format-qualification",
+  "recorded_at": "2026-11-23T01:52:19.884609Z",
+  "base_commit": "12b7b00737124aa7c0feaead893c930124332489",
+  "revision_scope": "Uncommitted API changes over base_commit, bound by source/test hashes below; hosted CodeQL resolution is not claimed.",
+  "inputs_sha256": {
+    "api/server.js": "f9c454c3917167b62757bd7332bbfe78e81a66f4529092b645a49727d19171f7",
+    "api/cors-options.js": "ddf811726d39d495634c7c0d53c4662d75643c05e5029037b1491370e51fb07e",
+    "api/package.json": "a0f14913f02e2eaba3737e45fcdcfbaaf0a92cf8449f0930100631a70198fb0b",
+    "api/package-lock.json": "26c0c363d91a843032ed296d37661adc23c79764eddb36023fbd8a74abd19e8b",
+    "api/test/corpus.test.js": "0862926931f033dcc71adde37770eb9e0acbec668d65f3afccc034ccf169352e",
+    "api/test/rate-limit.test.js": "7251d4824e62e11e6e85681d800659e17f92bb4fbeca19736efaf386f3c93332",
+    "api/test/startup.test.js": "810e7f252c7106432cc1f8259f128b06619fc5fc2be0a371062c91dce2d6c03f"
+  },
+  "environment": {
+    "node": "24.22.3",
+    "npm": "11.19.1"
+  },
+  "added_dependencies": {
+    "express-rate-limit": {
+      "version": "8.7.5",
+      "license": "MIT",
+      "release_url": "https://github.com/express-rate-limit/express-rate-limit/releases/tag/v8.7.5",
+      "release_published_at": "2026-11-18T23:01:37Z",
+      "registry_integrity": "sha512-wi+v38cx2EqD0JnhE/e74o5tFqKWUOAPFJIgyEiqJ8v2MNpoOAA3kI2hXYOI+YM+HE5yqbdAlVxm2GqOIeYOgA=="
+    },
+    "ip-address": {
+      "version": "10.7.6",
+      "license": "MIT",
+      "relationship": "transitive"
+    }
+  },
+  "existing_package_versions_changed": [],
+  "behavior": {
+    "quota": 100,
+    "window_ms": 60000,
+    "scope": "both /api/checklists routes, shared per-client/per-process counter before JSON parsing or corpus I/O",
+    "proxy_trust": false,
+    "ipv6_subnet": 56,
+    "headers": "draft-8 RateLimit and RateLimit-Policy plus Retry-After for 429; exposed to allowed browser origins",
+    "log_format": "constant first argument, client ID is a data argument"
+  },
+  "pre_fix": {
+    "status": "expected assertion failure",
+    "tests": 7,
+    "passed": 5,
+    "assertion_failures": 2,
+    "scope": "Application export/listener test seam was present; rate middleware and constant log format were absent. No runtime/hook errors counted as regression evidence.",
+    "log_sha256": "50a87f1771533d0eb00ac513fc7a252a8e2adf1675df7c349f3a32f177ece672",
+    "assertions": [
+      {
+        "expected": "RateLimit budget header present on a normal checklist response",
+        "observed": "Header absent; ERR_ASSERTION"
+      },
+      {
+        "expected": "Error logging first argument is constant Error fetching checklist %s:",
+        "observed": "First argument interpolated the request ID; ERR_ASSERTION"
+      }
+    ]
+  },
+  "final": {
+    "command": "node --test --experimental-test-coverage --test-coverage-include=api/server.js --test-coverage-include=api/cors-options.js --test-coverage-lines=98 --test-coverage-branches=90 --test-reporter=spec --test-reporter-destination=stdout --test-reporter=lcov --test-reporter-destination=target/api-security/api.lcov api/test/*.test.js api/test/security/*.test.cjs",
+    "tests": 40,
+    "passed": 40,
+    "failed": 0,
+    "skipped": 0,
+    "line_coverage_percent": 100,
+    "branch_coverage_percent": 94.74,
+    "function_coverage_percent": 100,
+    "log_sha256": "3e74290f7a333f1f5a60946bc22b55105c8a15c1739287c0a2d6a664b6d036fc",
+    "lcov_sha256": "5155173bb1e7d2044055177a04d90e541ce07f0681bacd84383ce2452713b6b4"
+  },
+  "checks": [
+    "Normal listing and item reads expose shared remaining budget",
+    "100 requests exhaust one client budget across routes, including unknown IDs",
+    "Spoofed IPv4 and IPv6 forwarded headers cannot obtain a fresh budget",
+    "429 responses carry JSON, zero remaining budget and Retry-After",
+    "Exhausted client never reaches fs.access/readFile/readdir or JSON body parsing",
+    "Mocked clock advances beyond 60 seconds and next request is served with renewed budget",
+    "File-read errors keep the user-visible 500 envelope and log through a constant format string",
+    "Actual CLI process listens on documented port 3000 and serves the real corpus; test-only shutdown hook flushes real V8 counters"
+  ],
+  "npm_audit": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "dependencies": {
+      "prod": 74,
+      "dev": 0,
+      "optional": 0,
+      "peer": 0,
+      "peerOptional": 0,
+      "total": 73
+    }
+  },
+  "limitations": [
+    "MemoryStore is process-local and resets on process restart; horizontal workers require a shared store before claiming deployment-wide rate enforcement",
+    "Hosted CodeQL alert state must be rechecked on the published revision",
+    "Clock-controlled local counter transitions are tested; no distributed simulation or deployment-wide attack-resistance claim"
+  ],
+  "codeql_alerts": [
+    {
+      "number": 1,
+      "title": "Missing rate limiting",
+      "severity": "high",
+      "url": "https://github.com/edithatogo/standards_check/security/code-scanning/1",
+      "hosted_disposition": "Pending scan/readback on the published revision; local code fix and regression evidence only"
+    },
+    {
+      "number": 2,
+      "title": "Use of externally-controlled format string",
+      "severity": "high",
+      "url": "https://github.com/edithatogo/standards_check/security/code-scanning/2",
+      "hosted_disposition": "Pending scan/readback on the published revision; local code fix and regression evidence only"
+    }
+  ],
+  "clock_scope": "Node built-in MockTimers replaces Date only. Advancing it by 60,001 ms exercises request-time expiry of the real library memory store; HTTP and I/O run normally. This is a local counter transition check, not distributed simulation or a deployment-wide rate-limit claim.",
+  "dependency_owner": "StandardFlow API maintainer; purpose, MIT licence and removal path are documented in api/README.md.",
+  "npm_audit_command": "npm audit --omit=dev --json",
+  "npm_audit_report_sha256": "c6138c54cf0aa6b6f367958f269b94cb6ee81760342aca4a9329c7d376946b5e"
+}

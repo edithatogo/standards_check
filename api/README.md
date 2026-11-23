@@ -67,7 +67,32 @@ Wildcard origins are rejected at startup; configure each permitted browser origi
 Credentialed CORS is not enabled. CORS controls browser access to responses; it does not
 authenticate callers.
 
-Run the origin and preflight regression tests with `npm test` from `api/` (Node.js 20 or newer).
+Run the regression tests with `npm test` from `api/`, using Node.js 24 as in CI.
+
+### Request budget
+
+Both checklist routes share a budget of **100 requests per client per 60 seconds**. The limiter
+runs before JSON body parsing, corpus reads and Markdown conversion. Requests beyond the budget
+receive `429` with a JSON error and a `Retry-After` header. `RateLimit` and `RateLimit-Policy`
+describe the remaining budget and window; permitted browser origins can read these headers.
+Successful requests, unknown IDs and invalid requests all consume the same budget.
+
+Express retains its default `trust proxy: false`: forwarded-IP headers do not change the client
+identity. IPv4 uses the socket address; IPv6 is grouped into `/56` subnets by the maintained
+limiter. A deployment behind a proxy needs a reviewed, explicit proxy trust configuration before
+using forwarded addresses. Do not enable blanket proxy trust.
+
+The built-in memory store applies to one server process and resets when that process restarts.
+Multiple workers or replicas need a shared store before claiming a deployment-wide budget. The
+local clock/expiry regression advances a mocked clock; it does not sleep for a real minute.
+
+`express-rate-limit` **8.7.5** is an MIT-licensed runtime dependency owned by the StandardFlow API
+maintainer. It supplies the bounded counter, expiry, IPv6 keys and standard response headers.
+Remove it when this local server is retired or an equivalent reviewed middleware replaces it;
+the static GitHub Pages API does not use it. Exact package and transitive versions/integrity hashes
+are retained in `package-lock.json`. Configuration follows the
+[official documentation](https://express-rate-limit.mintlify.app/reference/configuration) and
+[8.7.5 release](https://github.com/express-rate-limit/express-rate-limit/releases/tag/v8.7.5).
 
 ### Local API Endpoints
 

@@ -5,7 +5,7 @@ slice. Evidence: **local qualification; published-head and receiving-main accept
 
 ## Current software and policy qualification
 
-- [x] Record technique applicability and the scoped deterministic-simulation exclusion.
+- [x] Record technique applicability and scoped exclusions; test API rate-counter expiry with a mocked clock.
 - [x] Qualify property bounds, three seeds, lock/arithmetic/renderer invariants and failure replay.
 - [x] Run native Rust mutations, retain the two initial misses and verify strengthened assertions.
 - [x] Run ten hand-selected schema/API mutations with clean baselines and distinct failure classes.
@@ -14,8 +14,11 @@ slice. Evidence: **local qualification; published-head and receiving-main accept
 - [x] Restore the shared security policy with local scope and pin the managed-file comparison.
 - [x] Triage Unicode findings without changing preserved source bodies or suppressing the detector.
 - [x] Record the final combined Python coverage measurement after configuration reconciliation.
+- [x] Repair both observed High API CodeQL findings with bounded middleware and constant-format logging; retain failure-first regressions.
+- [ ] Observe fixed alert state on the published receiving revision.
+- [x] Produce nine baseline dependency SBOMs for maintained Python, Rust and Node graphs, bound to local inputs; hosted acceptance remains separately pending.
 - [ ] Obtain exact published-head and receiving-main receipts for the new assurance jobs.
-- [ ] Observe Codecov OIDC uploads and actual component/patch commit statuses.
+- [x] Observe all three Codecov OIDC uploads and actual patch-provider acceptance at first head `12b7b007`; later revisions need their own observations.
 - [ ] Apply and read back the solo-maintainer ruleset after confirming stable check names.
 - [ ] Qualify remaining managed-policy/profile divergence and the updater lifecycle; retain
   Dependabot until the receiving handover is demonstrated.
@@ -26,10 +29,11 @@ slice. Evidence: **local qualification; published-head and receiving-main accept
 - [ ] Complete independent interpretation/evidence review and migration semantic parity (#82).
 - [ ] Reconcile held guideline sources, item-level rights and independent fixtures before admission (#95).
 - [ ] Complete applicable ecosystem contracts and downstream canaries in Track 04.
-- [ ] Produce release/offline reproducibility, SBOM, provenance, signing and restore/rollback evidence.
+- [ ] Produce release/offline reproducibility, release-artifact SBOM, provenance, signing and restore/rollback evidence.
 - [ ] Obtain independent methodological, usability/accessibility and publication acceptance.
 
-Optional interactive-kernel qualification remains with the separate owner of #94. The imported
-runtime's 52-test compatibility and notebook/output parity receipts remain in Track 03; they do
-not substitute for Rust equivalence or the source/content gates above. See [verification](verification.md)
+Optional interactive-kernel qualification merged through #101 and closed #94. Held-source
+identity rejection and bounded legacy PRISMA parity merged through #102/#103 and are included
+in the integrated candidate. Their Track 03 receipts retain the wider content, migration and
+independent acceptance limits. See [verification](verification.md)
 for current evidence and [metadata](metadata.json) for machine-readable state.

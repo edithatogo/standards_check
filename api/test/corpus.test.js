@@ -4,24 +4,13 @@ const http = require('node:http');
 const path = require('node:path');
 const { once } = require('node:events');
 const { after, before, test } = require('node:test');
-const express = require('express');
+const app = require('../server');
 
 const corpus = path.resolve(__dirname, '../../markdown/en');
 let server;
 
 before(async () => {
-  // Exercise the production app and corpus, changing only its listener to an
-  // ephemeral loopback port so parallel tests do not compete for port 3000.
-  const listen = express.application.listen;
-  express.application.listen = function () {
-    server = listen.call(this, 0, '127.0.0.1');
-    return server;
-  };
-  try {
-    require('../server');
-  } finally {
-    express.application.listen = listen;
-  }
+  server = app.listen(0, '127.0.0.1');
   await once(server, 'listening');
 });
 
@@ -108,7 +97,7 @@ test('invalid identifiers cannot alias a real checklist or escape the corpus', a
 
 test('file read failures return 500 without exposing internal details', async t => {
   t.mock.method(fs, 'readFile', async () => { throw new Error('private fixture path'); });
-  t.mock.method(console, 'error', () => {});
+  const logged = t.mock.method(console, 'error', () => {});
   for (const [route, message] of [
     ['/api/checklists', 'Failed to fetch checklists'],
     ['/api/checklists/prisma-2020', 'Failed to fetch checklist'],
@@ -117,4 +106,7 @@ test('file read failures return 500 without exposing internal details', async t 
     assert.equal(response.status, 500, route);
     assert.deepEqual(response.body, { error: message });
   }
+  assert.equal(logged.mock.calls[1].arguments[0], 'Error fetching checklist %s:');
+  assert.equal(logged.mock.calls[1].arguments[1], 'prisma-2020');
+  assert.ok(logged.mock.calls[1].arguments[2] instanceof Error);
 });

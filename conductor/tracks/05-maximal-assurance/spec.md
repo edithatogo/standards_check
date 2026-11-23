@@ -15,7 +15,7 @@ remain separate stages; starting this track does not complete the wider roadmap.
 3. Schema, CLI and HTTP contracts reject invalid input with the expected nonzero/error status.
 4. Component coverage emits actual reports bound to the tested revision and enforces the recorded
    floors. Codecov upload and commit-status acceptance require separate hosted observations.
-5. Workflow, dependency-review, secret/privacy and CodeQL gates are inventoried against policy.
+5. Workflow, dependency-review, baseline dependency SBOM, secret/privacy and CodeQL gates are inventoried against policy.
    Managed-file comparisons name an exact upstream revision and preserve local instructions.
 6. A solo-maintainer ruleset requires qualified automation and PRs, disallows force pushes/deletion,
    requires zero human approvals and retains owner recovery without routine bypass.

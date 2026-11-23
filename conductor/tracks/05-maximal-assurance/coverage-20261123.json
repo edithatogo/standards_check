@@ -11,27 +11,27 @@
     "node": "24.22.3"
   },
   "tests": {
-    "python": 211,
+    "python": 252,
     "rust": 72,
-    "api": 38
+    "api": 40
   },
   "python": {
-    "scope": "All 24 maintained non-test Python modules; tests, frozen legacy snapshot, plugin/node dependencies and build output excluded. Existing offline validators are also executed.",
+    "scope": "All 28 maintained non-test Python modules; tests, frozen legacy snapshot, plugin/node dependencies and build output excluded by the unchanged configuration. The six existing offline validators and the maintained real legacy/Rust PRISMA CLI qualification are executed. Unexecuted optional kernel paths remain in the denominator.",
     "summary": {
-      "covered_lines": 1174,
-      "num_statements": 1507,
-      "percent_covered": 75.81667479278401,
-      "percent_covered_display": "75.82",
-      "missing_lines": 333,
+      "covered_lines": 1699,
+      "num_statements": 2150,
+      "percent_covered": 76.65975103734439,
+      "percent_covered_display": "76.66",
+      "missing_lines": 451,
       "excluded_lines": 0,
-      "percent_statements_covered": 77.90311877903119,
-      "percent_statements_covered_display": "77.90",
-      "num_branches": 544,
-      "num_partial_branches": 91,
-      "covered_branches": 381,
-      "missing_branches": 163,
-      "percent_branches_covered": 70.03676470588235,
-      "percent_branches_covered_display": "70.04"
+      "percent_statements_covered": 79.02325581395348,
+      "percent_statements_covered_display": "79.02",
+      "num_branches": 742,
+      "num_partial_branches": 110,
+      "covered_branches": 518,
+      "missing_branches": 224,
+      "percent_branches_covered": 69.81132075471699,
+      "percent_branches_covered_display": "69.81"
     },
     "files": {
       "extract_all_docx.py": {
@@ -170,20 +170,20 @@
       "scripts/check_standardflow_import.py": {
         "sha256": "16e1b283a3f7ff13dc653b97c4fbb6bec616c25950d1ab464781d4dac938f562",
         "summary": {
-          "covered_lines": 33,
+          "covered_lines": 35,
           "num_statements": 41,
-          "percent_covered": 77.35849056603773,
-          "percent_covered_display": "77.36",
-          "missing_lines": 8,
+          "percent_covered": 83.01886792452831,
+          "percent_covered_display": "83.02",
+          "missing_lines": 6,
           "excluded_lines": 0,
-          "percent_statements_covered": 80.48780487804878,
-          "percent_statements_covered_display": "80.49",
+          "percent_statements_covered": 85.36585365853658,
+          "percent_statements_covered_display": "85.37",
           "num_branches": 12,
-          "num_partial_branches": 4,
-          "covered_branches": 8,
-          "missing_branches": 4,
-          "percent_branches_covered": 66.66666666666667,
-          "percent_branches_covered_display": "66.67"
+          "num_partial_branches": 3,
+          "covered_branches": 9,
+          "missing_branches": 3,
+          "percent_branches_covered": 75.0,
+          "percent_branches_covered_display": "75.00"
         }
       },
       "scripts/compare_prisma_source_pdf.py": {
@@ -243,6 +243,25 @@
           "percent_branches_covered_display": "96.43"
         }
       },
+      "scripts/generate_sbom.py": {
+        "sha256": "da9a082f4a4107afca4323edbcb948455daa430ff9ba14e6a5a99939f1aa28ac",
+        "summary": {
+          "covered_lines": 156,
+          "num_statements": 168,
+          "percent_covered": 90.8256880733945,
+          "percent_covered_display": "90.83",
+          "missing_lines": 12,
+          "excluded_lines": 0,
+          "percent_statements_covered": 92.85714285714286,
+          "percent_statements_covered_display": "92.86",
+          "num_branches": 50,
+          "num_partial_branches": 6,
+          "covered_branches": 42,
+          "missing_branches": 8,
+          "percent_branches_covered": 84.0,
+          "percent_branches_covered_display": "84.00"
+        }
+      },
       "scripts/petri_net_generation/generate_net.py": {
         "sha256": "33da339fa21101da616fd2e483f6d9bb86a44c158f2ea4f39306203e415f536e",
         "summary": {
@@ -260,6 +279,44 @@
           "missing_branches": 1,
           "percent_branches_covered": 96.15384615384616,
           "percent_branches_covered_display": "96.15"
+        }
+      },
+      "scripts/qualify_legacy_kernel.py": {
+        "sha256": "5e9e441c06f09fcfba9d387404f38d7d412dde81ec59aa50c7b098fd72bbfbfb",
+        "summary": {
+          "covered_lines": 82,
+          "num_statements": 206,
+          "percent_covered": 39.236111111111114,
+          "percent_covered_display": "39.24",
+          "missing_lines": 124,
+          "excluded_lines": 0,
+          "percent_statements_covered": 39.80582524271845,
+          "percent_statements_covered_display": "39.81",
+          "num_branches": 82,
+          "num_partial_branches": 5,
+          "covered_branches": 31,
+          "missing_branches": 51,
+          "percent_branches_covered": 37.80487804878049,
+          "percent_branches_covered_display": "37.80"
+        }
+      },
+      "scripts/qualify_legacy_prisma.py": {
+        "sha256": "19630c0f2ae36c7cd9891388fe23cbe898e6b8c3ae85af92eba77b2df90ab28b",
+        "summary": {
+          "covered_lines": 175,
+          "num_statements": 179,
+          "percent_covered": 97.1563981042654,
+          "percent_covered_display": "97.16",
+          "missing_lines": 4,
+          "excluded_lines": 0,
+          "percent_statements_covered": 97.76536312849161,
+          "percent_statements_covered_display": "97.77",
+          "num_branches": 32,
+          "num_partial_branches": 2,
+          "covered_branches": 30,
+          "missing_branches": 2,
+          "percent_branches_covered": 93.75,
+          "percent_branches_covered_display": "93.75"
         }
       },
       "scripts/translate_checklist.py": {
@@ -282,22 +339,22 @@
         }
       },
       "scripts/validate_artifacts.py": {
-        "sha256": "a50d959a6ebdebb32ba65dd7cb45db81cb01371b80f8a39cdf3b0ec0d89f651e",
+        "sha256": "d09ba8c8624af6f053191d0bfa8ca423ac8f4b8c95f3a888b6265adeb615c67d",
         "summary": {
-          "covered_lines": 92,
-          "num_statements": 122,
-          "percent_covered": 70.78651685393258,
-          "percent_covered_display": "70.79",
+          "covered_lines": 105,
+          "num_statements": 135,
+          "percent_covered": 74.12935323383084,
+          "percent_covered_display": "74.13",
           "missing_lines": 30,
           "excluded_lines": 0,
-          "percent_statements_covered": 75.40983606557377,
-          "percent_statements_covered_display": "75.41",
-          "num_branches": 56,
+          "percent_statements_covered": 77.77777777777777,
+          "percent_statements_covered_display": "77.78",
+          "num_branches": 66,
           "num_partial_branches": 22,
-          "covered_branches": 34,
+          "covered_branches": 44,
           "missing_branches": 22,
-          "percent_branches_covered": 60.714285714285715,
-          "percent_branches_covered_display": "60.71"
+          "percent_branches_covered": 66.66666666666667,
+          "percent_branches_covered_display": "66.67"
         }
       },
       "scripts/validate_costing_reconciliation.py": {
@@ -336,6 +393,25 @@
           "missing_branches": 18,
           "percent_branches_covered": 59.09090909090909,
           "percent_branches_covered_display": "59.09"
+        }
+      },
+      "scripts/validate_held_guidelines.py": {
+        "sha256": "561bdec842c00efae0e13db909cb6362bd31f77c5b4bf4fa11fc74ed3ae21c35",
+        "summary": {
+          "covered_lines": 68,
+          "num_statements": 77,
+          "percent_covered": 87.12871287128714,
+          "percent_covered_display": "87.13",
+          "missing_lines": 9,
+          "excluded_lines": 0,
+          "percent_statements_covered": 88.31168831168831,
+          "percent_statements_covered_display": "88.31",
+          "num_branches": 24,
+          "num_partial_branches": 4,
+          "covered_branches": 20,
+          "missing_branches": 4,
+          "percent_branches_covered": 83.33333333333333,
+          "percent_branches_covered_display": "83.33"
         }
       },
       "scripts/validate_links.py": {
@@ -417,20 +493,20 @@
       "scripts/verify_legacy_standardflow.py": {
         "sha256": "cfff788fb14f05151f4870b777ec582d01953b02e1ceae9beb221d1a4aba7f94",
         "summary": {
-          "covered_lines": 0,
+          "covered_lines": 29,
           "num_statements": 90,
-          "percent_covered": 0.0,
-          "percent_covered_display": "0.00",
-          "missing_lines": 90,
+          "percent_covered": 27.11864406779661,
+          "percent_covered_display": "27.12",
+          "missing_lines": 61,
           "excluded_lines": 0,
-          "percent_statements_covered": 0.0,
-          "percent_statements_covered_display": "0.00",
+          "percent_statements_covered": 32.22222222222222,
+          "percent_statements_covered_display": "32.22",
           "num_branches": 28,
-          "num_partial_branches": 0,
-          "covered_branches": 0,
-          "missing_branches": 28,
-          "percent_branches_covered": 0.0,
-          "percent_branches_covered_display": "0.00"
+          "num_partial_branches": 3,
+          "covered_branches": 3,
+          "missing_branches": 25,
+          "percent_branches_covered": 10.714285714285714,
+          "percent_branches_covered_display": "10.71"
         }
       },
       "simple_extract.py": {
@@ -493,9 +569,144 @@
     },
     "configuration_sha256": "e4ba87f4769b1744d96912c44fbca74c33f71526c99366ed059e9a38d3d29f77",
     "zero_coverage_modules_retained": [
-      "simple_extract.py",
-      "scripts/verify_legacy_standardflow.py"
-    ]
+      "simple_extract.py"
+    ],
+    "observed_at": "2026-11-23T02:07:46.902422+00:00",
+    "candidate_base": "4177c7f9df9767fb93c8cf2039afa191ee821795",
+    "identity_scope": "Python-only local observation over the temporary integration of PR100 head 12b7b00737124aa7c0feaead893c930124332489 and main 7a6df395a2853c4c2052a492078cceb8f79f817d, including the modified SBOM generator/tests. Source hashes and the input manifest identify measured bytes. Other component observations retain their own historical identities; top-level observation fields are unchanged. Hosted checks require separate revision-bound receipts.",
+    "inputs": {
+      "manifest": "target/coverage/python-inputs.json",
+      "sha256": "2b6b75d8e9b75a1426f520fe3c4895feb9fdd550c3c5b1b7dbf3254630244f52",
+      "bytes": 7903,
+      "files": 76,
+      "test_and_fixture_files": 40,
+      "configuration_sha256": {
+        ".coveragerc": "e4ba87f4769b1744d96912c44fbca74c33f71526c99366ed059e9a38d3d29f77",
+        "requirements/python-tests.txt": "274aa2714421edd0e0f9074fa2544da3c3a1914029eeffa04ba6bcaa5c1e2aa4",
+        "requirements/legacy-standardflow.txt": "27ba903aba19f5851baf887a177699ac1c9604c9ec5a7666edac573aefbe0568",
+        "requirements/assurance-tools.txt": "45b28efc387f40cee01fb1ee08f366502afcf87fd95a15a9d6d8a975ce306337",
+        "Cargo.lock": "33c6f6e885c65ec5fa88948e4d508e180520e873f725f13b467d2ff8bfaf72ea",
+        "Cargo.toml": "6736f253aa3707808be62ea08fba13fb117814690d2e6c180fd5f62036a1a5a2",
+        "rust-toolchain.toml": "c910997cb152c6dc8ed13b1fdf9fa28a4ed30d6776123e27dd6170e5c66067a0",
+        "contracts/examples/legacy-prisma-parity.json": "d0305a141ba5682d72c6924f296acd84e67e667d0caa6a3314dff305f5ec2e12"
+      }
+    },
+    "execution": {
+      "regression_command": "python -m coverage run -m pytest --import-mode=importlib tests test_extract_and_convert.py",
+      "regression_tests_passed": 252,
+      "regression_log": {
+        "sha256": "dd1f4eb5c108b407ddafe73eee36948d7e8d4cb0e1b40a2be597971db8b68c00",
+        "bytes": 3205
+      },
+      "validators": [
+        {
+          "command": "python -m coverage run scripts/validate_foundation.py",
+          "exit_code": 0,
+          "log": {
+            "sha256": "d2234f2f99a5122d8b6f3675e75942d269d9ee5c3b9351b128dc49c44acd541e",
+            "bytes": 42
+          }
+        },
+        {
+          "command": "python -m coverage run scripts/validate_packs.py",
+          "exit_code": 0,
+          "log": {
+            "sha256": "fbca28d27abc148589f190c11c22bab2109bbc7c9ddb49735ac0b2195a3c1f91",
+            "bytes": 39
+          }
+        },
+        {
+          "command": "python -m coverage run scripts/validate_artifacts.py",
+          "exit_code": 0,
+          "log": {
+            "sha256": "023311c52d3657a15514f94f92413e7f1cb37c95869e400c7678ba629ccc530f",
+            "bytes": 46
+          }
+        },
+        {
+          "command": "python -m coverage run scripts/validate_costing_reconciliation.py",
+          "exit_code": 0,
+          "log": {
+            "sha256": "5f62f40d770b29ea2e08e249632528a988d44977e426eda978c6da84fff0a035",
+            "bytes": 139
+          }
+        },
+        {
+          "command": "python -m coverage run scripts/validate_prisma_source_assurance.py",
+          "exit_code": 0,
+          "log": {
+            "sha256": "1e9e2ba39c4ec9826180338d3fc7cd2225eee6ee6e7e593ff37477052c40667c",
+            "bytes": 676
+          }
+        },
+        {
+          "command": "python -m coverage run scripts/audit_foundation.py",
+          "exit_code": 0,
+          "log": {
+            "sha256": "8842c2ca75387e2eba45db72873a8c3721fc079666997c322d5847de29cc58a7",
+            "bytes": 1116
+          }
+        }
+      ],
+      "prisma_qualification": {
+        "command": "python -m coverage run -m scripts.qualify_legacy_prisma --rust-cli target/debug/standardflow --output target/coverage/legacy-prisma-qualification.json",
+        "result": "pass",
+        "authored_pairs": 2,
+        "intentional_validation_differences": [
+          {
+            "id": "screening-conservation",
+            "legacy_exit_code": 0,
+            "rust_diagnostic_codes": [
+              "SF-PRISMA-010",
+              "SF-PRISMA-011"
+            ],
+            "rust_exit_code": 1,
+            "rust_output_created": false
+          },
+          {
+            "id": "updated-total-conservation",
+            "legacy_exit_code": 0,
+            "rust_diagnostic_codes": [
+              "SF-PRISMA-040"
+            ],
+            "rust_exit_code": 1,
+            "rust_output_created": false
+          }
+        ],
+        "rust_executable_sha256": "7073b3342cda86f9b16c4b33e64252cd980a9ec472b583adedebdffcf8f862ac",
+        "corpus_sha256": "d0305a141ba5682d72c6924f296acd84e67e667d0caa6a3314dff305f5ec2e12",
+        "receipt": {
+          "sha256": "808d9fbdd34179eec6f282a58719fb4e90a485fe2b8152eef997262d828104e6",
+          "bytes": 5570
+        },
+        "log": {
+          "sha256": "808d9fbdd34179eec6f282a58719fb4e90a485fe2b8152eef997262d828104e6",
+          "bytes": 5570
+        }
+      },
+      "dependency_profile": "requirements/python-tests.txt plus the existing exact requirements/legacy-standardflow.txt profile and requirements/assurance-tools.txt; pip check passed before the final clean run",
+      "environment_report": {
+        "sha256": "7dba06504c249ae796a889dfca722f7278f697dd2f1593d7a6a2e512a9a5e08b",
+        "bytes": 973490
+      },
+      "build_command": "cargo build --locked --offline -p standardflow-cli",
+      "final_commands": [
+        "python -m coverage combine",
+        "python -m coverage xml",
+        "python -m coverage json",
+        "python -m coverage report --fail-under=75"
+      ],
+      "initial_suite_and_six_validators": {
+        "tests_passed": 252,
+        "covered_statements": 1575,
+        "total_statements": 2150,
+        "covered_branches": 492,
+        "total_branches": 742,
+        "combined_percent": 71.47302904564316,
+        "floor_result": "fail"
+      },
+      "scope_note": "No new tests, coverage exclusions, lowered floor or synthetic executions were introduced for this refresh. The real existing PRISMA qualification closes the execution gap. Kernel execution is not claimed by this coverage observation."
+    }
   },
   "rust": {
     "scope": "Workspace source files with cargo-llvm-cov; includes tests embedded in src, excludes integration-test files. Stable Rust does not measure branch coverage in this profile.",
@@ -959,17 +1170,33 @@
     "scope": "api/server.js and api/cors-options.js; static generator and browser frontend not measured by this component",
     "lcov_totals": {
       "FNF": 10,
-      "FNH": 9,
-      "BRF": 37,
-      "BRH": 35,
-      "LH": 128,
-      "LF": 129
+      "FNH": 10,
+      "BRF": 38,
+      "BRH": 36,
+      "LH": 146,
+      "LF": 146
     },
     "source_sha256": {
-      "api/server.js": "b87e4cdf7c8f4c30046a132c62404e163d26d6bebbcdd27909d2c1de2415f4f8",
       "api/cors-options.js": "ddf811726d39d495634c7c0d53c4662d75643c05e5029037b1491370e51fb07e",
-      "api/test/corpus.test.js": "0a899963ff57418101118ac6192ba1cf772f6754e9a2cbfd0dc42e870eb22efd",
-      "api/test/cors.test.js": "f3d44de9bffb742154d69034288fde375dbddcb932a493aa768946279c681b9d"
+      "api/package-lock.json": "26c0c363d91a843032ed296d37661adc23c79764eddb36023fbd8a74abd19e8b",
+      "api/package.json": "a0f14913f02e2eaba3737e45fcdcfbaaf0a92cf8449f0930100631a70198fb0b",
+      "api/server.js": "f9c454c3917167b62757bd7332bbfe78e81a66f4529092b645a49727d19171f7",
+      "api/test/corpus.test.js": "0862926931f033dcc71adde37770eb9e0acbec668d65f3afccc034ccf169352e",
+      "api/test/cors.test.js": "f3d44de9bffb742154d69034288fde375dbddcb932a493aa768946279c681b9d",
+      "api/test/rate-limit.test.js": "7251d4824e62e11e6e85681d800659e17f92bb4fbeca19736efaf386f3c93332",
+      "api/test/security/body-parser.test.cjs": "ed6c3328bc5f987c1cdb45b2b4adfd95f6f6a7c916f9c8546b4e5f04a0a98a6b",
+      "api/test/security/path-to-regexp.test.cjs": "e13469d913f9868467d9cc59579c711f26dc3346b91e1dcd5981bee2e189605d",
+      "api/test/security/proxy-addr.test.cjs": "07d9f952db8d37d4d344d58b13080e711e76d2208cab4ed3c2068211594e4dd0",
+      "api/test/security/qs.test.cjs": "112d927f3ec7f26fabedd1be6c7afd984c16a97b97ce37a2714630d8c2b07870",
+      "api/test/startup.test.js": "810e7f252c7106432cc1f8259f128b06619fc5fc2be0a371062c91dce2d6c03f"
+    },
+    "observed_at": "2026-11-23T01:52:19.884609Z",
+    "candidate_base": "12b7b00737124aa7c0feaead893c930124332489",
+    "identity_scope": "API-only local observation after the rate-limit/log-format corrections over this base; hashes identify modified source and test inputs. The top-level observation date/base and Python/Rust measurements remain historical and unchanged. Hosted checks require their own revision-bound receipts.",
+    "summary_percent": {
+      "lines": 100.0,
+      "branches": 94.73684210526316,
+      "functions": 100.0
     }
   },
   "floors_percent": {
@@ -980,12 +1207,12 @@
   },
   "reports": {
     "python.xml": {
-      "sha256": "6fe56a1f7682e6caca37db17aa483bdf922c4eecbbd11b42206bba0027baed4a",
-      "bytes": 73918
+      "sha256": "f5e35c471a55745ceb0ea6ca3de92938ff9c4955a213ad137f5eedbb55dba8c0",
+      "bytes": 103091
     },
     "python.json": {
-      "sha256": "6ac9d3ae6514ae0f791362ece7c1e0b1332b2593a4a39b15ac235c1e51c4ed19",
-      "bytes": 121951
+      "sha256": "0493a5af0bc96047eb1107c1b4b710d07e2979151aaa43b38d4ce9a7d4ea5db4",
+      "bytes": 167768
     },
     "rust.lcov": {
       "sha256": "459c6b23de3fccd0b7b2fc144be10426658f7351ba2ef40dc9da8fa070fccd3e",
@@ -996,8 +1223,8 @@
       "bytes": 6212
     },
     "api.lcov": {
-      "sha256": "653ae9af823799d6a51ab0b0194f12ec3af560d45d5bfed6547410b81a48281c",
-      "bytes": 2271
+      "sha256": "5155173bb1e7d2044055177a04d90e541ce07f0681bacd84383ce2452713b6b4",
+      "bytes": 2463
     }
   },
   "limitations": [

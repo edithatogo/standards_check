@@ -41,6 +41,7 @@ jobs:
           egress-policy: audit
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          fetch-depth: 0
           persist-credentials: false
           submodules: false
       - name: Prepare evidence directory
@@ -57,7 +58,14 @@ jobs:
           sudo apt-get update
           sudo apt-get install --yes --no-install-recommends graphviz
           python -m pip install --disable-pip-version-check -r requirements/python-tests.txt
+          python -m pip install --disable-pip-version-check --no-deps -r requirements/legacy-standardflow.txt
           python -m pip install --disable-pip-version-check --no-deps -r requirements/assurance-tools.txt
+          python -m pip check
+      - name: Prepare the locked CLI for Python's cross-runtime contract
+        if: matrix.component == 'python'
+        uses: dtolnay/rust-toolchain@4cda84d5c5c54efe2404f9d843567869ab1699d4
+        with:
+          toolchain: "1.98.1"
       - name: Measure Python regressions and existing validators
         if: matrix.component == 'python'
         shell: bash
@@ -67,6 +75,9 @@ jobs:
           for validator in validate_foundation validate_packs validate_artifacts validate_costing_reconciliation validate_prisma_source_assurance audit_foundation; do
             python -m coverage run "scripts/${validator}.py"
           done
+          cargo build --locked -p standardflow-cli
+          python -m coverage run -m scripts.qualify_legacy_prisma \
+            --rust-cli target/debug/standardflow --output target/coverage/legacy-prisma.json
           python -m coverage combine
           python -m coverage xml
           python -m coverage json
@@ -203,13 +214,14 @@ jobs:
           submodules: false
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
-          python-version: "3.12"
+          python-version: "3.14"
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: "24"
       - name: Install locked boundary-test dependencies
         run: |
           python -m pip install --disable-pip-version-check --no-deps -r requirements/standardflow-foundation.txt
+          python -m pip check
           npm ci --prefix api --ignore-scripts --no-audit --no-fund
       - name: Execute the hand-selected schema and API mutation campaign
         run: python tests/mutation_campaign.py --output target/mutation-evidence/report.json

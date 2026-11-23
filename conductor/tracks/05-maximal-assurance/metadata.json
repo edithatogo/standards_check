@@ -23,7 +23,13 @@
     "rust-qualification-20261123.json",
     "boundary-mutation-20261123.md",
     "managed-file-drift-20261123.json",
-    "coverage-20261123.json"
+    "coverage-20261123.json",
+    "api-security-20261123.json",
+    "sbom-20261123.md",
+    "hosted-first-head-20261123.json",
+    "registry-publication-20261123.json",
+    "rust-hosted-first-head-20261123.json",
+    "rust-hosted-first-head-20261123.md"
   ],
   "coverage_floors_percent": {
     "python_combined": 75,
@@ -32,25 +38,53 @@
     "api_branches": 90
   },
   "python_final_measurement": {
-    "combined_percent": 75.81667479278401,
-    "lines_covered": 1174,
-    "lines_total": 1507,
-    "branches_covered": 381,
-    "branches_total": 544,
-    "production_modules": 24
+    "combined_percent": 76.65975103734439,
+    "lines_covered": 1699,
+    "lines_total": 2150,
+    "branches_covered": 518,
+    "branches_total": 742,
+    "production_modules": 28,
+    "tests": 252,
+    "real_qualification": "two authored legacy/Rust PRISMA pairs plus two intentional validation differences"
   },
-  "hosted_assurance_acceptance": "pending",
-  "codecov_operational_acceptance": "pending",
+  "hosted_assurance_acceptance": "First head 12b7b007: component coverage, workflow policy, dependency review and privacy passed; boundary setup and aggregate failed; corrected candidate pending",
+  "codecov_operational_acceptance": {
+    "revision": "12b7b00737124aa7c0feaead893c930124332489",
+    "oidc_components": [
+      "python",
+      "rust",
+      "api"
+    ],
+    "patch_check_id": 137437302663,
+    "patch_result": "success",
+    "patch_percent": 94.59,
+    "patch_target": 80,
+    "project_check": "not_observed",
+    "later_revision_acceptance": "requires_fresh_observation"
+  },
   "solo_maintainer_ruleset": "pending_application_and_readback",
   "remaining_evidence_gates": [
     "new published-head and receiving-main assurance checks",
-    "actual Codecov OIDC upload and commit-status observation",
+    "fresh Codecov observations for subsequent revisions; project check still unobserved",
     "solo-maintainer ruleset enforcement and recovery receipt",
     "remaining managed-policy/profile and dependency updater qualification",
     "executed offline-security receipt",
-    "legacy-to-Rust semantic parity and optional interactive-kernel qualification",
+    "legacy-to-Rust consumer semantics beyond the bounded PRISMA contract",
     "normalized interpretations, item-level rights and held guideline admission",
     "Track 04 ecosystem contracts and release engineering",
     "independent methodology, usability/accessibility and publication acceptance"
-  ]
+  ],
+  "integrated_receiving_main": "7a6df395a2853c4c2052a492078cceb8f79f817d",
+  "hosted_rust_mutation": {
+    "revision": "12b7b00737124aa7c0feaead893c930124332489",
+    "run": 45097644451,
+    "workspace_tests": 72,
+    "native_selected_package_baseline_tests": 61,
+    "selected": 26,
+    "caught": 25,
+    "known_unviable": 1,
+    "missed": 0,
+    "timeout": 0,
+    "receipt": "rust-hosted-first-head-20261123.json"
+  }
 }
