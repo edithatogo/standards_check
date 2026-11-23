@@ -16,9 +16,8 @@ try:
 except ImportError:  # direct execution as scripts/equator_source_links.py
     from sync_equator_catalog import inventory
 
-MARKDOWN = re.compile(r"(?<!!)\[[^\]\n]{1,200}\]\(([^\s)<>]{1,2048})\)")
-ANGLE = re.compile(r"<(?P<url>https?://[^\s<>]{1,2048})>")
-BARE = re.compile(r"https?://[^\s<>)\]'}\"]{1,2048}")
+LINK_START = re.compile(r"(?<!!)\[[^\]\n]{1,200}\]\(")
+BARE = re.compile(r"https?://[^\s<>\]'}\"]{1,2048}")
 FILES = (".pdf", ".doc", ".docx", ".rtf", ".csv", ".xlsx", ".xls")
 FIELDS = ("downloads", "relevant-urls", "full-bibliographic-reference")
 MAX_CANDIDATES = 64
@@ -32,7 +31,28 @@ def extract_links(data: dict, page_url: str) -> list[dict]:
         text = data.get(field) or ""
         if not isinstance(text, str):
             continue  # caller flags malformed metadata separately
-        candidates = MARKDOWN.findall(text) + ANGLE.findall(text) + BARE.findall(text)
+        # Balance parentheses in Markdown destinations, then scan other URLs.
+        # Avoid truncated duplicate URLs from the same Markdown destination.
+        candidates = []
+        remaining = list(text)
+        for match in LINK_START.finditer(text):
+            depth = 1
+            for pos in range(match.end(), min(len(text), match.end() + 2048)):
+                if text[pos] == "(":
+                    depth += 1
+                elif text[pos] == ")":
+                    depth -= 1
+                    if depth == 0:
+                        destination = text[match.end():pos].strip().strip("<>")
+                        if destination and not any(char.isspace() for char in destination):
+                            candidates.append(destination)
+                            remaining[match.start():pos + 1] = " " * (pos + 1 - match.start())
+                        break
+        for match in BARE.finditer("".join(remaining)):
+            target = match.group()
+            while target.endswith(")") and target.count(")") > target.count("("):
+                target = target[:-1]
+            candidates.append(target)
         for target in candidates:
             target = target.strip().rstrip(".,;:")
             resolved = urljoin(page_url, target)

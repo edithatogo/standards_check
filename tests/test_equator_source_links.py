@@ -23,6 +23,16 @@ class SourceLinksTests(unittest.TestCase):
         ]
         assert all(x['qualification'] == 'unverified_link_only' for x in links)
 
+    def test_parentheses_in_publisher_urls_remain_intact_without_false_truncated_links(self):
+        ispor = "https://www.ispor.org/heor-resources/good-practices/article/consolidated-health-economic-evaluation-reporting-standards-2022-(cheers-2022)-statement"
+        elsevier = "https://linkinghub.elsevier.com/retrieve/pii/S2589-5370(24)00566-2"
+        data = {
+            "relevant-urls": f"See [ISPOR]({ispor})",
+            "full-bibliographic-reference": f"[Full text]({elsevier}) and {elsevier}",
+        }
+        links = extract_links(data, "https://equator-network.org/reporting-guidelines/cheers/")
+        self.assertEqual([item["url"] for item in links], [ispor, elsevier])
+
     def test_bibliographic_links_are_candidates_not_primary_evidence(self):
         links = extract_links({"full-bibliographic-reference":
             "[Full text](https://www.bmj.com/content/383/bmj-2023-076386)\n"
