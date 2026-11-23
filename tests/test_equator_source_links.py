@@ -108,6 +108,32 @@ class SourceLinksTests(unittest.TestCase):
             assert result['summary']['records_needing_review']==1
             assert 'not copied' not in json.dumps(result)
             assert result['guidelines'][0]['status']=='needs_review'
+            # Run the exact CLI on a pinned local source, with no web requests.
+            catalogue_file = root / 'catalogue.json'
+            catalogue_file.write_text(json.dumps(catalogue))
+            export = root / 'candidates.json'
+            import sys
+            process = subprocess.run(
+                [sys.executable, '-m', 'scripts.equator_source_links',
+                 '--source', str(root), '--catalogue', str(catalogue_file),
+                 '--output', str(export)],
+                capture_output=True, text=True, cwd=Path(__file__).resolve().parents[1])
+            self.assertEqual(process.returncode, 0, process.stderr)
+            self.assertEqual(json.loads(export.read_text())['published_count'], 2)
+            self.assertEqual(json.loads(export.read_text())['summary']['records_needing_review'], 1)
+
+            # Missing/duplicate/unexpected source metadata cannot silently pass.
+            with self.assertRaisesRegex(ValueError, 'invalid upstream catalogue count'):
+                collect(root, {**catalogue, 'published_count': 3})
+            wrong = json.loads(json.dumps(catalogue))
+            wrong['guidelines'][0]['source_blob_sha'] = 'a' * 40
+            with self.assertRaisesRegex(ValueError, 'source identity'):
+                collect(root, wrong)
+            repeated = json.loads(json.dumps(catalogue))
+            repeated['guidelines'][1] = repeated['guidelines'][0]
+            with self.assertRaises(ValueError):
+                collect(root, repeated)
+
             catalogue['source_revision']='a'*40
             with self.assertRaisesRegex(ValueError,'source revision'):
                 collect(root,catalogue)
@@ -128,6 +154,41 @@ class SourceLinksTests(unittest.TestCase):
             report=collect(root,{'source_revision':head,'published_count':1,'guidelines':[{'id':'equator:one','page_url':'https://equator-network.org/reporting-guidelines/one/','source_path':path,'source_blob_sha':sha,'metadata_status':'needs_review'}]})
             assert report['guidelines'][0]['status']=='needs_review'
             assert report['summary']['records_needing_review']==1
+
+
+    def test_oversized_candidate_list_and_bad_metadata_are_review_debt(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            subprocess.run(['git', 'init', '-q', str(root)], check=True)
+            subprocess.run(['git','-C',str(root),'config','user.email','test@example.invalid'], check=True)
+            subprocess.run(['git','-C',str(root),'config','user.name','Test'], check=True)
+            file = root / 'reporting-guidelines/example/index.qmd'
+            file.parent.mkdir(parents=True)
+            links = '\n'.join(f'  [Source {i}](https://example.org/{i}.pdf)' for i in range(70))
+            file.write_text('---\ntitle: Example\nrelevant-urls: |-\n' + links +
+                            '\ndownloads: \n  - invalid-structured-field\n---\nDo not export body.')
+            subprocess.run(['git','-C',str(root),'add','.'], check=True)
+            subprocess.run(['git','-C',str(root),'commit','-qm','fixture'], check=True)
+            head = subprocess.check_output(['git','-C',str(root),'rev-parse','HEAD'], text=True).strip()
+            sha = subprocess.check_output(['git','-C',str(root),'rev-parse',
+                                           'HEAD:reporting-guidelines/example/index.qmd'],
+                                          text=True).strip()
+            report = collect(root, {'source_revision': head, 'published_count': 1,
+                      'guidelines': [{
+                        'id': 'equator:example',
+                        'page_url': 'https://equator-network.org/reporting-guidelines/example/',
+                        'source_path': 'reporting-guidelines/example/index.qmd',
+                        'source_blob_sha': sha,
+                        'metadata_status': 'extracted_unverified'
+                      }]})
+            row = report['guidelines'][0]
+            self.assertEqual(len(row['candidates']), 64)
+            self.assertIn('link_limit_exceeded', row['issues'])
+            self.assertIn('invalid_downloads', row['issues'])
+            self.assertEqual(row['status'], 'needs_review')
+            self.assertEqual(report['summary']['records_needing_review'], 1)
+            self.assertNotIn('Do not export body', json.dumps(report))
+
 
 
 if __name__ == '__main__':
