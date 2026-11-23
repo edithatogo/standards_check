@@ -88,8 +88,10 @@ proptest! {
         let _ = parse_pack(&bytes);
         let mut known = include_bytes!("../../../packs/org.prisma/prisma/2020/pack.json").to_vec();
         let index = mutation_position % known.len();
-        known[index] = replacement;
-        let _ = parse_pack(&known);
+        if let Some(byte) = known.get_mut(index) {
+            *byte = replacement;
+            let _ = parse_pack(&known);
+        }
     }
 
     #[test]
