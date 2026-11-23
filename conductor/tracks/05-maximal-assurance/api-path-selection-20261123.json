@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "repository": "edithatogo/standards_check",
+  "base_sha": "8029b1a55fb4273878510681c1a5a7b5c02b57f0",
+  "candidate_status": "Local correction over the recorded main base; source hashes identify the reviewed candidate. Published-head and receiving-main CodeQL acceptance are separate.",
+  "owned_files": [
+    "api/server.js",
+    "api/test/corpus.test.js"
+  ],
+  "source_sha256": {
+    "api/server.js": "e1211891369fd88c576745d4c2b24a5006bef954377647524e48adc0812ee37d",
+    "api/test/corpus.test.js": "b28be0d0752bc7ea9d2def2c951da0f00de82afd799a86b1ecb121ee6b0fb376"
+  },
+  "observed_findings": {
+    "source": "Root inspected live GitHub CodeQL UI traces on actual receiving main.",
+    "alerts": [
+      {
+        "number": 5,
+        "url": "https://github.com/edithatogo/standards_check/security/code-scanning/5",
+        "sink_at_base": "api/server.js:99 fs.access"
+      },
+      {
+        "number": 6,
+        "url": "https://github.com/edithatogo/standards_check/security/code-scanning/6",
+        "sink_at_base": "api/server.js:112 fs.readFile"
+      }
+    ],
+    "query_id": "js/path-injection",
+    "query_source_revision": "github/codeql@ceeaafac4e629e0e39de04d40c719d7d18b4b612"
+  },
+  "change": "Both routes enumerate fixed corpus directories as Dirents and select only regular files. The detail route compares the validated ID to an entry name, then constructs its path solely from that enumerated name; no request-derived path is passed to filesystem APIs.",
+  "failure_first": {
+    "command": [
+      "node",
+      "--test",
+      "--test-reporter=tap",
+      "--test-name-pattern=symlinked corpus entries",
+      "api/test/corpus.test.js"
+    ],
+    "exit_code": 1,
+    "actual_status": 200,
+    "expected_status": 404,
+    "fixture": "Mocked filesystem metadata and I/O represent a corpus symlink to synthetic external content; actual HTTP handlers are exercised. No transient files are written into the checked-in corpus.",
+    "log": "failure-first.log"
+  },
+  "qualification": {
+    "node": "v24.22.3",
+    "api_tests": 41,
+    "api_tests_passed": 41,
+    "api_tests_skipped": 0,
+    "line_percent": 100.0,
+    "branch_percent": 97.61904761904762,
+    "function_percent": 100.0,
+    "unchanged_line_floor": 98,
+    "unchanged_branch_floor": 90,
+    "coverage_totals": {
+      "LF": 143,
+      "LH": 143,
+      "BRF": 42,
+      "BRH": 41,
+      "FNF": 11,
+      "FNH": 11
+    },
+    "coverage_files": [
+      {
+        "source": "api/cors-options.js",
+        "FNF": 2,
+        "FNH": 2,
+        "BRF": 8,
+        "BRH": 8,
+        "LH": 15,
+        "LF": 15
+      },
+      {
+        "source": "api/server.js",
+        "FNF": 9,
+        "FNH": 9,
+        "BRF": 34,
+        "BRH": 33,
+        "LH": 128,
+        "LF": 128
+      }
+    ],
+    "coverage_report": "api.lcov",
+    "native_validation": "local-validation.json",
+    "bounded_mutation_report": "mutations/report.json",
+    "bounded_mutations": {
+      "assertion_kill": 10
+    },
+    "mutation_sources_unchanged": true,
+    "git_diff_check": "passed",
+    "coverage_report_sha256": "b71ec07177fbac978ed1c470d3064c0c16436b48d8739bcaa30752b202a62681"
+  },
+  "preserved": [
+    "Existing kebab-case ID validation and its exact mutation site",
+    "Shared 100-request per 60-second limiter and proxy trust",
+    "CORS and error-response contracts",
+    "Dependencies and lockfiles",
+    "Both existing production modules in the coverage denominator"
+  ],
+  "limits": [
+    "The existing regex rejects traversal syntax; no direct remote ../ exploit was demonstrated.",
+    "The regression proves an enumerated non-regular entry cannot be served through either route; it is a controlled filesystem model, not a real hostile mount.",
+    "The local corpus is a trusted filesystem. Enumeration and subsequent read are not atomic; a local writer racing file replacement could change an entry after its type was checked. This change does not claim protection against that attacker or arbitrary untrusted filesystem mounts.",
+    "Actual published-head CodeQL analysis and live resolution of alerts5/6 remain required.",
+    "No alert dismissal, suppression, new dependency, commit, stage or publication was performed."
+  ],
+  "recorded_at": "2026-11-23T03:11:48.596379+00:00",
+  "independent_review": {
+    "schema_version": 1,
+    "outcome": "pass",
+    "node": "v24.22.3",
+    "source_hashes": {
+      "api/server.js": "e1211891369fd88c576745d4c2b24a5006bef954377647524e48adc0812ee37d",
+      "api/cors-options.js": "ddf811726d39d495634c7c0d53c4662d75643c05e5029037b1491370e51fb07e",
+      "api/test/corpus.test.js": "b28be0d0752bc7ea9d2def2c951da0f00de82afd799a86b1ecb121ee6b0fb376"
+    },
+    "checks": [
+      "actual file symlinks in both corpus directories, dangling link, .md directory and non-markdown file are excluded from listing",
+      "regular entries in both directories are served and agree with the list endpoint",
+      "actual symlinks, dangling link, directory entry and unknown valid ID all return 404",
+      "path aliases, extensions, NUL, uppercase and repeated hyphens return 400",
+      "directory enumeration errors produce sanitized 500 responses on both endpoints"
+    ],
+    "source_unchanged": true,
+    "scope": "Independent temporary copy of the unchanged API source with native Linux filesystem symlinks and authored synthetic fixtures; directory faults injected in-process.",
+    "limitation": "Assumes deployment-controlled corpus directories. This probe does not establish resistance to concurrent filesystem replacement or writable untrusted directory parents."
+  },
+  "retained_evidence": [
+    {
+      "path": "failure-first.log",
+      "sha256": "b03c31dad4faee16c84d7bae49b2d017225e89114be9116b70098e82f5abb53c"
+    },
+    {
+      "path": "api.lcov",
+      "sha256": "b71ec07177fbac978ed1c470d3064c0c16436b48d8739bcaa30752b202a62681"
+    },
+    {
+      "path": "local-validation.json",
+      "sha256": "2c7befe14decc1bc28e9ca7b514d2198add5dace25af149e0fe0414d6dc579f4"
+    },
+    {
+      "path": "mutations/report.json",
+      "sha256": "fa06cd84696501a89d1515d3caa810b3dff044fb5e0f562cb7867aababd15179"
+    }
+  ],
+  "receipt_format_correction": {
+    "previous_head": "5a5d0ebad6cbc6bf6bb3d79507405e63dae06891",
+    "failed_privacy_job": 137462942084,
+    "finding_rule": "generic-api-key",
+    "finding_file": "conductor/tracks/05-maximal-assurance/api-path-selection-20261123.json",
+    "finding_line": 131,
+    "disposition": "Verified coverage-report SHA-256, not a credential. Represented as explicit path and sha256 fields; scanner and policy unchanged. Production and regression bytes are unchanged."
+  }
+}
