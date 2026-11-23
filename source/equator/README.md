@@ -18,6 +18,11 @@ python scripts/sync_equator_catalog.py --source /tmp/equator-website \
   --mode catalogue --output source/equator/catalogue.json
 ```
 
+A read-only [GitHub Actions workflow](../../.github/workflows/equator-catalogue.yml)
+runs on source-related PRs, monthly, and on demand. It creates a full descriptive
+metadata catalogue and addition/removal/revision report **as an artifact for
+review**, never an automatic overwrite of the curated source inventory.
+
 `--check` replaces output writing with a deterministic drift assertion. For review,
 compare the new commit, added/removed/changed `equator:<slug>` IDs, and source
 links before accepting any update. Reclassification and guideline succession are
