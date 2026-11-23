@@ -15,6 +15,7 @@ MAX_BYTES = 8_000_000
 ITEM_ID = re.compile(r"^[0-9]{1,3}[a-z]?$", re.I)
 LEGACY_TASK = re.compile(r"^\s*[-*] \[[ xX]\]\s*(.+)$")
 LEGACY_LABEL = re.compile(r"^\s*\*\*(?:S)?([0-9]{1,3}[a-z]?)(?:[.)]|\s|:)([^*]*)\*\*\s*", re.I)
+EDITORIAL_LABEL = re.compile(r"^\s*\*\*[^*\n]{1,160}:\*\*\s*")
 LICENCE = {
     "CC-BY-4.0": "creativecommons.org/licenses/by/4.0",
     "CC0-1.0": "creativecommons.org/publicdomain/zero/1.0",
@@ -39,6 +40,8 @@ def extract_table(raw: bytes, spec: dict) -> dict:
     checksum = hashlib.sha256(raw).hexdigest()
     if spec.get("source_sha256") and checksum != spec["source_sha256"]:
         raise ValueError("source checksum differs from pinned article")
+    if spec.get("source_bytes") is not None and len(raw) != spec["source_bytes"]:
+        raise ValueError("source length differs from pinned article")
     try:
         root = ET.fromstring(raw)
     except ET.ParseError as exc:
@@ -75,6 +78,8 @@ def extract_table(raw: bytes, spec: dict) -> dict:
     table_id = table.get("id")
     if not table_id:
         raise ValueError("checklist table missing stable XML anchor")
+    if spec.get("table_id") and table_id != spec["table_id"]:
+        raise ValueError("checklist table anchor differs from pinned table")
     if table.findall(".//permissions") or table.findall(".//license"):
         raise ValueError("table has separate rights metadata requiring qualification")
     rows = []
@@ -94,7 +99,11 @@ def extract_table(raw: bytes, spec: dict) -> dict:
                      "text": phrase, "normalized_text_sha256": digest(phrase)})
     if [row["item_id"] for row in rows] != spec["item_ids"]:
         raise ValueError("numbered checklist rows differ from independently specified IDs/order")
+    table_hash = digest(json.dumps(rows, ensure_ascii=False, sort_keys=True, separators=(",", ":")))
+    if spec.get("table_rows_sha256") and table_hash != spec["table_rows_sha256"]:
+        raise ValueError("source row digest differs from pinned table")
     return {
+        "table_rows_sha256": table_hash,
         "source_sha256": checksum, "source_bytes": len(raw), "doi": spec["doi"],
         "pmcid": spec["pmcid"], "table_id": table_id, "table_label": spec["table_label"],
         "licence": spec["licence"], "attribution": spec["attribution"],
@@ -111,8 +120,9 @@ def parse_legacy(markdown: str) -> list[dict]:
         if task:
             phrase = task[1]
             label = LEGACY_LABEL.match(phrase)
+            requirement = phrase[label.end():] if label else EDITORIAL_LABEL.sub("", phrase)
             rows.append({"position": len(rows) + 1, "declared_item_id": label[1].lower() if label else None,
-                         "text": normalize(phrase[label.end():] if label else phrase)})
+                         "text": normalize(requirement)})
     return rows
 
 
@@ -123,6 +133,12 @@ def reconcile_items(source: list[dict], legacy: list[dict]) -> dict:
     for row in source:
         exact = [entry["position"] for entry in legacy if row["text"] == entry["text"]]
         matched.update(exact)
+        # Only a single terminal full stop is ignored in this separate diagnostic.
+        # Internal punctuation and all words remain unchanged. Never elevate it
+        # to strict equality or methodological equivalence.
+        punctuation = [entry["position"] for entry in legacy
+                       if entry["position"] not in exact and
+                       row["text"].removesuffix(".") == entry["text"].removesuffix(".")]
         same_number = [entry["position"] for entry in legacy if entry["declared_item_id"] == row["item_id"]]
         scored = sorted(
             ((round(SequenceMatcher(None, row["text"].casefold(), entry["text"].casefold(),
@@ -133,12 +149,16 @@ def reconcile_items(source: list[dict], legacy: list[dict]) -> dict:
             "source_item_id": row["item_id"], "source_anchor": row["source_anchor"],
             "source_text_sha256": row["normalized_text_sha256"],
             "same_number_legacy_positions": same_number, "exact_legacy_positions": exact,
+            "terminal_period_only_legacy_positions": punctuation,
             "closest_text_candidate_only": best,
             "status": ("exact_text_match_not_methodology" if len(exact) == 1 else
                        "ambiguous_exact_text" if exact else "not_exactly_reconciled"),
         })
     return {"source_item_count": len(source), "legacy_task_count": len(legacy),
             "exact_unique_items": sum(len(row["exact_legacy_positions"]) == 1 for row in items),
+            "terminal_period_only_unique_items": sum(not row["exact_legacy_positions"] and
+                                                     len(row["terminal_period_only_legacy_positions"]) == 1
+                                                     for row in items),
             "legacy_positions_without_exact_source_match": [row["position"] for row in legacy
                                                               if row["position"] not in matched],
             "items": items, "canonical_packs_promoted": 0}
