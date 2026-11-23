@@ -1,6 +1,6 @@
 # Plan: Platform foundation
 
-Current status: **in progress**. Implementation: **source implemented and foundation merged**.
+Current status: **implementation complete (bounded)**. Implementation: **source implemented and foundation merged**.
 The reviewed foundation at `d8cd1f2c54934ee15400d5be047c76977adfa29b` has
 **compiler-verified** hosted evidence, retained in [evidence.json](evidence.json).
 PR #59 merged as `a8bfec446d219b770e76a23b44d1f08d9e00465d`.
