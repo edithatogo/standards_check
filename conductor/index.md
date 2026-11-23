@@ -11,6 +11,7 @@
 - [Workflow](./workflow.md)
 - [Roadmap](./roadmap.md)
 - [Tracks](./tracks.md)
+- [Technical-preview readiness and EQUATOR engagement](../docs/preview-readiness.md)
 
 ## Source reconciliation
 
