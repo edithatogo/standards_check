@@ -58,7 +58,10 @@ def evaluate_text(extracted: str, legacy_items: list[str]) -> dict:
     # ponytail: Conservative substring equality; layout/OCR/paraphrase requires a
     # separately justified comparator, not a speculative NLP service.
     normalized = normalise(extracted)
-    items = [normalise(item) for item in legacy_items]
+    # Legacy Markdown sometimes prepends a bold item number and section title,
+    # while the original PDF/DOCX arranges that label separately.
+    label = re.compile(r"^\s*\*\*\d+[a-z]?(?:\.\d+)?[.)]?\s+[^*]{1,160}\*\*\s*", re.I)
+    items = [normalise(label.sub("", item)) for item in legacy_items]
     matches = [len(item) >= 40 and item in normalized for item in items]
     return {"normalized_source_sha256": hashlib.sha256(normalized.encode()).hexdigest(),
             "normalized_characters": len(normalized),
