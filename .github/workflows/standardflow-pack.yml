@@ -23,6 +23,7 @@ on:
       - "tests/test_prisma_source_assurance.py"
       - "conductor/tracks/01-canonical-standard-pack/**"
       - ".github/workflows/standardflow-pack.yml"
+  workflow_dispatch:
   push:
     branches: [main]
     paths:
@@ -175,11 +176,35 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+          fetch-depth: 2
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: "3.12"
       - run: python -m unittest tests.test_reconcile_authoritative_articles -v
+      - name: Verify retained table source pins and reconcile offline
+        run: |
+          python -m scripts.reconcile_authoritative_articles \
+            --output "$RUNNER_TEMP/authoritative-article-offline-reconciliation.json" \
+            --require-all
+      - name: Determine whether primary-source re-acquisition is needed
+        id: source_change
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "$EVENT_NAME" = "workflow_dispatch" ] || \
+             ! git rev-parse --verify HEAD^1 >/dev/null 2>&1 || \
+             ! git diff --quiet HEAD^1 HEAD -- \
+               source/official/authoritative-article-editions.json \
+               source/official/authoritative-article-rows.json \
+               scripts/reconcile_authoritative_articles.py; then
+            echo "live=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "live=false" >> "$GITHUB_OUTPUT"
+          fi
       - name: Acquire only four selected open-access article XML records
+        if: steps.source_change.outputs.live == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -193,7 +218,8 @@ jobs:
               echo "::warning::Selected source $pmcid could not be acquired; leave it held."
             fi
           done
-      - name: Compare every numbered row with the existing legacy checklist
+      - name: Recheck exact primary article bytes and every source row
+        if: steps.source_change.outputs.live == 'true'
         run: |
           python -m scripts.reconcile_authoritative_articles \
             --source-dir "$RUNNER_TEMP/authoritative-articles" \
@@ -204,6 +230,8 @@ jobs:
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: authoritative-article-reconciliation
-          path: ${{ runner.temp }}/authoritative-article-reconciliation.json
+          path: |
+            ${{ runner.temp }}/authoritative-article-offline-reconciliation.json
+            ${{ runner.temp }}/authoritative-article-reconciliation.json
           if-no-files-found: error
           retention-days: 90
