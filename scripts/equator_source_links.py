@@ -17,13 +17,13 @@ except ImportError:  # direct execution as scripts/equator_source_links.py
     from sync_equator_catalog import inventory
 
 LINK_START = re.compile(r"(?<!!)\[[^\]\n]{1,200}\]\(")
-BARE = re.compile(r"https?://[^\s<>\]'}\"]{1,2048}")
+BARE = re.compile(r"https?://\[[0-9a-fA-F:.]+\](?:/[^\s<>)\]'}\"]{0,2048})?|https?://[^\s<>\]'}\"]{1,2048}")
 FILES = (".pdf", ".doc", ".docx", ".rtf", ".csv", ".xlsx", ".xls")
 FIELDS = ("downloads", "relevant-urls", "full-bibliographic-reference")
 MAX_CANDIDATES = 64
 
 
-def extract_links(data: dict, page_url: str) -> list[dict]:
+def extract_links(data: dict, page_url: str, issues: list[str] | None = None) -> list[dict]:
     """Conservatively extract hyperlinks; a URL is never evidence of checklist rights."""
     collected = []
     seen = set()
@@ -55,22 +55,28 @@ def extract_links(data: dict, page_url: str) -> list[dict]:
             candidates.append(target)
         for target in candidates:
             target = target.strip().rstrip(".,;:")
-            resolved = urljoin(page_url, target)
-            url = urlsplit(resolved)
-            if (url.scheme not in {"https", "http"} or not url.hostname or
-                    url.username is not None or url.password is not None or
-                    target.startswith(("javascript:", "file:", "data:")) or resolved in seen):
-                continue
             try:
-                if not ipaddress.ip_address(url.hostname).is_global:
+                resolved = urljoin(page_url, target)
+                url = urlsplit(resolved)
+                hostname = url.hostname
+                if (url.scheme not in {"https", "http"} or not hostname or
+                        url.username is not None or url.password is not None or
+                        target.startswith(("javascript:", "file:", "data:")) or resolved in seen):
                     continue
             except ValueError:
-                if url.hostname == "localhost" or url.hostname.endswith((".local", ".internal")):
+                if issues is not None and "malformed_candidate_url" not in issues:
+                    issues.append("malformed_candidate_url")
+                continue
+            try:
+                if not ipaddress.ip_address(hostname).is_global:
+                    continue
+            except ValueError:
+                if hostname == "localhost" or hostname.endswith((".local", ".internal")):
                     continue
             seen.add(resolved)
             extension = url.path.lower().split("/")[-1]
             kind = ("source_file_candidate" if extension.endswith(FILES) else
-                    "doi_landing_candidate" if url.hostname in {"doi.org", "dx.doi.org"} else
+                    "doi_landing_candidate" if hostname in {"doi.org", "dx.doi.org"} else
                     "interactive_page_candidate" if extension.endswith(".qmd") else
                     "landing_page_candidate")
             collected.append({"url": resolved, "source_field": field,
@@ -123,7 +129,7 @@ def collect(root: Path, catalogue: dict) -> dict:
         for field in FIELDS:
             if metadata.get(field) is not None and not isinstance(metadata[field], str):
                 issues.append("invalid_" + field)
-        links = extract_links(metadata, row["page_url"])
+        links = extract_links(metadata, row["page_url"], issues)
         if len(links) > MAX_CANDIDATES:
             links = links[:MAX_CANDIDATES]
             issues.append("link_limit_exceeded")
