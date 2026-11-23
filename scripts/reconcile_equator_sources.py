@@ -116,6 +116,46 @@ def scan_local(root: Path, item: dict) -> tuple[list[dict], list[str], dict | No
 
 
 
+def scan_alias_assets(root: Path, item: dict, known_ids: set[str]) -> list[dict]:
+    """Find unindexed filenames by matching existing sidecar title/group/edition.
+
+    This identifies a local file candidate, not its originating publication
+    or redistribution rights. No fuzzy title matching is permitted here.
+    """
+    matches = []
+    for level in ("archetypes", "variants"):
+        folder = root / "source" / level
+        for sidecar in sorted(folder.glob("*.yml")):
+            if sidecar.stem in known_ids or sidecar.is_symlink():
+                continue
+            try:
+                record = yaml.safe_load(sidecar.read_text(encoding="utf-8"))
+            except (OSError, UnicodeError, yaml.YAMLError):
+                continue
+            if not isinstance(record, dict):
+                continue
+            if not (
+                words(record.get("title")) == words(item.get("title"))
+                and record.get("title")
+                and record.get("group") == item.get("group")
+                and str(record.get("version")) == str(item.get("version"))
+            ):
+                continue
+            for ext in (".pdf", ".docx", ".csv", ".html", ".txt"):
+                original = folder / (sidecar.stem + ext)
+                if not original.is_file() or original.is_symlink():
+                    continue
+                digest = sha256(original)
+                matches.append({
+                    "path": original.relative_to(root).as_posix(),
+                    "sha256": digest,
+                    "match_basis": "sidecar_title_group_edition_candidate",
+                    "sidecar_path": sidecar.relative_to(root).as_posix(),
+                    "sidecar_digest_matches": str(record.get("checksum") or "").lower() == digest,
+                })
+    return sorted(matches, key=lambda x: x["path"])
+
+
 def scan_sidecar(root: Path, item: dict, assets: list[dict]) -> tuple[dict | None, list[str]]:
     paths = [root / "source" / level / (item["id"] + ".yml") for level in ("archetypes", "variants")]
     paths = [path for path in paths if path.is_file() and not path.is_symlink()]
@@ -221,8 +261,11 @@ def reconcile(root: Path, catalogue: dict) -> dict:
     for item in items:
         candidate, basis, alternatives = suggest(item, rows)
         assets, views, content = scan_local(root, item)
+        aliases = scan_alias_assets(root, item, set(ids)) if not assets else []
+        assets.extend(aliases)
         sidecar, sidecar_findings = scan_sidecar(root, item, assets)
         findings = ["legacy_content_not_authority", "rights_unassessed_for_legacy_text", *sidecar_findings]
+        if aliases: findings.append("source_asset_filename_alias_unverified")
         if not assets: findings.append("no_original_asset")
         if not views: findings.append("no_legacy_markdown")
         if item.get("variant_of") and item["variant_of"] not in ids:
