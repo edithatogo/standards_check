@@ -13,6 +13,10 @@
 - [Tracks](./tracks.md)
 - [Technical-preview readiness and EQUATOR engagement](../docs/preview-readiness.md)
 
+## Source reconciliation
+
+- [EQUATOR directory discovery and rights boundary](./source-reconciliation/equator-catalogue-20261123.md) — version-pinned published-source inventory, not canonical checklist content.
+
 ## Architecture
 
 - [Platform architecture](../docs/architecture/STANDARDFLOW_ARCHITECTURE.md)
