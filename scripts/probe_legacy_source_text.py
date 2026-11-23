@@ -54,19 +54,60 @@ def source_text(path: Path) -> tuple[str, str, str]:
     return text, method, hashlib.sha256(source).hexdigest()
 
 
+def fidelity_normalise(text: str) -> str:
+    """Retain case and punctuation, normalizing Unicode and whitespace only."""
+    return " ".join(unicodedata.normalize("NFKC", text).split())
+
+
+def phrase_occurrences(source: str, phrase: str) -> int:
+    if not phrase:
+        return 0
+    # Word boundaries prevent partial-token hits; lookahead counts overlaps.
+    return sum(1 for _ in re.finditer(r"(?<!\w)(?=" + re.escape(phrase) + r"(?!\w))", source))
+
+
 def evaluate_text(extracted: str, legacy_items: list[str]) -> dict:
-    # ponytail: Conservative substring equality; layout/OCR/paraphrase requires a
-    # separately justified comparator, not a speculative NLP service.
+    # ponytail: Phrase diagnostics only, not complete row or semantic equality.
     normalized = normalise(extracted)
+    fidelity = fidelity_normalise(extracted)
     # Legacy Markdown sometimes prepends a bold item number and section title,
     # while the original PDF/DOCX arranges that label separately.
     label = re.compile(r"^\s*\*\*\d+[a-z]?(?:\.\d+)?[.)]?\s+[^*]{1,160}\*\*\s*", re.I)
-    items = [normalise(label.sub("", item)) for item in legacy_items]
-    matches = [len(item) >= 40 and item in normalized for item in items]
+    items = [label.sub("", item) for item in legacy_items]
+    comparisons = []
+    for ordinal, item in enumerate(items, 1):
+        lexical = normalise(item)
+        strict = fidelity_normalise(item)
+        lexical_count = phrase_occurrences(normalized, lexical)
+        fidelity_count = phrase_occurrences(fidelity, strict)
+        short = len(lexical) < 40
+        if not lexical:
+            outcome = "empty_lexical"
+        elif not lexical_count:
+            outcome = "absent"
+        elif lexical_count > 1 or fidelity_count > 1:
+            outcome = "repeated"
+        elif not fidelity_count:
+            outcome = "lexical_only"
+        else:
+            outcome = "fidelity_phrase_present"
+        comparisons.append({"legacy_ordinal": ordinal,
+                            "legacy_fidelity_sha256": hashlib.sha256(strict.encode()).hexdigest(),
+                            "short_for_legacy_metric": short,
+                            "lexical_occurrences": lexical_count,
+                            "fidelity_occurrences": fidelity_count,
+                            "outcome": outcome})
+    # Retain historical substring metric for comparability; it is not token-bounded.
+    meaningful = [row for row in comparisons if not row["short_for_legacy_metric"]]
     return {"normalized_source_sha256": hashlib.sha256(normalized.encode()).hexdigest(),
+            "fidelity_source_sha256": hashlib.sha256(fidelity.encode()).hexdigest(),
             "normalized_characters": len(normalized),
-            "meaningful_legacy_items": sum(len(item) >= 40 for item in items),
-            "exact_substring_matches": sum(matches),
+            "meaningful_legacy_items": len(meaningful),
+            "exact_substring_matches": sum(len(lexical) >= 40 and lexical in normalized
+                                           for lexical in map(normalise, items)),
+            "token_bounded_legacy_matches": sum(row["lexical_occurrences"] > 0 for row in meaningful),
+            "fidelity_legacy_matches": sum(row["fidelity_occurrences"] > 0 for row in meaningful),
+            "item_comparisons": comparisons,
             "status": "triage_only_not_edition_verification"}
 
 

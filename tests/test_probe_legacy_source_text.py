@@ -76,5 +76,50 @@ class TextProbeTests(unittest.TestCase):
             self.assertEqual(len(digest), 64)
 
 
+
+class ItemDiagnosticsTests(unittest.TestCase):
+    def test_word_boundaries_and_punctuation_are_distinct_diagnostics(self):
+        result = evaluate_text(
+            "unreport the complete outcome assessment protocolX. Report all outcomes, including harms.",
+            ["report the complete outcome assessment protocol", "Report all outcomes including harms."])
+        first, second = result["item_comparisons"]
+        self.assertEqual(first["lexical_occurrences"], 0)
+        self.assertEqual(first["outcome"], "absent")
+        self.assertEqual(result["exact_substring_matches"], 1)  # historical triage metric
+        self.assertEqual(result["token_bounded_legacy_matches"], 0)
+        self.assertEqual(second["lexical_occurrences"], 1)
+        self.assertEqual(second["fidelity_occurrences"], 0)
+        self.assertEqual(second["outcome"], "lexical_only")
+
+    def test_short_empty_repeated_and_negated_items_are_not_silently_accepted(self):
+        result = evaluate_text("Report harms. Report harms. Do not omit withdrawals.",
+                               ["Report harms.", "", "omit withdrawals.", "Report all participants."])
+        repeated, empty, negated, absent = result["item_comparisons"]
+        self.assertEqual([row["legacy_ordinal"] for row in result["item_comparisons"]], [1, 2, 3, 4])
+        self.assertTrue(repeated["short_for_legacy_metric"])
+        self.assertEqual(repeated["lexical_occurrences"], 2)
+        self.assertEqual(repeated["fidelity_occurrences"], 2)
+        self.assertEqual(repeated["outcome"], "repeated")
+        self.assertEqual(empty["outcome"], "empty_lexical")
+        # Even a fidelity phrase hit within a negated sentence is NOT equivalence.
+        self.assertEqual(negated["fidelity_occurrences"], 1)
+        self.assertEqual(negated["outcome"], "fidelity_phrase_present")
+        self.assertEqual(absent["outcome"], "absent")
+        self.assertNotIn("Report harms", str(result))
+        self.assertEqual(len(repeated["legacy_fidelity_sha256"]), 64)
+        self.assertEqual(result["status"], "triage_only_not_edition_verification")
+
+    def test_fidelity_preserves_case_and_punctuation_but_normalizes_whitespace(self):
+        result = evaluate_text("Report\nall outcomes, including harms.",
+                               ["**2. Outcomes:** Report all outcomes, including harms.",
+                                "report all outcomes, including harms."])
+        first, second = result["item_comparisons"]
+        self.assertEqual(first["outcome"], "fidelity_phrase_present")
+        self.assertEqual(first["fidelity_occurrences"], 1)
+        self.assertEqual(second["lexical_occurrences"], 1)
+        self.assertEqual(second["fidelity_occurrences"], 0)
+        self.assertNotEqual(first["legacy_fidelity_sha256"], second["legacy_fidelity_sha256"])
+
+
 if __name__ == "__main__":
     unittest.main()
