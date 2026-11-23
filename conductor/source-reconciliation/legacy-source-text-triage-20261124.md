@@ -57,3 +57,43 @@ The dependency-free shared reader `scripts/legacy_checklist_structure.py` preser
 The existing probe now compares full captured task text, not just the first line. Report schema 2 adds a fingerprint of the exact legacy Markdown bytes, source line numbers, indentation, section anchors, declared IDs, parent relationships and warnings; raw legacy text is omitted. Prior lexical aggregates retain their meaning as phrase counts but are not directly comparable across changed extraction scopes. Existing original-file read is bounded at 20 MB plus one byte before parsing. No authoritative source rows, pack, rights status, or user progress changed; zero automatic promotions.
 
 Six focused synthetic reader tests passed locally in an isolated Python 3.13 harness; the committed source/test blob IDs match those tested. Integration and bounded-read tests run in the existing Python suite. Full-repository local testing is unavailable in this environment. On receiving #132, reuse the same reader for the primary-article comparator; do not mutate pinned article rows or source digests. T01.5b remains open for source-side hierarchy, complete row/subitem reconciliation, and independent parser comparison.
+
+## T01.5b — structured DOCX and tabular sources
+
+The local original audit now uses `scripts/structured_source.py` for DOCX,
+CSV and XLSX, with the same source-byte limit and digest checks. It preserves
+DOCX body order, nested tables, physical cell coordinates, horizontal spans,
+vertical merge origin and numbering metadata; rendered numbering, non-body
+parts, unsupported content and inconsistent grids are held. CSV retains
+logical rows, physical line ranges and cells (including empty and multiline
+values); ragged rows are explicit. XLSX retains sheet ordinals, row/cell
+coordinates, merged ranges, hidden state, data types and cell hashes. Formulas
+are not evaluated; non-cell content is held. ZIP expanded-size and member
+limits, DOCX nesting/node limits and XLSX preflight grid bounds are applied
+before expansion of large merged ranges. No workbook macros are executed.
+
+The existing report advances to schema 3. Whole normalized row/cell/block
+fingerprints can be compared with legacy item fingerprints independently of
+the flat phrase match. Anchor counts are retained with up to twenty candidate
+anchors; these are exact normalized text candidates, not independently
+verified printed identities. Raw source text, formula expressions and sheet
+names are not emitted. Format-native numeric-looking values are candidate
+labels only. Source structure, identity, rights, interpretation and admission
+remain separate; `verified_by_this_process` remains zero. Historical flat
+phrase counts may change because physical DOCX duplicates and lost nested
+content have been corrected.
+
+A pinned `openpyxl==3.1.5` is justified by the actual archived PRISMA-EcoEvo
+Excel checklist; reuse python-docx's existing lxml dependency for safe bounded
+XML preflight. Include only the two explicitly named archived EcoEvo DOCX/XLSX
+files as filename-based unverified candidates, never as authoritative sources.
+The generic local scanner also recognizes `.xlsx`. No new runtime, crawler,
+source bytes or canonical packs. Five synthetic local parser tests passed on
+Python 3.13.5 with python-docx 1.2.0 and openpyxl 3.1.5; exact helper/test blob
+hashes matched. The end-to-end audit regression and actual archive probes
+require hosted qualification. Reuse existing Python coverage artifact;
+rollback this additive parser, dispatch and dependency together.
+
+### Review hardening
+
+The XLSX preflight now independently caps cumulative merged-range area across the workbook, not just the enclosing rectangular grid, before normal loading. Formula-bearing rows have no whole-row fingerprint; literal cell anchors remain eligible but formula cells and partial rows cannot count as exact structural matches. Two focused tests reproduced both failures against the existing XLSX function in an isolated local harness and passed after the repair (Python 3.13.5, openpyxl 3.1.5). The existing audit integration fixture now also checks that a formula-bearing row contributes only its literal-cell anchor. Full exact-head hosted checks remain required.

@@ -72,7 +72,7 @@ class TextProbeTests(unittest.TestCase):
             text, extractor, digest = source_text(path)
             self.assertIn("Synthetic protocol", text)
             self.assertIn("Study characteristics", text)
-            self.assertEqual(extractor, "python_docx_paragraphs_and_tables")
+            self.assertEqual(extractor, "python_docx_ordered_structure")
             self.assertEqual(len(digest), 64)
 
 
@@ -93,7 +93,7 @@ class TextProbeTests(unittest.TestCase):
             report = audit(root)
             record = report["legacy_items"][0]
             structure = record["legacy_structure"]
-            self.assertEqual(report["schema_version"], 2)
+            self.assertEqual(report["schema_version"], 3)
             self.assertEqual(report["summary"]["verified_by_this_process"], 0)
             self.assertEqual(record["legacy_item_count"], 3)
             self.assertEqual(structure["duplicate_declared_item_ids"], ["2a"])
@@ -117,6 +117,35 @@ class TextProbeTests(unittest.TestCase):
                     source_text(path)
 
 
+
+
+    def test_tabular_audit_preserves_anchors_and_never_promotes_archived_workbooks(self):
+        from openpyxl import Workbook
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            direct = root / "source/variants"
+            direct.mkdir(parents=True)
+            (root / "source/index.yml").write_text("items:\n  - id: prisma-ecoevo\n    title: Synthetic\n")
+            (direct / "prisma-ecoevo.csv").write_text("ID,Requirement\n1a,Report all outcomes.\n")
+            archive = root / "source/archive/processed"
+            archive.mkdir(parents=True)
+            book = Workbook()
+            book.active.append(["Report all outcomes.", "=1+1"])
+            book.save(archive / "PRISMA-EcoEvo_ExcelChecklist.xlsx")
+            book.close()
+            view = root / "markdown/en/variants/prisma-ecoevo.md"
+            view.parent.mkdir(parents=True)
+            view.write_text("- [ ] **1a.** Report all outcomes.\n")
+            report = audit(root)
+            self.assertEqual(report["summary"]["verified_by_this_process"], 0)
+            self.assertEqual(report["summary"]["source_structure_status_counts"],
+                             {"structure_observed_not_qualified": 1, "held_structural_discrepancy": 1})
+            csv, xlsx = report["legacy_items"][0]["source_probes"]
+            self.assertEqual(csv["item_comparisons"][0]["exact_structural_anchors"], ["row/2/c2"])
+            self.assertEqual(xlsx["item_comparisons"][0]["exact_structural_anchors"], ["sheet/1/A1"])
+            self.assertEqual(xlsx["identity_basis"], "archive_filename_candidate_unverified")
+            self.assertEqual(xlsx["rights"], "unassessed")
+            self.assertNotIn("Report all outcomes.", str(report))
 
 
 class ItemDiagnosticsTests(unittest.TestCase):

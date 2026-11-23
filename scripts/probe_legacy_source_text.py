@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter
-import csv
 import hashlib
 import io
 import json
@@ -16,10 +15,12 @@ import yaml
 
 try:
     from .legacy_checklist_structure import parse_legacy_tasks, split_label
-    from .reconcile_equator_sources import scan_local, scan_alias_assets
+    from .reconcile_equator_sources import scan_local, scan_alias_assets, sha256
+    from .structured_source import extract_structure
 except ImportError:
     from legacy_checklist_structure import parse_legacy_tasks, split_label
-    from reconcile_equator_sources import scan_local, scan_alias_assets
+    from reconcile_equator_sources import scan_local, scan_alias_assets, sha256
+    from structured_source import extract_structure
 
 MAX_SOURCE_BYTES = 20_000_000
 MAX_PAGES = 80
@@ -29,11 +30,12 @@ def normalise(text: str) -> str:
     return " ".join(re.findall(r"\w+", unicodedata.normalize("NFKC", text).casefold()))
 
 
-def source_text(path: Path) -> tuple[str, str, str]:
+def source_probe(path: Path) -> tuple[str, str, str, dict | None]:
     with path.open("rb") as stream:
         source = stream.read(MAX_SOURCE_BYTES + 1)
     if len(source) > MAX_SOURCE_BYTES:
         raise ValueError("source_too_large")
+    structure = None
     if path.suffix == ".pdf":
         import pdfplumber
         with pdfplumber.open(io.BytesIO(source)) as pdf:
@@ -41,21 +43,21 @@ def source_text(path: Path) -> tuple[str, str, str]:
                 raise ValueError("too_many_pages")
             text = "\n".join(page.extract_text() or "" for page in pdf.pages)
         method = "pdfplumber_text_only_no_ocr"
-    elif path.suffix == ".docx":
-        from docx import Document
-        doc = Document(io.BytesIO(source))
-        text = "\n".join([*(p.text for p in doc.paragraphs),
-                          *(cell.text for table in doc.tables for row in table.rows for cell in row.cells)])
-        method = "python_docx_paragraphs_and_tables"
-    elif path.suffix == ".csv":
-        text = "\n".join(" ".join(row) for row in csv.reader(io.StringIO(source.decode("utf-8-sig"))))
-        method = "stdlib_csv"
+    elif path.suffix in {".docx", ".csv", ".xlsx"}:
+        text, structure = extract_structure(source, path.suffix)
+        method = {".docx": "python_docx_ordered_structure", ".csv": "stdlib_csv_structured",
+                  ".xlsx": "openpyxl_structured_no_formula_evaluation"}[path.suffix]
     elif path.suffix == ".txt":
         text = source.decode("utf-8")
         method = "stdlib_text"
     else:
         raise ValueError("unsupported_document_format")
-    return text, method, hashlib.sha256(source).hexdigest()
+    return text, method, hashlib.sha256(source).hexdigest(), structure
+
+
+def source_text(path: Path) -> tuple[str, str, str]:
+    text, method, digest, _ = source_probe(path)
+    return text, method, digest
 
 
 def fidelity_normalise(text: str) -> str:
@@ -112,6 +114,26 @@ def evaluate_text(extracted: str, legacy_items: list[str]) -> dict:
             "status": "triage_only_not_edition_verification"}
 
 
+def structural_matches(structure: dict, comparisons: list[dict]) -> None:
+    """Match whole normalized blocks/cells/rows by digest, never infer item identity."""
+    matches: dict[str, list[str]] = {}
+    blank = hashlib.sha256(b"").hexdigest()
+
+    def visit(node: dict) -> None:
+        digest = node.get("text_sha256")
+        if digest and digest != blank and node.get("anchor") and node.get("value_type") != "f":
+            matches.setdefault(digest, []).append(node["anchor"])
+        for key in ("blocks", "rows", "cells", "sheets"):
+            for child in node.get(key, []):
+                visit(child)
+
+    visit(structure)
+    for comparison in comparisons:
+        anchors = matches.get(comparison["legacy_fidelity_sha256"], [])
+        comparison["exact_structural_anchor_count"] = len(anchors)
+        comparison["exact_structural_anchors"] = anchors[:20]
+
+
 def audit(root: Path) -> dict:
     index = yaml.safe_load((root / "source/index.yml").read_text(encoding="utf-8"))
     items = index["items"]
@@ -121,6 +143,14 @@ def audit(root: Path) -> dict:
         originals, views, _ = scan_local(root, item)
         if not originals:
             originals = scan_alias_assets(root, item, ids)
+        # ponytail: a single explicit archive cohort; no fuzzy archive-wide matching.
+        if item["id"] == "prisma-ecoevo":
+            for filename in ("PRISMA-EcoEvo_WordChecklist.docx", "PRISMA-EcoEvo_ExcelChecklist.xlsx"):
+                candidate = root / "source/archive/processed" / filename
+                if candidate.is_file() and not candidate.is_symlink():
+                    originals.append({"path": candidate.relative_to(root).as_posix(),
+                                      "sha256": sha256(candidate),
+                                      "match_basis": "archive_filename_candidate_unverified"})
         legacy_rows = []
         legacy_structure = None
         if views:
@@ -146,11 +176,14 @@ def audit(root: Path) -> dict:
                      "identity_basis": original.get("match_basis", "exact_filename_unverified"),
                      "rights": "unassessed"}
             try:
-                extracted, method, digest = source_text(path)
+                extracted, method, digest, structure = source_probe(path)
                 if digest != original["sha256"]:
                     raise ValueError("source_changed_since_inventory")
                 entry.update(evaluate_text(extracted, legacy))
                 entry["extractor"] = method
+                if structure is not None:
+                    entry["source_structure"] = structure
+                    structural_matches(structure, entry["item_comparisons"])
                 if not extracted.strip():
                     entry["status"] = "empty_extraction_requires_review"
             except Exception as exc:  # third-party PDF/DOCX parser exceptions vary
@@ -161,13 +194,16 @@ def audit(root: Path) -> dict:
                         "legacy_item_count": len(legacy), "legacy_structure": legacy_structure,
                         "source_probes": probes,
                         "qualification": "unverified_original_and_legacy_text"})
-    return {"schema_version": 2, "authority": "no_source_or_legacy_content_admission",
+    return {"schema_version": 3, "authority": "no_source_or_legacy_content_admission",
             "legacy_item_count": len(records),
             "summary": {"records_with_original_candidates": sum(bool(row["source_probes"]) for row in records),
                         "source_probes": sum(len(row["source_probes"]) for row in records),
                         "successfully_extracted": sum(
                             p["status"] == "triage_only_not_edition_verification"
                             for row in records for p in row["source_probes"]),
+                        "source_structure_status_counts": dict(Counter(
+                            p["source_structure"]["status"] for row in records for p in row["source_probes"]
+                            if "source_structure" in p)),
                         "verified_by_this_process": 0},
             "legacy_items": records}
 
