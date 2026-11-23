@@ -13,14 +13,13 @@ from xml.etree import ElementTree as ET
 
 if __package__:
     from .jats_checklist_structure import describe_table
+    from .legacy_checklist_structure import parse_legacy_tasks
 else:
     from jats_checklist_structure import describe_table
+    from legacy_checklist_structure import parse_legacy_tasks
 
 MAX_BYTES = 8_000_000
 ITEM_ID = re.compile(r"^[0-9]{1,3}[a-z]?$", re.I)
-LEGACY_TASK = re.compile(r"^\s*[-*] \[[ xX]\]\s*(.+)$")
-LEGACY_LABEL = re.compile(r"^\s*\*\*(?:S)?([0-9]{1,3}[a-z]?)(?:[.)]|\s|:)([^*]*)\*\*\s*", re.I)
-EDITORIAL_LABEL = re.compile(r"^\s*\*\*[^*\n]{1,160}:\*\*\s*")
 LICENCE = {
     "CC-BY-4.0": "creativecommons.org/licenses/by/4.0",
     "CC0-1.0": "creativecommons.org/publicdomain/zero/1.0",
@@ -160,16 +159,9 @@ def snapshot_table(edition: dict, spec: dict) -> dict:
 
 
 def parse_legacy(markdown: str) -> list[dict]:
-    rows = []
-    for line in markdown.splitlines():
-        task = LEGACY_TASK.match(line)
-        if task:
-            phrase = task[1]
-            label = LEGACY_LABEL.match(phrase)
-            requirement = phrase[label.end():] if label else EDITORIAL_LABEL.sub("", phrase)
-            rows.append({"position": len(rows) + 1, "declared_item_id": label[1].lower() if label else None,
-                         "text": normalize(requirement)})
-    return rows
+    """Reuse the bounded legacy structure reader; keep original IDs and anchors."""
+    return [{**{key: value for key, value in row.items() if key != "raw_text"},
+             "text": normalize(row["text"])} for row in parse_legacy_tasks(markdown)]
 
 
 def reconcile_items(source: list[dict], legacy: list[dict]) -> dict:
@@ -201,6 +193,8 @@ def reconcile_items(source: list[dict], legacy: list[dict]) -> dict:
                        "ambiguous_exact_text" if exact else "not_exactly_reconciled"),
         })
     return {"source_item_count": len(source), "legacy_task_count": len(legacy),
+            "legacy_task_anchors": [{**{key: value for key, value in entry.items() if key != "text"},
+                                     "normalized_text_sha256": digest(entry["text"])} for entry in legacy],
             "exact_unique_items": sum(len(row["exact_legacy_positions"]) == 1 for row in items),
             "terminal_period_only_unique_items": sum(not row["exact_legacy_positions"] and
                                                      len(row["terminal_period_only_legacy_positions"]) == 1
@@ -230,8 +224,10 @@ def audit(root: Path, source_dir: Path | None, specs: list[dict]) -> dict:
                     raw = stream.read(MAX_BYTES + 1)
                 result["observed_source_sha256"] = hashlib.sha256(raw).hexdigest()
                 source = extract_table(raw, spec)
-            legacy = parse_legacy((root / spec["legacy_path"]).read_text(encoding="utf-8"))
+            legacy_bytes = (root / spec["legacy_path"]).read_bytes()
+            legacy = parse_legacy(legacy_bytes.decode("utf-8"))
             result["source"] = source
+            result["legacy_view_sha256"] = hashlib.sha256(legacy_bytes).hexdigest()
             result["legacy"] = reconcile_items(source["rows"], legacy)
             result["status"] = "table_items_extracted_legacy_compared"
         except (OSError, UnicodeError, ValueError) as exc:

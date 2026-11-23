@@ -223,5 +223,25 @@ class AuthoritativeTableTests(unittest.TestCase):
         self.assertIsNone(report["items"][0]["closest_text_candidate_only"])
 
 
+
+    def test_shared_reader_preserves_complete_legacy_structure_without_text_leak(self):
+        markdown = ("## Methods\n- [ ] **1a. Topic:** Identify the\n"
+                    "    protocol.\n    - [ ] **1b.** Report any update.\n"
+                    "- [ ] **S2.** Report another requirement.\n"
+                    "possible ambiguous continuation.\n")
+        legacy = parse_legacy(markdown)
+        self.assertEqual([item["declared_item_id"] for item in legacy], ["1a", "1b", "s2"])
+        self.assertEqual(legacy[0]["text"], "Identify the protocol.")
+        self.assertEqual(legacy[1]["parent_position"], 1)
+        self.assertEqual(legacy[2]["warnings"], ["ambiguous_unindented_continuation"])
+        report = reconcile_items(extract_table(XML, SPEC)["rows"], legacy)
+        self.assertEqual(report["exact_unique_items"], 2)
+        self.assertEqual(report["legacy_task_anchors"][0]["line_numbers"], [2, 3])
+        self.assertEqual(report["legacy_task_anchors"][1]["parent_position"], 1)
+        self.assertEqual(len(report["legacy_task_anchors"][0]["normalized_text_sha256"]), 64)
+        self.assertNotIn("Identify the protocol.", str(report))
+        self.assertNotIn("possible ambiguous continuation", str(report))
+
+
 if __name__ == "__main__":
     unittest.main()

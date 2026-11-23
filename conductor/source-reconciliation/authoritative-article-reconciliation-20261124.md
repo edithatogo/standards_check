@@ -30,8 +30,7 @@ reported separately. Same number is not a match; lexical similarity is only
 a candidate for investigation. Editorial bold numbering and unnumbered bold topic labels ending in a
 colon are stripped independently of declared item IDs. Strict equality
 retains punctuation; a separate diagnostic flags a difference limited to
-one terminal full stop. Markdown task-list first-line scope is explicit, so
-multiline/paraphrased rows may be false mismatches, not scientific defects.
+one terminal full stop. The initial receipt used first-line-only Markdown task extraction. It is superseded by the shared bounded reader described below; historical counts must not be compared without noting the changed extraction scope. Paraphrased rows may still be false mismatches, not scientific defects.
 All item identifiers, mismatches and missing acquisitions are retained.
 
 No automatically generated canonical pack, external validation, migrated
@@ -80,5 +79,17 @@ Five new synthetic structure tests ran RED/GREEN locally on Python 3.13.5
 against exact Git blobs. Four additional integration/negative tests exercise
 the current XML/snapshot/CLI paths and address the previous patch-coverage
 gap; hosted receipts and observed coverage are still required. Preserve
-the source-only scope, zero promotions and original attribution. Shared
-legacy reader integration remains a separate receiving change after #135.
+the source-only scope, zero promotions and original attribution. The shared legacy reader was subsequently integrated after #135 merged; see below.
+
+## Shared legacy structural reader (after #135)
+
+Both article and local-original probes now use `parse_legacy_tasks` from
+`scripts/legacy_checklist_structure.py`. No second task-list regex or
+editorial-label parser remains in the article comparator. Whole captured
+requirements are normalized for comparison; nested checkbox parent ordinals,
+section/line anchors, original indentation and warnings are retained separately
+with a normalized requirement digest and exact view SHA-256. Declared labels
+remain exactly distinct (e.g. S2 versus 2); do not infer identity by stripping
+prefixes. Source row and article-byte pins are unchanged. A regression covers
+multiline and nested tasks, ambiguity flags, and no raw legacy text in receipts.
+Historical first-line match counts are not comparable without rerunning.
