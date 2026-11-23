@@ -57,14 +57,18 @@ def _frontmatter(path: Path) -> dict:
 
 
 def _list_field(data: dict, name: str) -> list[str]:
-    value = data.get(name) or []
+    value = data.get(name)
+    if value is None:
+        return []
     if not isinstance(value, list) or any(not isinstance(item, str) for item in value):
         raise ValueError(f"Unexpected {name} list in EQUATOR source")
     return list(dict.fromkeys(item.strip() for item in value if item.strip()))
 
 
 def _identifiers(data: dict) -> tuple[str | None, str | None]:
-    raw_doi = data.get("rg-doi") or ""
+    raw_doi = data.get("rg-doi")
+    if raw_doi is None:
+        raw_doi = ""
     if not isinstance(raw_doi, str):
         raise ValueError("Unexpected DOI field in EQUATOR source")
     raw_doi = raw_doi.strip()
@@ -73,9 +77,13 @@ def _identifiers(data: dict) -> tuple[str | None, str | None]:
             raw_doi = raw_doi[len(prefix):]
             break
     doi = raw_doi if DOI.fullmatch(raw_doi) else None
-    ids = set(PMID.findall(str(data.get("pmid-id") or "")))
+    for field in ("pmid-id", "pmid-url"):
+        value = data.get(field)
+        if value is not None and not isinstance(value, str):
+            raise ValueError(f"Unexpected {field} field in EQUATOR source")
+    ids = set(PMID.findall(data.get("pmid-id") or ""))
     if not ids:
-        ids = set(PMID.findall(str(data.get("pmid-url") or "")))
+        ids = set(PMID.findall(data.get("pmid-url") or ""))
     return doi, next(iter(ids)) if len(ids) == 1 else None
 
 
@@ -100,9 +108,12 @@ def build_catalog(source: Path, revision: str, records: list[tuple[str, str]], *
             try:
                 data = _frontmatter(file)
                 doi, pmid = _identifiers(data)
+                acronym = data.get("acronym")
+                if acronym is not None and not isinstance(acronym, str):
+                    raise ValueError("Unexpected acronym field in EQUATOR source")
                 row.update({
                     "title": data["title"].strip(),
-                    "acronym": str(data.get("acronym") or "").strip() or None,
+                    "acronym": (acronym or "").strip() or None,
                     "doi": doi,
                     "pmid": pmid,
                     "study_types": _list_field(data, "categories"),
