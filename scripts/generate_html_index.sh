@@ -46,7 +46,7 @@ BODY_CONTENT_TMP=$(mktemp)
 trap 'rm -f "$BODY_CONTENT_TMP"' EXIT
 
 # --- Implemented Checklists ---
-echo "<h2>Implemented Checklists</h2>" >> "$BODY_CONTENT_TMP"
+echo "<h2>Legacy checklist previews (content not fully qualified)</h2>" >> "$BODY_CONTENT_TMP"
 echo "<div class='list-group mb-4'>" >> "$BODY_CONTENT_TMP"
 yq -r '.items[] | select(.status == "mapped") | .id' "$INDEX_YAML" | while IFS= read -r id;
 do
@@ -72,7 +72,7 @@ done
 {
   echo "</div>"
   # --- Placeholder Checklists ---
-  echo "<h2>Placeholder Checklists</h2>"
+  echo "<h2>Other catalogue entries (not yet qualified)</h2>"
   echo "<div class='list-group mb-4'>"
 } >> "$BODY_CONTENT_TMP"
 yq -r '.items[] | select(.status != "mapped") | .id' "$INDEX_YAML" | while IFS= read -r id;
@@ -109,4 +109,8 @@ pandoc \
   --output="$OUTPUT_FILE" \
   "$BODY_CONTENT_TMP"
 
+# The deployed Pages artifact must contain its browser script.
+test -s assets/js/app.js
+mkdir -p "${OUTPUT_DIR}/assets/js"
+cp assets/js/app.js "${OUTPUT_DIR}/assets/js/app.js"
 log "Successfully generated index page at ${OUTPUT_FILE}"

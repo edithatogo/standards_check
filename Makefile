@@ -25,6 +25,7 @@ $(HTML_DIR)/%.html: %.md templates/pandoc/html_template.html
 	@pandoc "$<" \
 		--to=html \
 		--template="templates/pandoc/html_template.html" \
+		--metadata checklist_page=true \
 		--metadata title="$$(sed -n '/^# /{s/^# //;p;q;}' "$<")" \
 		--output="$@"
 

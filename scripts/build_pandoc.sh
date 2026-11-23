@@ -41,6 +41,7 @@ while IFS= read -r -d '' md; do
     --to=html \
     --template="templates/pandoc/html_template.html" \
     --metadata title="$title" \
+    --metadata checklist_page=true \
     -o "html/$dir/$base.html"
 
   # LaTeX
