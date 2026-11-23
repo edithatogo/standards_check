@@ -1,4 +1,33 @@
-document.addEventListener('DOMContentLoaded', () => {
+// Local preview progress is bound to this rendered checklist, never to a newer edition.
+const MAX_PROGRESS_BYTES = 64000;
+const MAX_NOTE_LENGTH = 2000;
+
+function validateProgressSnapshot(value, identity, itemCount) {
+  const record = v => v !== null && typeof v === 'object' && !Array.isArray(v);
+  const only = (v, allowed) => Object.keys(v).every(k => allowed.includes(k));
+  if (!record(value) || !record(value.source) || !record(value.checkboxes) ||
+      !record(value.notes) || !only(value, ['schema', 'source', 'checkboxes', 'notes']) ||
+      !only(value.source, ['page', 'sha256']) || value.schema !== 1 ||
+      value.source.page !== identity.page || value.source.sha256 !== identity.sha256) return null;
+
+  const validId = key => {
+    if (!/^item-(0|[1-9]\d*)$/.test(key)) return false;
+    return Number(key.slice(5)) < itemCount;
+  };
+  const checkboxes = {};
+  const notes = {};
+  for (const [key, checked] of Object.entries(value.checkboxes)) {
+    if (!validId(key) || typeof checked !== 'boolean') return null;
+    checkboxes[key] = checked;
+  }
+  for (const [key, note] of Object.entries(value.notes)) {
+    if (!validId(key) || typeof note !== 'string' || note.length > MAX_NOTE_LENGTH) return null;
+    notes[key] = note;
+  }
+  return {schema: 1, source: identity, checkboxes, notes};
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
   const mainContent = document.querySelector('main');
   if (!mainContent) return;
 
@@ -12,15 +41,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const exportButton = document.getElementById('exportButton');
   const importButton = document.getElementById('importButton');
   const totalItems = checklistItems.length;
+  // Web Crypto is native to supported secure HTTPS browsers. The rendered item
+  // text, rather than the page title or positional IDs, determines edition identity.
+  const itemText = checklistItems.map(item => item.textContent.trim()).join('\n');
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(itemText));
+  const sha256 = Array.from(new Uint8Array(digest), n => n.toString(16).padStart(2, '0')).join('');
+  const identity = {page: location.pathname, sha256};
+  const storageKey = `standardflow-progress:v1:${identity.page}:${sha256}`;
 
   // --- State Management ---
-  let state = {
-    checkboxes: {},
-    notes: {}
-  };
+  let state = {schema: 1, source: identity, checkboxes: {}, notes: {}};
 
   function saveState() {
-    localStorage.setItem(pageKey, JSON.stringify(state));
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(state));
+    } catch {
+      console.warn('Checklist progress could not be stored locally');
+    }
   }
 
   let saveStateTimeout;
@@ -43,14 +80,18 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function loadState() {
-    const savedState = localStorage.getItem(pageKey);
-    if (savedState) {
-      state = JSON.parse(savedState);
+    try {
+      const saved = localStorage.getItem(storageKey);
+      if (!saved || new TextEncoder().encode(saved).length > MAX_PROGRESS_BYTES) return;
+      const validated = validateProgressSnapshot(JSON.parse(saved), identity, totalItems);
+      if (validated) state = validated;
+    } catch {
+      console.warn('Invalid saved checklist progress was ignored');
     }
   }
 
   function updateProgress() {
-    const checkedItems = Object.values(state.checkboxes).filter(Boolean).length;
+    const checkedItems = checklistItems.filter((_, i) => state.checkboxes[`item-${i}`] === true).length;
     const percentage = totalItems > 0 ? Math.round((checkedItems / totalItems) * 100) : 0;
     
     if (progressBar) {
@@ -80,18 +121,22 @@ document.addEventListener('DOMContentLoaded', () => {
     input.onchange = e => {
       const file = e.target.files[0];
       if (!file) return;
+      if (file.size > MAX_PROGRESS_BYTES) {
+        alert('Error: Progress file is too large.');
+        return;
+      }
       const reader = new FileReader();
       reader.onload = readerEvent => {
         try {
           const importedState = JSON.parse(readerEvent.target.result);
-          // Basic validation
-          if (importedState && typeof importedState.checkboxes === 'object' && typeof importedState.notes === 'object') {
-            state = importedState;
-            saveState();
-            location.reload(); // Easiest way to reflect the new state
-          } else {
-            alert('Error: Invalid file format.');
+          const validated = validateProgressSnapshot(importedState, identity, totalItems);
+          if (!validated) {
+            alert('Error: Invalid file, unknown checklist edition or obsolete progress format.');
+            return;
           }
+          state = validated;
+          saveState();
+          location.reload();
         } catch (error) {
           alert('Error: Could not parse the file.');
           console.error(error);
@@ -128,6 +173,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const noteButton = document.createElement('button');
     noteButton.textContent = 'Add Note';
     noteButton.className = 'btn btn-outline-secondary btn-sm ms-auto';
+    noteButton.type = 'button';
+    noteButton.setAttribute('aria-expanded', 'false');
     
     item.appendChild(noteButton);
 
@@ -138,9 +185,12 @@ document.addEventListener('DOMContentLoaded', () => {
         noteArea.className = 'form-control mt-2';
         noteArea.placeholder = 'Enter your notes here...';
         noteArea.rows = 3;
+        noteArea.maxLength = MAX_NOTE_LENGTH;
+        noteArea.setAttribute('aria-label', `Note for checklist item ${index + 1}`);
         noteArea.value = state.notes[itemId] || '';
         item.appendChild(noteArea);
         noteButton.textContent = 'Remove Note';
+        noteButton.setAttribute('aria-expanded', 'true');
         noteArea.focus();
 
         noteArea.addEventListener('input', () => {
@@ -160,6 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
         saveState();
         existingNote.remove();
         noteButton.textContent = 'Add Note';
+        noteButton.setAttribute('aria-expanded', 'false');
       } else {
         createNoteArea();
       }
