@@ -82,6 +82,10 @@ jobs:
           python -m coverage xml
           python -m coverage json
           python -m coverage report --fail-under=75 | tee target/coverage/summary.txt
+          # Triage existing local original files only; no external downloads,
+          # source-text export, licences, or Canonical Pack promotion.
+          python -m scripts.probe_legacy_source_text --output target/coverage/legacy-source-text-triage.json
+
       - if: matrix.component == 'rust'
         uses: dtolnay/rust-toolchain@4cda84d5c5c54efe2404f9d843567869ab1699d4
         with:
