@@ -1,0 +1,92 @@
+"""Synthetic tests for bounded EQUATOR source-link discovery."""
+import json
+import subprocess
+import tempfile
+import unittest
+from pathlib import Path
+
+from scripts.equator_source_links import extract_links, collect
+
+
+class SourceLinksTests(unittest.TestCase):
+    def test_extracts_downloads_without_claiming_rights_or_content(self):
+        data = {
+            'downloads': 'Download [checklist](checklist.pdf) or [docx](https://example.org/guide.docx).',
+            'relevant-urls': 'Read [the statement](https://doi.org/10.1000/example) and <https://example.org/info>.',
+        }
+        links = extract_links(data, 'https://equator-network.org/reporting-guidelines/example/')
+        assert [(x['url'], x['source_field'], x['type']) for x in links] == [
+            ('https://equator-network.org/reporting-guidelines/example/checklist.pdf', 'downloads', 'source_file_candidate'),
+            ('https://example.org/guide.docx', 'downloads', 'source_file_candidate'),
+            ('https://doi.org/10.1000/example', 'relevant-urls', 'doi_landing_candidate'),
+            ('https://example.org/info', 'relevant-urls', 'landing_page_candidate'),
+        ]
+        assert all(x['qualification'] == 'unverified_link_only' for x in links)
+
+    def test_bibliographic_links_are_candidates_not_primary_evidence(self):
+        links = extract_links({"full-bibliographic-reference":
+            "[Full text](https://www.bmj.com/content/383/bmj-2023-076386)\n"
+            "[Issue](https://www.bmj.com/content/383/bmj-2023-076386)"},
+            "https://equator-network.org/reporting-guidelines/spirit-define/")
+        assert len(links) == 1
+        assert links[0]["source_field"] == "full-bibliographic-reference"
+        assert links[0]["qualification"] == "unverified_link_only"
+
+    def test_does_not_accept_script_file_or_credential_urls(self):
+        data = {'downloads': '[bad](javascript:alert) [bad](file:///etc/passwd) '
+                '[bad](https://user:secret@example.org/file.pdf) [bad](http://127.0.0.1/private.pdf) [valid](https://example.org/public.pdf)'}
+        assert [x['url'] for x in extract_links(data, 'https://equator-network.org/reporting-guidelines/a/')] == [
+            'https://example.org/public.pdf'
+        ]
+
+    def test_development_and_missing_title_are_not_silently_dropped(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            subprocess.run(['git','init','-q',str(root)],check=True)
+            subprocess.run(['git','-C',str(root),'config','user.email','test@example.invalid'],check=True)
+            subprocess.run(['git','-C',str(root),'config','user.name','Test'],check=True)
+            for name,content in {
+                'reporting-guidelines/one/index.qmd': '---\ntitle: ""\ndownloads: "[Checklist](item.pdf)"\n---\nnot copied',
+                'reporting-guidelines/two/index.qmd': '---\ntitle: Second\ndownloads: ""\n---\nnot copied',
+                'reporting-guidelines/under-development/draft/index.qmd': '---\ntitle: Draft\n---\nnot copied',
+            }.items():
+                path=root/name; path.parent.mkdir(parents=True,exist_ok=True);path.write_text(content)
+            subprocess.run(['git','-C',str(root),'add','.'],check=True)
+            subprocess.run(['git','-C',str(root),'commit','-qm','fixture'],check=True)
+            head=subprocess.check_output(['git','-C',str(root),'rev-parse','HEAD'],text=True).strip()
+            catalogue={'source_revision':head,'published_count':2,'guidelines':[]}
+            for slug in ('one','two'):
+                path=f'reporting-guidelines/{slug}/index.qmd'
+                sha=subprocess.check_output(['git','-C',str(root),'rev-parse',f'HEAD:{path}'],text=True).strip()
+                catalogue['guidelines'].append({'id':'equator:'+slug,'page_url':f'https://equator-network.org/reporting-guidelines/{slug}/','source_path':path,'source_blob_sha':sha,'metadata_status':'extracted_unverified'})
+            result=collect(root,catalogue)
+            assert result['published_count']==2
+            assert result['summary']['records_with_candidates']==1
+            assert result['summary']['link_count']==1
+            assert result['summary']['records_needing_review']==1
+            assert 'not copied' not in json.dumps(result)
+            assert result['guidelines'][0]['status']=='needs_review'
+            catalogue['source_revision']='a'*40
+            with self.assertRaisesRegex(ValueError,'source revision'):
+                collect(root,catalogue)
+
+    def test_bad_frontmatter_is_explicit_review_debt_not_authority(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp)
+            subprocess.run(['git','init','-q',str(root)],check=True)
+            subprocess.run(['git','-C',str(root),'config','user.email','test@example.invalid'],check=True)
+            subprocess.run(['git','-C',str(root),'config','user.name','Test'],check=True)
+            path='reporting-guidelines/one/index.qmd'
+            (root/path).parent.mkdir(parents=True)
+            (root/path).write_text('not YAML frontmatter')
+            subprocess.run(['git','-C',str(root),'add','.'],check=True)
+            subprocess.run(['git','-C',str(root),'commit','-qm','fixture'],check=True)
+            head=subprocess.check_output(['git','-C',str(root),'rev-parse','HEAD'],text=True).strip()
+            sha=subprocess.check_output(['git','-C',str(root),'rev-parse',f'HEAD:{path}'],text=True).strip()
+            report=collect(root,{'source_revision':head,'published_count':1,'guidelines':[{'id':'equator:one','page_url':'https://equator-network.org/reporting-guidelines/one/','source_path':path,'source_blob_sha':sha,'metadata_status':'needs_review'}]})
+            assert report['guidelines'][0]['status']=='needs_review'
+            assert report['summary']['records_needing_review']==1
+
+
+if __name__ == '__main__':
+    unittest.main()

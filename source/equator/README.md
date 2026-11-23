@@ -46,3 +46,13 @@ Ownership: `standards_check`/StandardFlow holds the standards catalogue and
 qualified packs. Searchright consumes version-pinned references and stays
 responsible for review/search state and PRISMA counts. This is not evidence of
 methodological adequacy, complete checklist transcription or clinical validity.
+
+## Candidate original-source links (no download)
+The same read-only workflow also runs `scripts/equator_source_links.py` over
+the exact pinned Quarto source. It extracts candidate links from `downloads`,
+`relevant-urls` and bibliographic references, retaining each source-page
+Git blob, link field and link type. The `equator-source-link-candidates.json`
+artifact is a **lead list**, not confirmation of original source identity,
+file existence, redistribution permission, current edition or clinical validity.
+Unparseable/untitled upstream pages remain explicit `needs_review` rows.
+No provider files are fetched, reused or published by this workflow.
