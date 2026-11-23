@@ -47,8 +47,9 @@
 - [x] Admit Click 8.5.1, graphviz 0.21 and jsonschema 4.26.0 in the maintained host
   profile through PR #98, merged at `d213085a268a4cd82d522e6e17d27f3dee15bf5f`.
   Preserve the exact source snapshot and historical source PR dispositions.
-- [ ] Record receiving-main execution after PR #98 separately from its successful
-  reviewed-head checks and the historical `2b0c5794` runtime receipt.
+- [x] Record successful receiving-main execution after PR #98 at admission merge
+  `d213085a` and retirement merge `ba6b0888`, separately from its reviewed-head checks
+  and the historical `2b0c5794` runtime receipt.
 - [ ] Retain issue #94 for optional interactive-kernel qualification and updater
   observation. ipykernel 6.31.0 remains unadmitted; neither attempted kernel profile
   reached `kernel_info` or executed cells.

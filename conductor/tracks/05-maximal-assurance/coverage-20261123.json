@@ -1,0 +1,1007 @@
+{
+  "schema_version": "dev.standardflow.component-coverage.v1",
+  "observed_at": "2026-11-23T01:38:41.591040+00:00",
+  "candidate_base": "ba6b0888806e84276e5f54afc07e4e555220c4ea",
+  "identity_scope": "Local modified candidate; source hashes identify inputs. Hosted commits require their own receipts.",
+  "tools": {
+    "python": "3.12.14",
+    "coverage": "7.17.4",
+    "rust": "1.98.1",
+    "cargo_llvm_cov": "0.9.2",
+    "node": "24.22.3"
+  },
+  "tests": {
+    "python": 211,
+    "rust": 72,
+    "api": 38
+  },
+  "python": {
+    "scope": "All 24 maintained non-test Python modules; tests, frozen legacy snapshot, plugin/node dependencies and build output excluded. Existing offline validators are also executed.",
+    "summary": {
+      "covered_lines": 1174,
+      "num_statements": 1507,
+      "percent_covered": 75.81667479278401,
+      "percent_covered_display": "75.82",
+      "missing_lines": 333,
+      "excluded_lines": 0,
+      "percent_statements_covered": 77.90311877903119,
+      "percent_statements_covered_display": "77.90",
+      "num_branches": 544,
+      "num_partial_branches": 91,
+      "covered_branches": 381,
+      "missing_branches": 163,
+      "percent_branches_covered": 70.03676470588235,
+      "percent_branches_covered_display": "70.04"
+    },
+    "files": {
+      "extract_all_docx.py": {
+        "sha256": "c6904f9ac9f0a58f3a7f3f22cf08f039d7e4612ab9c8196d8b1fddd8aad5d727",
+        "summary": {
+          "covered_lines": 10,
+          "num_statements": 31,
+          "percent_covered": 25.58139534883721,
+          "percent_covered_display": "25.58",
+          "missing_lines": 21,
+          "excluded_lines": 0,
+          "percent_statements_covered": 32.25806451612903,
+          "percent_statements_covered_display": "32.26",
+          "num_branches": 12,
+          "num_partial_branches": 1,
+          "covered_branches": 1,
+          "missing_branches": 11,
+          "percent_branches_covered": 8.333333333333334,
+          "percent_branches_covered_display": "8.33"
+        }
+      },
+      "extract_and_convert.py": {
+        "sha256": "cf1e46f3e50a768371ec62ad084b6bd39e2fe8dd79fc9898417a8f526f8aacff",
+        "summary": {
+          "covered_lines": 38,
+          "num_statements": 60,
+          "percent_covered": 58.333333333333336,
+          "percent_covered_display": "58.33",
+          "missing_lines": 22,
+          "excluded_lines": 0,
+          "percent_statements_covered": 63.333333333333336,
+          "percent_statements_covered_display": "63.33",
+          "num_branches": 24,
+          "num_partial_branches": 3,
+          "covered_branches": 11,
+          "missing_branches": 13,
+          "percent_branches_covered": 45.833333333333336,
+          "percent_branches_covered_display": "45.83"
+        }
+      },
+      "extract_docx.py": {
+        "sha256": "93f436d4fb92ba8052ca7ebd6eb222d2a2c588bafeecb732a9b5a2bb475e1361",
+        "summary": {
+          "covered_lines": 15,
+          "num_statements": 15,
+          "percent_covered": 100.0,
+          "percent_covered_display": "100.00",
+          "missing_lines": 0,
+          "excluded_lines": 0,
+          "percent_statements_covered": 100.0,
+          "percent_statements_covered_display": "100.00",
+          "num_branches": 4,
+          "num_partial_branches": 0,
+          "covered_branches": 4,
+          "missing_branches": 0,
+          "percent_branches_covered": 100.0,
+          "percent_branches_covered_display": "100.00"
+        }
+      },
+      "extract_docx_content.py": {
+        "sha256": "90f3e9d1531b1e0605b2246801ea9cd6bdb7fc20efa36e7a7e995c007c0f94f9",
+        "summary": {
+          "covered_lines": 9,
+          "num_statements": 27,
+          "percent_covered": 25.641025641025642,
+          "percent_covered_display": "25.64",
+          "missing_lines": 18,
+          "excluded_lines": 0,
+          "percent_statements_covered": 33.333333333333336,
+          "percent_statements_covered_display": "33.33",
+          "num_branches": 12,
+          "num_partial_branches": 1,
+          "covered_branches": 1,
+          "missing_branches": 11,
+          "percent_branches_covered": 8.333333333333334,
+          "percent_branches_covered_display": "8.33"
+        }
+      },
+      "scripts/__init__.py": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "summary": {
+          "covered_lines": 0,
+          "num_statements": 0,
+          "percent_covered": 100.0,
+          "percent_covered_display": "100.00",
+          "missing_lines": 0,
+          "excluded_lines": 0,
+          "percent_statements_covered": 100.0,
+          "percent_statements_covered_display": "100.00",
+          "num_branches": 0,
+          "num_partial_branches": 0,
+          "covered_branches": 0,
+          "missing_branches": 0,
+          "percent_branches_covered": 100.0,
+          "percent_branches_covered_display": "100.00"
+        }
+      },
+      "scripts/audit_foundation.py": {
+        "sha256": "48bf5bc0ab32be66f20728f60284e91d72466a5ee2386b44115c0e40ac2cb3c2",
+        "summary": {
+          "covered_lines": 80,
+          "num_statements": 91,
+          "percent_covered": 87.21804511278195,
+          "percent_covered_display": "87.22",
+          "missing_lines": 11,
+          "excluded_lines": 0,
+          "percent_statements_covered": 87.91208791208791,
+          "percent_statements_covered_display": "87.91",
+          "num_branches": 42,
+          "num_partial_branches": 6,
+          "covered_branches": 36,
+          "missing_branches": 6,
+          "percent_branches_covered": 85.71428571428571,
+          "percent_branches_covered_display": "85.71"
+        }
+      },
+      "scripts/build_prisma42_candidate.py": {
+        "sha256": "422172b2d31e6878218d440847913104c825d5066997ea742f2db3108c56bf80",
+        "summary": {
+          "covered_lines": 63,
+          "num_statements": 75,
+          "percent_covered": 82.52427184466019,
+          "percent_covered_display": "82.52",
+          "missing_lines": 12,
+          "excluded_lines": 0,
+          "percent_statements_covered": 84.0,
+          "percent_statements_covered_display": "84.00",
+          "num_branches": 28,
+          "num_partial_branches": 4,
+          "covered_branches": 22,
+          "missing_branches": 6,
+          "percent_branches_covered": 78.57142857142857,
+          "percent_branches_covered_display": "78.57"
+        }
+      },
+      "scripts/check_standardflow_import.py": {
+        "sha256": "16e1b283a3f7ff13dc653b97c4fbb6bec616c25950d1ab464781d4dac938f562",
+        "summary": {
+          "covered_lines": 33,
+          "num_statements": 41,
+          "percent_covered": 77.35849056603773,
+          "percent_covered_display": "77.36",
+          "missing_lines": 8,
+          "excluded_lines": 0,
+          "percent_statements_covered": 80.48780487804878,
+          "percent_statements_covered_display": "80.49",
+          "num_branches": 12,
+          "num_partial_branches": 4,
+          "covered_branches": 8,
+          "missing_branches": 4,
+          "percent_branches_covered": 66.66666666666667,
+          "percent_branches_covered_display": "66.67"
+        }
+      },
+      "scripts/compare_prisma_source_pdf.py": {
+        "sha256": "b64770fd90b01716274ca93460ce4ccd9f810392b2b63b705fcc0382d97a123d",
+        "summary": {
+          "covered_lines": 63,
+          "num_statements": 83,
+          "percent_covered": 77.3913043478261,
+          "percent_covered_display": "77.39",
+          "missing_lines": 20,
+          "excluded_lines": 0,
+          "percent_statements_covered": 75.90361445783132,
+          "percent_statements_covered_display": "75.90",
+          "num_branches": 32,
+          "num_partial_branches": 6,
+          "covered_branches": 26,
+          "missing_branches": 6,
+          "percent_branches_covered": 81.25,
+          "percent_branches_covered_display": "81.25"
+        }
+      },
+      "scripts/extract_pdf_content.py": {
+        "sha256": "fa0cf04537979291025dfdeb5a66eb2545a5d62534a2ec04ca31da886ee8b6fa",
+        "summary": {
+          "covered_lines": 48,
+          "num_statements": 49,
+          "percent_covered": 96.82539682539682,
+          "percent_covered_display": "96.83",
+          "missing_lines": 1,
+          "excluded_lines": 0,
+          "percent_statements_covered": 97.95918367346938,
+          "percent_statements_covered_display": "97.96",
+          "num_branches": 14,
+          "num_partial_branches": 1,
+          "covered_branches": 13,
+          "missing_branches": 1,
+          "percent_branches_covered": 92.85714285714286,
+          "percent_branches_covered_display": "92.86"
+        }
+      },
+      "scripts/find_latest_checklist.py": {
+        "sha256": "28a0c94452f1b209dce5e66041ecaf48bd96091a3990b402bad8c2b80e2fbae6",
+        "summary": {
+          "covered_lines": 59,
+          "num_statements": 60,
+          "percent_covered": 97.72727272727273,
+          "percent_covered_display": "97.73",
+          "missing_lines": 1,
+          "excluded_lines": 0,
+          "percent_statements_covered": 98.33333333333333,
+          "percent_statements_covered_display": "98.33",
+          "num_branches": 28,
+          "num_partial_branches": 1,
+          "covered_branches": 27,
+          "missing_branches": 1,
+          "percent_branches_covered": 96.42857142857143,
+          "percent_branches_covered_display": "96.43"
+        }
+      },
+      "scripts/petri_net_generation/generate_net.py": {
+        "sha256": "33da339fa21101da616fd2e483f6d9bb86a44c158f2ea4f39306203e415f536e",
+        "summary": {
+          "covered_lines": 114,
+          "num_statements": 115,
+          "percent_covered": 98.58156028368795,
+          "percent_covered_display": "98.58",
+          "missing_lines": 1,
+          "excluded_lines": 0,
+          "percent_statements_covered": 99.1304347826087,
+          "percent_statements_covered_display": "99.13",
+          "num_branches": 26,
+          "num_partial_branches": 1,
+          "covered_branches": 25,
+          "missing_branches": 1,
+          "percent_branches_covered": 96.15384615384616,
+          "percent_branches_covered_display": "96.15"
+        }
+      },
+      "scripts/translate_checklist.py": {
+        "sha256": "d19ce52fabb386bd8fe52e4a3a20409750f761dbd93e819f89b9159f2c8f81d0",
+        "summary": {
+          "covered_lines": 41,
+          "num_statements": 64,
+          "percent_covered": 64.28571428571429,
+          "percent_covered_display": "64.29",
+          "missing_lines": 23,
+          "excluded_lines": 0,
+          "percent_statements_covered": 64.0625,
+          "percent_statements_covered_display": "64.06",
+          "num_branches": 20,
+          "num_partial_branches": 1,
+          "covered_branches": 13,
+          "missing_branches": 7,
+          "percent_branches_covered": 65.0,
+          "percent_branches_covered_display": "65.00"
+        }
+      },
+      "scripts/validate_artifacts.py": {
+        "sha256": "a50d959a6ebdebb32ba65dd7cb45db81cb01371b80f8a39cdf3b0ec0d89f651e",
+        "summary": {
+          "covered_lines": 92,
+          "num_statements": 122,
+          "percent_covered": 70.78651685393258,
+          "percent_covered_display": "70.79",
+          "missing_lines": 30,
+          "excluded_lines": 0,
+          "percent_statements_covered": 75.40983606557377,
+          "percent_statements_covered_display": "75.41",
+          "num_branches": 56,
+          "num_partial_branches": 22,
+          "covered_branches": 34,
+          "missing_branches": 22,
+          "percent_branches_covered": 60.714285714285715,
+          "percent_branches_covered_display": "60.71"
+        }
+      },
+      "scripts/validate_costing_reconciliation.py": {
+        "sha256": "46e8a8b655f5fec2a08eddc9b7484628b31ac6966f0f6491167e579d04dea320",
+        "summary": {
+          "covered_lines": 117,
+          "num_statements": 125,
+          "percent_covered": 92.02453987730061,
+          "percent_covered_display": "92.02",
+          "missing_lines": 8,
+          "excluded_lines": 0,
+          "percent_statements_covered": 93.6,
+          "percent_statements_covered_display": "93.60",
+          "num_branches": 38,
+          "num_partial_branches": 5,
+          "covered_branches": 33,
+          "missing_branches": 5,
+          "percent_branches_covered": 86.84210526315789,
+          "percent_branches_covered_display": "86.84"
+        }
+      },
+      "scripts/validate_foundation.py": {
+        "sha256": "bcfca8f90db237307646155a745d7baae42cf18def9890e7e6ac6f9be360d5fd",
+        "summary": {
+          "covered_lines": 81,
+          "num_statements": 105,
+          "percent_covered": 71.81208053691275,
+          "percent_covered_display": "71.81",
+          "missing_lines": 24,
+          "excluded_lines": 0,
+          "percent_statements_covered": 77.14285714285714,
+          "percent_statements_covered_display": "77.14",
+          "num_branches": 44,
+          "num_partial_branches": 18,
+          "covered_branches": 26,
+          "missing_branches": 18,
+          "percent_branches_covered": 59.09090909090909,
+          "percent_branches_covered_display": "59.09"
+        }
+      },
+      "scripts/validate_links.py": {
+        "sha256": "3227f2d38af8f87ee32b6bd287cac2351b52e86e26c571a8b8944a340b89467b",
+        "summary": {
+          "covered_lines": 115,
+          "num_statements": 126,
+          "percent_covered": 90.10989010989012,
+          "percent_covered_display": "90.11",
+          "missing_lines": 11,
+          "excluded_lines": 0,
+          "percent_statements_covered": 91.26984126984127,
+          "percent_statements_covered_display": "91.27",
+          "num_branches": 56,
+          "num_partial_branches": 7,
+          "covered_branches": 49,
+          "missing_branches": 7,
+          "percent_branches_covered": 87.5,
+          "percent_branches_covered_display": "87.50"
+        }
+      },
+      "scripts/validate_packs.py": {
+        "sha256": "b09170e4f9cb1681c448d288a7b468c9b6a40656e256eba6f33d8bc049646ac9",
+        "summary": {
+          "covered_lines": 82,
+          "num_statements": 95,
+          "percent_covered": 83.20610687022901,
+          "percent_covered_display": "83.21",
+          "missing_lines": 13,
+          "excluded_lines": 0,
+          "percent_statements_covered": 86.3157894736842,
+          "percent_statements_covered_display": "86.32",
+          "num_branches": 36,
+          "num_partial_branches": 9,
+          "covered_branches": 27,
+          "missing_branches": 9,
+          "percent_branches_covered": 75.0,
+          "percent_branches_covered_display": "75.00"
+        }
+      },
+      "scripts/validate_prisma_source_assurance.py": {
+        "sha256": "66ae358e2e197e9a64f034540b70328a6fdca087d682ae07dfaa3a5212361cd4",
+        "summary": {
+          "covered_lines": 61,
+          "num_statements": 61,
+          "percent_covered": 100.0,
+          "percent_covered_display": "100.00",
+          "missing_lines": 0,
+          "excluded_lines": 0,
+          "percent_statements_covered": 100.0,
+          "percent_statements_covered_display": "100.00",
+          "num_branches": 12,
+          "num_partial_branches": 0,
+          "covered_branches": 12,
+          "missing_branches": 0,
+          "percent_branches_covered": 100.0,
+          "percent_branches_covered_display": "100.00"
+        }
+      },
+      "scripts/validate_schemas.py": {
+        "sha256": "b733237a14bdf5db79818da38d8fd7db218b8f21242ebb01de058906fa402364",
+        "summary": {
+          "covered_lines": 49,
+          "num_statements": 50,
+          "percent_covered": 96.875,
+          "percent_covered_display": "96.88",
+          "missing_lines": 1,
+          "excluded_lines": 0,
+          "percent_statements_covered": 98.0,
+          "percent_statements_covered_display": "98.00",
+          "num_branches": 14,
+          "num_partial_branches": 1,
+          "covered_branches": 13,
+          "missing_branches": 1,
+          "percent_branches_covered": 92.85714285714286,
+          "percent_branches_covered_display": "92.86"
+        }
+      },
+      "scripts/verify_legacy_standardflow.py": {
+        "sha256": "cfff788fb14f05151f4870b777ec582d01953b02e1ceae9beb221d1a4aba7f94",
+        "summary": {
+          "covered_lines": 0,
+          "num_statements": 90,
+          "percent_covered": 0.0,
+          "percent_covered_display": "0.00",
+          "missing_lines": 90,
+          "excluded_lines": 0,
+          "percent_statements_covered": 0.0,
+          "percent_statements_covered_display": "0.00",
+          "num_branches": 28,
+          "num_partial_branches": 0,
+          "covered_branches": 0,
+          "missing_branches": 28,
+          "percent_branches_covered": 0.0,
+          "percent_branches_covered_display": "0.00"
+        }
+      },
+      "simple_extract.py": {
+        "sha256": "8c23d675ae7ba8bf0ea3f3af0953bb5882fedd5e6f5210fd10823ad806e8bf64",
+        "summary": {
+          "covered_lines": 0,
+          "num_statements": 18,
+          "percent_covered": 0.0,
+          "percent_covered_display": "0.00",
+          "missing_lines": 18,
+          "excluded_lines": 0,
+          "percent_statements_covered": 0.0,
+          "percent_statements_covered_display": "0.00",
+          "num_branches": 6,
+          "num_partial_branches": 0,
+          "covered_branches": 0,
+          "missing_branches": 6,
+          "percent_branches_covered": 0.0,
+          "percent_branches_covered_display": "0.00"
+        }
+      },
+      "utils/__init__.py": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "summary": {
+          "covered_lines": 0,
+          "num_statements": 0,
+          "percent_covered": 100.0,
+          "percent_covered_display": "100.00",
+          "missing_lines": 0,
+          "excluded_lines": 0,
+          "percent_statements_covered": 100.0,
+          "percent_statements_covered_display": "100.00",
+          "num_branches": 0,
+          "num_partial_branches": 0,
+          "covered_branches": 0,
+          "missing_branches": 0,
+          "percent_branches_covered": 100.0,
+          "percent_branches_covered_display": "100.00"
+        }
+      },
+      "utils/docx_utils.py": {
+        "sha256": "c2694a66ca8878065de9ef498fe18ce7eade08947fdc0ffb3e13e6349b1f9a91",
+        "summary": {
+          "covered_lines": 4,
+          "num_statements": 4,
+          "percent_covered": 100.0,
+          "percent_covered_display": "100.00",
+          "missing_lines": 0,
+          "excluded_lines": 0,
+          "percent_statements_covered": 100.0,
+          "percent_statements_covered_display": "100.00",
+          "num_branches": 0,
+          "num_partial_branches": 0,
+          "covered_branches": 0,
+          "missing_branches": 0,
+          "percent_branches_covered": 100.0,
+          "percent_branches_covered_display": "100.00"
+        }
+      }
+    },
+    "configuration_sha256": "e4ba87f4769b1744d96912c44fbca74c33f71526c99366ed059e9a38d3d29f77",
+    "zero_coverage_modules_retained": [
+      "simple_extract.py",
+      "scripts/verify_legacy_standardflow.py"
+    ]
+  },
+  "rust": {
+    "scope": "Workspace source files with cargo-llvm-cov; includes tests embedded in src, excludes integration-test files. Stable Rust does not measure branch coverage in this profile.",
+    "totals": {
+      "branches": {
+        "count": 0,
+        "covered": 0,
+        "notcovered": 0,
+        "percent": 0
+      },
+      "functions": {
+        "count": 311,
+        "covered": 246,
+        "percent": 79.09967845659163
+      },
+      "instantiations": {
+        "count": 662,
+        "covered": 415,
+        "percent": 62.688821752265866
+      },
+      "lines": {
+        "count": 3430,
+        "covered": 2742,
+        "percent": 79.94169096209912
+      },
+      "mcdc": {
+        "count": 0,
+        "covered": 0,
+        "notcovered": 0,
+        "percent": 0
+      },
+      "regions": {
+        "count": 4698,
+        "covered": 3814,
+        "notcovered": 884,
+        "percent": 81.18348233290762
+      }
+    },
+    "files": {
+      "crates/standardflow-artifacts/src/limits.rs": {
+        "sha256": "266e9e57ae232a236eecb5ca06659ec2c76b1f92fad603e2ffa4a71dc19c79cc",
+        "summary": {
+          "branches": {
+            "count": 0,
+            "covered": 0,
+            "notcovered": 0,
+            "percent": 0.0
+          },
+          "mcdc": {
+            "count": 0,
+            "covered": 0,
+            "notcovered": 0,
+            "percent": 0.0
+          },
+          "functions": {
+            "count": 2,
+            "covered": 2,
+            "percent": 100.0
+          },
+          "instantiations": {
+            "count": 4,
+            "covered": 4,
+            "percent": 100.0
+          },
+          "lines": {
+            "count": 9,
+            "covered": 9,
+            "percent": 100.0
+          },
+          "regions": {
+            "count": 14,
+            "covered": 12,
+            "notcovered": 2,
+            "percent": 85.71428571428571
+          }
+        }
+      },
+      "crates/standardflow-artifacts/src/prisma.rs": {
+        "sha256": "1188e4462b4d704a56bbe0a16543307cf041ba864e88f8d9061f3d79d34c86e0",
+        "summary": {
+          "branches": {
+            "count": 0,
+            "covered": 0,
+            "notcovered": 0,
+            "percent": 0.0
+          },
+          "mcdc": {
+            "count": 0,
+            "covered": 0,
+            "notcovered": 0,
+            "percent": 0.0
+          },
+          "functions": {
+            "count": 28,
+            "covered": 26,
+            "percent": 92.85714285714286
+          },
+          "instantiations": {
+            "count": 69,
+            "covered": 53,
+            "percent": 76.81159420289855
+          },
+          "lines": {
+            "count": 602,
+            "covered": 525,
+            "percent": 87.20930232558139
+          },
+          "regions": {
+            "count": 601,
+            "covered": 535,
+            "notcovered": 66,
+            "percent": 89.01830282861897
+          }
+        }
+      },
+      "crates/standardflow-artifacts/src/recipe.rs": {
+        "sha256": "0456ebf5d463a3718550bcd9234964a9e165805838d63f5ceec6102c16fff59f",
+        "summary": {
+          "branches": {
+            "count": 0,
+            "covered": 0,
+            "notcovered": 0,
+            "percent": 0.0
+          },
+          "mcdc": {
+            "count": 0,
+            "covered": 0,
+            "notcovered": 0,
+            "percent": 0.0
+          },
+          "functions": {
+            "count": 53,
+            "covered": 47,
+            "percent": 88.67924528301889
+          },
+          "instantiations": {
+            "count": 105,
+            "covered": 92,
+            "percent": 87.61904761904762
+          },
+          "lines": {
+            "count": 723,
+            "covered": 622,
+            "percent": 86.03042876901799
+          },
+          "regions": {
+            "count": 957,
+            "covered": 851,
+            "notcovered": 106,
+            "percent": 88.92371995820272
+          }
+        }
+      },
+      "crates/standardflow-artifacts/src/render.rs": {
+        "sha256": "5b66618b293550c67e28af4331c08eccba0a1346c558903af8b92970efeecdaf",
+        "summary": {
+          "branches": {
+            "count": 0,
+            "covered": 0,
+            "notcovered": 0,
+            "percent": 0.0
+          },
+          "mcdc": {
+            "count": 0,
+            "covered": 0,
+            "notcovered": 0,
+            "percent": 0.0
+          },
+          "functions": {
+            "count": 20,
+            "covered": 18,
+            "percent": 90.0
+          },
+          "instantiations": {
+            "count": 39,
+            "covered": 20,
+            "percent": 51.28205128205128
+          },
+          "lines": {
+            "count": 185,
+            "covered": 161,
+            "percent": 87.02702702702705
+          },
+          "regions": {
+            "count": 311,
+            "covered": 248,
+            "notcovered": 63,
+            "percent": 79.7427652733119
+          }
+        }
+      },
+      "crates/standardflow-artifacts/src/scene.rs": {
+        "sha256": "48351a82b4ff0f4762f7a41d96088d225fb284d589e1e3d8d590eb79999c6628",
+        "summary": {
+          "branches": {
+            "count": 0,
+            "covered": 0,
+            "notcovered": 0,
+            "percent": 0.0
+          },
+          "mcdc": {
+            "count": 0,
+            "covered": 0,
+            "notcovered": 0,
+            "percent": 0.0
+          },
+          "functions": {
+            "count": 27,
+            "covered": 26,
+            "percent": 96.29629629629629
+          },
+          "instantiations": {
+            "count": 53,
+            "covered": 44,
+            "percent": 83.01886792452831
+          },
+          "lines": {
+            "count": 311,
+            "covered": 222,
+            "percent": 71.38263665594855
+          },
+          "regions": {
+            "count": 359,
+            "covered": 304,
+            "notcovered": 55,
+            "percent": 84.67966573816156
+          }
+        }
+      },
+      "crates/standardflow-cli/src/main.rs": {
+        "sha256": "7e54f4a7b6b796f69ac1da08b698aeb6b25f821452e005d8a9c94698822fba75",
+        "summary": {
+          "branches": {
+            "count": 0,
+            "covered": 0,
+            "notcovered": 0,
+            "percent": 0.0
+          },
+          "mcdc": {
+            "count": 0,
+            "covered": 0,
+            "notcovered": 0,
+            "percent": 0.0
+          },
+          "functions": {
+            "count": 57,
+            "covered": 30,
+            "percent": 52.63157894736842
+          },
+          "instantiations": {
+            "count": 143,
+            "covered": 39,
+            "percent": 27.27272727272727
+          },
+          "lines": {
+            "count": 413,
+            "covered": 278,
+            "percent": 67.31234866828088
+          },
+          "regions": {
+            "count": 709,
+            "covered": 433,
+            "notcovered": 276,
+            "percent": 61.0719322990127
+          }
+        }
+      },
+      "crates/standardflow-core/src/canonical.rs": {
+        "sha256": "8f7d356ead2ad07914bb23617d9169a82a0539ae36cb0b093acc79e68bcad874",
+        "summary": {
+          "branches": {
+            "count": 0,
+            "covered": 0,
+            "notcovered": 0,
+            "percent": 0.0
+          },
+          "mcdc": {
+            "count": 0,
+            "covered": 0,
+            "notcovered": 0,
+            "percent": 0.0
+          },
+          "functions": {
+            "count": 9,
+            "covered": 9,
+            "percent": 100.0
+          },
+          "instantiations": {
+            "count": 19,
+            "covered": 18,
+            "percent": 94.73684210526316
+          },
+          "lines": {
+            "count": 105,
+            "covered": 102,
+            "percent": 97.14285714285714
+          },
+          "regions": {
+            "count": 195,
+            "covered": 188,
+            "notcovered": 7,
+            "percent": 96.41025641025642
+          }
+        }
+      },
+      "crates/standardflow-core/src/diagnostic.rs": {
+        "sha256": "ce80618212fac664cbdf4166117c79a4ee178d76cdd366d3fe49f9c6b79c38d3",
+        "summary": {
+          "branches": {
+            "count": 0,
+            "covered": 0,
+            "notcovered": 0,
+            "percent": 0.0
+          },
+          "mcdc": {
+            "count": 0,
+            "covered": 0,
+            "notcovered": 0,
+            "percent": 0.0
+          },
+          "functions": {
+            "count": 9,
+            "covered": 9,
+            "percent": 100.0
+          },
+          "instantiations": {
+            "count": 26,
+            "covered": 14,
+            "percent": 53.84615384615385
+          },
+          "lines": {
+            "count": 44,
+            "covered": 44,
+            "percent": 100.0
+          },
+          "regions": {
+            "count": 39,
+            "covered": 39,
+            "notcovered": 0,
+            "percent": 100.0
+          }
+        }
+      },
+      "crates/standardflow-core/src/evidence.rs": {
+        "sha256": "e7193a6af3be9caf3885d72f80ebd23af6b222735e1950c358a9910a415862b9",
+        "summary": {
+          "branches": {
+            "count": 0,
+            "covered": 0,
+            "notcovered": 0,
+            "percent": 0.0
+          },
+          "mcdc": {
+            "count": 0,
+            "covered": 0,
+            "notcovered": 0,
+            "percent": 0.0
+          },
+          "functions": {
+            "count": 1,
+            "covered": 0,
+            "percent": 0.0
+          },
+          "instantiations": {
+            "count": 1,
+            "covered": 0,
+            "percent": 0.0
+          },
+          "lines": {
+            "count": 3,
+            "covered": 0,
+            "percent": 0.0
+          },
+          "regions": {
+            "count": 3,
+            "covered": 0,
+            "notcovered": 3,
+            "percent": 0.0
+          }
+        }
+      },
+      "crates/standardflow-core/src/lock.rs": {
+        "sha256": "4e60c0f2af0ad5109d4a3059be5144585517f3ac79488dffb69a2747a86a39d9",
+        "summary": {
+          "branches": {
+            "count": 0,
+            "covered": 0,
+            "notcovered": 0,
+            "percent": 0.0
+          },
+          "mcdc": {
+            "count": 0,
+            "covered": 0,
+            "notcovered": 0,
+            "percent": 0.0
+          },
+          "functions": {
+            "count": 44,
+            "covered": 27,
+            "percent": 61.36363636363637
+          },
+          "instantiations": {
+            "count": 77,
+            "covered": 37,
+            "percent": 48.051948051948045
+          },
+          "lines": {
+            "count": 444,
+            "covered": 354,
+            "percent": 79.72972972972973
+          },
+          "regions": {
+            "count": 757,
+            "covered": 606,
+            "notcovered": 151,
+            "percent": 80.05284015852048
+          }
+        }
+      },
+      "crates/standardflow-core/src/pack.rs": {
+        "sha256": "116f87d45906442979943063ab17c7af1278f1c609c35384e0a811b7021ef69b",
+        "summary": {
+          "branches": {
+            "count": 0,
+            "covered": 0,
+            "notcovered": 0,
+            "percent": 0.0
+          },
+          "mcdc": {
+            "count": 0,
+            "covered": 0,
+            "notcovered": 0,
+            "percent": 0.0
+          },
+          "functions": {
+            "count": 61,
+            "covered": 52,
+            "percent": 85.24590163934425
+          },
+          "instantiations": {
+            "count": 126,
+            "covered": 94,
+            "percent": 74.60317460317461
+          },
+          "lines": {
+            "count": 591,
+            "covered": 425,
+            "percent": 71.91201353637902
+          },
+          "regions": {
+            "count": 753,
+            "covered": 598,
+            "notcovered": 155,
+            "percent": 79.4156706507304
+          }
+        }
+      }
+    }
+  },
+  "api": {
+    "scope": "api/server.js and api/cors-options.js; static generator and browser frontend not measured by this component",
+    "lcov_totals": {
+      "FNF": 10,
+      "FNH": 9,
+      "BRF": 37,
+      "BRH": 35,
+      "LH": 128,
+      "LF": 129
+    },
+    "source_sha256": {
+      "api/server.js": "b87e4cdf7c8f4c30046a132c62404e163d26d6bebbcdd27909d2c1de2415f4f8",
+      "api/cors-options.js": "ddf811726d39d495634c7c0d53c4662d75643c05e5029037b1491370e51fb07e",
+      "api/test/corpus.test.js": "0a899963ff57418101118ac6192ba1cf772f6754e9a2cbfd0dc42e870eb22efd",
+      "api/test/cors.test.js": "f3d44de9bffb742154d69034288fde375dbddcb932a493aa768946279c681b9d"
+    }
+  },
+  "floors_percent": {
+    "python_combined": 75,
+    "rust_lines": 79,
+    "api_lines": 98,
+    "api_branches": 90
+  },
+  "reports": {
+    "python.xml": {
+      "sha256": "6fe56a1f7682e6caca37db17aa483bdf922c4eecbbd11b42206bba0027baed4a",
+      "bytes": 73918
+    },
+    "python.json": {
+      "sha256": "6ac9d3ae6514ae0f791362ece7c1e0b1332b2593a4a39b15ac235c1e51c4ed19",
+      "bytes": 121951
+    },
+    "rust.lcov": {
+      "sha256": "459c6b23de3fccd0b7b2fc144be10426658f7351ba2ef40dc9da8fa070fccd3e",
+      "bytes": 148444
+    },
+    "rust-summary.json": {
+      "sha256": "691a66b7cef2cfc08b94520605cce3b58b15c25f0437ccd01dcf0d1f314e5f44",
+      "bytes": 6212
+    },
+    "api.lcov": {
+      "sha256": "653ae9af823799d6a51ab0b0194f12ec3af560d45d5bfed6547410b81a48281c",
+      "bytes": 2271
+    }
+  },
+  "limitations": [
+    "This is code execution coverage, not source-rights, scientific, independent accessibility or security certification.",
+    "Tested local source identities are independent of subsequent hosted upload/status and receiving-main acceptance."
+  ]
+}

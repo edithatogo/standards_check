@@ -1,0 +1,27 @@
+codecov:
+  require_ci_to_pass: true
+  notify:
+    after_n_builds: 3
+
+coverage:
+  status:
+    project:
+      default:
+        target: auto
+        threshold: 0%
+    patch:
+      default:
+        target: 80%
+
+flag_management:
+  default_rules:
+    carryforward: false
+  individual_flags:
+    - name: python
+      paths: ["scripts/", "utils/", "extract*.py", "simple_extract.py"]
+    - name: rust
+      paths: ["crates/"]
+    - name: api
+      paths: ["api/server.js", "api/cors-options.js"]
+
+comment: false

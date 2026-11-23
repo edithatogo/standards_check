@@ -77,10 +77,11 @@ app.get('/api/checklists', async (req, res) => {
 app.get('/api/checklists/:id', async (req, res) => {
     try {
         const checklistId = req.params.id;
+        if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(checklistId)) {
+            return res.status(400).json({ error: 'Invalid checklist ID' });
+        }
         const findChecklist = async (dir) => {
-            // Prevent directory traversal attacks
-            const safeChecklistId = path.basename(checklistId);
-            const targetPath = path.join(dir, `${safeChecklistId}.md`);
+            const targetPath = path.join(dir, `${checklistId}.md`);
             try {
                 await fs.access(targetPath);
                 return targetPath;

@@ -73,3 +73,7 @@ Run the origin and preflight regression tests with `npm test` from `api/` (Node.
 
 *   `GET /api/checklists`: Returns a list of all available checklists.
 *   `GET /api/checklists/:id`: Returns a single checklist by its ID.
+
+IDs use lowercase letters, digits and single hyphen separators, matching the corpus filenames.
+Malformed IDs (including encoded path separators) return `400`; an unknown valid ID returns
+`404`. Read failures return `500` without exposing filesystem details.

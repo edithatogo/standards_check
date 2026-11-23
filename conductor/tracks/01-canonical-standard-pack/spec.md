@@ -20,5 +20,12 @@ Implement the first executable Canonical Standard Pack vertical slice: strict Ru
 4. Canonical bytes and SHA-256 are independent of JSON object order.
 5. Lockfiles are deterministic, exclude themselves, reject symlinks and detect mutation.
 6. The CLI exposes validation, canonicalization, digest and lock operations with JSON output.
-7. The PRISMA pack contains 27 unique items and exactly one unresolved-transcription warning.
+7. The live PRISMA pack contains all 42 individually numbered source-reconciled items and no
+   unresolved-transcription warning. The original 27-item pack remains an immutable migration
+   fixture; separate synthetic imported-pack tests retain the unverified warning contract.
 8. Rust unit, property, CLI, cross-platform and generated-drift checks pass before promotion.
+
+The 42-item source-text acceptance supersedes the original PR #60 27-item assertion through
+PR #83 and the receiving repair in PR #86. [Current source evidence](source-reconciliation-20261123.md)
+retains exact revisions and distinguishes transcription from normalized interpretation, migration
+semantic parity and independent methodological/accessibility acceptance.

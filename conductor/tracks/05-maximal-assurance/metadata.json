@@ -1,0 +1,56 @@
+{
+  "schema_version": "dev.standardflow.conductor-track.v1",
+  "track_id": "05",
+  "slug": "05-maximal-assurance",
+  "title": "Maximal assurance, release and external validation",
+  "status": "in_progress",
+  "implementation_state": "source_implemented",
+  "evidence_level": "fixture_proven",
+  "evidence_level_scope": "Bounded local software-contract and policy qualification; new hosted acceptance remains pending",
+  "updated": "2026-11-23",
+  "dependencies": [
+    "00-platform-foundation",
+    "01-canonical-standard-pack",
+    "02-semantic-diagram-prisma",
+    "03-standardflow-import"
+  ],
+  "later_release_dependency": "Track 04 research ecosystem contracts",
+  "base_branch": "main",
+  "local_candidate_base": "ba6b0888806e84276e5f54afc07e4e555220c4ea",
+  "candidate_scope": "Modified inputs are bound by the individual local receipts, not by the base commit alone",
+  "verification_receipt": "verification.md",
+  "receipts": [
+    "rust-qualification-20261123.json",
+    "boundary-mutation-20261123.md",
+    "managed-file-drift-20261123.json",
+    "coverage-20261123.json"
+  ],
+  "coverage_floors_percent": {
+    "python_combined": 75,
+    "rust_lines": 79,
+    "api_lines": 98,
+    "api_branches": 90
+  },
+  "python_final_measurement": {
+    "combined_percent": 75.81667479278401,
+    "lines_covered": 1174,
+    "lines_total": 1507,
+    "branches_covered": 381,
+    "branches_total": 544,
+    "production_modules": 24
+  },
+  "hosted_assurance_acceptance": "pending",
+  "codecov_operational_acceptance": "pending",
+  "solo_maintainer_ruleset": "pending_application_and_readback",
+  "remaining_evidence_gates": [
+    "new published-head and receiving-main assurance checks",
+    "actual Codecov OIDC upload and commit-status observation",
+    "solo-maintainer ruleset enforcement and recovery receipt",
+    "remaining managed-policy/profile and dependency updater qualification",
+    "executed offline-security receipt",
+    "legacy-to-Rust semantic parity and optional interactive-kernel qualification",
+    "normalized interpretations, item-level rights and held guideline admission",
+    "Track 04 ecosystem contracts and release engineering",
+    "independent methodology, usability/accessibility and publication acceptance"
+  ]
+}

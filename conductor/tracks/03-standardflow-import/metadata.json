@@ -17,7 +17,6 @@
   "base_branch": "main",
   "source_retirement_authorization": "User explicitly requested export followed by private archival on 2026-11-22.",
   "remaining_evidence_gates": [
-    "receiving-main execution after host dependency admission (PR #98)",
     "offline AI-security execution",
     "legacy-to-Rust semantic parity",
     "legacy item-level rights and provenance",
@@ -42,8 +41,8 @@
     "evidence_origin": "Independent GitHub repository API read by the integrator after the owner applied the authorized settings."
   },
   "canonical_content_promotion": false,
-  "latest_verified_receiving_main": "2b0c579454a1dd469cd12cfb9538d23c96785370",
-  "latest_verified_receiving_run": "https://github.com/edithatogo/standards_check/actions/runs/45070791156",
+  "latest_verified_receiving_main": "ba6b0888806e84276e5f54afc07e4e555220c4ea",
+  "latest_verified_receiving_run": "https://github.com/edithatogo/standards_check/actions/runs/45085224983",
   "source_issue_transfers": {
     "12": 29,
     "13": 30,
@@ -64,8 +63,8 @@
       "preserved_export_tip_count": 9
     }
   },
-  "latest_verified_receiving_job": "https://github.com/edithatogo/standards_check/actions/runs/45070791156/job/137357038355",
-  "latest_verified_receiving_artifact": "https://github.com/edithatogo/standards_check/actions/runs/45070791156/artifacts/14773685812",
+  "latest_verified_receiving_job": "https://github.com/edithatogo/standards_check/actions/runs/45085224983/job/137402195300",
+  "latest_verified_receiving_artifact": "https://github.com/edithatogo/standards_check/actions/runs/45085224983/artifacts/14778918783",
   "active_registry_retirement": {
     "status": "merged",
     "pull_request": "https://github.com/edithatogo/repository-standards/pull/172",
@@ -96,9 +95,17 @@
     "full_local_tox_passed": false,
     "required_command_evidence": "Thirteen local environment checks passed. Existing current-input hosted coverage and docs jobs cover the remaining required commands; the full local attempt did not pass.",
     "qualification_receipt": "verification.md#voiage-downstream-merge-and-command-evidence",
-    "post_merge_ci_acceptance_claimed": false
+    "post_merge_ci_acceptance_claimed": true,
+    "post_merge_ci": {
+      "commit": "a921d6471822eaac7fbc22f507760bd943ba9f6a",
+      "success": 52,
+      "expected_skips": 3,
+      "failed": 0,
+      "pending": 0,
+      "receipt": "https://github.com/edithatogo/voiage/commit/a921d6471822eaac7fbc22f507760bd943ba9f6a/checks"
+    }
   },
-  "latest_verified_receiving_main_scope": "Historical actual-main runtime acceptance before PR #98 host dependency admission. Execution at the new receiving main remains separately pending.",
+  "latest_verified_receiving_main_scope": "Post-retirement main with the admitted maintained host profile: provenance, source/receiving parity, historical container and default HTTP startup all passed. All eight ordinary check records succeeded; offline security remained queued.",
   "current_host_dependency_admission": {
     "status": "admitted_with_reviewed_head_qualification",
     "pull_request": "https://github.com/edithatogo/standards_check/pull/98",
@@ -116,9 +123,21 @@
     "reviewed_head_workflow": "https://github.com/edithatogo/standards_check/actions/runs/45082189553",
     "ordinary_checks_passed": 9,
     "offline_checks_queued": 2,
-    "receiving_main_execution": "pending_separate_receipt",
+    "receiving_main_execution": "passed_at_admission_merge_and_retirement_merge",
     "ipykernel_6_31_0_admitted": false,
-    "issue_94_status": "open_for_optional_kernel_qualification_and_updater_observation",
-    "interactive_kernel_parity_established": false
+    "issue_94_status": "open_for_optional_kernel_qualification",
+    "interactive_kernel_parity_established": false,
+    "receiving_main_workflows": [
+      "https://github.com/edithatogo/standards_check/actions/runs/45084073642",
+      "https://github.com/edithatogo/standards_check/actions/runs/45085224983"
+    ],
+    "receiving_updater_discovery": "observed_in_dashboard_76_after_merge"
+  },
+  "historical_pre_host_admission_acceptance": {
+    "latest_verified_receiving_main": "2b0c579454a1dd469cd12cfb9538d23c96785370",
+    "latest_verified_receiving_run": "https://github.com/edithatogo/standards_check/actions/runs/45070791156",
+    "latest_verified_receiving_job": "https://github.com/edithatogo/standards_check/actions/runs/45070791156/job/137357038355",
+    "latest_verified_receiving_artifact": "https://github.com/edithatogo/standards_check/actions/runs/45070791156/artifacts/14773685812",
+    "latest_verified_receiving_main_scope": "Historical actual-main runtime acceptance before PR #98 host dependency admission. Execution at the new receiving main remains separately pending."
   }
 }

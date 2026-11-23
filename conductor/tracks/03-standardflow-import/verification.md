@@ -232,8 +232,14 @@ and jsonschema 4.26.0 in the maintained root host profile. Reviewed head
 `08d9ffef20675efc80484d108b32f1d1ee759921` passed its
 [legacy workflow 45082189553](https://github.com/edithatogo/standards_check/actions/runs/45082189553);
 all nine ordinary checks succeeded and two offline checks remained queued.
-Receiving-main execution after this admission is separately pending. The earlier
-`2b0c5794` checks above retain their original revision and dependency scope.
+Receiving-main execution subsequently passed at the admission merge in
+[run 45084073642](https://github.com/edithatogo/standards_check/actions/runs/45084073642)
+and retirement main `ba6b0888806e84276e5f54afc07e4e555220c4ea` in
+[run 45085224983](https://github.com/edithatogo/standards_check/actions/runs/45085224983).
+Job `137402195300` passed provenance, source/receiving parity, historical container tests
+and default HTTP startup; artifact `14778918783` retains the parity receipt. The latter
+main has eight successful ordinary checks; its offline-security job remains queued.
+The earlier `2b0c5794` checks above retain their original revision and dependency scope.
 
 The [qualification receipt](../../../docs/migration/standardflow/dependency-qualification-20261123.json)
 binds the maintained profile to SHA-256
@@ -301,3 +307,11 @@ methodology and accessibility qualification remain open. See the
 [retirement record](../../../docs/migration/standardflow/retirement.md) for recovery
 and the [source inventory](../../../docs/migration/standardflow/source-inventory.json)
 for the preserved historical observations.
+
+## Completed downstream main checks
+
+Voiage main `a921d6471822eaac7fbc22f507760bd943ba9f6a` subsequently completed
+52 successful checks and three expected skips, with no failures or pending checks.
+[The commit checks](https://github.com/edithatogo/voiage/commit/a921d6471822eaac7fbc22f507760bd943ba9f6a/checks)
+are separate from the prior PR and local command receipts; the full local tox attempt
+above remains recorded as unsuccessful.
