@@ -32,6 +32,18 @@ class HtmlTests(unittest.TestCase):
         self.assertEqual(rows[1]['inherited_cells'], ['table/1/r1/c1'])
         self.assertEqual(rows[1]['cells'][0]['column'], 2)
 
+    def test_comments_do_not_break_implicit_row_groups(self):
+        for span in ('2', '0'):
+            raw = f'<table><tr><th rowspan="{span}">Topic</th><td>1</td></tr><!-- comment --><tr><td>2</td></tr></table>'.encode()
+            _, report = html_structure(raw)
+            rows = report['blocks'][0]['rows']
+            self.assertEqual(rows[1]['inherited_cells'], ['table/1/r1/c1'])
+            self.assertEqual(rows[1]['cells'][0]['column'], 2)
+
+    def test_heading_text_boundaries(self):
+        _, report = html_structure(b'<table><tr><td><h3>First.</h3><h4>Second.</h4></td></tr></table>')
+        self.assertEqual(report['blocks'][0]['rows'][0]['cells'][0]['text_sha256'], fingerprint('First. Second.'))
+
     def test_incomplete_cell_never_gets_an_exact_fingerprint(self):
         text, report = html_structure(b'<table><tr><td>Literal<script>not a requirement</script><img src="external.png"></td></tr></table>')
         row = report['blocks'][0]['rows'][0]

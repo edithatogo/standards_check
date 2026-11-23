@@ -249,7 +249,8 @@ def html_structure(raw: bytes) -> tuple[str, dict]:
         issues.add("rendered_visibility_not_qualified")
     skip = {"script", "style", "template", "noscript", "img", "input", "select", "textarea",
             "svg", "math", "iframe", "object", "video", "audio"}
-    blocks = {"p", "div", "li", "ol", "ul", "br", "dl", "dt", "dd", "blockquote", "pre", "hr"}
+    blocks = {"p", "div", "li", "ol", "ul", "br", "dl", "dt", "dd", "blockquote", "pre", "hr",
+              "h1", "h2", "h3", "h4", "h5", "h6"}
     count = 0
 
     def content(node) -> tuple[str, bool]:
@@ -277,7 +278,7 @@ def html_structure(raw: bytes) -> tuple[str, dict]:
     for number, table in enumerate(tables, 1):
         anchor = f"table/{number}"
         groups = []
-        for tag, nodes in groupby(table, key=lambda node: node.tag):
+        for tag, nodes in groupby((node for node in table if isinstance(node.tag, str)), key=lambda node: node.tag):
             if tag == "tr":
                 groups.append(("implicit_tbody", list(nodes)))
             elif tag in {"thead", "tbody", "tfoot"}:
