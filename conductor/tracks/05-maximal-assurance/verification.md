@@ -194,3 +194,37 @@ reproducibility, provenance/signatures, downstream cutover/rollback and independ
 methodology/accessibility/publication open. Optional kernels (#94/#101), held-source identity
 rejection (#102) and bounded PRISMA parity (#103) retain their recorded limits. Track status
 remains in progress; accepted implementation is not completion of the whole programme.
+
+## Repository health, accessibility and advisory supply-chain reconciliation — 23 November 2026
+
+At [main `f4d8b3e`](https://github.com/edithatogo/standards_check/commit/f4d8b3e159e442950bcd888b611121d065197501),
+[RepoHealth run 45121828831](https://github.com/edithatogo/standards_check/actions/runs/45121828831)
+reported **93/100 (A)**: CI/CD 15/15, Testing 16/20, Documentation 13/15 and Security 9/10.
+Its test-framework recommendation is not sufficient grounds to add a second runner or
+uninformative configuration: Rust, Python and Node tests already run under `Assurance`.
+ALint passed with 74 nonblocking notices (one missing code of conduct; the others
+missing terminal newlines). Preserve immutable original/archival source bytes rather
+than mass-normalising them to chase a hygiene score. The separate actionlint/Zizmor
+workflow-policy job passed; Zizmor reported **zero active findings and 39 suppressed**,
+not zero underlying diagnostic observations. Suppression categorisation needs an
+explicit audit if it becomes a security gate.
+
+[OpenSSF Scorecard run 45121828713](https://github.com/edithatogo/standards_check/actions/runs/45121828713)
+published [SARIF artifact 14794255855](https://github.com/edithatogo/standards_check/actions/runs/45121828713/artifacts/14794255855)
+with actionable advisory **RUSTSEC-2026-0486**: `Cargo.lock` held `rustix 1.1.4`,
+fixed upstream in **1.1.6**. This increment updates only the exact `rustix` lock entry
+using the published `1.1.6` registry checksum; hosted `cargo --locked` verification and
+a subsequent Scorecard rescan are required before declaring the finding resolved.
+Other diagnostic checks: PinnedDependencies 8 (pip install commands without hashes);
+SAST 7 (23/30 observed historical commits); Fuzzing 0 (no detected recognised integration);
+BranchProtection 4 / CodeReview 0 (deliberate zero-human-approval solo-maintainer policy);
+BestPractices 0 (self-attestation not attempted). These scores are not release gates.
+Any full pip hash migration or native fuzzing programme requires a focused dependency-
+and use-case-qualified increment; none is inferred from the current property/mutation tests.
+
+This commit adds a repository-specific accessibility statement, reporting template,
+community conduct and support routes, an introductory run example and local credential
+ignores. It does not claim independent WCAG compliance, release provenance, external
+methodology acceptance or rights to redistribute third-party reporting guidelines.
+See [quality frontier #31](https://github.com/edithatogo/standards_check/issues/31)
+and [security #30](https://github.com/edithatogo/standards_check/issues/30).

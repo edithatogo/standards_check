@@ -1,6 +1,6 @@
 # Plan: Platform foundation
 
-Current status: **in progress**. Implementation: **source implemented and foundation merged**.
+Current status: **implementation complete (bounded)**. Implementation: **source implemented and foundation merged**.
 The reviewed foundation at `d8cd1f2c54934ee15400d5be047c76977adfa29b` has
 **compiler-verified** hosted evidence, retained in [evidence.json](evidence.json).
 PR #59 merged as `a8bfec446d219b770e76a23b44d1f08d9e00465d`.
@@ -33,7 +33,12 @@ These receipts apply to their recorded commit, not automatically to later repair
 ## Phase 4: Repository standards and next tracks
 
 - [x] Add immutable-pinned foundation CI and network-free contract checks.
-- [ ] Reconcile the repository profile with `edithatogo/repository-standards`.
+- [x] Reconcile the registered `node`/`baseline` requirements through the existing
+  semantic-conflict review in [#30](https://github.com/edithatogo/standards_check/issues/30):
+  required dependency review and maintained inventories passed on accepted main
+  `dd3f995`. Keep specialized Python/Rust/API CI and OIDC checks. Exact
+  reusable-call and template-byte equality remain **unclaimed** and are not
+  prerequisites for the accepted local controls.
 - [x] Record the implemented Track 01 and Track 02 artefacts in the Conductor registry.
 - [x] Record hosted acceptance at PR #60 revision `bfe2255fda85b891c2f68044676c0b777d92c38c`.
 
@@ -42,7 +47,7 @@ prove legacy migration parity or establish publication and external acceptance.
 
 See [brownfield-audit.md](brownfield-audit.md) for classified authority and migration debt. Exact-head PR #79 CI verified the inventory and context checks; receiving-main CI is independently tracked in the dated reconciliation.
 
-The [19 November 2026 quality-frontier reconciliation](../../quality-frontier-20261119.md) records issue #29-31 gates and exact-head evidence. Upstream profile alignment is **not** yet accepted.
+The [19 November 2026 quality-frontier reconciliation](../../quality-frontier-20261119.md) records issue #29-31 gates and exact-head evidence. The bounded registered-policy specialization was accepted and documented through PR #108; exact upstream template delivery remains unclaimed.
 
 ## Ponytail review — 22 November 2026
 
