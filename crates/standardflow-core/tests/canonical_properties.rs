@@ -5,7 +5,7 @@
 use proptest::prelude::*;
 use proptest::test_runner::FileFailurePersistence;
 use serde_json::{Map, Value};
-use standardflow_core::{CanonicalError, PackId, canonical_json, sha256_hex};
+use standardflow_core::{CanonicalError, PackId, canonical_json, parse_pack, sha256_hex};
 
 fn integer_json() -> BoxedStrategy<Value> {
     let leaf = prop_oneof![
@@ -74,6 +74,22 @@ proptest! {
         let result = canonical_json(&Value::Object(object));
         let expected = format!("/{prefix}~0~1{suffix}/{index}");
         prop_assert!(matches!(result, Err(CanonicalError::FloatingPoint { path }) if path == expected), "float diagnostic path must match the generated position");
+    }
+
+    #[test]
+    fn untrusted_or_mutated_pack_bytes_never_panic(
+        bytes in prop::collection::vec(any::<u8>(), 0..4096),
+        mutation_position in any::<usize>(),
+        replacement in any::<u8>(),
+    ) {
+        // Bounded arbitrary bytes plus one-byte mutations of an actual valid
+        // pack exercise both the JSON boundary and deeper semantic validation.
+        // This is property-based input mutation, not an OpenSSF-recognised fuzzer.
+        let _ = parse_pack(&bytes);
+        let mut known = include_bytes!("../../../packs/org.prisma/prisma/2020/pack.json").to_vec();
+        let index = mutation_position % known.len();
+        known[index] = replacement;
+        let _ = parse_pack(&known);
     }
 
     #[test]
