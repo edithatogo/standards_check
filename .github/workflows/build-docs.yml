@@ -68,16 +68,25 @@ jobs:
         uses: pandoc/actions/setup@86321b6dd4675f5014c611e05088e10d4939e09e # v1
         with:
           version: "3.9.0.2"
-      - name: Install TeX
+      - name: Install yq for the HTML index
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends texlive-xetex texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
+          sudo apt-get install -y --no-install-recommends yq
       - name: Setup Typst
         uses: typst-community/setup-typst@00ad6338f0b34724ea002136bfb701a6c18585b0 # v5.3.2
         with:
           typst-version: "0.15.1"
       - name: Build documents
         run: bash scripts/build_pandoc.sh
+      - name: Generate HTML index
+        run: bash scripts/generate_html_index.sh
+      - name: Retain the built HTML for the separate deployment job
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: html-site
+          path: html/
+          if-no-files-found: error
+          retention-days: 7
       - name: Upload PDF artifacts
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
@@ -118,27 +127,13 @@ jobs:
         with:
           egress-policy: audit
 
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Retrieve the exact site produced by the build job
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
-          persist-credentials: false
-          submodules: false
-      - name: Setup Pandoc
-        uses: pandoc/actions/setup@86321b6dd4675f5014c611e05088e10d4939e09e # v1
-        with:
-          version: "3.9.0.2"
-      - name: Install TeX and yq
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends texlive-xetex texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended yq
-      - name: Setup Typst
-        uses: typst-community/setup-typst@00ad6338f0b34724ea002136bfb701a6c18585b0 # v5.3.2
-        with:
-          typst-version: "0.15.1"
-      - name: Build HTML
-        run: |
-          bash scripts/build_pandoc.sh
-          bash scripts/generate_html_index.sh
+          name: html-site
+          path: html
+      - name: Verify the site entrypoint
+        run: test -s html/index.html
       - name: Upload Pages artifact
         id: pages_upload
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
