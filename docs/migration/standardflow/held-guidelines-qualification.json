@@ -1,0 +1,216 @@
+{
+  "observed_on": "2026-11-23",
+  "issue_url": "https://github.com/edithatogo/standards_check/issues/95",
+  "receiving_base_revision": "ba6b0888806e84276e5f54afc07e4e555220c4ea",
+  "scope": "Source identity and work-specific rights research only. All ten legacy arrays remain held; none is admitted as a Canonical Standard Pack. New editions below are proposed replacement sources, not an inference about the edition intended by an unversioned historical label.",
+  "archive_ref": "refs/heads/archive/standardflow/feature/implement-guidelines",
+  "archive_revision": "f1680778b4141bb5553b0e80af22bbdf5c75c862",
+  "reference_path": "data/stard_checklist.json",
+  "reference_items_sha256": "3526bd36acc55e63431cabfbd1335606497e0a54ba1eec29d3064041a2ed6696",
+  "reference_serialization": "SHA-256 of UTF-8 json.dumps(items, sort_keys=True, separators=(\",\", \":\")), with the default ensure_ascii=True.",
+  "identifier_fixture": "tests/fixtures/held-guidelines/source-item-identities.json",
+  "finding": "The items arrays in all ten archived files exactly equal the 30-item STARD array at the same revision. None matches the independently sourced identifier columns. Relabelling or truncating STARD text cannot repair their identities.",
+  "check_command": "python scripts/validate_held_guidelines.py",
+  "check_exit_contract": "The command audits the actual preserved Git objects without network access. Exit 1 is expected for these rejected historical inputs; a missing historical object also fails and is reported separately. Unit tests can run with the frozen reference file in a shallow checkout.",
+  "claim_limits": [
+    "A source identifier match is structural evidence only. It cannot establish item wording, normalized meaning, applicability, scoring, methodology or external validation.",
+    "Licence observations apply only to the cited works and versions. They do not clear the legacy copies, all material on a website, co-publications, translations or future pack items.",
+    "Only factual identifiers, provenance and rights observations are redistributed here. Source PDF/DOCX/XML files and checklist wording are not included."
+  ],
+  "common_admission_requirements": [
+    "Create fresh data from an explicitly chosen edition; retain the copied legacy arrays only in preserved history.",
+    "Pin retrievable authoritative bytes and reconcile every intended item/subitem, its wording, source anchor and applicability against those bytes. Row-count matches do not satisfy this gate.",
+    "Assign item-level rights under the existing pack contract, preserve required attribution and changes notices, and use link-only entries where permission for the intended distribution is not established.",
+    "Use the repaired receiving runtime and existing Canonical Standard Pack contracts, with independently distinguishing content/compatibility fixtures. Record method review and external acceptance separately; this ledger supplies neither."
+  ],
+  "datasets": [
+    {
+      "label": "AGREE",
+      "archive_path": "data/agree_checklist.json",
+      "source_editions": [
+        "agree-reporting-2016",
+        "agree-ii-2009-manual-2017"
+      ],
+      "version_decision": "Unresolved: choose reporting guidance (2016) or the AGREE II appraisal instrument (2009; manual updated 2017). Both have 23 main items, but their purpose, criteria and overall assessments differ.",
+      "rights_evidence": [
+        {
+          "edition": "agree-reporting-2016",
+          "observed_license": "CC-BY-NC-3.0",
+          "evidence_url": "https://www.bmj.com/content/352/bmj.i1152",
+          "scope": "The 2016 BMJ article has an explicit CC BY-NC 3.0 notice. The rights correction is https://www.bmj.com/content/354/bmj.i4852. The standalone checklist PDF does not carry the same notice in its extracted text.",
+          "reuse_disposition": "Keep link-only until the intended distribution fits the noncommercial terms or separate permission is documented; reconcile the chosen checklist text to the licensed work."
+        },
+        {
+          "edition": "agree-ii-2009-manual-2017",
+          "observed_license": null,
+          "evidence_url": "https://www.agreetrust.org/wp-content/uploads/2017/12/AGREE-II-Users-Manual-and-23-item-Instrument-2009-Update-2017.pdf",
+          "scope": "The Copyright and Reproduction page permits specified educational, quality-assurance and appraisal uses and excludes commercial/product-marketing use. The manual says the 23 instrument items remain those of 2009.",
+          "reuse_disposition": "Custom use terms require a distribution-purpose decision or specific permission; do not assign a generic open-source licence."
+        }
+      ],
+      "next_step": "Resolve instrument versus reporting scope first; then establish work-specific permission for the intended pack distribution and reconcile all criteria or assessments in that scope."
+    },
+    {
+      "label": "ARRIVE",
+      "archive_path": "data/arrive_checklist.json",
+      "source_editions": [
+        "arrive-2.0-2020"
+      ],
+      "version_decision": "Proposed replacement: ARRIVE 2.0 (2020), with Essential 10 and Recommended Set preserved.",
+      "rights_evidence": [
+        {
+          "edition": "arrive-2.0-2020",
+          "observed_license": "CC0-1.0",
+          "evidence_url": "https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3000410",
+          "scope": "The primary statement and its numbered tables carry the CC0 public-domain dedication in the publisher HTML and pinned JATS. The distinct explanation paper (10.1371/journal.pbio.3000411) has different terms.",
+          "reuse_disposition": "A fresh candidate may use the primary statement under CC0, with provenance retained. This does not reconcile its internal lettered recommendations."
+        }
+      ],
+      "next_step": "Use the pinned primary tables for a fresh candidate; resolve the internal lettered recommendations into the intended item model and independently check content before promotion."
+    },
+    {
+      "label": "CHEERS",
+      "archive_path": "data/cheers_checklist.json",
+      "source_editions": [
+        "cheers-2022"
+      ],
+      "version_decision": "Proposed replacement: CHEERS 2022. ISPOR identifies it as the update replacing the 2013 checklist.",
+      "rights_evidence": [
+        {
+          "edition": "cheers-2022",
+          "observed_license": "CC-BY-4.0",
+          "evidence_url": "https://www.bmj.com/content/376/bmj-2021-067975",
+          "scope": "The BMJ primary statement explicitly grants CC BY 4.0; the linked author checklist also prints that licence. Other journal co-publications have different terms and are not interchangeable licence evidence.",
+          "reuse_disposition": "A fresh candidate can use this identified work with attribution and changes notices. Exact checklist bytes were not retrieved in this session."
+        }
+      ],
+      "next_step": "Obtain and pin the identified checklist or primary-table bytes before full item reconciliation. Preserve CHEERS as reporting guidance, not a methodological quality score."
+    },
+    {
+      "label": "COREQ",
+      "archive_path": "data/coreq_checklist.json",
+      "source_editions": [
+        "coreq-2007"
+      ],
+      "version_decision": "Proposed source identity: the 2007 Tong, Sainsbury and Craig checklist for interviews and focus groups.",
+      "rights_evidence": [
+        {
+          "edition": "coreq-2007",
+          "observed_license": null,
+          "evidence_url": "https://academic.oup.com/intqhc/article/19/6/349/1791966",
+          "scope": "The original publisher article establishes the 32-item checklist. No affirmative reuse grant for the intended distribution was established. The Wiley-hosted checklist is labelled as developed from the paper, and no byte pin was obtained.",
+          "reuse_disposition": "Keep link-only pending a work-specific permission receipt or a verified applicable licence; public download availability is not treated as permission."
+        }
+      ],
+      "next_step": "Obtain source bytes and confirm reuse rights with the relevant rights holder before reproducing wording; reconcile the original table rather than treating a derived template as exact text."
+    },
+    {
+      "label": "PRISMA-P",
+      "archive_path": "data/prisma_p_checklist.json",
+      "source_editions": [
+        "prisma-p-2015"
+      ],
+      "version_decision": "Proposed replacement: PRISMA-P 2015. This is protocol reporting guidance, distinct from the existing PRISMA 2020 pack.",
+      "rights_evidence": [
+        {
+          "edition": "prisma-p-2015",
+          "observed_license": "CC-BY-4.0",
+          "evidence_url": "https://www.prisma-statement.org/s/PRISMA-P-checklist-h7cd.pdf",
+          "scope": "The pinned official checklist has a PRISMA-P Group copyright notice and explicit CC BY 4.0 licence on page 3.",
+          "reuse_disposition": "A fresh candidate may use this checklist with its attribution and changes notices. All 26 printed item/subitem texts still require reconciliation."
+        }
+      ],
+      "next_step": "Build a separate versioned protocol candidate from the pinned 26 identifiers and source text, with item-level attribution and source anchors; do not substitute the PRISMA 2020 runtime data."
+    },
+    {
+      "label": "RIGHT",
+      "archive_path": "data/right_checklist.json",
+      "source_editions": [
+        "right-2017"
+      ],
+      "version_decision": "Proposed source identity: RIGHT 2017 (published online in 2016), 22 main numbers and 35 printed item/subitem identifiers.",
+      "rights_evidence": [
+        {
+          "edition": "right-2017",
+          "observed_license": null,
+          "evidence_url": "https://doi.org/10.7326/M16-1565",
+          "scope": "The primary Annals work and official English checklist establish identity. No affirmative open reuse grant for the intended distribution was established from the cited work or downloaded checklist.",
+          "reuse_disposition": "Keep link-only until the publisher/authors supply an applicable permission or licence receipt."
+        }
+      ],
+      "next_step": "Use the pinned official PDF as an identity reference only; resolve reuse permission before verbatim candidate data and separately reconcile the 35 item/subitem texts."
+    },
+    {
+      "label": "SPIRIT",
+      "archive_path": "data/spirit_checklist.json",
+      "source_editions": [
+        "spirit-2025"
+      ],
+      "version_decision": "Proposed replacement: SPIRIT 2025, explicitly versioned; no equivalence with SPIRIT 2013 is claimed.",
+      "rights_evidence": [
+        {
+          "edition": "spirit-2025",
+          "observed_license": "CC-BY-4.0",
+          "evidence_url": "https://www.consort-spirit.org/_files/ugd/b5740e_667c45b02102408ab983c9704525597b.docx?dn=SPIRIT+2025+editable+checklist.docx",
+          "scope": "The pinned official editable checklist carries a 2025 Chan A-W et al. notice granting CC BY 4.0; the primary BMJ article DOI is recorded in the identifier fixture.",
+          "reuse_disposition": "A fresh candidate may use this identified checklist with attribution and changes notices. Its 53 printed item/subitem texts and separate schedule figure are not reconciled here."
+        }
+      ],
+      "next_step": "Build a versioned 2025 candidate from the pinned document, distinguishing its 34 main numbers and 53 printed identifiers; decide separately whether the schedule figure is in scope."
+    },
+    {
+      "label": "SQUIRE",
+      "archive_path": "data/squire_checklist.json",
+      "source_editions": [
+        "squire-2.0-2015"
+      ],
+      "version_decision": "Proposed source identity: SQUIRE 2.0 (2015); the journal issue date is December 2016.",
+      "rights_evidence": [
+        {
+          "edition": "squire-2.0-2015",
+          "observed_license": "CC-BY-NC-4.0",
+          "evidence_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5256233/",
+          "scope": "The primary article, including its checklist table, carries CC BY-NC 4.0 in the pinned archived JATS.",
+          "reuse_disposition": "Keep link-only for unrestricted distribution unless separate permission is documented; a deliberately noncommercial distribution would need to preserve the licence conditions."
+        }
+      ],
+      "next_step": "Resolve intended distribution and noncommercial rights first, then reconcile each main item and its internal components from the pinned primary table."
+    },
+    {
+      "label": "SRQR",
+      "archive_path": "data/srqr_checklist.json",
+      "source_editions": [
+        "srqr-2014"
+      ],
+      "version_decision": "Proposed source identity: SRQR 2014, whose identifiers are S1-S21 rather than plain numbers.",
+      "rights_evidence": [
+        {
+          "edition": "srqr-2014",
+          "observed_license": null,
+          "evidence_url": "https://doi.org/10.1097/ACM.0000000000000388",
+          "scope": "The original article facsimile establishes the S-prefixed identifiers. No affirmative reuse grant for the intended distribution was established; a university-hosted copy alone is not such a grant.",
+          "reuse_disposition": "Keep link-only pending publisher/author permission or verified applicable licence."
+        }
+      ],
+      "next_step": "Retain S-prefixed identifiers and the exact article receipt; obtain a reuse decision and independently reconcile the table before including wording in a candidate."
+    },
+    {
+      "label": "TRIPOD",
+      "archive_path": "data/tripod_checklist.json",
+      "source_editions": [
+        "tripod-ai-2024"
+      ],
+      "version_decision": "Proposed replacement: TRIPOD+AI 2024. The official site states that it replaces TRIPOD 2015. This is not the separate TRIPOD-LLM extension.",
+      "rights_evidence": [
+        {
+          "edition": "tripod-ai-2024",
+          "observed_license": "CC-BY-4.0",
+          "evidence_url": "https://www.tripod-statement.org/wp-content/uploads/2019/12/TRIPOD-Abstract_AI_Paper.pdf",
+          "scope": "The primary BMJ statement carries an explicit CC BY 4.0 notice. The pinned checklist identifies version 11-January-2024; the URL folder name is not its edition date.",
+          "reuse_disposition": "A fresh candidate may use the identified licensed article with attribution and changes notices, after matching each standalone checklist row to that work."
+        }
+      ],
+      "next_step": "Reconcile the 52 printed identifiers and the separate development/evaluation applicability column against the licensed work; preserve the 2024 edition identity and exclude unrelated extensions."
+    }
+  ]
+}
