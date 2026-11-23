@@ -9,6 +9,25 @@ StandardFlow is being developed as a machine-actionable research-standards platf
 standards and provenance, deterministic applicability and evidence assessment, plus accessible
 checklists, forms, PRISMA/CONSORT/STROBE diagrams and publication artefacts.
 
+## Getting started
+
+Install [Rust](https://rustup.rs/) (the repository pins its toolchain in
+`rust-toolchain.toml`). For a minimal canonical-pack smoke check:
+
+```bash
+cargo run --locked -p standardflow-cli -- --json pack validate packs/org.prisma/prisma/2020/pack.json
+```
+
+The legacy document pipeline also uses Python, Pandoc and Typst; consult
+[Contributing](CONTRIBUTING.md) and the
+[legacy instructions](legacy/README.md) before using those workflows.
+A passing validator does **not** establish third-party checklist redistribution rights,
+methodological validity or independent accessibility certification.
+
+Community resources: [Accessibility](ACCESSIBILITY.md) ·
+[Support](SUPPORT.md) · [Code of conduct](CODE_OF_CONDUCT.md) ·
+[Security](SECURITY.md).
+
 ## Current repository surface
 
 The established pipeline collects original files and provenance under `source/`, maintains cleaned

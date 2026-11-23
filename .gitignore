@@ -19,3 +19,10 @@ __pycache__/
 *.pyc
 *.pyo
 .venv-legacy/
+
+# Local credentials and private keys (tracked historical files are unaffected)
+*.pem
+*.key
+*.p12
+*.pfx
+credentials/
