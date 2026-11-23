@@ -1370,19 +1370,19 @@
       "api": {
         "scope": "api/server.js and api/cors-options.js; static generator and browser frontend not measured by this component",
         "lcov_totals": {
-          "LF": 143,
-          "LH": 143,
-          "BRF": 42,
-          "BRH": 41,
-          "FNF": 11,
-          "FNH": 11
+          "FNF": 10,
+          "FNH": 10,
+          "BRF": 38,
+          "BRH": 36,
+          "LH": 146,
+          "LF": 146
         },
         "source_sha256": {
           "api/cors-options.js": "ddf811726d39d495634c7c0d53c4662d75643c05e5029037b1491370e51fb07e",
           "api/package-lock.json": "26c0c363d91a843032ed296d37661adc23c79764eddb36023fbd8a74abd19e8b",
           "api/package.json": "a0f14913f02e2eaba3737e45fcdcfbaaf0a92cf8449f0930100631a70198fb0b",
-          "api/server.js": "e1211891369fd88c576745d4c2b24a5006bef954377647524e48adc0812ee37d",
-          "api/test/corpus.test.js": "b28be0d0752bc7ea9d2def2c951da0f00de82afd799a86b1ecb121ee6b0fb376",
+          "api/server.js": "f9c454c3917167b62757bd7332bbfe78e81a66f4529092b645a49727d19171f7",
+          "api/test/corpus.test.js": "0862926931f033dcc71adde37770eb9e0acbec668d65f3afccc034ccf169352e",
           "api/test/cors.test.js": "f3d44de9bffb742154d69034288fde375dbddcb932a493aa768946279c681b9d",
           "api/test/rate-limit.test.js": "7251d4824e62e11e6e85681d800659e17f92bb4fbeca19736efaf386f3c93332",
           "api/test/security/body-parser.test.cjs": "ed6c3328bc5f987c1cdb45b2b4adfd95f6f6a7c916f9c8546b4e5f04a0a98a6b",
@@ -1391,15 +1391,14 @@
           "api/test/security/qs.test.cjs": "112d927f3ec7f26fabedd1be6c7afd984c16a97b97ce37a2714630d8c2b07870",
           "api/test/startup.test.js": "810e7f252c7106432cc1f8259f128b06619fc5fc2be0a371062c91dce2d6c03f"
         },
-        "observed_at": "2026-11-23T03:11:48.596379+00:00",
-        "candidate_base": "8029b1a55fb4273878510681c1a5a7b5c02b57f0",
-        "identity_scope": "Local API correction after the recorded main CodeQL path findings. Source hashes identify the modified inputs; Python/Rust observations are unchanged. See api-path-selection-20261123.json; hosted and actual alert closure remain separate.",
+        "observed_at": "2026-11-23T01:52:19.884609Z",
+        "candidate_base": "12b7b00737124aa7c0feaead893c930124332489",
+        "identity_scope": "API-only local observation after the rate-limit/log-format corrections over this base; hashes identify modified source and test inputs. The top-level observation date/base and Python/Rust measurements remain historical and unchanged. Hosted checks require their own revision-bound receipts.",
         "summary_percent": {
           "lines": 100.0,
-          "branches": 97.61904761904762,
+          "branches": 94.73684210526316,
           "functions": 100.0
-        },
-        "path_boundary_receipt": "api-path-selection-20261123.json"
+        }
       },
       "tests": 40,
       "report": {
