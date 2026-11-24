@@ -7,6 +7,8 @@ on:
       - "scripts/reconcile_equator_sources.py"
       - "scripts/equator_source_links.py"
       - "scripts/survey_equator_articles.py"
+      - "scripts/source_provider_evidence.py"
+      - "tests/test_source_provider_evidence.py"
       - "scripts/reconcile_authoritative_articles.py"
       - "scripts/jats_checklist_structure.py"
       - "tests/test_survey_equator_articles.py"
@@ -76,8 +78,10 @@ jobs:
             --catalogue "$RUNNER_TEMP/equator-catalogue.json" \
             --output "$RUNNER_TEMP/equator-source-link-candidates.json"
       - name: Resolve all catalogue identifiers and acquire selected primary OA candidates
+        env:
+          SOURCE_API_EMAIL: ${{ vars.SOURCE_API_EMAIL }}
         run: |
-          python -m unittest tests.test_survey_equator_articles -v
+          python -m unittest tests.test_survey_equator_articles tests.test_source_provider_evidence -v
           python -m scripts.survey_equator_articles \
             --catalogue "$RUNNER_TEMP/equator-catalogue.json" \
             --output "$RUNNER_TEMP/equator-article-survey.json"
