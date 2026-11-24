@@ -80,10 +80,24 @@ fn lock_read_rejects_nonregular_and_overflowing_inputs() -> Result<(), Box<dyn s
         Err(LockError::Limit(message)) if message.contains("overflow")));
     fs::remove_file(&lock)?;
     fs::create_dir(&lock)?;
+    let preserved = lock.join("preserved.txt");
+    fs::write(&preserved, b"approved")?;
+    let result = verify_pack_lock(directory.path(), LockLimits::default());
+    // Windows refuses an ordinary read-only open of a directory. Unix opens it,
+    // then the metadata check rejects it before any lock JSON can be decoded.
+    #[cfg(windows)]
     assert!(matches!(
-        verify_pack_lock(directory.path(), LockLimits::default()),
-        Err(LockError::NonPortablePath(_))
+        result,
+        Err(LockError::Io { operation: "open pack file", path, source })
+            if Path::new(&path) == lock && source.kind() == io::ErrorKind::PermissionDenied
     ));
+    #[cfg(not(windows))]
+    assert!(matches!(
+        result,
+        Err(LockError::NonPortablePath(path)) if Path::new(&path) == lock
+    ));
+    assert!(lock.is_dir());
+    assert_eq!(fs::read(preserved)?, b"approved");
     Ok(())
 }
 
@@ -127,9 +141,7 @@ fn invalid_roots_and_malformed_locks_cannot_report_verification()
 
 #[cfg(unix)]
 #[test]
-fn native_symlink_and_non_utf8_boundaries_preserve_the_target()
--> Result<(), Box<dyn std::error::Error>> {
-    use std::os::unix::ffi::OsStrExt;
+fn native_symlink_boundaries_preserve_the_target() -> Result<(), Box<dyn std::error::Error>> {
     use std::os::unix::fs::symlink;
 
     let directory = Directory::new()?;
@@ -150,15 +162,27 @@ fn native_symlink_and_non_utf8_boundaries_preserve_the_target()
         Err(LockError::UnsafeRoot(_))
     ));
     fs::remove_file(root_link)?;
-    fs::write(
-        directory
-            .path()
-            .join(std::ffi::OsStr::from_bytes(b"invalid-\xff")),
-        b"data",
-    )?;
+    assert_eq!(fs::read(victim)?, b"approved");
+    Ok(())
+}
+
+// The Linux CI filesystem admits this fixture; macOS rejects these filename
+// bytes during creation, before the pack API can inspect them.
+#[cfg(target_os = "linux")]
+#[test]
+fn non_utf8_filename_cannot_enter_a_pack_manifest() -> Result<(), Box<dyn std::error::Error>> {
+    use std::os::unix::ffi::OsStrExt;
+
+    let directory = Directory::new()?;
+    let invalid = directory
+        .path()
+        .join(std::ffi::OsStr::from_bytes(b"invalid-\xff"));
+    fs::write(&invalid, b"data")?;
     assert!(matches!(
         build_pack_lock(directory.path(), LockLimits::default()),
         Err(LockError::NonPortablePath(_))
     ));
+    assert_eq!(fs::read(invalid)?, b"data");
+    assert!(!directory.path().join("standardflow.lock.json").exists());
     Ok(())
 }

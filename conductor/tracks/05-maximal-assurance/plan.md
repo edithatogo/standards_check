@@ -99,7 +99,7 @@ and [publication protocol](../../../docs/research/publication-protocol.v0.1.0.md
 
 ## 25 November: repository maturity programme
 
-- [ ] **T05.037** ([#31](https://github.com/edithatogo/standards_check/issues/31)) Enforce qualified formatting, static lint, typing, security lint, dead-code and author-prose checks through required CI and local hooks.
+- [ ] **T05.037** ([#31](https://github.com/edithatogo/standards_check/issues/31)) Enforce qualified formatting, static lint, typing, security lint and author-prose checks through required CI and local hooks; evaluate dead-code analysis and record its findings and gate decision.
 - [ ] **T05.038** ([#31](https://github.com/edithatogo/standards_check/issues/31)) Raise Python and Rust coverage above 90 percent through meaningful failure-path and invariant tests without excluding production code; retain strict API coverage.
 - [ ] **T05.039** ([#163](https://github.com/edithatogo/standards_check/issues/163)) Map every registered plan item and repository issue, validate reverse links and run live read-only reconciliation in required and event-driven CI.
 - [ ] **T05.040** ([#163](https://github.com/edithatogo/standards_check/issues/163)) Provide a GitHub Project view over the owning issues, preserving one issue per work scope and explicit completed/held outcomes.

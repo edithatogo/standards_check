@@ -47,13 +47,52 @@ formatting, types, security and prose. Crosswalk and dataset review identified a
 repaired real malformed-input gaps before sealing the measurements. None of these
 local receipts substitutes for the protected PR and receiving-main checks.
 
+## Initial PR 165 hosted failures and corrections
+
+The initial [PR 165](https://github.com/edithatogo/standards_check/pull/165)
+head was `883be9a9e56ed7ecc75981e36a820e29221b1e06`, with tree
+`31e6a74ba089ce55d34a7fb622619c0874e09780`.
+[Assurance run 45426654849](https://github.com/edithatogo/standards_check/actions/runs/45426654849)
+exposed runner and fixture assumptions:
+
+- The [Python job](https://github.com/edithatogo/standards_check/actions/runs/45426654849/job/138560372498)
+  reported 639 passed and one failed because the native `convert` executable was
+  absent. The correction installs ImageMagick in that job, retaining the exercised
+  conversion assertion.
+- macOS rejected creation of the invalid-byte filename fixture with OS error 92,
+  before the pack API could inspect it. The test correction retains this fixture
+  on Linux, where it can be created and the pack rejection can be observed.
+- The Windows hosted log showed a failed assertion expecting `NonPortablePath`
+  for the directory used as a lock-file input; it did not print the actual error
+  variant. Code and platform review diagnosed an earlier directory-open refusal.
+  The corrected test asserts `LockError::Io` with `PermissionDenied` on Windows
+  and `NonPortablePath` elsewhere, while retaining directory and sentinel
+  preservation on every platform. A fresh Windows pass must verify that diagnosis.
+
+The Rust corrections affect tests only; all-platform rejection checks remain,
+alongside the Linux invalid-byte case. These are implemented corrections, not
+hosted acceptance. Checks for the corrected head and receiving-main revision are
+pending. The sealed local coverage figures above remain their original historical
+measurement and are not replaced by the initial hosted test counts.
+
 ## Enforced quality policy
 
 The seven existing app-bound branch checks remain required, current-base strict,
 and without bypass. The `assurance` aggregate rejects failed, cancelled and
 unexpectedly skipped dependencies. It contains native component coverage,
-workflow policy, boundary mutation and property checks. CodeQL, privacy/secrets
-and maintained dependency inventories remain independently required.
+cross-platform testing, workflow policy, boundary mutation and property checks.
+CodeQL, privacy/secrets and maintained dependency inventories remain independently required.
+
+The [assurance workflow](../../../.github/workflows/ci.yml) now owns one
+Linux/macOS/Windows `cross-platform` matrix, replacing the duplicate matrices in
+the pack and diagram workflows. Each platform runs locked workspace tests across
+all targets and features, documentation tests, and both pack-lock and scene-output
+CLI smoke checks. `fail-fast: false` retains the remaining platform runs after a
+failure. The protected `assurance` aggregate includes this matrix in `needs` and
+explicitly requires its result to be `success`; a failed, cancelled or skipped
+matrix cannot satisfy that gate. This enforcement is implemented in workflow
+source; hosted qualification of the corrected native matrix and protected
+aggregate remains pending.
 
 The coverage floor is Python 90.5% combined statements and branches, Rust 91%
 lines, API 100% lines and 95% branches. Report the native numerator and denominator

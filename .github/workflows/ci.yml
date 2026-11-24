@@ -65,11 +65,23 @@ jobs:
         if: matrix.component == 'python'
         run: |
           sudo apt-get update
-          sudo apt-get install --yes --no-install-recommends graphviz poppler-utils
+          sudo apt-get install --yes --no-install-recommends graphviz imagemagick poppler-utils
           python -m pip install --disable-pip-version-check -r requirements/python-tests.txt
           python -m pip install --disable-pip-version-check --no-deps -r requirements/legacy-standardflow.txt
           python -m pip install --disable-pip-version-check --no-deps -r requirements/assurance-tools.txt
           python -m pip check
+      - name: Verify the native legacy PNG to TIFF renderer
+        if: matrix.component == 'python'
+        run: |
+          dot -V 2>&1 | tee target/coverage/native-renderers.txt
+          convert -version | tee -a target/coverage/native-renderers.txt
+          probe_dir="$(mktemp -d)"
+          trap 'rm -rf "$probe_dir"' EXIT
+          printf '%s\n' 'digraph { first -> second }' | dot -Tpng -o "$probe_dir/diagram.png"
+          convert "$probe_dir/diagram.png" "$probe_dir/diagram.tiff"
+          test -s "$probe_dir/diagram.tiff"
+          test "$(identify -format '%m' "$probe_dir/diagram.tiff")" = TIFF
+          printf '%s\n' 'Graphviz PNG to ImageMagick TIFF probe passed' | tee -a target/coverage/native-renderers.txt
       - name: Type check maintained validator and receipt boundaries
         if: matrix.component == 'python'
         run: ty check --python "$(command -v python)" --error-on-warning --output-format github
@@ -280,6 +292,41 @@ jobs:
           if-no-files-found: error
           retention-days: 30
 
+  cross-platform:
+    name: cross-platform (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 35
+    env:
+      CARGO_INCREMENTAL: "0"
+      CARGO_TERM_COLOR: always
+      RUST_BACKTRACE: "1"
+    steps:
+      # Audit mode supports GitHub-hosted Linux, macOS and Windows runners.
+      - name: Audit runner activity on each supported platform
+        uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          submodules: false
+      - uses: dtolnay/rust-toolchain@4cda84d5c5c54efe2404f9d843567869ab1699d4
+        with:
+          toolchain: 1.100.0
+          components: rustfmt,clippy
+      - name: Test all workspace targets and features
+        run: cargo test --workspace --all-targets --all-features --locked
+      - name: Test workspace documentation examples
+        run: cargo test --workspace --doc --all-features --locked
+      - name: Check the canonical pack lock through the CLI
+        run: cargo run --locked -p standardflow-cli -- pack lock packs/org.prisma/prisma/2020 --check
+      - name: Exercise deterministic scene output through the CLI
+        run: cargo run --quiet --locked -p standardflow-cli -- diagram prisma contracts/examples/prisma-flow/new-databases-registers.json --format scene-json --output - > /dev/null
+
   codecov:
     name: codecov (${{ matrix.component }})
     needs: coverage
@@ -441,7 +488,7 @@ jobs:
 
   assurance:
     if: always()
-    needs: [coverage, workflow-policy, boundary-mutations, dependency-review]
+    needs: [coverage, cross-platform, workflow-policy, boundary-mutations, dependency-review]
     runs-on: ubuntu-24.04
     timeout-minutes: 2
     steps:
@@ -453,6 +500,7 @@ jobs:
       - name: Require each applicable local assurance check
         env:
           COVERAGE: ${{ needs.coverage.result }}
+          CROSS_PLATFORM: ${{ needs.cross-platform.result }}
           WORKFLOW_POLICY: ${{ needs.workflow-policy.result }}
           BOUNDARY_MUTATIONS: ${{ needs.boundary-mutations.result }}
           DEPENDENCY_REVIEW: ${{ needs.dependency-review.result }}
@@ -460,6 +508,7 @@ jobs:
         run: |
           set -euo pipefail
           test "$COVERAGE" = success
+          test "$CROSS_PLATFORM" = success
           test "$WORKFLOW_POLICY" = success
           test "$BOUNDARY_MUTATIONS" = success
           if [ "$EVENT_NAME" = pull_request ]; then
