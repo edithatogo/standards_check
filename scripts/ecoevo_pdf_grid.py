@@ -1,0 +1,200 @@
+"""Independent ruled-grid PDF candidates: native PDF geometry and Poppler pixels."""
+from __future__ import annotations
+
+from collections import Counter
+from dataclasses import dataclass
+import io
+import re
+import subprocess
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from xml.etree import ElementTree as ET
+
+from .source_reconciliation import fingerprint
+
+ID = re.compile(r'\d{1,3}\.\d{1,3}')
+MAX_BYTES = 20_000_000
+MAX_PAGES = 80
+
+
+@dataclass(frozen=True)
+class Word:
+    x0: float
+    y0: float
+    x1: float
+    y1: float
+    text: str
+
+    @property
+    def x(self):
+        return (self.x0 + self.x1) / 2
+
+    @property
+    def y(self):
+        return (self.y0 + self.y1) / 2
+
+
+def clusters(values, tolerance=1.5):
+    groups = []
+    for value in sorted(values):
+        if groups and value - groups[-1][-1] <= tolerance:
+            groups[-1].append(value)
+        else:
+            groups.append([value])
+    return [sum(group) / len(group) for group in groups]
+
+
+def phrase(words):
+    lines = []
+    for word in sorted(words, key=lambda w: (w.y, w.x0)):
+        if lines and abs(word.y - lines[-1][0].y) <= 3:
+            lines[-1].append(word)
+        else:
+            lines.append([word])
+    return ' '.join(w.text for line in lines for w in sorted(line, key=lambda w: w.x0))
+
+
+def region(words, x0, y0, x1, y1):
+    return [w for w in words if x0 <= w.x < x1 and y0 <= w.y < y1]
+
+
+def header(text):
+    return re.sub(r'[^a-z0-9]', '', re.sub(r'\(cid:\d+\)', '', text.casefold()))
+
+
+def anchor(page, x0, y0, x1, y1):
+    return f'page/{page}/bbox/' + ','.join(f'{v:.2f}' for v in (x0, y0, x1, y1))
+
+
+def extract_grid(words, xs, horizontal, page, vertical=lambda x, a, b: True):
+    """Require explicit column headers and closed row bands, not ID proximity."""
+    candidates = []
+    for x0, x1, x2 in zip(xs, xs[1:], xs[2:]):
+        ys = horizontal(x0, x2)
+        for i in range(min(5, len(ys)-1)):
+            for j in range(i+1, min(i+3, len(ys)-1)+1):
+                if (header(phrase(region(words,x0,ys[i],x1,ys[j]))) == 'subitemnumber'
+                        and header(phrase(region(words,x1,ys[i],x2,ys[j]))) == 'subitem'):
+                    candidates.append((x0,x1,x2,ys,j))
+    if len(candidates) != 1:
+        return [], ['header_not_unique'], {'verticals': xs, 'header_candidates': len(candidates)}
+    x0,x1,x2,ys,start=candidates[0]
+    rows,issues=[],set()
+    for y0,y1 in zip(ys[start:],ys[start+1:]):
+        identifier=phrase(region(words,x0,y0,x1,y1)).strip()
+        req=phrase(region(words,x1,y0,x2,y1))
+        if not identifier and not req:
+            continue
+        if not ID.fullmatch(identifier):
+            issues.add('unbound_requirement_band')
+            if not rows:
+                issues.add('unbound_leading_band')
+            if rows:
+                rows[-1]['requirement_sha256']=None
+            continue
+        closed=all(vertical(x,y0,y1) for x in (x0,x1,x2))
+        if not closed:
+            issues.add('unclosed_row_geometry')
+        rows.append({'item_id':identifier, 'identifier_anchor':anchor(page,x0,y0,x1,y1),
+                     'requirement_anchor':anchor(page,x1,y0,x2,y1),
+                     'requirement_sha256':fingerprint(req) if req and closed else None})
+        if not req:
+            issues.add('empty_requirement')
+    if not rows:
+        issues.add('no_closed_rows')
+    return rows,sorted(issues),{'verticals':xs,'header_candidates':1,'column_bounds':[x0,x1,x2],
+        'row_boundaries':ys,'header_bottom':ys[start]}
+
+
+def coverage(intervals, low, high):
+    end=low;covered=0.0
+    for a,b in sorted(intervals):
+        a,b=max(low,a),min(high,b)
+        if b>max(a,end):
+            covered+=b-max(a,end);end=b
+    return covered/(high-low) if high>low else 0.0
+
+
+def finish(parser, pages):
+    rows=[];issues=set();geometry=[]
+    for page, (items, problems, evidence) in enumerate(pages,1):
+        if rows and ('unbound_leading_band' in problems or 'header_not_unique' in problems):
+            rows[-1]['requirement_sha256']=None
+        rows.extend(items);issues.update(problems);geometry.append({'page':page,**evidence})
+    counts=Counter(r['item_id'] for r in rows)
+    for row in rows:
+        if counts[row['item_id']]>1:
+            row['requirement_sha256']=None;issues.add('duplicate_id')
+    return {'parser':parser,'rows':rows,'issues':sorted(issues),'geometry':geometry}
+
+
+def extract_native(raw):
+    import pdfplumber
+    if not raw or len(raw)>MAX_BYTES:
+        raise ValueError('PDF size limit')
+    pages=[]
+    with pdfplumber.open(io.BytesIO(raw)) as pdf:
+        if not 0<len(pdf.pages)<=MAX_PAGES:
+            raise ValueError('PDF page limit')
+        for page in pdf.pages:
+            if len(page.edges)>5000:
+                raise ValueError('PDF edge limit')
+            vertical=[e for e in page.edges if e['orientation']=='v']
+            h_edges=[e for e in page.edges if e['orientation']=='h']
+            xs=[x for x in clusters(e['x0'] for e in vertical)
+                if coverage([(e['top'],e['bottom']) for e in vertical if abs(e['x0']-x)<=1.5],0,page.height)>=.18]
+            def horizontal(a,b):
+                return [y for y in clusters(e['top'] for e in h_edges)
+                    if coverage([(e['x0'],e['x1']) for e in h_edges if abs(e['top']-y)<=1.5],a,b)>=.90]
+            words=[Word(w['x0'],w['top'],w['x1'],w['bottom'],w['text']) for w in page.extract_words()]
+            def closed(x,a,b):
+                return coverage([(e['top'],e['bottom']) for e in vertical if abs(e['x0']-x)<=1.5],a,b)>=.90
+            pages.append(extract_grid(words,xs,horizontal,page.page_number,closed))
+    return {**finish('pdfplumber_geometry',pages),'version':pdfplumber.__version__}
+
+
+def extract_poppler(raw):
+    """Poppler independently renders the ruling lines and extracts word boxes."""
+    import numpy as np
+    from PIL import Image
+    if not raw or len(raw)>MAX_BYTES:
+        raise ValueError('PDF size limit')
+    with TemporaryDirectory() as temp:
+        root=Path(temp); pdf=root/'input.pdf';pdf.write_bytes(raw)
+        output=subprocess.run(['pdftotext','-bbox-layout','-enc','UTF-8','-f','1','-l',str(MAX_PAGES+1),str(pdf),'-'],capture_output=True,check=True,timeout=40).stdout
+        if len(output)>16_000_000:
+            raise ValueError('Poppler output limit')
+        xml=ET.fromstring(output)
+        doc_pages=list(xml.iter('{http://www.w3.org/1999/xhtml}page'))
+        if not 0<len(doc_pages)<=MAX_PAGES:
+            raise ValueError('Poppler page limit')
+        subprocess.run(['pdftoppm','-f','1','-l',str(len(doc_pages)),'-scale-to','1800','-gray','-png',str(pdf),str(root/'page')],capture_output=True,check=True,timeout=80)
+        images=sorted(root.glob('page-*.png'),key=lambda p:int(p.stem.split('-')[-1]))
+        if len(images)!=len(doc_pages):
+            raise ValueError('Poppler page/render mismatch')
+        pages=[]
+        for n,(page,image) in enumerate(zip(doc_pages,images),1):
+            width,height=float(page.attrib['width']),float(page.attrib['height'])
+            words=[Word(*(float(w.attrib[k]) for k in ('xMin','yMin','xMax','yMax')),w.text or '') for w in page.iter('{http://www.w3.org/1999/xhtml}word')]
+            with Image.open(image) as im:
+                mask=np.asarray(im.convert('L'))<210
+            h,w=mask.shape; sx=w/width;sy=h/height
+            xs=clusters([float(x)/sx for x in np.flatnonzero(mask.mean(axis=0)>=.18)])
+            def horizontal(a,b):
+                x0,x1=round(a*sx),round(b*sx)
+                if x1-x0<2:
+                    return []
+                return clusters([float(y)/sy for y in np.flatnonzero(mask[:,x0:x1].mean(axis=1)>=.90)])
+            def closed(x,a,b):
+                x0=max(0,round(x*sx)-2); x1=min(w,round(x*sx)+3)
+                y0=max(0,round(a*sy)); y1=min(h,round(b*sy))
+                return bool(y1>y0 and mask[y0:y1,x0:x1].any(axis=1).mean()>=.90)
+            pages.append(extract_grid(words,xs,horizontal,n,closed))
+        version=subprocess.run(['pdftotext','-v'],capture_output=True,timeout=5,check=True).stderr.decode().splitlines()[0]
+        return {**finish('poppler_rendered_geometry',pages),'version':version}
+
+
+def run(raw):
+    import hashlib
+    return {'source_sha256':hashlib.sha256(raw).hexdigest(),'native':extract_native(raw),
+            'independent':extract_poppler(raw),'canonical_packs_promoted':0}

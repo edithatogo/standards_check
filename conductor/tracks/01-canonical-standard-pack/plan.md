@@ -147,3 +147,7 @@ Keep T01.5c/d/h open for actual corpus replay, independent held-out error
 measurement, receiving CI and resumed live acquisition (#142). No NLI or model
 runtime is required. Existing runtime status is unchanged. Refs #111/#95/#82;
 Track 05 independent qualification and Track 04 consumer handoff remain separate.
+
+### Independent EcoEvo geometry follow-up
+
+See [EcoEvo geometric reconstruction](ecoevo-pdf-geometry.md); independent native vector and Poppler raster/word geometry replaces one-line header assumption. Closed-band and page-tail qualification, actual 89-item replay and pairwise comparison required. Source/rights gates remain held.

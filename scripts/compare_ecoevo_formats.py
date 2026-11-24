@@ -13,10 +13,10 @@ import subprocess
 
 if __package__:
     from .structured_source import cell_fields, fingerprint
-    from .source_reconciliation import layout_rows
+    from .ecoevo_pdf_grid import extract_native, extract_poppler
 else:
     from structured_source import cell_fields, fingerprint
-    from source_reconciliation import layout_rows
+    from scripts.ecoevo_pdf_grid import extract_native, extract_poppler
 
 # Printed sub-item sequences from the official checklist PDF (2021, seven pages),
 # not from the legacy Markdown or any local candidate. No checklist prose copied.
@@ -155,6 +155,7 @@ def benchmark(report: dict, root: Path | None = None, official: Path | None = No
                 source["identity"] = "official_bytes_unavailable"
         structure = probe.get("source_structure")
         issues = []
+        native_grid = None
         raw = None
         source["local_bytes"] = "not_rechecked"
         if root is not None:
@@ -171,7 +172,9 @@ def benchmark(report: dict, root: Path | None = None, official: Path | None = No
             try:
                 import pdfplumber
                 source["pdfplumber_version"] = pdfplumber.__version__
-                structure = pdf_tables(raw)
+                native_grid = extract_native(raw)
+                source["pdf_grid_native"] = {k: v for k, v in native_grid.items() if k != "rows"}
+                structure = None
             except Exception as exc:  # parser-specific failures remain held, no text leaked
                 issues.append("pdf_table_extraction_failed:" + type(exc).__name__)
             # Run the independent parser even when the first parser fails.
@@ -182,9 +185,10 @@ def benchmark(report: dict, root: Path | None = None, official: Path | None = No
                     raise ValueError("Poppler output exceeds limit")
                 layout = run.stdout.decode("utf-8")
                 tokens = layout_ids(layout)
-                poppler_rows, poppler_issues = layout_rows(layout)
-                source["poppler_rows"] = poppler_rows
-                source["poppler_row_issues"] = poppler_issues
+                grid = extract_poppler(raw)
+                source["poppler_rows"] = grid["rows"]
+                source["poppler_row_issues"] = grid["issues"]
+                source["pdf_grid_independent"] = {k: v for k, v in grid.items() if k != "rows"}
                 token_counts = Counter(token["item_id"] for token in tokens)
                 version = subprocess.run(["pdftotext", "-v"], capture_output=True, timeout=5, check=True)
                 source["poppler_version"] = version.stderr.decode("utf-8").splitlines()[0] if version.stderr else "unknown"
@@ -193,7 +197,10 @@ def benchmark(report: dict, root: Path | None = None, official: Path | None = No
                 source["poppler_duplicate_id_tokens"] = sorted(item for item, count in token_counts.items() if count > 1)
             except (OSError, subprocess.SubprocessError, UnicodeError, ValueError):
                 issues.append("poppler_layout_unavailable")
-        rows, row_issues = collect_rows(structure) if structure is not None else ([], ["structure_unavailable"])
+        if native_grid is not None:
+            rows, row_issues = native_grid["rows"], native_grid["issues"]
+        else:
+            rows, row_issues = collect_rows(structure) if structure is not None else ([], ["structure_unavailable"])
         counts = Counter(row["item_id"] for row in rows)
         source.update(rows=rows, structure_status=(structure or {}).get("status", "candidate_only"),
                       expected_ids_recovered=sum(item in counts for item in EXPECTED_IDS),
@@ -207,6 +214,12 @@ def benchmark(report: dict, root: Path | None = None, official: Path | None = No
             source["pdf_independent_row_comparison"] = compare_formats(rows, independent)
             source["poppler_exact_expected_order"] = [row["item_id"] for row in independent] == EXPECTED_IDS
         results.append(source)
+    for source in results:
+        if "poppler_rows" in source:
+            source["poppler_vs_other_formats"] = [
+                {"path": other["path"], **compare_formats(source["poppler_rows"], other["rows"])}
+                for other in results if other is not source
+            ]
     return {"edition": "PRISMA-EcoEvo 2021 v1.0", "doi": "10.1111/brv.12721", "numbering_reference": REFERENCE,
             "expected_item_ids": EXPECTED_IDS, "claim_boundary": "candidate structural comparison; no rights, authority or admission",
             "sources": results, "pairwise": [{"left": a["path"], "right": b["path"], **compare_formats(a["rows"], b["rows"])}
