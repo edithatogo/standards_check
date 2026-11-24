@@ -2,13 +2,13 @@ import unittest
 from scripts.ecoevo_pdf_grid import extract_native, extract_poppler, fingerprint, extract_grid, Word
 
 
-def tiny_grid_pdf():
+def tiny_grid_pdf(virtual=False):
     pages=[]
     for page, rows in enumerate(([('1.1','Report outcomes.'),('1.2','Report harms.')],[('1.3','Report all data.')]),1):
         xs=(20,80,140,300,360)
         top=250; header_bottom=220; bottom=header_bottom-40*len(rows)
         cmds=['0.7 w']
-        for x in xs: cmds.append(f'{x} {bottom} m {x} {top} l S')
+        for x in (xs[0],xs[-1]) if virtual else xs: cmds.append(f'{x} {bottom} m {x} {top} l S')
         for y in (top,header_bottom,bottom): cmds.append(f'{xs[0]} {y} m {xs[-1]} {y} l S')
         for i in range(1,len(rows)): cmds.append(f'80 {header_bottom-40*i} m 360 {header_bottom-40*i} l S')
         def put(x,y,text): cmds.append(f'BT /F1 9 Tf {x} {y} Td ({text}) Tj ET')

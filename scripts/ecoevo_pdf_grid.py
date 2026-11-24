@@ -106,6 +106,85 @@ def extract_grid(words, xs, horizontal, page, vertical=lambda x, a, b: True):
         'row_boundaries':ys,'header_bottom':ys[start]}
 
 
+def header_evidence(words):
+    allowed={'subitem','subitemnumber','sub','item','number','reported','score','notes','checklist'}
+    return [{'role':header(w.text) if header(w.text) in allowed else w.text,
+             'bbox':[round(v,2) for v in (w.x0,w.y0,w.x1,w.y1)]}
+            for w in words if header(w.text) in allowed or ID.fullmatch(w.text)][:240]
+
+
+def extract_virtual(words, xs, horizontal, page, outer_closed):
+    """A word-header binding plus independently observed horizontal ruling bands.
+
+    Some tables have only outer vertical rulings. Derive virtual separators
+    from explicit header/ID geometry, not from a prescribed item count.
+    """
+    evidence={'verticals':xs,'header_words':header_evidence(words),'mode':'header_virtual_columns'}
+    heads=[w for w in words if header(w.text)=='subitem']
+    numbers=[w for w in words if header(w.text)=='number']
+    right_headers=[w for w in words if header(w.text) in {'reported','score'}]
+    candidates=[]
+    for left in heads:
+        for right in heads:
+            if not left.x<right.x or abs(left.y-right.y)>25:
+                continue
+            for number in numbers:
+                if abs(number.x-left.x)>25 or not -3<=number.y-left.y<=25:
+                    continue
+                for response in right_headers:
+                    if response.x<=right.x or abs(response.y-right.y)>25:
+                        continue
+                    candidates.append((left,right,number,response))
+    if len(candidates)!=1:
+        return [],['header_not_unique'],{**evidence,'header_candidates':len(candidates)}
+    left,right,number,response=candidates[0]
+    header_bottom=max(w.y1 for w in (left,right,number,response))
+    ids=[w for w in words if w.y0>=header_bottom-1 and ID.fullmatch(w.text)
+         and abs(w.x-number.x)<=25 and w.x1<right.x1]
+    if not ids:
+        return [],['no_header_bound_ids'],evidence
+    x0=min([left.x0,number.x0,*[w.x0 for w in ids]])-1
+    # Body ID and requirement starts must have an observed whitespace gap.
+    id_right=max(w.x1 for w in ids)
+    eligible=[w for w in words if w.y0>=header_bottom-1 and w.x0>id_right and w.x0<response.x0-1]
+    if not eligible:
+        return [],['no_requirement_column'],evidence
+    req_start=min(w.x0 for w in eligible)
+    x1=(id_right+req_start)/2
+    x2=response.x0-1
+    ys=horizontal(x0,x2)
+    first=min(w.y0 for w in ids)
+    start=[i for i,y in enumerate(ys) if header_bottom-2<=y<=first+1]
+    evidence.update(column_bounds=[x0,x1,x2],row_boundaries=ys,header_bottom=header_bottom,
+                    header_candidates=1,header_bound_id_count=len(ids))
+    if not start or len(xs)<2:
+        return [],['header_row_boundary_unavailable'],evidence
+    rows=[];issues=set();seen_ids=[]
+    for y0,y1 in zip(ys[start[-1]:],ys[start[-1]+1:]):
+        idwords=region(words,x0,y0,x1,y1)
+        reqwords=region(words,x1,y0,x2,y1)
+        if not idwords and not reqwords:
+            continue
+        identifier=phrase(idwords).strip();req=phrase(reqwords)
+        if not ID.fullmatch(identifier):
+            issues.add('unbound_requirement_band')
+            if rows: rows[-1]['requirement_sha256']=None
+            else: issues.add('unbound_leading_band')
+            continue
+        seen_ids.append(identifier)
+        crosses=any(w.x0<x1<w.x1 or w.x0<x2<w.x1 or w.y0<y0-1 or w.y1>y1+1 for w in idwords+reqwords)
+        closed=outer_closed(xs[0],y0,y1) and outer_closed(xs[-1],y0,y1)
+        if crosses or not closed or not req:
+            issues.add('unclosed_or_crossing_virtual_band')
+        rows.append({'item_id':identifier,'identifier_anchor':anchor(page,x0,y0,x1,y1),
+                     'requirement_anchor':anchor(page,x1,y0,x2,y1),
+                     'requirement_sha256':fingerprint(req) if req and closed and not crosses else None})
+    if Counter(seen_ids)!=Counter(w.text for w in ids):
+        issues.add('unbound_header_ids')
+        if rows: rows[-1]['requirement_sha256']=None
+    return rows,sorted(issues),evidence
+
+
 def coverage(intervals, low, high):
     end=low;covered=0.0
     for a,b in sorted(intervals):
@@ -149,7 +228,11 @@ def extract_native(raw):
             words=[Word(w['x0'],w['top'],w['x1'],w['bottom'],w['text']) for w in page.extract_words()]
             def closed(x,a,b):
                 return coverage([(e['top'],e['bottom']) for e in vertical if abs(e['x0']-x)<=1.5],a,b)>=.90
-            pages.append(extract_grid(words,xs,horizontal,page.page_number,closed))
+            result=extract_grid(words,xs,horizontal,page.page_number,closed)
+            if 'header_not_unique' in result[1]:
+                result=extract_virtual(words,xs,horizontal,page.page_number,closed)
+                result[2]['native_horizontal_segments']=[(round(e['top'],2),round(e['x0'],2),round(e['x1'],2)) for e in h_edges if e['x1']-e['x0']>30][:400]
+            pages.append(result)
     return {**finish('pdfplumber_geometry',pages),'version':pdfplumber.__version__}
 
 
@@ -189,7 +272,10 @@ def extract_poppler(raw):
                 x0=max(0,round(x*sx)-2); x1=min(w,round(x*sx)+3)
                 y0=max(0,round(a*sy)); y1=min(h,round(b*sy))
                 return bool(y1>y0 and mask[y0:y1,x0:x1].any(axis=1).mean()>=.90)
-            pages.append(extract_grid(words,xs,horizontal,n,closed))
+            result=extract_grid(words,xs,horizontal,n,closed)
+            if 'header_not_unique' in result[1]:
+                result=extract_virtual(words,xs,horizontal,n,closed)
+            pages.append(result)
         version=subprocess.run(['pdftotext','-v'],capture_output=True,timeout=5,check=True).stderr.decode().splitlines()[0]
         return {**finish('poppler_rendered_geometry',pages),'version':version}
 

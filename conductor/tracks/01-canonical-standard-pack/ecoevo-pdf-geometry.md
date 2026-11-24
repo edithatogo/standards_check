@@ -43,3 +43,5 @@ The four focused synthetic regressions passed locally (real two-page ruled
 PDF with wrapped cells and merged topic; missing/ambiguous header and border
 holds). Actual source replay requires hosted execution. Keep prior failed
 receipt immutable; compare source and exact revision before qualification.
+
+First actual [grid replay artifact 14920191118](https://github.com/edithatogo/standards_check/actions/runs/45393167595/artifacts/14920191118), tested merge c068b25b77cfef58d9c7c30882b926588c07f128: zero full rows, both headers held. Native long vector edges only at outer left/right; rendered dark-column totals picked up text strokes. Exact PDF hash matches. Add virtual separators from independent header words, ID geometry and horizontal boundaries; no inferred complete row absent closed outer and horizontal evidence. Missing-inner-rules synthetic PDF failed RED on both engines, then passed GREEN; five focused tests passed. Retain failure receipt.

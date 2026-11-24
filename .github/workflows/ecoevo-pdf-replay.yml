@@ -32,7 +32,7 @@ jobs:
           sudo apt-get install --yes --no-install-recommends poppler-utils
           python -m pip install -r requirements/python-tests.txt
       - name: Run synthetic PDF geometry regressions
-        run: python -m unittest tests.test_ecoevo_grid tests.test_compare_ecoevo_formats -v
+        run: python -m unittest tests.test_ecoevo_grid tests.test_virtual_grid tests.test_compare_ecoevo_formats -v
       - name: Replay exact pinned official PDF and other representations
         run: |
           echo 'db0a9fb221a1467a82c277419be96e18c7f8600b0deed25009bacb41322623ba  source/variants/prisma-ecoevo.pdf' | sha256sum --check
