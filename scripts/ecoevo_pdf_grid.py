@@ -44,14 +44,50 @@ def clusters(values, tolerance=1.5):
     return [sum(group) / len(group) for group in groups]
 
 
-def phrase(words):
+def text_lines(words):
     lines = []
     for word in sorted(words, key=lambda w: (w.y, w.x0)):
         if lines and abs(word.y - lines[-1][0].y) <= 3:
             lines[-1].append(word)
         else:
             lines.append([word])
-    return ' '.join(w.text for line in lines for w in sorted(line, key=lambda w: w.x0))
+    return [sorted(line,key=lambda w:w.x0) for line in lines]
+
+
+def phrase(words):
+    return ' '.join(w.text for line in text_lines(words) for w in line)
+
+
+def partition_group(identifiers, words):
+    """Unique contiguous line partition matching top- or centre-aligned IDs."""
+    from functools import lru_cache
+    lines=text_lines(words)
+    if not identifiers or len(lines)<len(identifiers) or len(lines)>160:
+        return None
+    tops=[min(w.y0 for w in line) for line in lines]
+    bottoms=[max(w.y1 for w in line) for line in lines]
+    middles=[(a+b)/2 for a,b in zip(tops,bottoms)]
+    solutions=set()
+    for mode in ('top','center'):
+        @lru_cache(None)
+        def search(i,start):
+            if i==len(identifiers):
+                return [()] if start==len(lines) else []
+            choices=[]
+            for end in range(start+1,len(lines)-(len(identifiers)-i-1)+1):
+                target=middles[start] if mode=='top' else (tops[start]+bottoms[end-1])/2
+                if abs(target-identifiers[i].y)>3:
+                    continue
+                for tail in search(i+1,end):
+                    choices.append((end,)+tail)
+                    if len(choices)>=2:
+                        return choices
+            return choices
+        solutions.update(search(0,0))
+    if len(solutions)!=1:
+        return None
+    ends=next(iter(solutions));starts=(0,)+ends[:-1]
+    return [[w for line in lines[a:b] for w in line] for a,b in zip(starts,ends)]
 
 
 def region(words, x0, y0, x1, y1):
@@ -171,27 +207,25 @@ def extract_virtual(words, xs, horizontal, page, outer_closed):
             if rows: rows[-1]['requirement_sha256']=None
             else: issues.add('unbound_leading_band')
             continue
-        # A physical group can span several numbered items; only split at
-        # independently aligned first lines, not arbitrary equal-height rows.
+        # A group may hold multiple items, with IDs vertically centred on
+        # paragraphs. Every word is assigned once by a unique partition.
         ordered=sorted(idwords,key=lambda w:w.y)
         closed=outer_closed(xs[0],y0,y1) and outer_closed(xs[-1],y0,y1)
         bad=not closed or any(w.x0<x1<w.x1 or w.x0<x2<w.x1 or w.y0<y0-1 or w.y1>y1+1 for w in idwords+reqwords)
-        if any(w.y<ordered[0].y-3 for w in reqwords):
-            issues.add('unbound_leading_band' if not rows else 'unbound_requirement_band')
-            if rows: rows[-1]['requirement_sha256']=None
-            bad=True
+        parts=partition_group(ordered,reqwords)
+        if parts is None:
+            issues.add('ambiguous_item_line_partition')
+            if not rows: issues.add('unbound_leading_band')
         for j,ident in enumerate(ordered):
-            end=ordered[j+1].y-3 if j+1<len(ordered) else y1
-            begin=ident.y-3
-            bound=[w for w in reqwords if begin<=w.y<end]
-            aligned=any(abs(w.y-ident.y)<=3 for w in bound)
-            req=phrase(bound)
-            valid=not bad and aligned and bool(req)
+            bound=parts[j] if parts is not None else []
+            valid=not bad and bool(bound)
             if not valid: issues.add('unclosed_or_unaligned_virtual_band')
             seen_ids.append(ident.text)
+            begin=min((w.y0 for w in bound),default=y0)
+            end=max((w.y1 for w in bound),default=y1)
             rows.append({'item_id':ident.text,'identifier_anchor':anchor(page,ident.x0,ident.y0,ident.x1,ident.y1),
-                'requirement_anchor':anchor(page,x1,max(y0,begin),x2,end),
-                'requirement_sha256':fingerprint(req) if valid else None})
+                'requirement_anchor':anchor(page,x1,begin,x2,end),
+                'requirement_sha256':fingerprint(phrase(bound)) if valid else None})
     if Counter(seen_ids)!=Counter(w.text for w in ids):
         issues.add('unbound_header_ids')
         if rows: rows[-1]['requirement_sha256']=None
