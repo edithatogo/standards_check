@@ -11,6 +11,11 @@ import time
 from urllib.parse import quote, urlencode, urlsplit, urlunsplit
 from xml.etree import ElementTree as ET
 
+if __package__:
+    from .source_xml import parse_xml
+else:
+    from source_xml import parse_xml
+
 EUROPE = "www.ebi.ac.uk"
 PMC = "pmc.ncbi.nlm.nih.gov"
 CROSSREF = "api.crossref.org"
@@ -146,12 +151,9 @@ def convert_ids(kind: str, values: list[str], contact: str | None) -> dict:
 
 
 def oai_article(raw: bytes, pmcid: str) -> tuple[bytes, dict]:
-    if len(raw) > MAX_BYTES or not PMCID.fullmatch(pmcid) or re.search(rb"<!ENTITY", raw, re.I):
+    if not PMCID.fullmatch(pmcid):
         raise ValueError("invalid OAI response input")
-    try:
-        root = ET.fromstring(raw)
-    except ET.ParseError as exc:
-        raise ValueError("invalid OAI XML") from exc
+    root = parse_xml(raw, MAX_BYTES)
     record = root.find(f"{OAI}GetRecord/{OAI}record")
     if root.tag != OAI + "OAI-PMH" or record is None:
         raise ValueError("OAI record unavailable or reuse restricted")
@@ -174,15 +176,17 @@ def fetch_priority(pmcid: str) -> tuple[bytes | None, dict]:
         return raw, {"provider": "europe_pmc", "representation": "europe_pmc_primary_xml",
                      "response_sha256": hashlib.sha256(raw).hexdigest(), "response_bytes": len(raw),
                      "attempts": [{"provider": "europe_pmc", "status": "retrieved"}]}
-    except (OSError, http.client.HTTPException):
-        attempts.append({"provider": "europe_pmc", "status": "transport_or_http_failure"})
+    except (OSError, http.client.HTTPException) as exc:
+        attempts.append({"provider": "europe_pmc", "status": "transport_or_http_failure",
+                         "error_type": type(exc).__name__})
     # An alternative official endpoint, not an automatic replacement of existing pins.
     try:
         path = "/api/oai/v1/mh/?" + urlencode({"verb": "GetRecord", "identifier": "oai:pubmedcentral.nih.gov:" + pmcid[3:], "metadataPrefix": "pmc"})
         article, evidence = oai_article(fetch(PMC, path), pmcid)
         return article, {**evidence, "attempts": [*attempts, {"provider": "pmc_oai", "status": "retrieved"}]}
-    except (OSError, ValueError, http.client.HTTPException):
-        attempts.append({"provider": "pmc_oai", "status": "unavailable_or_held"})
+    except (OSError, ValueError, http.client.HTTPException) as exc:
+        attempts.append({"provider": "pmc_oai", "status": "unavailable_or_held",
+                         "error_type": type(exc).__name__})
         return None, {"attempts": attempts}
 
 

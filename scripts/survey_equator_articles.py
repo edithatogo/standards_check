@@ -15,14 +15,15 @@ from pathlib import Path
 import re
 import time
 from urllib.parse import urlencode
-from xml.etree import ElementTree as ET
 
 if __package__:
+    from .source_xml import parse_xml
     from .reconcile_authoritative_articles import (
         LICENCE, MAX_BYTES, ITEM_ID, content, digest, extract_table,
         parse_legacy, reconcile_items,
     )
 else:
+    from source_xml import parse_xml
     from reconcile_authoritative_articles import (
         LICENCE, MAX_BYTES, ITEM_ID, content, digest, extract_table,
         parse_legacy, reconcile_items,
@@ -162,12 +163,7 @@ def lookup(rows: list[dict]) -> tuple[list[dict], set[str], set[str]]:
 
 
 def scan_article(raw: bytes, spec: dict, root: Path | None) -> dict:
-    if not raw or len(raw) > MAX_BYTES or re.search(rb"<!ENTITY", raw, re.I):
-        raise ValueError("empty, oversized or entity-bearing article")
-    try:
-        article = ET.fromstring(raw)
-    except ET.ParseError as exc:
-        raise ValueError("invalid article XML") from exc
+    article = parse_xml(raw, MAX_BYTES)
     meta = article.find("./front/article-meta")
     if article.tag != "article" or meta is None:
         raise ValueError("missing primary article metadata")
