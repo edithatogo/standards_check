@@ -7,6 +7,7 @@ import hashlib
 import json
 from pathlib import Path
 import platform
+import re
 import resource
 import sys
 from tempfile import TemporaryDirectory
@@ -15,8 +16,20 @@ from zipfile import ZipFile
 
 from .classical_linguistic_nlp import compare, load_reference
 
+def reference_runtime_pin(path: Path) -> str:
+    """Use the same exact runtime pin that the qualification workflow installs."""
+    lines = [line.strip() for line in path.read_text(encoding='utf-8').splitlines()
+             if line.strip() and not line.lstrip().startswith('#')]
+    match = re.fullmatch(r'spacy==(\d+\.\d+\.\d+)', lines[0]) if len(lines) == 1 else None
+    if match is None:
+        raise ValueError('one exact spaCy pin required')
+    return match[1]
+
+
 MODEL = {
-    'name': 'en_core_web_sm', 'version': '3.8.0', 'spacy_version': '3.8.11',
+    'name': 'en_core_web_sm', 'version': '3.8.0',
+    'spacy_version': reference_runtime_pin(Path(__file__).resolve().parents[1] /
+                                           'requirements/classical-nlp-reference.txt'),
     'licence': 'MIT', 'bytes': 12806118,
     'sha256': '1932429db727d4bff3deed6b34cfc05df17794f4a52eeb26cf8928f7c1a0fb85',
     'release': 'https://github.com/explosion/spacy-models/releases/tag/en_core_web_sm-3.8.0',
@@ -165,7 +178,7 @@ def main() -> None:
     result.update(schema_version=1, model=MODEL if args.model_wheel else None, source_pins=pins,
                   python=platform.python_version(), platform=platform.platform(),
                   fixture_sha256=hashlib.sha256(json.dumps(cases, ensure_ascii=False).encode()).hexdigest(),
-                  label_origin='author-defined challenge labels; independent human review pending',
+                  label_origin='author-defined challenge labels; independent model-agent qualification pending',
                   claim_boundary='diagnostic benchmark; no semantic acceptance or pack promotion')
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + '\n')
