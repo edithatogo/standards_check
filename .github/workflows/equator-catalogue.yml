@@ -6,6 +6,11 @@ on:
       - "scripts/sync_equator_catalog.py"
       - "scripts/reconcile_equator_sources.py"
       - "scripts/equator_source_links.py"
+      - "scripts/survey_equator_articles.py"
+      - "scripts/reconcile_authoritative_articles.py"
+      - "scripts/jats_checklist_structure.py"
+      - "tests/test_survey_equator_articles.py"
+      - "source/official/priority-article-candidates.json"
       - "tests/test_equator_source_links.py"
       - "tests/test_reconcile_equator_sources.py"
       - "source/index.yml"
@@ -70,6 +75,12 @@ jobs:
             --source "$RUNNER_TEMP/equator-website" \
             --catalogue "$RUNNER_TEMP/equator-catalogue.json" \
             --output "$RUNNER_TEMP/equator-source-link-candidates.json"
+      - name: Resolve all catalogue identifiers and acquire selected primary OA candidates
+        run: |
+          python -m unittest tests.test_survey_equator_articles -v
+          python -m scripts.survey_equator_articles \
+            --catalogue "$RUNNER_TEMP/equator-catalogue.json" \
+            --output "$RUNNER_TEMP/equator-article-survey.json"
       - name: Report new, removed and changed published entries
         run: |
           python - <<'PY'
@@ -101,4 +112,5 @@ jobs:
             ${{ runner.temp }}/equator-catalogue.json
             ${{ runner.temp }}/equator-legacy-alignment.json
             ${{ runner.temp }}/equator-source-link-candidates.json
+            ${{ runner.temp }}/equator-article-survey.json
           if-no-files-found: warn
