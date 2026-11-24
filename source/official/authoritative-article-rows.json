@@ -1,0 +1,543 @@
+{
+  "schema_version": 1,
+  "claim_boundary": "Attributed selected CC BY 4.0 article-table extracts, normalized whitespace/structure. Source SHA-256 and ordered row digests are pinned in authoritative-article-editions.json; no Canonical Standard Pack or methodological admission.",
+  "evidence": "https://github.com/edithatogo/standards_check/actions/runs/45268251861/artifacts/14864257046",
+  "editions": [
+    {
+      "edition": "prisma-p-2015",
+      "doi": "10.1186/2046-4053-4-1",
+      "pmcid": "PMC4320440",
+      "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC4320440/fullTextXML",
+      "source_sha256": "c251b01d9809d36e0b7f4ffc46c717a1a9df6e263b98166f80f4885beeeb4b14",
+      "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Moher D, Shamseer L, Clarke M, et al. Preferred reporting items for systematic review and meta-analysis protocols (PRISMA-P) 2015 statement. Systematic Reviews 2015;4:1. DOI 10.1186/2046-4053-4-1. Table 3. CC BY 4.0; extraction changes whitespace and structure.",
+      "rows": [
+        {
+          "item_id": "1a",
+          "topic": "Identification",
+          "source_anchor": "Tab3:row:3:item:1a",
+          "text": "Identify the report as a protocol of a systematic review"
+        },
+        {
+          "item_id": "1b",
+          "topic": "Update",
+          "source_anchor": "Tab3:row:4:item:1b",
+          "text": "If the protocol is for an update of a previous systematic review, identify as such"
+        },
+        {
+          "item_id": "2",
+          "topic": "Registration",
+          "source_anchor": "Tab3:row:5:item:2",
+          "text": "If registered, provide the name of the registry (e.g., PROSPERO) and registration number"
+        },
+        {
+          "item_id": "3a",
+          "topic": "Contact",
+          "source_anchor": "Tab3:row:7:item:3a",
+          "text": "Provide name, institutional affiliation, and e-mail address of all protocol authors; provide physical mailing address of corresponding author"
+        },
+        {
+          "item_id": "3b",
+          "topic": "Contributions",
+          "source_anchor": "Tab3:row:8:item:3b",
+          "text": "Describe contributions of protocol authors and identify the guarantor of the review"
+        },
+        {
+          "item_id": "4",
+          "topic": "Amendments",
+          "source_anchor": "Tab3:row:9:item:4",
+          "text": "If the protocol represents an amendment of a previously completed or published protocol, identify as such and list changes; otherwise, state plan for documenting important protocol amendments"
+        },
+        {
+          "item_id": "5a",
+          "topic": "Sources",
+          "source_anchor": "Tab3:row:11:item:5a",
+          "text": "Indicate sources of financial or other support for the review"
+        },
+        {
+          "item_id": "5b",
+          "topic": "Sponsor",
+          "source_anchor": "Tab3:row:12:item:5b",
+          "text": "Provide name for the review funder and/or sponsor"
+        },
+        {
+          "item_id": "5c",
+          "topic": "Role of sponsor/funder",
+          "source_anchor": "Tab3:row:13:item:5c",
+          "text": "Describe roles of funder(s), sponsor(s), and/or institution(s), if any, in developing the protocol"
+        },
+        {
+          "item_id": "6",
+          "topic": "Rationale",
+          "source_anchor": "Tab3:row:15:item:6",
+          "text": "Describe the rationale for the review in the context of what is already known"
+        },
+        {
+          "item_id": "7",
+          "topic": "Objectives",
+          "source_anchor": "Tab3:row:16:item:7",
+          "text": "Provide an explicit statement of the question(s) the review will address with reference to participants, interventions, comparators, and outcomes (PICO)"
+        },
+        {
+          "item_id": "8",
+          "topic": "Eligibility criteria",
+          "source_anchor": "Tab3:row:18:item:8",
+          "text": "Specify the study characteristics (e.g., PICO, study design, setting, time frame) and report characteristics (e.g., years considered, language, publication status) to be used as criteria for eligibility for the review"
+        },
+        {
+          "item_id": "9",
+          "topic": "Information sources",
+          "source_anchor": "Tab3:row:19:item:9",
+          "text": "Describe all intended information sources (e.g., electronic databases, contact with study authors, trial registers, or other grey literature sources) with planned dates of coverage"
+        },
+        {
+          "item_id": "10",
+          "topic": "Search strategy",
+          "source_anchor": "Tab3:row:20:item:10",
+          "text": "Present draft of search strategy to be used for at least one electronic database, including planned limits, such that it could be repeated"
+        },
+        {
+          "item_id": "11a",
+          "topic": "Data management",
+          "source_anchor": "Tab3:row:22:item:11a",
+          "text": "Describe the mechanism(s) that will be used to manage records and data throughout the review"
+        },
+        {
+          "item_id": "11b",
+          "topic": "Selection process",
+          "source_anchor": "Tab3:row:23:item:11b",
+          "text": "State the process that will be used for selecting studies (e.g., two independent reviewers) through each phase of the review (i.e., screening, eligibility, and inclusion in meta-analysis)"
+        },
+        {
+          "item_id": "11c",
+          "topic": "Data collection process",
+          "source_anchor": "Tab3:row:24:item:11c",
+          "text": "Describe planned method of extracting data from reports (e.g., piloting forms, done independently, in duplicate), any processes for obtaining and confirming data from investigators"
+        },
+        {
+          "item_id": "12",
+          "topic": "Data items",
+          "source_anchor": "Tab3:row:25:item:12",
+          "text": "List and define all variables for which data will be sought (e.g., PICO items, funding sources), any pre-planned data assumptions and simplifications"
+        },
+        {
+          "item_id": "13",
+          "topic": "Outcomes and prioritization",
+          "source_anchor": "Tab3:row:26:item:13",
+          "text": "List and define all outcomes for which data will be sought, including prioritization of main and additional outcomes, with rationale"
+        },
+        {
+          "item_id": "14",
+          "topic": "Risk of bias in individual studies",
+          "source_anchor": "Tab3:row:27:item:14",
+          "text": "Describe anticipated methods for assessing risk of bias of individual studies, including whether this will be done at the outcome or study level, or both; state how this information will be used in data synthesis"
+        },
+        {
+          "item_id": "15a",
+          "topic": "Synthesis",
+          "source_anchor": "Tab3:row:29:item:15a",
+          "text": "Describe criteria under which study data will be quantitatively synthesized"
+        },
+        {
+          "item_id": "15b",
+          "topic": null,
+          "source_anchor": "Tab3:row:30:item:15b",
+          "text": "If data are appropriate for quantitative synthesis, describe planned summary measures, methods of handling data, and methods of combining data from studies, including any planned exploration of consistency (e.g., I 2, Kendall’s tau)"
+        },
+        {
+          "item_id": "15c",
+          "topic": null,
+          "source_anchor": "Tab3:row:31:item:15c",
+          "text": "Describe any proposed additional analyses (e.g., sensitivity or subgroup analyses, meta-regression)"
+        },
+        {
+          "item_id": "15d",
+          "topic": null,
+          "source_anchor": "Tab3:row:32:item:15d",
+          "text": "If quantitative synthesis is not appropriate, describe the type of summary planned"
+        },
+        {
+          "item_id": "16",
+          "topic": "Meta-bias(es)",
+          "source_anchor": "Tab3:row:33:item:16",
+          "text": "Specify any planned assessment of meta-bias(es) (e.g., publication bias across studies, selective reporting within studies)"
+        },
+        {
+          "item_id": "17",
+          "topic": "Confidence in cumulative evidence",
+          "source_anchor": "Tab3:row:34:item:17",
+          "text": "Describe how the strength of the body of evidence will be assessed (e.g., GRADE)"
+        }
+      ]
+    },
+    {
+      "edition": "prisma-s-2021",
+      "doi": "10.1186/s13643-020-01542-z",
+      "pmcid": "PMC7839230",
+      "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC7839230/fullTextXML",
+      "source_sha256": "e5c1036e41ce4be10864f830be8d9e38b277ab0b656c623675bedb813432ca8e",
+      "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Rethlefsen ML, Kirtley S, Waffenschmidt S, et al. PRISMA-S: an extension to the PRISMA Statement for Reporting Literature Searches in Systematic Reviews. Systematic Reviews 2021;10:39. DOI 10.1186/s13643-020-01542-z. Table 1. CC BY 4.0; extraction changes whitespace and structure.",
+      "rows": [
+        {
+          "item_id": "1",
+          "topic": "Database name",
+          "source_anchor": "Tab1:row:2:item:1",
+          "text": "Name each individual database searched, stating the platform for each."
+        },
+        {
+          "item_id": "2",
+          "topic": "Multi-database searching",
+          "source_anchor": "Tab1:row:3:item:2",
+          "text": "If databases were searched simultaneously on a single platform, state the name of the platform, listing all of the databases searched."
+        },
+        {
+          "item_id": "3",
+          "topic": "Study registries",
+          "source_anchor": "Tab1:row:4:item:3",
+          "text": "List any study registries searched."
+        },
+        {
+          "item_id": "4",
+          "topic": "Online resources and browsing",
+          "source_anchor": "Tab1:row:5:item:4",
+          "text": "Describe any online or print source purposefully searched or browsed (e.g., tables of contents, print conference proceedings, web sites), and how this was done."
+        },
+        {
+          "item_id": "5",
+          "topic": "Citation searching",
+          "source_anchor": "Tab1:row:6:item:5",
+          "text": "Indicate whether cited references or citing references were examined, and describe any methods used for locating cited/citing references (e.g., browsing reference lists, using a citation index, setting up email alerts for references citing included studies)."
+        },
+        {
+          "item_id": "6",
+          "topic": "Contacts",
+          "source_anchor": "Tab1:row:7:item:6",
+          "text": "Indicate whether additional studies or data were sought by contacting authors, experts, manufacturers, or others."
+        },
+        {
+          "item_id": "7",
+          "topic": "Other methods",
+          "source_anchor": "Tab1:row:8:item:7",
+          "text": "Describe any additional information sources or search methods used."
+        },
+        {
+          "item_id": "8",
+          "topic": "Full search strategies",
+          "source_anchor": "Tab1:row:10:item:8",
+          "text": "Include the search strategies for each database and information source, copied and pasted exactly as run."
+        },
+        {
+          "item_id": "9",
+          "topic": "Limits and restrictions",
+          "source_anchor": "Tab1:row:11:item:9",
+          "text": "Specify that no limits were used, or describe any limits or restrictions applied to a search (e.g., date or time period, language, study design) and provide justification for their use."
+        },
+        {
+          "item_id": "10",
+          "topic": "Search filters",
+          "source_anchor": "Tab1:row:12:item:10",
+          "text": "Indicate whether published search filters were used (as originally designed or modified), and if so, cite the filter(s) used."
+        },
+        {
+          "item_id": "11",
+          "topic": "Prior work",
+          "source_anchor": "Tab1:row:13:item:11",
+          "text": "Indicate when search strategies from other literature reviews were adapted or reused for a substantive part or all of the search, citing the previous review(s)."
+        },
+        {
+          "item_id": "12",
+          "topic": "Updates",
+          "source_anchor": "Tab1:row:14:item:12",
+          "text": "Report the methods used to update the search(es) (e.g., rerunning searches, email alerts)."
+        },
+        {
+          "item_id": "13",
+          "topic": "Dates of searches",
+          "source_anchor": "Tab1:row:15:item:13",
+          "text": "For each search strategy, provide the date when the last search occurred."
+        },
+        {
+          "item_id": "14",
+          "topic": "Peer review",
+          "source_anchor": "Tab1:row:17:item:14",
+          "text": "Describe any search peer review process."
+        },
+        {
+          "item_id": "15",
+          "topic": "Total records",
+          "source_anchor": "Tab1:row:19:item:15",
+          "text": "Document the total number of records identified from each database and other information sources."
+        },
+        {
+          "item_id": "16",
+          "topic": "Deduplication",
+          "source_anchor": "Tab1:row:20:item:16",
+          "text": "Describe the processes and any software used to deduplicate records from multiple database searches and other information sources."
+        }
+      ]
+    },
+    {
+      "edition": "prisma-abstracts-2020",
+      "doi": "10.1371/journal.pmed.1003583",
+      "pmcid": "PMC8007028",
+      "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8007028/fullTextXML",
+      "source_sha256": "31f1be514e423ab71b49291caa0bc3be9ff22fc2cfdb501bab80f2e8cbdbf55b",
+      "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Page MJ, McKenzie JE, Bossuyt PM, et al. The PRISMA 2020 statement: an updated guideline for reporting systematic reviews. PLOS Medicine 2021;18:e1003583. DOI 10.1371/journal.pmed.1003583. Table 2. CC BY 4.0; extraction changes whitespace and structure.",
+      "rows": [
+        {
+          "item_id": "1",
+          "topic": "Title",
+          "source_anchor": "pmed.1003583.t002:row:2:item:1",
+          "text": "Identify the report as a systematic review."
+        },
+        {
+          "item_id": "2",
+          "topic": "Objectives",
+          "source_anchor": "pmed.1003583.t002:row:4:item:2",
+          "text": "Provide an explicit statement of the main objective(s) or question(s) the review addresses."
+        },
+        {
+          "item_id": "3",
+          "topic": "Eligibility criteria",
+          "source_anchor": "pmed.1003583.t002:row:6:item:3",
+          "text": "Specify the inclusion and exclusion criteria for the review."
+        },
+        {
+          "item_id": "4",
+          "topic": "Information sources",
+          "source_anchor": "pmed.1003583.t002:row:7:item:4",
+          "text": "Specify the information sources (e.g. databases, registers) used to identify studies and the date when each was last searched."
+        },
+        {
+          "item_id": "5",
+          "topic": "Risk of bias",
+          "source_anchor": "pmed.1003583.t002:row:8:item:5",
+          "text": "Specify the methods used to assess risk of bias in the included studies."
+        },
+        {
+          "item_id": "6",
+          "topic": "Synthesis of results",
+          "source_anchor": "pmed.1003583.t002:row:9:item:6",
+          "text": "Specify the methods used to present and synthesise results."
+        },
+        {
+          "item_id": "7",
+          "topic": "Included studies",
+          "source_anchor": "pmed.1003583.t002:row:11:item:7",
+          "text": "Give the total number of included studies and participants and summarise relevant characteristics of studies."
+        },
+        {
+          "item_id": "8",
+          "topic": "Synthesis of results",
+          "source_anchor": "pmed.1003583.t002:row:12:item:8",
+          "text": "Present results for main outcomes, preferably indicating the number of included studies and participants for each. If meta-analysis was done, report the summary estimate and confidence/credible interval. If comparing groups, indicate the direction of the effect (i.e. which group is favoured)."
+        },
+        {
+          "item_id": "9",
+          "topic": "Limitations of evidence",
+          "source_anchor": "pmed.1003583.t002:row:14:item:9",
+          "text": "Provide a brief summary of the limitations of the evidence included in the review (e.g. study risk of bias, inconsistency and imprecision)."
+        },
+        {
+          "item_id": "10",
+          "topic": "Interpretation",
+          "source_anchor": "pmed.1003583.t002:row:15:item:10",
+          "text": "Provide a general interpretation of the results and important implications."
+        },
+        {
+          "item_id": "11",
+          "topic": "Funding",
+          "source_anchor": "pmed.1003583.t002:row:17:item:11",
+          "text": "Specify the primary source of funding for the review."
+        },
+        {
+          "item_id": "12",
+          "topic": "Registration",
+          "source_anchor": "pmed.1003583.t002:row:18:item:12",
+          "text": "Provide the register name and registration number."
+        }
+      ]
+    },
+    {
+      "edition": "cheers-2022",
+      "doi": "10.1186/s12889-021-12491-0",
+      "pmcid": "PMC8793177",
+      "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8793177/fullTextXML",
+      "source_sha256": "d9554be50b55b0669d06a4d08ef3dff63b5b2dd0d253ecbf223c465c9e3135b8",
+      "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Husereau D, Drummond M, Augustovski F, et al. Consolidated Health Economic Evaluation Reporting Standards 2022 (CHEERS 2022) statement: updated reporting guidance for health economic evaluations. BMC Public Health 2022. DOI 10.1186/s12889-021-12491-0. Table 1. CC BY 4.0; extraction changes whitespace and structure. This exact co-publication is selected, not the legacy BMJ source.",
+      "rows": [
+        {
+          "item_id": "1",
+          "topic": "Title",
+          "source_anchor": "Tab1:row:2:item:1",
+          "text": "Identify the study as an economic evaluation and specify the interventions being compared."
+        },
+        {
+          "item_id": "2",
+          "topic": "Abstract",
+          "source_anchor": "Tab1:row:4:item:2",
+          "text": "Provide a structured summary that highlights context, key methods, results, and alternative analyses."
+        },
+        {
+          "item_id": "3",
+          "topic": "Background and objectives",
+          "source_anchor": "Tab1:row:6:item:3",
+          "text": "Give the context for the study, the study question, and its practical relevance for decision making in policy or practice."
+        },
+        {
+          "item_id": "4",
+          "topic": "Health economic analysis plan",
+          "source_anchor": "Tab1:row:8:item:4",
+          "text": "Indicate whether a health economic analysis plan was developed and where available."
+        },
+        {
+          "item_id": "5",
+          "topic": "Study population",
+          "source_anchor": "Tab1:row:9:item:5",
+          "text": "Describe characteristics of the study population (such as age range, demographics, socioeconomic, or clinical characteristics)."
+        },
+        {
+          "item_id": "6",
+          "topic": "Setting and location",
+          "source_anchor": "Tab1:row:10:item:6",
+          "text": "Provide relevant contextual information that may influence findings."
+        },
+        {
+          "item_id": "7",
+          "topic": "Comparators",
+          "source_anchor": "Tab1:row:11:item:7",
+          "text": "Describe the interventions or strategies being compared and why chosen."
+        },
+        {
+          "item_id": "8",
+          "topic": "Perspective",
+          "source_anchor": "Tab1:row:12:item:8",
+          "text": "State the perspective(s) adopted by the study and why chosen."
+        },
+        {
+          "item_id": "9",
+          "topic": "Time horizon",
+          "source_anchor": "Tab1:row:13:item:9",
+          "text": "State the time horizon for the study and why appropriate."
+        },
+        {
+          "item_id": "10",
+          "topic": "Discount rate",
+          "source_anchor": "Tab1:row:14:item:10",
+          "text": "Report the discount rate(s) and reason chosen."
+        },
+        {
+          "item_id": "11",
+          "topic": "Selection of outcomes",
+          "source_anchor": "Tab1:row:15:item:11",
+          "text": "Describe what outcomes were used as the measure(s) of benefit(s) and harm(s)."
+        },
+        {
+          "item_id": "12",
+          "topic": "Measurement of outcomes",
+          "source_anchor": "Tab1:row:16:item:12",
+          "text": "Describe how outcomes used to capture benefit(s) and harm(s) were measured."
+        },
+        {
+          "item_id": "13",
+          "topic": "Valuation of outcomes",
+          "source_anchor": "Tab1:row:17:item:13",
+          "text": "Describe the population and methods used to measure and value outcomes."
+        },
+        {
+          "item_id": "14",
+          "topic": "Measurement and valuation of resources and costs",
+          "source_anchor": "Tab1:row:18:item:14",
+          "text": "Describe how costs were valued."
+        },
+        {
+          "item_id": "15",
+          "topic": "Currency, price date, and conversion",
+          "source_anchor": "Tab1:row:19:item:15",
+          "text": "Report the dates of the estimated resource quantities and unit costs, plus the currency and year of conversion."
+        },
+        {
+          "item_id": "16",
+          "topic": "Rationale and description of model",
+          "source_anchor": "Tab1:row:20:item:16",
+          "text": "If modelling is used, describe in detail and why used. Report if the model is publicly available and where it can be accessed."
+        },
+        {
+          "item_id": "17",
+          "topic": "Analytics and assumptions",
+          "source_anchor": "Tab1:row:21:item:17",
+          "text": "Describe any methods for analysing or statistically transforming data, any extrapolation methods, and approaches for validating any model used."
+        },
+        {
+          "item_id": "18",
+          "topic": "Characterising heterogeneity",
+          "source_anchor": "Tab1:row:22:item:18",
+          "text": "Describe any methods used for estimating how the results of the study vary for subgroups."
+        },
+        {
+          "item_id": "19",
+          "topic": "Characterising distributional effects",
+          "source_anchor": "Tab1:row:23:item:19",
+          "text": "Describe how impacts are distributed across different individuals or adjustments made to reflect priority populations."
+        },
+        {
+          "item_id": "20",
+          "topic": "Characterising uncertainty",
+          "source_anchor": "Tab1:row:24:item:20",
+          "text": "Describe methods to characterise any sources of uncertainty in the analysis."
+        },
+        {
+          "item_id": "21",
+          "topic": "Approach to engagement with patients and others affected by the study",
+          "source_anchor": "Tab1:row:25:item:21",
+          "text": "Describe any approaches to engage patients or service recipients, the general public, communities, or stakeholders (such as clinicians or payers) in the design of the study."
+        },
+        {
+          "item_id": "22",
+          "topic": "Study parameters",
+          "source_anchor": "Tab1:row:27:item:22",
+          "text": "Report all analytic inputs (such as values, ranges, references) including uncertainty or distributional assumptions."
+        },
+        {
+          "item_id": "23",
+          "topic": "Summary of main results",
+          "source_anchor": "Tab1:row:28:item:23",
+          "text": "Report the mean values for the main categories of costs and outcomes of interest and summarise them in the most appropriate overall measure."
+        },
+        {
+          "item_id": "24",
+          "topic": "Effect of uncertainty",
+          "source_anchor": "Tab1:row:29:item:24",
+          "text": "Describe how uncertainty about analytic judgments, inputs, or projections affect findings. Report the effect of choice of discount rate and time horizon, if applicable."
+        },
+        {
+          "item_id": "25",
+          "topic": "Effect of engagement with patients and others affected by the study",
+          "source_anchor": "Tab1:row:30:item:25",
+          "text": "Report on any difference patient/service recipient, general public, community, or stakeholder involvement made to the approach or findings of the study"
+        },
+        {
+          "item_id": "26",
+          "topic": "Study findings, limitations, generalisability, and current knowledge",
+          "source_anchor": "Tab1:row:32:item:26",
+          "text": "Report key findings, limitations, ethical or equity considerations not captured, and how these could affect patients, policy, or practice."
+        },
+        {
+          "item_id": "27",
+          "topic": "Source of funding",
+          "source_anchor": "Tab1:row:34:item:27",
+          "text": "Describe how the study was funded and any role of the funder in the identification, design, conduct, and reporting of the analysis"
+        },
+        {
+          "item_id": "28",
+          "topic": "Conflicts of interest",
+          "source_anchor": "Tab1:row:35:item:28",
+          "text": "Report authors conflicts of interest according to journal or International Committee of Medical Journal Editors requirements."
+        }
+      ]
+    }
+  ]
+}

@@ -91,7 +91,7 @@ def scan_local(root: Path, item: dict) -> tuple[list[dict], list[str], dict | No
     assets = []
     for level in ("archetypes", "variants"):
         folder = root / "source" / level
-        for ext in (".pdf", ".docx", ".csv", ".html", ".txt"):
+        for ext in (".pdf", ".docx", ".csv", ".xlsx", ".html", ".txt"):
             path = folder / (ident + ext)
             if path.is_file() and not path.is_symlink():
                 assets.append({"path": path.relative_to(root).as_posix(), "sha256": sha256(path)})
@@ -141,7 +141,7 @@ def scan_alias_assets(root: Path, item: dict, known_ids: set[str]) -> list[dict]
                 and str(record.get("version")) == str(item.get("version"))
             ):
                 continue
-            for ext in (".pdf", ".docx", ".csv", ".html", ".txt"):
+            for ext in (".pdf", ".docx", ".csv", ".xlsx", ".html", ".txt"):
                 original = folder / (sidecar.stem + ext)
                 if not original.is_file() or original.is_symlink():
                     continue

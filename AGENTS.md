@@ -7,6 +7,7 @@
 - The document pipeline below is a legacy compatibility surface. Its generated views are not
   canonical Standard Packs and do not establish source rights or methodological validity.
 - Keep exact-commit verification receipts and remaining gates in the existing Conductor tracks.
+- For source acquisition, extraction changes, drift or session close-out, use `.agents/skills/source-reconciliation-retrospective/SKILL.md` and the deterministic receipt review before proposing refinements.
 
 ## Project Structure & Module Organization
 - Pipeline: `source/` → `markdown/` → `typst/` → `latex/`.
