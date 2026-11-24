@@ -58,3 +58,22 @@ SLSA are not selected by the registered baseline; future release applicability r
 The implementation receipt names main `dd3f995`. A later documentation-only commit records
 that accepted result and does not create a recursive requirement to qualify another
 implementation revision. See [verification](verification.md) and [metadata](metadata.json).
+
+
+## 24 November: Ponytail solo-maintainer refinement
+
+- [x] Existing required ALint, workflow syntax/Zizmor, CodeQL, privacy/secrets,
+  coverage, mutation, dependency inventories and protected-main checks are present.
+  RepoHealth and OpenSSF remain diagnostic workflows, not substitutes for the required gates.
+- [ ] Qualify the grouped routine Renovate proposal across maintained managers and lockfiles;
+  keep security fixes and breaking upgrades separately reviewable. Dependabot remains
+  grouped and available until a protected Renovate handover is observed. Do not assert
+  that the newest versions are installed merely because the bot proposes them.
+- [ ] Verify focused pre-commit lint configuration and the offline quick profile in the
+  receiving checkout. Reuse existing CI instead of adding another full duplicate matrix.
+- [ ] Qualify the shared Rust dependency policy (#131), and the source-XML boundary
+  mutation regression and resumed acquisition (#142), on their exact receiving revisions.
+  Distinguish seeded parser mutation tests from native coverage-guided fuzz campaigns.
+- [ ] Retain the independent offline security/runner, reproducibility and publication
+  gates. Required ruleset, zero-human-approval protection, review resolution and no
+  bypass remain unchanged. See #30, #31 and #116.
