@@ -15,7 +15,7 @@ validity, source reconciliation, external accessibility certification, rights or
 | 05 | [Maximal assurance, release and external validation](tracks/05-maximal-assurance/spec.md) | short to long | 00–03 now; 04 for ecosystem release | in progress (operations/release) | Bounded assurance, coverage, CodeQL fixes, ruleset and Pages repair accepted | implementation main `dd3f995`; [verification](tracks/05-maximal-assurance/verification.md); docs PR #108 | [#29](https://github.com/edithatogo/standards_check/issues/29) closed; [#30](https://github.com/edithatogo/standards_check/issues/30) updater/offline runner and broader release/external gates open |
 
 Revision-bound receipts and open gates are retained in each active track's metadata, plan and
-evidence file. PR #60 is now based on `main`; PR #59 is no longer an open merge dependency.
+evidence file. PR #60's historical hosted acceptance and PR #59's merge are retained; neither is an open merge dependency.
 The detailed sequencing and later capabilities remain in [`roadmap.md`](./roadmap.md).
 
 ## Current reconciliation
@@ -36,9 +36,8 @@ For new reporting checklists or diagrams, follow the single
 copying or admission of held sources. [#82](https://github.com/edithatogo/standards_check/issues/82)
 owns PRISMA interpretation and semantic migration; [#95](https://github.com/edithatogo/standards_check/issues/95)
 owns the unqualified historical guideline copies. The [EQUATOR directory issue #111](https://github.com/edithatogo/standards_check/issues/111)
-owns descriptive source discovery and the future Searchright consumer handoff;
-[PR #112](https://github.com/edithatogo/standards_check/pull/112) is its separate
-source-only candidate. Track 04 remains **planned**: do not build an adapter or
+owns source discovery, rights-aware acquisition and the future Searchright consumer handoff.
+[PR #112](https://github.com/edithatogo/standards_check/pull/112) merged the source directory; [#127](https://github.com/edithatogo/standards_check/pull/127), [#129](https://github.com/edithatogo/standards_check/pull/129) and [#130](https://github.com/edithatogo/standards_check/pull/130) merged the legacy crosswalk, source-link leads and local text triage. [#132](https://github.com/edithatogo/standards_check/pull/132) merged the retained 82-row primary article candidate ledger, and [#134–138](https://github.com/edithatogo/standards_check/pull/138) advanced bounded structural extraction and comparison. These are not additional admitted packs. [#139](https://github.com/edithatogo/standards_check/pull/139) is the catalogue-wide batch candidate; see [Track 01 Phase 5](tracks/01-canonical-standard-pack/plan.md). Track 04 remains **planned**: do not build an adapter or
 scaffold until the pinned consumer contract and tests are ready.
 
 ### Earlier historical receipts

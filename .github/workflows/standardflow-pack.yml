@@ -16,6 +16,8 @@ on:
       - "scripts/build_prisma42_candidate.py"
       - "scripts/compare_prisma_source_pdf.py"
       - "scripts/reconcile_authoritative_articles.py"
+      - "scripts/review_source_receipts.py"
+      - "tests/test_review_source_receipts.py"
       - "scripts/jats_checklist_structure.py"
       - "scripts/legacy_checklist_structure.py"
       - "tests/test_legacy_checklist_structure.py"
@@ -44,6 +46,8 @@ on:
       - "scripts/build_prisma42_candidate.py"
       - "scripts/compare_prisma_source_pdf.py"
       - "scripts/reconcile_authoritative_articles.py"
+      - "scripts/review_source_receipts.py"
+      - "tests/test_review_source_receipts.py"
       - "scripts/jats_checklist_structure.py"
       - "scripts/legacy_checklist_structure.py"
       - "tests/test_legacy_checklist_structure.py"
@@ -194,6 +198,12 @@ jobs:
           python -m scripts.reconcile_authoritative_articles \
             --output "$RUNNER_TEMP/authoritative-article-offline-reconciliation.json" \
             --require-all
+      - name: Review retained source evidence and prioritize discrepancies
+        run: |
+          python -m unittest tests.test_review_source_receipts -v
+          python -m scripts.review_source_receipts \
+            --receipt "$RUNNER_TEMP/authoritative-article-offline-reconciliation.json" \
+            --output "$RUNNER_TEMP/authoritative-article-retrospective.json"
       - name: Determine whether primary-source re-acquisition is needed
         id: source_change
         env:
@@ -241,6 +251,7 @@ jobs:
           name: authoritative-article-reconciliation
           path: |
             ${{ runner.temp }}/authoritative-article-offline-reconciliation.json
+            ${{ runner.temp }}/authoritative-article-retrospective.json
             ${{ runner.temp }}/authoritative-article-reconciliation.json
           if-no-files-found: error
           retention-days: 90

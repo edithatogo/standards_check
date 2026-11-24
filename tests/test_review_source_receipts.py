@@ -1,5 +1,9 @@
+import json
+from pathlib import Path
+import tempfile
 import unittest
-from scripts.review_source_receipts import review
+from unittest.mock import patch
+from scripts.review_source_receipts import review, main
 
 
 def receipt(*rows, articles=()):
@@ -55,6 +59,34 @@ class ReceiptReviewTests(unittest.TestCase):
         self.assertIn("structural_drift", review(receipt(articles=[changed]), receipt(articles=[old]))["finding_counts"])
         lost = {**old, "source_sha256": None, "tables": []}
         self.assertIn("evidence_lost", review(receipt(articles=[lost]), receipt(articles=[old]))["finding_counts"])
+
+    def test_retained_table_without_structure_and_missing_licence_are_evidence_loss(self):
+        before = {"edition": "fixture", "status": "table_items_extracted_legacy_compared",
+                  "pmid": "123", "doi": "10.1234/test", "pmcid": "PMC42",
+                  "source": {"source_sha256": "a", "table_id": "T", "table_rows_sha256": "b",
+                             "licence": "CC-BY-4.0", "structure": {"rows": [{"row": 1}]}}}
+        for field in ("structure", "licence"):
+            current = {**before, "source": {k:v for k,v in before["source"].items() if k != field}}
+            self.assertIn("evidence_lost", review({"editions": [current]}, {"editions": [before]})["finding_counts"])
+        for field in ("pmid", "pmcid", "doi"):
+            current = {k:v for k,v in before.items() if k != field}
+            self.assertIn("evidence_lost", review({"editions": [current]}, {"editions": [before]})["finding_counts"])
+
+    def test_cli_reports_hashes_and_candidate_only_status(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            current, previous, output = root / "current.json", root / "previous.json", root / "review.json"
+            previous.write_text(json.dumps(receipt({"id": "equator:a", "status": "oa_xml_candidate", "pmid": "123"})))
+            current.write_text(json.dumps(receipt({"id": "equator:a", "status": "identifier_conflict", "pmid": "456"},
+                                                  {"id": "equator:b", "status": "held"})))
+            with patch("sys.argv", ["review", "--receipt", str(current), "--baseline", str(previous), "--output", str(output)]):
+                main()
+            result = json.loads(output.read_text())
+            self.assertEqual(result["finding_counts"]["identity_or_licence_changed"], 1)
+            self.assertEqual(result["finding_counts"]["source_held"], 1)
+            self.assertEqual(result["finding_counts"]["new_record"], 1)
+            self.assertEqual(len(result["receipt_sha256"]), 64)
+            self.assertEqual(len(result["baseline_sha256"]), 64)
 
     def test_same_receipt_no_new_drift(self):
         a = receipt({"id": "equator:a", "status": "oa_xml_candidate"})

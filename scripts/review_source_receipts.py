@@ -88,9 +88,12 @@ def review(current: dict, baseline: dict | None = None) -> dict:
                 findings.add(("legacy_text_discrepancy", key))
         if key in before:
             old_hashes, old_identity, old_tables, old_objects = observed(before[key])
-            if any(a and not b for a, b in zip(old_hashes, hashes)) or (old_tables and not tables):
+            if any(a and not b for a, b in zip(old_hashes + old_identity, hashes + identity)) or (old_tables and not tables):
                 findings.add(("evidence_lost", key))
             old_structure = {t.get("table_id"): t.get("structure") for t in old_objects if t.get("structure")}
+            current_structure = {t.get("table_id"): t.get("structure") for t in objects if t.get("structure")}
+            if old_structure.keys() - current_structure.keys():
+                findings.add(("evidence_lost", key))
             if any(t.get("structure") and t.get("table_id") in old_structure and
                    t["structure"] != old_structure[t.get("table_id")] for t in objects):
                 findings.add(("structural_drift", key))
