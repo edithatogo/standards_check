@@ -148,6 +148,10 @@ measurement, receiving CI and resumed live acquisition (#142). No NLI or model
 runtime is required. Existing runtime status is unchanged. Refs #111/#95/#82;
 Track 05 independent qualification and Track 04 consumer handoff remain separate.
 
-### Experimental semantic comparator and blinded subagents
+### Independent EcoEvo geometry follow-up
 
-See [semantic reconciliation qualification](semantic-reconciliation-qualification.md): family-disjoint synthetic reference benchmark, separate local CPU inference and development-only thresholds. Replace human labelling with two independent, blinded, pinned model-agent processes on actual source-derived and observed candidate pairs. Keep T01.5d/e open until a real-source consensus and held-out error receipt exists; T01.5f/g gated by measured residuals. No automatic admission.
+See [EcoEvo geometric reconstruction](ecoevo-pdf-geometry.md); independent native vector and Poppler raster/word geometry replaces one-line header assumption. Closed-band and page-tail qualification, actual 89-item replay and pairwise comparison required. Source/rights gates remain held.
+
+### Five-class blinded adjudication and comparator qualification
+
+See [semantic reconciliation qualification](semantic-reconciliation-qualification.md). T01.5d/e: retain the prior synthetic and first blinded receipt; improve insufficient agreement using numbered evidence spans and stronger separately pinned model-agent processes, freeze a family-disjoint five-class controlled benchmark from actual pinned source rows and separate natural candidate pairs. T01.5f/g: one additional NLI comparator only on a predeclared material baseline deficit against independent formal controls or qualified agent consensus. No automatic admission; insufficient consensus stays held. No human labelling or adjudication in this benchmark.
