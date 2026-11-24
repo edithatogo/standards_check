@@ -38,3 +38,13 @@ class VirtualGridTests(unittest.TestCase):
         self.assertEqual(len(rows),1)
         self.assertIsNone(rows[0]['requirement_sha256'])
         self.assertIn('unclosed_trailing_text',issues)
+
+    def test_typographic_comparison_preserves_hyphen_and_superscript(self):
+        from scripts.ecoevo_pdf_grid import Word, fidelity_fields, phrase
+        words=[Word(10,10,30,20,'time-'),Word(10,22,45,32,'stamped'),
+               Word(50,22,55,32,'I'),Word(55.3,20,58,26,'2'),Word(58.3,25,60,32,',')]
+        evidence=fidelity_fields(words,True)
+        self.assertEqual(evidence['requirement_sha256'],fingerprint(phrase(words)))
+        self.assertEqual(evidence['layout_normalized_sha256'],fingerprint('time-stamped I2,'))
+        self.assertEqual(evidence['layout_events'],{'line_end_hyphen':1,'superscript_join':1,'superscript_punctuation_join':1})
+        self.assertIsNone(fidelity_fields(words,False)['layout_normalized_sha256'])

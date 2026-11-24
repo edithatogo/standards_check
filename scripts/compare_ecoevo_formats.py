@@ -95,6 +95,14 @@ def compare_formats(left: list[dict], right: list[dict]) -> dict:
             "not_comparable_expected_ids": [item for item in EXPECTED_IDS if item not in common]}
 
 
+def layout_comparison_rows(rows: list[dict]) -> list[dict]:
+    """Use the separately recorded typography diagnostic only for complete rows."""
+    return [{**row, "requirement_sha256": (
+        row.get("layout_normalized_sha256", row["requirement_sha256"])
+        if row["requirement_sha256"] is not None else None
+    )} for row in rows]
+
+
 def pdf_tables(raw: bytes) -> dict:
     """Bounded ruled-table experiment with the existing pdfplumber engine."""
     import pdfplumber
@@ -212,17 +220,25 @@ def benchmark(report: dict, root: Path | None = None, official: Path | None = No
         if path.endswith(".pdf") and "poppler_rows" in source:
             independent = source["poppler_rows"]
             source["pdf_independent_row_comparison"] = compare_formats(rows, independent)
+            source["pdf_independent_layout_comparison"] = compare_formats(layout_comparison_rows(rows), layout_comparison_rows(independent))
             source["poppler_exact_expected_order"] = [row["item_id"] for row in independent] == EXPECTED_IDS
         results.append(source)
     for source in results:
         if "poppler_rows" in source:
+            source["poppler_layout_vs_other_formats"] = [
+                {"path": other["path"], **compare_formats(layout_comparison_rows(source["poppler_rows"]), layout_comparison_rows(other["rows"]))}
+                for other in results if other is not source
+            ]
             source["poppler_vs_other_formats"] = [
                 {"path": other["path"], **compare_formats(source["poppler_rows"], other["rows"])}
                 for other in results if other is not source
             ]
     return {"edition": "PRISMA-EcoEvo 2021 v1.0", "doi": "10.1111/brv.12721", "numbering_reference": REFERENCE,
             "expected_item_ids": EXPECTED_IDS, "claim_boundary": "candidate structural comparison; no rights, authority or admission",
-            "sources": results, "pairwise": [{"left": a["path"], "right": b["path"], **compare_formats(a["rows"], b["rows"])}
+            "sources": results,
+            "layout_pairwise": [{"left": a["path"], "right": b["path"], **compare_formats(layout_comparison_rows(a["rows"]), layout_comparison_rows(b["rows"]))}
+                                for a, b in combinations(results, 2)],
+            "pairwise": [{"left": a["path"], "right": b["path"], **compare_formats(a["rows"], b["rows"])}
                                                for a, b in combinations(results, 2)], "canonical_packs_promoted": 0}
 
 

@@ -93,6 +93,43 @@ def partition_group(identifiers, words):
     return [[w for line in lines[a:b] for w in line] for a,b in zip(starts,ends)]
 
 
+def fidelity_fields(words, valid):
+    """Additional layout-aware digest; original strict text digest is retained."""
+    if not valid:
+        return {'requirement_sha256':None,'layout_normalized_sha256':None,'layout_events':{}}
+    events=Counter();attached={};removed=set()
+    # Reattach smaller, raised numeric glyph boxes to their unique adjacent
+    # base word; do not join ordinary baseline numerals or distant tokens.
+    for number in words:
+        if not re.fullmatch(r'\d+[,.;:]?',number.text):
+            continue
+        candidates=[base for base in words if base.text[-1:].isalpha()
+            and -1<=number.x0-base.x1<=2 and number.y0<base.y0+.5
+            and number.y1>=base.y0 and number.y1-number.y0<=.85*(base.y1-base.y0)]
+        if len(candidates)!=1 or candidates[0] in attached:
+            continue
+        base=candidates[0];attached[base]=number.text;removed.add(number);events['superscript_join']+=1
+        punctuation=[w for w in words if re.fullmatch(r'[,.;:)]',w.text)
+            and -1<=w.x0-number.x1<=2 and w.y0<=base.y1 and w.y1>=base.y0]
+        if len(punctuation)==1 and punctuation[0] not in removed:
+            attached[base]+=punctuation[0].text;removed.add(punctuation[0]);events['superscript_punctuation_join']+=1
+    parts=[]
+    for line in text_lines([w for w in words if w not in removed]):
+        for i,word in enumerate(line):
+            value=word.text+attached.get(word,'')
+            if i==0 and parts and parts[-1].endswith('-') and value[:1].isalpha():
+                parts[-1]+=value;events['line_end_hyphen']+=1
+            else:
+                parts.append(value)
+    return {'requirement_sha256':fingerprint(phrase(words)),
+            'layout_normalized_sha256':fingerprint(' '.join(parts)),'layout_events':dict(events)}
+
+
+def hold(row):
+    row['requirement_sha256']=None
+    row['layout_normalized_sha256']=None
+
+
 def region(words, x0, y0, x1, y1):
     return [w for w in words if x0 <= w.x < x1 and y0 <= w.y < y1]
 
@@ -113,7 +150,7 @@ def hold_unclosed_tail(words, x0, x2, bottom, rows, issues):
             continue
         if any(x0<=w.x<x2 for w in line):
             issues.add('unclosed_trailing_text')
-            if rows: rows[-1]['requirement_sha256']=None
+            if rows: hold(rows[-1])
             break
 
 
@@ -133,7 +170,8 @@ def extract_grid(words, xs, horizontal, page, vertical=lambda x, a, b: True):
     rows,issues=[],set()
     for y0,y1 in zip(ys[start:],ys[start+1:]):
         identifier=phrase(region(words,x0,y0,x1,y1)).strip()
-        req=phrase(region(words,x1,y0,x2,y1))
+        reqwords=region(words,x1,y0,x2,y1)
+        req=phrase(reqwords)
         if not identifier and not req:
             continue
         if not ID.fullmatch(identifier):
@@ -141,14 +179,14 @@ def extract_grid(words, xs, horizontal, page, vertical=lambda x, a, b: True):
             if not rows:
                 issues.add('unbound_leading_band')
             if rows:
-                rows[-1]['requirement_sha256']=None
+                hold(rows[-1])
             continue
         closed=all(vertical(x,y0,y1) for x in (x0,x1,x2))
         if not closed:
             issues.add('unclosed_row_geometry')
         rows.append({'item_id':identifier, 'identifier_anchor':anchor(page,x0,y0,x1,y1),
                      'requirement_anchor':anchor(page,x1,y0,x2,y1),
-                     'requirement_sha256':fingerprint(req) if req and closed else None})
+                     **fidelity_fields(reqwords,bool(req and closed))})
         if not req:
             issues.add('empty_requirement')
     hold_unclosed_tail(words,x0,x2,ys[-1],rows,issues)
@@ -220,7 +258,7 @@ def extract_virtual(words, xs, horizontal, page, outer_closed):
             continue
         if not idwords or any(not ID.fullmatch(w.text) for w in idwords):
             issues.add('unbound_requirement_band')
-            if rows: rows[-1]['requirement_sha256']=None
+            if rows: hold(rows[-1])
             else: issues.add('unbound_leading_band')
             continue
         # A group may hold multiple items, with IDs vertically centred on
@@ -241,11 +279,11 @@ def extract_virtual(words, xs, horizontal, page, outer_closed):
             end=max((w.y1 for w in bound),default=y1)
             rows.append({'item_id':ident.text,'identifier_anchor':anchor(page,ident.x0,ident.y0,ident.x1,ident.y1),
                 'requirement_anchor':anchor(page,x1,begin,x2,end),
-                'requirement_sha256':fingerprint(phrase(bound)) if valid else None})
+                **fidelity_fields(bound,valid)})
     hold_unclosed_tail(words,x0,x2,ys[-1],rows,issues)
     if Counter(seen_ids)!=Counter(w.text for w in ids):
         issues.add('unbound_header_ids')
-        if rows: rows[-1]['requirement_sha256']=None
+        if rows: hold(rows[-1])
     return rows,sorted(issues),evidence
 
 
@@ -262,12 +300,12 @@ def finish(parser, pages):
     rows=[];issues=set();geometry=[]
     for page, (items, problems, evidence) in enumerate(pages,1):
         if rows and ('unbound_leading_band' in problems or 'header_not_unique' in problems):
-            rows[-1]['requirement_sha256']=None
+            hold(rows[-1])
         rows.extend(items);issues.update(problems);geometry.append({'page':page,**evidence})
     counts=Counter(r['item_id'] for r in rows)
     for row in rows:
         if counts[row['item_id']]>1:
-            row['requirement_sha256']=None;issues.add('duplicate_id')
+            hold(row);issues.add('duplicate_id')
     return {'parser':parser,'rows':rows,'issues':sorted(issues),'geometry':geometry}
 
 
