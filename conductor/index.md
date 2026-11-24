@@ -28,6 +28,7 @@
 ## Agent capability
 
 - [Conductor router](../.agents/skills/conductor/SKILL.md)
+- [Source reconciliation retrospective](../.agents/skills/source-reconciliation-retrospective/SKILL.md) — evidence-led session and extraction review; [initial receipt](source-reconciliation/retrospective-20261124.md).
 - Exact upstream plugin gitlink: `.agents/plugins/conductor`
 - Expected upstream revision: `metadata.revision` in the [router](../.agents/skills/conductor/SKILL.md),
   checked against the gitlink by `scripts/audit_foundation.py`.
