@@ -101,3 +101,72 @@ def test_absent_family_is_reported_without_pairwise_success(tmp_path):
     edition = result["editions"][0]
     assert edition["status"] == "held_no_candidate_sources"
     assert not edition["pairwise"]
+
+
+def test_pinned_article_snapshot_is_compared_without_raw_text():
+    from dataclasses import replace
+
+    cohort = next(p for p in profiles(Path(".")) if p.edition == "cheers-2022")
+    result = benchmark(Path("."), [replace(cohort, paths=())])
+    source = result["editions"][0]["sources"][0]
+    assert source["format"] == "jats_snapshot"
+    assert source["expected_ids_recovered"] == 28
+    assert source["identity"] == "retained_table_snapshot_matches_pinned_rows"
+    assert len(source["table_rows_sha256"]) == 64
+    assert all(len(row["requirement_sha256"]) == 64 for row in source["rows"])
+    assert all("text" not in row for row in source["rows"])
+
+
+def test_ambiguous_header_is_held(tmp_path):
+    (tmp_path / "ambiguous.csv").write_text(
+        "Item number,Item ID,Recommendation\n1,2,Report results.\n", encoding="utf-8")
+    cohort = Cohort("synthetic", "test", ("1",), ("ambiguous.csv",), "reference")
+    source = benchmark(tmp_path, [cohort])["editions"][0]["sources"][0]
+    assert source["expected_ids_recovered"] == 0
+    assert "incomplete_or_ambiguous_header" in source["issues"]
+    assert source["status"] == "held_structural_discrepancy"
+
+
+def test_same_bytes_and_no_comparable_pairs_stay_labelled(tmp_path):
+    data = "Item number,Recommendation\n1,Report results.\n"
+    for name in ("a.csv", "b.csv"):
+        (tmp_path / name).write_text(data, encoding="utf-8")
+    cohort = Cohort("synthetic", "test", ("1", "2"), ("a.csv", "b.csv", "absent.csv"), "reference")
+    edition = benchmark(tmp_path, [cohort])["editions"][0]
+    first, second, _ = edition["pairwise"]
+    assert first["identical_source_bytes"] is True
+    assert first["cross_format"] is False
+    assert first["independent_source_identity_verified"] is False
+    assert second["identical_source_bytes"] is None
+    assert second["status"] == "held_no_comparable_rows"
+    assert edition["sources"][0]["status"] == "held_structural_discrepancy"
+    assert "missing_expected_ids" in edition["sources"][0]["issues"]
+
+
+def test_cli_receipt_is_deterministic_and_references_are_hashed(tmp_path, monkeypatch):
+    import sys
+    from scripts import compare_guideline_formats as driver
+
+    for relative in (driver.ARTICLE_SPECS, driver.ARTICLE_ROWS, driver.PRIORITY, driver.HELD):
+        path = tmp_path / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(b"[]")
+    monkeypatch.setattr(driver, "profiles", lambda root: [Cohort("synthetic", "test", (), (), "reference")])
+    output = tmp_path / "out" / "report.json"
+    monkeypatch.setattr(sys, "argv", ["compare_guideline_formats", "--root", str(tmp_path), "--output", str(output)])
+    driver.main()
+    first = output.read_bytes()
+    assert len(json.loads(first)["reference_files_sha256"]) == 4
+    driver.main()
+    assert output.read_bytes() == first
+
+
+def test_symlink_and_duplicate_cohort_rejected(tmp_path):
+    path = tmp_path / "real.csv"
+    path.write_text("Item number,Recommendation\n1,Report results.\n", encoding="utf-8")
+    (tmp_path / "link.csv").symlink_to(path)
+    with pytest.raises(ValueError, match="symlink"):
+        benchmark(tmp_path, [Cohort("synthetic", "test", ("1",), ("link.csv",), "reference")])
+    profile = Cohort("synthetic", "test", ("1",), (), "reference")
+    with pytest.raises(ValueError, match="duplicate"):
+        benchmark(tmp_path, [profile, profile])
