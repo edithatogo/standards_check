@@ -48,18 +48,62 @@ and not production operating thresholds. NLI scores must have finite
 probabilities in both directions, both top labels entailment; report the full
 directional confusion. Exact surface agreement remains separately reported.
 
-## Independent actual-source qualification
+## Independent actual-source qualification — blinded model subagents
 
-Use existing retained source/legacy item ledger and canonical PRISMA positive
-control. An assessor independent of implementation must label both implications
-and error categories (negation, obligation, scope, quantifier, condition,
-applicability, argument roles, structure). Two reviewers independently label
-a stratified family-level sample of candidate matches and discrepancies;
-adjudicate disagreement before unblinding predictions. Keep source edition,
-SHA-256, printed IDs, anchor, candidate digest and rationale; do not export
-rights-unclear text. Include a distinct held-out family not used to tune
-rules. Report paired errors and binomial intervals, not a universal accuracy
-claim. No actual independently adjudicated label ledger exists yet.
+No human labelling or adjudication is required for this benchmark. Use two
+stateless model-agent processes with distinct pinned Apache-2.0 GGUF weights
+(Qwen2.5-1.5B-Instruct and SmolLM2-1.7B-Instruct), neither the MiniLM comparator.
+Freeze the family-disjoint actual-source and candidate pair ledger before
+inference. Give each agent only opaque ID and A/B text; hide guideline-family
+split, constructed control class, other votes, and algorithmic predictions.
+Use independently generated structured five-class judgements and exact unique
+supporting spans. Invalid, missing, or conflicting votes abstain. Never
+fabricate a third adjudication or equate agreement with ground truth.
+
+Source-derived controls cover equivalent, additional obligation (narrower),
+weakened obligation (broader), negation (contradictory), and different
+requirements (indeterminate); the agents independently assess the actual
+relationship rather than receive those intended classes. Keep real legacy
+discrepancies separate from constructed controls. Reuse exact source and
+table pins; unavailable or changed sources stay held. No source text, agent
+quotes, or private pair files in public artifacts. Record model revisions,
+weight hashes, prompts, input digests, span offsets, runtime, coverage and
+per-class agreement and errors. PRISMA is development; CHEERS, CONSORT and
+TRIPOD are held out when their exact source pins can be replayed.
+
+Escalation gate predeclared: at least ten held-out consensus pairs, at least
+two held-out families and 50% agreement coverage; at least two false
+equivalences or two errors within a class with at least three consensus
+examples. Only then evaluate one targeted additional NLI or decision model.
+If insufficient agreement, report an adjudication deficit, not a comparator
+accuracy claim. Small models are fallible and may share training biases.
+The benchmark is automated candidate evidence, not rights, methodological
+authority, or canonical admission. Existing external admission gates remain
+distinct.
+
+```mermaid
+flowchart TD
+  P[Pinned actual source and candidate pairs] --> F[Frozen family split and pair digests]
+  F --> B[Opaque A/B input without labels or predictions]
+  B --> Q[Qwen adjudicator]
+  B --> S[SmolLM adjudicator]
+  Q --> V[Validate exact quote spans and input hashes]
+  S --> V
+  V --> C{Both agree?}
+  C -->|No| A[Abstain]
+  C -->|Yes| L[Consensus label ledger]
+  F --> N[Existing bidirectional MiniLM comparator]
+  L --> E[Unblind and compare held-out errors]
+  N --> E
+  E --> G{Predeclared escalation gate}
+  G -->|Yes| T[One targeted additional model]
+  G -->|No| H[Hold or retain baseline]
+```
+
+Four isolated RED/GREEN tests passed for blinding, span validity,
+directionality and escalation gating. Actual model-agent and real-source
+execution must be established by its hosted receipt; this plan is not a
+claim of completed adjudication.
 
 ## Reproduction
 
