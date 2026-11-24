@@ -1,5 +1,7 @@
 import hashlib
 import tempfile
+import subprocess
+import shutil
 import unittest
 from pathlib import Path
 
@@ -44,6 +46,20 @@ def tiny_pdf():
 
 
 class EcoEvoFormatTests(unittest.TestCase):
+    @unittest.skipUnless(shutil.which("pdftotext"), "Poppler not installed")
+    def test_independent_full_rows_from_same_real_pdf(self):
+        from scripts.source_reconciliation import layout_rows
+        raw = tiny_pdf()
+        native, native_issues = collect_rows(pdf_tables(raw))
+        result = subprocess.run(["pdftotext", "-layout", "-enc", "UTF-8", "-", "-"],
+                                input=raw, capture_output=True, check=True, timeout=10)
+        other, issues = layout_rows(result.stdout.decode("utf-8"))
+        self.assertEqual(issues, [])
+        self.assertEqual(native_issues, [])
+        self.assertEqual(compare_formats(native, other)["exact_equal"], 1)
+        self.assertEqual(other[0]["requirement_sha256"], fingerprint("Example requirement."))
+
+
     def test_header_columns_not_numeric_scoring_columns_and_extra_ids(self):
         rows, issues = collect_rows(group([['Score','Sub-item number','Sub-item'],
                                          ['2.1','1.1','Alpha'], ['0.5','28.1','Extra']]))

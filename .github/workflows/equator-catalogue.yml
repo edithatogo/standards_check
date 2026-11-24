@@ -10,6 +10,9 @@ on:
       - "scripts/source_provider_evidence.py"
       - "scripts/source_xml.py"
       - "scripts/review_source_receipts.py"
+      - "scripts/survey_projections.py"
+      - "scripts/source_reconciliation.py"
+      - "tests/test_survey_projections.py"
       - "tests/test_source_xml.py"
       - "tests/test_review_source_receipts.py"
       - "tests/test_source_provider_evidence.py"
@@ -33,6 +36,9 @@ on:
       - "scripts/source_provider_evidence.py"
       - "scripts/source_xml.py"
       - "scripts/review_source_receipts.py"
+      - "scripts/survey_projections.py"
+      - "scripts/source_reconciliation.py"
+      - "tests/test_survey_projections.py"
       - ".github/workflows/equator-catalogue.yml"
   workflow_dispatch:
     inputs:
@@ -151,6 +157,58 @@ jobs:
           python -m scripts.review_source_receipts \
             --receipt "$RUNNER_TEMP/equator-article-survey.json" \
             --output "$RUNNER_TEMP/equator-article-retrospective.json" "${args[@]}"
+      - name: Project receipt-bound analytical evidence (no source repin)
+        run: |
+          python -m pip install --disable-pip-version-check \
+            "$(grep -E '^polars==[0-9.]+
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          before = json.loads(Path("source/equator/discovery.json").read_text())
+          after = json.loads((Path(os.environ["RUNNER_TEMP"]) / "equator-discovery.json").read_text())
+          old = {x["id"]: x["source_blob_sha"] for x in before["guidelines"]}
+          new = {x["id"]: x["source_blob_sha"] for x in after["guidelines"]}
+          counts = {
+              "added": len(new.keys() - old.keys()),
+              "removed": len(old.keys() - new.keys()),
+              "revised": sum(old[x] != new[x] for x in old.keys() & new.keys()),
+          }
+          print(f"source: {after['source_revision']} / {after['published_count']} published")
+          print(f"directory changes vs checked-in pin: {counts}")
+          metadata = json.loads((Path(os.environ["RUNNER_TEMP"]) / "equator-catalogue.json").read_text())
+          print(f"unresolved upstream metadata: {metadata['metadata_issue_count']}")
+          PY
+      - name: Retain source catalogue for review (not auto-admitted)
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: equator-source-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/equator-discovery.json
+            ${{ runner.temp }}/equator-catalogue.json
+            ${{ runner.temp }}/equator-legacy-alignment.json
+            ${{ runner.temp }}/equator-source-link-candidates.json
+            ${{ runner.temp }}/equator-article-survey.json
+            ${{ runner.temp }}/equator-article-retrospective.json
+          if-no-files-found: warn
+ requirements/python-tests.txt)"
+          python -m unittest tests.test_survey_projections -v
+          python -m scripts.survey_projections \
+            --catalogue "$RUNNER_TEMP/equator-catalogue.json" \
+            --survey "$RUNNER_TEMP/equator-article-survey.json" \
+            --retrospective "$RUNNER_TEMP/equator-article-retrospective.json" \
+            --output "$RUNNER_TEMP/equator-analytical-snapshot" \
+            --revision "$(git rev-parse HEAD)" --origin scheduled_or_live
+      - name: Retain version-bound analytical snapshot
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: equator-analytical-snapshot-${{ github.sha }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/equator-analytical-snapshot/
+          if-no-files-found: error
+          retention-days: 90
       - name: Report new, removed and changed published entries
         run: |
           python - <<'PY'
@@ -185,3 +243,49 @@ jobs:
             ${{ runner.temp }}/equator-article-survey.json
             ${{ runner.temp }}/equator-article-retrospective.json
           if-no-files-found: warn
+
+  # Bounded one-time historical receipt qualification; never treated as a fresh survey.
+  projection-replay:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+      - name: Download inspected immutable historical receipt
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/equator-replay"
+          gh run download 45368782537 --repo "$GITHUB_REPOSITORY" \
+            --name equator-source-45368782537 --dir "$RUNNER_TEMP/equator-replay"
+          cd "$RUNNER_TEMP/equator-replay"
+          sha256sum --check --strict <<'CHECKSUMS'
+          474aacbe8a020e5b295ed55454854731d3e9bc1501de55cbdd625a5d1253e94c  equator-catalogue.json
+          46e15d6334d66a3467601fcd07c698149106dc47b3ca21714bf69d357b98fbe8  equator-article-survey.json
+          ec7f6c149bf2c196408bccf54864e9b62af2e266a91b7f38468d2e3305bfb9a6  equator-article-retrospective.json
+          CHECKSUMS
+      - name: Verify round-trip and produce historical replay only
+        run: |
+          python -m pip install --disable-pip-version-check \
+            "$(grep -E '^polars==[0-9.]+$' requirements/python-tests.txt)"
+          python -m unittest tests.test_survey_projections -v
+          python -m scripts.survey_projections \
+            --catalogue "$RUNNER_TEMP/equator-replay/equator-catalogue.json" \
+            --survey "$RUNNER_TEMP/equator-replay/equator-article-survey.json" \
+            --retrospective "$RUNNER_TEMP/equator-replay/equator-article-retrospective.json" \
+            --output "$RUNNER_TEMP/equator-analytical-replay" \
+            --revision "$(git rev-parse HEAD)" --origin historical_replay
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: equator-analytical-replay-${{ github.sha }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/equator-analytical-replay/
+          if-no-files-found: error
+          retention-days: 90

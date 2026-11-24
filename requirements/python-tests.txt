@@ -8,3 +8,6 @@ pdfplumber==0.11.9
 python-docx==1.2.0
 openpyxl==3.1.5
 pm4py==2.7.23.12
+
+# Analytical export only; no Rust runtime or model dependency.
+polars==1.35.2

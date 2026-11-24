@@ -136,6 +136,19 @@ T01.5d–g conditional on measured residual errors. No new model or service
 is required for the census.
 
 
+### T01.5c/d/h and analytical projections — implementation increment
+
+See [requirements and design](source-reconciliation-design.md) for the MoSCoW
+acceptance criteria, Mermaid dataflow and disposition model. The candidate
+implementation adds whole-row independent Poppler layout comparison, rule-based
+linguistic discrepancy diagnostics, an offline review queue with deterministic
+sampling, and typed Parquet projections from pinned sources and canonical packs.
+Keep T01.5c/d/h open for actual corpus replay, independent held-out error
+measurement, receiving CI and resumed live acquisition (#142). No NLI or model
+runtime is required. Existing runtime status is unchanged. Refs #111/#95/#82;
+Track 05 independent qualification and Track 04 consumer handoff remain separate.
+
+
 ## 24 November — programme of deterministic source resilience
 
 - [x] Inspect both historical EQUATOR source receipts at upstream revision
@@ -152,3 +165,7 @@ is required for the census.
   registry agreement is not checklist semantic or rights verification.
 - [ ] Resolve remaining #111 and #95 source and item-level rights/anchor gates
   before any canonical pack promotion. Preserve #82 independent review gates.
+
+### Versioned acquisition evidence handoff
+
+See [EQUATOR analytical snapshot](equator-analytical-snapshot.md). Reuses #142 scheduled source and retrospective evidence with a strict versioned Parquet export; separate canonical projections and Searchright #843. Historical receipt replay and live receiving evidence remain distinct. No promotion.
