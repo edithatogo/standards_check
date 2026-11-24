@@ -160,41 +160,7 @@ jobs:
       - name: Project receipt-bound analytical evidence (no source repin)
         run: |
           python -m pip install --disable-pip-version-check \
-            "$(grep -E '^polars==[0-9.]+
-        run: |
-          python - <<'PY'
-          import json
-          import os
-          from pathlib import Path
-
-          before = json.loads(Path("source/equator/discovery.json").read_text())
-          after = json.loads((Path(os.environ["RUNNER_TEMP"]) / "equator-discovery.json").read_text())
-          old = {x["id"]: x["source_blob_sha"] for x in before["guidelines"]}
-          new = {x["id"]: x["source_blob_sha"] for x in after["guidelines"]}
-          counts = {
-              "added": len(new.keys() - old.keys()),
-              "removed": len(old.keys() - new.keys()),
-              "revised": sum(old[x] != new[x] for x in old.keys() & new.keys()),
-          }
-          print(f"source: {after['source_revision']} / {after['published_count']} published")
-          print(f"directory changes vs checked-in pin: {counts}")
-          metadata = json.loads((Path(os.environ["RUNNER_TEMP"]) / "equator-catalogue.json").read_text())
-          print(f"unresolved upstream metadata: {metadata['metadata_issue_count']}")
-          PY
-      - name: Retain source catalogue for review (not auto-admitted)
-        if: always()
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
-        with:
-          name: equator-source-${{ github.run_id }}
-          path: |
-            ${{ runner.temp }}/equator-discovery.json
-            ${{ runner.temp }}/equator-catalogue.json
-            ${{ runner.temp }}/equator-legacy-alignment.json
-            ${{ runner.temp }}/equator-source-link-candidates.json
-            ${{ runner.temp }}/equator-article-survey.json
-            ${{ runner.temp }}/equator-article-retrospective.json
-          if-no-files-found: warn
- requirements/python-tests.txt)"
+            "$(grep -E '^polars==[0-9.]+$' requirements/python-tests.txt)"
           python -m unittest tests.test_survey_projections -v
           python -m scripts.survey_projections \
             --catalogue "$RUNNER_TEMP/equator-catalogue.json" \
