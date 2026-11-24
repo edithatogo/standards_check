@@ -17,3 +17,7 @@ Reproduce the campaign with the committed lock:
     CARGO_NET_OFFLINE=true cargo +nightly-2026-11-23 fuzz run pack_ingress -- -seed=721114987 -max_total_time=60 -max_len=262144 -timeout=5 -rss_limit_mb=1024 -print_final_stats=1
 
 Upstream guide: https://rust-fuzz.github.io/book/cargo-fuzz/ci.html
+
+## Licence-policy qualification
+
+The locked graph's initial cargo-deny check ([job 138364791634](https://github.com/edithatogo/standards_check/actions/runs/45370956988/job/138364791634)) passed advisories, bans and sources but rejected the declared `(MIT OR Apache-2.0) AND NCSA` expression of `libfuzzer-sys` 0.4.13, and the unpublished fuzz package lacked a licence declaration. Use the repository's dual MIT/Apache-2.0 licence for the local package and a version-specific NCSA allowance for the test-only libFuzzer dependency, following the [cargo-deny exception configuration](https://embarkstudios.github.io/cargo-deny/checks/licenses/cfg.html). Retain licence notices; no global licence relaxation or advisory suppression. The subsequent locked campaign ([job 138364791384](https://github.com/edithatogo/standards_check/actions/runs/45370956988/job/138364791384)) completed 629,873 inputs in 61 seconds (cov 3103, peak RSS 468 MiB), without a reported crash or sanitizer finding. Require both dependency-policy and the new exact-head locked campaign to pass before marking the PR ready.
