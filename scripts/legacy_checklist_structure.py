@@ -1,4 +1,5 @@
 """Bounded reader for legacy checklist Markdown, not an authority or CommonMark parser."""
+
 from __future__ import annotations
 
 import re
@@ -17,7 +18,7 @@ def split_label(text: str) -> tuple[str | None, str]:
     if label:
         number = ITEM_ID.match(label[1])
         if number or label[1].endswith(":"):
-            return number[1].lower() if number else None, text[label.end():]
+            return number[1].lower() if number else None, text[label.end() :]
     return None, text
 
 
@@ -67,16 +68,25 @@ def parse_legacy_tasks(markdown: str) -> list[dict]:
             while stack and indent <= stack[-1][0]:
                 stack.pop()
             declared, text = split_label(task[2] or "")
-            row = {"position": len(rows) + 1, "declared_item_id": declared,
-                   "parent_position": stack[-1][1]["position"] if stack else None,
-                   "section_line": section_line, "line_numbers": [number],
-                   "line_indents": [indent], "raw_first_line": task[2] or "",
-                   "parts": [text], "warnings": []}
+            row = {
+                "position": len(rows) + 1,
+                "declared_item_id": declared,
+                "parent_position": stack[-1][1]["position"] if stack else None,
+                "section_line": section_line,
+                "line_numbers": [number],
+                "line_indents": [indent],
+                "raw_first_line": task[2] or "",
+                "parts": [text],
+                "warnings": [],
+            }
             rows.append(row)
             stack.append((indent, row))
         else:
-            while stack and (indent < stack[-1][0] or
-                             indent == stack[-1][0] and (blank or OTHER_BLOCK.match(stripped))):
+            while stack and (
+                indent < stack[-1][0]
+                or indent == stack[-1][0]
+                and (blank or OTHER_BLOCK.match(stripped))
+            ):
                 stack.pop()
             if stack:
                 row = stack[-1][1]

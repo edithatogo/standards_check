@@ -88,6 +88,22 @@ class ReceiptReviewTests(unittest.TestCase):
             self.assertEqual(len(result["receipt_sha256"]), 64)
             self.assertEqual(len(result["baseline_sha256"]), 64)
 
+    def test_registry_contact_budget_conflicts_and_provider_drift(self):
+        row = {"id": "equator:a", "status": "oa_xml_candidate"}
+        edition = {"edition": "candidate:PMC1", "status": "source_inventory_observed_not_reconciled",
+                   "acquisition": {"provider": "europe_pmc"}}
+        before = {**receipt(row), "bulk_articles": [edition]}
+        current = {**receipt(row), "provider_evidence": {"records": {"equator:a": {
+            "pmc_by_pmid": {"status": "contact_not_configured"},
+            "crossref": {"status": "deferred_request_budget"},
+            "openalex": {"status": "identifier_conflict"}}}},
+            "bulk_articles": [{**edition, "status": "deferred_acquisition_budget",
+                               "acquisition": {"provider": "pmc_oai"}}]}
+        findings = review(current, before)["finding_counts"]
+        for code in ("provider_contact_missing", "provider_budget_deferred", "provider_conflict",
+                     "provider_representation_changed", "acquisition_deferred"):
+            self.assertEqual(findings[code], 1)
+
     def test_same_receipt_no_new_drift(self):
         a = receipt({"id": "equator:a", "status": "oa_xml_candidate"})
         self.assertEqual(review(a, a)["finding_counts"], {})

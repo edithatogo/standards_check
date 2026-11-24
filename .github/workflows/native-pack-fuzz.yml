@@ -7,6 +7,7 @@ on:
       - 'crates/standardflow-core/**'
       - 'Cargo.toml'
       - 'Cargo.lock'
+      - 'packs/org.prisma/prisma/2020/pack.json'
       - '.github/workflows/native-pack-fuzz.yml'
       - 'deny.toml'
   push:
@@ -16,6 +17,7 @@ on:
       - 'crates/standardflow-core/**'
       - 'Cargo.toml'
       - 'Cargo.lock'
+      - 'packs/org.prisma/prisma/2020/pack.json'
       - '.github/workflows/native-pack-fuzz.yml'
       - 'deny.toml'
   schedule:
@@ -34,7 +36,7 @@ jobs:
     uses: edithatogo/repository-standards/.github/workflows/rust-dependency-policy.yml@3fa29fff49268393e427ca3043fb6e1f0e49f877
     with:
       manifest-path: ./fuzz/Cargo.toml
-      rust-version: stable
+      rust-version: "1.100.0"
   native-pack-fuzz:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
@@ -47,6 +49,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+          submodules: false
       - name: Install dated test-only compiler and pinned fuzzer
         shell: bash
         run: |

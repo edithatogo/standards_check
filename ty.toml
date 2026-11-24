@@ -1,0 +1,20 @@
+# Initial enforced boundary: repository/contract validators, dependency receipts,
+# and the shared XML ingress. Optional model and research-report modules remain
+# subject to runtime tests and Ruff/Bandit until their data shapes are typed.
+[environment]
+python-version = "3.12"
+extra-paths = ["scripts"]
+
+[src]
+include = [
+    "scripts/validate_*.py",
+    "scripts/check_standardflow_import.py",
+    "scripts/audit_foundation.py",
+    "scripts/generate_sbom.py",
+    "scripts/review_source_receipts.py",
+    "scripts/source_xml.py",
+    "scripts/verify_site_accessibility.py",
+]
+
+[terminal]
+error-on-warning = true

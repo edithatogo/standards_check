@@ -10,6 +10,27 @@
 6. Record limitations and evidence level; do not promote claims automatically.
 7. Open a focused pull request with migration, security, rights and rollback notes.
 
+## Plan and issue reconciliation
+
+Every plan checkbox has a stable `Txx.nnn` identifier and one or more canonical
+issue links. Keep existing identifiers stable; append new identifiers instead of
+renumbering old work. Every repository issue, including completed history, belongs
+in `contracts/project/conductor-issues.v1.json` and owns at least one plan item in
+each declared track. The issue body retains the exact track marker and links back
+to its plan. The dependency dashboard uses its registered retained comment because
+the updater owns its body.
+
+Run `python scripts/validate_conductor_links.py` locally and the same command with
+`--live` in authenticated CI. The latter reads all issue pages and registered bot
+comments; it makes no writes. New issues can make the event-driven check fail until
+triage assigns their owner and updates the versioned registry. An unfinished plan
+item must retain an open issue. Completing a bounded implementation does not close
+an umbrella's scientific, rights, operational or external acceptance gates.
+
+Issue and PR templates request the ownership and acceptance evidence. A future
+GitHub Project displays these records; it does not introduce another independently
+maintained completion ledger.
+
 ## Development rules
 
 - Test-driven for parsers, resolvers, arithmetic, state machines and renderers.

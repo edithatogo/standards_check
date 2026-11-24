@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Discover upstream guideline source links. No downloads, licence or content admission."""
+
 from __future__ import annotations
 
 import argparse
@@ -17,7 +18,9 @@ except ImportError:  # direct execution as scripts/equator_source_links.py
     from sync_equator_catalog import inventory
 
 LINK_START = re.compile(r"(?<!!)\[[^\]\n]{1,200}\]\(")
-BARE = re.compile(r"https?://\[[0-9a-fA-F:.]+\](?:/[^\s<>)\]'}\"]{0,2048})?|https?://[^\s<>\]'}\"]{1,2048}")
+BARE = re.compile(
+    r"https?://\[[0-9a-fA-F:.]+\](?:/[^\s<>)\]'}\"]{0,2048})?|https?://[^\s<>\]'}\"]{1,2048}"
+)
 FILES = (".pdf", ".doc", ".docx", ".rtf", ".csv", ".xlsx", ".xls")
 FIELDS = ("downloads", "relevant-urls", "full-bibliographic-reference")
 MAX_CANDIDATES = 64
@@ -43,10 +46,10 @@ def extract_links(data: dict, page_url: str, issues: list[str] | None = None) ->
                 elif text[pos] == ")":
                     depth -= 1
                     if depth == 0:
-                        destination = text[match.end():pos].strip().strip("<>")
+                        destination = text[match.end() : pos].strip().strip("<>")
                         if destination and not any(char.isspace() for char in destination):
                             candidates.append(destination)
-                            remaining[match.start():pos + 1] = " " * (pos + 1 - match.start())
+                            remaining[match.start() : pos + 1] = " " * (pos + 1 - match.start())
                         break
         for match in BARE.finditer("".join(remaining)):
             target = match.group()
@@ -59,9 +62,14 @@ def extract_links(data: dict, page_url: str, issues: list[str] | None = None) ->
                 resolved = urljoin(page_url, target)
                 url = urlsplit(resolved)
                 hostname = url.hostname
-                if (url.scheme not in {"https", "http"} or not hostname or
-                        url.username is not None or url.password is not None or
-                        target.startswith(("javascript:", "file:", "data:")) or resolved in seen):
+                if (
+                    url.scheme not in {"https", "http"}
+                    or not hostname
+                    or url.username is not None
+                    or url.password is not None
+                    or target.startswith(("javascript:", "file:", "data:"))
+                    or resolved in seen
+                ):
                     continue
             except ValueError:
                 if issues is not None and "malformed_candidate_url" not in issues:
@@ -75,12 +83,23 @@ def extract_links(data: dict, page_url: str, issues: list[str] | None = None) ->
                     continue
             seen.add(resolved)
             extension = url.path.lower().split("/")[-1]
-            kind = ("source_file_candidate" if extension.endswith(FILES) else
-                    "doi_landing_candidate" if hostname in {"doi.org", "dx.doi.org"} else
-                    "interactive_page_candidate" if extension.endswith(".qmd") else
-                    "landing_page_candidate")
-            collected.append({"url": resolved, "source_field": field,
-                              "type": kind, "qualification": "unverified_link_only"})
+            kind = (
+                "source_file_candidate"
+                if extension.endswith(FILES)
+                else "doi_landing_candidate"
+                if hostname in {"doi.org", "dx.doi.org"}
+                else "interactive_page_candidate"
+                if extension.endswith(".qmd")
+                else "landing_page_candidate"
+            )
+            collected.append(
+                {
+                    "url": resolved,
+                    "source_field": field,
+                    "type": kind,
+                    "qualification": "unverified_link_only",
+                }
+            )
     return collected
 
 
@@ -113,9 +132,14 @@ def collect(root: Path, catalogue: dict) -> dict:
         if not isinstance(row, dict) or not isinstance(row.get("source_path"), str):
             raise ValueError("invalid upstream entry")
         path, sha = row["source_path"], row.get("source_blob_sha")
-        if (path not in tree or tree[path] != sha or path in seen or
-                row.get("id") != "equator:" + path.split("/")[1] or
-                row.get("page_url") != "https://equator-network.org/reporting-guidelines/" + path.split("/")[1] + "/"):
+        if (
+            path not in tree
+            or tree[path] != sha
+            or path in seen
+            or row.get("id") != "equator:" + path.split("/")[1]
+            or row.get("page_url")
+            != "https://equator-network.org/reporting-guidelines/" + path.split("/")[1] + "/"
+        ):
             raise ValueError("source identity, path or Git blob mismatch")
         seen.add(path)
         issues = []
@@ -133,17 +157,30 @@ def collect(root: Path, catalogue: dict) -> dict:
         if len(links) > MAX_CANDIDATES:
             links = links[:MAX_CANDIDATES]
             issues.append("link_limit_exceeded")
-        report.append({"id": row["id"], "source_path": path, "source_blob_sha": sha,
-                       "status": "needs_review" if issues else "unverified_candidates",
-                       "issues": issues, "candidates": links})
+        report.append(
+            {
+                "id": row["id"],
+                "source_path": path,
+                "source_blob_sha": sha,
+                "status": "needs_review" if issues else "unverified_candidates",
+                "issues": issues,
+                "candidates": links,
+            }
+        )
     if seen != set(tree):
         raise ValueError("incomplete EQUATOR source coverage")
-    return {"schema_version": 1, "authority": "candidate_links_only_no_downloads_or_rights",
-            "source_revision": revision, "published_count": len(report),
-            "summary": {"records_with_candidates": sum(bool(r["candidates"]) for r in report),
-                        "link_count": sum(len(r["candidates"]) for r in report),
-                        "records_needing_review": sum(r["status"] == "needs_review" for r in report)},
-            "guidelines": report}
+    return {
+        "schema_version": 1,
+        "authority": "candidate_links_only_no_downloads_or_rights",
+        "source_revision": revision,
+        "published_count": len(report),
+        "summary": {
+            "records_with_candidates": sum(bool(r["candidates"]) for r in report),
+            "link_count": sum(len(r["candidates"]) for r in report),
+            "records_needing_review": sum(r["status"] == "needs_review" for r in report),
+        },
+        "guidelines": report,
+    }
 
 
 def main() -> None:
@@ -154,7 +191,9 @@ def main() -> None:
     args = parser.parse_args()
     report = collect(args.source, json.loads(args.catalogue.read_text(encoding="utf-8")))
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    args.output.write_text(
+        json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
     print(f"EQUATOR source links: {report['summary']}; rights and text remain unverified")
 
 
