@@ -302,6 +302,115 @@ jobs:
           if-no-files-found: error
           retention-days: 30
 
+      # Temporary, draft-PR-only experiment. The protected serial report above is unchanged.
+      - name: Compare serial and two-worker pytest on the same runner
+        if: matrix.component == 'python' && github.event_name == 'pull_request' && github.head_ref == 'experiment/pytest-two-worker-20261125'
+        run: |
+          set -euo pipefail
+          evidence="$RUNNER_TEMP/pytest-efficiency"
+          mkdir -p "$evidence"
+          git rev-parse HEAD > "$evidence/commit.txt"
+          python -VV > "$evidence/python.txt"
+          uname -a > "$evidence/runner.txt"
+          nproc >> "$evidence/runner.txt"
+          python -m pip freeze > "$evidence/incumbent-environment.txt"
+          cat > "$evidence/experiment-requirements.txt" <<'PINS'
+          pytest-xdist==3.8.0 --hash=sha256:202ca578cfeb7370784a8c33d6d05bc6e13b4f25b5053c30a152269fd10f0b88
+          execnet==2.1.2 --hash=sha256:67fba928dd5a544b783f6056f449e5e3931a5c378b128bc18501f7ea79e296ec
+          PINS
+          python -m pip install --disable-pip-version-check --no-deps --require-hashes --only-binary=:all: -r "$evidence/experiment-requirements.txt"
+          python -m pip check
+          python -m pip freeze > "$evidence/trial-environment.txt"
+          python - <<'PY'
+          import collections
+          import json
+          import os
+          from pathlib import Path
+          import statistics
+          import subprocess
+          import sys
+          import time
+          import xml.etree.ElementTree as ET
+
+          root = Path(os.environ["RUNNER_TEMP"]) / "pytest-efficiency"
+          repo = Path.cwd()
+
+          def signature(path):
+              cases = collections.Counter()
+              for case in ET.parse(path).iter("testcase"):
+                  outcome = tuple(child.tag for child in case if child.tag in {"failure", "error", "skipped"})
+                  cases[(case.attrib["classname"], case.attrib["name"], outcome)] += 1
+              if not cases:
+                  raise ValueError("No test cases")
+              return cases
+
+          def coverage_signature(path):
+              report = json.loads(path.read_text())
+              return {
+                  name: {key: item.get(key, []) for key in ("executed_lines", "missing_lines", "excluded_lines", "executed_branches", "missing_branches")}
+                  for name, item in report["files"].items()
+              }
+
+          def run(command, log, env):
+              start = time.perf_counter()
+              with log.open("w") as out:
+                  result = subprocess.run(command, env=env, stdout=out, stderr=subprocess.STDOUT, timeout=300, check=False)
+              return result.returncode, time.perf_counter() - start
+
+          ordinary = signature(repo / "target/coverage/python-junit.xml")
+          observations = []
+          signatures = {}
+          hits = {}
+          # Alternate order to reduce confounding by warmed filesystem caches.
+          for repeat, workers in [(1, 0), (1, 2), (2, 2), (2, 0), (3, 0), (3, 2)]:
+              name = f"r{repeat}-n{workers}"
+              target = root / name
+              target.mkdir()
+              env = dict(os.environ, COVERAGE_FILE=str(target / ".coverage"), COVERAGE_RCFILE=str(repo / ".coveragerc"), PYTHONHASHSEED="0")
+              command = [sys.executable, "-m", "coverage", "run", "-m", "pytest", "--import-mode=importlib", "-n", str(workers), "--dist=loadfile", "--max-worker-restart=0", "--junitxml", str(target / "junit.xml"), "-o", "junit_logging=no", "-o", "junit_log_passing_tests=false", "tests", "test_extract_and_convert.py"]
+              row = {"repeat": repeat, "workers": workers, "command": command}
+              try:
+                  row["exit"], row["seconds"] = run(command, target / "tests.log", env)
+                  signatures[name] = signature(target / "junit.xml")
+                  row["cases"] = sum(signatures[name].values())
+                  row["same_cases_and_outcomes_as_incumbent"] = signatures[name] == ordinary
+                  for args in (["combine"], ["json", "-o", str(target / "coverage.json")]):
+                      subprocess.run([sys.executable, "-m", "coverage", *args], env=env, check=True, timeout=60)
+                  hits[name] = coverage_signature(target / "coverage.json")
+                  row["totals"] = json.loads((target / "coverage.json").read_text())["totals"]
+              except Exception as exc:
+                  row["error"] = f"{type(exc).__name__}: {exc}"
+              observations.append(row)
+              (root / "observations.json").write_text(json.dumps(observations, indent=2) + "\n")
+              print(json.dumps(row), flush=True)
+
+          # A deliberately failing synthetic test must return pytest exit 1 in both modes.
+          probe = root / "test_failure_probe.py"
+          probe.write_text("def test_deliberate_failure():\n    assert False, 'intentional negative control'\n")
+          negative = {}
+          for workers in (0, 2):
+              code, seconds = run([sys.executable, "-m", "pytest", "-n", str(workers), "--dist=loadfile", "--max-worker-restart=0", str(probe)], root / f"failure-probe-n{workers}.log", os.environ)
+              negative[str(workers)] = {"exit": code, "seconds": seconds}
+          baseline = hits.get("r1-n0")
+          # Compare per-file statement and branch sets, not rounded percentages.
+          complete = len(hits) == 6 and len(signatures) == 6 and bool(baseline) and all(row.get("exit") == 0 and row.get("same_cases_and_outcomes_as_incumbent") and "error" not in row for row in observations)
+          equal_coverage = complete and all(value == baseline for value in hits.values())
+          medians = {str(n): statistics.median([row["seconds"] for row in observations if row["workers"] == n and "seconds" in row]) for n in (0, 2)} if complete else {}
+          improvement = 1 - medians["2"] / medians["0"] if complete and medians["0"] > 0 else None
+          summary = {"complete": complete, "coverage_sets_equal": bool(equal_coverage), "negative_controls": negative, "median_seconds": medians, "fractional_improvement": improvement, "eligible_for_further_adoption_review": bool(equal_coverage and all(v["exit"] == 1 for v in negative.values()) and improvement is not None and improvement >= 0.15)}
+          (root / "summary.json").write_text(json.dumps(summary, indent=2) + "\n")
+          print("PYTEST_EFFICIENCY_RESULT=" + json.dumps(summary), flush=True)
+          # Execution success is not adoption. Missing/mismatched evidence is a hold.
+          PY
+      - name: Retain all trial outcomes and negative controls
+        if: always() && matrix.component == 'python' && github.event_name == 'pull_request' && github.head_ref == 'experiment/pytest-two-worker-20261125'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: pytest-efficiency-${{ github.sha }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/pytest-efficiency/
+          if-no-files-found: error
+          retention-days: 30
+
   cross-platform:
     name: cross-platform (${{ matrix.os }})
     strategy:
