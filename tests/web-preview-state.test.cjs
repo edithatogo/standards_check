@@ -5,7 +5,7 @@ const vm = require('node:vm');
 const path = require('node:path');
 
 const script = fs.readFileSync(path.join(__dirname, '..', 'assets', 'js', 'app.js'), 'utf8');
-const context = {document: {addEventListener() {}}};
+const context = {TextEncoder, document: {addEventListener() {}}};
 vm.createContext(context);
 vm.runInContext(script, context);
 const validate = context.validateProgressSnapshot;
@@ -48,4 +48,29 @@ test('rejects out-of-range IDs, unknown keys and bad checkbox/note types', () =>
   ]) {
     assert.equal(validate({...sample(), checkboxes: checks, notes}, source, 2), null);
   }
+});
+
+test('all UI-permitted CJK and escaped-control notes fit the same import and load budget', () => {
+  for (const character of ['漢', '\u0000']) {
+    const value = {schema: 1, source, checkboxes: {}, notes: {}};
+    for (let i = 0; i < 27; i++) {
+      value.checkboxes['item-' + i] = false;
+      value.notes['item-' + i] = character.repeat(2000);
+    }
+    const snapshot = validate(value, source, 27);
+    assert.ok(snapshot);
+    const serialized = JSON.stringify(snapshot);
+    assert.ok(new TextEncoder().encode(serialized).length <= context.maxProgressBytes(source, 27));
+    assert.deepEqual(JSON.parse(serialized), value);
+  }
+});
+
+test('failed writes are reported without changing the previous stored snapshot', () => {
+  const previous = JSON.stringify(sample());
+  const storage = {getItem() { return previous; }, setItem() { throw Error('quota'); }};
+  const imported = {...sample(), notes: {'item-0': 'imported'}};
+  assert.equal(context.persistProgress(storage, 'key', imported), false);
+  assert.equal(storage.getItem('key'), previous);
+  const success = {setItem(key, value) { assert.equal(key, 'key'); assert.equal(value, JSON.stringify(imported)); }};
+  assert.equal(context.persistProgress(success, 'key', imported), true);
 });
