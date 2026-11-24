@@ -29,3 +29,8 @@ packs/<namespace>/<family>/<edition>/
 - item-level rights and redistribution status.
 
 Every requirement has a stable identifier independent of display numbering. A pack release is content-addressed. Supersession, extension, companion, conflict, mapping and translation relations are explicit. Lockfiles pin pack IDs, versions, hashes, rule engines and artefact recipes.
+
+## Analytical projection
+
+For query engines, the optional [versioned Parquet snapshot](../../conductor/tracks/01-canonical-standard-pack/analytical-projections.md)
+is derived from existing JSON/YAML sources, never an input to validation or admission.

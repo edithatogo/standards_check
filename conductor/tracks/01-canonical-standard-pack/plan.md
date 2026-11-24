@@ -134,3 +134,9 @@ reporting checklist.
 independent structure/comparison, rights, semantics and admission. Keep
 T01.5d–g conditional on measured residual errors. No new model or service
 is required for the census.
+
+## Phase 6: Analytical projections (T01.6, #149)
+
+See the [requirements, design and acceptance plan](analytical-projections.md).
+Implementation is proposed separately from the source acquisition and reconciliation
+lanes; keep the exact-head and receiving-main execution gates open until observed.

@@ -29,3 +29,9 @@ The 42-item source-text acceptance supersedes the original PR #60 27-item assert
 PR #83 and the receiving repair in PR #86. [Current source evidence](source-reconciliation-20261123.md)
 retains exact revisions and distinguishes transcription from normalized interpretation, migration
 semantic parity and independent methodological/accessibility acceptance.
+
+## Analytical projections
+
+The [Parquet analytical projection contract](analytical-projections.md) defines the
+derived, rights-aware analytical surface and its conservation assertions (#149).
+Parquet is not a pack ingestion format and cannot promote source candidates.

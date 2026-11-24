@@ -88,6 +88,14 @@ jobs:
             --report target/coverage/legacy-source-text-triage.json \
             --output target/coverage/ecoevo-format-comparison.json
 
+      - name: Generate and independently read back analytical Parquet snapshot
+        if: matrix.component == 'python'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m scripts.project_parquet --output target/coverage/analytical-parquet
+          python -m scripts.project_parquet --check --output target/coverage/analytical-parquet
+
       - name: Compare explicitly selected official EcoEvo download bytes
         if: matrix.component == 'python'
         shell: bash
