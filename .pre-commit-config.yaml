@@ -7,10 +7,16 @@ repos:
   rev: 3.0.0
   hooks:
   - id: shellcheck
-# Add ESLint once the repository has a validated eslint.config.* configuration.
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v6.0.0
   hooks:
+  - id: check-merge-conflict
+  - id: check-json
+    files: ^(schemas/|contracts/|recipes/|\.github/|renovate\.json$|package\.json$|api/package\.json$)
+  - id: check-toml
+    files: ^(Cargo\.toml$|crates/|rust-toolchain\.toml$)
+  - id: check-yaml
+    files: ^(\.github/|\.pre-commit-config\.yaml$)
   - id: end-of-file-fixer
     exclude: ^(source|archive|assets|docs|docx|pdf|html|latex|typst)/
   - id: trailing-whitespace
@@ -20,3 +26,5 @@ repos:
   rev: v10.8.0
   hooks:
   - id: eslint
+    files: ^(api/|scripts/|tests/).+\.(js|cjs|mjs)$
+    args: [--max-warnings=0]
