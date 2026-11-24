@@ -163,6 +163,22 @@ class BatchTests(unittest.TestCase):
         self.assertIn("equator:a", conflicts)
         self.assertNotIn("equator:a", retained)
 
+    def test_conflicting_prior_status_blocks_unchanged_success_in_either_order(self):
+        catalogue = {"source_revision": "b"*40, "published_count": 1,
+                     "guidelines": [row("a", "123")]}
+        good = catalogue_report(catalogue, [article_record()], set())
+        for status in ("identifier_conflict", "ambiguous_identifier"):
+            held = catalogue_report(catalogue, [article_record()], set())
+            held["records"][0]["status"] = status
+            for receipts in ([good, held], [held, good]):
+                retained, conflicts = combine_retained_metadata(catalogue, receipts)
+                self.assertNotIn("equator:a", retained)
+                self.assertEqual(conflicts, {"equator:a"})
+        held["records"][0]["source_blob_sha"] = "c"*40
+        retained, conflicts = combine_retained_metadata(catalogue, [good, held])
+        self.assertIn("equator:a", retained)
+        self.assertFalse(conflicts)
+
     def test_bulk_inventory_budget_resume_and_circuit_breaker(self):
         records = [resolve(row(str(i),str(i)), [article_record(pmid=str(i),pmcid="PMC"+str(i))])
                    for i in range(1,5)]
