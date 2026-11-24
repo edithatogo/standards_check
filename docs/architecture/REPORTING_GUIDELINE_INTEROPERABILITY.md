@@ -215,3 +215,10 @@ have later integration evidence. Preserve scientific and source gates.
 No additional runtime dependency, source content, canonical pack promotion,
 accepted technical standard, external contact, or production model promotion
 is created by this document.
+
+## Ongoing model and method qualification
+
+Use the [dated frontier evaluation record](../research/frontier-evaluation-20261125.md)
+for observed comparative value, failures, source links, promotion boundaries and model
+review triggers. The publication contract remains the sole prospective run and claim
+ledger. A newly announced model is a challenger, not an automatic replacement.

@@ -262,3 +262,11 @@ The [dissemination policy](../../../docs/architecture/DATA_DISSEMINATION.md) gov
 any Hugging Face export. The [submission plan](../../../docs/research/publication-submission-plan.v0.1.0.md)
 records publication options, registration/freeze decisions, authorship and venue
 rules. Neither document authorizes blanket dataset upload or manuscript submission.
+
+## Next increment: measured test efficiency and frontier value
+
+The [frontier evaluation record](../../../docs/research/frontier-evaluation-20261125.md)
+records the measured Python job baseline, native timing instrumentation, historical model
+and fuzz observations, explicit improvement thresholds and research priorities. Use
+T05.047–048 for the remaining efficiency and model work. Do not add another CI system,
+model executor, result registry or parallel test dependency without demonstrated benefit.

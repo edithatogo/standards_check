@@ -47,3 +47,13 @@ Do not contact stakeholders, submit manuscripts, upload unpublished material
 or install a new service merely because this skill is invoked. Follow the
 user's existing authorization for any such action. Never label a run, claim,
 source, model or manuscript accepted solely because a local check passes.
+
+## Model lifecycle and value
+
+At each new experiment design or material model/runtime release, inspect the dated
+[frontier evaluation record](../../../docs/research/frontier-evaluation-20261125.md).
+Record the current role, incumbent and challenger; compare primary risk, incremental
+supported detections, resource cost and review burden on the same locked inputs.
+Keep failed, null and unqualified observations; do not change a frozen protocol or
+select a model using held-out results. A new design or cohort is required for a
+new confirmatory claim. Do not name a provider/model version that cannot be verified.

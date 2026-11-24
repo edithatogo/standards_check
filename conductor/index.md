@@ -13,6 +13,7 @@
 - [Tracks](./tracks.md)
 - [Technical-preview readiness and EQUATOR engagement](../docs/preview-readiness.md)
 - [Repository maturity plan](tracks/05-maximal-assurance/maturity-plan-20261125.md)
+- [Frontier evaluation and test efficiency evidence](../docs/research/frontier-evaluation-20261125.md)
 - [Complete plan/issue registry](../contracts/project/conductor-issues.v1.json)
 
 ## Source reconciliation

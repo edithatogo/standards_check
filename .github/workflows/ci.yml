@@ -110,12 +110,22 @@ jobs:
         run: |
           toolchain="$(python -c 'import tomllib; print(tomllib.load(open("rust-toolchain.toml", "rb"))["toolchain"]["channel"])')"
           rustup toolchain install "$toolchain" --profile minimal
-      - name: Measure Python regressions and existing validators
+      - name: Measure Python regressions and retain native timing
         if: matrix.component == 'python'
         shell: bash
         run: |
           set -euo pipefail
-          python -m coverage run -m pytest --import-mode=importlib tests test_extract_and_convert.py 2>&1 | tee target/coverage/tests.log
+          python -m coverage run -m pytest --import-mode=importlib \
+            --durations=20 --durations-min=0.1 \
+            --junitxml=target/coverage/python-junit.xml \
+            -o junit_logging=no -o junit_log_passing_tests=false \
+            tests test_extract_and_convert.py 2>&1 | tee target/coverage/tests.log
+          test -s target/coverage/python-junit.xml
+      - name: Measure Python validators and cross-runtime evidence
+        if: matrix.component == 'python'
+        shell: bash
+        run: |
+          set -euo pipefail
           for validator in validate_foundation validate_packs validate_artifacts validate_costing_reconciliation validate_prisma_source_assurance audit_foundation; do
             python -m coverage run "scripts/${validator}.py"
           done
