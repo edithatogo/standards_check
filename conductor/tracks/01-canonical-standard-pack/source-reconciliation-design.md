@@ -72,7 +72,7 @@ One optional export dependency: Polars, pinned for Python test/export CI
 (MIT, including its native runtime package). Owner Track 01; no Rust linkage.
 Remove the export invocation and dependency to roll back, retaining existing
 JSON receipts. Typed tables: guidelines, sources, requirements, source anchors,
-canonical requirements (effective-cleared text only), comparisons, format
+canonical requirements (effective-cleared text, licence, attribution and change notice), comparisons, format
 comparisons, extraction runs, and admission decisions. Keys are scoped to
 source/edition and row ordinal; printed IDs remain separate. Null indicates
 unavailable evidence rather than zero. No raw candidate text is exported.
@@ -97,3 +97,5 @@ repository acceptance. The Parquet dependency is unavailable in the isolated
 local environment; the existing hosted CI must execute the round-trip and
 retained-source artifact. Inspect the exact-head evidence and receiving-main
 receipt before closing any track. Keep older failed/incomplete receipts intact.
+
+The extended isolated module/tests at `7a591b9648d34f806bef90d15d8109e389b73d48` matched the local Git blobs: eight tests passed, one Parquet test skipped because Polars was absent. A separate locally generated ruled PDF was extracted independently by pdfplumber 0.11.9 and Poppler: one complete row matched. Hosted Repository health run 45383591230 failed downloading the pinned ALint executable (HTTP 500 on three attempts), not a lint finding. Preserve that failed receipt and requalify the new head. Final extended CLI and Parquet tests require hosted execution.

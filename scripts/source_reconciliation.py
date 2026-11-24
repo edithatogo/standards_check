@@ -144,19 +144,22 @@ def item_findings(source: dict, legacy: list[dict]) -> dict:
             'similarity_permille': comparison['similarity_permille']}
 
 
-# Explicit, nullable columns; no source prose, model output or raw parser data.
+# Explicit, nullable columns; no candidate prose, model output or raw parser data.
 SCHEMAS = {
     'guidelines': {'key': 'str', 'kind': 'str', 'version': 'str', 'rights': 'str', 'status': 'str'},
     'sources': {'key': 'str', 'guideline_id': 'str', 'source_sha256': 'str', 'source_blob_sha': 'str', 'format': 'str', 'status': 'str'},
     'requirements': {'key': 'str', 'source_id': 'str', 'item_id': 'str', 'ordinal': 'int', 'fingerprint': 'str', 'rights': 'str'},
     'canonical_requirements': {'key': 'str', 'requirement_id': 'str', 'display_number': 'str', 'section': 'str',
-                               'verbatim_text': 'str', 'normalized_requirement': 'str', 'rights': 'str'},
+                               'verbatim_text': 'str', 'normalized_requirement': 'str', 'guidance': 'str', 'rights': 'str',
+                               'spdx': 'str', 'license_url': 'str', 'attribution': 'str', 'redistribution': 'str',
+                               'source_url': 'str', 'evidence_expectations_json': 'str'},
     'format_comparisons': {'key': 'str', 'left_source_id': 'str', 'right_source_id': 'str', 'item_id': 'str',
                            'left_requirement_id': 'str', 'right_requirement_id': 'str', 'status': 'str'},
     'source_anchors': {'key': 'str', 'requirement_id': 'str', 'anchor': 'str'},
     'comparisons': {'key': 'str', 'requirement_id': 'str', 'status': 'str', 'legacy_position': 'int', 'findings': 'str', 'similarity_permille': 'int'},
     'admission_decisions': {'key': 'str', 'source_id': 'str', 'requirement_id': 'str', 'disposition': 'str', 'independent_sample': 'bool'},
-    'extraction_runs': {'key': 'str', 'source_id': 'str', 'parser': 'str', 'version': 'str', 'rows': 'int'},
+    'extraction_runs': {'key': 'str', 'source_id': 'str', 'parser': 'str', 'version': 'str', 'rows': 'int',
+                        'issues_json': 'str', 'identity': 'str', 'exact_expected_order': 'bool'},
 }
 
 
@@ -190,21 +193,29 @@ def project(catalogue: dict, packs: list[dict], article: dict, ecoevo: dict, leg
         sid = gid + '/authority'
         source(sid, gid, pack['authority'].get('source_sha256'), 'canonical_pack', status)
         for i, row in enumerate(pack['requirements'], 1):
-            policy = row['rights']; effective = rights if policy.get('inherit_from_pack') else policy.get('status', 'unassessed')
+            policy = pack['rights'] if row['rights'].get('inherit_from_pack') else row['rights']
+            effective = policy.get('status', 'unassessed')
             key = requirement(sid, i, row['id'], fingerprint(row['verbatim_text']) if row.get('verbatim_text') else None,
                               row['source_anchor'], effective)
             # Only already-admitted pack content with effective cleared rights may carry prose.
             add('canonical_requirements', key=key, requirement_id=key, display_number=row.get('display_number'),
                 section=row.get('section') if effective == 'cleared' else None,
                 verbatim_text=row.get('verbatim_text') if effective == 'cleared' else None,
-                normalized_requirement=row.get('normalized_requirement') if effective == 'cleared' else None, rights=effective)
+                normalized_requirement=row.get('normalized_requirement') if effective == 'cleared' else None,
+                guidance=row.get('guidance') if effective == 'cleared' else None, rights=effective,
+                spdx=policy.get('spdx'), license_url=policy.get('license_url'),
+                attribution=policy.get('attribution'), redistribution=policy.get('redistribution'),
+                source_url=pack['authority'].get('source_url'),
+                evidence_expectations_json=json.dumps(row.get('evidence_expectations', [])))
     for edition in article['editions']:
         name = edition['edition']; gid = 'article:' + name; sid = gid + '/table'
         add('guidelines', key=gid, kind='candidate', version=None, rights='unassessed', status=edition['status'])
         src = edition.get('source', {})
         source(sid, gid, src.get('source_sha256'), 'JATS', edition['status'])
         rows = src.get('rows', [])
-        add('extraction_runs', key=sid, source_id=sid, parser='retained_or_jats', version=VERSION, rows=len(rows))
+        add('extraction_runs', key=sid, source_id=sid, parser='retained_or_jats', version=VERSION, rows=len(rows),
+            issues_json=json.dumps(src.get('structure', {}).get('issues', [])), identity=src.get('pin_status'),
+            exact_expected_order=None)
         if not rows:
             decision(sid, None, 'held_source')
         exact = []
@@ -230,13 +241,16 @@ def project(catalogue: dict, packs: list[dict], article: dict, ecoevo: dict, leg
                 sid = gid + '/' + observed['path'] + '/' + parser
                 source(sid, gid, observed.get('source_sha256'), Path(observed['path']).suffix, 'held')
                 add('extraction_runs', key=sid, source_id=sid, parser=parser,
-                    version=observed.get('poppler_version' if parser == 'poppler' else 'pdfplumber_version'), rows=len(rows))
+                    version=observed.get('poppler_version' if parser == 'poppler' else 'pdfplumber_version'), rows=len(rows),
+                    issues_json=json.dumps(observed.get('poppler_row_issues' if parser == 'poppler' else 'issues', [])),
+                    identity=observed.get('identity'),
+                    exact_expected_order=observed.get('poppler_exact_expected_order' if parser == 'poppler' else 'exact_expected_order'))
                 if not rows:
                     decision(sid, None, 'held_source')
                 format_groups[sid] = {}
                 for i, row in enumerate(rows, 1):
                     key = requirement(sid, i, row['item_id'], row['requirement_sha256'], row['requirement_anchor'], 'unassessed')
-                    decision(sid, key, 'held_independent_review')
+                    decision(sid, key, 'held_independent_review' if row['requirement_sha256'] else 'held_incomplete_row')
                     format_groups[sid].setdefault(row['item_id'], []).append((key, row['requirement_sha256']))
         for left, right in combinations(sorted(format_groups), 2):
             a, b = format_groups[left], format_groups[right]

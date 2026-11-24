@@ -59,7 +59,8 @@ class SourceReconciliationTests(unittest.TestCase):
     def test_projection_preserves_rows_without_text_or_promotion(self):
         catalogue = {'guidelines': [{'id': 'equator:a', 'source_blob_sha': 'a'*40}]}
         pack = {'pack_id': 'org/a/1', 'version': '1', 'verification': {'status': 'source_reconciled'},
-                'rights': {'status': 'cleared'}, 'authority': {'source_sha256': 'b'*64},
+                'rights': {'status': 'cleared', 'spdx': 'CC-BY-4.0', 'attribution': 'Synthetic author'},
+                'authority': {'source_sha256': 'b'*64},
                 'requirements': [{'id': 'A:1', 'source_anchor': 'table:1', 'verbatim_text': 'Secret example.',
                                   'rights': {'inherit_from_pack': True}}]}
         article = {'editions': [{'edition': 'Example', 'status': 'table_items_extracted_legacy_compared',
@@ -68,6 +69,8 @@ class SourceReconciliationTests(unittest.TestCase):
         self.assertEqual(len(tables['requirements']), 2)
         self.assertEqual(len(tables['guidelines']), 3)
         self.assertEqual(tables['canonical_requirements'][0]['verbatim_text'], 'Secret example.')
+        self.assertEqual(tables['canonical_requirements'][0]['spdx'], 'CC-BY-4.0')
+        self.assertEqual(tables['canonical_requirements'][0]['attribution'], 'Synthetic author')
         self.assertNotIn('Secret example.', str(tables['requirements']))
         self.assertNotIn('Report harms.', str(tables))
         self.assertEqual(tables['admission_decisions'][0]['disposition'], 'held_independent_review')
@@ -114,3 +117,41 @@ class SourceReconciliationTests(unittest.TestCase):
             self.assertEqual(pl.read_parquet(output / 'guidelines.parquet').height, 1)
             self.assertEqual(pl.read_parquet(output / 'requirements.parquet').height, 0)
             self.assertEqual(pl.read_parquet(output / 'requirements.parquet').schema['ordinal'], pl.Int64)
+
+    @unittest.skipUnless(importlib.util.find_spec('polars'), 'Parquet dependency not installed')
+    def test_cli_replays_pinned_retained_corpus_and_existing_survey(self):
+        import json
+        import sys
+        from unittest.mock import patch
+        import polars as pl
+        from scripts.source_reconciliation import main
+        root = Path(__file__).resolve().parents[1]
+        with tempfile.TemporaryDirectory() as temp:
+            base = Path(temp)
+            ecoevo = base / 'ecoevo.json'
+            ecoevo.write_text(json.dumps({'sources': []}), encoding='utf-8')
+            survey = base / 'survey.json'
+            survey.write_text(json.dumps({'records': [{'id': 'equator:test', 'status': 'lookup_incomplete'}]}), encoding='utf-8')
+            output = base / 'out'
+            with patch.object(sys, 'argv', ['source_reconciliation', '--root', str(root),
+                                          '--ecoevo', str(ecoevo), '--survey', str(survey),
+                                          '--output', str(output), '--revision', 'synthetic-test-revision']):
+                main()
+            manifest = json.loads((output / 'manifest.json').read_text())
+            self.assertEqual(manifest['canonical_packs_promoted'], 0)
+            self.assertTrue((output / 'survey-retrospective.json').is_file())
+            canonical = pl.read_parquet(output / 'canonical_requirements.parquet')
+            self.assertGreaterEqual(canonical.height, 42)
+            self.assertEqual(canonical.filter(pl.col('rights') != 'cleared')['verbatim_text'].drop_nulls().len(), 0)
+            self.assertGreater(pl.read_parquet(output / 'comparisons.parquet').height, 0)
+
+    def test_validator_rejects_orphans_and_wrong_types(self):
+        tables = project({'guidelines': [{'id': 'equator:a', 'source_blob_sha': 'a'*40}]}, [],
+                         {'editions': []}, {'sources': []}, {})
+        tables['sources'][0]['guideline_id'] = 'missing'
+        with self.assertRaisesRegex(ValueError, 'relationship'):
+            validate_tables(tables)
+        tables['sources'][0]['guideline_id'] = 'equator:a'
+        tables['sources'][0]['format'] = 1
+        with self.assertRaisesRegex(ValueError, 'value type'):
+            validate_tables(tables)
