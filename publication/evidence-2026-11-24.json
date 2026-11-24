@@ -1,0 +1,70 @@
+{
+  "directory": {
+    "canonical_packs_promoted": 0,
+    "input_sha256s": {
+      "catalogue": "474aacbe8a020e5b295ed55454854731d3e9bc1501de55cbdd625a5d1253e94c",
+      "links": "0b20e58d091020e1eff4bda4219818d35dbf8830882c3c621b8df6e132e5639a",
+      "survey": "d8d8e4e9bc653cf298336453548790fbf5d63510d3794b4aa74a2167891e41e4"
+    },
+    "lookup_counts": {
+      "identifier_conflict": 5,
+      "lookup_incomplete": 85,
+      "metadata_only": 335,
+      "missing_identifier": 77,
+      "oa_xml_candidate": 213,
+      "unresolved_identifier": 5
+    },
+    "next_action_counts": {
+      "acquire_exact_source": 2,
+      "hold_identity_conflict": 5,
+      "locate_authoritative_source": 251,
+      "qualify_source_link": 158,
+      "resolve_identity": 8,
+      "resume_acquisition_budget": 207,
+      "resume_provider_lookup": 85,
+      "retry_acquisition_or_alternative": 4
+    },
+    "published_count": 720,
+    "schema_version": 1,
+    "source_revision": "d74413b15d266334067e1e5c104957601be3ba6c"
+  },
+  "five_class_controls": {
+    "consensus": 17,
+    "correct_consensus": 6,
+    "deberta_correct": 29,
+    "deberta_false_equivalence": 0,
+    "development_accuracy": {
+      "agent_a": 0.2,
+      "agent_b": 0.2
+    },
+    "fixed": 13,
+    "introduced": 0,
+    "minilm_correct": 16,
+    "minilm_false_equivalence": 2,
+    "n": 30,
+    "natural_consensus": 0,
+    "qualified": false
+  },
+  "limitations": [
+    "Directory dispositions are candidate-only and do not establish rights or complete extraction.",
+    "Constructed formal controls and selected model-agent consensus are not independent natural-language ground truth.",
+    "Historical observations predate the prospective protocol; no submission or profile approval authorized."
+  ],
+  "receipts": [
+    {
+      "kind": "directory",
+      "sha256": "9ddd611875b29cc0a6c82b9f50a76131b21e8ae38b79a945dfa7d4290f17e94f",
+      "tested_revision": "bce82c92f2ece4d775985a6af06f3edd1eae8b6a",
+      "url": "https://github.com/edithatogo/standards_check/actions/runs/45404500530/artifacts/14925365720"
+    },
+    {
+      "kind": "five_class",
+      "receipt_sha256": "d23c3a52ad1e626cab22997df232a90ed30f6f22e78690bb77b1b1a83ac622b3",
+      "sha256": "1047f28eba5ab300fbb3419c94f9a39275964d246d79b6a45c7fc2040ecc5c0d",
+      "tested_revision": "e1a03e4ee0d7925d95d2e36e30f334d7012d002c",
+      "url": "https://github.com/edithatogo/standards_check/actions/runs/45400872869/artifacts/14924523529"
+    }
+  ],
+  "schema_version": 1,
+  "status": "historical_descriptive"
+}
