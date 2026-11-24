@@ -4,7 +4,7 @@
   "description": "Simple pipeline for academic publication checklists: 1) Collect originals into `source/`. 2) Produce edited Markdown in `markdown/`. 3) Produce Typst in `typst/`. 4) Produce LaTeX in `latex/`.",
   "main": "index.js",
   "scripts": {
-    "test": "node --test tests/dependency-security.test.cjs"
+    "test": "node --test tests/*.test.cjs"
   },
   "repository": {
     "type": "git",
