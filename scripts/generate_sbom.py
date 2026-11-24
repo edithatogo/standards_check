@@ -27,7 +27,7 @@ PYTHON_PROFILES = {
     "kernel-baseline": ("legacy-kernel-qualification", (3, 12), True),
     "kernel-candidate": ("legacy-kernel-qualification", (3, 12), True),
 }
-COMPONENTS = ("rust", "node", "api", *(f"python-{key}" for key in PYTHON_PROFILES))
+COMPONENTS = ("rust", "rust-fuzz", "node", "api", *(f"python-{key}" for key in PYTHON_PROFILES))
 
 
 def run(command: list[str], *, cwd: Path = ROOT, output: Path | None = None) -> str:
@@ -74,6 +74,13 @@ def source_inputs(component: str) -> list[Path]:
             ROOT / "Cargo.lock",
             ROOT / "Cargo.toml",
             *sorted((ROOT / "crates").glob("*/Cargo.toml")),
+        ]
+    if component == "rust-fuzz":
+        return [
+            ROOT / "fuzz/Cargo.lock",
+            ROOT / "fuzz/Cargo.toml",
+            ROOT / "Cargo.toml",
+            ROOT / "crates/standardflow-core/Cargo.toml",
         ]
     if component in ("node", "api"):
         base = ROOT if component == "node" else ROOT / "api"
@@ -219,12 +226,15 @@ def python_inventory(
 
 
 def generate(component: str, output: Path, temporary: Path, policy: Path, receipt: dict) -> dict:
-    if component == "rust":
+    if component in ("rust", "rust-fuzz"):
+        lock = ROOT / ("Cargo.lock" if component == "rust" else "fuzz/Cargo.lock")
         receipt["scope"] = (
             "all Cargo.lock packages, including build/dev/optional/target resolution; not linked binary composition"
         )
+        if component == "rust-fuzz":
+            receipt["scope"] += "; isolated test-only native fuzz workspace"
         return central_helper(policy, "cargo_lock_sbom.py").generate(
-            (ROOT / "Cargo.lock").read_bytes(), "standards_check/rust", receipt["source_commit"]
+            lock.read_bytes(), f"standards_check/{component}", receipt["source_commit"]
         )
     if component.startswith("python-"):
         return python_inventory(component, output, temporary, policy, receipt)

@@ -49,7 +49,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for component in rust node api python-legacy python-tests python-assurance python-kernel-baseline python-kernel-candidate; do
+          for component in rust rust-fuzz node api python-legacy python-tests python-assurance python-kernel-baseline python-kernel-candidate; do
             python scripts/generate_sbom.py --component "$component" --policy-dir target/sbom-policy --output "target/sbom/$component"
           done
       - name: Retain BOMs, resolved environments and source receipts
