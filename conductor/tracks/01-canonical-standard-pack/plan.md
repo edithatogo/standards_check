@@ -73,6 +73,10 @@ The [local original text triage](../../source-reconciliation/legacy-source-text-
 
 ### Independent benchmark and evidence
 
+See [cross-family format benchmark](cross-family-format-benchmark.md) for the
+edition-scoped extension of the existing EcoEvo comparison. Actual-source
+qualification remains separate; T01.5b/c/h remain open.
+
 Use the accepted 42-item PRISMA primary-source comparator as a bounded positive control, not ground truth for normalized interpretation; the historical 27-item migration and ten STARD-copy rejections as independent structural/negative controls. Use PRISMA-EcoEvo PDF/CSV discrepancies as unlabelled diagnostics, and qualify selected independent guideline editions as they become available. Add synthetic single-change negatives (missing negation/condition/subitem, wrong item binding, duplicates/reorder, modality, numeric quantifier, AND/OR). Split development/test by guideline family and edition, not individual sentences; no validation against unqualified legacy arrays.
 
 Measure item/subitem precision/recall/completeness, exact anchored text fidelity, false acceptance among accepted cases, abstention/coverage, semantic discrepancy detection, time and peak memory; use risk–coverage curves and calibration metrics for probabilistic methods. Report paired incremental improvement and uncertainty on held-out data; do not set an arbitrary confidence cutoff or equate zero observed errors with zero risk. Retain a new method only if it improves error detection or coverage at an acceptable resource cost without weakening required gates. Thresholds must be justified and pinned before the held-out run.

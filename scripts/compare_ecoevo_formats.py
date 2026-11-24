@@ -41,7 +41,8 @@ def read_bounded(path: Path, limit: int = MAX_BYTES) -> bytes:
     return raw
 
 
-def collect_rows(structure: dict) -> tuple[list[dict], list[str]]:
+def collect_rows(structure: dict, *, identifier_pattern: re.Pattern = ID,
+                 header_roles: dict | None = None) -> tuple[list[dict], list[str]]:
     """Match explicit header roles, not arbitrary numeric-looking scoring cells."""
     records, issues = [], set()
 
@@ -49,7 +50,8 @@ def collect_rows(structure: dict) -> tuple[list[dict], list[str]]:
         columns = None
         for row in node.get("rows", []):
             cells = {cell.get("column", ordinal): cell for ordinal, cell in enumerate(row["cells"], 1)}
-            headers = [(column, cell.get("header_role") or HEADER.get(cell.get("text_sha256")))
+            headers = [(column, (cell.get("header_role") or HEADER.get(cell.get("text_sha256")))
+                        if header_roles is None else header_roles.get(cell.get("text_sha256")))
                        for column, cell in cells.items()]
             id_cols = [column for column, role in headers if role == "id"]
             req_cols = [column for column, role in headers if role == "requirement"]
@@ -63,7 +65,7 @@ def collect_rows(structure: dict) -> tuple[list[dict], list[str]]:
             identifier = cells.get(columns[0], {})
             requirement = cells.get(columns[1], {})
             item_id = identifier.get("item_id_candidate")
-            if not isinstance(item_id, str) or not ID.fullmatch(item_id) or identifier.get("value_type") == "f":
+            if not isinstance(item_id, str) or not identifier_pattern.fullmatch(item_id) or identifier.get("value_type") == "f":
                 if identifier.get("text_sha256") not in {None, EMPTY} or requirement.get("text_sha256") not in {None, EMPTY}:
                     issues.add("unclassified_data_row")
                 continue
@@ -81,16 +83,18 @@ def collect_rows(structure: dict) -> tuple[list[dict], list[str]]:
     return records, sorted(issues)
 
 
-def compare_formats(left: list[dict], right: list[dict]) -> dict:
+def compare_formats(left: list[dict], right: list[dict], *,
+                    expected_ids: list[str] | tuple[str, ...] | None = None) -> dict:
+    expected = EXPECTED_IDS if expected_ids is None else expected_ids
     def unique(rows: list[dict]) -> dict:
         counts = Counter(row["item_id"] for row in rows)
         return {row["item_id"]: row["requirement_sha256"] for row in rows
                 if counts[row["item_id"]] == 1 and row["requirement_sha256"] is not None}
     a, b = unique(left), unique(right)
-    common = [item for item in EXPECTED_IDS if item in a and item in b]
+    common = [item for item in expected if item in a and item in b]
     different = [item for item in common if a[item] != b[item]]
     return {"compared": len(common), "exact_equal": len(common) - len(different), "different_ids": different,
-            "not_comparable_expected_ids": [item for item in EXPECTED_IDS if item not in common]}
+            "not_comparable_expected_ids": [item for item in expected if item not in common]}
 
 
 def pdf_tables(raw: bytes) -> dict:

@@ -88,6 +88,12 @@ jobs:
             --report target/coverage/legacy-source-text-triage.json \
             --output target/coverage/ecoevo-format-comparison.json
 
+      - name: Benchmark local guideline-family format candidates
+        if: matrix.component == 'python'
+        run: |
+          python -m scripts.compare_guideline_formats --root . \
+            --output target/coverage/guideline-format-comparison.json
+
       - name: Compare explicitly selected official EcoEvo download bytes
         if: matrix.component == 'python'
         shell: bash
