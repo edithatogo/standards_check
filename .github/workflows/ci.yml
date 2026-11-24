@@ -112,6 +112,27 @@ jobs:
             --report target/coverage/legacy-source-text-triage.json \
             --output target/coverage/ecoevo-official-byte-comparison.json
 
+      - name: Qualify independent real-source PDF and selected publisher HTML
+        if: matrix.component == 'python'
+        shell: bash
+        run: |
+          set -euo pipefail
+          selected="$(mktemp -d "$RUNNER_TEMP/source-format.XXXXXX")"
+          trap 'rm -rf -- "$selected"' EXIT
+          # Network acquisition is explicit and bounded; ordinary CI replays the pinned PDF offline.
+          if [ "$GITHUB_EVENT_NAME" = workflow_dispatch ] || ! git diff --quiet HEAD^1 HEAD -- scripts/qualify_real_source_formats.py; then
+            if ! curl --fail --silent --show-error --location --max-redirs 2 \
+              --connect-timeout 10 --max-time 45 --max-filesize 20000000 \
+              --proto '=https' --proto-redir '=https' \
+              'https://link.springer.com/article/10.1186/s13643-020-01542-z/tables/1' \
+              --output "$selected/prisma-s.html"; then
+              rm -f -- "$selected/prisma-s.html"
+              echo "::warning::Publisher HTML unavailable; hold real-source HTML qualification."
+            fi
+          fi
+          python -m scripts.qualify_real_source_formats --root . \
+            --html "$selected/prisma-s.html" --output target/coverage/real-source-format-qualification.json
+
       - if: matrix.component == 'rust'
         uses: dtolnay/rust-toolchain@4cda84d5c5c54efe2404f9d843567869ab1699d4
         with:
