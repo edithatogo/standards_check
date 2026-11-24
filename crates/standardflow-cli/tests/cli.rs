@@ -97,6 +97,6 @@ fn committed_prisma_lock_verifies() -> Result<(), Box<dyn std::error::Error>> {
 fn unknown_commands_return_usage_status() -> Result<(), Box<dyn std::error::Error>> {
     let output = cli().arg("unknown").output()?;
     assert_eq!(output.status.code(), Some(2));
-    assert!(!output.stderr.is_empty());
+    assert_ne!(output.stderr, [] as [u8; 0]);
     Ok(())
 }
