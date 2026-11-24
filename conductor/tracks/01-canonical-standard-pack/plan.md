@@ -148,6 +148,6 @@ measurement, receiving CI and resumed live acquisition (#142). No NLI or model
 runtime is required. Existing runtime status is unchanged. Refs #111/#95/#82;
 Track 05 independent qualification and Track 04 consumer handoff remain separate.
 
-### Experimental semantic comparator
+### Experimental semantic comparator and blinded subagents
 
-See [semantic reconciliation qualification](semantic-reconciliation-qualification.md): family-disjoint synthetic reference benchmark, separate local CPU inference and development-only threshold selection. Keep T01.5d/e open until actual independently labelled source-family validation; T01.5f/g gated by measured residuals. No automatic admission.
+See [semantic reconciliation qualification](semantic-reconciliation-qualification.md): family-disjoint synthetic reference benchmark, separate local CPU inference and development-only thresholds. Replace human labelling with two independent, blinded, pinned model-agent processes on actual source-derived and observed candidate pairs. Keep T01.5d/e open until a real-source consensus and held-out error receipt exists; T01.5f/g gated by measured residuals. No automatic admission.
