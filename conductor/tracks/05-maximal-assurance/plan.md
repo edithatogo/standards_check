@@ -120,3 +120,10 @@ both the corrected PR head and receiving main. The [hosted acceptance record](ho
 binds the exact trees, downloaded native reports and live issue-event reconciliation.
 T05.037–039 are complete within that software and ownership scope. The remaining
 operational, dataset, consumer and publication tasks above retain their own gates.
+
+## Next increment: measurable efficiency and model value
+
+- [ ] **T05.047** ([#31](https://github.com/edithatogo/standards_check/issues/31)) Retain native test timing and case outcomes; qualify a same-revision efficiency improvement against unchanged required tests, coverage and failure detection. Compare at least three repeated runs per configuration before adopting parallelism or a cache.
+- [ ] **T05.048** ([#158](https://github.com/edithatogo/standards_check/issues/158)) Maintain dated model evidence and value decisions using the existing experiment contract; qualify the next challenger on the frozen question, budget and reference, retain failed runs, and reassess on relevant releases without changing a frozen experiment.
+
+See [frontier evaluation and efficiency evidence](../../../docs/research/frontier-evaluation-20261125.md). Source changes and historical observations do not close these tasks; receiving checks and actual comparative evidence remain required.

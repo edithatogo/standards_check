@@ -23,13 +23,18 @@ The detailed sequencing and later capabilities remain in [`roadmap.md`](./roadma
 The [25 November maturity plan](tracks/05-maximal-assurance/maturity-plan-20261125.md)
 records stricter CI, measured coverage, selective data-release controls and the
 remaining operational gates. The [issue registry](../contracts/project/conductor-issues.v1.json)
-maps all 185 current plan items across six tracks to all 19 repository issues,
+mapped 185 plan items across six tracks to all 19 repository issues at PR #166,
 including completed work and the bot-owned dependency dashboard. Offline and
 read-only live checks verify both directions; this is ownership coverage, not a
 scientific completion score. Issue counts are a dated observation and can change.
 
-The current protected receiving baseline is main `82e4a1efc136187f42b31347ada44506d2d96bfa`
-from PR #160. Its seven required checks and native Pages deployment completed.
+The protected baseline for the next hardening increment is main
+`ef4fb0dd4c4e01fca4527041e464e816f6f4d73e` from PR #166. The seven required checks completed;
+PR #165's receiving-main Pages deployment and PR #166's live issue-event reconciliation
+are recorded in [the acceptance evidence](tracks/05-maximal-assurance/plan.md).
+The [frontier evaluation record](../docs/research/frontier-evaluation-20261125.md)
+adds two tracked tasks under existing owners; live reconciliation of the new candidate
+is required before claiming the new count.
 The historical receipts below remain bound to their original revisions. Current
 publication experiments remain planned, and profile 0.1.0 remains unapproved.
 
