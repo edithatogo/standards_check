@@ -133,6 +133,12 @@ jobs:
             --ecoevo target/coverage/ecoevo-format-comparison.json \
             --output target/coverage/source-projections --revision "$(git rev-parse HEAD)"
 
+      - name: Benchmark local guideline-family format candidates
+        if: matrix.component == 'python'
+        run: |
+          python -m scripts.compare_guideline_formats --root . \
+            --output target/coverage/guideline-format-comparison.json
+
       - name: Compare explicitly selected official EcoEvo download bytes
         if: matrix.component == 'python'
         shell: bash
