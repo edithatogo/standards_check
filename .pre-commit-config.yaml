@@ -28,3 +28,18 @@ repos:
   - id: eslint
     files: ^(api/|scripts/|tests/).+\.(js|cjs|mjs)$
     args: [--max-warnings=0]
+
+- repo: local
+  hooks:
+  - id: representation-profile
+    name: Validate versioned representation profile
+    entry: python scripts/validate_representation_spec.py
+    language: system
+    pass_filenames: false
+    files: ^(contracts/representation/|docs/specifications/reporting-guideline-representation/|schemas/|scripts/validate_representation_spec\.py$)
+  - id: publication-contract
+    name: Validate publication experiment and claim contract
+    entry: python scripts/validate_publication_contract.py
+    language: system
+    pass_filenames: false
+    files: ^(contracts/publication/|docs/research/|scripts/validate_publication_contract\.py$)

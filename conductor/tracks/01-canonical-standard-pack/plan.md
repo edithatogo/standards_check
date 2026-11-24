@@ -183,3 +183,30 @@ See [EQUATOR analytical snapshot](equator-analytical-snapshot.md). Reuses #142 s
 ### Receiving-main acquisition reconciliation
 
 The #142 candidate retains prior receipt and current live projection observations (artifacts 14918300555 and 14916344312) and the Searchright #851 historical consumer canary. Reconcile hardened source XML ingress with the already-merged #154 opt-in linguistic reconciliation; neither implementation is overwritten. Retain discovery-only identity conflicts, acquisition rights and held candidate statuses, and validate item-count, fingerprint and anchor conservation. No new source authority, rights or canonical pack promotion. Hosted current-base tests and live/replay evidence required before merge.
+
+
+## Phase 6: Versioned representation and directory assurance
+
+Scope: #158 research programme, #111 directory/source work, #118 technical-specification engagement,
+#82/#95 interpretation/rights, and Track 05 empirical publication qualification.
+The bounded runtime is complete; the broader representation programme is in progress.
+
+- [x] Preserve RGI-01–14 in immutable draft profile 0.1.0, with distinct pack/schema,
+  guideline-edition, model and profile versions; explicit directional relation semantics.
+- [x] Implement profile digest/contract-pin checks, an append-only baseline comparison,
+  and separate hash-bound approval records. No specification has been approved.
+- [x] Integrate #142 after seven exact-head protected checks and actual current/historical
+  artifact inspection; reuse its four-table directory projection and existing writer.
+- [x] Observe all seven #142 receiving-main checks; merge #153 after current-base checks
+  and retain strict/layout-normalized differences and all fourteen-family holds.
+- [ ] Observe #153 and this increment on their exact receiving-main revisions.
+- [x] Define d1-2B as a conditional complementary-evidence experiment; standalone
+  superiority is not required. Predeclare useful gain, harmful changes and review budget.
+- [ ] Freeze untouched family strata and thresholds, qualify the existing #155 benchmark,
+  then run the isolated d1-2B experiment if source/model/runtime prerequisites pass.
+- [ ] Validate implementation-neutral conformance with a real downstream consumer;
+  technical approval, item-level admission and EQUATOR feedback remain distinct.
+
+[Current evidence and sequence](representation-programme-20261124.md) is the
+single receipt for this increment. No additional crawler, exporter, database or
+production model is introduced.

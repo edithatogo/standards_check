@@ -77,3 +77,22 @@ implementation revision. See [verification](verification.md) and [metadata](meta
 - [ ] Retain the independent offline security/runner, reproducibility and publication
   gates. Required ruleset, zero-human-approval protection, review resolution and no
   bypass remain unchanged. See #30, #31 and #116.
+
+
+## Representation/publication assurance increment — 24 November 2026
+
+- [x] Close the required-lint gap: existing ESLint pre-commit configuration feeds the
+  required workflow-policy job; Rust fmt/strict Clippy feed required Rust coverage.
+- [x] Add version-registry and publication-contract checks to the existing Python
+  assurance lane and local hooks. Preserve all branch rules and coverage thresholds.
+- [x] Define the publication protocol, three planned experiments, blinded agent roles,
+  claim ledger and repository-local publication-evidence skill; fifteen contract regressions
+  include negative paths. No model run or scientific acceptance is claimed.
+- [ ] Observe exact-head and receiving-main CI for this increment.
+- [ ] Resolve protocol freeze blockers; execute E1 directory census, E2 independent
+  five-class reference and E3 incremental decision-model utility in dependency order.
+- [ ] Complete native fuzzing, offline runner, updater handover and release provenance
+  using their existing issues. Configuration is not an execution receipt.
+
+See [current programme receipt](../01-canonical-standard-pack/representation-programme-20261124.md)
+and [publication protocol](../../../docs/research/publication-protocol.v0.1.0.md).
