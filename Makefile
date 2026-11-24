@@ -53,7 +53,7 @@ clean:
 # Fast, network-free maintained contract and source regression profile.
 .PHONY: quick
 quick:
-	python -m unittest tests.test_reconcile_authoritative_articles tests.test_jats_checklist_structure tests.test_review_source_receipts tests.test_classical_linguistic_nlp -v
+	python -m unittest tests.test_reconcile_authoritative_articles tests.test_jats_checklist_structure tests.test_review_source_receipts tests.test_classical_linguistic_nlp tests.test_linguistic_benchmark -v
 	cargo fmt --all -- --check
 	node --check api/server.js
 	node --check api/cors-options.js

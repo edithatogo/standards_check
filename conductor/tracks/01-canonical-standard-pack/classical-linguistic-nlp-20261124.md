@@ -72,3 +72,57 @@ labels (not legacy self-labels), actual trained spaCy model and exact model dige
 scope and role counterexamples, paired precision/recall and abstention/false-acceptance
 metrics, resource measurements and exact-head/receiving-main CI. Retain this checkbox open
 until observed, not merely configured. RapidFuzz is deferred until a measured need.
+
+## Frozen challenge and reference qualification — follow-up
+
+Previous PR head `154c760188915d9db3a4e1fdf1de72a314537954`: eight hosted workflows
+completed successfully, but Codecov patch coverage was **61.01% versus 80% required by the
+advisory target** ([Assurance run](https://github.com/edithatogo/standards_check/actions/runs/45384358540)).
+Offline AI security remained queued. Do not transfer these results to the new head.
+
+The [frozen challenge](../../../scripts/linguistic_benchmark.py) has 17 synthetic cases
+(scope, passive voice, explicit/implicit actors, object changes, double negation,
+coordinated arguments, nested conditions and meaning-preserving controls). It also
+selects eight distinct rows from two separately sourced guideline families (PRISMA-S 2021
+and CHEERS 2022), yielding eight source-backed single mutations and eight unchanged
+controls, **33 total pairs**. The existing snapshot validator checks the source identity,
+ordered row digest and anchor; the mutations are applied in memory and reports retain only
+hashes and case IDs. Neither family is used to tune the comparator in this follow-up.
+These are author-defined perturbation labels, NOT independently reviewed human labels or
+an untouched external dataset. Keep independent family/edition qualification open.
+Do not tune on these frozen cases and subsequently report them as held-out results.
+
+Publisher reference: [spaCy en_core_web_sm 3.8.0](https://github.com/explosion/spacy-models/releases/tag/en_core_web_sm-3.8.0),
+MIT, CPU pipeline, spaCy 3.8.11, wheel size 12,806,118 bytes, publisher SHA-256
+`1932429db727d4bff3deed6b34cfc05df17794f4a52eeb26cf8928f7c1a0fb85`.
+The reference loader rejects wrong bytes, runtime version, model version/name and licence.
+No model package code is installed; the exact verified wheel is extracted into a temporary
+directory and loaded as local pipeline data. Ordinary unrelated CI does not acquire it;
+a relevant NLP change or explicit assurance dispatch does. The existing coverage artifact
+retains matched fixture fingerprints, source pins, per-case expected/observed diagnostics,
+field-level TP/FP/FN, precision/recall, held and material-no-signal counts, control false
+alerts, comparison time, process peak RSS and the resolved package inventory. Hosted
+timing/RSS include coverage instrumentation; use separate plain runs for operational timing.
+
+Local RED: missing benchmark module. GREEN (Python 3.13.5 / pytest 9.0.2 / spaCy 3.8.11):
+12 passed, 11 subtests passed, one skipped because the isolated container has no retained
+source ledger. The three new/updated code and test files' exact Git blob hashes were verified
+before push. Publisher wheel download was attempted locally and failed; do not claim
+trained inference or source replay from the isolated local run. The new hosted run must
+execute both methods on the same 33 cases and preserve actual receipt bytes.
+
+Synthetic rules baseline, fixture SHA-256
+`8c2f58d2f4a661747be03463d7db3421336e1be8fd82f89f5c47b5ca5eb2d7a1`:
+17 pairs, TP 7, FP 2, FN 7, micro precision 77.78%, micro recall 50%,
+13 material-change cases, 6 with no diagnostic signal, 0 held, 4 controls, 1 false alert,
+comparison time 0.00196 s, peak RSS 98,316,288 bytes (one local uninstrumented run).
+These are challenge-set observations, not generalizable error rates or acceptance thresholds.
+The missed cases include argument substitution, passive agent changes, double negation,
+coordinated arguments and altered parenthetical scope. No-change diagnostics do not
+authorize admission. Compare paired reference improvement and false alerts first; design
+a separate reviewed family-level evaluation before determining acceptance criteria.
+
+Remaining: actual pinned-wheel execution and receipt, exact-head and receiving-main
+checks, Codecov patch target, independently reviewed labels and additional untouched
+guideline families with an agreed acceptance criterion. Do not close #95/#82 or T01.5d
+on a configured workflow or on synthetic results.
