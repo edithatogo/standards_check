@@ -80,7 +80,8 @@ The known EcoEvo header issue was fixed and independently verified; its review t
 was resolved. The branch was synchronized with #142 receiving main, with 30 focused
 merged-tree tests passing; all seven protected checks then passed on `a5b39cc41cf0faf1721da9c5f057caf56464f4b0`.
 The PR merged normally at `e2797940a9f46ee0412a4783506a4c36a85372a1`; receiving-main
-checks are recorded separately. Both merged feature branches were automatically pruned.
+checks subsequently passed all seven protected contexts. Both merged feature branches
+were automatically pruned.
 
 [PR #155](https://github.com/edithatogo/standards_check/pull/155) owns the active
 five-class agent/model experiments. The witness-v2 artifact explicitly failed scientific
@@ -88,6 +89,16 @@ qualification despite workflow success (6/17 correct consensuses, only one corre
 covered class). A later experiment is separate evidence; never turn green CI or formal
 control accuracy into natural-language or production qualification. No competing model
 harness or premature model admission is introduced here.
+
+The later condition-v3 receipt from [run 45405499908](https://github.com/edithatogo/standards_check/actions/runs/45405499908),
+artifact 14926383953, was also inspected: held-out formal consensus was 18/30 with
+18/18 correct, but covered only narrower, contradictory and indeterminate. Equivalent
+and broader were absent from consensus, and natural-source consensus was 0/5. The
+receipt remains `qualified: false`. Conditional DeBERTa corrected 12 MiniLM errors
+but introduced four, giving 25/30 versus 17/30; both had zero false-equivalence calls
+among 24 non-equivalent controls. These are formal-control results, not evidence of
+natural-source or production qualification. The separate blinded-agent receipt remains
+ineligible (3/10 test consensuses in one family, only equivalent/narrower covered).
 
 ## Prior art and publication contribution
 
@@ -100,6 +111,32 @@ assurance at directory scale. A technical profile, empirical methods paper and c
 software paper have separate acceptance criteria. EQUATOR should be asked about the
 specification and optional implementation; its endorsement is not assumed.
 
+The refined #118 proposal links immutable profile, approval-registry and protocol
+bytes, acknowledges the prior art and distinguishes 720 directory identities from
+item-level qualification. An authorized GitHub issue creation attempt against
+`EQUATOR-Network/equator-website` returned HTTP 403, `Resource not accessible by
+integration`; no upstream issue was created. The concrete proposal remains in #118.
+
+## Pages delivery and upstream scanner availability
+
+Receiving-main [Build Documents 45407700728](https://github.com/edithatogo/standards_check/actions/runs/45407700728)
+uploaded artifact 14926023037, and the exact-ID REST visibility guard succeeded, but
+the native deploy action's results-service lookup did not include that newly uploaded
+artifact. This matches [actions/deploy-pages#451](https://github.com/actions/deploy-pages/issues/451).
+The Pages upload now completes in the build job before its dependent deployment job.
+Producer outputs carry both name and artifact ID; a failed-deploy-only rerun therefore
+retains the successful build attempt's identity. The exact-ID/run/expiry guard, pinned
+native deploy action, protected-main condition and restricted deployment permissions
+remain enforced. Twelve focused regressions pass; a receiving-main native deployment
+is still required before claiming recovery. This does not close #123's live interaction
+and accessibility acceptance.
+
+Scorecard's v2.6.0 pinned container cannot be pulled: its image index references missing
+child manifests, tracked in [ossf/scorecard-action#1752](https://github.com/ossf/scorecard-action/issues/1752).
+Downgrading to v2.5.0 would remove Scorecard 5.7.0 security fixes. Preserve the current
+pin and #116's explicit upstream availability hold until the image is restored or a
+fixed release is qualified; no scan result exists for those failed starts.
+
 ## Verification and remaining sequence
 
 The final pre-integration working-tree verification passed 452 Python tests with three optional model
@@ -111,9 +148,16 @@ remain required for the synchronized candidate. Required workflow-policy consume
 all maintained JS passed and a direct-eval negative probe was rejected. Zizmor reported
 no unsuppressed findings; 42 pre-existing suppressions were not changed.
 
-1. Complete current-base integration and receiving evidence for #153 and this increment.
-2. Refine #118 with the immutable profile and prior-art framing, attempt the authorized
-   GitHub issue once and record the actual result; keep any permission failure explicit.
+After integrating #153, the full local Python suite passed 480 tests with three optional
+model skips and 743 subtests. PR #160's initial head
+`03d00800436a0263b00b6f00833f920275601f7f` passed all seven protected checks and had no
+unresolved review threads. The subsequent Pages repair requires fresh head checks and
+receiving-main deployment evidence; neither is inferred from the earlier green head.
+
+1. Complete protected integration and receiving evidence for this increment and the
+   Pages repair; #142 and #153 receiving protected checks are complete.
+2. Retain the concrete #118 proposal and recorded 403; external submission awaits a
+   connection with permission to create the upstream issue.
 3. Complete source acquisition/reconstruction by measured failure family, retaining every
    directory identity, exact source bytes and held next action. Qualify rights/interpretation
    before admitting additional packs; #82/#95 remain open.
