@@ -5,7 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Use a unique key for each checklist based on the page title
   const pageKey = document.title.replace(/\s+/g, '-').toLowerCase();
 
-  const checklistItems = mainContent.querySelectorAll('li');
+  // Reuse native task-list checkboxes; never add duplicates or count instructions.
+  const checklistItems = [...mainContent.querySelectorAll('ul.task-list li')]
+    .filter(item => item.querySelector('input[type="checkbox"]'));
   const progressBar = document.getElementById('progressBar');
   const exportButton = document.getElementById('exportButton');
   const importButton = document.getElementById('importButton');
@@ -110,15 +112,11 @@ document.addEventListener('DOMContentLoaded', () => {
   checklistItems.forEach((item, index) => {
     const itemId = `item-${index}`;
 
-    // --- Create and Prepend Checkbox ---
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.className = 'form-check-input me-2';
+    // Pandoc already associates the existing input with its label.
+    const checkbox = item.querySelector('input[type="checkbox"]');
     checkbox.id = itemId;
-    checkbox.checked = state.checkboxes[itemId] || false; // Load state
-    item.style.listStyleType = 'none';
-    item.classList.add('d-flex', 'align-items-start', 'mb-3');
-    item.prepend(checkbox);
+    checkbox.checked = Boolean(state.checkboxes[itemId]);
+    item.classList.add('mb-3');
 
     checkbox.addEventListener('change', () => {
       state.checkboxes[itemId] = checkbox.checked;
@@ -129,27 +127,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Create "Add Note" Button and Text Area ---
     const noteButton = document.createElement('button');
     noteButton.textContent = 'Add Note';
+    noteButton.type = 'button';
     noteButton.className = 'btn btn-outline-secondary btn-sm ms-auto';
     
-    const wrapper = document.createElement('div');
-    wrapper.className = 'ms-2 w-100';
-    while(item.firstChild !== checkbox) {
-        if (item.firstChild) {
-            wrapper.appendChild(item.firstChild);
-        }
-    }
-    item.appendChild(wrapper);
-    wrapper.appendChild(noteButton);
+    item.appendChild(noteButton);
 
-    const noteText = state.notes[itemId] || '';
     let noteArea; // To hold the textarea element
 
     function createNoteArea() {
         noteArea = document.createElement('textarea');
         noteArea.className = 'form-control mt-2';
         noteArea.placeholder = 'Enter your notes here...';
+        noteArea.setAttribute('aria-label', `Notes for checklist item ${index + 1}`);
         noteArea.rows = 3;
-        noteArea.value = noteText;
+        noteArea.value = state.notes[itemId] || '';
         item.appendChild(noteArea);
         noteButton.textContent = 'Remove Note';
         noteArea.focus();
@@ -160,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    if (noteText) {
+    if (state.notes[itemId]) {
         createNoteArea();
     }
 

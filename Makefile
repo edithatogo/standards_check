@@ -24,7 +24,9 @@ $(HTML_DIR)/%.html: %.md templates/pandoc/html_template.html
 	@echo "--> Generating HTML for $<"
 	@pandoc "$<" \
 		--to=html \
+		--shift-heading-level-by=1 \
 		--template="templates/pandoc/html_template.html" \
+		--metadata checklist_page=true \
 		--metadata title="$$(sed -n '/^# /{s/^# //;p;q;}' "$<")" \
 		--output="$@"
 

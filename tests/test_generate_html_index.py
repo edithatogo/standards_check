@@ -53,6 +53,8 @@ class TestGenerateHtmlIndex(unittest.TestCase):
         (self.root / "source").mkdir()
         (self.root / "html" / "archetypes").mkdir(parents=True)
         (self.root / "html" / "variants").mkdir()
+        (self.root / "assets" / "js").mkdir(parents=True)
+        (self.root / "assets" / "js" / "app.js").write_text("// test browser asset\n", encoding="utf-8")
         tools_dir = self.root / "bin"
         tools_dir.mkdir()
         for name, source in (("yq", YQ_STUB), ("pandoc", PANDOC_STUB)):
@@ -93,6 +95,19 @@ class TestGenerateHtmlIndex(unittest.TestCase):
         output = (self.root / "html" / "index.html").read_text(encoding="utf-8")
         self.assertIn(">-n (Coming Soon)</span>", output)
         self.assertIn(r">-e \t (Coming Soon)</span>", output)
+
+    def test_legacy_labels_and_browser_asset_are_built(self):
+        result = self.run_generator([
+            {"id": "one", "title": "One", "level": "archetype", "status": "mapped"},
+        ])
+        self.assertEqual(result.returncode, 0, result.stderr)
+        output = (self.root / "html" / "index.html").read_text(encoding="utf-8")
+        self.assertIn("Legacy checklist previews (content not fully qualified)", output)
+        self.assertIn("Other catalogue entries (not yet qualified)", output)
+        self.assertEqual(
+            (self.root / "html" / "assets" / "js" / "app.js").read_text(encoding="utf-8"),
+            "// test browser asset\n",
+        )
 
     def test_invalid_identifiers_fail_before_rendering(self):
         for identifier in ("../escape", 'item" onmouseover="alert(1)', "UPPER", "", "$(id)"):

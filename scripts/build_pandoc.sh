@@ -39,8 +39,10 @@ while IFS= read -r -d '' md; do
   pandoc "$md" \
     --from=markdown+task_lists \
     --to=html \
+    --shift-heading-level-by=1 \
     --template="templates/pandoc/html_template.html" \
     --metadata title="$title" \
+    --metadata checklist_page=true \
     -o "html/$dir/$base.html"
 
   # LaTeX

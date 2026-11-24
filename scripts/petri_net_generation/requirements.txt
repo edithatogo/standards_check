@@ -1,2 +1,3 @@
-pm4py
-PyYAML
+# Aligned with the maintained Python regression profile; install before generating.
+pm4py==2.7.23.12
+PyYAML==6.0.4

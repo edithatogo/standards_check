@@ -31,3 +31,13 @@ The comparator requires the pinned PDF bytes, complete numbered rows, exact expe
 - Independent methodological, usability/accessibility and publication acceptance. `source_reconciled` does not mean `externally_validated`.
 
 The original draft is an auditable migration input. Its existence alone is not a complete source-verification receipt.
+
+## Additional authoritative-edition source candidates
+
+[Primary article table reconciliation](authoritative-article-reconciliation-20261124.md) describes the first additional cohort of four primary, open-access editions and 82 independently sourced numbered rows. The retained source-table snapshot and manifest under `source/official/` enable deterministic legacy discrepancy reports and explicit primary-source reacquisition. They do not yet constitute additional admitted canonical packs or validated migration semantics.
+
+- [EcoEvo cross-format benchmark](ecoevo-format-benchmark-20261124.md) — first observed candidate sub-item agreement, official-source and independent PDF parser experiment (T01.5b/c; not admission).
+
+### Catalogue-wide source acquisition
+
+Track 01's [batch decision and remaining gates](../tracks/01-canonical-standard-pack/plan.md) reconcile the merged source-candidate ledger, structural readers and EcoEvo benchmark with live main. [#139](https://github.com/edithatogo/standards_check/pull/139) is a separate in-flight catalogue-wide acquisition candidate; inspect the actual census and acquisition artifact before recording its outcome. Source and item rights, complete nested structure, independent interpretation, semantic migration and pack admission remain separate.
