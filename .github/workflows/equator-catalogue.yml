@@ -7,7 +7,16 @@ on:
       - "scripts/reconcile_equator_sources.py"
       - "scripts/equator_source_links.py"
       - "scripts/survey_equator_articles.py"
+      - 'scripts/directory_workplan.py'
+      - 'tests/test_directory_workplan.py'
       - "scripts/source_provider_evidence.py"
+      - "scripts/source_xml.py"
+      - "scripts/review_source_receipts.py"
+      - "scripts/survey_projections.py"
+      - "scripts/source_reconciliation.py"
+      - "tests/test_survey_projections.py"
+      - "tests/test_source_xml.py"
+      - "tests/test_review_source_receipts.py"
       - "tests/test_source_provider_evidence.py"
       - "scripts/reconcile_authoritative_articles.py"
       - "scripts/jats_checklist_structure.py"
@@ -22,12 +31,31 @@ on:
       - "source/equator/**"
       - "tests/test_sync_equator_catalog.py"
       - ".github/workflows/equator-catalogue.yml"
+  push:
+    branches: [main]
+    paths:
+      - "scripts/survey_equator_articles.py"
+      - 'scripts/directory_workplan.py'
+      - 'tests/test_directory_workplan.py'
+      - "scripts/source_provider_evidence.py"
+      - "scripts/source_xml.py"
+      - "scripts/review_source_receipts.py"
+      - "scripts/survey_projections.py"
+      - "scripts/source_reconciliation.py"
+      - "tests/test_survey_projections.py"
+      - ".github/workflows/equator-catalogue.yml"
   workflow_dispatch:
+    inputs:
+      refresh:
+        description: "Fresh survey without historical receipt reuse"
+        type: boolean
+        default: false
   schedule:
-    - cron: "27 2 1 * *"
+    - cron: "27 2 * * 1"
 
 permissions:
   contents: read
+  actions: read
 
 concurrency:
   group: equator-catalogue-${{ github.ref }}
@@ -36,7 +64,7 @@ concurrency:
 jobs:
   catalogue:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 35
     steps:
       - name: Harden runner
         uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
@@ -77,14 +105,88 @@ jobs:
             --source "$RUNNER_TEMP/equator-website" \
             --catalogue "$RUNNER_TEMP/equator-catalogue.json" \
             --output "$RUNNER_TEMP/equator-source-link-candidates.json"
+      - name: Recover trusted historical census receipts
+        if: github.event_name != 'workflow_dispatch' || !inputs.refresh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/prior"
+          runs=$(timeout 30s gh run list --repo "$GITHUB_REPOSITORY" \
+            --workflow equator-catalogue.yml --branch main --status success \
+            --limit 8 --json databaseId,event --jq '.[] | select(.event != "pull_request") | .databaseId' || true)
+          for run in $runs; do
+            [[ "$run" =~ ^[0-9]+$ ]] || continue
+            mkdir -p "$RUNNER_TEMP/prior/$run"
+            if timeout 60s gh run download "$run" --repo "$GITHUB_REPOSITORY" \
+              --name "equator-source-$run" --dir "$RUNNER_TEMP/prior/$run" &&
+              test -s "$RUNNER_TEMP/prior/$run/equator-article-survey.json"; then
+              break
+            fi
+          done
+          # Immutable previously inspected bootstrap receipts, until a resumed main run succeeds.
+          for seed in \
+            '45354602091 50169d8b55f76eebcfaae75e25b3d39bc761621d81bd59dde2570f94dbdf3a0e' \
+            '45357095336 3997a4a6b453b77cf20451943aac12881fb95b2b6a49d44e15494558dbdc0b96'; do
+            read -r run expected <<< "$seed"
+            dir="$RUNNER_TEMP/prior/$run"
+            mkdir -p "$dir"
+            if timeout 60s gh run download "$run" --repo "$GITHUB_REPOSITORY" \
+              --name "equator-source-$run" --dir "$dir" &&
+              printf '%s  %s\n' "$expected" "$dir/equator-article-survey.json" | sha256sum --check --strict; then
+              echo "Verified bootstrap receipt $run"
+            else
+              rm -f "$dir/equator-article-survey.json"
+              echo "::warning::Historical bootstrap receipt unavailable or checksum mismatch"
+            fi
+          done
       - name: Resolve all catalogue identifiers and acquire selected primary OA candidates
         env:
           SOURCE_API_EMAIL: ${{ vars.SOURCE_API_EMAIL }}
         run: |
-          python -m unittest tests.test_survey_equator_articles tests.test_source_provider_evidence -v
+          python -m unittest tests.test_survey_equator_articles tests.test_source_provider_evidence tests.test_source_xml tests.test_review_source_receipts -v
+          args=()
+          for receipt in "$RUNNER_TEMP"/prior/*/equator-article-survey.json; do
+            if test -f "$receipt"; then args+=(--previous "$receipt"); fi
+          done
           python -m scripts.survey_equator_articles \
             --catalogue "$RUNNER_TEMP/equator-catalogue.json" \
-            --output "$RUNNER_TEMP/equator-article-survey.json"
+            --output "$RUNNER_TEMP/equator-article-survey.json" "${args[@]}"
+      - name: Route the complete published directory for implementation
+        run: |
+          python -m unittest tests.test_directory_workplan -v
+          python -m scripts.directory_workplan \
+            --catalogue "$RUNNER_TEMP/equator-catalogue.json" \
+            --survey "$RUNNER_TEMP/equator-article-survey.json" \
+            --links "$RUNNER_TEMP/equator-source-link-candidates.json" \
+            --output "$RUNNER_TEMP/equator-directory-workplan.json"
+      - name: Generate deterministic acquisition retrospective
+        run: |
+          args=()
+          for receipt in "$RUNNER_TEMP"/prior/*/equator-article-survey.json; do
+            if test -f "$receipt"; then args=(--baseline "$receipt"); fi
+          done
+          python -m scripts.review_source_receipts \
+            --receipt "$RUNNER_TEMP/equator-article-survey.json" \
+            --output "$RUNNER_TEMP/equator-article-retrospective.json" "${args[@]}"
+      - name: Project receipt-bound analytical evidence (no source repin)
+        run: |
+          python -m pip install --disable-pip-version-check \
+            "$(grep -E '^polars==[0-9.]+$' requirements/python-tests.txt)"
+          python -m unittest tests.test_survey_projections -v
+          python -m scripts.survey_projections \
+            --catalogue "$RUNNER_TEMP/equator-catalogue.json" \
+            --survey "$RUNNER_TEMP/equator-article-survey.json" \
+            --retrospective "$RUNNER_TEMP/equator-article-retrospective.json" \
+            --output "$RUNNER_TEMP/equator-analytical-snapshot" \
+            --revision "$(git rev-parse HEAD)" --origin scheduled_or_live
+      - name: Retain version-bound analytical snapshot
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: equator-analytical-snapshot-${{ github.sha }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/equator-analytical-snapshot/
+          if-no-files-found: error
+          retention-days: 90
       - name: Report new, removed and changed published entries
         run: |
           python - <<'PY'
@@ -117,4 +219,52 @@ jobs:
             ${{ runner.temp }}/equator-legacy-alignment.json
             ${{ runner.temp }}/equator-source-link-candidates.json
             ${{ runner.temp }}/equator-article-survey.json
+            ${{ runner.temp }}/equator-directory-workplan.json
+            ${{ runner.temp }}/equator-article-retrospective.json
           if-no-files-found: warn
+
+  # Bounded one-time historical receipt qualification; never treated as a fresh survey.
+  projection-replay:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+      - name: Download inspected immutable historical receipt
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/equator-replay"
+          gh run download 45368782537 --repo "$GITHUB_REPOSITORY" \
+            --name equator-source-45368782537 --dir "$RUNNER_TEMP/equator-replay"
+          cd "$RUNNER_TEMP/equator-replay"
+          sha256sum --check --strict <<'CHECKSUMS'
+          474aacbe8a020e5b295ed55454854731d3e9bc1501de55cbdd625a5d1253e94c  equator-catalogue.json
+          46e15d6334d66a3467601fcd07c698149106dc47b3ca21714bf69d357b98fbe8  equator-article-survey.json
+          ec7f6c149bf2c196408bccf54864e9b62af2e266a91b7f38468d2e3305bfb9a6  equator-article-retrospective.json
+          CHECKSUMS
+      - name: Verify round-trip and produce historical replay only
+        run: |
+          python -m pip install --disable-pip-version-check \
+            "$(grep -E '^polars==[0-9.]+$' requirements/python-tests.txt)"
+          python -m unittest tests.test_survey_projections -v
+          python -m scripts.survey_projections \
+            --catalogue "$RUNNER_TEMP/equator-replay/equator-catalogue.json" \
+            --survey "$RUNNER_TEMP/equator-replay/equator-article-survey.json" \
+            --retrospective "$RUNNER_TEMP/equator-replay/equator-article-retrospective.json" \
+            --output "$RUNNER_TEMP/equator-analytical-replay" \
+            --revision "$(git rev-parse HEAD)" --origin historical_replay
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: equator-analytical-replay-${{ github.sha }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/equator-analytical-replay/
+          if-no-files-found: error
+          retention-days: 90

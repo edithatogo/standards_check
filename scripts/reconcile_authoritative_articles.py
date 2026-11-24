@@ -13,10 +13,12 @@ import unicodedata
 from xml.etree import ElementTree as ET
 
 if __package__:
+    from .source_xml import parse_xml
     from .classical_linguistic_nlp import compare as compare_linguistic, load_reference
     from .jats_checklist_structure import describe_table
     from .legacy_checklist_structure import parse_legacy_tasks
 else:
+    from source_xml import parse_xml
     from classical_linguistic_nlp import compare as compare_linguistic, load_reference
     from jats_checklist_structure import describe_table
     from legacy_checklist_structure import parse_legacy_tasks
@@ -42,17 +44,14 @@ def digest(text: str) -> str:
 
 
 def extract_table(raw: bytes, spec: dict) -> dict:
-    if not raw or len(raw) > MAX_BYTES or re.search(rb"<!ENTITY", raw, re.I):
-        raise ValueError("empty, oversized or entity-bearing article XML")
+    if not raw or len(raw) > MAX_BYTES:
+        raise ValueError("empty or oversized article XML")
     checksum = hashlib.sha256(raw).hexdigest()
     if spec.get("source_sha256") and checksum != spec["source_sha256"]:
         raise ValueError("source checksum differs from pinned article")
     if spec.get("source_bytes") is not None and len(raw) != spec["source_bytes"]:
         raise ValueError("source length differs from pinned article")
-    try:
-        root = ET.fromstring(raw)
-    except ET.ParseError as exc:
-        raise ValueError("invalid article XML") from exc
+    root = parse_xml(raw, MAX_BYTES)
     if root.tag != "article":
         raise ValueError("expected a primary JATS article")
     meta = root.find("./front/article-meta")
