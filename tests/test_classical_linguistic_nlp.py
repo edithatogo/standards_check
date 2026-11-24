@@ -76,3 +76,27 @@ class ReferenceTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class ReferenceLoadingTests(unittest.TestCase):
+    def test_local_reference_loader_requires_english_directory(self):
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        try:
+            import spacy
+        except ImportError:
+            self.skipTest('optional spaCy reference not installed')
+        from scripts.classical_linguistic_nlp import load_reference
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            with self.assertRaisesRegex(ValueError, 'directory'):
+                load_reference(root / 'absent')
+            model_path = root / 'en'
+            spacy.blank('en').to_disk(model_path)
+            model, reference = load_reference(model_path)
+            self.assertEqual(model.lang, 'en')
+            self.assertEqual(reference['spacy_version'], spacy.__version__)
+            model_path = root / 'de'
+            spacy.blank('de').to_disk(model_path)
+            with self.assertRaisesRegex(ValueError, 'English'):
+                load_reference(model_path)
