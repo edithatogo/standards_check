@@ -28,3 +28,13 @@ class VirtualGridTests(unittest.TestCase):
         rows,issues,_=extract_virtual(words,[10,280],lambda a,b:[0,30,100],1,lambda x,a,b:True)
         self.assertEqual(issues,[])
         self.assertEqual([r['requirement_sha256'] for r in rows],[fingerprint('First requirement.'),fingerprint('Second wrapped requirement.')])
+
+    def test_trailing_unclosed_text_is_not_silently_discarded(self):
+        from scripts.ecoevo_pdf_grid import Word, extract_virtual
+        def w(x,y,text): return Word(x,y-4,x+min(35,4*len(text)),y+4,text)
+        words=[w(20,5,'Sub'),w(20,15,'item'),w(20,25,'number'),w(70,15,'Sub-item'),w(230,15,'Reported'),
+               w(20,39,'1.1'),w(70,39,'First'),w(70,50,'Continuation.')]
+        rows,issues,_=extract_virtual(words,[10,280],lambda a,b:[0,30,45],1,lambda x,a,b:True)
+        self.assertEqual(len(rows),1)
+        self.assertIsNone(rows[0]['requirement_sha256'])
+        self.assertIn('unclosed_trailing_text',issues)

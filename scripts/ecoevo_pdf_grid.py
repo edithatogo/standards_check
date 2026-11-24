@@ -10,7 +10,10 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from xml.etree import ElementTree as ET
 
-from .source_reconciliation import fingerprint
+if __package__:
+    from .source_reconciliation import fingerprint
+else:
+    from source_reconciliation import fingerprint
 
 ID = re.compile(r'\d{1,3}\.\d{1,3}')
 MAX_BYTES = 20_000_000
@@ -102,6 +105,18 @@ def anchor(page, x0, y0, x1, y1):
     return f'page/{page}/bbox/' + ','.join(f'{v:.2f}' for v in (x0, y0, x1, y1))
 
 
+def hold_unclosed_tail(words, x0, x2, bottom, rows, issues):
+    """Do not silently lose trailing text; allow only explicit page furniture."""
+    footer=re.compile(r'https?://doi\.org/\S+\s+PRISMA[-‐–]EcoEvo\s+Checklist:\s*Page\s+\d+\s+of\s+\d+',re.I)
+    for line in text_lines([w for w in words if w.y>=bottom]):
+        if footer.fullmatch(phrase(line)):
+            continue
+        if any(x0<=w.x<x2 for w in line):
+            issues.add('unclosed_trailing_text')
+            if rows: rows[-1]['requirement_sha256']=None
+            break
+
+
 def extract_grid(words, xs, horizontal, page, vertical=lambda x, a, b: True):
     """Require explicit column headers and closed row bands, not ID proximity."""
     candidates = []
@@ -136,6 +151,7 @@ def extract_grid(words, xs, horizontal, page, vertical=lambda x, a, b: True):
                      'requirement_sha256':fingerprint(req) if req and closed else None})
         if not req:
             issues.add('empty_requirement')
+    hold_unclosed_tail(words,x0,x2,ys[-1],rows,issues)
     if not rows:
         issues.add('no_closed_rows')
     return rows,sorted(issues),{'verticals':xs,'header_candidates':1,'column_bounds':[x0,x1,x2],
@@ -226,6 +242,7 @@ def extract_virtual(words, xs, horizontal, page, outer_closed):
             rows.append({'item_id':ident.text,'identifier_anchor':anchor(page,ident.x0,ident.y0,ident.x1,ident.y1),
                 'requirement_anchor':anchor(page,x1,begin,x2,end),
                 'requirement_sha256':fingerprint(phrase(bound)) if valid else None})
+    hold_unclosed_tail(words,x0,x2,ys[-1],rows,issues)
     if Counter(seen_ids)!=Counter(w.text for w in ids):
         issues.add('unbound_header_ids')
         if rows: rows[-1]['requirement_sha256']=None

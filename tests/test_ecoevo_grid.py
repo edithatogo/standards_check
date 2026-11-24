@@ -56,3 +56,17 @@ class GridTests(unittest.TestCase):
         words=[Word(2,2,8,6,'Sub-item'),Word(2,10,8,14,'number'),Word(12,2,18,6,'Sub-item'),Word(2,22,8,26,'1.1'),Word(12,22,18,26,'First.')]
         rows,issues,_=extract_grid(words,[0,10,30],lambda a,b:[0,20,40],1,lambda x,a,b:x!=30)
         self.assertIsNone(rows[0]['requirement_sha256']); self.assertIn('unclosed_row_geometry',issues)
+
+    def test_missing_final_ruling_holds_trailing_requirement(self):
+        words=[Word(2,2,8,6,'Sub-item'),Word(2,10,8,14,'number'),Word(12,2,18,6,'Sub-item'),Word(2,22,8,26,'1.1'),Word(12,22,18,26,'First.'),Word(12,42,18,46,'Continuation.')]
+        rows,issues,_=extract_grid(words,[0,10,30],lambda a,b:[0,20,40],1)
+        self.assertIsNone(rows[0]['requirement_sha256'])
+        self.assertIn('unclosed_trailing_text',issues)
+
+    def test_explicit_page_furniture_is_not_requirement_text(self):
+        words=[Word(2,2,8,6,'Sub-item'),Word(2,10,8,14,'number'),Word(12,2,18,6,'Sub-item'),Word(2,22,8,26,'1.1'),Word(12,22,18,26,'First.')]
+        for i,word in enumerate('https://doi.org/10.1111/example PRISMA-EcoEvo Checklist: Page 1 of 7'.split()):
+            words.append(Word(i*5,50,i*5+4,54,word))
+        rows,issues,_=extract_grid(words,[0,10,30],lambda a,b:[0,20,40],1)
+        self.assertEqual(rows[0]['requirement_sha256'],fingerprint('First.'))
+        self.assertEqual(issues,[])

@@ -16,7 +16,7 @@ if __package__:
     from .ecoevo_pdf_grid import extract_native, extract_poppler
 else:
     from structured_source import cell_fields, fingerprint
-    from scripts.ecoevo_pdf_grid import extract_native, extract_poppler
+    from ecoevo_pdf_grid import extract_native, extract_poppler
 
 # Printed sub-item sequences from the official checklist PDF (2021, seven pages),
 # not from the legacy Markdown or any local candidate. No checklist prose copied.
