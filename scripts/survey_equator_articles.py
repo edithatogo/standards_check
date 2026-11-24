@@ -137,6 +137,24 @@ def retained_metadata(catalogue: dict, previous: dict | None) -> dict:
     return retained
 
 
+def combine_retained_metadata(catalogue: dict, receipts: list[dict]) -> tuple[dict, set[str]]:
+    """Union unchanged successful observations, holding conflicts for fresh lookup."""
+    retained, conflicts = {}, set()
+    fields = ("status", "resolved_pmid", "resolved_doi", "pmcid", "oa_reported", "licence_reported")
+    for previous in receipts:
+        if (previous.get("schema_version") != 1 or
+                previous.get("summary", {}).get("published_count") != len(previous.get("records", [])) or
+                previous.get("summary", {}).get("canonical_packs_promoted") != 0 or
+                not re.fullmatch(r"[a-f0-9]{40}", previous.get("source_revision", ""))):
+            raise ValueError("invalid prior survey receipt")
+        for key, record in retained_metadata(catalogue, previous).items():
+            if key in retained and any(retained[key].get(f) != record.get(f) for f in fields):
+                conflicts.add(key)
+            else:
+                retained[key] = record
+    return {k: v for k, v in retained.items() if k not in conflicts}, conflicts
+
+
 def lookup(rows: list[dict]) -> tuple[list[dict], set[str], set[str]]:
     terms = query_terms(rows)
     records, failed, deferred = [], set(), set()
@@ -286,6 +304,7 @@ def oa_worklist(report: dict, observations: dict, priorities: list[dict], known:
         if pair not in entry["identity_pairs"]:
             entry["identity_pairs"].append(pair)
         entry["issues"].extend(identifier_disagreements(row, observations.get(row["id"], {})))
+        entry["issues"].extend(row.get("provider_disagreements", []))
         if not all(pair):
             entry["issues"].append("missing_exact_article_identifier")
     for entry in work.values():
@@ -299,18 +318,62 @@ def oa_worklist(report: dict, observations: dict, priorities: list[dict], known:
     return [work[key] for key in sorted(work)]
 
 
+def bulk_survey(report: dict, previous: list[dict], root: Path, limit: int) -> list[dict]:
+    """Inventory OA sources, without assuming checklist row identities or rights."""
+    prior = {}
+    for receipt in previous:
+        for record in receipt.get("bulk_articles", []):
+            prior.setdefault(record["pmcid"], []).append(record)
+    blobs = {r["id"]: r["source_blob_sha"] for r in report["records"]}
+    out, pending = [], []
+    for candidate in report["oa_source_worklist"]:
+        if candidate["status"] != "candidate_pending_acquisition":
+            continue
+        doi, pmid = candidate["identity_pairs"][0]
+        pmcid = candidate["pmcid"]
+        binding = [[key, blobs[key]] for key in sorted(candidate["source_ids"])]
+        identity = {"edition": "candidate:" + pmcid, "doi": doi, "pmid": pmid,
+                    "pmcid": pmcid, "source_blobs": binding}
+        historical = [r for r in prior.get(pmcid, []) if
+                      all(r.get(k) == v for k, v in identity.items())]
+        successful = [r for r in historical if
+                      r["status"] == "source_inventory_observed_not_reconciled"]
+        if successful and len({r.get("source_sha256") for r in successful}) == 1:
+            out.append({**successful[-1], "acquisition_origin": "retained_previous_receipt"})
+        else:
+            pending.append((any(r["status"] == "held" for r in historical), identity))
+    pending.sort(key=lambda pair: (pair[0], pair[1]["pmcid"]))
+    failures = 0
+    for index, (_, identity) in enumerate(pending):
+        if index >= limit or failures >= 2:
+            out.append({**identity, "status": "deferred_acquisition_budget",
+                        "canonical_packs_promoted": 0})
+            continue
+        record = priority_survey([{**identity, "table_item_ids": [], "legacy_path": None}], root)[0]
+        record.update(identity)
+        record["acquisition_origin"] = "current_observation"
+        if record.get("source_sha256") and "table_inventory" in record:
+            record["status"] = "source_inventory_observed_not_reconciled"
+        failures = failures + 1 if record["status"] == "held" else 0
+        out.append(record)
+    return sorted(out, key=lambda record: record["pmcid"])
+
+
 def main() -> None:
     root = Path(__file__).resolve().parents[1]
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--catalogue", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--previous", type=Path, help="Explicit prior survey receipt; reuse unchanged resolved metadata only.")
+    parser.add_argument("--previous", type=Path, action="append", default=[],
+                        help="Repeatable prior survey receipt; reuse unchanged historical evidence.")
+    parser.add_argument("--bulk-limit", type=int, default=12, choices=range(0, 25))
     parser.add_argument("--registry-limit", type=int, default=12, choices=range(0, 101),
                         help="Bound exact Crossref and OpenAlex singleton lookups per provider.")
     args = parser.parse_args()
     catalogue = json.loads(args.catalogue.read_text(encoding="utf-8"))
-    previous_bytes = args.previous.read_bytes() if args.previous else None
-    retained = retained_metadata(catalogue, json.loads(previous_bytes) if previous_bytes else None)
+    previous_bytes = [path.read_bytes() for path in args.previous]
+    previous = [json.loads(raw) for raw in previous_bytes]
+    retained, conflicts = combine_retained_metadata(catalogue, previous)
     specs = json.loads((root/"source/official/priority-article-candidates.json").read_text(encoding="utf-8"))
     known = json.loads((root/"source/official/authoritative-article-editions.json").read_text(encoding="utf-8"))
     # Try priority articles before exhausting the metadata provider request budget.
@@ -323,13 +386,18 @@ def main() -> None:
     evidence = report["provider_evidence"]["records"]
     for row in report["records"]:
         row["provider_disagreements"] = identifier_disagreements(row, evidence.get(row["id"], {}))
+        if row["id"] in conflicts:
+            row["provider_disagreements"].append("historical_metadata_conflict")
     report["oa_source_worklist"] = oa_worklist(report, evidence, specs, known)
     report["summary"]["oa_worklist_status_counts"] = dict(sorted(Counter(r["status"] for r in report["oa_source_worklist"]).items()))
     report["summary"]["priority_status_counts"] = dict(sorted(Counter(r["status"] for r in priority).items()))
     report["summary"]["metadata_batches_failed_terms"] = len(failed)
     report["summary"]["metadata_deferred_terms"] = len(deferred)
     report["summary"]["retained_metadata_records"] = len(retained)
-    report["previous_receipt_sha256"] = hashlib.sha256(previous_bytes).hexdigest() if previous_bytes else None
+    report["summary"]["historical_metadata_conflicts"] = len(conflicts)
+    report["previous_receipt_sha256s"] = [hashlib.sha256(raw).hexdigest() for raw in previous_bytes]
+    report["bulk_articles"] = bulk_survey(report, previous, root, args.bulk_limit)
+    report["summary"]["bulk_status_counts"] = dict(sorted(Counter(r["status"] for r in report["bulk_articles"]).items()))
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
     print(json.dumps(report["summary"], sort_keys=True))
