@@ -1,0 +1,20 @@
+extends: existence
+message: "Name the link destination instead of '%s'."
+level: error
+scope: link
+ignorecase: true
+nonword: true
+tokens:
+  - '^(?:click here|here|link|this link)$'
+tests:
+  - name: rejects vague link labels
+    input: 'See [click here](https://example.com) and [this link](https://example.org).'
+    contains:
+      - "instead of 'click here'"
+      - "instead of 'this link'"
+  - name: accepts descriptive labels
+    input: 'See [the representation specification](https://example.com).'
+    want: ''
+  - name: leaves ordinary prose and code alone
+    input: 'Work here. The command is `[here](https://example.com)`.'
+    want: ''

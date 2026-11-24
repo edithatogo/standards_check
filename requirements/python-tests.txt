@@ -11,3 +11,6 @@ pm4py==2.7.23.15
 
 # Analytical export only; no Rust runtime or model dependency.
 polars==1.44.2
+
+# Generated invariant tests; test-only, owned by Track 05. MPL-2.0.
+hypothesis==6.170.17

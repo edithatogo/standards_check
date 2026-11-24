@@ -7,7 +7,7 @@
   "implementation_state": "source_implemented",
   "evidence_level": "fixture_proven",
   "evidence_level_scope": "Bounded software implementation accepted at main dd3: native artifacts, SBOM, OIDC, observed privacy/CodeQL and active protection verified. Scientific, release and operational programme gates remain open.",
-  "updated": "2026-11-23",
+  "updated": "2026-11-25",
   "dependencies": [
     "00-platform-foundation",
     "01-canonical-standard-pack",
@@ -32,13 +32,17 @@
     "rust-hosted-first-head-20261123.md",
     "hosted-status-20261123.json",
     "api-path-selection-20261123.json",
-    "verification-receipt-20261123.json"
+    "verification-receipt-20261123.json",
+    "coverage-20261125.json",
+    "coverage-sources-20261125.json",
+    "api-coverage-20261125.json",
+    "boundary-mutations-20261125.json"
   ],
   "coverage_floors_percent": {
-    "python_combined": 75,
-    "rust_lines": 79,
-    "api_lines": 98,
-    "api_branches": 90
+    "python_combined": 90.5,
+    "rust_lines": 91,
+    "api_lines": 100,
+    "api_branches": 95
   },
   "python_final_measurement": {
     "combined_percent": 76.6839378238342,
@@ -160,5 +164,24 @@
       "https://github.com/edithatogo/repository-standards/blob/2efdbd988064f6857795b9fa9ed4e1d08d18791d/docs/continuous-conformance-standard.md",
       "https://github.com/edithatogo/repository-standards/blob/2efdbd988064f6857795b9fa9ed4e1d08d18791d/conductor/tracks/frontier_02_enforcement_20261113/spec.md"
     ]
+  },
+  "maturity_plan": "maturity-plan-20261125.md",
+  "historical_measurements_note": "Earlier measurement and hosted acceptance fields retain their named 2026-11-23 revisions. Current uncommitted candidate evidence is separate and requires its own protected hosted receipt.",
+  "current_hardening_candidate": {
+    "base_revision": "82e4a1efc136187f42b31347ada44506d2d96bfa",
+    "coverage_receipt": "coverage-20261125.json",
+    "source_manifest": "coverage-sources-20261125.json",
+    "python_combined_percent": 90.81296992481202,
+    "python_statements_percent": 92.45344658608298,
+    "python_branches_percent": 86.61087866108787,
+    "rust_lines_percent": 91.69070975187536,
+    "python_tests": 637,
+    "python_optional_skips": 3,
+    "rust_tests": 95,
+    "source_hashes_stable": true,
+    "hosted_acceptance": "Observe current-head and receiving-main protected checks on the linked hardening PR; this local receipt does not assert hosted acceptance.",
+    "scientific_acceptance": false,
+    "api_coverage_receipt": "api-coverage-20261125.json",
+    "mutation_receipt": "boundary-mutations-20261125.json"
   }
 }

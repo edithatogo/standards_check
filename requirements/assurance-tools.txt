@@ -17,3 +17,16 @@ filelock==4.3.1
 packaging==26.4
 platformdirs==4.14.8
 python-discovery==1.9.7
+
+# Ruff: MIT; maintained Python lint and formatting. No Python dependencies.
+ruff==0.17.6
+# ty: MIT; one type checker for the validator/receipt boundary. No Python dependencies.
+ty==0.0.109
+# Bandit: Apache-2.0; medium/high severity+confidence findings in maintained scripts.
+# Its closed Python 3.12 support closure shares PyYAML above.
+bandit==1.9.4
+stevedore==5.10.0
+rich==15.0.0
+markdown-it-py==4.3.0
+Pygments==2.21.0
+mdurl==0.1.2

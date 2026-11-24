@@ -1,17 +1,26 @@
 """Offline cross-family checklist comparison; structural diagnostics, never admission."""
+
 from __future__ import annotations
 
 import argparse
+import hashlib
+import json
 from collections import Counter
 from dataclasses import dataclass
-import hashlib
 from importlib.metadata import version
 from itertools import combinations
-import json
 from pathlib import Path
 
-from .compare_ecoevo_formats import (COHORT, EXPECTED_IDS, REFERENCE, collect_rows, compare_formats,
-                                     layout_comparison_rows, pdf_tables, read_bounded)
+from .compare_ecoevo_formats import (
+    COHORT,
+    EXPECTED_IDS,
+    REFERENCE,
+    collect_rows,
+    compare_formats,
+    layout_comparison_rows,
+    pdf_tables,
+    read_bounded,
+)
 from .ecoevo_pdf_grid import extract_native, extract_poppler
 from .reconcile_authoritative_articles import snapshot_table
 from .structured_source import ITEM_ID, extract_structure, fingerprint
@@ -40,15 +49,37 @@ class Cohort:
 def header_roles() -> dict[str, str]:
     # Explicit header aliases only; numeric response cells cannot become IDs.
     labels = {
-        "id": ("Item number", "Item No.", "Item No", "Item ID", "Item #",
-               "Sub-item number", "Subitem number", "No."),
-        "requirement": ("Recommendation", "Recommendations", "Checklist item",
-                        "Checklist items", "Item description", "Reporting item",
-                        "Reporting requirement", "Requirement", "Description",
-                        "Sub-item", "Subitem", "Checklist recommendation"),
+        "id": (
+            "Item number",
+            "Item No.",
+            "Item No",
+            "Item ID",
+            "Item #",
+            "Sub-item number",
+            "Subitem number",
+            "No.",
+        ),
+        "requirement": (
+            "Recommendation",
+            "Recommendations",
+            "Checklist item",
+            "Checklist items",
+            "Item description",
+            "Reporting item",
+            "Reporting requirement",
+            "Requirement",
+            "Description",
+            "Sub-item",
+            "Subitem",
+            "Checklist recommendation",
+        ),
     }
-    return {fingerprint(variant): role for role, names in labels.items()
-            for label in names for variant in (label, label.lower(), label.upper(), label.title())}
+    return {
+        fingerprint(variant): role
+        for role, names in labels.items()
+        for label in names
+        for variant in (label, label.lower(), label.upper(), label.title())
+    }
 
 
 def load_json(root: Path, path: str):
@@ -60,21 +91,48 @@ def profiles(root: Path) -> list[Cohort]:
     priority = {x["edition"]: x for x in load_json(root, PRIORITY)}
     held = load_json(root, HELD)["editions"]
     articles = {x["edition"]: x for x in load_json(root, ARTICLE_SPECS)}
-    result = [Cohort("prisma-ecoevo-2021", "prisma", tuple(EXPECTED_IDS),
-                     tuple(COHORT), REFERENCE, scope="89 printed subitems; 27 main groups",
-                     doi="10.1111/brv.12721")]
+    result = [
+        Cohort(
+            "prisma-ecoevo-2021",
+            "prisma",
+            tuple(EXPECTED_IDS),
+            tuple(COHORT),
+            REFERENCE,
+            scope="89 printed subitems; 27 main groups",
+            doi="10.1111/brv.12721",
+        )
+    ]
     candidates = (
-        ("prisma-p-2015", "prisma", (VARIANT + "prisma-p.pdf", ARCHIVE + "PRISMA-P-checklist.docx")),
+        (
+            "prisma-p-2015",
+            "prisma",
+            (VARIANT + "prisma-p.pdf", ARCHIVE + "PRISMA-P-checklist.docx"),
+        ),
         ("prisma-s-2021", "prisma", ()),
-        ("prisma-abstracts-2020", "prisma", (ARCHIVE + "PRISMA_2020_abstract_checklist.docx",
-                                             ARCHIVE + "PRISMA_2020_abstract_checklist.pdf")),
+        (
+            "prisma-abstracts-2020",
+            "prisma",
+            (
+                ARCHIVE + "PRISMA_2020_abstract_checklist.docx",
+                ARCHIVE + "PRISMA_2020_abstract_checklist.pdf",
+            ),
+        ),
         ("cheers-2022", "cheers", (ARCHETYPE + "cheers-2022.pdf",)),
         ("arrive-2.0-2020", "arrive", (ARCHETYPE + "arrive-2020.pdf",)),
-        ("consort-2025", "consort", (ARCHIVE + "CONSORT_2025_checklist.docx",
-                                    ARCHIVE + "CONSORT_2025_editable_checklist.docx",
-                                    ARCHIVE + "bmj-2024-081123.full.pdf")),
-        ("spirit-2025", "spirit", (ARCHETYPE + "spirit-2025.docx",
-                                  ARCHIVE + "bmj-2024-081477.full.pdf")),
+        (
+            "consort-2025",
+            "consort",
+            (
+                ARCHIVE + "CONSORT_2025_checklist.docx",
+                ARCHIVE + "CONSORT_2025_editable_checklist.docx",
+                ARCHIVE + "bmj-2024-081123.full.pdf",
+            ),
+        ),
+        (
+            "spirit-2025",
+            "spirit",
+            (ARCHETYPE + "spirit-2025.docx", ARCHIVE + "bmj-2024-081477.full.pdf"),
+        ),
         ("stard-2015", "stard", (ARCHETYPE + "stard-2015.pdf",)),
         ("strobe-2007", "strobe", (ARCHETYPE + "strobe-2007.pdf",)),
         ("tripod-ai-2024", "tripod", ()),
@@ -98,8 +156,18 @@ def profiles(root: Path) -> list[Cohort]:
             ids = entry["item_ids"]
             reference = HELD + "#" + edition
             scope = entry["identifier_scope"]
-        result.append(Cohort(edition, family, tuple(ids), paths, reference,
-                             edition in articles, scope, entry.get("doi")))
+        result.append(
+            Cohort(
+                edition,
+                family,
+                tuple(ids),
+                paths,
+                reference,
+                edition in articles,
+                scope,
+                entry.get("doi"),
+            )
+        )
     return result
 
 
@@ -107,8 +175,10 @@ def summarize_source(rows: list[dict], expected: tuple[str, ...], issues: list[s
     safe_rows = []
     issues = list(issues)
     for row in rows:
-        record = {key: row.get(key) for key in ("item_id", "identifier_anchor",
-                                               "requirement_anchor", "requirement_sha256")}
+        record = {
+            key: row.get(key)
+            for key in ("item_id", "identifier_anchor", "requirement_anchor", "requirement_sha256")
+        }
         if "layout_normalized_sha256" in row:
             record["layout_normalized_sha256"] = row["layout_normalized_sha256"]
         if not record["identifier_anchor"] or not record["requirement_anchor"]:
@@ -160,8 +230,13 @@ def candidate_path(root: Path, relative: str) -> Path:
 def observe_file(root: Path, path: str, cohort: Cohort) -> dict:
     source_path = candidate_path(root, path)
     suffix = source_path.suffix.lower()
-    result = {"path": path, "format": suffix.lstrip("."), "source_sha256": None,
-              "identity": "candidate_path_only_unverified", "status": "held_unavailable_or_unsupported"}
+    result = {
+        "path": path,
+        "format": suffix.lstrip("."),
+        "source_sha256": None,
+        "identity": "candidate_path_only_unverified",
+        "status": "held_unavailable_or_unsupported",
+    }
     rows, issues = [], []
     try:
         raw = read_bounded(source_path)
@@ -174,11 +249,19 @@ def observe_file(root: Path, path: str, cohort: Cohort) -> dict:
             try:
                 other = extract_poppler(raw)
                 independent = summarize_source(other["rows"], cohort.expected_ids, other["issues"])
-                result["independent_pdf"] = {"extractor": other["parser"], "extractor_version": other["version"],
+                result["independent_pdf"] = {
+                    "extractor": other["parser"],
+                    "extractor_version": other["version"],
                     **independent,
-                    "strict_comparison": compare_formats(rows, independent["rows"], expected_ids=cohort.expected_ids),
-                    "layout_comparison": compare_formats(layout_comparison_rows(rows),
-                        layout_comparison_rows(independent["rows"]), expected_ids=cohort.expected_ids)}
+                    "strict_comparison": compare_formats(
+                        rows, independent["rows"], expected_ids=cohort.expected_ids
+                    ),
+                    "layout_comparison": compare_formats(
+                        layout_comparison_rows(rows),
+                        layout_comparison_rows(independent["rows"]),
+                        expected_ids=cohort.expected_ids,
+                    ),
+                }
                 if independent["issues"]:
                     issues.append("independent_pdf_structural_hold")
             except Exception as exc:  # preserve native observations; independent failure stays held
@@ -199,11 +282,15 @@ def observe_file(root: Path, path: str, cohort: Cohort) -> dict:
             if cohort.edition == "prisma-ecoevo-2021":
                 rows, issues = collect_rows(structure)
             else:
-                rows, issues = collect_rows(structure, identifier_pattern=ITEM_ID, header_roles=header_roles())
+                rows, issues = collect_rows(
+                    structure, identifier_pattern=ITEM_ID, header_roles=header_roles()
+                )
             issues.extend(structure.get("issues", []))
         if not rows:
             issues.append("no_explicit_numbered_requirement_rows")
-        result["status"] = "held_structural_discrepancy" if issues else "structure_observed_not_qualified"
+        result["status"] = (
+            "held_structural_discrepancy" if issues else "structure_observed_not_qualified"
+        )
     except Exception as exc:  # Third-party parser errors stay held; no raw text.
         issues.append("extraction_failed:" + type(exc).__name__)
     summary = summarize_source(rows, cohort.expected_ids, issues)
@@ -214,25 +301,41 @@ def observe_file(root: Path, path: str, cohort: Cohort) -> dict:
 
 def observe_snapshot(root: Path, cohort: Cohort) -> dict:
     spec = next(x for x in load_json(root, ARTICLE_SPECS) if x["edition"] == cohort.edition)
-    retained = next(x for x in load_json(root, ARTICLE_ROWS)["editions"] if x["edition"] == cohort.edition)
+    retained = next(
+        x for x in load_json(root, ARTICLE_ROWS)["editions"] if x["edition"] == cohort.edition
+    )
     verified = snapshot_table(retained, spec)
-    rows = [{"item_id": row["item_id"], "identifier_anchor": row["source_anchor"],
-             "requirement_anchor": row["source_anchor"], "requirement_sha256": fingerprint(row["text"])}
-            for row in verified["rows"]]
-    return {"path": ARTICLE_ROWS + "#" + cohort.edition, "format": "jats_snapshot",
-            "source_sha256": verified["source_sha256"], "table_rows_sha256": verified["table_rows_sha256"],
-            "identity": verified["pin_status"], "status": "retained_snapshot_not_full_structure",
-            "extractor": "reconcile_authoritative_articles.snapshot_table",
-            **summarize_source(rows, cohort.expected_ids, ["pinned_xml_required"])}
+    rows = [
+        {
+            "item_id": row["item_id"],
+            "identifier_anchor": row["source_anchor"],
+            "requirement_anchor": row["source_anchor"],
+            "requirement_sha256": fingerprint(row["text"]),
+        }
+        for row in verified["rows"]
+    ]
+    return {
+        "path": ARTICLE_ROWS + "#" + cohort.edition,
+        "format": "jats_snapshot",
+        "source_sha256": verified["source_sha256"],
+        "table_rows_sha256": verified["table_rows_sha256"],
+        "identity": verified["pin_status"],
+        "status": "retained_snapshot_not_full_structure",
+        "extractor": "reconcile_authoritative_articles.snapshot_table",
+        **summarize_source(rows, cohort.expected_ids, ["pinned_xml_required"]),
+    }
 
 
 def benchmark(root: Path, cohorts: list[Cohort]) -> dict:
     editions = []
     seen = set()
     for cohort in sorted(cohorts, key=lambda value: value.edition):
-        if (cohort.edition in seen or len(set(cohort.expected_ids)) != len(cohort.expected_ids)
-                or len(set(cohort.paths)) != len(cohort.paths)
-                or any(not ITEM_ID.fullmatch(item) for item in cohort.expected_ids)):
+        if (
+            cohort.edition in seen
+            or len(set(cohort.expected_ids)) != len(cohort.expected_ids)
+            or len(set(cohort.paths)) != len(cohort.paths)
+            or any(not ITEM_ID.fullmatch(item) for item in cohort.expected_ids)
+        ):
             raise ValueError("duplicate or invalid cohort reference")
         seen.add(cohort.edition)
         sources = [observe_file(root, path, cohort) for path in cohort.paths]
@@ -241,27 +344,59 @@ def benchmark(root: Path, cohorts: list[Cohort]) -> dict:
         pairwise = []
         if cohort.expected_ids:
             for left, right in combinations(sources, 2):
-                same_bytes = (left["source_sha256"] == right["source_sha256"]
-                              if left["source_sha256"] and right["source_sha256"] else None)
-                comparison = compare_formats(left["rows"], right["rows"], expected_ids=cohort.expected_ids)
-                pairwise.append({"left": left["path"], "right": right["path"],
-                                 "cross_format": left["format"] != right["format"],
-                                 "identical_source_bytes": same_bytes,
-                                 "independent_source_identity_verified": False,
-                                 "status": ("candidate_comparison_only" if comparison["compared"] else
-                                            "held_no_comparable_rows"),
-                                 **comparison,
-                                 "layout_comparison": compare_formats(layout_comparison_rows(left["rows"]),
-                                     layout_comparison_rows(right["rows"]), expected_ids=cohort.expected_ids)})
-        editions.append({"edition": cohort.edition, "family": cohort.family,
-                         "reference": cohort.reference, "scope": cohort.scope, "doi": cohort.doi,
-                         "expected_item_ids": list(cohort.expected_ids) if cohort.expected_ids else None,
-                         "status": ("held_no_candidate_sources" if not sources else
-                                    "held_no_independent_denominator" if not cohort.expected_ids else
-                                    "candidate_comparison_only"),
-                         "sources": sources, "pairwise": pairwise})
-    return {"schema_version": 1, "claim_boundary": "candidate-only; edition/rights/interpretation require separate review",
-            "editions": editions, "canonical_packs_promoted": 0}
+                same_bytes = (
+                    left["source_sha256"] == right["source_sha256"]
+                    if left["source_sha256"] and right["source_sha256"]
+                    else None
+                )
+                comparison = compare_formats(
+                    left["rows"], right["rows"], expected_ids=cohort.expected_ids
+                )
+                pairwise.append(
+                    {
+                        "left": left["path"],
+                        "right": right["path"],
+                        "cross_format": left["format"] != right["format"],
+                        "identical_source_bytes": same_bytes,
+                        "independent_source_identity_verified": False,
+                        "status": (
+                            "candidate_comparison_only"
+                            if comparison["compared"]
+                            else "held_no_comparable_rows"
+                        ),
+                        **comparison,
+                        "layout_comparison": compare_formats(
+                            layout_comparison_rows(left["rows"]),
+                            layout_comparison_rows(right["rows"]),
+                            expected_ids=cohort.expected_ids,
+                        ),
+                    }
+                )
+        editions.append(
+            {
+                "edition": cohort.edition,
+                "family": cohort.family,
+                "reference": cohort.reference,
+                "scope": cohort.scope,
+                "doi": cohort.doi,
+                "expected_item_ids": list(cohort.expected_ids) if cohort.expected_ids else None,
+                "status": (
+                    "held_no_candidate_sources"
+                    if not sources
+                    else "held_no_independent_denominator"
+                    if not cohort.expected_ids
+                    else "candidate_comparison_only"
+                ),
+                "sources": sources,
+                "pairwise": pairwise,
+            }
+        )
+    return {
+        "schema_version": 1,
+        "claim_boundary": "candidate-only; edition/rights/interpretation require separate review",
+        "editions": editions,
+        "canonical_packs_promoted": 0,
+    }
 
 
 def main() -> None:
@@ -272,7 +407,8 @@ def main() -> None:
     report = benchmark(args.root, profiles(args.root))
     report["reference_files_sha256"] = {
         path: hashlib.sha256(read_bounded(args.root / path)).hexdigest()
-        for path in (ARTICLE_SPECS, ARTICLE_ROWS, PRIORITY, HELD)}
+        for path in (ARTICLE_SPECS, ARTICLE_ROWS, PRIORITY, HELD)
+    }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 

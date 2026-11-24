@@ -4,22 +4,41 @@
 Offline audit of explicit PRISMA item/subitem IDs, licence metadata and evidence.
 It never treats a licence statement as proof of item-level transcription parity.
 """
+
 from __future__ import annotations
 
 import hashlib
 import json
-from pathlib import Path
 import re
+from pathlib import Path
 
 if __package__:
-    from .build_prisma42_candidate import (
-        EXPECTED as EXPECTED_ORDER, LEDGER, OFFICIAL_PDF_URL, PINNED_PDF_SHA256,
-        SPLIT as SUBITEMS, checked_ledger_items, normalize,
+    from scripts.build_prisma42_candidate import (
+        EXPECTED as EXPECTED_ORDER,
+    )
+    from scripts.build_prisma42_candidate import (
+        LEDGER,
+        OFFICIAL_PDF_URL,
+        PINNED_PDF_SHA256,
+        checked_ledger_items,
+        normalize,
+    )
+    from scripts.build_prisma42_candidate import (
+        SPLIT as SUBITEMS,
     )
 else:
     from build_prisma42_candidate import (
-        EXPECTED as EXPECTED_ORDER, LEDGER, OFFICIAL_PDF_URL, PINNED_PDF_SHA256,
-        SPLIT as SUBITEMS, checked_ledger_items, normalize,
+        EXPECTED as EXPECTED_ORDER,
+    )
+    from build_prisma42_candidate import (
+        LEDGER,
+        OFFICIAL_PDF_URL,
+        PINNED_PDF_SHA256,
+        checked_ledger_items,
+        normalize,
+    )
+    from build_prisma42_candidate import (
+        SPLIT as SUBITEMS,
     )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -46,14 +65,16 @@ def audit(pack: dict, ledger: dict) -> dict:
     numbers = [str(item["display_number"]) for item in requirements]
     seen = set(numbers)
     legacy_aggregate = sorted(x for x in seen if x in SUBITEMS)
-    missing = sorted(EXPECTED - seen, key=lambda x: (int(re.match(r"\d+", x).group()), x))
+    missing = [number for number in EXPECTED_ORDER if number not in seen]
     extra = sorted(seen - EXPECTED)
     duplicate = len(numbers) != len(seen)
     rights = pack["rights"]
-    licence_ok = (rights.get("status") == "cleared"
-                  and rights.get("spdx") == "CC-BY-4.0"
-                  and rights.get("license_url") == LICENCE
-                  and bool(rights.get("attribution")))
+    licence_ok = (
+        rights.get("status") == "cleared"
+        and rights.get("spdx") == "CC-BY-4.0"
+        and rights.get("license_url") == LICENCE
+        and bool(rights.get("attribution"))
+    )
     evidence = pack["verification"]
     receipt_strings = evidence.get("evidence", [])
     authority_sha = pack.get("authority", {}).get("source_sha256", "")
@@ -63,22 +84,19 @@ def audit(pack: dict, ledger: dict) -> dict:
     )
     source_receipt = "source-sha256:" + PINNED_PDF_SHA256
     item_receipts = {
-        match.group(1): match.group(2) for receipt in receipt_strings
-        if (match := re.fullmatch(
-            r"item-check:([0-9]+[a-z]?):sha256:([a-f0-9]{64})", str(receipt)
-        ))
+        match.group(1): match.group(2)
+        for receipt in receipt_strings
+        if (match := re.fullmatch(r"item-check:([0-9]+[a-z]?):sha256:([a-f0-9]{64})", str(receipt)))
     }
     matching_receipts = all(
-        item_receipts.get(str(item["display_number"])) == hashlib.sha256(
-            normalize(item.get("verbatim_text") or "").encode("utf-8")
-        ).hexdigest()
+        item_receipts.get(str(item["display_number"]))
+        == hashlib.sha256(normalize(item.get("verbatim_text") or "").encode("utf-8")).hexdigest()
         for item in requirements
     )
     matching_source_text = ledger_error is None and all(
         str(item["display_number"]) in source_items
-        and normalize(item.get("verbatim_text") or "") == normalize(
-            source_items[str(item["display_number"])]["verbatim_text"]
-        )
+        and normalize(item.get("verbatim_text") or "")
+        == normalize(source_items[str(item["display_number"])]["verbatim_text"])
         for item in requirements
     )
     matching_source_anchors = all(
@@ -86,22 +104,29 @@ def audit(pack: dict, ledger: dict) -> dict:
         for item in requirements
     )
     matching_source_identifiers = all(
-        item.get("id") == f"PRISMA-2020:{item['display_number']}"
-        for item in requirements
+        item.get("id") == f"PRISMA-2020:{item['display_number']}" for item in requirements
     )
-    evidence_ok = (bool(evidence.get("verified_at"))
-                   and bool(evidence.get("verified_by"))
-                   and source_identity_ok
-                   and source_receipt in receipt_strings
-                   and EXPECTED.issubset(item_receipts)
-                   and matching_receipts
-                   and matching_source_text
-                   and matching_source_anchors
-                   and matching_source_identifiers)
+    evidence_ok = (
+        bool(evidence.get("verified_at"))
+        and bool(evidence.get("verified_by"))
+        and source_identity_ok
+        and source_receipt in receipt_strings
+        and EXPECTED.issubset(item_receipts)
+        and matching_receipts
+        and matching_source_text
+        and matching_source_anchors
+        and matching_source_identifiers
+    )
     # Exact-item evidence requires the full official checklist numbering, not
     # one aggregate item representing multiple required subitems.
-    source_ready = bool(not missing and not extra and not duplicate
-                        and not legacy_aggregate and evidence_ok and licence_ok)
+    source_ready = bool(
+        not missing
+        and not extra
+        and not duplicate
+        and not legacy_aggregate
+        and evidence_ok
+        and licence_ok
+    )
     status = evidence["status"]
     errors = []
     if ledger_error is not None:

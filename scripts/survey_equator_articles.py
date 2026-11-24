@@ -3,38 +3,65 @@
 
 Outputs evidence and acquisition candidates, never canonical checklist admission.
 """
+
 from __future__ import annotations
 
 import argparse
-from collections import Counter
 import hashlib
 import http.client
 import json
 import os
-from pathlib import Path
 import re
 import time
+from collections import Counter
+from pathlib import Path
 from urllib.parse import urlencode
 
 if __package__:
-    from .source_xml import parse_xml
     from .reconcile_authoritative_articles import (
-        LICENCE, MAX_BYTES, ITEM_ID, content, digest, extract_table,
-        parse_legacy, reconcile_items,
+        ITEM_ID,
+        LICENCE,
+        MAX_BYTES,
+        content,
+        digest,
+        extract_table,
+        parse_legacy,
+        reconcile_items,
     )
+    from .source_xml import parse_xml
 else:
-    from source_xml import parse_xml
     from reconcile_authoritative_articles import (
-        LICENCE, MAX_BYTES, ITEM_ID, content, digest, extract_table,
-        parse_legacy, reconcile_items,
+        ITEM_ID,
+        LICENCE,
+        MAX_BYTES,
+        content,
+        digest,
+        extract_table,
+        parse_legacy,
+        reconcile_items,
     )
+    from source_xml import parse_xml
 
 if __package__:
-    from .source_provider_evidence import (EUROPE, PMCID, doi_value, pmid_value,
-                                           fetch, fetch_priority, provider_observations)
+    from .source_provider_evidence import (
+        EUROPE,
+        PMCID,
+        doi_value,
+        fetch,
+        fetch_priority,
+        pmid_value,
+        provider_observations,
+    )
 else:
-    from source_provider_evidence import (EUROPE, PMCID, doi_value, pmid_value,
-                                         fetch, fetch_priority, provider_observations)
+    from source_provider_evidence import (
+        EUROPE,
+        PMCID,
+        doi_value,
+        fetch,
+        fetch_priority,
+        pmid_value,
+        provider_observations,
+    )
 
 API = "/europepmc/webservices/rest/"
 BATCH_SIZE = 20
@@ -53,7 +80,8 @@ def query_terms(rows: list[dict]) -> list[str]:
         if doi:
             dois.add(doi)
     return [f"(EXT_ID:{pmid} AND SRC:MED)" for pmid in sorted(pmids)] + [
-        f'DOI:"{doi}"' for doi in sorted(dois)]
+        f'DOI:"{doi}"' for doi in sorted(dois)
+    ]
 
 
 def record_identity(record: dict) -> tuple:
@@ -64,8 +92,7 @@ def record_identity(record: dict) -> tuple:
 
 def resolve(row: dict, records: list[dict]) -> dict:
     pmid, doi = identifiers(row)
-    result = {"id": row["id"], "source_blob_sha": row["source_blob_sha"],
-              "pmid": pmid, "doi": doi}
+    result = {"id": row["id"], "source_blob_sha": row["source_blob_sha"], "pmid": pmid, "doi": doi}
     if not pmid and not doi:
         return {**result, "status": "missing_identifier"}
     matches = {}
@@ -75,8 +102,11 @@ def resolve(row: dict, records: list[dict]) -> dict:
             matches[(rid, rdoi, pmcid)] = record
     if not matches:
         return {**result, "status": "unresolved_identifier"}
-    exact = [record for (rid, rdoi, _), record in matches.items()
-             if (not pmid or rid == pmid) and (not doi or rdoi == doi)]
+    exact = [
+        record
+        for (rid, rdoi, _), record in matches.items()
+        if (not pmid or rid == pmid) and (not doi or rdoi == doi)
+    ]
     if not exact:
         return {**result, "status": "identifier_conflict"}
     if len(exact) != 1:
@@ -85,14 +115,25 @@ def resolve(row: dict, records: list[dict]) -> dict:
     rid, rdoi, pmcid = record_identity(record)
     oa = record.get("isOpenAccess") == "Y"
     valid_pmcid = isinstance(pmcid, str) and PMCID.fullmatch(pmcid)
-    return {**result, "status": "oa_xml_candidate" if oa and valid_pmcid else "metadata_only",
-            "resolved_pmid": rid, "resolved_doi": rdoi, "pmcid": pmcid,
-            "oa_reported": oa, "licence_reported": record.get("license"),
-            "rights": "unassessed_article_and_table_reuse"}
+    return {
+        **result,
+        "status": "oa_xml_candidate" if oa and valid_pmcid else "metadata_only",
+        "resolved_pmid": rid,
+        "resolved_doi": rdoi,
+        "pmcid": pmcid,
+        "oa_reported": oa,
+        "licence_reported": record.get("license"),
+        "rights": "unassessed_article_and_table_reuse",
+    }
 
 
-def catalogue_report(catalogue: dict, records: list[dict], failed_terms: set[str],
-                     deferred_terms: set[str] | None = None, retained: dict | None = None) -> dict:
+def catalogue_report(
+    catalogue: dict,
+    records: list[dict],
+    failed_terms: set[str],
+    deferred_terms: set[str] | None = None,
+    retained: dict | None = None,
+) -> dict:
     rows = catalogue["guidelines"]
     if len(rows) != catalogue["published_count"] or len({row["id"] for row in rows}) != len(rows):
         raise ValueError("incomplete or duplicated catalogue")
@@ -107,16 +148,27 @@ def catalogue_report(catalogue: dict, records: list[dict], failed_terms: set[str
         terms = set(query_terms([row]))
         if failed_terms.intersection(terms) or (deferred_terms or set()).intersection(terms):
             pmid, doi = identifiers(row)
-            result = {"id": row["id"], "source_blob_sha": row["source_blob_sha"],
-                      "pmid": pmid, "doi": doi, "status": "lookup_incomplete",
-                      "lookup_reason": "provider_request_failed" if failed_terms.intersection(terms)
-                                       else "deferred_provider_circuit_breaker"}
+            result = {
+                "id": row["id"],
+                "source_blob_sha": row["source_blob_sha"],
+                "pmid": pmid,
+                "doi": doi,
+                "status": "lookup_incomplete",
+                "lookup_reason": "provider_request_failed"
+                if failed_terms.intersection(terms)
+                else "deferred_provider_circuit_breaker",
+            }
         out.append(result)
-    return {"schema_version": 1, "source_revision": catalogue["source_revision"],
-            "summary": {"published_count": len(out),
-                        "status_counts": dict(sorted(Counter(r["status"] for r in out).items())),
-                        "canonical_packs_promoted": 0},
-            "records": out}
+    return {
+        "schema_version": 1,
+        "source_revision": catalogue["source_revision"],
+        "summary": {
+            "published_count": len(out),
+            "status_counts": dict(sorted(Counter(r["status"] for r in out).items())),
+            "canonical_packs_promoted": 0,
+        },
+        "records": out,
+    }
 
 
 def retained_metadata(catalogue: dict, previous: dict | None) -> dict:
@@ -130,9 +182,11 @@ def retained_metadata(catalogue: dict, previous: dict | None) -> dict:
     retained = {}
     for row in catalogue["guidelines"]:
         old = prior.get(row["id"], {})
-        if (old.get("status") in {"oa_xml_candidate", "metadata_only"} and
-            old.get("source_blob_sha") == row["source_blob_sha"] and
-            (old.get("pmid"), old.get("doi")) == identifiers(row)):
+        if (
+            old.get("status") in {"oa_xml_candidate", "metadata_only"}
+            and old.get("source_blob_sha") == row["source_blob_sha"]
+            and (old.get("pmid"), old.get("doi")) == identifiers(row)
+        ):
             retained[row["id"]] = old
     return retained
 
@@ -142,23 +196,33 @@ def combine_retained_metadata(catalogue: dict, receipts: list[dict]) -> tuple[di
     retained, conflicts = {}, set()
     fields = ("status", "resolved_pmid", "resolved_doi", "pmcid", "oa_reported", "licence_reported")
     for previous in receipts:
-        if (previous.get("schema_version") != 1 or
-                previous.get("summary", {}).get("published_count") != len(previous.get("records", [])) or
-                previous.get("summary", {}).get("canonical_packs_promoted") != 0 or
-                not re.fullmatch(r"[a-f0-9]{40}", previous.get("source_revision", ""))):
+        if (
+            previous.get("schema_version") != 1
+            or previous.get("summary", {}).get("published_count")
+            != len(previous.get("records", []))
+            or previous.get("summary", {}).get("canonical_packs_promoted") != 0
+            or not re.fullmatch(r"[a-f0-9]{40}", previous.get("source_revision", ""))
+        ):
             raise ValueError("invalid prior survey receipt")
         # Negative identity evidence is significant even when no reusable
         # positive record exists. Match the unchanged catalogue identity first.
         current = {row["id"]: row for row in catalogue["guidelines"]}
         for record in previous["records"]:
             row = current.get(record["id"])
-            if (row is not None and record.get("source_blob_sha") == row["source_blob_sha"]
+            if (
+                row is not None
+                and record.get("source_blob_sha") == row["source_blob_sha"]
                 and (record.get("pmid"), record.get("doi")) == identifiers(row)
-                and (record.get("status") in {"identifier_conflict", "ambiguous_identifier"}
-                     or record.get("provider_disagreements"))):
+                and (
+                    record.get("status") in {"identifier_conflict", "ambiguous_identifier"}
+                    or record.get("provider_disagreements")
+                )
+            ):
                 conflicts.add(record["id"])
         for key, record in retained_metadata(catalogue, previous).items():
-            if record.get("provider_disagreements") or (key in retained and any(retained[key].get(f) != record.get(f) for f in fields)):
+            if record.get("provider_disagreements") or (
+                key in retained and any(retained[key].get(f) != record.get(f) for f in fields)
+            ):
                 conflicts.add(key)
             else:
                 retained[key] = record
@@ -170,12 +234,19 @@ def lookup(rows: list[dict]) -> tuple[list[dict], set[str], set[str]]:
     records, failed, deferred = [], set(), set()
     consecutive_failures = 0
     for start in range(0, len(terms), BATCH_SIZE):
-        batch = terms[start:start+BATCH_SIZE]
+        batch = terms[start : start + BATCH_SIZE]
         if consecutive_failures >= 3:
             deferred.update(terms[start:])
             break
-        query = urlencode({"query": " OR ".join(batch), "format": "json",
-                           "resultType": "core", "pageSize": 100, "synonym": "false"})
+        query = urlencode(
+            {
+                "query": " OR ".join(batch),
+                "format": "json",
+                "resultType": "core",
+                "pageSize": 100,
+                "synonym": "false",
+            }
+        )
         try:
             response = json.loads(fetch(EUROPE, API + "search?" + query, 12_000_000))
             hits = response["resultList"]["result"]
@@ -201,23 +272,41 @@ def scan_article(raw: bytes, spec: dict, root: Path | None) -> dict:
     for kind, key in (("pmid", "pmid"), ("pmc", "pmcid"), ("pmcid", "pmcid")):
         if ids.get(kind) and ids[kind].upper().removeprefix("PMC") != spec[key].removeprefix("PMC"):
             raise ValueError("article identity mismatch")
-    evidence = " ".join(content(n) + " " + " ".join(v for e in n.iter() for v in e.attrib.values())
-                        for n in meta.findall("./permissions/license")).lower()
-    licences = [name for name, uri in LICENCE.items()
-                if re.search(r"https?://" + re.escape(uri) + r"(?:/|(?=[\s.,;]|$))", evidence)]
+    evidence = " ".join(
+        content(n) + " " + " ".join(v for e in n.iter() for v in e.attrib.values())
+        for n in meta.findall("./permissions/license")
+    ).lower()
+    licences = [
+        name
+        for name, uri in LICENCE.items()
+        if re.search(r"https?://" + re.escape(uri) + r"(?:/|(?=[\s.,;]|$))", evidence)
+    ]
     if len(licences) != 1:
         raise ValueError("article licence not uniquely eligible for source survey")
-    result = {"edition": spec["edition"], "pmcid": spec["pmcid"], "doi": spec["doi"],
-              "source_sha256": hashlib.sha256(raw).hexdigest(), "source_bytes": len(raw),
-              "article_licence_observed": licences[0], "expected_rows": sum(map(len,spec["table_item_ids"])),
-              "matched_rows": 0, "tables": [], "table_inventory": [],
-              "rights": "table_and_item_reuse_unassessed", "canonical_packs_promoted": 0}
+    result = {
+        "edition": spec["edition"],
+        "pmcid": spec["pmcid"],
+        "doi": spec["doi"],
+        "source_sha256": hashlib.sha256(raw).hexdigest(),
+        "source_bytes": len(raw),
+        "article_licence_observed": licences[0],
+        "expected_rows": sum(map(len, spec["table_item_ids"])),
+        "matched_rows": 0,
+        "tables": [],
+        "table_inventory": [],
+        "rights": "table_and_item_reuse_unassessed",
+        "canonical_packs_promoted": 0,
+    }
     wrappers = article.findall("./body//table-wrap")
     for wrapper in wrappers:
-        result["table_inventory"].append({"table_id": wrapper.get("id"),
-                                          "label": content(wrapper.find("label")),
-                                          "caption_sha256": digest(content(wrapper.find("caption"))),
-                                          "body_rows": len(wrapper.findall(".//tbody/tr"))})
+        result["table_inventory"].append(
+            {
+                "table_id": wrapper.get("id"),
+                "label": content(wrapper.find("label")),
+                "caption_sha256": digest(content(wrapper.find("caption"))),
+                "body_rows": len(wrapper.findall(".//tbody/tr")),
+            }
+        )
     for expected in spec["table_item_ids"]:
         candidates = []
         for wrapper in wrappers:
@@ -225,13 +314,18 @@ def scan_article(raw: bytes, spec: dict, root: Path | None) -> dict:
                 continue
             # Infer only a unique column binding with an independently specified
             # exact ordered item-ID sequence. Keep all nonmatching tables held.
-            cells = [[content(c) for c in row if c.tag in {"td","th"}]
-                     for row in wrapper.findall(".//tbody/tr")]
-            for id_offset in (2,3,4):
-                sequence = [row[-id_offset].lower() for row in cells if len(row)>=id_offset
-                            and ITEM_ID.fullmatch(row[-id_offset])]
+            cells = [
+                [content(c) for c in row if c.tag in {"td", "th"}]
+                for row in wrapper.findall(".//tbody/tr")
+            ]
+            for id_offset in (2, 3, 4):
+                sequence = [
+                    row[-id_offset].lower()
+                    for row in cells
+                    if len(row) >= id_offset and ITEM_ID.fullmatch(row[-id_offset])
+                ]
                 if sequence == expected:
-                    candidates.append((wrapper,id_offset))
+                    candidates.append((wrapper, id_offset))
         if len(candidates) != 1:
             continue
         wrapper, id_offset = candidates[0]
@@ -240,27 +334,50 @@ def scan_article(raw: bytes, spec: dict, root: Path | None) -> dict:
         if not caption or not label:
             continue
         try:
-            extracted = extract_table(raw, {**spec, "licence": licences[0],
-                "table_id": wrapper.get("id"), "table_label": label,
-                "caption_contains": caption, "id_from_right": id_offset,
-                "text_from_right": id_offset-1, "item_ids": expected,
-                "attribution": "Primary article DOI: " + spec["doi"]})
+            extracted = extract_table(
+                raw,
+                {
+                    **spec,
+                    "licence": licences[0],
+                    "table_id": wrapper.get("id"),
+                    "table_label": label,
+                    "caption_contains": caption,
+                    "id_from_right": id_offset,
+                    "text_from_right": id_offset - 1,
+                    "item_ids": expected,
+                    "attribution": "Primary article DOI: " + spec["doi"],
+                },
+            )
         except ValueError:
             continue
         rows = extracted["rows"]
-        table = {"table_id": extracted["table_id"], "table_rows_sha256": extracted["table_rows_sha256"],
-                 "item_ids": expected, "structure": extracted["structure"],
-                 "items": [{"item_id": row["item_id"], "source_anchor": row["source_anchor"],
-                            "normalized_text_sha256": row["normalized_text_sha256"]} for row in rows]}
+        table = {
+            "table_id": extracted["table_id"],
+            "table_rows_sha256": extracted["table_rows_sha256"],
+            "item_ids": expected,
+            "structure": extracted["structure"],
+            "items": [
+                {
+                    "item_id": row["item_id"],
+                    "source_anchor": row["source_anchor"],
+                    "normalized_text_sha256": row["normalized_text_sha256"],
+                }
+                for row in rows
+            ],
+        }
         if root is not None and spec.get("legacy_path"):
             path = root / spec["legacy_path"]
             if path.is_file():
-                table["legacy"] = reconcile_items(rows, parse_legacy(path.read_text(encoding="utf-8")))
+                table["legacy"] = reconcile_items(
+                    rows, parse_legacy(path.read_text(encoding="utf-8"))
+                )
         result["matched_rows"] += len(rows)
         result["tables"].append(table)
-    result["status"] = ("expected_numbered_rows_observed"
+    result["status"] = (
+        "expected_numbered_rows_observed"
         if result["expected_rows"] and result["expected_rows"] == result["matched_rows"]
-        else "held_table_identity_or_structure")
+        else "held_table_identity_or_structure"
+    )
     return result
 
 
@@ -276,10 +393,18 @@ def priority_survey(specs: list[dict], root: Path) -> list[dict]:
             result["acquisition"] = acquisition
             results.append(result)
         except (OSError, ValueError, http.client.HTTPException) as exc:
-            results.append({"edition": spec["edition"], "doi": spec["doi"], "pmcid": spec["pmcid"],
-                            "status": "held", "error_type": type(exc).__name__,
-                            "reason": str(exc)[:150], "acquisition": acquisition,
-                            "canonical_packs_promoted": 0})
+            results.append(
+                {
+                    "edition": spec["edition"],
+                    "doi": spec["doi"],
+                    "pmcid": spec["pmcid"],
+                    "status": "held",
+                    "error_type": type(exc).__name__,
+                    "reason": str(exc)[:150],
+                    "acquisition": acquisition,
+                    "canonical_packs_promoted": 0,
+                }
+            )
         time.sleep(0.35)
     return results
 
@@ -287,17 +412,24 @@ def priority_survey(specs: list[dict], root: Path) -> list[dict]:
 def identifier_disagreements(row: dict, observations: dict) -> list[str]:
     """Conflicting nonempty fields are holds, not a majority-vote identity."""
     disagreements = []
-    if any(v.get("status") in {"identifier_conflict", "ambiguous_identifier"} for v in observations.values()):
+    if any(
+        v.get("status") in {"identifier_conflict", "ambiguous_identifier"}
+        for v in observations.values()
+    ):
         disagreements.append("provider_identity_conflict")
     for field, normalize in (("pmid", pmid_value), ("doi", doi_value), ("pmcid", lambda x: x)):
-        values = {normalize(v.get(field) or v.get("resolved_" + field))
-                  for v in [row, *observations.values()]}
+        values = {
+            normalize(v.get(field) or v.get("resolved_" + field))
+            for v in [row, *observations.values()]
+        }
         if len(values - {None}) > 1:
             disagreements.append(field + "_disagreement")
     return disagreements
 
 
-def oa_worklist(report: dict, observations: dict, priorities: list[dict], known: list[dict]) -> list[dict]:
+def oa_worklist(
+    report: dict, observations: dict, priorities: list[dict], known: list[dict]
+) -> list[dict]:
     """Deduplicate eligible OA sources; leave actual bulk content acquisition separate."""
     known_ids = {r["pmcid"] for r in [*priorities, *known]}
     work = {}
@@ -307,8 +439,16 @@ def oa_worklist(report: dict, observations: dict, priorities: list[dict], known:
         pmcid = row.get("pmcid")
         if not isinstance(pmcid, str) or not PMCID.fullmatch(pmcid):
             continue
-        entry = work.setdefault(pmcid, {"pmcid": pmcid, "source_ids": [], "identity_pairs": [],
-                                        "issues": [], "status": "candidate_pending_acquisition"})
+        entry = work.setdefault(
+            pmcid,
+            {
+                "pmcid": pmcid,
+                "source_ids": [],
+                "identity_pairs": [],
+                "issues": [],
+                "status": "candidate_pending_acquisition",
+            },
+        )
         entry["source_ids"].append(row["id"])
         pair = [row.get("resolved_doi"), row.get("resolved_pmid")]
         if pair not in entry["identity_pairs"]:
@@ -342,12 +482,19 @@ def bulk_survey(report: dict, previous: list[dict], root: Path, limit: int) -> l
         doi, pmid = candidate["identity_pairs"][0]
         pmcid = candidate["pmcid"]
         binding = [[key, blobs[key]] for key in sorted(candidate["source_ids"])]
-        identity = {"edition": "candidate:" + pmcid, "doi": doi, "pmid": pmid,
-                    "pmcid": pmcid, "source_blobs": binding}
-        historical = [r for r in prior.get(pmcid, []) if
-                      all(r.get(k) == v for k, v in identity.items())]
-        successful = [r for r in historical if
-                      r["status"] == "source_inventory_observed_not_reconciled"]
+        identity = {
+            "edition": "candidate:" + pmcid,
+            "doi": doi,
+            "pmid": pmid,
+            "pmcid": pmcid,
+            "source_blobs": binding,
+        }
+        historical = [
+            r for r in prior.get(pmcid, []) if all(r.get(k) == v for k, v in identity.items())
+        ]
+        successful = [
+            r for r in historical if r["status"] == "source_inventory_observed_not_reconciled"
+        ]
         if successful and len({r.get("source_sha256") for r in successful}) == 1:
             out.append({**successful[-1], "acquisition_origin": "retained_previous_receipt"})
         else:
@@ -356,8 +503,9 @@ def bulk_survey(report: dict, previous: list[dict], root: Path, limit: int) -> l
     failures = 0
     for index, (_, identity) in enumerate(pending):
         if index >= limit or failures >= 2:
-            out.append({**identity, "status": "deferred_acquisition_budget",
-                        "canonical_packs_promoted": 0})
+            out.append(
+                {**identity, "status": "deferred_acquisition_budget", "canonical_packs_promoted": 0}
+            )
             continue
         record = priority_survey([{**identity, "table_item_ids": [], "legacy_path": None}], root)[0]
         record.update(identity)
@@ -374,45 +522,76 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--catalogue", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--previous", type=Path, action="append", default=[],
-                        help="Repeatable prior survey receipt; reuse unchanged historical evidence.")
+    parser.add_argument(
+        "--previous",
+        type=Path,
+        action="append",
+        default=[],
+        help="Repeatable prior survey receipt; reuse unchanged historical evidence.",
+    )
     parser.add_argument("--bulk-limit", type=int, default=12, choices=range(0, 25))
-    parser.add_argument("--registry-limit", type=int, default=12, choices=range(0, 101),
-                        help="Bound exact Crossref and OpenAlex singleton lookups per provider.")
+    parser.add_argument(
+        "--registry-limit",
+        type=int,
+        default=12,
+        choices=range(0, 101),
+        help="Bound exact Crossref and OpenAlex singleton lookups per provider.",
+    )
     args = parser.parse_args()
     catalogue = json.loads(args.catalogue.read_text(encoding="utf-8"))
     previous_bytes = [path.read_bytes() for path in args.previous]
     previous = [json.loads(raw) for raw in previous_bytes]
     retained, conflicts = combine_retained_metadata(catalogue, previous)
-    specs = json.loads((root/"source/official/priority-article-candidates.json").read_text(encoding="utf-8"))
-    known = json.loads((root/"source/official/authoritative-article-editions.json").read_text(encoding="utf-8"))
+    specs = json.loads(
+        (root / "source/official/priority-article-candidates.json").read_text(encoding="utf-8")
+    )
+    known = json.loads(
+        (root / "source/official/authoritative-article-editions.json").read_text(encoding="utf-8")
+    )
     # Try priority articles before exhausting the metadata provider request budget.
     priority = priority_survey(specs, root)
-    records, failed, deferred = lookup([row for row in catalogue["guidelines"] if row["id"] not in retained])
+    records, failed, deferred = lookup(
+        [row for row in catalogue["guidelines"] if row["id"] not in retained]
+    )
     report = catalogue_report(catalogue, records, failed, deferred, retained)
     report["priority_articles"] = priority
     report["provider_evidence"] = provider_observations(
-        report["records"], specs + known, os.environ.get("SOURCE_API_EMAIL"), args.registry_limit)
+        report["records"], specs + known, os.environ.get("SOURCE_API_EMAIL"), args.registry_limit
+    )
     evidence = report["provider_evidence"]["records"]
     for row in report["records"]:
         row["provider_disagreements"] = identifier_disagreements(row, evidence.get(row["id"], {}))
         if row["id"] in conflicts:
             row["provider_disagreements"].append("historical_metadata_conflict")
     report["oa_source_worklist"] = oa_worklist(report, evidence, specs, known)
-    report["summary"]["oa_worklist_status_counts"] = dict(sorted(Counter(r["status"] for r in report["oa_source_worklist"]).items()))
-    report["summary"]["priority_status_counts"] = dict(sorted(Counter(r["status"] for r in priority).items()))
+    report["summary"]["oa_worklist_status_counts"] = dict(
+        sorted(Counter(r["status"] for r in report["oa_source_worklist"]).items())
+    )
+    report["summary"]["priority_status_counts"] = dict(
+        sorted(Counter(r["status"] for r in priority).items())
+    )
     report["summary"]["metadata_batches_failed_terms"] = len(failed)
     report["summary"]["metadata_deferred_terms"] = len(deferred)
     report["summary"]["retained_metadata_records"] = len(retained)
     report["summary"]["historical_metadata_conflicts"] = len(conflicts)
     report["previous_receipt_sha256s"] = [hashlib.sha256(raw).hexdigest() for raw in previous_bytes]
     report["bulk_articles"] = bulk_survey(report, previous, root, args.bulk_limit)
-    report["summary"]["bulk_status_counts"] = dict(sorted(Counter(r["status"] for r in report["bulk_articles"]).items()))
+    report["summary"]["bulk_status_counts"] = dict(
+        sorted(Counter(r["status"] for r in report["bulk_articles"]).items())
+    )
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
+    args.output.write_text(
+        json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
     print(json.dumps(report["summary"], sort_keys=True))
     for record in report["priority_articles"]:
-        print(record["edition"], record["status"], record.get("matched_rows",0), "/", record.get("expected_rows",0))
+        print(
+            record["edition"],
+            record["status"],
+            record.get("matched_rows", 0),
+            "/",
+            record.get("expected_rows", 0),
+        )
 
 
 if __name__ == "__main__":

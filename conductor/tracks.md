@@ -10,8 +10,8 @@ validity, source reconciliation, external accessibility certification, rights or
 | 00 | [Platform foundation](tracks/00-platform-foundation/spec.md) | short | none | implementation complete (bounded) | Rust/Conductor foundation and brownfield controls implemented | PR #79/main receipts; registered node/baseline local specialization accepted in #30 | No new foundation logic needed; exact thin-call/template equality is not claimed or a blocker to accepted local CI |
 | 01 | [Canonical Standard Pack runtime](tracks/01-canonical-standard-pack/spec.md) | short | 00 | in progress (representation programme; bounded runtime complete) | source implemented; hosted integration accepted at recorded revision | runtime fixtures at PR #60; bounded 42-item source comparison at PR #83 | Strict packs, canonicalization, locks and CLI; PRISMA transcription reconciled; interpretation, migration, broader rights and external gates remain open |
 | 02 | [Semantic diagram engine and PRISMA 2020 flows](tracks/02-semantic-diagram-prisma/spec.md) | short | 01 | implementation complete | source implemented; hosted integration accepted | fixture proven at recorded PR #60 revision | Four PRISMA families and 12 golden outputs; independent source, rights, accessibility, methodology and publication gates remain open |
-| 03 | [History-preserving standardflow import](tracks/03-standardflow-import/spec.md) | short | 00, 01, 02 | in progress (semantic cutover) | History/source retirement, host and interactive-kernel qualification complete | #88/#92/#99/#101; exact source and nine histories verified | Historical import complete; [#82](https://github.com/edithatogo/standards_check/issues/82)/[#95](https://github.com/edithatogo/standards_check/issues/95), consumer parity and independent review remain open |
-| 04 | Research ecosystem contracts | medium | 01, 02 | planned | contracted | contracted | Exact-pinned evidence exchange with SearchRight, SourceRight and AuthenText |
+| 03 | [History-preserving `standardflow` import](tracks/03-standardflow-import/spec.md) | short | 00, 01, 02 | in progress (semantic cutover) | History/source retirement, host and interactive-kernel qualification complete | #88/#92/#99/#101; exact source and nine histories verified | Historical import complete; [#82](https://github.com/edithatogo/standards_check/issues/82)/[#95](https://github.com/edithatogo/standards_check/issues/95), consumer parity and independent review remain open |
+| 04 | [Research ecosystem contracts](tracks/04-research-ecosystem/spec.md) | medium | 01, 02 | planned | contracted | contracted | Exact-pinned evidence exchange with SearchRight, SourceRight and AuthenText |
 | 05 | [Maximal assurance, release and external validation](tracks/05-maximal-assurance/spec.md) | short to long | 00–03 now; 04 for ecosystem release | in progress (operations/release) | Bounded assurance, coverage, CodeQL fixes, ruleset and Pages repair accepted | implementation main `dd3f995`; [verification](tracks/05-maximal-assurance/verification.md); docs PR #108 | [#29](https://github.com/edithatogo/standards_check/issues/29) closed; [#30](https://github.com/edithatogo/standards_check/issues/30) updater/offline runner and broader release/external gates open |
 
 Revision-bound receipts and open gates are retained in each active track's metadata, plan and
@@ -19,6 +19,19 @@ evidence file. PR #60's historical hosted acceptance and PR #59's merge are reta
 The detailed sequencing and later capabilities remain in [`roadmap.md`](./roadmap.md).
 
 ## Current reconciliation
+
+The [25 November maturity plan](tracks/05-maximal-assurance/maturity-plan-20261125.md)
+records stricter CI, measured coverage, selective data-release controls and the
+remaining operational gates. The [issue registry](../contracts/project/conductor-issues.v1.json)
+maps all 185 current plan items across six tracks to all 19 repository issues,
+including completed work and the bot-owned dependency dashboard. Offline and
+read-only live checks verify both directions; this is ownership coverage, not a
+scientific completion score. Issue counts are a dated observation and can change.
+
+The current protected receiving baseline is main `82e4a1efc136187f42b31347ada44506d2d96bfa`
+from PR #160. Its seven required checks and native Pages deployment completed.
+The historical receipts below remain bound to their original revisions. Current
+publication experiments remain planned, and profile 0.1.0 remains unapproved.
 
 The [representation programme receipt](tracks/01-canonical-standard-pack/representation-programme-20261124.md)
 records the current profile/versioning, directory integration, complementary-model
