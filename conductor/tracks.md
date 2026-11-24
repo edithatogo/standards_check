@@ -8,7 +8,7 @@ validity, source reconciliation, external accessibility certification, rights or
 | ID | Track | Horizon | Depends on | Status | Implementation | Evidence | Outcome |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 00 | [Platform foundation](tracks/00-platform-foundation/spec.md) | short | none | implementation complete (bounded) | Rust/Conductor foundation and brownfield controls implemented | PR #79/main receipts; registered node/baseline local specialization accepted in #30 | No new foundation logic needed; exact thin-call/template equality is not claimed or a blocker to accepted local CI |
-| 01 | [Canonical Standard Pack runtime](tracks/01-canonical-standard-pack/spec.md) | short | 00 | implementation complete | source implemented; hosted integration accepted at recorded revision | runtime fixtures at PR #60; bounded 42-item source comparison at PR #83 | Strict packs, canonicalization, locks and CLI; PRISMA transcription reconciled; interpretation, migration, broader rights and external gates remain open |
+| 01 | [Canonical Standard Pack runtime](tracks/01-canonical-standard-pack/spec.md) | short | 00 | in progress (representation programme; bounded runtime complete) | source implemented; hosted integration accepted at recorded revision | runtime fixtures at PR #60; bounded 42-item source comparison at PR #83 | Strict packs, canonicalization, locks and CLI; PRISMA transcription reconciled; interpretation, migration, broader rights and external gates remain open |
 | 02 | [Semantic diagram engine and PRISMA 2020 flows](tracks/02-semantic-diagram-prisma/spec.md) | short | 01 | implementation complete | source implemented; hosted integration accepted | fixture proven at recorded PR #60 revision | Four PRISMA families and 12 golden outputs; independent source, rights, accessibility, methodology and publication gates remain open |
 | 03 | [History-preserving standardflow import](tracks/03-standardflow-import/spec.md) | short | 00, 01, 02 | in progress (semantic cutover) | History/source retirement, host and interactive-kernel qualification complete | #88/#92/#99/#101; exact source and nine histories verified | Historical import complete; [#82](https://github.com/edithatogo/standards_check/issues/82)/[#95](https://github.com/edithatogo/standards_check/issues/95), consumer parity and independent review remain open |
 | 04 | Research ecosystem contracts | medium | 01, 02 | planned | contracted | contracted | Exact-pinned evidence exchange with SearchRight, SourceRight and AuthenText |
@@ -19,6 +19,12 @@ evidence file. PR #60's historical hosted acceptance and PR #59's merge are reta
 The detailed sequencing and later capabilities remain in [`roadmap.md`](./roadmap.md).
 
 ## Current reconciliation
+
+The [representation programme receipt](tracks/01-canonical-standard-pack/representation-programme-20261124.md)
+records the current profile/versioning, directory integration, complementary-model
+experiment and publication work. Profile 0.1.0 is a draft; the publication contract
+has three planned experiments and no executed runs. Historical runtime acceptance
+below remains revision-bound and does not close the wider programme.
 
 The accepted bounded implementation is `dd3f995c473db0cc1cd6dad9d392b3744166958b`;
 its evidence documentation merged as `54456f7b88f0f926e4f1513fe3321873159489b3`

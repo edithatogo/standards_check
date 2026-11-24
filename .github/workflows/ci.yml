@@ -35,6 +35,7 @@ jobs:
       HF_HUB_OFFLINE: "1"
       TRANSFORMERS_OFFLINE: "1"
       HF_HUB_DISABLE_TELEMETRY: "1"
+      PROFILE_BASELINE_REVISION: ${{ github.event.pull_request.base.sha || github.event.before }}
     steps:
       - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
         with:
@@ -93,6 +94,14 @@ jobs:
           for validator in validate_foundation validate_packs validate_artifacts validate_costing_reconciliation validate_prisma_source_assurance audit_foundation; do
             python -m coverage run "scripts/${validator}.py"
           done
+          profile_args=()
+          if [ -n "$PROFILE_BASELINE_REVISION" ] && [ "$PROFILE_BASELINE_REVISION" != 0000000000000000000000000000000000000000 ]; then
+            profile_args+=(--baseline-revision "$PROFILE_BASELINE_REVISION")
+          fi
+          python -m coverage run -m scripts.validate_representation_spec "${profile_args[@]}" \
+            --output target/coverage/representation-profile.json
+          python -m coverage run -m scripts.validate_publication_contract "${profile_args[@]}" \
+            | tee target/coverage/publication-contract.json
           cargo +1.98.1 build --locked -p standardflow-cli
           python -m coverage run -m scripts.qualify_legacy_prisma \
             --rust-cli target/debug/standardflow --output target/coverage/legacy-prisma.json
@@ -176,6 +185,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          cargo fmt --all -- --check
+          cargo clippy --workspace --all-targets --all-features --locked -- -D warnings
           cargo llvm-cov --workspace --all-targets --all-features --locked --lcov --output-path target/coverage/rust.lcov --fail-under-lines 79 2>&1 | tee target/coverage/tests.log
           cargo llvm-cov report --json --summary-only --output-path target/coverage/rust-summary.json
       - if: matrix.component == 'api'
@@ -268,16 +279,24 @@ jobs:
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: "3.12"
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
       - name: Install pinned workflow linters
         shell: bash
         run: |
           set -euo pipefail
           python -m pip install --disable-pip-version-check --no-deps -r requirements/assurance-tools.txt
+          python -m pip check
           curl --fail --location --silent --show-error --max-time 90 \
             https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_1.7.12_linux_amd64.tar.gz \
             --output "$RUNNER_TEMP/actionlint.tar.gz"
           echo "8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8  $RUNNER_TEMP/actionlint.tar.gz" | sha256sum --check
           tar -xzf "$RUNNER_TEMP/actionlint.tar.gz" -C "$RUNNER_TEMP" actionlint
+      - name: Validate commit hooks and run maintained JavaScript lint
+        run: |
+          pre-commit validate-config
+          pre-commit run eslint --all-files --show-diff-on-failure
       - name: Check workflow syntax and offline security policy
         run: |
           "$RUNNER_TEMP/actionlint" -color
