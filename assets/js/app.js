@@ -1,6 +1,21 @@
 // Local preview progress is bound to this rendered checklist, never to a newer edition.
-const MAX_PROGRESS_BYTES = 64000;
 const MAX_NOTE_LENGTH = 2000;
+
+// JSON can escape each UTF-16 code unit as six ASCII bytes. Bound a compact
+// snapshot by the actual rendered checklist size, including every checkbox.
+function maxProgressBytes(identity, itemCount) {
+  const envelope = JSON.stringify({schema: 1, source: identity, checkboxes: {}, notes: {}});
+  return new TextEncoder().encode(envelope).length + itemCount * (6 * MAX_NOTE_LENGTH + 128);
+}
+
+function persistProgress(storage, key, snapshot) {
+  try {
+    storage.setItem(key, JSON.stringify(snapshot));
+    return true;
+  } catch {
+    return false;
+  }
+}
 
 function validateProgressSnapshot(value, identity, itemCount) {
   const record = v => v !== null && typeof v === 'object' && !Array.isArray(v);
@@ -48,16 +63,26 @@ document.addEventListener('DOMContentLoaded', async () => {
   const sha256 = Array.from(new Uint8Array(digest), n => n.toString(16).padStart(2, '0')).join('');
   const identity = {page: location.pathname, sha256};
   const storageKey = `standardflow-progress:v1:${identity.page}:${sha256}`;
+  const maxBytes = maxProgressBytes(identity, totalItems);
 
   // --- State Management ---
   let state = {schema: 1, source: identity, checkboxes: {}, notes: {}};
 
-  function saveState() {
+  let storageWarningShown = false;
+  function saveState(snapshot = state) {
     try {
-      localStorage.setItem(storageKey, JSON.stringify(state));
+      if (persistProgress(localStorage, storageKey, snapshot)) {
+        storageWarningShown = false;
+        return true;
+      }
     } catch {
-      console.warn('Checklist progress could not be stored locally');
+      // Accessing localStorage itself can be denied.
     }
+    if (!storageWarningShown) {
+      alert('Checklist progress could not be saved locally. Export a backup before leaving this page.');
+      storageWarningShown = true;
+    }
+    return false;
   }
 
   let saveStateTimeout;
@@ -82,7 +107,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   function loadState() {
     try {
       const saved = localStorage.getItem(storageKey);
-      if (!saved || new TextEncoder().encode(saved).length > MAX_PROGRESS_BYTES) return;
+      if (!saved || new TextEncoder().encode(saved).length > maxBytes) return;
       const validated = validateProgressSnapshot(JSON.parse(saved), identity, totalItems);
       if (validated) state = validated;
     } catch {
@@ -103,7 +128,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // --- Export/Import Logic ---
   function exportState() {
-    const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+    const blob = new Blob([JSON.stringify(state)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
@@ -121,7 +146,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     input.onchange = e => {
       const file = e.target.files[0];
       if (!file) return;
-      if (file.size > MAX_PROGRESS_BYTES) {
+      if (file.size > maxBytes) {
         alert('Error: Progress file is too large.');
         return;
       }
@@ -134,8 +159,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             alert('Error: Invalid file, unknown checklist edition or obsolete progress format.');
             return;
           }
+          if (!saveState(validated)) return;
           state = validated;
-          saveState();
           location.reload();
         } catch (error) {
           alert('Error: Could not parse the file.');
