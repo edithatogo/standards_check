@@ -11,6 +11,7 @@
 - [Workflow](./workflow.md)
 - [Roadmap](./roadmap.md)
 - [Tracks](./tracks.md)
+- [Publication programme and research protocol](../publication/plan.md) — [#158](https://github.com/edithatogo/standards_check/issues/158).
 - [Technical-preview readiness and EQUATOR engagement](../docs/preview-readiness.md)
 
 ## Source reconciliation
@@ -23,13 +24,14 @@
 
 - [Platform architecture](../docs/architecture/STANDARDFLOW_ARCHITECTURE.md)
 - [Canonical Standard Pack](../docs/architecture/CANONICAL_STANDARD_PACK.md)
-- [Reporting guideline interoperability and assurance — draft profile 0.1](../docs/architecture/REPORTING_GUIDELINE_INTEROPERABILITY.md) — proposed conformance requirements, evidence receipt, triangulation, model shortlist and publication plan.
+- [Versioned reporting guideline interoperability profile](../specifications/reporting-guideline-interoperability/versions.json) — immutable 0.1.0 and 0.2.0 drafts, explicit approval ledger; [historical rationale](../docs/architecture/REPORTING_GUIDELINE_INTEROPERABILITY.md).
 - [Diagram and artefact engine](../docs/architecture/DIAGRAM_ENGINE.md)
 - [Research ecosystem](../docs/architecture/RESEARCH_ECOSYSTEM.md)
 - [Assurance and release engineering](../docs/architecture/ASSURANCE.md)
 
 ## Agent capability
 
+- [Publication development skill](../.agents/skills/publication-development/SKILL.md) — evidence-first, isolated research roles and reproducible claims.
 - [Conductor router](../.agents/skills/conductor/SKILL.md)
 - [Source reconciliation retrospective](../.agents/skills/source-reconciliation-retrospective/SKILL.md) — evidence-led session and extraction review; [initial receipt](source-reconciliation/retrospective-20261124.md).
 - Exact upstream plugin gitlink: `.agents/plugins/conductor`

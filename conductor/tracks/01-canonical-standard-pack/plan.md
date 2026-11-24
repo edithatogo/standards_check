@@ -152,3 +152,48 @@ Track 05 independent qualification and Track 04 consumer handoff remain separate
 ### Independent EcoEvo geometry follow-up
 
 See [EcoEvo geometric reconstruction](ecoevo-pdf-geometry.md); independent native vector and Poppler raster/word geometry replaces one-line header assumption. Closed-band and page-tail qualification, actual 89-item replay and pairwise comparison required. Source/rights gates remain held.
+
+### Directory-wide implementation and technical profile (owner direction, 24 November 2026)
+
+Scale is now an active requirement, not a prerequisite to await a perfect benchmark. Preserve
+historical sections above as receipts. [#111](https://github.com/edithatogo/standards_check/issues/111)
+and [#142](https://github.com/edithatogo/standards_check/pull/142) own acquisition/resume. The
+[actual resumed artifact](https://github.com/edithatogo/standards_check/actions/runs/45404500530/artifacts/14925365720)
+ZIP SHA-256 9ddd611875b29cc0a6c82b9f50a76131b21e8ae38b79a945dfa7d4290f17e94f
+contains 720 records, 213 OA XML candidates, 335 metadata-only, 85 incomplete, 77 missing
+identifiers, 5 conflicts, 5 unresolved; 362 prior metadata observations retained. Of 209 pending
+bulk acquisitions, 2 held and 207 deferred by budget/circuit breaker; 6 priority fetches held.
+[Analytical snapshot](https://github.com/edithatogo/standards_check/actions/runs/45404500530/artifacts/14925380706)
+has 720 catalogue identities, 215 acquisition dispositions, zero acquisition items, 2385 review
+findings. Do not replace earlier successful priority evidence with these transient failures.
+
+- [x] Implement per-entry deterministic next-action workplan over existing catalogue/survey/link
+  receipts. Actual pinned archive replay: all 720 routed, zero promotions; three focused tests.
+  Use `scripts.directory_workplan` as a consumer of the existing census (not a new crawler/writer).
+- [ ] Merge and qualify #142 on exact current head and receiving main; integrate the workplan
+  invocation in the existing scheduled producer. Persist unresolved per-entry and deduplicated
+  article work, retry only eligible unresolved sources with bounded provider-aware backoff;
+  distinguish drift from temporary failure. #152/#153 extend current readers after #156.
+- [ ] Inventory every acquired eligible source's bounded anchored structure, including unknown
+  layouts, not just six priority editions. Use existing JATS/HTML/DOCX/XLSX/CSV/PDF readers;
+  absent independent item identities yields candidate fingerprints/held status, not a canonical
+  checklist. Prioritize source and format coverage, then interpretation, rights and admission.
+- [ ] Process every eligible source across the directory; catalogue pages without a checklist,
+  unavailable or unlicensed sources retain explicit reason, next action and no guessed pack.
+  Do not stop because a fixed development sample passes; use new real failure strata for tests.
+- [ ] Version and explicitly approve the [technical profile](../../../specifications/reporting-guideline-interoperability/versions.json);
+  no automatic approval on merge. Reuse schemas; future versions add compatibility and conformance
+  mapping evidence. Offer specification plus optional reference implementation via #118.
+- [ ] On #155, retain orthogonal inference for marginal evidence coverage and error diversity,
+  not only standalone superiority. Compare baseline, dependency, NLI, decision-model disagreement
+  and selective abstention on identical fresh pairs; record correct baseline errors caught, added
+  false alerts, common-mode errors, coverage, cost and evidence-span validity. d1-2B trial after
+  exact model/license/runtime/code review; no production promotion or new oracle. Stronger model
+  or architecture warranted when corpus evidence reveals a failure mode. Preserve witness-v2
+  failure: 17/30 consensus, 6 correct; development accuracy 20% each; MiniLM 16/30 (2 false
+  equivalences), DeBERTa 29/30 (0 false equivalences), 13 paired fixes/0 introduced. No natural
+  consensus. [Receipt](https://github.com/edithatogo/standards_check/actions/runs/45400872869/artifacts/14924523529).
+- [ ] [#158](https://github.com/edithatogo/standards_check/issues/158): freeze prospective
+  publication protocol/analysis contract, independent agent roles, reproducible claims and
+  conformance evidence before new held-out evaluation. Keep human author accountability separate
+  from model-agent benchmark labelling. No external submission/endorsement claimed.

@@ -77,3 +77,21 @@ implementation revision. See [verification](verification.md) and [metadata](meta
 - [ ] Retain the independent offline security/runner, reproducibility and publication
   gates. Required ruleset, zero-human-approval protection, review resolution and no
   bypass remain unchanged. See #30, #31 and #116.
+
+## Research and directory-wide assurance follow-up
+
+#157 merged a15ae17; its receiving Assurance, Scorecard and Pages passed. #145 merged
+675fc9afeaf3dc17c8ddef793b553e2f44b401a7; actual [Python job 138486048423](https://github.com/edithatogo/standards_check/actions/runs/45405790933/job/138486048423)
+passed 433 tests, 84.62% branch-inclusive coverage, pinned spaCy replay rules 18/2/6 and
+reference 24/8/0 TP/FP/FN. This qualifies that observed grouped updater receipt, not all
+future ecosystem updates. Retain Dependabot until complete handover. Receiving Scorecard
+failed on this later revision; independent offline security queued. #146 native fuzz and
+#116 transitive hash-locks remain; #123 real browser/accessibility, signed release and consumer
+canary remain. Do not call the harness maximal until remaining execution receipts exist.
+
+- [ ] Enforce the maintained pre-commit config in required Assurance workflow-policy on changed
+  tracked files and explicit full dispatch; immutable hook revisions, exact direct tool pin,
+  retain existing privacy and security gates. Local `make install-hooks` is explicit; no claim
+  it ran on a user's device. Do not weaken a hook to pass; diagnose findings.
+- [ ] Verify immutable profile versions and explicit approval ledger, publication receipt
+  conservation and exact historical replay. Research protocol #158, no submission gate bypass.

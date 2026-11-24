@@ -2,6 +2,7 @@
 
 ## Authority and Current Work
 - Read `conductor/index.md`, `conductor/workflow.md`, and the affected track before changes.
+- For specifications, corpus analyses or publication work, use `.agents/skills/publication-development/SKILL.md` and `publication/contract.json`. Keep profile versions immutable; a merged PR is not approval.
 - `packs/`, `schemas/`, `contracts/`, and `recipes/` define StandardFlow's structured contracts;
   `crates/` contains the Rust core, artefact engine, and CLI.
 - The document pipeline below is a legacy compatibility surface. Its generated views are not

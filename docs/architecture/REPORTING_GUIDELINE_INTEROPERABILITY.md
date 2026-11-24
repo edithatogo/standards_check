@@ -1,5 +1,7 @@
 # Reporting guideline interoperability and assurance — draft profile 0.1
 
+Historical rationale retained. The immutable [version 0.1.0](../../specifications/reporting-guideline-interoperability/0.1.0.md) and [current draft 0.2.0](../../specifications/reporting-guideline-interoperability/0.2.0.md) are listed in the [version/approval registry](../../specifications/reporting-guideline-interoperability/versions.json). No profile has been approved.
+
 Status: **proposed technical specification for discussion**, not an EQUATOR
 standard, reporting guideline for a study type, legal permission, or accepted
 scientific validation. The existing Canonical Standard Pack v1 JSON schema,
