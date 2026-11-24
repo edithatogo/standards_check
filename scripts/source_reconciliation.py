@@ -269,15 +269,15 @@ def project(catalogue: dict, packs: list[dict], article: dict, ecoevo: dict, leg
     return tables
 
 
-def validate_tables(tables: dict) -> None:
-    if set(tables) != set(SCHEMAS):
+def validate_table_shapes(tables: dict, schemas: dict) -> dict:
+    if set(tables) != set(schemas):
         raise ValueError('unexpected analytical tables')
     keys = {}
     for table, rows in tables.items():
-        if any(set(row) != set(SCHEMAS[table]) for row in rows):
+        if any(set(row) != set(schemas[table]) for row in rows):
             raise ValueError('unexpected analytical columns')
         expected_types = {'str': str, 'int': int, 'bool': bool}
-        if any(value is not None and type(value) is not expected_types[SCHEMAS[table][col]]
+        if any(value is not None and type(value) is not expected_types[schemas[table][col]]
                for row in rows for col, value in row.items()):
             raise ValueError('unexpected analytical value type')
         keys[table] = {row['key'] for row in rows}
@@ -285,6 +285,11 @@ def validate_tables(tables: dict) -> None:
             raise ValueError('missing analytical key')
         if len(keys[table]) != len(rows):
             raise ValueError('duplicate analytical key')
+    return keys
+
+
+def validate_tables(tables: dict) -> None:
+    keys = validate_table_shapes(tables, SCHEMAS)
     for table, field, parent in [('sources', 'guideline_id', 'guidelines'), ('requirements', 'source_id', 'sources'),
                                  ('source_anchors', 'requirement_id', 'requirements'), ('comparisons', 'requirement_id', 'requirements'),
                                  ('canonical_requirements', 'requirement_id', 'requirements'),
@@ -297,20 +302,20 @@ def validate_tables(tables: dict) -> None:
             raise ValueError('unbound analytical relationship')
 
 
-def write_parquet(tables: dict, output: Path) -> dict:
+def write_parquet(tables: dict, output: Path, *, schemas=SCHEMAS, validator=validate_tables) -> dict:
     import polars as pl
-    validate_tables(tables)
+    validator(tables)
     output.mkdir(parents=True, exist_ok=True)
     manifest = {}
     types = {'str': pl.String, 'int': pl.Int64, 'bool': pl.Boolean}
     for name, rows in tables.items():
-        schema = {col: types[kind] for col, kind in SCHEMAS[name].items()}
+        schema = {col: types[kind] for col, kind in schemas[name].items()}
         frame = pl.DataFrame(rows, schema=schema, strict=True).sort('key')
         path = output / (name + '.parquet')
         frame.write_parquet(path, compression='zstd')
         if not pl.read_parquet(path).equals(frame):
             raise ValueError('Parquet conservation failure')
-        manifest[name] = {'rows': frame.height, 'sha256': sha(path.read_bytes()), 'schema': SCHEMAS[name]}
+        manifest[name] = {'rows': frame.height, 'sha256': sha(path.read_bytes()), 'schema': schemas[name]}
     return {'polars_version': pl.__version__, 'tables': manifest}
 
 
