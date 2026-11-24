@@ -10,7 +10,9 @@ from itertools import combinations
 import json
 from pathlib import Path
 
-from .compare_ecoevo_formats import COHORT, EXPECTED_IDS, REFERENCE, collect_rows, compare_formats, pdf_tables, read_bounded
+from .compare_ecoevo_formats import (COHORT, EXPECTED_IDS, REFERENCE, collect_rows, compare_formats,
+                                     layout_comparison_rows, pdf_tables, read_bounded)
+from .ecoevo_pdf_grid import extract_native, extract_poppler
 from .reconcile_authoritative_articles import snapshot_table
 from .structured_source import ITEM_ID, extract_structure, fingerprint
 
@@ -107,9 +109,13 @@ def summarize_source(rows: list[dict], expected: tuple[str, ...], issues: list[s
     for row in rows:
         record = {key: row.get(key) for key in ("item_id", "identifier_anchor",
                                                "requirement_anchor", "requirement_sha256")}
+        if "layout_normalized_sha256" in row:
+            record["layout_normalized_sha256"] = row["layout_normalized_sha256"]
         if not record["identifier_anchor"] or not record["requirement_anchor"]:
             issues.append("missing_row_anchor")
             record["requirement_sha256"] = None
+            if "layout_normalized_sha256" in record:
+                record["layout_normalized_sha256"] = None
         safe_rows.append(record)
     counts = Counter(row["item_id"] for row in safe_rows)
     known = set(expected)
@@ -160,18 +166,41 @@ def observe_file(root: Path, path: str, cohort: Cohort) -> dict:
     try:
         raw = read_bounded(source_path)
         result["source_sha256"] = hashlib.sha256(raw).hexdigest()
-        if suffix == ".pdf":
-            result["extractor"] = "pdfplumber_ruled_table"
-            result["extractor_version"] = version("pdfplumber")
-            structure = pdf_tables(raw)
+        if suffix == ".pdf" and cohort.edition == "prisma-ecoevo-2021":
+            native = extract_native(raw)
+            rows, issues = native["rows"], list(native["issues"])
+            result["extractor"] = native["parser"]
+            result["extractor_version"] = native["version"]
+            try:
+                other = extract_poppler(raw)
+                independent = summarize_source(other["rows"], cohort.expected_ids, other["issues"])
+                result["independent_pdf"] = {"extractor": other["parser"], "extractor_version": other["version"],
+                    **independent,
+                    "strict_comparison": compare_formats(rows, independent["rows"], expected_ids=cohort.expected_ids),
+                    "layout_comparison": compare_formats(layout_comparison_rows(rows),
+                        layout_comparison_rows(independent["rows"]), expected_ids=cohort.expected_ids)}
+                if independent["issues"]:
+                    issues.append("independent_pdf_structural_hold")
+            except Exception as exc:  # preserve native observations; independent failure stays held
+                issues.append("independent_pdf_unavailable:" + type(exc).__name__)
         else:
-            result["extractor"] = suffix.lstrip(".") + "_structured_source"
-            package = {".docx": "python-docx", ".xlsx": "openpyxl", ".html": "lxml"}.get(suffix)
-            if package:
-                result["extractor_version"] = version(package)
-            _, structure = extract_structure(raw, suffix)
-        rows, issues = collect_rows(structure, identifier_pattern=ITEM_ID, header_roles=header_roles())
-        issues.extend(structure.get("issues", []))
+            if suffix == ".pdf":
+                result["extractor"] = "pdfplumber_ruled_table"
+                result["extractor_version"] = version("pdfplumber")
+                structure = pdf_tables(raw)
+            else:
+                result["extractor"] = suffix.lstrip(".") + "_structured_source"
+                package = {".docx": "python-docx", ".xlsx": "openpyxl", ".html": "lxml"}.get(suffix)
+                if package:
+                    result["extractor_version"] = version(package)
+                _, structure = extract_structure(raw, suffix)
+            # EcoEvo includes both main item and sub-item number columns. Generic
+            # aliases make them ambiguous; retain its qualified explicit dialect.
+            if cohort.edition == "prisma-ecoevo-2021":
+                rows, issues = collect_rows(structure)
+            else:
+                rows, issues = collect_rows(structure, identifier_pattern=ITEM_ID, header_roles=header_roles())
+            issues.extend(structure.get("issues", []))
         if not rows:
             issues.append("no_explicit_numbered_requirement_rows")
         result["status"] = "held_structural_discrepancy" if issues else "structure_observed_not_qualified"
@@ -221,7 +250,9 @@ def benchmark(root: Path, cohorts: list[Cohort]) -> dict:
                                  "independent_source_identity_verified": False,
                                  "status": ("candidate_comparison_only" if comparison["compared"] else
                                             "held_no_comparable_rows"),
-                                 **comparison})
+                                 **comparison,
+                                 "layout_comparison": compare_formats(layout_comparison_rows(left["rows"]),
+                                     layout_comparison_rows(right["rows"]), expected_ids=cohort.expected_ids)})
         editions.append({"edition": cohort.edition, "family": cohort.family,
                          "reference": cohort.reference, "scope": cohort.scope, "doi": cohort.doi,
                          "expected_item_ids": list(cohort.expected_ids) if cohort.expected_ids else None,

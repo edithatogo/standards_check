@@ -1,5 +1,5 @@
 # Test-only tools, owned by Track 05. Not application dependencies.
 # coverage: Apache-2.0; branch/subprocess coverage. Remove with the Python coverage job.
 # zizmor: MIT; offline workflow security lint. Remove only when a replacement gate is accepted.
-coverage==7.17.4
+coverage==7.17.5
 zizmor==1.33.1

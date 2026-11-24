@@ -170,3 +170,24 @@ def test_symlink_and_duplicate_cohort_rejected(tmp_path):
     profile = Cohort("synthetic", "test", ("1",), (), "reference")
     with pytest.raises(ValueError, match="duplicate"):
         benchmark(tmp_path, [profile, profile])
+
+
+def test_ecoevo_keeps_subitem_dialect_in_family_driver(tmp_path):
+    (tmp_path / "ecoevo.csv").write_text(
+        "Item number,Sub-item number,Sub-item,Score\n1,1.1,Report results.,2\n", encoding="utf-8")
+    cohort = Cohort("prisma-ecoevo-2021", "prisma", ("1.1",), ("ecoevo.csv",), "synthetic")
+    source = benchmark(tmp_path, [cohort])["editions"][0]["sources"][0]
+    assert source["expected_ids_recovered"] == 1
+    assert source["rows"][0]["requirement_sha256"] is not None
+    assert "incomplete_or_ambiguous_header" not in source["issues"]
+
+
+def test_ecoevo_pdf_reuses_independent_grid_evidence(tmp_path):
+    from tests.test_ecoevo_grid import tiny_grid_pdf
+    (tmp_path / "ecoevo.pdf").write_bytes(tiny_grid_pdf())
+    cohort = Cohort("prisma-ecoevo-2021", "prisma", ("1.1", "1.2", "1.3"),
+                    ("ecoevo.pdf",), "synthetic")
+    source = benchmark(tmp_path, [cohort])["editions"][0]["sources"][0]
+    assert source["expected_ids_recovered"] == 3
+    assert source["independent_pdf"]["expected_ids_recovered"] == 3
+    assert source["independent_pdf"]["layout_comparison"]["exact_equal"] == 3

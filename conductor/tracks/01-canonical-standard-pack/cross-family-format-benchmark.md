@@ -62,3 +62,9 @@ execution container cannot resolve GitHub, so checkout-based RED/GREEN
 and full-suite tests have not been executed locally. Hosted and receiving-main
 receipts must be observed before acceptance. No source counts or test passes
 are asserted here.
+
+## Receiving-main reconciliation
+
+Historical artifact [14914864611](https://github.com/edithatogo/standards_check/actions/runs/45384270600/artifacts/14914864611), SHA-256 cf4277cd8b07780dee5b14305f0450afbfd8c428e87b23f2c3beaa58ea4d892d, inspected. All 14 cohorts reported, but generic header aliases recovered zero EcoEvo IDs in all four formats despite later #156 qualification. Four retained JATS snapshots recovered 82 rows; PRISMA-P and abstracts DOCX recovered 26/12 rows. Trial, other PDF and missing-source holds retained; no pooled denominator or promotion.
+
+Reconcile latest receiving main (including #145 maintained pins, #154 classical comparator and #156 PDF grid). Preserve existing strict fingerprints and separate layout-aware comparison. EcoEvo uses its original specific subitem header and the qualified native/Poppler PDF readers, not generic ruled-table extraction. New regressions cover ambiguous main/subitem aliases and actual synthetic independent grid replay. Actual old cohort artifact is the reproduced RED evidence; local complete checkout and new tests not executed here, require hosted suite and actual artifact inspection. No new parser/runtime or rights promotion. Other formats stay diagnostic/held.

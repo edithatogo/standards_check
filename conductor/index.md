@@ -19,8 +19,11 @@
 
 ## Architecture
 
+- [Track 01 source reconciliation requirements and design](tracks/01-canonical-standard-pack/source-reconciliation-design.md) — MoSCoW, Mermaid and analytical projections.
+
 - [Platform architecture](../docs/architecture/STANDARDFLOW_ARCHITECTURE.md)
 - [Canonical Standard Pack](../docs/architecture/CANONICAL_STANDARD_PACK.md)
+- [Reporting guideline interoperability and assurance — draft profile 0.1](../docs/architecture/REPORTING_GUIDELINE_INTEROPERABILITY.md) — proposed conformance requirements, evidence receipt, triangulation, model shortlist and publication plan.
 - [Diagram and artefact engine](../docs/architecture/DIAGRAM_ENGINE.md)
 - [Research ecosystem](../docs/architecture/RESEARCH_ECOSYSTEM.md)
 - [Assurance and release engineering](../docs/architecture/ASSURANCE.md)

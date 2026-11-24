@@ -23,7 +23,7 @@ repos:
     args: [--markdown-linebreak-ext=md]
     exclude: ^(source|archive|assets|docs|docx|pdf|html|latex|typst)/
 - repo: https://github.com/pre-commit/mirrors-eslint
-  rev: v10.8.0
+  rev: v10.15.0
   hooks:
   - id: eslint
     files: ^(api/|scripts/|tests/).+\.(js|cjs|mjs)$

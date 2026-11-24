@@ -61,6 +61,26 @@ jobs:
           python -m pip install --disable-pip-version-check --no-deps -r requirements/legacy-standardflow.txt
           python -m pip install --disable-pip-version-check --no-deps -r requirements/assurance-tools.txt
           python -m pip check
+      - name: Acquire pinned English reference for an explicit NLP qualification change
+        if: matrix.component == 'python'
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Ordinary unrelated PRs remain model-free. Only NLP changes or explicit dispatch qualify.
+          if [ "$GITHUB_EVENT_NAME" != workflow_dispatch ] && git diff --quiet HEAD^1 HEAD -- scripts/classical_linguistic_nlp.py scripts/linguistic_benchmark.py scripts/lexical_text.py requirements/classical-nlp-reference.txt tests/test_classical_linguistic_nlp.py tests/test_linguistic_benchmark.py tests/test_linguistic_role_scope.py; then
+            exit 0
+          fi
+          python -m pip install --disable-pip-version-check -r requirements/classical-nlp-reference.txt
+          python -m pip check
+          wheel="$RUNNER_TEMP/en_core_web_sm-3.8.0-py3-none-any.whl"
+          curl --fail --silent --show-error --location --max-redirs 3 \
+            --connect-timeout 10 --max-time 90 --max-filesize 12806118 \
+            --proto '=https' --proto-redir '=https' \
+            "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl" --output "$wheel"
+          printf '%s  %s\n' '1932429db727d4bff3deed6b34cfc05df17794f4a52eeb26cf8928f7c1a0fb85' "$wheel" | sha256sum --check
+          mkdir -p target/coverage/linguistic
+          python -m pip freeze > target/coverage/linguistic/environment.txt
+
       - name: Prepare the locked CLI for Python's cross-runtime contract
         if: matrix.component == 'python'
         run: rustup toolchain install 1.98.1 --profile minimal
@@ -76,6 +96,27 @@ jobs:
           cargo +1.98.1 build --locked -p standardflow-cli
           python -m coverage run -m scripts.qualify_legacy_prisma \
             --rust-cli target/debug/standardflow --output target/coverage/legacy-prisma.json
+          wheel="$RUNNER_TEMP/en_core_web_sm-3.8.0-py3-none-any.whl"
+          if [ -f "$wheel" ]; then
+            # Separate processes; timing/RSS include coverage instrumentation.
+            python -m coverage run -m scripts.linguistic_benchmark --output target/coverage/linguistic/rules.json
+            python -m coverage run -m scripts.linguistic_benchmark --model-wheel "$wheel" --output target/coverage/linguistic/reference.json
+            python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path("target/coverage/linguistic")
+          rules = json.loads((root / "rules.json").read_text())
+          reference = json.loads((root / "reference.json").read_text())
+          assert rules["fixture_sha256"] == reference["fixture_sha256"]
+          assert rules["source_pins"] == reference["source_pins"]
+          assert rules["metrics"]["cases"] == reference["metrics"]["cases"] == 33
+          assert rules["canonical_packs_promoted"] == reference["canonical_packs_promoted"] == 0
+          assert reference["method"] == "dependency_assisted"
+          assert reference["metrics"]["held"] == 0, "reference failed to parse a benchmark row"
+          print("Paired reference challenge executed; no independent semantic qualification implied.")
+          PY
+          fi
           python -m coverage combine
           python -m coverage xml
           python -m coverage json
@@ -87,6 +128,10 @@ jobs:
           python -m scripts.compare_ecoevo_formats --root . \
             --report target/coverage/legacy-source-text-triage.json \
             --output target/coverage/ecoevo-format-comparison.json
+          # Text-free candidate evidence and rights-cleared canonical Parquet; no acquisition.
+          python -m scripts.source_reconciliation \
+            --ecoevo target/coverage/ecoevo-format-comparison.json \
+            --output target/coverage/source-projections --revision "$(git rev-parse HEAD)"
 
       - name: Benchmark local guideline-family format candidates
         if: matrix.component == 'python'
@@ -121,7 +166,7 @@ jobs:
       - if: matrix.component == 'rust'
         uses: dtolnay/rust-toolchain@4cda84d5c5c54efe2404f9d843567869ab1699d4
         with:
-          toolchain: "1.98.1"
+          toolchain: "1.100.0"
           components: llvm-tools-preview,rustfmt,clippy
       - name: Install pinned Rust measurement tool
         if: matrix.component == 'rust'
