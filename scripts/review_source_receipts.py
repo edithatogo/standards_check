@@ -22,6 +22,8 @@ RULES = {
     "unresolved_identity": (2, "Use exact PMID/DOI resolution and registry evidence; retain ambiguous publication candidates."),
     "legacy_text_discrepancy": (2, "Compare anchored source and legacy items; separate formatting, aggregation, missing conditions and substantive differences."),
     "new_record": (3, "Queue the new identity for source and rights discovery, not automatic admission."),
+    "provider_contact_missing": (1, "Configure an authorized maintainer contact for PMC ID conversion; do not guess identity."),
+    "provider_budget_deferred": (1, "Revisit deferred registry observations in a subsequent bounded run."),
     "provider_conflict": (0, "Hold identity conflicts; compare exact identifiers and publisher evidence, never majority-vote."),
     "acquisition_deferred": (1, "Resume bounded acquisition from trusted receipts; prioritize unattempted sources."),
     "provider_representation_changed": (0, "Compare the newly observed source representation against its previous byte and table receipt; do not automatically repin."),
@@ -74,7 +76,19 @@ def review(current: dict, baseline: dict | None = None) -> dict:
     now = index(current)
     before = index(baseline) if baseline is not None else {}
     findings = set()
+    evidence = current.get("provider_evidence", {}).get("records", {})
     for key, row in now.items():
+        if key.startswith("catalogue:"):
+            observations = evidence.get(row["id"], {})
+        else:
+            observations = evidence.get(key, {})
+        statuses = {v.get("status") for v in observations.values()}
+        if "contact_not_configured" in statuses:
+            findings.add(("provider_contact_missing", key))
+        if "deferred_request_budget" in statuses:
+            findings.add(("provider_budget_deferred", key))
+        if statuses.intersection({"identifier_conflict", "ambiguous_identifier"}):
+            findings.add(("provider_conflict", key))
         status = row.get("status", "unknown")
         hashes, identity, tables, objects = observed(row)
         if row.get("provider_disagreements"):

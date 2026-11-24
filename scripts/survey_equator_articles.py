@@ -148,7 +148,7 @@ def combine_retained_metadata(catalogue: dict, receipts: list[dict]) -> tuple[di
                 not re.fullmatch(r"[a-f0-9]{40}", previous.get("source_revision", ""))):
             raise ValueError("invalid prior survey receipt")
         for key, record in retained_metadata(catalogue, previous).items():
-            if key in retained and any(retained[key].get(f) != record.get(f) for f in fields):
+            if record.get("provider_disagreements") or (key in retained and any(retained[key].get(f) != record.get(f) for f in fields)):
                 conflicts.add(key)
             else:
                 retained[key] = record

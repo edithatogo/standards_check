@@ -134,3 +134,21 @@ reporting checklist.
 independent structure/comparison, rights, semantics and admission. Keep
 T01.5d–g conditional on measured residual errors. No new model or service
 is required for the census.
+
+
+## 24 November — programme of deterministic source resilience
+
+- [x] Inspect both historical EQUATOR source receipts at upstream revision
+  `d74413b15d266334067e1e5c104957601be3ba6c`. First run: 305 identity successes;
+  later run: 57 non-overlapping successes, 586 incomplete, 77 missing identifiers.
+  No successful full-text acquisition among the later six priority candidates.
+- [ ] Qualify the bounded OA inventory and historical-receipt resume (#142).
+  Historical 362 identity observations are candidate evidence, not a new
+  successful receiving run. Changed or conflicting identities remain held.
+- [ ] Qualify the weekly automated acquisition retrospective, fresh-dispatch
+  drift comparison, shared XML boundary and 512-case seeded mutation regression.
+- [ ] Configure an authorized PMC ID-converter contact, then verify new provider
+  observations. Keep title/author matching and ORCID optional disambiguators;
+  registry agreement is not checklist semantic or rights verification.
+- [ ] Resolve remaining #111 and #95 source and item-level rights/anchor gates
+  before any canonical pack promotion. Preserve #82 independent review gates.

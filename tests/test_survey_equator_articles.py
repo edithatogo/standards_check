@@ -158,6 +158,10 @@ class BatchTests(unittest.TestCase):
         self.assertEqual(conflicts, {"equator:a"})
         with self.assertRaises(ValueError):
             combine_retained_metadata(catalogue, [{"records": []}])
+        prior["records"][0]["provider_disagreements"] = ["pmcid_disagreement"]
+        retained, conflicts = combine_retained_metadata(catalogue, [prior, later])
+        self.assertIn("equator:a", conflicts)
+        self.assertNotIn("equator:a", retained)
 
     def test_bulk_inventory_budget_resume_and_circuit_breaker(self):
         records = [resolve(row(str(i),str(i)), [article_record(pmid=str(i),pmcid="PMC"+str(i))])
