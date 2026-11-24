@@ -156,3 +156,30 @@ Track 05 independent qualification and Track 04 consumer handoff remain separate
 ### Independent EcoEvo geometry follow-up
 
 See [EcoEvo geometric reconstruction](ecoevo-pdf-geometry.md); independent native vector and Poppler raster/word geometry replaces one-line header assumption. Closed-band and page-tail qualification, actual 89-item replay and pairwise comparison required. Source/rights gates remain held.
+
+
+## 24 November — programme of deterministic source resilience
+
+- [x] Inspect both historical EQUATOR source receipts at upstream revision
+  `d74413b15d266334067e1e5c104957601be3ba6c`. First run: 305 identity successes;
+  later run: 57 non-overlapping successes, 586 incomplete, 77 missing identifiers.
+  No successful full-text acquisition among the later six priority candidates.
+- [ ] Qualify the bounded OA inventory and historical-receipt resume (#142).
+  Historical 362 identity observations are candidate evidence, not a new
+  successful receiving run. Changed or conflicting identities remain held.
+- [ ] Qualify the weekly automated acquisition retrospective, fresh-dispatch
+  drift comparison, shared XML boundary and 512-case seeded mutation regression.
+- [ ] Configure an authorized PMC ID-converter contact, then verify new provider
+  observations. Keep title/author matching and ORCID optional disambiguators;
+  registry agreement is not checklist semantic or rights verification.
+- [ ] Resolve remaining #111 and #95 source and item-level rights/anchor gates
+  before any canonical pack promotion. Preserve #82 independent review gates.
+
+### Versioned acquisition evidence handoff
+
+See [EQUATOR analytical snapshot](equator-analytical-snapshot.md). Reuses #142 scheduled source and retrospective evidence with a strict versioned Parquet export; separate canonical projections and Searchright #843. Historical receipt replay and live receiving evidence remain distinct. No promotion.
+
+
+### Receiving-main acquisition reconciliation
+
+The #142 candidate retains prior receipt and current live projection observations (artifacts 14918300555 and 14916344312) and the Searchright #851 historical consumer canary. Reconcile hardened source XML ingress with the already-merged #154 opt-in linguistic reconciliation; neither implementation is overwritten. Retain discovery-only identity conflicts, acquisition rights and held candidate statuses, and validate item-count, fingerprint and anchor conservation. No new source authority, rights or canonical pack promotion. Hosted current-base tests and live/replay evidence required before merge.
