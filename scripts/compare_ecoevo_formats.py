@@ -41,7 +41,7 @@ def read_bounded(path: Path, limit: int = MAX_BYTES) -> bytes:
     return raw
 
 
-def collect_rows(structure: dict) -> tuple[list[dict], list[str]]:
+def collect_rows(structure: dict, id_pattern: re.Pattern = ID) -> tuple[list[dict], list[str]]:
     """Match explicit header roles, not arbitrary numeric-looking scoring cells."""
     records, issues = [], set()
 
@@ -63,7 +63,7 @@ def collect_rows(structure: dict) -> tuple[list[dict], list[str]]:
             identifier = cells.get(columns[0], {})
             requirement = cells.get(columns[1], {})
             item_id = identifier.get("item_id_candidate")
-            if not isinstance(item_id, str) or not ID.fullmatch(item_id) or identifier.get("value_type") == "f":
+            if not isinstance(item_id, str) or not id_pattern.fullmatch(item_id) or identifier.get("value_type") == "f":
                 if identifier.get("text_sha256") not in {None, EMPTY} or requirement.get("text_sha256") not in {None, EMPTY}:
                     issues.add("unclassified_data_row")
                 continue
@@ -93,7 +93,14 @@ def compare_formats(left: list[dict], right: list[dict]) -> dict:
             "not_comparable_expected_ids": [item for item in EXPECTED_IDS if item not in common]}
 
 
-def pdf_tables(raw: bytes) -> dict:
+def pdf_header_role(value: str, roles: dict[str, str] | None = None) -> str | None:
+    # The official EcoEvo PDF's sub-item header uses a control/glyph marker.
+    # Recognize only the observed CID 2 header form; never strip markers from body text.
+    header = re.sub(r"[^a-z0-9]", "", value.casefold().replace("(cid:2)", ""))
+    return (roles if roles is not None else {"subitemnumber": "id", "subitem": "requirement"}).get(header)
+
+
+def pdf_tables(raw: bytes, header_roles: dict[str, str] | None = None) -> dict:
     """Bounded ruled-table experiment with the existing pdfplumber engine."""
     import pdfplumber
 
@@ -113,10 +120,9 @@ def pdf_tables(raw: bytes) -> dict:
                     cells = []
                     for column, value in enumerate(values, 1):
                         value = value or ""
-                        header = re.sub(r"[^a-z0-9]", "", value.casefold())
                         anchor = f"page/{page.page_number}/table/{table_number}/r{row_number}/c{column}"
                         cells.append({"anchor": anchor, "column": column, **cell_fields(value),
-                                      "header_role": {"subitemnumber": "id", "subitem": "requirement"}.get(header)})
+                                      "header_role": pdf_header_role(value, header_roles)})
                     rows.append({"cells": cells})
                 blocks.append({"rows": rows})
     return {"blocks": blocks}
