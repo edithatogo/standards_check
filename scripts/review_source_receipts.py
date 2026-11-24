@@ -22,6 +22,9 @@ RULES = {
     "unresolved_identity": (2, "Use exact PMID/DOI resolution and registry evidence; retain ambiguous publication candidates."),
     "legacy_text_discrepancy": (2, "Compare anchored source and legacy items; separate formatting, aggregation, missing conditions and substantive differences."),
     "new_record": (3, "Queue the new identity for source and rights discovery, not automatic admission."),
+    "provider_conflict": (0, "Hold identity conflicts; compare exact identifiers and publisher evidence, never majority-vote."),
+    "acquisition_deferred": (1, "Resume bounded acquisition from trusted receipts; prioritize unattempted sources."),
+    "provider_representation_changed": (0, "Compare the newly observed source representation against its previous byte and table receipt; do not automatically repin."),
     "status_changed": (3, "Investigate the changed outcome against exact-revision receipts before interpreting it as improvement or regression."),
 }
 
@@ -37,7 +40,8 @@ def index(receipt: dict) -> dict:
         raise ValueError("receipt must be an object")
     if "records" in receipt:
         groups = (("catalogue", "id", receipt["records"]),
-                  ("edition", "edition", receipt.get("priority_articles", [])))
+                  ("edition", "edition", receipt.get("priority_articles", [])),
+                  ("edition", "edition", receipt.get("bulk_articles", [])))
     elif "editions" in receipt:
         groups = (("edition", "edition", receipt["editions"]),)
     else:
@@ -73,6 +77,10 @@ def review(current: dict, baseline: dict | None = None) -> dict:
     for key, row in now.items():
         status = row.get("status", "unknown")
         hashes, identity, tables, objects = observed(row)
+        if row.get("provider_disagreements"):
+            findings.add(("provider_conflict", key))
+        if status == "deferred_acquisition_budget":
+            findings.add(("acquisition_deferred", key))
         if status == "lookup_incomplete":
             findings.add(("provider_incomplete", key))
         if status in {"missing_identifier", "unresolved_identifier", "identifier_conflict", "ambiguous_identifier"}:
@@ -88,6 +96,10 @@ def review(current: dict, baseline: dict | None = None) -> dict:
                 findings.add(("legacy_text_discrepancy", key))
         if key in before:
             old_hashes, old_identity, old_tables, old_objects = observed(before[key])
+            old_provider = (before[key].get("acquisition") or {}).get("provider")
+            new_provider = (row.get("acquisition") or {}).get("provider")
+            if old_provider and new_provider and old_provider != new_provider:
+                findings.add(("provider_representation_changed", key))
             if any(a and not b for a, b in zip(old_hashes + old_identity, hashes + identity)) or (old_tables and not tables):
                 findings.add(("evidence_lost", key))
             old_structure = {t.get("table_id"): t.get("structure") for t in old_objects if t.get("structure")}
