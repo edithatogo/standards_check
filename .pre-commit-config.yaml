@@ -1,18 +1,18 @@
 repos:
 - repo: https://github.com/gitleaks/gitleaks
-  rev: v8.30.1
+  rev: 83d9cd684c87d95d656c1458ef04895a7f1cbd8e # v8.30.1
   hooks:
   - id: gitleaks
 - repo: https://github.com/jumanjihouse/pre-commit-hooks
-  rev: 3.0.0
+  rev: 38980559e3a605691d6579f96222c30778e5a69e # 3.0.0
   hooks:
   - id: shellcheck
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v6.0.0
+  rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c # v6.0.0
   hooks:
   - id: check-merge-conflict
   - id: check-json
-    files: ^(schemas/|contracts/|recipes/|\.github/|renovate\.json$|package\.json$|api/package\.json$)
+    files: ^(schemas/|contracts/|recipes/|specifications/|publication/|\.github/|renovate\.json$|package\.json$|api/package\.json$)
   - id: check-toml
     files: ^(Cargo\.toml$|crates/|rust-toolchain\.toml$)
   - id: check-yaml
@@ -23,7 +23,7 @@ repos:
     args: [--markdown-linebreak-ext=md]
     exclude: ^(source|archive|assets|docs|docx|pdf|html|latex|typst)/
 - repo: https://github.com/pre-commit/mirrors-eslint
-  rev: v10.15.0
+  rev: 73e3fe97594aeeb7151061de3b7792b5fc451e55 # v10.15.0
   hooks:
   - id: eslint
     files: ^(api/|scripts/|tests/).+\.(js|cjs|mjs)$

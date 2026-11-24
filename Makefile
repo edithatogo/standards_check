@@ -53,8 +53,18 @@ clean:
 # Fast, network-free maintained contract and source regression profile.
 .PHONY: quick
 quick:
-	python -m unittest tests.test_reconcile_authoritative_articles tests.test_jats_checklist_structure tests.test_review_source_receipts tests.test_classical_linguistic_nlp tests.test_linguistic_benchmark tests.test_linguistic_role_scope tests.test_runtime_pin -v
+	python -m unittest tests.test_reconcile_authoritative_articles tests.test_jats_checklist_structure tests.test_review_source_receipts tests.test_classical_linguistic_nlp tests.test_linguistic_benchmark tests.test_linguistic_role_scope tests.test_runtime_pin tests.test_directory_workplan tests.test_publication_contract -v
+	python -m scripts.publication_contract
 	cargo fmt --all -- --check
 	node --check api/server.js
 	node --check api/cors-options.js
 	node --check scripts/generate_api_data.js
+
+.PHONY: install-hooks publication-check
+install-hooks:
+	python -m pre_commit validate-config
+	python -m pre_commit install --install-hooks
+
+publication-check:
+	python -m unittest tests.test_directory_workplan tests.test_publication_contract -v
+	python -m scripts.publication_contract

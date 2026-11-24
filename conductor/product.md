@@ -3,7 +3,7 @@
 StandardFlow is a machine-readable reporting-standard representation, reconciliation and assurance
 system. Its implementation-neutral technical profile and experimental reference implementation are
 separately versioned. It processes the whole published reporting-guideline directory as a corpus,
-while admitting only rights- and evidence-qualified Canonical Standard Packs, resolves which requirements
+while admitting only rights- and evidence-qualified Canonical Standard Packs. It resolves which requirements
 apply to a research project, captures evidence against those requirements, and deterministically
 generates checklists, forms, diagrams and submission artefacts.
 
