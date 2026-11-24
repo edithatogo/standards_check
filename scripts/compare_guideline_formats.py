@@ -32,6 +32,7 @@ class Cohort:
     reference: str
     snapshot: bool = False
     scope: str = "printed item IDs; nested requirements not qualified"
+    doi: str | None = None
 
 
 def header_roles() -> dict[str, str]:
@@ -58,7 +59,8 @@ def profiles(root: Path) -> list[Cohort]:
     held = load_json(root, HELD)["editions"]
     articles = {x["edition"]: x for x in load_json(root, ARTICLE_SPECS)}
     result = [Cohort("prisma-ecoevo-2021", "prisma", tuple(EXPECTED_IDS),
-                     tuple(COHORT), REFERENCE, scope="89 printed subitems; 27 main groups")]
+                     tuple(COHORT), REFERENCE, scope="89 printed subitems; 27 main groups",
+                     doi="10.1111/brv.12721")]
     candidates = (
         ("prisma-p-2015", "prisma", (VARIANT + "prisma-p.pdf", ARCHIVE + "PRISMA-P-checklist.docx")),
         ("prisma-s-2021", "prisma", ()),
@@ -95,7 +97,7 @@ def profiles(root: Path) -> list[Cohort]:
             reference = HELD + "#" + edition
             scope = entry["identifier_scope"]
         result.append(Cohort(edition, family, tuple(ids), paths, reference,
-                             edition in articles, scope))
+                             edition in articles, scope, entry.get("doi")))
     return result
 
 
@@ -111,14 +113,28 @@ def summarize_source(rows: list[dict], expected: tuple[str, ...], issues: list[s
         safe_rows.append(record)
     counts = Counter(row["item_id"] for row in safe_rows)
     known = set(expected)
+    missing = [item for item in expected if item not in counts] if expected else None
+    extra = sorted(set(counts) - known) if expected else None
+    duplicates = sorted(item for item, n in counts.items() if n > 1)
+    ordered = [row["item_id"] for row in rows] == list(expected) if expected else None
+    if missing:
+        issues.append("missing_expected_ids")
+    if extra:
+        issues.append("extra_ids")
+    if duplicates:
+        issues.append("duplicate_ids")
+    if ordered is False:
+        issues.append("expected_order_not_recovered")
+    if not expected:
+        issues.append("independent_denominator_unavailable")
     return {
         "rows": safe_rows,
         "observed_row_count": len(rows),
         "expected_ids_recovered": sum(item in counts for item in expected) if expected else None,
-        "missing_ids": [item for item in expected if item not in counts] if expected else None,
-        "extra_ids": sorted(set(counts) - known) if expected else None,
-        "duplicate_ids": sorted(item for item, n in counts.items() if n > 1),
-        "exact_expected_order": [row["item_id"] for row in rows] == list(expected) if expected else None,
+        "missing_ids": missing,
+        "extra_ids": extra,
+        "duplicate_ids": duplicates,
+        "exact_expected_order": ordered,
         "issues": sorted(set(issues)),
     }
 
@@ -196,15 +212,18 @@ def benchmark(root: Path, cohorts: list[Cohort]) -> dict:
         pairwise = []
         if cohort.expected_ids:
             for left, right in combinations(sources, 2):
-                same_bytes = bool(left["source_sha256"] and left["source_sha256"] == right["source_sha256"])
+                same_bytes = (left["source_sha256"] == right["source_sha256"]
+                              if left["source_sha256"] and right["source_sha256"] else None)
                 comparison = compare_formats(left["rows"], right["rows"], expected_ids=cohort.expected_ids)
                 pairwise.append({"left": left["path"], "right": right["path"],
                                  "cross_format": left["format"] != right["format"],
                                  "identical_source_bytes": same_bytes,
                                  "independent_source_identity_verified": False,
+                                 "status": ("candidate_comparison_only" if comparison["compared"] else
+                                            "held_no_comparable_rows"),
                                  **comparison})
         editions.append({"edition": cohort.edition, "family": cohort.family,
-                         "reference": cohort.reference, "scope": cohort.scope,
+                         "reference": cohort.reference, "scope": cohort.scope, "doi": cohort.doi,
                          "expected_item_ids": list(cohort.expected_ids) if cohort.expected_ids else None,
                          "status": ("held_no_candidate_sources" if not sources else
                                     "held_no_independent_denominator" if not cohort.expected_ids else
