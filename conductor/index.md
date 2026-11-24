@@ -19,6 +19,8 @@
 
 ## Architecture
 
+- [Track 01 source reconciliation requirements and design](tracks/01-canonical-standard-pack/source-reconciliation-design.md) — MoSCoW, Mermaid and analytical projections.
+
 - [Platform architecture](../docs/architecture/STANDARDFLOW_ARCHITECTURE.md)
 - [Canonical Standard Pack](../docs/architecture/CANONICAL_STANDARD_PACK.md)
 - [Diagram and artefact engine](../docs/architecture/DIAGRAM_ENGINE.md)

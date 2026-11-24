@@ -13,8 +13,10 @@ import subprocess
 
 if __package__:
     from .structured_source import cell_fields, fingerprint
+    from .source_reconciliation import layout_rows
 else:
     from structured_source import cell_fields, fingerprint
+    from source_reconciliation import layout_rows
 
 # Printed sub-item sequences from the official checklist PDF (2021, seven pages),
 # not from the legacy Markdown or any local candidate. No checklist prose copied.
@@ -178,7 +180,11 @@ def benchmark(report: dict, root: Path | None = None, official: Path | None = No
                                      input=raw, capture_output=True, timeout=20, check=True)
                 if len(run.stdout) > 8_000_000:
                     raise ValueError("Poppler output exceeds limit")
-                tokens = layout_ids(run.stdout.decode("utf-8"))
+                layout = run.stdout.decode("utf-8")
+                tokens = layout_ids(layout)
+                poppler_rows, poppler_issues = layout_rows(layout)
+                source["poppler_rows"] = poppler_rows
+                source["poppler_row_issues"] = poppler_issues
                 token_counts = Counter(token["item_id"] for token in tokens)
                 version = subprocess.run(["pdftotext", "-v"], capture_output=True, timeout=5, check=True)
                 source["poppler_version"] = version.stderr.decode("utf-8").splitlines()[0] if version.stderr else "unknown"
@@ -196,6 +202,10 @@ def benchmark(report: dict, root: Path | None = None, official: Path | None = No
                       duplicate_ids=sorted(item for item, count in counts.items() if count > 1),
                       exact_expected_order=[row["item_id"] for row in rows] == EXPECTED_IDS,
                       issues=sorted(set(issues + row_issues)))
+        if path.endswith(".pdf") and "poppler_rows" in source:
+            independent = source["poppler_rows"]
+            source["pdf_independent_row_comparison"] = compare_formats(rows, independent)
+            source["poppler_exact_expected_order"] = [row["item_id"] for row in independent] == EXPECTED_IDS
         results.append(source)
     return {"edition": "PRISMA-EcoEvo 2021 v1.0", "doi": "10.1111/brv.12721", "numbering_reference": REFERENCE,
             "expected_item_ids": EXPECTED_IDS, "claim_boundary": "candidate structural comparison; no rights, authority or admission",
