@@ -1,0 +1,65 @@
+name: EcoEvo independent PDF replay
+
+on:
+  pull_request:
+    paths:
+      - "scripts/ecoevo_pdf_grid.py"
+      - "scripts/compare_ecoevo_formats.py"
+      - "tests/test_ecoevo_grid.py"
+      - ".github/workflows/ecoevo-pdf-replay.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  actual-grid:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+      - name: Install existing parser stack
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends poppler-utils
+          python -m pip install -r requirements/python-tests.txt
+      - name: Run synthetic PDF geometry regressions
+        run: python -m unittest tests.test_ecoevo_grid tests.test_virtual_grid tests.test_compare_ecoevo_formats -v
+      - name: Replay exact pinned official PDF and other representations
+        run: |
+          echo 'db0a9fb221a1467a82c277419be96e18c7f8600b0deed25009bacb41322623ba  source/variants/prisma-ecoevo.pdf' | sha256sum --check
+          mkdir -p "$RUNNER_TEMP/ecoevo-evidence"
+          git rev-parse HEAD > "$RUNNER_TEMP/ecoevo-evidence/commit.txt"
+          python -m scripts.probe_legacy_source_text --output "$RUNNER_TEMP/triage.json"
+          python -m scripts.compare_ecoevo_formats --root . --report "$RUNNER_TEMP/triage.json" --output "$RUNNER_TEMP/ecoevo-evidence/comparison.json"
+      - name: Retain only fingerprint and geometry evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ecoevo-grid-evidence-${{ github.sha }}
+          path: ${{ runner.temp }}/ecoevo-evidence/
+          if-no-files-found: warn
+      - name: Require 89 complete ordered independently reconstructed rows
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          data = json.loads((Path(os.environ['RUNNER_TEMP']) / 'ecoevo-evidence/comparison.json').read_text())
+          pdf = next(s for s in data['sources'] if s['path'].endswith('.pdf'))
+          for parser, rows in [('native', pdf['rows']), ('poppler', pdf.get('poppler_rows', []))]:
+              complete = sum(r['requirement_sha256'] is not None for r in rows)
+              print(parser, 'complete', complete, 'ordered', [r['item_id'] for r in rows] == data['expected_item_ids'])
+          assert data['canonical_packs_promoted'] == 0
+          assert [r['item_id'] for r in pdf['rows']] == data['expected_item_ids']
+          assert [r['item_id'] for r in pdf.get('poppler_rows', [])] == data['expected_item_ids']
+          assert all(r['requirement_sha256'] is not None for key in ('rows','poppler_rows') for r in pdf[key])
+          assert not pdf['issues'] and not pdf['poppler_row_issues']
+          PY

@@ -67,7 +67,7 @@ jobs:
         run: |
           set -euo pipefail
           # Ordinary unrelated PRs remain model-free. Only NLP changes or explicit dispatch qualify.
-          if [ "$GITHUB_EVENT_NAME" != workflow_dispatch ] && git diff --quiet HEAD^1 HEAD -- scripts/classical_linguistic_nlp.py scripts/linguistic_benchmark.py scripts/lexical_text.py requirements/classical-nlp-reference.txt tests/test_classical_linguistic_nlp.py tests/test_linguistic_benchmark.py; then
+          if [ "$GITHUB_EVENT_NAME" != workflow_dispatch ] && git diff --quiet HEAD^1 HEAD -- scripts/classical_linguistic_nlp.py scripts/linguistic_benchmark.py scripts/lexical_text.py requirements/classical-nlp-reference.txt tests/test_classical_linguistic_nlp.py tests/test_linguistic_benchmark.py tests/test_linguistic_role_scope.py; then
             exit 0
           fi
           python -m pip install --disable-pip-version-check -r requirements/classical-nlp-reference.txt
@@ -128,6 +128,10 @@ jobs:
           python -m scripts.compare_ecoevo_formats --root . \
             --report target/coverage/legacy-source-text-triage.json \
             --output target/coverage/ecoevo-format-comparison.json
+          # Text-free candidate evidence and rights-cleared canonical Parquet; no acquisition.
+          python -m scripts.source_reconciliation \
+            --ecoevo target/coverage/ecoevo-format-comparison.json \
+            --output target/coverage/source-projections --revision "$(git rev-parse HEAD)"
 
       - name: Compare explicitly selected official EcoEvo download bytes
         if: matrix.component == 'python'

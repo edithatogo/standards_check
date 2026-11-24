@@ -278,7 +278,7 @@ def main() -> int:
     nlp, reference = load_reference(args.spacy_model) if args.spacy_model else (None, None)
     report = audit(args.root, args.source_dir, specs, linguistic=args.linguistic, nlp=nlp)
     if args.linguistic or nlp is not None:
-        report["linguistic_reference"] = {"method": "classical_linguistic_nlp_v1",
+        report["linguistic_reference"] = {"method": "classical_linguistic_nlp_v2",
                                           "model": reference, "authority": "diagnostic_only"}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

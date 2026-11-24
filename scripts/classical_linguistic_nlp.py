@@ -32,6 +32,66 @@ def span(kind: str, text: str, start: int, end: int) -> dict:
             'sha256': digest(' '.join(unicodedata.normalize('NFKC', text[start:end]).casefold().split()))}
 
 
+def logic_grouping(text: str) -> dict:
+    """Retain explicit coordination grouping, not an inferred Boolean expression."""
+    stack, groups = [], []
+    connectors = 0
+    balanced = True
+    for match in re.finditer(r'\(|\)|\b(?:and/or|and|or)\b', text, re.IGNORECASE):
+        token = match.group()
+        if token == '(':
+            stack.append(connectors)
+        elif token == ')':
+            if not stack:
+                balanced = False
+                continue
+            start = stack.pop()
+            if connectors > start:
+                groups.append([start, connectors])
+        else:
+            connectors += 1
+    return {'groups': sorted(groups), 'balanced': balanced and not stack}
+
+
+def predicate_arguments(doc) -> list[dict]:
+    """Compare bounded lemma roles; retain full source spans separately.
+
+    Active subject and explicit passive agent are actor candidates. A passive
+    subject is a patient candidate. Never supply an unexpressed actor. This is
+    grammatical evidence, not complete semantic role labelling or entailment.
+    """
+    def argument(kind, token):
+        # Ignore surface position and determiners; retain lexical modifiers.
+        for member in (token, *token.conjuncts):
+            modifiers = sorted((c.dep_, c.lemma_.casefold()) for c in member.children
+                               if c.dep_ in {'amod', 'compound', 'poss', 'flat'})
+            yield (kind, digest(repr((member.lemma_.casefold(), modifiers))))
+
+    predicates = []
+    for verb in doc:
+        if verb.pos_ != 'VERB':
+            continue
+        args = []
+        for child in verb.children:
+            if child.dep_ in {'nsubj', 'csubj'}:
+                args.extend(argument('actor', child))
+            elif child.dep_ in {'nsubjpass', 'csubjpass', 'nsubj:pass', 'csubj:pass', 'dobj', 'obj'}:
+                args.extend(argument('patient', child))
+            elif child.dep_ in {'iobj', 'dative'}:
+                args.extend(argument('recipient', child))
+            elif child.dep_ in {'attr', 'oprd'}:
+                args.extend(argument('complement', child))
+            elif child.dep_ == 'agent':
+                for obj in child.children:
+                    if obj.dep_ == 'pobj':
+                        args.extend(argument('actor', obj))
+            elif child.dep_ == 'obl:agent':
+                args.extend(argument('actor', child))
+        predicates.append({'predicate_sha256': digest(verb.lemma_.casefold()),
+                           'arguments': [list(a) for a in sorted(args)]})
+    return sorted(predicates, key=lambda row: (row['predicate_sha256'], row['arguments']))
+
+
 def describe(text: str, nlp=None) -> dict:
     """Return hashes and character offsets, never input prose or lemma strings."""
     if len(text) > MAX_CHARS:
@@ -61,6 +121,7 @@ def describe(text: str, nlp=None) -> dict:
                 cue['scope_sha256'] = span('scope', text, match.start(), stop)['sha256']
             cues.append(cue)
         result[field] = cues
+    result['logic_grouping'] = logic_grouping(text)
     result['conditional_obligation_candidate'] = bool(
         result['conditionality'] and any(c['kind'] == 'obligation' for c in result['modality']))
     if nlp is None:
@@ -101,12 +162,13 @@ def describe(text: str, nlp=None) -> dict:
             if kind == 'object' and verb.lemma_.casefold() in {'document', 'record', 'report', 'submit', 'retain'}:
                 roles.append(role('evidence_candidate', arg, verb, True))
     result['semantic_roles'] = sorted(roles, key=lambda r: (r['start'], r['kind'], r['head']))
+    result['predicate_arguments'] = predicate_arguments(doc)
     result['dependency_negation'] = sorted(negation, key=lambda r: (r['start'], r['head']))
     return result
 
 
 def compare(left: str, right: str, nlp=None) -> dict:
-    base = {'schema_version': 1, 'canonical_packs_promoted': 0, 'status': 'held_input'}
+    base = {'schema_version': 2, 'canonical_packs_promoted': 0, 'status': 'held_input'}
     try:
         a, b = describe(left, nlp), describe(right, nlp)
     except ValueError:
@@ -115,8 +177,12 @@ def compare(left: str, right: str, nlp=None) -> dict:
         return [{k: v for k, v in row.items() if k not in {'start', 'end'}} for row in rows]
     fields = list(PATTERNS)
     if nlp is not None:
-        fields += ['tokens', 'clauses', 'semantic_roles', 'dependency_negation']
+        fields += ['tokens', 'clauses', 'dependency_negation']
     changed = [field for field in fields if signature(a[field]) != signature(b[field])]
+    if a['logic_grouping'] != b['logic_grouping'] and 'logic' not in changed:
+        changed.append('logic')
+    if nlp is not None and a['predicate_arguments'] != b['predicate_arguments']:
+        changed.append('semantic_roles')
     similarity = SequenceMatcher(None, normalise(left).split(), normalise(right).split(), autojunk=False).ratio()
     return {**base, 'status': 'diagnostic_only', 'lexical_similarity': round(similarity, 6),
             'exact_text_equal': left == right, 'changed_fields': changed, 'source': a, 'candidate': b}

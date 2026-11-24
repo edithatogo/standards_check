@@ -126,3 +126,74 @@ Remaining: actual pinned-wheel execution and receipt, exact-head and receiving-m
 checks, Codecov patch target, independently reviewed labels and additional untouched
 guideline families with an agreed acceptance criterion. Do not close #95/#82 or T01.5d
 on a configured workflow or on synthetic results.
+
+## Actual hosted receipt and evidence-led refinement (24 November 2026)
+
+PR head `c22c0eaac0f3708bece58d7b5230c1f28f4ebb5a`; tested merge
+`d9d11ca6c29e627c38f47295197d58ff0ec9214f`.
+[Assurance job 138421260722](https://github.com/edithatogo/standards_check/actions/runs/45387161999/job/138421260722):
+405 Python tests passed; Codecov patch 96.29% (target 80%). The actual downloaded
+[artifact 14917156502](https://github.com/edithatogo/standards_check/actions/runs/45387161999/artifacts/14917156502)
+has ZIP SHA-256 `98a1d1f921f69f3aff66fa1fe2db66890b07dc26a36861c8ec74427f5aaf8504`, matching
+GitHub's digest; commit.txt, pinned model, fixture hash, source pins and both per-case reports
+were inspected. All 33 pairs ran with zero held or promoted.
+
+| Field | Rules TP/FP/FN | Dependency TP/FP/FN |
+| --- | --- | --- |
+| Modality | 2/0/0 | 2/0/0 |
+| Negation | 1/0/2 | 3/0/0 |
+| Quantification | 3/1/0 | 3/1/0 |
+| Logic | 6/1/1 | 6/1/1 |
+| Conditionality | 5/0/0 | 5/0/0 |
+| Roles | 0/0/4 | 3/14/1 |
+| Total | 17/2/7 | 22/16/2 |
+
+Precision 89.47% -> 57.89%; recall 70.83% -> 91.67%; F1 79.07% -> 70.97%.
+Entire material changes without any signal: 6/21 -> 1/21 (five rescued, no lost).
+Equivalent controls with any false field: 1/12 -> 2/12. All five extra correct
+fields were synthetic (three argument changes, two negation); all eight
+primary-source mutations were already detected by rules. All 14 incremental
+false fields were role alerts. Cases s04 (passive actor) and s17 (explicit
+coordination grouping) remained field-level misses. Comparison-only,
+coverage-instrumented CPU wall time 0.031978 -> 0.429901 s for 33 pairs
+(13.44x); process peak RSS 29,495,296 -> 185,978,880 bytes (6.31x,
+includes runtime/model load). These are descriptive, not generalizable accuracy
+or timing estimates. Source-table live re-acquisition on the same head failed
+because Europe PMC returned HTTP 500/503 for two editions; offline pins and
+retained rows passed. Preserve that failed receipt; retry through the existing
+source job, never weaken live identity or rights gates.
+
+Decision: keep dependency-assisted role/negation evidence optional, not an
+equivalence classifier. Replace raw-span/position equality for the role alert
+with bounded predicate/argument lemma signatures; preserve original token,
+span and clause diagnostics. Normalize explicit active/passive agent/patient
+bindings, retain lexical modifiers and coordinated arguments, do not invent
+implicit actors. Record explicit parenthetical coordination groups as a bounded
+rule; do not implement a general logical-expression parser. Local two-test
+RED reproduced the grouping miss and active/passive false role alert against
+exact old blobs; GREEN 2/2 passed with constructed real spaCy Docs, including
+actor and patient substitution and modality invariance. New model replay must
+measure residual alerts on the same 33 cases; that cohort is now development,
+not an independent test. No claimed improvement from constructed parser
+fixtures alone. Comparator receipt schema v2 identifies changed role semantics.
+
+The separate [PR #155](https://github.com/edithatogo/standards_check/pull/155)
+synthetic 24-pair held-out experiment, actual artifact 14918011640
+(`d234b1cb5e09c885d6b96d0b1508b40002a6d33237d0875aec8d3c9456b12bf3`),
+found 4/8 equivalences accepted by each classical/dependency method, versus
+8/8 by pinned bidirectional MiniLM, with 0/16 false equivalences in each;
+8/14 neutral directions were nevertheless labelled contradiction by NLI.
+Its blinded Qwen/SmolLM model-agent actual-source artifact 14920298460
+(`a51680139144c90ea61fd2cd04cfb18b44559f194c24a392521d9b2928243d7a`)
+had 3/22 consensus (19 abstained), no dev consensus, only one held-out
+consensus family (CHEERS; 3/10), CONSORT/TRIPOD sources held. MiniLM
+correct on 2/3 consensus pairs; one narrower -> contradiction, no observed
+false equivalence. Not adequate to select an operating threshold or add
+more NLI/decision/tiny models. Retain existing experimental NLI lane,
+improve source coverage and adjudicator validity there; use independent
+blinded model adjudication rather than humans per user instruction.
+No new model family or production threshold. Cross-reference #95/#82/#111.
+
+Main has advanced through the source-reconciliation and EcoEvo geometry
+work; reconcile this branch with current main without replacing the
+existing source projection comparator or new Parquet/PDF paths.
