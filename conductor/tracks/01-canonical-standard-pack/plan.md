@@ -134,3 +134,16 @@ reporting checklist.
 independent structure/comparison, rights, semantics and admission. Keep
 T01.5d–g conditional on measured residual errors. No new model or service
 is required for the census.
+
+
+### T01.5c/d/h and analytical projections — implementation increment
+
+See [requirements and design](source-reconciliation-design.md) for the MoSCoW
+acceptance criteria, Mermaid dataflow and disposition model. The candidate
+implementation adds whole-row independent Poppler layout comparison, rule-based
+linguistic discrepancy diagnostics, an offline review queue with deterministic
+sampling, and typed Parquet projections from pinned sources and canonical packs.
+Keep T01.5c/d/h open for actual corpus replay, independent held-out error
+measurement, receiving CI and resumed live acquisition (#142). No NLI or model
+runtime is required. Existing runtime status is unchanged. Refs #111/#95/#82;
+Track 05 independent qualification and Track 04 consumer handoff remain separate.

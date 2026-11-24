@@ -87,6 +87,10 @@ jobs:
           python -m scripts.compare_ecoevo_formats --root . \
             --report target/coverage/legacy-source-text-triage.json \
             --output target/coverage/ecoevo-format-comparison.json
+          # Text-free candidate evidence and rights-cleared canonical Parquet; no acquisition.
+          python -m scripts.source_reconciliation \
+            --ecoevo target/coverage/ecoevo-format-comparison.json \
+            --output target/coverage/source-projections --revision "$(git rev-parse HEAD)"
 
       - name: Compare explicitly selected official EcoEvo download bytes
         if: matrix.component == 'python'

@@ -5,6 +5,7 @@ import argparse
 from bisect import bisect_right
 from collections import Counter
 from difflib import SequenceMatcher
+from itertools import combinations
 import hashlib
 import json
 from pathlib import Path
@@ -135,6 +136,8 @@ def item_findings(source: dict, legacy: list[dict]) -> dict:
     if not candidates:
         return {'status': 'held_unaligned', 'legacy_position': None, 'findings': [], 'similarity_permille': None}
     match = candidates[0]
+    if match['declared_item_id'] not in (None, '', source['item_id']):
+        return {'status': 'held_ambiguous_alignment', 'legacy_position': None, 'findings': [], 'similarity_permille': None}
     comparison = linguistic_compare(source['text'], match['text'])
     return {'status': 'exact_text_candidate' if comparison['exact'] else 'held_text_discrepancy',
             'legacy_position': match['position'], 'findings': comparison['findings'],
@@ -144,8 +147,12 @@ def item_findings(source: dict, legacy: list[dict]) -> dict:
 # Explicit, nullable columns; no source prose, model output or raw parser data.
 SCHEMAS = {
     'guidelines': {'key': 'str', 'kind': 'str', 'version': 'str', 'rights': 'str', 'status': 'str'},
-    'sources': {'key': 'str', 'guideline_id': 'str', 'source_sha256': 'str', 'format': 'str', 'status': 'str'},
+    'sources': {'key': 'str', 'guideline_id': 'str', 'source_sha256': 'str', 'source_blob_sha': 'str', 'format': 'str', 'status': 'str'},
     'requirements': {'key': 'str', 'source_id': 'str', 'item_id': 'str', 'ordinal': 'int', 'fingerprint': 'str', 'rights': 'str'},
+    'canonical_requirements': {'key': 'str', 'requirement_id': 'str', 'display_number': 'str', 'section': 'str',
+                               'verbatim_text': 'str', 'normalized_requirement': 'str', 'rights': 'str'},
+    'format_comparisons': {'key': 'str', 'left_source_id': 'str', 'right_source_id': 'str', 'item_id': 'str',
+                           'left_requirement_id': 'str', 'right_requirement_id': 'str', 'status': 'str'},
     'source_anchors': {'key': 'str', 'requirement_id': 'str', 'anchor': 'str'},
     'comparisons': {'key': 'str', 'requirement_id': 'str', 'status': 'str', 'legacy_position': 'int', 'findings': 'str', 'similarity_permille': 'int'},
     'admission_decisions': {'key': 'str', 'source_id': 'str', 'requirement_id': 'str', 'disposition': 'str', 'independent_sample': 'bool'},
@@ -159,8 +166,8 @@ def project(catalogue: dict, packs: list[dict], article: dict, ecoevo: dict, leg
     def add(table, **row):
         tables[table].append(row)
 
-    def source(key, gid, digest, fmt, status):
-        add('sources', key=key, guideline_id=gid, source_sha256=digest, format=fmt, status=status)
+    def source(key, gid, digest, fmt, status, blob=None):
+        add('sources', key=key, guideline_id=gid, source_sha256=digest, source_blob_sha=blob, format=fmt, status=status)
 
     def requirement(sid, ordinal, item, digest, anchor, rights):
         key = f'{sid}/{ordinal}'
@@ -175,7 +182,7 @@ def project(catalogue: dict, packs: list[dict], article: dict, ecoevo: dict, leg
     for row in catalogue['guidelines']:
         gid = row['id']
         add('guidelines', key=gid, kind='discovery', version=None, rights='unassessed', status='discovery_only')
-        source(gid + '/directory', gid, None, 'QMD', 'discovery_only')
+        source(gid + '/directory', gid, None, 'QMD', 'discovery_only', row['source_blob_sha'])
     for pack in packs:
         gid = 'pack:' + pack['pack_id']
         rights, status = pack['rights']['status'], pack['verification']['status']
@@ -184,8 +191,13 @@ def project(catalogue: dict, packs: list[dict], article: dict, ecoevo: dict, leg
         source(sid, gid, pack['authority'].get('source_sha256'), 'canonical_pack', status)
         for i, row in enumerate(pack['requirements'], 1):
             policy = row['rights']; effective = rights if policy.get('inherit_from_pack') else policy.get('status', 'unassessed')
-            requirement(sid, i, row['id'], fingerprint(row['verbatim_text']) if row.get('verbatim_text') else None,
-                        row['source_anchor'], effective)
+            key = requirement(sid, i, row['id'], fingerprint(row['verbatim_text']) if row.get('verbatim_text') else None,
+                              row['source_anchor'], effective)
+            # Only already-admitted pack content with effective cleared rights may carry prose.
+            add('canonical_requirements', key=key, requirement_id=key, display_number=row.get('display_number'),
+                section=row.get('section') if effective == 'cleared' else None,
+                verbatim_text=row.get('verbatim_text') if effective == 'cleared' else None,
+                normalized_requirement=row.get('normalized_requirement') if effective == 'cleared' else None, rights=effective)
     for edition in article['editions']:
         name = edition['edition']; gid = 'article:' + name; sid = gid + '/table'
         add('guidelines', key=gid, kind='candidate', version=None, rights='unassessed', status=edition['status'])
@@ -210,6 +222,7 @@ def project(catalogue: dict, packs: list[dict], article: dict, ecoevo: dict, leg
     if ecoevo['sources']:
         gid = 'candidate:prisma-ecoevo-2021'
         add('guidelines', key=gid, kind='candidate', version='2021', rights='unassessed', status='held')
+        format_groups = {}
         for observed in ecoevo['sources']:
             for parser, rows in [('native', observed['rows']), ('poppler', observed.get('poppler_rows'))]:
                 if rows is None:
@@ -220,9 +233,21 @@ def project(catalogue: dict, packs: list[dict], article: dict, ecoevo: dict, leg
                     version=observed.get('poppler_version' if parser == 'poppler' else 'pdfplumber_version'), rows=len(rows))
                 if not rows:
                     decision(sid, None, 'held_source')
+                format_groups[sid] = {}
                 for i, row in enumerate(rows, 1):
                     key = requirement(sid, i, row['item_id'], row['requirement_sha256'], row['requirement_anchor'], 'unassessed')
                     decision(sid, key, 'held_independent_review')
+                    format_groups[sid].setdefault(row['item_id'], []).append((key, row['requirement_sha256']))
+        for left, right in combinations(sorted(format_groups), 2):
+            a, b = format_groups[left], format_groups[right]
+            for item in sorted(set(ecoevo.get('expected_item_ids', [])) | a.keys() | b.keys()):
+                l, r = a.get(item, []), b.get(item, [])
+                lk, lh = l[0] if len(l) == 1 else (None, None)
+                rk, rh = r[0] if len(r) == 1 else (None, None)
+                status = ('held_missing_or_ambiguous' if not lh or not rh else
+                          'exact_fingerprint_candidate' if lh == rh else 'held_text_discrepancy')
+                add('format_comparisons', key=sha(json.dumps([left, right, item]).encode()), left_source_id=left,
+                    right_source_id=right, item_id=item, left_requirement_id=lk, right_requirement_id=rk, status=status)
     validate_tables(tables)
     return tables
 
@@ -234,14 +259,23 @@ def validate_tables(tables: dict) -> None:
     for table, rows in tables.items():
         if any(set(row) != set(SCHEMAS[table]) for row in rows):
             raise ValueError('unexpected analytical columns')
+        expected_types = {'str': str, 'int': int, 'bool': bool}
+        if any(value is not None and type(value) is not expected_types[SCHEMAS[table][col]]
+               for row in rows for col, value in row.items()):
+            raise ValueError('unexpected analytical value type')
         keys[table] = {row['key'] for row in rows}
+        if None in keys[table] or '' in keys[table]:
+            raise ValueError('missing analytical key')
         if len(keys[table]) != len(rows):
             raise ValueError('duplicate analytical key')
     for table, field, parent in [('sources', 'guideline_id', 'guidelines'), ('requirements', 'source_id', 'sources'),
                                  ('source_anchors', 'requirement_id', 'requirements'), ('comparisons', 'requirement_id', 'requirements'),
+                                 ('canonical_requirements', 'requirement_id', 'requirements'),
+                                 ('format_comparisons', 'left_source_id', 'sources'), ('format_comparisons', 'right_source_id', 'sources'),
+                                 ('format_comparisons', 'left_requirement_id', 'requirements'), ('format_comparisons', 'right_requirement_id', 'requirements'),
                                  ('admission_decisions', 'source_id', 'sources'), ('admission_decisions', 'requirement_id', 'requirements'),
                                  ('extraction_runs', 'source_id', 'sources')]:
-        if any(row[field] not in keys[parent] and not (table == 'admission_decisions' and field == 'requirement_id' and row[field] is None)
+        if any(row[field] not in keys[parent] and not (table in {'admission_decisions', 'format_comparisons'} and field.endswith('requirement_id') and row[field] is None)
                for row in tables[table]):
             raise ValueError('unbound analytical relationship')
 
@@ -270,6 +304,7 @@ def main() -> None:
     parser.add_argument('--ecoevo', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--revision', required=True)
+    parser.add_argument('--survey', type=Path, help='Optional already-acquired catalogue survey receipt, never fetches sources')
     args = parser.parse_args()
     def read(path):
         return json.loads(path.read_text(encoding='utf-8'))
@@ -281,10 +316,21 @@ def main() -> None:
     packs = [read(path) for path in sorted((args.root / 'packs').rglob('pack.json'))]
     ecoevo = read(args.ecoevo)
     tables = project(catalogue, packs, article, ecoevo, legacy)
+    if args.survey:
+        from .review_source_receipts import review
+        survey = read(args.survey)
+        retrospective = review(survey)
+        # Existing receipt reviewer owns the queue and status taxonomy; keep this separate
+        # from pack authority and the pinned discovery catalogue.
+        args.output.mkdir(parents=True, exist_ok=True)
+        (args.output / 'survey-retrospective.json').write_text(json.dumps(retrospective, indent=2, sort_keys=True) + '\n', encoding='utf-8')
     args.output.mkdir(parents=True, exist_ok=True)
     manifest = write_parquet(tables, args.output)
     receipt = {'schema_version': VERSION, 'revision': args.revision, 'canonical_packs_promoted': 0,
                'ecoevo_sha256': sha(args.ecoevo.read_bytes()), 'catalogue_revision': catalogue.get('source_revision'),
+               'survey_sha256': sha(args.survey.read_bytes()) if args.survey else None,
+               'article_receipt_sha256': sha(json.dumps(article, sort_keys=True).encode()),
+               'pack_sha256s': {pack['pack_id']: sha(json.dumps(pack, sort_keys=True).encode()) for pack in packs},
                'dispositions': dict(sorted(Counter(r['disposition'] for r in tables['admission_decisions']).items())),
                **manifest}
     (args.output / 'manifest.json').write_text(json.dumps(receipt, indent=2, sort_keys=True) + '\n', encoding='utf-8')

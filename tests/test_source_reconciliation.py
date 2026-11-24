@@ -1,5 +1,8 @@
 import unittest
-from scripts.source_reconciliation import linguistic_compare, layout_rows, item_findings, project, validate_tables
+import importlib.util
+import tempfile
+from pathlib import Path
+from scripts.source_reconciliation import linguistic_compare, layout_rows, item_findings, project, validate_tables, write_parquet
 
 
 class SourceReconciliationTests(unittest.TestCase):
@@ -50,6 +53,8 @@ class SourceReconciliationTests(unittest.TestCase):
         outcome = item_findings(source, legacy[:1])
         self.assertEqual(outcome['status'], 'exact_text_candidate')
         self.assertEqual(item_findings(source, [])['status'], 'held_unaligned')
+        wrong_id = [{'declared_item_id': '2', 'position': 1, 'text': 'Report harms.'}]
+        self.assertEqual(item_findings(source, wrong_id)['status'], 'held_ambiguous_alignment')
 
     def test_projection_preserves_rows_without_text_or_promotion(self):
         catalogue = {'guidelines': [{'id': 'equator:a', 'source_blob_sha': 'a'*40}]}
@@ -62,7 +67,8 @@ class SourceReconciliationTests(unittest.TestCase):
         tables = project(catalogue, [pack], article, {'sources': []}, {'Example': [{'declared_item_id': '1', 'position': 1, 'text': 'Report harms.'}]})
         self.assertEqual(len(tables['requirements']), 2)
         self.assertEqual(len(tables['guidelines']), 3)
-        self.assertNotIn('Secret example.', str(tables))
+        self.assertEqual(tables['canonical_requirements'][0]['verbatim_text'], 'Secret example.')
+        self.assertNotIn('Secret example.', str(tables['requirements']))
         self.assertNotIn('Report harms.', str(tables))
         self.assertEqual(tables['admission_decisions'][0]['disposition'], 'held_independent_review')
         self.assertTrue(tables['admission_decisions'][0]['independent_sample'])
@@ -76,3 +82,35 @@ class SourceReconciliationTests(unittest.TestCase):
         self.assertEqual(tables['sources'][0]['status'], 'held')
         self.assertEqual(tables['admission_decisions'][0]['disposition'], 'held_source')
         self.assertEqual(tables['requirements'], [])
+
+    def test_candidate_cross_format_missing_duplicate_and_discrepant_rows(self):
+        def row(item, digest):
+            return {'item_id': item, 'requirement_sha256': digest, 'requirement_anchor': 'table/1'}
+        ecoevo = {'expected_item_ids': ['1.1', '1.2', '1.3'],
+                  'sources': [{'path': 'a.pdf', 'rows': [row('1.1', 'a'*64), row('1.2', 'a'*64), row('1.2', 'a'*64)]},
+                              {'path': 'b.csv', 'rows': [row('1.1', 'b'*64), row('1.2', 'a'*64)]}]}
+        tables = project({'guidelines': []}, [], {'editions': []}, ecoevo, {})
+        statuses = {r['item_id']: r['status'] for r in tables['format_comparisons']}
+        self.assertEqual(statuses, {'1.1': 'held_text_discrepancy', '1.2': 'held_missing_or_ambiguous', '1.3': 'held_missing_or_ambiguous'})
+
+    def test_uncleared_canonical_prose_is_not_exported(self):
+        pack = {'pack_id': 'org/a/1', 'version': '1', 'verification': {'status': 'imported_unverified'},
+                'rights': {'status': 'cleared'}, 'authority': {},
+                'requirements': [{'id': 'A:1', 'source_anchor': 'a', 'verbatim_text': 'Restricted.',
+                                  'normalized_requirement': 'Restricted.', 'rights': {'status': 'restricted'}}]}
+        tables = project({'guidelines': []}, [pack], {'editions': []}, {'sources': []}, {})
+        self.assertNotIn('Restricted.', str(tables))
+        self.assertIsNone(tables['canonical_requirements'][0]['verbatim_text'])
+
+    @unittest.skipUnless(importlib.util.find_spec('polars'), 'Parquet dependency not installed')
+    def test_parquet_roundtrip_preserves_explicit_schema_and_empty_tables(self):
+        import polars as pl
+        tables = project({'guidelines': [{'id': 'equator:a', 'source_blob_sha': 'a'*40}]}, [],
+                         {'editions': []}, {'sources': []}, {})
+        with tempfile.TemporaryDirectory() as temp:
+            output = Path(temp)
+            manifest = write_parquet(tables, output)
+            self.assertEqual(set(manifest['tables']), set(tables))
+            self.assertEqual(pl.read_parquet(output / 'guidelines.parquet').height, 1)
+            self.assertEqual(pl.read_parquet(output / 'requirements.parquet').height, 0)
+            self.assertEqual(pl.read_parquet(output / 'requirements.parquet').schema['ordinal'], pl.Int64)
