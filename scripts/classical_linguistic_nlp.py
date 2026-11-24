@@ -7,7 +7,10 @@ import re
 import unicodedata
 from pathlib import Path
 
-from .lexical_text import normalise
+if __package__:
+    from .lexical_text import normalise
+else:
+    from lexical_text import normalise
 
 MAX_CHARS = 8192
 MAX_TOKENS = 1024
