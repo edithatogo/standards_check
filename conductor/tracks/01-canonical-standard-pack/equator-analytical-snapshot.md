@@ -47,3 +47,7 @@ mismatch/nonzero-promotion rejection. Polars absent locally. Exact replay and
 round-trip required on hosted CI; live scheduled artifact separately required.
 The temporary pinned historical replay job can be retired after receiving-main
 live projection succeeds. Preserve prior source failures/retained evidence.
+
+## Reconcile against receiving main (24 November)
+
+Historical and fresh hosted projection receipts (14918300555 and 14916344312) and Searchright historical canary (14918081392) remain immutable. After #154 merged, preserve both its optional classical NLP path and the shared hardened XML parser. Tighten validation of identity conflict disposition, unassessed acquisition rights, per-edition item counts, nonempty unique anchors and source/item SHA-256. Three focused local tests (six negative subcases) failed RED against the exact original survey module, then passed GREEN. Both previously inspected source JSON receipts pass the strengthened checks without count changes (720/145/95/2241 and 720/160/52/2267). Local shape helper is the extracted unchanged implementation; Polars remains unavailable locally. Require actual hosted Parquet readback and current-base acquisition replay. Do not infer rights or replace prior fingerprints with missing newer evidence.

@@ -1,5 +1,6 @@
 """Versioned discovery and acquisition evidence, never a canonical pack."""
 from __future__ import annotations
+from collections import Counter
 import json
 import re
 import hashlib
@@ -87,11 +88,35 @@ def validate(tables):
     keys = validate_table_shapes(tables, SCHEMAS)
     if any(row['edition'] not in keys['acquisitions'] for row in tables['acquisition_items']):
         raise ValueError('unbound acquisition item')
-    if any(row['rights_status'] != 'unassessed' or row['disposition'] not in {'discovery_only','held_identity_conflict'}
-           for row in tables['catalogue_identity']):
-        raise ValueError('discovery status must not authorize use')
+    for row in tables['catalogue_identity']:
+        if (row['rights_status'] != 'unassessed' or type(row['identity_conflict']) is not bool or
+                row['disposition'] != ('held_identity_conflict' if row['identity_conflict'] else 'discovery_only') or
+                (row['lookup_status'] in {'identifier_conflict','ambiguous_identifier'} and not row['identity_conflict'])):
+            raise ValueError('discovery status must not authorize use')
     if any(row['disposition'] != 'held_review' for name in ('acquisitions','acquisition_items') for row in tables[name]):
         raise ValueError('acquisition must remain held')
+    counts = Counter()
+    anchors = set()
+    for row in tables['acquisition_items']:
+        identity = (row['edition'], row['source_anchor'])
+        if (not row['item_id'] or not row['table_id'] or not row['source_anchor'] or
+                not isinstance(row['fingerprint'], str) or not HEX64.fullmatch(row['fingerprint']) or identity in anchors):
+            raise ValueError('invalid or repeated acquisition item evidence')
+        counts[row['edition']] += 1
+        anchors.add(identity)
+    for row in tables['acquisitions']:
+        count = counts[row['key']]
+        matched, expected = row['matched_rows'], row['expected_rows']
+        if row['rights_status'] != 'unassessed':
+            raise ValueError('acquisition rights must remain unassessed')
+        if (matched is not None and matched != count or count and matched is None or
+                expected is not None and (expected < 0 or count > expected) or
+                row['status'] == 'expected_numbered_rows_observed' and (not count or expected != count)):
+            raise ValueError('acquisition item count mismatch')
+        if (count or row['source_sha256'] is not None) and (
+                not isinstance(row['source_sha256'], str) or not HEX64.fullmatch(row['source_sha256'])):
+            raise ValueError('missing or invalid acquired source fingerprint')
+
 
 
 def main():

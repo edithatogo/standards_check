@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from collections import Counter
 from difflib import SequenceMatcher
 import hashlib
 import json
@@ -13,10 +14,12 @@ from xml.etree import ElementTree as ET
 
 if __package__:
     from .source_xml import parse_xml
+    from .classical_linguistic_nlp import compare as compare_linguistic, load_reference
     from .jats_checklist_structure import describe_table
     from .legacy_checklist_structure import parse_legacy_tasks
 else:
     from source_xml import parse_xml
+    from classical_linguistic_nlp import compare as compare_linguistic, load_reference
     from jats_checklist_structure import describe_table
     from legacy_checklist_structure import parse_legacy_tasks
 
@@ -163,10 +166,11 @@ def parse_legacy(markdown: str) -> list[dict]:
              "text": normalize(row["text"])} for row in parse_legacy_tasks(markdown)]
 
 
-def reconcile_items(source: list[dict], legacy: list[dict]) -> dict:
+def reconcile_items(source: list[dict], legacy: list[dict], *, linguistic: bool = False, nlp=None) -> dict:
     """No automatic matching based on printed numbers or approximate text."""
     items = []
     matched = set()
+    source_ids = Counter(row['item_id'] for row in source)
     for row in source:
         exact = [entry["position"] for entry in legacy if row["text"] == entry["text"]]
         matched.update(exact)
@@ -191,6 +195,17 @@ def reconcile_items(source: list[dict], legacy: list[dict]) -> dict:
             "status": ("exact_text_match_not_methodology" if len(exact) == 1 else
                        "ambiguous_exact_text" if exact else "not_exactly_reconciled"),
         })
+        if linguistic or nlp is not None:
+            aligned = [entry for entry in legacy if entry["declared_item_id"] == row["item_id"]]
+            if source_ids[row["item_id"]] != 1 or len(aligned) != 1 or aligned[0].get("warnings"):
+                items[-1]["linguistic"] = {"status": "held_ambiguous_or_missing_alignment",
+                                           "canonical_packs_promoted": 0}
+            else:
+                items[-1]["linguistic"] = {
+                    "legacy_position": aligned[0]["position"],
+                    "legacy_line_numbers": aligned[0].get("line_numbers"),
+                    **compare_linguistic(row["text"], aligned[0]["text"], nlp),
+                }
     return {"source_item_count": len(source), "legacy_task_count": len(legacy),
             "legacy_task_anchors": [{**{key: value for key, value in entry.items() if key != "text"},
                                      "normalized_text_sha256": digest(entry["text"])} for entry in legacy],
@@ -203,7 +218,7 @@ def reconcile_items(source: list[dict], legacy: list[dict]) -> dict:
             "items": items, "canonical_packs_promoted": 0}
 
 
-def audit(root: Path, source_dir: Path | None, specs: list[dict]) -> dict:
+def audit(root: Path, source_dir: Path | None, specs: list[dict], *, linguistic: bool = False, nlp=None) -> dict:
     snapshots = None
     if source_dir is None:
         ledger = json.loads((root / "source/official/authoritative-article-rows.json").read_text(encoding="utf-8"))
@@ -227,7 +242,7 @@ def audit(root: Path, source_dir: Path | None, specs: list[dict]) -> dict:
             legacy = parse_legacy(legacy_bytes.decode("utf-8"))
             result["source"] = source
             result["legacy_view_sha256"] = hashlib.sha256(legacy_bytes).hexdigest()
-            result["legacy"] = reconcile_items(source["rows"], legacy)
+            result["legacy"] = reconcile_items(source["rows"], legacy, linguistic=linguistic, nlp=nlp)
             result["status"] = "table_items_extracted_legacy_compared"
         except (OSError, UnicodeError, ValueError) as exc:
             result["status"] = "held"
@@ -255,9 +270,15 @@ def main() -> int:
     parser.add_argument("--source-dir", type=Path, help="Optional exact primary XML files; default uses checked-in table snapshots.")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--require-all", action="store_true")
+    parser.add_argument("--linguistic", action="store_true", help="Add bounded rule-based row diagnostics")
+    parser.add_argument("--spacy-model", type=Path, help="Explicit trusted local English model directory (implies linguistic)")
     args = parser.parse_args()
     specs = json.loads((args.root / "source/official/authoritative-article-editions.json").read_text(encoding="utf-8"))
-    report = audit(args.root, args.source_dir, specs)
+    nlp, reference = load_reference(args.spacy_model) if args.spacy_model else (None, None)
+    report = audit(args.root, args.source_dir, specs, linguistic=args.linguistic, nlp=nlp)
+    if args.linguistic or nlp is not None:
+        report["linguistic_reference"] = {"method": "classical_linguistic_nlp_v2",
+                                          "model": reference, "authority": "diagnostic_only"}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report["summary"]))

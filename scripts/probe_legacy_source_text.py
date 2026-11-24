@@ -14,20 +14,18 @@ import unicodedata
 import yaml
 
 try:
+    from .lexical_text import normalise
     from .legacy_checklist_structure import parse_legacy_tasks, split_label
     from .reconcile_equator_sources import scan_local, scan_alias_assets, sha256
     from .structured_source import extract_structure
 except ImportError:
+    from lexical_text import normalise
     from legacy_checklist_structure import parse_legacy_tasks, split_label
     from reconcile_equator_sources import scan_local, scan_alias_assets, sha256
     from structured_source import extract_structure
 
 MAX_SOURCE_BYTES = 20_000_000
 MAX_PAGES = 80
-
-
-def normalise(text: str) -> str:
-    return " ".join(re.findall(r"\w+", unicodedata.normalize("NFKC", text).casefold()))
 
 
 def source_probe(path: Path) -> tuple[str, str, str, dict | None]:
