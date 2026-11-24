@@ -123,9 +123,12 @@ jobs:
       - name: Measure Python regressions and retain native timing
         if: matrix.component == 'python'
         shell: bash
+        env:
+          PYTHONHASHSEED: "0"
         run: |
           set -euo pipefail
           python -m coverage run -m pytest --import-mode=importlib \
+            -n 2 --dist=loadfile --max-worker-restart=0 \
             --durations=20 --durations-min=0.1 \
             --junitxml=target/coverage/python-junit.xml \
             -o junit_logging=no -o junit_log_passing_tests=false \
