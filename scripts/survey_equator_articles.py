@@ -147,6 +147,16 @@ def combine_retained_metadata(catalogue: dict, receipts: list[dict]) -> tuple[di
                 previous.get("summary", {}).get("canonical_packs_promoted") != 0 or
                 not re.fullmatch(r"[a-f0-9]{40}", previous.get("source_revision", ""))):
             raise ValueError("invalid prior survey receipt")
+        # Negative identity evidence is significant even when no reusable
+        # positive record exists. Match the unchanged catalogue identity first.
+        current = {row["id"]: row for row in catalogue["guidelines"]}
+        for record in previous["records"]:
+            row = current.get(record["id"])
+            if (row is not None and record.get("source_blob_sha") == row["source_blob_sha"]
+                and (record.get("pmid"), record.get("doi")) == identifiers(row)
+                and (record.get("status") in {"identifier_conflict", "ambiguous_identifier"}
+                     or record.get("provider_disagreements"))):
+                conflicts.add(record["id"])
         for key, record in retained_metadata(catalogue, previous).items():
             if record.get("provider_disagreements") or (key in retained and any(retained[key].get(f) != record.get(f) for f in fields)):
                 conflicts.add(key)
