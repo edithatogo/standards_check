@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         noteArea.placeholder = 'Enter your notes here...';
         noteArea.rows = 3;
         noteArea.maxLength = MAX_NOTE_LENGTH;
-        noteArea.setAttribute('aria-label', `Note for checklist item ${index + 1}`);
+        noteArea.setAttribute('aria-label', `Notes for checklist item ${index + 1}`);
         noteArea.value = state.notes[itemId] || '';
         item.appendChild(noteArea);
         noteButton.textContent = 'Remove Note';

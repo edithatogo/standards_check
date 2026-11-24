@@ -228,3 +228,54 @@ ignores. It does not claim independent WCAG compliance, release provenance, exte
 methodology acceptance or rights to redistribute third-party reporting guidelines.
 See [quality frontier #31](https://github.com/edithatogo/standards_check/issues/31)
 and [security #30](https://github.com/edithatogo/standards_check/issues/30).
+
+## #116 follow-up — generated HTML and reproducible CI receipts (proposed)
+
+Receiving baseline `f05578a0592dfd5437352d563af97f4115929173`: [build run
+45138844044](https://github.com/edithatogo/standards_check/actions/runs/45138844044)
+produced a 115-page HTML artifact. Inspection found 114 pages with 2–3
+`h1` elements, no skip-to-main links on any page, and an unnamed progress
+bar on 114 checklist views. 
+The same generated artifact retained **116 PDFs, of which 56 had a PDF
+structure tree and marked-content flag**, and 60 did not. All 116 had
+text, language and outlines in the sampled structural audit. Many
+untagged entries were legacy `en/` or otherwise stale tracked outputs;
+retaining them in the artifact falsely implied fresh, uniform build
+qualification. The revised clean-build step therefore discards the
+**generated output directories** `html/`, `pdf/`, `docx/` and
+`latex/` in the ephemeral checkout before regeneration, while
+preserving every tracked/historical source file on the remote. New
+artifact counts and PDF tag metadata must be independently verified
+on the candidate and receiving main. A structure tree is necessary
+evidence, not full PDF/UA or assistive-technology validation.
+
+The same run's representative PRISMA PDF was
+tagged (`/StructTreeRoot`, `/MarkInfo /Marked true`, `/Lang en-US`,
+outline present); this is **not** a PDF/UA or manual screen-reader certification.
+
+The candidate repair uses Pandoc's native
+`--shift-heading-level-by=1` in both maintained HTML entrypoints,
+the existing shared template for a skip-to-main link, named progress bar
+and focusable main target, and one stdlib post-build validator over every
+fresh HTML page. The Pages build discards stale checked-in HTML **only in
+the ephemeral runner** before regeneration; it does not alter source
+rights/archival bytes. Note textareas receive unique accessible names.
+Manual keyboard, screen-reader, zoom/contrast and PDF/DOCX acceptance
+remain open.
+
+A main-run [assurance failure 45138839321](https://github.com/edithatogo/standards_check/actions/runs/45138839321)
+initially stopped on runner rustup Clippy installation conflict, not a
+test assertion. On partial rerun the Python tests passed, but Codecov
+selected the **older, incomplete, same-named coverage artifact** (IDs
+14801112629 and 14801053253) and failed its checksum receipt. Candidate
+fix: do not install unused Clippy/rustfmt components in the Python CLI
+build job; `overwrite: true` makes a rerun's coverage artifact replace
+the incomplete same-run attempt rather than leaving ambiguous copies.
+This preserves exact-commit checksum validation and separate trusted OIDC.
+
+Pinned `zizmor==1.33.1` already enforces its default high-signal
+policy. The optional auditor persona retains all diagnostics as JSON
+for review without changing mandatory policy, adding dependencies or
+silencing the original gate. Suppressed results need actual
+classification before #116 can close. Historical SAST coverage,
+zero-human-review ruleset, release rights and other gates are unchanged.

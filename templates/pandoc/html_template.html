@@ -16,6 +16,7 @@
   </style>
 </head>
 <body>
+  <a href="#main-content" class="visually-hidden-focusable position-absolute top-0 start-0 p-3 bg-white text-dark">Skip to main content</a>
   <div class="container">
     <header class="pb-3 mb-4 border-bottom">
       <div class="d-flex align-items-center justify-content-between">
@@ -36,11 +37,11 @@ $endif$
 
 $if(checklist_page)$
     <div class="progress mb-4">
-      <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+      <div id="progressBar" class="progress-bar" role="progressbar" aria-label="Checklist completion" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
     </div>
 $endif$
 
-    <main>
+    <main id="main-content" tabindex="-1">
       <p class="small text-muted" role="note">Legacy checklist preview, not an independently qualified Canonical Standard Pack. Consult and cite the issuing guideline before submission; this is not an EQUATOR Network endorsed product. Notes and progress stay in this browser; do not enter clinical or personal information. Progress from another edition is not transferred automatically.</p>
       $body$
     </main>

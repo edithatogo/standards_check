@@ -15,12 +15,21 @@ on:
       - "scripts/validate_prisma_source_assurance.py"
       - "scripts/build_prisma42_candidate.py"
       - "scripts/compare_prisma_source_pdf.py"
+      - "scripts/reconcile_authoritative_articles.py"
+      - "scripts/review_source_receipts.py"
+      - "tests/test_review_source_receipts.py"
+      - "scripts/jats_checklist_structure.py"
+      - "scripts/legacy_checklist_structure.py"
+      - "tests/test_legacy_checklist_structure.py"
+      - "tests/test_jats_checklist_structure.py"
+      - "tests/test_reconcile_authoritative_articles.py"
       - "tests/test_prisma_source_pdf.py"
       - "tests/test_prisma42_candidate.py"
       - "conductor/source-reconciliation/**"
       - "tests/test_prisma_source_assurance.py"
       - "conductor/tracks/01-canonical-standard-pack/**"
       - ".github/workflows/standardflow-pack.yml"
+  workflow_dispatch:
   push:
     branches: [main]
     paths:
@@ -36,6 +45,14 @@ on:
       - "scripts/validate_prisma_source_assurance.py"
       - "scripts/build_prisma42_candidate.py"
       - "scripts/compare_prisma_source_pdf.py"
+      - "scripts/reconcile_authoritative_articles.py"
+      - "scripts/review_source_receipts.py"
+      - "tests/test_review_source_receipts.py"
+      - "scripts/jats_checklist_structure.py"
+      - "scripts/legacy_checklist_structure.py"
+      - "tests/test_legacy_checklist_structure.py"
+      - "tests/test_jats_checklist_structure.py"
+      - "tests/test_reconcile_authoritative_articles.py"
       - "tests/test_prisma_source_pdf.py"
       - "tests/test_prisma42_candidate.py"
       - "conductor/source-reconciliation/**"
@@ -155,5 +172,86 @@ jobs:
         with:
           name: prisma2020-source-comparison
           path: ${{ runner.temp }}/prisma2020-source-comparison.json
+          if-no-files-found: error
+          retention-days: 90
+
+
+  authoritative-article-tables:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+      - run: python -m unittest tests.test_reconcile_authoritative_articles tests.test_jats_checklist_structure tests.test_legacy_checklist_structure -v
+      - name: Verify retained table source pins and reconcile offline
+        run: |
+          python -m scripts.reconcile_authoritative_articles \
+            --output "$RUNNER_TEMP/authoritative-article-offline-reconciliation.json" \
+            --require-all
+      - name: Review retained source evidence and prioritize discrepancies
+        run: |
+          python -m unittest tests.test_review_source_receipts -v
+          python -m scripts.review_source_receipts \
+            --receipt "$RUNNER_TEMP/authoritative-article-offline-reconciliation.json" \
+            --output "$RUNNER_TEMP/authoritative-article-retrospective.json"
+      - name: Determine whether primary-source re-acquisition is needed
+        id: source_change
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "$EVENT_NAME" = "workflow_dispatch" ] || \
+             ! git rev-parse --verify HEAD^1 >/dev/null 2>&1 || \
+             ! git diff --quiet HEAD^1 HEAD -- \
+               source/official/authoritative-article-editions.json \
+               source/official/authoritative-article-rows.json \
+               scripts/reconcile_authoritative_articles.py \
+               scripts/jats_checklist_structure.py; then
+            echo "live=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "live=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Acquire only four selected open-access article XML records
+        if: steps.source_change.outputs.live == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/authoritative-articles"
+          for pmcid in PMC4320440 PMC7839230 PMC8007028 PMC8793177; do
+            if ! curl --fail --silent --show-error --retry 2 --connect-timeout 15 \
+              --max-time 90 --max-filesize 8000000 --proto '=https' \
+              "https://www.ebi.ac.uk/europepmc/webservices/rest/$pmcid/fullTextXML" \
+              -o "$RUNNER_TEMP/authoritative-articles/$pmcid.xml"; then
+              rm -f "$RUNNER_TEMP/authoritative-articles/$pmcid.xml"
+              echo "::warning::Selected source $pmcid could not be acquired; leave it held."
+            fi
+          done
+      - name: Recheck exact primary article bytes and every source row
+        if: steps.source_change.outputs.live == 'true'
+        run: |
+          python -m scripts.reconcile_authoritative_articles \
+            --source-dir "$RUNNER_TEMP/authoritative-articles" \
+            --output "$RUNNER_TEMP/authoritative-article-reconciliation.json" \
+            --require-all
+      - name: Retain exact table extracts and per-item source evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: authoritative-article-reconciliation
+          path: |
+            ${{ runner.temp }}/authoritative-article-offline-reconciliation.json
+            ${{ runner.temp }}/authoritative-article-retrospective.json
+            ${{ runner.temp }}/authoritative-article-reconciliation.json
           if-no-files-found: error
           retention-days: 90

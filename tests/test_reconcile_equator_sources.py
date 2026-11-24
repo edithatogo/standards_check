@@ -1,0 +1,231 @@
+"""Source-alignment guards: candidates are not validated checklist content."""
+from pathlib import Path
+import json
+import tempfile
+import unittest
+
+from scripts.reconcile_equator_sources import reconcile
+
+
+class ReconcileEquatorSourcesTests(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.root = Path(self.tmp.name)
+        (self.root / "source").mkdir()
+        self.catalogue = {
+            "schema_version": 1,
+            "source_repository": "https://github.com/EQUATOR-Network/equator-website",
+            "source_revision": "b" * 40,
+            "rights_status": "not_assessed_for_individual_guidelines",
+            "published_count": 3,
+            "guidelines": [
+                {"id":"equator:consort","title":"CONSORT 2025 Statement: updated guideline for reporting randomised trials","acronym":"CONSORT","page_url":"https://equator-network.org/reporting-guidelines/consort/","source_path":"reporting-guidelines/consort/index.qmd","source_blob_sha":"a"*40,"metadata_status":"extracted_unverified","doi":"10.1136/bmj-2024-081123"},
+                {"id":"equator:prisma","title":"The PRISMA 2020 statement: An updated guideline for reporting systematic reviews","acronym":"PRISMA 2020","page_url":"https://equator-network.org/reporting-guidelines/prisma/","source_path":"reporting-guidelines/prisma/index.qmd","source_blob_sha":"c"*40,"metadata_status":"extracted_unverified","doi":None},
+                {"id":"equator:strobe-metepi","source_path":"reporting-guidelines/strobe-metepi/index.qmd","page_url":"https://equator-network.org/reporting-guidelines/strobe-metepi/","source_blob_sha":"d"*40,"metadata_status":"needs_review","metadata_issue":"Missing title"},
+            ],
+            "metadata_issue_count": 1,
+        }
+
+    def index(self, content):
+        (self.root / "source" / "index.yml").write_text("version: 2\nitems:\n"+content,encoding="utf-8")
+
+    def test_matches_locator_but_flags_superseded_edition_without_promotion(self):
+        self.index('  - id: consort-2010\n    title: CONSORT 2010 Checklist\n    url: https://equator-network.org/reporting-guidelines/consort/\n    group: consort\n    version: "2010"\n    status: mapped\n')
+        result = reconcile(self.root, self.catalogue)
+        row = result["legacy_items"][0]
+        self.assertEqual(row["equator_candidate"]["id"], "equator:consort")
+        self.assertEqual(row["link_basis"], "equator_page_url")
+        self.assertIn("possible_edition_difference", row["findings"])
+        self.assertEqual(row["admission"], "unverified_candidate")
+        self.assertEqual(row["rights"], "unassessed")
+
+
+    def test_unindexed_filename_alias_is_inventoried_but_not_accepted(self):
+        self.index('  - id: squire-2-0\n    title: SQUIRE 2.0 Guidelines Checklist\n    group: squire\n    version: "2.0"\n    status: mapped\n')
+        folder = self.root / "source/archetypes"
+        folder.mkdir()
+        alias = folder / "squire-2016.pdf"
+        alias.write_bytes(b"unverified synthetic source bytes")
+        import hashlib
+        digest = hashlib.sha256(alias.read_bytes()).hexdigest()
+        (folder / "squire-2016.yml").write_text(
+            'id: squire-2016\n'
+            'title: SQUIRE 2.0 Guidelines Checklist\n'
+            'group: squire\n'
+            'version: "2.0"\n'
+            f'checksum: "{digest}"\n'
+        )
+        row = reconcile(self.root, self.catalogue)["legacy_items"][0]
+        self.assertEqual(row["source_assets"][0]["path"], "source/archetypes/squire-2016.pdf")
+        self.assertEqual(row["source_assets"][0]["sha256"], digest)
+        self.assertEqual(row["source_assets"][0]["match_basis"], "sidecar_title_group_edition_candidate")
+        self.assertTrue(row["source_assets"][0]["sidecar_digest_matches"])
+        self.assertIn("source_asset_filename_alias_unverified", row["findings"])
+        self.assertNotIn("no_original_asset", row["findings"])
+        self.assertEqual(row["admission"], "unresolved")
+
+    def test_aliases_do_not_match_unrelated_guideline_titles(self):
+        self.index('  - id: squire-2-0\n    title: SQUIRE 2.0 Guidelines Checklist\n    group: squire\n    version: "2.0"\n')
+        folder = self.root / "source/archetypes"
+        folder.mkdir()
+        (folder / "squire-2016.pdf").write_bytes(b"unverified synthetic source bytes")
+        (folder / "squire-2016.yml").write_text(
+            'title: A Different Publication\n'
+            'group: squire\nversion: "2.0"\n'
+        )
+        row = reconcile(self.root, self.catalogue)["legacy_items"][0]
+        self.assertEqual(row["source_assets"], [])
+        self.assertIn("no_original_asset", row["findings"])
+
+    def test_hashes_original_but_never_uses_it_as_ground_truth(self):
+        self.index('  - id: prisma-2020\n    title: PRISMA 2020 Checklist\n    url: https://www.prisma-statement.org/\n    group: prisma\n    version: "2020"\n    status: mapped\n')
+        folder = self.root / "source" / "archetypes"
+        folder.mkdir()
+        (folder / "prisma-2020.pdf").write_bytes(b"fake but pinned for audit")
+        result = reconcile(self.root, self.catalogue)
+        row = result["legacy_items"][0]
+        self.assertEqual(row["equator_candidate"]["id"], "equator:prisma")
+        self.assertEqual(row["source_assets"][0]["path"], "source/archetypes/prisma-2020.pdf")
+        self.assertEqual(len(row["source_assets"][0]["sha256"]), 64)
+        self.assertEqual(row["admission"], "unverified_candidate")
+        self.assertIn("legacy_content_not_authority", row["findings"])
+
+    def test_missing_and_ambiguous_source_stays_unresolved(self):
+        self.index('  - id: ace\n    title: ACE Checklist\n    group: consort\n    variant_of: absent-parent\n    status: mapped\n')
+        result = reconcile(self.root,self.catalogue)
+        row = result["legacy_items"][0]
+        self.assertIsNone(row["equator_candidate"])
+        self.assertIn("orphan_variant_parent",row["findings"])
+        self.assertIn("no_original_asset",row["findings"])
+        self.assertEqual(row["admission"],"unresolved")
+
+    def test_same_acronym_not_enough_for_abstracts_vs_acupuncture(self):
+        self.index('  - id: prisma-a\n    title: PRISMA for Abstracts Checklist\n    group: prisma\n')
+        self.catalogue["guidelines"].append({
+            "id": "equator:prisma-acupuncture",
+            "page_url": "https://equator-network.org/reporting-guidelines/prisma-acupuncture/",
+            "source_path": "reporting-guidelines/prisma-acupuncture/index.qmd",
+            "source_blob_sha": "e" * 40,
+            "metadata_status": "extracted_unverified",
+            "title": "Reporting items for systematic reviews of acupuncture: the PRISMA for acupuncture checklist",
+            "acronym": "PRISMA-A",
+        })
+        self.catalogue["published_count"] += 1
+        result = reconcile(self.root, self.catalogue)
+        self.assertIsNone(result["legacy_items"][0]["equator_candidate"])
+
+    def test_independently_scoped_count_evidence_never_promotes_legacy(self):
+        import json
+        self.index('  - id: spirit-2025\n    title: SPIRIT 2025 Checklist\n    version: "2025"\n')
+        folder = self.root / "tests/fixtures/held-guidelines"
+        folder.mkdir(parents=True)
+        (folder / "source-item-identities.json").write_text(
+            json.dumps({"editions": {"spirit-2025": {"item_ids": [str(i) for i in range(1, 54)]}}})
+        )
+        md = self.root / "markdown/en/archetypes/spirit-2025.md"
+        md.parent.mkdir(parents=True)
+        md.write_text("# SPIRIT\n" + "- [ ] item\n" * 32)
+        result = reconcile(self.root, self.catalogue)
+        self.assertEqual(result["legacy_items"][0]["independent_identifier_count"], 53)
+        self.assertIn("legacy_count_differs_from_independent_identifier_fixture", result["legacy_items"][0]["findings"])
+        self.assertEqual(result["summary"]["verified_legacy_checklists"], 0)
+
+    def test_untrusted_legacy_sidecar_hash_and_licence_claims_are_checked(self):
+        self.index('  - id: prisma-2020\n    title: PRISMA 2020 Checklist\n    group: prisma\n    version: "2020"\n    checksum: "' + 'f'*64 + '"\n    license: CC BY 4.0\n')
+        folder = self.root / "source/archetypes"
+        folder.mkdir()
+        (folder / "prisma-2020.pdf").write_bytes(b"not the claimed file")
+        (folder / "prisma-2020.yml").write_text('verified: true\nlicense: All rights reserved\nchecksum: "' + 'e'*64 + '"\n')
+        row = reconcile(self.root, self.catalogue)["legacy_items"][0]
+        self.assertTrue(row["legacy_sidecar"]["claimed_verified"])
+        self.assertIn("legacy_sidecar_verified_not_evidence", row["findings"])
+        self.assertIn("legacy_checksum_disagrees_with_present_asset", row["findings"])
+        self.assertIn("legacy_license_claim_conflict", row["findings"])
+        self.assertIn("index_sidecar_checksum_conflict", row["findings"])
+        self.assertEqual(row["admission"], "unverified_candidate")
+
+    def test_catalogue_rights_identity_revision_and_duplicate_guards(self):
+        self.index('  - id: x\n    title: X\n')
+        for key, value in (
+            ("rights_status", "cleared"), ("source_revision", "unknown"),
+            ("guidelines", [None, *self.catalogue["guidelines"][1:]]),
+        ):
+            with self.subTest(key=key), self.assertRaises(ValueError):
+                reconcile(self.root, {**self.catalogue, key: value})
+        invalid = json.loads(json.dumps(self.catalogue))
+        invalid["guidelines"][0]["source_path"] = "reporting-guidelines/under-development/index.qmd"
+        with self.assertRaises(ValueError):reconcile(self.root, invalid)
+        duplicate = json.loads(json.dumps(self.catalogue))
+        duplicate["guidelines"][1] = duplicate["guidelines"][0]
+        with self.assertRaises(ValueError):reconcile(self.root, duplicate)
+
+    def test_source_url_doi_and_title_match_are_only_candidates(self):
+        for id_,title,url,expected_basis in (
+            ("consort-2025", "CONSORT 2025", "https://doi.org/10.1136/bmj-2024-081123", "same_doi_candidate"),
+            ("alias-prisma", "The PRISMA 2020 statement: An updated guideline for reporting systematic reviews", "", "title_similarity_suggestion"),
+        ):
+            with self.subTest(identifier=id_):
+                self.index(f'  - id: {id_}\n    title: {json.dumps(title)}\n    url: "{url}"\n')
+                row = reconcile(self.root, self.catalogue)["legacy_items"][0]
+                self.assertEqual(row["link_basis"], expected_basis)
+                self.assertEqual(row["admission"], "unverified_candidate")
+
+    def test_malformed_missing_and_multiple_legacy_sidecars_are_flagged(self):
+        self.index('  - id: coreq-2007\n    title: COREQ checklist\n    level: variant\n')
+        x = self.root / "source/archetypes/coreq-2007.yml"
+        x.parent.mkdir(parents=True)
+        x.write_text("license: [\n")
+        row = reconcile(self.root, self.catalogue)["legacy_items"][0]
+        self.assertIn("malformed_legacy_sidecar", row["findings"])
+        x.write_text("null")
+        row = reconcile(self.root, self.catalogue)["legacy_items"][0]
+        self.assertIn("malformed_legacy_sidecar", row["findings"])
+        x.write_text("verified: false")
+        y = self.root / "source/variants/coreq-2007.yml"
+        y.parent.mkdir(parents=True)
+        y.write_text("verified: false")
+        row = reconcile(self.root, self.catalogue)["legacy_items"][0]
+        self.assertIn("multiple_legacy_sidecars", row["findings"])
+        self.assertEqual(row["legacy_sidecar"]["path"], "source/variants/coreq-2007.yml")
+
+    def test_duplicate_legacy_items_and_canonical_pack_difference(self):
+        self.index('  - id: prisma-2020\n    title: PRISMA 2020\n  - id: strobe-2007\n    title: STROBE\n')
+        for id_ in ("prisma-2020", "strobe-2007"):
+            md = self.root / f"markdown/en/archetypes/{id_}.md"
+            md.parent.mkdir(parents=True, exist_ok=True)
+            md.write_text("# Title\n- [ ] Shared item\n")
+        pack = self.root / "packs/org.prisma/prisma/2020/pack.json"
+        pack.parent.mkdir(parents=True)
+        pack.write_text(json.dumps({"requirements":[{"id":str(i)} for i in range(42)]}))
+        result = reconcile(self.root, self.catalogue)
+        rows = result["legacy_items"]
+        self.assertTrue(all("duplicate_legacy_item_text" in x["findings"] for x in rows))
+        self.assertIn("legacy_count_differs_from_canonical_pack", rows[0]["findings"])
+        self.assertEqual(rows[0]["canonical_pack_item_count"], 42)
+
+    def test_cli_output_is_deterministic_and_never_promotes(self):
+        import subprocess, sys
+        self.index('  - id: prisma-2020\n    title: PRISMA 2020 Checklist\n')
+        cat = self.root / "catalogue.json"
+        cat.write_text(json.dumps(self.catalogue))
+        target = self.root / "report/alignment.json"
+        code = Path(__file__).resolve().parents[1] / "scripts/reconcile_equator_sources.py"
+        args = [sys.executable,str(code),"--root",str(self.root),"--catalogue",str(cat),"--output",str(target)]
+        first = subprocess.run(args,text=True,capture_output=True)
+        self.assertEqual(first.returncode,0,first.stderr)
+        original = target.read_bytes()
+        second = subprocess.run(args,text=True,capture_output=True)
+        self.assertEqual(second.returncode,0,second.stderr)
+        self.assertEqual(target.read_bytes(),original)
+        self.assertEqual(json.loads(original)["summary"]["verified_legacy_checklists"],0)
+
+    def test_catalogue_identity_count_and_duplicate_sources_fail_closed(self):
+        self.index('  - id: prisma-2020\n    title: PRISMA 2020 Checklist\n')
+        broken = {**self.catalogue, "published_count": 5}
+        with self.assertRaises(ValueError):reconcile(self.root,broken)
+        self.index('  - id: x\n    title: X\n  - id: x\n    title: X again\n')
+        with self.assertRaises(ValueError):reconcile(self.root,self.catalogue)
+
+
+if __name__=="__main__":unittest.main()
