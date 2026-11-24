@@ -155,3 +155,20 @@ class SourceReconciliationTests(unittest.TestCase):
         tables['sources'][0]['format'] = 1
         with self.assertRaisesRegex(ValueError, 'value type'):
             validate_tables(tables)
+
+    def test_cross_page_continuation_is_held(self):
+        from scripts.source_reconciliation import fingerprint
+        rows, issues = layout_rows('Sub-item number   Sub-item\n1.1               Report outcomes\f'
+                                   'Sub-item number   Sub-item\n                  only if eligible.\n'
+                                   '1.2               Report harms.')
+        self.assertIsNone(rows[0]['requirement_sha256'])
+        self.assertIn('cross_page_row_unqualified', issues)
+        self.assertEqual(rows[1]['requirement_sha256'], fingerprint('Report harms.'))
+
+    def test_nonfinal_page_tail_is_held_even_when_header_repeats(self):
+        from scripts.source_reconciliation import fingerprint
+        rows, issues = layout_rows('Sub-item number   Sub-item\n1.1               Report outcomes.\f'
+                                   'Sub-item number   Sub-item\n1.2               Report harms.\f')
+        self.assertIsNone(rows[0]['requirement_sha256'])
+        self.assertEqual(rows[1]['requirement_sha256'], fingerprint('Report harms.'))
+        self.assertIn('cross_page_row_unqualified', issues)

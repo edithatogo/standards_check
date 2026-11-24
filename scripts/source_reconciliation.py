@@ -72,9 +72,8 @@ def layout_rows(layout: str) -> tuple[list[dict], list[str]]:
     are supported. No identifier-only match or ambiguous row gets a text digest.
     """
     rows, issues = [], set()
-    for page, text in enumerate(layout.split('\f'), 1):
-        if not text.strip():
-            continue
+    pages = [(page, text) for page, text in enumerate(layout.split('\f'), 1) if text.strip()]
+    for index, (page, text) in enumerate(pages):
         starts, roles, current = [], {}, None
 
         def finish():
@@ -119,6 +118,10 @@ def layout_rows(layout: str) -> tuple[list[dict], list[str]]:
                 issues.add('unbound_layout_line')
                 if current:
                     current[-1] = True
+        if current is not None and index + 1 < len(pages):
+            # Layout text has no reliable page-spanning row boundary.
+            current[-1] = True
+            issues.add('cross_page_row_unqualified')
         finish()
     counts = Counter(r['item_id'] for r in rows)
     for row in rows:
