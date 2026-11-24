@@ -121,6 +121,10 @@ def extract_virtual(words, xs, horizontal, page, outer_closed):
     """
     evidence={'verticals':xs,'header_words':header_evidence(words),'mode':'header_virtual_columns'}
     heads=[w for w in words if header(w.text)=='subitem']
+    for sub in (w for w in words if header(w.text)=='sub'):
+        for item in (w for w in words if header(w.text)=='item'):
+            if abs(sub.x0-item.x0)<=2 and 3<item.y-sub.y<=16:
+                heads.append(Word(min(sub.x0,item.x0),sub.y0,max(sub.x1,item.x1),item.y1,'subitem'))
     numbers=[w for w in words if header(w.text)=='number']
     right_headers=[w for w in words if header(w.text) in {'reported','score'}]
     candidates=[]
@@ -144,15 +148,12 @@ def extract_virtual(words, xs, horizontal, page, outer_closed):
     if not ids:
         return [],['no_header_bound_ids'],evidence
     x0=min([left.x0,number.x0,*[w.x0 for w in ids]])-1
-    # Body ID and requirement starts must have an observed whitespace gap.
     id_right=max(w.x1 for w in ids)
-    eligible=[w for w in words if w.y0>=header_bottom-1 and w.x0>id_right and w.x0<response.x0-1]
-    if not eligible:
+    if right.x0<=id_right:
         return [],['no_requirement_column'],evidence
-    req_start=min(w.x0 for w in eligible)
-    x1=(id_right+req_start)/2
+    x1=(id_right+right.x0)/2
     x2=response.x0-1
-    ys=horizontal(x0,x2)
+    ys=horizontal(x0,response.x0+(response.x1-response.x0)/2)
     first=min(w.y0 for w in ids)
     start=[i for i,y in enumerate(ys) if header_bottom-2<=y<=first+1]
     evidence.update(column_bounds=[x0,x1,x2],row_boundaries=ys,header_bottom=header_bottom,
@@ -165,20 +166,32 @@ def extract_virtual(words, xs, horizontal, page, outer_closed):
         reqwords=region(words,x1,y0,x2,y1)
         if not idwords and not reqwords:
             continue
-        identifier=phrase(idwords).strip();req=phrase(reqwords)
-        if not ID.fullmatch(identifier):
+        if not idwords or any(not ID.fullmatch(w.text) for w in idwords):
             issues.add('unbound_requirement_band')
             if rows: rows[-1]['requirement_sha256']=None
             else: issues.add('unbound_leading_band')
             continue
-        seen_ids.append(identifier)
-        crosses=any(w.x0<x1<w.x1 or w.x0<x2<w.x1 or w.y0<y0-1 or w.y1>y1+1 for w in idwords+reqwords)
+        # A physical group can span several numbered items; only split at
+        # independently aligned first lines, not arbitrary equal-height rows.
+        ordered=sorted(idwords,key=lambda w:w.y)
         closed=outer_closed(xs[0],y0,y1) and outer_closed(xs[-1],y0,y1)
-        if crosses or not closed or not req:
-            issues.add('unclosed_or_crossing_virtual_band')
-        rows.append({'item_id':identifier,'identifier_anchor':anchor(page,x0,y0,x1,y1),
-                     'requirement_anchor':anchor(page,x1,y0,x2,y1),
-                     'requirement_sha256':fingerprint(req) if req and closed and not crosses else None})
+        bad=not closed or any(w.x0<x1<w.x1 or w.x0<x2<w.x1 or w.y0<y0-1 or w.y1>y1+1 for w in idwords+reqwords)
+        if any(w.y<ordered[0].y-3 for w in reqwords):
+            issues.add('unbound_leading_band' if not rows else 'unbound_requirement_band')
+            if rows: rows[-1]['requirement_sha256']=None
+            bad=True
+        for j,ident in enumerate(ordered):
+            end=ordered[j+1].y-3 if j+1<len(ordered) else y1
+            begin=ident.y-3
+            bound=[w for w in reqwords if begin<=w.y<end]
+            aligned=any(abs(w.y-ident.y)<=3 for w in bound)
+            req=phrase(bound)
+            valid=not bad and aligned and bool(req)
+            if not valid: issues.add('unclosed_or_unaligned_virtual_band')
+            seen_ids.append(ident.text)
+            rows.append({'item_id':ident.text,'identifier_anchor':anchor(page,ident.x0,ident.y0,ident.x1,ident.y1),
+                'requirement_anchor':anchor(page,x1,max(y0,begin),x2,end),
+                'requirement_sha256':fingerprint(req) if valid else None})
     if Counter(seen_ids)!=Counter(w.text for w in ids):
         issues.add('unbound_header_ids')
         if rows: rows[-1]['requirement_sha256']=None
@@ -224,7 +237,7 @@ def extract_native(raw):
                 if coverage([(e['top'],e['bottom']) for e in vertical if abs(e['x0']-x)<=1.5],0,page.height)>=.18]
             def horizontal(a,b):
                 return [y for y in clusters(e['top'] for e in h_edges)
-                    if coverage([(e['x0'],e['x1']) for e in h_edges if abs(e['top']-y)<=1.5],a,b)>=.90]
+                    if coverage([(e['x0'],e['x1']) for e in h_edges if abs(e['top']-y)<=1.5],a,b)>=.98]
             words=[Word(w['x0'],w['top'],w['x1'],w['bottom'],w['text']) for w in page.extract_words()]
             def closed(x,a,b):
                 return coverage([(e['top'],e['bottom']) for e in vertical if abs(e['x0']-x)<=1.5],a,b)>=.90
@@ -260,14 +273,16 @@ def extract_poppler(raw):
             width,height=float(page.attrib['width']),float(page.attrib['height'])
             words=[Word(*(float(w.attrib[k]) for k in ('xMin','yMin','xMax','yMax')),w.text or '') for w in page.iter('{http://www.w3.org/1999/xhtml}word')]
             with Image.open(image) as im:
-                mask=np.asarray(im.convert('L'))<210
+                gray=np.asarray(im.convert('L'))
+                mask=gray<235
+            gradient=np.abs(np.diff(gray.astype('int16'),axis=0))>=30
             h,w=mask.shape; sx=w/width;sy=h/height
             xs=clusters([float(x)/sx for x in np.flatnonzero(mask.mean(axis=0)>=.18)])
             def horizontal(a,b):
                 x0,x1=round(a*sx),round(b*sx)
                 if x1-x0<2:
                     return []
-                return clusters([float(y)/sy for y in np.flatnonzero(mask[:,x0:x1].mean(axis=1)>=.90)])
+                return clusters([(float(y)+.5)/sy for y in np.flatnonzero(gradient[:,x0:x1].mean(axis=1)>=.85)])
             def closed(x,a,b):
                 x0=max(0,round(x*sx)-2); x1=min(w,round(x*sx)+3)
                 y0=max(0,round(a*sy)); y1=min(h,round(b*sy))

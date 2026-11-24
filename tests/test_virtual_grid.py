@@ -10,3 +10,11 @@ class VirtualGridTests(unittest.TestCase):
                 self.assertEqual([r['item_id'] for r in result['rows']],['1.1','1.2','1.3'])
                 self.assertEqual(result['rows'][0]['requirement_sha256'],fingerprint('Report outcomes. Include missing data.'))
                 self.assertEqual(result['issues'],[])
+
+    def test_three_line_header_and_items_inside_merged_group(self):
+        raw=tiny_grid_pdf(virtual=True, merged=True)
+        for result in (extract_native(raw),extract_poppler(raw)):
+            with self.subTest(parser=result['parser']):
+                self.assertEqual([r['item_id'] for r in result['rows']],['1.1','1.2','1.3'])
+                self.assertEqual(result['rows'][0]['requirement_sha256'],fingerprint('Report outcomes. Include missing data.'))
+                self.assertEqual(result['issues'],[])

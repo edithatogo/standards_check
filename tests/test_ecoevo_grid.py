@@ -2,7 +2,7 @@ import unittest
 from scripts.ecoevo_pdf_grid import extract_native, extract_poppler, fingerprint, extract_grid, Word
 
 
-def tiny_grid_pdf(virtual=False):
+def tiny_grid_pdf(virtual=False, merged=False):
     pages=[]
     for page, rows in enumerate(([('1.1','Report outcomes.'),('1.2','Report harms.')],[('1.3','Report all data.')]),1):
         xs=(20,80,140,300,360)
@@ -10,9 +10,11 @@ def tiny_grid_pdf(virtual=False):
         cmds=['0.7 w']
         for x in (xs[0],xs[-1]) if virtual else xs: cmds.append(f'{x} {bottom} m {x} {top} l S')
         for y in (top,header_bottom,bottom): cmds.append(f'{xs[0]} {y} m {xs[-1]} {y} l S')
-        for i in range(1,len(rows)): cmds.append(f'80 {header_bottom-40*i} m 360 {header_bottom-40*i} l S')
+        for i in range(1,len(rows)) if not merged else (): cmds.append(f'80 {header_bottom-40*i} m 360 {header_bottom-40*i} l S')
         def put(x,y,text): cmds.append(f'BT /F1 9 Tf {x} {y} Td ({text}) Tj ET')
-        put(24,235,'Topic');put(84,238,'Sub-item');put(84,226,'number');put(144,235,'Sub-item');put(304,235,'Score')
+        put(24,235,'Topic');put(144,235,'Sub-item');put(304,235,'Score')
+        if merged: put(84,244,'Sub');put(84,235,'item');put(84,226,'number')
+        else: put(84,238,'Sub-item');put(84,226,'number')
         put(24,header_bottom-12,'Results')
         for i,(item,text) in enumerate(rows):
             y=header_bottom-12-40*i;put(84,y,item);put(144,y,text);put(304,y,'8.3')
