@@ -66,10 +66,20 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install --yes --no-install-recommends graphviz imagemagick poppler-utils
-          python -m pip install --disable-pip-version-check -r requirements/python-tests.txt
-          python -m pip install --disable-pip-version-check --no-deps -r requirements/legacy-standardflow.txt
-          python -m pip install --disable-pip-version-check --no-deps -r requirements/assurance-tools.txt
-          python -m pip check
+          sha256sum --check requirements/ci-python312-linux-x86_64.inputs.sha256
+          test "$(uname -m)" = x86_64
+          python -m venv "$RUNNER_TEMP/standardflow-ci-python"
+          ci_python="$RUNNER_TEMP/standardflow-ci-python/bin/python"
+          "$ci_python" -VV | tee target/coverage/ci-python-version.txt
+          "$ci_python" -m pip --version | tee target/coverage/ci-pip-version.txt
+          "$ci_python" -m pip install --disable-pip-version-check --require-hashes --only-binary=:all: \
+            --report target/coverage/ci-python-install.json -r requirements/ci-python312-linux-x86_64.lock.txt
+          "$ci_python" -m pip check
+          "$ci_python" -m pip install --disable-pip-version-check --dry-run --no-index --no-deps \
+            -r requirements/python-tests.txt -r requirements/legacy-standardflow.txt -r requirements/assurance-tools.txt
+          "$ci_python" -m pip freeze > target/coverage/ci-python-environment.txt
+          sha256sum requirements/ci-python312-linux-x86_64.lock.txt requirements/ci-python312-linux-x86_64.inputs.sha256 > target/coverage/ci-python-lock.sha256
+          echo "$RUNNER_TEMP/standardflow-ci-python/bin" >> "$GITHUB_PATH"
       - name: Verify the native legacy PNG to TIFF renderer
         if: matrix.component == 'python'
         run: |
