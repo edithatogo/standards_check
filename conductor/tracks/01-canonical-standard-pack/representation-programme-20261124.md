@@ -43,10 +43,11 @@ held-status invariants and live row-level regeneration with Polars 1.44.2.
 
 | Snapshot | Directory identities | Acquisition records | Item fingerprints | Review findings |
 | --- | ---: | ---: | ---: | ---: |
-| Current observation, artifact 14925482519 | 720 | 193 | 0 | 2,338 |
+| Earlier PR observation, artifact 14925482519 | 720 | 193 | 0 | 2,338 |
 | Historical replay, artifact 14926570626 | 720 | 145 | 95 | 2,241 |
+| Receiving main, artifact 14926956740 | 720 | 176 | 21 | 2,299 |
 
-Both came from [run 45405885030](https://github.com/edithatogo/standards_check/actions/runs/45405885030),
+The first two came from [run 45405885030](https://github.com/edithatogo/standards_check/actions/runs/45405885030),
 tested merge `78f437e6a8c2821bcadd8d12abd53fc250cc3882`, upstream revision
 `d74413b15d266334067e1e5c104957601be3ba6c`. Current source-survey artifact
 14926436388 has ZIP SHA-256
@@ -54,12 +55,27 @@ tested merge `78f437e6a8c2821bcadd8d12abd53fc250cc3882`, upstream revision
 current projection ZIP: `01a03905363b0d4602b9b5f6699e59d7e76558f0b7098be13151ba70cda4f1ad`;
 historical replay ZIP: `fdbadf2ce4dae0893683fd3c6e4b5eb448230819715933f2a700455d51884b7b`.
 
-The current zero-item outcome reflects six held priority acquisitions after provider
+The earlier zero-item outcome reflects six held priority acquisitions after provider
 timeouts/held alternatives, one bulk article inventory, two held bulk attempts and
 184 deferred records. It reused 362 metadata observations. This is faithful coverage
 of failures and holds, not successful item-level acquisition. Historical replay's 95
 fingerprints are preserved separately; its original input regeneration was not repeated
 because those inputs are not included in the replay artifact. No canonical packs promoted.
+
+The distinct [receiving-main census 45407700732](https://github.com/edithatogo/standards_check/actions/runs/45407700732)
+completed successfully on `15f8470a440c946eebfe0421ae0a4cb8d55a9aaa`, against the same
+upstream directory revision. Downloaded source artifact 14925188826 has ZIP SHA-256
+`db3d9e7f92fe7552c1a8759db873274caf68d4ca124f0c392bb9ad9974307586`;
+projection artifact 14926956740 has ZIP SHA-256
+`51cdff0492e95b9c4f487b282d67cca33ce0e1cbce845ab39ea1344a9531054f`.
+Both matched GitHub metadata. Independent Polars 1.44.2 inspection verified every
+table hash, typed schema, sorted unique key, exact source-input binding and row-level
+regeneration. The 21 ARRIVE 2.0 fingerprints remain held for a block-boundary structural
+discrepancy. All 176 acquisitions remain held for review; 166 are budget deferrals.
+Lookup outcomes are 301 metadata-only, 172 OA XML candidates, 170 incomplete and 77
+missing identifiers. All 720 identities are retained, including two identity conflicts;
+rights remain unassessed and zero packs were promoted. Provider observations are
+different snapshots, not monotonic or pooled source qualification.
 
 On receiving main, [Assurance 45407700819](https://github.com/edithatogo/standards_check/actions/runs/45407700819),
 privacy, dependency inventory, foundation and Canonical Pack passed. The fresh catalogue
@@ -116,6 +132,10 @@ bytes, acknowledges the prior art and distinguishes 720 directory identities fro
 item-level qualification. An authorized GitHub issue creation attempt against
 `EQUATOR-Network/equator-website` returned HTTP 403, `Resource not accessible by
 integration`; no upstream issue was created. The concrete proposal remains in #118.
+The subsequent authorized browser submission succeeded as
+[EQUATOR-Network/equator-website#14](https://github.com/EQUATOR-Network/equator-website/issues/14).
+The posted body was read back and exactly matched the prepared proposal. The earlier
+connector failure is historical; stakeholder feedback and endorsement remain unobserved.
 
 ## Pages delivery and upstream scanner availability
 
@@ -154,10 +174,18 @@ model skips and 743 subtests. PR #160's initial head
 unresolved review threads. The subsequent Pages repair requires fresh head checks and
 receiving-main deployment evidence; neither is inferred from the earlier green head.
 
+Pages head `10287090f43734c11bde1eb18cf344976d89e179` subsequently passed all seven
+protected checks. [Assurance 45411570729](https://github.com/edithatogo/standards_check/actions/runs/45411570729)
+ran 481 Python tests with three optional model skips and 84.06% combined coverage.
+Both version/publication receipts used baseline `e2797940a9f46ee0412a4783506a4c36a85372a1`;
+the publication receipt confirms three planned experiments, zero registered runs and
+zero observed claims. This final documentation receipt still requires its own current-head
+protected checks before integration. Receiving-main Pages deployment remains separate.
+
 1. Complete protected integration and receiving evidence for this increment and the
    Pages repair; #142 and #153 receiving protected checks are complete.
-2. Retain the concrete #118 proposal and recorded 403; external submission awaits a
-   connection with permission to create the upstream issue.
+2. Retain #118's connector failure and successful upstream #14 submission. Disposition
+   actual EQUATOR feedback when received; version any resulting normative amendment.
 3. Complete source acquisition/reconstruction by measured failure family, retaining every
    directory identity, exact source bytes and held next action. Qualify rights/interpretation
    before admitting additional packs; #82/#95 remain open.
