@@ -99,9 +99,9 @@ and [publication protocol](../../../docs/research/publication-protocol.v0.1.0.md
 
 ## 25 November: repository maturity programme
 
-- [ ] **T05.037** ([#31](https://github.com/edithatogo/standards_check/issues/31)) Enforce qualified formatting, static lint, typing, security lint and author-prose checks through required CI and local hooks; evaluate dead-code analysis and record its findings and gate decision.
-- [ ] **T05.038** ([#31](https://github.com/edithatogo/standards_check/issues/31)) Raise Python and Rust coverage above 90 percent through meaningful failure-path and invariant tests without excluding production code; retain strict API coverage.
-- [ ] **T05.039** ([#163](https://github.com/edithatogo/standards_check/issues/163)) Map every registered plan item and repository issue, validate reverse links and run live read-only reconciliation in required and event-driven CI.
+- [x] **T05.037** ([#31](https://github.com/edithatogo/standards_check/issues/31)) Enforce qualified formatting, static lint, typing, security lint and author-prose checks through required CI and local hooks; evaluate dead-code analysis and record its findings and gate decision.
+- [x] **T05.038** ([#31](https://github.com/edithatogo/standards_check/issues/31)) Raise Python and Rust coverage above 90 percent through meaningful failure-path and invariant tests without excluding production code; retain strict API coverage.
+- [x] **T05.039** ([#163](https://github.com/edithatogo/standards_check/issues/163)) Map every registered plan item and repository issue, validate reverse links and run live read-only reconciliation in required and event-driven CI.
 - [ ] **T05.040** ([#163](https://github.com/edithatogo/standards_check/issues/163)) Provide a GitHub Project view over the owning issues, preserving one issue per work scope and explicit completed/held outcomes.
 - [ ] **T05.041** ([#162](https://github.com/edithatogo/standards_check/issues/162)) Qualify the reviewed dataset release manifest before any Hugging Face upload, including hashes, export permission, privacy and benchmark exposure.
 - [ ] **T05.042** ([#30](https://github.com/edithatogo/standards_check/issues/30), [#116](https://github.com/edithatogo/standards_check/issues/116)) Complete native fuzz execution and targeted mutation evidence using existing lanes, retaining every failure and declared budget.
@@ -111,3 +111,12 @@ and [publication protocol](../../../docs/research/publication-protocol.v0.1.0.md
 - [ ] **T05.046** ([#158](https://github.com/edithatogo/standards_check/issues/158)) Complete the prospective publication evidence bundle and venue-policy checks before preprint or manuscript submission.
 
 The detailed tool decisions and ordered gates are in [the maturity plan](maturity-plan-20261125.md).
+
+## Hardening acceptance — 25 November 2026
+
+[PR 165](https://github.com/edithatogo/standards_check/pull/165) merged normally at
+`019f280d615dcdc8162555e6ab9fea0eaa6fbeb4`. All seven required checks passed on
+both the corrected PR head and receiving main. The [hosted acceptance record](hosted-hardening-20261125.json)
+binds the exact trees, downloaded native reports and live issue-event reconciliation.
+T05.037–039 are complete within that software and ownership scope. The remaining
+operational, dataset, consumer and publication tasks above retain their own gates.

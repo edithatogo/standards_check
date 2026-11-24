@@ -67,13 +67,61 @@ exposed runner and fixture assumptions:
   variant. Code and platform review diagnosed an earlier directory-open refusal.
   The corrected test asserts `LockError::Io` with `PermissionDenied` on Windows
   and `NonPortablePath` elsewhere, while retaining directory and sentinel
-  preservation on every platform. A fresh Windows pass must verify that diagnosis.
+  preservation on every platform. The subsequent Windows execution below verified
+  the revised assertion.
 
 The Rust corrections affect tests only; all-platform rejection checks remain,
-alongside the Linux invalid-byte case. These are implemented corrections, not
-hosted acceptance. Checks for the corrected head and receiving-main revision are
-pending. The sealed local coverage figures above remain their original historical
-measurement and are not replaced by the initial hosted test counts.
+alongside the Linux invalid-byte case. At the initial checkpoint, corrected-head
+and receiving-main checks were pending. The sealed local coverage figures above
+remain their original historical measurement. Subsequent hosted acceptance is
+recorded separately below.
+
+## Qualified PR and receiving-main execution
+
+[PR 165](https://github.com/edithatogo/standards_check/pull/165) merged normally at
+`019f280d615dcdc8162555e6ab9fea0eaa6fbeb4`. Corrected head
+`d73ce920aa5934f251fd958f2791bf994266d100`, tested merge
+`a7c9390a2607c03991b7cae25b9713ad6c476acc` and receiving main all have the verified
+implementation tree `3cce524076fdfdc50f7566ac16d9784d6066e4a9`.
+All seven required app-bound checks passed on both the PR and main, with no
+unresolved review threads or ruleset bypass.
+
+The [PR native receipt](pr165-native-20261125.json) and
+[receiving-main native receipt](main165-native-20261125.json) independently verify
+the downloaded archive digests, native report checksums and checkout bindings.
+[Main Assurance run 45431063021](https://github.com/edithatogo/standards_check/actions/runs/45431063021)
+matches the qualified PR measurements:
+
+| Measure | Actual hosted main result |
+| --- | --- |
+| Python tests | 640 passed; zero failed or skipped |
+| Python combined | 7,801 / 8,512, 91.647% |
+| Python statements | 5,705 / 6,122, 93.189% |
+| Python branches | 2,096 / 2,390, 87.699% |
+| Rust coverage | 96 tests passed; 3,178 / 3,466 lines, 91.691% |
+| Native platform tests | Ubuntu 96, macOS 95, Windows 91; zero failures or ignored tests |
+| API | 41 tests passed; 143 / 143 lines and 41 / 42 branches |
+
+The Python run includes the explicitly pinned optional reference path triggered
+by changes to its maintained scripts. Its higher coverage does not replace the
+sealed model-free result or change the coverage denominator. Platform test counts
+differ because native tests are compiled for their applicable operating systems.
+The documentation-test commands passed but contain zero doctests; no extra test
+coverage is claimed for that step.
+
+[Issue-comment run 45431174623](https://github.com/edithatogo/standards_check/actions/runs/45431174623)
+executed the new default-branch reconciliation and verified all 185 plan items,
+six tracks and 19 non-PR issues, with 100% mapping in both directions. Native Pages
+deployment also succeeded. The [acceptance record](hosted-hardening-20261125.json)
+retains exact check IDs, protected settings and the remaining holds.
+
+The supplementary [Scorecard run 45431063297](https://github.com/edithatogo/standards_check/actions/runs/45431063297)
+failed before analysis: three pulls of the pinned `v2.6.0` image returned
+`manifest unknown`. No Scorecard assessment was produced. The security-fixed action
+pin remains unchanged, with the [observed hold recorded in issue 30](https://github.com/edithatogo/standards_check/issues/30#issuecomment-7136959684).
+The independent offline-security job remains queued and unqualified. Neither
+observation is counted as a passed scan. These operational limits, and the rights,
+consumer, release and publication gates, remain open.
 
 ## Enforced quality policy
 
@@ -90,9 +138,8 @@ all targets and features, documentation tests, and both pack-lock and scene-outp
 CLI smoke checks. `fail-fast: false` retains the remaining platform runs after a
 failure. The protected `assurance` aggregate includes this matrix in `needs` and
 explicitly requires its result to be `success`; a failed, cancelled or skipped
-matrix cannot satisfy that gate. This enforcement is implemented in workflow
-source; hosted qualification of the corrected native matrix and protected
-aggregate remains pending.
+matrix cannot satisfy that gate. The corrected native matrix and protected
+aggregate passed on both the PR and receiving-main implementation revisions above.
 
 The coverage floor is Python 90.5% combined statements and branches, Rust 91%
 lines, API 100% lines and 95% branches. Report the native numerator and denominator

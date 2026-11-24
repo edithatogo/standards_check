@@ -36,7 +36,10 @@
     "coverage-20261125.json",
     "coverage-sources-20261125.json",
     "api-coverage-20261125.json",
-    "boundary-mutations-20261125.json"
+    "boundary-mutations-20261125.json",
+    "hosted-hardening-20261125.json",
+    "pr165-native-20261125.json",
+    "main165-native-20261125.json"
   ],
   "coverage_floors_percent": {
     "python_combined": 90.5,
@@ -166,7 +169,7 @@
     ]
   },
   "maturity_plan": "maturity-plan-20261125.md",
-  "historical_measurements_note": "Earlier measurement and hosted acceptance fields retain their named 2026-11-23 revisions. Current uncommitted candidate evidence is separate and requires its own protected hosted receipt.",
+  "historical_measurements_note": "Earlier measurements and hosted acceptance fields retain their named historical revisions. The sealed local candidate and PR165/main019f280 acceptance have separate source-bound receipts.",
   "current_hardening_candidate": {
     "base_revision": "82e4a1efc136187f42b31347ada44506d2d96bfa",
     "coverage_receipt": "coverage-20261125.json",
@@ -183,5 +186,22 @@
     "scientific_acceptance": false,
     "api_coverage_receipt": "api-coverage-20261125.json",
     "mutation_receipt": "boundary-mutations-20261125.json"
+  },
+  "current_hardening_acceptance": {
+    "pull_request": 165,
+    "accepted_head": "d73ce920aa5934f251fd958f2791bf994266d100",
+    "receiving_main": "019f280d615dcdc8162555e6ab9fea0eaa6fbeb4",
+    "implementation_tree": "3cce524076fdfdc50f7566ac16d9784d6066e4a9",
+    "receipt": "hosted-hardening-20261125.json",
+    "required_contexts_passed_on_pr_and_main": 7,
+    "native_main_receipt": "main165-native-20261125.json",
+    "conductor_plan_items": 185,
+    "repository_issues": 19,
+    "live_bidirectional_mapping_percent": 100,
+    "issue_event_run": 45431174623,
+    "pages_deployment": "success",
+    "overall_programme_acceptance": false,
+    "source_rights_or_scientific_approval": false,
+    "followup_documentation_note": "This receipt-only change records the accepted implementation and does not relabel its source-bound reports as a new experimental result."
   }
 }
