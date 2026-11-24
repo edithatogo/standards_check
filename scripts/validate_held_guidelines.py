@@ -6,12 +6,12 @@ does not verify wording, rights, applicability or methodology. The preserved
 inputs are known invalid candidates, so the default archive audit exits 1.
 No network access or source-artifact redistribution is required.
 """
-from collections import Counter
+
 import hashlib
 import json
-from pathlib import Path
 import subprocess
-
+from collections import Counter
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 LEDGER = ROOT / "docs/migration/standardflow/held-guidelines-qualification.json"
@@ -25,8 +25,11 @@ def items_digest(items):
 
 def compare_items(items, expected_ids, stard_items):
     """Check printed IDs and copied STARD descriptions; do not attest new text."""
-    if (not expected_ids or any(not isinstance(value, str) or not value for value in expected_ids)
-            or len(set(expected_ids)) != len(expected_ids)):
+    if (
+        not expected_ids
+        or any(not isinstance(value, str) or not value for value in expected_ids)
+        or len(set(expected_ids)) != len(expected_ids)
+    ):
         raise ValueError("Source identifier fixture must contain unique nonempty strings")
     valid_array = isinstance(items, list) and bool(items)
     entries = items if isinstance(items, list) else []
@@ -39,8 +42,12 @@ def compare_items(items, expected_ids, stard_items):
             continue
         identifier = item.get("id")
         description = item.get("description")
-        if (not isinstance(identifier, str) or not identifier.strip()
-                or not isinstance(description, str) or not description.strip()):
+        if (
+            not isinstance(identifier, str)
+            or not identifier.strip()
+            or not isinstance(description, str)
+            or not description.strip()
+        ):
             malformed.append(position)
             continue
         identifiers.append(identifier)
@@ -79,8 +86,11 @@ def compare_items(items, expected_ids, stard_items):
 
 def read_archive_json(revision, path):
     result = subprocess.run(
-        ["git", "show", f"{revision}:{path}"], cwd=ROOT,
-        check=True, capture_output=True, text=True,
+        ["git", "show", f"{revision}:{path}"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
     )
     return json.loads(result.stdout)
 
@@ -100,16 +110,20 @@ def audit_archive():
             raise ValueError(f"No source edition specified for {dataset['label']}")
         data = read_archive_json(revision, dataset["archive_path"])
         items = data.get("items")
-        datasets.append({
-            "label": dataset["label"],
-            "archive_path": dataset["archive_path"],
-            "items_sha256": items_digest(items),
-            "exact_stard_items_copy": items == reference,
-            "comparisons": {
-                edition: compare_items(items, sources["editions"][edition]["item_ids"], reference)
-                for edition in dataset["source_editions"]
-            },
-        })
+        datasets.append(
+            {
+                "label": dataset["label"],
+                "archive_path": dataset["archive_path"],
+                "items_sha256": items_digest(items),
+                "exact_stard_items_copy": items == reference,
+                "comparisons": {
+                    edition: compare_items(
+                        items, sources["editions"][edition]["item_ids"], reference
+                    )
+                    for edition in dataset["source_editions"]
+                },
+            }
+        )
     return {
         "archive_revision": revision,
         "scope": "Identity and known-copy audit only; no pack admission or source reconciliation",
@@ -121,17 +135,25 @@ def main():
     try:
         result = audit_archive()
     except subprocess.CalledProcessError:
-        print(json.dumps({"error": "Historical Git source unavailable; fetch preserved primary history before auditing"}))
+        print(
+            json.dumps(
+                {
+                    "error": "Historical Git source unavailable; fetch preserved primary history before auditing"
+                }
+            )
+        )
         return 1
     except (OSError, ValueError, KeyError, TypeError) as error:
         print(json.dumps({"error": str(error)}))
         return 1
     print(json.dumps(result, indent=2))
-    return int(any(
-        comparison["errors"]
-        for dataset in result["datasets"]
-        for comparison in dataset["comparisons"].values()
-    ))
+    return int(
+        any(
+            comparison["errors"]
+            for dataset in result["datasets"]
+            for comparison in dataset["comparisons"].values()
+        )
+    )
 
 
 if __name__ == "__main__":

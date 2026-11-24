@@ -3,15 +3,16 @@
 
 Never silently promote draft web transcription to source_reconciled.
 """
+
 from __future__ import annotations
 
 import argparse
-from copy import deepcopy
 import hashlib
 import json
-from pathlib import Path
 import re
 import unicodedata
+from copy import deepcopy
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 LEDGER = ROOT / "conductor/source-reconciliation/prisma-2020-checklist-draft.json"
@@ -20,16 +21,14 @@ LEGACY_PACK_SHA256 = "2c4ca02e5c8fb65f046b6eb1cf131769288f07d1f92f16a50f721a03be
 OFFICIAL_PDF_URL = "https://www.prisma-statement.org/s/PRISMA_2020_checklist-ab3g.pdf"
 PINNED_PDF_SHA256 = "2eedbd5452741f9615307a0bce21a8198c0597ce2a0a8a0fd7e140d64b08c625"
 PINNED_PDF_LENGTH = 67506
-SPLIT = {"10": "ab", "13": "abcdef", "16": "ab",
-         "20": "abcd", "23": "abcd", "24": "abc"}
+SPLIT = {"10": "ab", "13": "abcdef", "16": "ab", "20": "abcd", "23": "abcd", "24": "abc"}
 EXPECTED = [
     (f"{i}{suffix}" if str(i) in SPLIT else str(i))
     for i in range(1, 28)
     for suffix in (SPLIT[str(i)] if str(i) in SPLIT else ("",))
 ]
 EXPECTED_PAGES = {
-    number: 1 if int(re.match(r"\d+", number).group()) <= 15 else 2
-    for number in EXPECTED
+    number: 1 if int(re.match(r"\d+", number).group()) <= 15 else 2 for number in EXPECTED
 }
 
 
@@ -66,9 +65,15 @@ def load_legacy_pack() -> dict:
 
 
 def preview(old: dict, ledger: dict) -> dict:
-    if ledger.get("source_bytes_verified") is not False or ledger.get("source_bytes_sha256") is not None:
+    if (
+        ledger.get("source_bytes_verified") is not False
+        or ledger.get("source_bytes_sha256") is not None
+    ):
         raise ValueError("Draft ledger must not assert source-byte verification")
-    if ledger.get("transcription_status") != "draft_transcribed_from_official_web_pdf_text_and_visual":
+    if (
+        ledger.get("transcription_status")
+        != "draft_transcribed_from_official_web_pdf_text_and_visual"
+    ):
         raise ValueError("Unexpected transcription evidence boundary")
     source = list(checked_ledger_items(ledger).values())
     original = {item["display_number"]: item for item in old["requirements"]}
@@ -106,9 +111,7 @@ def preview(old: dict, ledger: dict) -> dict:
         "requirements": items,
         "migration": {
             "legacy_to_candidate": alias,
-            "split_requires_semantic_reassessment": [
-                f"PRISMA-2020:{parent}" for parent in SPLIT
-            ],
+            "split_requires_semantic_reassessment": [f"PRISMA-2020:{parent}" for parent in SPLIT],
             "legacy_identifiers_must_not_be_reused_as_one_to_one": True,
         },
     }

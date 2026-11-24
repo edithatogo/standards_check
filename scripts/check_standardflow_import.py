@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Verify preserved legacy bytes and ancestry, not Rust parity or source rights."""
+
 import json
-from pathlib import Path
 import re
 import subprocess
 import sys
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = "conductor/tracks/03-standardflow-import/import.json"

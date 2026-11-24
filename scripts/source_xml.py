@@ -1,4 +1,5 @@
 """Shared bounded UTF-8 XML trust boundary for article and OAI sources."""
+
 from xml.etree import ElementTree as ET
 
 
@@ -14,6 +15,8 @@ def parse_xml(raw: bytes, max_bytes: int) -> ET.Element:
     if "<!ENTITY" in text.upper():
         raise ValueError("entity-bearing source XML")
     try:
-        return ET.fromstring(text)
+        # B314 reviewed: UTF-8, byte bound and entity-declaration rejection above;
+        # ElementTree does not fetch external DTDs. Keep tests/test_source_xml.py.
+        return ET.fromstring(text)  # nosec B314
     except ET.ParseError as exc:
         raise ValueError("invalid source XML") from exc

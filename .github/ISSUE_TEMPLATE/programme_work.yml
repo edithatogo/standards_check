@@ -1,0 +1,67 @@
+name: Programme work
+description: Propose or track a bounded StandardFlow implementation, evidence or release outcome.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Link existing work where it already owns this outcome. This form does not approve a
+        specification, source, model or release. Use the [Conductor tracks](https://github.com/edithatogo/standards_check/blob/main/conductor/tracks.md)
+        to select the primary owner; maintainers can register additional tracks during triage.
+  - type: dropdown
+    id: track
+    attributes:
+      label: Primary Conductor track
+      options:
+        - "00 — Platform foundation"
+        - "01 — Canonical Standard Pack runtime"
+        - "02 — Semantic diagram engine and PRISMA flows"
+        - "03 — StandardFlow import and semantic cutover"
+        - "04 — Research ecosystem contracts"
+        - "05 — Assurance, release and external validation"
+    validations:
+      required: true
+  - type: textarea
+    id: problem_outcome
+    attributes:
+      label: Problem and intended outcome
+      description: Explain the concrete gap, affected users or consumers, and the bounded result needed.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance evidence
+      description: State observable acceptance conditions, relevant failure cases and the evidence needed to close this issue.
+    validations:
+      required: true
+  - type: textarea
+    id: ownership
+    attributes:
+      label: Ownership, task IDs and dependencies
+      description: Link related or owning issues, Conductor plan and existing stable task IDs (TNN.NNN). Name the proposed maintainer and any additional tracks; new task IDs are allocated during triage.
+    validations:
+      required: false
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Current evidence and remaining holds
+      description: Include exact commit/source/model revisions, commands or run/artifact links when available. Separate observations from planned work, and identify unresolved dependencies.
+    validations:
+      required: false
+  - type: textarea
+    id: boundaries
+    attributes:
+      label: Contract or release implications
+      description: When relevant, identify new immutable specification/protocol versions, source/export rights, privacy or evaluation exposure, model qualification, release destination and approval boundaries.
+    validations:
+      required: false
+  - type: markdown
+    attributes:
+      value: |
+        **Maintainer triage:** register every repository issue, including closed and bot
+        issues, in `contracts/project/conductor-issues.v1.json` and link its owning plan
+        item(s) with stable task IDs. Add exactly one reverse-link HTML comment containing
+        `standardflow:tracks=` followed by the sorted, comma-separated two-digit track IDs
+        to an ordinary issue's body. Bot issues use the retained comment ID recorded in
+        the registry. Run the offline and live Conductor reconciliation checks after mapping.
+        The form's selected track alone does not create that registry entry or reverse link.

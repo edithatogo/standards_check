@@ -148,7 +148,7 @@ baseline hash RED on simulated manifest update, GREEN after change; three
 local tests and five subtests passed, 17 synthetic rule challenge replayed.
 No trained 3.8.18 inference or full checkout local run claimed. Build
 Documents [45400651928](https://github.com/edithatogo/standards_check/actions/runs/45400651928)
-built successfully but deploy-pages twice could not find github-pages-1/-2
+built successfully but deploy-pages twice could not find `github-pages-1`/`github-pages-2`
 despite successful REST metadata verification; preserve both receipts,
 investigate provider/API visibility via existing #123, no weakened artifact
 binding or custom deployment substitute.

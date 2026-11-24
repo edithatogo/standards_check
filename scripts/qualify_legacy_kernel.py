@@ -4,24 +4,29 @@
 from __future__ import annotations
 
 import argparse
-from collections import Counter
 import hashlib
-from importlib import metadata
 import json
 import os
-from pathlib import Path
 import re
 import shutil
 import sys
 import tempfile
+from collections import Counter
+from importlib import metadata
+from pathlib import Path
 
 from scripts import verify_legacy_standardflow as legacy
 
-
 ROOT = Path(__file__).resolve().parents[1]
 VERSIONS = ("6.25.0", "6.31.0")
-PROTOCOL_CHECKS = ("kernel_info", "completion", "inspection", "error_and_recovery",
-                   "interrupt_and_recovery", "restart_and_state_reset")
+PROTOCOL_CHECKS = (
+    "kernel_info",
+    "completion",
+    "inspection",
+    "error_and_recovery",
+    "interrupt_and_recovery",
+    "restart_and_state_reset",
+)
 
 
 def digest(data: bytes) -> str:
@@ -56,8 +61,9 @@ def outputs(messages: list[dict]) -> list[dict]:
             else:
                 result.append({"type": kind, "name": content["name"], "text": content["text"]})
         elif kind in ("display_data", "execute_result"):
-            result.append({"type": kind, "data": content["data"],
-                           "metadata": content.get("metadata", {})})
+            result.append(
+                {"type": kind, "data": content["data"], "metadata": content.get("metadata", {})}
+            )
     return result
 
 
@@ -70,7 +76,11 @@ def execute(client, code: str, *, status: str = "ok", hook=None) -> tuple[list[d
             hook(message)
 
     reply = client.execute_interactive(
-        code, timeout=45, allow_stdin=False, stop_on_error=True, output_hook=collect,
+        code,
+        timeout=45,
+        allow_stdin=False,
+        stop_on_error=True,
+        output_hook=collect,
     )["content"]
     if reply.get("status") != status:
         raise RuntimeError(f"Unexpected kernel execution reply: {reply}")
@@ -80,10 +90,12 @@ def execute(client, code: str, *, status: str = "ok", hook=None) -> tuple[list[d
 
 
 def identity(client, version: str) -> dict:
-    visible, _ = execute(client,
+    visible, _ = execute(
+        client,
         "import sys, json, importlib.metadata\n"
         "print(json.dumps({'executable':sys.executable,'prefix':sys.prefix,"
-        "'ipykernel':importlib.metadata.version('ipykernel')}))")
+        "'ipykernel':importlib.metadata.version('ipykernel')}))",
+    )
     actual = json.loads("".join(item.get("text", "") for item in visible))
     if actual != {"executable": sys.executable, "prefix": sys.prefix, "ipykernel": version}:
         raise RuntimeError(f"Kernel interpreter/profile mismatch: {actual}")
@@ -118,14 +130,20 @@ def protocol_smoke(manager, client, version: str) -> dict:
 
     def interrupt_when_ready(message):
         nonlocal interrupted
-        if (not interrupted and message["msg_type"] == "stream"
-                and "standardflow-interrupt-ready" in message["content"]["text"]):
+        if (
+            not interrupted
+            and message["msg_type"] == "stream"
+            and "standardflow-interrupt-ready" in message["content"]["text"]
+        ):
             interrupted = True
             manager.interrupt_kernel()
 
-    _, error = execute(client,
+    _, error = execute(
+        client,
         "import time\nprint('standardflow-interrupt-ready', flush=True)\ntime.sleep(60)",
-        status="error", hook=interrupt_when_ready)
+        status="error",
+        hook=interrupt_when_ready,
+    )
     if not interrupted or error.get("ename") != "KeyboardInterrupt":
         raise RuntimeError("Kernel interrupt did not terminate the running cell")
     execute(client, "assert standardflow_probe_value == 42")
@@ -133,15 +151,21 @@ def protocol_smoke(manager, client, version: str) -> dict:
     client.wait_for_ready(timeout=30)
     identity(client, version)
     execute(client, "assert 'standardflow_probe_value' not in globals()")
-    return {"kernel_info": True, "completion": True, "inspection": True,
-            "error_and_recovery": True, "interrupt_and_recovery": True,
-            "restart_and_state_reset": True, "protocol_version": info["protocol_version"]}
+    return {
+        "kernel_info": True,
+        "completion": True,
+        "inspection": True,
+        "error_and_recovery": True,
+        "interrupt_and_recovery": True,
+        "restart_and_state_reset": True,
+        "protocol_version": info["protocol_version"],
+    }
 
 
 def qualify(version: str, evidence: Path) -> dict:
+    import psutil
     from jupyter_client import KernelManager
     from jupyter_client.kernelspec import KernelSpecManager
-    import psutil
 
     provenance = legacy.verify_history()
     host = ROOT / "requirements/legacy-standardflow.txt"
@@ -150,16 +174,25 @@ def qualify(version: str, evidence: Path) -> dict:
     if host_pins.keys() & extra_pins.keys() or "ipykernel" in host_pins | extra_pins:
         raise ValueError("Kernel-only pins must not replace any maintained host pin")
     expected = host_pins | extra_pins | {"ipykernel": version}
-    installed = {canonical(d.metadata["Name"]): d.version for d in metadata.distributions()
-                 if canonical(d.metadata["Name"]) != "pip"}
+    installed = {
+        canonical(d.metadata["Name"]): d.version
+        for d in metadata.distributions()
+        if canonical(d.metadata["Name"]) != "pip"
+    }
     if len(expected) != 42 or installed != expected:
         raise RuntimeError(f"Expected the exact 42-package comparison profile; got {installed}")
     legacy.run([sys.executable, "-m", "pip", "check"], ROOT)
-    receipt = {"result": "pass", "ipykernel": version, "python": sys.version.split()[0],
-               "provenance": provenance, "dependencies": installed,
-               "host_profile_sha256": digest(host.read_bytes()),
-               "kernel_profile_sha256": digest(extra.read_bytes()),
-               "saved_notebook_outputs_used": False, "notebooks": []}
+    receipt = {
+        "result": "pass",
+        "ipykernel": version,
+        "python": sys.version.split()[0],
+        "provenance": provenance,
+        "dependencies": installed,
+        "host_profile_sha256": digest(host.read_bytes()),
+        "kernel_profile_sha256": digest(extra.read_bytes()),
+        "saved_notebook_outputs_used": False,
+        "notebooks": [],
+    }
     with tempfile.TemporaryDirectory(prefix="standardflow-real-kernel-") as directory:
         temporary = Path(directory)
         work = temporary / "application"
@@ -171,30 +204,56 @@ def qualify(version: str, evidence: Path) -> dict:
         environment = os.environ.copy()
         environment.pop("PYTHONPATH", None)
         environment["PYTHONNOUSERSITE"] = "1"
-        for variable in ("JUPYTER_RUNTIME_DIR", "JUPYTER_CONFIG_DIR", "JUPYTER_DATA_DIR", "IPYTHONDIR"):
+        for variable in (
+            "JUPYTER_RUNTIME_DIR",
+            "JUPYTER_CONFIG_DIR",
+            "JUPYTER_DATA_DIR",
+            "IPYTHONDIR",
+        ):
             target = temporary / variable.lower()
             target.mkdir()
             environment[variable] = str(target)
         spec = temporary / "kernels/standardflow"
         spec.mkdir(parents=True)
-        (spec / "kernel.json").write_text(json.dumps({
-            "argv": [sys.executable, "-Xfrozen_modules=off", "-m", "ipykernel_launcher",
-                     "-f", "{connection_file}", "--HistoryManager.hist_file=:memory:"],
-            "display_name": "StandardFlow qualification", "language": "python",
-        }))
+        (spec / "kernel.json").write_text(
+            json.dumps(
+                {
+                    "argv": [
+                        sys.executable,
+                        "-Xfrozen_modules=off",
+                        "-m",
+                        "ipykernel_launcher",
+                        "-f",
+                        "{connection_file}",
+                        "--HistoryManager.hist_file=:memory:",
+                    ],
+                    "display_name": "StandardFlow qualification",
+                    "language": "python",
+                }
+            )
+        )
         specs = KernelSpecManager(kernel_dirs=[str(spec.parent)], ensure_native_kernel=False)
         notebooks = sorted((work / "examples/notebooks").glob("*.ipynb"))
         if len(notebooks) != 11:
             raise RuntimeError("Expected all 11 frozen notebook fixtures")
         for index, notebook in enumerate(notebooks):
-            cells = ["".join(c["source"]) for c in json.loads(notebook.read_text())["cells"]
-                     if c["cell_type"] == "code"]
-            manager = KernelManager(kernel_name="standardflow", kernel_spec_manager=specs,
-                                    ip="127.0.0.1", transport="tcp")
+            cells = [
+                "".join(c["source"])
+                for c in json.loads(notebook.read_text())["cells"]
+                if c["cell_type"] == "code"
+            ]
+            manager = KernelManager(
+                kernel_name="standardflow",
+                kernel_spec_manager=specs,
+                ip="127.0.0.1",
+                transport="tcp",
+            )
             client, pid = None, None
             with (evidence / f"{notebook.stem}.log").open("w") as log:
                 try:
-                    manager.start_kernel(cwd=str(notebook.parent), env=environment, stdout=log, stderr=log)
+                    manager.start_kernel(
+                        cwd=str(notebook.parent), env=environment, stdout=log, stderr=log
+                    )
                     pid = manager.provisioner.pid
                     client = manager.blocking_client()
                     client.start_channels()
@@ -207,14 +266,22 @@ def qualify(version: str, evidence: Path) -> dict:
                         receipt["protocol"] = protocol_smoke(manager, client, version)
                         pid = manager.provisioner.pid
                     visible = [execute(client, code)[0] for code in cells]
-                    mime = Counter(m for cell in visible for item in cell for m in item.get("data", {}))
+                    mime = Counter(
+                        m for cell in visible for item in cell for m in item.get("data", {})
+                    )
                     shutdown(manager, client)
-                    receipt["notebooks"].append({
-                        "name": notebook.name, "source_sha256": digest(notebook.read_bytes()),
-                        "code_cells": len(cells), "mime_counts": dict(sorted(mime.items())),
-                        "shutdown_reply_observed": True,
-                        "visible_output_sha256": digest(json.dumps(visible, sort_keys=True).encode()),
-                    })
+                    receipt["notebooks"].append(
+                        {
+                            "name": notebook.name,
+                            "source_sha256": digest(notebook.read_bytes()),
+                            "code_cells": len(cells),
+                            "mime_counts": dict(sorted(mime.items())),
+                            "shutdown_reply_observed": True,
+                            "visible_output_sha256": digest(
+                                json.dumps(visible, sort_keys=True).encode()
+                            ),
+                        }
+                    )
                 finally:
                     if manager.has_kernel:
                         manager.shutdown_kernel(now=True)
@@ -226,7 +293,9 @@ def qualify(version: str, evidence: Path) -> dict:
         if sum(n["code_cells"] for n in receipt["notebooks"]) != 43:
             raise RuntimeError("Expected execution of all 43 original code cells")
         files = sorted(images.glob("*.png"))
-        if len(files) != 6 or any(not p.read_bytes().startswith(b"\x89PNG\r\n\x1a\n") for p in files):
+        if len(files) != 6 or any(
+            not p.read_bytes().startswith(b"\x89PNG\r\n\x1a\n") for p in files
+        ):
             raise RuntimeError("Real notebooks did not create all six valid PNG outputs")
         receipt["rendered_images"] = {p.name: digest(p.read_bytes()) for p in files}
         receipt["clean_shutdowns"] = len(notebooks)
@@ -236,36 +305,57 @@ def qualify(version: str, evidence: Path) -> dict:
 
 
 def compare(baseline: dict, candidate: dict) -> dict:
-    for receipt, version in zip((baseline, candidate), VERSIONS):
+    for receipt, version in zip((baseline, candidate), VERSIONS, strict=True):
         if receipt.get("result") != "pass" or receipt.get("ipykernel") != version:
-            raise ValueError("Comparison needs two successful, correctly identified kernel receipts")
+            raise ValueError(
+                "Comparison needs two successful, correctly identified kernel receipts"
+            )
         if receipt.get("dependencies", {}).get("ipykernel") != version:
             raise ValueError("The installed kernel version disagrees with the receipt identity")
-        if (len(receipt.get("notebooks", [])) != 11
-                or sum(n["code_cells"] for n in receipt["notebooks"]) != 43
-                or receipt.get("clean_shutdowns") != 11
-                or len(receipt.get("rendered_images", {})) != 6
-                or not all(n.get("shutdown_reply_observed") is True for n in receipt["notebooks"])
-                or receipt.get("saved_notebook_outputs_used") is not False
-                or receipt.get("application", {}).get("tests") != 52
-                or len(receipt.get("application", {}).get("files", {})) != 21
-                or any(receipt.get("protocol", {}).get(k) is not True for k in PROTOCOL_CHECKS)):
+        if (
+            len(receipt.get("notebooks", [])) != 11
+            or sum(n["code_cells"] for n in receipt["notebooks"]) != 43
+            or receipt.get("clean_shutdowns") != 11
+            or len(receipt.get("rendered_images", {})) != 6
+            or not all(n.get("shutdown_reply_observed") is True for n in receipt["notebooks"])
+            or receipt.get("saved_notebook_outputs_used") is not False
+            or receipt.get("application", {}).get("tests") != 52
+            or len(receipt.get("application", {}).get("files", {})) != 21
+            or any(receipt.get("protocol", {}).get(k) is not True for k in PROTOCOL_CHECKS)
+        ):
             raise ValueError("A receipt lacks complete notebook execution/output/cleanup evidence")
     before = {k: v for k, v in baseline["dependencies"].items() if k != "ipykernel"}
     after = {k: v for k, v in candidate["dependencies"].items() if k != "ipykernel"}
     if len(before) != 41 or before != after:
         raise ValueError("The environments differ beyond the compared ipykernel version")
-    for key in ("python", "provenance", "host_profile_sha256", "kernel_profile_sha256",
-                "application", "protocol", "notebooks", "rendered_images"):
+    for key in (
+        "python",
+        "provenance",
+        "host_profile_sha256",
+        "kernel_profile_sha256",
+        "application",
+        "protocol",
+        "notebooks",
+        "rendered_images",
+    ):
         if baseline[key] != candidate[key]:
             raise ValueError(f"Kernel compatibility differs: {key}")
-    return {"result": "pass", "versions": list(VERSIONS), "notebooks_per_version": 11,
-            "code_cells_per_version": 43, "identical_pngs": 6,
-            "identical_cli_files": len(baseline["application"]["files"]),
-            "unchanged_other_packages": len(before), "protocol": baseline["protocol"],
-            "claim": "frozen notebook and tested Jupyter protocol compatibility",
-            "limits": ["not a notebook GUI/browser qualification", "not general notebook support",
-                       "not Rust parity, methodological validation, rights or offline-security acceptance"]}
+    return {
+        "result": "pass",
+        "versions": list(VERSIONS),
+        "notebooks_per_version": 11,
+        "code_cells_per_version": 43,
+        "identical_pngs": 6,
+        "identical_cli_files": len(baseline["application"]["files"]),
+        "unchanged_other_packages": len(before),
+        "protocol": baseline["protocol"],
+        "claim": "frozen notebook and tested Jupyter protocol compatibility",
+        "limits": [
+            "not a notebook GUI/browser qualification",
+            "not general notebook support",
+            "not Rust parity, methodological validation, rights or offline-security acceptance",
+        ],
+    }
 
 
 def main() -> int:
@@ -282,8 +372,11 @@ def main() -> int:
         else:
             receipt = qualify(arguments.expected_version, arguments.output.parent)
     except Exception as error:
-        receipt = {"result": "fail", "error": f"{type(error).__name__}: {error}",
-                   "ipykernel": arguments.expected_version}
+        receipt = {
+            "result": "fail",
+            "error": f"{type(error).__name__}: {error}",
+            "ipykernel": arguments.expected_version,
+        }
     arguments.output.write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n")
     print(json.dumps(receipt, indent=2, sort_keys=True))
     return 0 if receipt["result"] == "pass" else 1

@@ -9,6 +9,10 @@ on:
 permissions:
   contents: read
 
+defaults:
+  run:
+    shell: bash --noprofile --norc -euo pipefail {0}
+
 concurrency:
   group: assurance-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
@@ -35,6 +39,10 @@ jobs:
       HF_HUB_OFFLINE: "1"
       TRANSFORMERS_OFFLINE: "1"
       HF_HUB_DISABLE_TELEMETRY: "1"
+      PYTHON_MIN_COVERAGE: "90.5"
+      RUST_MIN_LINES: "91"
+      API_MIN_LINES: "100"
+      API_MIN_BRANCHES: "95"
       PROFILE_BASELINE_REVISION: ${{ github.event.pull_request.base.sha || github.event.before }}
     steps:
       - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
@@ -62,6 +70,9 @@ jobs:
           python -m pip install --disable-pip-version-check --no-deps -r requirements/legacy-standardflow.txt
           python -m pip install --disable-pip-version-check --no-deps -r requirements/assurance-tools.txt
           python -m pip check
+      - name: Type check maintained validator and receipt boundaries
+        if: matrix.component == 'python'
+        run: ty check --python "$(command -v python)" --error-on-warning --output-format github
       - name: Acquire pinned English reference for an explicit NLP qualification change
         if: matrix.component == 'python'
         shell: bash
@@ -84,7 +95,9 @@ jobs:
 
       - name: Prepare the locked CLI for Python's cross-runtime contract
         if: matrix.component == 'python'
-        run: rustup toolchain install 1.98.1 --profile minimal
+        run: |
+          toolchain="$(python -c 'import tomllib; print(tomllib.load(open("rust-toolchain.toml", "rb"))["toolchain"]["channel"])')"
+          rustup toolchain install "$toolchain" --profile minimal
       - name: Measure Python regressions and existing validators
         if: matrix.component == 'python'
         shell: bash
@@ -102,7 +115,9 @@ jobs:
             --output target/coverage/representation-profile.json
           python -m coverage run -m scripts.validate_publication_contract "${profile_args[@]}" \
             | tee target/coverage/publication-contract.json
-          cargo +1.98.1 build --locked -p standardflow-cli
+          python -m coverage run -m scripts.validate_dataset_release \
+            | tee target/coverage/dataset-release.json
+          cargo build --locked -p standardflow-cli
           python -m coverage run -m scripts.qualify_legacy_prisma \
             --rust-cli target/debug/standardflow --output target/coverage/legacy-prisma.json
           wheel="$RUNNER_TEMP/en_core_web_sm-3.8.0-py3-none-any.whl"
@@ -129,7 +144,7 @@ jobs:
           python -m coverage combine
           python -m coverage xml
           python -m coverage json
-          python -m coverage report --fail-under=75 | tee target/coverage/summary.txt
+          python -m coverage report --fail-under="$PYTHON_MIN_COVERAGE" | tee target/coverage/summary.txt
           # Triage existing local original files only; no external downloads,
           # source-text export, licences, or Canonical Pack promotion.
           python -m scripts.probe_legacy_source_text --output target/coverage/legacy-source-text-triage.json
@@ -187,7 +202,7 @@ jobs:
           set -euo pipefail
           cargo fmt --all -- --check
           cargo clippy --workspace --all-targets --all-features --locked -- -D warnings
-          cargo llvm-cov --workspace --all-targets --all-features --locked --lcov --output-path target/coverage/rust.lcov --fail-under-lines 79 2>&1 | tee target/coverage/tests.log
+          cargo llvm-cov --workspace --all-targets --all-features --locked --lcov --output-path target/coverage/rust.lcov --fail-under-lines "$RUST_MIN_LINES" 2>&1 | tee target/coverage/tests.log
           cargo llvm-cov report --json --summary-only --output-path target/coverage/rust-summary.json
       - if: matrix.component == 'api'
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
@@ -199,15 +214,61 @@ jobs:
           npm ci --prefix api --ignore-scripts --no-audit --no-fund
           node --test --experimental-test-coverage \
             --test-coverage-include='api/server.js' --test-coverage-include='api/cors-options.js' \
-            --test-coverage-lines=98 --test-coverage-branches=90 \
+            --test-coverage-lines="$API_MIN_LINES" --test-coverage-branches="$API_MIN_BRANCHES" \
             --test-reporter=spec --test-reporter-destination=stdout \
             --test-reporter=lcov --test-reporter-destination=target/coverage/api.lcov \
             api/test/*.test.js api/test/security/*.test.cjs
       - name: Bind report bytes to the tested checkout
         env:
           COVERAGE_REPORT: target/coverage/${{ matrix.report }}
+          COVERAGE_COMPONENT: ${{ matrix.component }}
         run: |
           test -s "$COVERAGE_REPORT"
+          # Native display rounding must not admit a result below the exact floor.
+          python3 - <<'PY'
+          import json
+          import os
+          from collections import Counter
+          from decimal import Decimal
+          from pathlib import Path
+
+          def counts(label, covered, total):
+              if type(covered) is not int or type(total) is not int or not 0 <= covered <= total or total == 0:
+                  raise SystemExit(f"Invalid or empty {label} coverage counts")
+              print(f"{label}: {covered}/{total}")
+
+          def require_floor(label, covered, total, setting):
+              counts(label, covered, total)
+              floor = Decimal(os.environ[setting])
+              if not floor.is_finite() or not 0 < floor <= 100:
+                  raise SystemExit(f"Invalid coverage floor: {setting}")
+              numerator, denominator = floor.as_integer_ratio()
+              if 100 * covered * denominator < numerator * total:
+                  raise SystemExit(f"{label} below exact {floor}% floor")
+
+          component = os.environ["COVERAGE_COMPONENT"]
+          if component == "python":
+              totals = json.loads(Path("target/coverage/python.json").read_text())["totals"]
+              counts("Python statements", totals["covered_lines"], totals["num_statements"])
+              counts("Python branches", totals["covered_branches"], totals["num_branches"])
+              require_floor("Python combined", totals["covered_lines"] + totals["covered_branches"],
+                            totals["num_statements"] + totals["num_branches"], "PYTHON_MIN_COVERAGE")
+          elif component in ("rust", "api"):
+              totals = Counter()
+              for line in Path(os.environ["COVERAGE_REPORT"]).read_text().splitlines():
+                  key, _, value = line.partition(":")
+                  if key in ("LF", "LH", "BRF", "BRH"):
+                      count = int(value)
+                      if count < 0:
+                          raise SystemExit("Negative LCOV coverage count")
+                      totals[key] += count
+              require_floor(f"{component} lines", totals["LH"], totals["LF"],
+                            "RUST_MIN_LINES" if component == "rust" else "API_MIN_LINES")
+              if component == "api":
+                  require_floor("API branches", totals["BRH"], totals["BRF"], "API_MIN_BRANCHES")
+          else:
+              raise SystemExit("Unknown coverage component")
+          PY
           sha256sum "$COVERAGE_REPORT" > target/coverage/report.sha256
       - name: Retain component coverage evidence
         if: always()
@@ -268,6 +329,9 @@ jobs:
   workflow-policy:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
+    permissions:
+      contents: read
+      issues: read
     steps:
       - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
         with:
@@ -282,7 +346,7 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: "24"
-      - name: Install pinned workflow linters
+      - name: Install pinned code, prose and workflow linters
         shell: bash
         run: |
           set -euo pipefail
@@ -293,10 +357,23 @@ jobs:
             --output "$RUNNER_TEMP/actionlint.tar.gz"
           echo "8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8  $RUNNER_TEMP/actionlint.tar.gz" | sha256sum --check
           tar -xzf "$RUNNER_TEMP/actionlint.tar.gz" -C "$RUNNER_TEMP" actionlint
-      - name: Validate commit hooks and run maintained JavaScript lint
+          curl --fail --location --silent --show-error --max-time 90 \
+            --max-redirs 3 --max-filesize 50000000 --proto '=https' --proto-redir '=https' \
+            https://github.com/vale-cli/vale/releases/download/v3.28.1/vale_3.28.1_Linux_64-bit.tar.gz \
+            --output "$RUNNER_TEMP/vale.tar.gz"
+          echo "068954ad869ebec24b8dec6ebcd1cbb1fd5f5a83e966a35baedfae8b2cdc093a  $RUNNER_TEMP/vale.tar.gz" | sha256sum --check
+          tar -xzf "$RUNNER_TEMP/vale.tar.gz" -C "$RUNNER_TEMP" vale
+          echo "$RUNNER_TEMP" >> "$GITHUB_PATH"
+      - name: Validate commit hooks and run maintained code and prose checks
         run: |
           pre-commit validate-config
-          pre-commit run eslint --all-files --show-diff-on-failure
+          for hook in eslint ruff ruff-format bandit vale vale-rules; do
+            pre-commit run "$hook" --all-files --show-diff-on-failure
+          done
+      - name: Reconcile Conductor with live GitHub issue links
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/validate_conductor_links.py --live
       - name: Check workflow syntax and offline security policy
         run: |
           "$RUNNER_TEMP/actionlint" -color
@@ -381,6 +458,7 @@ jobs:
           DEPENDENCY_REVIEW: ${{ needs.dependency-review.result }}
           EVENT_NAME: ${{ github.event_name }}
         run: |
+          set -euo pipefail
           test "$COVERAGE" = success
           test "$WORKFLOW_POLICY" = success
           test "$BOUNDARY_MUTATIONS" = success

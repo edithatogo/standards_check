@@ -1,29 +1,30 @@
 repos:
 - repo: https://github.com/gitleaks/gitleaks
-  rev: v8.30.1
+  rev: 83d9cd684c87d95d656c1458ef04895a7f1cbd8e  # v8.30.1
   hooks:
   - id: gitleaks
 - repo: https://github.com/jumanjihouse/pre-commit-hooks
-  rev: 3.0.0
+  rev: 38980559e3a605691d6579f96222c30778e5a69e  # 3.0.0
   hooks:
   - id: shellcheck
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v6.0.0
+  rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c  # v6.0.0
   hooks:
   - id: check-merge-conflict
   - id: check-json
     files: ^(schemas/|contracts/|recipes/|\.github/|renovate\.json$|package\.json$|api/package\.json$)
   - id: check-toml
-    files: ^(Cargo\.toml$|crates/|rust-toolchain\.toml$)
+    files: ^(Cargo\.toml$|crates/|rust-toolchain\.toml$|\.ruff\.toml$|ty\.toml$)
   - id: check-yaml
-    files: ^(\.github/|\.pre-commit-config\.yaml$)
+    files: ^(\.github/|\.pre-commit-config\.yaml$|config/vale/)
+  # Preserve retained source and revision-bound evidence bytes.
   - id: end-of-file-fixer
-    exclude: ^(source|archive|assets|docs|docx|pdf|html|latex|typst)/
+    exclude: ^(source|archive|assets|docs|docx|pdf|html|latex|typst|legacy|markdown|citations|conductor)/
   - id: trailing-whitespace
     args: [--markdown-linebreak-ext=md]
-    exclude: ^(source|archive|assets|docs|docx|pdf|html|latex|typst)/
+    exclude: ^(source|archive|assets|docs|docx|pdf|html|latex|typst|legacy|markdown|citations|conductor)/
 - repo: https://github.com/pre-commit/mirrors-eslint
-  rev: v10.15.0
+  rev: 73e3fe97594aeeb7151061de3b7792b5fc451e55  # v10.15.0
   hooks:
   - id: eslint
     files: ^(api/|scripts/|tests/).+\.(js|cjs|mjs)$
@@ -31,6 +32,55 @@ repos:
 
 - repo: local
   hooks:
+  # System entries share the exact closed assurance-tools profile with CI.
+  # Formatting is check-only so commit hooks never rewrite source evidence.
+  - id: ruff
+    name: Lint maintained Python scripts
+    entry: ruff check --output-format concise scripts
+    language: system
+    pass_filenames: false
+    files: ^(scripts/.+\.py$|\.ruff\.toml$)
+  - id: ruff-format
+    name: Check maintained Python formatting
+    entry: ruff format --check --output-format concise scripts
+    language: system
+    pass_filenames: false
+    files: ^(scripts/.+\.py$|\.ruff\.toml$)
+  - id: ty
+    name: Type check validator and receipt boundary
+    entry: ty check --error-on-warning
+    language: system
+    pass_filenames: false
+    files: ^(scripts/.+\.py$|ty\.toml$|requirements/)
+  - id: bandit
+    name: Security check maintained Python scripts
+    entry: bandit -r scripts --severity-level medium --confidence-level medium
+    language: system
+    pass_filenames: false
+    files: ^(scripts/.+\.py$|requirements/assurance-tools\.txt$)
+  - id: vale
+    name: Check maintained author prose
+    entry: vale --no-global --config=.vale.ini
+    language: system
+    files: ^(README\.md|CONTRIBUTING\.md|AGENTS\.md|CONTENT_POPULATION_WORKFLOW\.md|docs/(architecture/.*|development/.*|preview-readiness)\.md|conductor/(index|product|tech-stack|workflow|roadmap|tracks|tracks/[^/]+/(plan|spec))\.md)$
+  - id: vale-rules
+    name: Test prose policy rules and activation
+    entry: vale test --no-global --coverage config/vale/styles
+    language: system
+    pass_filenames: false
+    files: ^(\.vale\.ini$|config/vale/)
+  - id: conductor-links
+    name: Validate offline Conductor and GitHub issue crosswalk
+    entry: python scripts/validate_conductor_links.py
+    language: system
+    pass_filenames: false
+    files: ^(conductor/|contracts/project/|scripts/validate_conductor_links\.py$)
+  - id: dataset-release
+    name: Validate offline dataset release manifests
+    entry: python scripts/validate_dataset_release.py
+    language: system
+    pass_filenames: false
+    files: ^(contracts/datasets/|scripts/validate_dataset_release\.py$)
   - id: representation-profile
     name: Validate versioned representation profile
     entry: python scripts/validate_representation_spec.py

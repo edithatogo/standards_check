@@ -1,0 +1,46 @@
+name: Conductor issue reconciliation
+
+on:
+  issues:
+    types: [opened, edited, deleted, transferred, closed, reopened]
+  # Runs only default-branch code with a read-only metadata token. Issue/comment
+  # text never selects checkout refs, commands or executable artifacts.
+  issue_comment: # zizmor: ignore[dangerous-triggers]
+    types: [created, edited, deleted]
+  schedule:
+    - cron: "17 18 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: read
+
+defaults:
+  run:
+    shell: bash --noprofile --norc -euo pipefail {0}
+
+concurrency:
+  group: conductor-issue-reconciliation
+  cancel-in-progress: true
+
+jobs:
+  reconcile:
+    if: github.event_name != 'issue_comment' || !github.event.issue.pull_request
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          persist-credentials: false
+          submodules: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+      - name: Reconcile every plan item and repository issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/validate_conductor_links.py --live

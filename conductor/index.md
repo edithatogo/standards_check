@@ -12,6 +12,8 @@
 - [Roadmap](./roadmap.md)
 - [Tracks](./tracks.md)
 - [Technical-preview readiness and EQUATOR engagement](../docs/preview-readiness.md)
+- [Repository maturity plan](tracks/05-maximal-assurance/maturity-plan-20261125.md)
+- [Complete plan/issue registry](../contracts/project/conductor-issues.v1.json)
 
 ## Source reconciliation
 
@@ -35,6 +37,9 @@
 - [Current programme receipt](tracks/01-canonical-standard-pack/representation-programme-20261124.md).
 - [Publication protocol](../docs/research/publication-protocol.v0.1.0.md) and
   [machine-readable experiment/claim contract](../contracts/publication/programme.v1.json).
+- [Publication submission plan](../docs/research/publication-submission-plan.v0.1.0.md)
+  and [selective data dissemination policy](../docs/architecture/DATA_DISSEMINATION.md).
+- [Prepared EQUATOR issue refinement](tracks/01-canonical-standard-pack/equator-issue-14-refinement-20261125.md).
 
 ## Agent capability
 
