@@ -1,0 +1,111 @@
+name: Five-class consensus and gated NLI
+
+on:
+  pull_request:
+    paths:
+      - "scripts/five_class_benchmark.py"
+      - "tests/test_five_class_benchmark.py"
+      - ".github/workflows/five-class-benchmark.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: five-class-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  controlled-consensus:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      HF_HUB_DISABLE_TELEMETRY: "1"
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: "3.12"
+      - name: Verify deterministic controls and prepare blinded pairs
+        run: |
+          python -m pip install python-docx==1.2.0
+          python -m unittest tests.test_five_class_benchmark -v
+          mkdir -p "$RUNNER_TEMP/five-class"
+          python -m scripts.five_class_benchmark prepare --directory "$RUNNER_TEMP/five-class"
+          git rev-parse HEAD > "$RUNNER_TEMP/five-class/commit.txt"
+      - name: Install previously qualified CPU inference runtime
+        run: |
+          mkdir -p "$RUNNER_TEMP/five-class-runtime"
+          python -m pip download --no-deps --no-binary=:all: --dest "$RUNNER_TEMP/five-class-runtime" llama-cpp-python==0.3.38
+          echo "0570c9736b5e2a239b651da18687238eeba7fc2369dcdfd8cbb009dc1321e23f  $RUNNER_TEMP/five-class-runtime/llama_cpp_python-0.3.38.tar.gz" | sha256sum --check
+          CMAKE_ARGS="-DGGML_NATIVE=OFF" CMAKE_BUILD_PARALLEL_LEVEL=4 python -m pip install "$RUNNER_TEMP/five-class-runtime/llama_cpp_python-0.3.38.tar.gz"
+          python -m pip install onnxruntime==1.23.2 tokenizers==0.22.1
+          python -m pip check
+          python -m pip freeze > "$RUNNER_TEMP/five-class/environment.txt"
+      - name: Acquire only pinned GGUF weights and run blinded judges
+        run: |
+          python - <<'PY'
+          import json, os, subprocess
+          from pathlib import Path
+          from scripts.five_class_benchmark import JUDGES
+          from scripts.blind_adjudication import file_hash
+          root=Path(os.environ['RUNNER_TEMP'])
+          for name,model in JUDGES.items():
+              revision=model['revision']
+              if revision=='main':
+                  metadata=subprocess.run(['curl','--fail','--silent','--show-error','--max-time','30','https://huggingface.co/api/models/'+model['id']],capture_output=True,check=True).stdout
+                  revision=json.loads(metadata)['sha']
+              if len(revision)!=40 or any(c not in '0123456789abcdef' for c in revision): raise ValueError('invalid model revision')
+              weights=root/(name+'.gguf')
+              subprocess.run(['curl','--fail','--silent','--show-error','--location','--max-redirs','5','--connect-timeout','15','--max-time','600','--max-filesize','3000000000','--proto','=https','--proto-redir','=https','https://huggingface.co/'+model['id']+'/resolve/'+revision+'/'+model['file'],'--output',str(weights)],check=True)
+              if file_hash(weights)!=model['sha256']: raise ValueError('model hash mismatch')
+              info=root/(name+'-metadata.json');info.write_text(json.dumps({'revision':revision}))
+              subprocess.run(['python','-m','scripts.five_class_benchmark','judge','--directory',str(root/'five-class'),'--name',name,'--weights',str(weights),'--model-metadata',str(info)],check=True)
+              weights.unlink()
+          PY
+      - name: Baseline and conditional additional NLI
+        run: |
+          python - <<'PY'
+          import json, os, subprocess
+          from pathlib import Path
+          from scripts.five_class_benchmark import DEBERTA
+          from scripts.semantic_benchmark import MODEL_ID, MODEL_REVISION, MODEL_SHA256
+          from scripts.blind_adjudication import file_hash
+          root=Path(os.environ['RUNNER_TEMP'])
+          def acquire(model, name):
+              assets=root/name;assets.mkdir(exist_ok=True)
+              for remote in ('tokenizer.json','config.json','onnx/model_quint8_avx2.onnx'):
+                  path=assets/remote.rsplit('/',1)[-1]
+                  subprocess.run(['curl','--fail','--silent','--show-error','--location','--max-redirs','5','--connect-timeout','15','--max-time','180','--max-filesize','100000000','--proto','=https','--proto-redir','=https','https://huggingface.co/'+model['id']+'/resolve/'+model['revision']+'/'+remote,'--output',str(path)],check=True)
+              if file_hash(assets/'model_quint8_avx2.onnx')!=model['sha256']: raise ValueError('ONNX weight pin mismatch')
+              return assets
+          def run(mode,assets):
+              subprocess.run(['python','-m','scripts.five_class_benchmark',mode,'--directory',str(root/'five-class'),'--assets',str(assets)],check=True)
+          run('baseline',acquire({'id':MODEL_ID,'revision':MODEL_REVISION,'sha256':MODEL_SHA256},'minilm'))
+          receipt=json.loads((root/'five-class/five-class-receipt.json').read_text())
+          if receipt['escalation']['eligible']:
+              run('additional',acquire(DEBERTA,'deberta'))
+          else:
+              print('No material control-set deficit: additional model not run')
+          PY
+      - name: Publish redacted evidence only
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: five-class-consensus-${{ github.sha }}
+          path: |
+            ${{ runner.temp }}/five-class/commit.txt
+            ${{ runner.temp }}/five-class/environment.txt
+            ${{ runner.temp }}/five-class/qwen4-votes.json
+            ${{ runner.temp }}/five-class/phi4-votes.json
+            ${{ runner.temp }}/five-class/five-class-receipt.json
+          if-no-files-found: warn
+          retention-days: 90

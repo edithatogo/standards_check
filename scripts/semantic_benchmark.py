@@ -63,13 +63,13 @@ MODEL_SHA256 = '44391a5241a62e0083c1a8899a71e69a092b95aea5ba89e14062925468eceac7
 
 class LocalNLI:
     """Pinned, CPU-only ONNX; local tokenizer and label map; never truncate."""
-    def __init__(self, directory):
+    def __init__(self, directory, *, expected_model_sha256=MODEL_SHA256):
         import json
         import hashlib
         import onnxruntime as ort
         from tokenizers import Tokenizer
         model = directory / 'model_quint8_avx2.onnx'
-        if model.stat().st_size > 100_000_000 or hashlib.sha256(model.read_bytes()).hexdigest() != MODEL_SHA256:
+        if model.stat().st_size > 100_000_000 or hashlib.sha256(model.read_bytes()).hexdigest() != expected_model_sha256:
             raise ValueError('unqualified ONNX model bytes')
         config = json.loads((directory / 'config.json').read_text())
         if [config['id2label'][str(i)].lower() for i in range(3)] != list(LABELS):
