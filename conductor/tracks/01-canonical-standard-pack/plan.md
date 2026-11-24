@@ -134,3 +134,7 @@ reporting checklist.
 independent structure/comparison, rights, semantics and admission. Keep
 T01.5d–g conditional on measured residual errors. No new model or service
 is required for the census.
+
+### T01.5b/c — real-source format qualification follow-up (24 November 2026)
+
+The [exact hosted EcoEvo receipt and qualification increment](../../source-reconciliation/real-source-formats-20261124.md) confirms official PDF/DOCX/XLSX byte equality and the actual 89-ID Poppler/zero bound-row pdfplumber discrepancy. Retain the failed receipt and the 8.3 CSV discrepancy. The bounded follow-up compares PRISMA-S publisher HTML against the independently pinned 16-item JATS ledger and PRISMA 2020's 42 full numbered PDF rows from independent parser outputs; it retries the narrowly scoped EcoEvo header marker. Keep both task checkboxes open until exact-head and receiving artifacts establish the stated gates; broader coverage, rights, source hierarchy and interpretation remain separate. No new runtime dependency or pack admission.
