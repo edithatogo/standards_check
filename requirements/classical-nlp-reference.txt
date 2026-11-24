@@ -1,0 +1,2 @@
+# Optional offline classical NLP reference; no model download.
+spacy==3.8.11

@@ -28,3 +28,20 @@ def witness_vote(pair, vote):
     result = validate_index_vote(pair, {'label': label, 'a': vote.get('a'), 'b': vote.get('b')})
     return {**result, 'a_compliant': a if witness_mask(a) is not None else None,
             'b_compliant': b if witness_mask(b) is not None else None}
+
+
+CONDITIONS = {'P': 0b1100, 'Q': 0b1010, 'NOT_P': 0b0011, 'P_AND_Q': 0b1000}
+
+
+def condition_vote(pair, vote):
+    """Compile only independently selected controlled conditions, never infer a vote."""
+    a, b = vote.get('a_condition'), vote.get('b_condition')
+    left = CONDITIONS.get(a) if isinstance(a, str) else None
+    right = CONDITIONS.get(b) if isinstance(b, str) else None
+    label = relation(left, right) if left is not None and right is not None else 'abstain'
+    if (set(vote) != {'a_condition', 'b_condition', 'a', 'b'} or
+            any(not isinstance(vote.get(k), list) or 2 not in vote[k] for k in ('a', 'b'))):
+        label = 'abstain'
+    result = validate_index_vote(pair, {'label': label, 'a': vote.get('a'), 'b': vote.get('b')})
+    return {**result, 'a_condition': a if left is not None else None,
+            'b_condition': b if right is not None else None}
