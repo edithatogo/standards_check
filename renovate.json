@@ -1,7 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "local>edithatogo/renovate-config"
+    "local>edithatogo/renovate-config",
+    "group:all"
   ],
   "automerge": false,
   "platformAutomerge": false,
@@ -19,14 +20,59 @@
     "legacy/standardflow/**"
   ],
   "pip_requirements": {
-    "managerFilePatterns": ["requirements/*.txt"]
+    "managerFilePatterns": [
+      "requirements/*.txt"
+    ]
   },
   "packageRules": [
     {
-      "description": "Keep updates reviewable until required repository checks are configured",
-      "matchPackageNames": ["*"],
+      "description": "One routine dependency update across maintained ecosystems",
+      "matchPackageNames": [
+        "*"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "pinDigest",
+        "digest",
+        "lockFileMaintenance",
+        "rollback"
+      ],
+      "groupName": "maintained dependencies",
+      "groupSlug": "maintained-dependencies",
       "automerge": false,
       "platformAutomerge": false
+    },
+    {
+      "description": "Breaking changes reviewed separately",
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "groupName": "major dependency updates",
+      "groupSlug": "major-dependency-updates",
+      "dependencyDashboardApproval": true,
+      "automerge": false,
+      "platformAutomerge": false
+    },
+    {
+      "description": "Immutable workflow action references",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "pinDigests": true
     }
-  ]
+  ],
+  "prConcurrentLimit": 1,
+  "separateMajorMinor": true,
+  "pre-commit": {
+    "enabled": true
+  },
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "groupName": null,
+    "schedule": [],
+    "automerge": false,
+    "dependencyDashboardApproval": false
+  }
 }

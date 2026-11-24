@@ -65,3 +65,14 @@
 ## Security & Licensing Notes
 - Do not commit proprietary content or secrets.
 - Respect source licensing; include citation in the Markdown header or sidecar notes.
+
+## Solo-maintainer assurance
+- Start with the affected Conductor track, active GitHub issue and exact main revision.
+- Run `make quick` before focused changes; run the applicable full CI checks before merge.
+- Treat advisory scores as diagnostics, not a target to game. Preserve the required privacy,
+  CodeQL, assurance and inventory checks and resolve review threads.
+- Maintain one routine Renovate group, separate breaking/security updates, and verify actual
+  receiving-main dependency lock, inventory and security evidence. Do not disable the
+  existing Dependabot path until a protected Renovate handover has been demonstrated.
+- Never treat historical or queued CI results, proposed version updates, or source candidate
+  observations as current verification. Record accepted and held work separately.
