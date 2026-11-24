@@ -1,0 +1,22 @@
+[package]
+name = "standardflow-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2024"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "=0.4.13"
+standardflow-core = { path = "../crates/standardflow-core" }
+
+[workspace]
+members = ["."]
+
+[[bin]]
+name = "pack_ingress"
+path = "fuzz_targets/pack_ingress.rs"
+test = false
+doc = false
+bench = false

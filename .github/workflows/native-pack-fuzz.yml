@@ -1,0 +1,68 @@
+name: Native pack fuzz qualification
+
+on:
+  pull_request:
+    paths:
+      - 'fuzz/**'
+      - 'crates/standardflow-core/**'
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+      - '.github/workflows/native-pack-fuzz.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: native-pack-fuzz-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  native-pack-fuzz:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      CARGO_BUILD_JOBS: "2"
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install dated test-only compiler and pinned fuzzer
+        shell: bash
+        run: |
+          set -euo pipefail
+          rustup toolchain install nightly-2026-11-23 --profile minimal
+          cargo +nightly-2026-11-23 install cargo-fuzz --version 0.13.2 --locked
+      - name: Candidate lock and bounded AddressSanitizer campaign
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p target/native-fuzz-evidence fuzz/corpus/pack_ingress
+          git rev-parse HEAD > target/native-fuzz-evidence/commit.txt
+          rustc +nightly-2026-11-23 -Vv > target/native-fuzz-evidence/compiler.txt
+          cargo +nightly-2026-11-23 fuzz --version > target/native-fuzz-evidence/fuzzer.txt
+          # Draft qualification only. Replace with a mandatory committed lock before merge.
+          if ! test -f fuzz/Cargo.lock; then
+            cargo +nightly-2026-11-23 generate-lockfile --manifest-path fuzz/Cargo.toml
+          fi
+          cp fuzz/Cargo.lock target/native-fuzz-evidence/Cargo.lock
+          cargo +nightly-2026-11-23 fetch --locked --manifest-path fuzz/Cargo.toml
+          cp packs/org.prisma/prisma/2020/pack.json fuzz/corpus/pack_ingress/prisma.json
+          sha256sum fuzz/corpus/pack_ingress/prisma.json > target/native-fuzz-evidence/seed.sha256
+          CARGO_NET_OFFLINE=true cargo +nightly-2026-11-23 fuzz run pack_ingress -- \
+            -seed=721114987 -max_total_time=60 -max_len=262144 -timeout=5 -rss_limit_mb=1024 \
+            -print_final_stats=1 2>&1 | tee target/native-fuzz-evidence/campaign.log
+          cmp fuzz/Cargo.lock target/native-fuzz-evidence/Cargo.lock
+      - name: Retain campaign, lock candidate and failure inputs
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: native-pack-fuzz-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            target/native-fuzz-evidence/
+            fuzz/artifacts/
+          if-no-files-found: warn
+          retention-days: 30
