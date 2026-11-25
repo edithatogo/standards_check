@@ -14,3 +14,7 @@ polars==1.44.2
 
 # Generated invariant tests; test-only, owned by Track 05. MPL-2.0.
 hypothesis==6.170.17
+
+# Qualified two-worker CI execution; test-only, Track 05.
+pytest-xdist==3.8.0
+execnet==2.1.2

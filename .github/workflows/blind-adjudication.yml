@@ -2,6 +2,7 @@ name: Blinded model-agent adjudication
 
 on:
   pull_request:
+    types: [labeled]
     paths:
       - "scripts/blind_adjudication.py"
       - "tests/test_blind_adjudication.py"
@@ -17,7 +18,8 @@ concurrency:
 
 jobs:
   agent-benchmark:
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    # Deliberate experiment authorization after required deterministic checks.
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-semantic-benchmark')
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     env:

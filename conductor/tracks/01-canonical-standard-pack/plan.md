@@ -140,6 +140,9 @@ independent structure/comparison, rights, semantics and admission. Keep
 T01.5d–g conditional on measured residual errors. No new model or service
 is required for the census.
 
+### Trial-reporting edition metadata and synthetic examples
+
+[#121](https://github.com/edithatogo/standards_check/pull/121) corrects CONSORT/SPIRIT publication metadata and identifies TRIPOD+AI 2024 separately from 2015. Trial-reporting source entries and synthetic examples remain unqualified; no Canonical Pack, checklist rights, source-byte or methodological claim follows. Continue exact-edition acquisition and item/subitem reconciliation under [#120](https://github.com/edithatogo/standards_check/issues/120), retaining #95/#82 holds and the [guideline admission checklist](../../../CONTENT_POPULATION_WORKFLOW.md). The earlier 719-record catalogue is historical; current survey evidence remains in the Phase 5 record.
 
 ### T01.5c/d/h and analytical projections — implementation increment
 
@@ -157,11 +160,6 @@ Track 05 independent qualification and Track 04 consumer handoff remain separate
 
 See [EcoEvo geometric reconstruction](ecoevo-pdf-geometry.md); independent native vector and Poppler raster/word geometry replaces one-line header assumption. Closed-band and page-tail qualification, actual 89-item replay and pairwise comparison required. Source/rights gates remain held.
 
-### Five-class blinded adjudication and comparator qualification
-
-See [semantic reconciliation qualification](semantic-reconciliation-qualification.md). T01.5d/e: retain the prior synthetic and first blinded receipt; improve insufficient agreement using numbered evidence spans and stronger separately pinned model-agent processes, freeze a family-disjoint five-class controlled benchmark from actual pinned source rows and separate natural candidate pairs. T01.5f/g: one additional NLI comparator only on a predeclared material baseline deficit against independent formal controls or qualified agent consensus. No automatic admission; insufficient consensus stays held. No human labelling or adjudication in this benchmark.
-
-Witness-v2 scientific gate failed (artifact 14924523529); experimental DeBERTa 29/30 vs MiniLM 16/30 on formal controls. Condition-v3 bounded follow-up preserves the scientific threshold and natural-pair hold. See the semantic qualification receipt.
 
 ## 24 November — programme of deterministic source resilience
 
@@ -222,3 +220,20 @@ production model is introduced.
 - [x] **T01.046** ([#118](https://github.com/edithatogo/standards_check/issues/118)) Post the versioned profile and optional reference implementation to EQUATOR; upstream `equator-website#14` was read back after the authorized browser submission.
 - [ ] **T01.047** ([#118](https://github.com/edithatogo/standards_check/issues/118)) Record actual EQUATOR feedback and version any resulting normative amendment; delivery is not endorsement.
 - [ ] **T01.048** ([#162](https://github.com/edithatogo/standards_check/issues/162)) Prepare and qualify a selective metadata/evidence dataset release with separate source rights and export permission.
+
+## Multi-checklist composition and requirement mapping
+
+- [ ] **T01.049** ([#82](https://github.com/edithatogo/standards_check/issues/82), [#149](https://github.com/edithatogo/standards_check/issues/149)) Qualify the bounded identity-conserving union and sparse cross-pack candidate preview. No similarity-based deletion.
+- [ ] **T01.050** ([#158](https://github.com/edithatogo/standards_check/issues/158)) Freeze and compare statistical retrieval with one qualified embedding challenger; separate retrieval utility from directional equivalence evidence, retain all failures.
+- [ ] **T01.051** ([#82](https://github.com/edithatogo/standards_check/issues/82), [#149](https://github.com/edithatogo/standards_check/issues/149)) Qualify reviewed equivalence display groups, applicability-aware implication, conflict and graph projections with original identities conserved.
+
+See [composition and requirement graph design](../../../docs/architecture/CHECKLIST_COMPOSITION.md). The first bounded preview does not authorize merging distinct semantic obligations or admitting new packs.
+
+
+### Five-class blinded adjudication and comparator qualification
+
+See [semantic reconciliation qualification](semantic-reconciliation-qualification.md). T01.5d/e: retain the prior synthetic and first blinded receipt; improve insufficient agreement using numbered evidence spans and stronger separately pinned model-agent processes, freeze a family-disjoint five-class controlled benchmark from actual pinned source rows and separate natural candidate pairs. T01.5f/g: one additional NLI comparator only on a predeclared material baseline deficit against independent formal controls or qualified agent consensus. No automatic admission; insufficient consensus stays held. No human labelling or adjudication in this benchmark.
+
+Witness-v2 scientific gate failed (artifact 14924523529); experimental DeBERTa 29/30 vs MiniLM 16/30 on formal controls. Condition-v3 bounded follow-up preserves the scientific threshold and natural-pair hold. See the semantic qualification receipt.
+
+26 November integration hold (#155): prior Assurance run 45626930697 failed maintained Ruff (95 violations) and combined Python coverage (85.86%, 7987/9302 versus 90.5% floor). The semantic scripts remain in the maintained coverage denominator. Current-base deterministic checks must qualify before explicitly authorizing the separate model experiments. Original reference failure and thresholds are unchanged. Legacy experiment labels describe B relative to A; RGI-06 describes A relative to B. Preserve historical receipts, and implement a tested, explicit direction adapter/version before downstream graph use. No source or semantic admission.
