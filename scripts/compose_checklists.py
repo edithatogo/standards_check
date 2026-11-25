@@ -74,9 +74,8 @@ def compose(packs: list[dict], *, top_k: int = 5, method: str = "word") -> dict:
                 if words:
                     if method == "word":
                         terms = Counter(words)
-                        terms.update(
-                            " ".join(pair) for pair in zip(words, words[1:], strict=False)
-                        )
+                        bigrams = zip(words, words[1:], strict=False)
+                        terms.update(" ".join(pair) for pair in bigrams)
                     else:
                         padded = f" {normalized} "
                         terms = Counter(padded[i : i + 3] for i in range(len(padded) - 2))
@@ -119,15 +118,14 @@ def compose(packs: list[dict], *, top_k: int = 5, method: str = "word") -> dict:
                     "status": "candidate_similarity",
                 }
             )
+    snapshot = hashlib.sha256(json.dumps(pack_rows, sort_keys=True).encode()).hexdigest()
     return {
         "method": (
             "word-unigram-bigram-tfidf-cosine-v1"
             if method == "word"
             else "character-trigram-tfidf-cosine-v1"
         ),
-        "pack_snapshot_sha256": hashlib.sha256(
-            json.dumps(pack_rows, sort_keys=True).encode()
-        ).hexdigest(),
+        "pack_snapshot_sha256": snapshot,
         "top_k": top_k,
         "packs": pack_rows,
         "requirements": nodes,
@@ -157,8 +155,10 @@ def apply_display_review(report: dict, review: dict) -> dict:
     statuses = {tuple(row["key"]): row["status"] for row in report["requirements"]}
 
     def checked_key(value):
-        if not isinstance(value, list) or len(value) != 3 or not all(
-            isinstance(part, str) for part in value
+        if (
+            not isinstance(value, list)
+            or len(value) != 3
+            or not all(isinstance(part, str) for part in value)
         ):
             raise ValueError("invalid requirement key")
         key = tuple(value)
