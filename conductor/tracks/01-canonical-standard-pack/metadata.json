@@ -3,7 +3,7 @@
   "track_id": "01",
   "slug": "01-canonical-standard-pack",
   "title": "Canonical Standard Pack runtime",
-  "status": "implementation_complete",
+  "status": "in_progress",
   "implementation_state": "source_implemented",
   "evidence_level": "fixture_proven",
   "dependencies": [
@@ -11,7 +11,7 @@
   ],
   "pull_request": 60,
   "merge_blockers": [],
-  "updated": "2026-11-20",
+  "updated": "2026-11-24",
   "evidence_level_scope": "bounded runtime fixtures at accepted PR #60; PRISMA 42-item source comparison at PR #83; receiving revisions, interpretation, migration and external qualification require separate evidence",
   "base_branch": "main",
   "last_hosted_verification": {
@@ -81,5 +81,13 @@
       "normalized interpretations, evidence expectations and migration semantic parity require separate review",
       "later receiving revisions require their own CI receipts"
     ]
+  },
+  "representation_programme": {
+    "status": "in_progress",
+    "current_profile": "0.1.0",
+    "approved_profile": null,
+    "registry": "contracts/representation/releases.json",
+    "receipt": "conductor/tracks/01-canonical-standard-pack/representation-programme-20261124.md",
+    "runtime_acceptance_preserved": true
   }
 }

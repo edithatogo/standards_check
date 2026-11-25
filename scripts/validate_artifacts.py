@@ -1,16 +1,22 @@
 #!/usr/bin/env python3
 """Validate recipes, PRISMA inputs and generated accessible artefacts."""
+
 from __future__ import annotations
 
 import argparse
 import json
-from pathlib import Path
 import sys
-from typing import Any
-import xml.etree.ElementTree as ET
+from pathlib import Path
+from typing import Any, NoReturn
 
 from jsonschema import Draft202012Validator, FormatChecker
 from jsonschema.exceptions import SchemaError
+from jsonschema.protocols import Validator
+
+if __package__:
+    from scripts.source_xml import parse_xml
+else:
+    from source_xml import parse_xml
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMAS = ROOT / "schemas"
@@ -38,7 +44,7 @@ VARIANTS = {
 }
 
 
-def fail(message: str) -> None:
+def fail(message: str) -> NoReturn:
     print(f"ERROR: {message}", file=sys.stderr)
     raise SystemExit(1)
 
@@ -50,7 +56,7 @@ def load_json(path: Path) -> Any:
         fail(f"{path.relative_to(ROOT)} cannot be read as JSON: {error}")
 
 
-def make_validator(name: str) -> Draft202012Validator:
+def make_validator(name: str) -> Validator:
     path = SCHEMAS / name
     schema = load_json(path)
     if not isinstance(schema, dict):
@@ -62,7 +68,7 @@ def make_validator(name: str) -> Draft202012Validator:
     return Draft202012Validator(schema, format_checker=FormatChecker())
 
 
-def validate(path: Path, validator: Draft202012Validator) -> dict[str, Any]:
+def validate(path: Path, validator: Validator) -> dict[str, Any]:
     value = load_json(path)
     if not isinstance(value, dict):
         fail(f"{path.relative_to(ROOT)} must contain a JSON object")
@@ -79,8 +85,8 @@ def validate(path: Path, validator: Draft202012Validator) -> dict[str, Any]:
 
 def validate_svg(path: Path, scene: dict[str, Any]) -> None:
     try:
-        root = ET.fromstring(path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, ET.ParseError) as error:
+        root = parse_xml(path.read_bytes(), 16_000_000)
+    except (OSError, ValueError) as error:
         fail(f"{path.relative_to(ROOT)} is not valid SVG XML: {error}")
     if root.tag != "{http://www.w3.org/2000/svg}svg":
         fail(f"{path.relative_to(ROOT)} root element is not SVG")
@@ -99,9 +105,9 @@ def validate_svg(path: Path, scene: dict[str, Any]) -> None:
         element = root.find(selector, namespace)
         if element is None or not "".join(element.itertext()).strip():
             fail(f"{path.relative_to(ROOT)} is missing non-empty {selector}")
-        if [
-            candidate for candidate in root.iter() if candidate.get("id") == identifier
-        ] != [element]:
+        if [candidate for candidate in root.iter() if candidate.get("id") == identifier] != [
+            element
+        ]:
             fail(f"{path.relative_to(ROOT)} {identifier} must resolve uniquely to {selector}")
         if "".join(element.itertext()) != expected:
             fail(f"{path.relative_to(ROOT)} {selector} differs from its scene")

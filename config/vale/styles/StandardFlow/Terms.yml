@@ -1,0 +1,23 @@
+extends: substitution
+message: "Use '%s' instead of '%s' in author prose."
+level: error
+ignorecase: true
+swap:
+  standardflow: StandardFlow
+  github: GitHub
+  codeql: CodeQL
+  equator: EQUATOR
+tests:
+  - name: catches product and network names
+    input: Standardflow uses Github and Codeql with Equator.
+    contains:
+      - "Use 'StandardFlow'"
+      - "Use 'GitHub'"
+      - "Use 'CodeQL'"
+      - "Use 'EQUATOR'"
+  - name: accepts preferred names
+    input: StandardFlow uses GitHub and CodeQL with EQUATOR.
+    want: ''
+  - name: preserves commands and URLs
+    input: 'Run `standardflow` and visit https://github.com/edithatogo/standards_check.'
+    want: ''

@@ -1,27 +1,28 @@
 #!/usr/bin/env python3
 """Triangulate existing local original-document text with legacy items (never certify)."""
+
 from __future__ import annotations
 
 import argparse
-from collections import Counter
 import hashlib
 import io
 import json
-from pathlib import Path
 import re
 import unicodedata
+from collections import Counter
+from pathlib import Path
 
 import yaml
 
 try:
-    from .lexical_text import normalise
     from .legacy_checklist_structure import parse_legacy_tasks, split_label
-    from .reconcile_equator_sources import scan_local, scan_alias_assets, sha256
+    from .lexical_text import normalise
+    from .reconcile_equator_sources import scan_alias_assets, scan_local, sha256
     from .structured_source import extract_structure
 except ImportError:
-    from lexical_text import normalise
     from legacy_checklist_structure import parse_legacy_tasks, split_label
-    from reconcile_equator_sources import scan_local, scan_alias_assets, sha256
+    from lexical_text import normalise
+    from reconcile_equator_sources import scan_alias_assets, scan_local, sha256
     from structured_source import extract_structure
 
 MAX_SOURCE_BYTES = 20_000_000
@@ -36,6 +37,7 @@ def source_probe(path: Path) -> tuple[str, str, str, dict | None]:
     structure = None
     if path.suffix == ".pdf":
         import pdfplumber
+
         with pdfplumber.open(io.BytesIO(source)) as pdf:
             if len(pdf.pages) > MAX_PAGES:
                 raise ValueError("too_many_pages")
@@ -43,9 +45,12 @@ def source_probe(path: Path) -> tuple[str, str, str, dict | None]:
         method = "pdfplumber_text_only_no_ocr"
     elif path.suffix in {".docx", ".csv", ".xlsx", ".html"}:
         text, structure = extract_structure(source, path.suffix)
-        method = {".docx": "python_docx_ordered_structure", ".csv": "stdlib_csv_structured",
-                  ".xlsx": "openpyxl_structured_no_formula_evaluation",
-                  ".html": "lxml_static_html_table_structure"}[path.suffix]
+        method = {
+            ".docx": "python_docx_ordered_structure",
+            ".csv": "stdlib_csv_structured",
+            ".xlsx": "openpyxl_structured_no_formula_evaluation",
+            ".html": "lxml_static_html_table_structure",
+        }[path.suffix]
     elif path.suffix == ".txt":
         text = source.decode("utf-8")
         method = "stdlib_text"
@@ -93,24 +98,31 @@ def evaluate_text(extracted: str, legacy_items: list[str]) -> dict:
             outcome = "lexical_only"
         else:
             outcome = "fidelity_phrase_present"
-        comparisons.append({"legacy_ordinal": ordinal,
-                            "legacy_fidelity_sha256": hashlib.sha256(strict.encode()).hexdigest(),
-                            "short_for_legacy_metric": short,
-                            "lexical_occurrences": lexical_count,
-                            "fidelity_occurrences": fidelity_count,
-                            "outcome": outcome})
+        comparisons.append(
+            {
+                "legacy_ordinal": ordinal,
+                "legacy_fidelity_sha256": hashlib.sha256(strict.encode()).hexdigest(),
+                "short_for_legacy_metric": short,
+                "lexical_occurrences": lexical_count,
+                "fidelity_occurrences": fidelity_count,
+                "outcome": outcome,
+            }
+        )
     # Retain historical substring metric for comparability; it is not token-bounded.
     meaningful = [row for row in comparisons if not row["short_for_legacy_metric"]]
-    return {"normalized_source_sha256": hashlib.sha256(normalized.encode()).hexdigest(),
-            "fidelity_source_sha256": hashlib.sha256(fidelity.encode()).hexdigest(),
-            "normalized_characters": len(normalized),
-            "meaningful_legacy_items": len(meaningful),
-            "exact_substring_matches": sum(len(lexical) >= 40 and lexical in normalized
-                                           for lexical in map(normalise, items)),
-            "token_bounded_legacy_matches": sum(row["lexical_occurrences"] > 0 for row in meaningful),
-            "fidelity_legacy_matches": sum(row["fidelity_occurrences"] > 0 for row in meaningful),
-            "item_comparisons": comparisons,
-            "status": "triage_only_not_edition_verification"}
+    return {
+        "normalized_source_sha256": hashlib.sha256(normalized.encode()).hexdigest(),
+        "fidelity_source_sha256": hashlib.sha256(fidelity.encode()).hexdigest(),
+        "normalized_characters": len(normalized),
+        "meaningful_legacy_items": len(meaningful),
+        "exact_substring_matches": sum(
+            len(lexical) >= 40 and lexical in normalized for lexical in map(normalise, items)
+        ),
+        "token_bounded_legacy_matches": sum(row["lexical_occurrences"] > 0 for row in meaningful),
+        "fidelity_legacy_matches": sum(row["fidelity_occurrences"] > 0 for row in meaningful),
+        "item_comparisons": comparisons,
+        "status": "triage_only_not_edition_verification",
+    }
 
 
 def structural_matches(structure: dict, comparisons: list[dict]) -> None:
@@ -144,25 +156,39 @@ def audit(root: Path) -> dict:
             originals = scan_alias_assets(root, item, ids)
         # ponytail: a single explicit archive cohort; no fuzzy archive-wide matching.
         if item["id"] == "prisma-ecoevo":
-            for filename in ("PRISMA-EcoEvo_WordChecklist.docx", "PRISMA-EcoEvo_ExcelChecklist.xlsx"):
+            for filename in (
+                "PRISMA-EcoEvo_WordChecklist.docx",
+                "PRISMA-EcoEvo_ExcelChecklist.xlsx",
+            ):
                 candidate = root / "source/archive/processed" / filename
                 if candidate.is_file() and not candidate.is_symlink():
-                    originals.append({"path": candidate.relative_to(root).as_posix(),
-                                      "sha256": sha256(candidate),
-                                      "match_basis": "archive_filename_candidate_unverified"})
+                    originals.append(
+                        {
+                            "path": candidate.relative_to(root).as_posix(),
+                            "sha256": sha256(candidate),
+                            "match_basis": "archive_filename_candidate_unverified",
+                        }
+                    )
         legacy_rows = []
         legacy_structure = None
         if views:
             view_bytes = (root / views[0]).read_bytes()
             legacy_rows = parse_legacy_tasks(view_bytes.decode("utf-8"))
-            declared = Counter(row["declared_item_id"] for row in legacy_rows
-                               if row["declared_item_id"] is not None)
+            declared = Counter(
+                row["declared_item_id"]
+                for row in legacy_rows
+                if row["declared_item_id"] is not None
+            )
             legacy_structure = {
                 "view_path": views[0],
                 "view_sha256": hashlib.sha256(view_bytes).hexdigest(),
-                "duplicate_declared_item_ids": sorted(key for key, count in declared.items() if count > 1),
-                "items": [{key: value for key, value in row.items() if key not in {"text", "raw_text"}}
-                          for row in legacy_rows],
+                "duplicate_declared_item_ids": sorted(
+                    key for key, count in declared.items() if count > 1
+                ),
+                "items": [
+                    {key: value for key, value in row.items() if key not in {"text", "raw_text"}}
+                    for row in legacy_rows
+                ],
                 "status": "legacy_structure_only_not_source_authority",
             }
         legacy = [row["raw_text"] for row in legacy_rows]
@@ -171,9 +197,12 @@ def audit(root: Path) -> dict:
             path = root / original["path"]
             if path.is_symlink():
                 continue
-            entry = {"path": original["path"], "source_sha256": original["sha256"],
-                     "identity_basis": original.get("match_basis", "exact_filename_unverified"),
-                     "rights": "unassessed"}
+            entry = {
+                "path": original["path"],
+                "source_sha256": original["sha256"],
+                "identity_basis": original.get("match_basis", "exact_filename_unverified"),
+                "rights": "unassessed",
+            }
             try:
                 extracted, method, digest, structure = source_probe(path)
                 if digest != original["sha256"]:
@@ -189,22 +218,40 @@ def audit(root: Path) -> dict:
                 entry["status"] = "extraction_failed_or_unsupported"
                 entry["error_type"] = type(exc).__name__
             probes.append(entry)
-        records.append({"legacy_id": item["id"], "legacy_view_count": len(views),
-                        "legacy_item_count": len(legacy), "legacy_structure": legacy_structure,
-                        "source_probes": probes,
-                        "qualification": "unverified_original_and_legacy_text"})
-    return {"schema_version": 3, "authority": "no_source_or_legacy_content_admission",
-            "legacy_item_count": len(records),
-            "summary": {"records_with_original_candidates": sum(bool(row["source_probes"]) for row in records),
-                        "source_probes": sum(len(row["source_probes"]) for row in records),
-                        "successfully_extracted": sum(
-                            p["status"] == "triage_only_not_edition_verification"
-                            for row in records for p in row["source_probes"]),
-                        "source_structure_status_counts": dict(Counter(
-                            p["source_structure"]["status"] for row in records for p in row["source_probes"]
-                            if "source_structure" in p)),
-                        "verified_by_this_process": 0},
-            "legacy_items": records}
+        records.append(
+            {
+                "legacy_id": item["id"],
+                "legacy_view_count": len(views),
+                "legacy_item_count": len(legacy),
+                "legacy_structure": legacy_structure,
+                "source_probes": probes,
+                "qualification": "unverified_original_and_legacy_text",
+            }
+        )
+    return {
+        "schema_version": 3,
+        "authority": "no_source_or_legacy_content_admission",
+        "legacy_item_count": len(records),
+        "summary": {
+            "records_with_original_candidates": sum(bool(row["source_probes"]) for row in records),
+            "source_probes": sum(len(row["source_probes"]) for row in records),
+            "successfully_extracted": sum(
+                p["status"] == "triage_only_not_edition_verification"
+                for row in records
+                for p in row["source_probes"]
+            ),
+            "source_structure_status_counts": dict(
+                Counter(
+                    p["source_structure"]["status"]
+                    for row in records
+                    for p in row["source_probes"]
+                    if "source_structure" in p
+                )
+            ),
+            "verified_by_this_process": 0,
+        },
+        "legacy_items": records,
+    }
 
 
 def main() -> None:
@@ -214,7 +261,9 @@ def main() -> None:
     args = parser.parse_args()
     report = audit(args.root)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    args.output.write_text(
+        json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
     print(f"Unverified local source text probes: {report['summary']}")
 
 

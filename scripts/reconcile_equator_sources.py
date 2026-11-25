@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 """Reconcile legacy checklist inventory with EQUATOR metadata; never certify content."""
+
 from __future__ import annotations
 
 import argparse
-from collections import Counter
-from difflib import SequenceMatcher
 import hashlib
 import json
-from pathlib import Path
 import re
+from collections import Counter
+from difflib import SequenceMatcher
+from pathlib import Path
 from urllib.parse import urlparse
 
 import yaml
@@ -18,18 +19,43 @@ PAGE = re.compile(r"^reporting-guidelines/([^/]+)/index\.qmd$")
 YEAR = re.compile(r"\b(?:19|20)\d{2}\b")
 # Explicit, source-edition-scoped identifier fixtures; never used for text or rights approval.
 IDENTIFIER_FIXTURES = {
-    "arrive-2020": "arrive-2.0-2020", "cheers-2022": "cheers-2022",
-    "coreq-2007": "coreq-2007", "prisma-p": "prisma-p-2015",
-    "spirit-2025": "spirit-2025", "squire-2-0": "squire-2.0-2015",
+    "arrive-2020": "arrive-2.0-2020",
+    "cheers-2022": "cheers-2022",
+    "coreq-2007": "coreq-2007",
+    "prisma-p": "prisma-p-2015",
+    "spirit-2025": "spirit-2025",
+    "squire-2-0": "squire-2.0-2015",
     "srqr-2014": "srqr-2014",
 }
 GENERIC_TITLE_WORDS = {
-    "prisma", "consort", "spirit", "strobe", "squire", "stard", "tripod",
-    "arrive", "cheers", "coreq", "moose", "tidier", "conserve", "care",
-    "the", "for", "and", "of", "reporting", "guidelines", "guideline",
-    "checklist", "statement", "standards", "on", "a", "an",
+    "prisma",
+    "consort",
+    "spirit",
+    "strobe",
+    "squire",
+    "stard",
+    "tripod",
+    "arrive",
+    "cheers",
+    "coreq",
+    "moose",
+    "tidier",
+    "conserve",
+    "care",
+    "the",
+    "for",
+    "and",
+    "of",
+    "reporting",
+    "guidelines",
+    "guideline",
+    "checklist",
+    "statement",
+    "standards",
+    "on",
+    "a",
+    "an",
 }
-
 
 
 def words(value: object) -> str:
@@ -50,7 +76,7 @@ def doi(value: object) -> str | None:
     raw = value.strip().lower()
     for prefix in ("https://doi.org/", "http://doi.org/", "https://dx.doi.org/", "doi:"):
         if raw.startswith(prefix):
-            raw = raw[len(prefix):]
+            raw = raw[len(prefix) :]
             break
     return raw if re.fullmatch(r"10\.\d{4,9}/\S+", raw) else None
 
@@ -107,13 +133,19 @@ def scan_local(root: Path, item: dict) -> tuple[list[dict], list[str], dict | No
                     views.append(relative)
                     seen.add(relative)
                 if task_text is None:
-                    task_text = re.findall(r"^\s*[-*] \[[ xX]\]\s*(.+)$", path.read_text(encoding="utf-8"), re.M)
+                    task_text = re.findall(
+                        r"^\s*[-*] \[[ xX]\]\s*(.+)$", path.read_text(encoding="utf-8"), re.M
+                    )
     content = None
     if task_text is not None:
         task_text = [words(text) for text in task_text]
-        content = {"item_count": len(task_text), "item_fingerprint": hashlib.sha256("\n".join(task_text).encode()).hexdigest() if task_text else None}
-    return sorted(assets, key=lambda x:x["path"]), sorted(views), content
-
+        content = {
+            "item_count": len(task_text),
+            "item_fingerprint": hashlib.sha256("\n".join(task_text).encode()).hexdigest()
+            if task_text
+            else None,
+        }
+    return sorted(assets, key=lambda x: x["path"]), sorted(views), content
 
 
 def scan_alias_assets(root: Path, item: dict, known_ids: set[str]) -> list[dict]:
@@ -146,18 +178,23 @@ def scan_alias_assets(root: Path, item: dict, known_ids: set[str]) -> list[dict]
                 if not original.is_file() or original.is_symlink():
                     continue
                 digest = sha256(original)
-                matches.append({
-                    "path": original.relative_to(root).as_posix(),
-                    "sha256": digest,
-                    "match_basis": "sidecar_title_group_edition_candidate",
-                    "sidecar_path": sidecar.relative_to(root).as_posix(),
-                    "sidecar_digest_matches": str(record.get("checksum") or "").lower() == digest,
-                })
+                matches.append(
+                    {
+                        "path": original.relative_to(root).as_posix(),
+                        "sha256": digest,
+                        "match_basis": "sidecar_title_group_edition_candidate",
+                        "sidecar_path": sidecar.relative_to(root).as_posix(),
+                        "sidecar_digest_matches": str(record.get("checksum") or "").lower()
+                        == digest,
+                    }
+                )
     return sorted(matches, key=lambda x: x["path"])
 
 
 def scan_sidecar(root: Path, item: dict, assets: list[dict]) -> tuple[dict | None, list[str]]:
-    paths = [root / "source" / level / (item["id"] + ".yml") for level in ("archetypes", "variants")]
+    paths = [
+        root / "source" / level / (item["id"] + ".yml") for level in ("archetypes", "variants")
+    ]
     paths = [path for path in paths if path.is_file() and not path.is_symlink()]
     findings = []
     if len(paths) > 1:
@@ -170,9 +207,15 @@ def scan_sidecar(root: Path, item: dict, assets: list[dict]) -> tuple[dict | Non
     try:
         data = yaml.safe_load(path.read_text(encoding="utf-8"))
     except yaml.YAMLError:
-        return {"path": path.relative_to(root).as_posix(), "parse_status": "invalid"}, [*findings, "malformed_legacy_sidecar"]
+        return {"path": path.relative_to(root).as_posix(), "parse_status": "invalid"}, [
+            *findings,
+            "malformed_legacy_sidecar",
+        ]
     if not isinstance(data, dict):
-        return {"path": path.relative_to(root).as_posix(), "parse_status": "invalid"}, [*findings, "malformed_legacy_sidecar"]
+        return {"path": path.relative_to(root).as_posix(), "parse_status": "invalid"}, [
+            *findings,
+            "malformed_legacy_sidecar",
+        ]
     recorded = str(data.get("checksum") or "").lower()
     claimed = str(item.get("checksum") or "").lower()
     actual = {a["sha256"] for a in assets}
@@ -182,8 +225,15 @@ def scan_sidecar(root: Path, item: dict, assets: list[dict]) -> tuple[dict | Non
         findings.append("index_sidecar_checksum_conflict")
     if claimed and actual and claimed not in actual:
         findings.append("index_checksum_disagrees_with_present_asset")
-    normal = lambda x: re.sub(r"[^a-z0-9]", "", str(x or "").lower())
-    if data.get("license") and item.get("license") and normal(data["license"]) != normal(item["license"]):
+
+    def normal(value):
+        return re.sub(r"[^a-z0-9]", "", str(value or "").lower())
+
+    if (
+        data.get("license")
+        and item.get("license")
+        and normal(data["license"]) != normal(item["license"])
+    ):
         findings.append("legacy_license_claim_conflict")
     if data.get("verified") is True:
         findings.append("legacy_sidecar_verified_not_evidence")
@@ -210,7 +260,10 @@ def suggest(item: dict, rows: list[dict]) -> tuple[dict | None, str, list[dict]]
             chosen, basis = matches[0], "same_doi_candidate"
     if not chosen:
         ident = item["id"]
-        for candidate, reason in ((ident, "same_slug_candidate"), (re.sub(r"-(?:19|20)\d{2}$", "", ident), "family_slug_candidate")):
+        for candidate, reason in (
+            (ident, "same_slug_candidate"),
+            (re.sub(r"-(?:19|20)\d{2}$", "", ident), "family_slug_candidate"),
+        ):
             if candidate in lookup:
                 chosen, basis = lookup[candidate], reason
                 break
@@ -233,17 +286,32 @@ def suggest(item: dict, rows: list[dict]) -> tuple[dict | None, str, list[dict]]
                 if score >= 0.72:
                     scored.append((score, row))
     scored.sort(key=lambda x: (-x[0], x[1]["id"]))
-    alternatives = [{"id": row["id"], "title_similarity": score} for score, row in scored[:3] if not chosen or row["id"] != chosen["id"]]
+    alternatives = [
+        {"id": row["id"], "title_similarity": score}
+        for score, row in scored[:3]
+        if not chosen or row["id"] != chosen["id"]
+    ]
     if not chosen and scored:
         best = scored[0]
         if len(scored) == 1 or best[0] - scored[1][0] >= 0.08:
             chosen, basis = best[1], "title_similarity_suggestion"
     if not chosen:
         return None, "unresolved", alternatives
-    return ({"id": chosen["id"], "page_url": chosen["page_url"],
-             "source_blob_sha": chosen["source_blob_sha"], "title": chosen.get("title"),
-             "acronym": chosen.get("acronym"), "doi": chosen.get("doi"),
-             "metadata_status": chosen.get("metadata_status")}), basis, alternatives
+    return (
+        (
+            {
+                "id": chosen["id"],
+                "page_url": chosen["page_url"],
+                "source_blob_sha": chosen["source_blob_sha"],
+                "title": chosen.get("title"),
+                "acronym": chosen.get("acronym"),
+                "doi": chosen.get("doi"),
+                "metadata_status": chosen.get("metadata_status"),
+            }
+        ),
+        basis,
+        alternatives,
+    )
 
 
 def reconcile(root: Path, catalogue: dict) -> dict:
@@ -253,10 +321,16 @@ def reconcile(root: Path, catalogue: dict) -> dict:
     if not isinstance(items, list) or not items:
         raise ValueError("missing legacy checklist inventory")
     ids = [item.get("id") for item in items]
-    if any(not isinstance(x, str) or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", x) for x in ids) or len(set(ids)) != len(ids):
+    if any(
+        not isinstance(x, str) or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", x) for x in ids
+    ) or len(set(ids)) != len(ids):
         raise ValueError("duplicate or invalid legacy source ID")
     fixture_path = root / "tests/fixtures/held-guidelines/source-item-identities.json"
-    fixtures = json.loads(fixture_path.read_text(encoding="utf-8")).get("editions", {}) if fixture_path.is_file() else {}
+    fixtures = (
+        json.loads(fixture_path.read_text(encoding="utf-8")).get("editions", {})
+        if fixture_path.is_file()
+        else {}
+    )
     found = []
     for item in items:
         candidate, basis, alternatives = suggest(item, rows)
@@ -264,23 +338,42 @@ def reconcile(root: Path, catalogue: dict) -> dict:
         aliases = scan_alias_assets(root, item, set(ids)) if not assets else []
         assets.extend(aliases)
         sidecar, sidecar_findings = scan_sidecar(root, item, assets)
-        findings = ["legacy_content_not_authority", "rights_unassessed_for_legacy_text", *sidecar_findings]
-        if aliases: findings.append("source_asset_filename_alias_unverified")
-        if not assets: findings.append("no_original_asset")
-        if not views: findings.append("no_legacy_markdown")
+        findings = [
+            "legacy_content_not_authority",
+            "rights_unassessed_for_legacy_text",
+            *sidecar_findings,
+        ]
+        if aliases:
+            findings.append("source_asset_filename_alias_unverified")
+        if not assets:
+            findings.append("no_original_asset")
+        if not views:
+            findings.append("no_legacy_markdown")
         if item.get("variant_of") and item["variant_of"] not in ids:
             findings.append("orphan_variant_parent")
         if candidate and candidate["metadata_status"] == "needs_review":
             findings.append("equator_metadata_exception")
         version = str(item.get("version", ""))
         if candidate and YEAR.fullmatch(version):
-            declared = {m.group() for key in ("title", "acronym") for m in YEAR.finditer(candidate.get(key) or "")}
+            declared = {
+                m.group()
+                for key in ("title", "acronym")
+                for m in YEAR.finditer(candidate.get(key) or "")
+            }
             if declared and version not in declared:
                 findings.append("possible_edition_difference")
-        if candidate and basis in {"title_similarity_suggestion", "family_slug_candidate", "same_acronym_candidate"}:
+        if candidate and basis in {
+            "title_similarity_suggestion",
+            "family_slug_candidate",
+            "same_acronym_candidate",
+        }:
             findings.append("identity_requires_source_confirmation")
         fixture = fixtures.get(IDENTIFIER_FIXTURES.get(item["id"], ""))
-        identifier_count = len(fixture["item_ids"]) if fixture and isinstance(fixture.get("item_ids"), list) else None
+        identifier_count = (
+            len(fixture["item_ids"])
+            if fixture and isinstance(fixture.get("item_ids"), list)
+            else None
+        )
         if identifier_count is not None and content and content["item_count"] != identifier_count:
             findings.append("legacy_count_differs_from_independent_identifier_fixture")
         canonical_count = None
@@ -292,29 +385,47 @@ def reconcile(root: Path, catalogue: dict) -> dict:
                 if content and canonical_count != content["item_count"]:
                     findings.append("legacy_count_differs_from_canonical_pack")
         entry = {
-            "legacy_id": item["id"], "legacy_title": item.get("title"), "legacy_status": item.get("status", "unset"),
-            "legacy_version": version or None, "legacy_group": item.get("group"), "legacy_variant_of": item.get("variant_of"),
-            "equator_candidate": candidate, "link_basis": basis, "alternatives": alternatives,
-            "source_assets": assets, "legacy_sidecar": sidecar,
-            "legacy_views": views, "legacy_item_inventory": content,
-            "independent_identifier_count": identifier_count, "canonical_pack_item_count": canonical_count,
-            "rights": "unassessed", "admission": "unverified_candidate" if candidate else "unresolved", "findings": sorted(findings),
+            "legacy_id": item["id"],
+            "legacy_title": item.get("title"),
+            "legacy_status": item.get("status", "unset"),
+            "legacy_version": version or None,
+            "legacy_group": item.get("group"),
+            "legacy_variant_of": item.get("variant_of"),
+            "equator_candidate": candidate,
+            "link_basis": basis,
+            "alternatives": alternatives,
+            "source_assets": assets,
+            "legacy_sidecar": sidecar,
+            "legacy_views": views,
+            "legacy_item_inventory": content,
+            "independent_identifier_count": identifier_count,
+            "canonical_pack_item_count": canonical_count,
+            "rights": "unassessed",
+            "admission": "unverified_candidate" if candidate else "unresolved",
+            "findings": sorted(findings),
         }
         found.append(entry)
-    fingerprints = Counter(x["legacy_item_inventory"]["item_fingerprint"] for x in found
-                           if x["legacy_item_inventory"] and x["legacy_item_inventory"]["item_fingerprint"])
+    fingerprints = Counter(
+        x["legacy_item_inventory"]["item_fingerprint"]
+        for x in found
+        if x["legacy_item_inventory"] and x["legacy_item_inventory"]["item_fingerprint"]
+    )
     for x in found:
         desc = x["legacy_item_inventory"]
         if desc and fingerprints[desc["item_fingerprint"]] > 1:
             x["findings"].append("duplicate_legacy_item_text")
             x["findings"].sort()
     return {
-        "schema_version": 1, "authority": "candidate_links_only_not_source_verification",
-        "equator_revision": catalogue["source_revision"], "equator_published_count": len(rows),
+        "schema_version": 1,
+        "authority": "candidate_links_only_not_source_verification",
+        "equator_revision": catalogue["source_revision"],
+        "equator_published_count": len(rows),
         "legacy_item_count": len(found),
         "summary": {
             "by_link_basis": dict(sorted(Counter(row["link_basis"] for row in found).items())),
-            "by_finding": dict(sorted(Counter(note for row in found for note in row["findings"]).items())),
+            "by_finding": dict(
+                sorted(Counter(note for row in found for note in row["findings"]).items())
+            ),
             "with_original_assets": sum(bool(row["source_assets"]) for row in found),
             "with_legacy_markdown": sum(bool(row["legacy_views"]) for row in found),
             "verified_legacy_checklists": 0,
@@ -331,8 +442,12 @@ def main() -> int:
     args = parser.parse_args()
     report = reconcile(args.root, json.loads(args.catalogue.read_text(encoding="utf-8")))
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(f"{report['legacy_item_count']} legacy records; proposed link bases: {report['summary']['by_link_basis']}; zero verified by this process")
+    args.output.write_text(
+        json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
+    print(
+        f"{report['legacy_item_count']} legacy records; proposed link bases: {report['summary']['by_link_basis']}; zero verified by this process"
+    )
     return 0
 
 

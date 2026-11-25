@@ -1,4 +1,4 @@
-# Reporting guideline interoperability and assurance — draft profile 0.1
+# Reporting guideline interoperability and assurance
 
 Status: **proposed technical specification for discussion**, not an EQUATOR
 standard, reporting guideline for a study type, legal permission, or accepted
@@ -8,24 +8,15 @@ document proposes a profile over them; it does not introduce another format.
 Track 01 owns representation/source; Track 04 consumer exchange; Track 05
 qualification. Issues #111, #118, #95, #82, #149, #30, #31, #116.
 
-## Proposed requirements (MoSCoW)
+## Versioned technical specification
 
-| ID | Priority | Conformance assertion and evidence |
-| --- | --- | --- |
-| RGI-01 | Must | Identify issuing authority, family, exact edition/language, stable ID, citation, version and explicit extension/translation/supersession relations; slugs are not identities. |
-| RGI-02 | Must | Bind each source artifact to URI, retrieval evidence, byte hash, source type and licence; rights apply to individual text, figures and translations. No presumed licence from catalogue inclusion. |
-| RGI-03 | Must | Preserve printed IDs, stable IDs, order, hierarchy, subitems, source wording where permitted and exact source anchors; distinguish missing from not applicable. Independent complete-row comparison and negative mutations. |
-| RGI-04 | Must | Separate verbatim text, normalized requirement, explanation, local interpretation and manuscript evidence. A normalized obligation never silently replaces source text. |
-| RGI-05 | Must | Preserve modality, actor, action, object, evidence expectation, quantification, conditions, exceptions and coordination; hold unresolved logical scope instead of inventing it. Require anchored interpretation receipts. |
-| RGI-06 | Must | Distinguish equivalent, narrower, broader, contradictory and indeterminate mappings using the same explicit applicability universe; inverse mapping, valid witnesses, uncertainty and provenance retained. No similarity or majority-vote admission. |
-| RGI-07 | Must | Separate source fidelity, interpretation, rights, applicability, interoperability, usability and external qualification. Missing evidence is a held state, not a negative assessment or passed test. |
-| RGI-08 | Must | Deterministic content-addressed packs and derived exports, exact revision/input/version pins, stable keys and schema/order/value conservation. Parquet is a derived view, not authority. |
-| RGI-09 | Must | Evaluation receipts bind models, labels, calibration, source pins, disjoint development/held-out families, errors, abstentions and resources; maintain failed receipts and prevent test leakage. |
-| RGI-10 | Must | Reporting compliance means evidence that a requirement is addressed, not study-design or methodological quality. Manuscript evidence assessment is a separate contract and benchmark. |
-| RGI-11 | Should | Accessible generated checklist/diagram representations, explicit not-applicable/unknown states and tested consumer import/export; fail closed on wrong edition or missing mappings. |
-| RGI-12 | Should | Reuse existing provenance, catalogue and packaging vocabularies: PROV-O, DCAT, SKOS with explicit directional semantics, RO-Crate, SPDX and JSON Schema. Map only on a demonstrated consumer need; SHACL if an RDF projection is necessary. |
-| RGI-13 | Could | Cross-edition semantic diffs, cross-guideline coverage graph, official translations, extractive manuscript evidence support. |
-| RGI-14 | Won't | Claim EQUATOR endorsement, redesign reporting guidance, copy rights-unclear prose, infer universal report quality, construct another canonical schema or service. |
+The normative proposal is now the immutable [profile 0.1.0](../specifications/reporting-guideline-representation/0.1.0.md),
+tracked by the [version and approval registry](../../contracts/representation/releases.json).
+It retains RGI-01–14 and defines directed relation semantics, applicability,
+version compatibility and explicit approval receipts. Its status is **draft**;
+there is no recorded specification approval or EQUATOR endorsement. This page
+is the evolving architecture and evidence overview, not a second specification.
+Run `python -m scripts.validate_representation_spec` to check snapshot integrity.
 
 Existing executable foundations: [Canonical Standard Pack](CANONICAL_STANDARD_PACK.md),
 [`standard-pack.v1.schema.json`](../../schemas/standard-pack.v1.schema.json),
@@ -88,8 +79,12 @@ classifiers. Candidate shortlist, not installed or evaluated here:
 | [answerdotai/ModernBERT-large](https://huggingface.co/answerdotai/ModernBERT-large), [microsoft/deberta-v3-large](https://huggingface.co/microsoft/deberta-v3-large) | Base encoders only; skip fine-tuning absent sufficient independently qualified training/evaluation data. |
 | [LiquidAI/d1-2B](https://huggingface.co/LiquidAI/d1-2B) | Conditional decision-model trial for typed implication questions, scope, abstention and source-span extraction. Publisher reports calibrated one-pass decisions, not this task accuracy; LFM Open License, custom-code/runtime and model integrity review before any execution. |
 
-Only one additional challenger at a time, against the best retained baseline
-on the same independent pairs. Prefer the existing ONNX CPU harness if exact
+Only one additional challenger at a time, against the retained baseline
+on the same independent pairs. Standalone superiority is not required:
+predeclare incremental supported errors at a fixed review budget, shared misses,
+spurious flags, harmful changed decisions, abstention, calibration and cost.
+A second model is useful only if measured evidence supports that role;
+architectural diversity alone does not establish independent errors. Prefer the existing ONNX CPU harness if exact
 assets fit; use local GPU only when measured. Pin weights/config/tokenizer
 and label mapping; prohibit silent truncation and remote model code. Treat
 larger generative judges, document rerankers and extractive QA as separate
@@ -100,7 +95,7 @@ contradiction/satisfiability or abstention; deterministic mapping avoids
 semantic class name inversion but does not establish truth. Do not benchmark
 more models solely because a newer checkpoint exists.
 
-## Actual programme receipt — 24 November 2026
+## Historical programme receipt — 24 November 2026
 
 Receiving main `30992df89f85c07ec7bb0d7187b438510456b2bc` after #154.
 [Assurance](https://github.com/edithatogo/standards_check/actions/runs/45400651706)
@@ -153,12 +148,18 @@ baseline hash RED on simulated manifest update, GREEN after change; three
 local tests and five subtests passed, 17 synthetic rule challenge replayed.
 No trained 3.8.18 inference or full checkout local run claimed. Build
 Documents [45400651928](https://github.com/edithatogo/standards_check/actions/runs/45400651928)
-built successfully but deploy-pages twice could not find github-pages-1/-2
+built successfully but deploy-pages twice could not find `github-pages-1`/`github-pages-2`
 despite successful REST metadata verification; preserve both receipts,
 investigate provider/API visibility via existing #123, no weakened artifact
 binding or custom deployment substitute.
 
 ## Publication and external engagement
+
+The executable publication plan is now the [protocol 0.1.0](../research/publication-protocol.v0.1.0.md),
+[experiment/claim contract](../../contracts/publication/programme.v1.json) and
+[publication-evidence skill](../../.agents/skills/publication-evidence/SKILL.md).
+The initial contract is planned, with no experimental freeze, model execution
+or observed scientific claim. Its validator checks integrity, not truth.
 
 Publish as an RFC-style technical interoperability/assurance profile, with
 synthetic fixtures, schemas, implementation reference, conformance tests,
@@ -191,6 +192,11 @@ References for interoperability: [DCAT 3](https://www.w3.org/TR/vocab-dcat/),
 
 ## Ordered remaining delivery
 
+Current execution and accepted/held integration are recorded in the
+[representation programme receipt](../../conductor/tracks/01-canonical-standard-pack/representation-programme-20261124.md).
+The sequence below is retained from the earlier receipt; #145 and #142 now
+have later integration evidence. Preserve scientific and source gates.
+
 1. Verify receiving revision of the runtime-pin fix and rerun #145 without
    dropping the exact-runtime gate; finish #146 and #30 with real receipts.
 2. Resolve #142 source resume conflict; reuse #150 projection and integrate
@@ -209,3 +215,10 @@ References for interoperability: [DCAT 3](https://www.w3.org/TR/vocab-dcat/),
 No additional runtime dependency, source content, canonical pack promotion,
 accepted technical standard, external contact, or production model promotion
 is created by this document.
+
+## Ongoing model and method qualification
+
+Use the [dated frontier evaluation record](../research/frontier-evaluation-20261125.md)
+for observed comparative value, failures, source links, promotion boundaries and model
+review triggers. The publication contract remains the sole prospective run and claim
+ledger. A newly announced model is a challenger, not an automatic replacement.

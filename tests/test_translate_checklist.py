@@ -51,7 +51,7 @@ def test_translate_markdown_file_preserves_structure_and_runs_translation(tmp_pa
         "scripts.translate_checklist._load_translation_model",
         return_value=(tokenizer, model),
     ) as load_model:
-        result = translate_markdown_file(source, "fr")
+        result = translate_markdown_file(source, "fr", "a" * 40)
 
     assert result == (
         "# Main Header\n"
@@ -61,7 +61,7 @@ def test_translate_markdown_file_preserves_structure_and_runs_translation(tmp_pa
         "  - Élément de liste 1\n"
         "    - Élément imbriqué\n"
     )
-    load_model.assert_called_once_with("Helsinki-NLP/opus-mt-en-fr")
+    load_model.assert_called_once_with("Helsinki-NLP/opus-mt-en-fr", "a" * 40)
     tokenizer.assert_called_once_with(
         ["Normal text here", "- List item 1", "- Nested item"],
         return_tensors="pt",
@@ -92,9 +92,9 @@ def test_translate_markdown_file_reports_missing_model(tmp_path, capsys):
         side_effect=OSError("Model not found"),
     ) as load_model:
         with pytest.raises(SystemExit) as error:
-            translate_markdown_file(source, "unknown-lang")
+            translate_markdown_file(source, "unknown-lang", "a" * 40)
     assert error.value.code == 1
-    load_model.assert_called_once_with("Helsinki-NLP/opus-mt-en-unknown-lang")
+    load_model.assert_called_once_with("Helsinki-NLP/opus-mt-en-unknown-lang", "a" * 40)
     assert "Model for target language 'unknown-lang' not found" in capsys.readouterr().out
 
 

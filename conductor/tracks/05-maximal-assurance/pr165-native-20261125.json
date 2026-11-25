@@ -1,0 +1,309 @@
+{
+  "components": {
+    "api": {
+      "artifact_id": 14937622952,
+      "artifact_name": "coverage-api-a7c9390a2607c03991b7cae25b9713ad6c476acc",
+      "artifact_url": "https://github.com/edithatogo/standards_check/actions/runs/45429972699/artifacts/14937622952",
+      "artifact_zip_sha256": "e757feffe9f47eb818e0d625640b2c8322a05f25f7f371120962ea119e8aeee2",
+      "coverage": {
+        "branch_percent": 97.61904761904762,
+        "function_percent": 100.0,
+        "lcov_totals": {
+          "BRF": 42,
+          "BRH": 41,
+          "FNF": 11,
+          "FNH": 11,
+          "LF": 143,
+          "LH": 143
+        },
+        "line_percent": 100.0
+      },
+      "digest_and_binding_verified": true,
+      "files": [
+        {
+          "path": "api.lcov",
+          "sha256": "1ee169667d5a40991d90824299f109fb79e102ee824faff5a9fb46c2ad3d2b1e"
+        },
+        {
+          "path": "commit.txt",
+          "sha256": "cfc141a2401f0a0b030e48d02e30ef7e1ecb74a9ba275c110e1668a759aab3eb"
+        },
+        {
+          "path": "report.sha256",
+          "sha256": "c33db3e40b7eda0c36c550b17f5c6f009fda001a31513a12a65e7b58079f8467"
+        }
+      ],
+      "job_id": 138572257560,
+      "job_log_sha256_utf8": "a580756ebbc4c6ff7a1b163b530d4472b4a4ed11e20d0db20cc2393ab86d1118",
+      "job_url": "https://github.com/edithatogo/standards_check/actions/runs/45429972699/job/138572257560",
+      "report": "api.lcov",
+      "report_sha256": "1ee169667d5a40991d90824299f109fb79e102ee824faff5a9fb46c2ad3d2b1e",
+      "status": "success",
+      "tested_checkout": "a7c9390a2607c03991b7cae25b9713ad6c476acc",
+      "tests": {
+        "cancelled": 0,
+        "fail": 0,
+        "pass": 41,
+        "skipped": 0,
+        "tests": 41
+      }
+    },
+    "python": {
+      "artifact_id": 14937797463,
+      "artifact_name": "coverage-python-a7c9390a2607c03991b7cae25b9713ad6c476acc",
+      "artifact_url": "https://github.com/edithatogo/standards_check/actions/runs/45429972699/artifacts/14937797463",
+      "artifact_zip_sha256": "e75cf7fa2a377a68184e341eaf1bac1275b36973990ed40fe0ac11c453a108bd",
+      "coverage": {
+        "covered_branches": 2096,
+        "covered_lines": 5705,
+        "excluded_lines": 0,
+        "missing_branches": 294,
+        "missing_lines": 417,
+        "num_branches": 2390,
+        "num_partial_branches": 252,
+        "num_statements": 6122,
+        "percent_branches_covered": 87.69874476987448,
+        "percent_branches_covered_display": "87.70",
+        "percent_covered": 91.64708646616542,
+        "percent_covered_display": "91.65",
+        "percent_statements_covered": 93.18850049003593,
+        "percent_statements_covered_display": "93.19"
+      },
+      "digest_and_binding_verified": true,
+      "files": [
+        {
+          "path": "commit.txt",
+          "sha256": "cfc141a2401f0a0b030e48d02e30ef7e1ecb74a9ba275c110e1668a759aab3eb"
+        },
+        {
+          "path": "native-renderers.txt",
+          "sha256": "4fb54d2141eea720b550fc259179167e5cf3adb82c3f77fe0a039d18d0ed36fe"
+        },
+        {
+          "path": "python.json",
+          "sha256": "ce8abd7a5f3369b73c775fecff82b0f600a3a876e37474cea011e31df29a8279"
+        },
+        {
+          "path": "python.xml",
+          "sha256": "e94870d410a5ebe87381ab537d543eef2ff237f68c4f7aa641a82328468fad0d"
+        },
+        {
+          "path": "report.sha256",
+          "sha256": "d4cc1f869228966209dde3e38ea826aac7aa446f5384614bd427155cc6a9b937"
+        },
+        {
+          "path": "tests.log",
+          "sha256": "cbe761a544a302eaac4418b3dd96ef002a3b36248ddf261d3bbcbe7a0f6fe77a"
+        }
+      ],
+      "job_id": 138572257513,
+      "job_log_sha256_utf8": "eaeee026525f32838b53bcc5250254d91ac9f643d5a0e772fd19ab81428f58d9",
+      "job_url": "https://github.com/edithatogo/standards_check/actions/runs/45429972699/job/138572257513",
+      "native_png_to_tiff_probe": "pass",
+      "report": "python.xml",
+      "report_sha256": "e94870d410a5ebe87381ab537d543eef2ff237f68c4f7aa641a82328468fad0d",
+      "status": "success",
+      "tested_checkout": "a7c9390a2607c03991b7cae25b9713ad6c476acc",
+      "tests": {
+        "duration_seconds": 31.95,
+        "failed": 0,
+        "passed": 640,
+        "skipped": 0
+      }
+    },
+    "rust": {
+      "artifact_id": 14938127340,
+      "artifact_name": "coverage-rust-a7c9390a2607c03991b7cae25b9713ad6c476acc",
+      "artifact_url": "https://github.com/edithatogo/standards_check/actions/runs/45429972699/artifacts/14938127340",
+      "artifact_zip_sha256": "044333229ee320aa2b240333d77767f7d1e18b8235558494e83d159cda82f2b8",
+      "coverage": {
+        "branches": {
+          "count": 0,
+          "covered": 0,
+          "notcovered": 0,
+          "percent": 0
+        },
+        "functions": {
+          "count": 313,
+          "covered": 268,
+          "percent": 85.6230031948882
+        },
+        "instantiations": {
+          "count": 670,
+          "covered": 453,
+          "percent": 67.61194029850746
+        },
+        "lines": {
+          "count": 3466,
+          "covered": 3178,
+          "percent": 91.69070975187536
+        },
+        "mcdc": {
+          "count": 0,
+          "covered": 0,
+          "notcovered": 0,
+          "percent": 0
+        },
+        "regions": {
+          "count": 3501,
+          "covered": 3055,
+          "notcovered": 446,
+          "percent": 87.26078263353327
+        }
+      },
+      "digest_and_binding_verified": true,
+      "files": [
+        {
+          "path": "commit.txt",
+          "sha256": "cfc141a2401f0a0b030e48d02e30ef7e1ecb74a9ba275c110e1668a759aab3eb"
+        },
+        {
+          "path": "report.sha256",
+          "sha256": "87eedb971fb22bebefcf2347a1d9630f381eaae05a5235e95c7631417843eb45"
+        },
+        {
+          "path": "rust-summary.json",
+          "sha256": "4487e492cc3529864639fb0620b1c67d7214d6cd367d27378b5d1394662157eb"
+        },
+        {
+          "path": "rust.lcov",
+          "sha256": "41f082f2e474cc3c5e87b303c3d4ce1c33bb861d5ada34457a5ba02d220d2f84"
+        },
+        {
+          "path": "tests.log",
+          "sha256": "2dd3eeec51a568e7ade7ba66ca3f158ae24b87fa4a96cca36d7059d839b4d364"
+        }
+      ],
+      "job_id": 138572257893,
+      "job_log_sha256_utf8": "7fd71b706b0de73a85b46d955ed9feafa19225b9344d8c149804cdc197efa068",
+      "job_url": "https://github.com/edithatogo/standards_check/actions/runs/45429972699/job/138572257893",
+      "lcov_totals": {
+        "BRF": 0,
+        "BRH": 0,
+        "FNF": 313,
+        "FNH": 268,
+        "LF": 3466,
+        "LH": 3178
+      },
+      "report": "rust.lcov",
+      "report_sha256": "41f082f2e474cc3c5e87b303c3d4ce1c33bb861d5ada34457a5ba02d220d2f84",
+      "status": "success",
+      "tested_checkout": "a7c9390a2607c03991b7cae25b9713ad6c476acc",
+      "tests": {
+        "failed": 0,
+        "ignored": 0,
+        "passed": 96,
+        "result_summaries": 15
+      }
+    }
+  },
+  "evidence_snapshot_files": [
+    {
+      "path": "api-snapshot-final.json",
+      "sha256": "95ae90337147c0b735f439845c1eb094759ce2d7093319f58532264ec1ed5540"
+    },
+    {
+      "path": "api-snapshot-initial.json",
+      "sha256": "6865a9ee52956761fd6b62d7ec9d777f936007f21a0049dfa08be6430f103a01"
+    }
+  ],
+  "failures": [],
+  "native_platforms": {
+    "macos": {
+      "corrected_lock_tests": {
+        "lock_read_rejects_nonregular_and_overflowing_inputs": true,
+        "native_symlink_boundaries_preserve_the_target": true
+      },
+      "job_id": 138572257869,
+      "job_log_sha256_utf8": "e005b08d8275cb43706a7ec538ec39aa31df8644e6d87028cf04f59bdb1bd036",
+      "job_url": "https://github.com/edithatogo/standards_check/actions/runs/45429972699/job/138572257869",
+      "scope_step_results": {
+        "Check the canonical pack lock through the CLI": "success",
+        "Exercise deterministic scene output through the CLI": "success",
+        "Test all workspace targets and features": "success",
+        "Test workspace documentation examples": "success"
+      },
+      "status": "success",
+      "tested_checkout": "a7c9390a2607c03991b7cae25b9713ad6c476acc",
+      "tests": {
+        "failed": 0,
+        "ignored": 0,
+        "passed": 95,
+        "result_summaries": 17
+      }
+    },
+    "ubuntu": {
+      "corrected_lock_tests": {
+        "lock_read_rejects_nonregular_and_overflowing_inputs": true,
+        "native_symlink_boundaries_preserve_the_target": true,
+        "non_utf8_filename_cannot_enter_a_pack_manifest": true
+      },
+      "job_id": 138572257374,
+      "job_log_sha256_utf8": "9e252519ea4dadb9308915d3e7b45f92954ab892de25b9ae69a338a3cd2cc4f9",
+      "job_url": "https://github.com/edithatogo/standards_check/actions/runs/45429972699/job/138572257374",
+      "scope_step_results": {
+        "Check the canonical pack lock through the CLI": "success",
+        "Exercise deterministic scene output through the CLI": "success",
+        "Test all workspace targets and features": "success",
+        "Test workspace documentation examples": "success"
+      },
+      "status": "success",
+      "tested_checkout": "a7c9390a2607c03991b7cae25b9713ad6c476acc",
+      "tests": {
+        "failed": 0,
+        "ignored": 0,
+        "passed": 96,
+        "result_summaries": 17
+      }
+    },
+    "windows": {
+      "corrected_lock_tests": {
+        "lock_read_rejects_nonregular_and_overflowing_inputs": true
+      },
+      "job_id": 138572257595,
+      "job_log_sha256_utf8": "3579b39a335e41a27f4ef79d044dc07402823609a0356581f444cb3f3f93cbda",
+      "job_url": "https://github.com/edithatogo/standards_check/actions/runs/45429972699/job/138572257595",
+      "scope_step_results": {
+        "Check the canonical pack lock through the CLI": "success",
+        "Exercise deterministic scene output through the CLI": "success",
+        "Test all workspace targets and features": "success",
+        "Test workspace documentation examples": "success"
+      },
+      "status": "success",
+      "tested_checkout": "a7c9390a2607c03991b7cae25b9713ad6c476acc",
+      "tests": {
+        "failed": 0,
+        "ignored": 0,
+        "passed": 91,
+        "result_summaries": 17
+      }
+    }
+  },
+  "observed_at": "2026-11-24T15:55:52.762788+00:00",
+  "protected_aggregate": {
+    "conclusion": "success",
+    "job_id": 138573903277
+  },
+  "pull_request": 165,
+  "repository": "edithatogo/standards_check",
+  "representation_note": "File-digest maps are represented as path/sha256 records to avoid the demonstrated generic API-key false positive; all native measurements, identities and digest values are preserved.",
+  "schema_version": 1,
+  "scope": "Native test and coverage evidence for this tested tree; no scientific equivalence, source-rights, or model qualification claim.",
+  "source_binding": {
+    "base": "82e4a1efc136187f42b31347ada44506d2d96bfa",
+    "pr_head": "d73ce920aa5934f251fd958f2791bf994266d100",
+    "pr_head_tree": "3cce524076fdfdc50f7566ac16d9784d6066e4a9",
+    "tested_synthetic_merge": "a7c9390a2607c03991b7cae25b9713ad6c476acc",
+    "tested_tree": "3cce524076fdfdc50f7566ac16d9784d6066e4a9",
+    "trees_equal_verified_via_git_commit_api": true
+  },
+  "transcribed_from_sha256": "035c4c45ed00265f9e3246d4a984c918fc64cce12c8d1ee152d02f4d9cb77676",
+  "workflow_run": {
+    "attempt": 1,
+    "conclusion": "success",
+    "event": "pull_request",
+    "id": 45429972699,
+    "status": "completed",
+    "url": "https://github.com/edithatogo/standards_check/actions/runs/45429972699"
+  }
+}

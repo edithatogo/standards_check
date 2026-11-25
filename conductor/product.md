@@ -1,6 +1,6 @@
 # Product: StandardFlow
 
-StandardFlow is a machine-actionable research-standards platform. It represents authoritative
+StandardFlow is a machine-readable reporting-standard representation, reconciliation and assurance system. It represents authoritative
 standards and their provenance as versioned Canonical Standard Packs, resolves which requirements
 apply to a research project, captures evidence against those requirements, and deterministically
 generates checklists, forms, diagrams and submission artefacts.
