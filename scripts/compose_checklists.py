@@ -6,7 +6,9 @@ import argparse
 import hashlib
 import json
 import math
+import re
 from collections import Counter
+from itertools import combinations
 from pathlib import Path
 
 from .lexical_text import normalise
@@ -17,10 +19,12 @@ MAX_TEXT_CHARS = 8192
 MAX_PACK_BYTES = 4_000_000
 
 
-def compose(packs: list[dict], *, top_k: int = 5) -> dict:
+def compose(packs: list[dict], *, top_k: int = 5, method: str = "word") -> dict:
     """Preserve every obligation; only repeat selection of identical packs is deduplicated."""
     if type(top_k) is not int or not 1 <= top_k <= 20:
         raise ValueError("top_k must be an integer in 1..20")
+    if method not in ("word", "char"):
+        raise ValueError("unknown statistical retrieval method")
     if not packs:
         raise ValueError("select at least one reporting checklist")
     schema = validator("standard-pack.v1.schema.json")
@@ -64,11 +68,17 @@ def compose(packs: list[dict], *, top_k: int = 5) -> dict:
                 text = item["normalized_requirement"]
                 if len(text) > MAX_TEXT_CHARS:
                     raise ValueError("normalized text limit exceeded")
-                words = normalise(text).split()
+                normalized = normalise(text)
+                words = normalized.split()
                 status = "held_no_terms"
                 if words:
-                    terms = Counter(words)
-                    terms.update(" ".join(pair) for pair in zip(words, words[1:], strict=False))
+                    if method == "word":
+                        terms = Counter(words)
+                        bigrams = zip(words, words[1:], strict=False)
+                        terms.update(" ".join(pair) for pair in bigrams)
+                    else:
+                        padded = f" {normalized} "
+                        terms = Counter(padded[i : i + 3] for i in range(len(padded) - 2))
                     documents[key] = terms
                     status = "candidate_review"
             nodes.append(
@@ -108,8 +118,14 @@ def compose(packs: list[dict], *, top_k: int = 5) -> dict:
                     "status": "candidate_similarity",
                 }
             )
+    snapshot = hashlib.sha256(json.dumps(pack_rows, sort_keys=True).encode()).hexdigest()
     return {
-        "method": "word-unigram-bigram-tfidf-cosine-v1",
+        "method": (
+            "word-unigram-bigram-tfidf-cosine-v1"
+            if method == "word"
+            else "character-trigram-tfidf-cosine-v1"
+        ),
+        "pack_snapshot_sha256": snapshot,
         "top_k": top_k,
         "packs": pack_rows,
         "requirements": nodes,
@@ -117,6 +133,93 @@ def compose(packs: list[dict], *, top_k: int = 5) -> dict:
         "semantic_merges": 0,
         "applicability": "not_assessed",
         "claim_boundary": "Local candidate preview only; no equivalent relation or reporting decision.",
+    }
+
+
+def apply_display_review(report: dict, review: dict) -> dict:
+    """Build a local display view; receipt hashes are declarations, not authentication."""
+    if not isinstance(review, dict) or set(review) != {
+        "pack_snapshot_sha256",
+        "scope_sha256",
+        "groups",
+    }:
+        raise ValueError("invalid display review fields")
+    if review["pack_snapshot_sha256"] != report["pack_snapshot_sha256"]:
+        raise ValueError("stale pack snapshot")
+
+    def is_hash(value):
+        return isinstance(value, str) and re.fullmatch(r"[0-9a-f]{64}", value) is not None
+
+    if not is_hash(review["scope_sha256"]) or not isinstance(review["groups"], list):
+        raise ValueError("invalid scope or groups")
+    statuses = {tuple(row["key"]): row["status"] for row in report["requirements"]}
+
+    def checked_key(value):
+        if (
+            not isinstance(value, list)
+            or len(value) != 3
+            or not all(isinstance(part, str) for part in value)
+        ):
+            raise ValueError("invalid requirement key")
+        key = tuple(value)
+        if statuses.get(key) != "candidate_review":
+            raise ValueError("unknown or held requirement")
+        return key
+
+    used = set()
+    display = []
+    for group in review["groups"]:
+        if not isinstance(group, dict) or set(group) != {"members", "pairs"}:
+            raise ValueError("invalid group fields")
+        if not isinstance(group["members"], list) or not isinstance(group["pairs"], list):
+            raise ValueError("invalid group members or pairs")
+        members = sorted(checked_key(value) for value in group["members"])
+        if len(members) < 2 or len(set(members)) != len(members) or used.intersection(members):
+            raise ValueError("groups must be disjoint and contain distinct requirements")
+        if len({key[0] for key in members}) != len(members):
+            raise ValueError("only cross-pack grouping is supported")
+        required_pairs = set(combinations(members, 2))
+        receipts = {}
+        for pair in group["pairs"]:
+            if not isinstance(pair, dict) or set(pair) != {
+                "left",
+                "right",
+                "relation",
+                "receipt_sha256",
+            }:
+                raise ValueError("invalid pair review fields")
+            keys = tuple(sorted((checked_key(pair["left"]), checked_key(pair["right"]))))
+            if (
+                keys not in required_pairs
+                or keys in receipts
+                or pair["relation"] != "equivalent"
+                or not is_hash(pair["receipt_sha256"])
+            ):
+                raise ValueError("invalid or duplicate pair review")
+            receipts[keys] = pair["receipt_sha256"]
+        if receipts.keys() != required_pairs:
+            raise ValueError("every pair needs explicit equivalent review; no transitive closure")
+        used.update(members)
+        display.append(
+            {
+                "members": [list(key) for key in members],
+                "status": "local_equivalence_review_declared",
+                "pairs": [
+                    {"left": list(left), "right": list(right), "receipt_sha256": receipt}
+                    for (left, right), receipt in sorted(receipts.items())
+                ],
+            }
+        )
+    display.extend(
+        {"members": [list(key)], "status": status, "pairs": []}
+        for key, status in sorted(statuses.items())
+        if key not in used
+    )
+    return {
+        **report,
+        "display_groups": sorted(display, key=lambda group: group["members"]),
+        "review_scope_sha256": review["scope_sha256"],
+        "display_claim_boundary": "Local grouping only; receipt authenticity and applicability unverified.",
     }
 
 
@@ -133,6 +236,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--pack", action="append", type=Path, required=True)
     parser.add_argument("--top-k", type=int, default=5)
+    parser.add_argument("--method", choices=("word", "char"), default="word")
+    parser.add_argument("--group-review", type=Path)
     args = parser.parse_args()
     packs, hashes = [], set()
     for path in args.pack:
@@ -142,7 +247,13 @@ def main() -> None:
             raise ValueError("pack byte limit exceeded")
         packs.append(json.loads(raw, object_pairs_hook=unique_fields))
         hashes.add(hashlib.sha256(raw).hexdigest())
-    report = compose(packs, top_k=args.top_k)
+    report = compose(packs, top_k=args.top_k, method=args.method)
+    if args.group_review is not None:
+        with args.group_review.open("rb") as handle:
+            raw = handle.read(MAX_PACK_BYTES + 1)
+        if len(raw) > MAX_PACK_BYTES:
+            raise ValueError("review byte limit exceeded")
+        report = apply_display_review(report, json.loads(raw, object_pairs_hook=unique_fields))
     report["input_file_sha256s"] = sorted(hashes)
     print(json.dumps(report, indent=2, sort_keys=True))
 

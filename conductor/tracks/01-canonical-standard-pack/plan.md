@@ -228,3 +228,5 @@ production model is introduced.
 - [ ] **T01.051** ([#82](https://github.com/edithatogo/standards_check/issues/82), [#149](https://github.com/edithatogo/standards_check/issues/149)) Qualify reviewed equivalence display groups, applicability-aware implication, conflict and graph projections with original identities conserved.
 
 See [composition and requirement graph design](../../../docs/architecture/CHECKLIST_COMPOSITION.md). The first bounded preview does not authorize merging distinct semantic obligations or admitting new packs.
+
+Composition follow-up (26 November): word and character TF-IDF comparison and optional conservative local display partition; see [composition design and synthetic development receipt](../../../docs/architecture/CHECKLIST_COMPOSITION.md). T01.049–051 remain open for independent real-source, applicability and reviewed-relation qualification. T04.007–008 remain open for pinned consumer evidence. No automatic semantic merge.
