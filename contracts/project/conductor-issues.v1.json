@@ -1,0 +1,243 @@
+{
+  "schema_version": "dev.standardflow.conductor-issues.v1",
+  "repository": "edithatogo/standards_check",
+  "tracks": [
+    {
+      "id": "00",
+      "plan": "conductor/tracks/00-platform-foundation/plan.md"
+    },
+    {
+      "id": "01",
+      "plan": "conductor/tracks/01-canonical-standard-pack/plan.md"
+    },
+    {
+      "id": "02",
+      "plan": "conductor/tracks/02-semantic-diagram-prisma/plan.md"
+    },
+    {
+      "id": "03",
+      "plan": "conductor/tracks/03-standardflow-import/plan.md"
+    },
+    {
+      "id": "04",
+      "plan": "conductor/tracks/04-research-ecosystem/plan.md"
+    },
+    {
+      "id": "05",
+      "plan": "conductor/tracks/05-maximal-assurance/plan.md"
+    }
+  ],
+  "issues": [
+    {
+      "number": 29,
+      "tracks": [
+        "05"
+      ],
+      "role": "historical",
+      "reverse_link": {
+        "kind": "body"
+      }
+    },
+    {
+      "number": 30,
+      "tracks": [
+        "00",
+        "03",
+        "05"
+      ],
+      "role": "work",
+      "reverse_link": {
+        "kind": "body"
+      }
+    },
+    {
+      "number": 31,
+      "tracks": [
+        "00",
+        "01",
+        "02",
+        "03",
+        "05"
+      ],
+      "role": "work",
+      "reverse_link": {
+        "kind": "body"
+      }
+    },
+    {
+      "number": 76,
+      "tracks": [
+        "05"
+      ],
+      "role": "bot",
+      "reverse_link": {
+        "kind": "comment",
+        "comment_id": 7135224700
+      }
+    },
+    {
+      "number": 82,
+      "tracks": [
+        "01",
+        "02",
+        "03",
+        "05"
+      ],
+      "role": "work",
+      "reverse_link": {
+        "kind": "body"
+      }
+    },
+    {
+      "number": 94,
+      "tracks": [
+        "03"
+      ],
+      "role": "historical",
+      "reverse_link": {
+        "kind": "body"
+      }
+    },
+    {
+      "number": 95,
+      "tracks": [
+        "01",
+        "02",
+        "03",
+        "05"
+      ],
+      "role": "work",
+      "reverse_link": {
+        "kind": "body"
+      }
+    },
+    {
+      "number": 111,
+      "tracks": [
+        "01"
+      ],
+      "role": "work",
+      "reverse_link": {
+        "kind": "body"
+      }
+    },
+    {
+      "number": 116,
+      "tracks": [
+        "05"
+      ],
+      "role": "work",
+      "reverse_link": {
+        "kind": "body"
+      }
+    },
+    {
+      "number": 118,
+      "tracks": [
+        "01",
+        "04"
+      ],
+      "role": "work",
+      "reverse_link": {
+        "kind": "body"
+      }
+    },
+    {
+      "number": 120,
+      "tracks": [
+        "02"
+      ],
+      "role": "work",
+      "reverse_link": {
+        "kind": "body"
+      }
+    },
+    {
+      "number": 123,
+      "tracks": [
+        "03",
+        "05"
+      ],
+      "role": "work",
+      "reverse_link": {
+        "kind": "body"
+      }
+    },
+    {
+      "number": 128,
+      "tracks": [
+        "02"
+      ],
+      "role": "work",
+      "reverse_link": {
+        "kind": "body"
+      }
+    },
+    {
+      "number": 149,
+      "tracks": [
+        "01"
+      ],
+      "role": "work",
+      "reverse_link": {
+        "kind": "body"
+      }
+    },
+    {
+      "number": 158,
+      "tracks": [
+        "01",
+        "02",
+        "05"
+      ],
+      "role": "work",
+      "reverse_link": {
+        "kind": "body"
+      }
+    },
+    {
+      "number": 161,
+      "tracks": [
+        "01",
+        "04",
+        "05"
+      ],
+      "role": "work",
+      "reverse_link": {
+        "kind": "body"
+      }
+    },
+    {
+      "number": 162,
+      "tracks": [
+        "01",
+        "04",
+        "05"
+      ],
+      "role": "work",
+      "reverse_link": {
+        "kind": "body"
+      }
+    },
+    {
+      "number": 163,
+      "tracks": [
+        "05"
+      ],
+      "role": "work",
+      "reverse_link": {
+        "kind": "body"
+      }
+    },
+    {
+      "number": 164,
+      "tracks": [
+        "01"
+      ],
+      "role": "historical",
+      "reverse_link": {
+        "kind": "body"
+      }
+    }
+  ]
+}

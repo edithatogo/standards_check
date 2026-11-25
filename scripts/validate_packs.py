@@ -1,24 +1,26 @@
 #!/usr/bin/env python3
 """Validate all committed Canonical Standard Pack source surfaces."""
+
 from __future__ import annotations
 
-from datetime import date
 import json
 import os
-from pathlib import Path
 import sys
-from typing import Any
+from datetime import date
+from pathlib import Path
+from typing import Any, NoReturn
 from urllib.parse import urlparse
 
 from jsonschema import Draft202012Validator, FormatChecker
 from jsonschema.exceptions import SchemaError
+from jsonschema.protocols import Validator
 
 ROOT = Path(__file__).resolve().parents[1]
 PACKS = ROOT / "packs"
 SCHEMAS = ROOT / "schemas"
 
 
-def fail(message: str) -> None:
+def fail(message: str) -> NoReturn:
     print(f"ERROR: {message}", file=sys.stderr)
     raise SystemExit(1)
 
@@ -48,7 +50,7 @@ def is_absolute_uri(value: object) -> bool:
     return bool(parsed.scheme and (parsed.netloc or parsed.scheme == "urn"))
 
 
-def validator(schema_name: str) -> Draft202012Validator:
+def validator(schema_name: str) -> Validator:
     schema_path = SCHEMAS / schema_name
     schema = load_json(schema_path)
     if not isinstance(schema, dict):
@@ -60,7 +62,7 @@ def validator(schema_name: str) -> Draft202012Validator:
     return Draft202012Validator(schema, format_checker=FORMAT_CHECKER)
 
 
-def validate_document(path: Path, schema_validator: Draft202012Validator) -> dict[str, Any]:
+def validate_document(path: Path, schema_validator: Validator) -> dict[str, Any]:
     document = load_json(path)
     if not isinstance(document, dict):
         fail(f"{path.relative_to(ROOT)} must contain an object")

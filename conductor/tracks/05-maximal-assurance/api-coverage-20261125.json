@@ -1,0 +1,51 @@
+{
+  "artifacts": [
+    {
+      "path": "api.lcov",
+      "sha256": "b71ec07177fbac978ed1c470d3064c0c16436b48d8739bcaa30752b202a62681"
+    },
+    {
+      "path": "tests.log",
+      "sha256": "d05b2c5db14d8580ba2c17ef05a3b9427124360b8508b8d7294c6295b915fe56"
+    }
+  ],
+  "checked_at": "2026-11-24T15:25:11.311511+00:00",
+  "coverage": {
+    "BRF": 42,
+    "BRH": 41,
+    "LF": 143,
+    "LH": 143
+  },
+  "floors": {
+    "branch_percent": 95,
+    "line_percent": 100
+  },
+  "node": "v24.22.3",
+  "outcome": "pass",
+  "representation_note": "Artifact digests use explicit path/sha256 pairs; counts, source bindings and digest values are unchanged.",
+  "schema_version": "dev.standardflow.local-api-coverage-qualification.v1",
+  "source_commit": "82e4a1efc136187f42b31347ada44506d2d96bfa",
+  "source_scope": "Tracked api/ files unchanged from source commit",
+  "source_sha256": {
+    "api/README.md": "bfbbcab63ec030ba44aaaeee39b61ac12ca97ce4bb6fa9a07b225aeb25600d6f",
+    "api/benchmark.js": "6d796ea19df994120edef1a8363e6e5a4d83ef55aa63a264f6668aacab8f83c2",
+    "api/cors-options.js": "ddf811726d39d495634c7c0d53c4662d75643c05e5029037b1491370e51fb07e",
+    "api/package-lock.json": "1926fc029ade0c12c2fe0b69f95ca76810bcc8b8d599b7f513a8ba9e03fd30c7",
+    "api/package.json": "a0f14913f02e2eaba3737e45fcdcfbaaf0a92cf8449f0930100631a70198fb0b",
+    "api/server.js": "e1211891369fd88c576745d4c2b24a5006bef954377647524e48adc0812ee37d",
+    "api/test/corpus.test.js": "b28be0d0752bc7ea9d2def2c951da0f00de82afd799a86b1ecb121ee6b0fb376",
+    "api/test/cors.test.js": "f3d44de9bffb742154d69034288fde375dbddcb932a493aa768946279c681b9d",
+    "api/test/rate-limit.test.js": "7251d4824e62e11e6e85681d800659e17f92bb4fbeca19736efaf386f3c93332",
+    "api/test/security/body-parser.test.cjs": "ed6c3328bc5f987c1cdb45b2b4adfd95f6f6a7c916f9c8546b4e5f04a0a98a6b",
+    "api/test/security/path-to-regexp.test.cjs": "e13469d913f9868467d9cc59579c711f26dc3346b91e1dcd5981bee2e189605d",
+    "api/test/security/proxy-addr.test.cjs": "07d9f952db8d37d4d344d58b13080e711e76d2208cab4ed3c2068211594e4dd0",
+    "api/test/security/qs.test.cjs": "112d927f3ec7f26fabedd1be6c7afd984c16a97b97ce37a2714630d8c2b07870",
+    "api/test/startup.test.js": "810e7f252c7106432cc1f8259f128b06619fc5fc2be0a371062c91dce2d6c03f"
+  },
+  "tests": {
+    "failed": 0,
+    "passed": 41,
+    "skipped": 0
+  },
+  "transcribed_from_sha256": "50b1152742bbbfc130ed41884498d1aeed0f2bed826b246adb245e358553e918"
+}

@@ -217,6 +217,22 @@ class AuthoritativeTableTests(unittest.TestCase):
             with self.subTest(raw=raw[:60]), self.assertRaises(ValueError):
                 extract_table(raw, SPEC)
 
+    def test_linguistic_comparison_is_opt_in_and_holds_ambiguous_rows(self):
+        source = extract_table(XML, SPEC)["rows"]
+        legacy = parse_legacy(
+            "- [ ] **1a.** Do not identify the protocol.\n"
+            "- [ ] **1b.** Report any update.\n"
+            "- [ ] **1b.** Report every update.\n"
+        )
+        self.assertNotIn("linguistic", reconcile_items(source, legacy)["items"][0])
+        result = reconcile_items(source, legacy, linguistic=True)
+        self.assertIn("negation", result["items"][0]["linguistic"]["changed_fields"])
+        self.assertEqual(result["items"][0]["linguistic"]["legacy_position"], 1)
+        self.assertEqual(result["items"][1]["linguistic"]["status"], "held_ambiguous_or_missing_alignment")
+        self.assertEqual(result["items"][2]["linguistic"]["status"], "held_ambiguous_or_missing_alignment")
+        self.assertEqual(result["canonical_packs_promoted"], 0)
+        self.assertNotIn("Do not identify", json.dumps(result))
+
     def test_empty_legacy_is_not_an_exact_match(self):
         report = reconcile_items(extract_table(XML, SPEC)["rows"], [])
         self.assertEqual(report["exact_unique_items"], 0)

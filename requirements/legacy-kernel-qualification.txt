@@ -6,7 +6,7 @@ debugpy==1.8.22
 jupyter-client==8.10.0
 jupyter-core==5.9.1
 nest-asyncio==1.6.0
-packaging==26.3
+packaging==26.4
 platformdirs==4.14.8
 python-dateutil==4.0.0
 pyzmq==27.3.0

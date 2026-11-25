@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 """
 Unofficial Checklist Translation Script
@@ -12,14 +11,14 @@ It runs entirely locally, requiring no API keys or subscriptions.
 
 Prerequisites:
 --------------
-1. Python 3.7+
+1. Python 3.12+
 2. An active internet connection (for the first run to download the model).
 3. Required libraries, which can be installed via pip:
    `pip install -r requirements.txt`
 
 Usage:
 ------
-`python scripts/translate_checklist.py <source_file> <target_language_code> [output_file]`
+`python scripts/translate_checklist.py <source_file> <target_language_code> [output_file] --model-revision <commit>`
 
 Arguments:
 ----------
@@ -31,21 +30,33 @@ Arguments:
 
 Example:
 --------
-`python scripts/translate_checklist.py markdown/en/archetypes/consort-2010.md fr`
+Supply the full 40-character model repository commit with --model-revision.
+Empty or structure-only documents do not load a model and need no revision.
 
 """
 
-import sys
+import argparse
 import os
+import re
+import sys
 
 
-def _load_translation_model(model_name):
+def _load_translation_model(model_name, model_revision):
     """Load optional model dependencies only when a non-empty batch needs them."""
+    if not isinstance(model_revision, str) or not re.fullmatch(r"[0-9a-f]{40}", model_revision):
+        raise ValueError(
+            "nonempty translation requires --model-revision with an exact 40-character lowercase Git commit"
+        )
     from transformers import MarianMTModel, MarianTokenizer
 
-    tokenizer = MarianTokenizer.from_pretrained(model_name)
-    model = MarianMTModel.from_pretrained(model_name)
+    tokenizer = MarianTokenizer.from_pretrained(
+        model_name, revision=model_revision, trust_remote_code=False
+    )
+    model = MarianMTModel.from_pretrained(
+        model_name, revision=model_revision, trust_remote_code=False
+    )
     return tokenizer, model
+
 
 def translate_text(text, model, tokenizer):
     """Translates a batch of text."""
@@ -54,12 +65,13 @@ def translate_text(text, model, tokenizer):
     translated_tokens = model.generate(**tokenizer(text, return_tensors="pt", padding=True))
     return [tokenizer.decode(t, skip_special_tokens=True) for t in translated_tokens]
 
-def translate_markdown_file(source_path, target_lang):
+
+def translate_markdown_file(source_path, target_lang, model_revision=None):
     """
     Translates a markdown file line by line, preserving structure.
     """
     print("Reading source file...")
-    with open(source_path, 'r', encoding='utf-8') as f:
+    with open(source_path, encoding="utf-8") as f:
         lines = f.readlines()
 
     translated_lines = []
@@ -70,34 +82,36 @@ def translate_markdown_file(source_path, target_lang):
     for i, line in enumerate(lines):
         stripped_line = line.strip()
         # Translate lines that contain text but are not just headings or separators
-        if stripped_line and not stripped_line.startswith('#') and not stripped_line == '---':
+        if stripped_line and not stripped_line.startswith("#") and not stripped_line == "---":
             batch_to_translate.append(stripped_line)
             line_indices_to_translate.append(i)
 
     if not batch_to_translate:
         return "".join(lines)
 
-    model_name = f'Helsinki-NLP/opus-mt-en-{target_lang}'
+    model_name = f"Helsinki-NLP/opus-mt-en-{target_lang}"
     print(f"Loading model: {model_name}...")
     try:
-        tokenizer, model = _load_translation_model(model_name)
+        tokenizer, model = _load_translation_model(model_name, model_revision)
     except OSError:
         print(f"Error: Model for target language '{target_lang}' not found.")
-        print("Please check the Hugging Face model hub for available 'Helsinki-NLP/opus-mt-en-*' models.")
+        print(
+            "Please check the Hugging Face model hub for available 'Helsinki-NLP/opus-mt-en-*' models."
+        )
         sys.exit(1)
 
     print(f"Translating {len(batch_to_translate)} lines...")
     translated_text_batch = translate_text(batch_to_translate, model, tokenizer)
 
     # Create a map of original line index to translated text
-    translation_map = dict(zip(line_indices_to_translate, translated_text_batch))
+    translation_map = dict(zip(line_indices_to_translate, translated_text_batch, strict=True))
 
     # Reconstruct the file
     for i, line in enumerate(lines):
         if i in translation_map:
             # Preserve original indentation
-            leading_whitespace = line[:len(line) - len(line.lstrip())]
-            translated_lines.append(leading_whitespace + translation_map[i] + '\n')
+            leading_whitespace = line[: len(line) - len(line.lstrip())]
+            translated_lines.append(leading_whitespace + translation_map[i] + "\n")
         else:
             translated_lines.append(line)
 
@@ -105,17 +119,21 @@ def translate_markdown_file(source_path, target_lang):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 3 or len(sys.argv) > 4:
-        print("Usage: python translate_checklist.py <source_file> <target_language_code> [output_file]")
-        sys.exit(1)
-
-    source_file = sys.argv[1]
-    target_language = sys.argv[2]
-    output_file = None
-
-    if len(sys.argv) == 4:
-        output_file = sys.argv[3]
-    else:
+    parser = argparse.ArgumentParser(
+        description="Translate an unofficial checklist using an immutable model revision."
+    )
+    parser.add_argument("source_file")
+    parser.add_argument("target_language_code")
+    parser.add_argument("output_file", nargs="?")
+    parser.add_argument(
+        "--model-revision",
+        help="Exact 40-character lowercase model repository commit; required for nonempty translation.",
+    )
+    arguments = parser.parse_args()
+    source_file = arguments.source_file
+    target_language = arguments.target_language_code
+    output_file = arguments.output_file
+    if output_file is None:
         base, ext = os.path.splitext(source_file)
         output_file = f"{base}.{target_language}{ext}"
 
@@ -124,10 +142,15 @@ if __name__ == "__main__":
         sys.exit(1)
 
     print(f"Starting translation for '{source_file}' to '{target_language}'...")
-    translated_content = translate_markdown_file(source_file, target_language)
+    try:
+        translated_content = translate_markdown_file(
+            source_file, target_language, arguments.model_revision
+        )
+    except ValueError as error:
+        parser.error(str(error))
 
     print(f"Writing translated content to '{output_file}'...")
-    with open(output_file, 'w', encoding='utf-8') as f:
+    with open(output_file, "w", encoding="utf-8") as f:
         f.write(translated_content)
 
     print("Translation complete!")

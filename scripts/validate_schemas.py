@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 """
 Schema Validator
@@ -23,26 +22,28 @@ Usage:
 
 """
 
+import json
 import os
 import sys
-import json
-import yaml
 from glob import glob
-from jsonschema import validate, ValidationError
+
+import yaml
+from jsonschema import ValidationError, validate
+
 
 def validate_yaml_file(file_path, schema_path):
     """Validates a single YAML file against a given schema."""
     print(f"Processing: {file_path}")
     try:
-        with open(file_path, 'r', encoding='utf-8') as f:
+        with open(file_path, encoding="utf-8") as f:
             content = f.read()
-            if '<kebab-case-id>' in content:
+            if "<kebab-case-id>" in content:
                 print(f"  - SKIPPING: {file_path} (template)")
                 return True
             data = yaml.safe_load(content)
-        with open(schema_path, 'r', encoding='utf-8') as f:
+        with open(schema_path, encoding="utf-8") as f:
             schema = json.load(f)
-        
+
         validate(instance=data, schema=schema)
         print(f"  ✓ OK: {file_path} is valid.")
         return True
@@ -57,10 +58,11 @@ def validate_yaml_file(file_path, schema_path):
         print(f"    - {e.message}")
         return False
 
+
 def main():
     """Main function to find all YAML files and validate them."""
     print("Starting schema validation...")
-    
+
     all_valid = True
 
     # Validate index file
@@ -72,7 +74,7 @@ def main():
     # Validate sidecar files
     sidecar_files = glob(os.path.join("source", "**", "*.yml"), recursive=True)
     sidecar_schema = "schemas/sidecar.schema.json"
-    
+
     for file_path in sidecar_files:
         if os.path.basename(file_path) not in ["index.yml", "_meta.template.yml"]:
             if not validate_yaml_file(file_path, sidecar_schema):
@@ -84,6 +86,7 @@ def main():
     else:
         print("\n✗ Some YAML files failed validation.")
         sys.exit(1)
+
 
 if __name__ == "__main__":
     main()

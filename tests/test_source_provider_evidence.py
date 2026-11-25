@@ -111,6 +111,12 @@ class ProviderTests(unittest.TestCase):
             self.assertEqual(getter.call_count, 1)
             self.assertEqual(evidence["representation"], "europe_pmc_primary_xml")
 
+    def test_rejects_entity_bearing_non_utf8_oai(self):
+        body = OAI.decode("utf-8").replace("<body/>", "<body>&inserted;</body>")
+        raw = ('<!DOCTYPE OAI-PMH [<!ENTITY inserted "unsafe">]>' + body).encode("utf-16")
+        with self.assertRaises(ValueError):
+            oai_article(raw, "PMC42")
+
     def test_provider_budget_and_no_override(self):
         records = [{"id": "equator:a", "pmid": "123", "doi": DOI, "status": "lookup_incomplete"},
                    {"id": "equator:b", "pmid": "123", "doi": DOI, "status": "oa_xml_candidate"},

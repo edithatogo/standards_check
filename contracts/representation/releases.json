@@ -1,0 +1,51 @@
+{
+  "schema_version": "dev.standardflow.representation-registry.v1",
+  "profile_id": "dev.standardflow.reporting-guideline-representation",
+  "current_version": "0.1.0",
+  "approved_version": null,
+  "releases": [
+    {
+      "version": "0.1.0",
+      "status": "draft",
+      "document": "docs/specifications/reporting-guideline-representation/0.1.0.md",
+      "sha256": "862ede4a60dbae3a0b8f49e102c955868c45206a246288454026be0f30994af8",
+      "previous_version": null,
+      "compatibility": "initial",
+      "requirement_ids": [
+        "RGI-01",
+        "RGI-02",
+        "RGI-03",
+        "RGI-04",
+        "RGI-05",
+        "RGI-06",
+        "RGI-07",
+        "RGI-08",
+        "RGI-09",
+        "RGI-10",
+        "RGI-11",
+        "RGI-12",
+        "RGI-13",
+        "RGI-14"
+      ],
+      "implementation_contracts": [
+        {
+          "path": "schemas/standard-pack.v1.schema.json",
+          "sha256": "e6720289aa9baf197d9d94d56f5c98453e4db69bb78360f58fd19b2e1ddbd076"
+        },
+        {
+          "path": "schemas/source-manifest.v1.schema.json",
+          "sha256": "29dac600645cd0469d95396307c28a19918fdf59125b0769955b5988a6988cf3"
+        },
+        {
+          "path": "schemas/standardflow-lock.v1.schema.json",
+          "sha256": "4a56076ec6ff128b898bb3b4b0ba918946a5a51dada0f791227f39302efb7236"
+        },
+        {
+          "path": "schemas/ecosystem-evidence.v1.schema.json",
+          "sha256": "899ddab710be6826487522ac18b328258dc42f0f3ee4ba403fefa3d5b774289e"
+        }
+      ],
+      "approval": null
+    }
+  ]
+}
