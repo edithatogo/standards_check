@@ -197,6 +197,8 @@ jobs:
         run: |
           python -m scripts.compare_guideline_formats --root . \
             --output target/coverage/guideline-format-comparison.json
+          python -m scripts.qualify_real_source_formats --root . \
+            --output target/coverage/real-source-format-qualification.json
 
       - name: Compare explicitly selected official EcoEvo download bytes
         if: matrix.component == 'python'
