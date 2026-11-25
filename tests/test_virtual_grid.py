@@ -1,0 +1,50 @@
+import unittest
+from scripts.ecoevo_pdf_grid import extract_native, extract_poppler, fingerprint
+from tests.test_ecoevo_grid import tiny_grid_pdf
+
+class VirtualGridTests(unittest.TestCase):
+    def test_missing_inner_rules_use_header_and_closed_horizontal_bands(self):
+        raw=tiny_grid_pdf(virtual=True)
+        for result in (extract_native(raw),extract_poppler(raw)):
+            with self.subTest(parser=result['parser']):
+                self.assertEqual([r['item_id'] for r in result['rows']],['1.1','1.2','1.3'])
+                self.assertEqual(result['rows'][0]['requirement_sha256'],fingerprint('Report outcomes. Include missing data.'))
+                self.assertEqual(result['issues'],[])
+
+    def test_three_line_header_and_items_inside_merged_group(self):
+        raw=tiny_grid_pdf(virtual=True, merged=True)
+        for result in (extract_native(raw),extract_poppler(raw)):
+            with self.subTest(parser=result['parser']):
+                self.assertEqual([r['item_id'] for r in result['rows']],['1.1','1.2','1.3'])
+                self.assertEqual(result['rows'][0]['requirement_sha256'],fingerprint('Report outcomes. Include missing data.'))
+                self.assertEqual(result['issues'],[])
+
+    def test_centered_number_and_requirement_lines_in_merged_group(self):
+        from scripts.ecoevo_pdf_grid import Word, extract_virtual
+        def w(x,y,text): return Word(x,y-4,x+min(35,4*len(text)),y+4,text)
+        words=[w(20,5,'Sub'),w(20,15,'item'),w(20,25,'number'),w(70,15,'Sub-item'),w(230,15,'Reported'),
+               w(20,44.5,'1.1'),w(70,39,'First'),w(70,50,'requirement.'),
+               w(20,73,'1.2'),w(70,62,'Second'),w(70,73,'wrapped'),w(70,84,'requirement.')]
+        rows,issues,_=extract_virtual(words,[10,280],lambda a,b:[0,30,100],1,lambda x,a,b:True)
+        self.assertEqual(issues,[])
+        self.assertEqual([r['requirement_sha256'] for r in rows],[fingerprint('First requirement.'),fingerprint('Second wrapped requirement.')])
+
+    def test_trailing_unclosed_text_is_not_silently_discarded(self):
+        from scripts.ecoevo_pdf_grid import Word, extract_virtual
+        def w(x,y,text): return Word(x,y-4,x+min(35,4*len(text)),y+4,text)
+        words=[w(20,5,'Sub'),w(20,15,'item'),w(20,25,'number'),w(70,15,'Sub-item'),w(230,15,'Reported'),
+               w(20,39,'1.1'),w(70,39,'First'),w(70,50,'Continuation.')]
+        rows,issues,_=extract_virtual(words,[10,280],lambda a,b:[0,30,45],1,lambda x,a,b:True)
+        self.assertEqual(len(rows),1)
+        self.assertIsNone(rows[0]['requirement_sha256'])
+        self.assertIn('unclosed_trailing_text',issues)
+
+    def test_typographic_comparison_preserves_hyphen_and_superscript(self):
+        from scripts.ecoevo_pdf_grid import Word, fidelity_fields, phrase
+        words=[Word(10,10,30,20,'time-'),Word(10,22,45,32,'stamped'),
+               Word(50,22,55,32,'I'),Word(55.3,20,58,26,'2'),Word(58.3,25,60,32,',')]
+        evidence=fidelity_fields(words,True)
+        self.assertEqual(evidence['requirement_sha256'],fingerprint(phrase(words)))
+        self.assertEqual(evidence['layout_normalized_sha256'],fingerprint('time-stamped I2,'))
+        self.assertEqual(evidence['layout_events'],{'line_end_hyphen':1,'superscript_join':1,'superscript_punctuation_join':1})
+        self.assertIsNone(fidelity_fields(words,False)['layout_normalized_sha256'])

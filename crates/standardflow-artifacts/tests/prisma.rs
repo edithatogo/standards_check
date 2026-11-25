@@ -31,8 +31,8 @@ fn all_four_prisma_templates_build_valid_scenes() -> Result<(), Box<dyn std::err
         assert!(flow.validate().is_valid());
         let scene = flow.build_scene()?;
         assert!(scene.validate().is_valid());
-        assert!(!scene.nodes.is_empty());
-        assert!(!scene.edges.is_empty());
+        assert_ne!(scene.nodes, [] as [standardflow_artifacts::SceneNode; 0]);
+        assert_ne!(scene.edges, [] as [standardflow_artifacts::SceneEdge; 0]);
         assert_eq!(scene.nodes.len(), scene.reading_order.len());
     }
     Ok(())
@@ -50,7 +50,7 @@ fn every_renderer_is_deterministic() -> Result<(), Box<dyn std::error::Error>> {
             let first = render(&scene, format)?;
             let second = render(&scene, format)?;
             assert_eq!(first, second);
-            assert!(!first.is_empty());
+            assert_ne!(first, [] as [u8; 0]);
         }
     }
     Ok(())

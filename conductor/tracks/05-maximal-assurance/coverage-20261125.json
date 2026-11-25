@@ -1,0 +1,94 @@
+{
+  "base_revision": "82e4a1efc136187f42b31347ada44506d2d96bfa",
+  "coverage_configuration_unchanged": true,
+  "native_patch_estimate": {
+    ".py": {
+      "changed_executable_lines": 1587,
+      "changed_line_branches": 516,
+      "combined_percent": 90.39467427484546,
+      "files": 44,
+      "hit_changed_line_branches": 432,
+      "hit_lines": 1469,
+      "line_percent": 92.5645872715816
+    },
+    ".rs": {
+      "changed_executable_lines": 0,
+      "changed_line_branches": 0,
+      "combined_percent": null,
+      "files": 0,
+      "hit_changed_line_branches": 0,
+      "hit_lines": 0,
+      "line_percent": null
+    }
+  },
+  "preserved_legacy_tree_unchanged": true,
+  "python_test_result": "637 passed, 3 skipped in 34.48s",
+  "python_totals": {
+    "covered_branches": 2070,
+    "covered_lines": 5660,
+    "excluded_lines": 0,
+    "missing_branches": 320,
+    "missing_lines": 462,
+    "num_branches": 2390,
+    "num_partial_branches": 260,
+    "num_statements": 6122,
+    "percent_branches_covered": 86.61087866108787,
+    "percent_branches_covered_display": "86.61",
+    "percent_covered": 90.81296992481202,
+    "percent_covered_display": "90.81",
+    "percent_statements_covered": 92.45344658608298,
+    "percent_statements_covered_display": "92.45"
+  },
+  "reports_sha256": {
+    "dataset-release.json": "970e9d6fbe6fb04e7053a8ff750383a820b2a2ab74ba35de62b1a3d8b0492e55",
+    "legacy-prisma.json": "6376d2590c15fa79183f479806dced301eeebb0d1e2c8fe6ff79316df6874a1f",
+    "native-changed-line-estimate.json": "937926a5f3c68891de286b87f49643e377d5d7ac2f434c3634a3cfec16e16d3c",
+    "publication-contract.json": "9d699f5b0643ba399b140a5061953d846e9d5d7178149acc6955337cc7b07eba",
+    "python-sealed-after.json": "9baac8118419cd8f76d8dd7b56e356d7a7ecdc09f5ba91b36ed0b6d39e5065cd",
+    "python-sealed-before.json": "9baac8118419cd8f76d8dd7b56e356d7a7ecdc09f5ba91b36ed0b6d39e5065cd",
+    "python.json": "0a83391d64686c74e6f06e90aa347b5ad6fc3aa1ae5a5dc607b9a9563beee923",
+    "python.xml": "6b11fc4dd071b0a3715e1d1dc84932a1ff4a36961db7e1b86f35d70548d75f99",
+    "representation-profile.json": "fc21e261db15b6b058e89c66d9cf4d1dc51dcb9ca807328351b664ee5a0e5fba",
+    "rust-summary.json": "1467654fc70b1006ec0a52becdd9fcd71cdebf9d1d1bb5eb9058da35a279a14e",
+    "rust.lcov": "196a8683fc4747cca8b62bf44bd060a2d39c0655e8fe1c7a8d589e97a62d09e6",
+    "summary.txt": "248fcf7c404fc5221b5b83ed88ecee6829b9128dcdc099dce1e1f43f4ab4612e"
+  },
+  "rust_test_result": "95 passed, zero failed or ignored; strict Clippy and fmt pass",
+  "rust_totals": {
+    "branches": {
+      "count": 0,
+      "covered": 0,
+      "notcovered": 0,
+      "percent": 0
+    },
+    "functions": {
+      "count": 313,
+      "covered": 268,
+      "percent": 85.6230031948882
+    },
+    "instantiations": {
+      "count": 670,
+      "covered": 453,
+      "percent": 67.61194029850746
+    },
+    "lines": {
+      "count": 3466,
+      "covered": 3178,
+      "percent": 91.69070975187536
+    },
+    "mcdc": {
+      "count": 0,
+      "covered": 0,
+      "notcovered": 0,
+      "percent": 0
+    },
+    "regions": {
+      "count": 3501,
+      "covered": 3055,
+      "notcovered": 446,
+      "percent": 87.26078263353327
+    }
+  },
+  "source_manifest_sha256": "9baac8118419cd8f76d8dd7b56e356d7a7ecdc09f5ba91b36ed0b6d39e5065cd",
+  "working_tree": "final source bytes, uncommitted when measured; exact Python content hashes captured before and after"
+}

@@ -81,3 +81,12 @@ single existing issue/PR for the work; never create a per-record issue flood.
 State which suggestions were implemented, rejected or deferred and why.
 The skill is a review discipline, not an autonomous mutation or background
 worker. The offline checker is the preferred reproducible diagnostic.
+
+
+## Source census operations and feedback loop
+
+Use the automated source census first; do not perform per-entry agent searches where exact registries and OA routes suffice. Reuse successful, unchanged catalogue identities only from trusted main-workflow receipts or explicitly SHA-256 verified historical receipts. Treat retained observations as historical, not new retrievals. Hold conflicting identities and changed source blobs. Use the bounded worklist and its acquisition budgets instead of unbounded retries. Run a fresh manual survey when testing provider drift.
+
+Review the generated machine-readable retrospective on every acquisition run. Evaluate the count of new observations, retained observations, unresolved identities, conflicting registry responses, deferrals and source holds independently of checklist extraction coverage. If a provider fails, retry bounded unresolved batches, then compare the available official alternatives. When a format, source representation, edition, table structure, item anchor, or licence changes, preserve prior evidence and run focused independent reconciliation before any source pin or canonical admission change. ORCID is for author disambiguation where necessary, not a substitute for publication DOI/PMID or table identity.
+
+Do not change extraction rules based on a single superficially plausible output. Reproduce failure with a minimal fixture, run mutation/fuzz and reconciliation tests, assess false positives and lost conditions, then record the fix and acceptance evidence in Conductor and the issue. Keep agentic judgment for ambiguous semantic or rights questions; automate everything that can be validated deterministically.

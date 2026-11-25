@@ -1,15 +1,27 @@
 #!/usr/bin/env python3
 """Offline inventory and exact Conductor context validation (not rights clearance)."""
-from collections import Counter
+
 import json
-from pathlib import Path
 import re
 import subprocess
 import sys
+from collections import Counter
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-AREAS = ("source", "markdown", "html", "pdf", "docx", "latex", "typst",
-         "schemas", "tests", "crates", "packs")
+AREAS = (
+    "source",
+    "markdown",
+    "html",
+    "pdf",
+    "docx",
+    "latex",
+    "typst",
+    "schemas",
+    "tests",
+    "crates",
+    "packs",
+)
 LINK = re.compile(r"\]\((\.\.?/[^)#]+)(?:#[^)]*)?\)")
 DEBT = re.compile(r"\[TBD\]|\bTODO\b|<kebab-case-id>", re.I)
 
@@ -20,8 +32,7 @@ def conductor_revision(router):
     header = re.match(r"\A---\n(.*?)\n---(?:\n|$)", text, re.S)
     if header is None:
         raise ValueError("Conductor router frontmatter missing")
-    blocks = re.findall(r"(?m)^metadata:\n((?:[ \t]+[^\n]*(?:\n|$))*)",
-                        header.group(1) + "\n")
+    blocks = re.findall(r"(?m)^metadata:\n((?:[ \t]+[^\n]*(?:\n|$))*)", header.group(1) + "\n")
     if len(blocks) != 1:
         raise ValueError("Conductor router metadata must occur once")
     upstream = re.findall(r"(?m)^  upstream:[ \t]*(.*?)\s*$", blocks[0])
@@ -37,7 +48,7 @@ def inventory(root, entries):
     counts = Counter()
     placeholders = []
     unreadable = []
-    for path, mode, sha in entries:
+    for path, mode, _sha in entries:
         area = path.split("/", 1)[0]
         if area in AREAS:
             counts[area] += 1
@@ -50,12 +61,17 @@ def inventory(root, entries):
                 placeholders.append(path)
         except (OSError, UnicodeError):
             unreadable.append(path)
-    return {"schema_version": "dev.standardflow.brownfield-inventory.v1",
-            "tracked_files": len(entries), "areas": dict(sorted(counts.items())),
-            "placeholder_paths": sorted(placeholders),
-            "unreadable_text_paths": sorted(unreadable),
-            "authority": "inventory_only", "rights_cleared": False,
-            "source_reconciled": False, "output_parity_verified": False}
+    return {
+        "schema_version": "dev.standardflow.brownfield-inventory.v1",
+        "tracked_files": len(entries),
+        "areas": dict(sorted(counts.items())),
+        "placeholder_paths": sorted(placeholders),
+        "unreadable_text_paths": sorted(unreadable),
+        "authority": "inventory_only",
+        "rights_cleared": False,
+        "source_reconciled": False,
+        "output_parity_verified": False,
+    }
 
 
 def context_errors(root, entries):
@@ -75,7 +91,9 @@ def context_errors(root, entries):
     modules = (root / ".gitmodules").read_text(encoding="utf-8")
     if not re.search(r"(?m)^\s*path\s*=\s*\.agents/plugins/conductor\s*$", modules):
         errors.append("Conductor gitmodules path invalid")
-    if not re.search(r"(?m)^\s*url\s*=\s*https://github\.com/gemini-cli-extensions/conductor\.git\s*$", modules):
+    if not re.search(
+        r"(?m)^\s*url\s*=\s*https://github\.com/gemini-cli-extensions/conductor\.git\s*$", modules
+    ):
         errors.append("Conductor gitmodules URL invalid")
     for name in ("index", "product", "tech-stack", "workflow", "roadmap", "tracks"):
         path = root / "conductor" / (name + ".md")
@@ -90,8 +108,9 @@ def context_errors(root, entries):
 
 
 def main():
-    result = subprocess.run(["git", "-C", str(ROOT), "ls-files", "--stage", "-z"],
-                            check=True, capture_output=True)
+    result = subprocess.run(
+        ["git", "-C", str(ROOT), "ls-files", "--stage", "-z"], check=True, capture_output=True
+    )
     entries = []
     for row in result.stdout.split(b"\0"):
         if not row:
@@ -103,8 +122,7 @@ def main():
         entries.append((path.decode("utf-8"), mode, sha))
     report = inventory(ROOT, entries)
     errors = context_errors(ROOT, entries)
-    print(json.dumps({"inventory": report, "context_errors": errors},
-                     indent=2, sort_keys=True))
+    print(json.dumps({"inventory": report, "context_errors": errors}, indent=2, sort_keys=True))
     return int(bool(errors or report["unreadable_text_paths"]))
 
 

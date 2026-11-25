@@ -1,8 +1,8 @@
 """Check minimal keyboard-navigation and heading contracts in generated HTML."""
 
+import sys
 from html.parser import HTMLParser
 from pathlib import Path
-import sys
 
 
 class _Page(HTMLParser):
@@ -57,7 +57,9 @@ def main() -> int:
             print(f"{path}: {error}", file=sys.stderr)
             failed += 1
     if not failed:
-        print(f"Checked {len(pages)} generated HTML pages (heading, skip-link, landmark, progress-name)")
+        print(
+            f"Checked {len(pages)} generated HTML pages (heading, skip-link, landmark, progress-name)"
+        )
     return int(bool(failed))
 
 

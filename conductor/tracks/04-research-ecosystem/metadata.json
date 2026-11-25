@@ -1,0 +1,21 @@
+{
+  "schema_version": "dev.standardflow.conductor-track.v1",
+  "track_id": "04",
+  "slug": "04-research-ecosystem",
+  "title": "Research ecosystem contracts",
+  "status": "planned",
+  "implementation_state": "contracted",
+  "evidence_level": "contracted",
+  "updated": "2026-11-25",
+  "dependencies": [
+    "01-canonical-standard-pack",
+    "02-semantic-diagram-prisma"
+  ],
+  "issues": [
+    161,
+    162,
+    118,
+    158
+  ],
+  "base_branch": "main"
+}
