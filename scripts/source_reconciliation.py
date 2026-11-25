@@ -345,7 +345,13 @@ def project(catalogue: dict, packs: list[dict], article: dict, ecoevo: dict, leg
         source(sid, gid, pack["authority"].get("source_sha256"), "canonical_pack", status)
         for i, row in enumerate(pack["requirements"], 1):
             policy = pack["rights"] if row["rights"].get("inherit_from_pack") else row["rights"]
+            if rights != "cleared":
+                policy = pack["rights"]
             effective = policy.get("status", "unassessed")
+            export_prose = effective == "cleared" and status in {
+                "source_reconciled",
+                "externally_validated",
+            }
             key = requirement(
                 sid,
                 i,
@@ -354,25 +360,27 @@ def project(catalogue: dict, packs: list[dict], article: dict, ecoevo: dict, leg
                 row["source_anchor"],
                 effective,
             )
-            # Only already-admitted pack content with effective cleared rights may carry prose.
+            # Parent and item rights and source verification must all permit prose.
             add(
                 "canonical_requirements",
                 key=key,
                 requirement_id=key,
                 display_number=row.get("display_number"),
-                section=row.get("section") if effective == "cleared" else None,
-                verbatim_text=row.get("verbatim_text") if effective == "cleared" else None,
+                section=row.get("section") if export_prose else None,
+                verbatim_text=row.get("verbatim_text") if export_prose else None,
                 normalized_requirement=row.get("normalized_requirement")
-                if effective == "cleared"
+                if export_prose
                 else None,
-                guidance=row.get("guidance") if effective == "cleared" else None,
+                guidance=row.get("guidance") if export_prose else None,
                 rights=effective,
                 spdx=policy.get("spdx"),
                 license_url=policy.get("license_url"),
                 attribution=policy.get("attribution"),
                 redistribution=policy.get("redistribution"),
                 source_url=pack["authority"].get("source_url"),
-                evidence_expectations_json=json.dumps(row.get("evidence_expectations", [])),
+                evidence_expectations_json=json.dumps(row.get("evidence_expectations", []))
+                if export_prose
+                else None,
             )
     for edition in article["editions"]:
         name = edition["edition"]
@@ -569,6 +577,31 @@ def validate_tables(tables: dict) -> None:
             for row in tables[table]
         ):
             raise ValueError("unbound analytical relationship")
+
+
+    requirements = {row["key"]: row for row in tables["requirements"]}
+    sources = {row["key"]: row for row in tables["sources"]}
+    guidelines = {row["key"]: row for row in tables["guidelines"]}
+    for row in tables["canonical_requirements"]:
+        requirement = requirements[row["requirement_id"]]
+        guideline = guidelines[sources[requirement["source_id"]]["guideline_id"]]
+        if (
+            guideline["kind"] != "canonical_pack"
+            or guideline["status"] not in {"source_reconciled", "externally_validated"}
+            or guideline["rights"] != "cleared"
+            or requirement["rights"] != "cleared"
+            or row["rights"] != "cleared"
+        ) and any(
+            row[field] is not None
+            for field in (
+                "section",
+                "verbatim_text",
+                "normalized_requirement",
+                "guidance",
+                "evidence_expectations_json",
+            )
+        ):
+            raise ValueError("held analytical requirement cannot export prose")
 
 
 def write_parquet(
