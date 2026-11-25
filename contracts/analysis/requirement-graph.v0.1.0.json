@@ -861,9 +861,9 @@
       "id": "G9",
       "task": "T05.050",
       "issue": 31,
-      "workflow": ".github/workflows/conductor-reconciliation.yml",
+      "workflow": ".github/workflows/ci.yml",
       "mode": "existing_required",
-      "acceptance": "Live plan/issue crosswalk and protected current-base receiving qualification."
+      "acceptance": "Required workflow-policy live plan/issue crosswalk; conductor-reconciliation.yml independently handles issue events and scheduled reconciliation; verify current-base receiving evidence."
     }
   ],
   "release": {
