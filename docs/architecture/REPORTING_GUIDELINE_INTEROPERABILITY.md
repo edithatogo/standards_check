@@ -1,7 +1,5 @@
 # Reporting guideline interoperability and assurance
 
-Historical rationale retained. The immutable [version 0.1.0](../../specifications/reporting-guideline-interoperability/0.1.0.md) and [current draft 0.2.0](../../specifications/reporting-guideline-interoperability/0.2.0.md) are listed in the [version/approval registry](../../specifications/reporting-guideline-interoperability/versions.json). No profile has been approved.
-
 Status: **proposed technical specification for discussion**, not an EQUATOR
 standard, reporting guideline for a study type, legal permission, or accepted
 scientific validation. The existing Canonical Standard Pack v1 JSON schema,
@@ -224,3 +222,11 @@ Use the [dated frontier evaluation record](../research/frontier-evaluation-20261
 for observed comparative value, failures, source links, promotion boundaries and model
 review triggers. The publication contract remains the sole prospective run and claim
 ledger. A newly announced model is a challenger, not an automatic replacement.
+
+
+## Multiple applicable standards
+
+Use the [composition and hybrid graph retrieval design](CHECKLIST_COMPOSITION.md) to preserve
+all selected obligations and propose cross-pack similarity candidates without automatic
+equivalence or deletion. The existing directional relation and source/rights boundaries
+remain authoritative; the derived graph is not a second standard representation.

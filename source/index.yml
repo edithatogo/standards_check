@@ -14,7 +14,7 @@
 # - variant_of: parent id (if level=variant)
 # - notes: optional remarks
 version: 2
-updated: "2025-08-11"
+updated: "2026-11-23"
 items:
   - id: consort-2010
     title: CONSORT 2010 Checklist
@@ -33,14 +33,14 @@ items:
     title: "CONSORT 2025 Checklist"
     url: https://doi.org/10.1136/bmj-2024-081123
     version: "2025"
-    date: "2025-01-21"
+    date: "2025-04-14"
     license: "CC-BY-4.0"
     publisher: CONSORT Group (Consolidated Standards of Reporting Trials)
     preferred_format: docx
     level: archetype
     group: consort
     status: mapped
-    notes: "Updated randomized trials reporting guideline."
+    notes: "BMJ 2025 publication 14 April (21 January was acceptance); 30 numbered reporting items and participant-flow figure. Source-indexed only; no accepted Canonical Standard Pack, item-level rights, interpretations or diagram conformity."
   - id: prisma-2020
     title: PRISMA 2020 Checklist
     url: https://www.prisma-statement.org/
@@ -98,7 +98,7 @@ items:
     preferred_format: pdf
     level: archetype
     group: cheers
-    notes: "The CHEERS 2022 checklist, replacing the 2013 version."
+    notes: "CHEERS 2022 replaces the 2013 edition; 28 reporting items for economic evaluation. Not a validated scoring tool; source indexing alone does not admit pack text or imply conduct quality."
   - id: tripod-2015
     title: TRIPOD Checklist
     url: https://www.tripod-statement.org/
@@ -109,18 +109,29 @@ items:
     preferred_format: pdf
     level: archetype
     group: tripod
-    notes: "Prediction model reporting."
+    notes: "Historical TRIPOD 2015 edition, superseded by TRIPOD+AI 2024 for regression and machine-learning prediction models. Retained for versioned legacy references; do not auto-transfer compliance decisions."
+  - id: tripod-ai-2024
+    title: "TRIPOD+AI statement: clinical prediction-model reporting"
+    url: https://doi.org/10.1136/bmj-2023-078378
+    version: "2024"
+    date: "2024-04-16"
+    license: "CC-BY-4.0"
+    publisher: "TRIPOD+AI Group / BMJ"
+    preferred_format: html
+    level: archetype
+    group: tripod
+    notes: "27-item updated reporting guideline superseding TRIPOD 2015 for regression and machine-learning prediction models. Source-indexed only: item/subitem text, source bytes, rights and migration semantics are not yet qualified."
   - id: spirit-2025
     title: SPIRIT 2025 Checklist
     url: https://doi.org/10.1136/bmj-2024-081477
     version: "2025"
-    date: "2025-01-31"
+    date: "2025-04-28"
     license: "CC-BY-4.0"
     publisher: SPIRIT Group
     preferred_format: docx
     level: archetype
     group: spirit
-    notes: "Clinical trial protocols."
+    notes: "BMJ 2025 publication 28 April (31 January was acceptance); 34 numbered protocol items and schedule diagram. Source-indexed only; no accepted Canonical Standard Pack, source-row comparison or figure conformity."
   - id: stard-2015
     title: STARD 2015 Checklist
     url: http://www.equator-network.org/reporting-guidelines/stard/

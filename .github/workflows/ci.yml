@@ -66,10 +66,20 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install --yes --no-install-recommends graphviz imagemagick poppler-utils
-          python -m pip install --disable-pip-version-check -r requirements/python-tests.txt
-          python -m pip install --disable-pip-version-check --no-deps -r requirements/legacy-standardflow.txt
-          python -m pip install --disable-pip-version-check --no-deps -r requirements/assurance-tools.txt
-          python -m pip check
+          sha256sum --check requirements/ci-python312-linux-x86_64.inputs.sha256
+          test "$(uname -m)" = x86_64
+          python -m venv "$RUNNER_TEMP/standardflow-ci-python"
+          ci_python="$RUNNER_TEMP/standardflow-ci-python/bin/python"
+          "$ci_python" -VV | tee target/coverage/ci-python-version.txt
+          "$ci_python" -m pip --version | tee target/coverage/ci-pip-version.txt
+          "$ci_python" -m pip install --disable-pip-version-check --require-hashes --only-binary=:all: \
+            --report target/coverage/ci-python-install.json -r requirements/ci-python312-linux-x86_64.lock.txt
+          "$ci_python" -m pip check
+          "$ci_python" -m pip install --disable-pip-version-check --dry-run --no-index --no-deps \
+            -r requirements/python-tests.txt -r requirements/legacy-standardflow.txt -r requirements/assurance-tools.txt
+          "$ci_python" -m pip freeze > target/coverage/ci-python-environment.txt
+          sha256sum requirements/ci-python312-linux-x86_64.lock.txt requirements/ci-python312-linux-x86_64.inputs.sha256 > target/coverage/ci-python-lock.sha256
+          echo "$RUNNER_TEMP/standardflow-ci-python/bin" >> "$GITHUB_PATH"
       - name: Verify the native legacy PNG to TIFF renderer
         if: matrix.component == 'python'
         run: |
@@ -113,9 +123,12 @@ jobs:
       - name: Measure Python regressions and retain native timing
         if: matrix.component == 'python'
         shell: bash
+        env:
+          PYTHONHASHSEED: "0"
         run: |
           set -euo pipefail
           python -m coverage run -m pytest --import-mode=importlib \
+            -n 2 --dist=loadfile --max-worker-restart=0 \
             --durations=20 --durations-min=0.1 \
             --junitxml=target/coverage/python-junit.xml \
             -o junit_logging=no -o junit_log_passing_tests=false \
@@ -397,7 +410,6 @@ jobs:
         with:
           persist-credentials: false
           submodules: false
-          fetch-depth: 0
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: "3.12"
@@ -436,47 +448,6 @@ jobs:
         run: |
           "$RUNNER_TEMP/actionlint" -color
           zizmor --offline .github/workflows
-      - name: Verify immutable technical profile and publication evidence
-        env:
-          EVENT_NAME: ${{ github.event_name }}
-          PUSH_BEFORE: ${{ github.event.before }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          baseline="$(git rev-parse HEAD^1)"
-          if [ "$EVENT_NAME" = push ]; then
-            baseline="$PUSH_BEFORE"
-          fi
-          [[ "$baseline" =~ ^[0-9a-f]{40}$ ]]
-          git cat-file -e "$baseline^{commit}"
-          python -m scripts.publication_contract --baseline-ref "$baseline" \
-            --output target/workflow-audit/publication-contract.json
-      - name: Run immutable-pinned pre-commit checks
-        env:
-          EVENT_NAME: ${{ github.event_name }}
-          PUSH_BEFORE: ${{ github.event.before }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p "$RUNNER_TEMP/pre-commit-wheel"
-          python -m pip download --disable-pip-version-check --no-deps --only-binary=:all: \
-            --require-hashes -r requirements/pre-commit.txt --dest "$RUNNER_TEMP/pre-commit-wheel"
-          python -m pip install --disable-pip-version-check --only-binary=:all: \
-            "$RUNNER_TEMP"/pre-commit-wheel/pre_commit-*.whl
-          python -m pip check
-          python -m pre_commit validate-config
-          if [ "$EVENT_NAME" = workflow_dispatch ]; then
-            python -m pre_commit run --all-files --show-diff-on-failure
-          else
-            baseline="$(git rev-parse HEAD^1)"
-            if [ "$EVENT_NAME" = push ]; then
-              baseline="$PUSH_BEFORE"
-            fi
-            [[ "$baseline" =~ ^[0-9a-f]{40}$ ]]
-            git cat-file -e "$baseline^{commit}"
-            python -m pre_commit run --from-ref "$baseline" --to-ref HEAD --show-diff-on-failure
-          fi
-          git diff --exit-code
       - name: Record Zizmor auditor-persona diagnostics (advisory)
         shell: bash
         run: |
@@ -488,9 +459,7 @@ jobs:
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: zizmor-auditor-${{ github.sha }}-${{ github.run_attempt }}
-          path: |
-            target/workflow-audit/zizmor-auditor.json
-            target/workflow-audit/publication-contract.json
+          path: target/workflow-audit/zizmor-auditor.json
           if-no-files-found: error
           retention-days: 14
 

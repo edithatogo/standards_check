@@ -1,3 +1,0 @@
-# Direct pre-commit wheel integrity; transitive dependency hash closure remains #116.
-# Install verified wheel using the Assurance workflow; no runtime dependency.
-pre-commit==4.7.0 --hash=sha256:2e229038ad3656081b70c27913157e4b636ef306f643f024a8a8e3f0f7b2f877

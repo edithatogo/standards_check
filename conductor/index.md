@@ -11,7 +11,6 @@
 - [Workflow](./workflow.md)
 - [Roadmap](./roadmap.md)
 - [Tracks](./tracks.md)
-- [Publication programme and research protocol](../publication/plan.md) — [#158](https://github.com/edithatogo/standards_check/issues/158).
 - [Technical-preview readiness and EQUATOR engagement](../docs/preview-readiness.md)
 - [Repository maturity plan](tracks/05-maximal-assurance/maturity-plan-20261125.md)
 - [Frontier evaluation and test efficiency evidence](../docs/research/frontier-evaluation-20261125.md)
@@ -27,10 +26,10 @@
 
 - [Platform architecture](../docs/architecture/STANDARDFLOW_ARCHITECTURE.md)
 - [Canonical Standard Pack](../docs/architecture/CANONICAL_STANDARD_PACK.md)
-- [Versioned reporting guideline interoperability profile](../specifications/reporting-guideline-interoperability/versions.json) — immutable 0.1.0 and 0.2.0 drafts, explicit approval ledger; [historical rationale](../docs/architecture/REPORTING_GUIDELINE_INTEROPERABILITY.md).
 - [Reporting guideline interoperability and assurance](../docs/architecture/REPORTING_GUIDELINE_INTEROPERABILITY.md) — proposed conformance requirements, evidence receipt, triangulation, model shortlist and publication plan.
 - [Diagram and artefact engine](../docs/architecture/DIAGRAM_ENGINE.md)
 - [Research ecosystem](../docs/architecture/RESEARCH_ECOSYSTEM.md)
+- [Composed checklists and requirement graph](../docs/architecture/CHECKLIST_COMPOSITION.md)
 - [Assurance and release engineering](../docs/architecture/ASSURANCE.md)
 
 ## Representation and publication delivery
@@ -46,7 +45,6 @@
 
 ## Agent capability
 
-- [Publication development skill](../.agents/skills/publication-development/SKILL.md) — evidence-first, isolated research roles and reproducible claims.
 - [Publication evidence](../.agents/skills/publication-evidence/SKILL.md) — frozen experiments, blinded model-agent references and source-bound claims.
 - [Conductor router](../.agents/skills/conductor/SKILL.md)
 - [Source reconciliation retrospective](../.agents/skills/source-reconciliation-retrospective/SKILL.md) — evidence-led session and extraction review; [initial receipt](source-reconciliation/retrospective-20261124.md).

@@ -140,6 +140,9 @@ independent structure/comparison, rights, semantics and admission. Keep
 T01.5d–g conditional on measured residual errors. No new model or service
 is required for the census.
 
+### Trial-reporting edition metadata and synthetic examples
+
+[#121](https://github.com/edithatogo/standards_check/pull/121) corrects CONSORT/SPIRIT publication metadata and identifies TRIPOD+AI 2024 separately from 2015. Trial-reporting source entries and synthetic examples remain unqualified; no Canonical Pack, checklist rights, source-byte or methodological claim follows. Continue exact-edition acquisition and item/subitem reconciliation under [#120](https://github.com/edithatogo/standards_check/issues/120), retaining #95/#82 holds and the [guideline admission checklist](../../../CONTENT_POPULATION_WORKFLOW.md). The earlier 719-record catalogue is historical; current survey evidence remains in the Phase 5 record.
 
 ### T01.5c/d/h and analytical projections — implementation increment
 
@@ -184,51 +187,6 @@ See [EQUATOR analytical snapshot](equator-analytical-snapshot.md). Reuses #142 s
 
 The #142 candidate retains prior receipt and current live projection observations (artifacts 14918300555 and 14916344312) and the Searchright #851 historical consumer canary. Reconcile hardened source XML ingress with the already-merged #154 opt-in linguistic reconciliation; neither implementation is overwritten. Retain discovery-only identity conflicts, acquisition rights and held candidate statuses, and validate item-count, fingerprint and anchor conservation. No new source authority, rights or canonical pack promotion. Hosted current-base tests and live/replay evidence required before merge.
 
-### Directory-wide implementation and technical profile (owner direction, 24 November 2026)
-
-Scale is now an active requirement, not a prerequisite to await a perfect benchmark. Preserve
-historical sections above as receipts. [#111](https://github.com/edithatogo/standards_check/issues/111)
-and [#142](https://github.com/edithatogo/standards_check/pull/142) own acquisition/resume. The
-[actual resumed artifact](https://github.com/edithatogo/standards_check/actions/runs/45404500530/artifacts/14925365720)
-ZIP SHA-256 9ddd611875b29cc0a6c82b9f50a76131b21e8ae38b79a945dfa7d4290f17e94f
-contains 720 records, 213 OA XML candidates, 335 metadata-only, 85 incomplete, 77 missing
-identifiers, 5 conflicts, 5 unresolved; 362 prior metadata observations retained. Of 209 pending
-bulk acquisitions, 2 held and 207 deferred by budget/circuit breaker; 6 priority fetches held.
-[Analytical snapshot](https://github.com/edithatogo/standards_check/actions/runs/45404500530/artifacts/14925380706)
-has 720 catalogue identities, 215 acquisition dispositions, zero acquisition items, 2385 review
-findings. Do not replace earlier successful priority evidence with these transient failures.
-
-- [x] Implement per-entry deterministic next-action workplan over existing catalogue/survey/link
-  receipts. Actual pinned archive replay: all 720 routed, zero promotions; three focused tests.
-  Use `scripts.directory_workplan` as a consumer of the existing census (not a new crawler/writer).
-- [x] #142 merged at `15f8470a440c946eebfe0421ae0a4cb8d55a9aaa`.
-- [ ] Verify receiving-main census and scheduled workplan on the integrated revision.
-  invocation in the existing scheduled producer. Persist unresolved per-entry and deduplicated
-  article work, retry only eligible unresolved sources with bounded provider-aware backoff;
-  distinguish drift from temporary failure. #152/#153 extend current readers after #156.
-- [ ] Inventory every acquired eligible source's bounded anchored structure, including unknown
-  layouts, not just six priority editions. Use existing JATS/HTML/DOCX/XLSX/CSV/PDF readers;
-  absent independent item identities yields candidate fingerprints/held status, not a canonical
-  checklist. Prioritize source and format coverage, then interpretation, rights and admission.
-- [ ] Process every eligible source across the directory; catalogue pages without a checklist,
-  unavailable or unlicensed sources retain explicit reason, next action and no guessed pack.
-  Do not stop because a fixed development sample passes; use new real failure strata for tests.
-- [ ] Version and explicitly approve the [technical profile](../../../specifications/reporting-guideline-interoperability/versions.json);
-  no automatic approval on merge. Reuse schemas; future versions add compatibility and conformance
-  mapping evidence. Offer specification plus optional reference implementation via #118.
-- [ ] On #155, retain orthogonal inference for marginal evidence coverage and error diversity,
-  not only standalone superiority. Compare baseline, dependency, NLI, decision-model disagreement
-  and selective abstention on identical fresh pairs; record correct baseline errors caught, added
-  false alerts, common-mode errors, coverage, cost and evidence-span validity. d1-2B trial after
-  exact model/license/runtime/code review; no production promotion or new oracle. Stronger model
-  or architecture warranted when corpus evidence reveals a failure mode. Preserve witness-v2
-  failure: 17/30 consensus, 6 correct; development accuracy 20% each; MiniLM 16/30 (2 false
-  equivalences), DeBERTa 29/30 (0 false equivalences), 13 paired fixes/0 introduced. No natural
-  consensus. [Receipt](https://github.com/edithatogo/standards_check/actions/runs/45400872869/artifacts/14924523529).
-- [ ] [#158](https://github.com/edithatogo/standards_check/issues/158): freeze prospective
-  publication protocol/analysis contract, independent agent roles, reproducible claims and
-  conformance evidence before new held-out evaluation. Keep human author accountability separate
-  from model-agent benchmark labelling. No external submission/endorsement claimed.
 
 ## Phase 6: Versioned representation and directory assurance
 
@@ -262,3 +220,11 @@ production model is introduced.
 - [x] **T01.046** ([#118](https://github.com/edithatogo/standards_check/issues/118)) Post the versioned profile and optional reference implementation to EQUATOR; upstream `equator-website#14` was read back after the authorized browser submission.
 - [ ] **T01.047** ([#118](https://github.com/edithatogo/standards_check/issues/118)) Record actual EQUATOR feedback and version any resulting normative amendment; delivery is not endorsement.
 - [ ] **T01.048** ([#162](https://github.com/edithatogo/standards_check/issues/162)) Prepare and qualify a selective metadata/evidence dataset release with separate source rights and export permission.
+
+## Multi-checklist composition and requirement mapping
+
+- [ ] **T01.049** ([#82](https://github.com/edithatogo/standards_check/issues/82), [#149](https://github.com/edithatogo/standards_check/issues/149)) Qualify the bounded identity-conserving union and sparse cross-pack candidate preview. No similarity-based deletion.
+- [ ] **T01.050** ([#158](https://github.com/edithatogo/standards_check/issues/158)) Freeze and compare statistical retrieval with one qualified embedding challenger; separate retrieval utility from directional equivalence evidence, retain all failures.
+- [ ] **T01.051** ([#82](https://github.com/edithatogo/standards_check/issues/82), [#149](https://github.com/edithatogo/standards_check/issues/149)) Qualify reviewed equivalence display groups, applicability-aware implication, conflict and graph projections with original identities conserved.
+
+See [composition and requirement graph design](../../../docs/architecture/CHECKLIST_COMPOSITION.md). The first bounded preview does not authorize merging distinct semantic obligations or admitting new packs.

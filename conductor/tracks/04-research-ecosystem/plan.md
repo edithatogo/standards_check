@@ -16,3 +16,10 @@ Existing ecosystem evidence contracts remain the authority; no adapter is admitt
 - [ ] **T04.006** ([#162](https://github.com/edithatogo/standards_check/issues/162)) Qualify a reviewed metadata/evidence export and its exact destination without changing source-content rights.
 
 Dependencies: Tracks 01/02, programme #158 and source/interpretation gates #111/#82/#95.
+
+## Hybrid retrieval and editorial consumer qualification
+
+- [ ] **T04.007** ([#161](https://github.com/edithatogo/standards_check/issues/161)) Pin neutral CiteWeft document-span evidence and Sourceright citation evidence, preserve Searchright review evidence and establish a versioned, read-only composition and assessment exchange.
+- [ ] **T04.008** ([#161](https://github.com/edithatogo/standards_check/issues/161), [#162](https://github.com/edithatogo/standards_check/issues/162)) Qualify hybrid sparse/dense and reviewed graph expansion on real editorial consumer fixtures; preserve access and source rights; compare reviewer utility before a dataset or service release.
+
+See [composition and hybrid graph retrieval](../../../docs/architecture/CHECKLIST_COMPOSITION.md). These are planned consumer capabilities, not an admitted adapter or new source authority.

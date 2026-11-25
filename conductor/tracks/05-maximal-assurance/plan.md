@@ -78,23 +78,6 @@ implementation revision. See [verification](verification.md) and [metadata](meta
   gates. Required ruleset, zero-human-approval protection, review resolution and no
   bypass remain unchanged. See #30, #31 and #116.
 
-## Research and directory-wide assurance follow-up
-
-#157 merged a15ae17; its receiving Assurance, Scorecard and Pages passed. #145 merged
-675fc9afeaf3dc17c8ddef793b553e2f44b401a7; actual [Python job 138486048423](https://github.com/edithatogo/standards_check/actions/runs/45405790933/job/138486048423)
-passed 433 tests, 84.62% branch-inclusive coverage, pinned spaCy replay rules 18/2/6 and
-reference 24/8/0 TP/FP/FN. This qualifies that observed grouped updater receipt, not all
-future ecosystem updates. Retain Dependabot until complete handover. Receiving Scorecard
-failed on this later revision; independent offline security queued. #146 native fuzz and
-#116 transitive hash-locks remain; #123 real browser/accessibility, signed release and consumer
-canary remain. Do not call the harness maximal until remaining execution receipts exist.
-
-- [ ] Enforce the maintained pre-commit config in required Assurance workflow-policy on changed
-  tracked files and explicit full dispatch; immutable hook revisions, exact direct tool pin,
-  retain existing privacy and security gates. Local `make install-hooks` is explicit; no claim
-  it ran on a user's device. Do not weaken a hook to pass; diagnose findings.
-- [ ] Verify immutable profile versions and explicit approval ledger, publication receipt
-  conservation and exact historical replay. Research protocol #158, no submission gate bypass.
 
 ## Representation/publication assurance increment — 24 November 2026
 
@@ -144,3 +127,5 @@ operational, dataset, consumer and publication tasks above retain their own gate
 - [ ] **T05.048** ([#158](https://github.com/edithatogo/standards_check/issues/158)) Maintain dated model evidence and value decisions using the existing experiment contract; qualify the next challenger on the frozen question, budget and reference, retain failed runs, and reassess on relevant releases without changing a frozen experiment.
 
 See [frontier evaluation and efficiency evidence](../../../docs/research/frontier-evaluation-20261125.md). Source changes and historical observations do not close these tasks; receiving checks and actual comparative evidence remain required.
+
+The independently verified controlled trial in [PR 168](https://github.com/edithatogo/standards_check/pull/168) achieved 34.2338% median regression-suite improvement, conserved exact coverage and test outcomes, and passed both failure probes. The production adoption and scoped clean-install qualification are in [PR 169](https://github.com/edithatogo/standards_check/pull/169), with [hash closure evidence](python-ci-hash-closure-20261125.md). T05.047 remains open until fresh protected and receiving acceptance; T05.043 remains open beyond the bounded ordinary Ubuntu Python CI profile. No scientific gate or release hold is closed.

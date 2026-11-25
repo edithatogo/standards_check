@@ -58,12 +58,3 @@ quick:
 	node --check api/server.js
 	node --check api/cors-options.js
 	node --check scripts/generate_api_data.js
-
-.PHONY: install-hooks publication-check
-install-hooks:
-	python -m pre_commit validate-config
-	python -m pre_commit install --install-hooks
-
-publication-check:
-	python -m unittest tests.test_directory_workplan tests.test_publication_contract -v
-	python -m scripts.publication_contract

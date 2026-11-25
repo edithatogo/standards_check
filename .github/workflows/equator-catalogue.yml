@@ -7,8 +7,6 @@ on:
       - "scripts/reconcile_equator_sources.py"
       - "scripts/equator_source_links.py"
       - "scripts/survey_equator_articles.py"
-      - 'scripts/directory_workplan.py'
-      - 'tests/test_directory_workplan.py'
       - "scripts/source_provider_evidence.py"
       - "scripts/source_xml.py"
       - "scripts/review_source_receipts.py"
@@ -35,8 +33,6 @@ on:
     branches: [main]
     paths:
       - "scripts/survey_equator_articles.py"
-      - 'scripts/directory_workplan.py'
-      - 'tests/test_directory_workplan.py'
       - "scripts/source_provider_evidence.py"
       - "scripts/source_xml.py"
       - "scripts/review_source_receipts.py"
@@ -152,14 +148,6 @@ jobs:
           python -m scripts.survey_equator_articles \
             --catalogue "$RUNNER_TEMP/equator-catalogue.json" \
             --output "$RUNNER_TEMP/equator-article-survey.json" "${args[@]}"
-      - name: Route the complete published directory for implementation
-        run: |
-          python -m unittest tests.test_directory_workplan -v
-          python -m scripts.directory_workplan \
-            --catalogue "$RUNNER_TEMP/equator-catalogue.json" \
-            --survey "$RUNNER_TEMP/equator-article-survey.json" \
-            --links "$RUNNER_TEMP/equator-source-link-candidates.json" \
-            --output "$RUNNER_TEMP/equator-directory-workplan.json"
       - name: Generate deterministic acquisition retrospective
         run: |
           args=()
@@ -219,7 +207,6 @@ jobs:
             ${{ runner.temp }}/equator-legacy-alignment.json
             ${{ runner.temp }}/equator-source-link-candidates.json
             ${{ runner.temp }}/equator-article-survey.json
-            ${{ runner.temp }}/equator-directory-workplan.json
             ${{ runner.temp }}/equator-article-retrospective.json
           if-no-files-found: warn
 
