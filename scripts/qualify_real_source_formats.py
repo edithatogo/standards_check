@@ -211,7 +211,9 @@ def report(root: Path, html: Path | None = None) -> dict:
         "pdf": {"status": "held"},
     }
     try:
-        result["pdf"] = pdf_receipt(read_bounded(root / "source/official/prisma-2020-checklist.pdf"))
+        result["pdf"] = pdf_receipt(
+            read_bounded(root / "source/official/prisma-2020-checklist.pdf")
+        )
     except Exception as exc:  # parser failures remain held; no raw source text
         result["pdf"]["error"] = type(exc).__name__
     if html is not None:
