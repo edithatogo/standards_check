@@ -368,9 +368,7 @@ def project(catalogue: dict, packs: list[dict], article: dict, ecoevo: dict, leg
                 display_number=row.get("display_number"),
                 section=row.get("section") if export_prose else None,
                 verbatim_text=row.get("verbatim_text") if export_prose else None,
-                normalized_requirement=row.get("normalized_requirement")
-                if export_prose
-                else None,
+                normalized_requirement=row.get("normalized_requirement") if export_prose else None,
                 guidance=row.get("guidance") if export_prose else None,
                 rights=effective,
                 spdx=policy.get("spdx"),
@@ -378,9 +376,9 @@ def project(catalogue: dict, packs: list[dict], article: dict, ecoevo: dict, leg
                 attribution=policy.get("attribution"),
                 redistribution=policy.get("redistribution"),
                 source_url=pack["authority"].get("source_url"),
-                evidence_expectations_json=json.dumps(row.get("evidence_expectations", []))
-                if export_prose
-                else None,
+                evidence_expectations_json=(
+                    json.dumps(row.get("evidence_expectations", [])) if export_prose else None
+                ),
             )
     for edition in article["editions"]:
         name = edition["edition"]
