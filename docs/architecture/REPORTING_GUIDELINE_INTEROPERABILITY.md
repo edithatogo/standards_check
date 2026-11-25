@@ -222,3 +222,11 @@ Use the [dated frontier evaluation record](../research/frontier-evaluation-20261
 for observed comparative value, failures, source links, promotion boundaries and model
 review triggers. The publication contract remains the sole prospective run and claim
 ledger. A newly announced model is a challenger, not an automatic replacement.
+
+
+## Multiple applicable standards
+
+Use the [composition and hybrid graph retrieval design](CHECKLIST_COMPOSITION.md) to preserve
+all selected obligations and propose cross-pack similarity candidates without automatic
+equivalence or deletion. The existing directional relation and source/rights boundaries
+remain authoritative; the derived graph is not a second standard representation.
