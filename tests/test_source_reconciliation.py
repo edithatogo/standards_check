@@ -105,6 +105,37 @@ class SourceReconciliationTests(unittest.TestCase):
         self.assertNotIn('Restricted.', str(tables))
         self.assertIsNone(tables['canonical_requirements'][0]['verbatim_text'])
 
+    def test_pack_and_item_clearance_and_source_verification_are_all_required(self):
+        for pack_rights, item_rights, status, allowed in [
+            ("cleared", "cleared", "source_reconciled", True),
+            ("cleared", "cleared", "externally_validated", True),
+            ("review_required", "cleared", "source_reconciled", False),
+            ("cleared", "link_only", "source_reconciled", False),
+            ("cleared", "cleared", "imported_unverified", False),
+        ]:
+            with self.subTest(pack_rights=pack_rights, item_rights=item_rights, status=status):
+                pack = {
+                    "pack_id": "org/a/1", "version": "1", "verification": {"status": status},
+                    "rights": {"status": pack_rights}, "authority": {},
+                    "requirements": [{
+                        "id": "A:1", "source_anchor": "a", "section": "Restricted section",
+                        "verbatim_text": "Restricted wording.", "normalized_requirement": "Restricted interpretation.",
+                        "guidance": "Restricted guidance.", "evidence_expectations": ["Restricted evidence."],
+                        "rights": {"status": item_rights},
+                    }],
+                }
+                tables = project({"guidelines": []}, [pack], {"editions": []}, {"sources": []}, {})
+                row = tables["canonical_requirements"][0]
+                for field in ("section", "verbatim_text", "normalized_requirement", "guidance", "evidence_expectations_json"):
+                    self.assertEqual(row[field] is not None, allowed, field)
+                self.assertEqual(len(tables["requirements"]), 1)
+                self.assertEqual(len(tables["source_anchors"]), 1)
+                if not allowed:
+                    self.assertNotIn("Restricted", str(tables))
+                    row["guidance"] = "Restricted injection."
+                    with self.assertRaisesRegex(ValueError, "prose"):
+                        validate_tables(tables)
+
     @unittest.skipUnless(importlib.util.find_spec('polars'), 'Parquet dependency not installed')
     def test_parquet_roundtrip_preserves_explicit_schema_and_empty_tables(self):
         import polars as pl
