@@ -576,7 +576,6 @@ def validate_tables(tables: dict) -> None:
         ):
             raise ValueError("unbound analytical relationship")
 
-
     requirements = {row["key"]: row for row in tables["requirements"]}
     sources = {row["key"]: row for row in tables["sources"]}
     guidelines = {row["key"]: row for row in tables["guidelines"]}

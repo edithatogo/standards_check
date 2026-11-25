@@ -104,6 +104,27 @@ class ReceiptReviewTests(unittest.TestCase):
                      "provider_representation_changed", "acquisition_deferred"):
             self.assertEqual(findings[code], 1)
 
+    def test_grouped_source_holds_survive_without_individual_provider_disagreements(self):
+        rows = [
+            {"id": "equator:a", "status": "oa_xml_candidate", "pmcid": "PMC42", "resolved_doi": "10.1/a"},
+            {"id": "equator:b", "status": "oa_xml_candidate", "pmcid": "PMC42", "resolved_doi": "10.1/b"},
+        ]
+        current = receipt(*rows)
+        current["oa_source_worklist"] = [{
+            "pmcid": "PMC42", "status": "held_identity", "source_ids": ["equator:a", "equator:b"],
+            "issues": ["conflicting_catalogue_article_identities"],
+        }, {"status": "priority_or_retained_source", "source_ids": ["equator:a"]}]
+        report = review(current)
+        self.assertEqual(report["finding_counts"]["provider_conflict"], 2)
+        self.assertEqual(report["findings"], [
+            {"code": "provider_conflict", "record": "catalogue:equator:a"},
+            {"code": "provider_conflict", "record": "catalogue:equator:b"},
+        ])
+        for invalid in ([], ["equator:unknown"], "equator:a", [None]):
+            current["oa_source_worklist"][0]["source_ids"] = invalid
+            with self.assertRaisesRegex(ValueError, "unbound source-level"):
+                review(current)
+
     def test_same_receipt_no_new_drift(self):
         a = receipt({"id": "equator:a", "status": "oa_xml_candidate"})
         self.assertEqual(review(a, a)["finding_counts"], {})

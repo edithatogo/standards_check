@@ -26,6 +26,33 @@ class SurveyProjectionTests(unittest.TestCase):
         c,s,r=self.inputs();s['summary']['canonical_packs_promoted']=1
         with self.assertRaises(ValueError): project_survey(c,s,r)
 
+    def test_grouped_source_hold_survives_catalogue_projection(self):
+        c, s, r = self.inputs()
+        s["records"][0].pop("provider_disagreements")
+        s["records"][0].update(pmcid="PMC42", resolved_doi="10.1/a")
+        c["guidelines"].append({
+            **c["guidelines"][0], "id": "equator:another",
+            "page_url": "https://equator-network.org/reporting-guidelines/another/",
+        })
+        s["records"].append({
+            **s["records"][0], "id": "equator:another", "resolved_doi": "10.1/b",
+        })
+        c["published_count"] = s["summary"]["published_count"] = 2
+        s["oa_source_worklist"] = [{
+            "pmcid": "PMC42", "status": "held_identity",
+            "source_ids": ["equator:example", "equator:another"],
+            "issues": ["conflicting_catalogue_article_identities"],
+        }]
+        tables = project_survey(c, s, r)
+        self.assertEqual(len(tables["catalogue_identity"]), 2)
+        for row in tables["catalogue_identity"]:
+            self.assertTrue(row["identity_conflict"])
+            self.assertEqual(row["disposition"], "held_identity_conflict")
+        validate(tables)
+        s["oa_source_worklist"][0]["source_ids"] = ["equator:unknown"]
+        with self.assertRaisesRegex(ValueError, "unbound source-level"):
+            project_survey(c, s, r)
+
     def test_roundtrip_all_four_tables(self):
         from pathlib import Path
         from tempfile import TemporaryDirectory
