@@ -1,0 +1,108 @@
+{
+  "schema_version": "dev.standardflow.publication-contract.v1",
+  "status": "planned",
+  "design": {
+    "programme_id": "standardflow-reporting-assurance",
+    "protocol": {
+      "version": "0.1.0",
+      "path": "docs/research/publication-protocol.v0.1.0.md",
+      "sha256": "8a4d243826eee7699a8be3f99355e9e61db56e9fc8e8726ee81882b5a7109654"
+    },
+    "experiments": [
+      {
+        "id": "E1",
+        "kind": "census",
+        "question": "Which published directory entries have complete item-level source reconciliation, and why are the rest held?",
+        "primary_endpoint": {
+          "name": "complete_source_reconciliation_coverage",
+          "definition": "Entries with complete item-level reconciliation receipts divided by all published entries in the frozen directory snapshot; report edition-level counts separately.",
+          "analysis_unit": "directory_entry",
+          "decision_rule": "Descriptive census: report all entries and all held reasons; no pass threshold."
+        },
+        "secondary_endpoints": [
+          "identity resolution",
+          "source acquisition",
+          "structure and text concordance",
+          "rights",
+          "format and family strata"
+        ],
+        "input_ids": []
+      },
+      {
+        "id": "E2",
+        "kind": "family_holdout",
+        "question": "How reliably do the retained methods distinguish five directed requirement relations against an independent model-agent reference?",
+        "primary_endpoint": {
+          "name": "reference_relative_false_equivalence",
+          "definition": "Predicted-equivalent outputs that disagree with a usable locked model-agent reference, divided only by predicted-equivalent outputs with a usable locked reference. Report unresolved equivalent predictions and reference coverage separately; unresolved cases cannot dilute the error rate.",
+          "analysis_unit": "guideline_family",
+          "decision_rule": "Descriptive qualification until sample size, grouped uncertainty and numerical adoption limits are frozen; no automatic admission."
+        },
+        "secondary_endpoints": [
+          "five-class confusion",
+          "directional inversions",
+          "abstention and coverage",
+          "Brier and log loss",
+          "risk-coverage",
+          "agent disagreement",
+          "unresolved equivalent predictions",
+          "usable reference coverage"
+        ],
+        "input_ids": []
+      },
+      {
+        "id": "E3",
+        "kind": "family_holdout",
+        "question": "Does adding LiquidAI/d1-2B find supported material errors missed by the retained baseline at the same review budget?",
+        "primary_endpoint": {
+          "name": "incremental_supported_errors_per_100_reviews",
+          "definition": "Difference between augmented and baseline triage in reference-confirmed material errors per 100 reviewed pairs at the same frozen review budget.",
+          "analysis_unit": "guideline_family",
+          "decision_rule": "Freeze a minimum useful paired gain and tolerated added error before execution; standalone model superiority is not required; keep outputs advisory."
+        },
+        "secondary_endpoints": [
+          "unique catches",
+          "shared misses",
+          "spurious flags",
+          "harmful changed decisions",
+          "domain calibration",
+          "latency memory and cost"
+        ],
+        "input_ids": []
+      }
+    ],
+    "inputs": [],
+    "freeze_blockers": [
+      "Pin the complete directory snapshot and all source/input manifests with exact hashes.",
+      "Select untouched guideline families, natural pair sampling, target family counts and grouped confidence method; retain development and synthetic cases separately.",
+      "Freeze E2 numerical adoption limits and E3 review budget, minimum useful gain, and tolerated added error before evaluation outputs.",
+      "Pin adjudicator versions/prompts and record independent source-only task boundaries.",
+      "Qualify d1-2B model, licence, weights, tokenizer, reviewed local code and runtime in the existing isolated experiment lane; remote model execution remains prohibited.",
+      "Record protocol/design decision evidence in Git before experimental execution."
+    ]
+  },
+  "freeze": null,
+  "runs": [],
+  "claims": [
+    {
+      "id": "C1",
+      "status": "planned",
+      "text": "The profile can represent diverse reporting standards with auditable source and semantic fidelity.",
+      "run_ids": [],
+      "review": null,
+      "limitations": [
+        "Proposed contribution; no directory-wide qualification or EQUATOR endorsement."
+      ]
+    },
+    {
+      "id": "C2",
+      "status": "planned",
+      "text": "Orthogonal decision-model evidence improves supported discrepancy discovery at a fixed review budget.",
+      "run_ids": [],
+      "review": null,
+      "limitations": [
+        "Hypothesis, not an observed result; correlated errors and domain calibration require measurement."
+      ]
+    }
+  ]
+}

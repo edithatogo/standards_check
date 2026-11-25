@@ -1,7 +1,6 @@
 """Exercise the committed Pages visibility guard without network access or sleeps."""
 
 from contextlib import redirect_stdout
-from copy import deepcopy
 import io
 import json
 import os
@@ -17,7 +16,8 @@ class PagesArtifactProbeTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         workflow = Path(__file__).resolve().parents[1] / ".github/workflows/build-docs.yml"
-        cls.deploy = yaml.safe_load(workflow.read_text(encoding="utf-8"))["jobs"]["deploy"]
+        jobs = yaml.safe_load(workflow.read_text(encoding="utf-8"))["jobs"]
+        cls.build, cls.deploy = jobs["build"], jobs["deploy"]
         probes = [step for step in cls.deploy["steps"]
                   if step.get("name") == "Wait for the uploaded Pages artifact metadata"]
         if len(probes) != 1:
@@ -35,12 +35,13 @@ class PagesArtifactProbeTests(unittest.TestCase):
     def payload(self, *artifacts):
         return {"total_count": len(artifacts), "artifacts": list(artifacts)}
 
-    def execute_probe(self, *responses):
+    def execute_probe(self, *responses, environment_overrides=None):
         environment = {
             "PAGES_ARTIFACT_ID": "101", "PAGES_ARTIFACT_NAME": "github-pages-3",
             "GITHUB_RUN_ID": "202", "GITHUB_API_URL": "https://api.github.com",
             "GITHUB_REPOSITORY": "example/repository", "GITHUB_TOKEN": "synthetic-test-token",
         }
+        environment.update(environment_overrides or {})
         self.elapsed, self.requests = 0.0, []
 
         def request(request, *, timeout):
@@ -48,7 +49,7 @@ class PagesArtifactProbeTests(unittest.TestCase):
             self.assertLessEqual(len(self.requests), 31, "Probe exceeded the mocked request budget")
             self.assertEqual(request.full_url,
                              "https://api.github.com/repos/example/repository/actions/runs/202/"
-                             "artifacts?name=github-pages-3&per_page=100")
+                             f"artifacts?name={environment['PAGES_ARTIFACT_NAME']}&per_page=100")
             self.assertEqual(request.get_header("Authorization"), "Bearer synthetic-test-token")
             self.assertGreater(timeout, 0)
             self.assertLessEqual(timeout, min(10, 60 - self.elapsed))
@@ -120,21 +121,53 @@ class PagesArtifactProbeTests(unittest.TestCase):
         self.assertEqual(observed.exception.code, 403)
         self.assertEqual((len(self.requests), self.elapsed), (1, 0))
 
-    def test_native_upload_probe_and_deploy_share_the_current_attempt_identity(self):
-        steps = deepcopy(self.deploy["steps"])
-        upload = next(step for step in steps if step.get("id") == "pages_upload")
+    def test_native_upload_precedes_deployment_job_with_producer_identity(self):
+        steps = self.deploy["steps"]
+        upload = next(step for step in self.build["steps"] if step.get("id") == "pages_upload")
         deploy = next(step for step in steps if step.get("id") == "deployment")
         probe = next(step for step in steps if step.get("name") == self.probe_step["name"])
-        self.assertEqual(self.deploy["env"]["PAGES_ARTIFACT_NAME"],
+        self.assertEqual(self.build["env"]["PAGES_ARTIFACT_NAME"],
                          "github-pages-${{ github.run_attempt }}")
         self.assertEqual(upload["with"]["name"], "${{ env.PAGES_ARTIFACT_NAME }}")
+        self.assertEqual(self.build["outputs"]["pages_artifact_name"], "${{ env.PAGES_ARTIFACT_NAME }}")
+        self.assertEqual(self.build["outputs"]["pages_artifact_id"],
+                         "${{ steps.pages_upload.outputs.artifact_id }}")
+        self.assertEqual(self.deploy["env"]["PAGES_ARTIFACT_NAME"],
+                         "${{ needs.build.outputs.pages_artifact_name }}")
+        self.assertEqual(self.deploy["needs"], "build")
+        self.assertEqual(upload["if"], self.deploy["if"])
+        self.assertFalse(any(step.get("id") == "pages_upload" for step in steps))
+        self.assertFalse(any("actions/download-artifact@" in step.get("uses", "") for step in steps))
         self.assertEqual(deploy["with"]["artifact_name"], "${{ env.PAGES_ARTIFACT_NAME }}")
         self.assertEqual(probe["env"]["PAGES_ARTIFACT_ID"],
-                         "${{ steps.pages_upload.outputs.artifact_id }}")
+                         "${{ needs.build.outputs.pages_artifact_id }}")
         self.assertEqual(probe["env"]["GITHUB_TOKEN"], "${{ github.token }}")
         self.assertEqual(self.deploy["permissions"]["actions"], "read")
-        self.assertLess(steps.index(upload), steps.index(probe))
+        self.assertEqual(self.deploy["permissions"]["pages"], "write")
+        self.assertEqual(self.deploy["permissions"]["id-token"], "write")
+        self.assertEqual(self.deploy["environment"]["name"], "github-pages")
         self.assertLess(steps.index(probe), steps.index(deploy))
+
+    def test_failed_deployment_rerun_keeps_the_successful_build_attempt(self):
+        def expand(value, context):
+            for key, replacement in context.items():
+                value = value.replace("${{ " + key + " }}", str(replacement))
+            self.assertNotIn("${{", value, "Unexpected workflow expression in this regression")
+            return value
+
+        producer = {"github.run_attempt": 3, "steps.pages_upload.outputs.artifact_id": 101}
+        producer["env.PAGES_ARTIFACT_NAME"] = expand(self.build["env"]["PAGES_ARTIFACT_NAME"], producer)
+        # GitHub retains successful dependency outputs when only the failed deploy job reruns.
+        consumer = {"github.run_attempt": 4}
+        consumer.update({"needs.build.outputs." + key: expand(value, producer)
+                         for key, value in self.build["outputs"].items()})
+        name = expand(self.deploy["env"]["PAGES_ARTIFACT_NAME"], consumer)
+        artifact_id = expand(self.probe_step["env"]["PAGES_ARTIFACT_ID"], consumer)
+        self.assertEqual((name, artifact_id), ("github-pages-3", "101"))
+        output = self.execute_probe(self.payload(self.artifact()), environment_overrides={
+            "PAGES_ARTIFACT_NAME": name, "PAGES_ARTIFACT_ID": artifact_id, "GITHUB_RUN_ATTEMPT": "4"})
+        self.assertIn("Pages artifact 101 (github-pages-3) is visible for run 202", output)
+        self.assertEqual((len(self.requests), self.elapsed), (1, 0))
 
 
 if __name__ == "__main__":

@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
 """Network-free validation for the initial StandardFlow contracts and context."""
+
 from __future__ import annotations
 
+import json
+import sys
 from copy import deepcopy
 from datetime import date, datetime
-import json
 from pathlib import Path
-import sys
-from typing import Any
+from typing import Any, NoReturn
 from urllib.parse import urlparse
 
 from jsonschema import Draft202012Validator, FormatChecker
 from jsonschema.exceptions import SchemaError
+from jsonschema.protocols import Validator
 
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = (
@@ -29,7 +31,7 @@ REQUIRED = (
 )
 
 
-def fail(message: str) -> None:
+def fail(message: str) -> NoReturn:
     print(f"ERROR: {message}", file=sys.stderr)
     raise SystemExit(1)
 
@@ -45,7 +47,7 @@ def load_json(path: Path) -> dict[str, Any]:
 
 
 def first_validation_error(
-    validator: Draft202012Validator,
+    validator: Validator,
     instance: dict[str, Any],
 ) -> str | None:
     errors = sorted(

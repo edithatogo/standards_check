@@ -39,6 +39,24 @@ class SbomTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "JSON object"):
             sbom.verify_inventory([], expected, "npm")
 
+    def test_fuzz_inventory_binds_its_separate_lock_and_inherited_manifest(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "fuzz").mkdir()
+            lock = b"test-only lock bytes"
+            (root / "fuzz/Cargo.lock").write_bytes(lock)
+            receipt = {"source_commit": "a" * 40}
+            with patch.object(sbom, "ROOT", root), patch.object(sbom, "central_helper") as helper:
+                sbom.generate("rust-fuzz", root, root, root, receipt)
+                helper.return_value.generate.assert_called_once_with(
+                    lock, "standards_check/rust-fuzz", receipt["source_commit"]
+                )
+                self.assertEqual(set(sbom.source_inputs("rust-fuzz")), {
+                    root / "fuzz/Cargo.lock", root / "fuzz/Cargo.toml",
+                    root / "Cargo.toml", root / "crates/standardflow-core/Cargo.toml",
+                })
+                self.assertIn("test-only", receipt["scope"])
+
     def test_native_npm_inventory_uses_all_locked_identities(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

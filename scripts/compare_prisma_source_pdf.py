@@ -4,25 +4,36 @@
 This requires an explicitly acquired local PDF and pdftotext. No network calls
 are made by this validator, and no verification status is silently promoted.
 """
+
 from __future__ import annotations
 
 import argparse
 import hashlib
 import json
-from pathlib import Path
 import re
 import subprocess
+from pathlib import Path
 
 if __package__:
     from .build_prisma42_candidate import (
-        EXPECTED, EXPECTED_PAGES, LEDGER, PINNED_PDF_LENGTH, PINNED_PDF_SHA256,
-        checked_ledger_items, normalize,
+        EXPECTED,
+        EXPECTED_PAGES,
+        LEDGER,
+        PINNED_PDF_LENGTH,
+        PINNED_PDF_SHA256,
+        checked_ledger_items,
+        normalize,
     )
     from .validate_prisma_source_assurance import PACK, audit
 else:
     from build_prisma42_candidate import (
-        EXPECTED, EXPECTED_PAGES, LEDGER, PINNED_PDF_LENGTH, PINNED_PDF_SHA256,
-        checked_ledger_items, normalize,
+        EXPECTED,
+        EXPECTED_PAGES,
+        LEDGER,
+        PINNED_PDF_LENGTH,
+        PINNED_PDF_SHA256,
+        checked_ledger_items,
+        normalize,
     )
     from validate_prisma_source_assurance import PACK, audit
 
@@ -54,7 +65,7 @@ def numbered_rows(text_pages: list[str]) -> dict[str, dict]:
         for line in page_text.splitlines():
             if line.startswith("From:"):
                 break
-            match = re.search(r"\b([0-9]{1,2}[a-z]?)\s*$", line[:GUTTERS[page]])
+            match = re.search(r"\b([0-9]{1,2}[a-z]?)\s*$", line[: GUTTERS[page]])
             if match:
                 number = match.group(1)
                 if number not in EXPECTED_PAGES or EXPECTED_PAGES[number] != page:
@@ -79,7 +90,9 @@ def extract_pdf_pages(source_bytes: bytes) -> list[str]:
     check_pdf_fingerprint(source_bytes)
     extracted = subprocess.run(
         ["pdftotext", "-layout", "-enc", "UTF-8", "-", "-"],
-        input=source_bytes, check=True, capture_output=True,
+        input=source_bytes,
+        check=True,
+        capture_output=True,
     ).stdout.decode("utf-8")
     return extracted.rstrip("\f").split("\f")
 
@@ -94,18 +107,26 @@ def verify_pdf(source_bytes: bytes, text_pages: list[str], ledger: dict, pack: d
         source = normalize(rows[number]["text"])
         expected_text = normalize(item["verbatim_text"])
         if rows[number]["page"] != page or expected_text != source:
-            raise ValueError(f"Item {number} does not match the complete numbered PDF row on page {page}")
-        comparisons.append({
-            "item": number,
-            "page": page,
-            "source_pdf_sha256": actual_sha,
-            "whitespace_normalized_text_sha256": hashlib.sha256(expected_text.encode()).hexdigest(),
-            "whitespace_normalized_source_match": True,
-            "comparison_method": "unicode_nfkc_whitespace_ignored_numbered_row_equality",
-        })
+            raise ValueError(
+                f"Item {number} does not match the complete numbered PDF row on page {page}"
+            )
+        comparisons.append(
+            {
+                "item": number,
+                "page": page,
+                "source_pdf_sha256": actual_sha,
+                "whitespace_normalized_text_sha256": hashlib.sha256(
+                    expected_text.encode()
+                ).hexdigest(),
+                "whitespace_normalized_source_match": True,
+                "comparison_method": "unicode_nfkc_whitespace_ignored_numbered_row_equality",
+            }
+        )
     pack_audit = audit(pack, ledger)
     if pack_audit["errors"] or not pack_audit["item_level_source_reconciled"]:
-        raise ValueError("Canonical PRISMA pack is not bound to the verified PDF item texts and source identity")
+        raise ValueError(
+            "Canonical PRISMA pack is not bound to the verified PDF item texts and source identity"
+        )
     return {
         "schema_version": "dev.standardflow.prisma-source-comparison.v1",
         "pdf_url": ledger["source_url"],
@@ -118,8 +139,10 @@ def verify_pdf(source_bytes: bytes, text_pages: list[str], ledger: dict, pack: d
         "pack_item_source_parity": True,
         "comparisons": comparisons,
         "status": "machine_compared_source_text",
-        "limitations": ["Comparison applies Unicode NFKC normalization and ignores whitespace",
-                        "Human methodological and translation evaluation are not covered"],
+        "limitations": [
+            "Comparison applies Unicode NFKC normalization and ignores whitespace",
+            "Human methodological and translation evaluation are not covered",
+        ],
     }
 
 

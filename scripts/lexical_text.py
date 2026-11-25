@@ -1,4 +1,5 @@
 """Shared Unicode-aware lexical normalization (not fidelity normalization)."""
+
 import re
 import unicodedata
 
