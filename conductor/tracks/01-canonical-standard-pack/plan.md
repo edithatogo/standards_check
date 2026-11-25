@@ -140,6 +140,9 @@ independent structure/comparison, rights, semantics and admission. Keep
 T01.5d–g conditional on measured residual errors. No new model or service
 is required for the census.
 
+### Trial-reporting edition metadata and synthetic examples
+
+[#121](https://github.com/edithatogo/standards_check/pull/121) corrects CONSORT/SPIRIT publication metadata and identifies TRIPOD+AI 2024 separately from 2015. Trial-reporting source entries and synthetic examples remain unqualified; no Canonical Pack, checklist rights, source-byte or methodological claim follows. Continue exact-edition acquisition and item/subitem reconciliation under [#120](https://github.com/edithatogo/standards_check/issues/120), retaining #95/#82 holds and the [guideline admission checklist](../../../CONTENT_POPULATION_WORKFLOW.md). The earlier 719-record catalogue is historical; current survey evidence remains in the Phase 5 record.
 
 ### T01.5c/d/h and analytical projections — implementation increment
 
