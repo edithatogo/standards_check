@@ -72,21 +72,21 @@ Local evidence and wire-compatibility details are recorded in
 
 ## Candidate CONSORT/SPIRIT diagrams — 23 November 2026
 
-- [x] Retain original **synthetic** CONSORT-informed participant flow and
+- [x] **T02.040** ([#120](https://github.com/edithatogo/standards_check/issues/120)) Retain original **synthetic** CONSORT-informed participant flow and
   SPIRIT-informed assessment schedule with text equivalents and
   failure-on-count-mutation regression in
   [PR #121](https://github.com/edithatogo/standards_check/pull/121).
   These examples are not copies of official figures, operative recipe contracts
   or methodological/accessibility acceptance.
-- [ ] Before accepting a real CONSORT 2025 flow, define a versioned input
+- [ ] **T02.041** ([#120](https://github.com/edithatogo/standards_check/issues/120)) Before accepting a real CONSORT 2025 flow, define a versioned input
   contract with groupwise enrolment/allocation/receipt/follow-up/analysis counts,
   reasons and overlap semantics, then check conservation using actual
   participant-state provenance. Follow-up loss and intervention discontinuation
   need not equal exclusions from the analysis set.
-- [ ] Before accepting a SPIRIT 2025 schedule, define typed visit windows,
+- [ ] **T02.042** ([#120](https://github.com/edithatogo/standards_check/issues/120)) Before accepting a SPIRIT 2025 schedule, define typed visit windows,
   optional/conditional activities and temporal ordering, with an accessible
   text equivalent and explicit protocol provenance.
-- [ ] Reuse the existing recipe/scene/SVG/text engine, rather than creating
+- [ ] **T02.043** ([#120](https://github.com/edithatogo/standards_check/issues/120)) Reuse the existing recipe/scene/SVG/text engine, rather than creating
   a CONSORT-only renderer. Pin source edition, figure rights and
   item-by-item review under [issue #120](https://github.com/edithatogo/standards_check/issues/120).
   No change to four qualified PRISMA recipe families or 12 golden outputs.
