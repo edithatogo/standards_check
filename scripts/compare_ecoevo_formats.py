@@ -1,19 +1,22 @@
 """Compare a fixed EcoEvo 2021 candidate cohort; never establish admission."""
+
 from __future__ import annotations
 
 import argparse
-from collections import Counter
 import hashlib
 import io
-from itertools import combinations
 import json
-from pathlib import Path
 import re
 import subprocess
+from collections import Counter
+from itertools import combinations
+from pathlib import Path
 
 if __package__:
+    from .ecoevo_pdf_grid import extract_native, extract_poppler
     from .structured_source import cell_fields, fingerprint
 else:
+    from ecoevo_pdf_grid import extract_native, extract_poppler
     from structured_source import cell_fields, fingerprint
 
 # Printed sub-item sequences from the official checklist PDF (2021, seven pages),
@@ -41,20 +44,35 @@ def read_bounded(path: Path, limit: int = MAX_BYTES) -> bytes:
     return raw
 
 
-def collect_rows(structure: dict, id_pattern: re.Pattern = ID) -> tuple[list[dict], list[str]]:
+def collect_rows(
+    structure: dict, *, identifier_pattern: re.Pattern = ID, header_roles: dict | None = None
+) -> tuple[list[dict], list[str]]:
     """Match explicit header roles, not arbitrary numeric-looking scoring cells."""
     records, issues = [], set()
 
     def visit(node: dict) -> None:
         columns = None
         for row in node.get("rows", []):
-            cells = {cell.get("column", ordinal): cell for ordinal, cell in enumerate(row["cells"], 1)}
-            headers = [(column, cell.get("header_role") or HEADER.get(cell.get("text_sha256")))
-                       for column, cell in cells.items()]
+            cells = {
+                cell.get("column", ordinal): cell for ordinal, cell in enumerate(row["cells"], 1)
+            }
+            headers = [
+                (
+                    column,
+                    (cell.get("header_role") or HEADER.get(cell.get("text_sha256")))
+                    if header_roles is None
+                    else header_roles.get(cell.get("text_sha256")),
+                )
+                for column, cell in cells.items()
+            ]
             id_cols = [column for column, role in headers if role == "id"]
             req_cols = [column for column, role in headers if role == "requirement"]
             if id_cols or req_cols:
-                columns = (id_cols[0], req_cols[0]) if len(id_cols) == len(req_cols) == 1 and id_cols != req_cols else None
+                columns = (
+                    (id_cols[0], req_cols[0])
+                    if len(id_cols) == len(req_cols) == 1 and id_cols != req_cols
+                    else None
+                )
                 if columns is None:
                     issues.add("incomplete_or_ambiguous_header")
                 continue
@@ -63,16 +81,33 @@ def collect_rows(structure: dict, id_pattern: re.Pattern = ID) -> tuple[list[dic
             identifier = cells.get(columns[0], {})
             requirement = cells.get(columns[1], {})
             item_id = identifier.get("item_id_candidate")
-            if not isinstance(item_id, str) or not id_pattern.fullmatch(item_id) or identifier.get("value_type") == "f":
-                if identifier.get("text_sha256") not in {None, EMPTY} or requirement.get("text_sha256") not in {None, EMPTY}:
+            if (
+                not isinstance(item_id, str)
+                or not identifier_pattern.fullmatch(item_id)
+                or identifier.get("value_type") == "f"
+            ):
+                if identifier.get("text_sha256") not in {None, EMPTY} or requirement.get(
+                    "text_sha256"
+                ) not in {None, EMPTY}:
                     issues.add("unclassified_data_row")
                 continue
             digest = requirement.get("text_sha256")
-            if not isinstance(digest, str) or not re.fullmatch(r"[0-9a-f]{64}", digest) or digest == EMPTY or requirement.get("value_type") == "f":
+            if (
+                not isinstance(digest, str)
+                or not re.fullmatch(r"[0-9a-f]{64}", digest)
+                or digest == EMPTY
+                or requirement.get("value_type") == "f"
+            ):
                 digest = None
                 issues.add("missing_or_ineligible_requirement")
-            records.append({"item_id": item_id, "identifier_anchor": identifier.get("anchor"),
-                            "requirement_anchor": requirement.get("anchor"), "requirement_sha256": digest})
+            records.append(
+                {
+                    "item_id": item_id,
+                    "identifier_anchor": identifier.get("anchor"),
+                    "requirement_anchor": requirement.get("anchor"),
+                    "requirement_sha256": digest,
+                }
+            )
         for key in ("blocks", "sheets"):
             for child in node.get(key, []):
                 visit(child)
@@ -81,26 +116,46 @@ def collect_rows(structure: dict, id_pattern: re.Pattern = ID) -> tuple[list[dic
     return records, sorted(issues)
 
 
-def compare_formats(left: list[dict], right: list[dict]) -> dict:
+def compare_formats(
+    left: list[dict], right: list[dict], *, expected_ids: list[str] | tuple[str, ...] | None = None
+) -> dict:
+    expected = EXPECTED_IDS if expected_ids is None else expected_ids
+
     def unique(rows: list[dict]) -> dict:
         counts = Counter(row["item_id"] for row in rows)
-        return {row["item_id"]: row["requirement_sha256"] for row in rows
-                if counts[row["item_id"]] == 1 and row["requirement_sha256"] is not None}
+        return {
+            row["item_id"]: row["requirement_sha256"]
+            for row in rows
+            if counts[row["item_id"]] == 1 and row["requirement_sha256"] is not None
+        }
+
     a, b = unique(left), unique(right)
-    common = [item for item in EXPECTED_IDS if item in a and item in b]
+    common = [item for item in expected if item in a and item in b]
     different = [item for item in common if a[item] != b[item]]
-    return {"compared": len(common), "exact_equal": len(common) - len(different), "different_ids": different,
-            "not_comparable_expected_ids": [item for item in EXPECTED_IDS if item not in common]}
+    return {
+        "compared": len(common),
+        "exact_equal": len(common) - len(different),
+        "different_ids": different,
+        "not_comparable_expected_ids": [item for item in expected if item not in common],
+    }
 
 
-def pdf_header_role(value: str, roles: dict[str, str] | None = None) -> str | None:
-    # The official EcoEvo PDF's sub-item header uses a control/glyph marker.
-    # Recognize only the observed CID 2 header form; never strip markers from body text.
-    header = re.sub(r"[^a-z0-9]", "", value.casefold().replace("(cid:2)", ""))
-    return (roles if roles is not None else {"subitemnumber": "id", "subitem": "requirement"}).get(header)
+def layout_comparison_rows(rows: list[dict]) -> list[dict]:
+    """Use the separately recorded typography diagnostic only for complete rows."""
+    return [
+        {
+            **row,
+            "requirement_sha256": (
+                row.get("layout_normalized_sha256", row["requirement_sha256"])
+                if row["requirement_sha256"] is not None
+                else None
+            ),
+        }
+        for row in rows
+    ]
 
 
-def pdf_tables(raw: bytes, header_roles: dict[str, str] | None = None) -> dict:
+def pdf_tables(raw: bytes) -> dict:
     """Bounded ruled-table experiment with the existing pdfplumber engine."""
     import pdfplumber
 
@@ -120,9 +175,21 @@ def pdf_tables(raw: bytes, header_roles: dict[str, str] | None = None) -> dict:
                     cells = []
                     for column, value in enumerate(values, 1):
                         value = value or ""
-                        anchor = f"page/{page.page_number}/table/{table_number}/r{row_number}/c{column}"
-                        cells.append({"anchor": anchor, "column": column, **cell_fields(value),
-                                      "header_role": pdf_header_role(value, header_roles)})
+                        header = re.sub(r"[^a-z0-9]", "", value.casefold())
+                        anchor = (
+                            f"page/{page.page_number}/table/{table_number}/r{row_number}/c{column}"
+                        )
+                        cells.append(
+                            {
+                                "anchor": anchor,
+                                "column": column,
+                                **cell_fields(value),
+                                "header_role": {
+                                    "subitemnumber": "id",
+                                    "subitem": "requirement",
+                                }.get(header),
+                            }
+                        )
                     rows.append({"cells": cells})
                 blocks.append({"rows": rows})
     return {"blocks": blocks}
@@ -130,14 +197,20 @@ def pdf_tables(raw: bytes, header_roles: dict[str, str] | None = None) -> dict:
 
 def layout_ids(layout: str) -> list[dict]:
     """Independent Poppler layout-field tokens, not verified full numbered rows."""
-    return [{"item_id": field, "page": page, "line": line}
-            for page, text in enumerate(layout.split("\f"), 1)
-            for line, row in enumerate(text.splitlines(), 1)
-            for field in re.split(r"\s{2,}", row.strip()) if ID.fullmatch(field)]
+    return [
+        {"item_id": field, "page": page, "line": line}
+        for page, text in enumerate(layout.split("\f"), 1)
+        for line, row in enumerate(text.splitlines(), 1)
+        for field in re.split(r"\s{2,}", row.strip())
+        if ID.fullmatch(field)
+    ]
 
 
 def benchmark(report: dict, root: Path | None = None, official: Path | None = None) -> dict:
-    if report.get("schema_version") != 3 or report.get("summary", {}).get("verified_by_this_process") != 0:
+    if (
+        report.get("schema_version") != 3
+        or report.get("summary", {}).get("verified_by_this_process") != 0
+    ):
         raise ValueError("unexpected source-triage receipt")
     records = [row for row in report["legacy_items"] if row["legacy_id"] == "prisma-ecoevo"]
     if len(records) != 1:
@@ -149,16 +222,28 @@ def benchmark(report: dict, root: Path | None = None, official: Path | None = No
     for path, filename in COHORT.items():
         probe = probes.get(path, {})
         digest = probe.get("source_sha256")
-        source = {"path": path, "source_sha256": digest, "official_url": f"https://www.prisma-statement.org/s/{filename}" if filename else None,
-                  "identity": "local_derivative_no_official_csv" if filename is None else "official_bytes_not_checked"}
+        source = {
+            "path": path,
+            "source_sha256": digest,
+            "official_url": f"https://www.prisma-statement.org/s/{filename}" if filename else None,
+            "identity": "local_derivative_no_official_csv"
+            if filename is None
+            else "official_bytes_not_checked",
+        }
         if official is not None and filename is not None:
             try:
                 downloaded = hashlib.sha256(read_bounded(official / filename)).hexdigest()
-                source.update(official_sha256=downloaded, identity="official_bytes_equal" if downloaded == digest else "official_bytes_different")
+                source.update(
+                    official_sha256=downloaded,
+                    identity="official_bytes_equal"
+                    if downloaded == digest
+                    else "official_bytes_different",
+                )
             except (OSError, ValueError):
                 source["identity"] = "official_bytes_unavailable"
         structure = probe.get("source_structure")
         issues = []
+        native_grid = None
         raw = None
         source["local_bytes"] = "not_rechecked"
         if root is not None:
@@ -174,47 +259,130 @@ def benchmark(report: dict, root: Path | None = None, official: Path | None = No
         if path.endswith(".pdf") and raw is not None:
             try:
                 import pdfplumber
+
                 source["pdfplumber_version"] = pdfplumber.__version__
-                structure = pdf_tables(raw)
+                native_grid = extract_native(raw)
+                source["pdf_grid_native"] = {k: v for k, v in native_grid.items() if k != "rows"}
+                structure = None
             except Exception as exc:  # parser-specific failures remain held, no text leaked
                 issues.append("pdf_table_extraction_failed:" + type(exc).__name__)
             # Run the independent parser even when the first parser fails.
             try:
-                run = subprocess.run(["pdftotext", "-layout", "-enc", "UTF-8", "-", "-"],
-                                     input=raw, capture_output=True, timeout=20, check=True)
+                run = subprocess.run(
+                    ["pdftotext", "-layout", "-enc", "UTF-8", "-", "-"],
+                    input=raw,
+                    capture_output=True,
+                    timeout=20,
+                    check=True,
+                )
                 if len(run.stdout) > 8_000_000:
                     raise ValueError("Poppler output exceeds limit")
-                tokens = layout_ids(run.stdout.decode("utf-8"))
+                layout = run.stdout.decode("utf-8")
+                tokens = layout_ids(layout)
+                grid = extract_poppler(raw)
+                source["poppler_rows"] = grid["rows"]
+                source["poppler_row_issues"] = grid["issues"]
+                source["pdf_grid_independent"] = {k: v for k, v in grid.items() if k != "rows"}
                 token_counts = Counter(token["item_id"] for token in tokens)
-                version = subprocess.run(["pdftotext", "-v"], capture_output=True, timeout=5, check=True)
-                source["poppler_version"] = version.stderr.decode("utf-8").splitlines()[0] if version.stderr else "unknown"
+                version = subprocess.run(
+                    ["pdftotext", "-v"], capture_output=True, timeout=5, check=True
+                )
+                source["poppler_version"] = (
+                    version.stderr.decode("utf-8").splitlines()[0] if version.stderr else "unknown"
+                )
                 source["poppler_layout_tokens"] = tokens
-                source["poppler_expected_id_tokens"] = sum(item in token_counts for item in EXPECTED_IDS)
-                source["poppler_duplicate_id_tokens"] = sorted(item for item, count in token_counts.items() if count > 1)
+                source["poppler_expected_id_tokens"] = sum(
+                    item in token_counts for item in EXPECTED_IDS
+                )
+                source["poppler_duplicate_id_tokens"] = sorted(
+                    item for item, count in token_counts.items() if count > 1
+                )
             except (OSError, subprocess.SubprocessError, UnicodeError, ValueError):
                 issues.append("poppler_layout_unavailable")
-        rows, row_issues = collect_rows(structure) if structure is not None else ([], ["structure_unavailable"])
+        if native_grid is not None:
+            rows, row_issues = native_grid["rows"], native_grid["issues"]
+        else:
+            rows, row_issues = (
+                collect_rows(structure)
+                if structure is not None
+                else ([], ["structure_unavailable"])
+            )
         counts = Counter(row["item_id"] for row in rows)
-        source.update(rows=rows, structure_status=(structure or {}).get("status", "candidate_only"),
-                      expected_ids_recovered=sum(item in counts for item in EXPECTED_IDS),
-                      missing_ids=[item for item in EXPECTED_IDS if item not in counts],
-                      extra_ids=sorted(set(counts) - set(EXPECTED_IDS)),
-                      duplicate_ids=sorted(item for item, count in counts.items() if count > 1),
-                      exact_expected_order=[row["item_id"] for row in rows] == EXPECTED_IDS,
-                      issues=sorted(set(issues + row_issues)))
+        source.update(
+            rows=rows,
+            structure_status=(structure or {}).get("status", "candidate_only"),
+            expected_ids_recovered=sum(item in counts for item in EXPECTED_IDS),
+            missing_ids=[item for item in EXPECTED_IDS if item not in counts],
+            extra_ids=sorted(set(counts) - set(EXPECTED_IDS)),
+            duplicate_ids=sorted(item for item, count in counts.items() if count > 1),
+            exact_expected_order=[row["item_id"] for row in rows] == EXPECTED_IDS,
+            issues=sorted(set(issues + row_issues)),
+        )
+        if path.endswith(".pdf") and "poppler_rows" in source:
+            independent = source["poppler_rows"]
+            source["pdf_independent_row_comparison"] = compare_formats(rows, independent)
+            source["pdf_independent_layout_comparison"] = compare_formats(
+                layout_comparison_rows(rows), layout_comparison_rows(independent)
+            )
+            source["poppler_exact_expected_order"] = [
+                row["item_id"] for row in independent
+            ] == EXPECTED_IDS
         results.append(source)
-    return {"edition": "PRISMA-EcoEvo 2021 v1.0", "doi": "10.1111/brv.12721", "numbering_reference": REFERENCE,
-            "expected_item_ids": EXPECTED_IDS, "claim_boundary": "candidate structural comparison; no rights, authority or admission",
-            "sources": results, "pairwise": [{"left": a["path"], "right": b["path"], **compare_formats(a["rows"], b["rows"])}
-                                               for a, b in combinations(results, 2)], "canonical_packs_promoted": 0}
+    for source in results:
+        if "poppler_rows" in source:
+            source["poppler_layout_vs_other_formats"] = [
+                {
+                    "path": other["path"],
+                    **compare_formats(
+                        layout_comparison_rows(source["poppler_rows"]),
+                        layout_comparison_rows(other["rows"]),
+                    ),
+                }
+                for other in results
+                if other is not source
+            ]
+            source["poppler_vs_other_formats"] = [
+                {"path": other["path"], **compare_formats(source["poppler_rows"], other["rows"])}
+                for other in results
+                if other is not source
+            ]
+    return {
+        "edition": "PRISMA-EcoEvo 2021 v1.0",
+        "doi": "10.1111/brv.12721",
+        "numbering_reference": REFERENCE,
+        "expected_item_ids": EXPECTED_IDS,
+        "claim_boundary": "candidate structural comparison; no rights, authority or admission",
+        "sources": results,
+        "layout_pairwise": [
+            {
+                "left": a["path"],
+                "right": b["path"],
+                **compare_formats(
+                    layout_comparison_rows(a["rows"]), layout_comparison_rows(b["rows"])
+                ),
+            }
+            for a, b in combinations(results, 2)
+        ],
+        "pairwise": [
+            {"left": a["path"], "right": b["path"], **compare_formats(a["rows"], b["rows"])}
+            for a, b in combinations(results, 2)
+        ],
+        "canonical_packs_promoted": 0,
+    }
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--report", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--root", type=Path, help="Optional repository checkout for the PDF experiment")
-    parser.add_argument("--official-dir", type=Path, help="Optional explicitly acquired official files; no downloads here")
+    parser.add_argument(
+        "--root", type=Path, help="Optional repository checkout for the PDF experiment"
+    )
+    parser.add_argument(
+        "--official-dir",
+        type=Path,
+        help="Optional explicitly acquired official files; no downloads here",
+    )
     args = parser.parse_args()
     raw = read_bounded(args.report, 100_000_000)
     evidence = benchmark(json.loads(raw), args.root, args.official_dir)

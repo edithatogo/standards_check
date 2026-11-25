@@ -12,6 +12,9 @@
 - [Roadmap](./roadmap.md)
 - [Tracks](./tracks.md)
 - [Technical-preview readiness and EQUATOR engagement](../docs/preview-readiness.md)
+- [Repository maturity plan](tracks/05-maximal-assurance/maturity-plan-20261125.md)
+- [Frontier evaluation and test efficiency evidence](../docs/research/frontier-evaluation-20261125.md)
+- [Complete plan/issue registry](../contracts/project/conductor-issues.v1.json)
 
 ## Source reconciliation
 
@@ -19,14 +22,30 @@
 
 ## Architecture
 
+- [Track 01 source reconciliation requirements and design](tracks/01-canonical-standard-pack/source-reconciliation-design.md) — MoSCoW, Mermaid and analytical projections.
+
 - [Platform architecture](../docs/architecture/STANDARDFLOW_ARCHITECTURE.md)
 - [Canonical Standard Pack](../docs/architecture/CANONICAL_STANDARD_PACK.md)
+- [Reporting guideline interoperability and assurance](../docs/architecture/REPORTING_GUIDELINE_INTEROPERABILITY.md) — proposed conformance requirements, evidence receipt, triangulation, model shortlist and publication plan.
 - [Diagram and artefact engine](../docs/architecture/DIAGRAM_ENGINE.md)
 - [Research ecosystem](../docs/architecture/RESEARCH_ECOSYSTEM.md)
+- [Composed checklists and requirement graph](../docs/architecture/CHECKLIST_COMPOSITION.md)
 - [Assurance and release engineering](../docs/architecture/ASSURANCE.md)
+
+## Representation and publication delivery
+
+- [Versioned profile 0.1.0](../docs/specifications/reporting-guideline-representation/0.1.0.md) and
+  [approval registry](../contracts/representation/releases.json); draft, independently versioned from pack schemas.
+- [Current programme receipt](tracks/01-canonical-standard-pack/representation-programme-20261124.md).
+- [Publication protocol](../docs/research/publication-protocol.v0.1.0.md) and
+  [machine-readable experiment/claim contract](../contracts/publication/programme.v1.json).
+- [Publication submission plan](../docs/research/publication-submission-plan.v0.1.0.md)
+  and [selective data dissemination policy](../docs/architecture/DATA_DISSEMINATION.md).
+- [Prepared EQUATOR issue refinement](tracks/01-canonical-standard-pack/equator-issue-14-refinement-20261125.md).
 
 ## Agent capability
 
+- [Publication evidence](../.agents/skills/publication-evidence/SKILL.md) — frozen experiments, blinded model-agent references and source-bound claims.
 - [Conductor router](../.agents/skills/conductor/SKILL.md)
 - [Source reconciliation retrospective](../.agents/skills/source-reconciliation-retrospective/SKILL.md) — evidence-led session and extraction review; [initial receipt](source-reconciliation/retrospective-20261124.md).
 - Exact upstream plugin gitlink: `.agents/plugins/conductor`

@@ -1,0 +1,35 @@
+{
+  "schema_version": "dev.standardflow.dataset-release.v1",
+  "status": "planned",
+  "release": {
+    "id": "standardflow-metadata",
+    "version": "0.1.0",
+    "producer_revision": "82e4a1efc136187f42b31347ada44506d2d96bfa",
+    "sources": [
+      {
+        "uri": "https://github.com/EQUATOR-Network/equator-website/tree/d74413b15d266334067e1e5c104957601be3ba6c",
+        "revision": "d74413b15d266334067e1e5c104957601be3ba6c",
+        "receipt": {
+          "path": null,
+          "sha256": "6342da023cfdc83cdfbafba4ae34868931341dea367f0c113800fcb82f443cf0"
+        }
+      }
+    ],
+    "destination": {
+      "repo_id": "edithatogo/standardflow-source-evidence",
+      "visibility": "public"
+    },
+    "license": null,
+    "attribution": [],
+    "benchmark_role": "operational",
+    "package_root": null,
+    "files": []
+  },
+  "reviews": {
+    "rights": null,
+    "privacy": null,
+    "secrets": null,
+    "benchmark_leakage": null
+  },
+  "approval": null
+}

@@ -19,7 +19,9 @@ PMID = re.compile(r"(?<!\d)\d{7,9}(?!\d)")
 def git(source: Path, *args: str) -> str:
     return subprocess.run(
         ["git", "-C", str(source), *args],
-        check=True, text=True, capture_output=True,
+        check=True,
+        text=True,
+        capture_output=True,
     ).stdout.strip()
 
 
@@ -51,7 +53,11 @@ def _frontmatter(path: Path) -> dict:
     if not sep:
         raise ValueError(f"Unterminated YAML frontmatter: {path}")
     data = yaml.safe_load(header)
-    if not isinstance(data, dict) or not isinstance(data.get("title"), str) or not data["title"].strip():
+    if (
+        not isinstance(data, dict)
+        or not isinstance(data.get("title"), str)
+        or not data["title"].strip()
+    ):
         raise ValueError(f"Missing guideline title: {path}")
     return data
 
@@ -74,7 +80,7 @@ def _identifiers(data: dict) -> tuple[str | None, str | None]:
     raw_doi = raw_doi.strip()
     for prefix in ("https://doi.org/", "http://doi.org/", "https://dx.doi.org/"):
         if raw_doi.lower().startswith(prefix):
-            raw_doi = raw_doi[len(prefix):]
+            raw_doi = raw_doi[len(prefix) :]
             break
     doi = raw_doi if DOI.fullmatch(raw_doi) else None
     for field in ("pmid-id", "pmid-url"):
@@ -87,7 +93,9 @@ def _identifiers(data: dict) -> tuple[str | None, str | None]:
     return doi, next(iter(ids)) if len(ids) == 1 else None
 
 
-def build_catalog(source: Path, revision: str, records: list[tuple[str, str]], *, metadata: bool) -> dict:
+def build_catalog(
+    source: Path, revision: str, records: list[tuple[str, str]], *, metadata: bool
+) -> dict:
     rows = []
     for path, blob_sha in records:
         match = INDEX_PATH.fullmatch(path)
@@ -111,15 +119,17 @@ def build_catalog(source: Path, revision: str, records: list[tuple[str, str]], *
                 acronym = data.get("acronym")
                 if acronym is not None and not isinstance(acronym, str):
                     raise ValueError("Unexpected acronym field in EQUATOR source")
-                row.update({
-                    "title": data["title"].strip(),
-                    "acronym": (acronym or "").strip() or None,
-                    "doi": doi,
-                    "pmid": pmid,
-                    "study_types": _list_field(data, "categories"),
-                    "clinical_areas": _list_field(data, "clinical-specialty"),
-                    "report_sections": _list_field(data, "report-section"),
-                })
+                row.update(
+                    {
+                        "title": data["title"].strip(),
+                        "acronym": (acronym or "").strip() or None,
+                        "doi": doi,
+                        "pmid": pmid,
+                        "study_types": _list_field(data, "categories"),
+                        "clinical_areas": _list_field(data, "clinical-specialty"),
+                        "report_sections": _list_field(data, "report-section"),
+                    }
+                )
             except (ValueError, yaml.YAMLError) as exc:
                 row["metadata_status"] = "needs_review"
                 row["metadata_issue"] = str(exc).replace(str(file), path)[:240]
@@ -158,8 +168,10 @@ def main() -> None:
     else:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_bytes(output)
-    print(f"{args.mode}: {result['published_count']} records at {revision}"
-          + (f"; {result['metadata_issue_count']} need review" if args.mode == "catalogue" else ""))
+    print(
+        f"{args.mode}: {result['published_count']} records at {revision}"
+        + (f"; {result['metadata_issue_count']} need review" if args.mode == "catalogue" else "")
+    )
 
 
 if __name__ == "__main__":

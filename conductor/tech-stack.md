@@ -2,7 +2,7 @@
 
 ## Production authority
 
-- Rust **1.98.1**, Edition 2024, exact-pinned through `rust-toolchain.toml`.
+- Rust Edition 2024; the exact maintained toolchain is authoritative in `rust-toolchain.toml`.
 - A dependency-minimal workspace with domain crates separated from CLI, API, MCP, WASI/WASM and renderer adapters.
 - JSON Schema Draft 2020-12 as the portable wire-contract baseline, with generated Rust types only after round-trip and compatibility tests exist.
 - JSON-LD/SKOS/SHACL projections for semantic interoperability; the filesystem pack remains canonical.

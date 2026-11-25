@@ -1,0 +1,14 @@
+- name: configured policy catches duplicate words
+  input: The the contract has a receipt.
+  contains: Vale.Repetition
+- name: configured policy reaches product names and link labels
+  input: 'Read Standardflow [here](https://example.com).'
+  contains:
+    - StandardFlow.Terms
+    - StandardFlow.LinkText
+- name: configured policy preserves fenced code
+  input: |
+    ```sh
+    standardflow --output the the
+    ```
+  want: ''

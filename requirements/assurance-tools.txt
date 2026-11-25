@@ -1,5 +1,32 @@
 # Test-only tools, owned by Track 05. Not application dependencies.
 # coverage: Apache-2.0; branch/subprocess coverage. Remove with the Python coverage job.
 # zizmor: MIT; offline workflow security lint. Remove only when a replacement gate is accepted.
-coverage==7.17.4
+coverage==7.17.5
 zizmor==1.33.1
+
+# pre-commit: MIT; run the existing configured hooks in required workflow-policy.
+# Closed Python 3.12 support closure; remove together if that hook gate is replaced.
+pre-commit==4.7.0
+cfgv==3.5.0
+identify==2.6.20
+nodeenv==1.12.0
+PyYAML==6.0.4
+virtualenv==21.15.13
+distlib==0.4.4
+filelock==4.3.1
+packaging==26.4
+platformdirs==4.14.8
+python-discovery==1.9.7
+
+# Ruff: MIT; maintained Python lint and formatting. No Python dependencies.
+ruff==0.17.6
+# ty: MIT; one type checker for the validator/receipt boundary. No Python dependencies.
+ty==0.0.109
+# Bandit: Apache-2.0; medium/high severity+confidence findings in maintained scripts.
+# Its closed Python 3.12 support closure shares PyYAML above.
+bandit==1.9.4
+stevedore==5.10.0
+rich==15.0.0
+markdown-it-py==4.3.0
+Pygments==2.21.0
+mdurl==0.1.2

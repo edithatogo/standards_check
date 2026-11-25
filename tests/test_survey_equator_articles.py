@@ -6,7 +6,8 @@ import unittest
 from unittest.mock import patch
 from scripts.survey_equator_articles import (resolve, query_terms, scan_article, catalogue_report,
                                             lookup, retained_metadata, priority_survey,
-                                            identifier_disagreements, oa_worklist, main)
+                                            identifier_disagreements, oa_worklist, combine_retained_metadata,
+                                            bulk_survey, main)
 
 def article_record(pmid="123", doi="10.1234/test", pmcid="PMC42", oa="Y", license_="cc by"):
     return {"source":"MED","id":pmid,"pmid":pmid,"doi":doi,"pmcid":pmcid,
@@ -131,7 +132,7 @@ class BatchTests(unittest.TestCase):
             out=root/"report.json"
             cat.write_text(json.dumps({"source_revision":"b"*40,"published_count":1,
                                        "guidelines":[row("a","123","10.1234/test")]}))
-            with patch("sys.argv",["survey","--catalogue",str(cat),"--output",str(out),"--registry-limit","0"]), \
+            with patch("sys.argv",["survey","--catalogue",str(cat),"--output",str(out),"--registry-limit","0","--bulk-limit","0"]), \
                  patch("scripts.survey_equator_articles.lookup",return_value=([article_record()],set(),set())), \
                  patch("scripts.survey_equator_articles.priority_survey",return_value=[]), \
                  patch("scripts.survey_equator_articles.provider_observations",return_value={"records":{}}):
@@ -141,6 +142,60 @@ class BatchTests(unittest.TestCase):
             self.assertEqual(result["summary"]["canonical_packs_promoted"],0)
             self.assertEqual(result["records"][0]["status"],"oa_xml_candidate")
             self.assertEqual(result["oa_source_worklist"][0]["pmcid"],"PMC42")
+
+
+    def test_multiple_receipts_recover_disjoint_and_hold_conflict(self):
+        a, b = row("a", "123"), row("b", "124")
+        catalogue = {"source_revision": "b"*40, "published_count": 2, "guidelines": [a,b]}
+        prior = catalogue_report(catalogue, [article_record()], set())
+        later = catalogue_report(catalogue, [article_record(pmid="124",pmcid="PMC43")], set())
+        retained, conflicts = combine_retained_metadata(catalogue, [prior,later])
+        self.assertEqual(set(retained), {"equator:a","equator:b"})
+        self.assertFalse(conflicts)
+        conflicting = catalogue_report(catalogue, [article_record(pmcid="PMC99")], set())
+        retained, conflicts = combine_retained_metadata(catalogue,[prior,later,conflicting])
+        self.assertEqual(set(retained), {"equator:b"})
+        self.assertEqual(conflicts, {"equator:a"})
+        with self.assertRaises(ValueError):
+            combine_retained_metadata(catalogue, [{"records": []}])
+        prior["records"][0]["provider_disagreements"] = ["pmcid_disagreement"]
+        retained, conflicts = combine_retained_metadata(catalogue, [prior, later])
+        self.assertIn("equator:a", conflicts)
+        self.assertNotIn("equator:a", retained)
+
+    def test_conflicting_prior_status_blocks_unchanged_success_in_either_order(self):
+        catalogue = {"source_revision": "b"*40, "published_count": 1,
+                     "guidelines": [row("a", "123")]}
+        good = catalogue_report(catalogue, [article_record()], set())
+        for status in ("identifier_conflict", "ambiguous_identifier"):
+            held = catalogue_report(catalogue, [article_record()], set())
+            held["records"][0]["status"] = status
+            for receipts in ([good, held], [held, good]):
+                retained, conflicts = combine_retained_metadata(catalogue, receipts)
+                self.assertNotIn("equator:a", retained)
+                self.assertEqual(conflicts, {"equator:a"})
+        held["records"][0]["source_blob_sha"] = "c"*40
+        retained, conflicts = combine_retained_metadata(catalogue, [good, held])
+        self.assertIn("equator:a", retained)
+        self.assertFalse(conflicts)
+
+    def test_bulk_inventory_budget_resume_and_circuit_breaker(self):
+        records = [resolve(row(str(i),str(i)), [article_record(pmid=str(i),pmcid="PMC"+str(i))])
+                   for i in range(1,5)]
+        report = {"records": records,"oa_source_worklist":oa_worklist({"records":records},{},[],[])}
+        observed = {"status":"held_table_identity_or_structure","source_sha256":"b"*64,
+                    "table_inventory":[],"canonical_packs_promoted":0}
+        with patch("scripts.survey_equator_articles.priority_survey", return_value=[observed.copy()]) as fetcher:
+            first = bulk_survey(report, [], None, 1)
+        self.assertEqual(fetcher.call_count,1)
+        self.assertEqual(first[0]["status"],"source_inventory_observed_not_reconciled")
+        self.assertEqual(first[1]["status"],"deferred_acquisition_budget")
+        with patch("scripts.survey_equator_articles.priority_survey",
+                   side_effect=lambda *args:[{"status":"held","canonical_packs_promoted":0}]) as fetcher:
+            second = bulk_survey(report,[{"bulk_articles":first}],None,4)
+        self.assertEqual(fetcher.call_count,2)
+        self.assertEqual(second[0]["acquisition_origin"],"retained_previous_receipt")
+        self.assertEqual(second[-1]["status"],"deferred_acquisition_budget")
 
 if __name__=="__main__":
     unittest.main()
