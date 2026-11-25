@@ -7,6 +7,8 @@ import json
 import re
 from collections import Counter
 
+from .review_source_receipts import held_source_ids
+
 SCHEMA_VERSION = "dev.standardflow.equator-analytical-snapshot.v1"
 HEX40 = re.compile(r"[0-9a-f]{40}")
 HEX64 = re.compile(r"[0-9a-f]{64}")
@@ -35,6 +37,7 @@ def project_survey(catalogue, survey, retrospective):
         raise ValueError("incompatible source revision or admission boundary")
     declared = indexed(catalogue["guidelines"], "id")
     observed = indexed(survey["records"], "id")
+    source_holds = held_source_ids(survey)
     if (
         declared.keys() != observed.keys()
         or len(declared) != catalogue["published_count"]
@@ -56,10 +59,11 @@ def project_survey(catalogue, survey, retrospective):
         ):
             raise ValueError("invalid or mismatched directory identity")
         status = obs["status"]
-        conflict = bool(obs.get("provider_disagreements")) or status in {
-            "identifier_conflict",
-            "ambiguous_identifier",
-        }
+        conflict = (
+            identity in source_holds
+            or bool(obs.get("provider_disagreements"))
+            or status in {"identifier_conflict", "ambiguous_identifier"}
+        )
         tables["catalogue_identity"].append(
             {
                 "key": identity,

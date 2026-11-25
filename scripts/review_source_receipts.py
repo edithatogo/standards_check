@@ -141,10 +141,28 @@ def observed(row: dict) -> tuple:
     return hashes, identity, tuple(signature(t) for t in tables), tables
 
 
+def held_source_ids(receipt: dict) -> set[str]:
+    """Retain grouped source identity holds, including rows without individual conflicts."""
+    records = {row["id"] for row in receipt.get("records", [])}
+    held = set()
+    for entry in receipt.get("oa_source_worklist", []):
+        if entry["status"] != "held_identity":
+            continue
+        ids = entry["source_ids"]
+        if (
+            not isinstance(ids, list)
+            or not ids
+            or any(not isinstance(value, str) or value not in records for value in ids)
+        ):
+            raise ValueError("unbound source-level identity hold")
+        held.update(ids)
+    return held
+
+
 def review(current: dict, baseline: dict | None = None) -> dict:
     now = index(current)
     before = index(baseline) if baseline is not None else {}
-    findings = set()
+    findings = {("provider_conflict", "catalogue:" + key) for key in held_source_ids(current)}
     evidence = current.get("provider_evidence", {}).get("records", {})
     for key, row in now.items():
         if key.startswith("catalogue:"):
