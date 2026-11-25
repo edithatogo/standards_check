@@ -27,6 +27,6 @@ See [composition and hybrid graph retrieval](../../../docs/architecture/CHECKLIS
 ## Editorial utility and contract presentation
 
 - [ ] **T04.009** ([#161](https://github.com/edithatogo/standards_check/issues/161)) Qualify authorized manuscript and reviewer E8 comparative evaluation, preserving read-only consumer roles and independent source-bound finding review.
-- [ ] **T04.010** ([#162](https://github.com/edithatogo/standards_check/issues/162), [#161](https://github.com/edithatogo/standards_check/issues/161)) Build and verify a private static Hugging Face contract-only preview from an exact GitHub revision; retain release hold for any graph/vector/benchmark/manuscript data.
+- [ ] **T04.010** ([#161](https://github.com/edithatogo/standards_check/issues/161), [#162](https://github.com/edithatogo/standards_check/issues/162)) Build and verify a private static Hugging Face contract-only preview from an exact GitHub revision; retain release hold for any graph/vector/benchmark/manuscript data.
 
 See [follow-up protocol](../../../docs/research/composition-graph-protocol.v0.1.0.md) and [planned analytical outputs](../../../contracts/analysis/requirement-graph.v0.1.0.json).
