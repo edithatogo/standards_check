@@ -29,6 +29,7 @@
 - [Reporting guideline interoperability and assurance](../docs/architecture/REPORTING_GUIDELINE_INTEROPERABILITY.md) — proposed conformance requirements, evidence receipt, triangulation, model shortlist and publication plan.
 - [Diagram and artefact engine](../docs/architecture/DIAGRAM_ENGINE.md)
 - [Research ecosystem](../docs/architecture/RESEARCH_ECOSYSTEM.md)
+- [Composed checklists and requirement graph](../docs/architecture/CHECKLIST_COMPOSITION.md)
 - [Assurance and release engineering](../docs/architecture/ASSURANCE.md)
 
 ## Representation and publication delivery

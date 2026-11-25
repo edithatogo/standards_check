@@ -220,3 +220,11 @@ production model is introduced.
 - [x] **T01.046** ([#118](https://github.com/edithatogo/standards_check/issues/118)) Post the versioned profile and optional reference implementation to EQUATOR; upstream `equator-website#14` was read back after the authorized browser submission.
 - [ ] **T01.047** ([#118](https://github.com/edithatogo/standards_check/issues/118)) Record actual EQUATOR feedback and version any resulting normative amendment; delivery is not endorsement.
 - [ ] **T01.048** ([#162](https://github.com/edithatogo/standards_check/issues/162)) Prepare and qualify a selective metadata/evidence dataset release with separate source rights and export permission.
+
+## Multi-checklist composition and requirement mapping
+
+- [ ] **T01.049** ([#82](https://github.com/edithatogo/standards_check/issues/82), [#149](https://github.com/edithatogo/standards_check/issues/149)) Qualify the bounded identity-conserving union and sparse cross-pack candidate preview. No similarity-based deletion.
+- [ ] **T01.050** ([#158](https://github.com/edithatogo/standards_check/issues/158)) Freeze and compare statistical retrieval with one qualified embedding challenger; separate retrieval utility from directional equivalence evidence, retain all failures.
+- [ ] **T01.051** ([#82](https://github.com/edithatogo/standards_check/issues/82), [#149](https://github.com/edithatogo/standards_check/issues/149)) Qualify reviewed equivalence display groups, applicability-aware implication, conflict and graph projections with original identities conserved.
+
+See [composition and requirement graph design](../../../docs/architecture/CHECKLIST_COMPOSITION.md). The first bounded preview does not authorize merging distinct semantic obligations or admitting new packs.
