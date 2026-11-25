@@ -185,9 +185,9 @@ def build(root, output, revision):
     validate_graph(root, graph, schema, publication)
     payload["index.html"] = render(graph, publication, programme, revision).encode()
     payload["README.md"] = (
-        "---\ntitle: StandardFlow Research Contracts\nsdk: static\napp_file: index.html\n---\n\n"
-        "Private, contract-only research preview. Plans are not results; dataset release held.\n"
-    ).encode()
+        b"---\ntitle: StandardFlow Research Contracts\nsdk: static\napp_file: index.html\n---\n\n"
+        b"Private, contract-only research preview. Plans are not results; dataset release held.\n"
+    )
     manifest = {
         "revision": revision,
         "publication_status": "planned",
