@@ -70,6 +70,26 @@ they do not certify general accessibility, methodological validity or third-part
 Local evidence and wire-compatibility details are recorded in
 [the text-metric correction receipt](recipe-text-metrics-20261123.md).
 
+## Candidate CONSORT/SPIRIT diagrams — 23 November 2026
+
+- [x] **T02.040** ([#120](https://github.com/edithatogo/standards_check/issues/120)) Retain original **synthetic** CONSORT-informed participant flow and
+  SPIRIT-informed assessment schedule with text equivalents and
+  failure-on-count-mutation regression in
+  [PR #121](https://github.com/edithatogo/standards_check/pull/121).
+  These examples are not copies of official figures, operative recipe contracts
+  or methodological/accessibility acceptance.
+- [ ] **T02.041** ([#120](https://github.com/edithatogo/standards_check/issues/120)) Before accepting a real CONSORT 2025 flow, define a versioned input
+  contract with groupwise enrolment/allocation/receipt/follow-up/analysis counts,
+  reasons and overlap semantics, then check conservation using actual
+  participant-state provenance. Follow-up loss and intervention discontinuation
+  need not equal exclusions from the analysis set.
+- [ ] **T02.042** ([#120](https://github.com/edithatogo/standards_check/issues/120)) Before accepting a SPIRIT 2025 schedule, define typed visit windows,
+  optional/conditional activities and temporal ordering, with an accessible
+  text equivalent and explicit protocol provenance.
+- [ ] **T02.043** ([#120](https://github.com/edithatogo/standards_check/issues/120)) Reuse the existing recipe/scene/SVG/text engine, rather than creating
+  a CONSORT-only renderer. Pin source edition, figure rights and
+  item-by-item review under [issue #120](https://github.com/edithatogo/standards_check/issues/120).
+  No change to four qualified PRISMA recipe families or 12 golden outputs.
 ## Subsequent representations
 
 - [ ] **T02.038** ([#128](https://github.com/edithatogo/standards_check/issues/128)) Evaluate optional Mermaid and GraphML projections from validated scenes with identity/edge conservation and explicit accessibility limits.

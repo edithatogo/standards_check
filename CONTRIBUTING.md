@@ -95,3 +95,5 @@ counts, platform checks or failure retention to improve a timing metric.
 
 For experiment and model work, follow the [frontier evaluation record](docs/research/frontier-evaluation-20261125.md)
 and [publication evidence skill](.agents/skills/publication-evidence/SKILL.md).
+
+For the ordinary Linux Python 3.12 coverage lane, use the exact [CI wheel closure](requirements/ci-python312-linux-x86_64.lock.txt) and its [input hashes](requirements/ci-python312-linux-x86_64.inputs.sha256). The portable profiles remain the declarations; regenerate and review the platform lock when they change. The [controlled efficiency trial](docs/research/frontier-evaluation-20261125.md) supports two-worker execution with file scheduling and no worker restarts. Do not extrapolate its measured speed gain to the full pipeline or drop a required test. Other operating systems and the explicit optional reference profile are not qualified by this Linux lock.

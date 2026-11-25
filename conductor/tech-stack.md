@@ -19,9 +19,3 @@ One application facade serves CLI, static JSON, OpenAPI/HTTP, MCP, WASI componen
 ## Assurance tools
 
 Rustfmt, Clippy with warnings denied, unit/integration/doc tests, property/metamorphic tests, mutation testing, cargo-fuzz, Miri, cargo-careful, Loom or Shuttle, Kani for bounded invariants, coverage, reproducible builds, SBOMs, SLSA provenance, artifact attestations, dependency review, CodeQL, cargo-deny, cargo-vet, actionlint, zizmor and OpenSSF Scorecard. Advanced gates earn evidence only when their receipts are observed.
-
-## Analytical outputs
-
-- Apache Arrow / PyArrow 26.0.1 (Apache-2.0) in the existing Python regression
-  profile only, for explicit-schema Parquet projections and readback. Canonical
-  JSON/YAML and the Rust runtime remain authoritative; no new runtime service.
