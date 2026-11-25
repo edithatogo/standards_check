@@ -266,3 +266,9 @@ No deadline or publication target changes the evidence required to support a cla
 [prior-art]: https://pmc.ncbi.nlm.nih.gov/articles/PMC9525592/
 [cedar]: https://metadatacenter.readthedocs.io/en/latest/yaml-spec/cedar-model/
 [equator-umbrella]: https://github.com/EQUATOR-Network/equator-website/issues/14
+
+
+## Follow-up composition and ontology coverage programme
+
+See [the prospective E4-E8 protocol](composition-graph-protocol.v0.1.0.md) and
+[publication contract](../../contracts/publication/composition-graph.v0.1.0.json). Keep E1-E3 unchanged. Plan a distinct methods/utility contribution only if the empirical findings warrant it; recheck venue, preprint and reporting policies at submission. No independent results, ethics approval or submission claimed.

@@ -230,3 +230,10 @@ production model is introduced.
 See [composition and requirement graph design](../../../docs/architecture/CHECKLIST_COMPOSITION.md). The first bounded preview does not authorize merging distinct semantic obligations or admitting new packs.
 
 Composition follow-up (26 November): word and character TF-IDF comparison and optional conservative local display partition; see [composition design and synthetic development receipt](../../../docs/architecture/CHECKLIST_COMPOSITION.md). T01.049–051 remain open for independent real-source, applicability and reviewed-relation qualification. T04.007–008 remain open for pinned consumer evidence. No automatic semantic merge.
+
+## Ontology coverage, network analysis and prospective validation
+
+- [ ] **T01.052** ([#111](https://github.com/edithatogo/standards_check/issues/111), [#95](https://github.com/edithatogo/standards_check/issues/95)) Freeze multiple qualified guideline families and ontology releases (MeSH, OBI, STATO first), eligible concept/scope universe, reference and source rights for E4-E6.
+- [ ] **T01.053** ([#149](https://github.com/edithatogo/standards_check/issues/149), [#82](https://github.com/edithatogo/standards_check/issues/82), [#158](https://github.com/edithatogo/standards_check/issues/158)) Produce validated graph, vector, concept mapping, citation/co-citation and gap-audit tables with explicit denominators, sensitivity and matched figures (E4-E7).
+
+The [follow-up protocol](../../../docs/research/composition-graph-protocol.v0.1.0.md) and [analytical contract](../../../contracts/analysis/requirement-graph.v0.1.0.json) define the planned output and workflow registry. Existing T01.049-051 remain open for independent scientific evidence; the merged #171 candidate is only a bounded synthetic implementation (684 tests, 91.21% combined Python coverage on its qualified head). No empirical gap or relation admission.
