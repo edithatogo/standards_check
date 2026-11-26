@@ -78,9 +78,7 @@ def decision_views(pair):
             for key, question in original["questions"].items()
         },
     }
-    swapped = decision_payload(
-        {"source": pair["candidate"], "candidate": pair["source"]}
-    )
+    swapped = decision_payload({"source": pair["candidate"], "candidate": pair["source"]})
     witness_options = {
         "yes": "Such a report is possible under the stated shared scope.",
         "no": "Such a report is impossible under the stated shared scope.",
@@ -117,13 +115,10 @@ def decode_view(name, payload, response):
     if set(answers) != set(payload["questions"]):
         raise ValueError("decision question coverage mismatch")
     if name == "witness":
-        labels = [
-            choose(answers[key], payload["questions"][key]["criteria"], 0.8)
-            for key in WITNESS_KEYS
-        ]
-        return compile_witness(*labels), None, {
-            key: answers[key]["probabilities"] for key in WITNESS_KEYS
-        }
+        criteria = {key: payload["questions"][key]["criteria"] for key in WITNESS_KEYS}
+        labels = [choose(answers[key], criteria[key], 0.8) for key in WITNESS_KEYS]
+        probabilities = {key: answers[key]["probabilities"] for key in WITNESS_KEYS}
+        return compile_witness(*labels), None, probabilities
     if name not in FRAMES:
         raise ValueError("unknown decision view")
     direct, direction, probabilities = decision_vote(response)
@@ -261,9 +256,7 @@ def embedding_views(queries, targets, references, bge, post):
     results = {}
     for frame, ranked in rankings.items():
         result = cost.evaluate(references, set(targets), ranked)
-        result["paired_vs_bge"] = cost.paired_retrieval(
-            references, bge, ranked, full_pool=True
-        )
+        result["paired_vs_bge"] = cost.paired_retrieval(references, bge, ranked, full_pool=True)
         results[frame] = result
     return {
         "protocol": "qwen-embedding-framing-development-v1",

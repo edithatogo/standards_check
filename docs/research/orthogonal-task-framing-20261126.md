@@ -52,8 +52,8 @@ Use exact historical fixture SHA-256
 synthetic cases as development. Each arm supplies only A/B source text and question
 criteria. Reuse the same d1-2B GGUF and native llama.cpp b11960, original direct
 confidence floor .50 and equivalence .95; directional and witness choice floor .80.
-Keep answers/probabilities and exact ordered payload hashes, never source text or
-reference labels in requests. Each pair receives four requests (144 total):
+Keep answers/probabilities and exact ordered payload hashes; retain no source text
+in receipts and send no reference labels in requests. Each pair receives four requests (144 total):
 
 1. Original direct plus directional questions (within-run comparator).
 2. Exact same wording with reverse insertion order of choice criteria; verify sent
@@ -176,3 +176,9 @@ Sources:
 - Zheng et al., ICLR 2024, https://proceedings.iclr.cc/paper_files/paper/2024/hash/54dd9e0cff6d9214e20d97eb2a3bae49-Abstract-Conference.html
 - Mixedbread v2: https://huggingface.co/mixedbread-ai/mxbai-rerank-large-v2
 - Jina listwise: https://huggingface.co/jinaai/jina-reranker-v3.5
+
+Initial [Assurance 45765184474](https://github.com/edithatogo/standards_check/actions/runs/45765184474)
+workflow-policy reported a formatting-only failure at task_framing.py line 81.
+Lint passed. The new decision, reranker and embedding runs passed the focused test
+step and reached native acquisition/inference. Correct the formatting without
+changing the frozen experimental questions; retain all old run IDs.
