@@ -11,6 +11,7 @@ from pathlib import Path
 
 from bibliographic_recovery import digest, ident, index, normal_title
 from searchright_bridge import read_pinned
+from recovery_batch import choose_batch, summarize_batch
 
 EARLY = '12a009fdcdfd8174daacfb606cb97a5c2648940c80df733a3b55a24ff6a14460'
 CURRENT = '21046589502f064d54800c9f495d72d18b97184a1db376f06da773b84bde3f01'
@@ -88,16 +89,23 @@ def plan_searches(audit,recovery):
         strategy_id='recovery-'+digest([audit['current_revision'],dialect,kind,value,sorted(ids)])[:32]
         strategy={'schema_version':'org.searchright.search-strategy.v1','strategy_id':strategy_id,'review_id':'standardflow-bibliographic-recovery','source_id':PROVIDER_IDS[dialect],'dialect':dialect,'query':{'op':'term','term':{'text':value,'fields':['title' if kind=='title' else 'identifier'],'vocabulary':None,'explode':False,'phrase':True,'truncation':False}},'limits':{'publication_date':None,'languages':[],'publication_types':[],'filters':[],'rationale':[]},'translated_from':None,'notes':['Candidate publication discovery only; verify exact edition and source independently.','Do not execute degraded or review-required translations.']}
         strategies.append({'strategy':strategy,'strategy_sha256':digest(strategy),'catalogue_ids':sorted(ids),'persistent_ids':sorted(ids&persistent),'kind':kind,'postfilter':{'exact_identifier':None if kind=='title' else kind+':'+value,'candidate_only':True},'execution_authorized':False,'budget':{'max_records':3,'max_pages':1,'timeout_seconds':15,'max_retries':0}})
-    # Deterministic priority by persistent burden, then distribute across providers.
+    # Retain the prior batch as an equal-slot planning comparator.
     queues=defaultdict(list)
     for x in sorted(strategies,key=lambda x:(-len(x['persistent_ids']),x['kind']=='title',x['strategy']['strategy_id'])):
         queues[x['strategy']['dialect']].append(x)
-    batch=[]
-    while any(queues.values()) and len(batch)<8:
+    old_batch=[]
+    while any(queues.values()) and len(old_batch)<8:
         for dialect in sorted(queues):
-            if queues[dialect] and len(batch)<8:
-                batch.append(queues[dialect].pop(0)['strategy']['strategy_id'])
-    return {'mechanism':'searchright','searchright_revision':SEARCHRIGHT_REVISION,'execution_status':'held_runtime_qualification','legacy_fallback':False,'strategies':strategies,'non_search_rows':non_search,'prior_attempts_excluded':len(excluded),'excluded_attempts':excluded,'next_bounded_batch':batch,'reference_lock_received':False,'scientific_qualification':False,'boundary':'Native Searchright strategies only. Compile with an admitted pinned runtime; no query or document acquisition, implicit fallback, or source qualification.'}
+            if queues[dialect] and len(old_batch)<8:
+                old_batch.append(queues[dialect].pop(0)['strategy']['strategy_id'])
+    observed = {row['id'] for row in audit['rows'] if any(o['status'] in ('exact_doi_metadata','exact_identifier_candidates') for o in row['later_metadata_observations'])}
+    batch = choose_batch(strategies, already_observed=observed)
+    batch_comparison = {'baseline_batch': old_batch, 'challenger_batch': batch,
+                        'baseline': summarize_batch(strategies, old_batch),
+                        'challenger': summarize_batch(strategies, batch),
+                        'already_observed_metadata_leads': sorted(observed),
+                        'boundary': 'Planning coverage only; no new search, hits, qualified edition or scientific improvement.'}
+    return {'mechanism':'searchright','searchright_revision':SEARCHRIGHT_REVISION,'execution_status':'held_runtime_qualification','legacy_fallback':False,'strategies':strategies,'non_search_rows':non_search,'prior_attempts_excluded':len(excluded),'excluded_attempts':excluded,'next_bounded_batch':batch,'batch_comparison':batch_comparison,'reference_lock_received':False,'scientific_qualification':False,'boundary':'Native Searchright strategies only. Compile with an admitted pinned runtime; no query or document acquisition, implicit fallback, or source qualification.'}
 
 
 def schema_registry(schemas):

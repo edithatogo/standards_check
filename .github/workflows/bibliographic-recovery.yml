@@ -59,7 +59,7 @@ jobs:
           grep -E '^(attrs|referencing|rpds-py|jsonschema|jsonschema-specifications|pytest|iniconfig|pluggy|packaging|pygments|typing-extensions)==' requirements/ci-python312-linux-x86_64.lock.txt > "$RUNNER_TEMP/bibliographic-evidence/python-lock.txt"
           python -m pip install --require-hashes --only-binary=:all: -r "$RUNNER_TEMP/bibliographic-evidence/python-lock.txt"
           python -m pip check
-          python -m pytest -q research/bibliographic-recovery/test_bibliographic_recovery.py research/bibliographic-recovery/test_searchright_bridge.py research/bibliographic-recovery/test_searchright_recovery.py
+          python -m pytest -q research/bibliographic-recovery/test_bibliographic_recovery.py research/bibliographic-recovery/test_searchright_bridge.py research/bibliographic-recovery/test_searchright_recovery.py research/bibliographic-recovery/test_recovery_batch.py
           sha256sum research/bibliographic-recovery/*.py > "$RUNNER_TEMP/bibliographic-evidence/code-sha256.txt"
       - name: Retrieve only fixed census and Searchright evidence inputs
         env:

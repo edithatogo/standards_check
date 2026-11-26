@@ -281,3 +281,73 @@ First native planning workflow 45821045254 on head 9e6dc00b stopped in
 Prepare Searchright-native strategies by default with ValueError: Searchright
 blob mismatch; hosted focused tests had passed but no native strategy receipt
 was generated. Failure artifact 15117079100 SHA-256 d23c7dea762ec6fc0fb321e09b0c808e6fa779eee95b6d8a05cee588c4aa4b62 retained. Exact offending raw schema was not identified by the generic error; do not infer upstream schema drift. Change only three new schema acquisitions to Git blob API at exact pinned object IDs, decode base64 strictly, validate returned object ID and recomputed Git blob hash and retain per-schema SHA-256. No relaxation, no new pin or source/provider query; code and local 15 passing tests unchanged. Fresh hosted replay and protected checks required.
+
+
+### Verified native planning and measured next recursive increment
+
+Receiving #185 merge b48e7adafea41e09f4aa07d9db6f7e9117618c10 tree
+bdd6fb7ad21086532c9b8a1ca0136a7f628a833f equals tested head 449689ac.
+Receiving main eb95f610ff78b620cb1c687fed544ed2b5475ff1 incorporates catalogue enrichment/vector selection;
+preserve those append-only Track 01 additions without duplicating their work.
+
+Hosted [45821391956](https://github.com/edithatogo/standards_check/actions/runs/45821391956)
+succeeded on exact prior head f3e71a9ade2e3ec159fa244de301c29efe0c2ba6. Independently downloaded
+artifact 15117882759, ZIP SHA-256
+0bf1a7a434ed21549998c9e04c55f3a72b37fd82797bb0db866dcf98612c2cec.
+Both persistent-gaps.json and searchright-strategies.json match the
+previous local member hashes byte for byte. All 886 strategies and
+44 crosswalk rows retained; 6 historical provider-work records exported,
+11 previous attempts excluded; zero native compilations, live
+executions, or independent qualifications. All seven required checks,
+CodeQL and patch/component coverage passed on that prior head;
+offline security separately queued. Fresh checks required after reconciliation.
+
+Recheck the original survey 15031534787 against the exact 122 persistent IDs:
+75 missing identifiers; among the 47 incomplete lookups, 43 explicitly
+provider_request_failed and four deferred_provider_circuit_breaker
+(CARE-DN, PRISMA network meta-analysis, PRISMA-ScR, REFINE).
+These are recorded transport/defer outcomes, not proven non-existence.
+Examples of held identity/source paths: RIGHTCARE-PR and SPIRIT identity
+conflicts; ICMJE disclosure form, Be PRECISE, PhyCARE, SUCCEED and WIDER
+direct assets; SAGER and STROBE abstracts issuer landing; ecohealth in
+press observation, RATS chapter and HuGENet handbook title routes.
+Keep the distinction between publisher availability, identity match,
+full checklist bytes/rights/structure and reference eligibility.
+
+Bounded improvement: the former next batch spent three of eight slots
+on the same shared RAMESES PMID. Use greedy marginal distinct persistent-ID
+coverage, then total uncovered catalogue IDs, then prefer unused
+query tokens, exact identifier over title, provider balance, stable ID.
+Prior successful metadata leads (four catalogue IDs, not qualified
+editions) are lower priority, not removed. Hard cap two per provider,
+eight total. No added strategy, query, request, provider, credential,
+rights inference or library execution. Preserve original batch as
+comparator and emit both summary and ID lists in batch_comparison.
+
+Executed against exact hosted 886-strategy member e71f45880e730faebbec94f3ee170a080b70cc373181179ba72c29c8e706e1ed:
+baseline eight slots / six distinct query tokens / seven persistent IDs;
+challenger eight slots / eight distinct query tokens / nine persistent
+IDs, same two slots per each of four providers. RAMESES pair remains
+separate catalogue identities; CHART and STROBE-nut gain planned slots.
+This is +2 planned ID coverage, not acquisition or recall gain.
+Local RED missing module then GREEN three focused tests, including
+ordering determinism, caps, invalid authorization, and prior observation
+priority. Exact blobs recovery_batch.py c20fe28fe60497f8208c82a5eb5c14de7d362dd6,
+test_recovery_batch.py 0ab46aff10b5b6bd41fa47b3670c45549bfe8d06.
+Local diagnostic SHA-256 cf210501f94eb94ae30e9d89414df1658f8fb74f2d02726b3ddf1a748cb3477d.
+The new workflow imports the tested selector and executes its regression
+tests; full checkout validation still required. Do not tune on eventual
+search successes until independently separated receipts permit comparison.
+
+Searchright upstream main remains 444c5199, #831 open; unmaintained
+dependency advisory and failed Security/Privacy checks, H-002 live host
+authority still held. The default strategy mechanism is Searchright;
+not a qualified native search runtime. Preserve actual compiler
+qualification, source policy and trusted host requirements; request
+existing upstream owner supply admitted binary and permitted execution
+receipt. No implicit legacy provider calls. Next: qualify native
+compilation then a bounded live matched-budget batch once authorized;
+compare unique exact identity leads, errors, deferrals, rights/edition
+holds and actual resources, not just number of planned queries.
+No new branch owner, registry, canonical admission or scientific
+reference lock. Layout continues #188.
