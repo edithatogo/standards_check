@@ -181,4 +181,30 @@ hosted CI gates, exact release scan integration and independent-reference holds.
 E1–E14 and one integrated publication under #158. All eight wider tasks remain open.
 
 
+### E9–E11 separate qualification receipts — 26 November
+
+Under T05.048, T05.049 and T05.060 / #158, keep E9 layout, E10 extractive
+tagging and E11 graph-assisted retrieval as separate experiments with identical
+within-experiment inputs and one changed method. See the
+[Track 01 bounded sequence](../01-canonical-standard-pack/plan.md#e9e11-bounded-opt-in-sequence--26-november)
+and [E9 local receipt](../../../docs/research/e9-layout-development-20261126.md).
+No pooled accuracy, automatic pack promotion, semantic equivalence, or
+scientific acceptance from synthetic agreement. Before confirmatory execution,
+freeze independent family-component partitions (related editions never cross
+splits), exact models/runtime/source hashes, authorisation, reference scope,
+denominators, metrics and resource/harm limits. Run E10 and E11 in separate
+opt-in lanes only after development qualification; failed/abstained cases
+remain in denominators and all negative observations are retained.
+
+E9 actual hosted comparison passed with both reader versions pinned; the
+[verified hosted receipt](../../../docs/research/e9-layout-development-20261126.md#verified-hosted-replay-and-coverage-repair)
+records the downloaded artifact, source hashes, costs, and the separate
+Codecov patch failure (57.02% vs 90%). Eight new local tests cover the runner
+at 99% branch-inclusive module coverage; protected replay still required.
+Reconcile #183–185 with #182 before integration; do not conflate their
+synthetic and retained-replay comparators with independent scientific results.
+
+
 Model-placement development (26 November; #158; T05.063 remains open): [synthetic compact/geometry placement receipt](../../../research/model-placement/synthetic.md) complements #182 and #183. Two local focused tests passed; six template families, eight placements including graph, tagging, atom decisions, learned reranking and typed verification. No independent validation, runtime admission or model promotion. Preserve negative results and ceiling effects; per-arm resource and rights-cleared references remain held.
+
+T05.063: E10 operator completion and E11 heading-text/fixed-pool replay now executed on hash-bound hosted receipts. Neither supports adding a learned tagger or mandatory graph propagation. See synthetic placement receipt; retain independent-reference and source gates.

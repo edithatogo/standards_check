@@ -118,3 +118,92 @@ This does not override the new negative stress result. Keep hybrid as an
 experimental review-prioritisation signal only, not an automatic rejection
 or authorisation rule. Need harder mixed-validity and natural citation
 judgments and fresh pretrained tagging before scientific qualification.
+
+
+## Hosted E10 operator completion and E11 heading context — retrospective replay
+
+Reused downloaded, hash-verified synthetic hosted artifacts. No fresh inference in
+these two replays, no model downloads, no independent source labels or production
+admission. All four new source and test blobs match locally executed files.
+Six focused tests passed; graph replay RED was missing-module before implementation.
+Use existing interpreter and lexical helper; local isolated overlay, not a full checkout.
+
+### E10: preserve operators without treating overlap as correctness
+
+Run [45795503022](https://github.com/edithatogo/standards_check/actions/runs/45795503022),
+artifact [15105041814](https://github.com/edithatogo/standards_check/actions/runs/45795503022/artifacts/15105041814),
+ZIP SHA-256 5ad26ba90e3aefb2d2fbc28011f73762723acf7774c9dff1cbb7bfe4aa7a57fb.
+Tested merge a694942dcf98a3302a022c29c3c6941560d0a68b.
+Both retained model and rule results use identical 16 cases and 17 gold spans.
+Complete a learned span only to a uniquely enclosing same-type rule span;
+guarded completion discards unsupported spans. Union preserves distinct spans.
+Use exact typed offsets and maximum one-to-one typed positive-character overlap
+as separate metrics; do not use reference spans in completion.
+
+| Arm | Exact TP/FP/FN | Exact F1 | Overlap F1 |
+| --- | --- | ---: | ---: |
+| Rules | 14/2/3 | .8485 | .9091 |
+| GLiNER2.5-small | 1/6/16 | .0833 | .3333 |
+| Completed | 4/3/13 | .3333 | .3333 |
+| Guarded | 4/0/13 | .3810 | .3810 |
+| Rule union raw | 14/8/3 | .7179 | .7692 |
+| Rule union completed | 14/5/3 | .7778 | .8333 |
+
+No new exact gold span beyond rules in any arm. Guarded completion retains four
+exact spans, drops ten rule-correct spans and has twelve empty-output cases.
+Do not promote either learned union. Next: independently framed extraction
+tasks and independently held-out source references, not a larger checkpoint
+selected on these exposed examples. Local replay wall .0078 s; 96,396 KiB RSS.
+Receipt SHA-256 6e0604cd461709955c6b72fa3c351ab6cae6d1d2e7f847265d804d92138b0a58
+includes runtime observations.
+
+### E11: simpler heading-context comparator and fixed-pool placement
+
+Run [45795402697](https://github.com/edithatogo/standards_check/actions/runs/45795402697),
+artifact [15103968915](https://github.com/edithatogo/standards_check/actions/runs/45795402697/artifacts/15103968915),
+ZIP SHA-256 f3f106a3b8855eaf8d464fe638a15476327ee9d94411c445e52e3768fff05df2.
+Tested merge 7c48bc6f1c71ddd953808c35ce95d2d314004610.
+Use the exact #187 fixture (SHA-256
+4aa25eb689a62a7b2758e19d6821f09708563a0d0c627c91b102cd84a3ca066d):
+25 targets, 10 queries, 17 reference associations. Recompute every baseline
+lexical score and confirm exact identity against the artifact. Compare parent-only
+field bonus, complete graph and simple heading-prepended text with the unchanged
+word/bigram and char-trigram lexical method. No weight fitting. For each, test
+candidate generation across the full universe and fixed-pool reranking of the
+original top ten; retain per-family and query-level scores, paired hits, gains,
+losses and candidate counts at 1/3/5/10.
+
+| Arm | Word R@5 / hits | Char R@5 / hits |
+| --- | --- | --- |
+| Incumbent lexical | .90 / 15 | .90 / 15 |
+| Parent generation | 1.00 / 17 | .95 / 16 |
+| Full graph generation | 1.00 / 17 | .95 / 16 |
+| Heading text generation | 1.00 / 17 | 1.00 / 17 |
+| Parent fixed pool | 1.00 / 17 | .95 / 16 |
+| Full graph fixed pool | 1.00 / 17 | .95 / 16 |
+| Heading text fixed pool | 1.00 / 17 | .95 / 16 |
+
+Heading-text generation gains two and loses zero associations at five for both
+methods. Character R@10 is .95 for every fixed-pool arm and 1.00 for all three
+generation arms; one additional association requires changing the pool.
+The parent signal suffices for the observed full-graph R@5 gain. Heading
+concatenation is the simpler comparator and should precede any graph model;
+structural edges remain useful for source provenance, not automatic semantic
+equivalence. This small exposed fixture is not a general performance conclusion.
+The #187 edge-type factorial and rewired control remain separate.
+Actual replay wall .0160 s, peak RSS 97,040 KiB. Receipt SHA-256
+d7fbc4c805eb31f67fbbf2a7d1aee7aea4317626c59b28895f943075a4a991d2
+includes runtime observations.
+
+Reproduce from repository root with exact artifacts downloaded by ID, plus
+the exact #187 fixture obtained from that branch:
+
+```sh
+PYTHONPATH=. python -m pytest -q research/model-placement/test_qualifier_replay.py research/model-placement/test_graph_context_replay.py
+PYTHONPATH=. python research/model-placement/qualifier_replay.py --artifact /path/to/github-actions-artifact-15105041814.zip --output qualifier-replay.json
+PYTHONPATH=. python research/model-placement/graph_context_replay.py --artifact /path/to/github-actions-artifact-15103968915.zip --fixture /path/to/graph-retrieval-v1.json --output graph-context-receipt.json
+```
+
+Reconciled receiving #182 main (08e86696180936ef6722e539a32d6ebbd2222625)
+without replacing any existing Track 05 evidence or changing production
+contracts. Full exact-head CI and offline security remain required.
