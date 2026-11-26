@@ -1,0 +1,85 @@
+{
+  "schema_version": "dev.standardflow.artifact-recipe.v1",
+  "version": "0.1.0",
+  "artifact_type": "flow_diagram",
+  "source_standard": "synthetic/trial-flow",
+  "input_contract": "dev.standardflow.trial-flow.v1",
+  "outputs": [
+    "scene-json",
+    "svg",
+    "text"
+  ],
+  "accessibility": {
+    "reading_order": true,
+    "text_equivalent": true,
+    "labelled_groups": true
+  },
+  "recipe_id": "synthetic/trial-flow/two-arm",
+  "title_template": "Synthetic parallel trial participant accounting",
+  "description_template": "Two allocated arms; receipt, follow-up and analysis are separate partitions. Discontinuation may overlap follow-up and analysis. Not an official reporting-standard figure.",
+  "layout": {
+    "columns": 2,
+    "margin": 40,
+    "column_width": 360,
+    "column_gap": 60,
+    "row_gap": 55,
+    "minimum_node_height": 92,
+    "padding": 18,
+    "line_height": 20,
+    "character_width": 8
+  },
+  "nodes": [
+    {
+      "id": "enrolment",
+      "role": "source",
+      "row": 0,
+      "column": 0,
+      "column_span": 2,
+      "label_template": "Assessed (n = {{assessed}})\nExcluded before randomization (n = {{excluded}})\nRandomized (n = {{randomized}})",
+      "aria_template": "Assessed (n = {{assessed}}); Excluded before randomization (n = {{excluded}}); Randomized (n = {{randomized}})"
+    },
+    {
+      "id": "arm-a",
+      "role": "outcome",
+      "row": 1,
+      "column": 0,
+      "column_span": 1,
+      "label_template": "Arm A: allocated (n = {{a_allocated}})\nReceived (n = {{a_received}}); not received (n = {{a_not_received}})\nFollowed up (n = {{a_followed_up}}); lost (n = {{a_lost_to_follow_up}})\nDiscontinued among received (n = {{a_discontinued}})\nAnalysed (n = {{a_analysed}}); excluded (n = {{a_excluded_from_analysis}})",
+      "aria_template": "Arm A: allocated (n = {{a_allocated}}); Received (n = {{a_received}}); not received (n = {{a_not_received}}); Followed up (n = {{a_followed_up}}); lost (n = {{a_lost_to_follow_up}}); Discontinued among received (n = {{a_discontinued}}); Analysed (n = {{a_analysed}}); excluded (n = {{a_excluded_from_analysis}})"
+    },
+    {
+      "id": "arm-b",
+      "role": "outcome",
+      "row": 1,
+      "column": 1,
+      "column_span": 1,
+      "label_template": "Arm B: allocated (n = {{b_allocated}})\nReceived (n = {{b_received}}); not received (n = {{b_not_received}})\nFollowed up (n = {{b_followed_up}}); lost (n = {{b_lost_to_follow_up}})\nDiscontinued among received (n = {{b_discontinued}})\nAnalysed (n = {{b_analysed}}); excluded (n = {{b_excluded_from_analysis}})",
+      "aria_template": "Arm B: allocated (n = {{b_allocated}}); Received (n = {{b_received}}); not received (n = {{b_not_received}}); Followed up (n = {{b_followed_up}}); lost (n = {{b_lost_to_follow_up}}); Discontinued among received (n = {{b_discontinued}}); Analysed (n = {{b_analysed}}); excluded (n = {{b_excluded_from_analysis}})"
+    }
+  ],
+  "edges": [
+    {
+      "id": "randomized-to-a",
+      "from": "enrolment",
+      "to": "arm-a",
+      "kind": "progression",
+      "from_anchor": "bottom",
+      "to_anchor": "top",
+      "label_template": null
+    },
+    {
+      "id": "randomized-to-b",
+      "from": "enrolment",
+      "to": "arm-b",
+      "kind": "progression",
+      "from_anchor": "bottom",
+      "to_anchor": "top",
+      "label_template": null
+    }
+  ],
+  "reading_order": [
+    "enrolment",
+    "arm-a",
+    "arm-b"
+  ]
+}

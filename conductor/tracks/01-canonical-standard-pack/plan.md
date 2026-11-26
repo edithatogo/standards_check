@@ -423,3 +423,9 @@ PRs #183–185 retain distinct placement experiments: build on #185's synthetic
 span/graph controls, not a duplicate ceiling benchmark. T01.052 source and
 family intake holds remain; E10/E11 require actual separately qualified
 checkpoint/graph comparisons and independent references.
+
+## Orthogonal reference and experiment follow-up — 26 November 2026
+
+T01.060-062: seven source-corroborated PRISMA conditional subclauses retain all 42 parent requirements. Eighteen named OBI/COB/STATO assertions are isolated by source context. Independent interpretation, typed costing mappings and family sampling remain held. E15-E17 and E21 supplement the single integrated publication.
+
+Conditional-scope audit (T01.061, T01.063 / #158): [source-bound development receipt](../../../docs/research/conditional-scope-audit-20261126.md) verifies the seven candidate anchors and all 42 retained parents; the same meta-analysis trigger does not discharge methods and results together. Exhaustive synthetic fact-state checks preserve unknown and conflict. Independent predicate interpretation and other families remain held.

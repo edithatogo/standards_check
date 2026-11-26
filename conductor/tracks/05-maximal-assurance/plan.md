@@ -203,3 +203,9 @@ Codecov patch failure (57.02% vs 90%). Eight new local tests cover the runner
 at 99% branch-inclusive module coverage; protected replay still required.
 Reconcile #183–185 with #182 before integration; do not conflate their
 synthetic and retained-replay comparators with independent scientific results.
+
+## Orthogonal reference and experiment follow-up — 26 November 2026
+
+T05.060-062: #179 protected merge d88f787ffd4647117bca4ca400cbb68d95197d40; exact PR head 56a1acb53596ee86e5f8441dd346034c9a1649ff, run 45782490486, 845 passed, 3 skipped, 91.71% combined coverage, seven required checks green, advisory patch 83.48% versus 90%, optional offline security queued. E15-E21 planned as #158 supplements; no independent scientific freeze, authorized corpus or release approval. Preserve gates and current receiving verification separately.
+
+Conditional-scope audit (T05.060/062 / #158): [source-bound development receipt](../../../docs/research/conditional-scope-audit-20261126.md) records exact source/seed pins, 4,096 synthetic fact scenarios, 28,672 matching clause-state checks and retained conditional-identity counterexamples. No independent review or scientific gate closure; protected exact-head qualification outstanding.

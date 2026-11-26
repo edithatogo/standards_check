@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://standardflow.dev/schemas/trial-flow.v1.schema.json",
+  "title": "Synthetic two-arm allocated-partition trial input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "analysis_population",
+    "assessed",
+    "excluded",
+    "randomized",
+    "arm_a",
+    "arm_b"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "dev.standardflow.trial-flow.v1"
+    },
+    "analysis_population": {
+      "const": "allocated_partition"
+    },
+    "assessed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "excluded": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "randomized": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "arm_a": {
+      "$ref": "#/$defs/arm"
+    },
+    "arm_b": {
+      "$ref": "#/$defs/arm"
+    }
+  },
+  "$defs": {
+    "arm": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "allocated",
+        "received",
+        "not_received",
+        "followed_up",
+        "lost_to_follow_up",
+        "discontinued",
+        "analysed",
+        "excluded_from_analysis"
+      ],
+      "properties": {
+        "allocated": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "received": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "not_received": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "followed_up": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "lost_to_follow_up": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "discontinued": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "analysed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "excluded_from_analysis": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      }
+    }
+  }
+}

@@ -9,7 +9,9 @@ use std::path::{Path, PathBuf};
 use std::process::ExitCode;
 
 use serde::Serialize;
-use standardflow_artifacts::{PrismaError, RenderFormat, parse_prisma_flow, render};
+use standardflow_artifacts::{
+    PrismaError, RenderFormat, build_trial_scene, parse_prisma_flow, render,
+};
 use standardflow_core::{
     LockLimits, PackError, ValidationReport, load_pack, sha256_hex, verify_pack_lock,
     write_pack_lock,
@@ -17,7 +19,7 @@ use standardflow_core::{
 
 const MAX_DIAGRAM_INPUT_BYTES: u64 = 1_048_576;
 
-const USAGE: &str = "Usage:\n  standardflow [--json] pack validate <pack.json>\n  standardflow [--json] pack canonicalize <pack.json> <output.json|->\n  standardflow [--json] pack digest <pack.json>\n  standardflow [--json] pack lock <pack-directory> --write\n  standardflow [--json] pack lock <pack-directory> --check\n  standardflow [--json] diagram prisma <input.json> --format <svg|text|scene-json> --output <path|->\n";
+const USAGE: &str = "Usage:\n  standardflow [--json] pack validate <pack.json>\n  standardflow [--json] pack canonicalize <pack.json> <output.json|->\n  standardflow [--json] pack digest <pack.json>\n  standardflow [--json] pack lock <pack-directory> --write\n  standardflow [--json] pack lock <pack-directory> --check\n  standardflow [--json] diagram <prisma|trial> <input.json> --format <svg|text|scene-json> --output <path|->\n";
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 enum OutputMode {
@@ -179,7 +181,8 @@ fn pack_command(mode: OutputMode, arguments: &[OsString]) -> Result<(), CliError
 
 fn diagram_command(mode: OutputMode, arguments: &[OsString]) -> Result<(), CliError> {
     ensure_argument_count(arguments, 7)?;
-    if argument(arguments, 1)? != OsStr::new("prisma")
+    let family = argument(arguments, 1)?;
+    if (family != OsStr::new("prisma") && family != OsStr::new("trial"))
         || argument(arguments, 3)? != OsStr::new("--format")
         || argument(arguments, 5)? != OsStr::new("--output")
     {
@@ -198,8 +201,19 @@ fn diagram_command(mode: OutputMode, arguments: &[OsString]) -> Result<(), CliEr
         ));
     }
     let input = read_bounded(&input_path, MAX_DIAGRAM_INPUT_BYTES)?;
-    let flow = parse_prisma_flow(&input).map_err(CliError::from_prisma)?;
-    let scene = flow.build_scene().map_err(CliError::from_prisma)?;
+    let (scene, operation) = if family == OsStr::new("trial") {
+        (
+            build_trial_scene(&input)
+                .map_err(|error| CliError::operation("trial-flow", error.to_string()))?,
+            "diagram.trial",
+        )
+    } else {
+        let flow = parse_prisma_flow(&input).map_err(CliError::from_prisma)?;
+        (
+            flow.build_scene().map_err(CliError::from_prisma)?,
+            "diagram.prisma",
+        )
+    };
     let bytes =
         render(&scene, format).map_err(|error| CliError::operation("render", error.to_string()))?;
     if output_argument == OsStr::new("-") {
@@ -218,7 +232,7 @@ fn diagram_command(mode: OutputMode, arguments: &[OsString]) -> Result<(), CliEr
         bytes: bytes.len(),
         sha256: sha256_hex(&bytes),
     };
-    emit_success(mode, "diagram.prisma", &result)
+    emit_success(mode, operation, &result)
 }
 
 fn validate_command(mode: OutputMode, arguments: &[OsString]) -> Result<(), CliError> {

@@ -1,0 +1,163 @@
+{
+  "schema_version": "dev.standardflow.publication-contract.v1",
+  "status": "planned",
+  "design": {
+    "programme_id": "standardflow-orthogonal-methods-integrated-publication",
+    "protocol": {
+      "version": "0.1.0",
+      "path": "docs/research/orthogonal-methods-protocol.v0.1.0.md",
+      "sha256": "d58398c8d4bdda25848c291f44e3f525a12530e4f710d069ad2c13313a05a590"
+    },
+    "experiments": [
+      {
+        "id": "E15",
+        "kind": "family_holdout",
+        "question": "Does calibration reduce unsupported acceptance at matched review coverage?",
+        "primary_endpoint": {
+          "name": "family_level_false_acceptance_bound",
+          "definition": "One-sided upper bound for independent accepted family units with any unsupported acceptance; family and item denominators separate.",
+          "analysis_unit": "guideline_family",
+          "decision_rule": "Freeze independent references, paired arms, sampling, precision, thresholds and harm limits before evaluation; no automatic admission."
+        },
+        "secondary_endpoints": [
+          "selective false equivalence",
+          "risk coverage",
+          "Brier score",
+          "log loss",
+          "abstention"
+        ],
+        "input_ids": []
+      },
+      {
+        "id": "E16",
+        "kind": "family_holdout",
+        "question": "Do source-bound rules improve over lexical and neural candidates?",
+        "primary_endpoint": {
+          "name": "unsupported_obligation_discharge",
+          "definition": "Unsupported discharged subclauses divided by eligible independently adjudicated invalid or unknown cases.",
+          "analysis_unit": "guideline_family",
+          "decision_rule": "Freeze independent references, paired arms, sampling, precision, thresholds and harm limits before evaluation; no automatic admission."
+        },
+        "secondary_endpoints": [
+          "unknown and conflict propagation",
+          "rule witnesses",
+          "parent conservation"
+        ],
+        "input_ids": []
+      },
+      {
+        "id": "E17",
+        "kind": "family_holdout",
+        "question": "Do typed constraints improve topical retrieval without unsupported equivalence?",
+        "primary_endpoint": {
+          "name": "unsupported_typed_mapping_acceptance",
+          "definition": "Accepted invalid typed mappings divided by independently adjudicated invalid eligible candidates.",
+          "analysis_unit": "ontology_release_and_guideline_family",
+          "decision_rule": "Freeze independent references, paired arms, sampling, precision, thresholds and harm limits before evaluation; no automatic admission."
+        },
+        "secondary_endpoints": [
+          "exact solver agreement",
+          "named class relation accuracy",
+          "costing scope disagreements"
+        ],
+        "input_ids": []
+      },
+      {
+        "id": "E18",
+        "kind": "family_holdout",
+        "question": "Do native CST and WFST methods conserve content and improve typed normalization?",
+        "primary_endpoint": {
+          "name": "exact_round_trip_conservation",
+          "definition": "Documents conserving untouched bytes and verified intended normalized spans divided by eligible supported documents.",
+          "analysis_unit": "format_and_document_family",
+          "decision_rule": "Freeze independent references, paired arms, sampling, precision, thresholds and harm limits before evaluation; no automatic admission."
+        },
+        "secondary_endpoints": [
+          "parser rejection",
+          "identifier and unit conservation",
+          "weighted path agreement",
+          "runtime"
+        ],
+        "input_ids": []
+      },
+      {
+        "id": "E19",
+        "kind": "family_holdout",
+        "question": "Do independent marking implementations agree on bounded workflow behavior?",
+        "primary_endpoint": {
+          "name": "reachable_marking_agreement",
+          "definition": "Eligible nets with exact reachable marking and transition agreement divided by eligible finite nets.",
+          "analysis_unit": "net_family",
+          "decision_rule": "Freeze independent references, paired arms, sampling, precision, thresholds and harm limits before evaluation; no automatic admission."
+        },
+        "secondary_endpoints": [
+          "deadlocks",
+          "weighted arcs",
+          "concurrency",
+          "cycle witnesses",
+          "bound exhaustion"
+        ],
+        "input_ids": []
+      },
+      {
+        "id": "E20",
+        "kind": "family_holdout",
+        "question": "Do Python and Rust preserve semantics and support non-PRISMA trial inputs?",
+        "primary_endpoint": {
+          "name": "cross_runtime_semantic_conservation",
+          "definition": "Eligible examples conserving identities, counts, edges and declared analysis denominators across implementations divided by eligible examples.",
+          "analysis_unit": "pack_or_diagram_family",
+          "decision_rule": "Freeze independent references, paired arms, sampling, precision, thresholds and harm limits before evaluation; no automatic admission."
+        },
+        "secondary_endpoints": [
+          "negative mutations",
+          "overlap semantics",
+          "reproducibility",
+          "accessibility text"
+        ],
+        "input_ids": []
+      },
+      {
+        "id": "E21",
+        "kind": "family_holdout",
+        "question": "Does manifest-bound exact scanning reject known leaking and unauthorized packages?",
+        "primary_endpoint": {
+          "name": "invalid_release_acceptance",
+          "definition": "Invalid or unauthorized packages accepted divided by independent known invalid package challenges.",
+          "analysis_unit": "source_and_package_family",
+          "decision_rule": "Freeze independent references, paired arms, sampling, precision, thresholds and harm limits before evaluation; no automatic admission."
+        },
+        "secondary_endpoints": [
+          "permitted package rejection",
+          "digest drift",
+          "restricted corpus coverage",
+          "direct script parity"
+        ],
+        "input_ids": []
+      }
+    ],
+    "inputs": [],
+    "freeze_blockers": [
+      "Qualify independent source, rights and reference denominators and disjoint family components.",
+      "Bind development, calibration-only and final evaluation allocation manifest and predeclare thresholds, precision, budgets and primary comparisons.",
+      "Qualify exact native parser, solver, runtime and model pins, dependency inventories and offline evidence.",
+      "Obtain authorized private restricted corpus and staged-package review evidence for the actual release gate.",
+      "Record versioned design and input freeze before confirmatory execution."
+    ]
+  },
+  "freeze": null,
+  "runs": [],
+  "claims": [
+    {
+      "id": "C8",
+      "status": "planned",
+      "text": "Orthogonal methods improve auditable conservation and selective decision quality at matched resource and review budgets.",
+      "run_ids": [],
+      "review": null,
+      "limitations": [
+        "Hypothesis only; engineering controls and source-asserted development references do not constitute independent evaluation.",
+        "Single integrated publication; no source rights, model, canonical pack or dataset admission."
+      ]
+    }
+  ]
+}

@@ -272,3 +272,10 @@ No deadline or publication target changes the evidence required to support a cla
 
 See [the prospective E4-E8 protocol](composition-graph-protocol.v0.1.0.md) and
 [publication contract](../../contracts/publication/composition-graph.v0.1.0.json). Keep E1-E3 unchanged. Plan a distinct methods/utility contribution only if the empirical findings warrant it; recheck venue, preprint and reporting policies at submission. No independent results, ethics approval or submission claimed.
+
+## Orthogonal extensions to the same paper
+
+The [orthogonal protocol](orthogonal-methods-protocol.v0.1.0.md) and
+[contract](../../contracts/publication/orthogonal-methods.v0.1.0.json) register E15-E21
+as prospective paired supplements to E1-E14 under issue #158, not separate publications.
+Actual independent input eligibility, calibration allocation and rights gates remain held.

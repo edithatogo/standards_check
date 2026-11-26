@@ -1,0 +1,27 @@
+{
+  "schema_version": "dev.standardflow.trial-flow.v1",
+  "analysis_population": "allocated_partition",
+  "assessed": 110,
+  "excluded": 10,
+  "randomized": 100,
+  "arm_a": {
+    "allocated": 50,
+    "received": 45,
+    "not_received": 5,
+    "followed_up": 42,
+    "lost_to_follow_up": 8,
+    "discontinued": 7,
+    "analysed": 48,
+    "excluded_from_analysis": 2
+  },
+  "arm_b": {
+    "allocated": 50,
+    "received": 46,
+    "not_received": 4,
+    "followed_up": 40,
+    "lost_to_follow_up": 10,
+    "discontinued": 9,
+    "analysed": 49,
+    "excluded_from_analysis": 1
+  }
+}

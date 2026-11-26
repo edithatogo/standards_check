@@ -1,0 +1,189 @@
+{
+  "schema_version": "dev.standardflow.ontology-reference-assertions.v1",
+  "status": "source_asserted_development_reference",
+  "sources": [
+    {
+      "id": "obi-core",
+      "repo": "obi-ontology/obi",
+      "revision": "64ef2b11a75ebd7035863d15acf52fefb7c84c6e",
+      "path": "views/obi_core.owl",
+      "version": "http://purl.obolibrary.org/obo/obi/2025-12-18/obi_core.owl",
+      "licence": "CC-BY-4.0",
+      "format": "rdfxml",
+      "git_blob_sha1": "75566553b10660f5069f077ad964df8d7df3fd99",
+      "sha256": "c1b9c66c2c30a8797bcb315c9cf69def53816138d0811aba914c3a920600a964",
+      "url": "https://github.com/obi-ontology/obi/blob/64ef2b11a75ebd7035863d15acf52fefb7c84c6e/views/obi_core.owl"
+    },
+    {
+      "id": "cob-reasoned",
+      "repo": "OBOFoundry/COB",
+      "revision": "34302c1a08b414e228c97e4560a951f31651cfb9",
+      "path": "cob-base-reasoned.owl",
+      "version": "http://purl.obolibrary.org/obo/cob/releases/2024-09-20/cob-base-reasoned.owl",
+      "licence": "CC0-1.0",
+      "format": "rdfxml",
+      "git_blob_sha1": "04ad0685a098c038df7e11ca8c9bc2a59c103cd3",
+      "sha256": "91d5aaa0dce6126915b50fd3007424bab5aac218b60dd17977ffdfef0b33a25a",
+      "url": "https://github.com/OBOFoundry/COB/blob/34302c1a08b414e228c97e4560a951f31651cfb9/cob-base-reasoned.owl"
+    },
+    {
+      "id": "stato-reasoned-development",
+      "repo": "ISA-tools/stato",
+      "revision": "a5910e6115217a88ee86e2666e12983ef2ef2a42",
+      "path": "dev/ontology/reasoned/obo/stato-reasoned.obo",
+      "version": "pinned development reasoned artifact; not release",
+      "licence": "CC-BY-3.0",
+      "format": "obo",
+      "git_blob_sha1": "73b3155b9a886382b2fef2ce5deddf1aa28b569b",
+      "sha256": "d4bf05045cf881f0c9642c3ea2605201aba41e9930523ad9960ba5b35dbf5f09",
+      "url": "https://github.com/ISA-tools/stato/blob/a5910e6115217a88ee86e2666e12983ef2ef2a42/dev/ontology/reasoned/obo/stato-reasoned.obo"
+    }
+  ],
+  "assertions": [
+    {
+      "source_id": "obi-core",
+      "subject": "http://purl.obolibrary.org/obo/OBI_0000272",
+      "relation": "subclass_of",
+      "object": "http://purl.obolibrary.org/obo/IAO_0000104",
+      "locator": "line:2525",
+      "reference_type": "asserted_in_pinned_artifact"
+    },
+    {
+      "source_id": "obi-core",
+      "subject": "http://purl.obolibrary.org/obo/OBI_0000066",
+      "relation": "subclass_of",
+      "object": "http://purl.obolibrary.org/obo/COB_0000035",
+      "locator": "line:2112",
+      "reference_type": "asserted_in_pinned_artifact"
+    },
+    {
+      "source_id": "obi-core",
+      "subject": "http://purl.obolibrary.org/obo/OBI_0000070",
+      "relation": "disjoint_with",
+      "object": "http://purl.obolibrary.org/obo/OBI_0200000",
+      "locator": "line:2264",
+      "reference_type": "asserted_in_pinned_artifact"
+    },
+    {
+      "source_id": "obi-core",
+      "subject": "http://purl.obolibrary.org/obo/COB_0000035",
+      "relation": "subclass_of",
+      "object": "http://purl.obolibrary.org/obo/COB_0000082",
+      "locator": "line:1443",
+      "reference_type": "asserted_in_pinned_artifact"
+    },
+    {
+      "source_id": "obi-core",
+      "subject": "http://purl.obolibrary.org/obo/COB_0000082",
+      "relation": "subclass_of",
+      "object": "http://purl.obolibrary.org/obo/BFO_0000015",
+      "locator": "line:1475",
+      "reference_type": "asserted_in_pinned_artifact"
+    },
+    {
+      "source_id": "obi-core",
+      "subject": "http://purl.obolibrary.org/obo/BFO_0000002",
+      "relation": "disjoint_with",
+      "object": "http://purl.obolibrary.org/obo/BFO_0000003",
+      "locator": "line:1047",
+      "reference_type": "asserted_in_pinned_artifact"
+    },
+    {
+      "source_id": "obi-core",
+      "subject": "http://purl.obolibrary.org/obo/BFO_0000015",
+      "relation": "subclass_of",
+      "object": "http://purl.obolibrary.org/obo/BFO_0000003",
+      "locator": "line:1091",
+      "reference_type": "asserted_in_pinned_artifact"
+    },
+    {
+      "source_id": "cob-reasoned",
+      "subject": "http://purl.obolibrary.org/obo/BFO_0000015",
+      "relation": "equivalent_class",
+      "object": "http://purl.obolibrary.org/obo/COB_0000034",
+      "locator": "line:754",
+      "reference_type": "asserted_in_pinned_artifact"
+    },
+    {
+      "source_id": "cob-reasoned",
+      "subject": "http://purl.obolibrary.org/obo/BFO_0000040",
+      "relation": "equivalent_class",
+      "object": "http://purl.obolibrary.org/obo/COB_0000006",
+      "locator": "line:879",
+      "reference_type": "asserted_in_pinned_artifact"
+    },
+    {
+      "source_id": "cob-reasoned",
+      "subject": "http://purl.obolibrary.org/obo/COB_0000035",
+      "relation": "equivalent_class",
+      "object": "http://purl.obolibrary.org/obo/OBI_0000011",
+      "locator": "line:1628",
+      "reference_type": "asserted_in_pinned_artifact"
+    },
+    {
+      "source_id": "cob-reasoned",
+      "subject": "http://purl.obolibrary.org/obo/COB_0000035",
+      "relation": "subclass_of",
+      "object": "http://purl.obolibrary.org/obo/COB_0000082",
+      "locator": "line:1629",
+      "reference_type": "asserted_in_pinned_artifact"
+    },
+    {
+      "source_id": "cob-reasoned",
+      "subject": "http://purl.obolibrary.org/obo/COB_0000082",
+      "relation": "subclass_of",
+      "object": "http://purl.obolibrary.org/obo/BFO_0000015",
+      "locator": "line:2175",
+      "reference_type": "asserted_in_pinned_artifact"
+    },
+    {
+      "source_id": "cob-reasoned",
+      "subject": "http://purl.obolibrary.org/obo/COB_0000035",
+      "relation": "disjoint_with",
+      "object": "http://purl.obolibrary.org/obo/COB_0000083",
+      "locator": "line:1636",
+      "reference_type": "asserted_in_pinned_artifact"
+    },
+    {
+      "source_id": "stato-reasoned-development",
+      "subject": "http://purl.obolibrary.org/obo/STATO_0000057",
+      "relation": "disjoint_with",
+      "object": "http://purl.obolibrary.org/obo/STATO_0000208",
+      "locator": "line:5135",
+      "reference_type": "asserted_in_pinned_artifact"
+    },
+    {
+      "source_id": "stato-reasoned-development",
+      "subject": "http://purl.obolibrary.org/obo/STATO_0000251",
+      "relation": "disjoint_with",
+      "object": "http://purl.obolibrary.org/obo/STATO_0000252",
+      "locator": "line:7790",
+      "reference_type": "asserted_in_pinned_artifact"
+    },
+    {
+      "source_id": "stato-reasoned-development",
+      "subject": "http://purl.obolibrary.org/obo/OBI_0000115",
+      "relation": "disjoint_with",
+      "object": "http://purl.obolibrary.org/obo/OBI_0300311",
+      "locator": "line:1420",
+      "reference_type": "asserted_in_pinned_artifact"
+    },
+    {
+      "source_id": "stato-reasoned-development",
+      "subject": "http://purl.obolibrary.org/obo/STATO_0000196",
+      "relation": "subclass_of",
+      "object": "http://purl.obolibrary.org/obo/IAO_0000027",
+      "locator": "line:7032",
+      "reference_type": "asserted_in_pinned_artifact"
+    },
+    {
+      "source_id": "stato-reasoned-development",
+      "subject": "http://purl.obolibrary.org/obo/STATO_0000175",
+      "relation": "subclass_of",
+      "object": "http://purl.obolibrary.org/obo/OBI_0200000",
+      "locator": "line:6747",
+      "reference_type": "asserted_in_pinned_artifact"
+    }
+  ],
+  "boundary": "Selected direct named assertions in separate pinned ontology artifacts. Not independently adjudicated cross-standard costing equivalence, complete OWL reasoning, or a frozen benchmark. Do not merge across release contexts."
+}

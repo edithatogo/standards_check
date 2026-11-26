@@ -50,7 +50,8 @@ def test_committed_contracts_and_exact_preview(tmp_path):
         assert hashlib.sha256((output / filename).read_bytes()).hexdigest() == digest
     assert json.loads((output / "manifest.json").read_text()) == manifest
     page = (output / "index.html").read_text()
-    assert "E4" in page and "E8" in page and "F11" in page
+    assert all(f"<td>E{i}</td>" in page for i in range(1, 22))
+    assert "F11" in page
     assert "coverage_cells" in page and "citation_pairs" in page and "Planned" in page
     with pytest.raises(ValueError, match="new directory"):
         preview.build(ROOT, output, revision)
