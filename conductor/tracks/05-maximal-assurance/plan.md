@@ -179,3 +179,7 @@ T05.060–062: the [qualification increment](orthogonal-qualification-20261126.m
 PR #177 receiving checks and the next bounded implementations, local evidence, current
 hosted CI gates, exact release scan integration and independent-reference holds. Preserve
 E1–E14 and one integrated publication under #158. All eight wider tasks remain open.
+
+## Orthogonal reference and experiment follow-up — 26 November 2026
+
+T05.060-062: #179 protected merge d88f787ffd4647117bca4ca400cbb68d95197d40; exact PR head 56a1acb53596ee86e5f8441dd346034c9a1649ff, run 45782490486, 845 passed, 3 skipped, 91.71% combined coverage, seven required checks green, advisory patch 83.48% versus 90%, optional offline security queued. E15-E21 planned as #158 supplements; no independent scientific freeze, authorized corpus or release approval. Preserve gates and current receiving verification separately.

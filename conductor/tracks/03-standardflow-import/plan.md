@@ -101,3 +101,7 @@ T03.060: the [qualification increment](../05-maximal-assurance/orthogonal-qualif
 adds actual Python-schema/Rust CLI comparisons across the eight pack kinds and generated
 PRISMA arithmetic properties. The current Rust diagram CLI supports PRISMA only; do not
 claim non-PRISMA legacy rendering parity, consumer cutover or scientific validity.
+
+## Orthogonal reference and experiment follow-up — 26 November 2026
+
+T03.060: E20 retains existing Python/Rust pack comparisons and adds a synthetic trial consumer contract. Legacy single-arm counts cannot establish complete randomized partitions. Native consumer and accessibility acceptance remain held.

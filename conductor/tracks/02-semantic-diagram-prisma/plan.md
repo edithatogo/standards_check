@@ -117,3 +117,7 @@ T02.060: the [qualification increment](../05-maximal-assurance/orthogonal-qualif
 adds the maintained PNML corpus/PM4Py comparator, weighted marking controls and a bounded
 Markdown parser-backed normalization increment. Retain independent hosted qualification
 and native CST/WFST, Typst and LaTeX scope as outstanding.
+
+## Orthogonal reference and experiment follow-up — 26 November 2026
+
+T02.060 and T02.041-043: candidate bounded two-arm trial recipe/CLI reuses the scene renderer; allocation, receipt, follow-up and analysis counts are distinct partitions. Candidate native Typst, LaTeX and weighted transducer probe remains outside the maintained Cargo graph pending lock and qualification. E18-E20 remain planned.

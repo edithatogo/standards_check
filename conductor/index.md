@@ -77,3 +77,5 @@ receipt records that observation.
 - [Orthogonal statistical and formal assurance](../docs/research/orthogonal-assurance-20261126.md) — conformal rank oracle, symbolic applicability and alignment, syntax/normalization, leakage and differential verification; prospective qualification, not an approved protocol.
 
 - [Orthogonal task formulation and model triangulation](../docs/research/orthogonal-task-framing-20261126.md) — prompt, candidate, directional-witness and instruction-aware retrieval ablations; actual receiving and source receipts.
+
+- [Orthogonal E15-E21 protocol](../docs/research/orthogonal-methods-protocol.v0.1.0.md) and [planned contract](../contracts/publication/orthogonal-methods.v0.1.0.json) — paired supplementary comparisons in the same #158 publication.

@@ -41,11 +41,16 @@ def audit(doc: dict) -> dict:
     counts = Counter()
     for row in doc["assertions"]:
         source, a, relation, b = (
-            row["source_id"], row["subject"], row["relation"], row["object"]
+            row["source_id"],
+            row["subject"],
+            row["relation"],
+            row["object"],
         )
         if source not in sources or relation not in RELATIONS or a == b:
             raise ValueError("invalid typed reference")
-        if not all(re.fullmatch(r"http://purl.obolibrary.org/obo/[A-Za-z]+_[0-9]+", n) for n in (a, b)):
+        if not all(
+            re.fullmatch(r"http://purl.obolibrary.org/obo/[A-Za-z]+_[0-9]+", n) for n in (a, b)
+        ):
             raise ValueError("named OBO class identifiers required")
         if row["reference_type"] != "asserted_in_pinned_artifact":
             raise ValueError("unknown reference type")
@@ -68,12 +73,16 @@ def audit(doc: dict) -> dict:
                 if relation == "equivalent_class":
                     closure[b].add(a)
         while True:
-            updated = {n: set().union(*(closure[p] for p in parents)) for n, parents in closure.items()}
+            updated = {
+                n: set().union(*(closure[p] for p in parents)) for n, parents in closure.items()
+            }
             if updated == closure:
                 break
             closure = updated
         conflicts = sorted(
-            n for n, parents in closure.items() if any(a in parents and b in parents for a, b in disjoint)
+            n
+            for n, parents in closure.items()
+            if any(a in parents and b in parents for a, b in disjoint)
         )
         contexts[source] = {"classes": len(closure), "unsatisfiable_candidates": conflicts}
     return {
@@ -93,7 +102,8 @@ def verify_source(doc: dict, source_id: str, raw: bytes) -> int:
         raise ValueError("reference source digest mismatch")
     expected = {
         (row["subject"], row["relation"], row["object"])
-        for row in doc["assertions"] if row["source_id"] == source_id
+        for row in doc["assertions"]
+        if row["source_id"] == source_id
     }
     actual = set()
     if source["format"] == "rdfxml":
@@ -104,7 +114,11 @@ def verify_source(doc: dict, source_id: str, raw: bytes) -> int:
                 for child in node.findall(tag):
                     actual.add((subject, relation, child.get(RDF_RESOURCE)))
     elif source["format"] == "obo":
-        predicates = {"is_a": "subclass_of", "equivalent_to": "equivalent_class", "disjoint_from": "disjoint_with"}
+        predicates = {
+            "is_a": "subclass_of",
+            "equivalent_to": "equivalent_class",
+            "disjoint_from": "disjoint_with",
+        }
         for stanza in raw.decode("utf-8").split("\n[Term]\n")[1:]:
             lines = stanza.split("\n[", 1)[0].splitlines()
             identifier = next((line[4:] for line in lines if line.startswith("id: ")), None)

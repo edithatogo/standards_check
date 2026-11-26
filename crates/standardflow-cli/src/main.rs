@@ -9,7 +9,9 @@ use std::path::{Path, PathBuf};
 use std::process::ExitCode;
 
 use serde::Serialize;
-use standardflow_artifacts::{PrismaError, RenderFormat, build_trial_scene, parse_prisma_flow, render};
+use standardflow_artifacts::{
+    PrismaError, RenderFormat, build_trial_scene, parse_prisma_flow, render,
+};
 use standardflow_core::{
     LockLimits, PackError, ValidationReport, load_pack, sha256_hex, verify_pack_lock,
     write_pack_lock,

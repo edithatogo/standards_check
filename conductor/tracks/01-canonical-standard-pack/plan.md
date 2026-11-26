@@ -374,3 +374,7 @@ adds signed ground-rule evaluation with exact source binding, a bounded HiGHS co
 a full typed costing candidate audit, family-level selective risk evaluation and private
 release-overlap integration. Real rule, reference, semantic mapping and corpus qualification
 remain held. No canonical admission or additional experiment registry.
+
+## Orthogonal reference and experiment follow-up — 26 November 2026
+
+T01.060-062: seven source-corroborated PRISMA conditional subclauses retain all 42 parent requirements. Eighteen named OBI/COB/STATO assertions are isolated by source context. Independent interpretation, typed costing mappings and family sampling remain held. E15-E17 and E21 supplement the single integrated publication.

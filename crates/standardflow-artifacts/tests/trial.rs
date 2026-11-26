@@ -10,7 +10,10 @@ fn trial_scene_is_deterministic_and_preserves_denominators() -> Result<(), Box<d
     assert_eq!(scene.nodes.len(), 3);
     assert_eq!(scene.edges.len(), 2);
     for format in [RenderFormat::Svg, RenderFormat::Text, RenderFormat::SceneJson] {
-        assert_eq!(render(&scene, format)?, render(&build_trial_scene(INPUT)?, format)?);
+        assert_eq!(
+            render(&scene, format)?,
+            render(&build_trial_scene(INPUT)?, format)?
+        );
     }
     assert!(scene.text_equivalent.contains("Analysed (n = 48)"));
     assert!(scene.text_equivalent.contains("Lost") || scene.text_equivalent.contains("lost"));
@@ -28,7 +31,9 @@ fn invalid_trial_counts_fail_closed() -> Result<(), Box<dyn std::error::Error>> 
         "/arm_b/excluded_from_analysis",
     ] {
         let mut trial: serde_json::Value = serde_json::from_slice(INPUT)?;
-        *trial.pointer_mut(path).ok_or_else(|| std::io::Error::other("missing fixture field"))? =
+        *trial
+            .pointer_mut(path)
+            .ok_or_else(|| std::io::Error::other("missing fixture field"))? =
             serde_json::Value::from(999_u64);
         assert!(build_trial_scene(&serde_json::to_vec(&trial)?).is_err());
     }

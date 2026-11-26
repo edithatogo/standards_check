@@ -1,6 +1,7 @@
 """Source assertions are independent of the costing retrieval scores."""
 
 import copy
+import hashlib
 import json
 from pathlib import Path
 
@@ -44,3 +45,27 @@ def test_exact_artifact_digest_is_required():
     doc = json.loads(SEED.read_text())
     with pytest.raises(ValueError):
         verify_source(doc, "obi-core", b"not the source")
+
+@pytest.mark.parametrize("fmt,raw", [
+    ("obo", b"format-version: 1.2\n\n[Term]\nid: OBI:1\nis_a: OBI:2\n"),
+    ("rdfxml", b'<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" '
+     b'xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">'
+     b'<owl:Class rdf:about="http://purl.obolibrary.org/obo/OBI_1">'
+     b'<rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/OBI_2"/>'
+     b'</owl:Class></rdf:RDF>'),
+])
+def test_replay_exact_synthetic_assertion_and_reject_missing_triple(fmt, raw):
+    doc = json.loads(SEED.read_text())
+    doc["sources"] = [{
+        "id": "fixture", "format": fmt, "revision": "a" * 40,
+        "sha256": hashlib.sha256(raw).hexdigest(),
+    }]
+    doc["assertions"] = [{
+        "source_id": "fixture", "subject": "http://purl.obolibrary.org/obo/OBI_1",
+        "object": "http://purl.obolibrary.org/obo/OBI_2", "relation": "subclass_of",
+        "reference_type": "asserted_in_pinned_artifact",
+    }]
+    assert verify_source(doc, "fixture", raw) == 1
+    doc["assertions"][0]["object"] = "http://purl.obolibrary.org/obo/OBI_3"
+    with pytest.raises(ValueError, match="not found"):
+        verify_source(doc, "fixture", raw)
