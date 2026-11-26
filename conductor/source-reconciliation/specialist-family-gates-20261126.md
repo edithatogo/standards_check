@@ -119,3 +119,52 @@ reranking and common-mode model error diagnostic with #184, #187 graph
 retrieval, #186/#189 tagging and #180 applicability. Run a staged
 factorial comparison with matched candidate and acquisition budgets and
 family-clustered uncertainty, preserving null and adverse findings.
+
+## Bounded source continuation and eligible pack inventory
+
+Reconciled protected E11 graph integration #187, receiving main
+`776ed1dbfbe19d16365310ef0fa07d29a793611a`. The receiving checks are separate
+from the prior qualified PR. No other experimental branch is overwritten.
+
+Reuse `bulk_survey` through `equator_resume_batch`; no new provider or crawler.
+The first batch binds the historical 720-entry receipt and its exact 205
+pending-worklist identities. Starting inventory: 202 deferred, two held,
+one source inventory observed without reconciliation. Select up to six
+previously unattempted sources in stable PMCID order; stop using the existing
+provider failure circuit breaker. Preserve every unselected or deferred prior
+row, including holds and success. A retry of held identities is explicit in
+the CLI, not automatic. Each output retains all 205 records, selected and
+actually attempted IDs, prior receipt digest and counts. The hosted
+`run-bulk-intake` label starts the first batch; workflow dispatch
+`bulk_only` resumes from the selected run ID and exact checkpoint digest.
+No licence or item qualification follows from table inventory.
+
+The eligible pack inventory binds exact pack bytes, requires source
+reconciliation and cleared inherited item rights, preserves each declared
+item anchor and text hash, and records explicit numbered cross-reference
+spans. Closure is bounded, cycle-safe and preserves stable IDs. The
+certificate concerns **declared item identity coverage**, not independent
+subclause/qualifier coverage or manuscript evidence. Unknown references
+block structural coverage. No heuristic numbering relationships become
+authoritative edges.
+
+Local bounded RED/GREEN: three resume tests with a controlled survey double,
+three inventory/closure/retrieval tests. All 42 tests of the available
+extracted-module overlay passed; no full checkout available (DNS failure).
+Executed against the exact retained PRISMA 2020 pack, SHA-256
+`56f79ee76d463c3878431a0342f127a1bcc89c019d636e4f28afdc0dfc462ec1`:
+42/42 declared item identities and one explicit reference (13a to 5).
+42 masked identity queries, 1,764 query-candidate pairs. Word TF-IDF
+41/42 at rank 1, 42/42 at rank 3 and 5; character TF-IDF 42/42 at rank 1,
+3 and 5. Closure adds no identity hits on this near-ceiling diagnostic.
+No independent semantic relevance labels, cross-family test, or fresh
+specialist inference. Full output digest and local tested code blobs in
+the companion receipt. Hosted tests and exact-head required checks pending.
+
+The four pinned article-table snapshots (82 candidate rows) remain held
+for item/structure rights and independent reconciliation; do not include
+their text in the cleared-pack benchmark. The 720-entry census remains
+the operational denominator. Extend structural inventories with verified
+subitem, qualifier, footnote and parent edges only when corresponding
+source evidence is available. Confirmatory family/reference freeze and
+actual reviewer outcomes remain held, not inferred from engineering tests.

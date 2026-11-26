@@ -2,23 +2,38 @@ name: Specialist independent family source intake
 
 on:
   workflow_dispatch:
+    inputs:
+      bulk_only:
+        description: Resume a bounded bulk source batch instead of priority intake
+        type: boolean
+        default: false
+      previous_run:
+        description: Prior successful bulk checkpoint run ID (empty uses pinned census)
+        type: string
+        default: ""
+      previous_sha256:
+        description: SHA-256 of the prior checkpoint JSON (required when resuming)
+        type: string
+        default: ""
   pull_request:
     types: [opened, synchronize, reopened, labeled]
     paths:
       - ".github/workflows/specialist-family-intake.yml"
       - "conductor/source-reconciliation/specialist-family-gates-20261126.md"
+      - "scripts/equator_resume_batch.py"
+      - "scripts/pack_evidence_inventory.py"
 
 permissions:
   contents: read
   actions: read
 
 concurrency:
-  group: specialist-family-intake-${{ github.ref }}
+  group: specialist-family-intake-${{ github.ref }}-${{ github.event.action || github.event_name }}-${{ github.event.label.name || 'default' }}
   cancel-in-progress: true
 
 jobs:
   family-intake:
-    if: github.event_name == 'workflow_dispatch' || (github.event.pull_request.head.repo.full_name == github.repository && (github.head_ref == 'research/specialist-family-intake' || contains(github.event.pull_request.labels.*.name, 'run-family-intake')))
+    if: (github.event_name == 'workflow_dispatch' && !inputs.bulk_only) || (github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name != 'run-bulk-intake' && (github.head_ref == 'research/specialist-family-intake' || contains(github.event.pull_request.labels.*.name, 'run-family-intake')))
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
@@ -85,5 +100,84 @@ jobs:
         with:
           name: specialist-family-intake-${{ github.sha }}
           path: ${{ runner.temp }}/family-evidence/
+          if-no-files-found: error
+          retention-days: 90
+
+  bulk-intake:
+    # Explicit bounded batch only, read-only acquisition; ordinary PR CI makes no new source requests.
+    if: (github.event_name == 'workflow_dispatch' && inputs.bulk_only) || (github.event_name == 'pull_request' && github.event.action == 'labeled' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-bulk-intake')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: "3.12.16"
+      - name: Verify code and reproduce the eligible pack baseline
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/bulk-evidence" "$RUNNER_TEMP/bulk-prior"
+          git rev-parse HEAD > "$RUNNER_TEMP/bulk-evidence/revision.txt"
+          python -m pip install pytest==9.2.0 ruff==0.17.6
+          ruff check scripts/equator_resume_batch.py scripts/pack_evidence_inventory.py scripts/equator_pipeline_coverage.py
+          ruff format --diff scripts/equator_resume_batch.py scripts/pack_evidence_inventory.py scripts/equator_pipeline_coverage.py > "$RUNNER_TEMP/bulk-evidence/format.diff" || test "$?" = 1
+          cat "$RUNNER_TEMP/bulk-evidence/format.diff"
+          python -m pytest --import-mode=importlib -q tests/test_equator_resume_batch.py tests/test_pack_evidence_inventory.py tests/test_equator_pipeline_coverage.py
+          python -m unittest tests.test_survey_equator_articles tests.test_source_provider_evidence tests.test_source_xml tests.test_review_source_receipts -v
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          from scripts.pack_evidence_inventory import baseline
+
+          raw = Path("packs/org.prisma/prisma/2020/pack.json").read_bytes()
+          result = baseline(raw, "56f79ee76d463c3878431a0342f127a1bcc89c019d636e4f28afdc0dfc462ec1")
+          out = Path(os.environ["RUNNER_TEMP"]) / "bulk-evidence" / "pack-evidence-inventory.json"
+          out.write_text(json.dumps(result, indent=2) + "\n")
+          print("masked source identity recovery", result["queries"], result["candidate_pairs"])
+          PY
+      - name: Download exact prior checkpoint and verify digest
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PRIOR_RUN: ${{ inputs.previous_run }}
+          PRIOR_SHA: ${{ inputs.previous_sha256 }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          prior="$RUNNER_TEMP/bulk-prior"
+          if [[ -z "$PRIOR_RUN" ]]; then
+            timeout 60 gh run download 45635380131 --repo "$GITHUB_REPOSITORY" --name equator-source-45635380131 --dir "$prior"
+            PRIOR_SHA=fc859acaf9ae378b3bb1a2d74be0eeb0ff294319434d83bce6f9a4daf835fa32
+          else
+            [[ "$PRIOR_RUN" =~ ^[0-9]{1,20}$ && "$PRIOR_SHA" =~ ^[a-f0-9]{64}$ ]]
+            timeout 60 gh run download "$PRIOR_RUN" --repo "$GITHUB_REPOSITORY" --name "equator-bulk-checkpoint-$PRIOR_RUN" --dir "$prior"
+          fi
+          printf '%s  %s\n' "$PRIOR_SHA" "$prior/equator-article-survey.json" | sha256sum --check --strict
+          printf '%s\n' "$PRIOR_SHA" > "$prior/expected-sha256.txt"
+      - name: Acquire next bounded source batch using existing provider and structural inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          prior="$RUNNER_TEMP/bulk-prior"
+          out="$RUNNER_TEMP/bulk-evidence"
+          timeout 600 python -m scripts.equator_resume_batch \
+            --previous "$prior/equator-article-survey.json" \
+            --expected-sha256 "$(cat "$prior/expected-sha256.txt")" \
+            --output "$out/equator-article-survey.json" --limit 6
+          python -m scripts.review_source_receipts --receipt "$out/equator-article-survey.json" \
+            --baseline "$prior/equator-article-survey.json" --output "$out/retrospective.json"
+          sha256sum "$out/equator-article-survey.json" > "$out/checkpoint-sha256.txt"
+      - name: Retain checkpoint, baseline and retrospective (no source text)
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: equator-bulk-checkpoint-${{ github.run_id }}
+          path: ${{ runner.temp }}/bulk-evidence/
           if-no-files-found: error
           retention-days: 90
