@@ -278,3 +278,39 @@ dense first-stage retrieval model (Qwen3-Embedding-0.6B or gte-modernbert-base)
 and lexical+dense fusion on separately declared development pools; keep the
 original 1,060-pair comparison unchanged. This is a separate retrieval ablation,
 not a retuning of prior controls.
+
+### Exact Qwen4B and source-layout gate
+
+[Model pin survey 45762792595](https://github.com/edithatogo/standards_check/actions/runs/45762792595/artifacts/15090706355)
+ZIP SHA-256 d942f79d8337f537152a3d938484e42c63b3bf11860aabe8c9eebfb37888455b
+downloaded and verified. Qwen4B third-party rank conversion metadata: repo
+gorse-io/Qwen3-Reranker-4B-GGUF, revision b22e6e5e27598ecc2a9b38439357034f3815d8cb,
+Qwen3-Reranker-4B-Q8_0.gguf, SHA-256
+2cf26934b45414d51cb1e1fc68378da02f8a1ae2893b70ccb13c381ec1ec9398,
+4,279,678,944 bytes, Apache-2.0, Qwen3 architecture, rank pooling metadata.
+Require exact model card names original reranker; conversion parity remains
+unqualified. Native existing b11960 rank endpoint, same Q8 class and original
+1,060 candidate pool, same positive/negative smoke plus exact alias. Separate
+label `run-qwen4b-reranker`, no effect on routine inference or hosted services.
+The GTE publisher upload resolves to 1299fb80afdf8c1ef9957056add3bc1db3b70a4e;
+weight digest unchanged. 8B held pending marginal utility.
+
+Source-side: inspected both rendered pages of the official
+[ARRIVE author checklist](https://arriveguidelines.org/sites/arrive/files/documents/Author%20Checklist%20-%20Full.pdf)
+and [STROBE combined checklist](https://www.strobe-statement.org/download/strobe-checklist-cohort-case-control-and-cross-sectional-studies-combined).
+The generic ruled-grid reader cannot bind the missing interior vertical rules.
+Freeze the visual main-ID denominators (ARRIVE 1–10 then 11–21, STROBE 1–12
+then 13–22, with printed stars on 8, 13–15) and edition-specific page-relative
+ID-column bounds before extraction. These are source-bound structural observations,
+not an independent semantic reference or validated full-row transcription.
+Use the existing native and Poppler geometry word helpers and retain only
+main identifier anchors and discrepancy counts. Exact bytes required; no
+unverified OCR or guessed items. Lettered subitems, study-design branches,
+footnote meanings, exact requirement spans and source rights remain separate
+holds. The ARRIVE primary PLOS article declares CC0 (DOI 10.1371/journal.pbio.3000410);
+do not propagate article rights to the issuer form. STARD alternate
+EQUATOR article PDF has CC-BY-NC-4.0 notice, not unrestricted redistribution.
+The `run-issuer-column-probe` job also attempts fixed primary ARRIVE XML
+and the EQUATOR-hosted STARD manifestation; retain metadata and fingerprint
+receipts only. Two pure source-identifier RED/GREEN regressions passed in
+isolation; full hosted verification and actual source receipts remain required.

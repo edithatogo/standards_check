@@ -7,6 +7,8 @@ on:
       - "scripts/five_class_benchmark.py"
       - "scripts/lfm_development.py"
       - "scripts/costing_retrieval.py"
+      - "scripts/issuer_column_probe.py"
+      - "tests/test_issuer_column_probe.py"
       - "scripts/hosted_specialist_development.py"
       - "tests/test_hosted_specialist_development.py"
       - "scripts/lexical_text.py"
@@ -550,9 +552,11 @@ jobs:
 
   native-qwen-reranker:
     # Public frozen editorial cohort; no provider credentials or scientific promotion.
-    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-native-qwen-reranker'
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && (github.event.label.name == 'run-native-qwen-reranker' || github.event.label.name == 'run-qwen4b-reranker')
     runs-on: ubuntu-24.04
-    timeout-minutes: 25
+    timeout-minutes: 45
+    env:
+      QWEN_MODEL: ${{ github.event.label.name == 'run-qwen4b-reranker' && 'qwen3-reranker-4b-q8' || 'qwen3-reranker-0.6b-q8' }}
     permissions:
       contents: read
       actions: read
@@ -590,19 +594,37 @@ jobs:
             https://github.com/ggml-org/llama.cpp/releases/download/b11960/llama-b11960-bin-ubuntu-x64.tar.gz --output "$RUNNER_TEMP/qwen-runtime.tar.gz"
           echo "31cc3a6bc638ac6c48dc4b1b74888f1eaadf3d14227c1e5f67daf9a49541d97a  $RUNNER_TEMP/qwen-runtime.tar.gz" | sha256sum --check
           tar -xzf "$RUNNER_TEMP/qwen-runtime.tar.gz" -C "$RUNNER_TEMP/qwen-runtime"
-          model_url="https://huggingface.co/ggml-org/Qwen3-Reranker-0.6B-Q8_0-GGUF/resolve/a02f48bb4f057028298c21fa033da2b30d7742d5"
-          curl --fail --silent --show-error --location --max-redirs 5 --connect-timeout 15 --max-time 600 --max-filesize 650000000 --proto '=https' --proto-redir '=https' \
-            "$model_url/qwen3-reranker-0.6b-q8_0.gguf" --output "$RUNNER_TEMP/qwen.gguf"
-          echo "22c9979ce4fbcdc5acdc310c6641c32797eff1aa980b8f7a2db8a8ea23429a48  $RUNNER_TEMP/qwen.gguf" | sha256sum --check | tee "$RUNNER_TEMP/qwen-evidence/weight-check.txt"
+          case "$QWEN_MODEL" in
+            qwen3-reranker-4b-q8)
+              model_url="https://huggingface.co/gorse-io/Qwen3-Reranker-4B-GGUF/resolve/b22e6e5e27598ecc2a9b38439357034f3815d8cb"
+              file="Qwen3-Reranker-4B-Q8_0.gguf"
+              digest="2cf26934b45414d51cb1e1fc68378da02f8a1ae2893b70ccb13c381ec1ec9398"
+              cap=4300000000
+              ;;
+            qwen3-reranker-0.6b-q8)
+              model_url="https://huggingface.co/ggml-org/Qwen3-Reranker-0.6B-Q8_0-GGUF/resolve/a02f48bb4f057028298c21fa033da2b30d7742d5"
+              file="qwen3-reranker-0.6b-q8_0.gguf"
+              digest="22c9979ce4fbcdc5acdc310c6641c32797eff1aa980b8f7a2db8a8ea23429a48"
+              cap=650000000
+              ;;
+            *) exit 1 ;;
+          esac
+          printf '%s\n' "$model_url/$file" > "$RUNNER_TEMP/qwen-evidence/weight-url.txt"
+          curl --fail --silent --show-error --location --max-redirs 5 --connect-timeout 15 --max-time 600 --max-filesize "$cap" --proto '=https' --proto-redir '=https' \
+            "$model_url/$file" --output "$RUNNER_TEMP/qwen.gguf"
+          echo "$digest  $RUNNER_TEMP/qwen.gguf" | sha256sum --check | tee "$RUNNER_TEMP/qwen-evidence/weight-check.txt"
           curl --fail --silent --show-error --location --max-redirs 5 --connect-timeout 15 --max-time 30 --max-filesize 2000000 --proto '=https' --proto-redir '=https' \
             "$model_url/README.md" --output "$RUNNER_TEMP/qwen-evidence/model-card.md"
           grep -i '^license: apache-2.0' "$RUNNER_TEMP/qwen-evidence/model-card.md"
+          if test "$QWEN_MODEL" = qwen3-reranker-4b-q8; then
+            grep -F 'Qwen/Qwen3-Reranker-4B' "$RUNNER_TEMP/qwen-evidence/model-card.md"
+          fi
       - name: Verify native rank head and score the conserved pool
         run: |
           server="$(find "$RUNNER_TEMP/qwen-runtime" -type f -name llama-server -print -quit)"
           test -x "$server"
           LD_LIBRARY_PATH="$(dirname "$server")" "$server" --version > "$RUNNER_TEMP/qwen-evidence/runtime.txt" 2>&1
-          LD_LIBRARY_PATH="$(dirname "$server")" "$server" -m "$RUNNER_TEMP/qwen.gguf" --alias qwen3-reranker-0.6b-q8 \
+          LD_LIBRARY_PATH="$(dirname "$server")" "$server" -m "$RUNNER_TEMP/qwen.gguf" --alias "$QWEN_MODEL" \
             --host 127.0.0.1 --port 18883 --reranking --pooling rank -c 2048 -b 2048 -ub 2048 -t 4 -ngl 0 -np 1 \
             > "$RUNNER_TEMP/qwen-evidence/server.log" 2>&1 &
           pid=$!
@@ -622,27 +644,131 @@ jobs:
           import os
           from pathlib import Path
           import requests
-          from scripts.hosted_specialist_development import make_post, rerank_payload, LOCAL_QWEN
+          from scripts.hosted_specialist_development import make_post, rerank_payload, LOCAL_QWEN_MODELS
           from scripts.costing_retrieval import parse_reranker_results
 
+          model = os.environ["QWEN_MODEL"]
+          if model not in LOCAL_QWEN_MODELS:
+              raise ValueError("unexpected local model alias")
           with requests.Session() as session:
               session.trust_env = False
               post = make_post(session, "http://127.0.0.1:18883/v1/rerank", None, 1)
-              result = post(rerank_payload(LOCAL_QWEN, "What is a panda?", ["A panda is a bear.", "Paris is the capital of France."]))
+              result = post(rerank_payload(model, "What is a panda?", ["A panda is a bear.", "Paris is the capital of France."]))
           scores = parse_reranker_results(["relevant", "irrelevant"], result["results"])
-          evidence = {"scores": scores, "model": result.get("model"), "passed": scores["relevant"] > scores["irrelevant"]}
+          evidence = {"scores": scores, "model": result.get("model"), "passed": result.get("model") == model and scores["relevant"] > scores["irrelevant"]}
           (Path(os.environ["RUNNER_TEMP"]) / "qwen-evidence/smoke.json").write_text(json.dumps(evidence))
           if not evidence["passed"]:
               raise ValueError("native rank head did not pass relevance smoke")
           PY
           baseline="$(find "$RUNNER_TEMP/qwen-baseline" -type f -name paired.json -print -quit)"
-          python -m scripts.hosted_specialist_development --model qwen3-reranker-0.6b-q8 --baseline "$baseline" --max-requests 106 --output "$RUNNER_TEMP/qwen-evidence/report.json"
+          python -m scripts.hosted_specialist_development --model "$QWEN_MODEL" --baseline "$baseline" --max-requests 106 --output "$RUNNER_TEMP/qwen-evidence/report.json"
           grep '^VmHWM:' "/proc/$pid/status" > "$RUNNER_TEMP/qwen-evidence/peak-memory.txt" || true
       - name: Retain Qwen diagnostic evidence
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
-          name: native-qwen-reranker-${{ github.sha }}
+          name: native-qwen-reranker-${{ env.QWEN_MODEL }}-${{ github.sha }}
           path: ${{ runner.temp }}/qwen-evidence/
+          if-no-files-found: error
+          retention-days: 90
+
+  issuer-column-probe:
+    # Exact source bytes and visible main identifiers; no text export or rights promotion.
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-issuer-column-probe'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c
+        with:
+          egress-policy: audit
+      - name: Fetch exact public test commit without credentials
+        env:
+          GIT_TERMINAL_PROMPT: "0"
+        run: |
+          git init
+          git fetch --no-tags --depth=1 https://github.com/edithatogo/standards_check.git "$GITHUB_SHA"
+          git checkout --detach FETCH_HEAD
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: "3.12"
+      - name: Install existing parser and verify bounded diagnostics
+        run: |
+          mkdir -p "$RUNNER_TEMP/issuer-evidence"
+          git rev-parse HEAD > "$RUNNER_TEMP/issuer-evidence/commit.txt"
+          python -m pip install pdfplumber==0.11.11 pytest==9.2.0
+          python -m pytest --import-mode=importlib tests/test_issuer_column_probe.py -q
+          pdftotext -v > "$RUNNER_TEMP/issuer-evidence/poppler-version.txt" 2>&1
+          python -m pip freeze > "$RUNNER_TEMP/issuer-evidence/environment.txt"
+      - name: Compare two readers on exact issuer PDFs
+        run: |
+          for family in arrive strobe; do
+            case "$family" in
+              arrive)
+                url="https://arriveguidelines.org/sites/arrive/files/documents/Author%20Checklist%20-%20Full.pdf"
+                digest="91e191d495f96472c0896ae3e489e9a12953648179f2a2a06b7035bb97a7327c"
+                ;;
+              strobe)
+                url="https://www.strobe-statement.org/download/strobe-checklist-cohort-case-control-and-cross-sectional-studies-combined"
+                digest="63c2af4d91d04f5b211f4277a267a23da5d313fe927753c08f98139a8aab41b8"
+                ;;
+            esac
+            pdf="$RUNNER_TEMP/$family-issuer.pdf"
+            bbox="$RUNNER_TEMP/$family-bbox.html"
+            curl --fail --silent --show-error --max-time 60 --max-filesize 8000000 --proto '=https' --output "$pdf" "$url"
+            echo "$digest  $pdf" | sha256sum --check
+            pdftotext -f 1 -l 3 -bbox-layout -enc UTF-8 "$pdf" "$bbox"
+            python -m scripts.issuer_column_probe --family "$family" --pdf "$pdf" --bbox "$bbox" --output "$RUNNER_TEMP/issuer-evidence/$family.json"
+            rm -f "$pdf" "$bbox"
+          done
+      - name: Inspect alternate primary ARRIVE and STARD source routes
+        run: |
+          python - <<'PY'
+          import hashlib, json, os, subprocess
+          from pathlib import Path
+          from scripts.survey_equator_articles import scan_article
+
+          temp = Path(os.environ["RUNNER_TEMP"])
+          output = temp / "issuer-evidence"
+          specs = json.loads(Path("source/official/priority-article-candidates.json").read_text())
+          arrive = next(s for s in specs if s["edition"] == "arrive-2.0-2020")
+          probes = [
+              ("arrive-plos-jats", "https://journals.plos.org/plosbiology/article/file?id=10.1371%2Fjournal.pbio.3000410&type=manuscript"),
+              ("stard-equator-pdf", "https://www.equator-network.org/wp-content/uploads/2015/03/STARD-2015-paper.pdf"),
+          ]
+          receipts = []
+          for key, url in probes:
+              path = temp / key
+              response = subprocess.run(["curl", "--fail", "--silent", "--show-error", "--location",
+                                         "--max-redirs", "3", "--max-time", "60", "--max-filesize", "8000000",
+                                         "--proto", "=https", "--proto-redir", "=https",
+                                         "--output", str(path), "--write-out", "%{http_code}", url],
+                                        capture_output=True, text=True, check=False)
+              row = {"id": key, "url": url, "http_status": response.stdout, "exit": response.returncode,
+                     "status": "held", "scientific_qualification": False, "canonical_packs_promoted": 0}
+              if response.returncode == 0 and path.is_file():
+                  raw = path.read_bytes()
+                  row.update({"sha256": hashlib.sha256(raw).hexdigest(), "bytes": len(raw)})
+                  try:
+                      if key == "arrive-plos-jats":
+                          row["survey"] = scan_article(raw, arrive, None)
+                      elif not raw.startswith(b"%PDF-"):
+                          raise ValueError("not PDF bytes")
+                      else:
+                          row["rights"] = "noncommercial manifestation, not release cleared"
+                      row["status"] = "candidate_observation_only"
+                  except ValueError as exc:
+                      row["reason"] = str(exc)[:150]
+              path.unlink(missing_ok=True)
+              receipts.append(row)
+          (output / "alternate-routes.json").write_text(json.dumps(receipts, indent=2) + "\n")
+          print(json.dumps([{k: v for k, v in r.items() if k != "survey"} for r in receipts]))
+          PY
+      - name: Retain geometry and source receipts only
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: issuer-column-probe-${{ github.sha }}
+          path: ${{ runner.temp }}/issuer-evidence/
           if-no-files-found: error
           retention-days: 90

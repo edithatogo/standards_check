@@ -35,6 +35,8 @@ RERANK_MODELS = {
     },
 }
 LOCAL_QWEN = "qwen3-reranker-0.6b-q8"
+LOCAL_QWEN_4B = "qwen3-reranker-4b-q8"
+LOCAL_QWEN_MODELS = (LOCAL_QWEN, LOCAL_QWEN_4B)
 
 
 def frozen_costing(root, baseline):
@@ -198,7 +200,9 @@ def make_post(session, endpoint, key, budget):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--model", required=True, choices=[*DECISION_MODELS, *RERANK_MODELS, LOCAL_QWEN]
+        "--model",
+        required=True,
+        choices=[*DECISION_MODELS, *RERANK_MODELS, *LOCAL_QWEN_MODELS],
     )
     parser.add_argument("--root", type=Path, default=Path("."))
     parser.add_argument("--baseline", type=Path)
@@ -206,7 +210,7 @@ def main():
     parser.add_argument("--allow-hosted-public-development", action="store_true")
     parser.add_argument("--max-requests", type=int, required=True)
     args = parser.parse_args()
-    if args.model == LOCAL_QWEN:
+    if args.model in LOCAL_QWEN_MODELS:
         endpoint, key = "http://127.0.0.1:18883/v1/rerank", None
     else:
         if not args.allow_hosted_public_development or os.environ.get("GITHUB_ACTIONS") == "true":
@@ -244,7 +248,7 @@ def main():
         args.output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
         raise SystemExit("experiment failed closed; sanitized failure receipt retained") from None
     result["status"] = "completed"
-    result["access"] = "local-loopback" if args.model == LOCAL_QWEN else "hosted-service"
+    result["access"] = "local-loopback" if args.model in LOCAL_QWEN_MODELS else "hosted-service"
     result["started_at"] = started_at
     args.output.write_text(
         json.dumps(result, indent=2, sort_keys=True, allow_nan=False) + "\n", encoding="utf-8"

@@ -44,7 +44,7 @@ MODELS = {
     },
     "gte-modernbert": {
         "id": "Alibaba-NLP/gte-reranker-modernbert-base",
-        "revision": "1299fb8",
+        "revision": "1299fb80afdf8c1ef9957056add3bc1db3b70a4e",
         "file": "onnx/model_quantized.onnx",
         "sha256": "ecc6a0ae67cee3d898167802383112d9185ca9250e07bd5d1fa65019b050179d",
         "licence": "Apache-2.0",

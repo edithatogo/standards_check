@@ -333,3 +333,11 @@ K2 and Qwen 0.6B native development receipts verified; preserve false equivalenc
 and paired retrieval harm. Prioritize Qwen4B native scale metadata, compact GTE
 ModernBERT, and independent source structure before a larger reranker or
 production selection. Keep scientific and conformal reference gates held.
+
+26 November source-specific structural diagnostic: exact ARRIVE and STROBE issuer
+PDF pins, visually inspected main-ID column bounds and printed-star denominators;
+compare pdfplumber and Poppler geometry, retain anchors and any discrepancy,
+no checklist text exported. The [challenger record](../../../docs/research/model-challengers-20261126.md)
+records the source probe, alternative CC0 ARRIVE JATS and restricted STARD route.
+Do not close T01.025, T01.052 or T01.062 on main-ID agreement alone; nested
+obligation structure, rights, independent family sample and frozen adjudication remain held.

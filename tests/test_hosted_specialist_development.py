@@ -129,3 +129,15 @@ def test_frozen_baseline_rejects_unqualified_receipt(tmp_path):
         fixture.parent.mkdir(parents=True)
         fixture.write_text("{}")
         hosted.evaluate_decision(tmp_path, "d1.2", lambda _: pytest.fail("network not permitted"))
+
+
+def test_larger_qwen_is_local_only(monkeypatch, tmp_path):
+    model = hosted.LOCAL_QWEN_4B
+    assert model in hosted.LOCAL_QWEN_MODELS and model not in hosted.RERANK_MODELS
+    assert hosted.rerank_payload(model, "query", ["candidate"]) == {
+        "model": model, "query": "query", "documents": ["candidate"], "top_n": 1,
+    }
+    monkeypatch.setattr(sys, "argv", ["hosted", "--model", model, "--max-requests", "106",
+                                     "--output", str(tmp_path / "out.json")])
+    with pytest.raises(SystemExit, match="baseline"):
+        hosted.main()
