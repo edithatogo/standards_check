@@ -629,3 +629,65 @@ Further repository priorities (existing Track 01/04/05 and #111/#95/#158):
    and evidence-policy work is not an independent same-ID analysis.
 
 No new model or service. No canonical admission or scientific promotion.
+
+
+## Hosted priority sources: observed discrepancy and reusable structural diagnostics
+
+Reconciled receiving main `b48e7adafea41e09f4aa07d9db6f7e9117618c10` after #185 integration, preserving
+the coordinator's changes. Prior #188 exact head 5d78c779 passed all seven
+required checks, assurance 45817319954, patch 92.50%; #189 passed its prior
+checks, patch 97.77%, and remains sequentially after #188. No merge bypass.
+
+Verified [priority-source artifact 15116098103](https://github.com/edithatogo/standards_check/actions/runs/45817343661/artifacts/15116098103),
+ZIP SHA-256 e27aad9b976d663c765926fa38cddc665ef70bcbbb198cfac7aa78d28a515f82,
+tested merge e503c916767d0e4b548cdff0429474743854681a. All six requested
+QMD/DOCX/issuer PDF transfers succeeded. Retain file-level identity:
+
+| Edition | Literal IDs | Word IDs | Strict text comparison | Issuer PDF identity |
+| --- | ---: | ---: | ---: | --- |
+| TRIPOD+AI 2024 | 52/52 | 52/52 | 46/52 | Acquired blob dcdcf9ed46273432ac0f941624a48086db9b48d8 matches EQUATOR article PDF, not pinned checklist PDF |
+| STROBE 2007 | 22/22 main IDs, 34 grouped subitems | 11/22 main IDs | 0 comparable (compound parent/subitem dialect) | Acquired blob 1580a3c33c1f60140b5096ecaaf520d390ca6371 differs from pinned combined checklist PDF |
+
+No automatic identity or rights qualification from successful downloads. TRIPOD
+issuer URL currently visually renders the 11 January 2024 checklist, but the
+hosted bytes match the alternate article blob; preserve observed mismatch,
+do not claim correct byte-level checklist acquisition. STROBE generic reader
+misses 8,13–22 (starred 8/13/14/15 and later rows); compound rows and
+unclassified header/unsupported blocks still held. The new diagnostic records
+possible main-ID cells with original printed stars and cell/row anchors,
+including later tables. Those are unverified candidates, not additional
+recovered requirements. Do not globally strip stars or propagate headers.
+
+Exact local reanalysis of the six QMD differing values from the pinned literal
+source: validated each original strict digest against hosted receipt before
+projection. Only explicit numeric sup markup and literal wiki-link target
+markup separated from display text, no other normalization. Items 2, 12c,
+12d, 18f, 22 match Word display fingerprints; 23b remains different. Strict
+46/52 unchanged; separate display agreement 51/52. All 52 intervening
+scope cells match D/E/D;E hashes (8/4/40). Word body has five footnote
+references IDs 1–5; footnotes part has five real notes plus separator
+records, ten nonempty text nodes. QMD references note 3 twice. Do not
+equate visible footnote numbers and Word internal IDs or treat reference
+co-presence as correct linkage. Preserve exact link-target hashes, source
+anchors, note markers, native Word XML evidence; cross-format display
+agreement is not a semantic equivalence or complete note-link qualification.
+
+Implemented bounded separate display fingerprint and link-target hash,
+same-row intervening scope-cell comparison and unverified STROBE printed-ID
+location diagnostics in existing reader. Preserve original strict comparison
+and missing denominators. Three new focused tests reproduced missing helpers
+(RED) then passed locally (GREEN) using the exact prior reader blob in
+isolated overlay; no actual Word parsing or full repository run locally.
+Exact committed source/test blobs verified. Hosted targeted priority replay
+required. No new model, reader dependency, schema, independent reference
+or canonical promotion. Continue source-specific permissions/attribution,
+actual issuer table and reference lock in existing lane; use #191 for
+bibliographic recovery and #192 for durable publication supplement rather
+than duplicate their work. No model retuning on exposed sources.
+
+[Latest E10 follow-up artifact 15115853570](https://github.com/edithatogo/standards_check/actions/runs/45817434574/artifacts/15115853570)
+SHA-256 431117a8062cf229fbd83680f65ef97a5d803287184530f89914cf11a3ed2f13:
+rules 14/2/3 TP/FP/FN (F1 .848485), joint 1/2/16 (.10), per-type
+2/19/15 (.105263), supervised token BIO 0/1/17 and span 0/0/17. Preserve
+negative results; independent frozen E9–E11 and component interaction
+analyses remain held. No new confirmation claims.

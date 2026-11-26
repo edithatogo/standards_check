@@ -346,10 +346,25 @@ def compare_docx(raw, name, reference, expected):
         headers[fingerprint("Item")] = "id"
     rows, issues = collect_rows(structure, identifier_pattern=ITEM_ID, header_roles=headers)
     anchor_evidence = docx_anchor_evidence(structure, rows)
+    diagnostics = {}
+    if name == "tripod":
+        diagnostics["display_content_comparison"] = compare_formats(
+            [{**row, "requirement_sha256": row["display_content_sha256"]} for row in reference],
+            rows,
+            expected_ids=expected,
+        )
+        diagnostics["scope_cell_comparison"] = tripod_scope_comparison(reference, anchor_evidence)
+    elif name == "strobe":
+        diagnostics["unverified_identifier_candidates"] = strobe_identifier_candidates(
+            structure, reference
+        )
     return {
         "source_sha256": hashlib.sha256(raw).hexdigest(),
         **summarize_source(rows, tuple(expected), issues + structure["issues"]),
-        "comparison": compare_formats(reference, rows, expected_ids=expected),
+        **diagnostics,
+        "comparison": compare_formats(
+            reference if name != "strobe" else [], rows, expected_ids=expected
+        ),
         "anchor_evidence": anchor_evidence,
         "bullet_content_comparison": bullet_content_comparison(reference, anchor_evidence),
         "markup_inventory": docx_markup_inventory(raw),
@@ -408,6 +423,68 @@ PRIORITY_PINS = {
 }
 
 
+def priority_display_fields(content):
+    """Separate observed QMD display markup from links; never normalize plain numbers."""
+    links = re.compile(r"\[\[([^\[\]|]+)\|([^\[\]|]+)\]\]")
+    notes = re.compile(r"<sup>([0-9]+)</sup>")
+    return {
+        "display_content_sha256": fingerprint(notes.sub("", links.sub(r"\1", content))),
+        "note_references": notes.findall(content),
+        "link_target_sha256": [
+            hashlib.sha256(match[2].encode()).hexdigest() for match in links.finditer(content)
+        ],
+    }
+
+
+def tripod_scope_comparison(reference, observed):
+    """Compare only the expected intervening cell in the pinned TRIPOD Word layout."""
+    result = []
+    for row in reference:
+        candidates = [r for r in observed if r["item_id"] == row["item_id"]]
+        receipt = {"item_id": row["item_id"], "status": "unknown", "scope_anchor": None}
+        if len(candidates) == 1 and candidates[0].get("status") == "observed_not_qualified":
+            candidate = candidates[0]
+            prefix = re.escape(candidate["row_anchor"])
+            identifier = re.fullmatch(prefix + r"/c(\d+)", candidate["identifier_anchor"])
+            requirement = re.fullmatch(prefix + r"/c(\d+)", candidate["requirement_anchor"])
+            if identifier and requirement and int(requirement[1]) == int(identifier[1]) + 2:
+                anchor = candidate["row_anchor"] + f"/c{int(identifier[1]) + 1}"
+                cells = [c for c in candidate["other_cells"] if c["anchor"] == anchor]
+                if len(cells) == 1 and cells[0].get("text_sha256"):
+                    receipt.update(
+                        scope_anchor=anchor,
+                        status=(
+                            "equal"
+                            if cells[0]["text_sha256"] == fingerprint(row["scope"])
+                            else "different"
+                        ),
+                    )
+        result.append(receipt)
+    return result
+
+
+def strobe_identifier_candidates(structure, reference):
+    """Expose possible lost main IDs, including starred labels, without scoring them."""
+    known = {fingerprint(row["printed_id"]): row for row in reference}
+    result = []
+    for table in structure["blocks"]:
+        for row in table.get("rows", []):
+            for cell in row["cells"]:
+                candidate = known.get(cell.get("text_sha256"))
+                if candidate is not None:
+                    result.append(
+                        {
+                            "item_id": candidate["item_id"],
+                            "printed_id": candidate["printed_id"],
+                            "row_anchor": row["anchor"],
+                            "cell_anchor": cell["anchor"],
+                            "column": cell["column"],
+                            "status": "unverified_cell_candidate",
+                        }
+                    )
+    return result
+
+
 def priority_literal_metadata(data, name, expected):
     """Retain observed scope and subitem structure; no semantic or rights decision."""
     if name not in PRIORITY_PINS or not expected or len(set(expected)) != len(expected):
@@ -449,8 +526,8 @@ def priority_literal_metadata(data, name, expected):
             row.update(
                 scope=scope,
                 scope_anchor=anchor + "/2",
-                note_references=re.findall(r"<sup>([0-9]+)</sup>", content),
                 requirement_sha256=fingerprint(content),
+                **priority_display_fields(content),
             )
         else:
             if type(scope) is not bool or not isinstance(content, list) or not content:
@@ -518,13 +595,18 @@ def observe_priority(source_dir, name, spec, pins):
     try:
         raw = pinned_bytes(source_dir / f"{name}.docx", docx_pin)
         # The existing generic Word reader deliberately holds unmatched compound rows.
-        ref = result["literal"].get("rows", []) if name == "tripod" else []
+        ref = result["literal"].get("rows", [])
         result["docx"] = compare_docx(raw, name, ref, expected)
         result["docx"]["git_blob"] = docx_pin
     except (OSError, ValueError, ImportError, RuntimeError) as exc:
         result["docx"] = {"status": "held", "error_type": type(exc).__name__}
     try:
         result["issuer_pdf"] = issuer_pdf_identity(source_dir / f"{name}.issuer.pdf", pdf_pin)
+        if (
+            name == "tripod"
+            and result["issuer_pdf"]["git_blob"] == "dcdcf9ed46273432ac0f941624a48086db9b48d8"
+        ):
+            result["issuer_pdf"]["identity_observation"] = "matches_equator_article_pdf_not_checklist_pin"
     except (OSError, ValueError) as exc:
         result["issuer_pdf"] = {"status": "held", "error_type": type(exc).__name__}
     return result
