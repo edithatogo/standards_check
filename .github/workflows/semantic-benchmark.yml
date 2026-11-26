@@ -1,0 +1,76 @@
+name: Experimental semantic reconciliation
+
+on:
+  pull_request:
+    types: [labeled]
+    paths:
+      - "scripts/semantic_benchmark.py"
+      - "tests/test_semantic_benchmark.py"
+      - "contracts/examples/semantic-reconciliation-synthetic-v1.json"
+      - "requirements/semantic-benchmark.txt"
+      - ".github/workflows/semantic-benchmark.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: semantic-benchmark-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  cpu-benchmark:
+    # Deliberate experiment authorization after required deterministic checks.
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-semantic-benchmark')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      HF_HUB_DISABLE_TELEMETRY: "1"
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+      - name: Install separately scoped experimental runtime
+        run: |
+          python -m pip install --disable-pip-version-check -r requirements/semantic-benchmark.txt
+          python -m pip check
+      - name: Run deterministic tests before model acquisition
+        run: python -m unittest tests.test_semantic_benchmark -v
+      - name: Acquire immutable model files, not executable remote code
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/semantic-model"
+          base="https://huggingface.co/cross-encoder/nli-MiniLM2-L6-H768/resolve/c847a3c0e1cad93a5343183ef183f3044e3fc7c2"
+          for name in tokenizer.json config.json onnx/model_quint8_avx2.onnx; do
+            curl --fail --silent --show-error --location --max-redirs 5 \
+              --connect-timeout 15 --max-time 180 --max-filesize 100000000 \
+              --proto '=https' --proto-redir '=https' \
+              "$base/$name" --output "$RUNNER_TEMP/semantic-model/${name##*/}"
+          done
+          echo "44391a5241a62e0083c1a8899a71e69a092b95aea5ba89e14062925468eceac7  $RUNNER_TEMP/semantic-model/model_quint8_avx2.onnx" | sha256sum --check
+      - name: Execute CPU-only held-out synthetic benchmark
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m scripts.semantic_benchmark \
+            --cases contracts/examples/semantic-reconciliation-synthetic-v1.json \
+            --assets "$RUNNER_TEMP/semantic-model" \
+            --output "$RUNNER_TEMP/semantic-benchmark/receipt.json" \
+            --revision "$(git rev-parse HEAD)"
+          python -m pip freeze > "$RUNNER_TEMP/semantic-benchmark/environment.txt"
+      - name: Retain benchmark receipt only
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: semantic-benchmark-${{ github.sha }}
+          path: ${{ runner.temp }}/semantic-benchmark/
+          if-no-files-found: error
+          retention-days: 90

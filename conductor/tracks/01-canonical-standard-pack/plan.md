@@ -240,6 +240,84 @@ The [follow-up protocol](../../../docs/research/composition-graph-protocol.v0.1.
 
 The [independent-family acquisition batch](../../source-reconciliation/independent-family-intake-20261126.md) uses existing priority survey and retrospective evidence with explicit publisher co-publications. T01.052 remains open for source and rights qualification, family-disjoint sampling and independent review; no new canonical or benchmark admission.
 
+### Five-class blinded adjudication and comparator qualification
+
+See [semantic reconciliation qualification](semantic-reconciliation-qualification.md). T01.5d/e: retain the prior synthetic and first blinded receipt; improve insufficient agreement using numbered evidence spans and stronger separately pinned model-agent processes, freeze a family-disjoint five-class controlled benchmark from actual pinned source rows and separate natural candidate pairs. T01.5f/g: one additional NLI comparator only on a predeclared material baseline deficit against independent formal controls or qualified agent consensus. No automatic admission; insufficient consensus stays held. No human labelling or adjudication in this benchmark.
+
+Witness-v2 scientific gate failed (artifact 14924523529); experimental DeBERTa 29/30 vs MiniLM 16/30 on formal controls. Condition-v3 bounded follow-up preserves the scientific threshold and natural-pair hold. See the semantic qualification receipt.
+
+26 November integration hold (#155): prior Assurance run 45626930697 failed maintained Ruff (95 violations) and combined Python coverage (85.86%, 7987/9302 versus 90.5% floor). The semantic scripts remain in the maintained coverage denominator. Current-base deterministic checks must qualify before explicitly authorizing the separate model experiments. Original reference failure and thresholds are unchanged. Legacy experiment labels describe B relative to A; RGI-06 describes A relative to B. Preserve historical receipts, and implement a tested, explicit direction adapter/version before downstream graph use. No source or semantic admission.
+
+26 November assurance increment (#155): merge receiving main `341f5388` without overwriting
+the composition, ontology or independent-family intake work. Prior run
+[45637024692](https://github.com/edithatogo/standards_check/actions/runs/45637024692)
+failed maintained lint (95 diagnostics) and combined Python coverage (86.28%, floor 90.5%).
+Apply the pinned Ruff repair from [45751013372](https://github.com/edithatogo/standards_check/actions/runs/45751013372);
+all four resulting blob prefixes matched the diagnostic, and its temporary workflow was removed.
+Add offline behavioral tests and the explicit direction adapter; six isolated direction tests
+passed against the extracted relation implementation, with full hosted verification outstanding.
+Keep T01.028–030 and T01.043 open: condition-v3 still fails scientific qualification, and the
+new independent-family intake remains held. Do not treat repeat controls or related CONSORT/SPIRIT
+editions as independent confirmatory families. No model execution, auto-merge, or admission.
+
+26 November review handoff (#155): all seven required workflow groups passed on head
+`2779f19`, with [Assurance 45751485991](https://github.com/edithatogo/standards_check/actions/runs/45751485991)
+reporting 724 Python tests passed and 91.59% combined coverage (90.5% floor).
+The [qualification receipt](semantic-reconciliation-qualification.md) now records the hash-verified
+main source census, prospective independent-family intake slots, and paired historical model
+complementarity. Zero of eight priority source candidates qualified for a fresh confirmatory freeze.
+Keep T01.028–030, T01.043 and T01.052 open. Ready for code and protocol review is not ready
+to merge; no auto-merge, new model run, scientific claim or pack promotion.
+
+### LFM complementary development and source retry
+
+User explicitly requests evaluating Liquid AI models. Separate the exploratory
+synthetic lane from E2/E3 and the condition-v3 scientific hold. Reuse the original
+36 analyst-authored pairs without retuning; all are development evidence now,
+including the former test stratum. Run one challenger at a time against both
+retained ONNX comparators, with independent jobs and no combined vote or promotion.
+Use the native decision API for d1 and the same existing blinded structured prompt
+for LFM3 and LFM2.5. The [qualification receipt](semantic-reconciliation-qualification.md)
+records model/runtime pins, predeclared thresholds and limits. Retry the selected
+official article transports and alternate issuer files; acquisition is not admission.
+T01.028–030, T01.043 and T01.052 remain open. Do not authorize merge from these
+synthetic results; fresh independent eligible source components and actual scientific
+qualification remain required.
+
+
+26 November LFM follow-up: actual d1 and LFM3 native inference receipts and exact issuer
+PDF acquisition are recorded in [semantic qualification](semantic-reconciliation-qualification.md).
+Keep prior failure and original thresholds; extend only the exploratory synthetic lane with
+bounded thinking/scale and output-budget ablations and reuse the structural comparator on new
+source manifestations. T01.028–030, T01.043 and T01.052 remain open. No source freeze or merge
+from diagnostic results.
+
+
+26 November source structure follow-up: five issuer/publisher PDFs acquired and hash-bound,
+zero comparable rows with the existing generic reader; STARD transport and source rights held.
+See [semantic qualification](semantic-reconciliation-qualification.md). Restore the Thinking
+weight pin at the original publisher upload and verify the later licence independently.
+Do not reopen or tune historical scientific control sets; independent cohort freeze held.
+
+### Specialist pipeline and publication extension (26 November)
+
+See [specialist pipeline protocol](../../../docs/research/specialist-pipeline-protocol.v0.1.0.md)
+and [prospective E9-E14 contract](../../../contracts/publication/specialist-pipeline.v0.1.0.json).
+T01.025, T01.027-030, T01.043, T01.050-053 retain their existing owners and gates.
+Use source-native extraction first; compare tiny document/layout models only on held
+formats. Test GLiNER boundary tags with exact offsets, a small dense retrieval/reranker
+against the existing lexical method, and NLI/d1 on separate evidence tasks. Do not
+use models for identity, arithmetic, applicability-rule execution or acceptance.
+The costing metadata cohort is a development-only editorial topic-ranking pilot;
+keep independent family, rights, reference, ontology and scientific holds explicit.
+All native LFM follow-up results and negative evidence are in the qualification receipt.
+
+26 November candidate expansion: [model challenger and evidence record](../../../docs/research/model-challengers-20261126.md).
+T01.028–030, T01.043, T01.050–053 remain held pending independent reference and source qualification.
+Reuse the observed BGE candidate pool, measure paired losses/gains with permitted local
+rerankers, qualify K2-Horizon and MiniCPM publisher assets before inference, and
+keep d1.2-ultra, Jev and hosted rerankers as separate opt-in service experiments.
+No remote inference in routine PR workflows, source repin or model promotion.
 
 ## Orthogonal statistical and symbolic qualification
 
@@ -248,3 +326,18 @@ The [independent-family acquisition batch](../../source-reconciliation/independe
 - [ ] **T01.062** ([#95](https://github.com/edithatogo/standards_check/issues/95), [#111](https://github.com/edithatogo/standards_check/issues/111)) Qualify restricted-source coverage and exact leakage comparisons within authorized private processing, preserving rights holds and original source anchors.
 
 See the [orthogonal assurance design](../../../docs/research/orthogonal-assurance-20261126.md). PR #155 remains held for independent reference and family qualification. No new pack admitted.
+
+26 November: reconcile receiving main's orthogonal T01.060–062 with the
+[model challenger record](../../../docs/research/model-challengers-20261126.md).
+K2 and Qwen 0.6B native development receipts verified; preserve false equivalences
+and paired retrieval harm. Prioritize Qwen4B native scale metadata, compact GTE
+ModernBERT, and independent source structure before a larger reranker or
+production selection. Keep scientific and conformal reference gates held.
+
+26 November source-specific structural diagnostic: exact ARRIVE and STROBE issuer
+PDF pins, visually inspected main-ID column bounds and printed-star denominators;
+compare pdfplumber and Poppler geometry, retain anchors and any discrepancy,
+no checklist text exported. The [challenger record](../../../docs/research/model-challengers-20261126.md)
+records the source probe, alternative CC0 ARRIVE JATS and restricted STARD route.
+Do not close T01.025, T01.052 or T01.062 on main-ID agreement alone; nested
+obligation structure, rights, independent family sample and frozen adjudication remain held.

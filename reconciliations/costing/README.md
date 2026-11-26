@@ -130,3 +130,33 @@ references, source URLs, status distinctions, verification scope, dates, duplica
 declared-versus-actual verified counts. It rejects transient retrieval IDs. It does not verify
 the accuracy of sources or endorse the mappings. The existing Markdown/index validators inspect
 the canonical pipeline, not this catalogue; inspect their messages as well as exit codes.
+
+## Specialist retrieval development
+
+The [specialist-pipeline protocol](../../docs/research/specialist-pipeline-protocol.v0.1.0.md)
+separates topic retrieval from equivalence and source qualification. Run the shared offline
+word/bigram and character-trigram baseline with:
+
+```sh
+python -m scripts.costing_retrieval --output /tmp/costing-retrieval.json
+```
+
+The opt-in PR label `run-specialist-retrieval` runs the same complete 31-domain candidate
+pool and pinned CPU BGE-small ONNX plus MiniLM top-ten reranker. The receipt retains
+all 106 query identities, ranked domain IDs, 125 editorial associations, source and asset hashes,
+recall/precision/MRR/nDCG, missing candidates, per-instrument strata and timing.
+These are development comparisons with editorial `covers_topic` associations, not independent
+truth, methodological quality, or evidence that unlisted mappings are irrelevant. No model
+output writes back to the registry, source wording, canonical packs or display groups.
+
+### Reranker panel
+
+[Run 45757790945](https://github.com/edithatogo/standards_check/actions/runs/45757790945)
+completed the BGE-small and MiniLM experiment on 106 items and 31 domains.
+Use the same ordered BGE top-ten candidate pool (SHA-256
+a86fcf8063efc642eb1295ca0a40e82791a739ca144c0d71904324c7c94e29f1)
+for BAAI bge-reranker-base, Mixedbread xsmall and Jina tiny; the opt-in
+`run-reranker-panel` label runs each arm independently. A mismatch aborts
+before reranking. Compare gains and losses against BGE by k, not just
+mean rank, and preserve all 125 editorial positive associations.
+See the [dated candidate and evidence record](../../docs/research/model-challengers-20261126.md).
