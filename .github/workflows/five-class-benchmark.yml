@@ -370,9 +370,18 @@ jobs:
       - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c
         with:
           egress-policy: audit
-      - uses: actions/checkout@3d3c42e5aac5ba805da76410c181273ba90b1
-        with:
-          persist-credentials: false
+      # The action resolver failed repeatedly for the verified v7.0.1 SHA.
+      # This public-repository research job can fetch the exact tested SHA without credentials.
+      - name: Fetch exact public test commit without action resolution
+        env:
+          GIT_TERMINAL_PROMPT: "0"
+        run: |
+          test "${#GITHUB_SHA}" -eq 40
+          [[ "$GITHUB_SHA" =~ ^[0-9a-f]{40}$ ]]
+          git init --quiet .
+          git fetch --no-tags --depth=1 https://github.com/edithatogo/standards_check.git "$GITHUB_SHA"
+          git checkout --detach FETCH_HEAD
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
         with:
           python-version: "3.12"
