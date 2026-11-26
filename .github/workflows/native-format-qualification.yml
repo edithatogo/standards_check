@@ -36,7 +36,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@4cda84d5c5c54efe2404f9d843567869ab1699d4
         with:
           toolchain: "1.100.0"
-      - name: Resolve candidate graph without compiling
+      - name: Verify frozen candidate graph without compiling
         run: |
           mkdir -p target/native-format-evidence
           git rev-parse HEAD > target/native-format-evidence/commit.txt
@@ -44,7 +44,10 @@ jobs:
           cargo -V > target/native-format-evidence/cargo.txt
           cp experiments/native-format-qualification/Cargo.toml.candidate \
             experiments/native-format-qualification/Cargo.toml
-          cargo generate-lockfile --manifest-path experiments/native-format-qualification/Cargo.toml
+          cp experiments/native-format-qualification/Cargo.lock.candidate \
+            experiments/native-format-qualification/Cargo.lock
+          cp deny.toml experiments/native-format-qualification/deny.toml
+          echo '20f995abbc9e34022e94d4dbd8f85183df6dcb29ad301feaece676a63b52ed92  experiments/native-format-qualification/Cargo.lock' | sha256sum --check
           cp experiments/native-format-qualification/Cargo.lock target/native-format-evidence/Cargo.lock
           python3 - <<'PY'
           import hashlib
@@ -92,10 +95,10 @@ jobs:
           rust-version: "1.100.0"
           command: check
           arguments: "--all-features --locked"
-          command-arguments: "--config deny.toml"
       - name: Fetch exact checked graph and run bounded synthetic probe offline
         run: |
           cmp experiments/native-format-qualification/Cargo.lock target/native-format-evidence/Cargo.lock
+          cmp deny.toml experiments/native-format-qualification/deny.toml
           cargo fetch --locked --manifest-path experiments/native-format-qualification/Cargo.toml
           cargo metadata --locked --offline --format-version 1 \
             --manifest-path experiments/native-format-qualification/Cargo.toml \

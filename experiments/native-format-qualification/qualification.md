@@ -16,3 +16,17 @@ probe. The publication and Conductor remain under T02.060 and T05.060-062 (#158)
 The pinned parser handles structure only, not TeX expansion or Typst evaluation;
 the weighted path fixture is not general-purpose transduction qualification.
 No document execution, secret, restricted source, or external upload.
+
+## First hosted resolution
+
+Run [45785147370](https://github.com/edithatogo/standards_check/actions/runs/45785147370)
+resolved all four pins to 87 registry packages plus the local probe. The policy
+step failed at an invalid placement of the cargo-deny --config argument; no
+candidate code executed. The [retained archive 15100431282](https://github.com/edithatogo/standards_check/actions/runs/45785147370/artifacts/15100431282)
+was downloaded and SHA-256 verified as dcc2010535ea870cb274ed83dc4aea23363f65f6e872f9d07ac09936abb0dfd7.
+The exact generated lock digest is 20f995abbc9e34022e94d4dbd8f85183df6dcb29ad301feaece676a63b52ed92.
+Retain that byte-identical candidate lock, explicitly copy the existing deny
+policy alongside the scratch manifest, and run the same pinned policy action
+with its common locked arguments. The probe's own licence follows the workspace
+licence. No change to the root graph or policy. Still held pending policy and
+actual offline compilation/tests.
