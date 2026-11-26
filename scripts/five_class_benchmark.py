@@ -1,8 +1,16 @@
 """Five-class blinded benchmark: formal controls distinct from candidate consensus."""
 from __future__ import annotations
 
-from collections import Counter
+import argparse
 import hashlib
+import io
+import json
+import re
+import time
+from collections import Counter
+from pathlib import Path
+
+from .blind_adjudication import blinded_cases, classify_nli, file_hash
 
 LABELS = ('equivalent','narrower','broader','contradictory','indeterminate')
 P, Q = 0b1100, 0b1010
@@ -15,10 +23,14 @@ def forms():
 def relation(a,b):
     if not 0 < a < 16 or not 0 < b < 16:
         raise ValueError('nonempty truth sets required')
-    if a==b: return 'equivalent'
-    if a&b==b: return 'narrower'
-    if a&b==a: return 'broader'
-    if not a&b: return 'contradictory'
+    if a==b:
+        return 'equivalent'
+    if a&b==b:
+        return 'narrower'
+    if a&b==a:
+        return 'broader'
+    if not a&b:
+        return 'contradictory'
     return 'indeterminate'
 
 
@@ -27,10 +39,12 @@ def digest(text):
 
 
 def evidence_spans(text):
-    spans=[]; start=0
+    spans=[]
+    start=0
     for line in text.splitlines(keepends=True):
         end=start+len(line.rstrip('\r\n'))
-        if text[start:end].strip(): spans.append((start,end))
+        if text[start:end].strip():
+            spans.append((start,end))
         start+=len(line)
     return spans
 
@@ -43,7 +57,8 @@ def validate_index_vote(pair,vote):
         return [list(spans[i-1]) for i in ids]
     a,b=select(pair['source'],vote.get('a')),select(pair['candidate'],vote.get('b'))
     label=vote.get('label')
-    if label not in LABELS or a is None or b is None: label='abstain'
+    if label not in LABELS or a is None or b is None:
+        label='abstain'
     return {'id':pair['id'],'source_sha256':digest(pair['source']),'candidate_sha256':digest(pair['candidate']),
             'label':label,'a_spans':a,'b_spans':b}
 
@@ -75,14 +90,6 @@ def material_deficit(rows):
 
 
 # This experiment has no network access during inference; downloads are separate.
-import argparse
-import io
-import json
-from pathlib import Path
-import re
-import time
-
-from .blind_adjudication import blinded_cases, classify_nli, file_hash
 
 JUDGES = {
     'qwen4': {'id':'Open4bits/Qwen3-4B-Instruct-2507-GGUF','revision':'7ddd64cfdb879bd66e42cdf94c11debd3d596ee7',
@@ -131,9 +138,12 @@ CONDITION_SCHEMA = {'type':'object','properties':{
 
 def render(mask,p,q,reverse=False):
     prefix='In this controlled example the two reporting checks are independent.'
-    if mask==P: return prefix+'\nA report complies exactly when it satisfies check P:\n'+p
-    if mask==Q: return prefix+'\nA report complies exactly when it satisfies check Q:\n'+q
-    if mask==15^P: return prefix+'\nA report complies exactly when it does not satisfy check P:\n'+p
+    if mask==P:
+        return prefix+'\nA report complies exactly when it satisfies check P:\n'+p
+    if mask==Q:
+        return prefix+'\nA report complies exactly when it satisfies check Q:\n'+q
+    if mask==15^P:
+        return prefix+'\nA report complies exactly when it does not satisfy check P:\n'+p
     if mask==P&Q:
         parts=['Check P: '+p,'Check Q: '+q]
         return prefix+'\nA report complies exactly when it satisfies both checks:\n'+'\n'.join(reversed(parts) if reverse else parts)
@@ -142,10 +152,12 @@ def render(mask,p,q,reverse=False):
 
 def spirit_rows(root):
     from docx import Document
+
     from .structured_source import check_package
     path=root/'source/archetypes/spirit-2025.docx'
     raw=path.read_bytes()
-    if file_hash(path)!=SPIRIT_SHA: raise ValueError('SPIRIT source pin mismatch')
+    if file_hash(path)!=SPIRIT_SHA:
+        raise ValueError('SPIRIT source pin mismatch')
     check_package(raw)
     specs=json.loads((root/'source/official/priority-article-candidates.json').read_text())
     spec=next(s for s in specs if s['edition']=='spirit-2025')
@@ -155,18 +167,22 @@ def spirit_rows(root):
         rows=[]
         for ri,row in enumerate(table.rows,1):
             cells=row.cells
-            if len(cells)!=4: continue
+            if len(cells)!=4:
+                continue
             item=' '.join(cells[1].text.split()).lower()
             text=' '.join(cells[2].text.split())
             if re.fullmatch(r'\d{1,2}[a-z]?',item) and text:
                 rows.append({'item_id':item,'text':text,'source_anchor':f'table/{ti}/row/{ri}/cell/3'})
-        if [r['item_id'] for r in rows]==expected: tables.append(rows)
-    if len(tables)!=1: raise ValueError('SPIRIT exact 53-row ordered binding not reproduced')
+        if [r['item_id'] for r in rows]==expected:
+            tables.append(rows)
+    if len(tables)!=1:
+        raise ValueError('SPIRIT exact 53-row ordered binding not reproduced')
     return {**spec,'source_sha256':SPIRIT_SHA},tables[0]
 
 
 def consort_rows(root):
     from docx import Document
+
     from .structured_source import check_package
     path=root/'source/archive/processed/CONSORT_2025_checklist.docx'
     raw=path.read_bytes()
@@ -176,7 +192,8 @@ def consort_rows(root):
     check_package(raw)
     specs=json.loads((root/'source/official/priority-article-candidates.json').read_text())
     spec=next(s for s in specs if s['edition']=='consort-2025')
-    expected=spec['table_item_ids'][0];matches=[]
+    expected=spec['table_item_ids'][0]
+    matches=[]
     for ti,table in enumerate(Document(io.BytesIO(raw)).tables,1):
         cells=[[' '.join(c.text.split()) for c in row.cells] for row in table.rows]
         for id_col in range(1,max(map(len,cells))-1):
@@ -184,25 +201,30 @@ def consort_rows(root):
                    'source_anchor':f'table/{ti}/row/{ri}/cell/{id_col+2}'}
                   for ri,row in enumerate(cells,1) if len(row)>id_col+1 and
                   re.fullmatch(r'\d{1,2}[a-z]?',row[id_col].lower()) and row[id_col+1]]
-            if [r['item_id'] for r in rows]==expected: matches.append(rows)
-    if len(matches)!=1: raise ValueError('CONSORT exact 42-row ordered binding not reproduced')
+            if [r['item_id'] for r in rows]==expected:
+                matches.append(rows)
+    if len(matches)!=1:
+        raise ValueError('CONSORT exact 42-row ordered binding not reproduced')
     return {**spec,'source_sha256':hashlib.sha256(raw).hexdigest()},matches[0]
 
 
 def prepare(root):
-    from .reconcile_authoritative_articles import snapshot_table, parse_legacy
+    from .reconcile_authoritative_articles import parse_legacy, snapshot_table
     specs=json.loads((root/'source/official/authoritative-article-editions.json').read_text())
     snapshots={e['edition']:e for e in json.loads((root/'source/official/authoritative-article-rows.json').read_text())['editions']}
-    groups=[];holds=[]
+    groups=[]
+    holds=[]
     for name,family in [('prisma-p-2015','prisma'),('cheers-2022','cheers')]:
         spec=next(s for s in specs if s['edition']==name)
         groups.append((family,spec,snapshot_table(snapshots[name],spec)['rows'],'retained_pinned_primary_rows'))
     try:
-        spec,rows=spirit_rows(root);groups.append(('trial_protocol',spec,rows,'pinned_repository_docx_candidate'))
+        spec,rows=spirit_rows(root)
+        groups.append(('trial_protocol',spec,rows,'pinned_repository_docx_candidate'))
     except (OSError,ValueError,StopIteration) as exc:
         holds.append({'edition':'spirit-2025','reason':type(exc).__name__})
     try:
-        spec,rows=consort_rows(root);groups.append(('trial_reporting',spec,rows,'pinned_repository_docx_candidate'))
+        spec,rows=consort_rows(root)
+        groups.append(('trial_reporting',spec,rows,'pinned_repository_docx_candidate'))
     except (OSError,ValueError,StopIteration) as exc:
         holds.append({'edition':'consort-2025','reason':type(exc).__name__})
     cases=[]
@@ -212,15 +234,16 @@ def prepare(root):
         # Preserve the first experiment; use disjoint item anchors for its families.
         chosen=ranked[4:8] if family=='trial_reporting' else ranked[8:12]
         if len(chosen)<4:
-            holds.append({'edition':spec['edition'],'reason':'insufficient_bounded_rows'});continue
+            holds.append({'edition':spec['edition'],'reason':'insufficient_bounded_rows'})
+            continue
         legacy_path=spec.get('legacy_path')
         legacy=parse_legacy((root/legacy_path).read_text(encoding='utf-8')) if legacy_path and (root/legacy_path).is_file() else []
-        def append(a,b,ref,anchors,origin):
+        def append(a,b,ref,anchors,origin,*,spec=spec,family=family,provenance=provenance):
             case_id=digest(json.dumps([spec['edition'],anchors,origin,a,b],ensure_ascii=False))
             cases.append({'id':case_id,'family':family,'split':'dev' if family=='prisma' else 'test',
                 'edition':spec['edition'],'source_pin':spec['source_sha256'],'source_anchors':anchors,
                 'source_provenance':provenance,'origin':origin,'reference':ref,'source':a,'candidate':b})
-        for p,q in zip(chosen[::2],chosen[1::2]):
+        for p,q in zip(chosen[::2],chosen[1::2],strict=True):
             for left,right in forms():
                 append(render(left,p['text'],q['text']),render(right,p['text'],q['text'],reverse=left==right),
                        relation(left,right),[p['source_anchor'],q['source_anchor']],'formal_source_derived')
@@ -236,14 +259,16 @@ def prepare(root):
 
 def judge(pairs, model_path, name, metadata):
     import llama_cpp
-    from .witness_adjudication import control_input, condition_vote
+
+    from .witness_adjudication import condition_vote, control_input
     pin=JUDGES[name]
     if file_hash(model_path)!=pin['sha256'] or model_path.stat().st_size>3_000_000_000:
         raise ValueError('unqualified judge weights')
     if any(set(p)!= {'id','source','candidate'} for p in pairs):
         raise ValueError('unblinded input')
     model=llama_cpp.Llama(model_path=str(model_path),n_ctx=4096,n_threads=4,n_gpu_layers=0,seed=724,verbose=False)
-    votes=[];started=time.perf_counter()
+    votes=[]
+    started=time.perf_counter()
     for pair in pairs:
         def numbered(text):
             return [{'number':i,'text':text[a:b]} for i,(a,b) in enumerate(evidence_spans(text),1)]
@@ -254,7 +279,8 @@ def judge(pairs, model_path, name, metadata):
                 {'role':'user','content':json.dumps({'A':numbered(pair['source']),'B':numbered(pair['candidate'])},ensure_ascii=False)}],
                 temperature=0,max_tokens=120,response_format={'type':'json_object','schema':schema})
             vote=json.loads(response['choices'][0]['message']['content'])
-        except (ValueError,KeyError,TypeError,IndexError): vote={}
+        except (ValueError,KeyError,TypeError,IndexError):
+            vote={}
         validate=condition_vote if controlled else validate_index_vote
         votes.append(validate(pair,vote if isinstance(vote,dict) else {}))
     return {'model':pin,'resolved_revision':metadata['revision'],'runtime':llama_cpp.__version__,
@@ -268,11 +294,12 @@ def merge_votes(ledger,pairs,left,right):
         raise ValueError('judge independence or input mismatch')
     indexed=[{r['id']:r for r in j['votes']} for j in (left,right)]
     ids={r['id'] for r in ledger['cases']}
-    if any(set(v)!=ids or len(v)!=len(j['votes']) for v,j in zip(indexed,(left,right))):
+    if any(set(v)!=ids or len(v)!=len(j['votes']) for v,j in zip(indexed,(left,right),strict=True)):
         raise ValueError('vote coverage mismatch')
     records=[]
     for pair in ledger['cases']:
-        key=pair['id'];a,b=(v[key] for v in indexed)
+        key=pair['id']
+        a,b=(v[key] for v in indexed)
         if any(v['source_sha256']!=digest(pair['source']) or v['candidate_sha256']!=digest(pair['candidate']) for v in (a,b)):
             raise ValueError('vote pair digest mismatch')
         label=a['label'] if a['label']==b['label'] and a['label'] in LABELS else 'abstain'
@@ -285,13 +312,17 @@ def merge_votes(ledger,pairs,left,right):
 def score(ledger, records, assets, expected_hash):
     from .semantic_benchmark import LocalNLI
     model=LocalNLI(assets,expected_model_sha256=expected_hash)
-    private={p['id']:p for p in ledger['cases']};out=[];started=time.perf_counter()
+    private={p['id']:p for p in ledger['cases']}
+    out=[]
+    started=time.perf_counter()
     for record in records:
         p=private[record['id']]
         try:
             f,b=model.score(p['source'],p['candidate']),model.score(p['candidate'],p['source'])
             prediction=classify_nli(f,b)
-        except ValueError: f=b=None;prediction='abstain'
+        except ValueError:
+            f=b=None
+            prediction='abstain'
         out.append({**record,'predicted':prediction,'forward':f,'reverse':b})
     test=[r for r in out if r['split']=='test' and r['reference'] in LABELS]
     confusion=Counter((r['reference'],r['predicted']) for r in test)
@@ -306,21 +337,31 @@ def score(ledger, records, assets, expected_hash):
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('mode',choices=['prepare','judge','baseline','additional'])
-    parser.add_argument('--root',type=Path,default=Path('.'));parser.add_argument('--directory',type=Path,required=True)
-    parser.add_argument('--name',choices=JUDGES);parser.add_argument('--weights',type=Path)
-    parser.add_argument('--model-metadata',type=Path);parser.add_argument('--assets',type=Path)
-    args=parser.parse_args();d=args.directory;d.mkdir(parents=True,exist_ok=True)
-    read=lambda n:json.loads((d/n).read_text())
+    parser.add_argument('--root',type=Path,default=Path('.'))
+    parser.add_argument('--directory',type=Path,required=True)
+    parser.add_argument('--name',choices=JUDGES)
+    parser.add_argument('--weights',type=Path)
+    parser.add_argument('--model-metadata',type=Path)
+    parser.add_argument('--assets',type=Path)
+    args=parser.parse_args()
+    d=args.directory
+    d.mkdir(parents=True,exist_ok=True)
+    def read(n):
+        return json.loads((d/n).read_text())
+
     def write(n,value):
         (d/n).write_text(json.dumps(value,sort_keys=True,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     if args.mode=='prepare':
-        ledger=prepare(args.root);write('private-pairs.json',ledger);write('blinded.json',blinded_cases(ledger['cases']))
+        ledger=prepare(args.root)
+        write('private-pairs.json',ledger)
+        write('blinded.json',blinded_cases(ledger['cases']))
         print(json.dumps({'families':sorted({r['family'] for r in ledger['cases']}),'pairs':len(ledger['cases']),'held_sources':ledger['held_sources']}))
     elif args.mode=='judge':
         write(args.name+'-votes.json',judge(read('blinded.json'),args.weights,args.name,json.loads(args.model_metadata.read_text())))
     elif args.mode=='baseline':
         from .semantic_benchmark import MODEL_SHA256
-        ledger=read('private-pairs.json');records=merge_votes(ledger,read('blinded.json'),read('qwen4-votes.json'),read('phi4-votes.json'))
+        ledger=read('private-pairs.json')
+        records=merge_votes(ledger,read('blinded.json'),read('qwen4-votes.json'),read('phi4-votes.json'))
         baseline=score(ledger,records,args.assets,MODEL_SHA256)
         report={'qualification':qualification(records),'escalation':material_deficit(baseline['records']),
                 'baseline':baseline,'held_sources':ledger['held_sources'],'canonical_packs_promoted':0,
@@ -330,11 +371,14 @@ def main():
         print(json.dumps({'qualification':report['qualification'],'escalation':report['escalation'],'baseline_correct':baseline['correct']}))
     else:
         report=read('five-class-receipt.json')
-        if not report['escalation']['eligible']: raise ValueError('no material baseline deficit')
-        rows=report['baseline']['records'];additional=score(read('private-pairs.json'),rows,args.assets,DEBERTA['sha256'])
-        report['additional_model']=DEBERTA;report['additional']=additional
-        report['paired_errors']={'fixed':sum(a['split']=='test' and a['reference'] in LABELS and a['predicted']!=a['reference'] and b['predicted']==b['reference'] for a,b in zip(rows,additional['records'])),
-          'introduced':sum(a['split']=='test' and a['reference'] in LABELS and a['predicted']==a['reference'] and b['predicted']!=b['reference'] for a,b in zip(rows,additional['records']))}
+        if not report['escalation']['eligible']:
+            raise ValueError('no material baseline deficit')
+        rows=report['baseline']['records']
+        additional=score(read('private-pairs.json'),rows,args.assets,DEBERTA['sha256'])
+        report['additional_model']=DEBERTA
+        report['additional']=additional
+        report['paired_errors']={'fixed':sum(a['split']=='test' and a['reference'] in LABELS and a['predicted']!=a['reference'] and b['predicted']==b['reference'] for a,b in zip(rows,additional['records'],strict=True)),
+          'introduced':sum(a['split']=='test' and a['reference'] in LABELS and a['predicted']==a['reference'] and b['predicted']!=b['reference'] for a,b in zip(rows,additional['records'],strict=True))}
         write('five-class-receipt.json',report)
         print(json.dumps({'additional_correct':additional['correct'],'paired_errors':report['paired_errors']}))
 

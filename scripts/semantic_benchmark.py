@@ -1,7 +1,7 @@
 """Experimental semantic diagnostics; never grant admission or rights."""
 from __future__ import annotations
-from collections import Counter
 import math
+from collections import Counter
 
 LABELS = ('contradiction', 'entailment', 'neutral')
 THRESHOLDS = (.5, .6, .7, .8, .9, .95, .99, 1.01)
@@ -40,7 +40,7 @@ def bidirectional(forward, reverse, threshold):
 def measures(expected, predicted):
     if len(expected) != len(predicted):
         raise ValueError('prediction coverage mismatch')
-    c = Counter(zip(expected, predicted))
+    c = Counter(zip(expected, predicted, strict=True))
     return {'n':len(expected),'tp':c[True,True],'fp':c[False,True],
             'tn':c[False,False],'fn':c[True,False],'accepted':sum(predicted)}
 
@@ -64,8 +64,9 @@ MODEL_SHA256 = '44391a5241a62e0083c1a8899a71e69a092b95aea5ba89e14062925468eceac7
 class LocalNLI:
     """Pinned, CPU-only ONNX; local tokenizer and label map; never truncate."""
     def __init__(self, directory, *, expected_model_sha256=MODEL_SHA256):
-        import json
         import hashlib
+        import json
+
         import onnxruntime as ort
         from tokenizers import Tokenizer
         model = directory / 'model_quint8_avx2.onnx'
@@ -117,6 +118,7 @@ def dependency_similarity(nlp, source, candidate):
 
 def evaluate(cases, nlp, nli):
     import time
+
     from .source_reconciliation import linguistic_compare
     validate_cases(cases)
     records = []
@@ -162,7 +164,7 @@ def evaluate(cases, nlp, nli):
     confusion = Counter()
     for row in test:
         for direction, expected, p in zip(('forward', 'reverse'), row['expected_directions'],
-                                           (row['forward_probabilities'], row['reverse_probabilities'])):
+                                           (row['forward_probabilities'], row['reverse_probabilities']), strict=True):
             actual = LABELS[max(range(3), key=lambda i: p[i])]
             confusion[(direction, expected, actual)] += 1
     return {'summary': summary, 'records': records, 'test_directional_confusion': [
@@ -177,9 +179,10 @@ def main():
     import json
     import platform
     import resource
-    from pathlib import Path
-    import spacy
     import time
+    from pathlib import Path
+
+    import spacy
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--cases', type=Path, required=True)
     parser.add_argument('--assets', type=Path, required=True)

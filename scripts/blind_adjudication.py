@@ -2,12 +2,12 @@
 from __future__ import annotations
 
 import argparse
-from collections import Counter
 import hashlib
 import json
-from pathlib import Path
 import re
 import time
+from collections import Counter
+from pathlib import Path
 
 LABELS=('equivalent','narrower','broader','contradictory','indeterminate','abstain')
 PROMPT=('Compare two reporting requirements A (source) and B (candidate) as sets of compliant reports. '
@@ -73,7 +73,8 @@ def classify_nli(forward,reverse):
 
 
 def escalation(records):
-    test=[r for r in records if r['split']=='test']; labeled=[r for r in test if r['label']!='abstain']
+    test=[r for r in records if r['split']=='test']
+    labeled=[r for r in test if r['label']!='abstain']
     errors=Counter(r['label'] for r in labeled if r['predicted']!=r['label'])
     totals=Counter(r['label'] for r in labeled)
     false_equiv=sum(r['label']!='equivalent' and r['predicted']=='equivalent' for r in labeled)
@@ -85,12 +86,17 @@ def escalation(records):
 
 
 def source_pairs(root,source_dir):
-    from .reconcile_authoritative_articles import snapshot_table, parse_legacy, extract_table, content
     from xml.etree import ElementTree as ET
-    read=lambda p:json.loads(p.read_text(encoding='utf-8'))
+
+    from .reconcile_authoritative_articles import content, extract_table, parse_legacy, snapshot_table
+
+    def read(p):
+        return json.loads(p.read_text(encoding='utf-8'))
+
     specs=read(root/'source/official/authoritative-article-editions.json')
     snapshots={e['edition']:e for e in read(root/'source/official/authoritative-article-rows.json')['editions']}
-    groups=[];held=[]
+    groups=[]
+    held=[]
     for spec in specs:
         table=snapshot_table(snapshots[spec['edition']],spec)
         groups.append(('cheers' if spec['edition'].startswith('cheers') else 'prisma',spec,table['rows']))
@@ -112,7 +118,8 @@ def source_pairs(root,source_dir):
             wrappers=[t for t in doc.findall('./body//table-wrap') if t.get('id')==table_id]
             if len(wrappers)!=1:
                 raise ValueError('table not unique')
-            table=wrappers[0];results=[]
+            table=wrappers[0]
+            results=[]
             for offset in (2,3,4):
                 try:
                     results.append(extract_table(raw,{**spec,'licence':'CC-BY-4.0','table_id':table_id,
@@ -126,7 +133,8 @@ def source_pairs(root,source_dir):
             groups.append(('trial_reporting' if name.startswith('consort') else 'prediction', {**spec,'source_sha256':pin},results[0]['rows']))
         except (OSError,ValueError,ET.ParseError) as exc:
             held.append({'edition':name,'status':'held','error_type':type(exc).__name__})
-    cases=[];families=set()
+    cases=[]
+    families=set()
     for family,spec,rows in groups:
         if family in families:
             continue
@@ -138,7 +146,9 @@ def source_pairs(root,source_dir):
         legacy_path=spec.get('legacy_path')
         legacy=parse_legacy((root/legacy_path).read_text(encoding='utf-8')) if legacy_path and (root/legacy_path).is_file() else []
         for index,row in enumerate(chosen):
-            a=row['text'];base=a.rstrip('.');other=chosen[1-index]['text']
+            a=row['text']
+            base=a.rstrip('.')
+            other=chosen[1-index]['text']
             variants=[('exact_control',a),('additional_obligation',base+'. Also report the date the report was completed.'),
                 ('weakened_obligation','If convenient, '+a[0].lower()+a[1:]),('negation','Do not '+a[0].lower()+a[1:]),('distinct_requirement',other)]
             matches=[r for r in legacy if r['declared_item_id']==row['item_id'] and r['text']!=a and len(r['text'])<=500]
@@ -159,7 +169,8 @@ def judge(input_path,model_path,name):
     if any(set(p)!= {'id','source','candidate'} for p in pairs) or len(pairs)>80:
         raise ValueError('unblinded or oversized adjudicator input')
     model=llama_cpp.Llama(model_path=str(model_path),n_ctx=2048,n_threads=2,n_gpu_layers=0,seed=724,verbose=False)
-    votes=[];start=time.perf_counter()
+    votes=[]
+    start=time.perf_counter()
     for pair in pairs:
         try:
             response=model.create_chat_completion(messages=[{'role':'system','content':PROMPT},
@@ -178,15 +189,19 @@ def evaluate(ledger,blind_hash,left,right,assets):
     from .source_reconciliation import linguistic_compare
     if left['input_sha256']!=blind_hash or right['input_sha256']!=blind_hash or left['model']['id']==right['model']['id']:
         raise ValueError('independent agent receipt mismatch')
-    cases={r['id']:r for r in ledger['cases']};a={r['id']:r for r in left['votes']};b={r['id']:r for r in right['votes']}
+    cases={r['id']:r for r in ledger['cases']}
+    a={r['id']:r for r in left['votes']}
+    b={r['id']:r for r in right['votes']}
     if set(cases)!=set(a) or set(cases)!=set(b) or len(a)!=len(left['votes']) or len(b)!=len(right['votes']):
         raise ValueError('adjudication coverage mismatch')
-    model=LocalNLI(assets);records=[]
+    model=LocalNLI(assets)
+    records=[]
     for key,row in sorted(cases.items()):
         source,candidate=row['source'],row['candidate']
         if a[key]['source_sha256']!=digest(source) or a[key]['candidate_sha256']!=digest(candidate):
             raise ValueError('frozen pair digest mismatch')
-        label=consensus(a[key],b[key]);f,r=model.score(source,candidate),model.score(candidate,source)
+        label=consensus(a[key],b[key])
+        f,r=model.score(source,candidate),model.score(candidate,source)
         records.append({**{k:v for k,v in row.items() if k not in {'source','candidate'}},
             'source_text_sha256':digest(source),'candidate_text_sha256':digest(candidate),
             'agent_a':a[key]['label'],'agent_b':b[key]['label'],'label':label,'predicted':classify_nli(f,r),
@@ -197,20 +212,33 @@ def evaluate(ledger,blind_hash,left,right,assets):
 
 
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('mode',choices=['prepare','judge','evaluate']);p.add_argument('--directory',type=Path,required=True)
-    p.add_argument('--root',type=Path,default=Path('.'));p.add_argument('--source-dir',type=Path);p.add_argument('--model',choices=MODELS);p.add_argument('--weights',type=Path);p.add_argument('--nli-assets',type=Path)
-    args=p.parse_args();d=args.directory;d.mkdir(parents=True,exist_ok=True)
-    read=lambda f:json.loads((d/f).read_text(encoding='utf-8'))
+    p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument('mode',choices=['prepare','judge','evaluate'])
+    p.add_argument('--directory',type=Path,required=True)
+    p.add_argument('--root',type=Path,default=Path('.'))
+    p.add_argument('--source-dir',type=Path)
+    p.add_argument('--model',choices=MODELS)
+    p.add_argument('--weights',type=Path)
+    p.add_argument('--nli-assets',type=Path)
+    args=p.parse_args()
+    d=args.directory
+    d.mkdir(parents=True,exist_ok=True)
+    def read(f):
+        return json.loads((d/f).read_text(encoding='utf-8'))
+
     def write(name,value):
         (d/name).write_text(json.dumps(value,ensure_ascii=False,sort_keys=True,indent=2)+'\n',encoding='utf-8')
     if args.mode=='prepare':
-        ledger=source_pairs(args.root,args.source_dir);write('private-pairs.json',ledger);write('blinded.json',blinded_cases(ledger['cases']))
+        ledger=source_pairs(args.root,args.source_dir)
+        write('private-pairs.json',ledger)
+        write('blinded.json',blinded_cases(ledger['cases']))
         print(json.dumps({'pairs':len(ledger['cases']),'families':ledger['families'],'held_sources':ledger['held_sources']}))
     elif args.mode=='judge':
         write(args.model+'-votes.json',judge(d/'blinded.json',args.weights,args.model))
     else:
         result=evaluate(read('private-pairs.json'),file_hash(d/'blinded.json'),read('qwen-votes.json'),read('smollm-votes.json'),args.nli_assets)
-        write('benchmark-receipt.json',result);print(json.dumps(result['escalation'],sort_keys=True))
+        write('benchmark-receipt.json',result)
+        print(json.dumps(result['escalation'],sort_keys=True))
 
 
 if __name__=='__main__':
