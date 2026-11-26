@@ -247,3 +247,15 @@ See [semantic reconciliation qualification](semantic-reconciliation-qualificatio
 Witness-v2 scientific gate failed (artifact 14924523529); experimental DeBERTa 29/30 vs MiniLM 16/30 on formal controls. Condition-v3 bounded follow-up preserves the scientific threshold and natural-pair hold. See the semantic qualification receipt.
 
 26 November integration hold (#155): prior Assurance run 45626930697 failed maintained Ruff (95 violations) and combined Python coverage (85.86%, 7987/9302 versus 90.5% floor). The semantic scripts remain in the maintained coverage denominator. Current-base deterministic checks must qualify before explicitly authorizing the separate model experiments. Original reference failure and thresholds are unchanged. Legacy experiment labels describe B relative to A; RGI-06 describes A relative to B. Preserve historical receipts, and implement a tested, explicit direction adapter/version before downstream graph use. No source or semantic admission.
+
+26 November assurance increment (#155): merge receiving main `341f5388` without overwriting
+the composition, ontology or independent-family intake work. Prior run
+[45637024692](https://github.com/edithatogo/standards_check/actions/runs/45637024692)
+failed maintained lint (95 diagnostics) and combined Python coverage (86.28%, floor 90.5%).
+Apply the pinned Ruff repair from [45751013372](https://github.com/edithatogo/standards_check/actions/runs/45751013372);
+all four resulting blob prefixes matched the diagnostic, and its temporary workflow was removed.
+Add offline behavioral tests and the explicit direction adapter; six isolated direction tests
+passed against the extracted relation implementation, with full hosted verification outstanding.
+Keep T01.028–030 and T01.043 open: condition-v3 still fails scientific qualification, and the
+new independent-family intake remains held. Do not treat repeat controls or related CONSORT/SPIRIT
+editions as independent confirmatory families. No model execution, auto-merge, or admission.

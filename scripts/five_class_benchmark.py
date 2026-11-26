@@ -35,6 +35,19 @@ def relation(a, b):
     return "indeterminate"
 
 
+def legacy_to_rgi06(label: str) -> str | None:
+    """Translate B-relative-to-A legacy labels to RGI-06 A-relative-to-B.
+
+    Abstention is no mapping, not an indeterminate relation. Historical receipts
+    retain the original label and protocol; this adapter is candidate-only.
+    """
+    if label == "abstain":
+        return None
+    if label not in LABELS:
+        raise ValueError("unknown legacy semantic relation")
+    return {"narrower": "broader", "broader": "narrower"}.get(label, label)
+
+
 def digest(text):
     return hashlib.sha256(text.encode()).hexdigest()
 

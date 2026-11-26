@@ -144,3 +144,39 @@ Condition-v3 isolates the explicit condition recognition step for formal control
 ## 26 November integration hold
 
 Current-base required checks first. Model jobs on the experimental branch now require explicit same-repository PR label `run-semantic-benchmark` (apply only after the exact-head deterministic checks and review prerequisites are satisfied), or manual dispatch where the workflow is registered. Do not apply the label on routine updates. Prior experimental receipts and their failed scientific gate are retained. The existing coverage threshold is not waived; prior artifact 15029995445 records combined 85.86% (7987/9302), including the three experimental scripts. Correct the lint and add meaningful deterministic coverage for input, model-pin, receipt and decision boundaries. Before wiring this benchmark into the requirement graph, normalize the legacy direction convention (candidate B relative to source A) to the draft RGI-06 convention (A relative to B), with inversion and contradiction tests. Do not relabel historical raw receipts or treat model agreement as independent truth.
+
+## 26 November repair and scientific disposition
+
+The condition-v3 run [45405499908](https://github.com/edithatogo/standards_check/actions/runs/45405499908)
+and rerun artifact 15030976063 remain failed scientific evidence: development accuracy 0.60/1.00,
+18/30 formal held-out consensuses, all correct but only narrower, contradictory and indeterminate.
+No natural held-out consensus. DeBERTa 25/30 versus MiniLM 17/30; 12 errors fixed and four introduced.
+The earlier witness-v2 and direct-judge failures remain intact. Do not reclassify these results as
+independent methodological validation or tune repeatedly to achieve a pass.
+
+The head before repair failed [Assurance 45637024692](https://github.com/edithatogo/standards_check/actions/runs/45637024692):
+95 Ruff findings and combined Python coverage 86.28% (90.5% required).
+Reconcile the branch with main `341f5388`; preserve all source and review holds.
+[Ruff 0.17.6 diagnostic 45751013372](https://github.com/edithatogo/standards_check/actions/runs/45751013372)
+fixed the final two lint findings, formatted four scripts, and reported all checks passed for those scripts.
+Verified patch application by matching the four resulting Git blob prefixes; the temporary read-only
+diagnostic is removed. New offline behavioral tests cover actual local source preparation, pinned
+model and runtime boundaries, vote integrity, malformed outputs, candidate-only CLI receipts and
+gated comparator execution using synthetic inference stubs. These are software tests, not model
+qualification. Full current-head hosted assurance is required; no coverage exemption.
+
+The `legacy_to_rgi06` adapter explicitly inverts narrower/broader (legacy B relative to A;
+RGI-06 A relative to B), preserves the other three classes, returns no mapping for abstention
+and rejects unknown labels. Six isolated RED/GREEN tests against the extracted relation logic
+passed; current-head integration is still required. Historical raw labels and receipts are unchanged,
+and the adapter does not admit a relation to the graph.
+
+The [independent-family intake](../../source-reconciliation/independent-family-intake-20261126.md)
+is the next prerequisite: source rights, independent structure/wording and family-component
+eligibility must pass before a fresh frozen confirmatory sample. CONSORT and SPIRIT belong to
+one harmonized independence component; PRISMA descendants are also correlated.
+The condition-v3 experiment was the bounded final controlled-protocol correction. Preserve its
+negative result rather than continuing to tune on familiar controls. The prospective complementary
+d1-2B experiment remains subject to #159 and the existing #158 protocol, not a substitute for
+qualified reference evidence. Do not authorize further model runs or merge this draft until the
+predeclared scientific gate and all current-head protected checks are satisfied.
