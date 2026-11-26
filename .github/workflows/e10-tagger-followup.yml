@@ -65,7 +65,7 @@ jobs:
               name, version = wheel.split("-")[:2]
               target = torch if name == "torch" else others
               target.append(f"{name}=={version} --hash=sha256:{digest}")
-          if len(torch) != 1 or len(others) != 38:
+          if len(torch) != 1 or not others or len(set(torch + others)) != len(wheel_lines):
               raise ValueError("unexpected exact wheel closure")
           for filename, lines in (("torch.txt", torch), ("others.txt", others), ("all.txt", torch + others)):
               (root / "tagger-receipt" / filename).write_text("\n".join(lines) + "\n")
