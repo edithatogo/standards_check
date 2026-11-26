@@ -1,0 +1,39 @@
+{
+  "version": "0.1.0",
+  "status": "candidate_only",
+  "scope": "Exploratory crosswalk between catalogue facets and MeSH descriptor topics. Associations are not equivalence, formal subsumption, applicability or publication-type assertions. MeSH Browser 2026 and selected observed descriptor list in #193. Unknown and broad mixed-methods labels are deliberately left unmapped.",
+  "source_url_template": "https://meshb.nlm.nih.gov/record/ui?ui={id}",
+  "mappings": {
+    "study_types": {
+      "Animal pre-clinical research": ["D032761"],
+      "Artificial intelligence/Machine learning": ["D001185", "D000069550"],
+      "Clinical practice guidelines": ["D017410"],
+      "Clinical trials": ["D002986"],
+      "Diagnosis/Prognosis/Prediction": ["D019937", "D012680", "D011379"],
+      "Economic evaluations": ["D003365", "D003362", "D000094703"],
+      "Experimental studies": ["D012107"],
+      "Observational studies": ["D064887"],
+      "Qualitative research": ["D036301"],
+      "Quality improvement studies": ["D058996"],
+      "Reliability/Agreement studies": ["D015203"],
+      "Study protocols": ["D000078985"],
+      "Systematic reviews/Meta-analyses/Reviews": ["D000078202", "D015201", "D012196"]
+    },
+    "clinical_areas": {
+      "Genetics": ["D005823", "D005826"],
+      "Oncology": ["D008495", "D009369"],
+      "Paediatrics": ["D010372"],
+      "Radiology": ["D011871"],
+      "Surgery": ["D013043"],
+      "Toxicology": ["D014116"]
+    },
+    "report_sections": {
+      "Data": ["D000068598"],
+      "Procedure/Method": ["D012107"],
+      "Protocol-whole report": ["D000078985"],
+      "Statistical methods and analyses": ["D016001"],
+      "Study characteristics (participants etc.)": ["D018401"]
+    }
+  },
+  "cautions": ["Research Design is broader than Experimental studies. Clinical Trial Protocols as Topic is narrower than generic Study protocols. Diagnostic methods, prognostic factors, and prediction are distinct; their candidate descriptors do not exhaust the label. Cost-analysis and cost-benefit descriptors are partial topics, not synonyms for all economic evaluations. Report-section links identify narrower or related methodological topics, never report-section equivalence. Oncology specialty and neoplasm disease subject are different facets. Mixed methods requires a separately verified composite definition."]
+}
