@@ -341,3 +341,10 @@ no checklist text exported. The [challenger record](../../../docs/research/model
 records the source probe, alternative CC0 ARRIVE JATS and restricted STARD route.
 Do not close T01.025, T01.052 or T01.062 on main-ID agreement alone; nested
 obligation structure, rights, independent family sample and frozen adjudication remain held.
+
+## Orthogonal task-framing development
+
+- [ ] **T01.063** ([#158](https://github.com/edithatogo/standards_check/issues/158)) Compare direct, option-order, swapped-direction and existential counterexample tasks; evaluate strict agreement and false-equivalence harm against independent references before promotion.
+- [ ] **T01.064** ([#158](https://github.com/edithatogo/standards_check/issues/158)) Compare domain-specific reranker query and embedding instructions on the retained costing seed, then qualify independently frozen retrieval and listwise/candidate-order comparisons. Retain separate first-stage fusion and fixed-pool reranking.
+
+See [task formulation](../../../docs/research/orthogonal-task-framing-20261126.md). PR #155 is merged in receiving main; its scientific holds are not closed by integration. Exact ARRIVE and STROBE main-ID geometry passed two readers (21/21 and 22/22); ARRIVE JATS matched 21/21 main rows but both tables hold block boundaries and rights. STARD alternate route 404. T01.025, T01.052 and T01.062 remain open; prioritize nested structure and table/item rights, then independent family sample.

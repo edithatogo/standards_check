@@ -75,3 +75,5 @@ receipt records that observation.
 - [Requested model challengers and actual retrieval receipts](../docs/research/model-challengers-20261126.md).
 
 - [Orthogonal statistical and formal assurance](../docs/research/orthogonal-assurance-20261126.md) — conformal rank oracle, symbolic applicability and alignment, syntax/normalization, leakage and differential verification; prospective qualification, not an approved protocol.
+
+- [Orthogonal task formulation and model triangulation](../docs/research/orthogonal-task-framing-20261126.md) — prompt, candidate, directional-witness and instruction-aware retrieval ablations; actual receiving and source receipts.

@@ -221,3 +221,5 @@ Use existing contract-preview pathway for any future rights-cleared publication.
 - Tree-sitter: https://github.com/tree-sitter/tree-sitter ; Typst: https://github.com/typst/typst
 - rustfst: https://github.com/Garvys/rustfst ; probminhash: https://docs.rs/probminhash/
 - Existing native fuzzing: [fuzz README](../../fuzz/README.md).
+
+Follow-up: [orthogonal task formulation](orthogonal-task-framing-20261126.md) reconciles the now-merged specialist programme with the existing conformal and symbolic design. Same-model task agreement is not exchangeable independent reference data; keep T01.060 and T05.060 open. E11/E12 prompt and counterexample ablations are separate development diagnostics, not a retrospective freeze.
