@@ -1,0 +1,883 @@
+{
+  "schema_version": "dev.standardflow.requirement-graph-plan.v1",
+  "contract_version": "0.1.0",
+  "status": "planned",
+  "publication_contract": "contracts/publication/composition-graph.v0.1.0.json",
+  "scope": "version-pinned, identity-conserving analytical graph; no asserted equivalence, normative gap or deployed consumer",
+  "sources": [
+    {
+      "id": "mesh",
+      "uri": "https://www.nlm.nih.gov/databases/download/mesh.html",
+      "role": "biomedical topics, publication types, qualifiers and multiple tree placements",
+      "status": "planned",
+      "revision": null,
+      "sha256": null,
+      "licence_status": "unassessed"
+    },
+    {
+      "id": "obi",
+      "uri": "https://obofoundry.org/ontology/obi.html",
+      "role": "investigation processes, study design, protocol and assay",
+      "status": "planned",
+      "revision": null,
+      "sha256": null,
+      "licence_status": "unassessed"
+    },
+    {
+      "id": "stato",
+      "uri": "https://obofoundry.org/ontology/stato.html",
+      "role": "statistical methods and analysis design",
+      "status": "planned",
+      "revision": null,
+      "sha256": null,
+      "licence_status": "unassessed"
+    },
+    {
+      "id": "edam",
+      "uri": "https://edamontology.org/",
+      "role": "informatics operations, topics, data and format; conditional extension",
+      "status": "planned",
+      "revision": null,
+      "sha256": null,
+      "licence_status": "unassessed"
+    },
+    {
+      "id": "ocre",
+      "uri": "https://doi.org/10.1016/j.jbi.2013.11.002",
+      "role": "study design and eligibility; assess artifact maintenance and licence first",
+      "status": "planned",
+      "revision": null,
+      "sha256": null,
+      "licence_status": "unassessed"
+    },
+    {
+      "id": "crossref",
+      "uri": "https://www.crossref.org/documentation/retrieve-metadata/rest-api/",
+      "role": "publisher-deposited citation metadata and DOI identity evidence",
+      "status": "planned",
+      "revision": null,
+      "sha256": null,
+      "licence_status": "unassessed"
+    },
+    {
+      "id": "openalex",
+      "uri": "https://help.openalex.org/data/works/citations/",
+      "role": "reference and citing-work observations; coverage and provider matching not ground truth",
+      "status": "planned",
+      "revision": null,
+      "sha256": null,
+      "licence_status": "unassessed"
+    },
+    {
+      "id": "equator",
+      "uri": "https://github.com/EQUATOR-Network/equator-website",
+      "role": "versioned directory discovery, not source authority",
+      "status": "planned",
+      "revision": null,
+      "sha256": null,
+      "licence_status": "unassessed"
+    }
+  ],
+  "existing_inputs": [
+    {
+      "id": "guidelines",
+      "producer": "scripts/source_reconciliation.py",
+      "grain": "existing guideline identity within verified analytical snapshot"
+    },
+    {
+      "id": "requirements",
+      "producer": "scripts/source_reconciliation.py",
+      "grain": "existing source-anchored requirement identity within snapshot"
+    },
+    {
+      "id": "source_anchors",
+      "producer": "scripts/source_reconciliation.py",
+      "grain": "existing source anchor and requirement linkage"
+    },
+    {
+      "id": "catalogue_identity",
+      "producer": "scripts/survey_projections.py",
+      "grain": "existing directory identity and discovery/held status"
+    }
+  ],
+  "tables": [
+    {
+      "id": "snapshot_manifest",
+      "grain": "one exact producer/source/model/ontology artifact in a frozen analysis snapshot",
+      "experiment_ids": [
+        "E4",
+        "E5",
+        "E6",
+        "E7",
+        "E8"
+      ],
+      "columns": {
+        "key": "str",
+        "snapshot_id": "str",
+        "artifact_kind": "str",
+        "uri": "str",
+        "revision": "str?",
+        "sha256": "str",
+        "source_rights": "str",
+        "export_permission": "str",
+        "reviewed_status": "str"
+      },
+      "primary_key": [
+        "key"
+      ],
+      "references": [],
+      "access": "reviewed_metadata_candidate",
+      "status": "planned"
+    },
+    {
+      "id": "ontology_concepts",
+      "grain": "one source ontology release and concept IRI",
+      "experiment_ids": [
+        "E6"
+      ],
+      "columns": {
+        "key": "str",
+        "snapshot_id": "str",
+        "source_key": "str",
+        "iri": "str",
+        "namespace": "str",
+        "obsolete": "bool",
+        "replacement_iri": "str?",
+        "review_status": "str"
+      },
+      "primary_key": [
+        "key"
+      ],
+      "references": [
+        {
+          "column": "source_key",
+          "table": "snapshot_manifest",
+          "target_column": "key"
+        }
+      ],
+      "access": "internal_only",
+      "status": "planned"
+    },
+    {
+      "id": "ontology_edges",
+      "grain": "one typed native ontology relationship",
+      "experiment_ids": [
+        "E6"
+      ],
+      "columns": {
+        "key": "str",
+        "snapshot_id": "str",
+        "subject_key": "str",
+        "predicate": "str",
+        "object_key": "str",
+        "source_key": "str"
+      },
+      "primary_key": [
+        "key"
+      ],
+      "references": [
+        {
+          "column": "subject_key",
+          "table": "ontology_concepts",
+          "target_column": "key"
+        },
+        {
+          "column": "object_key",
+          "table": "ontology_concepts",
+          "target_column": "key"
+        },
+        {
+          "column": "source_key",
+          "table": "snapshot_manifest",
+          "target_column": "key"
+        }
+      ],
+      "access": "internal_only",
+      "status": "planned"
+    },
+    {
+      "id": "scope_cells",
+      "grain": "one independently assessed concept/study-design/report-type cell",
+      "experiment_ids": [
+        "E5",
+        "E6"
+      ],
+      "columns": {
+        "key": "str",
+        "snapshot_id": "str",
+        "concept_key": "str",
+        "study_scope": "str",
+        "report_type": "str",
+        "applicability": "str",
+        "review_receipt_sha256": "str?"
+      },
+      "primary_key": [
+        "key"
+      ],
+      "references": [
+        {
+          "column": "concept_key",
+          "table": "ontology_concepts",
+          "target_column": "key"
+        }
+      ],
+      "access": "internal_only",
+      "status": "planned"
+    },
+    {
+      "id": "concept_mappings",
+      "grain": "one requirement/concept/mapping-role candidate or reviewed relation",
+      "experiment_ids": [
+        "E4",
+        "E6"
+      ],
+      "columns": {
+        "key": "str",
+        "snapshot_id": "str",
+        "requirement_key": "str",
+        "concept_key": "str",
+        "mapping_role": "str",
+        "scope_key": "str?",
+        "method_id": "str",
+        "confidence": "float?",
+        "status": "str",
+        "receipt_sha256": "str?"
+      },
+      "primary_key": [
+        "key"
+      ],
+      "references": [
+        {
+          "column": "requirement_key",
+          "table": "requirements",
+          "target_column": "key"
+        },
+        {
+          "column": "concept_key",
+          "table": "ontology_concepts",
+          "target_column": "key"
+        },
+        {
+          "column": "scope_key",
+          "table": "scope_cells",
+          "target_column": "key"
+        }
+      ],
+      "access": "internal_only",
+      "status": "planned"
+    },
+    {
+      "id": "requirement_relations",
+      "grain": "one directed requirement pair, relation type and scope",
+      "experiment_ids": [
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "columns": {
+        "key": "str",
+        "snapshot_id": "str",
+        "left_key": "str",
+        "right_key": "str",
+        "relation": "str",
+        "scope_sha256": "str",
+        "method_id": "str",
+        "status": "str",
+        "evidence_sha256": "str?"
+      },
+      "primary_key": [
+        "key"
+      ],
+      "references": [
+        {
+          "column": "left_key",
+          "table": "requirements",
+          "target_column": "key"
+        },
+        {
+          "column": "right_key",
+          "table": "requirements",
+          "target_column": "key"
+        }
+      ],
+      "access": "internal_only",
+      "status": "planned"
+    },
+    {
+      "id": "retrieval_ranks",
+      "grain": "one query/candidate/method/partition ranked observation",
+      "experiment_ids": [
+        "E4"
+      ],
+      "columns": {
+        "key": "str",
+        "snapshot_id": "str",
+        "query_key": "str",
+        "candidate_key": "str",
+        "method_id": "str",
+        "rank": "int",
+        "score": "float",
+        "reference_relevance": "str",
+        "reference_status": "str",
+        "family_component": "str",
+        "partition": "str",
+        "latency_ms": "float?"
+      },
+      "primary_key": [
+        "key"
+      ],
+      "references": [
+        {
+          "column": "query_key",
+          "table": "requirements",
+          "target_column": "key"
+        },
+        {
+          "column": "candidate_key",
+          "table": "requirements",
+          "target_column": "key"
+        }
+      ],
+      "access": "internal_only",
+      "status": "planned"
+    },
+    {
+      "id": "vector_manifest",
+      "grain": "one frozen corpus/model/vector shard descriptor, never vector values",
+      "experiment_ids": [
+        "E4"
+      ],
+      "columns": {
+        "key": "str",
+        "snapshot_id": "str",
+        "model_artifact_key": "str",
+        "corpus_sha256": "str",
+        "representation": "str",
+        "dimension": "int",
+        "dtype": "str",
+        "normalized": "bool",
+        "count": "int",
+        "shard_sha256": "str",
+        "access_status": "str"
+      },
+      "primary_key": [
+        "key"
+      ],
+      "references": [
+        {
+          "column": "model_artifact_key",
+          "table": "snapshot_manifest",
+          "target_column": "key"
+        }
+      ],
+      "access": "internal_only",
+      "status": "planned"
+    },
+    {
+      "id": "composition_membership",
+      "grain": "one original requirement disposition per selected-pack snapshot and study scope",
+      "experiment_ids": [
+        "E5"
+      ],
+      "columns": {
+        "key": "str",
+        "snapshot_id": "str",
+        "composition_id": "str",
+        "requirement_key": "str",
+        "display_group_id": "str?",
+        "scope_sha256": "str",
+        "disposition": "str",
+        "relation_receipt_sha256": "str?"
+      },
+      "primary_key": [
+        "key"
+      ],
+      "references": [
+        {
+          "column": "requirement_key",
+          "table": "requirements",
+          "target_column": "key"
+        }
+      ],
+      "access": "internal_only",
+      "status": "planned"
+    },
+    {
+      "id": "citation_works",
+      "grain": "one deduplicated bibliographic work with observation coverage",
+      "experiment_ids": [
+        "E7"
+      ],
+      "columns": {
+        "key": "str",
+        "snapshot_id": "str",
+        "work_id": "str",
+        "doi": "str?",
+        "pmid": "str?",
+        "openalex_id": "str?",
+        "guideline_key": "str?",
+        "year": "int?",
+        "reference_status": "str",
+        "provider": "str",
+        "source_key": "str"
+      },
+      "primary_key": [
+        "key"
+      ],
+      "references": [
+        {
+          "column": "guideline_key",
+          "table": "guidelines",
+          "target_column": "key"
+        },
+        {
+          "column": "source_key",
+          "table": "snapshot_manifest",
+          "target_column": "key"
+        }
+      ],
+      "access": "internal_only",
+      "status": "planned"
+    },
+    {
+      "id": "citation_edges",
+      "grain": "one observed citing/cited work pair with provider evidence",
+      "experiment_ids": [
+        "E7"
+      ],
+      "columns": {
+        "key": "str",
+        "snapshot_id": "str",
+        "citing_key": "str",
+        "cited_key": "str",
+        "source_key": "str",
+        "observation_status": "str",
+        "context_status": "str"
+      },
+      "primary_key": [
+        "key"
+      ],
+      "references": [
+        {
+          "column": "citing_key",
+          "table": "citation_works",
+          "target_column": "key"
+        },
+        {
+          "column": "cited_key",
+          "table": "citation_works",
+          "target_column": "key"
+        },
+        {
+          "column": "source_key",
+          "table": "snapshot_manifest",
+          "target_column": "key"
+        }
+      ],
+      "access": "internal_only",
+      "status": "planned"
+    },
+    {
+      "id": "citation_pairs",
+      "grain": "one unordered guideline publication pair/layer/time window",
+      "experiment_ids": [
+        "E7"
+      ],
+      "columns": {
+        "key": "str",
+        "snapshot_id": "str",
+        "left_work_key": "str",
+        "right_work_key": "str",
+        "layer": "str",
+        "window": "str",
+        "raw_count": "int?",
+        "observable_denominator": "int?",
+        "normalized_weight": "float?",
+        "coverage_status": "str"
+      },
+      "primary_key": [
+        "key"
+      ],
+      "references": [
+        {
+          "column": "left_work_key",
+          "table": "citation_works",
+          "target_column": "key"
+        },
+        {
+          "column": "right_work_key",
+          "table": "citation_works",
+          "target_column": "key"
+        }
+      ],
+      "access": "internal_only",
+      "status": "planned"
+    },
+    {
+      "id": "coverage_cells",
+      "grain": "one scope-cell coverage result with explicit uncertainty",
+      "experiment_ids": [
+        "E6"
+      ],
+      "columns": {
+        "key": "str",
+        "snapshot_id": "str",
+        "scope_key": "str",
+        "eligible": "bool",
+        "coverage_status": "str",
+        "direct_reviewed_count": "int?",
+        "ancestor_reviewed_count": "int?",
+        "held_source_count": "int?",
+        "denominator_status": "str"
+      },
+      "primary_key": [
+        "key"
+      ],
+      "references": [
+        {
+          "column": "scope_key",
+          "table": "scope_cells",
+          "target_column": "key"
+        }
+      ],
+      "access": "internal_only",
+      "status": "planned"
+    },
+    {
+      "id": "gap_audit",
+      "grain": "one sampled eligible coverage cell with independent relevance and gap disposition",
+      "experiment_ids": [
+        "E6"
+      ],
+      "columns": {
+        "key": "str",
+        "snapshot_id": "str",
+        "coverage_key": "str",
+        "nomination_status": "str",
+        "inclusion_probability": "float?",
+        "gap_class": "str",
+        "audit_status": "str",
+        "review_receipt_sha256": "str?"
+      },
+      "primary_key": [
+        "key"
+      ],
+      "references": [
+        {
+          "column": "coverage_key",
+          "table": "coverage_cells",
+          "target_column": "key"
+        }
+      ],
+      "access": "internal_only",
+      "status": "planned"
+    },
+    {
+      "id": "network_metrics",
+      "grain": "one layer/node or layer/community statistic at frozen parameters",
+      "experiment_ids": [
+        "E6",
+        "E7"
+      ],
+      "columns": {
+        "key": "str",
+        "snapshot_id": "str",
+        "layer": "str",
+        "unit_id": "str",
+        "statistic": "str",
+        "value": "float?",
+        "denominator": "int?",
+        "seed": "int?",
+        "parameter_sha256": "str",
+        "status": "str"
+      },
+      "primary_key": [
+        "key"
+      ],
+      "references": [],
+      "access": "aggregate_only",
+      "status": "planned"
+    },
+    {
+      "id": "editorial_outcomes",
+      "grain": "one manuscript/reviewer/arm/period assessment, pseudonymous internal only",
+      "experiment_ids": [
+        "E8"
+      ],
+      "columns": {
+        "key": "str",
+        "snapshot_id": "str",
+        "case_id": "str",
+        "reviewer_id": "str",
+        "arm": "str",
+        "period": "int",
+        "active_minutes": "float?",
+        "confirmed_material": "int?",
+        "missed_material": "int?",
+        "unsupported": "int?",
+        "reference_status": "str",
+        "status": "str"
+      },
+      "primary_key": [
+        "key"
+      ],
+      "references": [],
+      "access": "internal_only",
+      "status": "planned"
+    },
+    {
+      "id": "analysis_summary",
+      "grain": "one experiment/method/stratum/metric estimate and uncertainty",
+      "experiment_ids": [
+        "E4",
+        "E5",
+        "E6",
+        "E7",
+        "E8"
+      ],
+      "columns": {
+        "key": "str",
+        "snapshot_id": "str",
+        "experiment_id": "str",
+        "method_id": "str",
+        "stratum": "str",
+        "metric": "str",
+        "numerator": "float?",
+        "denominator": "float?",
+        "estimate": "float?",
+        "lower": "float?",
+        "upper": "float?",
+        "interval_kind": "str",
+        "status": "str",
+        "parameter_sha256": "str"
+      },
+      "primary_key": [
+        "key"
+      ],
+      "references": [],
+      "access": "aggregate_only",
+      "status": "planned"
+    }
+  ],
+  "figures": [
+    {
+      "id": "F1",
+      "visualization": "Denominator flow / ordered bars",
+      "table_ids": [
+        "catalogue_identity",
+        "snapshot_manifest",
+        "analysis_summary"
+      ],
+      "purpose": "Inventory, eligible, held, sampled and verified counts; no attrition concealed.",
+      "status": "planned",
+      "accessible_alternative": "Exact source table, denominators, text summary and labelled legend; no color-only encoding."
+    },
+    {
+      "id": "F2",
+      "visualization": "Recall@k curves and paired forest plot",
+      "table_ids": [
+        "retrieval_ranks",
+        "analysis_summary"
+      ],
+      "purpose": "Sparse, dense and hybrid effects and clustered uncertainty.",
+      "status": "planned",
+      "accessible_alternative": "Exact source table, denominators, text summary and labelled legend; no color-only encoding."
+    },
+    {
+      "id": "F3",
+      "visualization": "Directional confusion matrix and risk-coverage curves",
+      "table_ids": [
+        "requirement_relations",
+        "analysis_summary"
+      ],
+      "purpose": "Reference classes, abstentions, false equivalences and unresolved predictions.",
+      "status": "planned",
+      "accessible_alternative": "Exact source table, denominators, text summary and labelled legend; no color-only encoding."
+    },
+    {
+      "id": "F4",
+      "visualization": "Composition membership alluvial / compression-risk plot",
+      "table_ids": [
+        "composition_membership",
+        "analysis_summary"
+      ],
+      "purpose": "Conservation, grouping, original denominator and loss.",
+      "status": "planned",
+      "accessible_alternative": "Exact source table, denominators, text summary and labelled legend; no color-only encoding."
+    },
+    {
+      "id": "F5",
+      "visualization": "Concept-by-scope heatmap and coverage-bound dot plot",
+      "table_ids": [
+        "coverage_cells",
+        "scope_cells",
+        "concept_mappings",
+        "analysis_summary"
+      ],
+      "purpose": "Direct/ancestor coverage, partial and unknown separate.",
+      "status": "planned",
+      "accessible_alternative": "Exact source table, denominators, text summary and labelled legend; no color-only encoding."
+    },
+    {
+      "id": "F6",
+      "visualization": "Gap audit priority table and uncertainty bars",
+      "table_ids": [
+        "gap_audit",
+        "coverage_cells",
+        "analysis_summary"
+      ],
+      "purpose": "Reviewed candidate gap yield, false nominations and demand strata.",
+      "status": "planned",
+      "accessible_alternative": "Exact source table, denominators, text summary and labelled legend; no color-only encoding."
+    },
+    {
+      "id": "F7",
+      "visualization": "Layered requirement/ontology graph and degree distributions",
+      "table_ids": [
+        "requirements",
+        "concept_mappings",
+        "ontology_edges",
+        "requirement_relations",
+        "network_metrics"
+      ],
+      "purpose": "Typed edges, islands, components and community stability; layout not equivalence.",
+      "status": "planned",
+      "accessible_alternative": "Exact source table, denominators, text summary and labelled legend; no color-only encoding."
+    },
+    {
+      "id": "F8",
+      "visualization": "Co-citation and coupling network/time-stratified heatmap",
+      "table_ids": [
+        "citation_works",
+        "citation_edges",
+        "citation_pairs",
+        "network_metrics"
+      ],
+      "purpose": "Raw/normalized weights, observability and temporal differences.",
+      "status": "planned",
+      "accessible_alternative": "Exact source table, denominators, text summary and labelled legend; no color-only encoding."
+    },
+    {
+      "id": "F9",
+      "visualization": "Vector neighborhood projection and fidelity diagnostics",
+      "table_ids": [
+        "vector_manifest",
+        "retrieval_ranks",
+        "network_metrics"
+      ],
+      "purpose": "PCA/UMAP optional, fixed parameters and projection fidelity; no proof of clustering.",
+      "status": "planned",
+      "accessible_alternative": "Exact source table, denominators, text summary and labelled legend; no color-only encoding."
+    },
+    {
+      "id": "F10",
+      "visualization": "Sensitivity forest/robustness matrix",
+      "table_ids": [
+        "analysis_summary",
+        "network_metrics"
+      ],
+      "purpose": "Ontology depth, thresholds, missingness, time window, methods, weights and seed.",
+      "status": "planned",
+      "accessible_alternative": "Exact source table, denominators, text summary and labelled legend; no color-only encoding."
+    },
+    {
+      "id": "F11",
+      "visualization": "Paired editorial effect and workload plot",
+      "table_ids": [
+        "editorial_outcomes",
+        "analysis_summary"
+      ],
+      "purpose": "Confirmed findings/reviewer-hour, harms and review minutes; aggregate only after review.",
+      "status": "planned",
+      "accessible_alternative": "Exact source table, denominators, text summary and labelled legend; no color-only encoding."
+    }
+  ],
+  "gates": [
+    {
+      "id": "G1",
+      "task": "T01.052",
+      "issue": 111,
+      "workflow": ".github/workflows/equator-catalogue.yml",
+      "mode": "existing_source_lane",
+      "acceptance": "Frozen rights-qualified multi-family source census; all holds conserved."
+    },
+    {
+      "id": "G2",
+      "task": "T01.050",
+      "issue": 158,
+      "workflow": ".github/workflows/ci.yml",
+      "mode": "existing_required",
+      "acceptance": "Deterministic ranking and retrieval fixture checks; actual dense/held-out runs separate and explicitly authorized."
+    },
+    {
+      "id": "G3",
+      "task": "T01.051",
+      "issue": 82,
+      "workflow": ".github/workflows/ci.yml",
+      "mode": "existing_required",
+      "acceptance": "Identity conservation, reviewed scope, direction and held-state negative controls."
+    },
+    {
+      "id": "G4",
+      "task": "T01.053",
+      "issue": 149,
+      "workflow": ".github/workflows/ci.yml",
+      "mode": "planned_extension",
+      "acceptance": "Frozen ontology/citation inputs and typed derived table/graph conservation; empirical analyses explicitly dispatched."
+    },
+    {
+      "id": "G5",
+      "task": "T05.049",
+      "issue": 158,
+      "workflow": ".github/workflows/ci.yml",
+      "mode": "existing_required",
+      "acceptance": "Publication plan and provenance checks; freeze and actual independent run receipts required."
+    },
+    {
+      "id": "G6",
+      "task": "T04.007",
+      "issue": 161,
+      "workflow": ".github/workflows/standardflow-pack.yml",
+      "mode": "planned_extension",
+      "acceptance": "Pinned CiteWeft, Sourceright and Searchright consumer canary and degraded mode."
+    },
+    {
+      "id": "G7",
+      "task": "T04.009",
+      "issue": 161,
+      "workflow": ".github/workflows/ci.yml",
+      "mode": "planned_extension",
+      "acceptance": "Prospective editorial study only with institutional determination, authorized inputs and independent findings."
+    },
+    {
+      "id": "G8",
+      "task": "T04.010",
+      "issue": 162,
+      "workflow": ".github/workflows/ci.yml",
+      "mode": "existing_required",
+      "acceptance": "Contract-only static preview generated and hash-bound; separate reviewed data release gate."
+    },
+    {
+      "id": "G9",
+      "task": "T05.050",
+      "issue": 31,
+      "workflow": ".github/workflows/ci.yml",
+      "mode": "existing_required",
+      "acceptance": "Required workflow-policy live plan/issue crosswalk; conductor-reconciliation.yml independently handles issue events and scheduled reconciliation; verify current-base receiving evidence."
+    }
+  ],
+  "release": {
+    "space": "https://huggingface.co/spaces/edithatogo/standardflow-contracts",
+    "visibility": "private",
+    "preview": "authored_planned_contracts_only",
+    "dataset_status": "held",
+    "dataset_contract": "contracts/datasets/standardflow-metadata.v0.1.0.json",
+    "excluded": [
+      "source prose and rights-unclear content",
+      "vectors and item fingerprints",
+      "private manuscripts and review records",
+      "benchmark labels",
+      "unapproved ontology/citation data"
+    ]
+  }
+}

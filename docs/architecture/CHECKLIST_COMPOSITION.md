@@ -200,3 +200,14 @@ transitive closure from similarity. Preserve producer revisions, scope and
 rights; use the existing experiment and publication contracts. Do not add a
 persistent vector database, graph service or model dependency until qualified
 benefit and consumer need justify it.
+
+
+## Prospective ontology and citation-network validation
+
+The [follow-up protocol](../research/composition-graph-protocol.v0.1.0.md) and
+[analytical output contract](../../contracts/analysis/requirement-graph.v0.1.0.json) specify E4-E8,
+including independent eligible concept/scope denominators, typed MeSH/OBI/STATO
+mappings, citation/co-citation layers, coverage bounds, gap audit, and editorial
+utility. A missing mapping is unknown rather than proof of a reporting gap.
+Preserve source authority and existing projections. The graph is a derived view.
+The private contract preview and data-release approval are separate.

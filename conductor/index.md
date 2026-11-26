@@ -62,3 +62,8 @@ Track status, implementation completeness and evidence level are independent. A 
 source file, generated artefact or merged pull request is not evidence of live operation,
 methodological validity, accessibility, rights clearance or external acceptance unless an explicit
 receipt records that observation.
+
+## Follow-up analytical and publication programme
+
+- [Composition, ontology gaps and editorial validation protocol](../docs/research/composition-graph-protocol.v0.1.0.md).
+- [E4-E8 publication contract](../contracts/publication/composition-graph.v0.1.0.json) and [planned graph/vector/citation outputs](../contracts/analysis/requirement-graph.v0.1.0.json).

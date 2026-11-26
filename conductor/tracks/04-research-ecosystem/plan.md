@@ -23,3 +23,10 @@ Dependencies: Tracks 01/02, programme #158 and source/interpretation gates #111/
 - [ ] **T04.008** ([#161](https://github.com/edithatogo/standards_check/issues/161), [#162](https://github.com/edithatogo/standards_check/issues/162)) Qualify hybrid sparse/dense and reviewed graph expansion on real editorial consumer fixtures; preserve access and source rights; compare reviewer utility before a dataset or service release.
 
 See [composition and hybrid graph retrieval](../../../docs/architecture/CHECKLIST_COMPOSITION.md). These are planned consumer capabilities, not an admitted adapter or new source authority.
+
+## Editorial utility and contract presentation
+
+- [ ] **T04.009** ([#161](https://github.com/edithatogo/standards_check/issues/161)) Qualify authorized manuscript and reviewer E8 comparative evaluation, preserving read-only consumer roles and independent source-bound finding review.
+- [ ] **T04.010** ([#161](https://github.com/edithatogo/standards_check/issues/161), [#162](https://github.com/edithatogo/standards_check/issues/162)) Build and verify a private static Hugging Face contract-only preview from an exact GitHub revision; retain release hold for any graph/vector/benchmark/manuscript data.
+
+See [follow-up protocol](../../../docs/research/composition-graph-protocol.v0.1.0.md) and [planned analytical outputs](../../../contracts/analysis/requirement-graph.v0.1.0.json).
