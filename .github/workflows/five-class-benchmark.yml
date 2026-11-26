@@ -379,7 +379,7 @@ jobs:
 
   specialist-costing-development:
     # Editorial seed only; no model downloads or inference in ordinary CI.
-    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && (github.event.label.name == 'run-specialist-retrieval' || github.event.label.name == 'run-reranker-panel' || github.event.label.name == 'run-modernbert-reranker')
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && (github.event.label.name == 'run-fixed-pool-rerank' || github.event.label.name == 'run-specialist-retrieval' || github.event.label.name == 'run-reranker-panel' || github.event.label.name == 'run-modernbert-reranker')
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     strategy:
@@ -473,6 +473,23 @@ jobs:
             --assets "$RUNNER_TEMP/costing-assets" --reranker "$RERANKER" \
             --output "$RUNNER_TEMP/costing-evidence/paired.json" \
             2> "$RUNNER_TEMP/costing-evidence/resources.txt"
+      - name: Run both frozen top-ten pools in separate processes
+        if: github.event.label.name == 'run-fixed-pool-rerank'
+        env:
+          PYTHONPATH: "."
+        shell: bash
+        run: |
+          set -uo pipefail
+          python -m pytest -q research/model-placement/test_fixed_pool.py || exit 1
+          status=0
+          for pool in bge fused; do
+            /usr/bin/time -v python research/model-placement/fixed_pool.py \
+              --baseline "$RUNNER_TEMP/costing-evidence/paired.json" \
+              --assets "$RUNNER_TEMP/costing-assets" --pool "$pool" \
+              --output "$RUNNER_TEMP/costing-evidence/fixed-$pool.json" \
+              2> "$RUNNER_TEMP/costing-evidence/fixed-$pool-resources.txt" || status=1
+          done
+          exit "$status"
       - name: Retain exact metadata-only development receipts
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9

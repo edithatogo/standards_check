@@ -56,3 +56,12 @@ Same fixed candidate pool within each comparison, 1,060 candidates. Fresh neural
 ## Next
 
 Use existing LocalRanker and pinned BGE/MiniLM assets for both fixed top-ten pools, isolate per-arm time/peak RSS and download bytes, and qualify fresh inference with exact-head tests before opt-in. Evaluate routing against a genuinely orthogonal model at equal measured compute, and evidence sufficiency with an independent reference, not relevance scores. Preserve the observed negative arms. No model downloads in routine CI.
+
+
+## Fixed-pool neural reranking follow-up (26 November)
+
+Prospective development amendment, before any new inference: equal-weight RRF k=60, same query text, exact 10 candidates per pool, same pinned MiniLM reranker, tie break stable ID. Compare each pool's original ordering against neural reranking of precisely that pool; retain all 1,060 raw finite scores per arm and paired gains/losses, per-instrument results, per-process RSS/time and exact model asset bytes. Reuse the existing hash-pinned BGE/MiniLM workflow and LocalRanker; fail closed on changed input digest, BGE pool digest, lexical order, reference or candidate mismatch. Label run-fixed-pool-rerank only after required exact-head deterministic/security checks pass. Existing ordinary/label workflows otherwise unchanged; no hosted model API.
+
+Local RED import failure followed by GREEN 2 focused tests. Tested pure pool preparation against original archived paired.json (artifact 15088716936): 106 queries, 31 domains, 1,060 candidates in each arm; all 106 pool memberships differ, 347 slots replaced, 713 overlap. Both top-ten pools recover 97/125 known associations; top five 87 vs 82 before reranking. The new scorer was exercised only with injected finite/nonfinite test scores; fresh ONNX inference has NOT run. Local git DNS failed; onnxruntime and tokenizers absent; the hosted opt-in execution is the next gate. Do not reuse cached neural scores for new candidates or claim a comparison of fresh inference until the exact artifact is verified.
+
+The separately hosted E9 run 45787042673 (artifact 15100692740; independently verified ZIP digest f7155c826e7e9e601855f8e54e38220e185c05f622429e029205fb7e7261d7a6) supports native geometry qualification first: exact rows 1/4 vs 4/4, nested 1/1, footnote 1/1, qualifier links 2/2 both; Poppler 24.02.0 vs pdfplumber 0.11.11. Both synthetic, no independent qualification.
