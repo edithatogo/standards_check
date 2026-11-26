@@ -67,3 +67,11 @@ it. E10/E11 remain planned in existing Conductor plans. Independent rights
 and family-component reference freeze, reproducible hosted receipt and
 scientific acceptance remain open. Rollback: remove this opt-in lane; default
 production extractor and all canonical contracts remain unchanged.
+
+## Formatting follow-up
+
+The original receipt is bound to commit `92c9ff9d0271d462c1932635a3cf52718f9bebf3`.
+The follow-up aligns the script with the maintained double-quote/multiline style;
+local Python AST comparison was exactly equal, and all five focused tests passed
+again. Formatted script SHA-256 `6dd941156df7a037e6b20d4ec2b971f556a6c8de4d2247e53f405491cf124e15`.
+Ruff/Bandit are not installed locally; hosted full checks remain required.
