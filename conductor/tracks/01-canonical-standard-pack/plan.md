@@ -374,3 +374,6 @@ adds signed ground-rule evaluation with exact source binding, a bounded HiGHS co
 a full typed costing candidate audit, family-level selective risk evaluation and private
 release-overlap integration. Real rule, reference, semantic mapping and corpus qualification
 remain held. No canonical admission or additional experiment registry.
+
+
+Model-placement development replay (26 November; #158): T01.063–064 remain open. See [receipt and executable replay](../../../research/model-placement/replay.md). Historical inference receipts joined by exact fixture/candidate IDs; matched request-count routing and equal candidate-budget evidence escalation are exploratory. No scientific admission or model replacement.
