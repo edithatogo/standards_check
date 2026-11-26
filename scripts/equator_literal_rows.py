@@ -113,7 +113,9 @@ def literal_rows(raw, doi, expected_ids):
         "source_sha256": hashlib.sha256(raw).hexdigest(),
         "notice_observed": "CC-BY-4.0",
         "status": (
-            "held_structural_discrepancy" if result["issues"] else "structure_observed_not_qualified"
+            "held_structural_discrepancy"
+            if result["issues"]
+            else "structure_observed_not_qualified"
         ),
         "canonical_packs_promoted": 0,
     }
@@ -132,10 +134,67 @@ def pinned_bytes(path, expected):
     return raw
 
 
+def docx_anchor_evidence(structure, rows):
+    """Fingerprint-only context and block evidence, not inferred hierarchy or equivalence."""
+    # ponytail: native DOCX body tables already supply all collected row anchors.
+    row_by_cell = {
+        cell["anchor"]: row
+        for table in structure["blocks"]
+        for row in table.get("rows", [])
+        for cell in row["cells"]
+    }
+    cells = {
+        cell["anchor"]: cell
+        for table in structure["blocks"]
+        for row in table.get("rows", [])
+        for cell in row["cells"]
+    }
+    result = []
+    for row in rows:
+        requirement = row["requirement_anchor"]
+        identifier = row["identifier_anchor"]
+        table_row = row_by_cell.get(requirement)
+        receipt = {"item_id": row["item_id"], "requirement_anchor": requirement}
+        if table_row is None or row_by_cell.get(identifier) is not table_row:
+            result.append({**receipt, "status": "unbound"})
+            continue
+        other_cells = []
+        for cell in table_row["cells"]:
+            if cell["anchor"] in (identifier, requirement):
+                continue
+            origin = cell.get("merge_origin")
+            other_cells.append(
+                {
+                    "anchor": cell["anchor"],
+                    "text_sha256": cell["text_sha256"],
+                    "merge_origin": origin,
+                    "origin_text_sha256": cells.get(origin, {}).get("text_sha256"),
+                }
+            )
+        result.append(
+            {
+                **receipt,
+                "status": "observed_not_qualified",
+                "row_anchor": table_row["anchor"],
+                "identifier_anchor": identifier,
+                "requirement_blocks": [
+                    {
+                        k: block[k]
+                        for k in ("anchor", "kind", "text_sha256", "numbering")
+                        if k in block
+                    }
+                    for block in cells[requirement]["blocks"]
+                ],
+                "other_cells": other_cells,
+            }
+        )
+    return result
+
+
 def compare_docx(raw, name, reference, expected):
     from .compare_ecoevo_formats import collect_rows, compare_formats
     from .compare_guideline_formats import header_roles
-    from .structured_source import docx_structure
+    from .structured_source import check_package, docx_structure
 
     _, structure = docx_structure(raw)
     headers = {
@@ -149,6 +208,12 @@ def compare_docx(raw, name, reference, expected):
         "source_sha256": hashlib.sha256(raw).hexdigest(),
         **summarize_source(rows, tuple(expected), issues + structure["issues"]),
         "comparison": compare_formats(reference, rows, expected_ids=expected),
+        "anchor_evidence": docx_anchor_evidence(structure, rows),
+        "non_body_members": sorted(
+            name
+            for name in check_package(raw)
+            if re.match(r"word/(?:header|footer|footnotes|endnotes|comments)", name)
+        ),
         "independent_issuer_identity_verified": False,
     }
 

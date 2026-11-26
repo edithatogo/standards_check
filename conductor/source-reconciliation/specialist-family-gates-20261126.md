@@ -360,3 +360,71 @@ altering their algorithms. Next qualify actual bytes and row comparison,
 and a separately verified primary representation, then lock independent
 reference labels and family components. Scientific and publication gates
 remain open.
+
+
+## Verified real-source comparison and next source-family work
+
+Reconciled receiving main `413626c44da6d5d5faaa19a60f4d7ae0751f1fb7` after #183's protected integration.
+Preserve its Track 01 additions and reuse the actual [shared recall exchange](../../research/model-placement/replay.md),
+[handoff implementation](../../research/model-placement/recall_handoff.py) and
+[locked join](../../research/model-placement/locked_join.py). No alternate schema,
+reference IDs or positive ledger. #188 supplies source/anchor and independent
+reference evidence only when actually qualified.
+
+Downloaded [structural artifact 15109287625](https://github.com/edithatogo/standards_check/actions/runs/45805487210/artifacts/15109287625).
+ZIP SHA-256 `5091c91a02ecc2b0cef641fb1efda4442c678cfd580af1f423b09841e234d9da`,
+tested merge `fac7261d67e2483f9a8783ff99370b63047605b2`. All four exact
+upstream files acquired, Git blob pins verified by the runner. Actual
+same-edition observations:
+
+| Edition | Literal IDs/order | DOCX IDs/order | Exact normalized requirement match | Retained hold |
+| --- | ---: | ---: | ---: | --- |
+| CONSORT 2025 | 42/42 | 42/42 | 41/42 | Item 26 differs; non-body parts and rendered numbering unqualified |
+| SPIRIT 2025 | 53/53 | 53/53 | 53/53 | Non-body parts unqualified; independent issuer/rights not established |
+
+No missing, extra, duplicated or reordered identifiers in either format.
+CONSORT 26 literal anchor ROWS/31/2/0/1 vs DOCX body/2/r45/c3,
+literal normalized digest
+`57b586fd9172dab5a9f5882520fe9f2bf21987c814a61e71ca43a326f6c3ca73`,
+DOCX digest
+`9b85ce934c45ec15dcbd6cc090819d277e59776a447806cb2c2741f005f434df`.
+Do not infer a text omission or punctuation-only difference from hashes.
+Both formats belong to one source component. Identity/rights/structural and
+reference holds remain. Local raw DOCX transport unavailable; no additional
+source text copied.
+
+Next targeted diagnostic reuses the native DOCX structure: record each
+numbered item's requirement block anchors/fingerprints and numbering,
+other cells and their merge-origin hashes, and non-body member inventory.
+These are context candidates, not inferred heading relations or evidence
+of complete footnote extraction. This exposes which source anchors and
+blocks need review, including item 26. Five focused local overlay tests
+passed (missing helper RED, GREEN); actual DOCX integration test extended
+and awaits hosted checkout. Two exact maintained Ruff formatting findings
+from job 139863696669 corrected; full required checks still necessary.
+No additional reader dependency or registry.
+
+### Distinct-family source acquisition candidates
+
+Direct connector tree and QMD reads at
+[upstream 388e294](https://github.com/EQUATOR-Network/equator-website/tree/388e294f05d4d55cf6fc01ddf56b6ad48577b190/reporting-guidelines)
+confirmed four additional literal arrays. Parseable JSON metadata/shape
+observed without executing JavaScript or exporting checklist text.
+No qualifying local CC BY notice in these four files; do not generalize
+the CONSORT/SPIRIT reader by relaxing its rights or grammar guards.
+
+| Component | Exact pinned upstream candidate | Other exact file(s) | Rights/identity disposition |
+| --- | --- | --- | --- |
+| STARD | stard/stard-checklist.qmd, c1e7d423aa89693f418c081439414cef1a345f3d, 41 groups | STARD-2015-Checklist.docx bb31733af15ac923e80883016caeeb7e4a9bf30d; PDF 41325576f7851438e6788a229b8b417289c8bf3d | [BMJ primary](https://www.bmj.com/content/351/bmj.h5527) has conflicting CC BY / CC BY-NC wording; hold exact file reuse |
+| STROBE | strobe/strobe-checklist.qmd, e30f0cd788751d57bbd6e4a37185d3f008143fb0, 27 groups | combined DOCX 6e3e758865902a03a75e45821f78e1c0f371a36c; combined PDF 94f5b2d5f04a54eafdca508f86e2b50ad1ba58b1 | [PLOS primary](https://journals.plos.org/plosmedicine/article?id=10.1371%2Fjournal.pmed.0040296) CC BY notice and 22 main IDs; [issuer](https://www.strobe-statement.org/?id=checklist) requests contact for republication/related work. Preserve variant scope and exact-file rights hold. |
+| TRIPOD+AI | tripod/tripod-ai-checklist.qmd, 79d32ba9c806dccb617ff99b4eb6b2b9d2ad178d, 60 groups | TRIPOD+AI_checklist.docx 0087e65ff3ea8b37c309074e6ec9dab30169f015; PDF 4f3b8d79689e96760df28d21bf42115839a9ee4c | [Primary BMJ](https://www.bmj.com/content/385/bmj-2023-078378.long) 27 main items/52 subitems, observed article CC BY notice; [correction](https://www.bmj.com/content/385/bmj.q902.long) affiliations only. Prior conflicting wording and separate asset rights not resolved; prioritize exact corrected article table and its D/E applicability column. |
+| SQUIRE | squire/squire-checklist.qmd, 04dbe6f1fe5e0e8ea05c3989038c17c6242523d7, 24 groups | SQUIRE-2.0-checklist.pdf 961f854279275435f4f1ad70aa37014165335b69 | [BMJ Quality & Safety primary](https://qualitysafety.bmj.com/content/25/12/986) CC BY-NC; reserve until exact item reuse or a permissive co-publication qualified. |
+
+Group counts are array structure only, not requirement counts. All four
+use different row shapes from the already qualified literal grammar.
+Prefer exact issuer or publisher tables and existing structured readers.
+No expanded dialect, public reference labels or independent family freeze
+from these observations. Preserve earlier 205-worklist checkpoint, source
+availability holds and all denominator distinctions. Only a changed
+provider/representation or targeted diagnostic merits another bounded
+acquisition. No additional model sweep.

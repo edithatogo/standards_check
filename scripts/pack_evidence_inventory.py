@@ -138,7 +138,8 @@ def baseline(raw, expected):
         methods[method] = {
             "rows": rows,
             "hits": {
-                str(k): sum(r["rank"] is not None and r["rank"] <= k for r in rows) for k in (1, 3, 5)
+                str(k): sum(r["rank"] is not None and r["rank"] <= k for r in rows)
+                for k in (1, 3, 5)
             },
             "closed_hits": sum(r["expected"] in r["closed_top3_budget5"] for r in rows),
             "ranked_count": dict(Counter(len(rankings[key]) for key in targets)),

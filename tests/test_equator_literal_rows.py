@@ -98,6 +98,29 @@ class LiteralRowsTests(unittest.TestCase):
             finally:
                 os.chdir(prior)
 
+    def test_docx_anchor_evidence_keeps_blocks_and_inherited_context(self):
+        structure = {"blocks": [{"kind": "table", "rows": [
+            {"anchor": "body/1/r1", "cells": [
+                {"anchor": "body/1/r1/c1", "text_sha256": "topic-digest", "merge_origin": "body/1/r1/c1", "blocks": []},
+            ]},
+            {"anchor": "body/1/r2", "cells": [
+                {"anchor": "body/1/r2/c1", "text_sha256": "empty", "merge_origin": "body/1/r1/c1", "blocks": []},
+                {"anchor": "body/1/r2/c2", "text_sha256": "id-digest", "blocks": []},
+                {"anchor": "body/1/r2/c3", "text_sha256": "req-digest", "blocks": [
+                    {"anchor": "body/1/r2/c3/1", "kind": "paragraph", "text_sha256": "a", "numbering": None},
+                    {"anchor": "body/1/r2/c3/2", "kind": "paragraph", "text_sha256": "b", "numbering": {"id": 1, "level": 0}},
+                ]},
+            ]},
+        ]}]}
+        rows = [{"item_id": "1", "identifier_anchor": "body/1/r2/c2", "requirement_anchor": "body/1/r2/c3"}]
+        receipt = e.docx_anchor_evidence(structure, rows)
+        self.assertEqual(receipt[0]["row_anchor"], "body/1/r2")
+        self.assertEqual(len(receipt[0]["requirement_blocks"]), 2)
+        self.assertEqual(receipt[0]["requirement_blocks"][1]["numbering"], {"id": 1, "level": 0})
+        self.assertEqual(receipt[0]["other_cells"][0]["origin_text_sha256"], "topic-digest")
+        self.assertEqual(receipt[0]["other_cells"][0]["merge_origin"], "body/1/r1/c1")
+        self.assertEqual(e.docx_anchor_evidence(structure, [{**rows[0], "requirement_anchor": "missing"}])[0]["status"], "unbound")
+
     def test_actual_docx_reader_preserves_differences(self):
         from docx import Document
 
@@ -118,6 +141,10 @@ class LiteralRowsTests(unittest.TestCase):
             self.assertEqual(result["docx"]["comparison"]["different_ids"], ["1b"])
             self.assertEqual(result["status"], "held_structural_discrepancy")
             self.assertFalse(result["docx"]["independent_issuer_identity_verified"])
+            evidence = result["docx"]["anchor_evidence"]
+            self.assertEqual([row["item_id"] for row in evidence], ["1a", "1b"])
+            self.assertEqual(evidence[1]["requirement_anchor"], result["docx"]["rows"][1]["requirement_anchor"])
+            self.assertEqual(evidence[1]["requirement_blocks"][0]["kind"], "paragraph")
 
 
 if __name__ == "__main__":
