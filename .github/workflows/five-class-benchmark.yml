@@ -26,6 +26,12 @@ on:
       - "research/model-placement/test_recall_handoff.py"
       - "research/model-placement/locked_join.py"
       - "research/model-placement/test_locked_join.py"
+      - "scripts/evidence_factorial.py"
+      - "tests/test_evidence_factorial.py"
+      - "scripts/factorial_fairness.py"
+      - "tests/test_factorial_fairness.py"
+      - "scripts/evidence_policy.py"
+      - "tests/test_evidence_policy.py"
       - ".github/workflows/five-class-benchmark.yml"
   workflow_dispatch:
 
@@ -896,5 +902,241 @@ jobs:
         with:
           name: issuer-column-probe-${{ github.sha }}
           path: ${{ runner.temp }}/issuer-evidence/
+          if-no-files-found: error
+          retention-days: 90
+
+  evidence-verification-development:
+    # Explicitly authorized, bounded synthetic experiment. No inference in required CI.
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-evidence-verification'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      HF_HUB_DISABLE_TELEMETRY: "1"
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: "3.12"
+      - name: Verify deterministic experiment and record formatting
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/evidence-verification"
+          git rev-parse HEAD > "$RUNNER_TEMP/evidence-verification/commit.txt"
+          python -m pip install pytest==9.2.0 onnxruntime==1.23.2 tokenizers==0.22.1 ruff==0.17.6
+          ruff check --fix scripts/evidence_verification.py
+          ruff format scripts/evidence_verification.py
+          git diff -- scripts/evidence_verification.py | tee "$RUNNER_TEMP/evidence-verification/format.diff"
+          git hash-object scripts/evidence_verification.py tests/test_evidence_verification.py | tee "$RUNNER_TEMP/evidence-verification/blobs.txt"
+          ruff check scripts/evidence_verification.py
+          ruff format --check scripts/evidence_verification.py
+          python -m pytest --import-mode=importlib tests/test_evidence_action_replay.py tests/test_evidence_deficit_replay.py tests/test_evidence_verification.py -q
+          python -m pip check
+          python -m pip freeze > "$RUNNER_TEMP/evidence-verification/environment.txt"
+      - name: Acquire immutable public model artifacts and execute fresh CPU inference
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          import resource
+          import subprocess
+          import time
+          from pathlib import Path
+          from scripts.blind_adjudication import file_hash
+          from scripts.costing_retrieval import MODELS, LocalRanker
+          from scripts.evidence_action_replay import FIXTURE_SHA
+          from scripts.evidence_verification import pinned_fixture, run
+          from scripts.five_class_benchmark import DEBERTA
+          from scripts.semantic_benchmark import MODEL_ID, MODEL_REVISION, MODEL_SHA256, LocalNLI
+
+          root = Path(os.environ["RUNNER_TEMP"])
+          out = root / "evidence-verification"
+          fixture = pinned_fixture(Path("contracts/examples/semantic-reconciliation-synthetic-v1.json"), FIXTURE_SHA)
+          pins = {
+              "minilm": {"id": MODEL_ID, "revision": MODEL_REVISION, "sha256": MODEL_SHA256,
+                         "file": "onnx/model_quint8_avx2.onnx"},
+              "deberta": DEBERTA,
+              "reranker": MODELS["reranker"],
+          }
+          assets = {}
+          observations = {}
+          for name, pin in pins.items():
+              directory = root / "evidence-verification-assets" / name
+              directory.mkdir(parents=True)
+              model_file = "model.onnx" if name == "reranker" else "model_quint8_avx2.onnx"
+              for remote, local, cap in ((pin["file"], model_file, 100000000),
+                                         ("config.json", "config.json", 1000000),
+                                         ("tokenizer.json", "tokenizer.json", 20000000),
+                                         ("README.md", "README.md", 500000)):
+                  url = f"https://huggingface.co/{pin['id']}/resolve/{pin['revision']}/{remote}"
+                  subprocess.run(["curl", "--fail", "--silent", "--show-error", "--location",
+                                  "--max-redirs", "5", "--connect-timeout", "15", "--max-time", "180",
+                                  "--max-filesize", str(cap), "--proto", "=https", "--proto-redir", "=https",
+                                  url, "--output", str(directory / local)], check=True)
+              if file_hash(directory / model_file) != pin["sha256"]:
+                  raise ValueError("unqualified model bytes")
+              assets[name] = directory
+              observations[name] = {"pin": pin, "asset_hashes": {p.name: file_hash(p) for p in directory.iterdir()},
+                                    "download_bytes": sum(p.stat().st_size for p in directory.iterdir())}
+              (out / "assets.json").write_text(json.dumps(observations, indent=2) + "\n")
+          started = time.perf_counter()
+          models = {name: LocalNLI(assets[name], expected_model_sha256=pins[name]["sha256"])
+                    for name in ("minilm", "deberta")}
+          ranker = LocalRanker(assets["reranker"], "reranker")
+          initialization = time.perf_counter() - started
+          report = run(fixture, {name: model.score for name, model in models.items()}, ranker)
+          report.update(fixture_sha256=FIXTURE_SHA, initialization_seconds=initialization,
+                        peak_rss_kib=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
+                        fresh_inference=True, assets=observations,
+                        source_sha256=hashlib.sha256(Path("scripts/evidence_verification.py").read_bytes()).hexdigest())
+          (out / "report.json").write_text(json.dumps(report, indent=2, allow_nan=False) + "\n")
+          print(json.dumps({"summary": report["summary"], "formal": report["formal"]["summary"],
+                            "rerank_completeness": report["rerank_completeness"], "seconds": report["seconds"]}))
+          PY
+      - name: Retain complete synthetic experiment evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: evidence-verification-${{ github.sha }}
+          path: ${{ runner.temp }}/evidence-verification/
+          if-no-files-found: error
+          retention-days: 90
+
+  evidence-factorial-development:
+    # Explicit retrospective replay; no model acquisition or new inference.
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-evidence-factorial'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      actions: read
+    env:
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      HF_HUB_DISABLE_TELEMETRY: "1"
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: "3.12"
+      - name: Test and retain pinned formatter diagnostics
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/factorial-prior" "$RUNNER_TEMP/factorial-evidence"
+          git rev-parse HEAD > "$RUNNER_TEMP/factorial-evidence/commit.txt"
+          python -m pip install pytest==9.2.0 numpy==2.5.5 ruff==0.17.6
+          ruff check scripts/evidence_factorial.py
+          ruff format --diff scripts/evidence_factorial.py > "$RUNNER_TEMP/factorial-evidence/format.diff" || test "$?" = 1
+          cat "$RUNNER_TEMP/factorial-evidence/format.diff"
+          python -m pytest --import-mode=importlib -q tests/test_evidence_factorial.py
+          python -m pip freeze > "$RUNNER_TEMP/factorial-evidence/environment.txt"
+      - name: Replay previously verified semantic decisions and execute deterministic factorial
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          timeout 60 gh run download 45797316771 --repo "$GITHUB_REPOSITORY" --name evidence-verification-5dc29e64ad6ea05fd096cc72090603d2f759e209 --dir "$RUNNER_TEMP/factorial-prior"
+          python -m scripts.evidence_factorial --neural-report "$RUNNER_TEMP/factorial-prior/report.json" --output "$RUNNER_TEMP/factorial-evidence/evidence-factorial-v1.json"
+          sha256sum "$RUNNER_TEMP/factorial-evidence/evidence-factorial-v1.json" > "$RUNNER_TEMP/factorial-evidence/report-sha256.txt"
+      - name: Retain case-level factorial evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: evidence-factorial-${{ github.sha }}
+          path: ${{ runner.temp }}/factorial-evidence/
+          if-no-files-found: error
+          retention-days: 90
+
+  factorial-fairness-development:
+    # Same-repository, explicit read-only replay; no fresh inference.
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && (github.event.label.name == 'run-factorial-fairness' || github.event.label.name == 'run-evidence-policy')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      actions: read
+    env:
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      HF_HUB_DISABLE_TELEMETRY: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      OMP_NUM_THREADS: "1"
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: "3.12"
+      - name: Test and retain formatter diagnostic
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/fairness-prior" "$RUNNER_TEMP/fairness-evidence"
+          git rev-parse HEAD > "$RUNNER_TEMP/fairness-evidence/commit.txt"
+          python -m pip install pytest==9.2.0 numpy==2.3.5 ruff==0.17.6
+          # Capture both diagnostics even when the first fails; required CI remains check-only.
+          lint=0
+          ruff check --output-format concise scripts/factorial_fairness.py scripts/evidence_policy.py > "$RUNNER_TEMP/fairness-evidence/lint.txt" 2>&1 || lint=$?
+          fmt=0
+          ruff format --diff scripts/factorial_fairness.py scripts/evidence_policy.py > "$RUNNER_TEMP/fairness-evidence/format.diff" 2>&1 || fmt=$?
+          cat "$RUNNER_TEMP/fairness-evidence/lint.txt" "$RUNNER_TEMP/fairness-evidence/format.diff"
+          test "$lint" = 0
+          test "$fmt" -le 1
+          git hash-object scripts/factorial_fairness.py scripts/evidence_policy.py tests/test_factorial_fairness.py tests/test_evidence_policy.py > "$RUNNER_TEMP/fairness-evidence/executed-blobs.txt"
+          python -m pip check
+          python -m pip freeze > "$RUNNER_TEMP/fairness-evidence/environment.txt"
+          python -m pytest --import-mode=importlib -q tests/test_factorial_fairness.py tests/test_evidence_policy.py
+      - name: Reproduce the controlled retrieval and matched-coverage comparison
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          timeout 60 gh run download 45797316771 --repo "$GITHUB_REPOSITORY" --name evidence-verification-5dc29e64ad6ea05fd096cc72090603d2f759e209 --dir "$RUNNER_TEMP/fairness-prior"
+          python -m scripts.factorial_fairness --neural-report "$RUNNER_TEMP/fairness-prior/report.json" --output "$RUNNER_TEMP/fairness-evidence/factorial-fairness-v2.json"
+          sha256sum "$RUNNER_TEMP/fairness-evidence/factorial-fairness-v2.json" > "$RUNNER_TEMP/fairness-evidence/report-sha256.txt"
+      - name: Execute bounded observed-transition policy comparison and verify receipt
+        run: |
+          set -euo pipefail
+          python -m scripts.evidence_policy --output "$RUNNER_TEMP/fairness-evidence/evidence-policy-v1.json"
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+
+          root = Path(os.environ["RUNNER_TEMP"]) / "fairness-evidence"
+          report = json.loads((root / "evidence-policy-v1.json").read_text())
+          receipt = json.loads(Path("conductor/tracks/01-canonical-standard-pack/evidence-policy-v1-receipt.json").read_text())
+          for arms in report["comparisons"].values():
+              for arm in arms.values():
+                  for case in arm["cases"]:
+                      for edge in case["trace"]:
+                          del edge["acquisition_seconds"]
+          digest = hashlib.sha256(json.dumps(report, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+          (root / "policy-deterministic-sha256.txt").write_text(digest + "\n")
+          if digest != receipt["deterministic_output_sha256"]:
+              raise SystemExit("Policy replay differs from the pinned development receipt")
+          PY
+      - name: Retain actual paired evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: factorial-fairness-${{ github.sha }}
+          path: ${{ runner.temp }}/fairness-evidence/
           if-no-files-found: error
           retention-days: 90

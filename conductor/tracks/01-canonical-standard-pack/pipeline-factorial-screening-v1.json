@@ -1,0 +1,425 @@
+{
+  "schema_version": 1,
+  "status": "proposed_not_frozen_not_executed",
+  "owner": [
+    "T01.063",
+    "T01.064",
+    "T05.048",
+    "T05.063"
+  ],
+  "issue": 158,
+  "existing_experiments": "E9-E14, preserve immutable protocol and registered claim holds",
+  "factors": [
+    {
+      "id": "A",
+      "role": "layout",
+      "low": "source-native reader",
+      "high": "native plus targeted specialist layout recovery"
+    },
+    {
+      "id": "B",
+      "role": "structural_closure",
+      "low": "native items, invariant identity checks",
+      "high": "bounded source-anchored parent, continuation, footnote and cross-reference closure"
+    },
+    {
+      "id": "C",
+      "role": "tagging",
+      "low": "classical qualifier rules",
+      "high": "classical plus one pinned extractive tagger for candidate enrichment"
+    },
+    {
+      "id": "D",
+      "role": "candidate_generation",
+      "low": "word/character lexical baseline",
+      "high": "predeclared dense/graph candidate fusion with fixed eligible universe"
+    },
+    {
+      "id": "E",
+      "role": "reranking",
+      "low": "lexical rank within candidate pool",
+      "high": "pinned neural reranker within exactly the same pool"
+    },
+    {
+      "id": "F",
+      "role": "advisory_decision",
+      "low": "lexical relation candidate",
+      "high": "bidirectional specialist neural decision and counterexample proposal"
+    }
+  ],
+  "matrix": {
+    "type": "regular half fraction",
+    "levels": [
+      -1,
+      1
+    ],
+    "generator": "F=ABCDE",
+    "defining_relation": "I=ABCDEF",
+    "resolution": "VI",
+    "runs": [
+      [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      [
+        -1,
+        -1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      [
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      [
+        -1,
+        -1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      [
+        -1,
+        -1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        -1,
+        1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      [
+        -1,
+        1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      [
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        -1
+      ],
+      [
+        -1,
+        1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      [
+        -1,
+        1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      [
+        -1,
+        1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      [
+        -1,
+        1,
+        1,
+        1,
+        -1,
+        1
+      ],
+      [
+        -1,
+        1,
+        1,
+        1,
+        1,
+        -1
+      ],
+      [
+        1,
+        -1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      [
+        1,
+        -1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      [
+        1,
+        -1,
+        -1,
+        1,
+        -1,
+        -1
+      ],
+      [
+        1,
+        -1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        -1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      [
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      [
+        1,
+        -1,
+        1,
+        1,
+        -1,
+        1
+      ],
+      [
+        1,
+        -1,
+        1,
+        1,
+        1,
+        -1
+      ],
+      [
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      [
+        1,
+        1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      [
+        1,
+        1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      [
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    ],
+    "intercept_main_two_factor_columns": 22,
+    "verified_rank": 22,
+    "orthogonal": true,
+    "foldover": "negate F column for complementary 32 runs, or use full 64 if feasible",
+    "aliases": "main/five-way; two-way/four-way; complementary three-way effects; high-order effects not separately identified"
+  },
+  "invariants": [
+    "rights and exact source identity before content processing",
+    "stable evidence identities and source conservation in every arm",
+    "candidate generation precedes ranking its pool",
+    "independent validation of formal representation precedes proof",
+    "all final acceptance gates remain enabled; low decision factor is advisory only",
+    "unknown, unsupported, failed and noneligible rows retained"
+  ],
+  "placement_experiments": [
+    {
+      "component": "layout",
+      "positions": [
+        "whole-document before indexing",
+        "targeted regions after initial retrieval"
+      ],
+      "requires": "rights-cleared comparable PDF region references"
+    },
+    {
+      "component": "tagger",
+      "positions": [
+        "before candidate generation",
+        "after initial retrieval",
+        "both"
+      ],
+      "requires": "exact independently anchored spans; report extra calls"
+    },
+    {
+      "component": "graph",
+      "positions": [
+        "candidate generation",
+        "shortlist scoring",
+        "both"
+      ],
+      "requires": "source-anchored edges and shared eligible universe"
+    },
+    {
+      "component": "reranker",
+      "positions": [
+        "before expansion",
+        "after expansion",
+        "after structural closure"
+      ],
+      "requires": "same component set, compare compatible orders; fixed pool rank-only subexperiment"
+    },
+    {
+      "component": "decision",
+      "positions": [
+        "provisional ambiguity diagnosis before targeted retrieval",
+        "terminal evaluation"
+      ],
+      "requires": "same final advisory evaluator, no future labels"
+    },
+    {
+      "component": "applicability",
+      "positions": [
+        "provisional scope before retrieval",
+        "after candidate comparison"
+      ],
+      "requires": "unknown never excludes eligibility"
+    },
+    {
+      "component": "formal_witness",
+      "positions": [
+        "counterexample-guided acquisition",
+        "terminal-only verification"
+      ],
+      "requires": "validated representations only; no final gate removal"
+    },
+    {
+      "component": "fusion",
+      "positions": [
+        "sequential evidence channels",
+        "parallel fused channels"
+      ],
+      "requires": "conserve source identities and matched evidence/call budgets"
+    }
+  ],
+  "design_notes": [
+    "Prefer 64 full cells when cheap and feasible. The 32-cell design is conditional on all six binary factors being manipulable in a common eligible stratum.",
+    "Within a fixed active set, balance only legal orders; order contrasts at equal calls, candidates and observed compute. Factorial inclusion is not a measure of order.",
+    "Where precedence or format makes cells invalid, use a constrained design with explicit admissible configurations and check rank/aliasing per stratum; never impute impossible cells.",
+    "Use separate nested subexperiments for hybrid retrieval composition, tagger labels, and early verifier placement. Preserve fixed simple rules and negative controls."
+  ],
+  "analysis": {
+    "unit": "paired case within independent guideline-family component; document level blocks for readers",
+    "primary": [
+      "false equivalence or unsupported discharge at fixed referral workload and prespecified harm margin",
+      "complete anchored evidence recovery and relevance recall at fixed candidate/acquisition budgets"
+    ],
+    "secondary": [
+      "correct five-class decisions",
+      "conditional precision and recall",
+      "coverage and abstention",
+      "review referrals and actual independent outcomes",
+      "wall and CPU time, peak RSS, bytes and calls",
+      "paired gains/losses and per-family variability"
+    ],
+    "method": "estimate order-averaged main effects, prespecified two-way differences of differences and separate ordered contrasts; family-clustered uncertainty on independent freeze; no case-permutation pseudo-replication; compare multiobjective cost/risk frontier and retain losses",
+    "freeze": "independent reference/rights, grouped family and prior exposure, complete denominators, sample precision, prespecified interactions, thresholds, resources, order assignment, multiplicity, model asset versions and exact run receipts",
+    "adaptive": "only after fixed designs, compare deterministic router and learned actor/forecast on held-out observed transitions at matched resource/review constraints"
+  },
+  "confirmatory_status": "held; no source/reference or production admission"
+}
