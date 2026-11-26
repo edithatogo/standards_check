@@ -175,7 +175,7 @@ def file_hash(path):
         return hashlib.file_digest(stream, "sha256").hexdigest()
 
 
-def load_model(directory):
+def load_model(directory, *, predictor_factory=model_predictor):
     runtime = {name: version(name) for name in RUNTIME}
     if runtime != RUNTIME or directory is None:
         raise ValueError("unpinned local runtime or missing model directory")
@@ -195,10 +195,10 @@ def load_model(directory):
         str(directory), map_location="cpu", local_files_only=True
     )
     extractor.eval()
-    return model_predictor(extractor), runtime, asset_info
+    return predictor_factory(extractor), runtime, asset_info
 
 
-def run(arm, directory, revision):
+def run(arm, directory, revision, *, predictor_factory=model_predictor):
     import resource
 
     start = time.perf_counter()
@@ -213,7 +213,7 @@ def run(arm, directory, revision):
             return rules(text), None
 
     elif arm == "gliner":
-        predict, runtime, asset_info = load_model(directory)
+        predict, runtime, asset_info = load_model(directory, predictor_factory=predictor_factory)
     else:
         raise ValueError("unsupported arm")
     result = evaluate(cases, predict)
