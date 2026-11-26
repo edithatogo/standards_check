@@ -31,14 +31,18 @@ def scan(manifest: dict, root: Path) -> dict:
     The independent inventory and extraction-completeness witness must be authorized
     outside this function. The receipt describes only the specified input universe.
     """
-    if set(manifest) != {
+    fields = {
         "schema_version",
         "n",
         "expected_references",
         "expected_artifacts",
         "references",
         "artifacts",
-    } or manifest["schema_version"] != "dev.standardflow.restricted-overlap.v1":
+    }
+    if (
+        set(manifest) != fields
+        or manifest["schema_version"] != "dev.standardflow.restricted-overlap.v1"
+    ):
         raise ValueError("invalid overlap manifest")
     references = _inventory(
         manifest["references"],
@@ -55,8 +59,7 @@ def scan(manifest: dict, root: Path) -> dict:
     if len(references) * len(artifacts) > 10_000:
         raise ValueError("inventory exceeds comparison limit")
     restricted = {
-        key: read_bound(root, row["text"]).decode("utf-8")
-        for key, row in references.items()
+        key: read_bound(root, row["text"]).decode("utf-8") for key, row in references.items()
     }
     output = {}
     bound = {}

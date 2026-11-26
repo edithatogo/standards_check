@@ -237,9 +237,7 @@ def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def exercise_pair(
-    case: dict, cli: Path, work: Path, legacy: dict | None = None
-) -> dict:
+def exercise_pair(case: dict, cli: Path, work: Path, legacy: dict | None = None) -> dict:
     work.mkdir()
     input_path = work / "input.json"
     input_path.write_text(json.dumps(case["rust_input"]), encoding="utf-8")

@@ -89,7 +89,13 @@ def generated_pair(parts: tuple, previous: int | None) -> tuple[dict, dict]:
         "new_included": {"studies": included, "reports": included},
         "total_included": {"studies": total, "reports": total},
     }
-    return {"id": identifier, "conditions": conditions, "expected_counts": counts, "rust_input": flow}, legacy
+    case = {
+        "id": identifier,
+        "conditions": conditions,
+        "expected_counts": counts,
+        "rust_input": flow,
+    }
+    return case, legacy
 
 
 def compare(calibration: list[dict], evaluation: list[dict], *, alpha: int) -> dict:
@@ -106,9 +112,9 @@ def compare(calibration: list[dict], evaluation: list[dict], *, alpha: int) -> d
         for row in rows
     ):
         raise ValueError("complete finite five-label rows required")
-    if len({row["id"] for row in rows}) != len(rows) or {row["family"] for row in calibration} & {
-        row["family"] for row in evaluation
-    }:
+    calibration_families = {row["family"] for row in calibration}
+    evaluation_families = {row["family"] for row in evaluation}
+    if len({row["id"] for row in rows}) != len(rows) or calibration_families & evaluation_families:
         raise ValueError("case or guideline family overlap")
     reference = [(row["reference"], row["scores"][row["reference"]]) for row in calibration]
     result = {
@@ -139,9 +145,8 @@ def compare(calibration: list[dict], evaluation: list[dict], *, alpha: int) -> d
             expected = []
             for label in LABELS:
                 sample = [score for target, score in reference if not mondrian or target == label]
-                if 10_000 * (1 + sum(score >= scores[label] for score in sample)) > alpha * (
-                    len(sample) + 1
-                ):
+                numerator = 1 + sum(score >= scores[label] for score in sample)
+                if 10_000 * numerator > alpha * (len(sample) + 1):
                     expected.append(label)
             disagreements += tuple(expected) != prediction.labels
             predictions[method] = (prediction.labels, prediction.candidate)

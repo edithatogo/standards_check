@@ -32,9 +32,8 @@ def leakage(references: dict, outputs: dict, *, n: int = 8) -> dict:
         for parts in outputs.values()
     ):
         raise ValueError("invalid extracted text")
-    size = sum(map(len, references.values())) + sum(
-        len(p) for ps in outputs.values() for p in ps
-    )
+    size = sum(map(len, references.values()))
+    size += sum(len(p) for ps in outputs.values() for p in ps)
     if size > 1_000_000 or len(references) * len(outputs) > 10_000:
         return {"status": "held_limit", "matches": []}
     left = {k: _grams(v, n) for k, v in references.items()}
