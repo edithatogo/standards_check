@@ -192,3 +192,155 @@ Merge that main into this branch while preserving all prior experimental files,
 both Track 01 plan additions and the actual earlier run identity. New exact-head
 checks are required; offline AI security at the original head remained queued.
 Independent source/reference/family freeze and scientific gates remain open.
+
+
+## Shared missed-match coordination and bounded audit — 26 November
+
+This is the single shared attribution receipt for #158, T01.064 and T05.063
+on the existing #183/#185 lane. It is an experimental exchange convention,
+not a new canonical schema, publication registry or acceptance decision.
+Preserve the existing owners: Layout (#182/#186/#187/#188/#189) owns
+source extraction, span and structural retrieval, and independent family intake;
+Offline (#184) owns evidence acquisition/replay and action outcomes;
+Orthogonal owns definition/applicability/directional verification; Complete PR
+Work owns existing model/task-framing receipts. The coordinator joins their
+immutable outputs and owns recall accounting, not their branches. #185's
+heading-context control and #183's MiniLM negative result remain separate
+observations, not new executions of their owners' workloads.
+
+### Minimal exchange receipt for independently labelled positives
+
+One row per locked positive reference ID and evaluated arm. Use a stable
+opaque ID (bound to the query/item and target ID by the private reference
+ledger), never text or model-derived labels as join keys. Receipt metadata:
+dataset/version, reference tier (independently adjudicated / model-relative /
+editorial / synthetic), exact reference-lock digest, component/split IDs,
+eligible candidate universe digest, exact code/model/data/run and artifact
+pins, arm, candidate and review budgets, and owner/receipt references.
+Per-positive fields: case ID; expected source and target anchor references
+or hashes; observed anchor identity and fidelity status; original pool and
+review rank or null; stage states; decision outcome/reason (including
+abstention, rejection, unsupported, referral and observed resolution);
+per-stage evidence receipt identifiers. Do not expose restricted text.
+Explicit stage states: pass, fail, unknown (not measured/insufficient
+reference), not_reached (upstream exclusion demonstrated). Stages in order:
+source_anchor (including missing items, nested block or qualifier loss);
+candidate_generation (missing from the allowed pool); rank_cutoff (present
+in pool but excluded from the fixed review budget); evidence (insufficient
+or incorrect source-bound evidence); decision (wrong relation, unresolved
+abstention/referral). Only call a rank-cutoff loss a *reranker-induced loss*
+if the same candidate pool and baseline review set contained the positive.
+Retain all gains, losses, and abstentions; referral alone is not resolution.
+
+Report first_observed and first_established separately: the earliest
+observed failing stage is not a causal/end-to-end attribution when an
+earlier stage is unknown. A first_established stage requires all earlier
+stages to pass. None_observed is not success; independent end-to-end
+success requires all stages to pass. Count both-failed overlap alongside
+both-observed denominator for every stage pair; for arm pairs count shared
+and arm-specific misses on identical locked IDs and at both pool and review
+cutoffs. Do not impute downstream failures or zeros when unobserved.
+If independent counterfactual full-pool evidence is available, retain its
+separate budget and run IDs. Inference/reference separation: Layout/curators
+lock source-only adjudication by separate independent contexts, with all
+related editions/derivatives in the same component. Model runners receive
+only opaque cases, text and admissible anchors, never positive IDs/labels
+or earlier model results for adjudication. Coordinator joins only after
+runs are locked. No claim of human adjudication without actual humans.
+
+### Executed editorial diagnostic (not independent or confirmatory)
+
+Three retained ZIPs independently SHA-256 checked: BGE 15088716936,
+instructed Qwen fusion 15090704998, two-pool MiniLM 15105542356. Exact pins
+in recall_audit.py. Same 106 queries, 31 domains, 125 known editorial
+positive covers_topic associations; exact query/target/reference and
+MiniLM candidate pool identity checked. No independently adjudicated
+positives available; unlisted associations are not known negatives.
+Same 10 candidate slots and 5 review opportunities/query (1,060 and 530),
+not matched neural compute or observed review workload. Full rankings
+are separate from pool recall. No new neural downloads or inference.
+Plain lexical challenger: exact contiguous normalized query phrase in
+definition, then equal word/char RRF60, stable ID tie break. Parent-topic
+proxy uses nearest existing same-instrument dotted ID prefix for 24
+queries, prepending its short topic to the lexical query; not an
+independently verified source heading or clause. No labels or target
+IDs as lexical text. Stable zero-signal fill is explicitly counted
+(14 plain, 7 parent-proxy pool slots), not evidence of relevance.
+Local text projection copied from current repository's original editorial
+topic/definition metadata; exact retained word and char ranks reproduce
+for every query. Full checkout mode verifies source-file SHA-256 pins.
+No new reference registry or original-source disclosure.
+
+| Arm | Macro R@1 | R@3 | R@5 | Pool R@10 | Hits@5/125 | Pool hits/125 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| BGE | .34434 | .58962 | .72013 | .80031 | 87 | 97 |
+| Instructed Qwen+BGE | .39623 | .66509 | .76258 | .85692 | 93 | 104 |
+| BGE MiniLM | .40094 | .62736 | .68239 | .80031 | 82 | 97 |
+| Exact phrase + lexical | .32075 | .47642 | .52830 | .68868 | 63 | 81 |
+| Parent-topic proxy + exact/lexical | .37264 | .51887 | .55660 | .65094 | 66 | 77 |
+
+All-31 enumeration: 125/125 known associations, 3,286 candidate inspections;
+label-aware ranking oracle at 10/5: 125/125, R@1 .9135, R@3/5 1.0.
+The oracle uses known reference IDs only after evaluation, not operational
+inference, actual reviewer success or an equal-cost all-31 decision run.
+
+| Arm | Pool miss | In pool, outside review | No observed retrieval failure |
+| --- | ---: | ---: | ---: |
+| BGE | 28 | 10 | 87 |
+| Instructed Qwen+BGE | 21 | 11 | 93 |
+| BGE MiniLM | 28 | 15 | 82 |
+| Exact phrase + lexical | 44 | 18 | 63 |
+| Parent-topic proxy | 48 | 11 | 66 |
+
+Source/anchor, evidence and decision unknown for all 125 in each arm;
+first-established end-to-end attribution unresolved for all 125.
+Within-arm source/evidence/decision overlap denominators zero; do not
+interpret zero observed overlap as no failure. Pool/rank stages are
+sequential, so pool misses have rank not_reached. BGE vs instructed-Qwen
+fusion pool misses: 18 shared, 10 BGE-only, 3 fusion-only; review misses
+30 shared, 8 BGE-only, 2 fusion-only. MiniLM same BGE pool loses nine
+review positives and gains four; 34 shared review misses. Exact/lexical
+vs Qwen fusion review misses: 27 shared, 35 lexical-only, 5 fusion-only.
+Parent proxy vs Qwen fusion: 25 shared, 34 proxy-only, 7 fusion-only.
+Full per-positive stage rows, instrument strata, pairwise overlaps,
+candidate ranks and all full rankings generated by the audit. Instrument
+strata are not independent guideline components. Keep false-equivalence
+and decision recall unestimated on this positive-only editorial audit.
+
+Three focused tests: initial RED missing module, GREEN 3 passed. Local
+Python 3.13.5; wall .117809 s, peak RSS 101516 KiB. Script/test Git blobs
+35155c2a85fa396d045eb9a1606f840e4512ffdb and
+3ee57e049b09f1a649b08a40f5246a3d11aeec8d match locally executed sources.
+Projection SHA-256 8c35d63b307ffbb152490c912eb69e9a5830a2585dc38882ec4188a5a5468c48;
+generated receipt SHA-256 ad370b7cc7966b0beaaef2e7005c4bb155aec1fb2ea56a531132761e17532f23
+(includes variable runtime fields). Reproduce from repository root with
+the three exact GitHub artifact ZIPs (filenames github-actions-artifact-ID.zip):
+
+```sh
+PYTHONPATH=. python -m pytest -q research/model-placement/test_recall_audit.py
+PYTHONPATH=. python research/model-placement/recall_audit.py --artifacts /path/to/artifacts --inputs . --output recall-audit.json
+```
+
+Full-file checkout path remains to be exercised on hosted checkout; the
+local run used --projection-only with the rank-equivalence check.
+Do not use --projection-only for confirmation.
+
+### Dependency and disposition
+
+The latest Layout source-intake run 45797664414 completed; verified ZIP
+15106576904 SHA-256
+4133e229f7b6965e17690e063ebecd745ed96671b1fd8ce8247acedd2455a846.
+All five attempted editions held (PLOS OSError, Europe PMC TimeoutError,
+PMC OAI unavailable/held); zero newly qualified independent families or
+new canonical packs. Layout owns retries and source/anchor/reference
+qualification; do not duplicate. Next handoff is a frozen family-component
+source/anchor and independently adjudicated positive ledger, with full
+candidate references (or prespecified sampling weights). Then join
+Offline evidence sufficiency/resolution and Orthogonal applicability/
+direction outcomes against the same opaque IDs; Complete PR Work supplies
+existing model/framing pins. No cross-dataset pseudo-join, no production
+change, no new registry or release. #185's actual heading text synthetic
+control is retained (1.00/1.00 word/char R@5, fixed-pool 1.00/.95), not
+pooled with costing. Instructed Qwen+BGE is the strongest observed
+candidate-generation comparator here, not an adoption claim; focus on
+pool misses and common misses before further ranking experiments.
