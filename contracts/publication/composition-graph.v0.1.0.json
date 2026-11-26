@@ -1,0 +1,165 @@
+{
+  "schema_version": "dev.standardflow.publication-contract.v1",
+  "status": "planned",
+  "design": {
+    "programme_id": "standardflow-composition-ontology-editorial-followup",
+    "protocol": {
+      "version": "0.1.0",
+      "path": "docs/research/composition-graph-protocol.v0.1.0.md",
+      "sha256": "720f95da1e278ec71c16c3d8a51140a946ae74d1df514d3eecaf20add5d812a0"
+    },
+    "experiments": [
+      {
+        "id": "E4",
+        "kind": "family_holdout",
+        "question": "Can sparse and dense retrieval and ontology linking recover independently relevant cross-checklist requirements?",
+        "primary_endpoint": {
+          "name": "macro_family_recall_at_5",
+          "definition": "Mean over evaluation families of query-level relevant targets retrieved at k=5 divided by independently established relevant targets; undefined queries and incomplete-reference bounds separate.",
+          "analysis_unit": "guideline_family",
+          "decision_rule": "Freeze minimum useful paired recall gain, review budget and cost limit; no selection on evaluation labels."
+        },
+        "secondary_endpoints": [
+          "precision@k",
+          "recall@1/3/10",
+          "MRR",
+          "nDCG",
+          "candidate reduction",
+          "ontology-link precision/recall/F1",
+          "abstention",
+          "reference completeness",
+          "runtime/RSS/index bytes"
+        ],
+        "input_ids": []
+      },
+      {
+        "id": "E5",
+        "kind": "family_holdout",
+        "question": "Does conservative composition reduce display burden without losing applicable original obligations?",
+        "primary_endpoint": {
+          "name": "material_obligation_loss_rate",
+          "definition": "Independent reference-confirmed material lost obligations divided by adjudicable applicable original requirements; unresolved obligations and per-composition risk separate.",
+          "analysis_unit": "guideline_family_and_composition",
+          "decision_rule": "Require exact identity conservation and zero unsupported group closure; proposed upper 95% cluster-aware bound <=2% before any promotion, final margin and sample size frozen with expert approval."
+        },
+        "secondary_endpoints": [
+          "compression ratio",
+          "false equivalence",
+          "false discharge",
+          "direction inversions",
+          "scope conflicts",
+          "review minutes",
+          "unresolved applicability",
+          "source-anchor conservation"
+        ],
+        "input_ids": []
+      },
+      {
+        "id": "E6",
+        "kind": "census",
+        "question": "Which eligible ontology concept-by-scope cells lack independently verified reporting coverage and which apparent gaps survive audit?",
+        "primary_endpoint": {
+          "name": "expert_supported_gap_yield",
+          "definition": "Independently supported candidate gaps divided by audited nominated eligible cells; report the known-eligible denominator, confirmed full, confirmed partial, confirmed uncovered, unresolved candidate gaps, other unknown coverage, unknown applicability, excluded and sampled non-nominated cells separately.",
+          "analysis_unit": "ontology_concept_by_study_scope",
+          "decision_rule": "Descriptive census and stratified expert audit; no automatic normative gap inference."
+        },
+        "secondary_endpoints": [
+          "direct/ancestor coverage",
+          "separate full-coverage and any-coverage identification bounds; undefined for zero eligible cells",
+          "mapping disagreement",
+          "depth and weighting sensitivity",
+          "source incompleteness",
+          "ontology blind spots",
+          "audit inclusion probabilities"
+        ],
+        "input_ids": []
+      },
+      {
+        "id": "E7",
+        "kind": "census",
+        "question": "How do guideline co-citation and bibliographic coupling relate to independent semantic and ontology graph layers?",
+        "primary_endpoint": {
+          "name": "co_citation_semantic_edge_association",
+          "definition": "Descriptive association of normalized co-citation weights with reviewed semantic or ontology-related edges within frozen time/field strata; eligible pair and citation-observability denominators.",
+          "analysis_unit": "guideline_edition_pair_by_time_window",
+          "decision_rule": "Predeclare graph layers, comparison/null models and time windows; exploratory unless independently frozen; no causal or equivalence inference."
+        },
+        "secondary_endpoints": [
+          "raw co-citation/coupling",
+          "reference coverage",
+          "provider disagreements",
+          "centrality/community stability",
+          "permutation nulls",
+          "temporal and weighting sensitivity"
+        ],
+        "input_ids": []
+      },
+      {
+        "id": "E8",
+        "kind": "family_holdout",
+        "question": "Does hybrid graph/vector evidence improve editorial review utility relative to usual review and lexical/simple union comparators?",
+        "primary_endpoint": {
+          "name": "confirmed_material_findings_per_reviewer_hour",
+          "definition": "Paired difference in independently confirmed material reporting issues per active reviewer-hour, controlling manuscript and reviewer clustering and review order.",
+          "analysis_unit": "manuscript_and_reviewer_cluster",
+          "decision_rule": "Freeze institution/ethics determination, allocation, sample size, minimum gain and tolerated harm before enrollment; feasibility only if precision is insufficient."
+        },
+        "secondary_endpoints": [
+          "missed material issues",
+          "false positives",
+          "unsupported findings",
+          "time",
+          "usability",
+          "agreement",
+          "graph ablation",
+          "citation evidence ablation"
+        ],
+        "input_ids": []
+      }
+    ],
+    "inputs": [],
+    "freeze_blockers": [
+      "Acquire and qualify multiple exact-edition reporting packs and item-level rights; freeze natural cases and family components independent of training.",
+      "Freeze relevance, relation, applicability, concept and manuscript reference rubrics, adjudicators and conflict resolution; complete human audit design.",
+      "Pin ontology releases, import closure, eligible concept-by-scope denominator and literature-demand/citation snapshots with rights review.",
+      "Freeze sample size and cluster precision, primary decision limits, model/checkpoint/runtime/assets, retrieval candidate budgets and graph sensitivity/null design.",
+      "Obtain institutional and ethics determination, manuscript permissions and reviewer participation before prospective evaluation.",
+      "Record owner-approved protocol freeze and analytical contract hashes; no existing exploratory output can be retrospectively registered."
+    ]
+  },
+  "freeze": null,
+  "runs": [],
+  "claims": [
+    {
+      "id": "C4",
+      "status": "planned",
+      "text": "Sparse/dense retrieval and conservative composition can improve review efficiency while conserving applicable source obligations.",
+      "run_ids": [],
+      "review": null,
+      "limitations": [
+        "Hypothesis; synthetic development results and local hash declarations are not independent validation."
+      ]
+    },
+    {
+      "id": "C5",
+      "status": "planned",
+      "text": "Ontology-linked coverage and independent bibliometric evidence can help prioritize candidate reporting gaps.",
+      "run_ids": [],
+      "review": null,
+      "limitations": [
+        "No mapping is a missing-evidence state, not proof of a normative gap; audit and scope required."
+      ]
+    },
+    {
+      "id": "C6",
+      "status": "planned",
+      "text": "Hybrid graph retrieval may improve independently confirmed editorial findings per reviewer-hour.",
+      "run_ids": [],
+      "review": null,
+      "limitations": [
+        "Requires prospectively qualified manuscripts and reviewers, independent evidence and ethics determination."
+      ]
+    }
+  ]
+}

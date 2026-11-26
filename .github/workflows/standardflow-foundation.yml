@@ -45,6 +45,8 @@ on:
       - ".agents/skills/conductor/**"
       - ".github/workflows/standardflow-foundation.yml"
 
+  workflow_dispatch:
+
 permissions:
   contents: read
 

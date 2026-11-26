@@ -132,3 +132,82 @@ Ten synthetic cases passed. The full repository's CPython 3.12, protected CI and
 receiving-main qualification remain separate. Do not claim empirical semantic accuracy,
 actual cross-checklist reduction or a deployed consumer. Preserve the original source
 and all unverified nodes.
+
+
+## Second bounded increment: statistical comparison and local display grouping
+
+The word unigram/bigram TF-IDF baseline remains the default. Select
+`--method char` to use normalized, boundary-padded character trigrams with
+the same smoothed IDF, cosine scoring and eligibility rules. Both methods
+preserve every original requirement and return candidate edges, not equivalence.
+The pack snapshot digest is independent of ranking method.
+
+```sh
+python -m scripts.compose_checklists --pack a.json --pack b.json --method word --top-k 5
+python -m scripts.compose_checklists --pack a.json --pack b.json --method char --top-k 5
+python -m scripts.compose_checklists --pack a.json --pack b.json --group-review review.json
+```
+
+The optional local review input supplies `pack_snapshot_sha256`,
+`scope_sha256` and `groups`. Each group contains `members` (exact
+pack/version/item triples) and `pairs`. Each unordered pair must explicitly
+declare `left`, `right`, `relation: equivalent` and a
+`receipt_sha256`. Groups are disjoint and cross-pack; held or unknown items,
+stale snapshots, missing or duplicate pairs, and non-equivalent relations
+are rejected. All ungrouped items remain singleton rows. A three-item group
+requires three pair reviews, not merely two adjacent similarity edges.
+The result contains the unchanged requirement and candidate lists plus a
+display partition. Scope and receipt hashes are **local declarations**:
+the preview does not retrieve or authenticate the evidence or determine
+applicability, and never promotes the declaration to an approved graph edge
+or reports a semantic merge. A verified relation contract and an independently
+reviewed study-specific scope are prerequisites for publishing or using a
+group as an authoritative reporting decision.
+
+### Synthetic development comparison (26 November 2026)
+
+Six analyst-authored queries, twelve candidate requirements (six intended
+targets and six contrast cases), same two-pack input and exhaustive positive
+cross-pack rankings. Snapshot
+`8c431e4c3e55a56446e610a445e3da5780026b77263cfacbeb5c8f3a2d8026e3`.
+The panel in `tests/test_composition_extension.py` is a reproducible
+development control, not a held-out or independently adjudicated benchmark.
+
+| Method | Target ranks | Recall@1 | Recall@3 | MRR |
+| --- | --- | ---: | ---: | ---: |
+| Word unigram/bigram TF-IDF | 1, 1, 7, 8, 1, 2 | 3/6 | 4/6 | 0.628 |
+| Character trigram TF-IDF | 1, 1, 2, 2, 1, 1 | 4/6 | 6/6 | 0.833 |
+
+The character baseline retrieves more designed targets but still misranks
+two at rank one. The test deliberately includes quantifier, omission and
+scope contrasts. No automatic merges; no claim of natural-source or embedding
+performance. Focused tests-first execution observed two expected failures
+before implementation; 23 tests passed after implementation in an isolated
+CPython 3.13.5 environment using the copied validator/schema semantics and
+existing fixture helper. Hosted full-suite and receiving checks are separate.
+
+### Next qualification
+
+Freeze family/edition-disjoint natural queries and independently adjudicated
+relations with a documented relevance definition, hard negatives and
+uncertain cases. Compare both sparse methods and one locally executed pinned
+dense bi-encoder against the same inputs, not a changing corpus. Measure
+recall@k, precision@k, ranking quality, coverage/abstention, latency, memory,
+index size and reviewer workload. Evaluate hybrid rank fusion as a separate
+challenger, and directional equivalence independently of retrieval. Never
+reuse the synthetic development panel as independent validation or adopt
+transitive closure from similarity. Preserve producer revisions, scope and
+rights; use the existing experiment and publication contracts. Do not add a
+persistent vector database, graph service or model dependency until qualified
+benefit and consumer need justify it.
+
+
+## Prospective ontology and citation-network validation
+
+The [follow-up protocol](../research/composition-graph-protocol.v0.1.0.md) and
+[analytical output contract](../../contracts/analysis/requirement-graph.v0.1.0.json) specify E4-E8,
+including independent eligible concept/scope denominators, typed MeSH/OBI/STATO
+mappings, citation/co-citation layers, coverage bounds, gap audit, and editorial
+utility. A missing mapping is unknown rather than proof of a reporting gap.
+Preserve source authority and existing projections. The graph is a derived view.
+The private contract preview and data-release approval are separate.

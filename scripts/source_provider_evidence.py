@@ -21,7 +21,8 @@ EUROPE = "www.ebi.ac.uk"
 PMC = "pmc.ncbi.nlm.nih.gov"
 CROSSREF = "api.crossref.org"
 OPENALEX = "api.openalex.org"
-HOSTS = {EUROPE, PMC, CROSSREF, OPENALEX}
+PLOS = "journals.plos.org"
+HOSTS = {EUROPE, PMC, CROSSREF, OPENALEX, PLOS}
 MAX_BYTES = 8_000_000
 DOI = re.compile(r"10\.\d{4,9}/[A-Za-z0-9._;()/:+<>\-]{1,220}", re.I)
 PMID = re.compile(r"[1-9]\d{0,9}")
@@ -219,10 +220,34 @@ def oai_article(raw: bytes, pmcid: str) -> tuple[bytes, dict]:
     }
 
 
-def fetch_priority(pmcid: str) -> tuple[bytes | None, dict]:
+def fetch_priority(pmcid: str, *, plos_doi: str | None = None) -> tuple[bytes | None, dict]:
     if not PMCID.fullmatch(pmcid):
         raise ValueError("invalid selected PMCID")
     attempts = []
+    if plos_doi is not None:
+        # Fixed single-article JATS route documented at api.plos.org/text-and-data-mining.html.
+        match = re.fullmatch(r"10\.1371/journal\.(pmed|pbio)\.\d{7}", plos_doi)
+        if not match:
+            raise ValueError("invalid selected PLOS article DOI")
+        journal = {"pmed": "plosmedicine", "pbio": "plosbiology"}[match[1]]
+        try:
+            path = f"/{journal}/article/file?" + urlencode({"id": plos_doi, "type": "manuscript"})
+            raw = fetch(PLOS, path)
+            return raw, {
+                "provider": "plos",
+                "representation": "plos_publisher_jats_xml",
+                "response_sha256": hashlib.sha256(raw).hexdigest(),
+                "response_bytes": len(raw),
+                "attempts": [{"provider": "plos", "status": "retrieved"}],
+            }
+        except (OSError, ValueError, http.client.HTTPException) as exc:
+            attempts.append(
+                {
+                    "provider": "plos",
+                    "status": "transport_or_http_failure",
+                    "error_type": type(exc).__name__,
+                }
+            )
     try:
         raw = fetch(EUROPE, "/europepmc/webservices/rest/" + pmcid + "/fullTextXML")
         return raw, {
@@ -230,7 +255,7 @@ def fetch_priority(pmcid: str) -> tuple[bytes | None, dict]:
             "representation": "europe_pmc_primary_xml",
             "response_sha256": hashlib.sha256(raw).hexdigest(),
             "response_bytes": len(raw),
-            "attempts": [{"provider": "europe_pmc", "status": "retrieved"}],
+            "attempts": [*attempts, {"provider": "europe_pmc", "status": "retrieved"}],
         }
     except (OSError, http.client.HTTPException) as exc:
         attempts.append(

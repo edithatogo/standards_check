@@ -129,3 +129,17 @@ operational, dataset, consumer and publication tasks above retain their own gate
 See [frontier evaluation and efficiency evidence](../../../docs/research/frontier-evaluation-20261125.md). Source changes and historical observations do not close these tasks; receiving checks and actual comparative evidence remain required.
 
 The independently verified controlled trial in [PR 168](https://github.com/edithatogo/standards_check/pull/168) achieved 34.2338% median regression-suite improvement, conserved exact coverage and test outcomes, and passed both failure probes. The production adoption and scoped clean-install qualification are in [PR 169](https://github.com/edithatogo/standards_check/pull/169), with [hash closure evidence](python-ci-hash-closure-20261125.md). T05.047 remains open until fresh protected and receiving acceptance; T05.043 remains open beyond the bounded ordinary Ubuntu Python CI profile. No scientific gate or release hold is closed.
+
+## Prospective composition and graph qualification
+
+- [ ] **T05.049** ([#158](https://github.com/edithatogo/standards_check/issues/158)) Freeze the follow-up E4-E8 publication contract after independent references, sample precision, ontology/citation snapshots, methods and decision rules are approved; retain all empirical results and failed runs.
+- [ ] **T05.050** ([#31](https://github.com/edithatogo/standards_check/issues/31), [#162](https://github.com/edithatogo/standards_check/issues/162)) Qualify the contract-only static preview package, analytical contract and receiving CI; bind exact revision and artifact hashes. Keep real data and external release separate.
+
+The [publication contract](../../../contracts/publication/composition-graph.v0.1.0.json) extends the existing validator without replacing E1-E3. The [analysis contract](../../../contracts/analysis/requirement-graph.v0.1.0.json) maps each gate to its existing workflow or explicitly planned extension. No confirmed outcomes or real-data export.
+
+## Optional human review and unattended workflow operation
+
+- [ ] **T05.051** ([#31](https://github.com/edithatogo/standards_check/issues/31)) Qualify automatic and optional dispatch access for all maintained workflows, with no mandatory human approval and actual review objections retained.
+- [ ] **T05.052** ([#30](https://github.com/edithatogo/standards_check/issues/30), [#116](https://github.com/edithatogo/standards_check/issues/116)) Observe a protected updater proposal without dashboard approval and qualify the unattended routine merge handover; keep separate breaking/security work and verified receiving receipts.
+
+See [optional human review](../../../docs/development/optional-human-review.md). Model-relative development and candidate reference work can proceed without waiting for human review; T05.049 retains the actual external/scientific evidence gates. No automatic approval, false human review or release permission.

@@ -152,6 +152,9 @@ jobs:
             | tee target/coverage/publication-contract.json
           python -m coverage run -m scripts.validate_dataset_release \
             | tee target/coverage/dataset-release.json
+          python -m coverage run -m scripts.render_contract_preview \
+            --output target/coverage/contracts-preview --revision "$(git rev-parse HEAD)" \
+            | tee target/coverage/contracts-preview-receipt.json
           cargo build --locked -p standardflow-cli
           python -m coverage run -m scripts.qualify_legacy_prisma \
             --rust-cli target/debug/standardflow --output target/coverage/legacy-prisma.json

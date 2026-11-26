@@ -1,0 +1,346 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.standardflow.dev/requirement-graph-plan.v1.schema.json",
+  "title": "StandardFlow planned analytical graph outputs",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "contract_version",
+    "status",
+    "publication_contract",
+    "scope",
+    "sources",
+    "existing_inputs",
+    "tables",
+    "figures",
+    "gates",
+    "release"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "dev.standardflow.requirement-graph-plan.v1"
+    },
+    "contract_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "status": {
+      "const": "planned"
+    },
+    "publication_contract": {
+      "const": "contracts/publication/composition-graph.v0.1.0.json"
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "uri",
+          "role",
+          "status",
+          "revision",
+          "sha256",
+          "licence_status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$"
+          },
+          "uri": {
+            "type": "string",
+            "format": "uri"
+          },
+          "role": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "const": "planned"
+          },
+          "revision": {
+            "type": "null"
+          },
+          "sha256": {
+            "type": "null"
+          },
+          "licence_status": {
+            "const": "unassessed"
+          }
+        }
+      }
+    },
+    "existing_inputs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "producer",
+          "grain"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$"
+          },
+          "producer": {
+            "type": "string",
+            "pattern": "^scripts/[a-z_]+\\.py$"
+          },
+          "grain": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "tables": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "grain",
+          "experiment_ids",
+          "columns",
+          "primary_key",
+          "references",
+          "access",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$"
+          },
+          "grain": {
+            "type": "string",
+            "minLength": 1
+          },
+          "experiment_ids": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$"
+            },
+            "uniqueItems": true
+          },
+          "columns": {
+            "type": "object",
+            "minProperties": 2,
+            "required": [
+              "key",
+              "snapshot_id"
+            ],
+            "propertyNames": {
+              "pattern": "^[a-z][a-z0-9_]*$"
+            },
+            "properties": {
+              "key": {
+                "const": "str"
+              },
+              "snapshot_id": {
+                "const": "str"
+              }
+            },
+            "additionalProperties": {
+              "enum": [
+                "str",
+                "str?",
+                "int",
+                "int?",
+                "float",
+                "float?",
+                "bool",
+                "bool?"
+              ]
+            }
+          },
+          "primary_key": {
+            "const": [
+              "key"
+            ]
+          },
+          "references": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "column",
+                "table",
+                "target_column"
+              ],
+              "properties": {
+                "column": {
+                  "type": "string",
+                  "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$"
+                },
+                "table": {
+                  "type": "string",
+                  "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$"
+                },
+                "target_column": {
+                  "const": "key"
+                }
+              }
+            }
+          },
+          "access": {
+            "enum": [
+              "internal_only",
+              "aggregate_only",
+              "reviewed_metadata_candidate"
+            ]
+          },
+          "status": {
+            "const": "planned"
+          }
+        }
+      }
+    },
+    "figures": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "visualization",
+          "table_ids",
+          "purpose",
+          "status",
+          "accessible_alternative"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$"
+          },
+          "visualization": {
+            "type": "string",
+            "minLength": 1
+          },
+          "table_ids": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$"
+            },
+            "uniqueItems": true
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "const": "planned"
+          },
+          "accessible_alternative": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "gates": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "task",
+          "issue",
+          "workflow",
+          "mode",
+          "acceptance"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$"
+          },
+          "task": {
+            "type": "string",
+            "pattern": "^T[0-9]{2}\\.[0-9]{3}$"
+          },
+          "issue": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "workflow": {
+            "type": "string",
+            "pattern": "^\\.github/workflows/[a-z0-9-]+\\.yml$"
+          },
+          "mode": {
+            "enum": [
+              "existing_required",
+              "existing_source_lane",
+              "planned_extension"
+            ]
+          },
+          "acceptance": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "release": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "space",
+        "visibility",
+        "preview",
+        "dataset_status",
+        "dataset_contract",
+        "excluded"
+      ],
+      "properties": {
+        "space": {
+          "const": "https://huggingface.co/spaces/edithatogo/standardflow-contracts"
+        },
+        "visibility": {
+          "const": "private"
+        },
+        "preview": {
+          "const": "authored_planned_contracts_only"
+        },
+        "dataset_status": {
+          "const": "held"
+        },
+        "dataset_contract": {
+          "const": "contracts/datasets/standardflow-metadata.v0.1.0.json"
+        },
+        "excluded": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      }
+    }
+  }
+}

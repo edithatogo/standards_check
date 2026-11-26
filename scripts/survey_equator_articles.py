@@ -386,9 +386,12 @@ def priority_survey(specs: list[dict], root: Path) -> list[dict]:
     for spec in specs:
         acquisition = {}
         try:
-            raw, acquisition = fetch_priority(spec["pmcid"])
+            if spec.get("publisher_xml") == "plos":
+                raw, acquisition = fetch_priority(spec["pmcid"], plos_doi=spec["doi"])
+            else:
+                raw, acquisition = fetch_priority(spec["pmcid"])
             if raw is None:
-                raise ValueError("both official acquisition routes unavailable or held")
+                raise ValueError("selected official acquisition routes unavailable or held")
             result = scan_article(raw, spec, root)
             result["acquisition"] = acquisition
             results.append(result)
