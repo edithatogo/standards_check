@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "status": "executed_local_posthoc_synthetic",
+  "parent_pr": 184,
+  "parent_head": "806c21e563e5f2e0628d007a71e1883a88d75410",
+  "fixture_sha256": "55d1dd465c413a4d64890974de42a9719c63b7a711f8172eb70b35160b28c3d0",
+  "source_blob": "1e515c065e66b6f33d43eabb91ed8840690e2ed9",
+  "test_blob": "8b289b410107d68971400ee59ca3aec4c02bae9d",
+  "full_output_sha256": "338edbba0f271b6fefea6a6e68faa125984f743952db550d341e2d549a444c54",
+  "deterministic_sha256": "1ae64cc0fe64a12497b30dec993ecb4ec9c30a337452a87a9b588d20b2686475",
+  "digest_encoding": "Remove acquisition_seconds from every case trace; sorted-key compact UTF-8 JSON",
+  "train_cases": 12,
+  "test_cases": 24,
+  "comparison_fields": [
+    "complete",
+    "raw_correct",
+    "gated_correct",
+    "calls",
+    "reranks",
+    "new_words",
+    "reward",
+    "hindsight_regret"
+  ],
+  "parent_first": {
+    "exact_one": [
+      23,
+      18,
+      14,
+      24,
+      0,
+      159,
+      17.35,
+      0
+    ],
+    "exact_two": [
+      23,
+      18,
+      14,
+      48,
+      5,
+      279,
+      14.95,
+      0
+    ],
+    "adaptive_two": [
+      23,
+      18,
+      14,
+      25,
+      1,
+      159,
+      17.25,
+      0.2
+    ]
+  },
+  "comparison": "Existing one-call expansion 19 complete/11 gated correct, 24 calls/0 reranks; learned 20/12, 24/9; original adaptive expansion 23/14, 29/1",
+  "development_tie": "On 12 development cases both expansion-first and parent-first have 10 complete and five gated correct at one call; equal reward 6.3 with different acquired words.",
+  "common": {
+    "referrals": 6,
+    "review_resolved": 0,
+    "gated_false_equivalence": 0,
+    "missed_equivalence": 8
+  },
+  "tests": {
+    "focused": 6,
+    "overlay": 61,
+    "full_checkout": false,
+    "original_arms_and_digest_preserved": true
+  },
+  "claim_boundary": "Post-hoc routing on exposed synthetic family-disjoint replay; parent link guarantees full target in the fixture; no production or independent validation; no wall-time matching.",
+  "hosted": "pending"
+}
