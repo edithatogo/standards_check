@@ -1,0 +1,1977 @@
+{
+  "schema_version": 1,
+  "claim_boundary": "exposed synthetic development; no independent source/reference qualification or production promotion",
+  "run_id": 45797316771,
+  "job_id": 139831189662,
+  "experiment_head": "421a9b234f12edfac942c18f832a2ee4e5a21950",
+  "executed_merge": "5dc29e64ad6ea05fd096cc72090603d2f759e209",
+  "artifact_id": 15106112148,
+  "artifact_sha256": "e5f3d8a17ce8b57169aa19f7730b1d2f272c04d23282e8240822539d3b55f09f",
+  "report_sha256": "7a79c7734a6d202332fa1a65178a1fb4a9b14e83762041418574dd3a7eea2f7d",
+  "formatted_source_blob": "5ffcbb4b993d32a409087f33d64123c4fdbe1bcd",
+  "formatted_source_sha256": "d6900036850f51971856ed910f207562ad0d2ee2f5e858af1a3af27e34dde232",
+  "executed_test_blob": "a5c783231ea6bc7960a70a7bd65c3c98e8a6165a",
+  "fixture_sha256": "55d1dd465c413a4d64890974de42a9719c63b7a711f8172eb70b35160b28c3d0",
+  "fresh_inference": true,
+  "hosted_focused_tests": 21,
+  "call_counts": {
+    "directional_nli": 496,
+    "neural_rerank": 141
+  },
+  "runtime": {
+    "seconds": 4.201675719000036,
+    "initialization_seconds": 1.3252303410000081,
+    "peak_rss_kib": 589704,
+    "minilm_seconds": 1.1047612860002118,
+    "deberta_seconds": 2.747199761000047,
+    "reranker_seconds": 0.2694124110001894
+  },
+  "asset_download_bytes": {
+    "minilm": 86385719,
+    "deberta": 96037616,
+    "reranker": 23916695
+  },
+  "review_resolved": 0,
+  "summary": {
+    "head": {
+      "minilm": {
+        "n": 24,
+        "correct": 7,
+        "abstained": 3,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "broader",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "abstain",
+            "count": 1
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "broader",
+            "count": 2
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "contradictory",
+            "count": 3
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "abstain",
+            "count": 1
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "broader",
+            "count": 7
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "broader",
+            "count": 1
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "contradictory",
+            "count": 3
+          },
+          {
+            "reference": "narrower",
+            "prediction": "abstain",
+            "count": 1
+          },
+          {
+            "reference": "narrower",
+            "prediction": "broader",
+            "count": 1
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 0,
+          "incumbent_only": 0,
+          "challenger_only": 7,
+          "both_wrong": 17,
+          "disagreements": 21,
+          "shared_same_wrong": 3
+        },
+        "missed_equivalents": 8
+      },
+      "deberta": {
+        "n": 24,
+        "correct": 7,
+        "abstained": 2,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "broader",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "abstain",
+            "count": 2
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "broader",
+            "count": 1
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "contradictory",
+            "count": 3
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "broader",
+            "count": 5
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "indeterminate",
+            "count": 3
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "broader",
+            "count": 2
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "contradictory",
+            "count": 2
+          },
+          {
+            "reference": "narrower",
+            "prediction": "broader",
+            "count": 2
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 0,
+          "incumbent_only": 0,
+          "challenger_only": 7,
+          "both_wrong": 17,
+          "disagreements": 22,
+          "shared_same_wrong": 2
+        },
+        "missed_equivalents": 8
+      },
+      "lexical": {
+        "n": 24,
+        "correct": 0,
+        "abstained": 24,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "abstain",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "abstain",
+            "count": 8
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "narrower",
+            "prediction": "abstain",
+            "count": 2
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 0,
+          "incumbent_only": 0,
+          "challenger_only": 0,
+          "both_wrong": 24,
+          "disagreements": 0,
+          "shared_same_wrong": 24
+        },
+        "missed_equivalents": 8
+      },
+      "strict_nli": {
+        "n": 24,
+        "correct": 0,
+        "abstained": 24,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "abstain",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "abstain",
+            "count": 8
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "narrower",
+            "prediction": "abstain",
+            "count": 2
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 0,
+          "incumbent_only": 0,
+          "challenger_only": 0,
+          "both_wrong": 24,
+          "disagreements": 0,
+          "shared_same_wrong": 24
+        },
+        "missed_equivalents": 8
+      },
+      "proof_required": {
+        "n": 24,
+        "correct": 0,
+        "abstained": 24,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "abstain",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "abstain",
+            "count": 8
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "narrower",
+            "prediction": "abstain",
+            "count": 2
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 0,
+          "incumbent_only": 0,
+          "challenger_only": 0,
+          "both_wrong": 24,
+          "disagreements": 0,
+          "shared_same_wrong": 24
+        },
+        "missed_equivalents": 8
+      },
+      "lexical_verified": {
+        "n": 24,
+        "correct": 0,
+        "abstained": 24,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "abstain",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "abstain",
+            "count": 8
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "narrower",
+            "prediction": "abstain",
+            "count": 2
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 0,
+          "incumbent_only": 0,
+          "challenger_only": 0,
+          "both_wrong": 24,
+          "disagreements": 0,
+          "shared_same_wrong": 24
+        },
+        "missed_equivalents": 8
+      },
+      "formal": {
+        "n": 24,
+        "correct": 0,
+        "abstained": 24,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "abstain",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "abstain",
+            "count": 8
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "narrower",
+            "prediction": "abstain",
+            "count": 2
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 0,
+          "incumbent_only": 0,
+          "challenger_only": 0,
+          "both_wrong": 24,
+          "disagreements": 0,
+          "shared_same_wrong": 24
+        },
+        "missed_equivalents": 8
+      },
+      "complete_pairs": 0
+    },
+    "expanded": {
+      "minilm": {
+        "n": 24,
+        "correct": 19,
+        "abstained": 1,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "broader",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "contradictory",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "equivalent",
+            "count": 8
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "broader",
+            "count": 1
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "contradictory",
+            "count": 3
+          },
+          {
+            "reference": "narrower",
+            "prediction": "abstain",
+            "count": 1
+          },
+          {
+            "reference": "narrower",
+            "prediction": "narrower",
+            "count": 1
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 15,
+          "incumbent_only": 0,
+          "challenger_only": 4,
+          "both_wrong": 5,
+          "disagreements": 8,
+          "shared_same_wrong": 1
+        },
+        "missed_equivalents": 0
+      },
+      "deberta": {
+        "n": 24,
+        "correct": 19,
+        "abstained": 0,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "broader",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "contradictory",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "equivalent",
+            "count": 8
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "broader",
+            "count": 2
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "contradictory",
+            "count": 2
+          },
+          {
+            "reference": "narrower",
+            "prediction": "broader",
+            "count": 1
+          },
+          {
+            "reference": "narrower",
+            "prediction": "narrower",
+            "count": 1
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 15,
+          "incumbent_only": 0,
+          "challenger_only": 4,
+          "both_wrong": 5,
+          "disagreements": 9,
+          "shared_same_wrong": 0
+        },
+        "missed_equivalents": 0
+      },
+      "lexical": {
+        "n": 24,
+        "correct": 15,
+        "abstained": 9,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "broader",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "contradictory",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "equivalent",
+            "count": 4
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "narrower",
+            "prediction": "abstain",
+            "count": 1
+          },
+          {
+            "reference": "narrower",
+            "prediction": "narrower",
+            "count": 1
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 15,
+          "incumbent_only": 0,
+          "challenger_only": 0,
+          "both_wrong": 9,
+          "disagreements": 0,
+          "shared_same_wrong": 9
+        },
+        "missed_equivalents": 4
+      },
+      "strict_nli": {
+        "n": 24,
+        "correct": 19,
+        "abstained": 5,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "broader",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "contradictory",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "equivalent",
+            "count": 8
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "narrower",
+            "prediction": "abstain",
+            "count": 1
+          },
+          {
+            "reference": "narrower",
+            "prediction": "narrower",
+            "count": 1
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 15,
+          "incumbent_only": 0,
+          "challenger_only": 4,
+          "both_wrong": 5,
+          "disagreements": 4,
+          "shared_same_wrong": 5
+        },
+        "missed_equivalents": 0
+      },
+      "proof_required": {
+        "n": 24,
+        "correct": 11,
+        "abstained": 13,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "broader",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "contradictory",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "abstain",
+            "count": 8
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "narrower",
+            "prediction": "abstain",
+            "count": 1
+          },
+          {
+            "reference": "narrower",
+            "prediction": "narrower",
+            "count": 1
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 11,
+          "incumbent_only": 4,
+          "challenger_only": 0,
+          "both_wrong": 9,
+          "disagreements": 4,
+          "shared_same_wrong": 9
+        },
+        "missed_equivalents": 8
+      },
+      "lexical_verified": {
+        "n": 24,
+        "correct": 11,
+        "abstained": 13,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "broader",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "contradictory",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "abstain",
+            "count": 8
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "narrower",
+            "prediction": "abstain",
+            "count": 1
+          },
+          {
+            "reference": "narrower",
+            "prediction": "narrower",
+            "count": 1
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 11,
+          "incumbent_only": 4,
+          "challenger_only": 0,
+          "both_wrong": 9,
+          "disagreements": 4,
+          "shared_same_wrong": 9
+        },
+        "missed_equivalents": 8
+      },
+      "formal": {
+        "n": 24,
+        "correct": 0,
+        "abstained": 24,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "abstain",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "abstain",
+            "count": 8
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "narrower",
+            "prediction": "abstain",
+            "count": 2
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 0,
+          "incumbent_only": 15,
+          "challenger_only": 0,
+          "both_wrong": 9,
+          "disagreements": 15,
+          "shared_same_wrong": 9
+        },
+        "missed_equivalents": 8
+      },
+      "complete_pairs": 19
+    },
+    "lexical_deep": {
+      "minilm": {
+        "n": 24,
+        "correct": 19,
+        "abstained": 1,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "broader",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "contradictory",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "equivalent",
+            "count": 8
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "broader",
+            "count": 1
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "contradictory",
+            "count": 3
+          },
+          {
+            "reference": "narrower",
+            "prediction": "abstain",
+            "count": 1
+          },
+          {
+            "reference": "narrower",
+            "prediction": "narrower",
+            "count": 1
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 15,
+          "incumbent_only": 0,
+          "challenger_only": 4,
+          "both_wrong": 5,
+          "disagreements": 8,
+          "shared_same_wrong": 1
+        },
+        "missed_equivalents": 0
+      },
+      "deberta": {
+        "n": 24,
+        "correct": 19,
+        "abstained": 0,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "broader",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "contradictory",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "equivalent",
+            "count": 8
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "broader",
+            "count": 2
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "contradictory",
+            "count": 2
+          },
+          {
+            "reference": "narrower",
+            "prediction": "broader",
+            "count": 1
+          },
+          {
+            "reference": "narrower",
+            "prediction": "narrower",
+            "count": 1
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 15,
+          "incumbent_only": 0,
+          "challenger_only": 4,
+          "both_wrong": 5,
+          "disagreements": 9,
+          "shared_same_wrong": 0
+        },
+        "missed_equivalents": 0
+      },
+      "lexical": {
+        "n": 24,
+        "correct": 15,
+        "abstained": 9,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "broader",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "contradictory",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "equivalent",
+            "count": 4
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "narrower",
+            "prediction": "abstain",
+            "count": 1
+          },
+          {
+            "reference": "narrower",
+            "prediction": "narrower",
+            "count": 1
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 15,
+          "incumbent_only": 0,
+          "challenger_only": 0,
+          "both_wrong": 9,
+          "disagreements": 0,
+          "shared_same_wrong": 9
+        },
+        "missed_equivalents": 4
+      },
+      "strict_nli": {
+        "n": 24,
+        "correct": 19,
+        "abstained": 5,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "broader",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "contradictory",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "equivalent",
+            "count": 8
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "narrower",
+            "prediction": "abstain",
+            "count": 1
+          },
+          {
+            "reference": "narrower",
+            "prediction": "narrower",
+            "count": 1
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 15,
+          "incumbent_only": 0,
+          "challenger_only": 4,
+          "both_wrong": 5,
+          "disagreements": 4,
+          "shared_same_wrong": 5
+        },
+        "missed_equivalents": 0
+      },
+      "proof_required": {
+        "n": 24,
+        "correct": 11,
+        "abstained": 13,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "broader",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "contradictory",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "abstain",
+            "count": 8
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "narrower",
+            "prediction": "abstain",
+            "count": 1
+          },
+          {
+            "reference": "narrower",
+            "prediction": "narrower",
+            "count": 1
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 11,
+          "incumbent_only": 4,
+          "challenger_only": 0,
+          "both_wrong": 9,
+          "disagreements": 4,
+          "shared_same_wrong": 9
+        },
+        "missed_equivalents": 8
+      },
+      "lexical_verified": {
+        "n": 24,
+        "correct": 11,
+        "abstained": 13,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "broader",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "contradictory",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "abstain",
+            "count": 8
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "narrower",
+            "prediction": "abstain",
+            "count": 1
+          },
+          {
+            "reference": "narrower",
+            "prediction": "narrower",
+            "count": 1
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 11,
+          "incumbent_only": 4,
+          "challenger_only": 0,
+          "both_wrong": 9,
+          "disagreements": 4,
+          "shared_same_wrong": 9
+        },
+        "missed_equivalents": 8
+      },
+      "formal": {
+        "n": 24,
+        "correct": 0,
+        "abstained": 24,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "abstain",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "abstain",
+            "count": 8
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "narrower",
+            "prediction": "abstain",
+            "count": 2
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 0,
+          "incumbent_only": 15,
+          "challenger_only": 0,
+          "both_wrong": 9,
+          "disagreements": 15,
+          "shared_same_wrong": 9
+        },
+        "missed_equivalents": 8
+      },
+      "complete_pairs": 19
+    },
+    "neural_deep": {
+      "minilm": {
+        "n": 24,
+        "correct": 19,
+        "abstained": 1,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "broader",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "contradictory",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "equivalent",
+            "count": 8
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "broader",
+            "count": 1
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "contradictory",
+            "count": 3
+          },
+          {
+            "reference": "narrower",
+            "prediction": "abstain",
+            "count": 1
+          },
+          {
+            "reference": "narrower",
+            "prediction": "narrower",
+            "count": 1
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 15,
+          "incumbent_only": 0,
+          "challenger_only": 4,
+          "both_wrong": 5,
+          "disagreements": 8,
+          "shared_same_wrong": 1
+        },
+        "missed_equivalents": 0
+      },
+      "deberta": {
+        "n": 24,
+        "correct": 19,
+        "abstained": 0,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "broader",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "contradictory",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "equivalent",
+            "count": 8
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "broader",
+            "count": 2
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "contradictory",
+            "count": 2
+          },
+          {
+            "reference": "narrower",
+            "prediction": "broader",
+            "count": 1
+          },
+          {
+            "reference": "narrower",
+            "prediction": "narrower",
+            "count": 1
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 15,
+          "incumbent_only": 0,
+          "challenger_only": 4,
+          "both_wrong": 5,
+          "disagreements": 9,
+          "shared_same_wrong": 0
+        },
+        "missed_equivalents": 0
+      },
+      "lexical": {
+        "n": 24,
+        "correct": 15,
+        "abstained": 9,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "broader",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "contradictory",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "equivalent",
+            "count": 4
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "narrower",
+            "prediction": "abstain",
+            "count": 1
+          },
+          {
+            "reference": "narrower",
+            "prediction": "narrower",
+            "count": 1
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 15,
+          "incumbent_only": 0,
+          "challenger_only": 0,
+          "both_wrong": 9,
+          "disagreements": 0,
+          "shared_same_wrong": 9
+        },
+        "missed_equivalents": 4
+      },
+      "strict_nli": {
+        "n": 24,
+        "correct": 19,
+        "abstained": 5,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "broader",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "contradictory",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "equivalent",
+            "count": 8
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "narrower",
+            "prediction": "abstain",
+            "count": 1
+          },
+          {
+            "reference": "narrower",
+            "prediction": "narrower",
+            "count": 1
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 15,
+          "incumbent_only": 0,
+          "challenger_only": 4,
+          "both_wrong": 5,
+          "disagreements": 4,
+          "shared_same_wrong": 5
+        },
+        "missed_equivalents": 0
+      },
+      "proof_required": {
+        "n": 24,
+        "correct": 11,
+        "abstained": 13,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "broader",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "contradictory",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "abstain",
+            "count": 8
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "narrower",
+            "prediction": "abstain",
+            "count": 1
+          },
+          {
+            "reference": "narrower",
+            "prediction": "narrower",
+            "count": 1
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 11,
+          "incumbent_only": 4,
+          "challenger_only": 0,
+          "both_wrong": 9,
+          "disagreements": 4,
+          "shared_same_wrong": 9
+        },
+        "missed_equivalents": 8
+      },
+      "lexical_verified": {
+        "n": 24,
+        "correct": 11,
+        "abstained": 13,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "broader",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "contradictory",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "abstain",
+            "count": 8
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "narrower",
+            "prediction": "abstain",
+            "count": 1
+          },
+          {
+            "reference": "narrower",
+            "prediction": "narrower",
+            "count": 1
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 11,
+          "incumbent_only": 4,
+          "challenger_only": 0,
+          "both_wrong": 9,
+          "disagreements": 4,
+          "shared_same_wrong": 9
+        },
+        "missed_equivalents": 8
+      },
+      "formal": {
+        "n": 24,
+        "correct": 0,
+        "abstained": 24,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "abstain",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "abstain",
+            "count": 8
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "narrower",
+            "prediction": "abstain",
+            "count": 2
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 0,
+          "incumbent_only": 15,
+          "challenger_only": 0,
+          "both_wrong": 9,
+          "disagreements": 15,
+          "shared_same_wrong": 9
+        },
+        "missed_equivalents": 8
+      },
+      "complete_pairs": 19
+    },
+    "rule_terminal": {
+      "minilm": {
+        "n": 24,
+        "correct": 20,
+        "abstained": 0,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "broader",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "contradictory",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "equivalent",
+            "count": 8
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "broader",
+            "count": 1
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "contradictory",
+            "count": 3
+          },
+          {
+            "reference": "narrower",
+            "prediction": "narrower",
+            "count": 2
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 16,
+          "incumbent_only": 2,
+          "challenger_only": 4,
+          "both_wrong": 2,
+          "disagreements": 8,
+          "shared_same_wrong": 0
+        },
+        "missed_equivalents": 0
+      },
+      "deberta": {
+        "n": 24,
+        "correct": 20,
+        "abstained": 1,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "broader",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "contradictory",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "equivalent",
+            "count": 8
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "abstain",
+            "count": 1
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "broader",
+            "count": 1
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "contradictory",
+            "count": 2
+          },
+          {
+            "reference": "narrower",
+            "prediction": "narrower",
+            "count": 2
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 16,
+          "incumbent_only": 2,
+          "challenger_only": 4,
+          "both_wrong": 2,
+          "disagreements": 8,
+          "shared_same_wrong": 0
+        },
+        "missed_equivalents": 0
+      },
+      "lexical": {
+        "n": 24,
+        "correct": 18,
+        "abstained": 6,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "broader",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "contradictory",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "equivalent",
+            "count": 4
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "abstain",
+            "count": 2
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "indeterminate",
+            "count": 2
+          },
+          {
+            "reference": "narrower",
+            "prediction": "narrower",
+            "count": 2
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 18,
+          "incumbent_only": 0,
+          "challenger_only": 0,
+          "both_wrong": 6,
+          "disagreements": 0,
+          "shared_same_wrong": 6
+        },
+        "missed_equivalents": 4
+      },
+      "strict_nli": {
+        "n": 24,
+        "correct": 20,
+        "abstained": 2,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "broader",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "contradictory",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "equivalent",
+            "count": 8
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "abstain",
+            "count": 2
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "contradictory",
+            "count": 2
+          },
+          {
+            "reference": "narrower",
+            "prediction": "narrower",
+            "count": 2
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 16,
+          "incumbent_only": 2,
+          "challenger_only": 4,
+          "both_wrong": 2,
+          "disagreements": 7,
+          "shared_same_wrong": 1
+        },
+        "missed_equivalents": 0
+      },
+      "proof_required": {
+        "n": 24,
+        "correct": 12,
+        "abstained": 10,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "broader",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "contradictory",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "abstain",
+            "count": 8
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "abstain",
+            "count": 2
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "contradictory",
+            "count": 2
+          },
+          {
+            "reference": "narrower",
+            "prediction": "narrower",
+            "count": 2
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 12,
+          "incumbent_only": 6,
+          "challenger_only": 0,
+          "both_wrong": 6,
+          "disagreements": 7,
+          "shared_same_wrong": 5
+        },
+        "missed_equivalents": 8
+      },
+      "lexical_verified": {
+        "n": 24,
+        "correct": 14,
+        "abstained": 10,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "broader",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "contradictory",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "abstain",
+            "count": 8
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "abstain",
+            "count": 2
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "indeterminate",
+            "count": 2
+          },
+          {
+            "reference": "narrower",
+            "prediction": "narrower",
+            "count": 2
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 14,
+          "incumbent_only": 4,
+          "challenger_only": 0,
+          "both_wrong": 6,
+          "disagreements": 4,
+          "shared_same_wrong": 6
+        },
+        "missed_equivalents": 8
+      },
+      "formal": {
+        "n": 24,
+        "correct": 0,
+        "abstained": 24,
+        "false_equivalence": 0,
+        "confusion": [
+          {
+            "reference": "broader",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "contradictory",
+            "prediction": "abstain",
+            "count": 6
+          },
+          {
+            "reference": "equivalent",
+            "prediction": "abstain",
+            "count": 8
+          },
+          {
+            "reference": "indeterminate",
+            "prediction": "abstain",
+            "count": 4
+          },
+          {
+            "reference": "narrower",
+            "prediction": "abstain",
+            "count": 2
+          }
+        ],
+        "paired_vs_lexical": {
+          "both_correct": 0,
+          "incumbent_only": 18,
+          "challenger_only": 0,
+          "both_wrong": 6,
+          "disagreements": 18,
+          "shared_same_wrong": 6
+        },
+        "missed_equivalents": 8
+      },
+      "complete_pairs": 23
+    }
+  },
+  "formal_summary": {
+    "minilm": {
+      "n": 4,
+      "correct": 0,
+      "abstained": 4,
+      "false_equivalence": 0,
+      "confusion": [
+        {
+          "reference": "contradictory",
+          "prediction": "abstain",
+          "count": 1
+        },
+        {
+          "reference": "equivalent",
+          "prediction": "abstain",
+          "count": 1
+        },
+        {
+          "reference": "indeterminate",
+          "prediction": "abstain",
+          "count": 2
+        }
+      ],
+      "paired_vs_lexical": {
+        "both_correct": 0,
+        "incumbent_only": 1,
+        "challenger_only": 0,
+        "both_wrong": 3,
+        "disagreements": 4,
+        "shared_same_wrong": 0
+      },
+      "missed_equivalents": 1
+    },
+    "deberta": {
+      "n": 4,
+      "correct": 1,
+      "abstained": 0,
+      "false_equivalence": 0,
+      "confusion": [
+        {
+          "reference": "contradictory",
+          "prediction": "contradictory",
+          "count": 1
+        },
+        {
+          "reference": "equivalent",
+          "prediction": "contradictory",
+          "count": 1
+        },
+        {
+          "reference": "indeterminate",
+          "prediction": "contradictory",
+          "count": 2
+        }
+      ],
+      "paired_vs_lexical": {
+        "both_correct": 0,
+        "incumbent_only": 1,
+        "challenger_only": 1,
+        "both_wrong": 2,
+        "disagreements": 4,
+        "shared_same_wrong": 0
+      },
+      "missed_equivalents": 1
+    },
+    "lexical": {
+      "n": 4,
+      "correct": 1,
+      "abstained": 0,
+      "false_equivalence": 3,
+      "confusion": [
+        {
+          "reference": "contradictory",
+          "prediction": "equivalent",
+          "count": 1
+        },
+        {
+          "reference": "equivalent",
+          "prediction": "equivalent",
+          "count": 1
+        },
+        {
+          "reference": "indeterminate",
+          "prediction": "equivalent",
+          "count": 2
+        }
+      ],
+      "paired_vs_lexical": {
+        "both_correct": 1,
+        "incumbent_only": 0,
+        "challenger_only": 0,
+        "both_wrong": 3,
+        "disagreements": 0,
+        "shared_same_wrong": 3
+      },
+      "missed_equivalents": 0
+    },
+    "strict_nli": {
+      "n": 4,
+      "correct": 0,
+      "abstained": 4,
+      "false_equivalence": 0,
+      "confusion": [
+        {
+          "reference": "contradictory",
+          "prediction": "abstain",
+          "count": 1
+        },
+        {
+          "reference": "equivalent",
+          "prediction": "abstain",
+          "count": 1
+        },
+        {
+          "reference": "indeterminate",
+          "prediction": "abstain",
+          "count": 2
+        }
+      ],
+      "paired_vs_lexical": {
+        "both_correct": 0,
+        "incumbent_only": 1,
+        "challenger_only": 0,
+        "both_wrong": 3,
+        "disagreements": 4,
+        "shared_same_wrong": 0
+      },
+      "missed_equivalents": 1
+    },
+    "proof_required": {
+      "n": 4,
+      "correct": 0,
+      "abstained": 4,
+      "false_equivalence": 0,
+      "confusion": [
+        {
+          "reference": "contradictory",
+          "prediction": "abstain",
+          "count": 1
+        },
+        {
+          "reference": "equivalent",
+          "prediction": "abstain",
+          "count": 1
+        },
+        {
+          "reference": "indeterminate",
+          "prediction": "abstain",
+          "count": 2
+        }
+      ],
+      "paired_vs_lexical": {
+        "both_correct": 0,
+        "incumbent_only": 1,
+        "challenger_only": 0,
+        "both_wrong": 3,
+        "disagreements": 4,
+        "shared_same_wrong": 0
+      },
+      "missed_equivalents": 1
+    },
+    "lexical_verified": {
+      "n": 4,
+      "correct": 1,
+      "abstained": 3,
+      "false_equivalence": 0,
+      "confusion": [
+        {
+          "reference": "contradictory",
+          "prediction": "abstain",
+          "count": 1
+        },
+        {
+          "reference": "equivalent",
+          "prediction": "equivalent",
+          "count": 1
+        },
+        {
+          "reference": "indeterminate",
+          "prediction": "abstain",
+          "count": 2
+        }
+      ],
+      "paired_vs_lexical": {
+        "both_correct": 1,
+        "incumbent_only": 0,
+        "challenger_only": 0,
+        "both_wrong": 3,
+        "disagreements": 3,
+        "shared_same_wrong": 0
+      },
+      "missed_equivalents": 0
+    },
+    "formal": {
+      "n": 4,
+      "correct": 4,
+      "abstained": 0,
+      "false_equivalence": 0,
+      "confusion": [
+        {
+          "reference": "contradictory",
+          "prediction": "contradictory",
+          "count": 1
+        },
+        {
+          "reference": "equivalent",
+          "prediction": "equivalent",
+          "count": 1
+        },
+        {
+          "reference": "indeterminate",
+          "prediction": "indeterminate",
+          "count": 2
+        }
+      ],
+      "paired_vs_lexical": {
+        "both_correct": 1,
+        "incumbent_only": 0,
+        "challenger_only": 3,
+        "both_wrong": 0,
+        "disagreements": 3,
+        "shared_same_wrong": 0
+      },
+      "missed_equivalents": 0
+    }
+  },
+  "rerank_completeness": {
+    "gained_ids": [],
+    "lost_ids": []
+  },
+  "negative_observations": [
+    "Neural deep reranking added no complete pairs or correct decisions against lexical deep reranking.",
+    "Strict agreement with proof required withheld all eight reference-equivalent natural-language pairs at terminal state; 12/24 correct versus 20/24 for strict NLI alone.",
+    "Lexical verifier withheld three false equivalences and retained one true equivalent on formal controls; neither neural NLI resolved the commutative conjunction correctly."
+  ]
+}

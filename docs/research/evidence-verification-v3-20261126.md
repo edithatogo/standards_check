@@ -86,3 +86,43 @@ Conductor records. The labelled fresh-inference experiment is
 [run 45797316771](https://github.com/edithatogo/standards_check/actions/runs/45797316771)
 on head `421a9b234f12edfac942c18f832a2ee4e5a21950`; its development job was queued at observation. No fresh neural
 metrics, model-download success, or hosted qualification are claimed.
+
+## Executed hosted fresh inference
+
+[Run 45797316771](https://github.com/edithatogo/standards_check/actions/runs/45797316771)
+succeeded on merge `5dc29e64ad6ea05fd096cc72090603d2f759e209`. The downloaded
+[artifact 15106112148](https://github.com/edithatogo/standards_check/actions/runs/45797316771/artifacts/15106112148)
+matches SHA-256 `e5f3d8a17ce8b57169aa19f7730b1d2f272c04d23282e8240822539d3b55f09f`; report.json
+`7a79c7734a6d202332fa1a65178a1fb4a9b14e83762041418574dd3a7eea2f7d`. Retain the [versioned summary](../../conductor/tracks/01-canonical-standard-pack/evidence-verification-v3-receipt.json);
+the complete artifact contains probabilities, evidence, pool identities and timings.
+The exact formatted script blob `5ffcbb4b993d32a409087f33d64123c4fdbe1bcd` was applied
+without changing the executed logic. Hosted focused tests 21 passed (the
+exhaustive follow-up test was added on a later head). All current-head
+protected checks remain separate.
+
+| State | Complete /24 | Lexical correct | MiniLM correct | DeBERTa correct | Strict agreement correct | Proof-required correct |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Head | 0 | 0 | 7 | 7 | 0 | 0 |
+| Expansion | 19 | 15 | 19 | 19 | 19 | 11 |
+| Lexical deep | 19 | 15 | 19 | 19 | 19 | 11 |
+| Neural deep | 19 | 15 | 19 | 19 | 19 | 11 |
+| Rule terminal | 23 | 18 | 20 | 20 | 20 | 12 |
+
+496 directional NLI and 141 neural reranker calls; runtime 4.2017 s after
+1.3252 s initialization; peak RSS 589704 KiB. Model and artifact hashes
+retained in original report. Incomplete head-only judgments are diagnostic:
+both NLI models correctly resolved seven full-pair references without complete
+evidence, not a basis for acceptance. Deep reranking added no complete pairs
+or correct decisions. Strict NLI at terminal state had zero false equivalences,
+two abstentions and two wrong relations. Requiring formal verification reduced
+correct decisions from 20 to 12, withholding all eight true natural-language
+equivalences; ten abstentions, zero false equivalences. On four separate
+formal controls, lexical 1/4 correct and three false equivalences; lexical
+plus proof 1/4 correct and three abstentions; MiniLM 0/4, DeBERTa 1/4,
+finite oracle 4/4. Neither neural model correctly resolved the true formal
+equivalence. Preserve these negative findings and avoid claiming population
+risk or equal-compute utility. No independent review outcome.
+
+Source-anchored conditional scope and identity audit is coordinated with the
+source rule candidate on PR #180; independent family acquisition remains
+with PR #188. Neither is qualified by this run.

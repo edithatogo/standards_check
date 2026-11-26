@@ -24,9 +24,11 @@ def truth_set(text):
     """Exact closed two-atom grammar; reject natural text and additional clauses."""
     if not text.startswith(PREFIX) or not text.endswith("."):
         return None
-    expr = text[len(PREFIX):-1]
+    expr = text[len(PREFIX) : -1]
     implies = re.fullmatch(r"(alpha|beta) implies (alpha|beta)", expr)
-    binary = re.fullmatch(r"(alpha|beta) is (true|false) (and|or) (alpha|beta) is (true|false)", expr)
+    binary = re.fullmatch(
+        r"(alpha|beta) is (true|false) (and|or) (alpha|beta) is (true|false)", expr
+    )
     if not (implies or binary):
         return None
     result = []
@@ -83,7 +85,8 @@ def assess(row, scorers):
         forward = scorers[model](source, candidate)
         reverse = scorers[model](candidate, source)
         raw[model] = {
-            "forward": list(forward), "reverse": list(reverse),
+            "forward": list(forward),
+            "reverse": list(reverse),
             "prediction": classify_nli(forward, reverse),
             "seconds": time.perf_counter() - started,
             "calls": 2,
@@ -93,12 +96,19 @@ def assess(row, scorers):
     agreement = strict_agreement([raw[m]["prediction"] for m in MODELS]) if complete else "abstain"
     predictions = {m: raw[m]["prediction"] for m in MODELS}
     predictions.update(
-        lexical=lexical, strict_nli=agreement, proof_required=gate(agreement, complete, proof),
-        lexical_verified=gate(lexical, complete, proof), formal=proof["relation"],
+        lexical=lexical,
+        strict_nli=agreement,
+        proof_required=gate(agreement, complete, proof),
+        lexical_verified=gate(lexical, complete, proof),
+        formal=proof["relation"],
     )
     return {
-        "complete": complete, "visible_candidate": candidate, "source": source,
-        "evidence_ids": sorted(row["evidence"]), "raw": raw, "proof": proof,
+        "complete": complete,
+        "visible_candidate": candidate,
+        "source": source,
+        "evidence_ids": sorted(row["evidence"]),
+        "raw": raw,
+        "proof": proof,
         "predictions": predictions,
     }
 
@@ -106,16 +116,22 @@ def assess(row, scorers):
 def rerank_state(row, corpus, scorer):
     pool = row["pool"]
     started = time.perf_counter()
-    scores = parse_reranker_results(pool, [
-        {"index": i, "relevance_score": scorer(row["source"], corpus[key])}
-        for i, key in enumerate(pool)
-    ])
+    scores = parse_reranker_results(
+        pool,
+        [
+            {"index": i, "relevance_score": scorer(row["source"], corpus[key])}
+            for i, key in enumerate(pool)
+        ],
+    )
     ranking = rank(scores)
     new = {key: corpus[key] for key in ranking[:2] if key not in row["evidence"]}
     after = {**row, "evidence": {**row["evidence"], **new}}
     return after, {
-        "ranking": ranking, "scores": scores, "new_evidence": new,
-        "calls": len(pool), "seconds": time.perf_counter() - started,
+        "ranking": ranking,
+        "scores": scores,
+        "new_evidence": new,
+        "calls": len(pool),
+        "seconds": time.perf_counter() - started,
     }
 
 
@@ -127,8 +143,11 @@ def summarize(rows):
     for name in predictions:
         pred = {row["id"]: row["predictions"][name] for row in rows}
         result[name] = {
-            **metrics(reference, pred), "paired_vs_lexical": paired(reference, base, pred),
-            "missed_equivalents": sum(reference[k] == "equivalent" and pred[k] != reference[k] for k in reference),
+            **metrics(reference, pred),
+            "paired_vs_lexical": paired(reference, base, pred),
+            "missed_equivalents": sum(
+                reference[k] == "equivalent" and pred[k] != reference[k] for k in reference
+            ),
         }
     return result
 
@@ -146,19 +165,35 @@ def run(cases, scorers, scorer):
         expanded = lookup[(key, ("expand",))]
         lexical = lookup[(key, ("expand", "deep_rerank"))]
         rule = lookup[(key, ("expand", "parent" if row["parent_link"] else "deep_rerank"))]
-        corpus = {f"{r['id']}:{part}": layouts[r["id"]][i]
-                  for r in cases if r["family"] == row["family"]
-                  for i, part in enumerate(("head", "tail"))}
+        corpus = {
+            f"{r['id']}:{part}": layouts[r["id"]][i]
+            for r in cases
+            if r["family"] == row["family"]
+            for i, part in enumerate(("head", "tail"))
+        }
         neural, receipt = rerank_state(expanded, corpus, scorer)
-        states = {name: assess(state, scorers) for name, state in (
-            ("head", row), ("expanded", expanded), ("lexical_deep", lexical),
-            ("neural_deep", neural), ("rule_terminal", rule),
-        )}
-        rows.append({
-            "id": key, "split": row["split"], "family": row["family"], "reference": row["reference"],
-            "pool": row["pool"], "states": states, "neural_rerank": receipt,
-            "lexical_rerank": expanded["transitions"]["deep_rerank"],
-        })
+        states = {
+            name: assess(state, scorers)
+            for name, state in (
+                ("head", row),
+                ("expanded", expanded),
+                ("lexical_deep", lexical),
+                ("neural_deep", neural),
+                ("rule_terminal", rule),
+            )
+        }
+        rows.append(
+            {
+                "id": key,
+                "split": row["split"],
+                "family": row["family"],
+                "reference": row["reference"],
+                "pool": row["pool"],
+                "states": states,
+                "neural_rerank": receipt,
+                "lexical_rerank": expanded["transitions"]["deep_rerank"],
+            }
+        )
     summary = {}
     for name in rows[0]["states"]:
         group = [{"id": r["id"], "reference": r["reference"], **r["states"][name]} for r in rows]
@@ -166,17 +201,26 @@ def run(cases, scorers, scorer):
     formal = []
     for control in formal_controls():
         key = control["id"]
-        row = {"id": key, "source": control["source"], "evidence": {key + ":parent": control["candidate"]}, "parent_link": True}
+        row = {
+            "id": key,
+            "source": control["source"],
+            "evidence": {key + ":parent": control["candidate"]},
+            "parent_link": True,
+        }
         formal.append({"id": key, "reference": control["reference"], **assess(row, scorers)})
     before = {r["id"]: r["states"]["lexical_deep"]["complete"] for r in rows}
     after = {r["id"]: r["states"]["neural_deep"]["complete"] for r in rows}
     return {
         "claim_boundary": "Synthetic development only; proof covers exact finite grammar, not source authority",
-        "cases": rows, "summary": summary,
-        "rerank_completeness": {"gained_ids": sorted(k for k in before if after[k] and not before[k]),
-                                "lost_ids": sorted(k for k in before if before[k] and not after[k])},
+        "cases": rows,
+        "summary": summary,
+        "rerank_completeness": {
+            "gained_ids": sorted(k for k in before if after[k] and not before[k]),
+            "lost_ids": sorted(k for k in before if before[k] and not after[k]),
+        },
         "formal": {"cases": formal, "summary": summarize(formal)},
-        "review_resolved": 0, "seconds": time.perf_counter() - started,
+        "review_resolved": 0,
+        "seconds": time.perf_counter() - started,
     }
 
 
