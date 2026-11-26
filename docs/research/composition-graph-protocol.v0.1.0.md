@@ -157,10 +157,17 @@ universe from the frozen method taxonomy, literature demand sample and expert ru
 before looking at observed coverage. Sample across depth and rare/emerging methods,
 avoid defining the universe only by already mapped concepts. Separate out-of-scope
 topics, no reporting need, unknown applicability and held sources. For each eligible
-concept-scope cell distinguish covered, partial, candidate gap and unknown. Report
-coverage lower bound = reviewed covered/eligible; upper bound =
-(reviewed covered + partial + unknown)/eligible, treating the bound as identification
-uncertainty, not confidence. A missing map, inaccessible edition or insufficient
+concept-scope cell distinguish confirmed full coverage (C), confirmed partial coverage
+(P: some coverage, independently established as not full), confirmed uncovered (Z),
+unresolved candidate gap (G), and other unknown coverage (U). These five states are
+mutually exclusive within the independently eligible denominator N = C + P + Z + G + U.
+For full coverage report identification bounds C/N to (C + G + U)/N. For any
+coverage report (C + P)/N to (C + P + G + U)/N. Unknown applicability is outside
+this known-eligible denominator and reported separately; assess eligibility uncertainty
+with explicit sensitivity scenarios. Return undefined, not zero or one, when N = 0.
+For weighted sensitivity use the same nonnegative weights in each numerator and
+its denominator. Identification bounds express incomplete knowledge, not confidence
+intervals. A missing map, inaccessible edition or insufficient
 ontology granularity is not evidence that a guideline omits a requirement.
 Report direct and ancestor-rolled mappings separately; de-duplicate multiple tree
 paths, compare equal and fractional weights, depth cutoffs, release changes and

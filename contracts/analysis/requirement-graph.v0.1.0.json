@@ -515,7 +515,7 @@
     },
     {
       "id": "coverage_cells",
-      "grain": "one scope-cell coverage result with explicit uncertainty",
+      "grain": "One scope-cell coverage result. Within known eligibility, states are confirmed_full, confirmed_partial, confirmed_uncovered, candidate_gap_unresolved, unknown. Unknown applicability is separate. No inference from missing maps.",
       "experiment_ids": [
         "E6"
       ],
@@ -714,7 +714,7 @@
         "concept_mappings",
         "analysis_summary"
       ],
-      "purpose": "Direct/ancestor coverage, partial and unknown separate.",
+      "purpose": "Direct/ancestor, full/any coverage and identification bounds; partial, confirmed uncovered, unresolved gap and unknown separately.",
       "status": "planned",
       "accessible_alternative": "Exact source table, denominators, text summary and labelled legend; no color-only encoding."
     },

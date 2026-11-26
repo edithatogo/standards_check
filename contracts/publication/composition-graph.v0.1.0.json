@@ -6,7 +6,7 @@
     "protocol": {
       "version": "0.1.0",
       "path": "docs/research/composition-graph-protocol.v0.1.0.md",
-      "sha256": "c4334aec8a66d7e5a285e08409d367f697e6db3381710bc20af90828eb5db2eb"
+      "sha256": "720f95da1e278ec71c16c3d8a51140a946ae74d1df514d3eecaf20add5d812a0"
     },
     "experiments": [
       {
@@ -60,13 +60,13 @@
         "question": "Which eligible ontology concept-by-scope cells lack independently verified reporting coverage and which apparent gaps survive audit?",
         "primary_endpoint": {
           "name": "expert_supported_gap_yield",
-          "definition": "Independently supported candidate gaps divided by audited nominated eligible cells; report all eligible, unknown, partial, covered, excluded and sampled non-nominated cells separately.",
+          "definition": "Independently supported candidate gaps divided by audited nominated eligible cells; report the known-eligible denominator, confirmed full, confirmed partial, confirmed uncovered, unresolved candidate gaps, other unknown coverage, unknown applicability, excluded and sampled non-nominated cells separately.",
           "analysis_unit": "ontology_concept_by_study_scope",
           "decision_rule": "Descriptive census and stratified expert audit; no automatic normative gap inference."
         },
         "secondary_endpoints": [
           "direct/ancestor coverage",
-          "identification bounds",
+          "separate full-coverage and any-coverage identification bounds; undefined for zero eligible cells",
           "mapping disagreement",
           "depth and weighting sensitivity",
           "source incompleteness",
