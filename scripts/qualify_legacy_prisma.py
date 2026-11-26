@@ -19,6 +19,7 @@ from copy import deepcopy
 from pathlib import Path
 
 from .check_standardflow_import import git
+from .orthogonal_experiments import generated_pair
 from .source_xml import parse_xml
 from .validate_artifacts import make_validator, validate, validate_svg
 from .verify_legacy_standardflow import verify_history
@@ -236,12 +237,15 @@ def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def exercise_pair(case: dict, cli: Path, work: Path) -> dict:
+def exercise_pair(case: dict, cli: Path, work: Path, legacy: dict | None = None) -> dict:
     work.mkdir()
     input_path = work / "input.json"
     input_path.write_text(json.dumps(case["rust_input"]), encoding="utf-8")
     legacy_output = work / "legacy.svg"
-    render_legacy(LEGACY / case["legacy_fixture"], legacy_output)
+    legacy_path = LEGACY / case["legacy_fixture"] if legacy is None else work / "legacy.json"
+    if legacy is not None:
+        legacy_path.write_text(json.dumps(legacy), encoding="utf-8")
+    render_legacy(legacy_path, legacy_output)
     expected_legacy, expected_rust = expected_node_counts(case)
     observed_legacy = legacy_svg_counts(legacy_output)
     # Legacy duplicates its inclusion count into a meta-analysis claim without evidence.
@@ -341,6 +345,7 @@ def main() -> None:
         "both declared cases are required",
     )
     pairs, differences = [], []
+    generated, generated_differences = [], []
     # Keep temporary paths inside ROOT so the shared artifact validator can name them.
     with tempfile.TemporaryDirectory(prefix=".legacy-prisma-qualification-", dir=ROOT) as temporary:
         work = Path(temporary)
@@ -353,6 +358,14 @@ def main() -> None:
             differences.append(
                 exercise_difference(case, legacy, cli, work / (case["id"] + "-invalid"))
             )
+        for parts in ((1, 2, 3, 4), (17, 5, 9, 61), (101, 37, 23, 89)):
+            for previous in (None, 13):
+                case, legacy = generated_pair(parts, previous)
+                validate_pair(case, legacy)
+                generated.append(exercise_pair(case, cli, work / case["id"], legacy))
+                generated_differences.append(
+                    exercise_difference(case, legacy, cli, work / (case["id"] + "-invalid"))
+                )
     require(verify_history() == provenance, "source provenance changed during qualification")
     receipt = {
         "result": "pass",
@@ -369,8 +382,10 @@ def main() -> None:
         },
         "pairs": pairs,
         "intentional_validation_differences": differences,
+        "generated_pairs": generated,
+        "generated_intentional_validation_differences": generated_differences,
         "claim_limits": [
-            "two synthetic database-only pairs under explicitly supplied conditions",
+            "two authored and six generated database-only pairs under explicitly supplied conditions",
             "not full legacy-to-Rust semantic, layout, format, CLI or web compatibility",
             "legacy quantitative-synthesis claims are excluded from comparison",
             "structural text/ARIA fidelity is not assistive-technology or accessibility certification",

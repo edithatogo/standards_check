@@ -82,3 +82,15 @@ semantic and independent qualification remain separate.
 - [ ] **T03.060** ([#82](https://github.com/edithatogo/standards_check/issues/82), [#95](https://github.com/edithatogo/standards_check/issues/95)) Extend the shared-domain legacy Python/Rust differential contract through generated valid/invalid cases and independent semantic oracles, retaining minimized mismatches and intentional divergence; do not infer Rust replacement parity from source-to-subtree migration.
 
 See the [orthogonal assurance design](../../../docs/research/orthogonal-assurance-20261126.md).
+
+## Orthogonal implementation reconciliation — 26 November
+
+T03.060: [PR #177](https://github.com/edithatogo/standards_check/pull/177) extends
+the existing actual Python/Rust differential runner. The historical hosted job
+[139717065828](https://github.com/edithatogo/standards_check/actions/runs/45762873878/job/139717065828)
+executed two authored plus six generated database-only PRISMA pairs and eight
+intentional rejection differences. Count, scene, SVG and text invariants passed.
+The [shared implementation receipt](../05-maximal-assurance/orthogonal-verification-20261126.md)
+binds the result to the tested revision. Keep T03.060 open until receiving integration
+and the remaining property/fuzz, unsupported-stream and broader semantic qualification
+are observed; no universal semantic parity or consumer cutover claim.
