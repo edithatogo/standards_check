@@ -59,3 +59,7 @@ Reproduce after checkout:
 
 Rollback: revert this focused audit/test/receipt addition; existing source
 candidate and publication holds remain intact.
+
+## Protected qualification follow-up
+
+Original workflow-policy job 139838349391 flagged one formatter diagnostic in the candidate equivalence count; wrap that expression without changing logic. Reconcile receiving E11 main 776ed1db. Privacy job 139838349343 reported one generic-api-key finding in a historical research receipt. The referenced public Actions archive 15098444822 was independently downloaded and its SHA-256 recomputed, matching the documented archive digest. This supports a nonsecret provenance review, but does not establish the scanner's exact matched value or immutable finding coordinate. The central reviewed-finding procedure in repository-standards is required before any exception. No local ignore, policy weakening, suppression or bypass. Hold integration until actual protected checks pass.

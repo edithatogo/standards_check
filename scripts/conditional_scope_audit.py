@@ -76,7 +76,9 @@ def audit_projection(rows):
         "identity_controls": [_pair(row, row) for row in rows],
         "pairs": pairs,
         "condition_only_collisions": sum(row["same_trigger"] for row in pairs),
-        "candidate_equivalences_distinct_ids": sum(row["relation"] == "equivalent" for row in pairs),
+        "candidate_equivalences_distinct_ids": sum(
+            row["relation"] == "equivalent" for row in pairs
+        ),
     }
 
 
