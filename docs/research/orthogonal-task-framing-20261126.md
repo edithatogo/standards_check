@@ -182,3 +182,40 @@ workflow-policy reported a formatting-only failure at task_framing.py line 81.
 Lint passed. The new decision, reranker and embedding runs passed the focused test
 step and reached native acquisition/inference. Correct the formatting without
 changing the frozen experimental questions; retain all old run IDs.
+
+## Completed raw/instructed Qwen embedding and rank-fusion development
+
+[Run 45765210583](https://github.com/edithatogo/standards_check/actions/runs/45765210583/artifacts/15090704998)
+completed successfully. Downloaded ZIP independently matches
+194ed70304518cea956e60970ff337ac5d4cd486ba64de0a4753574a66aed77f.
+Tested merge d988efbf15356dc29e2c73edf578acf55bb3138b;
+report.json SHA-256 28dd0f5f343e703f6bd247501c97288443b044022197bcc1f6255153a3b7deba;
+fusion.json SHA-256 8b2d7521a7d284316d7194905213142f8619b2cfaaa71ce0018ffb9bc6ca25ca.
+Resolved exact official weight revision d20cf9c16f82914a21dbd9c645f56895fb1d7750;
+Q8_0 checksum passed (the previously pinned SHA-256). Apache-2.0 publisher
+metadata, unchanged full source/query universe, 243 requests, native CPU
+scoring 14.1424 s, peak server RSS 1433672 KiB. Timings are single-run only.
+
+| Arm | Macro R@1 | R@3 | R@5 | R@10 | MRR | nDCG@5 | Gains/losses @5 vs BGE |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| BGE-small | 34.43% | 58.96% | 72.01% | 80.03% | .55015 | .55966 | baseline |
+| BGE + character RRF60 | 36.32% | 61.32% | 69.34% | 79.72% | .55421 | .55630 | 6/11 |
+| Qwen raw | 36.32% | 58.33% | 70.13% | 81.92% | .55833 | .55897 | 13/17 |
+| Qwen instructed | 39.47% | 67.30% | 73.43% | 85.22% | .60590 | .59848 | 14/14 |
+| BGE + instructed Qwen RRF60 | 39.62% | 66.51% | 76.26% | 85.69% | .60123 | .60961 | 8/2 |
+
+The instruction improved same-model macro R@5 by 3.30 percentage points,
+and MRR by .04757. Against BGE, Qwen instructed improves macro query R@5
+but ties association-level recall at .696 (14 gained and 14 lost). The
+predeclared equal-weight fusion improves macro R@5 by 4.25 points and
+micro recall from .696 to .744 (93/125 versus 87/125), eight gains and
+two losses. BGE plus character fusion remains a negative R@5 result.
+This is descriptive evidence of task and architectural complementarity,
+not a statistically independent confirmation or claim of a universally
+better model. Keep the same budget and all query IDs, distinguish macro
+query weighting from association weighting, retain all arms. Next evaluate
+a separately frozen full-candidate retrieval reference and use the
+fused pool for a separately declared downstream reranking ablation; do
+not overwrite the historical BGE-only pool. No calibration or model
+promotion. The original four-view decision and Qwen rank-query experiments
+and earlier Qwen4B remain active at inspection.

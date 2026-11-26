@@ -608,8 +608,7 @@ jobs:
           tar -xzf "$RUNNER_TEMP/qwen-runtime.tar.gz" -C "$RUNNER_TEMP/qwen-runtime"
           case "$QWEN_MODEL" in
             qwen3-embedding-0.6b-q8)
-              revision="$(curl --fail --silent --show-error --max-time 30 --max-filesize 1000000 --proto '=https' 'https://huggingface.co/api/models/Qwen/Qwen3-Embedding-0.6B-GGUF/revision/d20cf9c' | python -c 'import json,sys;print(json.load(sys.stdin)["sha"])')"
-              [[ "$revision" =~ ^d20cf9c[0-9a-f]{33}$ ]]
+              revision="d20cf9c16f82914a21dbd9c645f56895fb1d7750"
               model_url="https://huggingface.co/Qwen/Qwen3-Embedding-0.6B-GGUF/resolve/$revision"
               file="Qwen3-Embedding-0.6B-Q8_0.gguf"
               digest="06507c7b42688469c4e7298b0a1e16deff06caf291cf0a5b278c308249c3e439"
