@@ -85,9 +85,33 @@ jobs:
           acquire policies integration/provider-policies/index.json "$stable"
           acquire methods contracts/fixtures/discovery-source-methods.json "$stable"
           acquire schema contracts/json-schema/bibliographic-record.v1.schema.json "$stable"
-          acquire strategy contracts/json-schema/search-strategy.v1.schema.json "$stable"
-          acquire ast contracts/json-schema/query-ast.v1.schema.json "$stable"
-          acquire compiled contracts/json-schema/compiled-strategy.v1.schema.json "$stable"
+          # Acquire the exact pinned Git objects, not a possibly transformed raw representation.
+          acquire_schema() {
+            local name="$1" expected="$2"
+            timeout 60 gh api --method GET "repos/edithatogo/searchright/git/blobs/$expected" > "$input/$name.blob.json"
+            python - "$input" "$name" "$expected" <<'PY'
+          import base64
+          import hashlib
+          import json
+          import sys
+          from pathlib import Path
+
+          root, name, expected = Path(sys.argv[1]), sys.argv[2], sys.argv[3]
+          payload = json.loads((root / (name + ".blob.json")).read_bytes())
+          if payload.get("sha") != expected or payload.get("encoding") != "base64":
+              raise ValueError(f"{name}: unexpected Git blob identity/encoding")
+          raw = base64.b64decode("".join(payload["content"].split()), validate=True)
+          actual = hashlib.sha1(b"blob " + str(len(raw)).encode() + b"\0" + raw, usedforsecurity=False).hexdigest()
+          if actual != expected:
+              raise ValueError(f"{name}: expected {expected}, received {actual}")
+          (root / (name + ".json")).write_bytes(raw)
+          print(f"{name}: verified Git blob {actual}; SHA-256 {hashlib.sha256(raw).hexdigest()}")
+          PY
+          }
+          acquire_schema strategy c2fea7532f6e3d40df12fee69d2f0c25cf8e4326
+          acquire_schema ast 62c46dfd151476a3a5c00e76ad6e59201e40c747
+          acquire_schema compiled fdce39827363c601ba78f34dfd641823f6d31b3e
+          sha256sum "$input/strategy.json" "$input/ast.json" "$input/compiled.json" > "$RUNNER_TEMP/bibliographic-evidence/searchright-schema-sha256.txt"
           acquire advisory data/source-selection/catalogue.v1.json "$advisory"
           acquire directories data/source-selection/directories.v1.json "$advisory"
           if [[ -n "$PREVIOUS_ARTIFACT" || -n "$PREVIOUS_SHA256" ]]; then

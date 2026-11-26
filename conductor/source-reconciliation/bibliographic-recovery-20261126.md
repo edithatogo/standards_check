@@ -273,3 +273,11 @@ automatic repin, semantic merge, new registry, source rights or
 independent reference promotion. Preserve #188 owner, #183 locked
 stage join and #95/#111/#158/T01.052/T05.049. Rollback removes this
 opt-in consumer increment; historical evidence and canonical packs unchanged.
+
+
+### Hosted schema retrieval failure and targeted repair
+
+First native planning workflow 45821045254 on head 9e6dc00b stopped in
+Prepare Searchright-native strategies by default with ValueError: Searchright
+blob mismatch; hosted focused tests had passed but no native strategy receipt
+was generated. Failure artifact 15117079100 SHA-256 d23c7dea762ec6fc0fb321e09b0c808e6fa779eee95b6d8a05cee588c4aa4b62 retained. Exact offending raw schema was not identified by the generic error; do not infer upstream schema drift. Change only three new schema acquisitions to Git blob API at exact pinned object IDs, decode base64 strictly, validate returned object ID and recomputed Git blob hash and retain per-schema SHA-256. No relaxation, no new pin or source/provider query; code and local 15 passing tests unchanged. Fresh hosted replay and protected checks required.
