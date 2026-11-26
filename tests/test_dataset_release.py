@@ -3,6 +3,9 @@ import copy
 import hashlib
 import io
 import json
+import os
+import subprocess
+import sys
 from pathlib import Path
 import tempfile
 import unittest
@@ -327,6 +330,22 @@ class DatasetReleaseTests(unittest.TestCase):
                     main(args + ["--restricted-overlap-manifest", str(self.root / ref["path"])]),
                     0 if defect == "none" else 1,
                 )
+                # Invoke from outside the checkout with no injected PYTHONPATH.
+                # The direct-script compatibility surface must match the module CLI.
+                if defect in ("none", "match"):
+                    environment = os.environ.copy()
+                    environment.pop("PYTHONPATH", None)
+                    result = subprocess.run(
+                        [sys.executable, str(ROOT / "scripts/validate_dataset_release.py"),
+                         *args, "--restricted-overlap-manifest", str(self.root / ref["path"])],
+                        cwd=self.root, env=environment, capture_output=True, text=True, timeout=30,
+                    )
+                    self.assertEqual(result.returncode, 0 if defect == "none" else 1, result.stderr)
+                    if defect == "none":
+                        self.assertEqual(json.loads(result.stdout)["restricted_overlap"]["status"], "clear_in_scope")
+                    else:
+                        self.assertNotIn("amber quills", result.stderr)
+
 
 
 if __name__ == "__main__":
