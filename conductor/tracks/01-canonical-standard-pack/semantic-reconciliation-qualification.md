@@ -275,3 +275,73 @@ until actual eligible-family/reference qualification and current-head required c
 No threshold waiver, canonical promotion or scientific claim. Review should explicitly verify
 the source rights and independence slots, direction adapter, reproducible negative receipts,
 and confirmatory design. Keep #111/#158/#159 and T01.028–030/T01.043/T01.052 open.
+
+## LFM development experiment — prospective design, 26 November
+
+The maintainer requests testing Liquid AI models. The last condition-v3
+reference failure is unchanged; do not iterate prompts on those formal held-out
+controls. LFM3's newer hybrid architecture and native d1 decision approach
+are plausible orthogonal methods, not established domain improvements.
+Retain MiniLM and DeBERTa-xsmall as fixed comparators. Exact label order, both
+directions, confidence and abstention semantics are unchanged.
+
+**Design:** reuse the original 36 synthetic analyst-authored pairs only. Treat
+all cases, including the former test stratum, as historical development; no
+confirmatory claim, no threshold tuning or source wording. Preserve the original
+split for descriptive strata. Opaque identifiers and source/candidate-only
+inputs; existing five-class generative rubric and numbered evidence validator.
+Compare individual challenger outputs to both incumbent predictions on identical
+pairs. Report full confusion, abstentions, false equivalences, unique catches,
+harmful changes, shared misses, disagreement and elapsed time. Do not infer
+fixed-budget utility or natural-source qualification from this diagnostic.
+
+| Challenger | Exact publisher revision | GGUF SHA-256 |
+| --- | --- | --- |
+| [LFM2.5-1.2B-Instruct Q4_K_M](https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-GGUF/commit/4e7112f1437070cf9f49aeb93ad965b946029f75) | 4e7112f1437070cf9f49aeb93ad965b946029f75 | b1b3de114215d9507409a662a501a631095a479a419584e8a2ded6304b19b4f5 |
+| [LFM3-1.7B Q4_K_M](https://huggingface.co/LiquidAI/LFM3-1.7B-GGUF/commit/b3f2ae5d73cd3c91bf40e8ba752c648aa05dffdf) | b3f2ae5d73cd3c91bf40e8ba752c648aa05dffdf | 3793e1e6e2266919d6e015287221b41100175a98eddaba92e111aed3b05c93c4 |
+| [d1-2B Q4_0](https://huggingface.co/LiquidAI/d1-2B-GGUF/commit/4a181094d1b6addfaa3a0956f78e7ab2aa406a0c) | 4a181094d1b6addfaa3a0956f78e7ab2aa406a0c | ba3f4f437746636dfd51e3b68d5a7858b56de44b54299a189f91c246db0a08ea |
+
+All three use the LFM Open License v1.0, not an OSI-approved permissive
+licence. The publisher licence conditions commercial use above its revenue
+threshold; this is a bounded non-commercial research experiment only, no
+redistribution of weights or institution-wide deployment decision. Retrieve
+and retain the exact revision licence. Native runtime [llama.cpp b11960](https://github.com/ggml-org/llama.cpp/releases/tag/b11960)
+supports the LFM3 architecture and typed System One route. Official Ubuntu
+CPU archive SHA-256 31cc3a6bc638ac6c48dc4b1b74888f1eaadf3d14227c1e5f67daf9a49541d97a,
+verified from release asset metadata. No remote model code, no external
+inference, no persistent server, no production dependency. Bind to loopback
+only, terminate after each run, retain model/runtime/fixture receipts.
+Generative temperature 0, seed 724, output cap 120 as before.
+For native d1, compare direct five-class choice with separate A-implies-B,
+B-implies-A and joint satisfiability choices. Validate probability support,
+finite sums and argmax; abstain on ties, unknown or incompatible implications.
+Direct threshold 0.5 (0.95 equivalence); each directional choice 0.8.
+These predeclared exploratory thresholds are not calibration claims.
+Native d1 route supports choice/score/noul; extraction is not yet supported.
+No span-validity or independent adjudicator claim for the decision route.
+The d1 Q4_0 choice is the verified bounded low-resource asset, not the
+publisher's suggested Q8_0 fidelity reference. If useful, repeat on pinned
+Q8_0 as a quantization ablation, not as a post hoc confirmatory result.
+
+The LFM2.5-1.2B-Thinking model is a further candidate (official Q4_K_M
+revision 6eef5895049f444e3436c6f583207e610a1485ce, SHA-256
+7223a2202405b02e8e1e6c5baa543c43dc98c1d9741a5c2a0ee1583212e1231b).
+Assess separately with a declared reasoning token budget and otherwise matched
+conditions, only after the first results. A larger NLI comparator (DeBERTa-v3-large)
+or ModernBERT-large NLI is a later scale/architecture ablation if residual errors
+justify it. Prefer separate implication and compatibility assessments with
+deterministic composition, reverse-order consistency, explicit applicability,
+modality and counterexample evidence to adding a majority vote. For natural E2,
+use independent source-only agents with locked reference and evidence; keep
+abstention separate from resolved indeterminacy. For E3 freeze review budget,
+tolerated harm and minimum useful gain before any new independent data are scored.
+
+The existing five-class workflow adds a separate explicit label
+`run-lfm-development`. It does not invoke the controlled-consensus job.
+The source-probe job reuses the existing primary survey for ARRIVE/STROBE/STARD
+and retries bounded issuer PDF transports without publishing content or repinning.
+Transport success alone is not independent structural or rights qualification.
+The source freeze and original scientific gate remain fail-closed. No merge or
+auto-merge on these exploratory results. The first native decision-contract
+unit tests were run in isolation (8 passing); the integrated harness and actual
+inference require hosted receipts.

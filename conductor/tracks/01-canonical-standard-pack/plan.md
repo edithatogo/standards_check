@@ -268,3 +268,18 @@ main source census, prospective independent-family intake slots, and paired hist
 complementarity. Zero of eight priority source candidates qualified for a fresh confirmatory freeze.
 Keep T01.028–030, T01.043 and T01.052 open. Ready for code and protocol review is not ready
 to merge; no auto-merge, new model run, scientific claim or pack promotion.
+
+### LFM complementary development and source retry
+
+User explicitly requests evaluating Liquid AI models. Separate the exploratory
+synthetic lane from E2/E3 and the condition-v3 scientific hold. Reuse the original
+36 analyst-authored pairs without retuning; all are development evidence now,
+including the former test stratum. Run one challenger at a time against both
+retained ONNX comparators, with independent jobs and no combined vote or promotion.
+Use the native decision API for d1 and the same existing blinded structured prompt
+for LFM3 and LFM2.5. The [qualification receipt](semantic-reconciliation-qualification.md)
+records model/runtime pins, predeclared thresholds and limits. Retry the selected
+official article transports and alternate issuer files; acquisition is not admission.
+T01.028–030, T01.043 and T01.052 remain open. Do not authorize merge from these
+synthetic results; fresh independent eligible source components and actual scientific
+qualification remain required.

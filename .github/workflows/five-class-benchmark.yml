@@ -5,6 +5,8 @@ on:
     types: [labeled]
     paths:
       - "scripts/five_class_benchmark.py"
+      - "scripts/lfm_development.py"
+      - "tests/test_lfm_development.py"
       - "tests/test_five_class_benchmark.py"
       - "scripts/witness_adjudication.py"
       - "tests/test_witness.py"
@@ -113,4 +115,203 @@ jobs:
             ${{ runner.temp }}/five-class/phi4-votes.json
             ${{ runner.temp }}/five-class/five-class-receipt.json
           if-no-files-found: warn
+          retention-days: 90
+
+  lfm-development:
+    # Exploratory synthetic-only lane, explicitly requested; not a qualification run.
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-lfm-development'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        challenger: [d1, lfm3, lfm25-instruct]
+    env:
+      CHALLENGER: ${{ matrix.challenger }}
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      HF_HUB_DISABLE_TELEMETRY: "1"
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: "3.12"
+      - name: Verify deterministic development contract
+        run: |
+          mkdir -p "$RUNNER_TEMP/lfm-evidence"
+          git rev-parse HEAD > "$RUNNER_TEMP/lfm-evidence/commit.txt"
+          python -m pip install pytest==9.2.0 requests==2.34.2 onnxruntime==1.23.2 tokenizers==0.22.1
+          python -m pytest --import-mode=importlib tests/test_lfm_development.py -q
+          python -m pip check
+          python -m pip freeze > "$RUNNER_TEMP/lfm-evidence/environment.txt"
+      - name: Acquire official, hash-pinned native CPU runtime
+        run: |
+          mkdir -p "$RUNNER_TEMP/lfm-runtime"
+          curl --fail --silent --show-error --location --max-redirs 5 --connect-timeout 15 --max-time 180 --max-filesize 50000000 --proto '=https' --proto-redir '=https' \
+            https://github.com/ggml-org/llama.cpp/releases/download/b11960/llama-b11960-bin-ubuntu-x64.tar.gz \
+            --output "$RUNNER_TEMP/llama-runtime.tar.gz"
+          echo "31cc3a6bc638ac6c48dc4b1b74888f1eaadf3d14227c1e5f67daf9a49541d97a  $RUNNER_TEMP/llama-runtime.tar.gz" | sha256sum --check
+          tar -xzf "$RUNNER_TEMP/llama-runtime.tar.gz" -C "$RUNNER_TEMP/lfm-runtime"
+          server="$(find "$RUNNER_TEMP/lfm-runtime" -type f -name llama-server -print -quit)"
+          test -x "$server"
+          LD_LIBRARY_PATH="$(dirname "$server")" "$server" --version > "$RUNNER_TEMP/lfm-evidence/runtime.txt" 2>&1
+      - name: Acquire publisher-pinned research-only weights and existing ONNX comparators
+        run: |
+          python - <<'PY'
+          import hashlib, json, os, subprocess
+          from pathlib import Path
+          from scripts.lfm_development import PINS
+          from scripts.five_class_benchmark import DEBERTA
+          from scripts.semantic_benchmark import MODEL_ID, MODEL_REVISION, MODEL_SHA256
+          from scripts.blind_adjudication import file_hash
+
+          root = Path(os.environ["RUNNER_TEMP"])
+          evidence = root / "lfm-evidence"
+          model = PINS[os.environ["CHALLENGER"]]
+          def acquire(pin, remote, path, cap):
+              url = f"https://huggingface.co/{pin['id']}/resolve/{pin['revision']}/{remote}"
+              subprocess.run(["curl", "--fail", "--silent", "--show-error", "--location",
+                              "--max-redirs", "5", "--connect-timeout", "15", "--max-time", "600",
+                              "--max-filesize", str(cap), "--proto", "=https", "--proto-redir", "=https",
+                              url, "--output", str(path)], check=True)
+          weights = root / "lfm.gguf"
+          acquire(model, model["file"], weights, 3000000000)
+          if file_hash(weights) != model["sha256"]:
+              raise ValueError("challenger model hash mismatch")
+          licence = evidence / "model-LICENSE.txt"
+          acquire(model, "LICENSE", licence, 100000)
+          licence_text = licence.read_text(encoding="utf-8")
+          if "LFM Open License" not in licence_text:
+              raise ValueError("unexpected model licence")
+          receipt = {"model": model, "licence_sha256": file_hash(licence),
+                     "weights_sha256": file_hash(weights), "research_only": True,
+                     "runtime_asset_sha256": "31cc3a6bc638ac6c48dc4b1b74888f1eaadf3d14227c1e5f67daf9a49541d97a"}
+          for name, pin in (("minilm", {"id": MODEL_ID, "revision": MODEL_REVISION, "sha256": MODEL_SHA256}),
+                            ("deberta", DEBERTA)):
+              assets = root / name
+              assets.mkdir()
+              for remote in ("config.json", "tokenizer.json", "onnx/model_quint8_avx2.onnx"):
+                  acquire(pin, remote, assets / remote.rsplit("/", 1)[-1], 100000000)
+              if file_hash(assets / "model_quint8_avx2.onnx") != pin["sha256"]:
+                  raise ValueError("comparator model hash mismatch")
+          (evidence / "asset-pins.json").write_text(json.dumps(receipt, indent=2) + "\n")
+          PY
+      - name: Run only synthetic text pairs through the loopback native model
+        run: |
+          server="$(find "$RUNNER_TEMP/lfm-runtime" -type f -name llama-server -print -quit)"
+          test -x "$server"
+          LD_LIBRARY_PATH="$(dirname "$server")" "$server" -m "$RUNNER_TEMP/lfm.gguf" \
+            --host 127.0.0.1 --port 18883 -c 8192 -b 8192 -ub 8192 -t 4 -ngl 0 -np 1 --jinja \
+            > "$RUNNER_TEMP/lfm-evidence/server.log" 2>&1 &
+          pid=$!
+          trap 'kill "$pid" 2>/dev/null || true' EXIT
+          ready=false
+          for _ in $(seq 1 120); do
+            if ! kill -0 "$pid" 2>/dev/null; then break; fi
+            if curl --noproxy '*' --fail --silent --max-time 2 http://127.0.0.1:18883/health > /dev/null; then
+              ready=true
+              break
+            fi
+            sleep 1
+          done
+          test "$ready" = true
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          import requests
+          from scripts.lfm_development import run
+          from scripts.blind_adjudication import file_hash
+          root = Path(os.environ["RUNNER_TEMP"])
+          fixture_path = Path("contracts/examples/semantic-reconciliation-synthetic-v1.json")
+          fixture = json.loads(fixture_path.read_text())
+          with requests.Session() as session:
+              session.trust_env = False
+              def post(endpoint, payload):
+                  response = session.post("http://127.0.0.1:18883/v1/" + endpoint,
+                                          json=payload, timeout=(3, 120), allow_redirects=False)
+                  response.raise_for_status()
+                  return response.json()
+              report = run(fixture, os.environ["CHALLENGER"], post, root / "minilm", root / "deberta")
+          report["fixture_bytes_sha256"] = file_hash(fixture_path)
+          (root / "lfm-evidence" / "report.json").write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
+          print(json.dumps({"summary": report["summary"], "paired": report["paired"],
+                            "challenger_wall_seconds": report["challenger_wall_seconds"]}))
+          PY
+          grep '^VmHWM:' "/proc/$pid/status" > "$RUNNER_TEMP/lfm-evidence/peak-memory.txt" || true
+      - name: Retain diagnostic evidence including failures
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: lfm-development-${{ matrix.challenger }}-${{ github.sha }}
+          path: ${{ runner.temp }}/lfm-evidence/
+          if-no-files-found: error
+          retention-days: 90
+
+  fresh-source-probe:
+    # Same explicit authorization; reuse existing acquisition and scanner.
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-lfm-development'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: "3.12"
+      - name: Retry selected official article and alternate issuer transports without repinning
+        run: |
+          mkdir -p "$RUNNER_TEMP/fresh-source-probe"
+          python - <<'PY'
+          import hashlib, json, os, subprocess
+          from pathlib import Path
+          from scripts.survey_equator_articles import priority_survey
+
+          root = Path(os.environ["RUNNER_TEMP"])
+          output = root / "fresh-source-probe"
+          selected = {"arrive-2.0-2020", "strobe-2007", "stard-2015"}
+          specs = json.loads(Path("source/official/priority-article-candidates.json").read_text())
+          primary = priority_survey([s for s in specs if s["edition"] in selected], Path("."))
+          (output / "primary-survey.json").write_text(json.dumps(primary, indent=2) + "\n")
+          alternatives = {
+              "arrive-issuer": "https://arriveguidelines.org/sites/arrive/files/documents/Author%20Checklist%20-%20Full.pdf",
+              "strobe-issuer": "https://www.strobe-statement.org/download/strobe-checklist-cohort-case-control-and-cross-sectional-studies-combined",
+          }
+          receipts = []
+          for key, url in alternatives.items():
+              path = root / (key + ".pdf")
+              result = subprocess.run(["curl", "--fail", "--silent", "--show-error", "--max-time", "30",
+                                       "--max-filesize", "8000000", "--proto", "=https",
+                                       "--output", str(path), "--write-out", "%{http_code}", url],
+                                      capture_output=True, text=True, check=False)
+              row = {"id": key, "url": url, "curl_exit": result.returncode,
+                     "http_status": result.stdout, "status": "held", "eligible": False}
+              if result.returncode == 0 and result.stdout == "200" and path.is_file():
+                  raw = path.read_bytes()
+                  if raw.startswith(b"%PDF-") and len(raw) <= 8000000:
+                      row.update({"status": "candidate_bytes_observed", "sha256": hashlib.sha256(raw).hexdigest(),
+                                  "bytes": len(raw)})
+              receipts.append(row)
+              path.unlink(missing_ok=True)
+          result = {"articles": primary, "alternatives": receipts, "eligible_families": 0,
+                    "boundary": "Acquisition only; independent structure and rights review required."}
+          (output / "acquisition.json").write_text(json.dumps(result, indent=2) + "\n")
+          print(json.dumps({"articles": [{k: row.get(k) for k in ("edition", "status", "reason", "matched_rows")} for row in primary],
+                            "alternatives": receipts}))
+          PY
+      - name: Retain source evidence, not source text
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: fresh-source-probe-${{ github.sha }}
+          path: ${{ runner.temp }}/fresh-source-probe/
+          if-no-files-found: error
           retention-days: 90

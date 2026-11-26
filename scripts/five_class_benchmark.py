@@ -415,8 +415,6 @@ def prepare(root):
 def judge(pairs, model_path, name, metadata):
     import llama_cpp
 
-    from .witness_adjudication import condition_vote, control_input
-
     pin = JUDGES[name]
     if file_hash(model_path) != pin["sha256"] or model_path.stat().st_size > 3_000_000_000:
         raise ValueError("unqualified judge weights")
@@ -425,8 +423,28 @@ def judge(pairs, model_path, name, metadata):
     model = llama_cpp.Llama(
         model_path=str(model_path), n_ctx=4096, n_threads=4, n_gpu_layers=0, seed=724, verbose=False
     )
-    votes = []
     started = time.perf_counter()
+    votes = adjudicate_pairs(pairs, model.create_chat_completion)
+    return {
+        "model": pin,
+        "resolved_revision": metadata["revision"],
+        "runtime": llama_cpp.__version__,
+        "prompt_sha256": digest(PROMPT),
+        "control_prompt_sha256": digest(CONDITION_PROMPT),
+        "protocol": "condition-v3",
+        "input_sha256": digest(json.dumps(pairs, sort_keys=True, ensure_ascii=False)),
+        "wall_seconds": time.perf_counter() - started,
+        "votes": votes,
+    }
+
+
+def adjudicate_pairs(pairs, complete):
+    """Reuse the existing blinded, schema-constrained prompt with a local runtime."""
+    from .witness_adjudication import condition_vote, control_input
+
+    if any(set(pair) != {"id", "source", "candidate"} for pair in pairs):
+        raise ValueError("unblinded input")
+    votes = []
     for pair in pairs:
 
         def numbered(text):
@@ -439,7 +457,7 @@ def judge(pairs, model_path, name, metadata):
             (CONDITION_PROMPT, CONDITION_SCHEMA) if controlled else (PROMPT, VOTE_SCHEMA)
         )
         try:
-            response = model.create_chat_completion(
+            response = complete(
                 messages=[
                     {"role": "system", "content": prompt},
                     {
@@ -459,17 +477,7 @@ def judge(pairs, model_path, name, metadata):
             vote = {}
         validate = condition_vote if controlled else validate_index_vote
         votes.append(validate(pair, vote if isinstance(vote, dict) else {}))
-    return {
-        "model": pin,
-        "resolved_revision": metadata["revision"],
-        "runtime": llama_cpp.__version__,
-        "prompt_sha256": digest(PROMPT),
-        "control_prompt_sha256": digest(CONDITION_PROMPT),
-        "protocol": "condition-v3",
-        "input_sha256": digest(json.dumps(pairs, sort_keys=True, ensure_ascii=False)),
-        "wall_seconds": time.perf_counter() - started,
-        "votes": votes,
-    }
+    return votes
 
 
 def merge_votes(ledger, pairs, left, right):
