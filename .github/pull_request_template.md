@@ -30,3 +30,10 @@ and receiving gate. A passing validator or merged PR alone is not release author
 methodological validation, source-rights clearance or model qualification.
 For legacy document changes: include the relevant source/view checks and render evidence.
 -->
+
+## Optional review and automated disposition
+
+<!-- No human approval is required for ordinary protected integration. Record the
+independent automated evidence/review and any unresolved concern or explicit hold.
+Human reviewers may comment, request changes or pause auto-merge. Do not mark a
+scientific or external-authorization gate passed without its actual evidence. -->

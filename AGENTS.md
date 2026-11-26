@@ -76,3 +76,8 @@
   existing Dependabot path until a protected Renovate handover has been demonstrated.
 - Never treat historical or queued CI results, proposed version updates, or source candidate
   observations as current verification. Record accepted and held work separately.
+
+- Apply the [optional human review policy](docs/development/optional-human-review.md):
+  automate routine evidence review and protected integration without mandatory
+  human approval; honor intentional holds and retain external authorization and
+  scientific reference boundaries.

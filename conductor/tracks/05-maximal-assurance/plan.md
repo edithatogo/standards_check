@@ -136,3 +136,10 @@ The independently verified controlled trial in [PR 168](https://github.com/edith
 - [ ] **T05.050** ([#31](https://github.com/edithatogo/standards_check/issues/31), [#162](https://github.com/edithatogo/standards_check/issues/162)) Qualify the contract-only static preview package, analytical contract and receiving CI; bind exact revision and artifact hashes. Keep real data and external release separate.
 
 The [publication contract](../../../contracts/publication/composition-graph.v0.1.0.json) extends the existing validator without replacing E1-E3. The [analysis contract](../../../contracts/analysis/requirement-graph.v0.1.0.json) maps each gate to its existing workflow or explicitly planned extension. No confirmed outcomes or real-data export.
+
+## Optional human review and unattended workflow operation
+
+- [ ] **T05.051** ([#31](https://github.com/edithatogo/standards_check/issues/31)) Qualify automatic and optional dispatch access for all maintained workflows, with no mandatory human approval and actual review objections retained.
+- [ ] **T05.052** ([#30](https://github.com/edithatogo/standards_check/issues/30), [#116](https://github.com/edithatogo/standards_check/issues/116)) Observe a protected updater proposal without dashboard approval and qualify the unattended routine merge handover; keep separate breaking/security work and verified receiving receipts.
+
+See [optional human review](../../../docs/development/optional-human-review.md). Model-relative development and candidate reference work can proceed without waiting for human review; T05.049 retains the actual external/scientific evidence gates. No automatic approval, false human review or release permission.

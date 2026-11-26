@@ -48,3 +48,13 @@ maintained completion ledger.
 - **full:** workspace integration, coverage, contracts, cross-target, document and visual checks.
 - **deep:** mutation, fuzzing, Miri, cargo-careful, concurrency exploration, model checking, performance and hostile-input suites.
 - **release:** clean-room/offline builds, reproducibility, SBOM, provenance, signatures, downstream canaries, restore and rollback rehearsal.
+
+## Optional human review
+
+Automation proceeds on required machine evidence and normal protected merge rules.
+Human review is available, not a prerequisite for routine workflow execution or
+merge. A real unresolved concern or intentional hold must be addressed; do not
+fabricate approval or bypass checks. Use native review, draft, cancel, rerun and
+per-PR auto-merge controls. See [operational policy](../docs/development/optional-human-review.md).
+Model-relative work can proceed with independent blinded agents; retain actual
+scientific reference, rights and external authorization boundaries.

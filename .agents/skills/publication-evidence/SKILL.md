@@ -57,3 +57,14 @@ supported detections, resource cost and review burden on the same locked inputs.
 Keep failed, null and unqualified observations; do not change a frozen protocol or
 select a model using held-out results. A new design or cohort is required for a
 new confirmatory claim. Do not name a provider/model version that cannot be verified.
+
+## Optional human review
+
+Use independent fresh-context agents and a separate resolver/reviewer by default
+for model-relative development and feasibility outputs. Human review is an optional
+additional evidence tier for that work, not a start gate. Preserve actual agent
+identity, evidence limits and disagreements. The E4–E8 planned design has a joint
+freeze; keep its human/external-evidence claims held and record exploratory work
+separately until a versioned model-relative design can be frozen independently of
+E8. Never mislabel model-relative results as expert reference or human consensus.
+See [operational policy](../../../docs/development/optional-human-review.md).
