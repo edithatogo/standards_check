@@ -77,3 +77,14 @@ and conclusions, absence of unresolved review threads, and current base. Then ve
 the exact receiving-main execution and prune only the merged feature branch.
 Record final integration and receiving results separately when actually observed.
 No source or model promotion; all eight wider acceptance tasks remain open.
+
+### Formatting follow-up
+
+[Assurance 45766801151](https://github.com/edithatogo/standards_check/actions/runs/45766801151),
+head `d308b34c42ede288e15cd2bc7a07e6758d70aee0`, workflow-policy
+[job 139729897262](https://github.com/edithatogo/standards_check/actions/runs/45766801151/job/139729897262):
+Ruff lint passed and formatting accepted three of the original four files.
+The marking-vector comprehension in `orthogonal_checks.py` still required
+formatting. Collapse the reported generator expression, simplify the adjacent
+edge validation and set construction without changing the defined behavior,
+and rerun the same required checks. No new qualification claimed for this head.

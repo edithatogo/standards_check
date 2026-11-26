@@ -118,8 +118,7 @@ def reachability(
         or len(initial) > 256
         or len(transitions) > 256
         or any(
-            len(v) != len(initial) or any(type(x) is not int or x < 0 for x in v)
-            for v in vectors
+            len(v) != len(initial) or any(type(x) is not int or x < 0 for x in v) for v in vectors
         )
     ):
         raise ValueError("invalid marking or transition")
@@ -178,16 +177,14 @@ def alignment(edges: list, incompatible: list) -> dict:
     """
     if len(edges) > 16:
         return {"status": "held_limit", "selected": [], "score": None}
-    if any(a == b or type(w) is not int or w <= 0 for a, b, w in edges) or any(
-        a == b for a, b in incompatible
-    ):
+    invalid_edge = any(a == b or type(w) is not int or w <= 0 for a, b, w in edges)
+    if invalid_edge or any(a == b for a, b in incompatible):
         raise ValueError("invalid equivalence candidate or incompatibility")
     edges = sorted((min(a, b), max(a, b), w) for a, b, w in edges)
     if len({(a, b) for a, b, _ in edges}) != len(edges):
         raise ValueError("duplicate equivalence candidate")
-    nodes = {x for a, b, _ in edges for x in (a, b)} | {
-        x for a, b in incompatible for x in (a, b)
-    }
+    nodes = {x for a, b, _ in edges for x in (a, b)}
+    nodes.update(x for a, b in incompatible for x in (a, b))
     best = -1
     selected = []
     tied = False
