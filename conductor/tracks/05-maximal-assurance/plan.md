@@ -161,6 +161,7 @@ T05.048 and T05.049: preserve the [requested model challenger record](../../../d
 
 See the [orthogonal assurance design](../../../docs/research/orthogonal-assurance-20261126.md). Local conformal oracle tests passed in isolation only; no full-checkout or hosted result claimed.
 
+- [ ] **T05.063** ([#158](https://github.com/edithatogo/standards_check/issues/158)) Qualify crossed model/task framing and order metamorphisms at fixed candidate/review budgets; preserve all prompt hashes, paired gains/losses, ablations, calibration and independent-reference limits in the preprint evidence. See [task formulation](../../../docs/research/orthogonal-task-framing-20261126.md); no automatic approval from agreement or prior-head CI.
 ## Orthogonal implementation reconciliation — 26 November
 
 T05.060–062: the [shared implementation receipt](orthogonal-verification-20261126.md)

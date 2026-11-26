@@ -106,12 +106,13 @@ def parse_reranker_results(candidates, rows):
     return scores
 
 
-def paired_retrieval(references, baseline, challenger):
+def paired_retrieval(references, baseline, challenger, *, full_pool=False):
     """Conserve the exact query and candidate pool; compare editorial hits, not truth."""
     if set(references) != set(baseline) or set(references) != set(challenger):
         raise ValueError("paired query coverage mismatch")
     for key, order in challenger.items():
-        if len(order) != len(set(order)) or set(order) != set(baseline[key][:10]):
+        expected = baseline[key] if full_pool else baseline[key][:10]
+        if len(order) != len(set(order)) or set(order) != set(expected):
             raise ValueError("reranker changed the frozen candidate pool")
     result = {}
     for k in KS:

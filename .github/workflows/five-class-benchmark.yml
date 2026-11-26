@@ -7,6 +7,8 @@ on:
       - "scripts/five_class_benchmark.py"
       - "scripts/lfm_development.py"
       - "scripts/costing_retrieval.py"
+      - "scripts/task_framing.py"
+      - "tests/test_task_framing.py"
       - "scripts/issuer_column_probe.py"
       - "tests/test_issuer_column_probe.py"
       - "scripts/hosted_specialist_development.py"
@@ -126,15 +128,16 @@ jobs:
 
   lfm-development:
     # Exploratory synthetic-only lane, explicitly requested; not a qualification run.
-    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && (github.event.label.name == 'run-lfm-followup' || github.event.label.name == 'run-lfm-thinking-repair' || github.event.label.name == 'run-compact-model-panel' || github.event.label.name == 'run-k2-development')
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && (github.event.label.name == 'run-lfm-followup' || github.event.label.name == 'run-lfm-thinking-repair' || github.event.label.name == 'run-compact-model-panel' || github.event.label.name == 'run-k2-development' || github.event.label.name == 'run-decision-framing')
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     strategy:
       fail-fast: false
       matrix:
-        challenger: ${{ fromJSON(github.event.label.name == 'run-lfm-thinking-repair' && '["lfm25-thinking"]' || github.event.label.name == 'run-compact-model-panel' && '["minicpm5"]' || github.event.label.name == 'run-k2-development' && '["k2-horizon"]' || '["lfm3","lfm25-instruct","lfm25-thinking","lfm2-2.6b"]') }}
+        challenger: ${{ fromJSON(github.event.label.name == 'run-lfm-thinking-repair' && '["lfm25-thinking"]' || github.event.label.name == 'run-compact-model-panel' && '["minicpm5"]' || github.event.label.name == 'run-k2-development' && '["k2-horizon"]' || github.event.label.name == 'run-decision-framing' && '["d1"]' || '["lfm3","lfm25-instruct","lfm25-thinking","lfm2-2.6b"]') }}
     env:
       CHALLENGER: ${{ matrix.challenger }}
+      DECISION_FRAMING: ${{ github.event.label.name == 'run-decision-framing' && '1' || '0' }}
       HF_HUB_OFFLINE: "1"
       TRANSFORMERS_OFFLINE: "1"
       HF_HUB_DISABLE_TELEMETRY: "1"
@@ -153,7 +156,7 @@ jobs:
           mkdir -p "$RUNNER_TEMP/lfm-evidence"
           git rev-parse HEAD > "$RUNNER_TEMP/lfm-evidence/commit.txt"
           python -m pip install pytest==9.2.0 requests==2.34.2 onnxruntime==1.23.2 tokenizers==0.22.1
-          python -m pytest --import-mode=importlib tests/test_lfm_development.py -q
+          python -m pytest --import-mode=importlib tests/test_lfm_development.py tests/test_task_framing.py -q
           python -m pip check
           python -m pip freeze > "$RUNNER_TEMP/lfm-evidence/environment.txt"
       - name: Acquire official, hash-pinned native CPU runtime
@@ -254,6 +257,8 @@ jobs:
           from pathlib import Path
           import requests
           from scripts.lfm_development import run
+          from scripts.task_framing import run_decision_frames
+          from scripts.hosted_specialist_development import FIXTURE_HASH
           from scripts.blind_adjudication import file_hash
           root = Path(os.environ["RUNNER_TEMP"])
           fixture_path = Path("contracts/examples/semantic-reconciliation-synthetic-v1.json")
@@ -265,12 +270,17 @@ jobs:
                                           json=payload, timeout=(3, 120), allow_redirects=False)
                   response.raise_for_status()
                   return response.json()
-              report = run(fixture, os.environ["CHALLENGER"], post, root / "minilm", root / "deberta")
+              if os.environ["DECISION_FRAMING"] == "1":
+                  if file_hash(fixture_path) != FIXTURE_HASH:
+                      raise ValueError("historical fixture drift")
+                  report = run_decision_frames(fixture, lambda payload: post("systemone", payload))
+              else:
+                  report = run(fixture, os.environ["CHALLENGER"], post, root / "minilm", root / "deberta")
           report["fixture_bytes_sha256"] = file_hash(fixture_path)
           report["resolved_model"] = json.loads((root / "lfm-evidence/asset-pins.json").read_text())["model"]
           (root / "lfm-evidence" / "report.json").write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
           print(json.dumps({"summary": report["summary"], "paired": report["paired"],
-                            "challenger_wall_seconds": report["challenger_wall_seconds"]}))
+                            "challenger_wall_seconds": report.get("challenger_wall_seconds", report.get("seconds"))}))
           PY
           grep '^VmHWM:' "/proc/$pid/status" > "$RUNNER_TEMP/lfm-evidence/peak-memory.txt" || true
       - name: Retain diagnostic evidence including failures
@@ -552,11 +562,12 @@ jobs:
 
   native-qwen-reranker:
     # Public frozen editorial cohort; no provider credentials or scientific promotion.
-    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && (github.event.label.name == 'run-native-qwen-reranker' || github.event.label.name == 'run-qwen4b-reranker')
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && (github.event.label.name == 'run-native-qwen-reranker' || github.event.label.name == 'run-qwen4b-reranker' || github.event.label.name == 'run-qwen-query-framing' || github.event.label.name == 'run-qwen-embedding-framing')
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     env:
-      QWEN_MODEL: ${{ github.event.label.name == 'run-qwen4b-reranker' && 'qwen3-reranker-4b-q8' || 'qwen3-reranker-0.6b-q8' }}
+      QWEN_MODEL: ${{ github.event.label.name == 'run-qwen4b-reranker' && 'qwen3-reranker-4b-q8' || github.event.label.name == 'run-qwen-embedding-framing' && 'qwen3-embedding-0.6b-q8' || 'qwen3-reranker-0.6b-q8' }}
+      QUERY_FRAME: ${{ github.event.label.name == 'run-qwen-query-framing' && 'domain-index' || 'raw' }}
     permissions:
       contents: read
       actions: read
@@ -588,13 +599,21 @@ jobs:
           baseline="$(find "$RUNNER_TEMP/qwen-baseline" -type f -name paired.json -print -quit)"
           test -n "$baseline"
           echo "09ba04a03e5942f71b3d18e6c6c2f0f3050298ad120d0b6d56ea209b29660bad  $baseline" | sha256sum --check
-          python -m pip install requests==2.34.2
+          python -m pip install requests==2.34.2 pytest==9.2.0
+          python -m pytest --import-mode=importlib tests/test_task_framing.py -q
           python -m pip freeze > "$RUNNER_TEMP/qwen-evidence/environment.txt"
           curl --fail --silent --show-error --location --max-redirs 5 --connect-timeout 15 --max-time 180 --max-filesize 50000000 --proto '=https' --proto-redir '=https' \
             https://github.com/ggml-org/llama.cpp/releases/download/b11960/llama-b11960-bin-ubuntu-x64.tar.gz --output "$RUNNER_TEMP/qwen-runtime.tar.gz"
           echo "31cc3a6bc638ac6c48dc4b1b74888f1eaadf3d14227c1e5f67daf9a49541d97a  $RUNNER_TEMP/qwen-runtime.tar.gz" | sha256sum --check
           tar -xzf "$RUNNER_TEMP/qwen-runtime.tar.gz" -C "$RUNNER_TEMP/qwen-runtime"
           case "$QWEN_MODEL" in
+            qwen3-embedding-0.6b-q8)
+              revision="d20cf9c16f82914a21dbd9c645f56895fb1d7750"
+              model_url="https://huggingface.co/Qwen/Qwen3-Embedding-0.6B-GGUF/resolve/$revision"
+              file="Qwen3-Embedding-0.6B-Q8_0.gguf"
+              digest="06507c7b42688469c4e7298b0a1e16deff06caf291cf0a5b278c308249c3e439"
+              cap=650000000
+              ;;
             qwen3-reranker-4b-q8)
               model_url="https://huggingface.co/gorse-io/Qwen3-Reranker-4B-GGUF/resolve/b22e6e5e27598ecc2a9b38439357034f3815d8cb"
               file="Qwen3-Reranker-4B-Q8_0.gguf"
@@ -624,8 +643,13 @@ jobs:
           server="$(find "$RUNNER_TEMP/qwen-runtime" -type f -name llama-server -print -quit)"
           test -x "$server"
           LD_LIBRARY_PATH="$(dirname "$server")" "$server" --version > "$RUNNER_TEMP/qwen-evidence/runtime.txt" 2>&1
+          if test "$QWEN_MODEL" = qwen3-embedding-0.6b-q8; then
+            flags=(--embedding --pooling last)
+          else
+            flags=(--reranking --pooling rank)
+          fi
           LD_LIBRARY_PATH="$(dirname "$server")" "$server" -m "$RUNNER_TEMP/qwen.gguf" --alias "$QWEN_MODEL" \
-            --host 127.0.0.1 --port 18883 --reranking --pooling rank -c 2048 -b 2048 -ub 2048 -t 4 -ngl 0 -np 1 \
+            --host 127.0.0.1 --port 18883 "${flags[@]}" -c 2048 -b 2048 -ub 2048 -t 4 -ngl 0 -np 1 \
             > "$RUNNER_TEMP/qwen-evidence/server.log" 2>&1 &
           pid=$!
           trap 'kill "$pid" 2>/dev/null || true' EXIT
@@ -639,6 +663,25 @@ jobs:
             sleep 1
           done
           test "$ready" = true
+          if test "$QWEN_MODEL" = qwen3-embedding-0.6b-q8; then
+            python - <<'PY'
+          import json, os
+          from pathlib import Path
+          import requests
+          from scripts.hosted_specialist_development import frozen_costing, make_post
+          from scripts.task_framing import embedding_views, retrieval_fusion
+          root = Path(os.environ["RUNNER_TEMP"])
+          baseline = next((root / "qwen-baseline").rglob("paired.json"))
+          fusion = retrieval_fusion(Path("."), baseline)
+          (root / "qwen-evidence/fusion.json").write_text(json.dumps(fusion, indent=2, allow_nan=False))
+          frozen = frozen_costing(Path("."), baseline)
+          with requests.Session() as session:
+              session.trust_env = False
+              post = make_post(session, "http://127.0.0.1:18883/v1/embeddings", None, 243)
+              result = embedding_views(*frozen, post)
+          (root / "qwen-evidence/report.json").write_text(json.dumps(result, indent=2, allow_nan=False))
+          PY
+          else
           python - <<'PY'
           import json
           import os
@@ -661,7 +704,8 @@ jobs:
               raise ValueError("native rank head did not pass relevance smoke")
           PY
           baseline="$(find "$RUNNER_TEMP/qwen-baseline" -type f -name paired.json -print -quit)"
-          python -m scripts.hosted_specialist_development --model "$QWEN_MODEL" --baseline "$baseline" --max-requests 106 --output "$RUNNER_TEMP/qwen-evidence/report.json"
+          python -m scripts.hosted_specialist_development --model "$QWEN_MODEL" --baseline "$baseline" --max-requests 106 --query-frame "$QUERY_FRAME" --output "$RUNNER_TEMP/qwen-evidence/report.json"
+          fi
           grep '^VmHWM:' "/proc/$pid/status" > "$RUNNER_TEMP/qwen-evidence/peak-memory.txt" || true
       - name: Retain Qwen diagnostic evidence
         if: always()

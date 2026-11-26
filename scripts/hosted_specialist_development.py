@@ -70,13 +70,16 @@ def rerank_payload(model, query, documents):
     return payload
 
 
-def evaluate_rerank(queries, targets, references, rankings, model, post):
+def evaluate_rerank(queries, targets, references, rankings, model, post, *, query_frame="raw"):
     """No labels, stable IDs or baseline scores are sent to the inference endpoint."""
+    from .task_framing import frame_query, payload_hash
+
     ranked, rows = {}, []
     started = time.perf_counter()
     for key, order in sorted(rankings.items()):
         candidates = order[:10]
-        payload = rerank_payload(model, queries[key], [targets[c] for c in candidates])
+        query = frame_query(queries[key], query_frame)
+        payload = rerank_payload(model, query, [targets[c] for c in candidates])
         response = post(payload)
         returned = response.get("model")
         if returned is not None and returned != model:
@@ -88,6 +91,7 @@ def evaluate_rerank(queries, targets, references, rankings, model, post):
                 "instrument_id": key[0],
                 "item_id": key[1],
                 "returned_model": returned,
+                "payload_sha256": payload_hash(payload),
                 "scores": scores,
                 "usage": usage(response),
             }
@@ -97,6 +101,7 @@ def evaluate_rerank(queries, targets, references, rankings, model, post):
     return {
         "protocol": "frozen-costing-rerank-development-v1",
         "requested_model": model,
+        "query_frame": query_frame,
         "reference_status": "research_seed_review_required",
         "scientific_qualification": False,
         "semantic_merges": 0,
@@ -206,6 +211,7 @@ def main():
     )
     parser.add_argument("--root", type=Path, default=Path("."))
     parser.add_argument("--baseline", type=Path)
+    parser.add_argument("--query-frame", choices=("raw", "domain-index"), default="raw")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--allow-hosted-public-development", action="store_true")
     parser.add_argument("--max-requests", type=int, required=True)
@@ -220,6 +226,8 @@ def main():
         if not key:
             raise SystemExit(f"missing local credential {env}")
     decision = args.model in DECISION_MODELS
+    if decision and args.query_frame != "raw":
+        raise SystemExit("query framing applies only to reranking")
     expected_requests = 36 if decision else 106
     if args.max_requests != expected_requests:
         raise SystemExit(f"declare exactly {expected_requests} maximum requests")
@@ -237,7 +245,7 @@ def main():
                 result = evaluate_decision(args.root, args.model, post)
             else:
                 frozen = frozen_costing(args.root, args.baseline)
-                result = evaluate_rerank(*frozen, args.model, post)
+                result = evaluate_rerank(*frozen, args.model, post, query_frame=args.query_frame)
     except (OSError, ValueError, KeyError, TypeError, requests.RequestException) as exc:
         result = {
             "requested_model": args.model,
