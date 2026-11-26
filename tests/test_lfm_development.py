@@ -108,7 +108,9 @@ def test_existing_harness_and_receipts(model, monkeypatch, tmp_path):
         if endpoint == "systemone":
             return decision_response() if len(calls) > 1 else {}
         assert endpoint == "chat/completions"
-        assert "reference" not in payload["messages"][1]["content"]
+        data = json.loads(payload["messages"][1]["content"])
+        assert set(data) == {"A", "B"}
+        assert all(set(line) == {"number", "text"} for lines in data.values() for line in lines)
         assert payload["seed"] == 724
         return {"choices": [{"message": {"content": json.dumps({
             "label": "equivalent", "a": [1], "b": [1],

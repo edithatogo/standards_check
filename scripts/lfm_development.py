@@ -120,8 +120,9 @@ def prepare_fixture(fixture):
     from .five_class_benchmark import digest
     from .semantic_benchmark import LABELS, validate_cases
 
-    if fixture.get("schema_version") != 1 or fixture.get("label_origin") != (
-        "synthetic_analyst_authored"
+    if (
+        fixture.get("schema_version") != 1
+        or fixture.get("label_origin") != "synthetic_analyst_authored"
     ):
         raise ValueError("only the original synthetic development fixture is allowed")
     validate_cases(fixture["cases"])
@@ -172,8 +173,7 @@ def paired(reference, incumbent, challenger):
     metrics(reference, incumbent)
     metrics(reference, challenger)
     counts = Counter(
-        (incumbent[key] == label, challenger[key] == label)
-        for key, label in reference.items()
+        (incumbent[key] == label, challenger[key] == label) for key, label in reference.items()
     )
     return {
         "both_correct": counts[True, True],
@@ -211,9 +211,7 @@ def run(fixture, model, post, minilm_assets, deberta_assets):
     ):
         receipt = five.score(ledger, records, assets, sha)
         predictions[name] = {row["id"]: row["predicted"] for row in receipt["records"]}
-        comparators[name] = {
-            key: receipt[key] for key in ("asset_hashes", "wall_seconds")
-        }
+        comparators[name] = {key: receipt[key] for key in ("asset_hashes", "wall_seconds")}
     started = time.perf_counter()
     invalid = []
     evidence = []
