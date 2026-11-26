@@ -1,0 +1,88 @@
+name: Specialist independent family source intake
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+    paths:
+      - ".github/workflows/specialist-family-intake.yml"
+      - "conductor/source-reconciliation/specialist-family-gates-20261126.md"
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: specialist-family-intake-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  family-intake:
+    if: github.event_name == 'workflow_dispatch' || (github.event.pull_request.head.repo.full_name == github.repository && (github.head_ref == 'research/specialist-family-intake' || contains(github.event.pull_request.labels.*.name, 'run-family-intake')))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12.16"
+      - name: Inspect existing source survey and review controls
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/family-evidence" "$RUNNER_TEMP/family-prior"
+          git rev-parse HEAD > "$RUNNER_TEMP/family-evidence/revision.txt"
+          python -VV > "$RUNNER_TEMP/family-evidence/python-version.txt"
+          sha256sum source/official/priority-article-candidates.json source/official/authoritative-article-editions.json scripts/survey_equator_articles.py scripts/reconcile_authoritative_articles.py scripts/jats_checklist_structure.py scripts/source_provider_evidence.py scripts/review_source_receipts.py > "$RUNNER_TEMP/family-evidence/input-sha256.txt"
+          python -m unittest tests.test_survey_equator_articles tests.test_source_provider_evidence tests.test_source_xml tests.test_review_source_receipts -v
+          timeout 60 gh run download 45635380131 --repo "$GITHUB_REPOSITORY" --name equator-source-45635380131 --dir "$RUNNER_TEMP/family-prior"
+          echo "fc859acaf9ae378b3bb1a2d74be0eeb0ff294319434d83bce6f9a4daf835fa32  $RUNNER_TEMP/family-prior/equator-article-survey.json" | sha256sum --check
+          python -m scripts.review_source_receipts --receipt "$RUNNER_TEMP/family-prior/equator-article-survey.json" --output "$RUNNER_TEMP/family-evidence/historical-retrospective.json"
+      - name: Reuse the bounded primary source acquisition and structural checker
+        shell: bash
+        run: |
+          set -euo pipefail
+          timeout 600 python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          from scripts.survey_equator_articles import priority_survey
+
+          root = Path(".")
+          out = Path(os.environ["RUNNER_TEMP"]) / "family-evidence"
+          candidates = json.loads((root / "source/official/priority-article-candidates.json").read_text())
+          chosen = [row for row in candidates if row.get("publisher_xml") == "plos"]
+          expected = {"consort-2025-plos", "spirit-2025-plos", "arrive-2.0-2020", "strobe-2007"}
+          if {r["edition"] for r in chosen} != expected:
+              raise ValueError("selected publisher candidate universe changed")
+          known = json.loads((root / "source/official/authoritative-article-editions.json").read_text())
+          (cheers,) = [row for row in known if row["edition"] == "cheers-2022"]
+          chosen.append({**cheers, "table_item_ids": [cheers["item_ids"]]})
+          # One selected exact-edition observation per source; no raw source export.
+          rows = priority_survey(chosen, root)
+          report = {
+              "schema_version": 1,
+              "status": "source_candidate_observation_only",
+              "canonical_packs_promoted": 0,
+              "editions": rows,
+          }
+          (out / "priority-retry.json").write_text(json.dumps(report, indent=2) + "\n")
+          for row in rows:
+              print(row["edition"], row["status"], row.get("matched_rows", 0), row.get("expected_rows", 0))
+          PY
+          python -m scripts.review_source_receipts --receipt "$RUNNER_TEMP/family-evidence/priority-retry.json" --output "$RUNNER_TEMP/family-evidence/priority-retry-retrospective.json"
+      - name: Retain only candidate source evidence and retrospective
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: specialist-family-intake-${{ github.sha }}
+          path: ${{ runner.temp }}/family-evidence/
+          if-no-files-found: error
+          retention-days: 90
