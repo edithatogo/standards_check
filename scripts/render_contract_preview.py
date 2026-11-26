@@ -16,9 +16,15 @@ GRAPH = "contracts/analysis/requirement-graph.v0.1.0.json"
 SCHEMA = "schemas/requirement-graph-plan.v1.schema.json"
 FOLLOWUP = "contracts/publication/composition-graph.v0.1.0.json"
 PROGRAMME = "contracts/publication/programme.v1.json"
+SPECIALIST = "contracts/publication/specialist-pipeline.v0.1.0.json"
+ORTHOGONAL = "contracts/publication/orthogonal-methods.v0.1.0.json"
 SOURCES = {
     PROGRAMME: "programme.v1.json",
     FOLLOWUP: "composition-graph.v0.1.0.json",
+    SPECIALIST: "specialist-pipeline.v0.1.0.json",
+    ORTHOGONAL: "orthogonal-methods.v0.1.0.json",
+    "docs/research/specialist-pipeline-protocol.v0.1.0.md": "specialist-pipeline-protocol.v0.1.0.md",
+    "docs/research/orthogonal-methods-protocol.v0.1.0.md": "orthogonal-methods-protocol.v0.1.0.md",
     GRAPH: "requirement-graph.v0.1.0.json",
     SCHEMA: "requirement-graph-plan.v1.schema.json",
     "docs/research/publication-protocol.v0.1.0.md": "publication-protocol.v0.1.0.md",
@@ -96,7 +102,7 @@ def table(headers, rows):
     )
 
 
-def render(graph, publication, programme, revision):
+def render(graph, experiment_rows, revision):
     links = "".join(
         f'<li><a href="{escape(name)}">{escape(name)}</a></li>' for name in SOURCES.values()
     )
@@ -109,7 +115,7 @@ def render(graph, publication, programme, revision):
                 row["primary_endpoint"]["name"],
                 row["primary_endpoint"]["decision_rule"],
             ]
-            for row in programme["design"]["experiments"] + publication["design"]["experiments"]
+            for row in experiment_rows
         ],
     )
     sources = table(
@@ -177,13 +183,19 @@ def build(root, output, revision):
     graph, schema, publication, programme = (
         json.loads(payload[SOURCES[path]]) for path in (GRAPH, SCHEMA, FOLLOWUP, PROGRAMME)
     )
-    for contract in (publication, programme):
+    specialist, orthogonal = (
+        json.loads(payload[SOURCES[path]]) for path in (SPECIALIST, ORTHOGONAL)
+    )
+    experiment_rows = []
+    for contract in (programme, publication, specialist, orthogonal):
         require_planned(contract)
         validate(contract, root)
         if contract["design"]["protocol"]["path"] not in SOURCES:
             raise ValueError("unlisted protocol")
+        experiment_rows.extend(contract["design"]["experiments"])
+    registry(experiment_rows)
     validate_graph(root, graph, schema, publication)
-    payload["index.html"] = render(graph, publication, programme, revision).encode()
+    payload["index.html"] = render(graph, experiment_rows, revision).encode()
     payload["README.md"] = (
         b"---\ntitle: StandardFlow Research Contracts\nsdk: static\napp_file: index.html\n---\n\n"
         b"Private, contract-only research preview. Plans are not results; dataset release held.\n"
