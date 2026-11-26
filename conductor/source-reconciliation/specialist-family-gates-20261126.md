@@ -522,3 +522,110 @@ Reconciled receiving #184 main `eb640fba5d04b1ed9971ff52dad2a339d078ec4a` while 
 Track 01/05 evidence-policy and factorial work. #186/#189 carry the
 format-only shared exception spacing repair; no change to earlier
 observations. Strict sequential protected checks must run on new heads.
+
+
+## Owner research authorization, cross-format learning and exact source receipts
+
+On 26 November the repository owner explicitly approved use of all checklists for
+this research purpose. Record that project-level authorization; routine permitted
+research acquisition and local analysis need no additional owner approval. Preserve
+attribution, source-specific permissions, actual rights evidence and the distinct
+public redistribution/release gate. The owner's research approval is not an
+assertion that they own every third-party copyright. Do not rewrite earlier
+license observations or automatically mark every pack as cleared. Keep raw
+candidate material out of public receipts.
+
+Protected E10 #186 merged at d8384d5a4f17069f1c91a3d9b4f23c30860522e2.
+Reconciled #188 with receiving #190 main `2d011db16600af47610c16cb52131aba5fea826d`, preserving its existing
+Conductor evidence-policy additions. Prior exact-head assurance and patch
+coverage passed (92.18%); fresh receiving-head checks are still required.
+
+Verified [Word structural receipt 15113361829](https://github.com/edithatogo/standards_check/actions/runs/45811546765/artifacts/15113361829),
+ZIP SHA-256 e0775e4bd37e677a5bec7d58e0b469e45af74b63177b5b4116379b8f4f1805d1.
+CONSORT item 26: five exact content-block matches, four numbered paragraphs
+numId 4, level 0 maps to unique abstractNum 8, level 0 bullet format, zero
+overrides. Exact row agreement 41/42 remains separate from 42/42 content
+agreement after the four literal bullet markers. SPIRIT 53/53 exact rows.
+Both files have zero body footnote/endnote/comment references; footnote/endnote
+XML contains only IDs -1/0 with no nonempty text nodes. CONSORT footer has one
+nonempty text node/one field; SPIRIT footer four nodes/two fields, header
+zero text nodes. Retain footer evidence; do not infer complete semantic
+coverage from part counts. Reanalysis of the same hash-only source receipt:
+all 42 CONSORT and all 53 SPIRIT literal topic hashes match at least one
+direct or inherited same-row Word context cell. This is a heading-context
+candidate observation, not independent interpretation or rendered fidelity.
+
+Verified [EQUATOR monitor artifact 15114251561](https://github.com/edithatogo/standards_check/actions/runs/45811510973/artifacts/15114251561),
+SHA-256 3295b1a2b731b02515296e23a7a1be7258af38552f8de6ad7845cc14183f1f90.
+Initial asset snapshot: 1,038 paths, 1,033 unique Git blob identities, five
+duplicate groups (four across guideline folders); 720 published index
+entries. Directory delta versus checked-in 46124ee9: one added equity-r
+and 19 revised pages. Distinguish from previous 388e294f→1025cac0 two-change
+asset observation. Aliases include identical protocol files under CONSORT/
+SPIRIT factorial, PRISMA-DTA abstract DOCX/PDF under two folders, TARCiS
+PDF under PRISMA-S and TARCiS, and two TRIPOD expanded-PDF names. Keep all
+paths and provenance; shared example protocols do not establish edition
+equivalence or independent guideline components. No actual file deletion.
+
+Retained [fourteen-cohort format benchmark](../tracks/01-canonical-standard-pack/cross-family-format-benchmark.md)
+from archive 15111340863: exact full ordered row fingerprints agree for
+EcoEvo Word/Excel (89/89) and PRISMA abstracts Word/retained JATS (12/12),
+yet their original structure/rights holds remain. EcoEvo PDF strict versus
+Word 83/89 and layout-aware 89/89; CSV versus Word 88/89. PRISMA-P Word
+versus JATS 14/26, not a duplicate decision. Reuse these as differential
+regressions. Store one edition identity, preserve every manifestation
+and stable item anchor; distinguish byte aliases, exact ordered row
+agreement, layout-only differences, scope/qualifier/footnote/heading
+loss, unknown identity and genuinely different editions. Do not collapse
+different study-design variants, extensions or translations, or apply
+transitive semantic equivalence from pairwise partial matches.
+
+Actual primary-source visual verification on 26 November:
+[TRIPOD+AI issuer PDF](https://www.tripod-statement.org/wp-content/uploads/2019/12/TRIPODAI_checklist.pdf)
+(version 11 January 2024, both pages) and [BMJ primary](https://www.bmj.com/content/385/bmj-2023-078378)
+(Table 2; 27 main items, 52 subitems; [correction](https://www.bmj.com/content/385/bmj.q902)
+affiliations only, CC BY 4.0). Compared the observed per-ID scope/footnote
+metadata against the exact upstream literal array without source text
+export: 52/52 scope codes agree, D-only 9a/12a/12b/12c/15/22/27a/27b,
+E-only 12f/12g/20c/24, 40 both. All five item-to-note links agree:
+12c→2, 12d→3, 18f→4, 22→5, 23b→3. Note 1 defines column scope.
+[STROBE issuer combined PDF](https://www.strobe-statement.org/download/strobe-checklist-cohort-case-control-and-cross-sectional-studies-combined)
+(both pages) and [PLOS primary](https://journals.plos.org/plosmedicine/article?id=10.1371%2Fjournal.pmed.0040296)
+confirm 22 main items, design-specific 6/12/14/15 and starred 8/13/14/15.
+Literal grouped subitem counts agree with visual main-item/subitem group
+structure (34 elements; variants within elements still need reconciliation).
+PLOS article has an attribution licence; issuer requests contact for
+republication and related work. BMJ article/correction CC BY notice and
+PMC conflicting commercial-reuse wording both retained. Research use
+approved by owner, exact public redistribution remains separately evidenced.
+Binary issuer PDF acquisition in local environment failed; visual comparisons
+are not byte-pinned, independently blinded semantic labels. Use fixed issuer
+asset URLs and exact EQUATOR blob pins in existing intake for byte-level
+qualification. No full-source qualification or independent freeze implied.
+
+Further repository priorities (existing Track 01/04/05 and #111/#95/#158):
+1. Use hash-based manifestation alias groups and ordered-row groups in the
+   existing cross-format comparator; retain all structural holds.
+2. Preserve scope and note linkage across exports (including generated
+   Typst/LaTeX/HTML); use round-trip differential tests for actual observed
+   failures rather than adding new readers before measuring residuals.
+3. Separate source updates from semantic changes: asset drift → exact
+   edition requalification → item-level diff; keep progress migration
+   explicit and reversible. Use existing source-census and pack contracts.
+4. Keep family dependency closure, including related editions and shared
+   source assets, in the single publication reference lock; common files
+   are leakage/exposure candidates, not automatic semantic connections.
+5. Persist compact hash-only case/metric receipts with immutable revision
+   references before CI artifact expiry; no third-party text dump.
+6. Prefer protected native auto-merge and avoid unnecessary repeated
+   downloads; do not weaken codecov, privacy, CodeQL or offline runner
+   qualification. Use the same shared missed-match coordinator on main.
+7. Use independent source-only packets, exact scope/anchor references and
+   blinded separate initial labels plus independent resolver; no supplied
+   lock or independent label receipt is currently available. The observed
+   source content has been inspected in development, so it must not be
+   relabelled untouched confirmation. Keep E9–E11 confirmation and the
+   eight-arm joint factorial held. Existing #184/#190 development factorial
+   and evidence-policy work is not an independent same-ID analysis.
+
+No new model or service. No canonical admission or scientific promotion.
