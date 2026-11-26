@@ -156,6 +156,7 @@ jobs:
             --output target/coverage/contracts-preview --revision "$(git rev-parse HEAD)" \
             | tee target/coverage/contracts-preview-receipt.json
           cargo build --locked -p standardflow-cli
+          python -m coverage run -m pytest --import-mode=importlib tests/native_searchright_conservation.py
           python -m coverage run -m scripts.qualify_legacy_prisma \
             --rust-cli target/debug/standardflow --output target/coverage/legacy-prisma.json
           python -m coverage run -m scripts.qualify_pack_differential \
