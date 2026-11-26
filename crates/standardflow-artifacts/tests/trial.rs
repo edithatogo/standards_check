@@ -57,7 +57,10 @@ fn trial_rejects_oversize_and_unsupported_scope() -> Result<(), Box<dyn std::err
     ));
     for (path, value) in [
         ("/schema_version", serde_json::Value::from("unknown")),
-        ("/analysis_population", serde_json::Value::from("per_protocol")),
+        (
+            "/analysis_population",
+            serde_json::Value::from("per_protocol"),
+        ),
         ("/arm_a/discontinued", serde_json::Value::from(46_u64)),
         ("/arm_b/received", serde_json::Value::from(u64::MAX)),
         ("/assessed", serde_json::Value::from(u64::MAX)),
