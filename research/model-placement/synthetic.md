@@ -207,3 +207,25 @@ PYTHONPATH=. python research/model-placement/graph_context_replay.py --artifact 
 Reconciled receiving #182 main (08e86696180936ef6722e539a32d6ebbd2222625)
 without replacing any existing Track 05 evidence or changing production
 contracts. Full exact-head CI and offline security remain required.
+
+
+## Shared recall coordination reconciliation — 26 November
+
+Receiving main `776ed1dbfbe19d16365310ef0fa07d29a793611a` includes #187's
+source-anchored graph and factorial ablations. The #185 experimental source,
+fixture identities, exact previous receipts and negative findings remain unchanged.
+The shared audit and its executable reference-bound stage join are owned solely
+by [#183](https://github.com/edithatogo/standards_check/pull/183) under #158;
+see its [verified full-checkout and handoff record](https://github.com/edithatogo/standards_check/blob/2cedd83859a3e697a8bfc1b8c3ebf951b2d14637/research/model-placement/replay.md#full-checkout-reproduction-and-locked-stage-handoff--26-november).
+The coordinator imported the existing #185 heading-context results, rather
+than rerunning this benchmark. Verified hosted audit run 45802682924
+reproduced all 1186 included observations; the 68 local heading observations
+are separately retained and explicitly absent from that hosted job. With
+#189's 68 additional span outcomes the shared local audit has 1322 rows
+on 175 distinct editorial/synthetic IDs, not independent positives.
+Do not duplicate the audit, reference registry, graph, extraction or evidence
+experiments. Next dependency is #188's actual source/rights/anchor-qualified
+blinded family lock and same-case Offline/Orthogonal evidence. Existing
+T05.049/T05.063 acceptance and #30 offline-security hold remain open.
+This reconciliation is documentation and current-main ancestry only;
+new exact-head checks required, no new inference or promotion.
