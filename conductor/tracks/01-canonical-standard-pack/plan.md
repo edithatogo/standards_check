@@ -366,3 +366,11 @@ PR #155 has since merged its bounded engineering and exploratory assets; indepen
 family, source rights and scientific gates remain held. Keep all three tasks open:
 no empirical calibration, source-anchored recursive rule corpus, full costing alignment,
 authorized restricted-corpus coverage or canonical admission has been established.
+
+## Orthogonal qualification follow-up — 26 November
+
+T01.060–062: the [qualification increment](../05-maximal-assurance/orthogonal-qualification-20261126.md)
+adds signed ground-rule evaluation with exact source binding, a bounded HiGHS comparator,
+a full typed costing candidate audit, family-level selective risk evaluation and private
+release-overlap integration. Real rule, reference, semantic mapping and corpus qualification
+remain held. No canonical admission or additional experiment registry.

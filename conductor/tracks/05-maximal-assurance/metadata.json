@@ -40,7 +40,8 @@
     "hosted-hardening-20261125.json",
     "pr165-native-20261125.json",
     "main165-native-20261125.json",
-    "orthogonal-verification-20261126.md"
+    "orthogonal-verification-20261126.md",
+    "orthogonal-qualification-20261126.md"
   ],
   "coverage_floors_percent": {
     "python_combined": 90.5,

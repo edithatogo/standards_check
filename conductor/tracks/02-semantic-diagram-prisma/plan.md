@@ -110,3 +110,10 @@ using the existing XML trust boundary, and source-byte-anchored edits with overl
 and stale-span rejection. The [shared implementation receipt](../05-maximal-assurance/orthogonal-verification-20261126.md)
 records synthetic tests and CI limitations. Keep the task open for actual PNML
 corpus/PM4Py comparison, parser-backed CST/WFST normalization and format conservation.
+
+## Orthogonal qualification follow-up — 26 November
+
+T02.060: the [qualification increment](../05-maximal-assurance/orthogonal-qualification-20261126.md)
+adds the maintained PNML corpus/PM4Py comparator, weighted marking controls and a bounded
+Markdown parser-backed normalization increment. Retain independent hosted qualification
+and native CST/WFST, Typst and LaTeX scope as outstanding.

@@ -3,6 +3,9 @@ import copy
 import hashlib
 import io
 import json
+import os
+import subprocess
+import sys
 from pathlib import Path
 import tempfile
 import unittest
@@ -279,6 +282,70 @@ class DatasetReleaseTests(unittest.TestCase):
             mutate(changed)
             with self.assertRaises(ValueError):
                 validate(changed, self.root)
+
+
+    def test_promotion_requires_exact_private_overlap_gate(self):
+        manifest = {
+            "schema_version": "dev.standardflow.restricted-overlap.v1",
+            "n": 3,
+            "expected_references": ["restricted"],
+            "expected_artifacts": ["data"],
+            "references": [{
+                "id": "restricted",
+                "text": self.write("evidence/restricted.txt", "amber quills drift past ridge"),
+            }],
+            "artifacts": [{
+                "id": "data",
+                "artifact": {
+                    "path": "package/data.jsonl",
+                    "sha256": self.data["release"]["files"][0]["sha256"],
+                },
+                "fragments": self.write(
+                    "evidence/fragments.json", json.dumps(["invented metadata key status"])
+                ),
+                "extraction_complete": True,
+            }],
+        }
+        contract = self.write("contract.json", json.dumps(self.data))
+        args = [
+            str(self.root / contract["path"]), "--root", str(self.root),
+            "--require-publishable",
+        ]
+        with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+            self.assertEqual(main(args), 1)
+            for defect in ("none", "wrong_artifact", "incomplete", "match"):
+                candidate = copy.deepcopy(manifest)
+                if defect == "wrong_artifact":
+                    candidate["artifacts"][0]["artifact"] = self.write(
+                        "evidence/other.txt", "different artifact"
+                    )
+                elif defect == "incomplete":
+                    candidate["artifacts"][0]["extraction_complete"] = False
+                elif defect == "match":
+                    candidate["artifacts"][0]["fragments"] = self.write(
+                        "evidence/leak.json", json.dumps(["amber quills drift"])
+                    )
+                ref = self.write("evidence/overlap.json", json.dumps(candidate))
+                self.assertEqual(
+                    main(args + ["--restricted-overlap-manifest", str(self.root / ref["path"])]),
+                    0 if defect == "none" else 1,
+                )
+                # Invoke from outside the checkout with no injected PYTHONPATH.
+                # The direct-script compatibility surface must match the module CLI.
+                if defect in ("none", "match"):
+                    environment = os.environ.copy()
+                    environment.pop("PYTHONPATH", None)
+                    result = subprocess.run(
+                        [sys.executable, str(ROOT / "scripts/validate_dataset_release.py"),
+                         *args, "--restricted-overlap-manifest", str(self.root / ref["path"])],
+                        cwd=self.root, env=environment, capture_output=True, text=True, timeout=30,
+                    )
+                    self.assertEqual(result.returncode, 0 if defect == "none" else 1, result.stderr)
+                    if defect == "none":
+                        self.assertEqual(json.loads(result.stdout)["restricted_overlap"]["status"], "clear_in_scope")
+                    else:
+                        self.assertNotIn("amber quills", result.stderr)
+
 
 
 if __name__ == "__main__":

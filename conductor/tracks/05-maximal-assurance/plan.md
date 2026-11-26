@@ -172,3 +172,10 @@ reconciliation, and all eight task-level remaining gates. Use one publication un
 all negative synthetic outcomes. Keep all three tasks open pending exact-head and
 receiving qualification, the authorized release corpus, wider property/fuzz evidence,
 and an independently frozen scientific comparison. No new approval requirement.
+
+## Orthogonal qualification follow-up — 26 November
+
+T05.060–062: the [qualification increment](orthogonal-qualification-20261126.md) records
+PR #177 receiving checks and the next bounded implementations, local evidence, current
+hosted CI gates, exact release scan integration and independent-reference holds. Preserve
+E1–E14 and one integrated publication under #158. All eight wider tasks remain open.

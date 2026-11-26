@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 
 from .orthogonal_checks import leakage
-from .validate_dataset_release import decode, read_bound
+from .validate_dataset_release import decode, read_bound, safe_path
 
 
 def _inventory(rows, expected, fields):
@@ -77,6 +77,32 @@ def scan(manifest: dict, root: Path) -> dict:
         "n": manifest["n"],
         "reference_count": len(restricted),
         "artifact_sha256": bound,
+    }
+
+
+def qualify_release(release: dict, manifest: dict, root: Path) -> dict:
+    """Require the scan to bind exactly the final staged package, not a sample."""
+    package = safe_path(root, release["package_root"])
+    expected = {
+        (package / row["path"]).relative_to(root).as_posix(): row["sha256"]
+        for row in release["files"]
+    }
+    rows = manifest["artifacts"]
+    observed = {row["artifact"]["path"]: row["artifact"]["sha256"] for row in rows}
+    if len(observed) != len(rows) or observed != expected:
+        raise ValueError("overlap artifact inventory differs from release")
+    private = [row["text"]["path"] for row in manifest["references"]]
+    private.extend(row["fragments"]["path"] for row in rows)
+    if any(safe_path(root, path).resolve().is_relative_to(package.resolve()) for path in private):
+        raise ValueError("private overlap inputs must not be staged for export")
+    result = scan(manifest, root)
+    if result["status"] != "clear_in_scope":
+        raise ValueError("restricted overlap gate held")
+    return {
+        "status": result["status"],
+        "artifacts": len(expected),
+        "reference_count": result["reference_count"],
+        "n": result["n"],
     }
 
 

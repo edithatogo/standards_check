@@ -158,6 +158,12 @@ jobs:
           cargo build --locked -p standardflow-cli
           python -m coverage run -m scripts.qualify_legacy_prisma \
             --rust-cli target/debug/standardflow --output target/coverage/legacy-prisma.json
+          python -m coverage run -m scripts.qualify_pack_differential \
+            --rust-cli target/debug/standardflow --output target/coverage/pack-differential.json
+          python -m coverage run -m scripts.qualify_petri_nets \
+            --output target/coverage/petri-net-qualification.json
+          python -m coverage run -m scripts.costing_scope_audit \
+            --output target/coverage/costing-scope-audit.json
           wheel="$RUNNER_TEMP/en_core_web_sm-3.8.0-py3-none-any.whl"
           if [ -f "$wheel" ]; then
             # Separate processes; timing/RSS include coverage instrumentation.

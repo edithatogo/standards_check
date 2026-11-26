@@ -94,3 +94,10 @@ The [shared implementation receipt](../05-maximal-assurance/orthogonal-verificat
 binds the result to the tested revision. Keep T03.060 open until receiving integration
 and the remaining property/fuzz, unsupported-stream and broader semantic qualification
 are observed; no universal semantic parity or consumer cutover claim.
+
+## Orthogonal qualification follow-up — 26 November
+
+T03.060: the [qualification increment](../05-maximal-assurance/orthogonal-qualification-20261126.md)
+adds actual Python-schema/Rust CLI comparisons across the eight pack kinds and generated
+PRISMA arithmetic properties. The current Rust diagram CLI supports PRISMA only; do not
+claim non-PRISMA legacy rendering parity, consumer cutover or scientific validity.
