@@ -228,6 +228,8 @@ T05.048/063 / #158: [fair factorial protocol](../../../docs/research/factorial-f
 
 T05.048/063 / #158: [policy and harness receipt](../01-canonical-standard-pack/evidence-policy-v1-receipt.json) retains matched call/referral comparisons, explicit reward and held-out oracle, five focused tests and exact input/output pins. Fix observed I001; existing opt-in workflow now records both diagnostics and exact replay digest. No weakening of required checks or scientific admission.
 
+T05.048/063 / #158: [parent-first diagnostic](../../../docs/research/evidence-policy-20261126.md#parent-first-diagnostic-follow-up-post-hoc) retains six focused and 61 overlay tests, original policy results and formal gate. Post-hoc synthetic only; keep exact-head and independent-family gates open.
+
 
 Model-placement development (26 November; #158; T05.063 remains open): [synthetic compact/geometry placement receipt](../../../research/model-placement/synthetic.md) complements #182 and #183. Two local focused tests passed; six template families, eight placements including graph, tagging, atom decisions, learned reranking and typed verification. No independent validation, runtime admission or model promotion. Preserve negative results and ceiling effects; per-arm resource and rights-cleared references remain held.
 
@@ -262,3 +264,5 @@ receipt. Keep #182's distinct linkage endpoint. No independent reference lock,
 no adoption, no new registry or gate change; #95/#111/#188/T05.049 remain open.
 
 #185 receiving reconciliation: main d8384d5a incorporates #184 and #186; append-only Track 05 additions conserved from both branches. All prior experimental and corrected source/test blobs unchanged. Exact corrected predecessor ad2d9840 passed all seven required contexts, CodeQL and patch/component coverage; fresh checks required on receiving head. Protected auto-merge retained.
+
+#185 receiving reconciliation: preserve #190's parent-first policy result at main 2d011db1 and the corrected co-extraction controls. Exact scientific holds unchanged; protected auto-merge and fresh checks required.

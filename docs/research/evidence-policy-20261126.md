@@ -111,3 +111,42 @@ protected CI. See [receipt](../../conductor/tracks/01-canonical-standard-pack/ev
 ## Observed hosted replay and formatter repair
 
 [Run 45809762393](https://github.com/edithatogo/standards_check/actions/runs/45809762393) completed successfully: 12 focused tests, exact policy deterministic digest match, fairness summary and matched-ranking/coverage results reproduced. Downloaded [artifact 15113035196](https://github.com/edithatogo/standards_check/actions/runs/45809762393/artifacts/15113035196) verified against its archive SHA-256. Both scripts required formatting; apply the exact retained diff to their original blobs, verify Python AST equality and all 60 local overlay tests. The resulting exact formatted Git blob IDs and hosted report hashes are in the versioned receipt. The prior required policy check failed formatting; current-head protected checks remain required. No promotion or automatic merge from an optional replay.
+
+## Parent-first diagnostic follow-up (post-hoc)
+
+A simpler fixed ordering is `parent → expand → deep_rerank`, subject to
+the existing action mask. No model or new acquisition backend. Compare
+using the original terminal proof gate, referral workload and actual
+observed transitions; preserve the original report by making this extra
+arm opt-in (`--compare-parent-first`). The additional ordering was
+examined after exposure to held-out results, not an independent selection.
+The two fixed orders tied on development (10 complete, five gated correct,
+12 calls, reward 6.3); no independent generalisation claim.
+
+| Parent-first budget | Complete | Gated correct | Calls | Reranks | Acquired words | Utility |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Exact one | 23 | 14 | 24 | 0 | 159 | 17.35 |
+| Exact two | 23 | 14 | 48 | 5 | 279 | 14.95 |
+| Adaptive two | 23 | 14 | 25 | 1 | 159 | 17.25 |
+
+At one call the ordering ties its hindsight ceiling and the previous
+two-call decision-quality ceiling. Adaptive parent-first wastes one further
+call relative to fixed one-call on these cases. Six referrals, no review
+resolutions, no gated false equivalence, eight genuine natural-language
+equivalences held in every arm. Source structure is artificially easy:
+synthetic parent links always recover the full target; real parent/qualifier
+links need independent completeness and cost measurements. Do not promote.
+The regression test verifies identical original arms/results, legal first
+actions, proof and referral conservation. Six focused and 61 overlay tests
+pass, hosted checks remain required. No additional dependency or workflow.
+See the [receipt](../../conductor/tracks/01-canonical-standard-pack/evidence-policy-parent-first-v1-receipt.json).
+
+```sh
+python -m scripts.evidence_policy --compare-parent-first --output evidence-policy-parent-first-v1.json
+```
+
+Keep the upstream PR head stable while it qualifies; this small follow-up
+must be reconciled to receiving main after #184. Rollback removes only the
+opt-in comparator and receipt. The historical default output stays intact.
+
+Protected follow-up: #184 receiving Assurance 45811145369 passed. Parent-first required workflow-policy job 139880152117 failed B008 on a closure default function call; bind `order` before the closure, preserving capture semantics. Six focused tests passed and the full timing-free parent-first report matched exactly. Reconcile disjoint #186 receiving changes at d8384d5a. Fresh exact-head checks required; no scientific promotion.
