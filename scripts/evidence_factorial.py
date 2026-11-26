@@ -78,7 +78,9 @@ def acquisition_cells(cases):
                 seconds = sum(c["acquisition_seconds"] for c in costs)
                 if len(order) == 3:
                     # No reference or future outcome reaches the acquisition function.
-                    visible = {k: row[k] for k in ("id", "source", "evidence", "parent_link", "pool")}
+                    visible = {
+                        k: row[k] for k in ("id", "source", "evidence", "parent_link", "pool")
+                    }
                     started = time.perf_counter()
                     found, _, _, _ = acquire(visible, order[-1], corpus, parents, initial["pool"])
                     seconds += time.perf_counter() - started
@@ -87,7 +89,11 @@ def acquisition_cells(cases):
                 rows.append(
                     {
                         **outcome(
-                            row, decision(state), bool(state[0]), order, len(order),
+                            row,
+                            decision(state),
+                            bool(state[0]),
+                            order,
+                            len(order),
                             int("deep_rerank" in order),
                         ),
                         "evidence_ids": sorted(row["evidence"]),
@@ -115,7 +121,9 @@ def neural_cells(report):
             # The original rule's second action retrieves a parent when available, else reranks.
             reranks = int(bool(a) and row["id"] + ":parent" not in state["evidence_ids"])
             cell[row["id"]] = [
-                outcome(row, state["predictions"][label], state["complete"], (), 2 * a, reranks, 4 * n)
+                outcome(
+                    row, state["predictions"][label], state["complete"], (), 2 * a, reranks, 4 * n
+                )
             ]
         result[f"{a}{n}{p}"] = cell
     return result
@@ -160,7 +168,10 @@ def order_summaries(cell):
         raise ValueError("unpaired order inventory")
     return {
         " -> ".join(order) or "none": summarize(
-            {key: [row for row in rows if tuple(row["order"]) == order] for key, rows in cell.items()}
+            {
+                key: [row for row in rows if tuple(row["order"]) == order]
+                for key, rows in cell.items()
+            }
         )
         for order in sorted(orders)
     }
@@ -199,7 +210,9 @@ def read_pinned(path, expected):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--fixture", type=Path, default=Path("contracts/examples/semantic-reconciliation-synthetic-v1.json")
+        "--fixture",
+        type=Path,
+        default=Path("contracts/examples/semantic-reconciliation-synthetic-v1.json"),
     )
     parser.add_argument("--neural-report", type=Path)
     parser.add_argument("--output", type=Path, required=True)
