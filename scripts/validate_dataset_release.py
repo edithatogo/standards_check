@@ -322,18 +322,19 @@ def main(argv: list[str] | None = None) -> int:
                 from scripts.check_restricted_overlap import qualify_release
 
                 require(len(paths) == 1, "one release contract per overlap qualification")
-                require(
-                    args.restricted_overlap_manifest is not None, "private overlap manifest required"
-                )
+                manifest_path = args.restricted_overlap_manifest
+                if manifest_path is None:
+                    raise ValueError("private overlap manifest required")
                 try:
-                    manifest_path = args.restricted_overlap_manifest
                     require(manifest_path.stat().st_size <= 1_000_000, "overlap manifest limit")
                     manifest = decode(manifest_path.read_bytes())
+                    if not isinstance(manifest, dict):
+                        raise ValueError("overlap manifest must be an object")
                     receipt["restricted_overlap"] = qualify_release(
                         value["release"], manifest, args.root
                     )
                 except (ValueError, OSError, KeyError, TypeError, AttributeError) as error:
-                    raise ValueError("Dataset release blocked: private overlap gate held") from error
+                    raise ValueError("Dataset release blocked: overlap gate held") from error
             print(json.dumps({"contract": str(path), **receipt}, sort_keys=True))
     except (ValueError, OSError, TypeError, KeyError) as error:
         print(str(error), file=sys.stderr)

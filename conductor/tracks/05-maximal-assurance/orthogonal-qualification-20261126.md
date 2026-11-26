@@ -106,3 +106,16 @@ PM4Py 2.7.23.15, SciPy 1.18.1 and markdown-it-py 4.3.0 profile. Record
 exact-head and receiving-main outcomes after successful execution, and preserve
 all eight broader acceptance gates. No new research result, pack, model or
 restricted-data admission. One publication, issue #158.
+
+### First hosted run and follow-up
+
+[Assurance 45781269198](https://github.com/edithatogo/standards_check/actions/runs/45781269198)
+at `fa60d57aa9e4eb7bff3ddc43e4adabd12324adcb` reported one Ruff formatting
+finding in the release CLI and one type-check finding for the decoded private
+manifest before Python regression execution. Require an explicit dictionary
+check and simplify the formatting; no suppression or coverage change.
+Later isolated verification passed the additional source binding test and
+three Markdown parser tests (local markdown-it-py 4.2.0, copied unchanged
+rewrite function). Remote rule and Markdown code/test blobs match the locally
+executed files. Total local isolated tests: 16. Locked full-suite and actual
+corpus acceptance remain pending, not inferred from these results.
