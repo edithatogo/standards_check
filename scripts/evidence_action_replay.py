@@ -122,7 +122,7 @@ def build_replay(cases):
         pool = lexical_rankings({"q": case["source"]}, corpus, "word")["q"][:6]
         gold = reference(case)
 
-        def visit(history, evidence):
+        def visit(history, evidence, *, key=key, case=case, pool=pool, gold=gold, corpus=corpus, parents=parents):
             row = {"id": key, "family": case["family"], "split": case["split"], "source": case["source"],
                    "history": history, "evidence": evidence, "parent_link": layouts[key][2],
                    "pool": pool, "reference": gold, "transitions": {}}

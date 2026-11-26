@@ -86,3 +86,45 @@ def test_replay_monotone_evidence_and_fixed_rerank_pool():
                 if action == "deep_rerank":
                     assert set(edge["ranking"]) <= set(row["pool"])
                     assert edge["reranks"] == 1
+
+
+def test_decision_and_reward_failure_paths():
+    from scripts.evidence_action_replay import decision, reward, split_document
+    import pytest
+
+    def state(word=0.4, char=0.4, a=0, b=0, neg=0, num=0, exact=0, complete=1):
+        return (complete, 0, word, char, a, b, neg, num, exact)
+
+    assert decision(state(neg=1)) == "contradictory"
+    assert decision(state(num=1)) == "contradictory"
+    assert decision(state(a=1)) == "narrower"
+    assert decision(state(b=1)) == "broader"
+    assert decision(state(word=0.2, char=0.2)) == "indeterminate"
+    assert decision(state(word=0.9, char=0.9)) == "equivalent"
+    assert decision(state(word=0.9, char=0.2)) == "abstain"
+    assert reward(state(exact=1), "contradictory") == -4
+    assert reward(state(neg=1), "equivalent") == -1
+    assert reward(state(complete=0), "equivalent") == 0
+    with pytest.raises(ValueError, match="two nonempty"):
+        split_document({"candidate": "one", "id": "single"})
+
+
+def test_cli_preserves_pinned_fixture_and_rejects_changed_bytes(tmp_path, monkeypatch):
+    import json
+    from pathlib import Path
+    from scripts.evidence_action_replay import main, FIXTURE_SHA
+
+    path = Path("contracts/examples/semantic-reconciliation-synthetic-v1.json")
+    target = tmp_path / "result.json"
+    monkeypatch.setattr("sys.argv", ["evidence-action", "--fixture", str(path), "--output", str(target)])
+    main()
+    output = json.loads(target.read_text())
+    assert output["report"]["fixture_sha256"] == FIXTURE_SHA
+    assert len(output["replay"]) == 360
+    assert output["report"]["arms"]["rule"]["correct"] == 18
+    changed = tmp_path / "changed.json"
+    changed.write_bytes(path.read_bytes() + b"\n")
+    monkeypatch.setattr("sys.argv", ["evidence-action", "--fixture", str(changed), "--output", str(target)])
+    import pytest
+    with pytest.raises(ValueError, match="pinned original"):
+        main()

@@ -187,3 +187,5 @@ compares action forecasting and fitted critics against the fixed retrieval rule.
 Six focused extracted-module tests passed; no full checkout or protected qualification.
 Retain negative results and actual referral workload; no review resolutions credited.
 Independent reference, source rights, scientific and publication gates stay open.
+
+Evidence-deficit follow-up (T05.048/063 / #158): [replay receipt](../01-canonical-standard-pack/evidence-deficit-replay-v2.json) retains initial hosted policy/patch failure, local focused coverage repair, resource counts and formal counterexamples. Keep hosted checks, fresh partial/complete neural evaluation, reference and rights qualification open. No promotion.

@@ -1,0 +1,999 @@
+{
+  "schema_version": 1,
+  "boundary": "historically exposed synthetic development; no fresh model inference; no promotion",
+  "fixture_sha256": "55d1dd465c413a4d64890974de42a9719c63b7a711f8172eb70b35160b28c3d0",
+  "historical_artifact": {
+    "id": 15087556116,
+    "run_id": 45754736904,
+    "zip_sha256": "d796bdbc6a84830a7e3c702fbc6d08ce9fe9430175db5a4610b0ad0dfa2c2ae9"
+  },
+  "local_full_output_sha256": "60774a285f0f0b12d6e5ec1b303ab60c310ce6db64897dbbe273440faaef5be4",
+  "deterministic_output_sha256": "e14794f206abac75c50fd22f3814a60458b4e4b1a56926c636cc15a87a22ab50",
+  "digest_encoding": "JSON sorted keys, compact separators, excluding only top-level seconds",
+  "seconds": 0.05631404299992937,
+  "python": "3.13.5",
+  "training_eligible": 10,
+  "test_eligible": 19,
+  "matched_semantic_budget": 4,
+  "summary": {
+    "search_again": {
+      "correct": 18,
+      "abstained": 6,
+      "false_equivalence": 0,
+      "missed_matches": 4,
+      "referrals": 2,
+      "review_resolved": 0,
+      "retrieval_calls": 48,
+      "semantic_calls": 0,
+      "stops": 0,
+      "gained_ids": [],
+      "lost_ids": []
+    },
+    "fixed": {
+      "correct": 18,
+      "abstained": 6,
+      "false_equivalence": 0,
+      "missed_matches": 4,
+      "referrals": 2,
+      "review_resolved": 0,
+      "retrieval_calls": 44,
+      "semantic_calls": 4,
+      "stops": 0,
+      "gained_ids": [],
+      "lost_ids": []
+    },
+    "deficit": {
+      "correct": 22,
+      "abstained": 2,
+      "false_equivalence": 0,
+      "missed_matches": 0,
+      "referrals": 2,
+      "review_resolved": 0,
+      "retrieval_calls": 44,
+      "semantic_calls": 4,
+      "stops": 0,
+      "gained_ids": [
+        "arrive-1",
+        "consort-1",
+        "stard-1",
+        "tripod-1"
+      ],
+      "lost_ids": []
+    },
+    "learned": {
+      "correct": 19,
+      "abstained": 5,
+      "false_equivalence": 0,
+      "missed_matches": 3,
+      "referrals": 2,
+      "review_resolved": 0,
+      "retrieval_calls": 44,
+      "semantic_calls": 4,
+      "stops": 0,
+      "gained_ids": [
+        "arrive-1"
+      ],
+      "lost_ids": []
+    },
+    "early": {
+      "correct": 22,
+      "abstained": 2,
+      "false_equivalence": 0,
+      "missed_matches": 0,
+      "referrals": 2,
+      "review_resolved": 0,
+      "retrieval_calls": 29,
+      "semantic_calls": 4,
+      "stops": 15,
+      "gained_ids": [
+        "arrive-1",
+        "consort-1",
+        "stard-1",
+        "tripod-1"
+      ],
+      "lost_ids": []
+    }
+  },
+  "models": [
+    "minilm",
+    "deberta"
+  ],
+  "models_agree_on_every_selected_prediction_and_trace": true,
+  "encoding": {
+    "case_fields": [
+      "id",
+      "reference",
+      "eligible_after_expansion",
+      "initial_prediction",
+      "baseline_second_action",
+      "baseline_prediction",
+      "baseline_referral",
+      "other_arms"
+    ],
+    "other_arm_order": [
+      "fixed",
+      "deficit",
+      "learned",
+      "early"
+    ],
+    "other_arm_fields": [
+      "second_action",
+      "prediction",
+      "referral"
+    ],
+    "actions": {
+      "P": "parent",
+      "D": "deep_rerank",
+      "M": "cached decision of model arm",
+      "S": "stop"
+    },
+    "labels": {
+      "eq": "equivalent",
+      "b": "broader",
+      "n": "narrower",
+      "c": "contradictory",
+      "i": "indeterminate",
+      "a": "abstain"
+    },
+    "formal_fields": [
+      "id",
+      "A condition",
+      "B condition",
+      "A satisfying world indices",
+      "B satisfying world indices",
+      "truth-table reference",
+      "lexical decision"
+    ],
+    "worlds": [
+      [
+        false,
+        false
+      ],
+      [
+        false,
+        true
+      ],
+      [
+        true,
+        false
+      ],
+      [
+        true,
+        true
+      ]
+    ],
+    "semantic_formal_outcomes": null,
+    "review_outcomes": null
+  },
+  "cases": [
+    [
+      "consort-1",
+      "eq",
+      1,
+      "a",
+      "P",
+      "a",
+      0,
+      [
+        [
+          "P",
+          "a",
+          0
+        ],
+        [
+          "M",
+          "eq",
+          0
+        ],
+        [
+          "P",
+          "a",
+          0
+        ],
+        [
+          "M",
+          "eq",
+          0
+        ]
+      ]
+    ],
+    [
+      "consort-2",
+      "b",
+      1,
+      "b",
+      "D",
+      "b",
+      0,
+      [
+        [
+          "D",
+          "b",
+          0
+        ],
+        [
+          "D",
+          "b",
+          0
+        ],
+        [
+          "M",
+          "b",
+          0
+        ],
+        [
+          "S",
+          "b",
+          0
+        ]
+      ]
+    ],
+    [
+      "consort-3",
+      "c",
+      1,
+      "c",
+      "P",
+      "c",
+      0,
+      [
+        [
+          "P",
+          "c",
+          0
+        ],
+        [
+          "P",
+          "c",
+          0
+        ],
+        [
+          "P",
+          "c",
+          0
+        ],
+        [
+          "S",
+          "c",
+          0
+        ]
+      ]
+    ],
+    [
+      "consort-4",
+      "c",
+      1,
+      "c",
+      "P",
+      "c",
+      0,
+      [
+        [
+          "P",
+          "c",
+          0
+        ],
+        [
+          "P",
+          "c",
+          0
+        ],
+        [
+          "P",
+          "c",
+          0
+        ],
+        [
+          "S",
+          "c",
+          0
+        ]
+      ]
+    ],
+    [
+      "consort-5",
+      "eq",
+      1,
+      "eq",
+      "D",
+      "eq",
+      0,
+      [
+        [
+          "D",
+          "eq",
+          0
+        ],
+        [
+          "D",
+          "eq",
+          0
+        ],
+        [
+          "M",
+          "eq",
+          0
+        ],
+        [
+          "S",
+          "eq",
+          0
+        ]
+      ]
+    ],
+    [
+      "consort-6",
+      "i",
+      0,
+      "a",
+      "P",
+      "i",
+      0,
+      [
+        [
+          "P",
+          "i",
+          0
+        ],
+        [
+          "P",
+          "i",
+          0
+        ],
+        [
+          "P",
+          "i",
+          0
+        ],
+        [
+          "P",
+          "i",
+          0
+        ]
+      ]
+    ],
+    [
+      "stard-1",
+      "eq",
+      1,
+      "a",
+      "P",
+      "a",
+      0,
+      [
+        [
+          "P",
+          "a",
+          0
+        ],
+        [
+          "M",
+          "eq",
+          0
+        ],
+        [
+          "P",
+          "a",
+          0
+        ],
+        [
+          "M",
+          "eq",
+          0
+        ]
+      ]
+    ],
+    [
+      "stard-2",
+      "b",
+      1,
+      "b",
+      "D",
+      "b",
+      0,
+      [
+        [
+          "D",
+          "b",
+          0
+        ],
+        [
+          "D",
+          "b",
+          0
+        ],
+        [
+          "M",
+          "b",
+          0
+        ],
+        [
+          "S",
+          "b",
+          0
+        ]
+      ]
+    ],
+    [
+      "stard-3",
+      "c",
+      1,
+      "c",
+      "P",
+      "c",
+      0,
+      [
+        [
+          "P",
+          "c",
+          0
+        ],
+        [
+          "P",
+          "c",
+          0
+        ],
+        [
+          "P",
+          "c",
+          0
+        ],
+        [
+          "S",
+          "c",
+          0
+        ]
+      ]
+    ],
+    [
+      "stard-4",
+      "eq",
+      1,
+      "eq",
+      "P",
+      "eq",
+      0,
+      [
+        [
+          "M",
+          "eq",
+          0
+        ],
+        [
+          "P",
+          "eq",
+          0
+        ],
+        [
+          "P",
+          "eq",
+          0
+        ],
+        [
+          "S",
+          "eq",
+          0
+        ]
+      ]
+    ],
+    [
+      "stard-5",
+      "i",
+      0,
+      "a",
+      "P",
+      "i",
+      0,
+      [
+        [
+          "P",
+          "i",
+          0
+        ],
+        [
+          "P",
+          "i",
+          0
+        ],
+        [
+          "P",
+          "i",
+          0
+        ],
+        [
+          "P",
+          "i",
+          0
+        ]
+      ]
+    ],
+    [
+      "stard-6",
+      "n",
+      0,
+      "a",
+      "P",
+      "n",
+      0,
+      [
+        [
+          "P",
+          "n",
+          0
+        ],
+        [
+          "P",
+          "n",
+          0
+        ],
+        [
+          "P",
+          "n",
+          0
+        ],
+        [
+          "P",
+          "n",
+          0
+        ]
+      ]
+    ],
+    [
+      "arrive-1",
+      "eq",
+      1,
+      "a",
+      "D",
+      "a",
+      0,
+      [
+        [
+          "D",
+          "a",
+          0
+        ],
+        [
+          "M",
+          "eq",
+          0
+        ],
+        [
+          "M",
+          "eq",
+          0
+        ],
+        [
+          "M",
+          "eq",
+          0
+        ]
+      ]
+    ],
+    [
+      "arrive-2",
+      "b",
+      1,
+      "b",
+      "P",
+      "b",
+      0,
+      [
+        [
+          "P",
+          "b",
+          0
+        ],
+        [
+          "P",
+          "b",
+          0
+        ],
+        [
+          "P",
+          "b",
+          0
+        ],
+        [
+          "S",
+          "b",
+          0
+        ]
+      ]
+    ],
+    [
+      "arrive-3",
+      "c",
+      1,
+      "c",
+      "P",
+      "c",
+      0,
+      [
+        [
+          "M",
+          "c",
+          0
+        ],
+        [
+          "P",
+          "c",
+          0
+        ],
+        [
+          "P",
+          "c",
+          0
+        ],
+        [
+          "S",
+          "c",
+          0
+        ]
+      ]
+    ],
+    [
+      "arrive-4",
+      "c",
+      1,
+      "c",
+      "P",
+      "c",
+      0,
+      [
+        [
+          "M",
+          "c",
+          0
+        ],
+        [
+          "P",
+          "c",
+          0
+        ],
+        [
+          "P",
+          "c",
+          0
+        ],
+        [
+          "S",
+          "c",
+          0
+        ]
+      ]
+    ],
+    [
+      "arrive-5",
+      "eq",
+      1,
+      "eq",
+      "P",
+      "eq",
+      0,
+      [
+        [
+          "P",
+          "eq",
+          0
+        ],
+        [
+          "P",
+          "eq",
+          0
+        ],
+        [
+          "P",
+          "eq",
+          0
+        ],
+        [
+          "S",
+          "eq",
+          0
+        ]
+      ]
+    ],
+    [
+      "arrive-6",
+      "i",
+      0,
+      "a",
+      "D",
+      "a",
+      1,
+      [
+        [
+          "D",
+          "a",
+          1
+        ],
+        [
+          "D",
+          "a",
+          1
+        ],
+        [
+          "D",
+          "a",
+          1
+        ],
+        [
+          "D",
+          "a",
+          1
+        ]
+      ]
+    ],
+    [
+      "tripod-1",
+      "eq",
+      1,
+      "a",
+      "P",
+      "a",
+      0,
+      [
+        [
+          "P",
+          "a",
+          0
+        ],
+        [
+          "M",
+          "eq",
+          0
+        ],
+        [
+          "P",
+          "a",
+          0
+        ],
+        [
+          "M",
+          "eq",
+          0
+        ]
+      ]
+    ],
+    [
+      "tripod-2",
+      "b",
+      1,
+      "b",
+      "P",
+      "b",
+      0,
+      [
+        [
+          "P",
+          "b",
+          0
+        ],
+        [
+          "P",
+          "b",
+          0
+        ],
+        [
+          "P",
+          "b",
+          0
+        ],
+        [
+          "S",
+          "b",
+          0
+        ]
+      ]
+    ],
+    [
+      "tripod-3",
+      "c",
+      1,
+      "c",
+      "P",
+      "c",
+      0,
+      [
+        [
+          "M",
+          "c",
+          0
+        ],
+        [
+          "P",
+          "c",
+          0
+        ],
+        [
+          "P",
+          "c",
+          0
+        ],
+        [
+          "S",
+          "c",
+          0
+        ]
+      ]
+    ],
+    [
+      "tripod-4",
+      "eq",
+      1,
+      "eq",
+      "P",
+      "eq",
+      0,
+      [
+        [
+          "P",
+          "eq",
+          0
+        ],
+        [
+          "P",
+          "eq",
+          0
+        ],
+        [
+          "P",
+          "eq",
+          0
+        ],
+        [
+          "S",
+          "eq",
+          0
+        ]
+      ]
+    ],
+    [
+      "tripod-5",
+      "i",
+      0,
+      "a",
+      "P",
+      "a",
+      1,
+      [
+        [
+          "P",
+          "a",
+          1
+        ],
+        [
+          "P",
+          "a",
+          1
+        ],
+        [
+          "P",
+          "a",
+          1
+        ],
+        [
+          "P",
+          "a",
+          1
+        ]
+      ]
+    ],
+    [
+      "tripod-6",
+      "n",
+      1,
+      "n",
+      "P",
+      "n",
+      0,
+      [
+        [
+          "P",
+          "n",
+          0
+        ],
+        [
+          "P",
+          "n",
+          0
+        ],
+        [
+          "P",
+          "n",
+          0
+        ],
+        [
+          "S",
+          "n",
+          0
+        ]
+      ]
+    ]
+  ],
+  "formal_controls": [
+    [
+      "implication",
+      "alpha implies beta",
+      "beta implies alpha",
+      [
+        0,
+        1,
+        3
+      ],
+      [
+        0,
+        2,
+        3
+      ],
+      "indeterminate",
+      "equivalent"
+    ],
+    [
+      "opposite_conjunctions",
+      "alpha is true and beta is false",
+      "beta is true and alpha is false",
+      [
+        2
+      ],
+      [
+        1
+      ],
+      "contradictory",
+      "equivalent"
+    ],
+    [
+      "opposite_disjunctions",
+      "alpha is true or beta is false",
+      "beta is true or alpha is false",
+      [
+        0,
+        2,
+        3
+      ],
+      [
+        0,
+        1,
+        3
+      ],
+      "indeterminate",
+      "equivalent"
+    ],
+    [
+      "commutative_conjunction",
+      "alpha is true and beta is true",
+      "beta is true and alpha is true",
+      [
+        3
+      ],
+      [
+        3
+      ],
+      "equivalent",
+      "equivalent"
+    ]
+  ],
+  "verification": {
+    "original_head": "8b83a7580361b7f5899be226fe4281ecdfb8688f",
+    "original_assurance_run": 45787051622,
+    "original_hosted_tests": {
+      "passed": 851,
+      "skipped": 3,
+      "combined_percent": 91.57,
+      "replay_module_percent": 84.77
+    },
+    "original_failures": [
+      "workflow-policy: B023 x12",
+      "codecov/patch"
+    ],
+    "local_tests": 15,
+    "local_coverage_combined_percent_rounded": 99,
+    "locally_executed_blobs": {
+      "v1": "914a3e50efa6feb7e795f5f01eac770f9e25ec19",
+      "v1_tests": "b6e72a6174024dc23f6f204e001830940f42e6bf",
+      "v2": "342735bf2c676830632c523db4ae3beff52adeac",
+      "v2_tests": "28e1cc344c6b941eb411ebde9c9b6dcb106ea691"
+    },
+    "full_checkout_local": false
+  }
+}
