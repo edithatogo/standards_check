@@ -40,11 +40,11 @@ for authorized automation, not a requirement that a person clicks a button.
 Keep existing event scopes, permissions, protected status names, coverage
 floors, failure behavior and expensive experiment budgets.
 
-The only deployment environment found in workflow YAML is github-pages.
+The only deployment environment found in workflow YAML is `github-pages`.
 The preceding receiving main deployed successfully. Environment protection,
 organization Actions policy and first-time external-fork execution permissions
 are server-side; this connector cannot inspect or change environment rules.
-For owner review: verify Environments > github-pages has no mandatory reviewers
+For owner review: verify Environments > `github-pages` has no mandatory reviewers
 for this routine approved Pages projection, while retaining deployment branch
 restrictions. Do not remove security restrictions on untrusted forks.
 Offline security is still queued for its qualified runner; optional review
