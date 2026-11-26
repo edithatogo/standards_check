@@ -102,3 +102,5 @@ retrieval/reranking and decision compute separately and compare against
 symbolic witnesses and independent adjudication. Review referrals remain
 workload until actual review outcomes. Keep T01.063–064, T05.048/063 and
 scientific gates open. No automatic canonical admission or production changes.
+
+Pinned Ruff 0.17.6 [diagnostic 45793477046](https://github.com/edithatogo/standards_check/actions/runs/45793477046) passed lint and format after producing a patch for both maintained scripts. The resulting Git blob hashes match the exact hosted formatter output; remove the temporary workflow. Required checks on the new head remain separate.

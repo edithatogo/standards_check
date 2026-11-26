@@ -160,12 +160,15 @@ def replay(cases, cache):
         arms[name] = {
             **metrics(reference, pred),
             "paired_vs_search": paired(reference, incumbent, pred),
-            "retrieval_calls": len(test) + sum(r["action"] in ("parent", "deep_rerank") for r in arm.values()),
+            "retrieval_calls": len(test)
+            + sum(r["action"] in ("parent", "deep_rerank") for r in arm.values()),
             "semantic_calls": sum(r["action"] in MODELS for r in arm.values()),
             "stops": sum(r["action"] == "stop" for r in arm.values()),
             "referrals": quota,
             "review_resolved": 0,
-            "missed_matches": sum(reference[k] == "equivalent" and pred[k] != "equivalent" for k in test),
+            "missed_matches": sum(
+                reference[k] == "equivalent" and pred[k] != "equivalent" for k in test
+            ),
             "gained_ids": sorted(k for k in test if pred[k] == reference[k] != incumbent[k]),
             "lost_ids": sorted(k for k in test if incumbent[k] == reference[k] != pred[k]),
         }
@@ -183,21 +186,65 @@ def replay(cases, cache):
 def formal_controls():
     """Separate finite truth-table controls; no neural predictions for these inputs."""
     forms = (
-        ("implication", "alpha implies beta", "beta implies alpha", lambda a, b: not a or b, lambda a, b: not b or a),
-        ("opposite_conjunctions", "alpha is true and beta is false", "beta is true and alpha is false", lambda a, b: a and not b, lambda a, b: b and not a),
-        ("opposite_disjunctions", "alpha is true or beta is false", "beta is true or alpha is false", lambda a, b: a or not b, lambda a, b: b or not a),
-        ("commutative_conjunction", "alpha is true and beta is true", "beta is true and alpha is true", lambda a, b: a and b, lambda a, b: b and a),
+        (
+            "implication",
+            "alpha implies beta",
+            "beta implies alpha",
+            lambda a, b: not a or b,
+            lambda a, b: not b or a,
+        ),
+        (
+            "opposite_conjunctions",
+            "alpha is true and beta is false",
+            "beta is true and alpha is false",
+            lambda a, b: a and not b,
+            lambda a, b: b and not a,
+        ),
+        (
+            "opposite_disjunctions",
+            "alpha is true or beta is false",
+            "beta is true or alpha is false",
+            lambda a, b: a or not b,
+            lambda a, b: b or not a,
+        ),
+        (
+            "commutative_conjunction",
+            "alpha is true and beta is true",
+            "beta is true and alpha is true",
+            lambda a, b: a and b,
+            lambda a, b: b and a,
+        ),
     )
     results = []
     for key, a_text, b_text, a_rule, b_rule in forms:
         worlds = list(product((False, True), repeat=2))
         a_set = {i for i, world in enumerate(worlds) if a_rule(*world)}
         b_set = {i for i, world in enumerate(worlds) if b_rule(*world)}
-        reference = compile_witness(*( "yes" if x else "no" for x in (a_set - b_set, b_set - a_set, a_set & b_set)))
+        reference = compile_witness(
+            *("yes" if x else "no" for x in (a_set - b_set, b_set - a_set, a_set & b_set))
+        )
         prefix = "A report complies if and only if "
         source, candidate = prefix + a_text + ".", prefix + b_text + "."
-        state = observe({"id": key, "source": source, "evidence": {key + ":parent": candidate}, "parent_link": True})
-        results.append({"id": key, "source": source, "candidate": candidate, "a_worlds": sorted(a_set), "b_worlds": sorted(b_set), "reference": reference, "lexical": decision(state), "semantic": None})
+        state = observe(
+            {
+                "id": key,
+                "source": source,
+                "evidence": {key + ":parent": candidate},
+                "parent_link": True,
+            }
+        )
+        results.append(
+            {
+                "id": key,
+                "source": source,
+                "candidate": candidate,
+                "a_worlds": sorted(a_set),
+                "b_worlds": sorted(b_set),
+                "reference": reference,
+                "lexical": decision(state),
+                "semantic": None,
+            }
+        )
     return results
 
 
@@ -221,7 +268,9 @@ def load(fixture, artifact):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--fixture", type=Path, default=Path("contracts/examples/semantic-reconciliation-synthetic-v1.json")
+        "--fixture",
+        type=Path,
+        default=Path("contracts/examples/semantic-reconciliation-synthetic-v1.json"),
     )
     parser.add_argument("--artifact", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
@@ -229,7 +278,12 @@ def main():
     started = time.perf_counter()
     cases, cache = load(args.fixture, args.artifact)
     report = replay(cases, cache)
-    report.update(artifact_sha256=ARTIFACT_SHA, fixture_sha256=FIXTURE_SHA, formal_controls=formal_controls(), seconds=time.perf_counter() - started)
+    report.update(
+        artifact_sha256=ARTIFACT_SHA,
+        fixture_sha256=FIXTURE_SHA,
+        formal_controls=formal_controls(),
+        seconds=time.perf_counter() - started,
+    )
     args.output.write_text(json.dumps(report, indent=2, allow_nan=False) + "\n")
 
 

@@ -994,6 +994,19 @@
       "v2": "342735bf2c676830632c523db4ae3beff52adeac",
       "v2_tests": "28e1cc344c6b941eb411ebde9c9b6dcb106ea691"
     },
-    "full_checkout_local": false
+    "full_checkout_local": false,
+    "hosted_format": {
+      "run_id": 45793477046,
+      "job_id": 139818080402,
+      "tested_head": "07f1afa945bd2d26deef1883d100dfa1ad89bca4",
+      "result": "passed",
+      "ruff_version": "0.17.6",
+      "formatted_blobs": {
+        "v1": "5c08549eada6dd96a4e6e5844f88802ad94fb22f",
+        "v2": "18c1752d616566951383586e1d008333fd707631"
+      },
+      "temporary_workflow_removed": true,
+      "protected_checks_pending": true
+    }
   }
 }

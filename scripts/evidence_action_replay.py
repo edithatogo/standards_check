@@ -1,4 +1,5 @@
 """Opt-in synthetic evidence-action experiment; no semantic admission authority."""
+
 from __future__ import annotations
 
 import argparse
@@ -20,8 +21,17 @@ from .task_framing import strict_agreement
 ACTIONS = ("expand", "parent", "deep_rerank")
 HORIZON = 2
 REVIEW_CAP = 6
-FEATURES = ("complete", "parent_link", "word_jaccard", "char_jaccard", "source_subset",
-            "candidate_subset", "negation_difference", "number_difference", "exact_text")
+FEATURES = (
+    "complete",
+    "parent_link",
+    "word_jaccard",
+    "char_jaccard",
+    "source_subset",
+    "candidate_subset",
+    "negation_difference",
+    "number_difference",
+    "exact_text",
+)
 STOP = {"the", "a", "an", "of", "in", "is", "was", "were", "and", "that", "for", "to"}
 NEG = {"not", "no", "never", "excludes", "without"}
 NUM = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"}
@@ -43,14 +53,21 @@ def observe(row):
     head, tail, parent = (evidence.get(f"{key}:{part}") for part in ("head", "tail", "parent"))
     target = parent if parent is not None else " ".join(x for x in (head, tail) if x is not None)
     a, b = tokens(row["source"]), tokens(target)
+
     def nums(ts):
         return {t for t in ts if t.isdecimal() or t in NUM}
 
-    return (int(parent is not None or (head is not None and tail is not None)),
-            int(row["parent_link"]), jaccard(a, b),
-            jaccard(set(term_counts(row["source"], "char")), set(term_counts(target, "char"))),
-            int(bool(a) and a <= b), int(bool(b) and b <= a), int((a & NEG) != (b & NEG)),
-            int(nums(a) != nums(b)), int(normalise(row["source"]) == normalise(target)))
+    return (
+        int(parent is not None or (head is not None and tail is not None)),
+        int(row["parent_link"]),
+        jaccard(a, b),
+        jaccard(set(term_counts(row["source"], "char")), set(term_counts(target, "char"))),
+        int(bool(a) and a <= b),
+        int(bool(b) and b <= a),
+        int((a & NEG) != (b & NEG)),
+        int(nums(a) != nums(b)),
+        int(normalise(row["source"]) == normalise(target)),
+    )
 
 
 def decision(state):
@@ -66,8 +83,12 @@ def decision(state):
         return "narrower"
     if b_sub >= 0.5 and a_sub < 0.5:
         return "broader"
-    return strict_agreement(["equivalent" if word >= 0.8 else "indeterminate" if word < 0.3 else "abstain",
-                             "equivalent" if char >= 0.8 else "indeterminate" if char < 0.3 else "abstain"])
+    return strict_agreement(
+        [
+            "equivalent" if word >= 0.8 else "indeterminate" if word < 0.3 else "abstain",
+            "equivalent" if char >= 0.8 else "indeterminate" if char < 0.3 else "abstain",
+        ]
+    )
 
 
 def split_document(row):
@@ -84,8 +105,9 @@ def available(history):
 
 
 def reference(row):
-    return classify_nli(*(tuple(float(label == row[d]) for label in LABELS)
-                          for d in ("forward", "reverse")))
+    return classify_nli(
+        *(tuple(float(label == row[d]) for label in LABELS) for d in ("forward", "reverse"))
+    )
 
 
 def acquire(row, action, corpus, parents, pool):
@@ -97,16 +119,27 @@ def acquire(row, action, corpus, parents, pool):
         found = {parent_id: parents[parent_id]} if row["parent_link"] else {}
         return found, [], 0, queried
     if action == "expand":
-        missing = sorted(tokens(queried) - tokens(" ".join(v for k, v in seen.items() if k.startswith(row["id"] + ":"))))
+        missing = sorted(
+            tokens(queried)
+            - tokens(" ".join(v for k, v in seen.items() if k.startswith(row["id"] + ":")))
+        )
         queried += " " + " ".join(missing * 2)
-        ranking = lexical_rankings({"q": queried}, {k: v for k, v in corpus.items() if k not in seen}, "word")["q"]
+        ranking = lexical_rankings(
+            {"q": queried}, {k: v for k, v in corpus.items() if k not in seen}, "word"
+        )["q"]
     else:
         order = lexical_rankings({"q": queried}, {k: corpus[k] for k in pool}, "char")["q"]
         scores = {k: float(len(order) - i) for i, k in enumerate(order)}
-        bound = parse_reranker_results(pool, [{"index": i, "relevance_score": scores.get(k, 0.0)}
-                                               for i, k in enumerate(pool)])
+        bound = parse_reranker_results(
+            pool, [{"index": i, "relevance_score": scores.get(k, 0.0)} for i, k in enumerate(pool)]
+        )
         ranking = rank(bound, positive=True)
-    return {k: corpus[k] for k in ranking if k not in seen and k in ranking[:2]}, ranking, int(action == "deep_rerank"), queried
+    return (
+        {k: corpus[k] for k in ranking if k not in seen and k in ranking[:2]},
+        ranking,
+        int(action == "deep_rerank"),
+        queried,
+    )
 
 
 def build_replay(cases):
@@ -115,17 +148,39 @@ def build_replay(cases):
     rows = []
     for case in cases:
         key = case["id"]
-        corpus = {f"{r['id']}:{part}": layouts[r["id"]][i]
-                  for r in cases if r["family"] == case["family"]
-                  for i, part in enumerate(("head", "tail"))}
+        corpus = {
+            f"{r['id']}:{part}": layouts[r["id"]][i]
+            for r in cases
+            if r["family"] == case["family"]
+            for i, part in enumerate(("head", "tail"))
+        }
         parents = {key + ":parent": case["candidate"]} if layouts[key][2] else {}
         pool = lexical_rankings({"q": case["source"]}, corpus, "word")["q"][:6]
         gold = reference(case)
 
-        def visit(history, evidence, *, key=key, case=case, pool=pool, gold=gold, corpus=corpus, parents=parents):
-            row = {"id": key, "family": case["family"], "split": case["split"], "source": case["source"],
-                   "history": history, "evidence": evidence, "parent_link": layouts[key][2],
-                   "pool": pool, "reference": gold, "transitions": {}}
+        def visit(
+            history,
+            evidence,
+            *,
+            key=key,
+            case=case,
+            pool=pool,
+            gold=gold,
+            corpus=corpus,
+            parents=parents,
+        ):
+            row = {
+                "id": key,
+                "family": case["family"],
+                "split": case["split"],
+                "source": case["source"],
+                "history": history,
+                "evidence": evidence,
+                "parent_link": layouts[key][2],
+                "pool": pool,
+                "reference": gold,
+                "transitions": {},
+            }
             rows.append(row)
             before = decision(observe(row))
             for action in available(history):
@@ -134,13 +189,24 @@ def build_replay(cases):
                 elapsed = time.perf_counter() - action_start
                 child = visit([*history, action], {**evidence, **found})
                 after = decision(observe(child))
-                row["transitions"][action] = {"next": child["history"], "new_evidence": found, "ranking": ranking,
-                                              "query": query, "retrieval_calls": 1, "reranks": reranks,
-                                              "acquisition_seconds": elapsed,
-                                              "resolved": before != gold and after == gold}
+                row["transitions"][action] = {
+                    "next": child["history"],
+                    "new_evidence": found,
+                    "ranking": ranking,
+                    "query": query,
+                    "retrieval_calls": 1,
+                    "reranks": reranks,
+                    "acquisition_seconds": elapsed,
+                    "resolved": before != gold and after == gold,
+                }
             for action in ("abstain", "review"):
-                row["transitions"][action] = {"retrieval_calls": 0, "reranks": 0, "referrals": int(action == "review"),
-                                              "review_outcome": None, "resolved": False}
+                row["transitions"][action] = {
+                    "retrieval_calls": 0,
+                    "reranks": 0,
+                    "referrals": int(action == "review"),
+                    "review_outcome": None,
+                    "resolved": False,
+                }
             return row
 
         visit([], {key + ":head": corpus[key + ":head"]})
@@ -184,11 +250,17 @@ def fit_critic(initial, lookup, weights, imagined):
             middle = forecast(weights, state, action) if imagined else observe(child)
             branches.append((row, state, action, middle))
             for second in available([action]):
-                terminal = forecast(weights, middle, second) if imagined else observe(lookup[(row["id"], (action, second))])
+                terminal = (
+                    forecast(weights, middle, second)
+                    if imagined
+                    else observe(lookup[(row["id"], (action, second))])
+                )
                 samples[1][second].append((middle, reward(terminal, row["reference"])))
     one = {a: ridge(*zip(*points, strict=True)) for a, points in samples[1].items()}
     for _, state, action, middle in branches:
-        samples[2][action].append((state, max(float(predict(one[b], middle)) for b in available([action]))))
+        samples[2][action].append(
+            (state, max(float(predict(one[b], middle)) for b in available([action])))
+        )
     two = {a: ridge(*zip(*points, strict=True)) for a, points in samples[2].items()}
     return {1: one, 2: two}
 
@@ -201,10 +273,15 @@ def forecast_evaluation(test, lookup, weights, means):
             actual = observe(lookup[(row["id"], (*row["history"], action))])
             outcomes.append((actual, forecast(weights, state, action), state, means[action]))
     values = np.asarray(outcomes)
-    return {"n": len(outcomes), "feature_names": FEATURES,
-            "mae": {name: np.abs(values[:, 0] - values[:, i]).mean(axis=0).tolist()
-                    for i, name in enumerate(("learned", "persistence", "action_mean"), 1)},
-            "complete_accuracy": float(np.mean((values[:, 1, 0] >= 0.5) == values[:, 0, 0]))}
+    return {
+        "n": len(outcomes),
+        "feature_names": FEATURES,
+        "mae": {
+            name: np.abs(values[:, 0] - values[:, i]).mean(axis=0).tolist()
+            for i, name in enumerate(("learned", "persistence", "action_mean"), 1)
+        },
+        "complete_accuracy": float(np.mean((values[:, 1, 0] >= 0.5) == values[:, 0, 0])),
+    }
 
 
 def experiment(cases, replay=None):
@@ -212,12 +289,20 @@ def experiment(cases, replay=None):
     rows = build_replay(cases) if replay is None else replay
     lookup = {(r["id"], tuple(r["history"])): r for r in rows}
     dev, test = ([r for r in rows if r["split"] == split] for split in ("dev", "test"))
-    training = {a: [(observe(r), observe(lookup[(r["id"], (*r["history"], a))]))
-                    for r in dev if a in available(r["history"])] for a in ACTIONS}
+    training = {
+        a: [
+            (observe(r), observe(lookup[(r["id"], (*r["history"], a))]))
+            for r in dev
+            if a in available(r["history"])
+        ]
+        for a in ACTIONS
+    }
     weights = {a: ridge(*zip(*samples, strict=True)) for a, samples in training.items()}
     means = {a: np.mean([y for _, y in samples], axis=0) for a, samples in training.items()}
-    critics = {name: fit_critic([r for r in dev if not r["history"]], lookup, weights, imagined)
-               for name, imagined in (("imagined_critic", True), ("observed_critic", False))}
+    critics = {
+        name: fit_critic([r for r in dev if not r["history"]], lookup, weights, imagined)
+        for name, imagined in (("imagined_critic", True), ("observed_critic", False))
+    }
     predictions, details, runtime = {}, {}, {}
     initial = [r for r in test if not r["history"]]
     for arm in ("rule", "forecast", *critics):
@@ -231,11 +316,22 @@ def experiment(cases, replay=None):
             while weak and (choices := available(row["history"])):
                 state = observe(row)
                 if arm == "rule":
-                    action = "expand" if "expand" in choices else "parent" if state[1] and "parent" in choices else choices[-1]
+                    action = (
+                        "expand"
+                        if "expand" in choices
+                        else "parent"
+                        if state[1] and "parent" in choices
+                        else choices[-1]
+                    )
                 elif arm == "forecast":
                     action = max(choices, key=lambda a: utility(forecast(weights, state, a)))
                 else:
-                    action = max(choices, key=lambda a: float(predict(critics[arm][HORIZON-len(row["history"])][a], state)))
+                    action = max(
+                        choices,
+                        key=lambda a: float(
+                            predict(critics[arm][HORIZON - len(row["history"])][a], state)
+                        ),
+                    )
                 edge = row["transitions"][action]
                 trace.append({"action": action, **edge})
                 row = lookup[(row["id"], tuple(edge["next"]))]
@@ -243,34 +339,64 @@ def experiment(cases, replay=None):
             details[arm][row["id"]] = {"trace": trace, "state": observe(row)}
         runtime[arm] = time.perf_counter() - arm_started
     # Match realised referral workload without using labels; excess unresolved cases abstain.
-    quota = min(REVIEW_CAP, *(sum(v == "abstain" for v in p.values()) for p in predictions.values()))
+    quota = min(
+        REVIEW_CAP, *(sum(v == "abstain" for v in p.values()) for p in predictions.values())
+    )
     gold = {r["id"]: r["reference"] for r in initial}
     arms = {}
     for arm, pred in predictions.items():
-        review = sorted((k for k, v in pred.items() if v == "abstain"), key=lambda k: (details[arm][k]["state"][0], k))[:quota]
+        review = sorted(
+            (k for k, v in pred.items() if v == "abstain"),
+            key=lambda k: (details[arm][k]["state"][0], k),
+        )[:quota]
         for key, d in details[arm].items():
-            d.update(prediction=pred[key], referral=key in review, review_outcome=None, reference=gold[key])
+            d.update(
+                prediction=pred[key],
+                referral=key in review,
+                review_outcome=None,
+                reference=gold[key],
+            )
         traces = [edge for d in details[arm].values() for edge in d["trace"]]
-        arms[arm] = {**metrics(gold, pred), "referrals": len(review), "review_resolved": 0,
-                     "pure_abstentions": sum(v == "abstain" for v in pred.values()) - len(review),
-                     "missed_matches": sum(v == "equivalent" and pred[k] != v for k, v in gold.items()),
-                     "retrieval_calls": sum(e["retrieval_calls"] for e in traces), "reranks": sum(e["reranks"] for e in traces),
-                     "new_fragments": sum(len(e["new_evidence"]) for e in traces), "policy_seconds": runtime[arm],
-                     "recorded_acquisition_seconds": sum(e["acquisition_seconds"] for e in traces),
-                     "paired_vs_rule": paired(gold, predictions["rule"], pred),
-                     "gained_ids": sorted(k for k in gold if pred[k] == gold[k] != predictions["rule"][k]),
-                     "lost_ids": sorted(k for k in gold if predictions["rule"][k] == gold[k] != pred[k])}
-    return {"claim_boundary": "Synthetic development only; no independently adjudicated review or admission",
-            "primary": "false equivalences at matched retrieval calls and referral workload; correctness guardrail",
-            "family_split": {s: sorted({r["family"] for r in rows if r["split"] == s}) for s in ("dev", "test")},
-            "states": len(rows), "training_transitions": sum(map(len, training.values())), "review_cap": REVIEW_CAP,
-            "forecast": forecast_evaluation(test, lookup, weights, means), "arms": arms, "details": details,
-            "seconds": time.perf_counter() - started, "python": platform.python_version(), "numpy": np.__version__}
+        arms[arm] = {
+            **metrics(gold, pred),
+            "referrals": len(review),
+            "review_resolved": 0,
+            "pure_abstentions": sum(v == "abstain" for v in pred.values()) - len(review),
+            "missed_matches": sum(v == "equivalent" and pred[k] != v for k, v in gold.items()),
+            "retrieval_calls": sum(e["retrieval_calls"] for e in traces),
+            "reranks": sum(e["reranks"] for e in traces),
+            "new_fragments": sum(len(e["new_evidence"]) for e in traces),
+            "policy_seconds": runtime[arm],
+            "recorded_acquisition_seconds": sum(e["acquisition_seconds"] for e in traces),
+            "paired_vs_rule": paired(gold, predictions["rule"], pred),
+            "gained_ids": sorted(k for k in gold if pred[k] == gold[k] != predictions["rule"][k]),
+            "lost_ids": sorted(k for k in gold if predictions["rule"][k] == gold[k] != pred[k]),
+        }
+    return {
+        "claim_boundary": "Synthetic development only; no independently adjudicated review or admission",
+        "primary": "false equivalences at matched retrieval calls and referral workload; correctness guardrail",
+        "family_split": {
+            s: sorted({r["family"] for r in rows if r["split"] == s}) for s in ("dev", "test")
+        },
+        "states": len(rows),
+        "training_transitions": sum(map(len, training.values())),
+        "review_cap": REVIEW_CAP,
+        "forecast": forecast_evaluation(test, lookup, weights, means),
+        "arms": arms,
+        "details": details,
+        "seconds": time.perf_counter() - started,
+        "python": platform.python_version(),
+        "numpy": np.__version__,
+    }
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--fixture", type=Path, default=Path("contracts/examples/semantic-reconciliation-synthetic-v1.json"))
+    parser.add_argument(
+        "--fixture",
+        type=Path,
+        default=Path("contracts/examples/semantic-reconciliation-synthetic-v1.json"),
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     raw = args.fixture.read_bytes()
@@ -280,8 +406,12 @@ def main():
     started = time.perf_counter()
     replay = build_replay(cases)
     report = experiment(cases, replay)
-    report.update(fixture_sha256=FIXTURE_SHA, replay_seconds=time.perf_counter() - started - report["seconds"])
-    args.output.write_text(json.dumps({"report": report, "replay": replay}, indent=2, allow_nan=False) + "\n")
+    report.update(
+        fixture_sha256=FIXTURE_SHA, replay_seconds=time.perf_counter() - started - report["seconds"]
+    )
+    args.output.write_text(
+        json.dumps({"report": report, "replay": replay}, indent=2, allow_nan=False) + "\n"
+    )
 
 
 if __name__ == "__main__":
