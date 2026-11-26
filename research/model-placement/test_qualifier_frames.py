@@ -35,5 +35,18 @@ class FrameTests(unittest.TestCase):
             predictor_factory('operator-first',validate)(Model())('Test')
 
 
+    def test_evaluator_retains_original_alias_and_invalid_span(self):
+        from scripts import extractive_development as e
+        alias = 'triggering condition'
+        for raw in ({'entities':{'unrequested':[]}}, {'entities':{alias:[{'start':1,'end':4,'text':'If A','confidence':.9}]}}):
+            class Model:
+                def extract_entities(self,*a,**kw): return raw
+            predict = predictor_factory('operator-first',e.model_spans)(Model())
+            row = e.evaluate([{'id':'a','family':'one','text':'If A','labels':[['condition','If A']]}],predict)['cases'][0]
+            self.assertEqual(row['raw'],raw)
+            self.assertEqual(row['predicted'],[])
+            self.assertIsNotNone(row['invalid_abstention'])
+
+
 if __name__ == '__main__':
     unittest.main()

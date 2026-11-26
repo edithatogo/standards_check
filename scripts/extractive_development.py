@@ -101,6 +101,21 @@ def model_spans(text, response):
     return spans
 
 
+
+class InvalidPrediction(ValueError):
+    """Keep the rejected model response without crediting any of its spans."""
+
+    def __init__(self, message, raw):
+        super().__init__(message)
+        # Model responses are JSON-like. Nonfinite numbers are retained as tagged values.
+        try:
+            self.raw = json.loads(
+                json.dumps(raw), parse_constant=lambda token: {"nonfinite_number": token}
+            )
+        except (TypeError, ValueError, RecursionError):
+            self.raw = {"non_json_response_repr": repr(raw)}
+
+
 def evaluate(cases, predict):
     """Score all cases, including abstentions; duplicates are false positives."""
     rows = []
@@ -112,6 +127,8 @@ def evaluate(cases, predict):
         error = None
         try:
             predicted, raw = predict(text)
+        except InvalidPrediction as exc:
+            predicted, raw, error = [], exc.raw, str(exc)
         except ValueError as exc:
             predicted, error = [], str(exc)
         observed = Counter(predicted)
@@ -165,7 +182,10 @@ def model_predictor(extractor):
             threshold=0.5,
             overlap_policy="allow",
         )
-        return model_spans(text, raw), raw
+        try:
+            return model_spans(text, raw), raw
+        except ValueError as exc:
+            raise InvalidPrediction(str(exc), raw) from exc
 
     return predict
 

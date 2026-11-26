@@ -97,3 +97,17 @@ references and residual gaps justify it. No scientific promotion.
 Use the coordinator's existing exchange convention in #183
 [replay.md](https://github.com/edithatogo/standards_check/blob/dd0eff304c0b1aa42e8b863514bd2b33b4ac95c1/research/model-placement/replay.md)
 and retain separate E9/E10/E11 identifiers; no cross-dataset join.
+
+
+## Review and formatting follow-up
+
+Reconciled with #186's raw-response retention repair `aecbb1fc09d9c3a521b1e9a7ba03529de93ccf83`.
+Multi-call framing preserves every response received before invalid span or
+label validation, including the offending response, using the same
+InvalidPrediction boundary; no partial credit. RED reproduced lost raw
+response, GREEN 16 focused local tests passed across evaluator and follow-up.
+Supervised per-case predictions and score dictionaries exactly match the
+prior local receipt for all three arms. Addressed hosted Ruff-format finding
+in run 45803120923, job 139853520573 by wrapping the reported call. No changed
+labels, weights, scoring, or independent scientific evidence. Full hosted
+exact-head qualification still required.

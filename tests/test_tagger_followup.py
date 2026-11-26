@@ -94,3 +94,15 @@ class TaggerFollowupTests(unittest.TestCase):
         self.assertIs(loaded, predictor)
         self.assertEqual(runtime, {'runtime': 'test'})
         self.assertEqual(assets, {'asset': 'test'})
+
+    def test_per_type_rejected_response_retains_preceding_calls(self):
+        first = {'entities':{'applicability':[]}}
+        second = {'entities':{'condition':[{'start':1,'end':4,'text':'If A','confidence':.9}]}}
+        model = Mock()
+        model.extract_entities.side_effect = [first, second]
+        case = {'id':'a','family':'one','text':'If A','labels':[['condition','If A']]}
+        result = t.e.evaluate([case], t.framed_predictor(model, 'per_type'))
+        self.assertEqual(result['cases'][0]['raw'], {'responses':[first,second]})
+        self.assertEqual(result['cases'][0]['predicted'], [])
+        self.assertEqual(result['invalid_abstentions'], 1)
+        self.assertEqual(result['scores']['all']['fn'], 1)

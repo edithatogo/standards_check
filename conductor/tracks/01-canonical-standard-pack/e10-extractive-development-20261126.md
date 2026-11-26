@@ -149,3 +149,18 @@ reuse this model loader and exact span evaluator; preserve its hash-locked
 wheel closure and all asset hashes for future qualification. No model
 promotion. Independent source/rights/reference gate remains open in #188.
 Exact new-head assurance and security status must be rechecked.
+
+
+## Review finding: failed-response retention
+
+All seven required checks passed at `38fbcb66976e6a1686b7dbaea96dbadeedc2ed5f` but the
+unresolved Codex review correctly identified that invalid raw predictions were
+lost before scoring. Preserve the actual response on a validation exception,
+including original label aliases, while scoring the case as an abstention with
+zero predicted spans. Nonfinite values are explicitly tagged in valid JSON;
+non-JSON responses retain a diagnostic representation. No changed model,
+fixture, scoring, threshold or admission decision. RED reproduced loss of the
+invalid offset, NaN and unknown-label response; GREEN eight evaluator tests
+and four frame tests passed locally. These are controlled response tests, not
+fresh pretrained inference. Full exact-head qualification and review-thread
+resolution required; #189 must reuse this boundary for multi-call framing.

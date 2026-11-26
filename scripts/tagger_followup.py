@@ -33,6 +33,7 @@ def framed_predictor(extractor, frame):
             [CLAUSE_LABELS] if frame == "clause" else [{k: v} for k, v in CLAUSE_LABELS.items()]
         )
         merged = {}
+        responses = []
         for labels in groups:
             raw = extractor.extract_entities(
                 text,
@@ -42,10 +43,14 @@ def framed_predictor(extractor, frame):
                 threshold=0.5,
                 overlap_policy="allow",
             )
-            e.model_spans(text, raw)
-            if not set(raw["entities"]) <= labels.keys():
-                raise ValueError("unexpected label for formulation")
-            merged.update(raw["entities"])
+            responses.append(raw)
+            try:
+                e.model_spans(text, raw)
+                if not set(raw["entities"]) <= labels.keys():
+                    raise ValueError("unexpected label for formulation")
+                merged.update(raw["entities"])
+            except ValueError as exc:
+                raise e.InvalidPrediction(str(exc), {"responses": responses}) from exc
         response = {"entities": merged}
         return e.model_spans(text, response), response
 
@@ -235,7 +240,9 @@ def supervised(cases):
             models = fit_models(train, arm)
             for case in test:
                 predictions[case["text"]] = predict_supervised(case["text"], models, arm)
-        arms[arm] = e.evaluate(cases, lambda text, predictions=predictions: (predictions[text], None))
+        arms[arm] = e.evaluate(
+            cases, lambda text, predictions=predictions: (predictions[text], None)
+        )
         arms[arm]["fit_and_predict_seconds"] = time.perf_counter() - start
     return {
         "arms": arms,
