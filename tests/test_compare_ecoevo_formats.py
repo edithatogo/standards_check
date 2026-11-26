@@ -19,15 +19,17 @@ def group(rows):
              for c, v in enumerate(row, 1)]} for i, row in enumerate(rows, 1)]}
 
 
-def tiny_pdf():
-    # A real, small PDF table with a text layer; no extra fixture dependency.
-    commands = ['0.5 w']
-    for x in (40, 160, 280):
-        commands.append(f'{x} 100 m {x} 160 l S')
-    for y in (100, 130, 160):
-        commands.append(f'40 {y} m 280 {y} l S')
-    for x,y,value in ((45,140,'Sub-item number'), (165,140,'Sub-item'), (45,110,'1.1'), (165,110,'Example requirement.')):
-        commands.append(f'BT /F1 10 Tf {x} {y} Td ({value}) Tj ET')
+def tiny_pdf(commands=None):
+    # Reuse the byte-stable PDF builder for manually annotated synthetic pages.
+    if commands is None:
+        # A real, small PDF table with a text layer; no extra fixture dependency.
+        commands = ['0.5 w']
+        for x in (40, 160, 280):
+            commands.append(f'{x} 100 m {x} 160 l S')
+        for y in (100, 130, 160):
+            commands.append(f'40 {y} m 280 {y} l S')
+        for x,y,value in ((45,140,'Sub-item number'), (165,140,'Sub-item'), (45,110,'1.1'), (165,110,'Example requirement.')):
+            commands.append(f'BT /F1 10 Tf {x} {y} Td ({value}) Tj ET')
     stream = '\n'.join(commands).encode()
     objs = [b'<< /Type /Catalog /Pages 2 0 R >>', b'<< /Type /Pages /Count 1 /Kids [3 0 R] >>',
             b'<< /Type /Page /Parent 2 0 R /MediaBox [0 0 320 200] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>',
