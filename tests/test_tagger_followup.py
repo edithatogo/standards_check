@@ -82,3 +82,15 @@ class TaggerFollowupTests(unittest.TestCase):
             with patch('sys.argv', argv), patch.object(t.e,'load_extractor',side_effect=ValueError('held')), self.assertRaises(SystemExit):
                 t.main()
             self.assertEqual(json.loads(path.read_text())['status'],'failed')
+
+    def test_shared_loader_preserves_predictor_factory(self):
+        from unittest.mock import patch
+        extractor = Mock()
+        predictor = Mock()
+        factory = Mock(return_value=predictor)
+        with patch.object(t.e, 'load_extractor', return_value=(extractor, {'runtime': 'test'}, {'asset': 'test'})):
+            loaded, runtime, assets = t.e.load_model(None, predictor_factory=factory)
+        factory.assert_called_once_with(extractor)
+        self.assertIs(loaded, predictor)
+        self.assertEqual(runtime, {'runtime': 'test'})
+        self.assertEqual(assets, {'asset': 'test'})

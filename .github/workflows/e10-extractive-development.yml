@@ -6,6 +6,8 @@ on:
     types: [opened, synchronize, reopened, labeled]
     paths:
       - "scripts/extractive_development.py"
+      - "research/model-placement/qualifier_frames.py"
+      - "research/model-placement/test_qualifier_frames.py"
       - "tests/test_extractive_development.py"
       - "tests/fixtures/specialist/qualifier-spans-v1.json"
       - ".github/workflows/e10-extractive-development.yml"
@@ -45,6 +47,7 @@ jobs:
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/e10-receipt" "$RUNNER_TEMP/e10-wheels"
           python -m unittest tests.test_extractive_development -v
+          python -m unittest discover -s research/model-placement -p test_qualifier_frames.py -v
           python -m scripts.extractive_development --arm rules --revision "$(git rev-parse HEAD)" --output "$RUNNER_TEMP/e10-receipt/rules.json"
           python -VV > "$RUNNER_TEMP/e10-receipt/python-version.txt"
       - name: Acquire isolated exact-version CPU runtime
@@ -86,6 +89,20 @@ jobs:
         run: |
           set -euo pipefail
           timeout 300 python -m scripts.extractive_development --arm gliner --model-dir "$RUNNER_TEMP/e10-model" --revision "$(git rev-parse HEAD)" --output "$RUNNER_TEMP/e10-receipt/gliner.json"
+      - name: Execute two alternative label frames with the same pinned checkpoint
+        env:
+          PYTHONPATH: "."
+        shell: bash
+        run: |
+          set -uo pipefail
+          status=0
+          for frame in clause-names operator-first; do
+            timeout 300 python research/model-placement/qualifier_frames.py \
+              --frame "$frame" --model-dir "$RUNNER_TEMP/e10-model" \
+              --revision "$(git rev-parse HEAD)" \
+              --output "$RUNNER_TEMP/e10-receipt/frame-$frame.json" || status=1
+          done
+          exit "$status"
       - name: Retain results and failures, not downloaded weights
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2

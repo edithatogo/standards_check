@@ -80,3 +80,72 @@ scientific acceptance remain held. E11 remains separate.
 Run [45794639014](https://github.com/edithatogo/standards_check/actions/runs/45794639014), artifact [15104920210](https://github.com/edithatogo/standards_check/actions/runs/45794639014/artifacts/15104920210), SHA-256 `77d5c49007dab891fdf83c48a92b00b051b54210fa6257c21a1816cbb4f35d4b`; downloaded and verified. Merge revision `482817aca80b286da42053ef04d1e5bc498686c0`; script SHA-256 `5572e5b9dfe9a25d33550c517e83ebd840551acaf7e2b50a61b61d11cff7177e`. Python 3.12.16, gliner2 2.2.0, transformers 5.8.0, torch 2.10.0+cpu. Both arms completed with no invalid abstentions. Rules 14 TP / 2 FP / 3 FN (F1 0.848485), GLiNER 1 TP / 6 FP / 16 FN (F1 0.083333); applicability and condition exact F1 zero for neural arm, exception 0.222222. Hosted process measurements: rules 0.003839818 s / 22064 KiB RSS; GLiNER 7.570632449 s / 1141960 KiB RSS. Model weights 295567700 bytes; complete asset and wheel receipts retained. Retain the negative result; no promotion. This is task/configuration-specific, not a general GLiNER conclusion. Next compare fixed label framing variants, boundary overlap vs exact typed spans, and independently supervised configurations with separate family-disjoint confirmation only once source gates pass.
 
 Assurance run 45794638924 found ShellCheck SC2035 at wheel hash glob. Corrected by delimiting options with `--`; no model/evaluator/fixture changes. Codecov patch 98.62% passed at prior exact head; replacement checks required. Offline security was queued.
+
+
+## Label-frame follow-up after receiving E9
+
+Exact rebased hosted run 45796898700 completed. Downloaded artifact
+15105328589 independently verified SHA-256
+3aaddfe04a9591e1f6360e9db60003bd2adf63714ca9ab08379792ea44d12a89;
+merge revision 96b87cce4fa5bc33b4b0ec26af32e700896188fc. Rules 14/2/3 and
+GLiNER 1/6/16 TP/FP/FN, identical to earlier run. Wall .00558 / 9.2441 s;
+peak RSS 22240 / 1137796 KiB; unchanged 295567700-byte model weights.
+The operator-completion replay in #185 found no additional exact reference
+span beyond rules. Guarded completion is not an independent learned gain.
+
+Predeclare two alternative natural-language label schemas, clause-names and
+operator-first, in research/model-placement/qualifier_frames.py. Same exact
+checkpoint, local loader, input hash, overlap policy, threshold .5, three
+labels, 16 calls per arm and unchanged exact-offset evaluator. Alias mapping
+is bijective and rejects unknown labels before the existing span validator;
+raw response and schema retained. No example or reference included in model
+request. No threshold selection, no larger model, no repeated downloads within
+a run. Run in two distinct CPU processes after existing original arm. Retain
+both results and any failure; resource measurements include model load.
+These are exposed synthetic diagnostic arms and not new independent testing.
+
+Local RED missing module; GREEN three focused unittest tests for exact
+schema, alias mapping, request settings and rejection. Tests use fake extractor
+only; actual new neural calls await the opt-in hosted workflow. Existing
+loader/evaluator default behavior retained via optional predictor factory.
+Full repository tests, exact-head CI, and source/reference gates remain open.
+No production change, new dependency, rights decision or scientific promotion.
+
+
+## Completed label-frame replay and disposition
+
+Hosted [45799077555](https://github.com/edithatogo/standards_check/actions/runs/45799077555)
+completed all three pretrained frames and rules. Downloaded artifact
+[15105999587](https://github.com/edithatogo/standards_check/actions/runs/45799077555/artifacts/15105999587)
+SHA-256 verified: `d4e7b997346976c6eb5aa118ef6cf6a4536824e459931a5a2bf0221bc50f12cc`.
+Tested merge revision `355bf1e245fb0c49e2892b1028aff09a842aeb4c`.
+The same 17 authored exact spans remain the denominator.
+
+| Arm | TP/FP/FN | Exact F1 | Empty predictions | Seconds | Peak RSS KiB |
+| --- | --- | ---: | ---: | ---: | ---: |
+| Rules | 14/2/3 | .848485 | 5 | .005473 | 22236 |
+| Original GLiNER | 1/6/16 | .083333 | 9 | 9.640118 | 1138092 |
+| Clause names | 2/6/15 | .16 | 9 | 9.229019 | 1140148 |
+| Operator-first | 0/3/17 | 0 | 13 | 9.342108 | 1142788 |
+
+No invalid-output abstentions; empty output is not nonapplicability.
+No model frame adds a correct exact span beyond rules. Retain q06
+applicability [0,11), q11 exception [22,40), q12 condition [0,52)
+as missing rules spans, and q12 [0,23) / q13 [16,40) false positives.
+Exact typed span precision and recall, predictions and offsets remain
+in the artifact. The independently executed #189 follow-up (artifact
+15107111276) is complementary: joint clause descriptions .10 F1,
+per-type .105263, supervised token-BIO and span-boundary 0. The per-type
+arm uses three calls per case, not equal compute. No further prompt
+sweep or larger checkpoint on this exposed fixture.
+
+Reconciled with protected E11 receiving main `776ed1dbfbe19d16365310ef0fa07d29a793611a`
+without changing either experimental method or fixture. #187 is merged.
+Use the existing shared missed-match convention in #183
+[replay.md](https://github.com/edithatogo/standards_check/blob/dd0eff304c0b1aa42e8b863514bd2b33b4ac95c1/research/model-placement/replay.md)
+and [#158 handoff](https://github.com/edithatogo/standards_check/issues/158#issuecomment-7189323646).
+No new audit registry or extraction branch. Keep #189 stacked and
+reuse this model loader and exact span evaluator; preserve its hash-locked
+wheel closure and all asset hashes for future qualification. No model
+promotion. Independent source/rights/reference gate remains open in #188.
+Exact new-head assurance and security status must be rechecked.

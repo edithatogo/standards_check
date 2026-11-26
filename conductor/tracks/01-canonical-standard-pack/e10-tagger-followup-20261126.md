@@ -57,3 +57,43 @@ Ordinary CI and hosted inference required. Scientific confirmation,
 independent source rights and family-qualified labels remain held.
 Rollback removes follow-up runner, fixture-independent tests and
 workflow, restores loader wrapper. No admission or equivalence inference.
+
+
+## Actual hosted follow-up and Ponytail reconciliation
+
+[Run 45798338941](https://github.com/edithatogo/standards_check/actions/runs/45798338941)
+completed both learned framings and supervised controls using the exact
+prior wheel closure and model assets. Downloaded
+[artifact 15107111276](https://github.com/edithatogo/standards_check/actions/runs/45798338941/artifacts/15107111276)
+SHA-256 `cf41d449aca1231ae24f544b6b36834b57de0b1c604ccb91ab34628a313878b8`;
+tested merge `b2c62207effb72107f70e5ba775422c4c57f4b9f`.
+
+| Arm | TP/FP/FN | Exact F1 |
+| --- | --- | ---: |
+| Rules | 14/2/3 | .848485 |
+| Whole-clause joint | 1/2/16 | .10 |
+| Per-type | 2/19/15 | .105263 |
+| Fitted BIO | 0/1/17 | 0 |
+| Fitted span boundary | 0/0/17 | 0 |
+
+Joint model recovers q02 exception [9,22); per-type also recovers q10
+exception [67,95). Both already recovered by the rules. Joint 16 calls,
+per-type 48 calls: report as different acquisition costs, not equal compute.
+Retain all raw offsets and negatives. No further synthetic prompt sweep.
+Use the exact pinned closure for future independent qualification.
+
+Reconciled stacked #189 onto #186 `38fbcb66976e6a1686b7dbaea96dbadeedc2ed5f`: retain one model
+initialization path (load_extractor) and the existing load_model wrapper
+with optional predictor_factory for both original label frames and the
+follow-up. Fix observed Ruff F821 and B023 in the follow-up (initialize
+end; bind predictions for the fold). New RED: missing predictor_factory
+argument, GREEN: 14 focused local tests passed; supervised per-case
+predictions and all metrics exactly equal the previous local receipt.
+Only tested the isolated overlay, not full checkout or fresh neural inference.
+Keep original source blobs and prior hosted results intact; exact-head
+required CI remains necessary. Defer any larger model until independent
+references and residual gaps justify it. No scientific promotion.
+
+Use the coordinator's existing exchange convention in #183
+[replay.md](https://github.com/edithatogo/standards_check/blob/dd0eff304c0b1aa42e8b863514bd2b33b4ac95c1/research/model-placement/replay.md)
+and retain separate E9/E10/E11 identifiers; no cross-dataset join.

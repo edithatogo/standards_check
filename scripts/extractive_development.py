@@ -198,12 +198,12 @@ def load_extractor(directory):
     return extractor, runtime, asset_info
 
 
-def load_model(directory):
+def load_model(directory, *, predictor_factory=model_predictor):
     extractor, runtime, asset_info = load_extractor(directory)
-    return model_predictor(extractor), runtime, asset_info
+    return predictor_factory(extractor), runtime, asset_info
 
 
-def run(arm, directory, revision):
+def run(arm, directory, revision, *, predictor_factory=model_predictor):
     import resource
 
     start = time.perf_counter()
@@ -218,7 +218,7 @@ def run(arm, directory, revision):
             return rules(text), None
 
     elif arm == "gliner":
-        predict, runtime, asset_info = load_model(directory)
+        predict, runtime, asset_info = load_model(directory, predictor_factory=predictor_factory)
     else:
         raise ValueError("unsupported arm")
     result = evaluate(cases, predict)

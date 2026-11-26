@@ -92,6 +92,7 @@ def bio_labels(words, case, kind):
 def decode_bio(words, tags, kind):
     result = []
     start = None
+    end = 0
     for (_, a, b), tag in zip(words, tags, strict=True):
         if start is not None and tag != "I":
             result.append((kind, start, end))
@@ -234,7 +235,7 @@ def supervised(cases):
             models = fit_models(train, arm)
             for case in test:
                 predictions[case["text"]] = predict_supervised(case["text"], models, arm)
-        arms[arm] = e.evaluate(cases, lambda text: (predictions[text], None))
+        arms[arm] = e.evaluate(cases, lambda text, predictions=predictions: (predictions[text], None))
         arms[arm]["fit_and_predict_seconds"] = time.perf_counter() - start
     return {
         "arms": arms,
