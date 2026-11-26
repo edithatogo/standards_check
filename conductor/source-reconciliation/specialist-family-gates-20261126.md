@@ -82,3 +82,40 @@ All three qualified-component integration/confirmatory runs remain held
 until actual eligible source and independent reference evidence is recorded.
 Rollback removes this opt-in workflow and note without changing the
 canonical pipeline or immutable specialist protocol.
+
+## Corpus-scale coverage ledger and next execution stages
+
+The [source coverage receipt](equator-pipeline-coverage-v1.json) joins the
+existing historical census members at identical source revision, stable
+directory IDs and source blobs. Four focused tests passed locally (initial
+missing-module RED, then GREEN). No new network requests or third-party
+text are required. The exact 720-entry output is reproducible using:
+
+    python -m scripts.equator_pipeline_coverage --artifact /path/to/github-actions-artifact-15031534787.zip --output /tmp/catalogue-coverage.json
+
+The existing family intake workflow now also executes this read-only join
+on its downloaded receipt directory. Historical source artifact SHA-256 and
+all four member hashes are retained. 719 metadata-extracted but unverified;
+317 entries have source-link candidates, 209 OA XML candidates, 41 matched
+legacy candidates and 16 matched local original-file candidates. Bulk
+receipt: 202 deferred, two held, one observed source inventory without
+reconciliation. Six priority acquisitions held in that receipt. No full
+pipeline execution can be inferred from these records. Study-type strata
+overlap; report missingness and selection bias, never treat OA candidacy as
+rights clearance. Current-head CI not yet qualified.
+
+Next extend the existing receipt join (not a second source registry) with
+eligible source manifestations, extraction attempts, stable item/subitem
+and clause anchors, expected/observed evidence units, qualifier closure,
+candidate-pool recall, unseen-fragment recall, semantic review/proof state
+and resource measurements. Missing/held/error/unsupported are explicit
+outcomes. Use this census for corpus-wide variability and worklist triage.
+Development cohort = all eligible existing rights-cleared source material;
+confirmation = separate independently adjudicated family components.
+Retain the entire 720-entry denominator and the reasons for non-evaluation.
+Do not freeze E9–E14 inputs from candidate rows or claim complete item
+denominators without reference structure. Coordinate novelty-aware
+reranking and common-mode model error diagnostic with #184, #187 graph
+retrieval, #186/#189 tagging and #180 applicability. Run a staged
+factorial comparison with matched candidate and acquisition budgets and
+family-clustered uncertainty, preserving null and adverse findings.

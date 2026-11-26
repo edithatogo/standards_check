@@ -45,6 +45,7 @@ jobs:
           timeout 60 gh run download 45635380131 --repo "$GITHUB_REPOSITORY" --name equator-source-45635380131 --dir "$RUNNER_TEMP/family-prior"
           echo "fc859acaf9ae378b3bb1a2d74be0eeb0ff294319434d83bce6f9a4daf835fa32  $RUNNER_TEMP/family-prior/equator-article-survey.json" | sha256sum --check
           python -m scripts.review_source_receipts --receipt "$RUNNER_TEMP/family-prior/equator-article-survey.json" --output "$RUNNER_TEMP/family-evidence/historical-retrospective.json"
+          python -m scripts.equator_pipeline_coverage --directory "$RUNNER_TEMP/family-prior" --output "$RUNNER_TEMP/family-evidence/catalogue-coverage.json"
       - name: Reuse the bounded primary source acquisition and structural checker
         shell: bash
         run: |
