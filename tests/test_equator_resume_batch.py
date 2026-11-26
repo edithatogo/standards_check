@@ -58,3 +58,51 @@ def test_explicit_retry_does_not_replay_success():
     assert result['resume']['attempted'] == []
     result = resume(prior, Path('.'), 2, lambda report, history, root, limit: [{**r, 'status': 'held', 'acquisition_origin': 'current_observation'} for r in report['bulk_articles'] if r['pmcid'] in {w['pmcid'] for w in report['oa_source_worklist']}], retry_held=True)
     assert result['resume']['attempted'] == ['PMC1', 'PMC2']
+
+
+def test_checkpoint_rejects_duplicate_or_changed_worklist():
+    prior = initial()
+    prior['bulk_articles'].append(copy.deepcopy(prior['bulk_articles'][0]))
+    with pytest.raises(ValueError, match='checkpoint inventory'):
+        resume(prior, Path('.'), 1, lambda *a: [])
+    prior = initial()
+    prior['oa_source_worklist'][0]['pmcid'] = 'PMC99'
+    with pytest.raises(ValueError, match='worklist inventory'):
+        resume(prior, Path('.'), 1, lambda *a: [])
+
+
+def test_resume_rejects_changed_batch_binding_and_promotion():
+    prior = initial()
+    target = prior['bulk_articles'][1]
+    for change, match in [({'doi': 'changed'}, 'binding'), ({'canonical_packs_promoted': 1, 'status': 'held'}, 'outcome')]:
+        with pytest.raises(ValueError, match=match):
+            resume(prior, Path('.'), 1, lambda *a: [{**target, **change}])
+
+
+def test_cli_checkpoint_digest_and_resume(tmp_path, monkeypatch):
+    import hashlib
+    import json
+    import sys
+    from types import ModuleType
+    from scripts import equator_resume_batch as module
+
+    prior = initial()
+    raw = json.dumps(prior).encode()
+    source = tmp_path / 'prior.json'
+    source.write_bytes(raw)
+    output = tmp_path / 'out.json'
+    provider = ModuleType('scripts.survey_equator_articles')
+    provider.bulk_survey = lambda report, *a: [{**r, 'status': 'held'} for r in report['bulk_articles'] if r['pmcid'] in {w['pmcid'] for w in report['oa_source_worklist']}]
+    monkeypatch.setitem(sys.modules, provider.__name__, provider)
+    argv = ['resume', '--previous', str(source), '--expected-sha256', '0' * 64, '--output', str(output), '--limit', '1']
+    monkeypatch.setattr(sys, 'argv', argv)
+    with pytest.raises(ValueError, match='digest mismatch'):
+        module.main()
+    assert not output.exists()
+    argv[argv.index('--expected-sha256') + 1] = hashlib.sha256(raw).hexdigest()
+    module.main()
+    result = json.loads(output.read_text())
+    assert result['resume']['attempted'] == ['PMC2']
+    assert result['resume']['previous_sha256'] == hashlib.sha256(raw).hexdigest()
+    assert len(result['bulk_articles']) == len(prior['bulk_articles'])
+    assert source.read_bytes() == raw

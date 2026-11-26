@@ -24,6 +24,139 @@ PINS = {
 }
 
 
+def literal_bullet_blocks(text, anchor):
+    lines = text.splitlines()
+    if len(lines) < 2 or not lines[0].strip() or lines[0].startswith("• "):
+        return []
+    if not all(line.startswith("• ") and line[2:].strip() for line in lines[1:]):
+        return []
+    return [
+        {
+            "anchor": f"{anchor}#line:{i + 1}",
+            "bullet": bool(i),
+            "text_sha256": fingerprint(line[2:] if i else line),
+        }
+        for i, line in enumerate(lines)
+    ]
+
+
+def bullet_content_comparison(literal, docx):
+    """Compare explicit literal bullet content to numbered Word paragraphs, not rendered glyphs."""
+    result = []
+    for row in literal:
+        blocks = row.get("bullet_blocks", [])
+        if not blocks:
+            continue
+        candidates = [r for r in docx if r["item_id"] == row["item_id"]]
+        observed = candidates[0].get("requirement_blocks", []) if len(candidates) == 1 else []
+        pairs = [
+            {
+                "literal_anchor": a["anchor"],
+                "docx_anchor": b["anchor"],
+                "equal": a["text_sha256"] == b.get("text_sha256")
+                and b["kind"] == "paragraph"
+                and a["bullet"] == (b.get("numbering") is not None),
+                "numbering": b.get("numbering"),
+            }
+            for a, b in zip(blocks, observed, strict=False)
+        ]
+        equal = len(blocks) == len(observed) and all(p["equal"] for p in pairs)
+        result.append(
+            {
+                "item_id": row["item_id"],
+                "literal_anchor": row["requirement_anchor"],
+                "status": "content_matches_numbered_blocks" if equal else "held_block_mismatch",
+                "pairs": pairs,
+            }
+        )
+    return result
+
+
+def docx_markup_inventory(raw):
+    """Bounded hash-only non-body and list-definition evidence; not a rendered DOCX reader."""
+    import io
+    from zipfile import ZipFile
+
+    from .source_xml import parse_xml
+    from .structured_source import MAX_UNPACKED_BYTES, check_package
+
+    members = check_package(raw)
+    w = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
+    with ZipFile(io.BytesIO(raw)) as archive:
+        body = parse_xml(archive.read("word/document.xml"), MAX_UNPACKED_BYTES)
+        refs = {
+            kind: [element.get(w + "id") for element in body.iter(w + kind)]
+            for kind in ("footnoteReference", "endnoteReference", "commentReference")
+        }
+        non_body = []
+        for name in sorted(members):
+            if not re.fullmatch(
+                r"word/(?:header\d+|footer\d+|footnotes|endnotes|comments)\.xml", name
+            ):
+                continue
+            content = archive.read(name)
+            part = parse_xml(content, MAX_UNPACKED_BYTES)
+            nodes = [node.text for node in part.iter(w + "t") if node.text and node.text.strip()]
+            non_body.append(
+                {
+                    "member": name,
+                    "sha256": hashlib.sha256(content).hexdigest(),
+                    "nonempty_text_nodes": len(nodes),
+                    "text_sha256": fingerprint("\n".join(nodes)),
+                    "note_ids": [
+                        node.get(w + "id")
+                        for kind in ("footnote", "endnote", "comment")
+                        for node in part.iter(w + kind)
+                    ],
+                    "field_count": sum(
+                        1
+                        for kind in ("fldSimple", "instrText", "drawing")
+                        for _ in part.iter(w + kind)
+                    ),
+                }
+            )
+        numbering = []
+        if "word/numbering.xml" in members:
+            root = parse_xml(archive.read("word/numbering.xml"), MAX_UNPACKED_BYTES)
+            for num in root.findall(w + "num"):
+                abstract_id = num.find(w + "abstractNumId")
+                ident = abstract_id.get(w + "val") if abstract_id is not None else None
+                defs = [
+                    node
+                    for node in root.findall(w + "abstractNum")
+                    if node.get(w + "abstractNumId") == ident
+                ]
+                levels = []
+                if len(defs) == 1:
+                    for level in defs[0].findall(w + "lvl"):
+                        fmt = level.find(w + "numFmt")
+                        marker = level.find(w + "lvlText")
+                        levels.append(
+                            {
+                                "level": level.get(w + "ilvl"),
+                                "format": fmt.get(w + "val") if fmt is not None else None,
+                                "marker_sha256": fingerprint(marker.get(w + "val", ""))
+                                if marker is not None
+                                else None,
+                            }
+                        )
+                numbering.append(
+                    {
+                        "num_id": num.get(w + "numId"),
+                        "abstract_id": ident,
+                        "definition_count": len(defs),
+                        "overrides": len(num.findall(w + "lvlOverride")),
+                        "levels": levels,
+                    }
+                )
+    return {
+        "body_references": refs,
+        "non_body": non_body,
+        "numbering": numbering,
+        "boundary": "Observed XML markup only; rendered numbering and non-body semantic coverage not established",
+    }
+
+
 def literal_rows(raw, doi, expected_ids):
     if len(raw) > 128_000 or not expected_ids or len(set(expected_ids)) != len(expected_ids):
         raise ValueError("invalid bounded source or reference")
@@ -99,6 +232,7 @@ def literal_rows(raw, doi, expected_ids):
                     "requirement_anchor": item_anchor + "/1",
                     "requirement_sha256": fingerprint(item[1]),
                     "verbatim_sha256": hashlib.sha256(item[1].encode()).hexdigest(),
+                    "bullet_blocks": literal_bullet_blocks(item[1], item_anchor + "/1"),
                     "section_anchor": section,
                     "topic_anchor": anchor + "/0",
                     "label_anchor": label,
@@ -204,11 +338,14 @@ def compare_docx(raw, name, reference, expected):
         fingerprint(f"{name.upper()} 2025 checklist item description"): "requirement",
     }
     rows, issues = collect_rows(structure, identifier_pattern=ITEM_ID, header_roles=headers)
+    anchor_evidence = docx_anchor_evidence(structure, rows)
     return {
         "source_sha256": hashlib.sha256(raw).hexdigest(),
         **summarize_source(rows, tuple(expected), issues + structure["issues"]),
         "comparison": compare_formats(reference, rows, expected_ids=expected),
-        "anchor_evidence": docx_anchor_evidence(structure, rows),
+        "anchor_evidence": anchor_evidence,
+        "bullet_content_comparison": bullet_content_comparison(reference, anchor_evidence),
+        "markup_inventory": docx_markup_inventory(raw),
         "non_body_members": sorted(
             name
             for name in check_package(raw)

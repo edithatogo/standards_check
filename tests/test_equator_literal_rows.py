@@ -149,3 +149,45 @@ class LiteralRowsTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class MarkupDiagnosticTests(unittest.TestCase):
+    def test_bullet_content_is_conserved_without_discarding_numbering(self):
+        from scripts.structured_source import fingerprint
+
+        source = LiteralRowsTests().fixture(['S', ['T', False, [['1a', 'Intro:\n• A\n• B'], ['1b', 'Other']]]])
+        literal = e.literal_rows(source, '10.1000/example', ['1a', '1b'])
+        ref = literal['rows'][0]
+        actual = {'item_id': '1a', 'status': 'observed_not_qualified', 'requirement_blocks': [
+            {'anchor': f'body/1/r2/c2/{i}', 'kind': 'paragraph', 'text_sha256': fingerprint(text), 'numbering': None if i == 1 else {'id': 4, 'level': 0}}
+            for i, text in enumerate(['Intro:', 'A', 'B'], 1)]}
+        result = e.bullet_content_comparison(literal['rows'], [actual])
+        self.assertEqual(result[0]['status'], 'content_matches_numbered_blocks')
+        self.assertEqual(result[0]['literal_anchor'], ref['requirement_anchor'])
+        self.assertEqual(len(result[0]['pairs']), 3)
+        actual['requirement_blocks'][2]['text_sha256'] = fingerprint('C')
+        self.assertEqual(e.bullet_content_comparison(literal['rows'], [actual])[0]['status'], 'held_block_mismatch')
+        actual['requirement_blocks'][2]['text_sha256'] = fingerprint('B')
+        actual['requirement_blocks'][2]['numbering'] = None
+        self.assertEqual(e.bullet_content_comparison(literal['rows'], [actual])[0]['status'], 'held_block_mismatch')
+        self.assertEqual(e.bullet_content_comparison(literal['rows'], [])[0]['status'], 'held_block_mismatch')
+
+    def test_docx_markup_inventory_records_references_and_definitions(self):
+        import io
+        from zipfile import ZipFile
+
+        ns = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'
+        def xml(value):
+            return f'<w:root xmlns:w="{ns}">{value}</w:root>'
+        output = io.BytesIO()
+        with ZipFile(output, 'w') as z:
+            z.writestr('word/document.xml', xml('<w:p><w:r><w:footnoteReference w:id="2"/></w:r></w:p>'))
+            z.writestr('word/footnotes.xml', xml('<w:footnote w:id="2"><w:p><w:r><w:t>Note text</w:t></w:r></w:p></w:footnote>'))
+            z.writestr('word/numbering.xml', xml('<w:abstractNum w:abstractNumId="3"><w:lvl w:ilvl="0"><w:numFmt w:val="bullet"/><w:lvlText w:val="•"/></w:lvl></w:abstractNum><w:num w:numId="4"><w:abstractNumId w:val="3"/></w:num>'))
+        result = e.docx_markup_inventory(output.getvalue())
+        self.assertEqual(result['body_references']['footnoteReference'], ['2'])
+        self.assertEqual(result['non_body'][0]['note_ids'], ['2'])
+        self.assertEqual(result['non_body'][0]['nonempty_text_nodes'], 1)
+        self.assertEqual(result['numbering'][0]['levels'][0]['format'], 'bullet')
+        self.assertEqual(result['numbering'][0]['num_id'], '4')
+        self.assertNotIn('Note text', json.dumps(result))

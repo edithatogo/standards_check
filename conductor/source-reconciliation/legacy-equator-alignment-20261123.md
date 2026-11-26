@@ -18,7 +18,7 @@ one known empty title (`strobe-metepi`).
 
 ## Automatic reconciliation
 
-The existing monthly [EQUATOR catalogue workflow](../../.github/workflows/equator-catalogue.yml)
+The existing weekly [EQUATOR catalogue workflow](../../.github/workflows/equator-catalogue.yml)
 now runs `scripts/reconcile_equator_sources.py` and retains
 `equator-legacy-alignment.json` in the same **read-only CI artifact**
 as the full frontmatter catalogue. It scans legacy item IDs, source URLs,

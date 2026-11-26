@@ -428,3 +428,92 @@ from these observations. Preserve earlier 205-worklist checkpoint, source
 availability holds and all denominator distinctions. Only a changed
 provider/representation or targeted diagnostic merits another bounded
 acquisition. No additional model sweep.
+
+
+## Weekly reconciliation, actual upstream changes and targeted item 26 repair
+
+The existing [EQUATOR directory workflow](../../.github/workflows/equator-catalogue.yml)
+has schedule `27 2 * * 1` (Monday 12:27 AEST), relevant PR/push and
+manual dispatch. The [main run 45635380131](https://github.com/edithatogo/standards_check/actions/runs/45635380131)
+succeeded from a push (25 Nov UTC / 26 Nov Brisbane); the inspected schedule
+run list contained no completed EQUATOR schedule invocation. Do not infer
+scheduled operation solely from configuration. Retain this existing
+workflow; do not introduce a second scheduler. Extend it to retain
+directory changed IDs versus the checked-in pin and a candidate-document
+Git tree inventory/delta versus the previous successful main source receipt.
+First asset snapshot has null changes (not all assets new). Only regular
+blobs in published guideline folders and bounded document suffixes, no
+generated _files content; executable-bit regular blobs are metadata only,
+never executed. Sparse checkout reads tree metadata without acquiring
+asset contents. Added/removed/revised paths do not establish changed
+obligations, rights or edition identity. External linked files and
+nonselected formats are not monitored by this asset census.
+
+Actual public upstream tree inspection: 388e294f05d4d55cf6fc01ddf56b6ad48577b190
+to 1025cac0c26d3854619fc129f50ab0015898c332, neither truncated. Directory
+720 to 720, zero added/removed, one revised CONSORT index.
+1037 to 1038 candidate document/index blobs; new
+`reporting-guidelines/consort/consort-flow-diagram.qmd`
+(cfaa691baf32817b6082d536b860f40f600dd8d7), changed
+`reporting-guidelines/consort/index.qmd`
+213134688f806a3dd259b1b831759197fd244e7d to
+3dfdd0b7450a041cbcd8d9822aa4e490fa50989d. No other changes in selected
+asset inventory. Record for review; no source pin updates or checklist
+content changes inferred. Initial scheduled snapshot may not have a
+previous asset receipt, but these exact live tree observations are retained.
+
+Downloaded [45808364894 / artifact 15110837213](https://github.com/edithatogo/standards_check/actions/runs/45808364894/artifacts/15110837213);
+verified ZIP SHA-256 d14b546d53d43cc8a40a3c2adeecbd24923bae7d8794b599cbcefa593f879b52,
+tested merge 18f2f37c316fb427b958b5ecf4664a10f603e671.
+All 42 CONSORT and 53 SPIRIT DOCX requirement rows bind to their cells.
+22 CONSORT and 31 SPIRIT rows have inherited-cell merge origins with
+retained hashes. The only numbered requirement paragraphs occur in CONSORT
+26: intro plus four list paragraphs, numId 4, level 0. Actual local
+comparison of the exact pinned QMD item 26 at ROWS/31/2/0/1 against this
+artifact: its original normalized hash matches the retained QMD hash;
+remove only literal leading U+2022 and space from the four following lines.
+All five block fingerprints match in order and the combined normalized
+hash equals the DOCX requirement hash. Original 41/42 exact match remains
+unchanged; layout-marker-separated content reconciliation is 42/42.
+No broad punctuation stripping or automatic semantic promotion. Actual
+Word numbering definition and non-body note references still require
+inspection. CONSORT lists footer1/endnotes/footnotes; SPIRIT lists those
+plus header1. Presence of a part alone does not establish a missing
+requirement. New diagnostic fingerprints explicit literal bullet blocks
+and native Word numbered blocks separately, inventories the existing
+package's non-body XML text hashes, note IDs, field counts, body note
+references and numbering declarations via the shared bounded XML parser.
+Retain original structural holds; no new parser dependency, no source
+text export. Run the same targeted pinned four-file lane only once after
+this change. No rendered-layout acceptance from a declaration alone.
+
+Additional source metadata observed directly from the exact upstream
+literal arrays without executing JavaScript. TRIPOD+AI 52/52 ordered
+printed IDs against existing primary article denominator; scope codes
+D=8, E=4, D;E=40; [primary statement](https://www.bmj.com/content/385/bmj-2023-078378)
+explains these scope categories. [PMC version](https://pmc.ncbi.nlm.nih.gov/articles/11019967/)
+still displays contradictory commercial-reuse language and a CC BY 4.0
+notice. Do not clear exact-file rights from one favourable notice.
+STROBE combined literal has 22 ordered main IDs, four starred items
+8, 13, 14, 15, and 33 content arrays (not an independent clause count);
+[primary PLOS article](https://journals.plos.org/plosmedicine/article?id=10.1371%2Fjournal.pmed.0040296)
+states four design-specific items 6,12,14,15 and a separate-group
+asterisk condition; its Table 1 is an image. [Issuer checklists](https://www.strobe-statement.org/checklists/)
+identify the combined, cohort, case-control and cross-sectional files.
+Hold issuer-asset permissions and exact structural/independent
+reference evidence. The literal arrays are source-candidate observations,
+not primary-table reconciliation or labels; no scope truth or family freeze.
+Continue qualified exact primary representations before a new experiment.
+
+Actual [coverage archive 15111340863](https://github.com/edithatogo/standards_check/actions/runs/45808312393/artifacts/15111340863)
+verified SHA-256 c5cdeb4e6690eda3920185b1337226ea6c861d0be8aa51647ff20245176501d6.
+Patch 85.91% vs required target 90%; resume module 69.66% branch-inclusive.
+Added negative checkpoint identity/promotion cases and CLI digest/resume
+test; six tests pass with 98% branch-inclusive resume coverage in the
+exact module overlay (only __main__ invocation uncovered). New monitor and
+markup regressions had missing-helper RED, GREEN 15 tests total and ten
+subtests, including prior tests in isolated overlay; full DOCX integration
+requires hosted checkout. Exact source/test blob matches verified.
+Do not claim patch threshold or full suite passed until actual new CI.
+Retain independent reference lock, family component and same-ID downstream
+join; no confirmatory E9–E11 or combined analysis on exposed/held inputs.
