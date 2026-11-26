@@ -34,3 +34,7 @@ See [follow-up protocol](../../../docs/research/composition-graph-protocol.v0.1.
 ## Pinned exchange characterization (2026-11-27)
 
 See [exact consumer fixtures, compatibility drift and preservation requirements](exchange-characterization-20261127.md) for T04.001–004. Local characterization tests pass; actual loss-accounted mapping, round-trip, native comparator execution and receiving canary remain held. Reconcile with Searchright #843 without automatic repin or authority changes.
+
+### Loss-accounted synthetic exchange
+
+#197 protected and receiving checks passed. The same Track 04 evidence record now includes a bounded candidate mapping and companion-dependent conservation tests. Keep T04.001–004 open for native and actual downstream qualification. Record schema version/field-preservation findings as a future profile clarification, not a change to approved or historical bytes.
