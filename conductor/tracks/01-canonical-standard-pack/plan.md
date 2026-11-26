@@ -239,3 +239,12 @@ Composition follow-up (26 November): word and character TF-IDF comparison and op
 The [follow-up protocol](../../../docs/research/composition-graph-protocol.v0.1.0.md) and [analytical contract](../../../contracts/analysis/requirement-graph.v0.1.0.json) define the planned output and workflow registry. Existing T01.049-051 remain open for independent scientific evidence; the merged #171 candidate is only a bounded synthetic implementation (684 tests, 91.21% combined Python coverage on its qualified head). No empirical gap or relation admission.
 
 The [independent-family acquisition batch](../../source-reconciliation/independent-family-intake-20261126.md) uses existing priority survey and retrospective evidence with explicit publisher co-publications. T01.052 remains open for source and rights qualification, family-disjoint sampling and independent review; no new canonical or benchmark admission.
+
+
+## Orthogonal statistical and symbolic qualification
+
+- [ ] **T01.060** ([#158](https://github.com/edithatogo/standards_check/issues/158)) Qualify split/Mondrian conformal triage with frozen family-disjoint score/reference data, independent rank comparator, explicit abstention and separate selective false-equivalence risk evaluation; the six local synthetic tests are not empirical calibration.
+- [ ] **T01.061** ([#82](https://github.com/edithatogo/standards_check/issues/82), [#149](https://github.com/edithatogo/standards_check/issues/149), [#158](https://github.com/edithatogo/standards_check/issues/158)) Qualify source-anchored three-valued applicability and globally consistent typed costing/ontology constraints, with counterexamples, exact finite oracle, preserved identities and no automatic equivalence.
+- [ ] **T01.062** ([#95](https://github.com/edithatogo/standards_check/issues/95), [#111](https://github.com/edithatogo/standards_check/issues/111)) Qualify restricted-source coverage and exact leakage comparisons within authorized private processing, preserving rights holds and original source anchors.
+
+See the [orthogonal assurance design](../../../docs/research/orthogonal-assurance-20261126.md). PR #155 remains held for independent reference and family qualification. No new pack admitted.

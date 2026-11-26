@@ -75,3 +75,10 @@ recovery receipts, and the [retirement record](../../../docs/migration/standardf
 for source PR dispositions, the observed private/archive settings and the historical
 authentication blocker. The two identified downstream references are reconciled;
 semantic and independent qualification remain separate.
+
+
+## Differential semantic migration
+
+- [ ] **T03.060** ([#82](https://github.com/edithatogo/standards_check/issues/82), [#95](https://github.com/edithatogo/standards_check/issues/95)) Extend the shared-domain legacy Python/Rust differential contract through generated valid/invalid cases and independent semantic oracles, retaining minimized mismatches and intentional divergence; do not infer Rust replacement parity from source-to-subtree migration.
+
+See the [orthogonal assurance design](../../../docs/research/orthogonal-assurance-20261126.md).

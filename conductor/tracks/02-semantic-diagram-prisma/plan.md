@@ -94,3 +94,10 @@ Local evidence and wire-compatibility details are recorded in
 
 - [ ] **T02.038** ([#128](https://github.com/edithatogo/standards_check/issues/128)) Evaluate optional Mermaid and GraphML projections from validated scenes with identity/edge conservation and explicit accessibility limits.
 - [ ] **T02.039** ([#120](https://github.com/edithatogo/standards_check/issues/120)) Qualify CONSORT/SPIRIT source packs and trial-flow examples against their actual edition, source rights and methodological boundaries.
+
+
+## Orthogonal format and net assurance
+
+- [ ] **T02.060** ([#82](https://github.com/edithatogo/standards_check/issues/82), [#158](https://github.com/edithatogo/standards_check/issues/158)) Qualify bounded PNML marking reachability, invariants and witnesses; compare native/PM4Py outputs; evaluate lossless CST and deterministic normalization with original span, identifier and format conservation before adding dependencies.
+
+See the [orthogonal assurance design](../../../docs/research/orthogonal-assurance-20261126.md); an exhausted search or unsupported format is held, not accepted.

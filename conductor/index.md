@@ -69,3 +69,5 @@ receipt records that observation.
 - [E4-E8 publication contract](../contracts/publication/composition-graph.v0.1.0.json) and [planned graph/vector/citation outputs](../contracts/analysis/requirement-graph.v0.1.0.json).
 
 - [Optional human review and unattended assurance](../docs/development/optional-human-review.md).
+
+- [Orthogonal statistical and formal assurance](../docs/research/orthogonal-assurance-20261126.md) — conformal rank oracle, symbolic applicability and alignment, syntax/normalization, leakage and differential verification; prospective qualification, not an approved protocol.
