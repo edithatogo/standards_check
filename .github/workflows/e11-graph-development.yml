@@ -1,0 +1,49 @@
+name: E11 synthetic advisory graph retrieval
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+    paths:
+      - "scripts/graph_development.py"
+      - "tests/test_graph_development.py"
+      - "tests/fixtures/specialist/graph-retrieval-v1.json"
+      - ".github/workflows/e11-graph-development.yml"
+
+permissions:
+  contents: read
+concurrency:
+  group: e11-graph-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  graph-development:
+    if: github.event_name == 'workflow_dispatch' || (github.event.pull_request.head.repo.full_name == github.repository && (github.head_ref == 'experiment/e11-advisory-graph' || contains(github.event.pull_request.labels.*.name, 'run-graph-benchmark')))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12.16"
+      - name: Run deterministic tests and paired comparison without model downloads
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/e11-receipt"
+          git rev-parse HEAD > "$RUNNER_TEMP/e11-receipt/revision.txt"
+          python -VV > "$RUNNER_TEMP/e11-receipt/python-version.txt"
+          sha256sum scripts/graph_development.py scripts/costing_retrieval.py scripts/lexical_text.py tests/fixtures/specialist/graph-retrieval-v1.json > "$RUNNER_TEMP/e11-receipt/input-sha256.txt"
+          python -m unittest tests.test_graph_development -v 2>&1 | tee "$RUNNER_TEMP/e11-receipt/tests.txt"
+          /usr/bin/time -v -o "$RUNNER_TEMP/e11-receipt/process-resource.txt" python -m scripts.graph_development --output "$RUNNER_TEMP/e11-receipt/comparison.json"
+      - name: Retain paired scores, ranks, edges and resource observations
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: e11-advisory-graph-${{ github.sha }}
+          path: ${{ runner.temp }}/e11-receipt/
+          if-no-files-found: error
+          retention-days: 90
