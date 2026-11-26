@@ -31,9 +31,9 @@ concurrency:
 
 jobs:
   recovery:
-    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && (github.event.label.name == 'run-bibliographic-recovery' || github.event.label.name == 'run-bibliographic-legacy-comparator' || github.event.label.name == 'run-searchright-recovery'))
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && (github.event.label.name == 'run-bibliographic-recovery' || github.event.label.name == 'run-bibliographic-legacy-comparator' || github.event.label.name == 'run-searchright-recovery' || github.event.label.name == 'run-searchright-compiler-canary'))
     runs-on: ubuntu-24.04
-    timeout-minutes: 12
+    timeout-minutes: 30
     env:
       PYTHONPATH: "."
       HF_HUB_OFFLINE: "1"
@@ -59,7 +59,7 @@ jobs:
           grep -E '^(attrs|referencing|rpds-py|jsonschema|jsonschema-specifications|pytest|iniconfig|pluggy|packaging|pygments|typing-extensions)==' requirements/ci-python312-linux-x86_64.lock.txt > "$RUNNER_TEMP/bibliographic-evidence/python-lock.txt"
           python -m pip install --require-hashes --only-binary=:all: -r "$RUNNER_TEMP/bibliographic-evidence/python-lock.txt"
           python -m pip check
-          python -m pytest -q research/bibliographic-recovery/test_bibliographic_recovery.py research/bibliographic-recovery/test_searchright_bridge.py research/bibliographic-recovery/test_searchright_recovery.py research/bibliographic-recovery/test_recovery_batch.py
+          python -m pytest -q research/bibliographic-recovery/test_bibliographic_recovery.py research/bibliographic-recovery/test_searchright_bridge.py research/bibliographic-recovery/test_searchright_recovery.py research/bibliographic-recovery/test_recovery_batch.py research/bibliographic-recovery/test_recovery_yield.py research/bibliographic-recovery/test_compiler_canary.py
           sha256sum research/bibliographic-recovery/*.py > "$RUNNER_TEMP/bibliographic-evidence/code-sha256.txt"
       - name: Retrieve only fixed census and Searchright evidence inputs
         env:
@@ -146,6 +146,73 @@ jobs:
               (root / "bibliographic-evidence" / "historical-canary.json").write_bytes(z.read("bibliographic-recovery.json"))
           PY
           python research/bibliographic-recovery/searchright_bridge.py --source-dir "$input" --receipt "$output/historical-canary.json" --output-dir "$output"
+      - name: Measure retained historical acquisition yield and costs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python research/bibliographic-recovery/recovery_yield.py \
+            --census "$RUNNER_TEMP/bibliographic-input/census.zip" \
+            --canary "$RUNNER_TEMP/bibliographic-input/canary.zip" \
+            --output "$RUNNER_TEMP/bibliographic-evidence/historical-yield.json"
+      - name: Probe exact native compiler candidate offline (not runtime admission)
+        if: github.event.label.name == 'run-searchright-compiler-canary'
+        shell: bash
+        run: |
+          set -euo pipefail
+          output="$RUNNER_TEMP/bibliographic-evidence"
+          input="$RUNNER_TEMP/bibliographic-input"
+          candidate="$RUNNER_TEMP/searchright-compiler-source"
+          sandbox="$RUNNER_TEMP/searchright-compiler-home"
+          mkdir -p "$candidate" "$sandbox/cargo" "$sandbox/home" "$sandbox/target"
+          stage=source
+          trap 'rc=$?; printf "stage=%s\nexit=%s\nruntime_qualified=false\nlive_searches=0\n" "$stage" "$rc" > "$output/compiler-probe-status.txt"; exit "$rc"' EXIT
+          git -C "$candidate" init -q
+          git -C "$candidate" config core.hooksPath /dev/null
+          GIT_TERMINAL_PROMPT=0 timeout 90 git -C "$candidate" fetch --depth=1 https://github.com/edithatogo/searchright.git 444c5199c0887c0259fe47c3d2545b5c6b877d6d
+          git -C "$candidate" checkout --detach FETCH_HEAD
+          test "$(git -C "$candidate" rev-parse HEAD)" = 444c5199c0887c0259fe47c3d2545b5c6b877d6d
+          test "$(git -C "$candidate" rev-parse HEAD^{tree})" = 0929bd9b17b81d98f8b59cca2d41367f8f95aafc
+          git -C "$candidate" rev-parse HEAD HEAD^{tree} > "$output/compiler-source.txt"
+          sha256sum "$candidate/Cargo.lock" "$candidate/rust-toolchain.toml" >> "$output/compiler-source.txt"
+          stage=locked-dependency-fetch
+          rustup toolchain install 1.97.1 --profile minimal --no-self-update
+          # Public locked source/dependency retrieval only. No credentials in build or test.
+          rusthome="$HOME/.rustup"
+          (
+            cd "$candidate"
+            env -i PATH="$PATH" HOME="$sandbox/home" RUSTUP_HOME="$rusthome" CARGO_HOME="$sandbox/cargo" GIT_TERMINAL_PROMPT=0 \
+              /usr/bin/time -v -o "$output/compiler-fetch-resources.txt" timeout 300 cargo +1.97.1 fetch --locked --target x86_64-unknown-linux-gnu
+          ) > "$output/compiler-fetch.log" 2>&1
+          hostnet="$(readlink /proc/self/ns/net)"
+          uid="$(id -u)"
+          gid="$(id -g)"
+          isolated() {
+            sudo -n unshare --net -- setpriv --reuid "$uid" --regid "$gid" --clear-groups \
+              env -i PATH="$PATH" HOME="$sandbox/home" RUSTUP_HOME="$rusthome" \
+              CARGO_HOME="$sandbox/cargo" CARGO_TARGET_DIR="$sandbox/target" \
+              CARGO_NET_OFFLINE=true LANG=C.UTF-8 "$@"
+          }
+          stage=isolated-build
+          (
+            cd "$candidate"
+            isolated /usr/bin/time -v -o "$output/compiler-build-resources.txt" timeout 900 cargo +1.97.1 build --offline --locked -p searchright-cli --bin searchright
+          ) > "$output/compiler-build.log" 2>&1
+          binary="$sandbox/target/debug/searchright"
+          pin="$(sha256sum "$binary" | cut -d ' ' -f 1)"
+          printf "%s\n" "$pin" > "$output/compiler-binary-sha256.txt"
+          stage=offline-native-compilation
+          py="$(command -v python)"
+          isolated timeout 300 "$py" "$GITHUB_WORKSPACE/research/bibliographic-recovery/compiler_canary.py" \
+            --plan "$output/searchright-strategies.json" --schema-dir "$input" \
+            --binary "$binary" --binary-sha256 "$pin" --host-netns "$hostnet" \
+            --output "$output/compiler-canary.json"
+          stage=upstream-authority-denial-test
+          (
+            cd "$candidate"
+            isolated timeout 360 cargo +1.97.1 test --offline --locked -p searchright --lib fixture_execution_previews_then_commits_without_network -- --nocapture
+          ) > "$output/compiler-authority-test.log" 2>&1
+          grep -F '1 passed; 0 failed' "$output/compiler-authority-test.log"
+          stage=completed
       - name: Explicit legacy comparator only (no automatic fallback)
         if: github.event.label.name == 'run-bibliographic-legacy-comparator' || inputs.legacy_comparator == true
         shell: bash
