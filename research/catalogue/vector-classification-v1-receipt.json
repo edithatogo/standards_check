@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "status": "exploratory_catalogue_label_recovery",
+  "base_main": "d285f520060256b6b0a2b5d746792315a1cfee54",
+  "source_revision": "e34dd7d8559a5df0fe4b7185c093978e4b2d6cbe",
+  "input": {
+    "run": 45635380131,
+    "artifact": 15031534787,
+    "archive_sha256": "21046589502f064d54800c9f495d72d18b97184a1db376f06da773b84bde3f01",
+    "catalogue_member_sha256": "abea437bf8bc34a14a6022c8e76367cd994e49bc6e888b2943030381068fa868"
+  },
+  "code_sha256": "df3e82879aaffedbe42ca20ce2cbbc57013d3ce52e08019abd4e447fbbe2d91a",
+  "selection_code_sha256": "92b400edf5d06df2f5d0c6d6d5f82993914287bf089de1cfd4a23fe9115ba74d",
+  "crosswalk_sha256": "47429a5c5ac8d761826704771dfc31143b80b13e87aa6067e8fb3ab1d61c8d5c",
+  "outputs": {
+    "factorial_sha256": "b0a67a7123478f3283adbf4608e7cdf523875994f6e3cfd0e239f3784a8c8a19",
+    "selection_sha256": "ba67871e39a4ee0b71eeae75270e35ff70a20900421396a394245dfdee7dcec3",
+    "retention": "Personal Library: standards_check/publication-evidence/catalogue-vector-factorial-v1-<factorial_sha256>; both full reports. No public raw report release."
+  },
+  "runtime": {
+    "numpy": "2.3.5",
+    "scikit_learn": "1.8.0"
+  },
+  "directory_entries": 720,
+  "title_eligible": 719,
+  "proxy_groups": 617,
+  "folds": [
+    144,
+    144,
+    144,
+    144,
+    143
+  ],
+  "configurations": 12,
+  "metrics": [
+    {
+      "facet": "study_types",
+      "eligible": 582,
+      "unknown": 138,
+      "positives": 1099,
+      "all_12_missed_at_3": 120,
+      "macro_r3_prevalence": 0.6407,
+      "macro_r3_word_tfidf": 0.7348,
+      "macro_r3_char_tfidf": 0.7495254459171985,
+      "macro_r3_char_tfidf_lsa32": 0.7008,
+      "macro_r5_prevalence": 0.7734270168548518,
+      "macro_r5_char_tfidf": 0.8486397479954182
+    },
+    {
+      "facet": "clinical_areas",
+      "eligible": 412,
+      "unknown": 308,
+      "positives": 637,
+      "all_12_missed_at_3": 198,
+      "macro_r3_prevalence": 0.1955,
+      "macro_r3_word_tfidf": 0.4303,
+      "macro_r3_char_tfidf": 0.5461771844660195,
+      "macro_r3_char_tfidf_lsa32": 0.2724,
+      "macro_r5_prevalence": 0.30833333333333335,
+      "macro_r5_char_tfidf": 0.5853155339805826
+    },
+    {
+      "facet": "report_sections",
+      "eligible": 706,
+      "unknown": 14,
+      "positives": 1343,
+      "all_12_missed_at_3": 275,
+      "macro_r3_prevalence": 0.6205,
+      "macro_r3_word_tfidf": 0.6156,
+      "macro_r3_char_tfidf": 0.6378675974639147,
+      "macro_r3_char_tfidf_lsa32": 0.5885,
+      "macro_r5_prevalence": 0.7330759026934665,
+      "macro_r5_char_tfidf": 0.7244845766446333
+    }
+  ],
+  "facet_associations": [
+    {
+      "facets": [
+        "study_types",
+        "clinical_areas"
+      ],
+      "eligible": 320,
+      "pairs": 233
+    },
+    {
+      "facets": [
+        "study_types",
+        "report_sections"
+      ],
+      "eligible": 573,
+      "pairs": 205
+    },
+    {
+      "facets": [
+        "clinical_areas",
+        "report_sections"
+      ],
+      "eligible": 408,
+      "pairs": 388
+    }
+  ],
+  "candidate_crosswalk": {
+    "study_types": [
+      13,
+      16
+    ],
+    "clinical_areas": [
+      6,
+      45
+    ],
+    "report_sections": [
+      5,
+      26
+    ]
+  },
+  "local_focused_tests": 5,
+  "full_checkout": false,
+  "fresh_neural_inference": false,
+  "independent_reference": false,
+  "production_admission": false
+}

@@ -742,3 +742,52 @@ Native syntax trees/rendering remain #181. Use the same locked join on
 main for family-component scientific references, not a new positive
 ledger. No independently blinded reference lock obtained; confirmation
 and joint E9–E11 analysis remain held.
+
+
+## Item 23b and explicit compound-row recovery
+
+Reconciled receiving #193/#194 main `eb95f610ff78b620cb1c687fed544ed2b5475ff1` (append-only Track 01
+catalogue findings retained). #188 previous exact head 2daad021 passed
+assurance 45831458917 and patch 91.44%, but main advanced; do not merge
+on stale evidence. #189 stays second in the requested sequence.
+
+Actual reanalysis of checksum-verified priority artifact 15116877562:
+TRIPOD 23b QMD anchor ROWS/52/3 original normalized fingerprint
+5e44626c202c7ab7acdb508e2f0186bed7c9f5e07596de6a79f88a240cee8fd1
+and display fingerprint
+1e38b2fea4fc2309947033e69f3e96472f9e47b47a741c3885572a53bc46306f
+both reproduced from exact pinned QMD blob 79d32ba9c806dccb617ff99b4eb6b2b9d2ad178d.
+Replacing only its explicit numeric sup markup by the literal digit
+reproduces Word requirement fingerprint
+4920949fec396b17cb8e03e6f95558a95b5d15140c05ec2d3d057d477bc80c23
+at body/2/r54/c4. The issuer PDF page 2 visibly shows note marker 3.
+Retain strict 46/52, marker-free display 51/52, explicit marker-inclusive
+content 52/52 across the two explicit projections; all 52 scope cells
+match. No blanket number or punctuation stripping, no proof of note-link
+identity or raw Word run formatting. Repeated display note 3 still needs
+explicit Word anchor-to-note evidence; issuer file identity and public
+redistribution decisions remain separate.
+
+STROBE actual receipt identifies all 22 possible main IDs in column 2:
+1–12 body/3 and 13–22 body/5; first table's classified requirement cells
+are column 3. New bounded four-column compound candidate comparison uses
+the exact printed-ID hash, explicit vertical merge origin, physical
+requirement cells and complete ordered literal subitem fingerprints
+(with only explicit em display markup removed). Preserve all candidate
+groups, subitem anchors, count mismatches and unequal hashes; never
+carry an identity across a table or treat a score column as a requirement.
+The second table's roles remain candidate geometry, not inferred header
+qualification. Keep the original 11/22 classified result. Actual pinned
+Word execution is required before claiming additional recovered subitems.
+
+Three focused synthetic regression tests RED on missing helpers, GREEN
+in an isolated overlay of the existing fingerprint/display functions
+and the new helpers. Test rejects unbound digits, duplicate/missing
+anchors, unmerged adjacent rows, cross-table continuations, wrong
+columns and differing obligation content. Exact tested helper/test
+Git blob identities verified. Local binary DOCX acquisition still
+unavailable; use the existing bounded hosted priority job, no new parser
+or dependency. Do not modify #192 publication snapshot or duplicate
+#191/#194 work. No independent reference lock or confirmatory execution
+claimed. Supply only the verified content and structural observations to
+existing T04 representation and #192 publication owners after integration.

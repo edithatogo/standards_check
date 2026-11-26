@@ -354,8 +354,14 @@ def compare_docx(raw, name, reference, expected):
             expected_ids=expected,
         )
         diagnostics["scope_cell_comparison"] = tripod_scope_comparison(reference, anchor_evidence)
+        diagnostics["note_marker_content_comparison"] = tripod_marker_comparison(
+            reference, rows, expected
+        )
     elif name == "strobe":
         diagnostics["unverified_identifier_candidates"] = strobe_identifier_candidates(
+            structure, reference
+        )
+        diagnostics["compound_candidate_comparison"] = strobe_compound_comparison(
             structure, reference
         )
     return {
@@ -429,6 +435,7 @@ def priority_display_fields(content):
     notes = re.compile(r"<sup>([0-9]+)</sup>")
     return {
         "display_content_sha256": fingerprint(notes.sub("", links.sub(r"\1", content))),
+        "literal_note_marker_sha256": fingerprint(notes.sub(r"\1", links.sub(r"\1", content))),
         "note_references": notes.findall(content),
         "link_target_sha256": [
             hashlib.sha256(match[2].encode()).hexdigest() for match in links.finditer(content)
@@ -482,6 +489,119 @@ def strobe_identifier_candidates(structure, reference):
                             "status": "unverified_cell_candidate",
                         }
                     )
+    return result
+
+
+def tripod_marker_comparison(reference, observed, expected):
+    """Compare the two explicit display projections without inferring note linkage."""
+    result = []
+    for item in expected:
+        refs = [r for r in reference if r["item_id"] == item]
+        rows = [r for r in observed if r["item_id"] == item]
+        entry = {"item_id": item, "status": "held", "note_linkage_qualified": False}
+        if len(refs) == len(rows) == 1:
+            ref, row = refs[0], rows[0]
+            entry.update(
+                literal_anchor=ref.get("requirement_anchor"),
+                requirement_anchor=row.get("requirement_anchor"),
+                note_references=ref["note_references"],
+                observed_sha256=row.get("requirement_sha256"),
+            )
+            if (
+                all(
+                    entry.get(key)
+                    for key in ("literal_anchor", "requirement_anchor", "observed_sha256")
+                )
+                and row.get("identifier_anchor")
+            ):
+                if entry["observed_sha256"] == ref["display_content_sha256"]:
+                    entry["status"] = "display_content_equal"
+                elif (
+                    ref["note_references"]
+                    and entry["observed_sha256"] == ref["literal_note_marker_sha256"]
+                ):
+                    entry["status"] = "explicit_marker_content_equal"
+        result.append(entry)
+    return result
+
+
+def strobe_compound_comparison(structure, reference):
+    """Pinned four-column STROBE layout diagnostic, not a generic header inference."""
+    known = {fingerprint(r["printed_id"]): r for r in reference}
+    groups = {r["item_id"]: [] for r in reference}
+    if len(known) != len(reference) or len(groups) != len(reference):
+        raise ValueError("duplicate STROBE reference identity")
+    # Candidate geometry only: column 2 identity and column 3 requirement.
+    # Never propagate the first table's header to a different table.
+    for table in structure["blocks"]:
+        if table.get("grid_width") != 4:
+            continue
+        current = None
+        for row in table.get("rows", []):
+            cells = {c["column"]: c for c in row["cells"] if c["colspan"] == 1}
+            identity, requirement = cells.get(2, {}), cells.get(3, {})
+            ref = known.get(identity.get("text_sha256"))
+            if ref is not None and identity.get("anchor"):
+                current = {
+                    "identifier_anchor": identity["anchor"],
+                    "table_anchor": table["anchor"],
+                    "requirements": [],
+                }
+                groups[ref["item_id"]].append(current)
+            elif not (
+                current is not None
+                and identity.get("empty")
+                and identity.get("vertical_merge") == "continue"
+                and identity.get("merge_origin") == current["identifier_anchor"]
+            ):
+                current = None
+            if current is not None:
+                current["requirements"].append(
+                    {
+                        "row_anchor": row["anchor"],
+                        "identifier_anchor": identity.get("anchor"),
+                        "identifier_merge_origin": identity.get("merge_origin"),
+                        "requirement_anchor": requirement.get("anchor"),
+                        "requirement_sha256": (
+                            requirement.get("text_sha256")
+                            if not requirement.get("empty", True)
+                            and requirement.get("vertical_merge") != "continue"
+                            else None
+                        ),
+                    }
+                )
+    result = []
+    for ref in reference:
+        candidates = groups[ref["item_id"]]
+        expected = ref["subitems"]
+        observed = candidates[0]["requirements"] if len(candidates) == 1 else []
+        pairs = []
+        if len(expected) == len(observed):
+            for a, b in zip(expected, observed, strict=True):
+                pairs.append(
+                    {
+                        **b,
+                        "subitem_id": a["item_id"],
+                        "literal_anchor": a["requirement_anchor"],
+                        "equal": bool(
+                            b["requirement_anchor"]
+                            and b["requirement_sha256"] == a["display_content_sha256"]
+                        ),
+                    }
+                )
+        result.append(
+            {
+                "item_id": ref["item_id"],
+                "printed_id": ref["printed_id"],
+                "status": (
+                    "candidate_content_matches" if pairs and all(p["equal"] for p in pairs) else "held"
+                ),
+                "expected_subitems": len(expected),
+                "candidate_groups": candidates,
+                "pairs": pairs,
+                "note_linkage_qualified": False,
+            }
+        )
     return result
 
 
@@ -549,6 +669,7 @@ def priority_literal_metadata(data, name, expected):
                         "item_id": sub[0],
                         "requirement_anchor": f"{anchor}/3/{j}/1",
                         "requirement_sha256": fingerprint(sub[1]),
+                        "display_content_sha256": fingerprint(re.sub(r"</?em>", "", sub[1])),
                     }
                 )
             row.update(starred=printed.endswith("*"), literal_group_flag=scope, subitems=subitems)
