@@ -20,6 +20,8 @@ on:
       - "scripts/witness_adjudication.py"
       - "tests/test_witness.py"
       - "tests/test_condition_adjudication.py"
+      - "scripts/evidence_factorial.py"
+      - "tests/test_evidence_factorial.py"
       - ".github/workflows/five-class-benchmark.yml"
   workflow_dispatch:
 
@@ -920,5 +922,55 @@ jobs:
         with:
           name: evidence-verification-${{ github.sha }}
           path: ${{ runner.temp }}/evidence-verification/
+          if-no-files-found: error
+          retention-days: 90
+
+  evidence-factorial-development:
+    # Explicit retrospective replay; no model acquisition or new inference.
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-evidence-factorial'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      actions: read
+    env:
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      HF_HUB_DISABLE_TELEMETRY: "1"
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: "3.12"
+      - name: Test and retain pinned formatter diagnostics
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/factorial-prior" "$RUNNER_TEMP/factorial-evidence"
+          git rev-parse HEAD > "$RUNNER_TEMP/factorial-evidence/commit.txt"
+          python -m pip install pytest==9.2.0 numpy==2.5.5 ruff==0.17.6
+          ruff check scripts/evidence_factorial.py
+          ruff format --diff scripts/evidence_factorial.py > "$RUNNER_TEMP/factorial-evidence/format.diff" || test "$?" = 1
+          cat "$RUNNER_TEMP/factorial-evidence/format.diff"
+          python -m pytest --import-mode=importlib -q tests/test_evidence_factorial.py
+          python -m pip freeze > "$RUNNER_TEMP/factorial-evidence/environment.txt"
+      - name: Replay previously verified semantic decisions and execute deterministic factorial
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          timeout 60 gh run download 45797316771 --repo "$GITHUB_REPOSITORY" --name evidence-verification-5dc29e64ad6ea05fd096cc72090603d2f759e209 --dir "$RUNNER_TEMP/factorial-prior"
+          python -m scripts.evidence_factorial --neural-report "$RUNNER_TEMP/factorial-prior/report.json" --output "$RUNNER_TEMP/factorial-evidence/evidence-factorial-v1.json"
+          sha256sum "$RUNNER_TEMP/factorial-evidence/evidence-factorial-v1.json" > "$RUNNER_TEMP/factorial-evidence/report-sha256.txt"
+      - name: Retain case-level factorial evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: evidence-factorial-${{ github.sha }}
+          path: ${{ runner.temp }}/factorial-evidence/
           if-no-files-found: error
           retention-days: 90
