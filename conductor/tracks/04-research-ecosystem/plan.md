@@ -30,3 +30,7 @@ See [composition and hybrid graph retrieval](../../../docs/architecture/CHECKLIS
 - [ ] **T04.010** ([#161](https://github.com/edithatogo/standards_check/issues/161), [#162](https://github.com/edithatogo/standards_check/issues/162)) Build and verify a private static Hugging Face contract-only preview from an exact GitHub revision; retain release hold for any graph/vector/benchmark/manuscript data.
 
 See [follow-up protocol](../../../docs/research/composition-graph-protocol.v0.1.0.md) and [planned analytical outputs](../../../contracts/analysis/requirement-graph.v0.1.0.json).
+
+## Pinned exchange characterization (2026-11-27)
+
+See [exact consumer fixtures, compatibility drift and preservation requirements](exchange-characterization-20261127.md) for T04.001–004. Local characterization tests pass; actual loss-accounted mapping, round-trip, native comparator execution and receiving canary remain held. Reconcile with Searchright #843 without automatic repin or authority changes.
