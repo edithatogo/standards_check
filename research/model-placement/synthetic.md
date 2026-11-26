@@ -229,3 +229,36 @@ blinded family lock and same-case Offline/Orthogonal evidence. Existing
 T05.049/T05.063 acceptance and #30 offline-security hold remain open.
 This reconciliation is documentation and current-main ancestry only;
 new exact-head checks required, no new inference or promotion.
+
+
+## Shared recall integration receiving reconciliation
+
+PR #183 merged through normal active branch protection as
+[413626c44da6d5d5faaa19a60f4d7ae0751f1fb7](https://github.com/edithatogo/standards_check/commit/413626c44da6d5d5faaa19a60f4d7ae0751f1fb7)
+after all seven required contexts, CodeQL and three component coverage uploads
+passed on head 2cedd83859a3e697a8bfc1b8c3ebf951b2d14637. Receiving tree
+6e9cfa541eafaca1fa737597c40c3cce925d8941 equals tested head/merge tree.
+The extended [audit 45804985347](https://github.com/edithatogo/standards_check/actions/runs/45804985347/artifacts/15109472517)
+passed 12 hosted focused tests; archive SHA-256
+020834bdbb13f84e8e0f2e024b8bc446d136791a7b545b7da23cf43e2909fc8e.
+All 1186 prior hosted observations unchanged; 68 imported #189 observations
+give 1254 hosted rows on unchanged 175 reference IDs. #185's 68 local heading
+observations remain separate. Zero independent positives. Offline security
+execution remains separately queued under #30; no change to protection.
+Reconcile this branch with receiving main by merging its exact ancestry and
+preserving all previously tested experimental source and test blobs. Prior
+#185 head a64b561fd991029c51fb547666b9fcb84e8c45a4 passed all seven required
+contexts and Codecov patch/component checks; fresh exact-head checks required
+on the receiving reconciliation. No fresh inference or duplicate benchmark.
+
+Latest #188 structural source receipt
+[45805487210 / 15109287625](https://github.com/edithatogo/standards_check/actions/runs/45805487210/artifacts/15109287625),
+verified SHA-256 5091c91a02ecc2b0cef641fb1efda4442c678cfd580af1f423b09841e234d9da:
+CONSORT and SPIRIT exact printed IDs 42/42 and 53/53; cross-format exact
+normalized text 41/42 and 53/53; CONSORT item 26 differs. Non-body part and
+issuer identity holds remain for both, numbering unresolved for CONSORT.
+Both remain held in one conservative family component. No independent
+reference lock, no same-ID downstream scientific evidence and no pipeline
+adoption. Layout retains source, rights and blinded adjudication; Offline
+and Orthogonal retain their stage evidence. Shared join now lives on main
+under the existing #158/T01.064/T05.063 convention.

@@ -210,3 +210,14 @@ Model-placement development (26 November; #158; T05.063 remains open): [syntheti
 T05.063: E10 operator completion and E11 heading-text/fixed-pool replay now executed on hash-bound hosted receipts. Neither supports adding a learned tagger or mandatory graph propagation. See synthetic placement receipt; retain independent-reference and source gates.
 
 T05.063 #158: #185 reconciled with #187 receiving main; retain unchanged synthetic controls, all negative observations, and the [single shared audit/locked stage join in #183](https://github.com/edithatogo/standards_check/blob/2cedd83859a3e697a8bfc1b8c3ebf951b2d14637/research/model-placement/replay.md#full-checkout-reproduction-and-locked-stage-handoff--26-november). Full checkout replay verified; #189 receipts joined without duplicate positives. Twelve focused local coordinator tests passed; independent source/reference qualification and matched case-level evidence and decision receipts remain held, with #188/#95/#111 and T05.049. Offline security #30 remains a separate execution hold. No second audit or acceptance claim; exact-head protected checks required.
+
+
+T05.063 #158: shared audit #183 protected integration verified at receiving main
+413626c44da6d5d5faaa19a60f4d7ae0751f1fb7 (tree equal to tested head), extended
+hosted audit 45804985347 passed, 1254 observations/175 distinct editorial or
+synthetic units, zero independent positives. #185 reconciles that receiving main
+with unchanged experimental source/test blobs. Fresh exact-head checks required.
+Layout #188 structural artifact 15109287625 recovers 95 printed IDs but CONSORT
+item 26 mismatch, unresolved non-body/numbering/issuer identity and family
+independence hold; no qualified lock. Keep #95/#111/T05.049 and #30 open.
+No new owner, registry, canonical promotion, or adoption.
