@@ -119,3 +119,21 @@ three Markdown parser tests (local markdown-it-py 4.2.0, copied unchanged
 rewrite function). Remote rule and Markdown code/test blobs match the locally
 executed files. Total local isolated tests: 16. Locked full-suite and actual
 corpus acceptance remain pending, not inferred from these results.
+
+### Hosted qualification and direct-script review finding
+
+[Assurance 45781577197](https://github.com/edithatogo/standards_check/actions/runs/45781577197),
+head `49b2de63c201d81dace91e9a8b68c56a80312468`, tested merge
+`2f0912dc82d30412de65cb0fcff695f37a3dfa94`: the Python job
+[139778104144](https://github.com/edithatogo/standards_check/actions/runs/45781577197/job/139778104144)
+passed 831 tests, three skipped, two warnings, 91.67 percent combined coverage.
+The actual PNML, pack differential and costing audit commands completed. All
+ordinary component tests and the workflow-policy job passed. The Python coverage
+archive [15097964757](https://github.com/edithatogo/standards_check/actions/runs/45781577197/artifacts/15097964757)
+has API-reported SHA-256 `5326bc303bce429279a29ba7561e4e139a48b08403213a083a5404b17c289946`.
+This is revision-bound historical evidence, not a verified download or final
+integration result. An independent inline review reproduced a direct-script
+import failure in the new promotion path; add a real subprocess regression
+for ready and leaking manifests from outside the repository, and make direct
+script execution resolve the same trusted package-relative import as module
+execution. Do not merge until the review finding and fresh protected checks pass.

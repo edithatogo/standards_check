@@ -343,4 +343,7 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
+    if not __package__:
+        # Direct-script invocation must support the same package-relative overlap gate.
+        sys.path.insert(0, str(ROOT))
     raise SystemExit(main())
