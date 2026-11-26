@@ -304,6 +304,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("paths", nargs="*", type=Path)
     parser.add_argument("--root", type=Path, default=ROOT)
     parser.add_argument("--require-publishable", action="store_true")
+    parser.add_argument("--restricted-overlap-manifest", type=Path)
     args = parser.parse_args(argv)
     paths = args.paths or sorted((args.root / "contracts/datasets").glob("*.json"))
     try:
@@ -313,11 +314,27 @@ def main(argv: list[str] | None = None) -> int:
             if not isinstance(value, dict):
                 raise ValueError("contract must be an object")
             receipt = validate(value, args.root)
-            print(json.dumps({"contract": str(path), **receipt}, sort_keys=True))
             require(
                 not args.require_publishable or receipt["publishable"],
                 "Dataset release blocked: " + "; ".join(receipt["blockers"]),
             )
+            if args.require_publishable:
+                from scripts.check_restricted_overlap import qualify_release
+
+                require(len(paths) == 1, "one release contract per overlap qualification")
+                require(
+                    args.restricted_overlap_manifest is not None, "private overlap manifest required"
+                )
+                try:
+                    manifest_path = args.restricted_overlap_manifest
+                    require(manifest_path.stat().st_size <= 1_000_000, "overlap manifest limit")
+                    manifest = decode(manifest_path.read_bytes())
+                    receipt["restricted_overlap"] = qualify_release(
+                        value["release"], manifest, args.root
+                    )
+                except (ValueError, OSError, KeyError, TypeError, AttributeError) as error:
+                    raise ValueError("Dataset release blocked: private overlap gate held") from error
+            print(json.dumps({"contract": str(path), **receipt}, sort_keys=True))
     except (ValueError, OSError, TypeError, KeyError) as error:
         print(str(error), file=sys.stderr)
         return 1

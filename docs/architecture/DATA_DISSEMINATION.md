@@ -124,17 +124,21 @@ The [dataset validator][validator], [planned contract][dataset-contract] and
 [negative regression tests][dataset-tests] implement a bounded first increment. They
 reuse the publication contract's canonical hashing and the source projection's table
 checks; Parquet reading uses the repository's existing Polars dependency. They perform
-no upload, model invocation, scan, permission decision or DOI assignment.
+no upload, model invocation, permission decision or DOI assignment. The final promotion
+command additionally executes the local exact overlap scan; ordinary structural validation
+does not access the restricted corpus.
 
 ```sh
 python -m scripts.validate_dataset_release
-python -m scripts.validate_dataset_release --require-publishable
+python -m scripts.validate_dataset_release path/to/release.json --root private-staging \
+  --require-publishable --restricted-overlap-manifest private-staging/evidence/overlap.json
 ```
 
 The default command validates all `contracts/datasets/*.json`. A structurally valid
 `planned` contract reports `publishable: false` and actionable blockers while returning
 success for routine repository validation. The second command is the promotion gate:
-it returns failure until every requirement is satisfied. An invalid `ready` contract
+it returns failure until every requirement is satisfied, including an exact restricted-source
+overlap scan of the entire staged artifact inventory. An invalid `ready` contract
 also fails without that flag. Unknown top-level fields and unsupported states are
 errors, not approvals. The committed sample is planned, has no staged files, no licence
 decision and no review or approval receipts. Its source/producer revisions are planning
@@ -148,6 +152,7 @@ references; a prepared release must identify the actual export-producing revisio
 | Restricted content profile | Only the validator's named metadata columns are accepted. Source-text, relation-label and item-fingerprint columns, nested payloads and unknown columns fail. String values cannot contain whitespace, and status fields use a closed operational vocabulary. README and ATTRIBUTION are the only supported Markdown files. |
 | Bound reviews | Separate rights, privacy, secrets and benchmark-leakage receipts, plus a separate approval receipt, must each record a passing outcome, reviewer, timezone-bearing date and summary. Each receipt is itself hashed and binds the digest of the entire release object. |
 | Mutation resistance | Changing files, column permissions, sources, destination, licence or other release fields invalidates existing review and approval bindings. Rehashing a changed data file in the manifest alone cannot preserve approval. |
+| Exact restricted overlap | Promotion additionally requires an authorized private reference inventory, ordered extraction witnesses and exact artifact path/hash coverage; references and extracted fragments must remain outside the export package. Missing, malformed, mismatched or held scans block promotion without echoing excerpts. The structural validator alone cannot authorize release. |
 | Claim boundary | The result always records `scientific_acceptance: false`; successful structural validation does not promote a source, pack, scientific result or model. |
 
 Review receipts have the fields `kind`, `release_sha256`, `outcome`, `reviewer`,
