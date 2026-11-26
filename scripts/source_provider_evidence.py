@@ -220,9 +220,7 @@ def oai_article(raw: bytes, pmcid: str) -> tuple[bytes, dict]:
     }
 
 
-def fetch_priority(
-    pmcid: str, *, plos_doi: str | None = None
-) -> tuple[bytes | None, dict]:
+def fetch_priority(pmcid: str, *, plos_doi: str | None = None) -> tuple[bytes | None, dict]:
     if not PMCID.fullmatch(pmcid):
         raise ValueError("invalid selected PMCID")
     attempts = []
@@ -233,9 +231,7 @@ def fetch_priority(
             raise ValueError("invalid selected PLOS article DOI")
         journal = {"pmed": "plosmedicine", "pbio": "plosbiology"}[match[1]]
         try:
-            path = f"/{journal}/article/file?" + urlencode(
-                {"id": plos_doi, "type": "manuscript"}
-            )
+            path = f"/{journal}/article/file?" + urlencode({"id": plos_doi, "type": "manuscript"})
             raw = fetch(PLOS, path)
             return raw, {
                 "provider": "plos",
