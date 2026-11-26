@@ -61,6 +61,8 @@ jobs:
           catalogue="$(find "$RUNNER_TEMP/catalogue-input" -type f -name equator-catalogue.json -print -quit)"
           test -f "$catalogue"
           echo "abea437bf8bc34a14a6022c8e76367cd994e49bc6e888b2943030381068fa868  $catalogue" | sha256sum --check
+          # Fail closed on the original split before acquiring any model assets.
+          python -c 'from pathlib import Path; import sys; from research.catalogue.followup import read_catalogue, fold_inventory, validate_folds; cat=read_catalogue(Path(sys.argv[1]), True); validate_folds(sorted((r for r in cat["guidelines"] if r.get("title")), key=lambda r:r["id"]), fold_inventory(cat)["test_ids"])' "$catalogue"
           root="$RUNNER_TEMP/catalogue-assets"
           evidence="$RUNNER_TEMP/catalogue-evidence"
           mkdir -p "$root"

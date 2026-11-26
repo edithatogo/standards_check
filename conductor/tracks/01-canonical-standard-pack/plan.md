@@ -466,4 +466,45 @@ T01.052–053 / #158 (E4/E6): [catalogue enrichment v1](../../../docs/research/c
 
 T01.052/053/064 / #111/#158: [catalogue vector, crosswalk and tool-selection study](../../../docs/research/catalogue-vector-selection-20261126.md) extends #193. Executed 12 catalogue-title configurations, prevalence control, 826 cross-facet co-occurrences, provisional MeSH coverage and descriptive Pareto; exact primary-paper citation pilot, no exhaustive network. Preserve #191 provider and #188 reference ownership; feed #192 versioned supplement; no fresh neural inference or scientific promotion. Next qualify role-aware spans and crossed dense/sparse representations on common independently locked inputs.
 
+
+T01.025/031/052/053/064 / #111/#95/#158: [bibliographic recovery and Searchright consumer](../../source-reconciliation/bibliographic-recovery-20261126.md).
+All 720 historical IDs retained; 49/76 missing IDs and 37/56 incomplete
+lookups expose literal link identifier candidates, no newly qualified
+source. Pinned Searchright main and unmerged #844 source/method/policy
+crosswalk, metadata-only exact work export and opt-in bounded canary;
+upstream security/privacy failures hold actual Rust dependency/execution.
+Use existing acquisition owner #188, #183 locked join, no parallel
+registry or duplicate provider runtime. Extend the existing retrospective
+skill with a bounded evidence-led improvement cycle and explicit stopping
+conditions. Independent family lock, citation/impact coverage and all
+scientific/production acceptance remain open.
+
+
+T01.025/031/052/053/064 #111/#95/#158: [persistent gap audit and
+Searchright-first workflow](../../source-reconciliation/bibliographic-recovery-20261126.md#persistent-missing-checklist-audit-and-searchright-first-migration).
+720 IDs, 708 unchanged, 122 persistent unresolved; 132 current gaps.
+Prior hosted canary 11 requests, six exact DOI observations (three works),
+one exact PMID, two timeouts, two title-no-match. 886 schema-validated
+native strategies for 106 current IDs, 26 non-search routes, 11 prior
+attempts excluded. Default Searchright plan and actual qualified compiler
+adapter; legacy only explicit comparator. 15 local tests passed.
+Runtime/live authority held upstream H-002/security/privacy; no actual
+compiler or native live result, no qualified reference lock. Keep #188
+source owner, #183 locked join, existing gates and no new registry.
+
+T01.025/031/052/053/064 #111/#95/#158: native Searchright planning replay
+45821391956/artifact 15117882759 verified; all 886 strategies and 122
+persistent gaps reproduce byte-exactly. Of persistent lookups, 43
+provider_request_failed and four circuit-breaker deferred; 75 missing
+identifiers. New bounded marginal-coverage selector plans nine distinct
+persistent IDs vs seven at eight slots, two/provider in both; three
+local tests passed, fresh hosted checks required. This is planning,
+not successful search. Existing native compile/live authority and
+upstream security holds remain. #185 receiving tree verified, current
+catalogue enrichment/vector work retained. No duplicate owner or
+registry; source qualification #188, independent labels and same-ID
+analysis still held.
+
 T01.052/053/064 / #158: [matched classifier and role follow-up](../../../docs/research/catalogue-classifier-followup-20261126.md) retains six observed sparse cells and original fold lock; balanced logistic improves matched label recovery, explicit title roles leave 206/259 mentions unresolved. Opt-in BGE/Qwen same-fold representation x classifier comparison, pending observed inference. Retain #191/#188 roles, #192 additive supplement and independent source/reference gates; no promotion.
+
+Hosted catalogue embedding follow-up 45836556902: both pinned model assets verified, both stopped before inference on fold reconstruction mismatch across runtimes. Freeze original 719 fold assignments in compact ordered identity-bound form and verify exact prior digest and group isolation before model acquisition. Six new tests and 16 overlay tests passed, all prior case-level outcomes identical; retain both failed archives. New exact-head hosted replay required.

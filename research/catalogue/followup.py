@@ -20,6 +20,18 @@ TERMS_SHA = 'ffb58e00328993a84e8e59bcf363fa0e36ced636077cc3ec46fb4a1ab1e1029f'
 FOLDS_SHA = '60b45222383886986d8b203aec093dd287eaf6d016c59323aac6804c2461cdf3'
 PREVIOUS_SHA = 'b0a67a7123478f3283adbf4608e7cdf523875994f6e3cfd0e239f3784a8c8a19'
 METHODS = ('knn', 'logistic', 'balanced')
+# Exact retained assignments on sorted titled catalogue IDs. Do not recompute tied groups.
+FOLD_ASSIGNMENT = (
+    '20432104311043210404432124321043010432232104432144321043222104321043210431211104'
+    '00043214044443210432104304321043210432100430200000000000010000000200104113442103'
+    '32104342121043210432004321104321043210432104321032104321024321043213044003431132'
+    '10334321443210432042210432104321043104321043210432104321104321043210423210421043'
+    '21043210432104312104341043210432102104321043210432104343210432104322104111111111'
+    '11311111124321043210432104333321132104321043210432132221043210432111044321040432'
+    '10432104321043042321004321043210432004321043210432104344043210432104321043212104'
+    '32103333333333333444213043212104323130432104333333221044102222222222222423210432'
+    '1204321041043210432104321040442321404321044444443210432132112222432104033321043'
+)
 
 
 def role(text, start, end):
@@ -131,13 +143,17 @@ def paired(baseline, challenger):
     return result
 
 
-def fold_inventory(catalogue):
-    from sklearn.model_selection import GroupKFold
+def decode_fold_assignment(rows, assignment, count):
+    if len(assignment) != len(rows) or set(assignment) != set(map(str, range(count))):
+        raise ValueError('invalid fold assignment')
+    return [[row['id'] for row, fold in zip(rows, assignment, strict=True) if fold == str(i)]
+            for i in range(count)]
 
+
+def fold_inventory(catalogue):
     rows = sorted((r for r in catalogue['guidelines'] if r.get('title')), key=lambda r: r['id'])
-    splits = GroupKFold(n_splits=5).split(rows, groups=groups(rows))
     result = {'catalogue_sha256': MEMBER_SHA, 'previous_report_sha256': PREVIOUS_SHA,
-              'test_ids': [[rows[i]['id'] for i in test] for _, test in splits]}
+              'test_ids': decode_fold_assignment(rows, FOLD_ASSIGNMENT, 5)}
     raw = (json.dumps(result, indent=2)+'\n').encode()
     if hashlib.sha256(raw).hexdigest() != FOLDS_SHA:
         raise ValueError('retained fold identity mismatch')

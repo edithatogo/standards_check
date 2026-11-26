@@ -48,3 +48,12 @@ def test_dense_matrix_rejects_zero_nonfinite_and_wrong_coverage():
     for invalid in ([0.,0.],[1.,float('nan')],[1.]):
         with pytest.raises(ValueError,match='embedding'):
             embed_titles(rows, lambda _: invalid, 2)
+
+
+def test_fixed_assignment_conserves_fold_ids():
+    from research.catalogue.followup import decode_fold_assignment
+    rows = [dict(id='a', title='X'),dict(id='b', title='Y'),dict(id='c', title='Z')]
+    assert decode_fold_assignment(rows,'010',2) == [['a','c'],['b']]
+    for bad in ('01','012','000'):
+        with pytest.raises(ValueError,match='assignment'):
+            decode_fold_assignment(rows,bad,2)

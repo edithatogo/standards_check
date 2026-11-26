@@ -1,0 +1,168 @@
+name: Bibliographic recovery and Searchright interoperability
+
+on:
+  pull_request:
+    types: [labeled]
+    paths:
+      - "research/bibliographic-recovery/**"
+      - ".github/workflows/bibliographic-recovery.yml"
+  workflow_dispatch:
+    inputs:
+      legacy_comparator:
+        description: Explicitly run the previous metadata comparator, not Searchright
+        type: boolean
+        default: false
+      previous_artifact:
+        description: Optional verified prior recovery artifact ID
+        type: string
+        default: ""
+      previous_sha256:
+        description: Exact prior ZIP SHA-256 (required with previous artifact)
+        type: string
+        default: ""
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: bibliographic-recovery-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  recovery:
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && (github.event.label.name == 'run-bibliographic-recovery' || github.event.label.name == 'run-bibliographic-legacy-comparator' || github.event.label.name == 'run-searchright-recovery'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      PYTHONPATH: "."
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      PIP_DISABLE_PIP_VERSION_CHECK: "1"
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: "3.12"
+      - name: Test exact recovery and interoperability boundaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/bibliographic-evidence" "$RUNNER_TEMP/bibliographic-input"
+          git rev-parse HEAD > "$RUNNER_TEMP/bibliographic-evidence/commit.txt"
+          python -VV > "$RUNNER_TEMP/bibliographic-evidence/python-version.txt"
+          grep -E '^(attrs|referencing|rpds-py|jsonschema|jsonschema-specifications|pytest|iniconfig|pluggy|packaging|pygments|typing-extensions)==' requirements/ci-python312-linux-x86_64.lock.txt > "$RUNNER_TEMP/bibliographic-evidence/python-lock.txt"
+          python -m pip install --require-hashes --only-binary=:all: -r "$RUNNER_TEMP/bibliographic-evidence/python-lock.txt"
+          python -m pip check
+          python -m pytest -q research/bibliographic-recovery/test_bibliographic_recovery.py research/bibliographic-recovery/test_searchright_bridge.py research/bibliographic-recovery/test_searchright_recovery.py research/bibliographic-recovery/test_recovery_batch.py
+          sha256sum research/bibliographic-recovery/*.py > "$RUNNER_TEMP/bibliographic-evidence/code-sha256.txt"
+      - name: Retrieve only fixed census and Searchright evidence inputs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PREVIOUS_ARTIFACT: ${{ inputs.previous_artifact }}
+          PREVIOUS_SHA256: ${{ inputs.previous_sha256 }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          input="$RUNNER_TEMP/bibliographic-input"
+          timeout 60 gh api --method GET "repos/$GITHUB_REPOSITORY/actions/artifacts/15031534787/zip" > "$input/census.zip"
+          echo "21046589502f064d54800c9f495d72d18b97184a1db376f06da773b84bde3f01  $input/census.zip" | sha256sum --check
+          timeout 60 gh api --method GET "repos/$GITHUB_REPOSITORY/actions/artifacts/14901554121/zip" > "$input/early.zip"
+          timeout 60 gh api --method GET "repos/$GITHUB_REPOSITORY/actions/artifacts/15115248937/zip" > "$input/canary.zip"
+          echo "12a009fdcdfd8174daacfb606cb97a5c2648940c80df733a3b55a24ff6a14460  $input/early.zip" | sha256sum --check
+          echo "c409624a581a6d637e4ef19cca41ec5c82c6877ee1054b9750289158771627e1  $input/canary.zip" | sha256sum --check
+          stable=444c5199c0887c0259fe47c3d2545b5c6b877d6d
+          advisory=703f9ede74d78ac3aa58ee322c48471875f2a80e
+          acquire() {
+            local name="$1" path="$2" ref="$3"
+            timeout 60 gh api --method GET -H 'Accept: application/vnd.github.raw+json' "repos/edithatogo/searchright/contents/$path?ref=$ref" > "$input/$name.json"
+          }
+          acquire policies integration/provider-policies/index.json "$stable"
+          acquire methods contracts/fixtures/discovery-source-methods.json "$stable"
+          acquire schema contracts/json-schema/bibliographic-record.v1.schema.json "$stable"
+          # Acquire the exact pinned Git objects, not a possibly transformed raw representation.
+          acquire_schema() {
+            local name="$1" expected="$2"
+            timeout 60 gh api --method GET "repos/edithatogo/searchright/git/blobs/$expected" > "$input/$name.blob.json"
+            python - "$input" "$name" "$expected" <<'PY'
+          import base64
+          import hashlib
+          import json
+          import sys
+          from pathlib import Path
+
+          root, name, expected = Path(sys.argv[1]), sys.argv[2], sys.argv[3]
+          payload = json.loads((root / (name + ".blob.json")).read_bytes())
+          if payload.get("sha") != expected or payload.get("encoding") != "base64":
+              raise ValueError(f"{name}: unexpected Git blob identity/encoding")
+          raw = base64.b64decode("".join(payload["content"].split()), validate=True)
+          actual = hashlib.sha1(b"blob " + str(len(raw)).encode() + b"\0" + raw, usedforsecurity=False).hexdigest()
+          if actual != expected:
+              raise ValueError(f"{name}: expected {expected}, received {actual}")
+          (root / (name + ".json")).write_bytes(raw)
+          print(f"{name}: verified Git blob {actual}; SHA-256 {hashlib.sha256(raw).hexdigest()}")
+          PY
+          }
+          acquire_schema strategy c2fea7532f6e3d40df12fee69d2f0c25cf8e4326
+          acquire_schema ast 62c46dfd151476a3a5c00e76ad6e59201e40c747
+          acquire_schema compiled fdce39827363c601ba78f34dfd641823f6d31b3e
+          sha256sum "$input/strategy.json" "$input/ast.json" "$input/compiled.json" > "$RUNNER_TEMP/bibliographic-evidence/searchright-schema-sha256.txt"
+          acquire advisory data/source-selection/catalogue.v1.json "$advisory"
+          acquire directories data/source-selection/directories.v1.json "$advisory"
+          if [[ -n "$PREVIOUS_ARTIFACT" || -n "$PREVIOUS_SHA256" ]]; then
+            [[ "$PREVIOUS_ARTIFACT" =~ ^[1-9][0-9]{0,19}$ && "$PREVIOUS_SHA256" =~ ^[a-f0-9]{64}$ ]]
+            timeout 60 gh api --method GET "repos/$GITHUB_REPOSITORY/actions/artifacts/$PREVIOUS_ARTIFACT/zip" > "$input/previous.zip"
+            echo "$PREVIOUS_SHA256  $input/previous.zip" | sha256sum --check
+            python - <<'PY'
+          import os
+          from pathlib import Path
+          from zipfile import ZipFile
+          root = Path(os.environ["RUNNER_TEMP"]) / "bibliographic-input"
+          with ZipFile(root / "previous.zip") as z:
+              info = z.getinfo("bibliographic-recovery.json")
+              if info.file_size > 8_000_000:
+                  raise ValueError("prior receipt too large")
+              (root / "previous.json").write_bytes(z.read(info))
+          PY
+          fi
+      - name: Prepare Searchright-native strategies by default
+        shell: bash
+        run: |
+          set -euo pipefail
+          input="$RUNNER_TEMP/bibliographic-input"
+          output="$RUNNER_TEMP/bibliographic-evidence"
+          python research/bibliographic-recovery/searchright_recovery.py --early "$input/early.zip" --current "$input/census.zip" --canary "$input/canary.zip" --schema-dir "$input" --output-dir "$output"
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          from zipfile import ZipFile
+          root = Path(os.environ["RUNNER_TEMP"])
+          with ZipFile(root / "bibliographic-input" / "canary.zip") as z:
+              (root / "bibliographic-evidence" / "historical-canary.json").write_bytes(z.read("bibliographic-recovery.json"))
+          PY
+          python research/bibliographic-recovery/searchright_bridge.py --source-dir "$input" --receipt "$output/historical-canary.json" --output-dir "$output"
+      - name: Explicit legacy comparator only (no automatic fallback)
+        if: github.event.label.name == 'run-bibliographic-legacy-comparator' || inputs.legacy_comparator == true
+        shell: bash
+        run: |
+          set -euo pipefail
+          input="$RUNNER_TEMP/bibliographic-input"
+          output="$RUNNER_TEMP/bibliographic-evidence"
+          prior="$output/historical-canary.json"
+          if [[ -f "$input/previous.json" ]]; then prior="$input/previous.json"; fi
+          pin=$(sha256sum "$prior" | cut -d ' ' -f 1)
+          timeout 300 python research/bibliographic-recovery/bibliographic_recovery.py --archive "$input/census.zip" --budget 8 --output "$output/bibliographic-recovery.json" --previous "$prior" --previous-sha256 "$pin" --live
+          python research/bibliographic-recovery/searchright_bridge.py --source-dir "$input" --receipt "$output/bibliographic-recovery.json" --output-dir "$output"
+      - name: Retain projected metadata and explicit source holds
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: bibliographic-recovery-${{ github.sha }}
+          path: ${{ runner.temp }}/bibliographic-evidence/
+          if-no-files-found: error
+          retention-days: 90

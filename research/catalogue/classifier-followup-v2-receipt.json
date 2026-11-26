@@ -154,5 +154,33 @@
     "all_3_classifiers": true,
     "status": "hosted_not_yet_observed"
   },
-  "boundary": "Catalogue-relative weak-label development; proxy folds, not independent family lock; all proposed ontology/role edges remain advisory; no production or scientific promotion."
+  "boundary": "Catalogue-relative weak-label development; proxy folds, not independent family lock; all proposed ontology/role edges remain advisory; no production or scientific promotion.",
+  "hosted_first_attempt": {
+    "run": 45836556902,
+    "merge_revision": "cade0734c7adf516609c90207eb2bb13f63a57d5",
+    "bge": {
+      "job": 139966853399,
+      "artifact": 15126371110,
+      "sha256": "fd64bfbf3a4144b5eed39e29077b6e3598d4fb7ca3fd5628abb883de605f9ed0"
+    },
+    "qwen": {
+      "job": 139966853919,
+      "artifact": 15126840978,
+      "sha256": "324d00dcfa56a2e5973c06c5476e4102fe7be44e87d7ccfcf6b571482be2ac97"
+    },
+    "status": "both_failed_before_inference_original_fold_digest_mismatch",
+    "all_assets_verified": true,
+    "retention": "Personal Library catalogue-embedding-failure-45836556902"
+  },
+  "fold_repair": {
+    "source_blob": "b4a897d546ab033585bd5229e3aae419ed256a87",
+    "source_sha256": "c7648331c7e5badea8420fb812c5442c6b19cc04311d0290351312e8381e536b",
+    "test_blob": "be7003fbc7a1040ab678be7f7476f659dabb1e27",
+    "local_report_sha256": "9bb8eb00f8eee3d4ffc53600ed69bd6dd5df90e1b707aafd6b2c91559591d239",
+    "fold_sha256": "60b45222383886986d8b203aec093dd287eaf6d016c59323aac6804c2461cdf3",
+    "all_case_level_results_unchanged": true,
+    "focused_tests": 6,
+    "overlay_tests": 16,
+    "hosted": "pending"
+  }
 }

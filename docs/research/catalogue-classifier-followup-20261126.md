@@ -93,3 +93,16 @@ qualification remain to be observed separately. Scientific and source
 holds remain. Ponytail: reuse existing dictionary, observed folds,
 classifier metrics, ONNX and llama.cpp runtime; no vector database, new
 neural training framework or broad bibliographic pipeline.
+
+## Hosted attempt and split portability repair
+
+Run 45836556902 failed before inference in both jobs, after exact catalogue
+and all pinned model assets passed their hashes. Original scikit-learn
+split reconstruction did not reproduce the retained fold digest across
+runtimes. Do not relax the gate: encode the exact 719 original assignments
+in sorted-ID order, bind them to the exact catalogue digest, reconstruct
+and verify the original manifest and test group isolation before acquisition.
+Both original artifacts are digest-verified and retained privately. RED
+missing assignment decoder, GREEN six focused and 16 extracted-module tests.
+All local case-level metrics, rankings and roles exactly equal v2. No neural
+inference result from either failed job; new hosted replay required.
