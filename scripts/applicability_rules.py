@@ -6,6 +6,7 @@ Anchors declare provenance; the caller must independently verify their authority
 
 from __future__ import annotations
 
+import hashlib
 import re
 from collections import defaultdict
 
@@ -159,3 +160,26 @@ def evaluate(doc: dict) -> dict:
         "obligations": obligations,
         "anchors": anchors,
     }
+
+
+def evaluate_bound(doc: dict, sources: dict) -> dict:
+    """Verify exact local bytes and line locators before advisory rule execution."""
+    anchors = _validate(doc)
+    expected = {anchor["source_id"] for anchor in anchors.values()}
+    if set(sources) != expected:
+        raise ValueError("source inventory differs from rule anchors")
+    lines = {}
+    digests = {}
+    for key, raw in sources.items():
+        if not isinstance(raw, bytes) or not 1 <= len(raw) <= 1_000_000:
+            raise ValueError("invalid bounded source bytes")
+        lines[key] = raw.decode("utf-8").splitlines()
+        digests[key] = hashlib.sha256(raw).hexdigest()
+    for anchor in anchors.values():
+        key = anchor["source_id"]
+        locator = re.fullmatch(r"line:([1-9][0-9]{0,6})", anchor["locator"])
+        if anchor["sha256"] != digests[key] or locator is None:
+            raise ValueError("source digest or locator mismatch")
+        if int(locator.group(1)) > len(lines[key]):
+            raise ValueError("source locator outside input")
+    return {**evaluate(doc), "source_binding": "exact_bytes_and_line_locators"}

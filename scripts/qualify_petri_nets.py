@@ -118,9 +118,7 @@ def corpus(root: Path) -> dict:
         "max_states": 1000,
         "max_tokens": 100,
         "nets": rows,
-        "qualified": all(
-            row["matched"] and row["status"] != "held_limit" for row in rows
-        ),
+        "qualified": all(row["matched"] and row["status"] != "held_limit" for row in rows),
         "boundary": "Structural marking behavior only; not reporting-methodology acceptance.",
     }
 

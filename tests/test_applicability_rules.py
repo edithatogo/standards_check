@@ -1,7 +1,8 @@
 import copy
+import hashlib
 import unittest
 
-from scripts.applicability_rules import evaluate
+from scripts.applicability_rules import evaluate, evaluate_bound
 
 ANCHOR = {"source_id": "synthetic", "sha256": "a" * 64, "locator": "fixture:1"}
 
@@ -78,3 +79,19 @@ class ApplicabilityRuleTests(unittest.TestCase):
         doc["rules"].append(rule("f1", "other", "trial"))
         with self.assertRaises(ValueError):
             evaluate(doc)
+
+
+    def test_exact_source_byte_binding_and_locators(self):
+        raw = b"Synthetic evidence, not an official guideline.\n"
+        doc = contract()
+        anchor = {"source_id": "fixture", "sha256": hashlib.sha256(raw).hexdigest(), "locator": "line:1"}
+        for row in doc["facts"] + doc["rules"] + doc["decisions"]:
+            row["anchor"] = anchor
+        self.assertEqual(evaluate_bound(doc, {"fixture": raw})["source_binding"], "exact_bytes_and_line_locators")
+        with self.assertRaises(ValueError):
+            evaluate_bound(doc, {"fixture": b"changed"})
+        with self.assertRaises(ValueError):
+            evaluate_bound(doc, {})
+        doc["decisions"][0]["anchor"] = {**anchor, "locator": "line:2"}
+        with self.assertRaises(ValueError):
+            evaluate_bound(doc, {"fixture": raw})

@@ -74,10 +74,12 @@ def solve(edges: list, incompatible: list) -> dict:
         cut = np.zeros(len(pairs))
         for pair in weights:
             cut[positions[pair]] = 1 if pair in selected else -1
-        alternate = optimize([
-            LinearConstraint(cost, score, score),
-            LinearConstraint(cut, -np.inf, len(selected) - 1),
-        ])
+        alternate = optimize(
+            [
+                LinearConstraint(cost, score, score),
+                LinearConstraint(cut, -np.inf, len(selected) - 1),
+            ]
+        )
         if alternate.status == 2:
             return {"status": "candidate_optimum", "selected": selected, "score": score}
         alternative, other_score = checked(alternate)
