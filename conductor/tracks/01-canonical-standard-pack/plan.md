@@ -326,3 +326,10 @@ No remote inference in routine PR workflows, source repin or model promotion.
 - [ ] **T01.062** ([#95](https://github.com/edithatogo/standards_check/issues/95), [#111](https://github.com/edithatogo/standards_check/issues/111)) Qualify restricted-source coverage and exact leakage comparisons within authorized private processing, preserving rights holds and original source anchors.
 
 See the [orthogonal assurance design](../../../docs/research/orthogonal-assurance-20261126.md). PR #155 remains held for independent reference and family qualification. No new pack admitted.
+
+26 November: reconcile receiving main's orthogonal T01.060–062 with the
+[model challenger record](../../../docs/research/model-challengers-20261126.md).
+K2 and Qwen 0.6B native development receipts verified; preserve false equivalences
+and paired retrieval harm. Prioritize Qwen4B native scale metadata, compact GTE
+ModernBERT, and independent source structure before a larger reranker or
+production selection. Keep scientific and conformal reference gates held.

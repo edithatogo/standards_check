@@ -42,6 +42,13 @@ MODELS = {
         "sha256": "15ef19a6de90be7d52b627f2c784107bd806e64826450f41fb75fa4f0179ab30",
         "licence": "Apache-2.0",
     },
+    "gte-modernbert": {
+        "id": "Alibaba-NLP/gte-reranker-modernbert-base",
+        "revision": "1299fb8",
+        "file": "onnx/model_quantized.onnx",
+        "sha256": "ecc6a0ae67cee3d898167802383112d9185ca9250e07bd5d1fa65019b050179d",
+        "licence": "Apache-2.0",
+    },
     "jina-tiny": {
         "id": "jinaai/jina-reranker-v1-tiny-en",
         "revision": "aca45de6945b5dc6399abcd2a9c55ded5dc9111f",

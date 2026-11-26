@@ -205,3 +205,76 @@ bounded CPU feasibility diagnostic, not a replication of publisher scores;
 length exhaustion stays an abstention. No mutable revision, remote code or
 third-party quantization. Weight acquisition and inference must succeed before
 reporting metrics.
+
+## Scale, orthogonal alternatives and receiving-base reconciliation
+
+The receiving main 6632782f51f126c82bbbddc2fe66d931e6d42382 introduces
+the [orthogonal assurance design](orthogonal-assurance-20261126.md) and the
+existing conformal rank oracle. Reconcile both Conductor histories, retain
+T01.060–062 and T05.060–062, and do not fit thresholds on historical evaluation
+controls. Confirmatory reference and source-family gates remain open.
+
+[Assurance 45762031866](https://github.com/edithatogo/standards_check/actions/runs/45762031866)
+on the previous head d2f609d passed all 13 jobs, including policy, Python,
+API and Rust, cross-platform and Codecov. Python: 786 passed, 92.21% combined
+coverage, above 90.50%. The reconciled head requires a new pass.
+
+### Completed K2 and Qwen 0.6B observations
+
+[ K2 artifact 15089979448 ](https://github.com/edithatogo/standards_check/actions/runs/45762032725/artifacts/15089979448)
+ZIP SHA-256 61d302283af1d62951323cfe7b153e45b0466d3f7e732f99250da5b778d4b817,
+report b35ff0185eb794147f4c4f3a559d04b140967855967fcc55d3271d4064f9155a.
+K2 native low-effort 1024-token Q4_K_M: 29/36, zero abstentions, five false
+equivalences. Versus each NLI incumbent: 22 both correct, 6 incumbent-only,
+7 challenger-only, 1 both wrong, 14 disagreements; all 36 finish normally,
+69.451 s, peak 6184240 KiB. Never promote as replacement or infer publisher
+high-effort benchmark parity.
+
+[Qwen 0.6B artifact 15090675906](https://github.com/edithatogo/standards_check/actions/runs/45761895728/artifacts/15090675906)
+ZIP SHA-256 87e6a5262fa06f54a9efb45af0d8b00c09193d48e8f8f74867daf344b22ae45b,
+report caef03d6b61e71b125d349cefae8c728fe40b19b3eb63dcc375018886b809668.
+Native Q8_0 rank smoke relevant .993536 vs irrelevant .000049469. All 106
+requests and exact original top-ten pool retained. R@1 38.68%, R@3 61.32%,
+R@5 68.40%, R@10 80.03%, MRR .56703, nDCG@5 .56524. At five +5/-11
+associations relative to BGE, no improvement over its 72.01% macro query recall.
+232.677 s loopback scoring, peak 1437492 KiB; not controlled repeated timing.
+Both ZIPs downloaded and independently checksum-verified. Development only.
+
+### Predeclared next arms
+
+Use Qwen3-Reranker-4B Q8_0 first, matching the prior quantization class;
+reserve 8B rather than assume scale monotonicity. Qwen's own top-100 MTEB-R
+English evaluation: 0.6B 65.80, 4B 69.76, 8B 69.02; FollowIR 5.41/14.84/8.05.
+See https://huggingface.co/Qwen/Qwen3-Reranker-4B and
+https://huggingface.co/Qwen/Qwen3-Reranker-8B .
+No claim about the costing domain from that external benchmark.
+
+A documented candidate is https://huggingface.co/gorse-io/Qwen3-Reranker-4B-GGUF
+(Apache-2.0 metadata, upstream Qwen3-Reranker-4B, rank pooling and cls.output.weight
+described in conversion notes). This is a third-party GGUF conversion, not a
+publisher checkpoint. Inspect fixed LFS metadata and freeze SHA/revision before
+executing; verify original upstream identity and licence, native rank smoke and
+exact candidate pool. Full upstream numerical parity remains unqualified.
+Do not execute an arbitrary causal model or mutable main. The metadata-only
+label `run-qwen-scale-pins` performs no model execution.
+
+GTE ModernBERT base 149M, Apache-2.0, is a compact encoder contrast. Pin
+publisher ONNX file at immutable upload commit prefix 1299fb8, SHA-256
+ecc6a0ae67cee3d898167802383112d9185ca9250e07bd5d1fa65019b050179d.
+See https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base/blob/main/onnx/model_quantized.onnx .
+Use the existing scalar ONNX adapter and equal frozen pool; fail closed if
+the input/output signature differs. Label `run-modernbert-reranker`.
+
+In Jina's published unified top-100 comparison (model card at
+https://huggingface.co/jinaai/jina-reranker-v3.5), Qwen3 4B leads their RTEB
+and Struct-IR arms at 77.68/55.6, while Jina v3.5 (0.6B) leads BEIR at 63.20.
+Mixedbread large v2 (1.5B, Apache-2.0) is a worthwhile additional distinct
+architecture (BEIR 62.45 vs Qwen4B 62.28, RTEB 70.81); its native decoder
+scoring differs from xsmall v1 and needs a pinned parity check. Jina v3.5
+is noncommercial weights or authorized hosted service. No universal performance
+ordering, no remote credentials or charges, no unverified model promotion.
+If reranking alone cannot recover missed relevant domains, test an independent
+dense first-stage retrieval model (Qwen3-Embedding-0.6B or gte-modernbert-base)
+and lexical+dense fusion on separately declared development pools; keep the
+original 1,060-pair comparison unchanged. This is a separate retrieval ablation,
+not a retuning of prior controls.
