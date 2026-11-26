@@ -69,3 +69,9 @@ def test_replay_exact_synthetic_assertion_and_reject_missing_triple(fmt, raw):
     doc["assertions"][0]["object"] = "http://purl.obolibrary.org/obo/OBI_3"
     with pytest.raises(ValueError, match="not found"):
         verify_source(doc, "fixture", raw)
+
+def test_reference_rejects_lookalike_hostname():
+    doc = json.loads(SEED.read_text())
+    doc["assertions"][0]["subject"] = "http://purlXobolibrary.org/obo/OBI_1"
+    with pytest.raises(ValueError, match="named OBO"):
+        audit(doc)
