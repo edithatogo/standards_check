@@ -1,0 +1,96 @@
+name: E10 synthetic qualifier span development
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+    paths:
+      - "scripts/extractive_development.py"
+      - "tests/test_extractive_development.py"
+      - "tests/fixtures/specialist/qualifier-spans-v1.json"
+      - ".github/workflows/e10-extractive-development.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: e10-qualifiers-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  extractive-development:
+    if: github.event_name == 'workflow_dispatch' || (github.event.pull_request.head.repo.full_name == github.repository && (github.head_ref == 'experiment/e10-qualifier-spans' || contains(github.event.pull_request.labels.*.name, 'run-extractive-benchmark')))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      HF_HUB_DISABLE_TELEMETRY: "1"
+      PIP_DISABLE_PIP_VERSION_CHECK: "1"
+      OMP_NUM_THREADS: "2"
+      MKL_NUM_THREADS: "2"
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+      - name: Test evaluator and execute the independent rules arm first
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/e10-receipt" "$RUNNER_TEMP/e10-wheels"
+          python -m unittest tests.test_extractive_development -v
+          python -m scripts.extractive_development --arm rules --revision "$(git rev-parse HEAD)" --output "$RUNNER_TEMP/e10-receipt/rules.json"
+          python -VV > "$RUNNER_TEMP/e10-receipt/python-version.txt"
+      - name: Acquire isolated exact-version CPU runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          wheelhouse="$RUNNER_TEMP/e10-wheels"
+          python -m pip download --no-deps --only-binary=:all: --timeout 30 --retries 2 \
+            --index-url https://download.pytorch.org/whl/cpu --dest "$wheelhouse" 'torch==2.10.0+cpu'
+          python -m pip download --only-binary=:all: --timeout 30 --retries 2 \
+            --index-url https://pypi.org/simple --find-links "$wheelhouse" --dest "$wheelhouse" \
+            'torch==2.10.0+cpu' 'gliner2[local]==2.2.0' 'transformers==5.8.0'
+          (cd "$wheelhouse" && sha256sum *.whl) > "$RUNNER_TEMP/e10-receipt/wheel-sha256.txt"
+          python -c 'import os,pathlib; p=pathlib.Path(os.environ["RUNNER_TEMP"])/"e10-wheels"; print(sum(f.stat().st_size for f in p.glob("*.whl")))' > "$RUNNER_TEMP/e10-receipt/runtime-download-bytes.txt"
+          python -m pip install --no-index --only-binary=:all: --find-links "$wheelhouse" \
+            'torch==2.10.0+cpu' 'gliner2[local]==2.2.0' 'transformers==5.8.0'
+          python -m pip check
+          python -m pip freeze > "$RUNNER_TEMP/e10-receipt/environment.txt"
+      - name: Acquire exact publisher checkpoint, no executable model code
+        shell: bash
+        run: |
+          set -euo pipefail
+          model="$RUNNER_TEMP/e10-model"
+          mkdir -p "$model/encoder_config"
+          base="https://huggingface.co/fastino/gliner2.5-small-v1/resolve/0f9bfda3394fe71b6e2cd479b98d08eca5ba6f0b"
+          for name in config.json encoder_config/config.json tokenizer.json tokenizer_config.json model.safetensors; do
+            limit=10000000
+            if [[ "$name" == model.safetensors ]]; then limit=300000000; fi
+            curl --fail --silent --show-error --location --max-redirs 5 \
+              --connect-timeout 15 --max-time 180 --max-filesize "$limit" \
+              --proto '=https' --proto-redir '=https' "$base/$name" --output "$model/$name"
+          done
+          echo "4ee982787ace270d4bf15dbcb28ced38e0aa201372347114ceedd6336055de2b  $model/model.safetensors" | sha256sum --check
+          test "$(stat -c '%s' "$model/model.safetensors")" -eq 295567700
+          (cd "$model" && sha256sum model.safetensors config.json encoder_config/config.json tokenizer.json tokenizer_config.json) > "$RUNNER_TEMP/e10-receipt/model-sha256.txt"
+          du --apparent-size --block-size=1 -s "$model" > "$RUNNER_TEMP/e10-receipt/model-download-size.txt"
+      - name: Execute offline CPU-only GLiNER boundary extraction
+        shell: bash
+        run: |
+          set -euo pipefail
+          timeout 300 python -m scripts.extractive_development --arm gliner --model-dir "$RUNNER_TEMP/e10-model" --revision "$(git rev-parse HEAD)" --output "$RUNNER_TEMP/e10-receipt/gliner.json"
+      - name: Retain results and failures, not downloaded weights
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: e10-qualifier-spans-${{ github.sha }}
+          path: ${{ runner.temp }}/e10-receipt/
+          if-no-files-found: error
+          retention-days: 90
