@@ -7,6 +7,7 @@ pub mod prisma;
 pub mod recipe;
 pub mod render;
 pub mod scene;
+pub mod trial;
 
 pub use prisma::{
     DatabaseRegisterStream, ExclusionReason, IncludedCounts, OtherMethodsStream, PrismaError,
@@ -18,3 +19,5 @@ pub use recipe::{
 };
 pub use render::{RenderError, RenderFormat, render, render_scene_json, render_svg, render_text};
 pub use scene::{Anchor, Canvas, EdgeKind, NodeRole, Point, Rect, Scene, SceneEdge, SceneNode};
+
+pub use trial::{TrialFlowError, build_trial_scene};
