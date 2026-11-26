@@ -1,0 +1,674 @@
+{
+  "schema_version": 2,
+  "status": "full_design_default_not_frozen_not_executed",
+  "supersedes": "pipeline-factorial-screening-v1.json (retained as resource-contingent fallback)",
+  "owner": [
+    "T01.063",
+    "T01.064",
+    "T05.048",
+    "T05.063"
+  ],
+  "issue": 158,
+  "factors": [
+    {
+      "id": "A",
+      "role": "layout",
+      "low": "source-native reader",
+      "high": "native plus targeted specialist layout recovery"
+    },
+    {
+      "id": "B",
+      "role": "structural_closure",
+      "low": "native items, invariant identity checks",
+      "high": "bounded source-anchored parent, continuation, footnote and cross-reference closure"
+    },
+    {
+      "id": "C",
+      "role": "tagging",
+      "low": "classical qualifier rules",
+      "high": "classical plus one pinned extractive tagger for candidate enrichment"
+    },
+    {
+      "id": "D",
+      "role": "candidate_generation",
+      "low": "word/character lexical baseline",
+      "high": "predeclared dense/graph candidate fusion with fixed eligible universe"
+    },
+    {
+      "id": "E",
+      "role": "reranking",
+      "low": "lexical rank within candidate pool",
+      "high": "pinned neural reranker within exactly the same pool"
+    },
+    {
+      "id": "F",
+      "role": "advisory_decision",
+      "low": "lexical relation candidate",
+      "high": "bidirectional specialist neural decision and counterexample proposal"
+    }
+  ],
+  "matrix": {
+    "type": "full factorial",
+    "levels": [
+      -1,
+      1
+    ],
+    "runs": [
+      [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      [
+        -1,
+        -1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      [
+        -1,
+        -1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      [
+        -1,
+        -1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      [
+        -1,
+        -1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      [
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      [
+        -1,
+        -1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      [
+        -1,
+        -1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      [
+        -1,
+        -1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1,
+        1,
+        1,
+        -1,
+        1
+      ],
+      [
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        -1
+      ],
+      [
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        -1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      [
+        -1,
+        1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      [
+        -1,
+        1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      [
+        -1,
+        1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      [
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        -1
+      ],
+      [
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      [
+        -1,
+        1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      [
+        -1,
+        1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      [
+        -1,
+        1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      [
+        -1,
+        1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      [
+        -1,
+        1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      [
+        -1,
+        1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      [
+        -1,
+        1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      [
+        -1,
+        1,
+        1,
+        1,
+        -1,
+        1
+      ],
+      [
+        -1,
+        1,
+        1,
+        1,
+        1,
+        -1
+      ],
+      [
+        -1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      [
+        1,
+        -1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      [
+        1,
+        -1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      [
+        1,
+        -1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      [
+        1,
+        -1,
+        -1,
+        1,
+        -1,
+        -1
+      ],
+      [
+        1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      [
+        1,
+        -1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      [
+        1,
+        -1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        -1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      [
+        1,
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      [
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      [
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      [
+        1,
+        -1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      [
+        1,
+        -1,
+        1,
+        1,
+        -1,
+        1
+      ],
+      [
+        1,
+        -1,
+        1,
+        1,
+        1,
+        -1
+      ],
+      [
+        1,
+        -1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      [
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      [
+        1,
+        1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      [
+        1,
+        1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        -1,
+        1,
+        -1,
+        -1
+      ],
+      [
+        1,
+        1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      [
+        1,
+        1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      [
+        1,
+        1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      [
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      [
+        1,
+        1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        -1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        -1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    ],
+    "rank": 64,
+    "all_effects_orthogonal": true
+  },
+  "invariants": [
+    "rights and exact source identity before content processing",
+    "stable evidence identities and source conservation in every arm",
+    "candidate generation precedes ranking its pool",
+    "independent validation of formal representation precedes proof",
+    "all final acceptance gates remain enabled; low decision factor is advisory only",
+    "unknown, unsupported, failed and noneligible rows retained"
+  ],
+  "placement_experiments": [
+    {
+      "component": "layout",
+      "positions": [
+        "whole-document before indexing",
+        "targeted regions after initial retrieval"
+      ],
+      "requires": "rights-cleared comparable PDF region references"
+    },
+    {
+      "component": "tagger",
+      "positions": [
+        "before candidate generation",
+        "after initial retrieval",
+        "both"
+      ],
+      "requires": "exact independently anchored spans; report extra calls"
+    },
+    {
+      "component": "graph",
+      "positions": [
+        "candidate generation",
+        "shortlist scoring",
+        "both"
+      ],
+      "requires": "source-anchored edges and shared eligible universe"
+    },
+    {
+      "component": "reranker",
+      "positions": [
+        "before expansion",
+        "after expansion",
+        "after structural closure"
+      ],
+      "requires": "same component set, compare compatible orders; fixed pool rank-only subexperiment"
+    },
+    {
+      "component": "decision",
+      "positions": [
+        "provisional ambiguity diagnosis before targeted retrieval",
+        "terminal evaluation"
+      ],
+      "requires": "same final advisory evaluator, no future labels"
+    },
+    {
+      "component": "applicability",
+      "positions": [
+        "provisional scope before retrieval",
+        "after candidate comparison"
+      ],
+      "requires": "unknown never excludes eligibility"
+    },
+    {
+      "component": "formal_witness",
+      "positions": [
+        "counterexample-guided acquisition",
+        "terminal-only verification"
+      ],
+      "requires": "validated representations only; no final gate removal"
+    },
+    {
+      "component": "fusion",
+      "positions": [
+        "sequential evidence channels",
+        "parallel fused channels"
+      ],
+      "requires": "conserve source identities and matched evidence/call budgets"
+    }
+  ],
+  "design_notes": [
+    "Enumerate all 64 configurations across every eligible common-input stratum; do not use a half fraction unless observed resource limits justify it.",
+    "The 720-entry historical directory ledger has 46,080 directory/configuration planning slots, not requirement-level trials or independent observations. All full specialist cells remain unexecuted; preserve partial component receipts separately.",
+    "Do not infer eligibility from catalogue existence; distinguish source, rights, structure, component/runtime, format applicability, and independent reference readiness.",
+    "Where a specialist is genuinely not applicable (e.g. image-layout recovery on native structured XML), record structural nonapplicability or a stratum-specific valid full factorial; do not silently run an identity operation and claim a treatment effect.",
+    "Define low and high as competing executable methods when estimating method effects; match candidates, novel evidence, scope, accepted coverage and actual resource constraints; separate optional-stage inclusion and resource contrasts.",
+    "Cross candidate generation with ranking at equal pools and novel evidence, separate full-universe recall and conditional ranking. Treat formal gates as invariant; compare advisory selective routing and counterexample placement only.",
+    "Block by family and document; balance feasible orders; predeclare reference, harm, missingness, actual costs and interaction estimands before confirmatory runs. Cache only exact input/model/configuration hashes; never copy predictions to new states."
+  ],
+  "analysis": {
+    "primary": "paired factorial contrasts and per-family effects on independent common inputs, plus fixed-budget risk/coverage and multiobjective cost",
+    "uncertainty": "family-level Bayesian bootstrap for descriptive reweighting; Bayesian hierarchical models or GLMM with family and case effects and random slopes when enough independent families; prior sensitivity and posterior predictive checks",
+    "prediction": "Compare beta-smoothed arm mean, regularised regression, Bayesian random effects, XGBoost using whole-family outer folds and nested tuning only on qualified development families; assess Brier/log loss, calibration, paired routing regret, actual resource and review cost.",
+    "confirmation": "no hyperparameter selection on exposed held-out families; independent frozen families and locked references; preserve every outcome and avoid treating configurations as independent cases."
+  },
+  "current_status": {
+    "historical_directory_entries": 720,
+    "configuration_slots": 46080,
+    "executed_full_specialist_slots": 0,
+    "admitted_packs": 1,
+    "source_reconciliation_owner": "PR #188",
+    "shared_stage_join": "research/model-placement/locked_join.py on receiving main",
+    "no_new_registry": true
+  }
+}

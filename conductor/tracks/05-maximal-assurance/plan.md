@@ -204,6 +204,30 @@ at 99% branch-inclusive module coverage; protected replay still required.
 Reconcile #183–185 with #182 before integration; do not conflate their
 synthetic and retained-replay comparators with independent scientific results.
 
+### Evidence-action replay development (26 November)
+
+T05.048, T05.063 / #158: [replay development result](../../../docs/research/evidence-action-replay-20261126.md)
+compares action forecasting and fitted critics against the fixed retrieval rule.
+Six focused extracted-module tests passed; no full checkout or protected qualification.
+Retain negative results and actual referral workload; no review resolutions credited.
+Independent reference, source rights, scientific and publication gates stay open.
+
+Evidence-deficit follow-up (T05.048/063 / #158): [replay receipt](../01-canonical-standard-pack/evidence-deficit-replay-v2.json) retains initial hosted policy/patch failure, local focused coverage repair, resource counts and formal counterexamples. Keep hosted checks, fresh partial/complete neural evaluation, reference and rights qualification open. No promotion.
+
+Evidence verification v3 (T05.048/063 / #158): [protocol and qualification record](../../../docs/research/evidence-verification-v3-20261126.md). Prior PR #184 head 53006835 passed Assurance 45793663091 and Codecov; new exact-head checks remain separate. Fresh inference explicitly labelled, finite proof limited to synthetic grammar, no scientific or operational gate closure.
+
+Additional independent bitmask oracle covers every ordered pair in the bounded grammar (1,296); 23 focused tests passed. Fresh inference run 45797316771 queued. Exact final-head checks and independent source/reference gates remain open.
+
+Fresh inference artifact 15106112148 verified (run 45797316771); [paired outcome receipt](../01-canonical-standard-pack/evidence-verification-v3-receipt.json) retains 496 NLI calls, 141 reranking calls, coverage loss and negative findings. Pinned formatter blob matched actual executed source; final-head protected checks remain outstanding. No promotion.
+
+T05.048/063: [evidence coverage diagnostic](../01-canonical-standard-pack/evidence-replay-diagnostics-v1.json) preserves rank-placement and novelty ablations and common-mode neural errors. Three focused local tests passed; final-head hosted qualification pending. No new inference or scientific gate closure.
+
+T05.048/063 / #158: [factorial design and receipt](../../../docs/research/pipeline-factorial-placement-20261126.md) retains six focused passing tests, 48 extracted-module tests, paired order effects, order-averaged interaction contrasts and proof coverage cost. Proposed 32-run resolution-VI matrix has rank 22, no corpus-scale execution. Current exact-head qualification, family-level reference and resource freeze remain held.
+
+T05.048/063 / #158: [fair factorial protocol](../../../docs/research/factorial-fairness-20261126.md) retains actual matched-budget and matched-coverage outcomes; no XGBoost advantage, Bayesian arm mean Brier and hierarchical log-loss baseline. Verified original hosted replay and exact formatter diff. Seven new tests/55 extracted-module tests; new head protected CI outstanding. Full six-factor plan supersedes half-fraction preference, not historical receipt or source/reference hold.
+
+T05.048/063 / #158: [policy and harness receipt](../01-canonical-standard-pack/evidence-policy-v1-receipt.json) retains matched call/referral comparisons, explicit reward and held-out oracle, five focused tests and exact input/output pins. Fix observed I001; existing opt-in workflow now records both diagnostics and exact replay digest. No weakening of required checks or scientific admission.
+
 
 Model-placement development (26 November; #158; T05.063 remains open): [synthetic compact/geometry placement receipt](../../../research/model-placement/synthetic.md) complements #182 and #183. Two local focused tests passed; six template families, eight placements including graph, tagging, atom decisions, learned reranking and typed verification. No independent validation, runtime admission or model promotion. Preserve negative results and ceiling effects; per-arm resource and rights-cleared references remain held.
 
@@ -236,3 +260,5 @@ Review correction: #185 geometry metric measures co-extraction, not qualifier
 linkage; 11 local tests pass, exact regenerated scoring PDF matches historical
 receipt. Keep #182's distinct linkage endpoint. No independent reference lock,
 no adoption, no new registry or gate change; #95/#111/#188/T05.049 remain open.
+
+#185 receiving reconciliation: main d8384d5a incorporates #184 and #186; append-only Track 05 additions conserved from both branches. All prior experimental and corrected source/test blobs unchanged. Exact corrected predecessor ad2d9840 passed all seven required contexts, CodeQL and patch/component coverage; fresh checks required on receiving head. Protected auto-merge retained.

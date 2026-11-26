@@ -1,0 +1,238 @@
+{
+  "schema_version": 1,
+  "status": "executed_local_synthetic_policy_development",
+  "main_revision": "413626c44da6d5d5faaa19a60f4d7ae0751f1fb7",
+  "fixture_sha256": "55d1dd465c413a4d64890974de42a9719c63b7a711f8172eb70b35160b28c3d0",
+  "source_blob": "478a134ffdcc9a37b3d0be2fa7997f596f50acdd",
+  "test_blob": "fcbf1a90bebb320210f6557381e8e620d4cccf35",
+  "full_output_sha256": "6efefcec3cc34771d6fbbc657d9c9b63ff212d8009e0da017f87fb14ee97dc3e",
+  "deterministic_output_sha256": "8966856703754c73fd520487c0467546bd930ae85546fc849469935765096eb5",
+  "digest_encoding": "Remove acquisition_seconds from every case trace; sorted-key compact JSON, UTF-8",
+  "training": {
+    "families": [
+      "CHEERS",
+      "PRISMA"
+    ],
+    "cases": 12,
+    "method": "existing ridge on actual observed immediate reward; fitted Q adds max feasible continuation"
+  },
+  "heldout": {
+    "families": [
+      "ARRIVE",
+      "CONSORT",
+      "STARD",
+      "TRIPOD"
+    ],
+    "cases": 24
+  },
+  "reward": {
+    "correct": 1,
+    "abstain": 0,
+    "wrong": -1,
+    "false_equivalence": -4,
+    "complete": 0.25,
+    "per_call": -0.1
+  },
+  "local_tests": {
+    "focused": 5,
+    "extracted_module_suite": 60,
+    "full_checkout": false
+  },
+  "comparison_fields": [
+    "complete",
+    "raw_correct",
+    "gated_correct",
+    "calls",
+    "reranks",
+    "new_words",
+    "reward",
+    "hindsight_regret"
+  ],
+  "comparisons": {
+    "exact_one": {
+      "rule": [
+        19,
+        15,
+        11,
+        24,
+        0,
+        150,
+        13.35,
+        4
+      ],
+      "best_fixed_dev": [
+        19,
+        15,
+        11,
+        24,
+        0,
+        150,
+        13.35,
+        4
+      ],
+      "bandit": [
+        20,
+        16,
+        12,
+        24,
+        9,
+        126,
+        14.6,
+        2.75
+      ],
+      "fitted_q": [
+        20,
+        16,
+        12,
+        24,
+        9,
+        126,
+        14.6,
+        2.75
+      ]
+    },
+    "exact_two": {
+      "rule": [
+        23,
+        18,
+        14,
+        48,
+        5,
+        275,
+        14.95,
+        0
+      ],
+      "best_fixed_dev": [
+        23,
+        18,
+        14,
+        48,
+        5,
+        275,
+        14.95,
+        0
+      ],
+      "bandit": [
+        20,
+        16,
+        12,
+        48,
+        22,
+        227,
+        12.2,
+        2.75
+      ],
+      "fitted_q": [
+        20,
+        16,
+        12,
+        48,
+        22,
+        227,
+        12.2,
+        2.75
+      ]
+    },
+    "adaptive_two": {
+      "rule": [
+        23,
+        18,
+        14,
+        29,
+        1,
+        175,
+        16.85,
+        0.6
+      ],
+      "best_fixed_dev": [
+        23,
+        18,
+        14,
+        29,
+        1,
+        175,
+        16.85,
+        0.6
+      ],
+      "bandit": [
+        20,
+        16,
+        12,
+        24,
+        9,
+        126,
+        14.6,
+        2.85
+      ],
+      "fitted_q": [
+        20,
+        16,
+        12,
+        24,
+        9,
+        126,
+        14.6,
+        2.85
+      ]
+    }
+  },
+  "hindsight": {
+    "exact_one": {
+      "complete": 23,
+      "gated_correct": 14,
+      "calls": 24,
+      "reward": 17.35
+    },
+    "exact_two": {
+      "complete": 23,
+      "gated_correct": 14,
+      "calls": 48,
+      "reward": 14.95
+    },
+    "adaptive_two": {
+      "complete": 23,
+      "gated_correct": 14,
+      "calls": 23,
+      "reward": 17.45
+    }
+  },
+  "common": {
+    "referrals_per_arm": 6,
+    "review_resolved": 0,
+    "raw_and_gated_false_equivalence": 0,
+    "unverified_true_equivalences": 8,
+    "all_outputs_advisory": true
+  },
+  "boundary": "Exposed synthetic development; no fresh semantic models, live exploration, source qualification, compute matching or production admission",
+  "previous_ci": {
+    "fairness_run": 45808273341,
+    "job": 139869138711,
+    "required_policy_job": 139869076761,
+    "reason": "I001 import sorting",
+    "repair_blob": "56c4b89d4d67c4bb17dfd649bbdf73830e246ac2",
+    "prior_python_coverage": "passed",
+    "prior_codecov_patch": "passed",
+    "prior_privacy": "passed",
+    "prior_codeql": "passed"
+  },
+  "new_head_checks": "pending",
+  "hosted": {
+    "run": 45809762393,
+    "job": 139874239637,
+    "merge_revision": "9c4fc520ce2ccd20a7f79025ab0d1777f0653b7b",
+    "artifact": 15113035196,
+    "archive_sha256": "e89cae2a2728d7904e139e177cdc825cd8ae956e3d709ae010a61ca75d429296",
+    "policy_report_sha256": "9025fbf8b9ede69616b4130a71b70274211075afa40ea2ec720210a58d319172",
+    "fairness_report_sha256": "e9731d43785f4d0cd373b95fd3c7dc96af89fac387792e8d6f60929b805c6a1d",
+    "focused_tests": 12,
+    "deterministic_matches_local": true,
+    "fairness_summary_matches": true,
+    "formatted_blobs": {
+      "policy": "32068c422e225c70e9ae0d881cbdda21cbbfd593",
+      "fairness": "14517983410432f420b619a82cb110bf5d4ff985"
+    },
+    "ast_equal": true,
+    "local_postformat_tests": 60,
+    "required_format_failure": "old head; exact hosted diff applied, new checks required"
+  }
+}
