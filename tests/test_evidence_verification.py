@@ -125,3 +125,42 @@ def test_future_evidence_and_semantic_outcomes_cannot_change_initial_deficit_ord
         second = replay(cases, changed)
     for name in first['details']:
         assert {k: r['action'] for k, r in first['details'][name].items()} == {k: r['action'] for k, r in second['details'][name].items()}
+
+
+def test_closed_grammar_exhaustive_against_bitmask_oracle():
+    # Independent four-bit oracle: alpha is true in worlds 2 and 3, beta in 1 and 3.
+    from itertools import product
+
+    masks = {"alpha": 0b1100, "beta": 0b1010}
+    expressions = {
+        f"{a} implies {b}": ((~masks[a]) | masks[b]) & 0b1111
+        for a, b in product(masks, repeat=2)
+    }
+    literals = {
+        f"{atom} is {value}": mask if value == "true" else mask ^ 0b1111
+        for atom, mask in masks.items()
+        for value in ("true", "false")
+    }
+    for a, b in product(literals, repeat=2):
+        expressions[f"{a} and {b}"] = literals[a] & literals[b]
+        expressions[f"{a} or {b}"] = literals[a] | literals[b]
+    assert len(expressions) == 36
+    for (a, left), (b, right) in product(expressions.items(), repeat=2):
+        if not left or not right:
+            expected = "abstain"
+        elif left == right:
+            expected = "equivalent"
+        elif not left & right:
+            expected = "contradictory"
+        elif left & right == right:
+            expected = "narrower"
+        elif left & right == left:
+            expected = "broader"
+        else:
+            expected = "indeterminate"
+        proof = formal_verdict(text(a), text(b), True)
+        assert proof["relation"] == expected
+        assert gate("equivalent", True, proof) == (
+            "equivalent" if expected == "equivalent" else "abstain"
+        )
+        assert len(proof["counterexamples"]) == ((left ^ right).bit_count() if left and right else 0)

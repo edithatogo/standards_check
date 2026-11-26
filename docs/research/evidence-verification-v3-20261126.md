@@ -71,3 +71,18 @@ held. No canonical admission, model promotion, production routing or changes
 to acceptance thresholds. Further learned action models remain deferred
 until simple routing leaves a material gap. Rollback: revert this focused
 research increment; existing v1/v2 reports remain unchanged.
+
+
+## Exhaustive finite-grammar qualification and hosted dispatch
+
+The follow-up local regression added an independently implemented four-bit
+truth-set oracle. It checked 36 supported syntactic expressions and all 1,296
+ordered pairs, including empty compliance sets, asymmetric relations, witness
+counts and the equivalence-only gate. All 23 focused tests passed. This proves
+agreement with the bounded oracle, not correctness of real-language
+formalisation. The branch was reconciled with E9 receiving main
+`08e86696180936ef6722e539a32d6ebbd2222625` without replacing the concurrent
+Conductor records. The labelled fresh-inference experiment is
+[run 45797316771](https://github.com/edithatogo/standards_check/actions/runs/45797316771)
+on head `421a9b234f12edfac942c18f832a2ee4e5a21950`; its development job was queued at observation. No fresh neural
+metrics, model-download success, or hosted qualification are claimed.

@@ -436,3 +436,5 @@ source/reference/scientific holds. See [compact receipt](evidence-action-replay-
 Evidence-deficit follow-up (T01.063–064 / #158): [retained decision replay](../../../docs/research/evidence-deficit-replay-20261126.md) recovered four missed equivalents using four targeted cached semantic actions. Learned allocation recovered one; fixed recovered none. Four separate formal controls expose three lexical false equivalences; keep equivalence safety and independent scientific gates held.
 
 Evidence verification v3 (T01.063–064 / #158): [finite equivalence gate and paired fresh inference protocol](../../../docs/research/evidence-verification-v3-20261126.md). Three invalid formal equivalences withheld, one genuine verified; 22 focused tests passed locally. Retain full state-specific neural, reranking and proof outcomes; no production or reference promotion.
+
+Exhaustive finite grammar oracle: 36 expressions, 1,296 ordered pairs, all 23 focused tests passed. Fresh inference run [45797316771](https://github.com/edithatogo/standards_check/actions/runs/45797316771) queued on the reconciled E9 base; no fresh model evidence or scientific promotion.
