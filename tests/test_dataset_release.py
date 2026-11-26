@@ -281,5 +281,53 @@ class DatasetReleaseTests(unittest.TestCase):
                 validate(changed, self.root)
 
 
+    def test_promotion_requires_exact_private_overlap_gate(self):
+        manifest = {
+            "schema_version": "dev.standardflow.restricted-overlap.v1",
+            "n": 3,
+            "expected_references": ["restricted"],
+            "expected_artifacts": ["data"],
+            "references": [{
+                "id": "restricted",
+                "text": self.write("evidence/restricted.txt", "amber quills drift past ridge"),
+            }],
+            "artifacts": [{
+                "id": "data",
+                "artifact": {
+                    "path": "package/data.jsonl",
+                    "sha256": self.data["release"]["files"][0]["sha256"],
+                },
+                "fragments": self.write(
+                    "evidence/fragments.json", json.dumps(["invented metadata key status"])
+                ),
+                "extraction_complete": True,
+            }],
+        }
+        contract = self.write("contract.json", json.dumps(self.data))
+        args = [
+            str(self.root / contract["path"]), "--root", str(self.root),
+            "--require-publishable",
+        ]
+        with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+            self.assertEqual(main(args), 1)
+            for defect in ("none", "wrong_artifact", "incomplete", "match"):
+                candidate = copy.deepcopy(manifest)
+                if defect == "wrong_artifact":
+                    candidate["artifacts"][0]["artifact"] = self.write(
+                        "evidence/other.txt", "different artifact"
+                    )
+                elif defect == "incomplete":
+                    candidate["artifacts"][0]["extraction_complete"] = False
+                elif defect == "match":
+                    candidate["artifacts"][0]["fragments"] = self.write(
+                        "evidence/leak.json", json.dumps(["amber quills drift"])
+                    )
+                ref = self.write("evidence/overlap.json", json.dumps(candidate))
+                self.assertEqual(
+                    main(args + ["--restricted-overlap-manifest", str(self.root / ref["path"])]),
+                    0 if defect == "none" else 1,
+                )
+
+
 if __name__ == "__main__":
     unittest.main()
