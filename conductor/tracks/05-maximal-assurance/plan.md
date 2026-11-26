@@ -143,3 +143,12 @@ The [publication contract](../../../contracts/publication/composition-graph.v0.1
 - [ ] **T05.052** ([#30](https://github.com/edithatogo/standards_check/issues/30), [#116](https://github.com/edithatogo/standards_check/issues/116)) Observe a protected updater proposal without dashboard approval and qualify the unattended routine merge handover; keep separate breaking/security work and verified receiving receipts.
 
 See [optional human review](../../../docs/development/optional-human-review.md). Model-relative development and candidate reference work can proceed without waiting for human review; T05.049 retains the actual external/scientific evidence gates. No automatic approval, false human review or release permission.
+
+
+## Orthogonal assurance and research ablations
+
+- [ ] **T05.060** ([#158](https://github.com/edithatogo/standards_check/issues/158)) Reconcile prospective orthogonal ablations with the existing E1–E8 programme and proposed specialist E9–E14 after integration; freeze calibration, risk endpoints, solver and format comparators before confirmatory execution.
+- [ ] **T05.061** ([#31](https://github.com/edithatogo/standards_check/issues/31), [#116](https://github.com/edithatogo/standards_check/issues/116)) Qualify exact leakage gate and private-corpus availability before release, synthetic negative fixtures in ordinary CI, and optional LSH acceleration only after measurement; no rights claim from detector pass.
+- [ ] **T05.062** ([#31](https://github.com/edithatogo/standards_check/issues/31), [#116](https://github.com/edithatogo/standards_check/issues/116)) Extend existing property/fuzz and legacy semantic differential tests, exact finite oracles and retained counterexamples; require current-head and receiving evidence without weakening thresholds.
+
+See the [orthogonal assurance design](../../../docs/research/orthogonal-assurance-20261126.md). Local conformal oracle tests passed in isolation only; no full-checkout or hosted result claimed.
