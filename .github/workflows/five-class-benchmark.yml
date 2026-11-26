@@ -18,7 +18,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: five-class-${{ github.ref }}
+  group: five-class-${{ github.ref }}-${{ github.event.label.name }}
   cancel-in-progress: true
 
 jobs:
@@ -119,13 +119,13 @@ jobs:
 
   lfm-development:
     # Exploratory synthetic-only lane, explicitly requested; not a qualification run.
-    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-lfm-followup'
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && (github.event.label.name == 'run-lfm-followup' || github.event.label.name == 'run-lfm-thinking-repair')
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     strategy:
       fail-fast: false
       matrix:
-        challenger: [lfm3, lfm25-instruct, lfm25-thinking, lfm2-2.6b]
+        challenger: ${{ fromJSON(github.event.label.name == 'run-lfm-thinking-repair' && '["lfm25-thinking"]' || '["lfm3","lfm25-instruct","lfm25-thinking","lfm2-2.6b"]') }}
     env:
       CHALLENGER: ${{ matrix.challenger }}
       HF_HUB_OFFLINE: "1"
@@ -173,9 +173,12 @@ jobs:
           root = Path(os.environ["RUNNER_TEMP"])
           evidence = root / "lfm-evidence"
           model = dict(PINS[os.environ["CHALLENGER"]])
-          # Resolve only immutable commit prefixes; record the complete revision before acquisition.
-          if len(model["revision"]) != 40:
-              prefix = model["revision"]
+          # Resolve only immutable commit prefixes; record complete revisions before acquisition.
+          def resolve_revision(prefix):
+              if not 7 <= len(prefix) <= 40 or any(c not in "0123456789abcdef" for c in prefix):
+                  raise ValueError("invalid immutable revision")
+              if len(prefix) == 40:
+                  return prefix
               url = f"https://huggingface.co/api/models/{model['id']}/revision/{prefix}"
               metadata = subprocess.run(["curl", "--fail", "--silent", "--show-error", "--max-time", "30",
                                          "--max-filesize", "1000000", "--proto", "=https", url],
@@ -183,7 +186,9 @@ jobs:
               resolved = json.loads(metadata.stdout)["sha"]
               if len(resolved) != 40 or not resolved.startswith(prefix) or any(c not in "0123456789abcdef" for c in resolved):
                   raise ValueError("immutable revision prefix did not resolve")
-              model["revision"] = resolved
+              return resolved
+          model["revision"] = resolve_revision(model["revision"])
+          model["licence_revision"] = resolve_revision(model.get("licence_revision", model["revision"]))
           def acquire(pin, remote, path, cap):
               url = f"https://huggingface.co/{pin['id']}/resolve/{pin['revision']}/{remote}"
               subprocess.run(["curl", "--fail", "--silent", "--show-error", "--location",
@@ -195,7 +200,7 @@ jobs:
           if file_hash(weights) != model["sha256"]:
               raise ValueError("challenger model hash mismatch")
           licence = evidence / "model-LICENSE.txt"
-          acquire(model, "LICENSE", licence, 100000)
+          acquire({**model, "revision": model["licence_revision"]}, "LICENSE", licence, 100000)
           licence_text = licence.read_text(encoding="utf-8")
           if "LFM Open License" not in licence_text:
               raise ValueError("unexpected model licence")

@@ -404,3 +404,39 @@ denominators. Source drift, parser, identity, nested structure and rights holds
 remain distinct. STROBE has no independent complete row denominator in the
 current registry. Do not infer eligibility from byte retrieval or same-reader
 agreement. Scientific cohort freeze remains held, zero admitted at last run.
+
+
+### Source structural follow-up and Thinking asset correction
+
+[Follow-up 45755775838](https://github.com/edithatogo/standards_check/actions/runs/45755775838)
+source artifact 15087069857 ZIP SHA-256
+81a8e111efc9e06264618a310da775791a075cc0ca04aed6965b58317c800276
+downloaded and verified. Reproduced both issuer PDF pins; also retrieved ARRIVE
+issuer poster (64a8f03f02496eac7eed4ba2b587ad8b9365670b946eb167bc68da5703d6c604),
+ARRIVE publisher PDF (00957028eae5b9935a86a8bc912fd2a85b95ca9be11bf175fbfea65d97fe83fc),
+and STROBE publisher explanation PDF (41de61bb60662cd007f0cb4655ae00c4fac3b6a8c2ab616a62cd741870947e46).
+Five PDFs, zero comparable numbered rows from the maintained generic reader.
+ARRIVE all 21 main items held, STROBE independent denominator absent, STARD
+publisher HTTP 403. Primary XML routes all held. Next source work is
+edition-specific column/subitem reconstruction using the existing readers and
+source-local rights review, not repeated downloads or a threshold waiver.
+
+LFM2.5-Instruct actual corrected-revision run: 9/36 correct, 0 abstentions,
+0 false equivalences, six unique correct vs either incumbent, 25 baseline-only
+correct, two shared misses. Retain poor standalone performance and possible
+triage complementarity; 82.99 s. LFM2.5-Thinking failed at b719458 because
+the fetched bytes did not match the earlier published Q4_K_M SHA-256.
+Restore the exact publisher weight-upload revision 6eef5895049f444e3436c6f583207e610a1485ce
+with the same published hash, retrieve LICENSE independently at the explicitly
+pinned later publisher revision b719458, and retain both fully resolved
+revisions. Do not repin observed mismatching bytes. Target only Thinking
+on a separate label/concurrency group so other in-flight experiments remain
+intact. No inference claim until actual receipt and no source/pack promotion.
+
+Retrospective d1 calibration diagnostic on the verified 36-case receipt:
+raw six-way argmax 31/36 correct, 35 covered, one abstained, zero false
+equivalences. Uniform confidence thresholds 0.50, 0.60, 0.70, 0.80 yield
+21/23, 18/19, 14/14, 6/6 correct among classified cases respectively.
+Multiclass Brier score (sum across six classes) 0.33054; log loss 0.69864.
+No threshold selected or revised for confirmation. Do not infer independent
+calibration or safety from these development controls.

@@ -291,3 +291,10 @@ Keep prior failure and original thresholds; extend only the exploratory syntheti
 bounded thinking/scale and output-budget ablations and reuse the structural comparator on new
 source manifestations. T01.028–030, T01.043 and T01.052 remain open. No source freeze or merge
 from diagnostic results.
+
+
+26 November source structure follow-up: five issuer/publisher PDFs acquired and hash-bound,
+zero comparable rows with the existing generic reader; STARD transport and source rights held.
+See [semantic qualification](semantic-reconciliation-qualification.md). Restore the Thinking
+weight pin at the original publisher upload and verify the later licence independently.
+Do not reopen or tune historical scientific control sets; independent cohort freeze held.

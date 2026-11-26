@@ -24,7 +24,8 @@ PINS = {
     },
     "lfm25-thinking": {
         "id": "LiquidAI/LFM2.5-1.2B-Thinking-GGUF",
-        "revision": "b719458",
+        "revision": "6eef5895049f444e3436c6f583207e610a1485ce",
+        "licence_revision": "b719458",
         "file": "LFM2.5-1.2B-Thinking-Q4_K_M.gguf",
         "sha256": "7223a2202405b02e8e1e6c5baa543c43dc98c1d9741a5c2a0ee1583212e1231b",
         "licence": "LFM Open License v1.0",
@@ -178,8 +179,7 @@ def metrics(reference, predictions):
             for key, label in reference.items()
         ),
         "confusion": [
-            {"reference": a, "prediction": b, "count": n}
-            for (a, b), n in sorted(confusion.items())
+            {"reference": a, "prediction": b, "count": n} for (a, b), n in sorted(confusion.items())
         ],
     }
 
