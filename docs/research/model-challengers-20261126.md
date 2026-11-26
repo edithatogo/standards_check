@@ -161,3 +161,29 @@ numeric usage where available; model version may be unavailable for hosted reran
 The implementation is not a provider service qualification. No live calls,
 account purchases or credential access occurred here. Mixedbread legacy API is
 held; open-weight experiment above is complete.
+
+## Verified metadata and native follow-up
+
+[Pin survey 45761669794](https://github.com/edithatogo/standards_check/actions/runs/45761669794),
+[artifact 15089154238](https://github.com/edithatogo/standards_check/actions/runs/45761669794/artifacts/15089154238)
+was downloaded and matched ZIP SHA-256
+3fdb902a05c0a1736f2029088a37d5032866118898898d0ac08285c9995ed37d.
+Publisher metadata confirms Apache-2.0 model cards and these exact assets:
+
+- MiniCPM5 Q4_K_M, revision `2079a22f3beaa4e306449978533478fe0522f4b3`,
+  weight SHA-256 `ec2d5801640099e97d8d7e8003ad4d81f336e757811f03a26173dddf386602fd`,
+  1,561,318,368 bytes. Native compact arm uses 512 output tokens, the unchanged
+  blinded 36-case synthetic controls and existing NLI comparators.
+- ggml-org Qwen3-Reranker-0.6B Q8_0, revision `a02f48bb4f057028298c21fa033da2b30d7742d5`,
+  weight SHA-256 `22c9979ce4fbcdc5acdc310c6641c32797eff1aa980b8f7a2db8a8ea23429a48`,
+  639,153,184 bytes. Native rank endpoint must pass fixed relevance smoke before
+  using the exact retained BGE receipt, 106 queries and 1,060 candidates.
+- K2 held: initial publisher filename did not match uniquely. Retry publisher
+  metadata for the 3.7B/4B naming variants; retain observed filenames and exact
+  metadata bytes even on hold. Never infer against mutable main or silently
+  substitute a third-party quantization.
+
+Trigger labels `run-compact-model-panel`, `run-native-qwen-reranker`,
+`run-k2-pin-review` are isolated explicit development/metadata lanes. No hosted
+credentials, no inference on private data, no scientific qualification. The
+bounded 512-token MiniCPM arm is not a reproduction of publisher benchmark settings.

@@ -8,6 +8,13 @@ import time
 from collections import Counter
 
 PINS = {
+    "minicpm5": {
+        "id": "openbmb/MiniCPM5-2B-GGUF",
+        "revision": "2079a22f3beaa4e306449978533478fe0522f4b3",
+        "file": "MiniCPM5-2B-Q4_K_M.gguf",
+        "sha256": "ec2d5801640099e97d8d7e8003ad4d81f336e757811f03a26173dddf386602fd",
+        "licence": "Apache-2.0",
+    },
     "lfm25-instruct": {
         "id": "LiquidAI/LFM2.5-1.2B-Instruct-GGUF",
         "revision": "012803cf70d6cdcf698f0c65fa8f9b7175128770",
@@ -209,6 +216,8 @@ def generation_options(model):
     options = {"seed": 724, "max_tokens": 256}
     if model == "lfm3":
         options["chat_template_kwargs"] = {"enable_thinking": False}
+    elif model == "minicpm5":
+        options["max_tokens"] = 512
     elif model == "lfm25-thinking":
         options["max_tokens"] = 512
         options["chat_template_kwargs"] = {"enable_thinking": True}

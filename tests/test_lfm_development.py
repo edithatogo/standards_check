@@ -94,7 +94,7 @@ def test_paired_does_not_discard_abstention():
         lfm.metrics(expected, {"a": "equivalent"})
 
 
-@pytest.mark.parametrize("model", ["d1", "lfm25-instruct", "lfm3", "lfm25-thinking", "lfm2-2.6b"])
+@pytest.mark.parametrize("model", ["d1", "lfm25-instruct", "lfm3", "lfm25-thinking", "lfm2-2.6b", "minicpm5"])
 def test_existing_harness_and_receipts(model, monkeypatch, tmp_path):
     def score(ledger, records, assets, sha):
         return {
@@ -154,6 +154,7 @@ def test_shared_judge_rejects_unblinded_input():
     ("lfm25-instruct", 256, None),
     ("lfm25-thinking", 512, True),
     ("lfm2-2.6b", 256, None),
+    ("minicpm5", 512, None),
 ])
 def test_declared_output_budget(model, cap, thinking):
     options = lfm.generation_options(model)

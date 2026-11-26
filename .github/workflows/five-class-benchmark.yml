@@ -124,13 +124,13 @@ jobs:
 
   lfm-development:
     # Exploratory synthetic-only lane, explicitly requested; not a qualification run.
-    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && (github.event.label.name == 'run-lfm-followup' || github.event.label.name == 'run-lfm-thinking-repair')
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && (github.event.label.name == 'run-lfm-followup' || github.event.label.name == 'run-lfm-thinking-repair' || github.event.label.name == 'run-compact-model-panel')
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     strategy:
       fail-fast: false
       matrix:
-        challenger: ${{ fromJSON(github.event.label.name == 'run-lfm-thinking-repair' && '["lfm25-thinking"]' || '["lfm3","lfm25-instruct","lfm25-thinking","lfm2-2.6b"]') }}
+        challenger: ${{ fromJSON(github.event.label.name == 'run-lfm-thinking-repair' && '["lfm25-thinking"]' || github.event.label.name == 'run-compact-model-panel' && '["minicpm5"]' || '["lfm3","lfm25-instruct","lfm25-thinking","lfm2-2.6b"]') }}
     env:
       CHALLENGER: ${{ matrix.challenger }}
       HF_HUB_OFFLINE: "1"
@@ -205,10 +205,16 @@ jobs:
           if file_hash(weights) != model["sha256"]:
               raise ValueError("challenger model hash mismatch")
           licence = evidence / "model-LICENSE.txt"
-          acquire({**model, "revision": model["licence_revision"]}, "LICENSE", licence, 100000)
-          licence_text = licence.read_text(encoding="utf-8")
-          if "LFM Open License" not in licence_text:
-              raise ValueError("unexpected model licence")
+          if model["licence"] == "Apache-2.0":
+              # Publisher model card at exact weight revision, not a third-party licence.
+              licence = evidence / "model-card.md"
+              acquire(model, "README.md", licence, 2000000)
+              if "license: apache-2.0" not in licence.read_text(encoding="utf-8").lower():
+                  raise ValueError("publisher model-card licence mismatch")
+          else:
+              acquire({**model, "revision": model["licence_revision"]}, "LICENSE", licence, 100000)
+              if "LFM Open License" not in licence.read_text(encoding="utf-8"):
+                  raise ValueError("unexpected model licence")
           receipt = {"model": model, "licence_sha256": file_hash(licence),
                      "weights_sha256": file_hash(weights), "research_only": True,
                      "runtime_asset_sha256": "31cc3a6bc638ac6c48dc4b1b74888f1eaadf3d14227c1e5f67daf9a49541d97a"}
@@ -466,7 +472,7 @@ jobs:
 
   specialist-model-pin-survey:
     # Read-only metadata, explicitly not weight acquisition or inference.
-    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-specialist-model-pins'
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && (github.event.label.name == 'run-specialist-model-pins' || github.event.label.name == 'run-k2-pin-review')
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
@@ -496,14 +502,24 @@ jobs:
                                         "--max-filesize", "2000000", "--proto", "=https", url],
                                        check=True, capture_output=True).stdout
                   data = json.loads(raw)
+                  (output / f"{key}-metadata.json").write_bytes(raw)
                   revision = data["sha"]
                   if not re.fullmatch(r"[0-9a-f]{40}", revision):
                       raise ValueError("invalid publisher revision")
                   if ref != "main" and not revision.startswith(ref):
                       raise ValueError("immutable publisher revision mismatch")
-                  files = [file for file in data["siblings"] if file["rfilename"] == filename]
+                  names = {filename}
+                  if key == "k2":
+                      # The publisher originally labelled this checkpoint 4B.
+                      names.add("K2-Horizon-4B-Q4_K_M.gguf")
+                      row["observed_gguf_files"] = [
+                          file["rfilename"] for file in data["siblings"]
+                          if file["rfilename"].lower().endswith(".gguf")
+                      ]
+                  files = [file for file in data["siblings"] if file["rfilename"] in names]
                   if len(files) != 1:
                       raise ValueError("publisher filename not unique")
+                  row["file"] = files[0]["rfilename"]
                   lfs = files[0]["lfs"]
                   digest = lfs.get("sha256") or lfs.get("oid")
                   if not re.fullmatch(r"[0-9a-f]{64}", digest):
@@ -527,5 +543,104 @@ jobs:
         with:
           name: specialist-model-pins-${{ github.sha }}
           path: ${{ runner.temp }}/model-pin-survey/
+          if-no-files-found: error
+          retention-days: 90
+
+  native-qwen-reranker:
+    # Public frozen editorial cohort; no provider credentials or scientific promotion.
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-native-qwen-reranker'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c
+        with:
+          egress-policy: audit
+      - name: Checkout exact public event commit without credentials
+        run: |
+          git init
+          git remote add origin "https://github.com/edithatogo/standards_check.git"
+          git fetch --no-tags --depth=1 origin "$GITHUB_SHA"
+          git checkout --detach FETCH_HEAD
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: "3.12"
+      - name: Retrieve exact retained baseline ranking
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        with:
+          artifact-ids: 15088716936
+          run-id: 45757790945
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/qwen-baseline
+      - name: Verify immutable inputs and acquire native CPU assets
+        run: |
+          mkdir -p "$RUNNER_TEMP/qwen-evidence" "$RUNNER_TEMP/qwen-runtime"
+          git rev-parse HEAD > "$RUNNER_TEMP/qwen-evidence/commit.txt"
+          baseline="$(find "$RUNNER_TEMP/qwen-baseline" -type f -name paired.json -print -quit)"
+          test -n "$baseline"
+          echo "09ba04a03e5942f71b3d18e6c6c2f0f3050298ad120d0b6d56ea209b29660bad  $baseline" | sha256sum --check
+          python -m pip install requests==2.34.2
+          python -m pip freeze > "$RUNNER_TEMP/qwen-evidence/environment.txt"
+          curl --fail --silent --show-error --location --max-redirs 5 --connect-timeout 15 --max-time 180 --max-filesize 50000000 --proto '=https' --proto-redir '=https' \
+            https://github.com/ggml-org/llama.cpp/releases/download/b11960/llama-b11960-bin-ubuntu-x64.tar.gz --output "$RUNNER_TEMP/qwen-runtime.tar.gz"
+          echo "31cc3a6bc638ac6c48dc4b1b74888f1eaadf3d14227c1e5f67daf9a49541d97a  $RUNNER_TEMP/qwen-runtime.tar.gz" | sha256sum --check
+          tar -xzf "$RUNNER_TEMP/qwen-runtime.tar.gz" -C "$RUNNER_TEMP/qwen-runtime"
+          model_url="https://huggingface.co/ggml-org/Qwen3-Reranker-0.6B-Q8_0-GGUF/resolve/a02f48bb4f057028298c21fa033da2b30d7742d5"
+          curl --fail --silent --show-error --location --max-redirs 5 --connect-timeout 15 --max-time 600 --max-filesize 650000000 --proto '=https' --proto-redir '=https' \
+            "$model_url/qwen3-reranker-0.6b-q8_0.gguf" --output "$RUNNER_TEMP/qwen.gguf"
+          echo "22c9979ce4fbcdc5acdc310c6641c32797eff1aa980b8f7a2db8a8ea23429a48  $RUNNER_TEMP/qwen.gguf" | sha256sum --check | tee "$RUNNER_TEMP/qwen-evidence/weight-check.txt"
+          curl --fail --silent --show-error --location --max-redirs 5 --connect-timeout 15 --max-time 30 --max-filesize 2000000 --proto '=https' --proto-redir '=https' \
+            "$model_url/README.md" --output "$RUNNER_TEMP/qwen-evidence/model-card.md"
+          grep -i '^license: apache-2.0' "$RUNNER_TEMP/qwen-evidence/model-card.md"
+      - name: Verify native rank head and score the conserved pool
+        run: |
+          server="$(find "$RUNNER_TEMP/qwen-runtime" -type f -name llama-server -print -quit)"
+          test -x "$server"
+          LD_LIBRARY_PATH="$(dirname "$server")" "$server" --version > "$RUNNER_TEMP/qwen-evidence/runtime.txt" 2>&1
+          LD_LIBRARY_PATH="$(dirname "$server")" "$server" -m "$RUNNER_TEMP/qwen.gguf" --alias qwen3-reranker-0.6b-q8 \
+            --host 127.0.0.1 --port 18883 --reranking --pooling rank -c 2048 -b 2048 -ub 2048 -t 4 -ngl 0 -np 1 \
+            > "$RUNNER_TEMP/qwen-evidence/server.log" 2>&1 &
+          pid=$!
+          trap 'kill "$pid" 2>/dev/null || true' EXIT
+          ready=false
+          for _ in $(seq 1 120); do
+            if ! kill -0 "$pid" 2>/dev/null; then break; fi
+            if curl --noproxy '*' --fail --silent --max-time 2 http://127.0.0.1:18883/health > /dev/null; then
+              ready=true
+              break
+            fi
+            sleep 1
+          done
+          test "$ready" = true
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          import requests
+          from scripts.hosted_specialist_development import make_post, rerank_payload, LOCAL_QWEN
+          from scripts.costing_retrieval import parse_reranker_results
+
+          with requests.Session() as session:
+              session.trust_env = False
+              post = make_post(session, "http://127.0.0.1:18883/v1/rerank", None, 1)
+              result = post(rerank_payload(LOCAL_QWEN, "What is a panda?", ["A panda is a bear.", "Paris is the capital of France."]))
+          scores = parse_reranker_results(["relevant", "irrelevant"], result["results"])
+          evidence = {"scores": scores, "model": result.get("model"), "passed": scores["relevant"] > scores["irrelevant"]}
+          (Path(os.environ["RUNNER_TEMP"]) / "qwen-evidence/smoke.json").write_text(json.dumps(evidence))
+          if not evidence["passed"]:
+              raise ValueError("native rank head did not pass relevance smoke")
+          PY
+          baseline="$(find "$RUNNER_TEMP/qwen-baseline" -type f -name paired.json -print -quit)"
+          python -m scripts.hosted_specialist_development --model qwen3-reranker-0.6b-q8 --baseline "$baseline" --max-requests 106 --output "$RUNNER_TEMP/qwen-evidence/report.json"
+          grep '^VmHWM:' "/proc/$pid/status" > "$RUNNER_TEMP/qwen-evidence/peak-memory.txt" || true
+      - name: Retain Qwen diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: native-qwen-reranker-${{ github.sha }}
+          path: ${{ runner.temp }}/qwen-evidence/
           if-no-files-found: error
           retention-days: 90
