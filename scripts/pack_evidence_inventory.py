@@ -38,24 +38,47 @@ def inventory(raw, expected):
         text = row["verbatim_text"]
         if not isinstance(text, str) or not text.strip():
             raise ValueError("empty source evidence")
-        units.append({"id": row["id"], "anchor": row["source_anchor"], "section": row["section"],
-                      "text_sha256": digest(text), "declared_evidence_kinds": row["evidence_expectations"]})
+        units.append(
+            {
+                "id": row["id"],
+                "anchor": row["source_anchor"],
+                "section": row["section"],
+                "text_sha256": digest(text),
+                "declared_evidence_kinds": row["evidence_expectations"],
+            }
+        )
         for match in LINK.finditer(text):
             number = match.group(1).casefold()
-            edge = {"from": row["id"], "type": "explicit_cross_reference", "anchor": row["source_anchor"],
-                    "span": list(match.span()), "target_number": number}
+            edge = {
+                "from": row["id"],
+                "type": "explicit_cross_reference",
+                "anchor": row["source_anchor"],
+                "span": list(match.span()),
+                "target_number": number,
+            }
             if number not in numbers or numbers[number] == row["id"]:
                 unresolved.append(edge)
             else:
                 edges.append({**edge, "to": numbers[number]})
-    return {"pack_id": pack["pack_id"], "source_pack_sha256": expected, "units": units,
-            "edges": edges, "unresolved_references": unresolved,
-            "claim_boundary": "declared_item_inventory_not_independent_clause_or_manuscript_reference"}
+    return {
+        "pack_id": pack["pack_id"],
+        "source_pack_sha256": expected,
+        "units": units,
+        "edges": edges,
+        "unresolved_references": unresolved,
+        "claim_boundary": "declared_item_inventory_not_independent_clause_or_manuscript_reference",
+    }
 
 
 def closure(inv, seeds, budget):
     ids = {r["id"] for r in inv["units"]}
-    if type(budget) is not int or budget < 1 or len(set(seeds)) != len(seeds) or not set(seeds) <= ids or len(seeds) > budget:
+    if (
+        type(budget) is not int
+        or budget < 1
+        or len(set(seeds)) != len(seeds)
+        or not set(seeds) <= ids
+        or len(seeds) > budget
+    ):
         raise ValueError("invalid evidence identity or closure budget")
     neighbors = {key: set() for key in ids}
     for edge in inv["edges"]:
@@ -70,15 +93,26 @@ def closure(inv, seeds, budget):
 
 def certificate(inv, observed, expected):
     ids = {r["id"] for r in inv["units"]}
-    if (len(set(observed)) != len(observed) or len(set(expected)) != len(expected)
-        or not set(observed) <= ids or not set(expected) <= ids or not expected):
+    if (
+        len(set(observed)) != len(observed)
+        or len(set(expected)) != len(expected)
+        or not set(observed) <= ids
+        or not set(expected) <= ids
+        or not expected
+    ):
         raise ValueError("invalid certificate identity")
     missing = sorted(set(expected) - set(observed))
     unresolved = [edge for edge in inv["unresolved_references"] if edge["from"] in expected]
-    return {"source_pack_sha256": inv["source_pack_sha256"], "expected": sorted(expected),
-            "observed": sorted(observed), "missing": missing, "unresolved_references": unresolved,
-            "structural_coverage_complete": not missing and not unresolved,
-            "semantic_completeness": "not_established", "admission": "advisory_only"}
+    return {
+        "source_pack_sha256": inv["source_pack_sha256"],
+        "expected": sorted(expected),
+        "observed": sorted(observed),
+        "missing": missing,
+        "unresolved_references": unresolved,
+        "structural_coverage_complete": not missing and not unresolved,
+        "semantic_completeness": "not_established",
+        "admission": "advisory_only",
+    }
 
 
 def baseline(raw, expected):
@@ -93,11 +127,27 @@ def baseline(raw, expected):
         for key in targets:
             order = rankings[key]
             closed = closure(inv, order[:3], 5)
-            rows.append({"expected": key, "rank": order.index(key) + 1 if key in order else None,
-                         "top5": order[:5], "closed_top3_budget5": closed})
-        methods[method] = {"rows": rows, "hits": {str(k): sum(r["rank"] is not None and r["rank"] <= k for r in rows) for k in (1, 3, 5)},
-                           "closed_hits": sum(r["expected"] in r["closed_top3_budget5"] for r in rows),
-                           "ranked_count": dict(Counter(len(rankings[key]) for key in targets))}
-    return {"claim_boundary": "masked_source_identity_recovery_not_semantic_relevance", "queries": len(queries),
-            "candidate_pairs": len(queries) * len(targets), "inventory": inv,
-            "certificate": certificate(inv, list(targets), list(targets)), "methods": methods}
+            rows.append(
+                {
+                    "expected": key,
+                    "rank": order.index(key) + 1 if key in order else None,
+                    "top5": order[:5],
+                    "closed_top3_budget5": closed,
+                }
+            )
+        methods[method] = {
+            "rows": rows,
+            "hits": {
+                str(k): sum(r["rank"] is not None and r["rank"] <= k for r in rows) for k in (1, 3, 5)
+            },
+            "closed_hits": sum(r["expected"] in r["closed_top3_budget5"] for r in rows),
+            "ranked_count": dict(Counter(len(rankings[key]) for key in targets)),
+        }
+    return {
+        "claim_boundary": "masked_source_identity_recovery_not_semantic_relevance",
+        "queries": len(queries),
+        "candidate_pairs": len(queries) * len(targets),
+        "inventory": inv,
+        "certificate": certificate(inv, list(targets), list(targets)),
+        "methods": methods,
+    }

@@ -293,3 +293,70 @@ independent evidence shows a residual deficit they uniquely recover.
 
 No production or canonical changes, new issue registry, independent source
 or scientific promotion. Exact-head checks still required.
+
+
+## Observed source continuation and native literal representation
+
+The [bulk checkpoint 45802629341](https://github.com/edithatogo/standards_check/actions/runs/45802629341/artifacts/15107508921)
+was downloaded; archive SHA-256
+`be0c2221b737042d0bb4656d1f1f4145324dbaf820112b1e366ba7f402e8676a`.
+Checkpoint JSON SHA-256
+`4e05045889b1f8f3a6228466e88d13b2baf866be63ea3c453e305f020fe468e3`.
+All 205 worklist identities conserved. Selected six; the existing circuit
+breaker attempted two (PMC10155050 and PMC10182844), both held. Remaining
+200 deferred, four held, one source inventory observed/not reconciled.
+The existing bulk label now defaults to this verified checkpoint rather
+than the original census; explicit run ID/digest override remains.
+No new bulk acquisition is justified merely by another code push.
+
+[Priority retry 45802602832](https://github.com/edithatogo/standards_check/actions/runs/45802602832/artifacts/15108328164)
+archive verified `e442a484cd20abd396d40c2dde03e7c0e5e10af327bd69522a21876d086a5e53`.
+The existing retrospective again reports all five source-held; the prior
+provider failures are unchanged. Do not retry them blindly.
+[Shared audit 45802682924](https://github.com/edithatogo/standards_check/actions/runs/45802682924/artifacts/15108373345)
+verified archive SHA-256 `bf28d89a54c532800ec5ac92cfd98732189d38d9b46841ad2eef9380d5f60909`;
+zero independent positives. Keep acquisition holds separate from extraction
+and retrieval misses; consume the existing coordinator schema in #183.
+
+A bounded alternate source observation uses the publisher-linked EQUATOR
+website repository at exact revision `388e294f05d4d55cf6fc01ddf56b6ad48577b190`:
+[CONSORT](https://github.com/EQUATOR-Network/equator-website/blob/388e294f05d4d55cf6fc01ddf56b6ad48577b190/reporting-guidelines/consort/consort-checklist.qmd)
+and [SPIRIT](https://github.com/EQUATOR-Network/equator-website/blob/388e294f05d4d55cf6fc01ddf56b6ad48577b190/reporting-guidelines/spirit/spirit-checklist.qmd).
+The interactive HTML has an empty tbody; its ROWS constant is literal JSON.
+Do not execute site JavaScript or use a browser scraper. Direct read via
+GitHub, JSON parsing and ordered comparison to the existing BMJ edition
+ID denominators (not legacy text) recovered:
+
+| Edition | IDs recovered | Section rows | Topic groups | Label rows | Indented topics |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| CONSORT 2025 | 42/42 | 6 | 30 | 1 | 3 |
+| SPIRIT 2025 | 53/53 | 9 | 34 | 1 | 3 |
+
+No missing, extra or reordered IDs in this direct observation. Both QMDs
+cite their corresponding BMJ DOI and display a local CC BY 4.0 notice.
+This does not transfer rights to other representations or establish full
+item/structure or issuer-intent qualification. The editions remain one
+conservative dependency component, not independent families or a
+substitute for PLOS/JATS acquisition.
+
+Implemented a bounded JSON-literal reader using existing summarize_source
+and fingerprint functions, with exact Git blob pins for QMD and official
+DOCX representations, separate section/topic/label anchors, and exact and
+normalized text hashes. Compare native DOCX row fingerprints using the
+existing collect_rows/compare_formats; no source text export or inferred
+equivalence. Missing, extra, duplicate, different, reordered or unsupported
+rows remain held. Local RED: missing module; GREEN: four focused tests
+passed in the isolated overlay of exact existing fingerprint and
+summarize_source functions. A fifth synthetic real-DOCX comparison test
+requires hosted full-checkout execution; source Git DNS unavailable locally.
+The new explicit run-structural-intake label exercises only four pinned
+files, not the previously failed priority XML routes.
+
+Ponytail: no generic QMD/JS parser, browser scraper, model or dependency
+expansion. Reuse the hash-pinned DOCX runtime and existing native
+comparison; preserve prior records and scope. Apply the exact hosted
+Ruff formatting changes to the three existing intake scripts without
+altering their algorithms. Next qualify actual bytes and row comparison,
+and a separately verified primary representation, then lock independent
+reference labels and family components. Scientific and publication gates
+remain open.

@@ -28,7 +28,11 @@ def coverage(catalogue, links, survey, legacy):
     revision = catalogue["source_revision"]
     if any(
         other != revision
-        for other in (links["source_revision"], survey["source_revision"], legacy["equator_revision"])
+        for other in (
+            links["source_revision"],
+            survey["source_revision"],
+            legacy["equator_revision"],
+        )
     ):
         raise ValueError("source revision mismatch")
     universe = index(catalogue["guidelines"])
@@ -114,7 +118,9 @@ def coverage(catalogue, links, survey, legacy):
             "rights_observation": dict(Counter(row["rights_observation"] for row in group)),
             "with_source_link_candidates": sum(row["source_link_count"] > 0 for row in group),
             "with_legacy_candidates": sum(bool(row["legacy_candidates"]) for row in group),
-            "with_legacy_original_candidates": sum(row["legacy_original_candidate"] for row in group),
+            "with_legacy_original_candidates": sum(
+                row["legacy_original_candidate"] for row in group
+            ),
         }
 
     summary = summarize(rows)

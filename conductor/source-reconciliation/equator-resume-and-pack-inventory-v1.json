@@ -39,6 +39,22 @@
     "char": 42
   },
   "boundary": "Masked same-source item identity recovery, not semantic relevance, rights clearance for candidate sources, or independent scientific validation.",
-  "fresh_bulk_status": "not_yet_observed",
-  "full_checkout_local": false
+  "fresh_bulk_status": "observed_two_held_no_new_qualified_sources",
+  "full_checkout_local": false,
+  "first_bulk_checkpoint": {
+    "run_id": 45802629341,
+    "artifact_id": 15107508921,
+    "archive_sha256": "be0c2221b737042d0bb4656d1f1f4145324dbaf820112b1e366ba7f402e8676a",
+    "survey_sha256": "4e05045889b1f8f3a6228466e88d13b2baf866be63ea3c453e305f020fe468e3",
+    "selected": 6,
+    "attempted": 2,
+    "attempted_pmcids": [
+      "PMC10155050",
+      "PMC10182844"
+    ],
+    "remaining_unattempted": 200,
+    "held": 4,
+    "observed_not_reconciled": 1,
+    "canonical_packs_promoted": 0
+  }
 }

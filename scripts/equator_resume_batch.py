@@ -21,7 +21,9 @@ def resume(prior, root, limit, survey, *, retry_held=False):
     old = {row["pmcid"]: row for row in rows}
     records = prior["records"]
     blobs = {row["id"]: row["source_blob_sha"] for row in records}
-    work = [r for r in prior["oa_source_worklist"] if r["status"] == "candidate_pending_acquisition"]
+    work = [
+        r for r in prior["oa_source_worklist"] if r["status"] == "candidate_pending_acquisition"
+    ]
     if len(old) != len(rows) or len(blobs) != len(records) or len(work) != len(old):
         raise ValueError("invalid checkpoint inventory")
     if {r["pmcid"] for r in work} != set(old):
@@ -42,14 +44,19 @@ def resume(prior, root, limit, survey, *, retry_held=False):
         key=lambda r: (old[r["pmcid"]]["status"] != DEFERRED, r["pmcid"]),
     )[:limit]
     expected = {r["pmcid"] for r in selected}
-    new = survey({**prior, "oa_source_worklist": selected}, [prior], root, limit) if selected else []
+    new = (
+        survey({**prior, "oa_source_worklist": selected}, [prior], root, limit) if selected else []
+    )
     if len(new) != len(expected) or {r["pmcid"] for r in new} != expected:
         raise ValueError("batch result inventory mismatch")
     attempted = []
     latest = dict(old)
     for row in new:
         key = row["pmcid"]
-        if any(row.get(k) != old[key].get(k) for k in ("edition", "pmcid", "doi", "pmid", "source_blobs")):
+        if any(
+            row.get(k) != old[key].get(k)
+            for k in ("edition", "pmcid", "doi", "pmid", "source_blobs")
+        ):
             raise ValueError("batch result source binding mismatch")
         if row["status"] == DEFERRED:
             continue
@@ -89,9 +96,13 @@ def main():
     raw = args.previous.read_bytes()
     if len(raw) > 16_000_000 or hashlib.sha256(raw).hexdigest() != args.expected_sha256:
         raise ValueError("prior receipt size or digest mismatch")
-    result = resume(json.loads(raw), Path.cwd(), args.limit, bulk_survey, retry_held=args.retry_held)
+    result = resume(
+        json.loads(raw), Path.cwd(), args.limit, bulk_survey, retry_held=args.retry_held
+    )
     result["resume"]["previous_sha256"] = args.expected_sha256
-    args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    args.output.write_text(
+        json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
     print(json.dumps(result["resume"], sort_keys=True))
 
 
