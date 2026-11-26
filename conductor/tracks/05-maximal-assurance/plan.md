@@ -179,3 +179,11 @@ T05.060–062: the [qualification increment](orthogonal-qualification-20261126.m
 PR #177 receiving checks and the next bounded implementations, local evidence, current
 hosted CI gates, exact release scan integration and independent-reference holds. Preserve
 E1–E14 and one integrated publication under #158. All eight wider tasks remain open.
+
+### Evidence-action replay development (26 November)
+
+T05.048, T05.063 / #158: [replay development result](../../../docs/research/evidence-action-replay-20261126.md)
+compares action forecasting and fitted critics against the fixed retrieval rule.
+Six focused extracted-module tests passed; no full checkout or protected qualification.
+Retain negative results and actual referral workload; no review resolutions credited.
+Independent reference, source rights, scientific and publication gates stay open.

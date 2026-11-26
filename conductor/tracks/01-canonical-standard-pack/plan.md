@@ -374,3 +374,12 @@ adds signed ground-rule evaluation with exact source binding, a bounded HiGHS co
 a full typed costing candidate audit, family-level selective risk evaluation and private
 release-overlap integration. Real rule, reference, semantic mapping and corpus qualification
 remain held. No canonical admission or additional experiment registry.
+
+### Evidence-action replay development (26 November)
+
+T01.064 / #158: [bounded evidence-action replay](../../../docs/research/evidence-action-replay-20261126.md)
+retains the original 36 synthetic pairs, 324 executed acquisition transitions and
+matched acquisition/referral comparison. Rule 18/24; forecast 16/24; imagined critic
+18/24; observed critic 15/24. All zero false equivalences, six referrals without
+review outcomes. No incremental value demonstrated; keep all existing independent
+source/reference/scientific holds. See [compact receipt](evidence-action-replay-v1.json).
