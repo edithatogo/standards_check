@@ -6,6 +6,9 @@ on:
     paths:
       - "scripts/five_class_benchmark.py"
       - "scripts/lfm_development.py"
+      - "scripts/costing_retrieval.py"
+      - "scripts/lexical_text.py"
+      - "tests/test_costing_retrieval.py"
       - "tests/test_lfm_development.py"
       - "tests/test_five_class_benchmark.py"
       - "scripts/witness_adjudication.py"
@@ -351,5 +354,83 @@ jobs:
         with:
           name: fresh-source-probe-${{ github.sha }}
           path: ${{ runner.temp }}/fresh-source-probe/
+          if-no-files-found: error
+          retention-days: 90
+
+  specialist-costing-development:
+    # Editorial seed only; no model downloads or inference in ordinary CI.
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-specialist-retrieval'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      HF_HUB_DISABLE_TELEMETRY: "1"
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: "3.12"
+      - name: Retain exact formatting diagnostics and test the offline boundary
+        run: |
+          mkdir -p "$RUNNER_TEMP/costing-evidence"
+          git rev-parse HEAD > "$RUNNER_TEMP/costing-evidence/commit.txt"
+          python -m pip install pytest==9.2.0 onnxruntime==1.23.2 tokenizers==0.22.1 ruff==0.17.6
+          # Diagnostic only; required workflow still enforces unchanged formatting policy.
+          ruff format --diff scripts/costing_retrieval.py scripts/lexical_text.py scripts/compose_checklists.py scripts/lfm_development.py > "$RUNNER_TEMP/costing-evidence/format.diff" || test "$?" = 1
+          cat "$RUNNER_TEMP/costing-evidence/format.diff"
+          python -m pytest --import-mode=importlib tests/test_costing_retrieval.py -q
+          python -m pip check
+          python -m pip freeze > "$RUNNER_TEMP/costing-evidence/environment.txt"
+          python -m scripts.costing_retrieval --output "$RUNNER_TEMP/costing-evidence/lexical.json"
+      - name: Acquire only pinned publisher ONNX graphs and model-card licence evidence
+        run: |
+          python - <<'PY'
+          import json, os, subprocess
+          from pathlib import Path
+          from scripts.costing_retrieval import MODELS, file_hash
+
+          root = Path(os.environ["RUNNER_TEMP"])
+          observations = {}
+          for name, pin in MODELS.items():
+              assets = root / "costing-assets" / name
+              assets.mkdir(parents=True)
+              for remote, local, cap in ((pin["file"], "model.onnx", 200000000),
+                                         ("config.json", "config.json", 1000000),
+                                         ("tokenizer.json", "tokenizer.json", 10000000),
+                                         ("README.md", "README.md", 500000)):
+                  url = f"https://huggingface.co/{pin['id']}/resolve/{pin['revision']}/{remote}"
+                  subprocess.run(["curl", "--fail", "--silent", "--show-error", "--location",
+                                  "--max-redirs", "5", "--connect-timeout", "15", "--max-time", "300",
+                                  "--max-filesize", str(cap), "--proto", "=https", "--proto-redir", "=https",
+                                  url, "--output", str(assets / local)], check=True)
+              if file_hash(assets / "model.onnx") != pin["sha256"]:
+                  raise ValueError("unqualified retrieval weight bytes")
+              card = (assets / "README.md").read_text(encoding="utf-8")
+              metadata = card.split("---", 2)[1] if card.startswith("---") else ""
+              licence_lines = [line.strip().lower() for line in metadata.splitlines() if line.startswith("license:")]
+              if licence_lines != ["license: " + pin["licence"].lower()]:
+                  raise ValueError("publisher model-card licence differs from pin")
+              observations[name] = {"pin": pin, "asset_hashes": {p.name: file_hash(p) for p in assets.iterdir()},
+                                    "licence_evidence": "exact model-card metadata; no redistribution decision"}
+          (root / "costing-evidence" / "assets.json").write_text(json.dumps(observations, indent=2) + "\n")
+          PY
+      - name: Execute paired complete-pool retrieval and top-ten reranking
+        run: |
+          /usr/bin/time -v python -m scripts.costing_retrieval \
+            --assets "$RUNNER_TEMP/costing-assets" \
+            --output "$RUNNER_TEMP/costing-evidence/paired.json" \
+            2> "$RUNNER_TEMP/costing-evidence/resources.txt"
+      - name: Retain exact metadata-only development receipts
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: specialist-costing-development-${{ github.sha }}
+          path: ${{ runner.temp }}/costing-evidence/
           if-no-files-found: error
           retention-days: 90

@@ -130,3 +130,21 @@ references, source URLs, status distinctions, verification scope, dates, duplica
 declared-versus-actual verified counts. It rejects transient retrieval IDs. It does not verify
 the accuracy of sources or endorse the mappings. The existing Markdown/index validators inspect
 the canonical pipeline, not this catalogue; inspect their messages as well as exit codes.
+
+## Specialist retrieval development
+
+The [specialist-pipeline protocol](../../docs/research/specialist-pipeline-protocol.v0.1.0.md)
+separates topic retrieval from equivalence and source qualification. Run the shared offline
+word/bigram and character-trigram baseline with:
+
+```sh
+python -m scripts.costing_retrieval --output /tmp/costing-retrieval.json
+```
+
+The opt-in PR label `run-specialist-retrieval` runs the same complete 31-domain candidate
+pool and pinned CPU BGE-small ONNX plus MiniLM top-ten reranker. The receipt retains
+all 106 query identities, ranked domain IDs, 125 editorial associations, source and asset hashes,
+recall/precision/MRR/nDCG, missing candidates, per-instrument strata and timing.
+These are development comparisons with editorial `covers_topic` associations, not independent
+truth, methodological quality, or evidence that unlisted mappings are irrelevant. No model
+output writes back to the registry, source wording, canonical packs or display groups.

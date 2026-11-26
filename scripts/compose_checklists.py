@@ -5,13 +5,11 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import math
 import re
-from collections import Counter
 from itertools import combinations
 from pathlib import Path
 
-from .lexical_text import normalise
+from .lexical_text import cosine, term_counts, tfidf_vectors
 from .validate_packs import validator
 
 MAX_REQUIREMENTS = 1000
@@ -68,17 +66,9 @@ def compose(packs: list[dict], *, top_k: int = 5, method: str = "word") -> dict:
                 text = item["normalized_requirement"]
                 if len(text) > MAX_TEXT_CHARS:
                     raise ValueError("normalized text limit exceeded")
-                normalized = normalise(text)
-                words = normalized.split()
+                terms = term_counts(text, method)
                 status = "held_no_terms"
-                if words:
-                    if method == "word":
-                        terms = Counter(words)
-                        bigrams = zip(words, words[1:], strict=False)
-                        terms.update(" ".join(pair) for pair in bigrams)
-                    else:
-                        padded = f" {normalized} "
-                        terms = Counter(padded[i : i + 3] for i in range(len(padded) - 2))
+                if terms:
                     documents[key] = terms
                     status = "candidate_review"
             nodes.append(
@@ -90,15 +80,7 @@ def compose(packs: list[dict], *, top_k: int = 5, method: str = "word") -> dict:
                 }
             )
 
-    frequencies = Counter(term for terms in documents.values() for term in terms)
-    vectors = {}
-    for key, terms in documents.items():
-        weights = {
-            term: count * (1 + math.log((1 + len(documents)) / (1 + frequencies[term])))
-            for term, count in terms.items()
-        }
-        norm = math.sqrt(math.fsum(value * value for value in weights.values()))
-        vectors[key] = {term: weight / norm for term, weight in weights.items()}
+    vectors = tfidf_vectors(documents)
     edges = []
     # ponytail: exhaustive sparse comparison for <=1000 selected items; profile before indexing.
     for query, left in sorted(vectors.items()):
@@ -106,7 +88,7 @@ def compose(packs: list[dict], *, top_k: int = 5, method: str = "word") -> dict:
         for candidate, right in vectors.items():
             if candidate[0] == query[0]:
                 continue
-            score = round(min(1.0, math.fsum(v * right.get(t, 0) for t, v in left.items())), 6)
+            score = cosine(left, right)
             if score > 0:
                 ranked.append((-score, candidate))
         for negative_score, candidate in sorted(ranked)[:top_k]:
