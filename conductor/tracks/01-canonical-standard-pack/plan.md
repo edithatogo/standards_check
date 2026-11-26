@@ -504,3 +504,17 @@ upstream security holds remain. #185 receiving tree verified, current
 catalogue enrichment/vector work retained. No duplicate owner or
 registry; source qualification #188, independent labels and same-ID
 analysis still held.
+
+
+T01.025/031/052/053/064 #111/#95/#158: #191 protected merge ede0ac97
+verified. [Role-aware manual recovery and native compiler feasibility](../../source-reconciliation/bibliographic-recovery-20261126.md#protected-integration-and-role-aware-recovery-increment-27-november).
+Eight exact planned tokens independently observed; seven primary/co-publication
+leads and shared RAMESES development report, two distinct primary leads
+on follow-up; no native live execution or qualified sources. Twelve
+supplementary source leads handed to #188. Historical measured 11 requests,
+7 exact responses/4 work IDs, 30.4659 request seconds; all requested
+descriptive strata and missingness retained. Four focused tests pass.
+Explicit offline exact pinned native CLI candidate and authority-denial
+test added to existing workflow; upstream #831/privacy/H-002 authority
+still holds, no admitted runtime. Actual hosted proof, independent
+source/reference lock and same-ID recall still required.

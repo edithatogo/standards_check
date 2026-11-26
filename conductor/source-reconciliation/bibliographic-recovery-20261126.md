@@ -351,3 +351,158 @@ compare unique exact identity leads, errors, deferrals, rights/edition
 holds and actual resources, not just number of planned queries.
 No new branch owner, registry, canonical admission or scientific
 reference lock. Layout continues #188.
+
+
+### Protected integration and role-aware recovery increment (27 November)
+
+#191 normally merged at [ede0ac97](https://github.com/edithatogo/standards_check/commit/ede0ac97e787c44d5288308eb2f378684d431c3e).
+All seven required contexts, CodeQL and component/patch coverage passed
+on c3480879; receiving tree 0fe04b9a93232359a061318cd112ad3e19f2f693
+equals tested head tree. Dedicated offline security remains held (#30).
+No protection change. Receiving main for this successor: ede0ac97e787c44d5288308eb2f378684d431c3e.
+
+The verified parent planning artifact 15125576531, ZIP SHA-256
+2a0f6fb0605e1995b38ec3755dc9dd0e8e161e6c78140a3e525ac15c170c8e0b
+fixes the eight selected strategies and nine covered catalogue IDs.
+Independently checked the exact eight query tokens in public bibliographic
+metadata (PubMed connector for six PMIDs returned five, public NLM page
+then resolved the remaining shared PMID; publisher/PubMed pages for two
+DOIs). This is a **manual metadata observation**, not native Searchright
+provider execution, a matched-request/provider experiment or qualified
+source recovery. No actual response byte count or provider seconds
+available for this manual check; record unknown, not zero. No document
+bytes retained.
+
+| Catalogue identity | Exact planned token | Observed DOI / role | Evidence |
+| --- | --- | --- | --- |
+| RAMESES meta-narrative and realist | PMID 25642521 | 10.3310/hsdr02300, related development report (not either primary standard) | [NLM](https://pubmed.ncbi.nlm.nih.gov/25642521/) |
+| IMPRINT | PMID 25225072 | 10.1016/j.fertnstert.2014.08.002, primary candidate | [NLM](https://pubmed.ncbi.nlm.nih.gov/25225072/) |
+| GRIPS | PMID 21407265 | 10.1038/ejhg.2011.25, PMC3172920, primary candidate | [NLM](https://pubmed.ncbi.nlm.nih.gov/21407265/) |
+| Music-based interventions | DOI 10.3389/fpsyg.2025.1551920 | exact DOI, PMID 40528854, PMC12171218, primary candidate | [Publisher](https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2025.1551920/full) |
+| CHEERS 2022 | PMID 35012427 | 10.1080/13696998.2021.2014721, co-publication candidate | [NLM](https://pubmed.ncbi.nlm.nih.gov/35012427/) |
+| CHART | PMID 40753040 | 10.1016/j.artmed.2025.103222, co-publication candidate | [NLM](https://pubmed.ncbi.nlm.nih.gov/40753040/) |
+| STROBE-nut | PMID 27587981 | 10.1111/nbu.12217, PMC4988500, co-publication candidate | [NLM](https://pubmed.ncbi.nlm.nih.gov/27587981/) |
+| Big Q qualitative values-based guidelines | DOI 10.1080/14780887.2024.2382244 | exact DOI, primary candidate, 2024 online/2025 issue | [Publisher](https://www.tandfonline.com/doi/full/10.1080/14780887.2024.2382244) |
+
+Eight exact publication records observed, seven primary/co-publication
+candidates directly, one related report spanning two catalogue IDs.
+Targeted follow-up resolves two distinct *primary article leads*:
+RAMESES realist DOI 10.1186/1741-7015-11-21, PMID 23360677,
+PMC3558331 ([NLM](https://pubmed.ncbi.nlm.nih.gov/23360677/));
+meta-narrative DOI 10.1186/1741-7015-11-20, PMID 23360661, PMC3558334
+([NLM](https://pubmed.ncbi.nlm.nih.gov/23360661/)).
+Never merge these obligations or use the development report as the
+primary source; preserve co-publication and shared development links,
+keep one conservative dependence component for evaluation. Nine
+catalogue IDs now have candidate primary/co-publication leads after
+manual follow-up, but zero newly qualified sources/independent positives.
+Do not subtract nine from the 122 persistent identity-gap denominator
+until the responsible owner reconciles identities against exact editions.
+
+Additional source routes, observed publicly and assigned to Layout:
+- [CHART interactive checklist](https://equator-network.org/reporting-guidelines/chart/chart-checklist.html)
+  identifies BMJ Medicine DOI 10.1136/bmjmed-2025-001632; separate full and
+  abstract forms. [EQUATOR](https://equator-network.org/reporting-guidelines/chart/index.html)
+  records simultaneous publication. Reconcile HTML/Word/PDF and edition.
+- [CHEERS source page](https://equator-network.org/reporting-guidelines/cheers/index.html)
+  identifies downloadable PDF/interactive checklist and multiple journals;
+  BMJ DOI 10.1136/bmj-2021-067975. Distinguish the checklist's rights
+  statement from journal-copy rights and record exact file bytes.
+- [STROBE-nut](https://equator-network.org/reporting-guidelines/strobe-nut/index.html)
+  lists PLoS Med PMID 27270749 and Nutrition Bulletin PMID 27587981;
+  fillable checklist in explanation/elaboration supplement.
+- Publisher pages for music interventions (Table 1) and Big Q qualitative
+  (Table 1 with CSV option) give structured manifestation candidates.
+- [ICMJE](https://www.icmje.org/news-and-editorials/updated_disclosure_form_2021.html)
+  replaced the older form in 2021; do not silently substitute edition.
+- [WIDER derived checklist](https://link.springer.com/article/10.1186/1748-5908-8-52)
+  has staged DOCX supplements; distinct from original recommendations.
+- [Be PRECISE](https://www.equator-network.org/reporting-guidelines/reporting-guidelines-for-precision-medicine-research-of-clinical-relevance-the-beprecise-checklist/),
+  [SUCCEED](https://equator-network.org/reporting-guidelines/succeed/index.html)
+  and [SOS-Prehab](https://equator-network.org/reporting-guidelines/sos-prehab/index.html)
+  list downloadable checklist assets.
+- [RATS](https://www.equator-network.org/reporting-guidelines/qualitative-research-review-guidelines-rats/)
+  is a 2003 BMJ Books chapter (Clark, pp 219-235): seek exact library/publisher version.
+- [HuGENet](https://www.researchgate.net/publication/254247831_The_HuGENet_HuGE_review_handbook_version_10)
+  is an author-deposit lead for 2006 handbook v1.0, corroborated by
+  EQUATOR; independently verify archival/institutional provenance and rights.
+All twelve supplementary lead records and exact batch/source-blob IDs
+retained in local manual-identity-check.json SHA-256
+a2cde67ff47e90febed6a6e836e7f03e9e7f48c2dc66fab7e1ef818bccf6b527.
+No downloaded checklist, reuse/rights determination, canonical source
+repin or independent reference. Layout consumes this handoff; do not
+run duplicate document intake. Next search cycle preserve related-report
+roles and favor new qualified primary identity evidence, not repeat the
+shared related PMID as if it were either primary checklist.
+
+Historical actual yield/cost: executable recovery_yield.py joins exact
+census 15031534787 and legacy canary 15115248937 at source revision and
+source-blob level, verifies exact identifier bindings, counts provider
+responses and deduplicates work IDs, retains source route, query type,
+observed age, overlapping study types and provisional family proxy.
+11 requests, 7 exact responses, 4 distinct work IDs and 4 catalogue IDs;
+30.465917144 seconds recorded per-request processing, 210382 response
+bytes for 9/11 responses (2 absent, not zero). No dollar/full-runtime
+or document-acquisition cost inferred.
+
+| Provider | Requests | Exact | Unique work IDs | Observed seconds |
+| --- | ---: | ---: | ---: | ---: |
+| Crossref | 5 | 3 | 3 | 0.407233488 |
+| OpenAlex | 3 | 3 | 3 | 0.386727442 |
+| Europe PMC | 3 | 1 | 1 | 29.671956214 |
+| Deduplicated total | 11 | 7 | 4 | 30.465917144 |
+
+Link-ID route 9 requests/7 exact/30.1761 s; title route 2/0/0.2899 s.
+Observed publication age 0-4 years: 4/4 exact, 10+ years 2/2,
+unknown 1/5; ascertainment and route confounding, not age effect.
+Clinical trial labels 5/7, experimental 3/4, observational 1/4,
+systematic review 2/2, other 1/2, unspecified 0/1; overlapping strata,
+not independent family counts. Family-proxy summaries retained, no
+independent family or provider superiority claim. Generated historical-yield.json
+SHA-256 14f04dc2aef9deca2af7b02d95e355222985cc74269b145d80ed1d76c7c4b867.
+Re-run using the existing fixed input ZIPs; default hosted planning
+now also retains this receipt.
+
+### Native compiler candidate feasibility; H-002 remains a live hold
+
+Upstream exact main 444c5199 tree 0929bd9b17b81d98f8b59cca2d41367f8f95aafc
+remains unchanged. SearchrightEngine::compile_strategy invokes the real
+QueryCompiler; CLI compile calls that facade. Engine execute_search rejects
+network capability other than Disabled or policy.live_enabled, and CLI apply
+requires trusted host verification. Actual upstream #831 remains open.
+Do not declare the binary admitted or invoke any lower-level live path.
+
+An explicit label run-searchright-compiler-canary extends the existing
+read-only hosted recovery workflow. Fetch exact public upstream source/tree
+and locked dependencies in disposable runner; then compile actual
+searchright-cli with the exact Rust 1.97.1 toolchain, locked offline Cargo,
+unprivileged separate network namespace and cleared environment. No
+provider credentials, no runtime network, no live calls, no production
+dependency, no release. Probe all eight exact existing strategies using
+the native CLI, validate actual upstream compiled schema, retain exact
+strategy binding, binary digest, warnings/loss/fidelity, time, RSS and
+failures. Test upstream fixture_execution_previews_then_commits_without_network
+offline, including its explicit live-denial assertion. Fixture local
+writes are temporary test state only; no production apply. If toolchain,
+dependency fetch, isolation, build, compile or test fails, retain actual
+stage/exit and logs; never fall back to host networking. No successful
+compile or authorized host asserted before actual receipt. An isolated
+compiler feasibility result cannot clear upstream supply-chain/privacy
+gates or H-002, and no real native search can run until its owner supplies
+the qualified host. Preserve actual old comparator and manual leads as
+separate evidence, not implicit execution fallback.
+
+Local RED missing modules, GREEN four focused tests passed (historical
+dedup/resource counts and ID mismatch; compiler binding, warnings,
+authority false, bounded held batch). Exact code/test blobs retained.
+Full repository regression and native compiled/denial receipts pending.
+Reuse existing #158/#111/#95, T01.025/031/052/053/064 and T05.049/063,
+no new canonical or publication registry. #188 latest verified artifact
+15125352116 SHA-256 ebc1c2ab584bc460f5d4d8fbb6ba0daad3548de74767e2d2a64bb7f9ef54fa42
+still source_observation_only for TRIPOD+AI/STROBE: 52 ordered TRIPOD IDs,
+46 exact rows; STROBE no independently comparable compound rows.
+Research-use approval does not establish public redistribution or
+reference independence. Layout retains exact source/rights/anchor
+and blinded lock; #183 join ready but no qualified ledger to execute.
+No production or scientific promotion. Rollback isolated successor
+increment; original #191 plan and evidence remain.
