@@ -344,3 +344,115 @@ control is retained (1.00/1.00 word/char R@5, fixed-pool 1.00/.95), not
 pooled with costing. Instructed Qwen+BGE is the strongest observed
 candidate-generation comparator here, not an adoption claim; focus on
 pool misses and common misses before further ranking experiments.
+
+
+## Shared audit handoffs — imported actual stage evidence
+
+Receiving main 776ed1dbfbe19d16365310ef0fa07d29a793611a includes #187 (source-anchored graph and factorial);
+its changed paths do not overlap this lane. Keep the other writers and their
+actual execution revisions. The sole shared research receipt convention is
+the preceding section and [row/ID constructor](recall_handoff.py) here;
+no new production or publication schema or case registry. The full stable
+case ID is SHA-256 of compact sorted-key UTF-8 JSON array
+[namespace, reference digest, original local identity]; arm is excluded.
+Preserve original IDs/anchors and exact receipt references. Reference tier
+and namespace must stay attached; stage states not observed remain unknown.
+Positive units are separate: editorial associations, layout facts, typed spans,
+relevance associations and equivalent pairs. Summaries are per namespace/arm,
+not pooled across the 175 distinct IDs.
+
+Executed import of exact original costing audit plus Layout handoff
+[#158 comment 7189323646](https://github.com/edithatogo/standards_check/issues/158#issuecomment-7189323646),
+Orthogonal [7189300653](https://github.com/edithatogo/standards_check/issues/158#issuecomment-7189300653)
+and Offline #184. Artifact pins in recall_handoff.py: E9 15100692740,
+E10 15105999587, E11 15105947458, Offline 15106112148 and intake
+15106576904; all independently verified. #185's local heading receipt
+is consumed without rerunning its benchmark (optional input, exact pin).
+No model calls or new labels. Six focused tests passed (three new after
+initial missing-module RED, three previous). Actual local import:
+1,254 arm-specific rows, 175 distinct reference IDs, nine separate
+unexecuted control proposals, five source-acquisition holds, zero
+independent positives. Local wall 1.00 s, RSS 108436 KiB; no model
+downloads. Receipt SHA-256
+6dda611871f462f1c2cf24282769e9185dd2a891304508a6b8c5f839a328be69.
+Source and test blob hashes 44ba9f73ee4d2b3f7c22bd567de6b27b0932f00c and
+21871181e586cc601e175e64923d8361de3ab520 match locally executed files.
+
+| Namespace (separate denominator) | Observed result |
+| --- | --- |
+| E9, 8 structural facts including 4 rows | pdfplumber 3 content-corrupted rows, Poppler 0; all 4 other facts preserved; manual region anchors distinct from observed line locators |
+| E10, 17 spans | rule / GLiNER / clause-names / operator-first exact misses 3 / 16 / 15 / 17; no learned unique exact hit; invalid-output abstentions zero |
+| E11, 17 relevance associations | original word pool misses 0, review misses 2; char pool misses 1, further review miss 1; heading generation 0 misses for both; char fixed pool still misses 1 |
+| E12 Offline, 8 equivalent synthetic pairs | head-only: evidence incomplete and strict NLI abstained on all 8 (both-failed overlap 8/8); expanded/terminal: bundle complete, strict NLI 8/8, proof-required abstained on all 8; zero actual review resolutions |
+
+E12 uses complete as *synthetic evidence-bundle* completeness only, not
+independent source/evidence sufficiency or proof. Unsupported proof is a
+withheld positive relative to these labels, not known rejection or error
+in safe policy. No fragment-rank-to-pair-rank substitution. The original
+24-case five-class and separate formal controls remain in #184, not pooled
+with the positive-only eight-pair subset. Source and pair shortlist/rank
+unobserved, so first-established end-to-end attribution remains unresolved.
+E9/E10 exact fact/span observations are not end-to-end pair success.
+All five source-intake failures remain source-availability holds, not
+extraction false negatives. No independent-reference freeze.
+
+### Common misses (costing editorial diagnostic)
+
+For 18 shared BGE/Qwen-fusion top-ten pool misses, use the already
+retained full rankings, not a new model run. Ten have best dense rank
+11–15; eight remain outside 15 for both. Three recoverable by each of
+the plain and parent-topic lexical comparators at ten, four in their
+union. Seven AGREE-DT, four CHEERS, two CHEERS-VOI, three GHCC and
+two iDSI. Four diagnostic-pathway, three results-disaggregation and
+two price-provenance associations; others are dispersed. Retain all
+original IDs/full ranks in the handoff result. These are hypothesis
+generators, not independently verified errors or a valid oracle-driven
+operational allocation. Any deeper or hybrid pool trial must use a
+predeclared label-blind policy across all queries at equal budget;
+Offline owns evidence acquisition policy. Do not tune on these misses.
+
+### Orthogonal ID allocation (proposals, not observed positives)
+
+Use namespace PRISMA-proposed and source pack Git blob
+318b0786e195ee9b6ccb5b0a39ade117ce3c6a2c at prior main 08e86696.
+Retain the source parent anchor(s) exactly; proposed subclause/bundle
+interpretations remain noncanonical. ID prefixes for orientation only
+(full 64-character IDs in receipt):
+
+| Original scenario key | Prefix |
+| --- | --- |
+| methods-results | 5baad1e93283 |
+| automation-scope | f9637eda7595 |
+| parent-child | a98c844046ba |
+| complete-bundle | 82b3010298fe |
+| sought-collected | 7f9cfb7b12c4 |
+| registration-protocol | 94e9d9e041b3 |
+| analysis-level | 48abd3044269 |
+| heterogeneity-sensitivity | a19765da93b7 |
+| source-only-evidence | 9291e39f2ad5 |
+
+Proposals are development scenarios, not independently labelled positives.
+No automatic conversion of the nine into observed failures, no new
+registry or experiment ID. Orthogonal retains actual definition/directional
+verification; Offline retains proof/evidence-bundle outcomes. Future
+independent label lock must precede model runs; do not share reference IDs
+or gold relations with model inference. For one-to-many positives, bind
+one reference obligation to its required bundle (all applicable components),
+preserve child IDs and separate directional scope; no duplicate credit.
+
+Reproduce with existing three costing ZIPs and five newly joined ZIPs:
+```sh
+PYTHONPATH=. python -m pytest -q research/model-placement/test_recall_audit.py research/model-placement/test_recall_handoff.py
+PYTHONPATH=. python research/model-placement/recall_audit.py --artifacts /path/to/artifacts --inputs . --output recall-audit.json
+PYTHONPATH=. python research/model-placement/recall_handoff.py --artifacts /path/to/artifacts --audit recall-audit.json --heading /path/to/graph-context-receipt.json --output handoff.json
+```
+
+Added read-only opt-in label run-shared-recall-audit to the existing
+five-class workflow: exact receiving checkout, test first, read-only
+Actions token downloads fixed public synthetic/editorial ZIPs, all hashes
+checked by the existing audit and handoff. Full source-file pins required;
+no projection-only hosted path. Optional locally retained #185 heading
+receipt is explicitly absent in hosted run rather than rerun or substituted.
+No model inference or production dependencies. Actual full-checkout run
+and new exact-head checks remain required. Dedicated offline security
+runner remains a separate gate; no bypass.

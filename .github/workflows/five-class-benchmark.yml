@@ -20,6 +20,10 @@ on:
       - "scripts/witness_adjudication.py"
       - "tests/test_witness.py"
       - "tests/test_condition_adjudication.py"
+      - "research/model-placement/recall_audit.py"
+      - "research/model-placement/recall_handoff.py"
+      - "research/model-placement/test_recall_audit.py"
+      - "research/model-placement/test_recall_handoff.py"
       - ".github/workflows/five-class-benchmark.yml"
   workflow_dispatch:
 
@@ -31,6 +35,61 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  shared-recall-audit:
+    # Explicit, same-repository, read-only artifact replay; never invokes a model.
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-shared-recall-audit'
+    permissions:
+      contents: read
+      actions: read
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      HF_HUB_DISABLE_TELEMETRY: "1"
+      PYTHONPATH: "."
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: "3.12"
+      - name: Test coordinator's exact input and attribution boundaries
+        run: |
+          mkdir -p "$RUNNER_TEMP/recall-evidence" "$RUNNER_TEMP/recall-artifacts"
+          git rev-parse HEAD > "$RUNNER_TEMP/recall-evidence/commit.txt"
+          python -VV > "$RUNNER_TEMP/recall-evidence/python-version.txt"
+          python -m pip install --disable-pip-version-check pytest==9.2.0
+          python -m pytest -q research/model-placement/test_recall_audit.py research/model-placement/test_recall_handoff.py
+          sha256sum research/model-placement/recall_audit.py research/model-placement/recall_handoff.py reconciliations/costing/costing-standards-registry.json reconciliations/costing/costing-item-mappings.json > "$RUNNER_TEMP/recall-evidence/input-sha256.txt"
+      - name: Fetch only existing public development receipts by fixed artifact ID
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          for id in 15088716936 15090704998 15105542356 15100692740 15105999587 15105947458 15106112148 15106576904; do
+            timeout 60 gh api --method GET "repos/$GITHUB_REPOSITORY/actions/artifacts/$id/zip" > "$RUNNER_TEMP/recall-artifacts/github-actions-artifact-$id.zip"
+          done
+      - name: Reproduce full-file pinned audit and join existing stage evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python research/model-placement/recall_audit.py --artifacts "$RUNNER_TEMP/recall-artifacts" --inputs . --output "$RUNNER_TEMP/recall-evidence/recall-audit.json"
+          python research/model-placement/recall_handoff.py --artifacts "$RUNNER_TEMP/recall-artifacts" --audit "$RUNNER_TEMP/recall-evidence/recall-audit.json" --output "$RUNNER_TEMP/recall-evidence/handoff.json"
+      - name: Retain research receipts, including partial failures
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: shared-recall-audit-${{ github.sha }}
+          path: ${{ runner.temp }}/recall-evidence/
+          if-no-files-found: error
+          retention-days: 90
+
   controlled-consensus:
     # Deliberate experiment authorization after required deterministic checks.
     if: github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-semantic-benchmark')
