@@ -375,6 +375,55 @@ a full typed costing candidate audit, family-level selective risk evaluation and
 release-overlap integration. Real rule, reference, semantic mapping and corpus qualification
 remain held. No canonical admission or additional experiment registry.
 
+
+### E9–E11 bounded opt-in sequence — 26 November
+
+Extend the existing specialist protocol and its immutable E9–E14 contract; no new
+registry, canonical schema, admission path or observed publication claim.
+
+- **E9 (T01.025, T01.029):** run the synthetic layout comparison first, using the
+  existing PDF fixture and independent Poppler layout command against the current
+  pdfplumber page extractor. Shared decoder; score exact rows, nesting, footnotes
+  and qualifier edges against authored page/region references. Retain incorrect
+  and missing facts and costs. The [development receipt](../../../docs/research/e9-layout-development-20261126.md)
+  is not a source-rights decision or a neural-model qualification. Next: exact
+  repository-runtime replay, independently annotated qualified families, then
+  one pinned Granite-Docling challenger if residual layout loss merits it.
+- **E10 (T01.027, T01.029), planned after E9:** compare one compact extractive
+  GLiNER2.5-small candidate (the protocol's proposed checkpoint, not yet qualified)
+  against existing classical condition/modality/negation rules on identical
+  authorized source strings. Freeze model revision, weight/tokenizer/config hashes,
+  licence and runtime before inference. Exact typed character-offset spans must
+  round-trip to source. Measure precision/recall/F1, missed applicability,
+  conditions, exceptions, nested spans, chunk-boundary losses and abstentions,
+  including empty/unresolved cases. No generation, canonical writes or remote
+  inference. Separate bounded opt-in job and receipt.
+- **E11 (T01.050, T01.053, T01.064), planned after E9:** reuse existing candidate
+  ranking, stable IDs, complete-pool checks and paired-retrieval metrics in
+  scripts/costing_retrieval.py and requirement-graph contract. Freeze a common
+  eligible universe and lexical incumbent rankings; use source-anchored parent
+  heading, explicit cross-reference and dependency edges only. Compare lexical
+  ranking vs a single deterministic one-hop weighted graph bonus, with weights
+  and tie-breaking frozen on development families, no gold-derived edges and
+  no changes to eligibility. Report macro-family recall@5, per-query paired
+  gained/lost relevant IDs, empty queries, candidate conservation and cost;
+  graph edges are advisory, never equivalence evidence. Keep independent
+  directional evidence and applicability/rights gates. Separate opt-in job.
+
+E10/E11 are prospective work, not executed. Use T01.052 and T05.049 for confirmatory
+family-component splits: editions, derivatives, translations and extensions stay
+together, references and eligible universes locked before evaluation. Each arm
+records exact code/data/model/runtime pins, licences, artifact/download bytes,
+wall time and peak process memory; retain failed receipts and distinct denominators.
+Use only rights-cleared or synthetic inputs in public CI.
+
+E9 hosted replay 45787042673 passed on merge revision `3d8c6726`; verified
+artifact and coverage-blocker repair are in the existing E9 receipt. Related
+PRs #183–185 retain distinct placement experiments: build on #185's synthetic
+span/graph controls, not a duplicate ceiling benchmark. T01.052 source and
+family intake holds remain; E10/E11 require actual separately qualified
+checkpoint/graph comparisons and independent references.
+
 ### Evidence-action replay development (26 November)
 
 T01.064 / #158: [bounded evidence-action replay](../../../docs/research/evidence-action-replay-20261126.md)
