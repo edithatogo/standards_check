@@ -8,6 +8,7 @@ on:
       - "scripts/layout_development.py"
       - "tests/layout_fixture.py"
       - "tests/test_layout_development.py"
+      - "tests/test_layout_runtime.py"
       - "tests/test_compare_ecoevo_formats.py"
       - ".github/workflows/e9-layout-development.yml"
 
@@ -57,7 +58,7 @@ jobs:
           python -VV > "$RUNNER_TEMP/e9-receipt/python-version.txt"
           python -m pip freeze > "$RUNNER_TEMP/e9-receipt/environment.txt"
       - name: Test shared decoder and fixture builder
-        run: python -m unittest tests.test_layout_development -v
+        run: python -m unittest tests.test_layout_development tests.test_layout_runtime -v
       - name: Execute both independent reader arms and retain failures
         shell: bash
         run: |

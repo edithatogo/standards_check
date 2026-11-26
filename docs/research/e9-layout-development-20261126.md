@@ -75,3 +75,60 @@ The follow-up aligns the script with the maintained double-quote/multiline style
 local Python AST comparison was exactly equal, and all five focused tests passed
 again. Formatted script SHA-256 `6dd941156df7a037e6b20d4ec2b971f556a6c8de4d2247e53f405491cf124e15`.
 Ruff/Bandit are not installed locally; hosted full checks remain required.
+
+## Verified hosted replay and coverage repair
+
+[Run 45787042673](https://github.com/edithatogo/standards_check/actions/runs/45787042673)
+completed successfully; exact PR head `718b3c89968d1ab853514b7cd7fbe51964482e54`, checked-out merge
+revision `3d8c6726fb8429f1d781dd113cb3d5261e009dd6`. The actual
+[ZIP artifact 15100692740](https://github.com/edithatogo/standards_check/actions/runs/45787042673/artifacts/15100692740)
+was downloaded and independently SHA-256 checked:
+`f7155c826e7e9e601855f8e54e38220e185c05f622429e029205fb7e7261d7a6`.
+Both JSON members were read and agree with the recorded source hashes,
+all four row labels and all four structure/edge labels. Runtime: Python
+3.12.16, pdfplumber 0.11.11, Poppler 24.02.0 (Ubuntu build
+24.02.0-1ubuntu9.11). Hash-pinned wheel downloads 23,112,215 bytes,
+zero model weights. Package installation and exact environment are retained
+in the ZIP. The individual reader JSON SHA-256 values are
+`3b57cb524e42e4312480f28796c51e0f3d3dca45240483efc0882ef906075536`
+(pdfplumber) and
+`ffe1693c3f6618cec1ad92f4621dc1a63146a6d9714c32ebcc1c0d4830812393`
+(Poppler). Both use script hash
+`6dd941156df7a037e6b20d4ec2b971f556a6c8de4d2247e53f405491cf124e15`.
+
+| Endpoint | pdfplumber | Poppler |
+| --- | ---: | ---: |
+| Exact rows TP/FP/FN | 1/3/3 | 4/0/0 |
+| Nested links TP/FP/FN | 1/0/0 | 1/0/0 |
+| Footnote TP/FP/FN | 1/0/0 | 1/0/0 |
+| Qualifier links TP/FP/FN | 2/0/0 | 2/0/0 |
+| Elapsed seconds | 0.108914968 | 0.013145135 |
+| Peak individual process RSS KiB | 40868 | 24152 |
+
+These are single observations in a hosted CPU lane, not adoption evidence.
+The archive contains all original per-case predictions/regions and failures;
+retain it separately from the prior local-overlay receipt.
+
+Ordinary assurance run 45787043063: 850 Python tests passed, 3 skipped,
+overall branch-inclusive Python coverage 91.30%. However Codecov patch
+check 139800210086 reported 57.02% (target 90%), and the module itself
+60.48% coverage. Do not merge until the protected checks pass.
+
+Add eight regression/integration tests for actual PDF adapters, identical
+fixture bytes, malformed output, ambiguous notes, cross-page nonbinding,
+runtime mismatch, page-count mismatch, successful and failed CLI receipts.
+The local isolated overlay used the exact E9 script hash and both original
+PDF hashes above, plus the unchanged normalization helper and fixture
+builder; Python 3.13.5 / pdfplumber 0.11.9 / Poppler 25.06.0.
+Executed `python -m coverage run --branch --source=scripts.layout_development -m unittest tests.test_layout_runtime -v`;
+eight passed; 121 statements, one uncovered, 46 branches, one partial;
+99% module coverage. This is not Codecov or repository-wide coverage.
+No threshold or experiment decoder changed. Hosted exact-head checks pending.
+
+PRs #183–185 are adjacent research lanes. #185 reports complementary
+synthetic region crops, classical span tagging and graph scoring. Do not
+repeat its easy ceiling-limited graph comparison or claim pretrained-model
+qualification from a fitted linear classifier. E10 should qualify the
+actual compact extractive checkpoint, E11 should use a non-ceiling
+independently labelled candidate universe. Source intake remains held per
+the existing independent-family record; no real guideline documents added.

@@ -416,3 +416,10 @@ together, references and eligible universes locked before evaluation. Each arm
 records exact code/data/model/runtime pins, licences, artifact/download bytes,
 wall time and peak process memory; retain failed receipts and distinct denominators.
 Use only rights-cleared or synthetic inputs in public CI.
+
+E9 hosted replay 45787042673 passed on merge revision `3d8c6726`; verified
+artifact and coverage-blocker repair are in the existing E9 receipt. Related
+PRs #183–185 retain distinct placement experiments: build on #185's synthetic
+span/graph controls, not a duplicate ceiling benchmark. T01.052 source and
+family intake holds remain; E10/E11 require actual separately qualified
+checkpoint/graph comparisons and independent references.

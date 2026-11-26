@@ -195,3 +195,11 @@ splits), exact models/runtime/source hashes, authorisation, reference scope,
 denominators, metrics and resource/harm limits. Run E10 and E11 in separate
 opt-in lanes only after development qualification; failed/abstained cases
 remain in denominators and all negative observations are retained.
+
+E9 actual hosted comparison passed with both reader versions pinned; the
+[verified hosted receipt](../../../docs/research/e9-layout-development-20261126.md#verified-hosted-replay-and-coverage-repair)
+records the downloaded artifact, source hashes, costs, and the separate
+Codecov patch failure (57.02% vs 90%). Eight new local tests cover the runner
+at 99% branch-inclusive module coverage; protected replay still required.
+Reconcile #183–185 with #182 before integration; do not conflate their
+synthetic and retained-replay comparators with independent scientific results.
