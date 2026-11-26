@@ -89,3 +89,26 @@ def test_follow_rejects_illegal_or_missing_action_and_mismatched_replay():
     next(r for r in other if r['history'])['family'] = 'unexpected'
     with pytest.raises(ValueError, match='identity'):
         policy_study(other)
+
+
+def test_parent_first_comparator_preserves_original_arms_and_gate():
+    cases = json.loads(Path('contracts/examples/semantic-reconciliation-synthetic-v1.json').read_text())['cases']
+    rows = build_replay(cases)
+    baseline = policy_study(rows)
+    expanded = policy_study(rows, compare_parent_first=True)
+    roots = {r['id']: r for r in rows if not r['history']}
+    for name, arms in expanded['comparisons'].items():
+        parent = arms.pop('parent_first')
+        assert arms == baseline['comparisons'][name]
+        assert parent['gated_false_equivalence'] == 0
+        assert parent['missed_equivalence'] == 8
+        assert parent['referrals'] == 6 and parent['review_resolved'] == 0
+        assert len(parent['cases']) == 24
+        assert all(
+            row['history'][0] == ('parent' if roots[row['id']]['parent_link'] else 'expand')
+            for row in parent['cases']
+        )
+        if name == 'exact_one':
+            assert (parent['complete'], parent['gated_correct'], parent['calls'], parent['reranks']) == (23, 14, 24, 0)
+            assert parent['hindsight_regret'] == pytest.approx(0)
+    assert expanded == baseline

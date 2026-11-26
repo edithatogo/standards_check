@@ -147,7 +147,7 @@ def hindsight(initial, lookup, cap, adaptive):
     return max(outcomes, key=lambda outcome: (outcome[0], -len(outcome[2])))
 
 
-def policy_study(rows):
+def policy_study(rows, *, compare_parent_first=False):
     lookup = {(r["id"], tuple(r["history"])): r for r in rows}
     if len(lookup) != len(rows):
         raise ValueError("duplicate replay state")
@@ -182,15 +182,20 @@ def policy_study(rows):
         best = max(permutations(ACTIONS), key=fixed_value)
         fixed_orders[name] = list(best)
         arms = {}
-        for mode in ("rule", "best_fixed_dev", "bandit", "fitted_q"):
+        orders = {"rule": ACTIONS, "best_fixed_dev": best}
+        if compare_parent_first:
+            orders["parent_first"] = ("parent", "expand", "deep_rerank")
+        for mode in (*orders, "bandit", "fitted_q"):
             weights = (
                 fit(rows, mode, cap, COST, adaptive) if mode in ("bandit", "fitted_q") else None
             )
 
-            def select(state, weights=weights, mode=mode, best=best, cap=cap, adaptive=adaptive):
+            order = orders.get(mode)
+
+            def select(state, weights=weights, order=order, cap=cap, adaptive=adaptive):
                 if weights is not None:
                     return choose(state, weights, cap, adaptive)
-                return ordered(state, ACTIONS if mode == "rule" else best, cap, adaptive)
+                return ordered(state, order, cap, adaptive)
 
             cases = []
             for initial in test:
@@ -279,12 +284,15 @@ def main():
         type=Path,
         default=Path("contracts/examples/semantic-reconciliation-synthetic-v1.json"),
     )
+    parser.add_argument("--compare-parent-first", action="store_true")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     raw = args.fixture.read_bytes()
     if hashlib.sha256(raw).hexdigest() != FIXTURE_SHA:
         raise ValueError("unqualified fixture bytes")
-    result = policy_study(build_replay(json.loads(raw)["cases"]))
+    result = policy_study(
+        build_replay(json.loads(raw)["cases"]), compare_parent_first=args.compare_parent_first
+    )
     result["fixture_sha256"] = FIXTURE_SHA
     args.output.write_text(json.dumps(result, indent=2, allow_nan=False) + "\n")
 
