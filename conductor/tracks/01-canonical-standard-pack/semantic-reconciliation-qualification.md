@@ -180,3 +180,98 @@ negative result rather than continuing to tune on familiar controls. The prospec
 d1-2B experiment remains subject to #159 and the existing #158 protocol, not a substitute for
 qualified reference evidence. Do not authorize further model runs or merge this draft until the
 predeclared scientific gate and all current-head protected checks are satisfied.
+
+## 26 November review handoff — engineering passed, scientific hold
+
+### Engineering acceptance on the tested head
+
+[Assurance 45751485991](https://github.com/edithatogo/standards_check/actions/runs/45751485991)
+passed on head `2779f19ec45092137fcdc3baaa0617308692723c`, tested merge
+`0f3a01d536f5a70e82d3aaaaced9d75b4c41d37c`, receiving base
+`341f5388bae99e7a5be9f7a29d04e2ed65b7f6dc`. All seven required workflow groups
+passed; optional Offline AI security was still queued at observation.
+[Python coverage job](https://github.com/edithatogo/standards_check/actions/runs/45751485991/job/139681007791)
+reported **724 passed, 3 skipped, 2 warnings; 91.59% combined branch coverage** versus
+the unchanged 90.50% floor. Blind adjudication 90.42%, five-class benchmark 95.31%,
+semantic benchmark 99.05%, witness adjudication 100%. Workflow policy, all three
+platforms, dependency review, mutation boundary, API and Rust coverage and Codecov
+upload jobs passed. This verifies software behavior, not actual model quality.
+Codecov patch status is advisory and not inferred from successful upload.
+
+### Fresh-family eligibility and pre-freeze reservation
+
+Downloaded and independently verified [main source census 45740480356, artifact 15080683676](https://github.com/edithatogo/standards_check/actions/runs/45740480356/artifacts/15080683676).
+ZIP SHA-256 `2aa6e7abc1564ae0966973a98417c48797257d1ad57cfa7a854f15310a4835ed`;
+survey SHA-256 `9bd9f5acc05c68f0e85796b5f7d9a83e8d6885c0ca6be98c8b5801ddd3e6e206`;
+EQUATOR revision `388e294f05d4d55cf6fc01ddf56b6ad48577b190`.
+All eight priority manifestations are held: ARRIVE, STROBE, STARD, TRIPOD+AI,
+CONSORT and SPIRIT BMJ, and CONSORT and SPIRIT PLOS. The PLOS transport attempts
+returned OSError, Europe PMC timed out and PMC OAI did not provide usable sources.
+The census records 720 directory identities; of 186 bulk records, 183 were deferred,
+two held, and one inventory observed but not reconciled. No canonical packs promoted.
+
+Reuse the existing [independent-family intake](../../source-reconciliation/independent-family-intake-20261126.md)
+and source retrospective rather than creating another crawler or duplicating acquisition.
+Reserve these prospective slots before seeing new inference results. These are **not** an
+eligible frozen sample, a source repin, or a publication design freeze.
+
+| Independence component | Prospective slot | Candidate evidence and unresolved gate |
+| --- | --- | --- |
+| ARRIVE 2.0 | Development | PLOS DOI 10.1371/journal.pbio.3000410; [issuer checklist resources](https://arriveguidelines.org/resources/author-checklists). The existing article receipt held 21 main-row fingerprints for block boundaries; independently compare ordered subitems and wording in the issuer and journal formats and verify exact source rights. |
+| STROBE 2007 | Held out 1 | PLOS DOI 10.1371/journal.pmed.0040296; [issuer combined checklist, PDF and Word](https://www.strobe-statement.org/checklists/). Verify the combined edition and conditional design-specific branches, independent anchors and manifestation-specific licence; [issuer](https://www.strobe-statement.org/?id=checklists) requests contact before republication. |
+| STARD 2015 | Held out 2 | DOI 10.1136/bmj.h5527; [EQUATOR source and co-publications](https://equator-network.org/reporting-guidelines/stard/). BMJ article footer says CC BY 4.0 but footnote says CC BY-NC 4.0; retain rights hold until the exact manifestation and use are resolved. Check the complete ordered item/subitem sequence against independent representations. |
+| TRIPOD+AI and related prediction guidance | Reserve/held | Prior attempted adjudication source was held; avoid allocating any potentially previously exposed component without an explicit leakage audit. |
+| PRISMA descendants, CHEERS, CONSORT/SPIRIT | Historical only | Exclude from the new confirmatory components; related editions, extensions, translations and co-publications do not count as separate independent families. |
+
+Local exact-byte transport for issuer ARRIVE and STROBE downloads and PLOS ARRIVE
+article failed DNS resolution. A separate ARRIVE download attempt also failed. Web source
+discovery establishes the alternate source routes, not receipt-level source qualification.
+No new source wording was acquired, recorded or redistributed by this increment.
+Current eligible fresh family count: zero; no actual frozen pair ledger or confirmatory run.
+Do not change the candidate splits after outcomes are seen. If a component fails eligibility
+or independence, make and document a prospective amendment before any predictions.
+
+On source qualification, freeze exact bytes, source-local rights, independent ordered structure
+and wording/anchors, connected family components, eligible complete-pool denominators and
+selection algorithm in the existing versioned publication contract. For the bounded formal
+control diagnostic retain the same five classes, original development and held-out thresholds
+(at least 10 consensus, 50% coverage, 90% accuracy, all five classes and two independent held-out
+families; both dev agents at least 80%). Use the existing condition-v3 judge protocol unchanged,
+with genuinely fresh sources, and retain every failure. For natural-source E2 use the separate
+prospective three-agent source-only protocol in the publication plan, not truth-table labels
+or a two-model vote as ground truth. Freeze the actual eligible sample and numerical analysis
+limits before either confirmatory execution. No run label or model acquisition now.
+
+### Paired historical complementary-model assessment (descriptive only)
+
+Downloaded the three original artifacts and verified each ZIP hash against the GitHub artifact
+metadata. Joined MiniLM and DeBERTa records by unique pair ID; checked matching reference labels
+and family on both sides. Retain constructed held-out controls only for this table. These are
+adaptively investigated historical datasets, not an independent confirmatory sample.
+
+| Receipt | N | Both correct | MiniLM only | DeBERTa only | Both wrong | Disagreements | Shared same wrong |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| [14922043306](https://github.com/edithatogo/standards_check/actions/runs/45398138785/artifacts/14922043306) | 20 | 12 | 0 | 6 | 2 | 7 | 1 |
+| [14924523529](https://github.com/edithatogo/standards_check/actions/runs/45400872869/artifacts/14924523529) | 30 | 16 | 0 | 13 | 1 | 13 | 1 |
+| [14926383953](https://github.com/edithatogo/standards_check/actions/runs/45405499908/artifacts/14926383953) | 30 | 13 | 4 | 12 | 1 | 16 | 1 |
+
+Condition-v3 receipt SHA-256 `e7768d40f843a1743a9bbdb1bed6090c454924f5637983dfcff776f833392a4c`.
+The last row's disagreement flags 12 of 13 MiniLM errors and four of 17 correct MiniLM
+decisions (16 flagged, one shared error remains unflagged). Those four baseline-only
+correct pairs comprise three equivalent and one indeterminate case. Thus disagreement
+may enrich triage, but agreement cannot certify correctness and replacing the baseline
+would lose valid decisions. Historical natural held-out consensus counts: 1/2, 0/3,
+0/2; both comparators disagree with the single usable natural reference. No pooled
+accuracy, confirmatory inference, fixed-budget utility, or production selection claim.
+D1-2B remains the orthogonal typed-decision candidate under #158/#159; no new run
+or performance claim before a fresh reference, pinned local runtime and model assets,
+review budget and adoption limits are frozen.
+
+### Disposition
+
+The maintainer requested ready-for-review status. Engineering and protocol review may proceed
+without claiming the scientific gate has passed. Do not enable auto-merge or merge this PR
+until actual eligible-family/reference qualification and current-head required checks pass.
+No threshold waiver, canonical promotion or scientific claim. Review should explicitly verify
+the source rights and independence slots, direction adapter, reproducible negative receipts,
+and confirmatory design. Keep #111/#158/#159 and T01.028–030/T01.043/T01.052 open.

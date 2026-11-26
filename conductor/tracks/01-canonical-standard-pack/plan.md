@@ -259,3 +259,12 @@ passed against the extracted relation implementation, with full hosted verificat
 Keep T01.028–030 and T01.043 open: condition-v3 still fails scientific qualification, and the
 new independent-family intake remains held. Do not treat repeat controls or related CONSORT/SPIRIT
 editions as independent confirmatory families. No model execution, auto-merge, or admission.
+
+26 November review handoff (#155): all seven required workflow groups passed on head
+`2779f19`, with [Assurance 45751485991](https://github.com/edithatogo/standards_check/actions/runs/45751485991)
+reporting 724 Python tests passed and 91.59% combined coverage (90.5% floor).
+The [qualification receipt](semantic-reconciliation-qualification.md) now records the hash-verified
+main source census, prospective independent-family intake slots, and paired historical model
+complementarity. Zero of eight priority source candidates qualified for a fresh confirmatory freeze.
+Keep T01.028–030, T01.043 and T01.052 open. Ready for code and protocol review is not ready
+to merge; no auto-merge, new model run, scientific claim or pack promotion.
