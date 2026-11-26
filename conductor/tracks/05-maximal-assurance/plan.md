@@ -160,3 +160,14 @@ T05.048 and T05.049: preserve the [requested model challenger record](../../../d
 - [ ] **T05.062** ([#31](https://github.com/edithatogo/standards_check/issues/31), [#116](https://github.com/edithatogo/standards_check/issues/116)) Extend existing property/fuzz and legacy semantic differential tests, exact finite oracles and retained counterexamples; require current-head and receiving evidence without weakening thresholds.
 
 See the [orthogonal assurance design](../../../docs/research/orthogonal-assurance-20261126.md). Local conformal oracle tests passed in isolation only; no full-checkout or hosted result claimed.
+
+## Orthogonal implementation reconciliation — 26 November
+
+T05.060–062: the [shared implementation receipt](orthogonal-verification-20261126.md)
+records [PR #177](https://github.com/edithatogo/standards_check/pull/177), the original
+failed policy gate, passed bounded functional and coverage jobs, current-main
+reconciliation, and all eight task-level remaining gates. Use one publication under
+[#158](https://github.com/edithatogo/standards_check/issues/158), preserve E1–E14 and
+all negative synthetic outcomes. Keep all three tasks open pending exact-head and
+receiving qualification, the authorized release corpus, wider property/fuzz evidence,
+and an independently frozen scientific comparison. No new approval requirement.
