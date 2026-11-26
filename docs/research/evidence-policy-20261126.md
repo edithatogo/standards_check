@@ -148,3 +148,5 @@ python -m scripts.evidence_policy --compare-parent-first --output evidence-polic
 Keep the upstream PR head stable while it qualifies; this small follow-up
 must be reconciled to receiving main after #184. Rollback removes only the
 opt-in comparator and receipt. The historical default output stays intact.
+
+Protected follow-up: #184 receiving Assurance 45811145369 passed. Parent-first required workflow-policy job 139880152117 failed B008 on a closure default function call; bind `order` before the closure, preserving capture semantics. Six focused tests passed and the full timing-free parent-first report matched exactly. Reconcile disjoint #186 receiving changes at d8384d5a. Fresh exact-head checks required; no scientific promotion.

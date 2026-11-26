@@ -68,5 +68,18 @@
     "original_arms_and_digest_preserved": true
   },
   "claim_boundary": "Post-hoc routing on exposed synthetic family-disjoint replay; parent link guarantees full target in the fixture; no production or independent validation; no wall-time matching.",
-  "hosted": "pending"
+  "hosted": "pending",
+  "protected_followup": {
+    "prior_head": "975e697468bb03710418cf772bb35ed324b78cf9",
+    "workflow_policy_job": 139880152117,
+    "assurance": "failed_B008",
+    "patch_coverage": "passed",
+    "repair_source_blob": "8f5014fb5fc9d98be7001fada750c301badc4d70",
+    "local_tests": 6,
+    "deterministic_output_unchanged": true,
+    "receiving_184_assurance_run": 45811145369,
+    "receiving_184_assurance": "success",
+    "reconciled_main": "d8384d5a4f17069f1c91a3d9b4f23c30860522e2",
+    "exact_head_checks": "pending"
+  }
 }

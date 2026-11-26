@@ -190,9 +190,9 @@ def policy_study(rows, *, compare_parent_first=False):
                 fit(rows, mode, cap, COST, adaptive) if mode in ("bandit", "fitted_q") else None
             )
 
-            def select(
-                state, weights=weights, order=orders.get(mode), cap=cap, adaptive=adaptive
-            ):
+            order = orders.get(mode)
+
+            def select(state, weights=weights, order=order, cap=cap, adaptive=adaptive):
                 if weights is not None:
                     return choose(state, weights, cap, adaptive)
                 return ordered(state, order, cap, adaptive)
