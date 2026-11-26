@@ -73,3 +73,10 @@ promote any results until artifact and code identity are checked.
 Source-family rights, source structure/interpretation review, blinded
 references, family partitions, long-context boundary qualification, and
 scientific acceptance remain held. E11 remains separate.
+
+
+## Hosted execution and disposition
+
+Run [45794639014](https://github.com/edithatogo/standards_check/actions/runs/45794639014), artifact [15104920210](https://github.com/edithatogo/standards_check/actions/runs/45794639014/artifacts/15104920210), SHA-256 `77d5c49007dab891fdf83c48a92b00b051b54210fa6257c21a1816cbb4f35d4b`; downloaded and verified. Merge revision `482817aca80b286da42053ef04d1e5bc498686c0`; script SHA-256 `5572e5b9dfe9a25d33550c517e83ebd840551acaf7e2b50a61b61d11cff7177e`. Python 3.12.16, gliner2 2.2.0, transformers 5.8.0, torch 2.10.0+cpu. Both arms completed with no invalid abstentions. Rules 14 TP / 2 FP / 3 FN (F1 0.848485), GLiNER 1 TP / 6 FP / 16 FN (F1 0.083333); applicability and condition exact F1 zero for neural arm, exception 0.222222. Hosted process measurements: rules 0.003839818 s / 22064 KiB RSS; GLiNER 7.570632449 s / 1141960 KiB RSS. Model weights 295567700 bytes; complete asset and wheel receipts retained. Retain the negative result; no promotion. This is task/configuration-specific, not a general GLiNER conclusion. Next compare fixed label framing variants, boundary overlap vs exact typed spans, and independently supervised configurations with separate family-disjoint confirmation only once source gates pass.
+
+Assurance run 45794638924 found ShellCheck SC2035 at wheel hash glob. Corrected by delimiting options with `--`; no model/evaluator/fixture changes. Codecov patch 98.62% passed at prior exact head; replacement checks required. Offline security was queued.

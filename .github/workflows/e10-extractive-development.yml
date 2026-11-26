@@ -57,7 +57,7 @@ jobs:
           python -m pip download --only-binary=:all: --timeout 30 --retries 2 \
             --index-url https://pypi.org/simple --find-links "$wheelhouse" --dest "$wheelhouse" \
             'torch==2.10.0+cpu' 'gliner2[local]==2.2.0' 'transformers==5.8.0'
-          (cd "$wheelhouse" && sha256sum *.whl) > "$RUNNER_TEMP/e10-receipt/wheel-sha256.txt"
+          (cd "$wheelhouse" && sha256sum -- *.whl) > "$RUNNER_TEMP/e10-receipt/wheel-sha256.txt"
           python -c 'import os,pathlib; p=pathlib.Path(os.environ["RUNNER_TEMP"])/"e10-wheels"; print(sum(f.stat().st_size for f in p.glob("*.whl")))' > "$RUNNER_TEMP/e10-receipt/runtime-download-bytes.txt"
           python -m pip install --no-index --only-binary=:all: --find-links "$wheelhouse" \
             'torch==2.10.0+cpu' 'gliner2[local]==2.2.0' 'transformers==5.8.0'
