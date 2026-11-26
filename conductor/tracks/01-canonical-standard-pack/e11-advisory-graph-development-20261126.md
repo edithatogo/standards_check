@@ -22,3 +22,24 @@ Equal two queries per stratum means macro-stratum recall equals macro-query reca
 ## Next gate
 
 Do not generalize effect size or tune on this fixture and call it confirmatory. Need independently adjudicated rights-cleared family-component splits, full eligible candidate universe, non-ceiling baselines, and edge-type ablations (parent-only, cross-reference-only, dependency-only and shuffled-edge control). Record losses, uncertainty at family level, precision burden, and separate reader/qualifier error sensitivity. Retain existing source intake holds and human or other independently supported equivalence evidence.
+
+
+## Hosted replay and edge-type ablation follow-up
+
+Prior exact-head run [45795402697](https://github.com/edithatogo/standards_check/actions/runs/45795402697) passed; checked merge revision 7c48bc6f1c71ddd953808c35ce95d2d314004610. [Artifact 15103968915](https://github.com/edithatogo/standards_check/actions/runs/45795402697/artifacts/15103968915) downloaded and independently checked SHA-256 f3f106a3b8855eaf8d464fe638a15476327ee9d94411c445e52e3768fff05df2. Reproduced word 0.90→1.00, character 0.90→0.95 and exact paired gains, no losses. Assurance failed Ruff formatting; formatted original script and checked exact Python AST equality. No change to original graph scorer or fixture.
+
+Retrospective all 2^3 edge combinations; same original weights, no fit. Twenty fixed seeds (0–19) permute destinations separately by type, preserve source and destination degree counts, forbid self-edges and require a nonidentity permutation per nonempty type. Rewired records explicitly control-only, never source evidence. All ranked candidates, scores, rewired endpoints, positive gains/losses and seven inclusion-exclusion contrasts per method retained. Fixed positive-only ranking, same 250 eligible pairs. Local Python 3.13.5 overlay: RED missing graph_ablation; GREEN 13 tests pass; 98% branch-inclusive coverage across two graph modules; script blob hashes e2f488bb952748746a88a23a9148033cea70e32a and 33d901fc18c734a967f28c550c8bba05ef70aa31. Initial ablation process 0.87 s and peak RSS 101264 KiB, no model weights. Hosted replay and original full suite required.
+
+| Arm | Word macro R@5 | Char macro R@5 |
+| --- | ---: | ---: |
+| None | .90 | .90 |
+| Parent | 1.00 | .95 |
+| Cross-reference | .95 | .90 |
+| Dependency | .90 | .90 |
+| Parent + cross-reference | 1.00 | .95 |
+| Parent + dependency | 1.00 | .95 |
+| Cross-reference + dependency | .95 | .90 |
+| Full graph | 1.00 | .95 |
+| Rewired control mean (min–max) | .8342 (.7167–.95) | .85 (.70–1.00) |
+
+Parent-only equals full-graph gain. Word parent×cross-reference inclusion-exclusion contrast -0.05; all other higher-order contrasts zero. This is a conditional descriptive contrast, not a population interaction or a test of independent component effects. Full-graph precision@5 .34/.32 versus .30/.30. Random graph can occasionally equal or exceed observed performance; do not interpret as significance. No independent families or confirmed graph benefits. Preserve original artifact and require real-family and independent source reference qualification.

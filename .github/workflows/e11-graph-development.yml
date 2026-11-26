@@ -5,6 +5,8 @@ on:
     types: [opened, synchronize, reopened, labeled]
     paths:
       - "scripts/graph_development.py"
+      - "scripts/graph_ablation.py"
+      - "tests/test_graph_ablation.py"
       - "tests/test_graph_development.py"
       - "tests/fixtures/specialist/graph-retrieval-v1.json"
       - ".github/workflows/e11-graph-development.yml"
@@ -37,8 +39,10 @@ jobs:
           git rev-parse HEAD > "$RUNNER_TEMP/e11-receipt/revision.txt"
           python -VV > "$RUNNER_TEMP/e11-receipt/python-version.txt"
           sha256sum scripts/graph_development.py scripts/costing_retrieval.py scripts/lexical_text.py tests/fixtures/specialist/graph-retrieval-v1.json > "$RUNNER_TEMP/e11-receipt/input-sha256.txt"
-          python -m unittest tests.test_graph_development -v 2>&1 | tee "$RUNNER_TEMP/e11-receipt/tests.txt"
+          python -m unittest tests.test_graph_development tests.test_graph_ablation -v 2>&1 | tee "$RUNNER_TEMP/e11-receipt/tests.txt"
           /usr/bin/time -v -o "$RUNNER_TEMP/e11-receipt/process-resource.txt" python -m scripts.graph_development --output "$RUNNER_TEMP/e11-receipt/comparison.json"
+          /usr/bin/time -v -o "$RUNNER_TEMP/e11-receipt/ablation-resource.txt" python -m scripts.graph_ablation --output "$RUNNER_TEMP/e11-receipt/ablation.json"
+          sha256sum scripts/graph_ablation.py >> "$RUNNER_TEMP/e11-receipt/input-sha256.txt"
       - name: Retain paired scores, ranks, edges and resource observations
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
