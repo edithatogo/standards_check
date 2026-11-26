@@ -52,3 +52,14 @@ complete bounded target pool (or retain known sampling probabilities), and keep
 ontology concept/role labels separate from directional obligation relations.
 Do not create gold labels from TF-IDF, a single model or the acquisition reader.
 No actual human adjudicator has been enrolled in this increment.
+
+## Review path
+
+Routine acquisition, reconciliation and model-relative calibration continue
+without waiting for human participation. Independent blinded agents can annotate
+permitted source-only development packets, lock original labels and resolve
+uncertainty in a separate review context. Human adjudication is optional for that
+model-relative lane. A human-validated reference, true issuer-intent claim or E8
+participant study still requires its actual evidence. Retain all source and rights
+holds and identify each label by its actual reference type. See the [optional
+review policy](../../docs/development/optional-human-review.md).

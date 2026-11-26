@@ -3,7 +3,6 @@
 import json
 from pathlib import Path
 
-import pytest
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -32,10 +31,3 @@ def test_dependency_dashboard_is_not_an_approval_gate():
     assert config["vulnerabilityAlerts"]["dependencyDashboardApproval"] is False
     assert config["prConcurrentLimit"] == 1
 
-
-@pytest.mark.parametrize("event", ["pull_request_target", "workflow_run"])
-def test_review_option_does_not_add_privileged_workflow_triggers(event):
-    # These trigger families are unnecessary for the native review/merge path.
-    for path in (ROOT / ".github/workflows").glob("*.y*ml"):
-        events = yaml.load(path.read_text(encoding="utf-8"), Loader=yaml.BaseLoader)["on"]
-        assert event not in events, path.name

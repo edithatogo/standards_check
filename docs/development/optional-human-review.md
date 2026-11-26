@@ -31,7 +31,7 @@ or a privileged workflow to bypass branch rules.
 
 ## Workflow inventory and changes
 
-All 19 checked-in workflow files have automatic event triggers; the foundation
+All 18 checked-in workflow files have automatic event triggers; the foundation
 workflow alone lacked explicit workflow dispatch. Add it and test automatic
 triggers and dispatch availability for the maintained workflow inventory.
 The GitHub Actions run/job logs, annotations, artifacts and step summaries are

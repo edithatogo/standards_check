@@ -17,7 +17,7 @@ flowchart TD
     E --> F["Independent meaning and migration review"]
     F --> G["Build versioned pack, rights and content lock"]
     G --> H["Generate checklist and justified diagrams"]
-    H --> I{"Contracts, CI and human review pass?"}
+    H --> I{"Contracts, CI and independent evidence pass?"}
     I -->|No| D
     I -->|Yes| J["Admit via reviewed PR with exact-revision receipt"]
 ```
@@ -80,3 +80,13 @@ For already-cleared legacy inputs, `extract_docx.py` and `extract_all_docx.py` r
 compatibility utilities; they do not qualify new canonical content. Validate generated
 legacy Markdown with `bash scripts/validate_md.sh` and `make validate`, and structured
 packs with `python scripts/validate_packs.py` and `python scripts/validate_artifacts.py`.
+
+## Optional human review
+
+The [optional review policy](docs/development/optional-human-review.md) applies to
+routine acquisition, deterministic source and structure checks, and independent
+agent review. A human may inspect or correct any receipt but is not required to
+start or complete those checks. Record the actual review type and evidence. A
+source-reconciled pack is not an expert-validated interpretation; model-relative
+candidates and unresolved rights or meaning remain held. Do not infer permission,
+independent human adjudication or issuer approval from automated agreement.
