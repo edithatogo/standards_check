@@ -90,3 +90,64 @@ Use the automated source census first; do not perform per-entry agent searches w
 Review the generated machine-readable retrospective on every acquisition run. Evaluate the count of new observations, retained observations, unresolved identities, conflicting registry responses, deferrals and source holds independently of checklist extraction coverage. If a provider fails, retry bounded unresolved batches, then compare the available official alternatives. When a format, source representation, edition, table structure, item anchor, or licence changes, preserve prior evidence and run focused independent reconciliation before any source pin or canonical admission change. ORCID is for author disambiguation where necessary, not a substitute for publication DOI/PMID or table identity.
 
 Do not change extraction rules based on a single superficially plausible output. Reproduce failure with a minimal fixture, run mutation/fuzz and reconciliation tests, assess false positives and lost conditions, then record the fix and acceptance evidence in Conductor and the issue. Keep agentic judgment for ambiguous semantic or rights questions; automate everything that can be validated deterministically.
+
+
+## Bounded recursive improvement cycle (including scholarly identity)
+
+For each completed or failed source, retrieval, evidence or decision increment,
+the coordinator follows this same cycle. Read the existing publication-evidence
+skill for blinded reference and reviewer roles; retain one owner for each
+source/metadata/retrieval/evidence/decision stage. Use
+[the bibliographic recovery consumer](../../../conductor/source-reconciliation/bibliographic-recovery-20261126.md)
+and the existing catalogue and locked recall receipts, never a new registry.
+
+1. Observe the exact receiving main, PR heads, open reviews, cohort/source
+   pins, coverage, budgets and failures. Join only matching identities;
+   keep source/rights holds, missingness and independent reference tier.
+2. Diagnose the dominant measured loss and compare the last comparable
+   receipt. Assign to the existing owner. Prefer a deterministic source
+   link/identity recovery, qualifier/anchor correction or simple comparator
+   before adding a provider, model, agent or dependency.
+3. Specify one falsifiable improvement, matched input/candidate/evidence/
+   review/compute budget, minimum useful gain and harm guard. No fitting on
+   locked evaluation labels. Source curation and independent source-only
+   adjudication remain separate from model execution and resolution.
+4. Implement one bounded increment after a failing regression test; run
+   deterministic tests and the explicit opt-in experiment. Record actual
+   gain/loss, missing/unknown, resource/rights evidence, false acceptances,
+   candidate workload and unchanged controls. Include negative results.
+5. Separate adversarial review of provenance, denominator, wrong-owner
+   link, scope/edition, conflict and false-discharge risks; resolve genuine
+   findings and run protected exact-head tests. Integrate normally only
+   when the actual engineering gate passes, preserve independent science,
+   rights and release holds. Record receiving revision and rollback.
+6. Reassess. Stop if the failure repeats without changed evidence, budget
+   exhausted, uncertainty prevents a valid comparison, no incremental
+   benefit or harm increases. Only continue another bounded cycle with a
+   justified changed input or independent new evidence. For bibliographic
+   metadata, resume the hash-pinned prior receipt via the explicit workflow
+   input; do not retry every code push or fabricate provider success.
+
+Searchright is a governed candidate consumer, not a new autonomous actor:
+use its pinned source descriptions, wire contracts, provider policy and
+admitted dedup engine when qualified. No arbitrary URL retrieval, secrets,
+licensed access bypass, source text redistribution, external publication
+or self-modifying loop. Optional human review does not waive actual source,
+rights, blinded reference, review-resolution or protected acceptance gates.
+
+
+### Persistent-gap recovery and Searchright cutover
+
+Before another bibliography batch, run the default Searchright-native
+recovery workflow. Match earlier/current catalogue ID and source blob;
+separate persistent missing identifier, incomplete lookup, transport,
+title/issuer/asset/edition route and conflicts. Route standalone forms,
+handbooks, chapters, in-press publications and actual assets to Layout.
+Use native Searchright strategy/AST and its admitted compiler, not a
+downstream query compiler; preserve translation-loss/review flags.
+No implicit fallback: previous adapter is an explicitly labelled
+comparator. No actual live result until upstream runtime and authority
+qualify; preserve every prior provider attempt and distinguish plan,
+compile and execute. No bypass of upstream H-002, source rights or
+independent reference gates. Continue only changed evidence or a justified
+next bounded batch, compare marginal identity/source yield and harm.
