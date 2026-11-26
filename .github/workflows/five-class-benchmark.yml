@@ -422,6 +422,9 @@ jobs:
           python -m pip check
           python -m pip freeze > "$RUNNER_TEMP/costing-evidence/environment.txt"
           python -m scripts.costing_retrieval --output "$RUNNER_TEMP/costing-evidence/lexical.json"
+      - name: Test fixed-pool invariants before acquisition
+        if: github.event.label.name == 'run-fixed-pool-rerank'
+        run: python -m pytest -q research/model-placement/test_fixed_pool.py
       - name: Acquire only pinned publisher ONNX graphs and model-card licence evidence
         run: |
           python - <<'PY'
@@ -480,7 +483,6 @@ jobs:
         shell: bash
         run: |
           set -uo pipefail
-          python -m pytest -q research/model-placement/test_fixed_pool.py || exit 1
           status=0
           for pool in bge fused; do
             /usr/bin/time -v python research/model-placement/fixed_pool.py \
