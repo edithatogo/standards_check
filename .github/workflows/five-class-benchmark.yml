@@ -1,0 +1,776 @@
+name: Five-class consensus and gated NLI
+
+on:
+  pull_request:
+    types: [labeled]
+    paths:
+      - "scripts/five_class_benchmark.py"
+      - "scripts/lfm_development.py"
+      - "scripts/costing_retrieval.py"
+      - "scripts/issuer_column_probe.py"
+      - "tests/test_issuer_column_probe.py"
+      - "scripts/hosted_specialist_development.py"
+      - "tests/test_hosted_specialist_development.py"
+      - "scripts/lexical_text.py"
+      - "tests/test_costing_retrieval.py"
+      - "tests/test_lfm_development.py"
+      - "tests/test_five_class_benchmark.py"
+      - "scripts/witness_adjudication.py"
+      - "tests/test_witness.py"
+      - "tests/test_condition_adjudication.py"
+      - ".github/workflows/five-class-benchmark.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: five-class-${{ github.ref }}-${{ github.event.label.name }}
+  cancel-in-progress: true
+
+jobs:
+  controlled-consensus:
+    # Deliberate experiment authorization after required deterministic checks.
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-semantic-benchmark')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      HF_HUB_DISABLE_TELEMETRY: "1"
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: "3.12"
+      - name: Verify deterministic controls and prepare blinded pairs
+        run: |
+          python -m pip install python-docx==1.2.0
+          python -m unittest tests.test_five_class_benchmark tests.test_witness tests.test_condition_adjudication -v
+          mkdir -p "$RUNNER_TEMP/five-class"
+          python -m scripts.five_class_benchmark prepare --directory "$RUNNER_TEMP/five-class"
+          git rev-parse HEAD > "$RUNNER_TEMP/five-class/commit.txt"
+      - name: Install previously qualified CPU inference runtime
+        run: |
+          mkdir -p "$RUNNER_TEMP/five-class-runtime"
+          python -m pip download --no-deps --no-binary=:all: --dest "$RUNNER_TEMP/five-class-runtime" llama-cpp-python==0.3.38
+          echo "0570c9736b5e2a239b651da18687238eeba7fc2369dcdfd8cbb009dc1321e23f  $RUNNER_TEMP/five-class-runtime/llama_cpp_python-0.3.38.tar.gz" | sha256sum --check
+          CMAKE_ARGS="-DGGML_NATIVE=OFF" CMAKE_BUILD_PARALLEL_LEVEL=4 python -m pip install "$RUNNER_TEMP/five-class-runtime/llama_cpp_python-0.3.38.tar.gz"
+          python -m pip install onnxruntime==1.23.2 tokenizers==0.22.1
+          python -m pip check
+          python -m pip freeze > "$RUNNER_TEMP/five-class/environment.txt"
+      - name: Acquire only pinned GGUF weights and run blinded judges
+        run: |
+          python - <<'PY'
+          import json, os, subprocess
+          from pathlib import Path
+          from scripts.five_class_benchmark import JUDGES
+          from scripts.blind_adjudication import file_hash
+          root=Path(os.environ['RUNNER_TEMP'])
+          for name,model in JUDGES.items():
+              revision=model['revision']
+              if revision=='main':
+                  metadata=subprocess.run(['curl','--fail','--silent','--show-error','--max-time','30','https://huggingface.co/api/models/'+model['id']],capture_output=True,check=True).stdout
+                  revision=json.loads(metadata)['sha']
+              if len(revision)!=40 or any(c not in '0123456789abcdef' for c in revision): raise ValueError('invalid model revision')
+              weights=root/(name+'.gguf')
+              subprocess.run(['curl','--fail','--silent','--show-error','--location','--max-redirs','5','--connect-timeout','15','--max-time','600','--max-filesize','3000000000','--proto','=https','--proto-redir','=https','https://huggingface.co/'+model['id']+'/resolve/'+revision+'/'+model['file'],'--output',str(weights)],check=True)
+              if file_hash(weights)!=model['sha256']: raise ValueError('model hash mismatch')
+              info=root/(name+'-metadata.json');info.write_text(json.dumps({'revision':revision}))
+              subprocess.run(['python','-m','scripts.five_class_benchmark','judge','--directory',str(root/'five-class'),'--name',name,'--weights',str(weights),'--model-metadata',str(info)],check=True)
+              weights.unlink()
+          PY
+      - name: Baseline and conditional additional NLI
+        run: |
+          python - <<'PY'
+          import json, os, subprocess
+          from pathlib import Path
+          from scripts.five_class_benchmark import DEBERTA
+          from scripts.semantic_benchmark import MODEL_ID, MODEL_REVISION, MODEL_SHA256
+          from scripts.blind_adjudication import file_hash
+          root=Path(os.environ['RUNNER_TEMP'])
+          def acquire(model, name):
+              assets=root/name;assets.mkdir(exist_ok=True)
+              for remote in ('tokenizer.json','config.json','onnx/model_quint8_avx2.onnx'):
+                  path=assets/remote.rsplit('/',1)[-1]
+                  subprocess.run(['curl','--fail','--silent','--show-error','--location','--max-redirs','5','--connect-timeout','15','--max-time','180','--max-filesize','100000000','--proto','=https','--proto-redir','=https','https://huggingface.co/'+model['id']+'/resolve/'+model['revision']+'/'+remote,'--output',str(path)],check=True)
+              if file_hash(assets/'model_quint8_avx2.onnx')!=model['sha256']: raise ValueError('ONNX weight pin mismatch')
+              return assets
+          def run(mode,assets):
+              subprocess.run(['python','-m','scripts.five_class_benchmark',mode,'--directory',str(root/'five-class'),'--assets',str(assets)],check=True)
+          run('baseline',acquire({'id':MODEL_ID,'revision':MODEL_REVISION,'sha256':MODEL_SHA256},'minilm'))
+          receipt=json.loads((root/'five-class/five-class-receipt.json').read_text())
+          if receipt['escalation']['eligible']:
+              run('additional',acquire(DEBERTA,'deberta'))
+          else:
+              print('No material control-set deficit: additional model not run')
+          PY
+      - name: Publish redacted evidence only
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: five-class-consensus-${{ github.sha }}
+          path: |
+            ${{ runner.temp }}/five-class/commit.txt
+            ${{ runner.temp }}/five-class/environment.txt
+            ${{ runner.temp }}/five-class/qwen4-votes.json
+            ${{ runner.temp }}/five-class/phi4-votes.json
+            ${{ runner.temp }}/five-class/five-class-receipt.json
+          if-no-files-found: warn
+          retention-days: 90
+
+  lfm-development:
+    # Exploratory synthetic-only lane, explicitly requested; not a qualification run.
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && (github.event.label.name == 'run-lfm-followup' || github.event.label.name == 'run-lfm-thinking-repair' || github.event.label.name == 'run-compact-model-panel' || github.event.label.name == 'run-k2-development')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        challenger: ${{ fromJSON(github.event.label.name == 'run-lfm-thinking-repair' && '["lfm25-thinking"]' || github.event.label.name == 'run-compact-model-panel' && '["minicpm5"]' || github.event.label.name == 'run-k2-development' && '["k2-horizon"]' || '["lfm3","lfm25-instruct","lfm25-thinking","lfm2-2.6b"]') }}
+    env:
+      CHALLENGER: ${{ matrix.challenger }}
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      HF_HUB_DISABLE_TELEMETRY: "1"
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: "3.12"
+      - name: Verify deterministic development contract
+        run: |
+          mkdir -p "$RUNNER_TEMP/lfm-evidence"
+          git rev-parse HEAD > "$RUNNER_TEMP/lfm-evidence/commit.txt"
+          python -m pip install pytest==9.2.0 requests==2.34.2 onnxruntime==1.23.2 tokenizers==0.22.1
+          python -m pytest --import-mode=importlib tests/test_lfm_development.py -q
+          python -m pip check
+          python -m pip freeze > "$RUNNER_TEMP/lfm-evidence/environment.txt"
+      - name: Acquire official, hash-pinned native CPU runtime
+        run: |
+          mkdir -p "$RUNNER_TEMP/lfm-runtime"
+          curl --fail --silent --show-error --location --max-redirs 5 --connect-timeout 15 --max-time 180 --max-filesize 50000000 --proto '=https' --proto-redir '=https' \
+            https://github.com/ggml-org/llama.cpp/releases/download/b11960/llama-b11960-bin-ubuntu-x64.tar.gz \
+            --output "$RUNNER_TEMP/llama-runtime.tar.gz"
+          echo "31cc3a6bc638ac6c48dc4b1b74888f1eaadf3d14227c1e5f67daf9a49541d97a  $RUNNER_TEMP/llama-runtime.tar.gz" | sha256sum --check
+          tar -xzf "$RUNNER_TEMP/llama-runtime.tar.gz" -C "$RUNNER_TEMP/lfm-runtime"
+          server="$(find "$RUNNER_TEMP/lfm-runtime" -type f -name llama-server -print -quit)"
+          test -x "$server"
+          LD_LIBRARY_PATH="$(dirname "$server")" "$server" --version > "$RUNNER_TEMP/lfm-evidence/runtime.txt" 2>&1
+      - name: Acquire publisher-pinned research-only weights and existing ONNX comparators
+        run: |
+          python - <<'PY'
+          import hashlib, json, os, subprocess
+          from pathlib import Path
+          from scripts.lfm_development import PINS
+          from scripts.five_class_benchmark import DEBERTA
+          from scripts.semantic_benchmark import MODEL_ID, MODEL_REVISION, MODEL_SHA256
+          from scripts.blind_adjudication import file_hash
+
+          root = Path(os.environ["RUNNER_TEMP"])
+          evidence = root / "lfm-evidence"
+          model = dict(PINS[os.environ["CHALLENGER"]])
+          # Resolve only immutable commit prefixes; record complete revisions before acquisition.
+          def resolve_revision(prefix):
+              if not 7 <= len(prefix) <= 40 or any(c not in "0123456789abcdef" for c in prefix):
+                  raise ValueError("invalid immutable revision")
+              if len(prefix) == 40:
+                  return prefix
+              url = f"https://huggingface.co/api/models/{model['id']}/revision/{prefix}"
+              metadata = subprocess.run(["curl", "--fail", "--silent", "--show-error", "--max-time", "30",
+                                         "--max-filesize", "1000000", "--proto", "=https", url],
+                                        check=True, capture_output=True)
+              resolved = json.loads(metadata.stdout)["sha"]
+              if len(resolved) != 40 or not resolved.startswith(prefix) or any(c not in "0123456789abcdef" for c in resolved):
+                  raise ValueError("immutable revision prefix did not resolve")
+              return resolved
+          model["revision"] = resolve_revision(model["revision"])
+          model["licence_revision"] = resolve_revision(model.get("licence_revision", model["revision"]))
+          def acquire(pin, remote, path, cap):
+              url = f"https://huggingface.co/{pin['id']}/resolve/{pin['revision']}/{remote}"
+              subprocess.run(["curl", "--fail", "--silent", "--show-error", "--location",
+                              "--max-redirs", "5", "--connect-timeout", "15", "--max-time", "600",
+                              "--max-filesize", str(cap), "--proto", "=https", "--proto-redir", "=https",
+                              url, "--output", str(path)], check=True)
+          weights = root / "lfm.gguf"
+          acquire(model, model["file"], weights, 3500000000 if os.environ["CHALLENGER"] == "k2-horizon" else 3000000000)
+          if file_hash(weights) != model["sha256"]:
+              raise ValueError("challenger model hash mismatch")
+          licence = evidence / "model-LICENSE.txt"
+          if model["licence"] == "Apache-2.0":
+              # Publisher model card at exact weight revision, not a third-party licence.
+              licence = evidence / "model-card.md"
+              acquire(model, "README.md", licence, 2000000)
+              if "license: apache-2.0" not in licence.read_text(encoding="utf-8").lower():
+                  raise ValueError("publisher model-card licence mismatch")
+          else:
+              acquire({**model, "revision": model["licence_revision"]}, "LICENSE", licence, 100000)
+              if "LFM Open License" not in licence.read_text(encoding="utf-8"):
+                  raise ValueError("unexpected model licence")
+          receipt = {"model": model, "licence_sha256": file_hash(licence),
+                     "weights_sha256": file_hash(weights), "research_only": True,
+                     "runtime_asset_sha256": "31cc3a6bc638ac6c48dc4b1b74888f1eaadf3d14227c1e5f67daf9a49541d97a"}
+          for name, pin in (("minilm", {"id": MODEL_ID, "revision": MODEL_REVISION, "sha256": MODEL_SHA256}),
+                            ("deberta", DEBERTA)):
+              assets = root / name
+              assets.mkdir()
+              for remote in ("config.json", "tokenizer.json", "onnx/model_quint8_avx2.onnx"):
+                  acquire(pin, remote, assets / remote.rsplit("/", 1)[-1], 100000000)
+              if file_hash(assets / "model_quint8_avx2.onnx") != pin["sha256"]:
+                  raise ValueError("comparator model hash mismatch")
+          (evidence / "asset-pins.json").write_text(json.dumps(receipt, indent=2) + "\n")
+          PY
+      - name: Run only synthetic text pairs through the loopback native model
+        run: |
+          server="$(find "$RUNNER_TEMP/lfm-runtime" -type f -name llama-server -print -quit)"
+          test -x "$server"
+          LD_LIBRARY_PATH="$(dirname "$server")" "$server" -m "$RUNNER_TEMP/lfm.gguf" \
+            --host 127.0.0.1 --port 18883 -c 8192 -b 8192 -ub 8192 -t 4 -ngl 0 -np 1 --jinja \
+            > "$RUNNER_TEMP/lfm-evidence/server.log" 2>&1 &
+          pid=$!
+          trap 'kill "$pid" 2>/dev/null || true' EXIT
+          ready=false
+          for _ in $(seq 1 120); do
+            if ! kill -0 "$pid" 2>/dev/null; then break; fi
+            if curl --noproxy '*' --fail --silent --max-time 2 http://127.0.0.1:18883/health > /dev/null; then
+              ready=true
+              break
+            fi
+            sleep 1
+          done
+          test "$ready" = true
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          import requests
+          from scripts.lfm_development import run
+          from scripts.blind_adjudication import file_hash
+          root = Path(os.environ["RUNNER_TEMP"])
+          fixture_path = Path("contracts/examples/semantic-reconciliation-synthetic-v1.json")
+          fixture = json.loads(fixture_path.read_text())
+          with requests.Session() as session:
+              session.trust_env = False
+              def post(endpoint, payload):
+                  response = session.post("http://127.0.0.1:18883/v1/" + endpoint,
+                                          json=payload, timeout=(3, 120), allow_redirects=False)
+                  response.raise_for_status()
+                  return response.json()
+              report = run(fixture, os.environ["CHALLENGER"], post, root / "minilm", root / "deberta")
+          report["fixture_bytes_sha256"] = file_hash(fixture_path)
+          report["resolved_model"] = json.loads((root / "lfm-evidence/asset-pins.json").read_text())["model"]
+          (root / "lfm-evidence" / "report.json").write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
+          print(json.dumps({"summary": report["summary"], "paired": report["paired"],
+                            "challenger_wall_seconds": report["challenger_wall_seconds"]}))
+          PY
+          grep '^VmHWM:' "/proc/$pid/status" > "$RUNNER_TEMP/lfm-evidence/peak-memory.txt" || true
+      - name: Retain diagnostic evidence including failures
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: lfm-development-${{ matrix.challenger }}-${{ github.sha }}
+          path: ${{ runner.temp }}/lfm-evidence/
+          if-no-files-found: error
+          retention-days: 90
+
+  fresh-source-probe:
+    # Same explicit authorization; reuse existing acquisition and scanner.
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-lfm-followup'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: "3.12"
+      - name: Retry selected official article and alternate issuer transports without repinning
+        run: |
+          mkdir -p "$RUNNER_TEMP/fresh-source-probe"
+          python -m pip install pdfplumber==0.11.11 python-docx==1.2.0 openpyxl==3.1.5
+          python - <<'PY'
+          import hashlib, json, os, subprocess
+          from dataclasses import replace
+          from pathlib import Path
+          from scripts.survey_equator_articles import priority_survey
+          from scripts.compare_guideline_formats import benchmark, profiles
+
+          root = Path(os.environ["RUNNER_TEMP"])
+          output = root / "fresh-source-probe"
+          selected = {"arrive-2.0-2020", "strobe-2007", "stard-2015"}
+          specs = json.loads(Path("source/official/priority-article-candidates.json").read_text())
+          primary = priority_survey([s for s in specs if s["edition"] in selected], Path("."))
+          (output / "primary-survey.json").write_text(json.dumps(primary, indent=2) + "\n")
+          alternatives = {
+              "arrive-issuer": "https://arriveguidelines.org/sites/arrive/files/documents/Author%20Checklist%20-%20Full.pdf",
+              "strobe-issuer": "https://www.strobe-statement.org/download/strobe-checklist-cohort-case-control-and-cross-sectional-studies-combined",
+              "arrive-issuer-poster": "https://arriveguidelines.org/sites/arrive/files/documents/ARRIVE%20guidelines%202.0%20-%20English.pdf",
+              "arrive-publisher": "https://journals.plos.org/plosbiology/article/file?id=10.1371%2Fjournal.pbio.3000410&type=printable",
+              "strobe-publisher": "https://journals.plos.org/plosmedicine/article/file?id=10.1371%2Fjournal.pmed.0040297&type=printable",
+              "stard-publisher": "https://pubs.rsna.org/doi/pdf/10.1148/radiol.2015151516",
+          }
+          receipts = []
+          by_family = {}
+          exact_pins = {"arrive-issuer": "91e191d495f96472c0896ae3e489e9a12953648179f2a2a06b7035bb97a7327c",
+                        "strobe-issuer": "63c2af4d91d04f5b211f4277a267a23da5d313fe927753c08f98139a8aab41b8"}
+          for key, url in alternatives.items():
+              path = root / (key + ".pdf")
+              result = subprocess.run(["curl", "--fail", "--silent", "--show-error", "--max-time", "30",
+                                       "--max-filesize", "8000000", "--proto", "=https",
+                                       "--output", str(path), "--write-out", "%{http_code}", url],
+                                      capture_output=True, text=True, check=False)
+              row = {"id": key, "url": url, "curl_exit": result.returncode,
+                     "http_status": result.stdout, "status": "held", "eligible": False}
+              if result.returncode == 0 and result.stdout == "200" and path.is_file():
+                  raw = path.read_bytes()
+                  if raw.startswith(b"%PDF-") and len(raw) <= 8000000:
+                      digest = hashlib.sha256(raw).hexdigest()
+                      if key in exact_pins and digest != exact_pins[key]:
+                          row.update({"status": "held_source_drift", "sha256": digest, "bytes": len(raw)})
+                      else:
+                          row.update({"status": "candidate_bytes_observed", "sha256": digest, "bytes": len(raw)})
+                          by_family.setdefault(key.split("-")[0], []).append(path.name)
+              receipts.append(row)
+          cohorts = [replace(c, paths=tuple(by_family.get(c.family, ())))
+                     for c in profiles(Path(".")) if c.edition in selected]
+          # Independent format comparison uses the maintained reader and expected-ID denominators.
+          # New locators and extracted rows remain candidate-only; never publish raw content.
+          structural = benchmark(root, cohorts)
+          (output / "structure.json").write_text(json.dumps(structural, indent=2) + "\n")
+          for key in alternatives:
+              (root / (key + ".pdf")).unlink(missing_ok=True)
+          result = {"articles": primary, "alternatives": receipts, "eligible_families": 0,
+                    "boundary": "Acquisition only; independent structure and rights review required."}
+          (output / "acquisition.json").write_text(json.dumps(result, indent=2) + "\n")
+          print(json.dumps({"articles": [{k: row.get(k) for k in ("edition", "status", "reason", "matched_rows")} for row in primary],
+                            "alternatives": receipts}))
+          PY
+      - name: Retain source evidence, not source text
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: fresh-source-probe-${{ github.sha }}
+          path: ${{ runner.temp }}/fresh-source-probe/
+          if-no-files-found: error
+          retention-days: 90
+
+  specialist-costing-development:
+    # Editorial seed only; no model downloads or inference in ordinary CI.
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && (github.event.label.name == 'run-specialist-retrieval' || github.event.label.name == 'run-reranker-panel' || github.event.label.name == 'run-modernbert-reranker')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        reranker: ${{ fromJSON(github.event.label.name == 'run-reranker-panel' && '["bge-base","mixedbread-xsmall","jina-tiny"]' || github.event.label.name == 'run-modernbert-reranker' && '["gte-modernbert"]' || '["reranker"]') }}
+    env:
+      RERANKER: ${{ matrix.reranker }}
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      HF_HUB_DISABLE_TELEMETRY: "1"
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c
+        with:
+          egress-policy: audit
+      # The action resolver failed repeatedly for the verified v7.0.1 SHA.
+      # This public-repository research job can fetch the exact tested SHA without credentials.
+      - name: Fetch exact public test commit without action resolution
+        env:
+          GIT_TERMINAL_PROMPT: "0"
+        run: |
+          test "${#GITHUB_SHA}" -eq 40
+          [[ "$GITHUB_SHA" =~ ^[0-9a-f]{40}$ ]]
+          git init --quiet .
+          git fetch --no-tags --depth=1 https://github.com/edithatogo/standards_check.git "$GITHUB_SHA"
+          git checkout --detach FETCH_HEAD
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: "3.12"
+      - name: Retain exact formatting diagnostics and test the offline boundary
+        run: |
+          mkdir -p "$RUNNER_TEMP/costing-evidence"
+          git rev-parse HEAD > "$RUNNER_TEMP/costing-evidence/commit.txt"
+          python -m pip install pytest==9.2.0 onnxruntime==1.23.2 tokenizers==0.22.1 ruff==0.17.6
+          # Diagnostic only; required workflow still enforces unchanged formatting policy.
+          ruff format --diff scripts/costing_retrieval.py scripts/lexical_text.py scripts/compose_checklists.py scripts/lfm_development.py > "$RUNNER_TEMP/costing-evidence/format.diff" || test "$?" = 1
+          cat "$RUNNER_TEMP/costing-evidence/format.diff"
+          python -m pytest --import-mode=importlib tests/test_costing_retrieval.py -q
+          python -m pip check
+          python -m pip freeze > "$RUNNER_TEMP/costing-evidence/environment.txt"
+          python -m scripts.costing_retrieval --output "$RUNNER_TEMP/costing-evidence/lexical.json"
+      - name: Acquire only pinned publisher ONNX graphs and model-card licence evidence
+        run: |
+          python - <<'PY'
+          import json, os, subprocess
+          from pathlib import Path
+          from scripts.costing_retrieval import MODELS, file_hash
+
+          root = Path(os.environ["RUNNER_TEMP"])
+          observations = {}
+          for name in ("bge", os.environ["RERANKER"]):
+              pin = dict(MODELS[name])
+              prefix = pin["revision"]
+              if not 7 <= len(prefix) <= 40 or any(c not in "0123456789abcdef" for c in prefix):
+                  raise ValueError("invalid immutable model revision")
+              if len(prefix) != 40:
+                  url = f"https://huggingface.co/api/models/{pin['id']}/revision/{prefix}"
+                  metadata = subprocess.run(["curl", "--fail", "--silent", "--show-error", "--max-time", "30",
+                                             "--max-filesize", "1000000", "--proto", "=https", url],
+                                            check=True, capture_output=True)
+                  revision = json.loads(metadata.stdout)["sha"]
+                  if len(revision) != 40 or not revision.startswith(prefix) or any(c not in "0123456789abcdef" for c in revision):
+                      raise ValueError("immutable model revision mismatch")
+                  pin["revision"] = revision
+              assets = root / "costing-assets" / name
+              assets.mkdir(parents=True)
+              for remote, local, cap in ((pin["file"], "model.onnx", pin.get("max_bytes", 200000000)),
+                                         ("config.json", "config.json", 1000000),
+                                         ("tokenizer.json", "tokenizer.json", 20000000),
+                                         ("README.md", "README.md", 500000)):
+                  url = f"https://huggingface.co/{pin['id']}/resolve/{pin['revision']}/{remote}"
+                  subprocess.run(["curl", "--fail", "--silent", "--show-error", "--location",
+                                  "--max-redirs", "5", "--connect-timeout", "15", "--max-time", "300",
+                                  "--max-filesize", str(cap), "--proto", "=https", "--proto-redir", "=https",
+                                  url, "--output", str(assets / local)], check=True)
+              if file_hash(assets / "model.onnx") != pin["sha256"]:
+                  raise ValueError("unqualified retrieval weight bytes")
+              card = (assets / "README.md").read_text(encoding="utf-8")
+              metadata = card.split("---", 2)[1] if card.startswith("---") else ""
+              licence_lines = [line.strip().lower() for line in metadata.splitlines() if line.startswith("license:")]
+              if licence_lines != ["license: " + pin["licence"].lower()]:
+                  raise ValueError("publisher model-card licence differs from pin")
+              observations[name] = {"pin": pin, "asset_hashes": {p.name: file_hash(p) for p in assets.iterdir()},
+                                    "licence_evidence": "exact model-card metadata; no redistribution decision"}
+          (root / "costing-evidence" / "assets.json").write_text(json.dumps(observations, indent=2) + "\n")
+          PY
+      - name: Execute paired complete-pool retrieval and top-ten reranking
+        run: |
+          /usr/bin/time -v python -m scripts.costing_retrieval \
+            --assets "$RUNNER_TEMP/costing-assets" --reranker "$RERANKER" \
+            --output "$RUNNER_TEMP/costing-evidence/paired.json" \
+            2> "$RUNNER_TEMP/costing-evidence/resources.txt"
+      - name: Retain exact metadata-only development receipts
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: specialist-costing-development-${{ matrix.reranker }}-${{ github.sha }}
+          path: ${{ runner.temp }}/costing-evidence/
+          if-no-files-found: error
+          retention-days: 90
+
+  specialist-model-pin-survey:
+    # Read-only metadata, explicitly not weight acquisition or inference.
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && (github.event.label.name == 'run-specialist-model-pins' || github.event.label.name == 'run-k2-pin-review' || github.event.label.name == 'run-qwen-scale-pins')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c
+        with:
+          egress-policy: audit
+      - name: Inspect fixed publisher model metadata before exact pin review
+        run: |
+          mkdir -p "$RUNNER_TEMP/model-pin-survey"
+          python - <<'PY'
+          import hashlib, json, os, re, subprocess
+          from pathlib import Path
+
+          output = Path(os.environ["RUNNER_TEMP"]) / "model-pin-survey"
+          specs = {
+              "k2": ("IFM/K2-Horizon-3.7B-GGUF", "main", "K2-Horizon-3.7B-Q4_K_M.gguf"),
+              "minicpm5": ("openbmb/MiniCPM5-2B-GGUF", "2079a22f3beaa4e306449978533478fe0522f4b3", "MiniCPM5-2B-Q4_K_M.gguf"),
+              "qwen3-reranker": ("ggml-org/Qwen3-Reranker-0.6B-Q8_0-GGUF", "a02f48b", "qwen3-reranker-0.6b-q8_0.gguf"),
+              "qwen3-reranker-4b-conversion": ("gorse-io/Qwen3-Reranker-4B-GGUF", "main", "Qwen3-Reranker-4B-Q8_0.gguf"),
+              "gte-modernbert": ("Alibaba-NLP/gte-reranker-modernbert-base", "1299fb8", "onnx/model_quantized.onnx"),
+          }
+          results = []
+          for key, (repo, ref, filename) in specs.items():
+              row = {"key": key, "repository": repo, "requested_ref": ref, "file": filename,
+                     "status": "held", "scientific_qualification": False}
+              try:
+                  url = f"https://huggingface.co/api/models/{repo}/revision/{ref}?blobs=true"
+                  raw = subprocess.run(["curl", "--fail", "--silent", "--show-error", "--max-time", "30",
+                                        "--max-filesize", "2000000", "--proto", "=https", url],
+                                       check=True, capture_output=True).stdout
+                  data = json.loads(raw)
+                  (output / f"{key}-metadata.json").write_bytes(raw)
+                  revision = data["sha"]
+                  if not re.fullmatch(r"[0-9a-f]{40}", revision):
+                      raise ValueError("invalid publisher revision")
+                  if ref != "main" and not revision.startswith(ref):
+                      raise ValueError("immutable publisher revision mismatch")
+                  names = {filename}
+                  if key == "k2":
+                      # The publisher originally labelled this checkpoint 4B.
+                      names.add("K2-Horizon-4B-Q4_K_M.gguf")
+                      row["observed_gguf_files"] = [
+                          file["rfilename"] for file in data["siblings"]
+                          if file["rfilename"].lower().endswith(".gguf")
+                      ]
+                  files = [file for file in data["siblings"] if file["rfilename"] in names]
+                  if len(files) != 1:
+                      raise ValueError("publisher filename not unique")
+                  row["file"] = files[0]["rfilename"]
+                  lfs = files[0]["lfs"]
+                  digest = lfs.get("sha256") or lfs.get("oid")
+                  if not re.fullmatch(r"[0-9a-f]{64}", digest):
+                      raise ValueError("publisher LFS SHA-256 unavailable")
+                  licence = data["cardData"]["license"]
+                  if licence != "apache-2.0":
+                      raise ValueError("model-card licence mismatch")
+                  row.update({"revision": revision, "sha256": digest, "bytes": files[0]["size"],
+                              "licence": licence, "provider_response_sha256": hashlib.sha256(raw).hexdigest(),
+                              "status": "publisher_metadata_observed_not_qualified"})
+                  (output / f"{key}-metadata.json").write_bytes(raw)
+              except (ValueError, KeyError, TypeError, subprocess.SubprocessError) as exc:
+                  row["error_type"] = type(exc).__name__
+              results.append(row)
+          (output / "pins.json").write_text(json.dumps(results, indent=2) + "\n")
+          print(json.dumps(results))
+          PY
+      - name: Retain pin discovery only
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: specialist-model-pins-${{ github.sha }}
+          path: ${{ runner.temp }}/model-pin-survey/
+          if-no-files-found: error
+          retention-days: 90
+
+  native-qwen-reranker:
+    # Public frozen editorial cohort; no provider credentials or scientific promotion.
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && (github.event.label.name == 'run-native-qwen-reranker' || github.event.label.name == 'run-qwen4b-reranker')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      QWEN_MODEL: ${{ github.event.label.name == 'run-qwen4b-reranker' && 'qwen3-reranker-4b-q8' || 'qwen3-reranker-0.6b-q8' }}
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c
+        with:
+          egress-policy: audit
+      - name: Checkout exact public event commit without credentials
+        run: |
+          git init
+          git remote add origin "https://github.com/edithatogo/standards_check.git"
+          git fetch --no-tags --depth=1 origin "$GITHUB_SHA"
+          git checkout --detach FETCH_HEAD
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: "3.12"
+      - name: Retrieve exact retained baseline ranking
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        with:
+          artifact-ids: 15088716936
+          run-id: 45757790945
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/qwen-baseline
+      - name: Verify immutable inputs and acquire native CPU assets
+        run: |
+          mkdir -p "$RUNNER_TEMP/qwen-evidence" "$RUNNER_TEMP/qwen-runtime"
+          git rev-parse HEAD > "$RUNNER_TEMP/qwen-evidence/commit.txt"
+          baseline="$(find "$RUNNER_TEMP/qwen-baseline" -type f -name paired.json -print -quit)"
+          test -n "$baseline"
+          echo "09ba04a03e5942f71b3d18e6c6c2f0f3050298ad120d0b6d56ea209b29660bad  $baseline" | sha256sum --check
+          python -m pip install requests==2.34.2
+          python -m pip freeze > "$RUNNER_TEMP/qwen-evidence/environment.txt"
+          curl --fail --silent --show-error --location --max-redirs 5 --connect-timeout 15 --max-time 180 --max-filesize 50000000 --proto '=https' --proto-redir '=https' \
+            https://github.com/ggml-org/llama.cpp/releases/download/b11960/llama-b11960-bin-ubuntu-x64.tar.gz --output "$RUNNER_TEMP/qwen-runtime.tar.gz"
+          echo "31cc3a6bc638ac6c48dc4b1b74888f1eaadf3d14227c1e5f67daf9a49541d97a  $RUNNER_TEMP/qwen-runtime.tar.gz" | sha256sum --check
+          tar -xzf "$RUNNER_TEMP/qwen-runtime.tar.gz" -C "$RUNNER_TEMP/qwen-runtime"
+          case "$QWEN_MODEL" in
+            qwen3-reranker-4b-q8)
+              model_url="https://huggingface.co/gorse-io/Qwen3-Reranker-4B-GGUF/resolve/b22e6e5e27598ecc2a9b38439357034f3815d8cb"
+              file="Qwen3-Reranker-4B-Q8_0.gguf"
+              digest="2cf26934b45414d51cb1e1fc68378da02f8a1ae2893b70ccb13c381ec1ec9398"
+              cap=4300000000
+              ;;
+            qwen3-reranker-0.6b-q8)
+              model_url="https://huggingface.co/ggml-org/Qwen3-Reranker-0.6B-Q8_0-GGUF/resolve/a02f48bb4f057028298c21fa033da2b30d7742d5"
+              file="qwen3-reranker-0.6b-q8_0.gguf"
+              digest="22c9979ce4fbcdc5acdc310c6641c32797eff1aa980b8f7a2db8a8ea23429a48"
+              cap=650000000
+              ;;
+            *) exit 1 ;;
+          esac
+          printf '%s\n' "$model_url/$file" > "$RUNNER_TEMP/qwen-evidence/weight-url.txt"
+          curl --fail --silent --show-error --location --max-redirs 5 --connect-timeout 15 --max-time 600 --max-filesize "$cap" --proto '=https' --proto-redir '=https' \
+            "$model_url/$file" --output "$RUNNER_TEMP/qwen.gguf"
+          echo "$digest  $RUNNER_TEMP/qwen.gguf" | sha256sum --check | tee "$RUNNER_TEMP/qwen-evidence/weight-check.txt"
+          curl --fail --silent --show-error --location --max-redirs 5 --connect-timeout 15 --max-time 30 --max-filesize 2000000 --proto '=https' --proto-redir '=https' \
+            "$model_url/README.md" --output "$RUNNER_TEMP/qwen-evidence/model-card.md"
+          grep -i '^license: apache-2.0' "$RUNNER_TEMP/qwen-evidence/model-card.md"
+          if test "$QWEN_MODEL" = qwen3-reranker-4b-q8; then
+            grep -F 'Qwen/Qwen3-Reranker-4B' "$RUNNER_TEMP/qwen-evidence/model-card.md"
+          fi
+      - name: Verify native rank head and score the conserved pool
+        run: |
+          server="$(find "$RUNNER_TEMP/qwen-runtime" -type f -name llama-server -print -quit)"
+          test -x "$server"
+          LD_LIBRARY_PATH="$(dirname "$server")" "$server" --version > "$RUNNER_TEMP/qwen-evidence/runtime.txt" 2>&1
+          LD_LIBRARY_PATH="$(dirname "$server")" "$server" -m "$RUNNER_TEMP/qwen.gguf" --alias "$QWEN_MODEL" \
+            --host 127.0.0.1 --port 18883 --reranking --pooling rank -c 2048 -b 2048 -ub 2048 -t 4 -ngl 0 -np 1 \
+            > "$RUNNER_TEMP/qwen-evidence/server.log" 2>&1 &
+          pid=$!
+          trap 'kill "$pid" 2>/dev/null || true' EXIT
+          ready=false
+          for _ in $(seq 1 120); do
+            if ! kill -0 "$pid" 2>/dev/null; then break; fi
+            if curl --noproxy '*' --fail --silent --max-time 2 http://127.0.0.1:18883/health > /dev/null; then
+              ready=true
+              break
+            fi
+            sleep 1
+          done
+          test "$ready" = true
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          import requests
+          from scripts.hosted_specialist_development import make_post, rerank_payload, LOCAL_QWEN_MODELS
+          from scripts.costing_retrieval import parse_reranker_results
+
+          model = os.environ["QWEN_MODEL"]
+          if model not in LOCAL_QWEN_MODELS:
+              raise ValueError("unexpected local model alias")
+          with requests.Session() as session:
+              session.trust_env = False
+              post = make_post(session, "http://127.0.0.1:18883/v1/rerank", None, 1)
+              result = post(rerank_payload(model, "What is a panda?", ["A panda is a bear.", "Paris is the capital of France."]))
+          scores = parse_reranker_results(["relevant", "irrelevant"], result["results"])
+          evidence = {"scores": scores, "model": result.get("model"), "passed": result.get("model") == model and scores["relevant"] > scores["irrelevant"]}
+          (Path(os.environ["RUNNER_TEMP"]) / "qwen-evidence/smoke.json").write_text(json.dumps(evidence))
+          if not evidence["passed"]:
+              raise ValueError("native rank head did not pass relevance smoke")
+          PY
+          baseline="$(find "$RUNNER_TEMP/qwen-baseline" -type f -name paired.json -print -quit)"
+          python -m scripts.hosted_specialist_development --model "$QWEN_MODEL" --baseline "$baseline" --max-requests 106 --output "$RUNNER_TEMP/qwen-evidence/report.json"
+          grep '^VmHWM:' "/proc/$pid/status" > "$RUNNER_TEMP/qwen-evidence/peak-memory.txt" || true
+      - name: Retain Qwen diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: native-qwen-reranker-${{ env.QWEN_MODEL }}-${{ github.sha }}
+          path: ${{ runner.temp }}/qwen-evidence/
+          if-no-files-found: error
+          retention-days: 90
+
+  issuer-column-probe:
+    # Exact source bytes and visible main identifiers; no text export or rights promotion.
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-issuer-column-probe'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c
+        with:
+          egress-policy: audit
+      - name: Fetch exact public test commit without credentials
+        env:
+          GIT_TERMINAL_PROMPT: "0"
+        run: |
+          git init
+          git fetch --no-tags --depth=1 https://github.com/edithatogo/standards_check.git "$GITHUB_SHA"
+          git checkout --detach FETCH_HEAD
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: "3.12"
+      - name: Install existing parser and verify bounded diagnostics
+        run: |
+          mkdir -p "$RUNNER_TEMP/issuer-evidence"
+          git rev-parse HEAD > "$RUNNER_TEMP/issuer-evidence/commit.txt"
+          python -m pip install pdfplumber==0.11.11 pytest==9.2.0
+          python -m pytest --import-mode=importlib tests/test_issuer_column_probe.py -q
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends poppler-utils
+          pdftotext -v > "$RUNNER_TEMP/issuer-evidence/poppler-version.txt" 2>&1
+          python -m pip freeze > "$RUNNER_TEMP/issuer-evidence/environment.txt"
+      - name: Compare two readers on exact issuer PDFs
+        run: |
+          for family in arrive strobe; do
+            case "$family" in
+              arrive)
+                url="https://arriveguidelines.org/sites/arrive/files/documents/Author%20Checklist%20-%20Full.pdf"
+                digest="91e191d495f96472c0896ae3e489e9a12953648179f2a2a06b7035bb97a7327c"
+                ;;
+              strobe)
+                url="https://www.strobe-statement.org/download/strobe-checklist-cohort-case-control-and-cross-sectional-studies-combined"
+                digest="63c2af4d91d04f5b211f4277a267a23da5d313fe927753c08f98139a8aab41b8"
+                ;;
+            esac
+            pdf="$RUNNER_TEMP/$family-issuer.pdf"
+            bbox="$RUNNER_TEMP/$family-bbox.html"
+            curl --fail --silent --show-error --max-time 60 --max-filesize 8000000 --proto '=https' --output "$pdf" "$url"
+            echo "$digest  $pdf" | sha256sum --check
+            pdftotext -f 1 -l 3 -bbox-layout -enc UTF-8 "$pdf" "$bbox"
+            python -m scripts.issuer_column_probe --family "$family" --pdf "$pdf" --bbox "$bbox" --output "$RUNNER_TEMP/issuer-evidence/$family.json"
+            rm -f "$pdf" "$bbox"
+          done
+      - name: Inspect alternate primary ARRIVE and STARD source routes
+        run: |
+          python - <<'PY'
+          import hashlib, json, os, subprocess
+          from pathlib import Path
+          from scripts.survey_equator_articles import scan_article
+
+          temp = Path(os.environ["RUNNER_TEMP"])
+          output = temp / "issuer-evidence"
+          specs = json.loads(Path("source/official/priority-article-candidates.json").read_text())
+          arrive = next(s for s in specs if s["edition"] == "arrive-2.0-2020")
+          probes = [
+              ("arrive-plos-jats", "https://journals.plos.org/plosbiology/article/file?id=10.1371%2Fjournal.pbio.3000410&type=manuscript"),
+              ("stard-equator-pdf", "https://www.equator-network.org/wp-content/uploads/2015/03/STARD-2015-paper.pdf"),
+          ]
+          receipts = []
+          for key, url in probes:
+              path = temp / key
+              response = subprocess.run(["curl", "--fail", "--silent", "--show-error", "--location",
+                                         "--max-redirs", "3", "--max-time", "60", "--max-filesize", "8000000",
+                                         "--proto", "=https", "--proto-redir", "=https",
+                                         "--output", str(path), "--write-out", "%{http_code}", url],
+                                        capture_output=True, text=True, check=False)
+              row = {"id": key, "url": url, "http_status": response.stdout, "exit": response.returncode,
+                     "status": "held", "scientific_qualification": False, "canonical_packs_promoted": 0}
+              if response.returncode == 0 and path.is_file():
+                  raw = path.read_bytes()
+                  row.update({"sha256": hashlib.sha256(raw).hexdigest(), "bytes": len(raw)})
+                  try:
+                      if key == "arrive-plos-jats":
+                          row["survey"] = scan_article(raw, arrive, None)
+                      elif not raw.startswith(b"%PDF-"):
+                          raise ValueError("not PDF bytes")
+                      else:
+                          row["rights"] = "noncommercial manifestation, not release cleared"
+                      row["status"] = "candidate_observation_only"
+                  except ValueError as exc:
+                      row["reason"] = str(exc)[:150]
+              path.unlink(missing_ok=True)
+              receipts.append(row)
+          (output / "alternate-routes.json").write_text(json.dumps(receipts, indent=2) + "\n")
+          print(json.dumps([{k: v for k, v in r.items() if k != "survey"} for r in receipts]))
+          PY
+      - name: Retain geometry and source receipts only
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: issuer-column-probe-${{ github.sha }}
+          path: ${{ runner.temp }}/issuer-evidence/
+          if-no-files-found: error
+          retention-days: 90

@@ -1,0 +1,148 @@
+{
+  "schema_version": "dev.standardflow.publication-contract.v1",
+  "status": "planned",
+  "design": {
+    "programme_id": "standardflow-specialist-neural-symbolic-pipeline",
+    "protocol": {
+      "version": "0.1.0",
+      "path": "docs/research/specialist-pipeline-protocol.v0.1.0.md",
+      "sha256": "2ab0c98aa4820edf4a2a895c0f842f3b4fd894eacd9322ff3af8c0697b9f7cef"
+    },
+    "experiments": [
+      {
+        "id": "E9",
+        "kind": "family_holdout",
+        "question": "Can a specialist document reader recover independently anchored items and nested structure beyond the native parser?",
+        "primary_endpoint": {
+          "name": "exact_source_requirement_anchor_conservation",
+          "definition": "Correct complete requirements with exact anchored source text divided by the complete independent eligible source denominator.",
+          "analysis_unit": "guideline_family_and_document",
+          "decision_rule": "Freeze eligible independent reference, budgets, minimum useful gain, tolerated harm and grouped uncertainty before evaluation; no automatic admission."
+        },
+        "secondary_endpoints": [
+          "table structure and reading order",
+          "subitem and footnote conservation",
+          "box and diagram edge fidelity",
+          "CPU and peak RSS"
+        ],
+        "input_ids": []
+      },
+      {
+        "id": "E10",
+        "kind": "family_holdout",
+        "question": "Does an extractive boundary encoder improve source-grounded entity and applicability fact detection?",
+        "primary_endpoint": {
+          "name": "exact_typed_span_f1",
+          "definition": "Harmonic mean of exact source-offset and typed entity precision and recall against the locked independent reference.",
+          "analysis_unit": "guideline_family_and_span",
+          "decision_rule": "Freeze eligible independent reference, budgets, minimum useful gain, tolerated harm and grouped uncertainty before evaluation; no automatic admission."
+        },
+        "secondary_endpoints": [
+          "nested spans",
+          "false negative and type errors",
+          "chunk boundary errors",
+          "abstention and cost"
+        ],
+        "input_ids": []
+      },
+      {
+        "id": "E11",
+        "kind": "family_holdout",
+        "question": "Does small dense retrieval plus reranking improve cross-standard and costing topic candidate discovery?",
+        "primary_endpoint": {
+          "name": "macro_family_recall_at_5",
+          "definition": "Mean family-specific query recall at five against an independently labelled complete candidate pool; report unavailable references and editorial seed diagnostics separately.",
+          "analysis_unit": "guideline_family",
+          "decision_rule": "Freeze eligible independent reference, budgets, minimum useful gain, tolerated harm and grouped uncertainty before evaluation; no automatic admission."
+        },
+        "secondary_endpoints": [
+          "recall at 1 3 and 10",
+          "precision and MRR",
+          "nDCG at five",
+          "candidate budget",
+          "paired misses and runtime"
+        ],
+        "input_ids": []
+      },
+      {
+        "id": "E12",
+        "kind": "family_holdout",
+        "question": "Do specialised NLI and complementary calibrated decision models reduce false discharge of applicable reporting obligations?",
+        "primary_endpoint": {
+          "name": "reference_relative_false_discharge",
+          "definition": "Unsupported discharged obligations divided by discharged obligations with usable independently locked reference; report unresolved cases separately.",
+          "analysis_unit": "guideline_family_and_manuscript",
+          "decision_rule": "Freeze eligible independent reference, budgets, minimum useful gain, tolerated harm and grouped uncertainty before evaluation; no automatic admission."
+        },
+        "secondary_endpoints": [
+          "evidence retrieval failures",
+          "five-class confusion and directional error",
+          "Brier and log loss",
+          "risk coverage",
+          "incremental findings at fixed review budget"
+        ],
+        "input_ids": []
+      },
+      {
+        "id": "E13",
+        "kind": "family_holdout",
+        "question": "Do grammar masks improve valid complete structured candidate outputs without bypassing deterministic validation?",
+        "primary_endpoint": {
+          "name": "invalid_output_acceptance",
+          "definition": "Invalid or incomplete candidate outputs accepted by the full grammar schema and semantic boundary divided by all invalid challenge cases.",
+          "analysis_unit": "schema_and_mutation_family",
+          "decision_rule": "Freeze eligible independent reference, budgets, minimum useful gain, tolerated harm and grouped uncertainty before evaluation; no automatic admission."
+        },
+        "secondary_endpoints": [
+          "completion and truncation",
+          "unsupported keywords",
+          "mutation detection",
+          "grammar compile and inference latency"
+        ],
+        "input_ids": []
+      },
+      {
+        "id": "E14",
+        "kind": "family_holdout",
+        "question": "Can approved symbolic rules conserve applicability evidence and validate arithmetic and workflow obligations?",
+        "primary_endpoint": {
+          "name": "unsupported_formal_decision_acceptance",
+          "definition": "Unsupported or erroneous formal decisions accepted divided by independently established invalid and unknown challenge cases.",
+          "analysis_unit": "rule_and_workflow_family",
+          "decision_rule": "Freeze eligible independent reference, budgets, minimum useful gain, tolerated harm and grouped uncertainty before evaluation; no automatic admission."
+        },
+        "secondary_endpoints": [
+          "counterexample witnesses",
+          "unknown propagation",
+          "cost conservation",
+          "reachability boundedness and completion",
+          "timeout and runtime"
+        ],
+        "input_ids": []
+      }
+    ],
+    "inputs": [],
+    "freeze_blockers": [
+      "Qualify exact sources, rights, anchors, complete independent family and manuscript reference denominators, with grouped partitions and ethics determination where applicable.",
+      "Lock stage-specific rubric, adjudicators, sample precision, thresholds, review budget and adoption/harm limits before independent evaluation.",
+      "Pin model, licence, runtime, tokenizer, grammar, solver, reader and exact code/asset receipts; no remote code or unreviewed external inference.",
+      "Verify deterministic conservation, applicability and complete candidate pools; preserve historical development and negative runs separately.",
+      "Record owner-approved versioned design freeze and permitted dissemination before confirmatory execution."
+    ]
+  },
+  "freeze": null,
+  "runs": [],
+  "claims": [
+    {
+      "id": "C7",
+      "status": "planned",
+      "text": "A specialist neural and deterministic pipeline improves reporting-standard fidelity and evidence assessment per unit resource and review effort.",
+      "run_ids": [],
+      "review": null,
+      "limitations": [
+        "Hypothesis only; no independent source or model qualification from historical synthetic and editorial seed development.",
+        "Software validity does not establish source rights, scientific validity or methodological appropriateness."
+      ]
+    }
+  ]
+}

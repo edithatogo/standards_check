@@ -1,0 +1,331 @@
+{
+  "schema_version": 1,
+  "label_origin": "synthetic_analyst_authored",
+  "claim_boundary": "Original illustrative sentences inspired by guideline domains; no copied source text, no blinded independent adjudication. Labels defined before model execution.",
+  "cases": [
+    {
+      "id": "prisma-1",
+      "family": "PRISMA",
+      "split": "dev",
+      "source": "The review report identifies every database searched.",
+      "candidate": "The report names each database that was searched.",
+      "forward": "entailment",
+      "reverse": "entailment"
+    },
+    {
+      "id": "prisma-2",
+      "family": "PRISMA",
+      "split": "dev",
+      "source": "The report includes the search dates and the full queries.",
+      "candidate": "The report includes the search dates.",
+      "forward": "entailment",
+      "reverse": "neutral"
+    },
+    {
+      "id": "prisma-3",
+      "family": "PRISMA",
+      "split": "dev",
+      "source": "The review excludes unpublished studies.",
+      "candidate": "The review includes unpublished studies.",
+      "forward": "contradiction",
+      "reverse": "contradiction"
+    },
+    {
+      "id": "prisma-4",
+      "family": "PRISMA",
+      "split": "dev",
+      "source": "The search used two independent reviewers.",
+      "candidate": "The search used three independent reviewers.",
+      "forward": "contradiction",
+      "reverse": "contradiction"
+    },
+    {
+      "id": "prisma-5",
+      "family": "PRISMA",
+      "split": "dev",
+      "source": "The report describes the screening process.",
+      "candidate": "The report describes the screening process.",
+      "forward": "entailment",
+      "reverse": "entailment"
+    },
+    {
+      "id": "prisma-6",
+      "family": "PRISMA",
+      "split": "dev",
+      "source": "The review describes the source of funding.",
+      "candidate": "The review describes the study registration number.",
+      "forward": "neutral",
+      "reverse": "neutral"
+    },
+    {
+      "id": "cheers-1",
+      "family": "CHEERS",
+      "split": "dev",
+      "source": "The evaluation reports costs and health outcomes.",
+      "candidate": "The evaluation reports economic costs.",
+      "forward": "entailment",
+      "reverse": "neutral"
+    },
+    {
+      "id": "cheers-2",
+      "family": "CHEERS",
+      "split": "dev",
+      "source": "Costs are expressed in Australian dollars.",
+      "candidate": "The currency for reported costs is Australian dollars.",
+      "forward": "entailment",
+      "reverse": "entailment"
+    },
+    {
+      "id": "cheers-3",
+      "family": "CHEERS",
+      "split": "dev",
+      "source": "The analysis discounts future costs.",
+      "candidate": "The analysis does not discount future costs.",
+      "forward": "contradiction",
+      "reverse": "contradiction"
+    },
+    {
+      "id": "cheers-4",
+      "family": "CHEERS",
+      "split": "dev",
+      "source": "The evaluation states the time horizon.",
+      "candidate": "The evaluation states the time horizon.",
+      "forward": "entailment",
+      "reverse": "entailment"
+    },
+    {
+      "id": "cheers-5",
+      "family": "CHEERS",
+      "split": "dev",
+      "source": "The analysis reports uncertainty in cost estimates.",
+      "candidate": "The analysis reports the model software.",
+      "forward": "neutral",
+      "reverse": "neutral"
+    },
+    {
+      "id": "cheers-6",
+      "family": "CHEERS",
+      "split": "dev",
+      "source": "The report includes the price year.",
+      "candidate": "The report includes the price year and exchange rate.",
+      "forward": "neutral",
+      "reverse": "entailment"
+    },
+    {
+      "id": "consort-1",
+      "family": "CONSORT",
+      "split": "test",
+      "source": "The trial report names the primary outcome.",
+      "candidate": "The primary outcome is named in the trial report.",
+      "forward": "entailment",
+      "reverse": "entailment"
+    },
+    {
+      "id": "consort-2",
+      "family": "CONSORT",
+      "split": "test",
+      "source": "The report includes all adverse events and withdrawals.",
+      "candidate": "The report includes all withdrawals.",
+      "forward": "entailment",
+      "reverse": "neutral"
+    },
+    {
+      "id": "consort-3",
+      "family": "CONSORT",
+      "split": "test",
+      "source": "Participants were randomly allocated.",
+      "candidate": "Participants were not randomly allocated.",
+      "forward": "contradiction",
+      "reverse": "contradiction"
+    },
+    {
+      "id": "consort-4",
+      "family": "CONSORT",
+      "split": "test",
+      "source": "The study includes exactly 40 participants.",
+      "candidate": "The study includes exactly 50 participants.",
+      "forward": "contradiction",
+      "reverse": "contradiction"
+    },
+    {
+      "id": "consort-5",
+      "family": "CONSORT",
+      "split": "test",
+      "source": "The report identifies the allocation mechanism.",
+      "candidate": "The report identifies the allocation mechanism.",
+      "forward": "entailment",
+      "reverse": "entailment"
+    },
+    {
+      "id": "consort-6",
+      "family": "CONSORT",
+      "split": "test",
+      "source": "The report describes randomisation concealment.",
+      "candidate": "The report describes outcome-assessor blinding.",
+      "forward": "neutral",
+      "reverse": "neutral"
+    },
+    {
+      "id": "stard-1",
+      "family": "STARD",
+      "split": "test",
+      "source": "The diagnostic study specifies the reference test.",
+      "candidate": "The reference test is specified in the diagnostic study.",
+      "forward": "entailment",
+      "reverse": "entailment"
+    },
+    {
+      "id": "stard-2",
+      "family": "STARD",
+      "split": "test",
+      "source": "The report contains sensitivity and specificity estimates.",
+      "candidate": "The report contains sensitivity estimates.",
+      "forward": "entailment",
+      "reverse": "neutral"
+    },
+    {
+      "id": "stard-3",
+      "family": "STARD",
+      "split": "test",
+      "source": "Assessors knew the reference test result.",
+      "candidate": "Assessors did not know the reference test result.",
+      "forward": "contradiction",
+      "reverse": "contradiction"
+    },
+    {
+      "id": "stard-4",
+      "family": "STARD",
+      "split": "test",
+      "source": "The report describes the index test.",
+      "candidate": "The report describes the index test.",
+      "forward": "entailment",
+      "reverse": "entailment"
+    },
+    {
+      "id": "stard-5",
+      "family": "STARD",
+      "split": "test",
+      "source": "The study reports the threshold for a positive index test.",
+      "candidate": "The study reports the recruitment setting.",
+      "forward": "neutral",
+      "reverse": "neutral"
+    },
+    {
+      "id": "stard-6",
+      "family": "STARD",
+      "split": "test",
+      "source": "The report includes accuracy estimates.",
+      "candidate": "The report includes accuracy estimates and confidence intervals.",
+      "forward": "neutral",
+      "reverse": "entailment"
+    },
+    {
+      "id": "arrive-1",
+      "family": "ARRIVE",
+      "split": "test",
+      "source": "The animal study describes housing conditions.",
+      "candidate": "The housing conditions are described in the animal study.",
+      "forward": "entailment",
+      "reverse": "entailment"
+    },
+    {
+      "id": "arrive-2",
+      "family": "ARRIVE",
+      "split": "test",
+      "source": "The study reports animal age and sex.",
+      "candidate": "The study reports animal age.",
+      "forward": "entailment",
+      "reverse": "neutral"
+    },
+    {
+      "id": "arrive-3",
+      "family": "ARRIVE",
+      "split": "test",
+      "source": "The treatment was allocated randomly.",
+      "candidate": "The treatment was not allocated randomly.",
+      "forward": "contradiction",
+      "reverse": "contradiction"
+    },
+    {
+      "id": "arrive-4",
+      "family": "ARRIVE",
+      "split": "test",
+      "source": "The study used exactly 12 mice.",
+      "candidate": "The study used exactly 20 mice.",
+      "forward": "contradiction",
+      "reverse": "contradiction"
+    },
+    {
+      "id": "arrive-5",
+      "family": "ARRIVE",
+      "split": "test",
+      "source": "The study describes the experimental unit.",
+      "candidate": "The study describes the experimental unit.",
+      "forward": "entailment",
+      "reverse": "entailment"
+    },
+    {
+      "id": "arrive-6",
+      "family": "ARRIVE",
+      "split": "test",
+      "source": "The report describes anaesthetic use.",
+      "candidate": "The report describes animal diet.",
+      "forward": "neutral",
+      "reverse": "neutral"
+    },
+    {
+      "id": "tripod-1",
+      "family": "TRIPOD",
+      "split": "test",
+      "source": "The prediction model reports its validation method.",
+      "candidate": "The validation method for the prediction model is reported.",
+      "forward": "entailment",
+      "reverse": "entailment"
+    },
+    {
+      "id": "tripod-2",
+      "family": "TRIPOD",
+      "split": "test",
+      "source": "The report provides discrimination and calibration estimates.",
+      "candidate": "The report provides discrimination estimates.",
+      "forward": "entailment",
+      "reverse": "neutral"
+    },
+    {
+      "id": "tripod-3",
+      "family": "TRIPOD",
+      "split": "test",
+      "source": "The validation dataset was independent of training.",
+      "candidate": "The validation dataset was not independent of training.",
+      "forward": "contradiction",
+      "reverse": "contradiction"
+    },
+    {
+      "id": "tripod-4",
+      "family": "TRIPOD",
+      "split": "test",
+      "source": "The report describes missing-data handling.",
+      "candidate": "The report describes missing-data handling.",
+      "forward": "entailment",
+      "reverse": "entailment"
+    },
+    {
+      "id": "tripod-5",
+      "family": "TRIPOD",
+      "split": "test",
+      "source": "The model estimates patient risk.",
+      "candidate": "The model estimates health service cost.",
+      "forward": "neutral",
+      "reverse": "neutral"
+    },
+    {
+      "id": "tripod-6",
+      "family": "TRIPOD",
+      "split": "test",
+      "source": "The report describes model predictors.",
+      "candidate": "The report describes model predictors and coefficients.",
+      "forward": "neutral",
+      "reverse": "entailment"
+    }
+  ]
+}
