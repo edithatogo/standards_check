@@ -1,0 +1,48 @@
+{
+  "headings": [
+    {"id":"H1","family":"trial-handbook","text":"Recruitment, participant flow and loss to follow-up","anchor":"trial/section/1"},
+    {"id":"H2","family":"diagnostic-handbook","text":"Reference standard, blinding and diagnostic accuracy","anchor":"diagnostic/section/1"},
+    {"id":"H3","family":"economic-handbook","text":"Resource use and unit costing","anchor":"economic/section/1"},
+    {"id":"H4","family":"prediction-handbook","text":"Model validation and calibration","anchor":"prediction/section/1"},
+    {"id":"H5","family":"safety-handbook","text":"Safety and administrative reporting","anchor":"safety/section/1"}
+  ],
+  "targets": [
+    {"id":"A1","heading":"H1","anchor":"trial/section/1/item/1","text":"Provide the denominator approached for enrolment."},
+    {"id":"A2","heading":"H1","anchor":"trial/section/1/item/2","text":"Distinguish voluntary withdrawal from other reasons for missing outcomes."},
+    {"id":"A3","heading":"H1","anchor":"trial/section/1/item/3","text":"For each study arm, enumerate those remaining at the final visit. See A2."},
+    {"id":"A4","heading":"H1","anchor":"trial/section/1/item/4","text":"Explain consent exclusions before allocation."},
+    {"id":"A5","heading":"H1","anchor":"trial/section/1/item/5","text":"Describe the time between recruitment and first follow-up."},
+    {"id":"B1","heading":"H2","anchor":"diagnostic/section/1/item/1","text":"Name the method used to classify true disease status."},
+    {"id":"B2","heading":"H2","anchor":"diagnostic/section/1/item/2","text":"State whether the evaluator knew the index result."},
+    {"id":"B3","heading":"H2","anchor":"diagnostic/section/1/item/3","text":"Provide the two-by-two table of classification outcomes. Depends on B1."},
+    {"id":"B4","heading":"H2","anchor":"diagnostic/section/1/item/4","text":"Describe exclusions for technically inadequate specimens."},
+    {"id":"B5","heading":"H2","anchor":"diagnostic/section/1/item/5","text":"Report unresolved disagreement among assessors. See B2."},
+    {"id":"C1","heading":"H3","anchor":"economic/section/1/item/1","text":"State unit price and quantity separately."},
+    {"id":"C2","heading":"H3","anchor":"economic/section/1/item/2","text":"Indicate the currency and valuation date."},
+    {"id":"C3","heading":"H3","anchor":"economic/section/1/item/3","text":"Identify the source and year of each tariff. Depends on C2."},
+    {"id":"C4","heading":"H3","anchor":"economic/section/1/item/4","text":"Describe handling of shared overheads."},
+    {"id":"C5","heading":"H3","anchor":"economic/section/1/item/5","text":"Report total cost of enrolled participants."},
+    {"id":"D1","heading":"H4","anchor":"prediction/section/1/item/1","text":"Identify the cohort used to test predictions."},
+    {"id":"D2","heading":"H4","anchor":"prediction/section/1/item/2","text":"Show agreement between predicted and observed risk."},
+    {"id":"D3","heading":"H4","anchor":"prediction/section/1/item/3","text":"Report the slope and intercept. See D2."},
+    {"id":"D4","heading":"H4","anchor":"prediction/section/1/item/4","text":"State how missing predictors were handled."},
+    {"id":"D5","heading":"H4","anchor":"prediction/section/1/item/5","text":"Describe change in discrimination over time. Depends on D1."},
+    {"id":"E1","heading":"H5","anchor":"safety/section/1/item/1","text":"Report all adverse events and reasons for withdrawal."},
+    {"id":"E2","heading":"H5","anchor":"safety/section/1/item/2","text":"Report timing of collection and availability of reference documentation."},
+    {"id":"E3","heading":"H5","anchor":"safety/section/1/item/3","text":"State the date and jurisdiction of publication."},
+    {"id":"E4","heading":"H5","anchor":"safety/section/1/item/4","text":"Record data collection method and evaluator identity."},
+    {"id":"E5","heading":"H5","anchor":"safety/section/1/item/5","text":"Summarise adverse-event costs and currency of reimbursement."}
+  ],
+  "queries": [
+    {"family":"trial-query","id":"Q1","text":"Provide counts screened, enrolled and retained in each treatment arm, including participant flow.","relevant":["A1","A3"]},
+    {"family":"trial-query","id":"Q2","text":"Explain reasons for losses during follow-up and participant withdrawal.","relevant":["A2","E1"]},
+    {"family":"diagnostic-query","id":"Q3","text":"Describe how true disease classification is established for the reference standard.","relevant":["B1"]},
+    {"family":"diagnostic-query","id":"Q4","text":"Report whether interpretation of diagnostic tests was blinded and any reader disagreements.","relevant":["B2","B5"]},
+    {"family":"economic-query","id":"Q5","text":"Provide resource quantities, price per unit, currency and base year.","relevant":["C1","C2","C3"]},
+    {"family":"economic-query","id":"Q6","text":"Describe allocation of pooled shared service expenditure.","relevant":["C4"]},
+    {"family":"prediction-query","id":"Q7","text":"Report calibration of predicted probabilities including coefficients of the calibration line.","relevant":["D2","D3"]},
+    {"family":"prediction-query","id":"Q8","text":"State whether the evaluation cohort differed from model development data.","relevant":["D1"]},
+    {"family":"safety-query","id":"Q9","text":"Document adverse outcomes and why participants withdrew.","relevant":["A2","E1"]},
+    {"family":"safety-query","id":"Q10","text":"Provide the date and jurisdiction of the guidance.","relevant":["E3"]}
+  ]
+}

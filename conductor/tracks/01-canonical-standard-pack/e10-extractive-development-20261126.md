@@ -110,3 +110,42 @@ only; actual new neural calls await the opt-in hosted workflow. Existing
 loader/evaluator default behavior retained via optional predictor factory.
 Full repository tests, exact-head CI, and source/reference gates remain open.
 No production change, new dependency, rights decision or scientific promotion.
+
+
+## Completed label-frame replay and disposition
+
+Hosted [45799077555](https://github.com/edithatogo/standards_check/actions/runs/45799077555)
+completed all three pretrained frames and rules. Downloaded artifact
+[15105999587](https://github.com/edithatogo/standards_check/actions/runs/45799077555/artifacts/15105999587)
+SHA-256 verified: `d4e7b997346976c6eb5aa118ef6cf6a4536824e459931a5a2bf0221bc50f12cc`.
+Tested merge revision `355bf1e245fb0c49e2892b1028aff09a842aeb4c`.
+The same 17 authored exact spans remain the denominator.
+
+| Arm | TP/FP/FN | Exact F1 | Empty predictions | Seconds | Peak RSS KiB |
+| --- | --- | ---: | ---: | ---: | ---: |
+| Rules | 14/2/3 | .848485 | 5 | .005473 | 22236 |
+| Original GLiNER | 1/6/16 | .083333 | 9 | 9.640118 | 1138092 |
+| Clause names | 2/6/15 | .16 | 9 | 9.229019 | 1140148 |
+| Operator-first | 0/3/17 | 0 | 13 | 9.342108 | 1142788 |
+
+No invalid-output abstentions; empty output is not nonapplicability.
+No model frame adds a correct exact span beyond rules. Retain q06
+applicability [0,11), q11 exception [22,40), q12 condition [0,52)
+as missing rules spans, and q12 [0,23) / q13 [16,40) false positives.
+Exact typed span precision and recall, predictions and offsets remain
+in the artifact. The independently executed #189 follow-up (artifact
+15107111276) is complementary: joint clause descriptions .10 F1,
+per-type .105263, supervised token-BIO and span-boundary 0. The per-type
+arm uses three calls per case, not equal compute. No further prompt
+sweep or larger checkpoint on this exposed fixture.
+
+Reconciled with protected E11 receiving main `776ed1dbfbe19d16365310ef0fa07d29a793611a`
+without changing either experimental method or fixture. #187 is merged.
+Use the existing shared missed-match convention in #183
+[replay.md](https://github.com/edithatogo/standards_check/blob/dd0eff304c0b1aa42e8b863514bd2b33b4ac95c1/research/model-placement/replay.md)
+and [#158 handoff](https://github.com/edithatogo/standards_check/issues/158#issuecomment-7189323646).
+No new audit registry or extraction branch. Keep #189 stacked and
+reuse this model loader and exact span evaluator; preserve its hash-locked
+wheel closure and all asset hashes for future qualification. No model
+promotion. Independent source/rights/reference gate remains open in #188.
+Exact new-head assurance and security status must be rechecked.
