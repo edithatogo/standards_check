@@ -385,3 +385,5 @@ review outcomes. No incremental value demonstrated; keep all existing independen
 source/reference/scientific holds. See [compact receipt](evidence-action-replay-v1.json).
 
 Evidence-deficit follow-up (T01.063–064 / #158): [retained decision replay](../../../docs/research/evidence-deficit-replay-20261126.md) recovered four missed equivalents using four targeted cached semantic actions. Learned allocation recovered one; fixed recovered none. Four separate formal controls expose three lexical false equivalences; keep equivalence safety and independent scientific gates held.
+
+Evidence verification v3 (T01.063–064 / #158): [finite equivalence gate and paired fresh inference protocol](../../../docs/research/evidence-verification-v3-20261126.md). Three invalid formal equivalences withheld, one genuine verified; 22 focused tests passed locally. Retain full state-specific neural, reranking and proof outcomes; no production or reference promotion.

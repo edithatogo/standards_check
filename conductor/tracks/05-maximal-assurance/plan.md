@@ -189,3 +189,5 @@ Retain negative results and actual referral workload; no review resolutions cred
 Independent reference, source rights, scientific and publication gates stay open.
 
 Evidence-deficit follow-up (T05.048/063 / #158): [replay receipt](../01-canonical-standard-pack/evidence-deficit-replay-v2.json) retains initial hosted policy/patch failure, local focused coverage repair, resource counts and formal counterexamples. Keep hosted checks, fresh partial/complete neural evaluation, reference and rights qualification open. No promotion.
+
+Evidence verification v3 (T05.048/063 / #158): [protocol and qualification record](../../../docs/research/evidence-verification-v3-20261126.md). Prior PR #184 head 53006835 passed Assurance 45793663091 and Codecov; new exact-head checks remain separate. Fresh inference explicitly labelled, finite proof limited to synthetic grammar, no scientific or operational gate closure.

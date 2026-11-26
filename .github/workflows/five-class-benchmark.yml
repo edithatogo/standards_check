@@ -818,3 +818,107 @@ jobs:
           path: ${{ runner.temp }}/issuer-evidence/
           if-no-files-found: error
           retention-days: 90
+
+  evidence-verification-development:
+    # Explicitly authorized, bounded synthetic experiment. No inference in required CI.
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-evidence-verification'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      HF_HUB_DISABLE_TELEMETRY: "1"
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: "3.12"
+      - name: Verify deterministic experiment and record formatting
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/evidence-verification"
+          git rev-parse HEAD > "$RUNNER_TEMP/evidence-verification/commit.txt"
+          python -m pip install pytest==9.2.0 onnxruntime==1.23.2 tokenizers==0.22.1 ruff==0.17.6
+          ruff check --fix scripts/evidence_verification.py
+          ruff format scripts/evidence_verification.py
+          git diff -- scripts/evidence_verification.py | tee "$RUNNER_TEMP/evidence-verification/format.diff"
+          git hash-object scripts/evidence_verification.py tests/test_evidence_verification.py | tee "$RUNNER_TEMP/evidence-verification/blobs.txt"
+          ruff check scripts/evidence_verification.py
+          ruff format --check scripts/evidence_verification.py
+          python -m pytest --import-mode=importlib tests/test_evidence_action_replay.py tests/test_evidence_deficit_replay.py tests/test_evidence_verification.py -q
+          python -m pip check
+          python -m pip freeze > "$RUNNER_TEMP/evidence-verification/environment.txt"
+      - name: Acquire immutable public model artifacts and execute fresh CPU inference
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          import resource
+          import subprocess
+          import time
+          from pathlib import Path
+          from scripts.blind_adjudication import file_hash
+          from scripts.costing_retrieval import MODELS, LocalRanker
+          from scripts.evidence_action_replay import FIXTURE_SHA
+          from scripts.evidence_verification import pinned_fixture, run
+          from scripts.five_class_benchmark import DEBERTA
+          from scripts.semantic_benchmark import MODEL_ID, MODEL_REVISION, MODEL_SHA256, LocalNLI
+
+          root = Path(os.environ["RUNNER_TEMP"])
+          out = root / "evidence-verification"
+          fixture = pinned_fixture(Path("contracts/examples/semantic-reconciliation-synthetic-v1.json"), FIXTURE_SHA)
+          pins = {
+              "minilm": {"id": MODEL_ID, "revision": MODEL_REVISION, "sha256": MODEL_SHA256,
+                         "file": "onnx/model_quint8_avx2.onnx"},
+              "deberta": DEBERTA,
+              "reranker": MODELS["reranker"],
+          }
+          assets = {}
+          observations = {}
+          for name, pin in pins.items():
+              directory = root / "evidence-verification-assets" / name
+              directory.mkdir(parents=True)
+              model_file = "model.onnx" if name == "reranker" else "model_quint8_avx2.onnx"
+              for remote, local, cap in ((pin["file"], model_file, 100000000),
+                                         ("config.json", "config.json", 1000000),
+                                         ("tokenizer.json", "tokenizer.json", 20000000),
+                                         ("README.md", "README.md", 500000)):
+                  url = f"https://huggingface.co/{pin['id']}/resolve/{pin['revision']}/{remote}"
+                  subprocess.run(["curl", "--fail", "--silent", "--show-error", "--location",
+                                  "--max-redirs", "5", "--connect-timeout", "15", "--max-time", "180",
+                                  "--max-filesize", str(cap), "--proto", "=https", "--proto-redir", "=https",
+                                  url, "--output", str(directory / local)], check=True)
+              if file_hash(directory / model_file) != pin["sha256"]:
+                  raise ValueError("unqualified model bytes")
+              assets[name] = directory
+              observations[name] = {"pin": pin, "asset_hashes": {p.name: file_hash(p) for p in directory.iterdir()},
+                                    "download_bytes": sum(p.stat().st_size for p in directory.iterdir())}
+              (out / "assets.json").write_text(json.dumps(observations, indent=2) + "\n")
+          started = time.perf_counter()
+          models = {name: LocalNLI(assets[name], expected_model_sha256=pins[name]["sha256"])
+                    for name in ("minilm", "deberta")}
+          ranker = LocalRanker(assets["reranker"], "reranker")
+          initialization = time.perf_counter() - started
+          report = run(fixture, {name: model.score for name, model in models.items()}, ranker)
+          report.update(fixture_sha256=FIXTURE_SHA, initialization_seconds=initialization,
+                        peak_rss_kib=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
+                        fresh_inference=True, assets=observations,
+                        source_sha256=hashlib.sha256(Path("scripts/evidence_verification.py").read_bytes()).hexdigest())
+          (out / "report.json").write_text(json.dumps(report, indent=2, allow_nan=False) + "\n")
+          print(json.dumps({"summary": report["summary"], "formal": report["formal"]["summary"],
+                            "rerank_completeness": report["rerank_completeness"], "seconds": report["seconds"]}))
+          PY
+      - name: Retain complete synthetic experiment evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: evidence-verification-${{ github.sha }}
+          path: ${{ runner.temp }}/evidence-verification/
+          if-no-files-found: error
+          retention-days: 90
