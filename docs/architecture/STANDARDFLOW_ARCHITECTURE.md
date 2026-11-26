@@ -21,3 +21,15 @@ authoritative source
 ```
 
 Generated representations never write back to canonical authority. Graph databases and search indexes are disposable projections. Models may help classify projects and locate candidate evidence, but deterministic code resolves standards, validates arithmetic and changes audit state.
+
+## Specialist inference boundary
+
+Source-native parsers and exact provenance precede optional document-layout/vision
+models; extractive encoders suggest anchored tags; retrieval and reranking nominate
+candidates; directional NLI and decision models suggest evidence, never approval.
+Grammar masks are an optional syntax layer. The full schema, Rust semantic validator,
+content lock, approved applicability rules and deterministic arithmetic remain
+authoritative. Bounded symbolic solvers may supply counterexamples for reviewed
+rules; an unknown or timed-out proof remains held. See the prospective
+[specialist pipeline evaluation](../research/specialist-pipeline-protocol.v0.1.0.md)
+for stage-specific comparators, experiments and scientific gates.

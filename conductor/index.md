@@ -69,3 +69,5 @@ receipt records that observation.
 - [E4-E8 publication contract](../contracts/publication/composition-graph.v0.1.0.json) and [planned graph/vector/citation outputs](../contracts/analysis/requirement-graph.v0.1.0.json).
 
 - [Optional human review and unattended assurance](../docs/development/optional-human-review.md).
+
+- [Specialist neural and deterministic pipeline protocol](../docs/research/specialist-pipeline-protocol.v0.1.0.md) and [prospective E9-E14 contract](../contracts/publication/specialist-pipeline.v0.1.0.json).

@@ -283,10 +283,9 @@ def run(fixture, model, post, minilm_assets, deberta_assets):
             raise ValueError("vote coverage mismatch")
         for vote in votes:
             pair = by_id[vote["id"]]
-            if (
-                vote["source_sha256"] != five.digest(pair["source"])
-                or vote["candidate_sha256"] != five.digest(pair["candidate"])
-            ):
+            source_matches = vote["source_sha256"] == five.digest(pair["source"])
+            candidate_matches = vote["candidate_sha256"] == five.digest(pair["candidate"])
+            if not (source_matches and candidate_matches):
                 raise ValueError("vote pair digest mismatch")
         predictions["direct"] = {vote["id"]: vote["label"] for vote in votes}
         evidence = votes

@@ -440,3 +440,50 @@ equivalences. Uniform confidence thresholds 0.50, 0.60, 0.70, 0.80 yield
 Multiclass Brier score (sum across six classes) 0.33054; log loss 0.69864.
 No threshold selected or revised for confirmation. Do not infer independent
 calibration or safety from these development controls.
+
+### Completed native LFM output-budget and scale ablations
+
+All four successful follow-up ZIPs were downloaded and independently hash-verified.
+Preserve the same 36 historical synthetic pairs and original decision rules; no new
+confirmatory reference or production selection. Exact checked-out merge, receipt and
+asset/license/environment files are in each artifact.
+
+| Model / run | Correct /36 | Abstained | False equivalence | Unique correct vs each incumbent | Wall s | Peak RSS KiB | Artifact |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| MiniLM / DeBERTa-xsmall | 28 each | 2 / 1 | 0 | baseline | see each receipt | separate | existing |
+| LFM3-1.7B, no-thinking 256 | 21 | 0 | 0 | 1 | 181.116 | 2086032 | [15088176142](https://github.com/edithatogo/standards_check/actions/runs/45755775838/artifacts/15088176142) |
+| LFM2-2.6B 256 | 26 | 0 | 0 | 7 | 130.054 | 3298364 | [15087841425](https://github.com/edithatogo/standards_check/actions/runs/45755775838/artifacts/15087841425) |
+| LFM2.5-Instruct 256 | 9 | 0 | 0 | 6 | 82.989 | 1393608 | [15087756259](https://github.com/edithatogo/standards_check/actions/runs/45755775838/artifacts/15087756259) |
+| LFM2.5-Thinking 512 | 12 | 0 | 24 | 1 | 63.657 | 1622072 | [15088500295](https://github.com/edithatogo/standards_check/actions/runs/45756199243/artifacts/15088500295) |
+
+ZIP SHA-256, in table order for the four follow-ups:
+- 3ae2e54c32e0f3cebc41547d9d672ff9324da62ff9fd6066f2674870e6fdfc36
+- 87d674843a96d0d1787fd78098affd57f4963fed9ba731e0425b0415fcee5c43
+- 6a6163c93e812c849dde84cc341687b45a3debc6409b9d3b628b87e4b583c683
+- 36b60f507aeb01f4a7643d5d6f2ffd7af209e61a78a7c556fe25f56c522ea981
+
+Receipt JSON SHA-256 respectively:
+78cedd752a87011a5e7108223c36e4d14a18b49019859195dd7ab689c9c11a17,
+d8d00618967d0d0c72ea50753e3b51c8d199d43b97520a0e509939531fb19f77,
+24b29ffcb0160a34a4924a3dd2e295c46c42ab7adcd99b81335deae140e6f212,
+db76294aeb6c9623b83be46a4b658a3ae28f4cceae6c33127e92d10d3798f2da.
+All 36 completions stopped normally per follow-up; the initial 120-token LFM3
+failure is retained. No attribution of improvement solely to architecture because
+thinking/budget changed together. LFM2-2.6B both correct 19, incumbent-only 9,
+challenger-only 7, both wrong 1, disagreement 17. This is descriptive paired
+complementarity, not a usable oracle or justified majority vote. Thinking is a
+negative safety result: all non-equivalent cases falsely classified equivalent.
+Every downloaded checkpoint licence is LFM Open License v1.0. Pin 2.6B resolved
+7949a4d1820bb11ce8e735872c31bd2dd7ec9c87; Thinking weight revision remains
+6eef5895049f444e3436c6f583207e610a1485ce, licence revision
+b71945805f7d4d87dabd73e26098d44bcad6c35f. Retain both original acquisition failures.
+
+Assurance 45756191815 Python job 139695502850 reported 748 passed, 3 skipped and
+91.72% combined coverage; workflow-policy failed at formatting in lfm_development.py
+line 286. The next commit simplifies that condition, keeping the digest gate.
+Current-head hosted checks and scientific gate remain required.
+
+The new [specialist-pipeline protocol](../../../docs/research/specialist-pipeline-protocol.v0.1.0.md)
+extends the publication programme without registering these retrospective results as
+frozen runs. Prioritise stage-specific evidence, calibrated d1 triage, source-native
+and layout-specialised ingestion, extractive tags, retrieval and exact validation.

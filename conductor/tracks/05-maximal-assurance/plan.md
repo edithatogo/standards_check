@@ -143,3 +143,10 @@ The [publication contract](../../../contracts/publication/composition-graph.v0.1
 - [ ] **T05.052** ([#30](https://github.com/edithatogo/standards_check/issues/30), [#116](https://github.com/edithatogo/standards_check/issues/116)) Observe a protected updater proposal without dashboard approval and qualify the unattended routine merge handover; keep separate breaking/security work and verified receiving receipts.
 
 See [optional human review](../../../docs/development/optional-human-review.md). Model-relative development and candidate reference work can proceed without waiting for human review; T05.049 retains the actual external/scientific evidence gates. No automatic approval, false human review or release permission.
+
+Specialist evaluation extends T05.046, T05.048 and T05.049 under #158. See
+[specialist pipeline protocol](../../../docs/research/specialist-pipeline-protocol.v0.1.0.md)
+for E9-E14 endpoints, constrained-decoding and symbolic validation boundaries,
+resource/rights pins and independent scientific freeze criteria. Grammar acceptance
+or green tests never establish semantic or scientific correctness. Preserve the full
+negative LFM ablations and source acquisition holds; no model promotion.

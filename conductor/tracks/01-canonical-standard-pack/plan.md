@@ -298,3 +298,16 @@ zero comparable rows with the existing generic reader; STARD transport and sourc
 See [semantic qualification](semantic-reconciliation-qualification.md). Restore the Thinking
 weight pin at the original publisher upload and verify the later licence independently.
 Do not reopen or tune historical scientific control sets; independent cohort freeze held.
+
+### Specialist pipeline and publication extension (26 November)
+
+See [specialist pipeline protocol](../../../docs/research/specialist-pipeline-protocol.v0.1.0.md)
+and [prospective E9-E14 contract](../../../contracts/publication/specialist-pipeline.v0.1.0.json).
+T01.025, T01.027-030, T01.043, T01.050-053 retain their existing owners and gates.
+Use source-native extraction first; compare tiny document/layout models only on held
+formats. Test GLiNER boundary tags with exact offsets, a small dense retrieval/reranker
+against the existing lexical method, and NLI/d1 on separate evidence tasks. Do not
+use models for identity, arithmetic, applicability-rule execution or acceptance.
+The costing metadata cohort is a development-only editorial topic-ranking pilot;
+keep independent family, rights, reference, ontology and scientific holds explicit.
+All native LFM follow-up results and negative evidence are in the qualification receipt.
