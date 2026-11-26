@@ -62,3 +62,59 @@ Unsupported citation acceptance (correct substring, wrong role) is distinct from
 ## Remaining
 
 The local git transport failed DNS; no GLiNER, Granite-Docling, pretrained GNN or new neural reranking weights acquired. The classical alternatives actually ran. Keep independent source rights/annotation, harder family-disjoint retrieval, first-pass frozen budgets, genuine cross-reference graph, full relation classes, separate learned evidence sufficiency, exact per-arm CPU/RSS/model byte receipts and hosted exact-head qualification outstanding. Add only opt-in runners, after maintained checks; no routine network, new dependency or acceptance bypass. Retain original negative results, not just the favorable cells.
+
+
+## Exception-specific stress and verifier-placement follow-up (26 November)
+
+Executed fresh local fit using original development partition, plus 32 newly
+authored synthetic cases (24 exception present, eight absent, four family-labelled
+groups). Same original model, no evaluation cases supplied for training.
+An exploratory expanded regex adds explicit surface cues excluding, other than,
+but not, outside and semicolon boundaries. Its design shares the vocabulary
+of the authored challenge: not an independent reference or evidence of
+generalisation. Missing-only learned fallback does not overwrite any rule span.
+No automatic acceptance or release changes.
+
+```sh
+cd research/model-placement
+python -m pytest -q test_tagging_followup.py
+python tagging_followup.py --output tagging-receipt.json
+```
+
+RED missing module; GREEN two tests passed. Actual run wall 0.181836 s, peak
+161300 KiB RSS, no model download. Same local research environment as above.
+Receipt SHA-256 3edbf13d6b98165f131a7be4bf06d3ccdf232ae244f66ae06a6f22b60f839387
+(includes non-deterministic timing/resource observations). Exact per-case
+spans, review flags, family summaries, paired gains and losses regenerable.
+
+| Method | Original exceptions TP/48 | Stress TP/24 | Stress FP | Stress FN | Stress F1 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Original rules | 40 | 4 | 4 | 20 | 25.0% |
+| Compact learned | 48 | 0 | 23 | 24 | 0.0% |
+| Missing-only learned fallback | 48 | 4 | 26 | 20 | 14.8% |
+| Expanded rules | 48 | 24 | 0 | 0 | 100% |
+| Expanded rules + fallback | 48 | 24 | 8 | 0 | 85.7% |
+
+Original rule omissions recovered by expanded surface rules; learned tagger
+fails on all new exact exception boundaries. Expanded+learned introduces
+eight spurious exception claims on absence controls. The 100% regex result
+is a cue-matched ceiling on these authored examples, not external validity.
+No adoption of a learned exception fallback. Further challenge implicit
+exceptions, cue polysemy, nested and cross-sentence scopes, independent span
+references before promoting any rule expansion.
+
+Typed verifier follow-up on original 432 claims (144 valid, 288 invalid):
+
+| Review flag method | Invalid flagged | Valid flagged |
+| --- | ---: | ---: |
+| Exact anchor only | 144 | 0 |
+| Rule-typed | 288 | 32 |
+| Learned typed | 288 | 29 |
+| Rule-typed + missing-only learned exception fallback | 288 | 24 |
+
+The hybrid reduces unnecessary flags by five vs the learned verifier and
+eight vs rule-typed on the original controls; all 288 invalid claims flagged.
+This does not override the new negative stress result. Keep hybrid as an
+experimental review-prioritisation signal only, not an automatic rejection
+or authorisation rule. Need harder mixed-validity and natural citation
+judgments and fresh pretrained tagging before scientific qualification.
