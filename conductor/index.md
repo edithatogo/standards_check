@@ -73,3 +73,5 @@ receipt records that observation.
 - [Specialist neural and deterministic pipeline protocol](../docs/research/specialist-pipeline-protocol.v0.1.0.md) and [prospective E9-E14 contract](../contracts/publication/specialist-pipeline.v0.1.0.json).
 
 - [Requested model challengers and actual retrieval receipts](../docs/research/model-challengers-20261126.md).
+
+- [Orthogonal statistical and formal assurance](../docs/research/orthogonal-assurance-20261126.md) — conformal rank oracle, symbolic applicability and alignment, syntax/normalization, leakage and differential verification; prospective qualification, not an approved protocol.

@@ -152,3 +152,11 @@ or green tests never establish semantic or scientific correctness. Preserve the 
 negative LFM ablations and source acquisition holds; no model promotion.
 
 T05.048 and T05.049: preserve the [requested model challenger record](../../../docs/research/model-challengers-20261126.md), exact candidate pool, source hashes, local/hosted boundaries and all negative retrieval receipts. The public-data service comparator is explicit local opt-in only; no secret-dependent PR CI or automatic scientific acceptance.
+
+## Orthogonal assurance and research ablations
+
+- [ ] **T05.060** ([#158](https://github.com/edithatogo/standards_check/issues/158)) Reconcile prospective orthogonal ablations with the existing E1–E8 programme and proposed specialist E9–E14 after integration; freeze calibration, risk endpoints, solver and format comparators before confirmatory execution.
+- [ ] **T05.061** ([#31](https://github.com/edithatogo/standards_check/issues/31), [#116](https://github.com/edithatogo/standards_check/issues/116)) Qualify exact leakage gate and private-corpus availability before release, synthetic negative fixtures in ordinary CI, and optional LSH acceleration only after measurement; no rights claim from detector pass.
+- [ ] **T05.062** ([#31](https://github.com/edithatogo/standards_check/issues/31), [#116](https://github.com/edithatogo/standards_check/issues/116)) Extend existing property/fuzz and legacy semantic differential tests, exact finite oracles and retained counterexamples; require current-head and receiving evidence without weakening thresholds.
+
+See the [orthogonal assurance design](../../../docs/research/orthogonal-assurance-20261126.md). Local conformal oracle tests passed in isolation only; no full-checkout or hosted result claimed.

@@ -318,3 +318,11 @@ Reuse the observed BGE candidate pool, measure paired losses/gains with permitte
 rerankers, qualify K2-Horizon and MiniCPM publisher assets before inference, and
 keep d1.2-ultra, Jev and hosted rerankers as separate opt-in service experiments.
 No remote inference in routine PR workflows, source repin or model promotion.
+
+## Orthogonal statistical and symbolic qualification
+
+- [ ] **T01.060** ([#158](https://github.com/edithatogo/standards_check/issues/158)) Qualify split/Mondrian conformal triage with frozen family-disjoint score/reference data, independent rank comparator, explicit abstention and separate selective false-equivalence risk evaluation; the six local synthetic tests are not empirical calibration.
+- [ ] **T01.061** ([#82](https://github.com/edithatogo/standards_check/issues/82), [#149](https://github.com/edithatogo/standards_check/issues/149), [#158](https://github.com/edithatogo/standards_check/issues/158)) Qualify source-anchored three-valued applicability and globally consistent typed costing/ontology constraints, with counterexamples, exact finite oracle, preserved identities and no automatic equivalence.
+- [ ] **T01.062** ([#95](https://github.com/edithatogo/standards_check/issues/95), [#111](https://github.com/edithatogo/standards_check/issues/111)) Qualify restricted-source coverage and exact leakage comparisons within authorized private processing, preserving rights holds and original source anchors.
+
+See the [orthogonal assurance design](../../../docs/research/orthogonal-assurance-20261126.md). PR #155 remains held for independent reference and family qualification. No new pack admitted.
