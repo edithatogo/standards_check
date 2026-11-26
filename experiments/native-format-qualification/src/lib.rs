@@ -79,9 +79,11 @@ pub fn latex_label(input: &str, old: &str, new: &str) -> Option<String> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rustfst::algorithms::{compose, shortest_path};
+    use rustfst::algorithms::compose::compose;
+    use rustfst::algorithms::shortest_path;
     use rustfst::fst;
     use rustfst::prelude::*;
+    use rustfst::utils::acceptor;
 
     #[test]
     fn native_cst_exact_span_edits_and_ambiguity() {

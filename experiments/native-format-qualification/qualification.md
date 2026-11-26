@@ -30,3 +30,7 @@ policy alongside the scratch manifest, and run the same pinned policy action
 with its common locked arguments. The probe's own licence follows the workspace
 licence. No change to the root graph or policy. Still held pending policy and
 actual offline compilation/tests.
+
+## Import repair and receiving-main reconciliation
+
+Original run 45785734826 passed candidate cargo-deny advisories, bans, licences and sources; Rust test compilation failed with two E0425 missing acceptor and two E0423 compose module/function errors. Use the pinned 1.3.1 API imports [compose](https://docs.rs/rustfst/1.3.1/rustfst/algorithms/compose/fn.compose.html) and [acceptor](https://docs.rs/rustfst/1.3.1/rustfst/utils/fn.acceptor.html). Preserve original tests and exact candidate lock; no new dependencies or change to policy. Reconcile E9/E11 receiving main 776ed1db, with disjoint changes. No successful parser/WFST test claim until actual fresh hosted compilation and execution. #180's source candidate copy requires later reconciliation.
