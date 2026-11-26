@@ -456,3 +456,114 @@ receipt is explicitly absent in hosted run rather than rerun or substituted.
 No model inference or production dependencies. Actual full-checkout run
 and new exact-head checks remain required. Dedicated offline security
 runner remains a separate gate; no bypass.
+
+
+## Full-checkout reproduction and locked stage handoff — 26 November
+
+Hosted [run 45802682924](https://github.com/edithatogo/standards_check/actions/runs/45802682924)
+completed successfully on exact PR head 568d98579d5401e3785cbec256a2ecd49887bbce,
+tested merge babddd6e233b253e0afc52ca50f63da90d28cbf1.
+Downloaded [artifact 15108373345](https://github.com/edithatogo/standards_check/actions/runs/45802682924/artifacts/15108373345)
+and independently verified ZIP SHA-256
+bf28d89a54c532800ec5ac92cfd98732189d38d9b46841ad2eef9380d5f60909.
+Member SHA-256: recall-audit.json
+203171b441ee7ec752052df9182fde04f9995412390350ce1fd14cd9f7047f3e;
+handoff.json 1a16b50a2de49ebfb8f6183bba41608fa329c94b4836521635b2173296a2d672.
+Both original costing input-file pins passed, projection_only=false.
+All metrics, rankings, misses, reference IDs and overlap counts exactly
+match the local projection run; only runtime/RSS and projection flag differ.
+All 1186 hosted handoff rows exactly match the corresponding local rows;
+the 68 additional local #185 heading-context rows were deliberately omitted,
+not rerun. Unique reference units remain 175. No model acquisition or inference.
+This resolves the prior full-checkout reproduction hold, not scientific qualification.
+
+Consume #189's existing [run 45798338941 artifact 15107111276](https://github.com/edithatogo/standards_check/actions/runs/45798338941/artifacts/15107111276)
+with verified ZIP SHA-256
+cf41d449aca1231ae24f544b6b36834b57de0b1c604ccb91ab34628a313878b8.
+Same E10 fixture hash, exact typed offset, case identity and source-text
+digest required; repeated rules predictions conserved and not double-counted.
+Four new arms add 68 observations to the prior 1254 local rows,
+now 1322 observations on the same 175 IDs. Exact span recovery on 17
+synthetic references:
+
+| Arm | Recovered | Missed |
+| --- | ---: | ---: |
+| Rules | 14 | 3 |
+| Original GLiNER | 1 | 16 |
+| Clause names | 2 | 15 |
+| Operator first | 0 | 17 |
+| Joint clause | 1 | 16 |
+| Per-type | 2 | 15 |
+| Token BIO | 0 | 17 |
+| Span boundary | 0 | 17 |
+
+No new exact reference span beyond rules; these results are not independent
+family evidence. Local expanded receipt SHA-256
+44956451bc7dfbce6913c3c454e6fc8b56f288c359d7b22d344d2c0f4e10f427.
+All 1254 old rows exactly preserved. Use --tagger-followup to import the
+additional pinned archive; the previous command remains reproducible.
+
+The existing exchange convention now has an executable coordinator-side
+[locked stage join](locked_join.py). It consumes the existing owner's
+private reference ledger export and exact canonical-JSON digest, not a
+new reference registry. One positive unit, one stable case ID per locked
+reference, one row per evaluated arm; family components cannot cross
+development/calibration/evaluation. Each stage owner can populate only
+its assigned stage, and all observations must bind the same lock, case
+and arm and identify the evidence receipt. Missing stage observations
+remain unknown. Conflicting receipts, out-of-budget ranks, unbound cases,
+partial required bundles claiming success, and referrals without actual
+resolution receipts fail closed. The existing first-observed and
+first-established functions are reused. Actual rights, anchor fidelity,
+blind initial labels, independent resolution, family partition and
+complete-pool reference receipts must be supplied for an independent tier;
+the join checks presence and consistency, not truth of those receipts.
+No real independent reference lock is generated or asserted here. Never
+send the private reference lock or post-inference output to model runners.
+
+Reference lock uses reference_tier, reference_ledger_receipt,
+eligible_universe_digest, qualification_receipts (when independent), arms,
+and cases with namespace, original_id, family_component, split,
+source_anchor, target_anchor, candidate_budget, review_budget and optional
+required_components. The canonical JSON digest is passed separately.
+Packets use reference_lock_digest, owner and rows with case_id, arm,
+receipt, and owned stages; optional candidate_rank/review_rank,
+decision_detail, covered_components and resolution_receipt preserve
+the earlier convention. Lock provenance is verified by Layout/curator;
+stage values are attributed to Layout, coordinator, Offline and Orthogonal.
+Model/framing receipts are consumed unchanged through the appropriate
+stage owner. The synthetic tests do not exercise actual independent labels.
+
+Local RED missing locked_join and missing followup importer; also RED
+rank-preservation failure, then GREEN all 12 focused tests passed.
+Exact tested blobs:
+recall_handoff.py ead817cc0b2f1e43a0fef250daca49374ab6644f;
+test_recall_handoff.py cf5e9a2fde5054efd6de8d58a2a3c0f3dabb792f;
+locked_join.py 08f9eb04ac42b1463f4e243f0ac0b054a0a9b573;
+test_locked_join.py bed308cd55076786712bcf23fdf019125f70a155.
+No production change, new registry, model runner or acceptance promotion.
+
+Source-intake reconciliation, #188 owner retained:
+[priority replay 45802602832 artifact 15108328164](https://github.com/edithatogo/standards_check/actions/runs/45802602832/artifacts/15108328164)
+verified SHA-256 e442a484cd20abd396d40c2dde03e7c0e5e10af327bd69522a21876d086a5e53:
+all five priority editions still held, catalogue coverage 720 entries,
+zero end-to-end qualified from those receipts.
+[Bulk checkpoint 45802629341 artifact 15107508921](https://github.com/edithatogo/standards_check/actions/runs/45802629341/artifacts/15107508921)
+verified SHA-256 be0c2221b737042d0bb4656d1f1f4145324dbaf820112b1e366ba7f402e8676a:
+720 catalogue entries, 209 OA XML candidates, 200 deferred acquisitions,
+4 held, 1 source inventory observed but unreconciled; 2 actual new attempts,
+zero canonical promotions. This advances acquisition accounting but does
+not supply a qualified independent positive ledger. Keep #95/#111/#158
+and T01.052/T05.049 open. Layout continues bounded intake and reference
+lock; Offline/Orthogonal supply matching stage receipts only after the
+lock. No duplicate acquisition, source rights assumption or new benchmark.
+The queued dedicated offline AI security runner belongs to existing
+#30/T05.044; no changes to runner isolation, ruleset or required checks.
+Fresh exact-head checks and extended opt-in read-only replay remain
+separate from the already verified full-checkout execution.
+
+Reproduce updated join tests and extended development receipt:
+```sh
+PYTHONPATH=. python -m pytest -q research/model-placement/test_recall_audit.py research/model-placement/test_recall_handoff.py research/model-placement/test_locked_join.py
+PYTHONPATH=. python research/model-placement/recall_handoff.py --artifacts /path/to/artifacts --audit recall-audit.json --tagger-followup --output handoff.json
+```

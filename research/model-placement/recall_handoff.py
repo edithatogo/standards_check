@@ -13,6 +13,7 @@ PINS = {
     15105999587: 'd4e7b997346976c6eb5aa118ef6cf6a4536824e459931a5a2bf0221bc50f12cc',
     15105947458: 'f30563e5c866fc7408987a07abd3a0014490dc263ceeb9e441fafc82c3b8534a',
     15106112148: 'e5f3d8a17ce8b57169aa19f7730b1d2f272c04d23282e8240822539d3b55f09f',
+    15107111276: 'cf41d449aca1231ae24f544b6b36834b57de0b1c604ccb91ab34628a313878b8',
     15106576904: '4133e229f7b6965e17690e063ebecd745ed96671b1fd8ce8247acedd2455a846',
 }
 HEADING_PIN = 'd7fbc4c805eb31f67fbbf2a7d1aee7aea4317626c59b28895f943075a4a991d2'
@@ -60,7 +61,43 @@ def common_misses(audit):
             'records':records,'boundary':'Editorial misses, not causal errors or independently established positives.'}
 
 
-def collect(root,audit,heading=None):
+def append_tagger_followup(root, rows):
+    """Consume #189's existing outputs on the same E10 fixture, no new inference."""
+    original = [r for r in rows if r['namespace'] == 'E10' and r['arm'] == 'rules']
+    baseline = {tuple(r['original_id']): r for r in original}
+    if not baseline or len(baseline) != len(original):
+        raise ValueError('invalid E10 reference denominator')
+    followup = members(root, 15107111276, ('clause.json', 'per_type.json', 'supervised.json'))
+    supervised = followup['supervised.json']
+    entries = [('rules', supervised['fixture_sha256'], supervised['arms']['rules']['cases'], 'supervised.json')]
+    entries += [(name, followup[name+'.json']['fixture_sha256'], followup[name+'.json']['evaluation']['cases'], name+'.json') for name in ('clause', 'per_type')]
+    entries += [(name, supervised['fixture_sha256'], supervised['arms'][name]['cases'], 'supervised.json') for name in ('token_bio', 'span_boundary')]
+    output = []
+    for arm, fixture, cases, file in entries:
+        seen = set()
+        for c in cases:
+            for kind, start, end in c['expected']:
+                original_id = (c['id'], kind, start, end)
+                prior = baseline.get(original_id)
+                if prior is None or original_id in seen or prior['reference_digest'] != fixture or prior['family'] != c['family'] or prior['source_text_digest'] != digest(c['text']):
+                    raise ValueError('E10 followup reference mismatch')
+                seen.add(original_id)
+                if arm == 'rules':
+                    if prior['observed_spans'] != c['predicted']:
+                        raise ValueError('repeated E10 rules predictions differ')
+                    continue
+                hit = [kind, start, end] in c['predicted']
+                output.append(row('E10', 'synthetic_author_labelled', fixture, list(original_id), arm,
+                                  {'source_anchor': 'pass' if hit else 'fail'}, f'15107111276/{file}',
+                                  unit='typed_span', source_text_digest=digest(c['text']), family=c['family'],
+                                  observed_spans=c['predicted'], detail='exact_span' if hit else 'missing_exact_span',
+                                  invalid_output=bool(c['invalid_abstention'])))
+        if seen != set(baseline):
+            raise ValueError('E10 followup reference denominator differs')
+    return output
+
+
+def collect(root,audit,heading=None,*,tagger_followup=False):
     if audit['reference_status']!='editorial_positive_only' or audit['independent_positive_count']!=0:raise ValueError('unqualified input audit')
     rows=[]; notes={}
     tier='synthetic_author_labelled'
@@ -95,6 +132,8 @@ def collect(root,audit,heading=None):
             for kind,start,end in c['expected']:
                 hit=[kind,start,end] in c['predicted']
                 rows.append(row('E10',tier,report['fixture_sha256'],[c['id'],kind,start,end],report.get('frame',report['arm']),{'source_anchor':'pass' if hit else 'fail'},f'15105999587/{file}',unit='typed_span',source_text_digest=digest(c['text']),family=c['family'],observed_spans=c['predicted'],detail='exact_span' if hit else 'missing_exact_span',invalid_output=bool(c['invalid_abstention'])))
+    if tagger_followup:
+        rows.extend(append_tagger_followup(root,rows))
     # E11 reference positives only; ranking stage is not evidence discharge.
     e11=members(root,15105947458,('ablation.json','comparison.json'));fixture=e11['comparison.json']['fixture_sha256']
     expected_pairs={}
@@ -143,5 +182,5 @@ def collect(root,audit,heading=None):
 
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--artifacts',type=Path,required=True);p.add_argument('--audit',type=Path,required=True);p.add_argument('--heading',type=Path);p.add_argument('--output',type=Path,required=True);a=p.parse_args()
-    a.output.write_text(json.dumps(collect(a.artifacts,json.loads(a.audit.read_bytes()),a.heading),indent=2,sort_keys=True,allow_nan=False)+'\n',encoding='utf-8')
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--artifacts',type=Path,required=True);p.add_argument('--audit',type=Path,required=True);p.add_argument('--heading',type=Path);p.add_argument('--tagger-followup',action='store_true');p.add_argument('--output',type=Path,required=True);a=p.parse_args()
+    a.output.write_text(json.dumps(collect(a.artifacts,json.loads(a.audit.read_bytes()),a.heading,tagger_followup=a.tagger_followup),indent=2,sort_keys=True,allow_nan=False)+'\n',encoding='utf-8')
