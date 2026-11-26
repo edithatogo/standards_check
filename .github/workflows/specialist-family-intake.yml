@@ -28,7 +28,7 @@ concurrency:
 
 jobs:
   family-intake:
-    if: (github.event_name == 'workflow_dispatch' && !inputs.bulk_only) || (github.event_name == 'pull_request' && github.event.action == 'labeled' && github.event.pull_request.head.repo.full_name == github.repository && (github.event.label.name == 'run-family-intake' || github.event.label.name == 'run-structural-intake'))
+    if: (github.event_name == 'workflow_dispatch' && !inputs.bulk_only) || (github.event_name == 'pull_request' && github.event.action == 'labeled' && github.event.pull_request.head.repo.full_name == github.repository && (github.event.label.name == 'run-family-intake' || github.event.label.name == 'run-structural-intake' || github.event.label.name == 'run-priority-structure'))
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
@@ -42,7 +42,7 @@ jobs:
         with:
           python-version: "3.12.16"
       - name: Inspect existing source survey and review controls
-        if: github.event.label.name != 'run-structural-intake'
+        if: github.event.label.name != 'run-structural-intake' && github.event.label.name != 'run-priority-structure'
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
@@ -58,7 +58,7 @@ jobs:
           python -m scripts.review_source_receipts --receipt "$RUNNER_TEMP/family-prior/equator-article-survey.json" --output "$RUNNER_TEMP/family-evidence/historical-retrospective.json"
           python -m scripts.equator_pipeline_coverage --directory "$RUNNER_TEMP/family-prior" --output "$RUNNER_TEMP/family-evidence/catalogue-coverage.json"
       - name: Reuse the bounded primary source acquisition and structural checker
-        if: github.event.label.name != 'run-structural-intake'
+        if: github.event.label.name != 'run-structural-intake' && github.event.label.name != 'run-priority-structure'
         shell: bash
         run: |
           set -euo pipefail
@@ -122,6 +122,35 @@ jobs:
             done
           done
           python -m scripts.equator_literal_rows --source-dir "$src" --output "$out/literal-source-comparison.json"
+      - name: Compare priority issuer source identity and structured metadata
+        if: github.event.label.name == 'run-priority-structure'
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/family-evidence"
+          src="$RUNNER_TEMP/family-sources"
+          mkdir -p "$out" "$src"
+          git rev-parse HEAD > "$out/revision.txt"
+          sha256sum scripts/equator_literal_rows.py scripts/structured_source.py scripts/compare_guideline_formats.py source/official/priority-article-candidates.json > "$out/input-sha256.txt"
+          grep -E '^(lxml|python-docx|typing-extensions)==' requirements/ci-python312-linux-x86_64.lock.txt > "$out/docx-lock.txt"
+          python -m pip install --require-hashes --no-deps --only-binary=:all: -r "$out/docx-lock.txt"
+          base="https://raw.githubusercontent.com/EQUATOR-Network/equator-website/388e294f05d4d55cf6fc01ddf56b6ad48577b190/reporting-guidelines"
+          fetch_source() {
+            local url="$1" file="$2"
+            if curl --fail --silent --show-error --location --max-redirs 2 --proto '=https' --proto-redir '=https' --connect-timeout 10 --max-time 45 --max-filesize 1000000 "$url" --output "$src/$file"; then
+              printf '%s acquired\n' "$file" >> "$out/transfer.txt"
+            else
+              rm -f "$src/$file"
+              printf '%s held_transport\n' "$file" >> "$out/transfer.txt"
+            fi
+          }
+          fetch_source "$base/tripod/tripod-ai-checklist.qmd" tripod.qmd
+          fetch_source "$base/tripod/TRIPOD%2BAI_checklist.docx" tripod.docx
+          fetch_source "$base/strobe/strobe-checklist.qmd" strobe.qmd
+          fetch_source "$base/strobe/STROBE_checklist_v4_combined.docx" strobe.docx
+          fetch_source "https://www.tripod-statement.org/wp-content/uploads/2019/12/TRIPODAI_checklist.pdf" tripod.issuer.pdf
+          fetch_source "https://www.strobe-statement.org/download/strobe-checklist-cohort-case-control-and-cross-sectional-studies-combined" strobe.issuer.pdf
+          python -m scripts.equator_literal_rows --priority --source-dir "$src" --output "$out/priority-structure.json"
       - name: Retain only candidate source evidence and retrospective
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2

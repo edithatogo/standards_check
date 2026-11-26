@@ -157,14 +157,7 @@ def docx_markup_inventory(raw):
     }
 
 
-def literal_rows(raw, doi, expected_ids):
-    if len(raw) > 128_000 or not expected_ids or len(set(expected_ids)) != len(expected_ids):
-        raise ValueError("invalid bounded source or reference")
-    source = raw.decode("utf-8")
-    for role, marker in (("cite", doi), ("lic", "https://creativecommons.org/licenses/by/4.0/")):
-        notices = re.findall(rf'<p class="tp-{role}">(.*?)</p>', source, re.S)
-        if len(notices) != 1 or marker not in notices[0]:
-            raise ValueError("source identity or local licence notice missing")
+def read_literal_array(source):
     matches = list(re.finditer(r"(?m)^[ \t]*const ROWS = [ \t]*", source))
     if len(matches) != 1:
         raise ValueError("ambiguous literal rows")
@@ -176,6 +169,18 @@ def literal_rows(raw, doi, expected_ids):
         raise ValueError("expected a literal array, not a computed expression")
     if not isinstance(data, list) or not 0 < len(data) <= 1000:
         raise ValueError("invalid literal row array")
+    return data
+
+
+def literal_rows(raw, doi, expected_ids):
+    if len(raw) > 128_000 or not expected_ids or len(set(expected_ids)) != len(expected_ids):
+        raise ValueError("invalid bounded source or reference")
+    source = raw.decode("utf-8")
+    for role, marker in (("cite", doi), ("lic", "https://creativecommons.org/licenses/by/4.0/")):
+        notices = re.findall(rf'<p class="tp-{role}">(.*?)</p>', source, re.S)
+        if len(notices) != 1 or marker not in notices[0]:
+            raise ValueError("source identity or local licence notice missing")
+    data = read_literal_array(source)
     rows, groups = [], []
     section = label = None
     for i, value in enumerate(data):
@@ -337,6 +342,8 @@ def compare_docx(raw, name, reference, expected):
         fingerprint("Checklist item description"): "requirement",
         fingerprint(f"{name.upper()} 2025 checklist item description"): "requirement",
     }
+    if name == "tripod":
+        headers[fingerprint("Item")] = "id"
     rows, issues = collect_rows(structure, identifier_pattern=ITEM_ID, header_roles=headers)
     anchor_evidence = docx_anchor_evidence(structure, rows)
     return {
@@ -385,16 +392,160 @@ def observe_pair(source_dir, name, spec, pins):
     return result
 
 
+PRIORITY_PINS = {
+    "tripod": (
+        "tripod-ai-2024",
+        "79d32ba9c806dccb617ff99b4eb6b2b9d2ad178d",
+        "0087e65ff3ea8b37c309074e6ec9dab30169f015",
+        "4f3b8d79689e96760df28d21bf42115839a9ee4c",
+    ),
+    "strobe": (
+        "strobe-2007",
+        "e30f0cd788751d57bbd6e4a37185d3f008143fb0",
+        "6e3e758865902a03a75e45821f78e1c0f371a36c",
+        "94f5b2d5f04a54eafdca508f86e2b50ad1ba58b1",
+    ),
+}
+
+
+def priority_literal_metadata(data, name, expected):
+    """Retain observed scope and subitem structure; no semantic or rights decision."""
+    if name not in PRIORITY_PINS or not expected or len(set(expected)) != len(expected):
+        raise ValueError("invalid source dialect or denominator")
+    rows = []
+    section = topic = None
+    for i, value in enumerate(data):
+        anchor = f"ROWS/{i}"
+        if isinstance(value, str) and value.strip():
+            section, topic = anchor, None
+            continue
+        if not isinstance(value, list) or len(value) != 4 or (section is None and name == "tripod"):
+            raise ValueError("invalid priority row")
+        heading, printed, scope, content = value
+        if not isinstance(heading, str) or not isinstance(printed, str):
+            raise ValueError("invalid topic or printed identity")
+        if heading.strip():
+            topic = anchor + "/0"
+        if topic is None:
+            raise ValueError("missing topic origin")
+        item = printed.removesuffix("*") if name == "strobe" else printed
+        if not ITEM_ID.fullmatch(item):
+            raise ValueError("invalid item identity")
+        row = {
+            "item_id": item,
+            "printed_id": printed,
+            "identifier_anchor": anchor + "/1",
+            "section_anchor": section,
+            "topic_anchor": topic,
+            "requirement_anchor": anchor + "/3",
+        }
+        if name == "tripod":
+            if (
+                scope not in ("D", "E", "D;E")
+                or not isinstance(content, str)
+                or not content.strip()
+            ):
+                raise ValueError("invalid scope or requirement")
+            row.update(
+                scope=scope,
+                scope_anchor=anchor + "/2",
+                note_references=re.findall(r"<sup>([0-9]+)</sup>", content),
+                requirement_sha256=fingerprint(content),
+            )
+        else:
+            if type(scope) is not bool or not isinstance(content, list) or not content:
+                raise ValueError("invalid grouped requirement")
+            subitems = []
+            for j, sub in enumerate(content):
+                if (
+                    not isinstance(sub, list)
+                    or len(sub) != 2
+                    or not isinstance(sub[0], str)
+                    or not re.fullmatch(re.escape(item) + r"[a-z]?", sub[0])
+                    or not isinstance(sub[1], str)
+                    or not sub[1].strip()
+                    or sub[0] in {part["item_id"] for part in subitems}
+                ):
+                    raise ValueError("invalid or duplicate subitem")
+                subitems.append(
+                    {
+                        "item_id": sub[0],
+                        "requirement_anchor": f"{anchor}/3/{j}/1",
+                        "requirement_sha256": fingerprint(sub[1]),
+                    }
+                )
+            row.update(starred=printed.endswith("*"), literal_group_flag=scope, subitems=subitems)
+        rows.append(row)
+    return {"expected_order": [r["item_id"] for r in rows] == list(expected), "rows": rows}
+
+
+def issuer_pdf_identity(path, pin):
+    with path.open("rb") as stream:
+        raw = stream.read(1_000_001)
+    if len(raw) > 1_000_000 or not raw.startswith(b"%PDF-"):
+        raise ValueError("invalid bounded issuer PDF")
+    git_sha = hashlib.sha1(f"blob {len(raw)}\0".encode() + raw, usedforsecurity=False).hexdigest()
+    return {
+        "source_sha256": hashlib.sha256(raw).hexdigest(),
+        "git_blob": git_sha,
+        "same_bytes_as_equator_pin": git_sha == pin,
+        "bytes": len(raw),
+    }
+
+
+def observe_priority(source_dir, name, spec, pins):
+    _, qmd_pin, docx_pin, pdf_pin = pins
+    # STROBE's primary article establishes 22 ordered main IDs, not a clause denominator.
+    expected = [str(i) for i in range(1, 23)] if name == "strobe" else spec["table_item_ids"][0]
+    result = {
+        "edition": spec["edition"],
+        "doi": spec["doi"],
+        "status": "source_observation_only",
+        "expected_main_or_printed_ids": expected,
+        "project_research_use_approved": True,
+        "public_redistribution_qualified": False,
+        "scientific_qualification": False,
+    }
+    try:
+        raw = pinned_bytes(source_dir / f"{name}.qmd", qmd_pin)
+        result["literal"] = {
+            **priority_literal_metadata(read_literal_array(raw.decode("utf-8")), name, expected),
+            "source_sha256": hashlib.sha256(raw).hexdigest(),
+            "git_blob": qmd_pin,
+        }
+    except (OSError, ValueError) as exc:
+        result["literal"] = {"status": "held", "error_type": type(exc).__name__}
+    try:
+        raw = pinned_bytes(source_dir / f"{name}.docx", docx_pin)
+        # The existing generic Word reader deliberately holds unmatched compound rows.
+        ref = result["literal"].get("rows", []) if name == "tripod" else []
+        result["docx"] = compare_docx(raw, name, ref, expected)
+        result["docx"]["git_blob"] = docx_pin
+    except (OSError, ValueError, ImportError, RuntimeError) as exc:
+        result["docx"] = {"status": "held", "error_type": type(exc).__name__}
+    try:
+        result["issuer_pdf"] = issuer_pdf_identity(source_dir / f"{name}.issuer.pdf", pdf_pin)
+    except (OSError, ValueError) as exc:
+        result["issuer_pdf"] = {"status": "held", "error_type": type(exc).__name__}
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source-dir", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--priority", action="store_true")
     args = parser.parse_args()
     specs = json.loads(Path("source/official/priority-article-candidates.json").read_text())
     editions = []
-    for name, pins in PINS.items():
-        (spec,) = [s for s in specs if s["edition"] == name + "-2025"]
-        editions.append(observe_pair(args.source_dir, name, spec, pins))
+    if args.priority:
+        for name, pins in PRIORITY_PINS.items():
+            (spec,) = [s for s in specs if s["edition"] == pins[0]]
+            editions.append(observe_priority(args.source_dir, name, spec, pins))
+    else:
+        for name, pins in PINS.items():
+            (spec,) = [s for s in specs if s["edition"] == name + "-2025"]
+            editions.append(observe_pair(args.source_dir, name, spec, pins))
     result = {
         "upstream_revision": UPSTREAM,
         "editions": editions,
