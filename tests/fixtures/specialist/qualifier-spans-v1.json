@@ -1,0 +1,18 @@
+[
+  {"id":"q01","family":"logic","text":"If eligible, report A when B is present.","labels":[["condition","If eligible"],["condition","when B is present"]]},
+  {"id":"q02","family":"logic","text":"Report A unless exempt.","labels":[["exception","unless exempt"]]},
+  {"id":"q03","family":"logic","text":"Report the result.","labels":[]},
+  {"id":"q04","family":"scope","text":"For clustered trials, report the allocation unit.","labels":[["applicability","For clustered trials"]]},
+  {"id":"q05","family":"scope","text":"In external validation studies, report calibration.","labels":[["applicability","In external validation studies"]]},
+  {"id":"q06","family":"scope","text":"Adults only: report the recruitment pathway.","labels":[["applicability","Adults only"]]},
+  {"id":"q07","family":"scope","text":"The report gives the reason for each exclusion.","labels":[]},
+  {"id":"q08","family":"workflow","text":"When an assay fails, report the repeat procedure, except when no sample remains.","labels":[["condition","When an assay fails"],["exception","except when no sample remains"]]},
+  {"id":"q09","family":"workflow","text":"Report missing values provided that their count is known.","labels":[["condition","provided that their count is known"]]},
+  {"id":"q10","family":"workflow","text":"Only for studies with linked records, describe the linkage process unless consent was withdrawn.","labels":[["applicability","Only for studies with linked records"],["exception","unless consent was withdrawn"]]},
+  {"id":"q11","family":"workflow","text":"No report is required for abandoned runs.","labels":[["exception","for abandoned runs"]]},
+  {"id":"q12","family":"logic","text":"If samples are frozen (unless storage is prohibited), describe thawing.","labels":[["condition","If samples are frozen (unless storage is prohibited)"],["exception","unless storage is prohibited"]]},
+  {"id":"q13","family":"scope","text":"Report the date when data were collected.","labels":[]},
+  {"id":"q14","family":"workflow","text":"Report the estimate if the model converged; otherwise give the failure reason.","labels":[["condition","if the model converged"]]},
+  {"id":"q15","family":"scope","text":"For studies of children, describe assent except in emergencies.","labels":[["applicability","For studies of children"],["exception","except in emergencies"]]},
+  {"id":"q16","family":"logic","text":"Explain the uncertainty without omitting the interval.","labels":[]}
+]
