@@ -94,7 +94,7 @@ def test_paired_does_not_discard_abstention():
         lfm.metrics(expected, {"a": "equivalent"})
 
 
-@pytest.mark.parametrize("model", ["d1", "lfm25-instruct", "lfm3"])
+@pytest.mark.parametrize("model", ["d1", "lfm25-instruct", "lfm3", "lfm25-thinking", "lfm2-2.6b"])
 def test_existing_harness_and_receipts(model, monkeypatch, tmp_path):
     def score(ledger, records, assets, sha):
         return {
@@ -147,3 +147,30 @@ def test_corrupt_vote_receipt_fails_closed(damage, reason, monkeypatch, tmp_path
 def test_shared_judge_rejects_unblinded_input():
     with pytest.raises(ValueError, match="unblinded"):
         five.adjudicate_pairs([{"id": "x", "source": "A", "candidate": "B", "reference": "equivalent"}], None)
+
+
+@pytest.mark.parametrize("model,cap,thinking", [
+    ("lfm3", 256, False),
+    ("lfm25-instruct", 256, None),
+    ("lfm25-thinking", 512, True),
+    ("lfm2-2.6b", 256, None),
+])
+def test_declared_output_budget(model, cap, thinking):
+    options = lfm.generation_options(model)
+    assert options["max_tokens"] == cap and options["seed"] == 724
+    assert options.get("chat_template_kwargs", {}).get("enable_thinking") is thinking
+
+
+def test_truncated_response_is_held_even_if_content_looks_valid():
+    from collections import Counter
+    receipt = Counter()
+    valid = {"choices": [{"finish_reason": "length", "message": {"content": '{"label":"equivalent"}'}}]}
+    held = lfm.observed_completion(lambda *_: valid, {"max_tokens": 512}, receipt)
+    assert held["choices"][0]["message"]["content"] == ""
+    assert receipt == {"length": 1}
+    valid["choices"][0]["finish_reason"] = "stop"
+    assert lfm.observed_completion(lambda *_: valid, {}, receipt) == valid
+    assert receipt == {"length": 1, "stop": 1}
+    for model in ("d1", "unregistered"):
+        with pytest.raises(ValueError):
+            lfm.generation_options(model)

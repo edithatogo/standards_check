@@ -283,3 +283,11 @@ official article transports and alternate issuer files; acquisition is not admis
 T01.028–030, T01.043 and T01.052 remain open. Do not authorize merge from these
 synthetic results; fresh independent eligible source components and actual scientific
 qualification remain required.
+
+
+26 November LFM follow-up: actual d1 and LFM3 native inference receipts and exact issuer
+PDF acquisition are recorded in [semantic qualification](semantic-reconciliation-qualification.md).
+Keep prior failure and original thresholds; extend only the exploratory synthetic lane with
+bounded thinking/scale and output-budget ablations and reuse the structural comparator on new
+source manifestations. T01.028–030, T01.043 and T01.052 remain open. No source freeze or merge
+from diagnostic results.

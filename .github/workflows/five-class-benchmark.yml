@@ -119,13 +119,13 @@ jobs:
 
   lfm-development:
     # Exploratory synthetic-only lane, explicitly requested; not a qualification run.
-    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-lfm-development'
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-lfm-followup'
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 45
     strategy:
       fail-fast: false
       matrix:
-        challenger: [d1, lfm3, lfm25-instruct]
+        challenger: [lfm3, lfm25-instruct, lfm25-thinking, lfm2-2.6b]
     env:
       CHALLENGER: ${{ matrix.challenger }}
       HF_HUB_OFFLINE: "1"
@@ -172,7 +172,18 @@ jobs:
 
           root = Path(os.environ["RUNNER_TEMP"])
           evidence = root / "lfm-evidence"
-          model = PINS[os.environ["CHALLENGER"]]
+          model = dict(PINS[os.environ["CHALLENGER"]])
+          # Resolve only immutable commit prefixes; record the complete revision before acquisition.
+          if len(model["revision"]) != 40:
+              prefix = model["revision"]
+              url = f"https://huggingface.co/api/models/{model['id']}/revision/{prefix}"
+              metadata = subprocess.run(["curl", "--fail", "--silent", "--show-error", "--max-time", "30",
+                                         "--max-filesize", "1000000", "--proto", "=https", url],
+                                        check=True, capture_output=True)
+              resolved = json.loads(metadata.stdout)["sha"]
+              if len(resolved) != 40 or not resolved.startswith(prefix) or any(c not in "0123456789abcdef" for c in resolved):
+                  raise ValueError("immutable revision prefix did not resolve")
+              model["revision"] = resolved
           def acquire(pin, remote, path, cap):
               url = f"https://huggingface.co/{pin['id']}/resolve/{pin['revision']}/{remote}"
               subprocess.run(["curl", "--fail", "--silent", "--show-error", "--location",
@@ -238,6 +249,7 @@ jobs:
                   return response.json()
               report = run(fixture, os.environ["CHALLENGER"], post, root / "minilm", root / "deberta")
           report["fixture_bytes_sha256"] = file_hash(fixture_path)
+          report["resolved_model"] = json.loads((root / "lfm-evidence/asset-pins.json").read_text())["model"]
           (root / "lfm-evidence" / "report.json").write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
           print(json.dumps({"summary": report["summary"], "paired": report["paired"],
                             "challenger_wall_seconds": report["challenger_wall_seconds"]}))
@@ -254,7 +266,7 @@ jobs:
 
   fresh-source-probe:
     # Same explicit authorization; reuse existing acquisition and scanner.
-    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-lfm-development'
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-lfm-followup'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -270,10 +282,13 @@ jobs:
       - name: Retry selected official article and alternate issuer transports without repinning
         run: |
           mkdir -p "$RUNNER_TEMP/fresh-source-probe"
+          python -m pip install pdfplumber==0.11.11 python-docx==1.2.0 openpyxl==3.1.5
           python - <<'PY'
           import hashlib, json, os, subprocess
+          from dataclasses import replace
           from pathlib import Path
           from scripts.survey_equator_articles import priority_survey
+          from scripts.compare_guideline_formats import benchmark, profiles
 
           root = Path(os.environ["RUNNER_TEMP"])
           output = root / "fresh-source-probe"
@@ -284,8 +299,15 @@ jobs:
           alternatives = {
               "arrive-issuer": "https://arriveguidelines.org/sites/arrive/files/documents/Author%20Checklist%20-%20Full.pdf",
               "strobe-issuer": "https://www.strobe-statement.org/download/strobe-checklist-cohort-case-control-and-cross-sectional-studies-combined",
+              "arrive-issuer-poster": "https://arriveguidelines.org/sites/arrive/files/documents/ARRIVE%20guidelines%202.0%20-%20English.pdf",
+              "arrive-publisher": "https://journals.plos.org/plosbiology/article/file?id=10.1371%2Fjournal.pbio.3000410&type=printable",
+              "strobe-publisher": "https://journals.plos.org/plosmedicine/article/file?id=10.1371%2Fjournal.pmed.0040297&type=printable",
+              "stard-publisher": "https://pubs.rsna.org/doi/pdf/10.1148/radiol.2015151516",
           }
           receipts = []
+          by_family = {}
+          exact_pins = {"arrive-issuer": "91e191d495f96472c0896ae3e489e9a12953648179f2a2a06b7035bb97a7327c",
+                        "strobe-issuer": "63c2af4d91d04f5b211f4277a267a23da5d313fe927753c08f98139a8aab41b8"}
           for key, url in alternatives.items():
               path = root / (key + ".pdf")
               result = subprocess.run(["curl", "--fail", "--silent", "--show-error", "--max-time", "30",
@@ -297,10 +319,21 @@ jobs:
               if result.returncode == 0 and result.stdout == "200" and path.is_file():
                   raw = path.read_bytes()
                   if raw.startswith(b"%PDF-") and len(raw) <= 8000000:
-                      row.update({"status": "candidate_bytes_observed", "sha256": hashlib.sha256(raw).hexdigest(),
-                                  "bytes": len(raw)})
+                      digest = hashlib.sha256(raw).hexdigest()
+                      if key in exact_pins and digest != exact_pins[key]:
+                          row.update({"status": "held_source_drift", "sha256": digest, "bytes": len(raw)})
+                      else:
+                          row.update({"status": "candidate_bytes_observed", "sha256": digest, "bytes": len(raw)})
+                          by_family.setdefault(key.split("-")[0], []).append(path.name)
               receipts.append(row)
-              path.unlink(missing_ok=True)
+          cohorts = [replace(c, paths=tuple(by_family.get(c.family, ())))
+                     for c in profiles(Path(".")) if c.edition in selected]
+          # Independent format comparison uses the maintained reader and expected-ID denominators.
+          # New locators and extracted rows remain candidate-only; never publish raw content.
+          structural = benchmark(root, cohorts)
+          (output / "structure.json").write_text(json.dumps(structural, indent=2) + "\n")
+          for key in alternatives:
+              (root / (key + ".pdf")).unlink(missing_ok=True)
           result = {"articles": primary, "alternatives": receipts, "eligible_families": 0,
                     "boundary": "Acquisition only; independent structure and rights review required."}
           (output / "acquisition.json").write_text(json.dumps(result, indent=2) + "\n")

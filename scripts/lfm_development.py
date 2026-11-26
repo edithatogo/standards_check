@@ -10,7 +10,7 @@ from collections import Counter
 PINS = {
     "lfm25-instruct": {
         "id": "LiquidAI/LFM2.5-1.2B-Instruct-GGUF",
-        "revision": "4e7112f1437070cf9f49aeb93ad965b946029f75",
+        "revision": "012803cf70d6cdcf698f0c65fa8f9b7175128770",
         "file": "LFM2.5-1.2B-Instruct-Q4_K_M.gguf",
         "sha256": "b1b3de114215d9507409a662a501a631095a479a419584e8a2ded6304b19b4f5",
         "licence": "LFM Open License v1.0",
@@ -20,6 +20,20 @@ PINS = {
         "revision": "b3f2ae5d73cd3c91bf40e8ba752c648aa05dffdf",
         "file": "LFM3-1.7B-Q4_K_M.gguf",
         "sha256": "3793e1e6e2266919d6e015287221b41100175a98eddaba92e111aed3b05c93c4",
+        "licence": "LFM Open License v1.0",
+    },
+    "lfm25-thinking": {
+        "id": "LiquidAI/LFM2.5-1.2B-Thinking-GGUF",
+        "revision": "b719458",
+        "file": "LFM2.5-1.2B-Thinking-Q4_K_M.gguf",
+        "sha256": "7223a2202405b02e8e1e6c5baa543c43dc98c1d9741a5c2a0ee1583212e1231b",
+        "licence": "LFM Open License v1.0",
+    },
+    "lfm2-2.6b": {
+        "id": "LiquidAI/LFM2-2.6B-GGUF",
+        "revision": "7949a4d",
+        "file": "LFM2-2.6B-Q4_K_M.gguf",
+        "sha256": "384bc877b6c37064982f96885bef69e4475919f5969218ed4e3b9399ae0340df",
         "licence": "LFM Open License v1.0",
     },
     "d1": {
@@ -110,9 +124,10 @@ def decision_vote(response):
     directional = compile_direction(
         *(choose(answers[key], YES_NO, 0.8) for key in ("a_to_b", "b_to_a", "joint"))
     )
-    return direct, directional, {
+    probabilities = {
         key: answers[key]["probabilities"] for key in ("relation", "a_to_b", "b_to_a", "joint")
     }
+    return direct, directional, probabilities
 
 
 def prepare_fixture(fixture):
@@ -187,6 +202,30 @@ def paired(reference, incumbent, challenger):
     }
 
 
+def generation_options(model):
+    """Frozen development-only output-budget ablations, never label-dependent."""
+    if model not in PINS or model == "d1":
+        raise ValueError("not a generative challenger")
+    options = {"seed": 724, "max_tokens": 256}
+    if model == "lfm3":
+        options["chat_template_kwargs"] = {"enable_thinking": False}
+    elif model == "lfm25-thinking":
+        options["max_tokens"] = 512
+        options["chat_template_kwargs"] = {"enable_thinking": True}
+    return options
+
+
+def observed_completion(post, options, diagnostics, **kwargs):
+    """Retain response diagnostics, not generated reasoning or source wording."""
+    response = post("chat/completions", {**kwargs, **options})
+    choice = response["choices"][0]
+    reason = choice.get("finish_reason", "unknown")
+    diagnostics[reason] += 1
+    if reason == "length":
+        return {"choices": [{"message": {"content": ""}}]}
+    return response
+
+
 def run(fixture, model, post, minilm_assets, deberta_assets):
     """Use the existing blinded vote/ONNX scoring paths; compare the same synthetic pairs."""
     from . import five_class_benchmark as five
@@ -215,6 +254,8 @@ def run(fixture, model, post, minilm_assets, deberta_assets):
     started = time.perf_counter()
     invalid = []
     evidence = []
+    completion_diagnostics = Counter()
+    options = {}
     if model == "d1":
         predictions["direct"], predictions["directional"] = {}, {}
         for pair in pairs:
@@ -232,8 +273,10 @@ def run(fixture, model, post, minilm_assets, deberta_assets):
             json.dumps(decision_payload({"source": "", "candidate": ""}), sort_keys=True)
         )
     else:
+        options = generation_options(model)
         votes = five.adjudicate_pairs(
-            pairs, lambda **kwargs: post("chat/completions", {**kwargs, "seed": 724})
+            pairs,
+            lambda **kwargs: observed_completion(post, options, completion_diagnostics, **kwargs),
         )
         by_id = {pair["id"]: pair for pair in pairs}
         if len(votes) != len(pairs) or {vote["id"] for vote in votes} != set(by_id):
@@ -251,7 +294,9 @@ def run(fixture, model, post, minilm_assets, deberta_assets):
     elapsed = time.perf_counter() - started
     reference = {row["id"]: row["reference"] for row in records}
     return {
-        "protocol": "lfm-synthetic-development-v1",
+        "protocol": "lfm-synthetic-development-v2",
+        "generation_options": options,
+        "completion_finish_reasons": dict(completion_diagnostics),
         "scientific_qualification": False,
         "canonical_packs_promoted": 0,
         "claim_boundary": "Previously used synthetic controls only; no independent reference.",

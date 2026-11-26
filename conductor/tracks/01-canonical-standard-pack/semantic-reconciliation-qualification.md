@@ -345,3 +345,62 @@ The source freeze and original scientific gate remain fail-closed. No merge or
 auto-merge on these exploratory results. The first native decision-contract
 unit tests were run in isolation (8 passing); the integrated harness and actual
 inference require hosted receipts.
+
+
+## Native inference observations and bounded follow-up
+
+[Run 45754736904](https://github.com/edithatogo/standards_check/actions/runs/45754736904),
+head 3d09ca6, tested merge 17a0bc78. Downloaded and SHA-256 verified the
+[d1 artifact 15087556116](https://github.com/edithatogo/standards_check/actions/runs/45754736904/artifacts/15087556116)
+(d796bdbc6a84830a7e3c702fbc6d08ce9fe9430175db5a4610b0ad0dfa2c2ae9),
+[LFM3 artifact 15087517304](https://github.com/edithatogo/standards_check/actions/runs/45754736904/artifacts/15087517304)
+(a0f979830385dfcf652edcf6bdfae1be8b7ca93bebe5f31a7c0ca380bf1df9d6),
+and [source artifact 15087277719](https://github.com/edithatogo/standards_check/actions/runs/45754736904/artifacts/15087277719)
+(24bf29448032d882d2f4d16a96090b471308b4641e69c4dd20364fe3f7a78ba8).
+The original 36 synthetic cases remain development only.
+
+| Method | Correct /36 | Abstentions | False equivalences |
+| --- | ---: | ---: | ---: |
+| MiniLM | 28 | 2 | 0 |
+| DeBERTa-xsmall | 28 | 1 | 0 |
+| d1-2B direct | 15 | 19 | 0 |
+| d1-2B directional | 11 | 25 | 0 |
+| LFM3 (120-token cap) | 0 | 36 | 0 |
+
+d1 direct: against either incumbent, 13 both correct, 15 incumbent-only,
+2 d1-only, 6 both wrong; no reason for production replacement. Directional
+compilation was over-conservative, with no unique correct cases. d1 215.38 s.
+LFM3 317.15 s, all 36 requests exhausted the 120-token limit in server logs,
+all evidence spans absent. No valid LFM3 classifications; preserve this
+failure. LFM2.5-Instruct failed at licence retrieval (404 at the weight-upload
+commit). Repin to publisher revision 012803cf70d6cdcf698f0c65fa8f9b7175128770,
+which adds LICENSE without changing the Q4_K_M hash. The exact d1 and LFM3
+artifacts contain LFM Open License v1.0, not Apache-2.0. In particular,
+section 5 conditions commercial use at the USD 10m annual revenue threshold.
+Keep experimental noncommercial research boundary; do not confuse a
+runtime/library licence or another checkpoint's licence with these weights.
+
+Follow-up development-only budget ablation, without modifying labels,
+rubric or the held-out scientific gate: LFM3 disable thinking via its
+documented chat-template argument, max 256 output tokens; Instruct max 256;
+LFM2.5-Thinking 512 (reasoning enabled); LFM2-2.6B Q4_K_M 256 as larger
+LFM-family comparator. Thinking and 2.6B official immutable commit prefixes
+b719458 and 7949a4d must resolve to complete 40-hex revisions before any
+acquisition, and the previously verified weight hashes must match. Preserve
+response finish reasons; truncate-to-abstain, no raw generated reasoning
+retention. No new reference labels or threshold tuning. Existing protected
+tests on head 3d09ca6: 741 passed, 3 skipped, 91.69% combined Python coverage
+(99.21% new module); workflow policy failed on Ruff formatting of a tuple
+return, corrected separately. Full checks on new head still required.
+
+The source retry retrieved exact issuer PDF bytes: ARRIVE full author checklist
+91e191d495f96472c0896ae3e489e9a12953648179f2a2a06b7035bb97a7327c (105723 bytes)
+and STROBE combined checklist
+63c2af4d91d04f5b211f4277a267a23da5d313fe927753c08f98139a8aab41b8 (19826 bytes).
+All three primary article transports remained held. Follow-up replays those
+pins and tries issuer ARRIVE poster and publisher PDF manifestations; reuse
+the existing compare_guideline_formats reader with unchanged independent
+denominators. Source drift, parser, identity, nested structure and rights holds
+remain distinct. STROBE has no independent complete row denominator in the
+current registry. Do not infer eligibility from byte retrieval or same-reader
+agreement. Scientific cohort freeze remains held, zero admitted at last run.
