@@ -292,6 +292,10 @@ def run(fixture, model, post, minilm_assets, deberta_assets):
         prompt_hash = five.digest(five.PROMPT)
     elapsed = time.perf_counter() - started
     reference = {row["id"]: row["reference"] for row in records}
+    receipt_records = []
+    for row in records:
+        row_predictions = {name: values[row["id"]] for name, values in predictions.items()}
+        receipt_records.append({**row, "predictions": row_predictions})
     return {
         "protocol": "lfm-synthetic-development-v2",
         "generation_options": options,
@@ -325,9 +329,6 @@ def run(fixture, model, post, minilm_assets, deberta_assets):
             }
             for split in ("dev", "test")
         },
-        "records": [
-            {**row, "predictions": {name: values[row["id"]] for name, values in predictions.items()}}
-            for row in records
-        ],
+        "records": receipt_records,
         "candidate_evidence": evidence,
     }

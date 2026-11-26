@@ -70,6 +70,8 @@ def evaluate(references, targets, rankings):
     def summarize(group):
         n = len(group)
         total = sum(len(row["reference"]) for row in group)
+        micro_recall = {str(k): sum(row["hits"][str(k)] for row in group) / total for k in KS}
+        precision = {str(k): sum(row["hits"][str(k)] for row in group) / (n * k) for k in KS}
         return {
             "queries": n,
             "positive_associations": total,
@@ -78,12 +80,8 @@ def evaluate(references, targets, rankings):
                 str(k): sum(row["hits"][str(k)] / len(row["reference"]) for row in group) / n
                 for k in KS
             },
-            "micro_recall": {
-                str(k): sum(row["hits"][str(k)] for row in group) / total for k in KS
-            },
-            "precision_at_k": {
-                str(k): sum(row["hits"][str(k)] for row in group) / (n * k) for k in KS
-            },
+            "micro_recall": micro_recall,
+            "precision_at_k": precision,
             "mrr": sum(row["reciprocal_rank"] for row in group) / n,
             "ndcg5": sum(row["ndcg5"] for row in group) / n,
         }
