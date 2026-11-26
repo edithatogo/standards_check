@@ -1,0 +1,158 @@
+{
+  "schema_version": 2,
+  "status": "executed_classical_and_role_candidates; neural_arms_not_executed_locally",
+  "base": "eb95f610ff78b620cb1c687fed544ed2b5475ff1",
+  "source_revision": "e34dd7d8559a5df0fe4b7185c093978e4b2d6cbe",
+  "archive": {
+    "id": 15031534787,
+    "run": 45635380131,
+    "sha256": "21046589502f064d54800c9f495d72d18b97184a1db376f06da773b84bde3f01",
+    "member_sha256": "abea437bf8bc34a14a6022c8e76367cd994e49bc6e888b2943030381068fa868"
+  },
+  "previous_report_sha256": "b0a67a7123478f3283adbf4608e7cdf523875994f6e3cfd0e239f3784a8c8a19",
+  "folds_sha256": "60b45222383886986d8b203aec093dd287eaf6d016c59323aac6804c2461cdf3",
+  "terms_sha256": "ffb58e00328993a84e8e59bcf363fa0e36ced636077cc3ec46fb4a1ab1e1029f",
+  "source_blob": "07223c5d8b38a6a5856eb1096f64edf4415e527a",
+  "source_sha256": "227b424bb64f1763470f1e6dcd3a8ee3dad9a2507e507412821644472bcfa198",
+  "outputs": {
+    "original_report_sha256": "b0d8070a5696afeb4ee24c435b68c706b00a09e70bccfdf2b4bbd3119189da7c",
+    "revised_report_sha256": "770d80faf2ce1b4ee40abf527abd5312d1400f75561bf70c73349a32244b1c49",
+    "timing_free_case_level_outcomes_equal": true,
+    "retention": "Both reports and exact fold manifest in access-controlled personal Library; distinct versions retained."
+  },
+  "population": {
+    "directory": 720,
+    "titles": 719,
+    "folds": [
+      144,
+      144,
+      144,
+      144,
+      143
+    ],
+    "eligible": [
+      582,
+      412,
+      706
+    ],
+    "positive_associations": [
+      1099,
+      637,
+      1343
+    ],
+    "facets": [
+      "study_types",
+      "clinical_areas",
+      "report_sections"
+    ]
+  },
+  "metrics_columns": [
+    "arm",
+    "macro_r3_study",
+    "macro_r3_clinical",
+    "macro_r3_section",
+    "representation_seconds_all_folds",
+    "classifier_seconds_all_facets"
+  ],
+  "metrics": [
+    [
+      "word-tfidf/knn",
+      0.7503,
+      0.4612,
+      0.6136,
+      0.141396,
+      0.720791
+    ],
+    [
+      "word-tfidf/logistic",
+      0.6561,
+      0.3464,
+      0.6597,
+      0.141396,
+      1.330058
+    ],
+    [
+      "word-tfidf/balanced",
+      0.8134,
+      0.5132,
+      0.6644,
+      0.141396,
+      1.294631
+    ],
+    [
+      "char-tfidf/knn",
+      0.7663,
+      0.5836,
+      0.6366,
+      0.744493,
+      0.811165
+    ],
+    [
+      "char-tfidf/logistic",
+      0.6714,
+      0.4115,
+      0.6693,
+      0.744493,
+      5.947715
+    ],
+    [
+      "char-tfidf/balanced",
+      0.8124,
+      0.5875,
+      0.6761,
+      0.744493,
+      7.080978
+    ]
+  ],
+  "paired_char_balanced_vs_char_knn": {
+    "study_types": {
+      "shared": 754,
+      "gains": 117,
+      "losses": 52,
+      "missed_both": 176
+    },
+    "clinical_areas": {
+      "shared": 282,
+      "gains": 63,
+      "losses": 56,
+      "missed_both": 236
+    },
+    "report_sections": {
+      "shared": 517,
+      "gains": 227,
+      "losses": 119,
+      "missed_both": 480
+    }
+  },
+  "roles": {
+    "mentions": 259,
+    "target_candidate": 52,
+    "development_candidate": 1,
+    "unresolved": 206,
+    "novel_direct_category_pairs": 40,
+    "novel_direct_pairs_with_target_cue": 1,
+    "accepted": 0
+  },
+  "runtime": {
+    "numpy": "2.3.5",
+    "scikit_learn": "1.8.0",
+    "scipy": "1.17.0",
+    "joblib": "1.5.3",
+    "threadpoolctl": "3.6.0"
+  },
+  "tests": {
+    "new": 5,
+    "overlay": 15,
+    "full_checkout": false
+  },
+  "neural": {
+    "models": [
+      "BGE-small-en-v1.5 raw",
+      "Qwen3-Embedding-0.6B Q8 raw"
+    ],
+    "planned_title_requests_per_model": 719,
+    "all_3_classifiers": true,
+    "status": "hosted_not_yet_observed"
+  },
+  "boundary": "Catalogue-relative weak-label development; proxy folds, not independent family lock; all proposed ontology/role edges remain advisory; no production or scientific promotion."
+}

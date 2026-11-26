@@ -1,0 +1,113 @@
+name: Catalogue embedding development
+on:
+  pull_request:
+    types: [labeled]
+    paths:
+      - 'research/catalogue/**'
+      - 'tests/test_catalogue_followup.py'
+      - '.github/workflows/catalogue-embedding-development.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: catalogue-embedding-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  matched-representations:
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-catalogue-embeddings')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        model: [bge, qwen]
+    env:
+      BACKEND: ${{ matrix.model }}
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      HF_HUB_DISABLE_TELEMETRY: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      OMP_NUM_THREADS: "1"
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: "3.12"
+      - name: Retain checkout and qualify research runtime
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/catalogue-evidence"
+          git rev-parse HEAD > "$RUNNER_TEMP/catalogue-evidence/commit.txt"
+          python -m pip install numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0 joblib==1.5.3 threadpoolctl==3.6.0 pytest==9.2.0 requests==2.34.2 onnxruntime==1.23.2 tokenizers==0.22.1
+          python -m pip check
+          python -m pip freeze > "$RUNNER_TEMP/catalogue-evidence/environment.txt"
+          python -m pytest --import-mode=importlib -q tests/test_catalogue_followup.py research/catalogue/test_followup_runtime.py
+      - name: Retrieve only the retained catalogue source
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        with:
+          artifact-ids: 15031534787
+          run-id: 45635380131
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/catalogue-input
+      - name: Verify exact catalogue member and run pinned inference
+        run: |
+          set -euo pipefail
+          catalogue="$(find "$RUNNER_TEMP/catalogue-input" -type f -name equator-catalogue.json -print -quit)"
+          test -f "$catalogue"
+          echo "abea437bf8bc34a14a6022c8e76367cd994e49bc6e888b2943030381068fa868  $catalogue" | sha256sum --check
+          root="$RUNNER_TEMP/catalogue-assets"
+          evidence="$RUNNER_TEMP/catalogue-evidence"
+          mkdir -p "$root"
+          # All downloads are exact public asset pins from prior observed inference receipts.
+          get() {
+            curl --fail --silent --show-error --location --max-redirs 5 --connect-timeout 15 --max-time 600 --max-filesize "$3" --proto '=https' --proto-redir '=https' "$1" --output "$2"
+            echo "$4  $2" | sha256sum --check | tee -a "$evidence/asset-checks.txt"
+          }
+          if test "$BACKEND" = bge; then
+            url="https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a"
+            get "$url/onnx/model.onnx" "$root/model.onnx" 200000000 828e1496d7fabb79cfa4dcd84fa38625c0d3d21da474a00f08db0f559940cf35
+            get "$url/tokenizer.json" "$root/tokenizer.json" 20000000 d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66
+            get "$url/config.json" "$root/config.json" 1000000 094f8e891b932f2000c92cfc663bac4c62069f5d8af5b5278c4306aef3084750
+            get "$url/README.md" "$root/README.md" 500000 ddb964361a55c6e5dfca6361615854b260c9c960205d04c7520151aaa1d75837
+            grep -i '^license: mit' "$root/README.md"
+            cp "$root/README.md" "$evidence/model-card.md"
+          else
+            get "https://github.com/ggml-org/llama.cpp/releases/download/b11960/llama-b11960-bin-ubuntu-x64.tar.gz" "$root/runtime.tar.gz" 50000000 31cc3a6bc638ac6c48dc4b1b74888f1eaadf3d14227c1e5f67daf9a49541d97a
+            url="https://huggingface.co/Qwen/Qwen3-Embedding-0.6B-GGUF/resolve/d20cf9c16f82914a21dbd9c645f56895fb1d7750"
+            get "$url/Qwen3-Embedding-0.6B-Q8_0.gguf" "$root/model.gguf" 650000000 06507c7b42688469c4e7298b0a1e16deff06caf291cf0a5b278c308249c3e439
+            get "$url/README.md" "$evidence/model-card.md" 500000 5dc596e802ce79342678281d42ec4b98fbee2fee241758df330cdc35cc15d29f
+            grep -i '^license: apache-2.0' "$evidence/model-card.md"
+            mkdir -p "$root/runtime"
+            tar -xzf "$root/runtime.tar.gz" -C "$root/runtime"
+            server="$(find "$root/runtime" -type f -name llama-server -print -quit)"
+            test -x "$server"
+            LD_LIBRARY_PATH="$(dirname "$server")" "$server" --version > "$evidence/runtime.txt" 2>&1
+            LD_LIBRARY_PATH="$(dirname "$server")" "$server" -m "$root/model.gguf" --alias qwen3-embedding-0.6b-q8 --host 127.0.0.1 --port 18883 --embedding --pooling last -c 2048 -b 2048 -ub 2048 -t 4 -ngl 0 -np 1 > "$root/server.log" 2>&1 &
+            pid=$!
+            trap 'kill "$pid" 2>/dev/null || true' EXIT
+            ready=false
+            for _ in $(seq 1 120); do
+              if ! kill -0 "$pid" 2>/dev/null; then break; fi
+              if curl --noproxy '*' --fail --silent --max-time 2 http://127.0.0.1:18883/health > /dev/null; then ready=true; break; fi
+              sleep 1
+            done
+            test "$ready" = true
+          fi
+          /usr/bin/time -v python -m research.catalogue.followup --catalogue "$catalogue" --member --backend "$BACKEND" --assets "$root" --output "$evidence/report.json" 2> "$evidence/resources.txt"
+          if test "$BACKEND" = qwen; then
+            grep '^VmHWM:' "/proc/$pid/status" > "$evidence/model-peak-memory.txt"
+          fi
+      - name: Retain measured outcomes and failures (no source prose or vectors)
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: catalogue-embeddings-${{ matrix.model }}-${{ github.sha }}
+          path: ${{ runner.temp }}/catalogue-evidence/
+          if-no-files-found: error
+          retention-days: 90
