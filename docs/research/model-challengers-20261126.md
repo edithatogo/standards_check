@@ -330,3 +330,5 @@ ran all four focused tests successfully, then failed with exit 127 at pdftotext
 version check. Reuse the existing Assurance Poppler package installation;
 rerun the exact source-only lane. No real-source structural observation yet
 from this job; earlier candidate PDF acquisition evidence retained.
+
+The [orthogonal task-framing record](orthogonal-task-framing-20261126.md) supersedes the pending MiniCPM and issuer-probe status: actual MiniCPM7/36 with 29 length abstentions and the two-reader main-ID/JATS receipts are recorded there, plus a fixed RRF diagnostic and new framing arms. Preserve historical reports and independent qualification holds.
