@@ -126,3 +126,50 @@ risk or equal-compute utility. No independent review outcome.
 Source-anchored conditional scope and identity audit is coordinated with the
 source rule candidate on PR #180; independent family acquisition remains
 with PR #188. Neither is qualified by this run.
+
+## Evidence completeness: diagnostic and scaling follow-up
+
+Reanalyse the verified fresh-inference report (15106112148, report SHA-256
+`7a79c7734a6d202332fa1a65178a1fb4a9b14e83762041418574dd3a7eea2f7d`) without new neural scoring. Three focused
+tests passed locally; initial missing-module failure and a test-fixture
+aliasing failure were repaired. Reproduction:
+
+    python -m scripts.evidence_replay_diagnostics --report /path/to/report.json --output /tmp/diagnostics.json
+
+The [compact receipt](../../conductor/tracks/01-canonical-standard-pack/evidence-replay-diagnostics-v1.json)
+pins the input, tested Git blobs and full regenerated JSON hash. Four of five
+missing tail fragments are absent from the fixed shortlist. STARD-6 is at
+lexical rank 4, neural rank 5. Of 48 second-pass slots, lexical repeats all
+48, neural repeats 46 and adds two irrelevant fragments. Novelty-aware
+selection of the top two unseen stable IDs recovers STARD-6 for both arms,
+20/24 complete rather than 19/24. At four and six unseen fragments both
+remain 20/24. No semantic decisions are imputed for the new state.
+Earlier rank placement at initial head, top two novel: 18/24 for each
+ranker, different paired cases; top four or six: 20/24 for both. These are
+retrospective applications of the same full-source query and fixed ranking,
+not a fresh policy evaluation.
+
+Raw neural predictions agree 17, 22 and 23 times at head, expansion and
+terminal stages; wrong shared non-abstained labels 9, 3 and 3, respectively.
+Two terminal shared errors have complete evidence (stard-5, tripod-5).
+Both classify the synthetic incomparable obligations as contradictory.
+Keep genuine directional disagreement, incomparability, unknown evidence
+and incompatibility separate. Formal verification of a representation is
+not verification of that representation's source fidelity.
+
+Next measured stages: (1) build declared/observed evidence-unit inventory
+with parent, continuation, table-cell and footnote closure, exact IDs and
+explicit qualifier and exception links; (2) use stable-ID novelty filtering
+and document-local structural expansion before semantic reranking; (3)
+measure candidate-generation recall independently from conditional rank
+utility, with matched pool sizes, top-new evidence budgets and per-stage
+cost; (4) compare direct NLI, bidirectional and witnessed compliance-set
+tasks, candidate structured rules, and verifier-gated equivalence with
+matched review workload and selective coverage, reporting correlation of
+errors. Only evaluate new neural outcomes on actual acquired evidence.
+Use #187 graph retrieval, #186/#189 tagging, #180 candidate applicability
+and #188 independent-family/corpus intake; no new duplicate registry.
+Scale deterministic coverage census first, then eligibility-filtered
+development, and finally held-out family-disjoint reference evaluation.
+Preserve historical E1-E21 gates and all null outcomes. No production,
+source rights, admission or scientific promotion. Current-head checks pending.

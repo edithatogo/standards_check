@@ -219,3 +219,5 @@ Evidence verification v3 (T05.048/063 / #158): [protocol and qualification recor
 Additional independent bitmask oracle covers every ordered pair in the bounded grammar (1,296); 23 focused tests passed. Fresh inference run 45797316771 queued. Exact final-head checks and independent source/reference gates remain open.
 
 Fresh inference artifact 15106112148 verified (run 45797316771); [paired outcome receipt](../01-canonical-standard-pack/evidence-verification-v3-receipt.json) retains 496 NLI calls, 141 reranking calls, coverage loss and negative findings. Pinned formatter blob matched actual executed source; final-head protected checks remain outstanding. No promotion.
+
+T05.048/063: [evidence coverage diagnostic](../01-canonical-standard-pack/evidence-replay-diagnostics-v1.json) preserves rank-placement and novelty ablations and common-mode neural errors. Three focused local tests passed; final-head hosted qualification pending. No new inference or scientific gate closure.
