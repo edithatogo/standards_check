@@ -105,3 +105,44 @@ random and deterministic policies as comparators and require independent
 references and matched fresh inference costs before selection. Retain every
 selected ID and instrument-level gain; do not relabel unlisted associations
 as unsupported decisions.
+
+
+## Non-ceiling graph comparison (26 November)
+
+Main's costing registry has domain definitions and ontology modelling rules, not
+independently qualified domain edges. Do not invent source hierarchy. Instead use
+a label-free co-retrieval graph from the original BGE rankings: top-five
+co-occurrence counts on the other instruments only, row-normalized, isolated
+vertices self-looped. Leave one instrument out, no reference labels in graph
+construction or propagation. Seed reciprocal BGE rank, restart 0.7, transition
+0.3. Compare one step and eight steps, both full-universe candidate generation
+and fixed original top-ten reranking. Parameters fixed for this exploratory run,
+no tuning on held-out labels. These are statistical graph placements, not a GNN
+or source ontology; instrument separation does not establish guideline-family
+independence.
+
+```sh
+cd research/model-placement
+python -m pytest -q test_graph_replay.py
+python graph_replay.py --artifacts /path/to/artifacts --output graph-receipt.json
+```
+
+RED missing module then GREEN two focused tests. Executed actual graph replay
+wall 0.137138 s, peak 98,576 KiB, zero model downloads. Receipt SHA-256
+08882913613afd30d9f13a7312bc4d4c24304a82cd08849e6c589ef3d45bd151
+(variable resource observation); includes graph adjacency, scores, full
+per-instrument paired observations. MRR evaluated at ten.
+
+| Method | Macro query R@5 | Known hits @5 | Gain/loss at 5 vs BGE | Known hits @10 |
+| --- | ---: | ---: | ---: | ---: |
+| BGE top ten | 72.01% | 87 | 0/0 | 97 |
+| One-hop generation | 66.35% | 81 | 1/7 | 97 |
+| Diffusion generation | 66.82% | 82 | 1/6 | 97 |
+| One-hop fixed-pool rerank | 66.35% | 81 | 1/7 | 97 |
+| Diffusion fixed-pool rerank | 66.82% | 82 | 1/6 | 97 |
+
+A real non-ceiling negative result for this co-retrieval graph and both
+placements. Diffusion does not outperform the original BGE incumbent, although
+one known association is newly recovered at five. Not evidence against
+source-anchored hierarchy/cross-reference/dependency edges, which remain a
+separate qualified-graph prerequisite. No model adoption or semantic admission.
