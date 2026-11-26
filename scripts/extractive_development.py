@@ -175,7 +175,7 @@ def file_hash(path):
         return hashlib.file_digest(stream, "sha256").hexdigest()
 
 
-def load_model(directory):
+def load_extractor(directory):
     runtime = {name: version(name) for name in RUNTIME}
     if runtime != RUNTIME or directory is None:
         raise ValueError("unpinned local runtime or missing model directory")
@@ -195,6 +195,11 @@ def load_model(directory):
         str(directory), map_location="cpu", local_files_only=True
     )
     extractor.eval()
+    return extractor, runtime, asset_info
+
+
+def load_model(directory):
+    extractor, runtime, asset_info = load_extractor(directory)
     return model_predictor(extractor), runtime, asset_info
 
 
