@@ -1,0 +1,76 @@
+name: E9 synthetic PDF layout development
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+    paths:
+      - "scripts/layout_development.py"
+      - "tests/layout_fixture.py"
+      - "tests/test_layout_development.py"
+      - "tests/test_compare_ecoevo_formats.py"
+      - ".github/workflows/e9-layout-development.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: e9-layout-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  layout-development:
+    # An explicitly named experiment branch or label is opt-in; never run forks.
+    if: github.event_name == 'workflow_dispatch' || (github.event.pull_request.head.repo.full_name == github.repository && (github.head_ref == 'experiment/e9-layout-opt-in' || contains(github.event.pull_request.labels.*.name, 'run-layout-benchmark')))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      HF_HUB_DISABLE_TELEMETRY: "1"
+      PIP_DISABLE_PIP_VERSION_CHECK: "1"
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+      - name: Acquire the existing hash-pinned PDF stack and Poppler
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/e9-receipt" "$RUNNER_TEMP/e9-wheels"
+          # Reuse only the incumbent's dependency closure from the CI lock.
+          grep -E '^(pdfplumber|pdfminer-six|pypdfium2|cryptography|cffi|pycparser|charset-normalizer|pillow)==' requirements/ci-python312-linux-x86_64.lock.txt > "$RUNNER_TEMP/e9-receipt/pdf-lock.txt"
+          python -m pip download --require-hashes --only-binary=:all: --dest "$RUNNER_TEMP/e9-wheels" -r "$RUNNER_TEMP/e9-receipt/pdf-lock.txt"
+          python -m pip install --require-hashes --only-binary=:all: --no-index --find-links "$RUNNER_TEMP/e9-wheels" -r "$RUNNER_TEMP/e9-receipt/pdf-lock.txt"
+          python -m pip check
+          python -c 'import os,pathlib; p=pathlib.Path(os.environ["RUNNER_TEMP"])/"e9-wheels"; print(sum(f.stat().st_size for f in p.glob("*.whl")))' > "$RUNNER_TEMP/e9-receipt/python-wheel-download-bytes.txt"
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends poppler-utils | tee "$RUNNER_TEMP/e9-receipt/poppler-install.txt"
+          pdftotext -v 2>&1 | tee "$RUNNER_TEMP/e9-receipt/poppler-version.txt"
+          dpkg-query -W 'poppler-utils' 'libpoppler*' > "$RUNNER_TEMP/e9-receipt/poppler-packages.txt"
+          python -VV > "$RUNNER_TEMP/e9-receipt/python-version.txt"
+          python -m pip freeze > "$RUNNER_TEMP/e9-receipt/environment.txt"
+      - name: Test shared decoder and fixture builder
+        run: python -m unittest tests.test_layout_development -v
+      - name: Execute both independent reader arms and retain failures
+        shell: bash
+        run: |
+          set -uo pipefail
+          status=0
+          python -m scripts.layout_development --reader pdfplumber --expected-version 0.11.11 --revision "$(git rev-parse HEAD)" --output "$RUNNER_TEMP/e9-receipt/pdfplumber.json" || status=1
+          python -m scripts.layout_development --reader poppler --expected-version 24.02.0 --revision "$(git rev-parse HEAD)" --output "$RUNNER_TEMP/e9-receipt/poppler.json" || status=1
+          exit "$status"
+      - name: Retain synthetic development results (including failures)
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: e9-layout-development-${{ github.sha }}
+          path: ${{ runner.temp }}/e9-receipt/
+          if-no-files-found: error
+          retention-days: 90
