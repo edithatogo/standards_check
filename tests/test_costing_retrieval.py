@@ -167,3 +167,65 @@ def test_runtime_shape_and_asset_boundary(tmp_path, monkeypatch):
         rerank("query", "target")
     state.value = np.array([[0.5]])
     assert rerank("query", "target") == .5
+
+
+def test_pool_order_binding():
+    ranks = {("i", "1"): ["a", "b"], ("i", "2"): ["b", "a"]}
+    assert cost.pool_sha256(ranks, 2) == cost.pool_sha256(dict(reversed(list(ranks.items()))), 2)
+    assert cost.pool_sha256(ranks, 2) != cost.pool_sha256({**ranks, ("i", "1"): ["b", "a"]}, 2)
+
+
+def test_provider_indices_bound_to_candidates():
+    candidates = ["b", "a"]
+    rows = [{"index": 0, "relevance_score": .2}, {"index": 1, "relevance_score": .9}]
+    assert cost.parse_reranker_results(candidates, rows) == {"b": .2, "a": .9}
+
+
+@pytest.mark.parametrize("rows", [
+    [{"index": 0, "relevance_score": .9}],
+    [{"index": 0, "relevance_score": .9}, {"index": 0, "relevance_score": .1}],
+    [{"index": True, "relevance_score": .1}, {"index": 0, "relevance_score": .2}],
+    [{"index": 0, "relevance_score": float("nan")}, {"index": 1, "relevance_score": .2}],
+    [{"index": 0, "relevance_score": .1}, {"index": 3, "relevance_score": .2}],
+    [{"index": 0, "relevance_score": True}, {"index": 1, "relevance_score": .2}],
+    [None, {"index": 1, "relevance_score": .2}],
+    None,
+])
+def test_invalid_provider_rows_fail_closed(rows):
+    with pytest.raises(ValueError):
+        cost.parse_reranker_results(["a", "b"], rows)
+
+
+def test_duplicate_provider_candidates_held():
+    with pytest.raises(ValueError):
+        cost.parse_reranker_results(["a", "a"], [])
+
+
+def test_paired_gain_and_harm_at_equal_budget():
+    refs = {("i", "1"): {"a"}, ("i", "2"): {"c"}}
+    before = {("i", "1"): ["b", "a"], ("i", "2"): ["c", "d"]}
+    after = {("i", "1"): ["a", "b"], ("i", "2"): ["d", "c"]}
+    result = cost.paired_retrieval(refs, before, after)
+    assert result["1"] == {
+        "gained_associations": 1, "lost_associations": 1, "improved_queries": 1,
+        "harmed_queries": 1, "unchanged_queries": 0,
+    }
+    assert result["10"]["gained_associations"] == result["10"]["lost_associations"] == 0
+    with pytest.raises(ValueError, match="coverage"):
+        cost.paired_retrieval(refs, before, {})
+    with pytest.raises(ValueError, match="pool"):
+        cost.paired_retrieval(refs, before, {**after, ("i", "2"): ["c", "e"]})
+
+
+def test_frozen_candidate_pool_rejected_before_reranking():
+    queries = {("instrument", "1"): "cost topic"}
+    targets = {"a": "cost", "b": "date"}
+    refs = {("instrument", "1"): {"a"}}
+    def forbidden(*args):
+        pytest.fail("reranker called before frozen pool validation")
+    with pytest.raises(ValueError, match="frozen BGE"):
+        cost.compare(queries, targets, refs, lambda _: np.array([1.0, 0.0]),
+                     forbidden, expected_pool="invalid")
+    root = Path(__file__).resolve().parents[1]
+    with pytest.raises(ValueError, match="unknown reranker"):
+        cost.run(root, reranker="bge")

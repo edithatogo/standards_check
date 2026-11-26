@@ -487,3 +487,13 @@ The new [specialist-pipeline protocol](../../../docs/research/specialist-pipelin
 extends the publication programme without registering these retrospective results as
 frozen runs. Prioritise stage-specific evidence, calibrated d1 triage, source-native
 and layout-specialised ingestion, extractive tags, retrieval and exact validation.
+
+### Requested specialist challenger panel
+
+The [dated model challenger record](../../../docs/research/model-challengers-20261126.md)
+preserves the actual 106-query neural retrieval result and verified artifact
+hashes; E11 rerankers now use an exact frozen BGE top-ten pool. Include
+K2-Horizon-3.7B, MiniCPM5-2B, d1.2-ultra and Jev 1.13 in the separate
+development comparator plan, not the independent reference. Hosted services
+require a separate authorized access and budget decision. Source-family and
+scientific holds remain unchanged.

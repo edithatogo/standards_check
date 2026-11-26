@@ -311,3 +311,10 @@ use models for identity, arithmetic, applicability-rule execution or acceptance.
 The costing metadata cohort is a development-only editorial topic-ranking pilot;
 keep independent family, rights, reference, ontology and scientific holds explicit.
 All native LFM follow-up results and negative evidence are in the qualification receipt.
+
+26 November candidate expansion: [model challenger and evidence record](../../../docs/research/model-challengers-20261126.md).
+T01.028–030, T01.043, T01.050–053 remain held pending independent reference and source qualification.
+Reuse the observed BGE candidate pool, measure paired losses/gains with permitted local
+rerankers, qualify K2-Horizon and MiniCPM publisher assets before inference, and
+keep d1.2-ultra, Jev and hosted rerankers as separate opt-in service experiments.
+No remote inference in routine PR workflows, source repin or model promotion.

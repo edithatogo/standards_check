@@ -359,10 +359,15 @@ jobs:
 
   specialist-costing-development:
     # Editorial seed only; no model downloads or inference in ordinary CI.
-    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-specialist-retrieval'
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && (github.event.label.name == 'run-specialist-retrieval' || github.event.label.name == 'run-reranker-panel')
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        reranker: ${{ fromJSON(github.event.label.name == 'run-reranker-panel' && '["bge-base","mixedbread-xsmall","jina-tiny"]' || '["reranker"]') }}
     env:
+      RERANKER: ${{ matrix.reranker }}
       HF_HUB_OFFLINE: "1"
       TRANSFORMERS_OFFLINE: "1"
       HF_HUB_DISABLE_TELEMETRY: "1"
@@ -406,12 +411,25 @@ jobs:
 
           root = Path(os.environ["RUNNER_TEMP"])
           observations = {}
-          for name, pin in MODELS.items():
+          for name in ("bge", os.environ["RERANKER"]):
+              pin = dict(MODELS[name])
+              prefix = pin["revision"]
+              if not 7 <= len(prefix) <= 40 or any(c not in "0123456789abcdef" for c in prefix):
+                  raise ValueError("invalid immutable model revision")
+              if len(prefix) != 40:
+                  url = f"https://huggingface.co/api/models/{pin['id']}/revision/{prefix}"
+                  metadata = subprocess.run(["curl", "--fail", "--silent", "--show-error", "--max-time", "30",
+                                             "--max-filesize", "1000000", "--proto", "=https", url],
+                                            check=True, capture_output=True)
+                  revision = json.loads(metadata.stdout)["sha"]
+                  if len(revision) != 40 or not revision.startswith(prefix) or any(c not in "0123456789abcdef" for c in revision):
+                      raise ValueError("immutable model revision mismatch")
+                  pin["revision"] = revision
               assets = root / "costing-assets" / name
               assets.mkdir(parents=True)
-              for remote, local, cap in ((pin["file"], "model.onnx", 200000000),
+              for remote, local, cap in ((pin["file"], "model.onnx", pin.get("max_bytes", 200000000)),
                                          ("config.json", "config.json", 1000000),
-                                         ("tokenizer.json", "tokenizer.json", 10000000),
+                                         ("tokenizer.json", "tokenizer.json", 20000000),
                                          ("README.md", "README.md", 500000)):
                   url = f"https://huggingface.co/{pin['id']}/resolve/{pin['revision']}/{remote}"
                   subprocess.run(["curl", "--fail", "--silent", "--show-error", "--location",
@@ -432,14 +450,14 @@ jobs:
       - name: Execute paired complete-pool retrieval and top-ten reranking
         run: |
           /usr/bin/time -v python -m scripts.costing_retrieval \
-            --assets "$RUNNER_TEMP/costing-assets" \
+            --assets "$RUNNER_TEMP/costing-assets" --reranker "$RERANKER" \
             --output "$RUNNER_TEMP/costing-evidence/paired.json" \
             2> "$RUNNER_TEMP/costing-evidence/resources.txt"
       - name: Retain exact metadata-only development receipts
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
-          name: specialist-costing-development-${{ github.sha }}
+          name: specialist-costing-development-${{ matrix.reranker }}-${{ github.sha }}
           path: ${{ runner.temp }}/costing-evidence/
           if-no-files-found: error
           retention-days: 90
