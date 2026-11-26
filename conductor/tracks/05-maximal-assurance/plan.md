@@ -179,3 +179,6 @@ T05.060–062: the [qualification increment](orthogonal-qualification-20261126.m
 PR #177 receiving checks and the next bounded implementations, local evidence, current
 hosted CI gates, exact release scan integration and independent-reference holds. Preserve
 E1–E14 and one integrated publication under #158. All eight wider tasks remain open.
+
+
+Model-placement development (26 November; #158; T05.063 remains open): [synthetic compact/geometry placement receipt](../../../research/model-placement/synthetic.md) complements #182 and #183. Two local focused tests passed; six template families, eight placements including graph, tagging, atom decisions, learned reranking and typed verification. No independent validation, runtime admission or model promotion. Preserve negative results and ceiling effects; per-arm resource and rights-cleared references remain held.
