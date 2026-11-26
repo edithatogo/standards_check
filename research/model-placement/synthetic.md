@@ -18,13 +18,13 @@ Local RED (missing module), GREEN 2 focused tests passed; full executed syntheti
 
 Six family-labelled synthetic controls, not independent guideline families. PRISMA/CHEERS development, CONSORT/STARD/ARRIVE/TRIPOD held out; exact actor/condition/exception offsets and source row/footnote references authored before the run. Small templates share structure; no claim of natural generalization. Linear classifiers and eight-dimensional LSA fit only on development families. Graph is section membership and adjacent synthetic dependencies, not validated guideline graph. Lexical comparator in this new fixture is development-fitted char TF-IDF, not live BGE. Historical five-class and BGE comparisons are in #183.
 
-| Layout reader/placement | Exact nested-ID rows | Footnotes | linked row/qualifier |
+| Layout reader/placement | Exact nested-ID rows | Footnotes | Co-extracted body/note pairs (not links) |
 | --- | ---: | ---: | ---: |
 | pdfplumber whole-page text | 0/36 | 36/36 | 0/36 |
 | PyMuPDF whole-page sorted | 0/36 | 36/36 | 0/36 |
 | PyMuPDF detected rectangle crops | 36/36 | 36/36 | 36/36 |
 
-Known drawn boxes, both columns and explicit synthetic footnote identifiers. This is a bounded geometry control, not scan/OCR, parent hierarchy reconstruction, TEDS, or real issuer qualification. Cross-replay #182 grids and real rights-cleared independent region references before adoption.
+Known drawn boxes, both columns and explicit synthetic footnote identifiers. The paired-presence metric uses each authored reference only to check whether the body and its expected note were both extracted. No reader predicts an association here. Qualifier linkage is unmeasured, not 36/36 recovered links. This is a bounded geometry/co-extraction control, not scan/OCR, parent hierarchy reconstruction, TEDS, or real issuer qualification. Use the independent explicit-marker edge endpoint from #182 separately; test wrong-owner, duplicate and ambiguous-marker controls on independently annotated pages before any linkage claim.
 
 | Exact held-out span | Rules TP/FP/FN | Linear tagger TP/FP/FN |
 | --- | --- | --- |
@@ -262,3 +262,191 @@ reference lock, no same-ID downstream scientific evidence and no pipeline
 adoption. Layout retains source, rights and blinded adjudication; Offline
 and Orthogonal retain their stage evidence. Shared join now lives on main
 under the existing #158/T01.064/T05.063 convention.
+
+
+## Review correction: co-extraction is not qualifier linkage
+
+Normal protected merge of prior head c775cb4257310a2a7d6a299d9e9881ac2d81df80 was rejected (405:
+unresolved conversation) despite all seven required checks, CodeQL and
+Codecov patch/component success. Review comment 4707523186 correctly
+identified reference-driven pairing: both expected strings appearing in
+the extracted chunks does not establish that the extractor linked them.
+Rename the metric and per-row field to co_extracted_body_note_pairs and
+body_and_note_present, respectively, with qualifier_linkage_measured=false.
+Do not add a second linkage implementation competing with Layout/#182.
+Correct the table and interpretation above; preserve historical receipts
+and the actual original failure/limitations. No numerical change to
+the co-presence observations and no claim of recovered link accuracy.
+
+RED: new actual-layout regression failed with KeyError for missing
+qualifier_linkage_measured. GREEN: three focused layout/fixture tests
+passed; all eleven #185 isolated tests passed. Exact local/remote Git blobs:
+synthetic.py 32abd5c6303c2cca1980706818cc5083896264a4;
+test_synthetic.py fcf2721c231520883ce91c390df88eec8fc1a4e9.
+Regenerate the same synthetic pages and extract the actual three reader
+arms; all per-case references, boxes, extracted-row/footnote flags and
+renamed co-presence results equal the historical layout member.
+Corrected layout-only receipt SHA-256
+9c168ef6516136bfd274d6dc64df3a7d7782e1d05de9aa475477ba85f8ec3b5b.
+The regenerated scoring PDF SHA-256
+cc80a2bc63d4d994373a41fd1ae70ee205bbbcb6285cb034e4868840561c383c
+matches the PDF hash *inside* the original synthetic receipt
+(4e91d4648d50b843000c23838494479a4b176f6898c94b86ace0e72c41743bf5).
+The separately archived illustrative PDF hash 02ff1c437ab1b0cd034cae94b71463a5f49bdf664e12777cd56969765e69fcca
+does not match the original scoring member; retain it as illustration,
+not the byte-exact scoring input. The corrected regeneration is the
+actual input matching the historical score receipt. No fresh model inference.
+Fresh exact-head checks required after this real measurement correction.
+
+## Corpus-wide coverage and incremental research priorities
+
+Cross-workstream coordinator under existing #158/T01.064/T05.063; do not
+duplicate Layout intake, Offline evidence replay or Orthogonal verification.
+Read complete main tree at 413626c44da6d5d5faaa19a60f4d7ae0751f1fb7 (1941 tree entries,
+one packs/.../pack.json, org.prisma/prisma/2020); catalogue denominator
+is not a canonical pack denominator or a software-coverage metric.
+Use only the existing exact hash-verified receipts:
+
+- Priority replay 45802602832 artifact 15108328164, ZIP SHA-256
+  e442a484cd20abd396d40c2dde03e7c0e5e10af327bd69522a21876d086a5e53:
+  catalogue-coverage.json, all 720 distinct catalogue identities.
+- Bulk checkpoint 45802629341 artifact 15107508921, ZIP SHA-256
+  be0c2221b737042d0bb4656d1f1f4145324dbaf820112b1e366ba7f402e8676a:
+  pack-evidence-inventory.json and equator-article-survey.json.
+- Extended shared audit 45804985347 artifact 15109472517, ZIP SHA-256
+  020834bdbb13f84e8e0f2e024b8bc446d136791a7b545b7da23cf43e2909fc8e:
+  recall-audit.json full rankings, not a selected success subset.
+
+Actual bounded local read-only projection of these three receipts:
+corpus-diagnostic.json SHA-256
+098cd04ebdc7a5dd77f33a77e627fe183decbdc23c0268a6e2adce9e4549ce11.
+No new reference labels, inference, dependency, source acquisition or
+promotion. All source/eligible query/target denominators checked.
+Catalogue 719 metadata-extracted/unverified, 317 source-link candidates,
+209 OA XML candidates, 115 both, 16 legacy-original candidates.
+Union of those three candidate routes 411; 309 with none (also neither
+link nor OA XML candidate). 76 missing publication identifiers, of which
+70 have source-link candidates and 7 legacy original candidates;
+56 incomplete lookups, of which 49 have source links. Rights not
+recorded 132, unassessed article/table reuse 588. End-to-end qualified
+from catalogue receipts zero. Do not interpret absence of an observed
+link as absence of an obtainable or lawful source. Preserve all 720 IDs
+and report availability/rights/qualification states separately.
+205 bulk worklist IDs, 200 deferred, 4 held, 1 inventory observed/unreconciled.
+Study-type categories overlap (1253 memberships, not 1253 guidelines).
+
+| Study type | Entries | OA XML candidates |
+| --- | ---: | ---: |
+| Mixed methods | 21 | 11 |
+| Economic evaluations | 30 | 12 |
+| Observational studies | 244 | 92 |
+| Clinical trials | 254 | 83 |
+| Systematic reviews/Meta-analyses/Reviews | 67 | 18 |
+| No study design specified | 131 | 21 |
+| Reliability/Agreement | 4 | 0 |
+
+All strata retained in the local projection, including AI/ML and unclassified;
+do not choose independent evaluation from ease of XML acquisition alone.
+The inventory certificate concerns all 42 PRISMA declared parent items,
+not independent semantic/clause or manuscript references. 35/42 declare
+multiple evidence kinds; 17 Methods, 11 Results, 6 Other information,
+4 Discussion, 2 Introduction, Title and Abstract one each. Document
+span all 42; synthesis plan six, synthesis results four, outcome
+catalogue three, registration identifier three, other structured
+types retained. One explicit source cross-reference in this inventory.
+Masked source-identity recovery word R@1 41/42 (20d at rank two),
+char 42/42; both R@3 and R@5 42/42. Identity/near-copy ceiling,
+not semantic recall or satisfaction. Multiple declared kinds do not
+prove each kind mandatory; applicability/bundle references need independent
+adjudication. Use Orthogonal and Offline typed bundles and owner receipts.
+
+Full ranking depth diagnostic, exactly 106 queries, 125 editorial known
+positives, 31 targets. For k in 1,3,5,10,15,20,31, intersect known positive
+IDs with each arm's order[:k] and sum paired set differences vs BGE.
+Equal k across arms; 106*k candidate slots, no actual review/compute parity
+or adjudicated negatives. Association micro counts below (not macro R@k).
+
+| k | Slots | BGE | Qwen+BGE | Exact lexical | Parent-topic proxy | Fusion gains/losses |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 1 | 106 | 41 | 47 | 37 | 43 | 10/4 |
+| 3 | 318 | 70 | 79 | 55 | 60 | 15/6 |
+| 5 | 530 | 87 | 93 | 63 | 66 | 8/2 |
+| 10 | 1060 | 97 | 104 | 81 | 77 | 10/3 |
+| 15 | 1590 | 110 | 115 | 92 | 90 | 7/2 |
+| 20 | 2120 | 118 | 119 | 102 | 100 | 3/2 |
+| 31 | 3286 | 125 | 125 | 125 | 125 | 0/0 |
+
+A wider pool reduces the fusion advantage to one known association at 20.
+Do not equate full enumeration with an operational equal-review-budget
+decision or assume unknown positives are negatives. At matched 10/5
+budgets, prior instrument/domain analysis in #158 comment 7190469008
+retains all 125 associations; improvement heterogeneous, including iDSI
+pool regression and GHCC review regression. Results-disaggregation 0/3
+and diagnostic-pathway 16/20 at ten in both dense arms. No model choice
+or per-instrument tuning on these exposed observations. Scientific
+false-equivalence/unsupported-discharge risk not estimable from this
+positive-only seed. Retain independently labelled negative and unknown
+pairs and real referral resolutions in confirmatory evaluation.
+
+### Change priorities and conditional fine-tuning
+
+1. Layout/#188/#95/#111/T01.052: use actual source-link/issuer candidates
+   for missing DOI/PMID cases; no universal identifier gate before
+   issuer-source observation, no rights or edition shortcut. Keep
+   source-unavailable/rights-held, anchor/structural loss, and unmeasured
+   downstream outcomes distinct. Report whole-catalogue attrition and
+   study-type/format/edition missingness, not convenience-sample accuracy.
+   Include distinct-family and hard structural cases, not only easy OA XML.
+   CONSORT/SPIRIT share one provisional component; item 26 and non-body,
+   numbering and issuer/rights holds still unresolved. No new source parser
+   or parallel acquisition in this lane.
+2. T01.064: preserve full candidate-universe oracle diagnostic; compare
+   native exact clause, heading text, typed evidence/explicit links and
+   instructed Qwen+BGE against BGE. Predeclare label-blind variable-depth
+   policies at the same total candidate, acquisition, review and compute
+   budgets. Hold review cutoff independently of pool size; preserve missed
+   and uniquely recovered positives, regressions and common failures.
+   Reuse #185 heading-text and #183 MiniLM R@5 negative control, no new
+   reranker scale sweep. Do not tune weights, cutoffs or routing on this
+   retained costing reference.
+3. T01.027/T01.063/T05.063: if qualified independent development-family
+   residuals justify it, compare compact supervised boundary/typed-span
+   or contrastive embedding fine-tuning to strong deterministic/native
+   and pretrained baselines. Hard negatives include shared topic but
+   different methods/results, population/denominator, scope, trigger,
+   operator, exception and directional parent/component; no identity
+   copies or near-duplicate co-publications across folds. Require exact
+   boundaries and wrong-owner link controls, unique gains and regression
+   counts; include implicit/nested/cross-sentence qualifiers. Do not
+   fine-tune on exposed editorial or synthetic evaluation cases.
+   Freeze model/runtime/assets, training/negative construction, hyperparameter
+   selection, calibration and final evaluation by family component. Test
+   fine-tuned vs base and simple comparator on untouched families; only
+   continue where incremental benefit is supported at matched costs.
+4. Offline/#184 and Orthogonal/#180: preserve explicit evidence-bundle
+   coverage, verified applicability/direction, unknown vs negative vs
+   referral resolution; 35 multi-kind declared PRISMA items motivate
+   multi-component evidence challenges, not a reference shortcut. Assess
+   both missed true matches and false equivalence/unsupported discharge;
+   proof-related abstention and incomplete evidence are separate stages.
+   No source-only evidence credit for manuscript satisfaction.
+5. T05.049/T05.063: after actual qualified blinded source-only reference
+   lock, run all eligible cases in family-component-disjoint folds.
+   Separate metadata/source eligibility and reference denominator from
+   downstream successes. Predeclare paired family-macro and association
+   recall, uncertainty clustered by family, coverage, selective risk,
+   false equivalence, unsupported discharge, workload and resource
+   endpoints; strata by study design, format, requirement complexity,
+   explicit/implicit qualifiers, evidence kind and family, with sparse
+   or empty denominators explicit. Do not infer population significance
+   from overlapping strata or same-source identity recovery.
+   Set material gains/harm noninferiority limits prospectively with
+   reference sample precision; no per-stratum threshold fishing.
+   Use the existing locked_join on identical opaque IDs. No full factorial
+   or adoption until component value and scientific gates qualify.
+
+Receiving main remains 413626c44da6d5d5faaa19a60f4d7ae0751f1fb7 at this review correction.
+#185 protection requires fresh checks and genuine review resolution.
+Reference lock has not been received; independent same-ID joins, scientific
+confirmation, pipeline changes and release remain held. No new registry,
+canonical schema, external submission, model acquisition or gate relaxation.

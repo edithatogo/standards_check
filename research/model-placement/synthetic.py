@@ -148,9 +148,9 @@ def layout(rows, root):
             for name,chunks in arms.items():
                 for ref in expected[index]:
                     body=[box for txt,box in chunks if norm(ref['body']) in txt]; foot=[box for txt,box in chunks if norm(ref['note']) in txt]
-                    result[name].append({'id':ref['id'],'page':index+1,'body':bool(body),'footnote':bool(foot),'linked':bool(body and foot),'body_regions':body,'footnote_regions':foot})
+                    result[name].append({'id':ref['id'],'page':index+1,'body':bool(body),'footnote':bool(foot),'body_and_note_present':bool(body and foot),'body_regions':body,'footnote_regions':foot})
         doc[0].get_pixmap(matrix=fitz.Matrix(1,1)).save(root/'layout-page-1.png')
-    return {'pdf_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'reference':expected,'arms':{a:{'rows':len(rs),'complete_nested_rows':sum(r['body'] for r in rs),'footnotes':sum(r['footnote'] for r in rs),'qualifier_links':sum(r['linked'] for r in rs),'records':rs} for a,rs in result.items()}}
+    return {'pdf_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'qualifier_linkage_measured':False,'reference':expected,'arms':{a:{'rows':len(rs),'complete_nested_rows':sum(r['body'] for r in rs),'footnotes':sum(r['footnote'] for r in rs),'co_extracted_body_note_pairs':sum(r['body_and_note_present'] for r in rs),'records':rs} for a,rs in result.items()}}
 
 
 def pipeline(rows, tag):

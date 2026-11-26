@@ -18,3 +18,15 @@ def test_anchor_and_fusion():
     assert not verify_anchor('ABC', -1, 3, 'ABC')
     assert not verify_anchor('ABC', 1, 3, 'ABC')
     assert rrf(['b','a'],['a','c']) == ['a','b','c']
+
+
+def test_layout_presence_does_not_claim_qualifier_linkage(tmp_path):
+    from synthetic import layout
+
+    result = layout(fixture(), tmp_path)
+    assert result['qualifier_linkage_measured'] is False
+    for arm in result['arms'].values():
+        assert 'qualifier_links' not in arm
+        assert arm['co_extracted_body_note_pairs'] == sum(r['body_and_note_present'] for r in arm['records'])
+        assert all('linked' not in r for r in arm['records'])
+        assert all(r['body_and_note_present'] == (r['body'] and r['footnote']) for r in arm['records'])

@@ -221,3 +221,18 @@ Layout #188 structural artifact 15109287625 recovers 95 printed IDs but CONSORT
 item 26 mismatch, unresolved non-body/numbering/issuer identity and family
 independence hold; no qualified lock. Keep #95/#111/T05.049 and #30 open.
 No new owner, registry, canonical promotion, or adoption.
+
+
+T05.063/T01.064 #158: [corpus-wide coverage and corrected measurement](../../../research/model-placement/synthetic.md#corpus-wide-coverage-and-incremental-research-priorities).
+All 720 catalogue identities retained; 411 have an observed source candidate
+route, 309 do not; 70/76 missing identifiers nevertheless have source-link
+candidates. One canonical pack, 35/42 items declare multiple evidence kinds.
+All 106 costing queries/125 known positives: fusion pool 104 vs 97 at ten,
+115 vs 110 at 15, 119 vs 118 at 20. Prefer source qualification, matched-budget
+depth/evidence allocation, exact clause/heading controls and conditional
+family-disjoint fine-tuning only after independent residuals justify it.
+Preserve negative results, overlapping/sparse strata and held source identities.
+Review correction: #185 geometry metric measures co-extraction, not qualifier
+linkage; 11 local tests pass, exact regenerated scoring PDF matches historical
+receipt. Keep #182's distinct linkage endpoint. No independent reference lock,
+no adoption, no new registry or gate change; #95/#111/#188/T05.049 remain open.
