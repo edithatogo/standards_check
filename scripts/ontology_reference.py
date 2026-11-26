@@ -49,7 +49,9 @@ def audit(doc: dict) -> dict:
         if source not in sources or relation not in RELATIONS or a == b:
             raise ValueError("invalid typed reference")
         if not all(
-            re.fullmatch(r"http://purl.obolibrary.org/obo/[A-Za-z]+_[0-9]+", n) for n in (a, b)
+            n.startswith(OBO_PREFIX)
+            and re.fullmatch(r"[A-Za-z]+_[0-9]+", n.removeprefix(OBO_PREFIX))
+            for n in (a, b)
         ):
             raise ValueError("named OBO class identifiers required")
         if row["reference_type"] != "asserted_in_pinned_artifact":

@@ -121,3 +121,48 @@ fn scene_json_can_be_streamed_to_stdout() -> Result<(), Box<dyn std::error::Erro
     );
     Ok(())
 }
+
+#[test]
+fn cli_trial_success_and_invalid_input() -> Result<(), Box<dyn std::error::Error>> {
+    let directory = TestDirectory::create()?;
+    let input = repository_root().join("contracts/examples/trial-flow/synthetic-two-arm.json");
+    let output_path = directory.path().join("trial.json");
+    let output = cli()
+        .args(["--json", "diagram", "trial"])
+        .arg(&input)
+        .args(["--format", "scene-json", "--output"])
+        .arg(&output_path)
+        .output()?;
+    assert!(
+        output.status.success(),
+        "{}",
+        String::from_utf8_lossy(&output.stderr)
+    );
+    let summary: Value = serde_json::from_slice(&output.stdout)?;
+    assert_eq!(
+        summary.pointer("/operation").and_then(Value::as_str),
+        Some("diagram.trial")
+    );
+    let scene: Value = serde_json::from_slice(&fs::read(&output_path)?)?;
+    assert_eq!(
+        scene.pointer("/recipe_id").and_then(Value::as_str),
+        Some("synthetic/trial-flow/two-arm")
+    );
+    let invalid = directory.path().join("invalid-trial.json");
+    fs::write(&invalid, "{}")?;
+    let refused_path = directory.path().join("refused.svg");
+    let refused = cli()
+        .args(["--json", "diagram", "trial"])
+        .arg(&invalid)
+        .args(["--format", "svg", "--output"])
+        .arg(&refused_path)
+        .output()?;
+    assert_eq!(refused.status.code(), Some(1));
+    assert!(!refused_path.exists());
+    let response: Value = serde_json::from_slice(&refused.stderr)?;
+    assert_eq!(
+        response.pointer("/error/kind").and_then(Value::as_str),
+        Some("trial-flow")
+    );
+    Ok(())
+}
