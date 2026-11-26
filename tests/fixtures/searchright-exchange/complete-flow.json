@@ -1,0 +1,29 @@
+{
+  "schema_version": "org.searchright.prisma-flow.v1",
+  "review_id": "fixture:independent-control",
+  "records_databases": 8,
+  "records_registers": 2,
+  "records_other": 0,
+  "duplicates_removed": 1,
+  "automation_removed": 1,
+  "other_removed": 0,
+  "records_screened": 8,
+  "records_excluded": 3,
+  "reports_sought": 5,
+  "reports_not_retrieved": 1,
+  "reports_assessed": 4,
+  "full_text_exclusions": [
+    {
+      "reason_id": "r1",
+      "label": "Synthetic A",
+      "count": 1
+    },
+    {
+      "reason_id": "r2",
+      "label": "Synthetic B",
+      "count": 1
+    }
+  ],
+  "studies_included": 1,
+  "reports_included": 2
+}
