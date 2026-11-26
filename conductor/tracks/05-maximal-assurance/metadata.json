@@ -39,7 +39,8 @@
     "boundary-mutations-20261125.json",
     "hosted-hardening-20261125.json",
     "pr165-native-20261125.json",
-    "main165-native-20261125.json"
+    "main165-native-20261125.json",
+    "orthogonal-verification-20261126.md"
   ],
   "coverage_floors_percent": {
     "python_combined": 90.5,
@@ -67,7 +68,7 @@
     ],
     "pr_head": "4e8e13a632777f2916b183101774cf2ff5389823",
     "pr_patch_check_id": 137468737189,
-    "pr_patch_percent": 100.0,
+    "pr_patch_percent": 100,
     "pr_patch_target": 80,
     "main_legacy_patch_status": 59621115216,
     "main_legacy_patch_result": "success",

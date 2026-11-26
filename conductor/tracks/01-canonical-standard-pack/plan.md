@@ -355,3 +355,14 @@ equal-weight instructed-Qwen+BGE RRF60 76.26% vs BGE 72.01%, eight gains/two
 losses at five. See [exact evidence and limitations](../../../docs/research/orthogonal-task-framing-20261126.md).
 Keep candidate pools and historical comparisons separate; independent reference
 and promotion remain held. Retain the weaker BGE/character RRF result.
+## Orthogonal implementation reconciliation — 26 November
+
+[PR #177](https://github.com/edithatogo/standards_check/pull/177) adds the synthetic
+split/Mondrian direct-count comparison (T01.060), bounded typed-literal applicability
+and exact equivalence-subset oracle (T01.061), and manifest-bound local exact word
+n-gram overlap checker (T01.062). See the [shared implementation receipt](../05-maximal-assurance/orthogonal-verification-20261126.md)
+for the original hosted test result and receiving qualification status.
+PR #155 has since merged its bounded engineering and exploratory assets; independent
+family, source rights and scientific gates remain held. Keep all three tasks open:
+no empirical calibration, source-anchored recursive rule corpus, full costing alignment,
+authorized restricted-corpus coverage or canonical admission has been established.
