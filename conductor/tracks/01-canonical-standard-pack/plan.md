@@ -461,3 +461,46 @@ T01.063–064 / #158: [fair factorial redesign](../../../docs/research/factorial
 T01.064 / #158: [offline policy comparison](../../../docs/research/evidence-policy-20261126.md) reuses actual transitions with feasible action masks and invariant proof gate. One-call learned gain one case; at two calls rule reaches hindsight ceiling; adaptive rule 29 calls vs oracle 23. No larger RL framework until measured residual gap on qualified common inputs. Retain full factorial and source/reference holds.
 
 T01.064 / #158: [post-hoc parent-first comparator](evidence-policy-parent-first-v1-receipt.json) reaches 23 complete and 14 gated correct in 24 calls, no reranking, versus 29 calls for the earlier adaptive rule. Synthetic parent completeness is guaranteed by fixture construction; retain real-source qualification and no promotion. Original report unchanged.
+
+T01.052–053 / #158 (E4/E6): [catalogue enrichment v1](../../../docs/research/catalogue-enrichment-20261126.md), [hash-bound receipt](../../../research/catalogue/catalogue-enrichment-v1-receipt.json). Executed 720-entry historical census, 41 selected MeSH descriptors, 219 dictionary-matched titles, 120 additional ancestor associations, 40 unverified category suggestions; 42 admitted PRISMA requirements retained, 10 with direct mentions. Five focused tests and deterministic repeat passed locally. No scope, equivalence, rights or independent reference promotion. Freeze ontology releases and qualify semantic roles before comparing neural extraction/linking and graph increment. Coordinate #180/#188/#191/#192 and the existing factorial plan.
+
+T01.052/053/064 / #111/#158: [catalogue vector, crosswalk and tool-selection study](../../../docs/research/catalogue-vector-selection-20261126.md) extends #193. Executed 12 catalogue-title configurations, prevalence control, 826 cross-facet co-occurrences, provisional MeSH coverage and descriptive Pareto; exact primary-paper citation pilot, no exhaustive network. Preserve #191 provider and #188 reference ownership; feed #192 versioned supplement; no fresh neural inference or scientific promotion. Next qualify role-aware spans and crossed dense/sparse representations on common independently locked inputs.
+
+
+T01.025/031/052/053/064 / #111/#95/#158: [bibliographic recovery and Searchright consumer](../../source-reconciliation/bibliographic-recovery-20261126.md).
+All 720 historical IDs retained; 49/76 missing IDs and 37/56 incomplete
+lookups expose literal link identifier candidates, no newly qualified
+source. Pinned Searchright main and unmerged #844 source/method/policy
+crosswalk, metadata-only exact work export and opt-in bounded canary;
+upstream security/privacy failures hold actual Rust dependency/execution.
+Use existing acquisition owner #188, #183 locked join, no parallel
+registry or duplicate provider runtime. Extend the existing retrospective
+skill with a bounded evidence-led improvement cycle and explicit stopping
+conditions. Independent family lock, citation/impact coverage and all
+scientific/production acceptance remain open.
+
+
+T01.025/031/052/053/064 #111/#95/#158: [persistent gap audit and
+Searchright-first workflow](../../source-reconciliation/bibliographic-recovery-20261126.md#persistent-missing-checklist-audit-and-searchright-first-migration).
+720 IDs, 708 unchanged, 122 persistent unresolved; 132 current gaps.
+Prior hosted canary 11 requests, six exact DOI observations (three works),
+one exact PMID, two timeouts, two title-no-match. 886 schema-validated
+native strategies for 106 current IDs, 26 non-search routes, 11 prior
+attempts excluded. Default Searchright plan and actual qualified compiler
+adapter; legacy only explicit comparator. 15 local tests passed.
+Runtime/live authority held upstream H-002/security/privacy; no actual
+compiler or native live result, no qualified reference lock. Keep #188
+source owner, #183 locked join, existing gates and no new registry.
+
+T01.025/031/052/053/064 #111/#95/#158: native Searchright planning replay
+45821391956/artifact 15117882759 verified; all 886 strategies and 122
+persistent gaps reproduce byte-exactly. Of persistent lookups, 43
+provider_request_failed and four circuit-breaker deferred; 75 missing
+identifiers. New bounded marginal-coverage selector plans nine distinct
+persistent IDs vs seven at eight slots, two/provider in both; three
+local tests passed, fresh hosted checks required. This is planning,
+not successful search. Existing native compile/live authority and
+upstream security holds remain. #185 receiving tree verified, current
+catalogue enrichment/vector work retained. No duplicate owner or
+registry; source qualification #188, independent labels and same-ID
+analysis still held.

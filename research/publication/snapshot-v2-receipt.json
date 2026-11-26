@@ -1,0 +1,37 @@
+{
+  "schema_version": 2,
+  "status": "exploratory_not_scientifically_qualified",
+  "previous_snapshot_sha256": "42b3a00545ebc855295687218deae8a249134938be2fd6e3c441662a1d6e084e",
+  "snapshot_sha256": "1bacaabb25e7139647677da575e360c10041659a27c186a53020ada9ca237bb3",
+  "inputs": 74,
+  "prior_inputs": 67,
+  "prior_metrics": 2317,
+  "metric_records": 3087,
+  "projection_count": 161,
+  "panel_count": 99,
+  "archive_sha256": "b1752699d3de7b0098efb1fb5fd1adfba1fe5feeecd741de8f0838c825f5d132",
+  "comparison_sha256": "5d978fc60b5a49db4c3e3353bc2de66cad6b85e19c8df357477dcdb762549f59",
+  "snapshot_file_sha256": "5158b9bff3d6aa8b309d2adb601ecce1c37303bb959de1efcabb7fe8651010b2",
+  "manifest_sha256": "eee3c12b6db0e6c9d00b755edf0b292e74f573ca4690396267ca189606a716b2",
+  "panels_sha256": "bb7195df52f247d53650f45023ed80dec6f2aca40e0cbaddd87f44a664cf851b",
+  "crosswalk_sha256": "8cee8af360f4d07db3e48ac6d8b3260a6736809f55a589786f6eb68e93b1dd87",
+  "exact_previous_comparison_prefix": true,
+  "replay_idempotent": true,
+  "storage": "Personal Library; both immutable evidence ZIPs and compiled projections retained separately",
+  "additional_post_snapshot_evidence": {
+    "failed_run": 45836556902,
+    "artifacts": [
+      {
+        "id": 15126371110,
+        "sha256": "fd64bfbf3a4144b5eed39e29077b6e3598d4fb7ca3fd5628abb883de605f9ed0"
+      },
+      {
+        "id": 15126840978,
+        "sha256": "324d00dcfa56a2e5973c06c5476e4102fe7be44e87d7ccfcf6b571482be2ac97"
+      }
+    ],
+    "repaired_report_sha256": "9bb8eb00f8eee3d4ffc53600ed69bd6dd5df90e1b707aafd6b2c91559591d239",
+    "status": "retained separately in Library and PR #195; not neural outcomes; append to next snapshot, not overwrite this version"
+  },
+  "source_reference_hold": true
+}

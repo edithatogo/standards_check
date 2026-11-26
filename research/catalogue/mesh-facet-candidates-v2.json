@@ -1,0 +1,471 @@
+{
+  "schema_version": 2,
+  "status": "candidate_only",
+  "previous_crosswalk_sha256": "47429a5c5ac8d761826704771dfc31143b80b13e87aa6067e8fb3ab1d61c8d5c",
+  "catalogue_sha256": "abea437bf8bc34a14a6022c8e76367cd994e49bc6e888b2943030381068fa868",
+  "descriptor_identity_evidence": [
+    {
+      "id": "D000068598",
+      "label": "Data Accuracy",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D000068598",
+      "evidence": "selected_2026_inventory"
+    },
+    {
+      "id": "D000069550",
+      "label": "Machine Learning",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D000069550",
+      "evidence": "selected_2026_inventory"
+    },
+    {
+      "id": "D000078202",
+      "label": "Systematic Reviews as Topic",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D000078202",
+      "evidence": "selected_2026_inventory"
+    },
+    {
+      "id": "D000078985",
+      "label": "Clinical Trial Protocols as Topic",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D000078985",
+      "evidence": "selected_2026_inventory"
+    },
+    {
+      "id": "D000094703",
+      "label": "Cost-Effectiveness Analysis",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D000094703",
+      "evidence": "selected_2026_inventory"
+    },
+    {
+      "id": "D001185",
+      "label": "Artificial Intelligence",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D001185",
+      "evidence": "selected_2026_inventory"
+    },
+    {
+      "id": "D002986",
+      "label": "Clinical Trials as Topic",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D002986",
+      "evidence": "selected_2026_inventory"
+    },
+    {
+      "id": "D003362",
+      "label": "Cost-Benefit Analysis",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D003362",
+      "evidence": "selected_2026_inventory"
+    },
+    {
+      "id": "D003365",
+      "label": "Costs and Cost Analysis",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D003365",
+      "evidence": "selected_2026_inventory"
+    },
+    {
+      "id": "D005823",
+      "label": "Genetics",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D005823",
+      "evidence": "selected_2026_inventory"
+    },
+    {
+      "id": "D005826",
+      "label": "Genetics, Medical",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D005826",
+      "evidence": "selected_2026_inventory"
+    },
+    {
+      "id": "D007258",
+      "label": "Informed Consent",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D007258",
+      "evidence": "observed_2026_descriptor_heading"
+    },
+    {
+      "id": "D008495",
+      "label": "Medical Oncology",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D008495",
+      "evidence": "observed_2026_descriptor_heading"
+    },
+    {
+      "id": "D009369",
+      "label": "Neoplasms",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D009369",
+      "evidence": "selected_2026_inventory"
+    },
+    {
+      "id": "D010372",
+      "label": "Pediatrics",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D010372",
+      "evidence": "selected_2026_inventory"
+    },
+    {
+      "id": "D011379",
+      "label": "Prognosis",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D011379",
+      "evidence": "observed_2026_descriptor_heading"
+    },
+    {
+      "id": "D011871",
+      "label": "Radiology",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D011871",
+      "evidence": "observed_2026_descriptor_heading"
+    },
+    {
+      "id": "D012107",
+      "label": "Research Design",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D012107",
+      "evidence": "selected_2026_inventory"
+    },
+    {
+      "id": "D012109",
+      "label": "Research Support as Topic",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D012109",
+      "evidence": "observed_2026_descriptor_heading"
+    },
+    {
+      "id": "D012196",
+      "label": "Review Literature as Topic",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D012196",
+      "evidence": "selected_2026_inventory"
+    },
+    {
+      "id": "D012680",
+      "label": "Sensitivity and Specificity",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D012680",
+      "evidence": "observed_2026_descriptor_heading"
+    },
+    {
+      "id": "D013043",
+      "label": "Specialties, Surgical",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D013043",
+      "evidence": "observed_2026_descriptor_heading"
+    },
+    {
+      "id": "D014116",
+      "label": "Toxicology",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D014116",
+      "evidence": "observed_2026_descriptor_heading"
+    },
+    {
+      "id": "D015201",
+      "label": "Meta-Analysis as Topic",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D015201",
+      "evidence": "selected_2026_inventory"
+    },
+    {
+      "id": "D015203",
+      "label": "Reproducibility of Results",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D015203",
+      "evidence": "selected_2026_inventory"
+    },
+    {
+      "id": "D015588",
+      "label": "Observer Variation",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D015588",
+      "evidence": "observed_2026_descriptor_heading"
+    },
+    {
+      "id": "D016001",
+      "label": "Confidence Intervals",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D016001",
+      "evidence": "selected_2026_inventory"
+    },
+    {
+      "id": "D016265",
+      "label": "Conflict of Interest",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D016265",
+      "evidence": "observed_2026_descriptor_heading"
+    },
+    {
+      "id": "D017063",
+      "label": "Outcome Assessment, Health Care",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D017063",
+      "evidence": "observed_2026_descriptor_heading"
+    },
+    {
+      "id": "D017410",
+      "label": "Practice Guidelines as Topic",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D017410",
+      "evidence": "observed_2026_descriptor_heading"
+    },
+    {
+      "id": "D018401",
+      "label": "Sample Size",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D018401",
+      "evidence": "selected_2026_inventory"
+    },
+    {
+      "id": "D019937",
+      "label": "Diagnostic Techniques and Procedures",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D019937",
+      "evidence": "observed_2026_descriptor_heading"
+    },
+    {
+      "id": "D032761",
+      "label": "Animal Experimentation",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D032761",
+      "evidence": "observed_2026_descriptor_heading"
+    },
+    {
+      "id": "D032984",
+      "label": "Ethics, Research",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D032984",
+      "evidence": "observed_2026_descriptor_heading"
+    },
+    {
+      "id": "D036301",
+      "label": "Qualitative Research",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D036301",
+      "evidence": "selected_2026_inventory"
+    },
+    {
+      "id": "D058996",
+      "label": "Quality Improvement",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D058996",
+      "evidence": "observed_2026_descriptor_heading"
+    },
+    {
+      "id": "D064887",
+      "label": "Observational Studies as Topic",
+      "source": "https://meshb.nlm.nih.gov/record/ui?ui=D064887",
+      "evidence": "selected_2026_inventory"
+    }
+  ],
+  "mesh_relation": "candidate_related_topic",
+  "mesh_mappings": {
+    "study_types": {
+      "Animal pre-clinical research": [
+        "D032761"
+      ],
+      "Artificial intelligence/Machine learning": [
+        "D001185",
+        "D000069550"
+      ],
+      "Clinical practice guidelines": [
+        "D017410"
+      ],
+      "Clinical trials": [
+        "D002986"
+      ],
+      "Diagnosis/Prognosis/Prediction": [
+        "D019937",
+        "D012680",
+        "D011379"
+      ],
+      "Economic evaluations": [
+        "D003365",
+        "D003362",
+        "D000094703"
+      ],
+      "Experimental studies": [
+        "D012107"
+      ],
+      "Observational studies": [
+        "D064887"
+      ],
+      "Qualitative research": [
+        "D036301"
+      ],
+      "Quality improvement studies": [
+        "D058996"
+      ],
+      "Reliability/Agreement studies": [
+        "D015203",
+        "D015588"
+      ],
+      "Study protocols": [
+        "D000078985"
+      ],
+      "Systematic reviews/Meta-analyses/Reviews": [
+        "D000078202",
+        "D015201",
+        "D012196"
+      ]
+    },
+    "clinical_areas": {
+      "Genetics": [
+        "D005823",
+        "D005826"
+      ],
+      "Oncology": [
+        "D008495",
+        "D009369"
+      ],
+      "Paediatrics": [
+        "D010372"
+      ],
+      "Radiology": [
+        "D011871"
+      ],
+      "Surgery": [
+        "D013043"
+      ],
+      "Toxicology": [
+        "D014116"
+      ]
+    },
+    "report_sections": {
+      "Data": [
+        "D000068598"
+      ],
+      "Procedure/Method": [
+        "D012107"
+      ],
+      "Protocol-whole report": [
+        "D000078985"
+      ],
+      "Statistical methods and analyses": [
+        "D016001"
+      ],
+      "Study characteristics (participants etc.)": [
+        "D018401"
+      ],
+      "Ethical issues (consent etc.)": [
+        "D032984",
+        "D007258"
+      ],
+      "Conflict of interest": [
+        "D016265"
+      ],
+      "Funding": [
+        "D012109"
+      ],
+      "Outcomes (variables)": [
+        "D017063"
+      ]
+    }
+  },
+  "structural_ontology_sources": {
+    "doco": {
+      "repository": "https://github.com/SPAROntologies/doco",
+      "commit": "4c4109a64148c207f80d48a611a79a2d996a44b4",
+      "path": "docs/2026-06-25/doco.ttl",
+      "blob": "0ccbf3f5fe912705c09976223782d88bf814bfd8"
+    },
+    "deo": {
+      "repository": "https://github.com/SPAROntologies/deo",
+      "commit": "628b663b64a75891c4e3a352b31dfe0a81838413",
+      "path": "docs/current/deo.ttl",
+      "blob": "1473e6b212c23947615439e63677d4a630b61bb3"
+    }
+  },
+  "structural_edges": [
+    {
+      "facet": "report_sections",
+      "label": "Abstract",
+      "target_iri": "http://purl.org/spar/doco/Abstract",
+      "predicate": "candidate_document_component",
+      "ontology": "doco",
+      "class_blob": "b61abeb28948c6e54780c78bf27da03789b18c43",
+      "class_path": "docs/2026-06-25/resources/doco/Abstract.ttl"
+    },
+    {
+      "facet": "report_sections",
+      "label": "Appendix",
+      "target_iri": "http://purl.org/spar/doco/Appendix",
+      "predicate": "candidate_document_component",
+      "ontology": "doco",
+      "class_blob": "224c2a7977c0259da1750bc1b04cd05525dd4391",
+      "class_path": "docs/2026-06-25/resources/doco/Appendix.ttl"
+    },
+    {
+      "facet": "report_sections",
+      "label": "Figures/Graphs",
+      "target_iri": "http://purl.org/spar/doco/Figure",
+      "predicate": "candidate_document_component",
+      "ontology": "doco",
+      "class_blob": "d8877159b997ea3e29c44a42d479db3de5797639",
+      "class_path": "docs/2026-06-25/resources/doco/Figure.ttl"
+    },
+    {
+      "facet": "report_sections",
+      "label": "Images",
+      "target_iri": "http://purl.org/spar/doco/Figure",
+      "predicate": "candidate_document_component",
+      "ontology": "doco",
+      "class_blob": "d8877159b997ea3e29c44a42d479db3de5797639",
+      "class_path": "docs/2026-06-25/resources/doco/Figure.ttl"
+    },
+    {
+      "facet": "report_sections",
+      "label": "Title",
+      "target_iri": "http://purl.org/spar/doco/Title",
+      "predicate": "candidate_document_component",
+      "ontology": "doco",
+      "class_blob": "41a13e486acc09c3737cd86ea5d05cd6363a45bc",
+      "class_path": "docs/2026-06-25/resources/doco/Title.ttl"
+    },
+    {
+      "facet": "report_sections",
+      "label": "Acknowledgements",
+      "target_iri": "http://purl.org/spar/deo/Acknowledgements",
+      "predicate": "candidate_document_component",
+      "ontology": "deo",
+      "class_blob": "6433b841c06ca72616abb569f0eaf4f8530ef1b1",
+      "class_path": "docs/current/resources/deo/Acknowledgements.ttl"
+    },
+    {
+      "facet": "report_sections",
+      "label": "Procedure/Method",
+      "target_iri": "http://purl.org/spar/deo/Methods",
+      "predicate": "candidate_document_component",
+      "ontology": "deo",
+      "class_blob": "1a60231d322b7c3c3f151aad5d96042810317e76",
+      "class_path": "docs/current/resources/deo/Methods.ttl"
+    },
+    {
+      "facet": "report_sections",
+      "label": "Results",
+      "target_iri": "http://purl.org/spar/deo/Results",
+      "predicate": "candidate_document_component",
+      "ontology": "deo",
+      "class_blob": "59a2bd0da8fe164d1d1871e620681347b8277d35",
+      "class_path": "docs/current/resources/deo/Results.ttl"
+    },
+    {
+      "facet": "report_sections",
+      "label": "Narrative sections (discussion etc.)",
+      "target_iri": "http://purl.org/spar/deo/Discussion",
+      "predicate": "candidate_document_component",
+      "ontology": "deo",
+      "class_blob": "ba716d36d7f7ec1173b479aa62df76f25531e431",
+      "class_path": "docs/current/resources/deo/Discussion.ttl"
+    },
+    {
+      "facet": "report_sections",
+      "label": "Narrative sections (discussion etc.)",
+      "target_iri": "http://purl.org/spar/deo/Conclusion",
+      "predicate": "candidate_document_component",
+      "ontology": "deo",
+      "class_blob": "e17ae401003aaf2d6a1fca170d697f44abc30fbc",
+      "class_path": "docs/current/resources/deo/Conclusion.ttl"
+    }
+  ],
+  "coverage": {
+    "study_types": {
+      "observed": 16,
+      "mesh_candidate_labels": 13,
+      "combined_candidate_labels": 13
+    },
+    "clinical_areas": {
+      "observed": 45,
+      "mesh_candidate_labels": 6,
+      "combined_candidate_labels": 6
+    },
+    "report_sections": {
+      "observed": 26,
+      "mesh_candidate_labels": 9,
+      "combined_candidate_labels": 17
+    }
+  },
+  "summary": {
+    "mesh_descriptor_ids": 37,
+    "existing_ids_rechecked": 10,
+    "new_descriptor_ids": 6,
+    "structural_edges": 10,
+    "accepted_equivalences": 0
+  },
+  "limitations": [
+    "Descriptor identity is not semantic mapping qualification. Preserve v1; no promoted exactMatch/subclass assertion.",
+    "MeSH topic and document-component role are separate relations; a narrower topic does not cover a full catalogue label.",
+    "Observer Variation is one aspect of agreement; Informed Consent is one aspect of ethics; health-care outcomes narrower than all variables.",
+    "DoCO Figure is not every image or graph; DEO Methods need not be one named section; whole report and unknown categories not inferred.",
+    "No independent mapping labels or full ontology release freeze; no source rights, applicability or release promotion."
+  ]
+}
