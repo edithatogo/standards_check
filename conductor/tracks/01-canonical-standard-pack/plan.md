@@ -474,3 +474,16 @@ registry or duplicate provider runtime. Extend the existing retrospective
 skill with a bounded evidence-led improvement cycle and explicit stopping
 conditions. Independent family lock, citation/impact coverage and all
 scientific/production acceptance remain open.
+
+
+T01.025/031/052/053/064 #111/#95/#158: [persistent gap audit and
+Searchright-first workflow](../../source-reconciliation/bibliographic-recovery-20261126.md#persistent-missing-checklist-audit-and-searchright-first-migration).
+720 IDs, 708 unchanged, 122 persistent unresolved; 132 current gaps.
+Prior hosted canary 11 requests, six exact DOI observations (three works),
+one exact PMID, two timeouts, two title-no-match. 886 schema-validated
+native strategies for 106 current IDs, 26 non-search routes, 11 prior
+attempts excluded. Default Searchright plan and actual qualified compiler
+adapter; legacy only explicit comparator. 15 local tests passed.
+Runtime/live authority held upstream H-002/security/privacy; no actual
+compiler or native live result, no qualified reference lock. Keep #188
+source owner, #183 locked join, existing gates and no new registry.

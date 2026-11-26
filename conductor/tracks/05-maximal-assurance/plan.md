@@ -229,3 +229,40 @@ T05.048/063 / #158: [fair factorial protocol](../../../docs/research/factorial-f
 T05.048/063 / #158: [policy and harness receipt](../01-canonical-standard-pack/evidence-policy-v1-receipt.json) retains matched call/referral comparisons, explicit reward and held-out oracle, five focused tests and exact input/output pins. Fix observed I001; existing opt-in workflow now records both diagnostics and exact replay digest. No weakening of required checks or scientific admission.
 
 T05.048/063 / #158: [parent-first diagnostic](../../../docs/research/evidence-policy-20261126.md#parent-first-diagnostic-follow-up-post-hoc) retains six focused and 61 overlay tests, original policy results and formal gate. Post-hoc synthetic only; keep exact-head and independent-family gates open.
+
+
+Model-placement development (26 November; #158; T05.063 remains open): [synthetic compact/geometry placement receipt](../../../research/model-placement/synthetic.md) complements #182 and #183. Two local focused tests passed; six template families, eight placements including graph, tagging, atom decisions, learned reranking and typed verification. No independent validation, runtime admission or model promotion. Preserve negative results and ceiling effects; per-arm resource and rights-cleared references remain held.
+
+T05.063: E10 operator completion and E11 heading-text/fixed-pool replay now executed on hash-bound hosted receipts. Neither supports adding a learned tagger or mandatory graph propagation. See synthetic placement receipt; retain independent-reference and source gates.
+
+T05.063 #158: #185 reconciled with #187 receiving main; retain unchanged synthetic controls, all negative observations, and the [single shared audit/locked stage join in #183](https://github.com/edithatogo/standards_check/blob/2cedd83859a3e697a8bfc1b8c3ebf951b2d14637/research/model-placement/replay.md#full-checkout-reproduction-and-locked-stage-handoff--26-november). Full checkout replay verified; #189 receipts joined without duplicate positives. Twelve focused local coordinator tests passed; independent source/reference qualification and matched case-level evidence and decision receipts remain held, with #188/#95/#111 and T05.049. Offline security #30 remains a separate execution hold. No second audit or acceptance claim; exact-head protected checks required.
+
+
+T05.063 #158: shared audit #183 protected integration verified at receiving main
+413626c44da6d5d5faaa19a60f4d7ae0751f1fb7 (tree equal to tested head), extended
+hosted audit 45804985347 passed, 1254 observations/175 distinct editorial or
+synthetic units, zero independent positives. #185 reconciles that receiving main
+with unchanged experimental source/test blobs. Fresh exact-head checks required.
+Layout #188 structural artifact 15109287625 recovers 95 printed IDs but CONSORT
+item 26 mismatch, unresolved non-body/numbering/issuer identity and family
+independence hold; no qualified lock. Keep #95/#111/T05.049 and #30 open.
+No new owner, registry, canonical promotion, or adoption.
+
+
+T05.063/T01.064 #158: [corpus-wide coverage and corrected measurement](../../../research/model-placement/synthetic.md#corpus-wide-coverage-and-incremental-research-priorities).
+All 720 catalogue identities retained; 411 have an observed source candidate
+route, 309 do not; 70/76 missing identifiers nevertheless have source-link
+candidates. One canonical pack, 35/42 items declare multiple evidence kinds.
+All 106 costing queries/125 known positives: fusion pool 104 vs 97 at ten,
+115 vs 110 at 15, 119 vs 118 at 20. Prefer source qualification, matched-budget
+depth/evidence allocation, exact clause/heading controls and conditional
+family-disjoint fine-tuning only after independent residuals justify it.
+Preserve negative results, overlapping/sparse strata and held source identities.
+Review correction: #185 geometry metric measures co-extraction, not qualifier
+linkage; 11 local tests pass, exact regenerated scoring PDF matches historical
+receipt. Keep #182's distinct linkage endpoint. No independent reference lock,
+no adoption, no new registry or gate change; #95/#111/#188/T05.049 remain open.
+
+#185 receiving reconciliation: main d8384d5a incorporates #184 and #186; append-only Track 05 additions conserved from both branches. All prior experimental and corrected source/test blobs unchanged. Exact corrected predecessor ad2d9840 passed all seven required contexts, CodeQL and patch/component coverage; fresh checks required on receiving head. Protected auto-merge retained.
+
+#185 receiving reconciliation: preserve #190's parent-first policy result at main 2d011db1 and the corrected co-extraction controls. Exact scientific holds unchanged; protected auto-merge and fresh checks required.

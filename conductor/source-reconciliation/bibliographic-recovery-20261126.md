@@ -152,3 +152,124 @@ family/reference locking remains a hold.
 
 Rollback: remove this opt-in research lane/skill append, leaving original
 catalogue, Searchright, source admissions and existing production unchanged.
+
+
+## Persistent missing checklist audit and Searchright-first migration
+
+Receiving main b48e7adafea41e09f4aa07d9db6f7e9117618c10: #185 merged normally; exact head
+449689ac43696587886055e9e1ae5a9891d96a1a and receiving tree
+bdd6fb7ad21086532c9b8a1ca0136a7f628a833f match. Prior #191 head passed
+all seven required contexts, CodeQL and patch/component checks. Reconcile
+receiving main without overlapping changed paths; fresh checks required.
+
+### Actual repeated observations and gap reasons
+
+Verified earlier survey artifact 14901554121 ZIP SHA-256
+12a009fdcdfd8174daacfb606cb97a5c2648940c80df733a3b55a24ff6a14460
+(source revision d74413b15d266334067e1e5c104957601be3ba6c) versus existing
+15031534787, source revision e34dd7d8559a5df0fe4b7185c093978e4b2d6cbe.
+Same 720 catalogue IDs, 708 unchanged source blobs. 122 unchanged
+unresolved rows: 75 missing identifier, 47 incomplete lookup (42 earlier
+incomplete, 3 unresolved, 2 conflicting). 210 earlier incomplete become
+metadata-only and 74 OA XML candidate among unchanged rows. Retain changed
+source rows separately. Current 132 gaps (76 missing, 56 incomplete;
+two conflict flags within these). Persistent routes: 76 literal link IDs,
+17 issuer landing pages, 14 existing IDs needing reconciliation, 7 direct
+assets, 6 title discovery, 2 conflicting identities. No inference that a
+checklist is absent from an identifier failure.
+
+Actual [metadata canary 45817003412/artifact 15115248937](https://github.com/edithatogo/standards_check/actions/runs/45817003412/artifacts/15115248937)
+verified ZIP SHA-256
+c409624a581a6d637e4ef19cca41ec5c82c6877ee1054b9750289158771627e1,
+tested merge e01e21e3cefcd2e79f22b63d60a36f9b0eb67288. Eight tasks,
+eleven requests: six exact DOI metadata observations across PRISMA-IPD,
+CONSORT factorial and CONSORT-C; one exact PMID candidate ORION PMID
+17376385, DOI 10.1016/s1473-3099(07)70082-8; two Europe PMC timeouts
+(STROBE-NUT PMCID and second ORION PMID); two title searches with no
+exact normalized title. Six Searchright wire-schema work projections.
+Crossref/OpenAlex citation counts 1989/2357, 91/100, 2/2 respectively,
+provider/date-specific, not additive impact or evidence qualification.
+58 OpenAlex ORCID assertions across the three works, not authenticated
+person identities. No new qualified checklist or independent label.
+
+Bounded 26 November follow-up on six title-only gaps (public landing and
+metadata observations, not document downloads):
+
+| Catalogue title/slug | Lead | Next |
+| --- | --- | --- |
+| Participatory action research | [Publisher DOI 10.1177/0011000010376416](https://journals.sagepub.com/doi/10.1177/0011000010376416); extraneous title suffix 1Ψ7; prior first Crossref candidate | Exact DOI provenance and review discrepancy |
+| ecohealth | [EQUATOR](https://www.equator-network.org/reporting-guidelines/ecohealth/) lists Lancet Planetary Health in press, updated 30 Sep 2026 | Observe publication release; no repeat unchanged title sweep |
+| Behavioural clinical psychology case reports | [Original journal 2008, 8:765–777](https://aepc.es/ijchp/articulos.php?coid=English&id=304), PDF lead | Layout exact bytes/rights |
+| Colorectal tumour case series | [OpenAlex W2055994389](https://openalex.org/W2055994389), DOI 10.1007/s101510050023; [EQUATOR](https://equator-network.org/reporting-guidelines/guidelines-for-reporting-case-series-of-tumours-of-the-colon-and-rectum/) matches 1999, 3:93–97 | Exact publisher reconciliation |
+| RATS | [EQUATOR](https://www.equator-network.org/reporting-guidelines/qualitative-research-review-guidelines-rats/) cites Clark 2003 book chapter | Book/chapter and issuer route |
+| HuGENet handbook | [EQUATOR](https://equator-network.org/reporting-guidelines/the-hugenet-huge-review-handbook-version-1-0-guidelines-for-systematic-review-and-meta-analysis-of-gene-disease-association-studies/) cites CDC 2006 handbook | Institutional/archive and edition-specific source |
+
+Separate source-byte gap: bulk checkpoint 15107508921 contains 205
+worklist IDs, 200 deferred, four held after transport/OAI failures, one
+observed XML inventory unreconciled. Six priority editions held across
+both historical surveys, not all absent. CONSORT/SPIRIT 95/95 ordered
+printed IDs in artifact 15113361829, marker-level agreement distinguished
+from exact row agreement; source/structure/issuer/rights holds remain.
+Priority-structure artifact 15116098103 verified SHA-256
+e27aad9b976d663c765926fa38cddc665ef70bcbbb198cfac7aa78d28a515f82:
+TRIPOD+AI 52/52 expected printed IDs DOCX, STROBE 11/22 main IDs DOCX,
+both source-observation-only, research-use approval field true, public
+redistribution and scientific qualification false. Layout owns the
+source/rights/anchor reconciliation; no inference of 720 independent
+guideline families, missing checklists, or downstream failures.
+
+### Default Searchright strategy mechanism, no implicit fallback
+
+Use actual Searchright strategy, query AST and compiled-strategy schemas
+at pinned main 444c5199, exact Git blob pins in searchright_recovery.py.
+No independent query compiler or provider runtime. Generate literal title
+and identifier terms, preserve exact-ID postfilter requirement and
+catalogue IDs, route assets/landing/conflict to Layout, deduplicate
+provider+kind+value, exclude the 11 prior observed provider-query attempts
+including failures. Eight-strategy next batch, max three records/one
+page/15s/zero retries per strategy when qualified host available.
+Default workflow uses native strategy generation, not legacy live calls.
+Legacy remains explicit comparator only (run-bibliographic-legacy-comparator
+label or legacy_comparator=true); resume via hash-verified receipt.
+
+Actual local replay: 720 rows retained, all 132 current gap IDs accounted
+for, 106 IDs with 886 distinct strategies (101 Crossref, 327 OpenAlex,
+230 PubMed, 228 Europe PMC), 26 source/identity routes (17 landing,
+7 asset, 2 conflict). Of 122 persistent IDs, 96 have native strategies
+and 26 are non-search. All 886 validated against byte-exact upstream
+schemas reconstructed from connector response and Git blob checks.
+Offline schema registry, no remote ref retrieval. Receipt SHA-256
+persistent-gaps.json 8b25c87c1a02c153760f7373c1b27af8799e6054364ebdb5e380dd7926550308,
+searchright-strategies.json e71f45880e730faebbec94f3ee170a080b70cc373181179ba72c29c8e706e1ed.
+RED missing module then GREEN 15 focused tests (nine prior, six new).
+Exact source/test blobs 003ebae80898b755400a3db1494a0d6242c82114,
+f877d94a0de5937434ffec567de6508f09e4e98f. Hosted default workflow
+explicit run-searchright-recovery label; retains actual historical canary
+metadata, no new provider calls or inferred qualification.
+
+Actual compiler adapter calls genuine qualified Searchright CLI
+`searchright compile <strategy.json> --dialect ...` with exact binary
+digest and caller-verified qualification receipt. Temporary directory,
+no inherited credentials, bounded time, exact result schema and
+strategy/dialect binding, retains translation warnings/loss codes,
+review_required and fidelity. At most eight; no live authorization.
+Synthetic mocked compiler tests are not executed upstream compiler.
+Local cargo/rustc absent, GitHub raw DNS failed; no admitted binary.
+Pinned upstream Security/Privacy failed; inspected
+SearchrightEngine::execute_search explicitly denies live (H-002,
+fixture preview only; CLI apply requires trusted host). Do not bypass
+this facade through low-level provider calls. Actual Searchright
+compilation and live search remain unqualified; native strategy
+preparation and compiler interface implemented, not a claim of runtime
+cutover. Coordinate exact compiler and approved read-only live host
+receipt via existing Searchright #835/#843/#831 and downstream matched
+budget canary. No fake execution or automatic fallback.
+
+Recursive improvement: use persistent source and prior-provider receipts,
+route new evidence rather than unchanged failure, measure unique
+identity recovery, transport/no-match/conflict, rights, structure,
+resource and review budgets separately. No repeated blind acquisition,
+automatic repin, semantic merge, new registry, source rights or
+independent reference promotion. Preserve #188 owner, #183 locked
+stage join and #95/#111/#158/T01.052/T05.049. Rollback removes this
+opt-in consumer increment; historical evidence and canonical packs unchanged.

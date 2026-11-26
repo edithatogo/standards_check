@@ -134,3 +134,20 @@ admitted dedup engine when qualified. No arbitrary URL retrieval, secrets,
 licensed access bypass, source text redistribution, external publication
 or self-modifying loop. Optional human review does not waive actual source,
 rights, blinded reference, review-resolution or protected acceptance gates.
+
+
+### Persistent-gap recovery and Searchright cutover
+
+Before another bibliography batch, run the default Searchright-native
+recovery workflow. Match earlier/current catalogue ID and source blob;
+separate persistent missing identifier, incomplete lookup, transport,
+title/issuer/asset/edition route and conflicts. Route standalone forms,
+handbooks, chapters, in-press publications and actual assets to Layout.
+Use native Searchright strategy/AST and its admitted compiler, not a
+downstream query compiler; preserve translation-loss/review flags.
+No implicit fallback: previous adapter is an explicitly labelled
+comparator. No actual live result until upstream runtime and authority
+qualify; preserve every prior provider attempt and distinguish plan,
+compile and execute. No bypass of upstream H-002, source rights or
+independent reference gates. Continue only changed evidence or a justified
+next bounded batch, compare marginal identity/source yield and harm.
