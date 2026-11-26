@@ -146,3 +146,49 @@ placements. Diffusion does not outperform the original BGE incumbent, although
 one known association is newly recovered at five. Not evidence against
 source-anchored hierarchy/cross-reference/dependency edges, which remain a
 separate qualified-graph prerequisite. No model adoption or semantic admission.
+
+
+## Fresh fixed-pool neural reranking — observed hosted result
+
+Run [45796791489](https://github.com/edithatogo/standards_check/actions/runs/45796791489)
+completed successfully on exact PR head 27b94938ff28ee8012ed768e8285cf708d28d8d7
+and checked merge revision 971a59e92dba04c95978cd202f524433fe66c211.
+[Artifact 15105542356](https://github.com/edithatogo/standards_check/actions/runs/45796791489/artifacts/15105542356)
+ZIP SHA-256 verified:
+1d8fefd7f760444e0df99b733d050bc7ecc386a377b060b2cfc136c5613247b3.
+Member digests (SHA-256): paired.json
+4f2b0c97a95154cb55724988a9f483a1aecdae6621b1d2e8446a4b619d271966;
+fixed-bge.json ed860392e19c0fd778eb82d9b61e8bc7a65626e7a994f224e62c229b17151b72;
+fixed-fused.json c557b2a38c8de8046384d32cfc2bf936a0914de246fa5f9e65e9dd3ca8e929bc.
+Independently recomputed score-to-candidate bindings, stable ordering,
+exact reference identity and paired gains/losses at 1/3/5/10 for every query.
+Both arms scored 1060 candidates; 713 shared scores match exactly, with
+maximum absolute difference zero. All 347 new fused candidates were actually
+scored; no cached-value substitution. Input pins and BGE pool pin match.
+Fused ordered pool digest:
+ce074af0f704d0b91855b61b0394a47bf1badc6a1fb4537a3627ba3cc207a806.
+Weights 23,200,716 bytes; reranker assets 23,916,695 bytes including tokenizer,
+config and model card. Same pinned MiniLM revision and ONNX Runtime 1.23.2,
+two CPU threads; observed load/score seconds 0.1964/1.5506 vs 0.1880/1.5488;
+total process wall 1.82/1.81 seconds and peak RSS 114912/114928 KiB.
+Both exited zero; GPU discovery warning did not prevent CPU execution.
+
+| Arm | Macro R@1 | R@3 | R@5 | R@10 | MRR@10 | Hits@5 | Gain/loss@5 vs own pool |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| BGE top ten | .34434 | .58962 | .72013 | .80031 | .54124 | 87 | — |
+| BGE plus MiniLM | .40094 | .62736 | .68239 | .80031 | .57700 | 82 | 4/9 |
+| RRF top ten | .36321 | .61321 | .69340 | .79717 | .54565 | 82 | — |
+| RRF plus MiniLM | .40094 | .63208 | .67453 | .79717 | .57117 | 81 | 7/8 |
+
+R@1 gain/loss BGE 17/11, RRF 13/8; at three 7/4 and 11/8; at ten
+0/0 by construction. Top-five recall fell in both arms. Keep BGE candidate
+discovery; reranker may be an advisory review-ordering comparator, not a
+completeness gate or reason to truncate. MRR at ten is not full-universe MRR.
+Five instrument partitions are descriptive; known associations are editorial
+positives, not independently adjudicated relevance. No model promotion.
+
+Receiving main 08e86696180936ef6722e539a32d6ebbd2222625 contains #182.
+Merge that main into this branch while preserving all prior experimental files,
+both Track 01 plan additions and the actual earlier run identity. New exact-head
+checks are required; offline AI security at the original head remained queued.
+Independent source/reference/family freeze and scientific gates remain open.
