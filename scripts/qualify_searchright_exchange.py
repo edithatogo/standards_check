@@ -60,7 +60,8 @@ def pack_view(source, *, expected_id, expected_version):
         "only the synthetic reporting lane is supported",
     )
     require(
-        cleared_fixture(source["rights"]) and source["verification"]["status"] == "source_reconciled",
+        cleared_fixture(source["rights"])
+        and source["verification"]["status"] == "source_reconciled",
         "unqualified fixture rights or verification",
     )
     rows = source["requirements"]
@@ -133,7 +134,9 @@ def flow_view(source, *, expected_review, template):
     require(source["records_other"] == 0, "other-source streams are not supported")
     reasons = source["full_text_exclusions"]
     require(
-        all(safe_count(row["count"]) and row["count"] > 0 and row["label"].strip() for row in reasons),
+        all(
+            safe_count(row["count"]) and row["count"] > 0 and row["label"].strip() for row in reasons
+        ),
         "invalid reason",
     )
     require(
@@ -158,7 +161,9 @@ def flow_view(source, *, expected_review, template):
     db["reports_excluded"] = [{"reason": row["label"], "reports": row["count"]} for row in reasons]
     # Independent source-side conservation checks for this one bounded template.
     identified = source["records_databases"] + source["records_registers"]
-    removed = sum(source[key] for key in ("duplicates_removed", "automation_removed", "other_removed"))
+    removed = sum(
+        source[key] for key in ("duplicates_removed", "automation_removed", "other_removed")
+    )
     excluded = sum(row["count"] for row in reasons)
     require(all(safe_count(value) for value in (identified, removed, excluded)), "unsafe aggregate")
     require(
