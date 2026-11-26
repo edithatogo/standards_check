@@ -20,6 +20,12 @@ on:
       - "scripts/witness_adjudication.py"
       - "tests/test_witness.py"
       - "tests/test_condition_adjudication.py"
+      - "research/model-placement/recall_audit.py"
+      - "research/model-placement/recall_handoff.py"
+      - "research/model-placement/test_recall_audit.py"
+      - "research/model-placement/test_recall_handoff.py"
+      - "research/model-placement/locked_join.py"
+      - "research/model-placement/test_locked_join.py"
       - ".github/workflows/five-class-benchmark.yml"
   workflow_dispatch:
 
@@ -31,6 +37,61 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  shared-recall-audit:
+    # Explicit, same-repository, read-only artifact replay; never invokes a model.
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-shared-recall-audit'
+    permissions:
+      contents: read
+      actions: read
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      HF_HUB_DISABLE_TELEMETRY: "1"
+      PYTHONPATH: "."
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: "3.12"
+      - name: Test coordinator's exact input and attribution boundaries
+        run: |
+          mkdir -p "$RUNNER_TEMP/recall-evidence" "$RUNNER_TEMP/recall-artifacts"
+          git rev-parse HEAD > "$RUNNER_TEMP/recall-evidence/commit.txt"
+          python -VV > "$RUNNER_TEMP/recall-evidence/python-version.txt"
+          python -m pip install --disable-pip-version-check pytest==9.2.0
+          python -m pytest -q research/model-placement/test_recall_audit.py research/model-placement/test_recall_handoff.py research/model-placement/test_locked_join.py
+          sha256sum research/model-placement/recall_audit.py research/model-placement/recall_handoff.py research/model-placement/locked_join.py reconciliations/costing/costing-standards-registry.json reconciliations/costing/costing-item-mappings.json > "$RUNNER_TEMP/recall-evidence/input-sha256.txt"
+      - name: Fetch only existing public development receipts by fixed artifact ID
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          for id in 15088716936 15090704998 15105542356 15100692740 15105999587 15105947458 15106112148 15106576904 15107111276; do
+            timeout 60 gh api --method GET "repos/$GITHUB_REPOSITORY/actions/artifacts/$id/zip" > "$RUNNER_TEMP/recall-artifacts/github-actions-artifact-$id.zip"
+          done
+      - name: Reproduce full-file pinned audit and join existing stage evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python research/model-placement/recall_audit.py --artifacts "$RUNNER_TEMP/recall-artifacts" --inputs . --output "$RUNNER_TEMP/recall-evidence/recall-audit.json"
+          python research/model-placement/recall_handoff.py --artifacts "$RUNNER_TEMP/recall-artifacts" --audit "$RUNNER_TEMP/recall-evidence/recall-audit.json" --tagger-followup --output "$RUNNER_TEMP/recall-evidence/handoff.json"
+      - name: Retain research receipts, including partial failures
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: shared-recall-audit-${{ github.sha }}
+          path: ${{ runner.temp }}/recall-evidence/
+          if-no-files-found: error
+          retention-days: 90
+
   controlled-consensus:
     # Deliberate experiment authorization after required deterministic checks.
     if: github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-semantic-benchmark')
@@ -379,7 +440,7 @@ jobs:
 
   specialist-costing-development:
     # Editorial seed only; no model downloads or inference in ordinary CI.
-    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && (github.event.label.name == 'run-specialist-retrieval' || github.event.label.name == 'run-reranker-panel' || github.event.label.name == 'run-modernbert-reranker')
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && (github.event.label.name == 'run-fixed-pool-rerank' || github.event.label.name == 'run-specialist-retrieval' || github.event.label.name == 'run-reranker-panel' || github.event.label.name == 'run-modernbert-reranker')
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     strategy:
@@ -422,6 +483,9 @@ jobs:
           python -m pip check
           python -m pip freeze > "$RUNNER_TEMP/costing-evidence/environment.txt"
           python -m scripts.costing_retrieval --output "$RUNNER_TEMP/costing-evidence/lexical.json"
+      - name: Test fixed-pool invariants before acquisition
+        if: github.event.label.name == 'run-fixed-pool-rerank'
+        run: python -m pytest -q research/model-placement/test_fixed_pool.py
       - name: Acquire only pinned publisher ONNX graphs and model-card licence evidence
         run: |
           python - <<'PY'
@@ -473,6 +537,22 @@ jobs:
             --assets "$RUNNER_TEMP/costing-assets" --reranker "$RERANKER" \
             --output "$RUNNER_TEMP/costing-evidence/paired.json" \
             2> "$RUNNER_TEMP/costing-evidence/resources.txt"
+      - name: Run both frozen top-ten pools in separate processes
+        if: github.event.label.name == 'run-fixed-pool-rerank'
+        env:
+          PYTHONPATH: "."
+        shell: bash
+        run: |
+          set -uo pipefail
+          status=0
+          for pool in bge fused; do
+            /usr/bin/time -v python research/model-placement/fixed_pool.py \
+              --baseline "$RUNNER_TEMP/costing-evidence/paired.json" \
+              --assets "$RUNNER_TEMP/costing-assets" --pool "$pool" \
+              --output "$RUNNER_TEMP/costing-evidence/fixed-$pool.json" \
+              2> "$RUNNER_TEMP/costing-evidence/fixed-$pool-resources.txt" || status=1
+          done
+          exit "$status"
       - name: Retain exact metadata-only development receipts
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
