@@ -71,3 +71,5 @@ receipt records that observation.
 - [Optional human review and unattended assurance](../docs/development/optional-human-review.md).
 
 - [Specialist neural and deterministic pipeline protocol](../docs/research/specialist-pipeline-protocol.v0.1.0.md) and [prospective E9-E14 contract](../contracts/publication/specialist-pipeline.v0.1.0.json).
+
+- [Requested model challengers and actual retrieval receipts](../docs/research/model-challengers-20261126.md).

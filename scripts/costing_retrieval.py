@@ -37,7 +37,7 @@ MODELS = {
     },
     "mixedbread-xsmall": {
         "id": "mixedbread-ai/mxbai-rerank-xsmall-v1",
-        "revision": "d8e18fd",
+        "revision": "d8e18fdfcfc8b37c036c5c23e9fa9bda8d738cc9",
         "file": "onnx/model_quantized.onnx",
         "sha256": "15ef19a6de90be7d52b627f2c784107bd806e64826450f41fb75fa4f0179ab30",
         "licence": "Apache-2.0",
@@ -51,6 +51,12 @@ MODELS = {
     },
 }
 FROZEN_POOL_SHA256 = "a86fcf8063efc642eb1295ca0a40e82791a739ca144c0d71904324c7c94e29f1"
+FROZEN_INPUT_SHA256 = {
+    "costing-standards-registry.json": (
+        "dba42197db8a317e07e18b32f718e38ccdc648a40370240d804423e3940f5378"
+    ),
+    "costing-item-mappings.json": "757606b5f703f18eca0474a3a4f6ebf1ed5270e5b867a305c6df67869c2819f1",
+}
 QUERY_PREFIX = "Represent this sentence for searching relevant passages: "
 
 
@@ -331,6 +337,9 @@ def run(root, assets=None, reranker="reranker"):
     registry, mappings, queries, targets, references, paths = load_inputs(root)
     if reranker == "bge" or reranker not in MODELS:
         raise ValueError("unknown reranker")
+    input_hashes = {path.name: file_hash(path) for path in paths}
+    if reranker != "reranker" and input_hashes != FROZEN_INPUT_SHA256:
+        raise ValueError("frozen costing source mismatch")
     names = ("bge", reranker)
     models = {name: LocalRanker(assets / name, name) for name in names} if assets else {}
     expected_pool = FROZEN_POOL_SHA256 if reranker != "reranker" else None
@@ -345,7 +354,7 @@ def run(root, assets=None, reranker="reranker"):
         "queries": len(queries),
         "target_domains": len(targets),
         "candidate_pool_pairs": len(queries) * len(targets),
-        "input_sha256": {path.name: file_hash(path) for path in paths},
+        "input_sha256": input_hashes,
         "models": {
             name: {**MODELS[name], "assets": model.asset_hashes, "runtime_version": model.version}
             for name, model in models.items()

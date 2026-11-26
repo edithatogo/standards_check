@@ -7,6 +7,8 @@ on:
       - "scripts/five_class_benchmark.py"
       - "scripts/lfm_development.py"
       - "scripts/costing_retrieval.py"
+      - "scripts/hosted_specialist_development.py"
+      - "tests/test_hosted_specialist_development.py"
       - "scripts/lexical_text.py"
       - "tests/test_costing_retrieval.py"
       - "tests/test_lfm_development.py"
@@ -459,5 +461,71 @@ jobs:
         with:
           name: specialist-costing-development-${{ matrix.reranker }}-${{ github.sha }}
           path: ${{ runner.temp }}/costing-evidence/
+          if-no-files-found: error
+          retention-days: 90
+
+  specialist-model-pin-survey:
+    # Read-only metadata, explicitly not weight acquisition or inference.
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-specialist-model-pins'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c
+        with:
+          egress-policy: audit
+      - name: Inspect fixed publisher model metadata before exact pin review
+        run: |
+          mkdir -p "$RUNNER_TEMP/model-pin-survey"
+          python - <<'PY'
+          import hashlib, json, os, re, subprocess
+          from pathlib import Path
+
+          output = Path(os.environ["RUNNER_TEMP"]) / "model-pin-survey"
+          specs = {
+              "k2": ("IFM/K2-Horizon-3.7B-GGUF", "main", "K2-Horizon-3.7B-Q4_K_M.gguf"),
+              "minicpm5": ("openbmb/MiniCPM5-2B-GGUF", "2079a22f3beaa4e306449978533478fe0522f4b3", "MiniCPM5-2B-Q4_K_M.gguf"),
+              "qwen3-reranker": ("ggml-org/Qwen3-Reranker-0.6B-Q8_0-GGUF", "a02f48b", "qwen3-reranker-0.6b-q8_0.gguf"),
+          }
+          results = []
+          for key, (repo, ref, filename) in specs.items():
+              row = {"key": key, "repository": repo, "requested_ref": ref, "file": filename,
+                     "status": "held", "scientific_qualification": False}
+              try:
+                  url = f"https://huggingface.co/api/models/{repo}/revision/{ref}?blobs=true"
+                  raw = subprocess.run(["curl", "--fail", "--silent", "--show-error", "--max-time", "30",
+                                        "--max-filesize", "2000000", "--proto", "=https", url],
+                                       check=True, capture_output=True).stdout
+                  data = json.loads(raw)
+                  revision = data["sha"]
+                  if not re.fullmatch(r"[0-9a-f]{40}", revision):
+                      raise ValueError("invalid publisher revision")
+                  if ref != "main" and not revision.startswith(ref):
+                      raise ValueError("immutable publisher revision mismatch")
+                  files = [file for file in data["siblings"] if file["rfilename"] == filename]
+                  if len(files) != 1:
+                      raise ValueError("publisher filename not unique")
+                  lfs = files[0]["lfs"]
+                  digest = lfs.get("sha256") or lfs.get("oid")
+                  if not re.fullmatch(r"[0-9a-f]{64}", digest):
+                      raise ValueError("publisher LFS SHA-256 unavailable")
+                  licence = data["cardData"]["license"]
+                  if licence != "apache-2.0":
+                      raise ValueError("model-card licence mismatch")
+                  row.update({"revision": revision, "sha256": digest, "bytes": files[0]["size"],
+                              "licence": licence, "provider_response_sha256": hashlib.sha256(raw).hexdigest(),
+                              "status": "publisher_metadata_observed_not_qualified"})
+                  (output / f"{key}-metadata.json").write_bytes(raw)
+              except (ValueError, KeyError, TypeError, subprocess.SubprocessError) as exc:
+                  row["error_type"] = type(exc).__name__
+              results.append(row)
+          (output / "pins.json").write_text(json.dumps(results, indent=2) + "\n")
+          print(json.dumps(results))
+          PY
+      - name: Retain pin discovery only
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: specialist-model-pins-${{ github.sha }}
+          path: ${{ runner.temp }}/model-pin-survey/
           if-no-files-found: error
           retention-days: 90

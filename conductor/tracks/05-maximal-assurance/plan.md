@@ -150,3 +150,5 @@ for E9-E14 endpoints, constrained-decoding and symbolic validation boundaries,
 resource/rights pins and independent scientific freeze criteria. Grammar acceptance
 or green tests never establish semantic or scientific correctness. Preserve the full
 negative LFM ablations and source acquisition holds; no model promotion.
+
+T05.048 and T05.049: preserve the [requested model challenger record](../../../docs/research/model-challengers-20261126.md), exact candidate pool, source hashes, local/hosted boundaries and all negative retrieval receipts. The public-data service comparator is explicit local opt-in only; no secret-dependent PR CI or automatic scientific acceptance.
