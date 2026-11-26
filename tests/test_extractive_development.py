@@ -52,7 +52,21 @@ class SpanTests(unittest.TestCase):
         self.assertEqual(result['scores']['all']['fn'], 1)
         self.assertEqual(result['invalid_abstentions'], 1)
         self.assertEqual(result['missed_qualifiers'], 1)
+        self.assertEqual(result['cases'][1]['raw'], {'entities': {'exception': [{'start':1,'end':8,'text':'Unless B','confidence':.9}]}})
+        self.assertEqual(result['cases'][1]['predicted'], [])
         self.assertEqual(model.extract_entities.call_args.kwargs['overlap_policy'], 'allow')
+
+
+    def test_invalid_nonfinite_response_retains_diagnostic_and_valid_json(self):
+        case = {'id':'a','family':'one','text':'If A','labels':[['condition','If A']]}
+        model = Mock()
+        model.extract_entities.return_value = {'entities': {'condition': [{'start':0,'end':4,'text':'If A','confidence':float('nan')}]}}
+        result = e.evaluate([case], e.model_predictor(model))
+        self.assertEqual(result['invalid_abstentions'], 1)
+        self.assertEqual(result['scores']['all']['fn'], 1)
+        raw = result['cases'][0]['raw']
+        self.assertEqual(raw['entities']['condition'][0]['confidence'], {'nonfinite_number':'NaN'})
+        json.dumps(result, allow_nan=False)
 
 
 @unittest.skipUnless(sys.platform.startswith('linux'), 'RSS receipt is Linux-specific')

@@ -25,6 +25,8 @@ def schema(frame):
 
 
 def predictor_factory(frame, validate):
+    from scripts.extractive_development import InvalidPrediction
+
     labels, mapping = schema(frame)
 
     def factory(extractor):
@@ -32,11 +34,14 @@ def predictor_factory(frame, validate):
             raw = extractor.extract_entities(text, labels, include_spans=True,
                                              include_confidence=True, threshold=.5,
                                              overlap_policy='allow')
-            entities = raw.get('entities') if isinstance(raw, dict) else None
-            if not isinstance(entities, dict) or not set(entities) <= set(mapping):
-                raise ValueError('malformed or unrequested entity label')
-            mapped = {'entities': {mapping[label]: items for label, items in entities.items()}}
-            return validate(text, mapped), raw
+            try:
+                entities = raw.get('entities') if isinstance(raw, dict) else None
+                if not isinstance(entities, dict) or not set(entities) <= set(mapping):
+                    raise ValueError('malformed or unrequested entity label')
+                mapped = {'entities': {mapping[label]: items for label, items in entities.items()}}
+                return validate(text, mapped), raw
+            except ValueError as exc:
+                raise InvalidPrediction(str(exc), raw) from exc
         return predict
     return factory
 
