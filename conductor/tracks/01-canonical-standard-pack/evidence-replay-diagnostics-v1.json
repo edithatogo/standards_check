@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "boundary": "Retrospective synthetic fragment coverage, not new model inference or a confirmatory comparison",
+  "report_sha256": "7a79c7734a6d202332fa1a65178a1fb4a9b14e83762041418574dd3a7eea2f7d",
+  "historical_run": 45797316771,
+  "historical_artifact": 15106112148,
+  "output_sha256": "4acf35ee3cbf55b168a38d28eb9fd9290e0dab51dd60d66657806b386e9d2026",
+  "source_blob": "fc457d5105e88d8595c90bc7caa7b5d5eef0c05f",
+  "test_blob": "3ee45e843a4fe111509c723e3d9d651bf5c93722",
+  "focused_tests_passed": 3,
+  "pairs": 24,
+  "after_expansion_complete": 19,
+  "missing_outside_pool": 4,
+  "missing_inside_pool": 1,
+  "residual": [
+    [
+      "consort-6",
+      null,
+      null
+    ],
+    [
+      "stard-5",
+      null,
+      null
+    ],
+    [
+      "stard-6",
+      4,
+      5
+    ],
+    [
+      "arrive-6",
+      null,
+      null
+    ],
+    [
+      "tripod-5",
+      null,
+      null
+    ]
+  ],
+  "residual_fields": [
+    "id",
+    "lexical_rank",
+    "neural_rank"
+  ],
+  "original_redundant_slots": {
+    "lexical": 48,
+    "neural": 46,
+    "total_per_arm": 48
+  },
+  "novelty_aware": {
+    "head": {
+      "two": {
+        "lexical": 18,
+        "neural": 18
+      },
+      "four": {
+        "lexical": 20,
+        "neural": 20
+      },
+      "six": {
+        "lexical": 20,
+        "neural": 20
+      }
+    },
+    "expanded": {
+      "two": {
+        "lexical": 20,
+        "neural": 20
+      },
+      "four": {
+        "lexical": 20,
+        "neural": 20
+      },
+      "six": {
+        "lexical": 20,
+        "neural": 20
+      },
+      "gained_ids": [
+        "stard-6"
+      ],
+      "novel_fragments_at_two": 46
+    }
+  },
+  "raw_neural_agreement": {
+    "head": {
+      "same": 17,
+      "shared_wrong_complete": 0,
+      "shared_wrong_incomplete": 9
+    },
+    "expanded": {
+      "same": 22,
+      "shared_wrong_complete": 0,
+      "shared_wrong_incomplete": 3
+    },
+    "terminal": {
+      "same": 23,
+      "shared_wrong_complete": 2,
+      "shared_wrong_incomplete": 1
+    }
+  },
+  "local_extracted_checkout": true,
+  "protected_checks": "pending"
+}

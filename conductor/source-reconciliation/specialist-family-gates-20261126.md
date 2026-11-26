@@ -495,7 +495,7 @@ explains these scope categories. [PMC version](https://pmc.ncbi.nlm.nih.gov/arti
 still displays contradictory commercial-reuse language and a CC BY 4.0
 notice. Do not clear exact-file rights from one favourable notice.
 STROBE combined literal has 22 ordered main IDs, four starred items
-8, 13, 14, 15, and 33 content arrays (not an independent clause count);
+8, 13, 14, 15, and 34 content-array elements (not an independent clause count);
 [primary PLOS article](https://journals.plos.org/plosmedicine/article?id=10.1371%2Fjournal.pmed.0040296)
 states four design-specific items 6,12,14,15 and a separate-group
 asterisk condition; its Table 1 is an image. [Issuer checklists](https://www.strobe-statement.org/checklists/)
@@ -517,3 +517,8 @@ requires hosted checkout. Exact source/test blob matches verified.
 Do not claim patch threshold or full suite passed until actual new CI.
 Retain independent reference lock, family component and same-ID downstream
 join; no confirmatory E9–E11 or combined analysis on exposed/held inputs.
+
+Reconciled receiving #184 main `eb640fba5d04b1ed9971ff52dad2a339d078ec4a` while retaining the existing
+Track 01/05 evidence-policy and factorial work. #186/#189 carry the
+format-only shared exception spacing repair; no change to earlier
+observations. Strict sequential protected checks must run on new heads.
