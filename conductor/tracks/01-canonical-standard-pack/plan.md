@@ -463,3 +463,16 @@ T01.063–064 / #158: [fair factorial redesign](../../../docs/research/factorial
 T01.064 / #158: [offline policy comparison](../../../docs/research/evidence-policy-20261126.md) reuses actual transitions with feasible action masks and invariant proof gate. One-call learned gain one case; at two calls rule reaches hindsight ceiling; adaptive rule 29 calls vs oracle 23. No larger RL framework until measured residual gap on qualified common inputs. Retain full factorial and source/reference holds.
 
 T01.064 / #158: [post-hoc parent-first comparator](evidence-policy-parent-first-v1-receipt.json) reaches 23 complete and 14 gated correct in 24 calls, no reranking, versus 29 calls for the earlier adaptive rule. Synthetic parent completeness is guaranteed by fixture construction; retain real-source qualification and no promotion. Original report unchanged.
+
+
+T01.025/031/052/053/064 / #111/#95/#158: [manifestation-aware comparison](cross-family-format-benchmark.md)
+and [cross-format reuse design](source-reconciliation-design.md) retain
+all 14 hosted cohorts, two complete ordered row fingerprint groups with
+holds, upstream byte aliases, and explicit structural/semantic separation.
+[Verified priority intake](../../source-reconciliation/specialist-family-gates-20261126.md)
+retains TRIPOD 51/52 display matches and 52 scope cells, STROBE 22 candidate
+IDs/11 classified rows, both issuer identity holds. Reconcile source
+changes before T03 migration and T04 downstream use; reuse #191/#193
+for bibliographic/ontology leads, #181 native representation and #192
+durable receipts. Preserve T05.049/063 reference and factorial gates.
+No scientific promotion.

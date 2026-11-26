@@ -691,3 +691,54 @@ rules 14/2/3 TP/FP/FN (F1 .848485), joint 1/2/16 (.10), per-type
 2/19/15 (.105263), supervised token BIO 0/1/17 and span 0/0/17. Preserve
 negative results; independent frozen E9–E11 and component interaction
 analyses remain held. No new confirmation claims.
+
+
+## Verified hosted manifestation census and integration gates
+
+Receiving main `b48e7adafea41e09f4aa07d9db6f7e9117618c10` includes #185. User requests incorporation of the
+previous cross-format and repository-wide recommendations. Use the existing
+T01.025/031/052/053/064, T03 migration, T04 downstream contracts, T05.049/063
+and #111/#95/#158; no new registry. The [cross-family benchmark](../tracks/01-canonical-standard-pack/cross-family-format-benchmark.md)
+and [source reconciliation design](../tracks/01-canonical-standard-pack/source-reconciliation-design.md)
+now specify manifestation grouping, item-level discrepancy retention,
+format-sensitive controls and downstream acceptance explicitly.
+
+Downloaded [priority structure artifact 15116877562](https://github.com/edithatogo/standards_check/actions/runs/45820483650/artifacts/15116877562)
+and verified SHA-256 `43499fd8e40ccd72bcc15694cff28c3b4cbe17a38c82697f157010ea0ded2104`,
+tested merge `5131c0c4cb98cb10555c2e9c0e7d68f0682b5280`.
+Six transfers completed. TRIPOD+AI 52/52 ordered Word IDs, 46/52 strict
+row agreement, 51/52 display-content agreement (23b still differs), 52/52
+scope-cell matches. STROBE 22 unverified printed-ID locations, 11/22
+classified main IDs; 0 comparable rows against an independently established
+compound-row reference. Missing 8,13–22 remain held. Both issuer PDF identity
+mismatches reproduce. No new acquisition is justified without changed
+locator, parser or reference evidence.
+
+Downloaded [coverage archive 15117906776](https://github.com/edithatogo/standards_check/actions/runs/45820413670/artifacts/15117906776)
+and verified SHA-256 `966bc0801a4a16e4c80e834bea1ec8d3a777d22d2f149d540c415b0cc51aff04`.
+Its actual guideline-format-comparison.json contains all fourteen cohorts.
+Two complete ordered row-hash groups: EcoEvo XLSX/DOCX (89 identifiers)
+and PRISMA abstracts DOCX/pinned JATS snapshot (12 identifiers). EcoEvo
+XLSX header and Word non-body holds retained; PRISMA abstracts Word
+non-body and snapshot XML holds retained. These are content agreement
+candidates, not independent source identity, canonical admission or semantic
+equivalence. No duplicate-byte groups within the tested local edition
+cohorts. Upstream five byte-alias groups are a different population.
+
+The exact #188 head 70e8c829 passed Codecov patch 91.44%, six other required
+contexts, and the hosted acquisition and catalogue runs; assurance failed
+only at Ruff-format (job 139910896951, line 609). Correct the single long
+assignment without changing behaviour or source pins. #189 exact head
+5bd187cb passed all seven required contexts and patch 97.77%; neither has
+unresolved review threads at observation. Requalify #188 before protected
+integration; retain #189 second and reconcile receiving main after #188.
+Do not require new model inference merely to demonstrate the same
+format-only repair. Preserve the dedicated offline-runner hold #30.
+
+Route durable evidence/supplement assembly to existing #192 and keep its
+snapshot pins; #191 owns bibliographic recovery/Searchright-first and #193
+owns catalogue/MeSH topic enrichment. Do not duplicate their scripts.
+Native syntax trees/rendering remain #181. Use the same locked join on
+main for family-component scientific references, not a new positive
+ledger. No independently blinded reference lock obtained; confirmation
+and joint E9–E11 analysis remain held.

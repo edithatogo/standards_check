@@ -105,3 +105,34 @@ The extended isolated module/tests at `7a591b9648d34f806bef90d15d8109e389b73d48`
 At candidate head `051980593145107f815eeaea32ebde3317bcba8d`, synthetic merge revision `81eac9a3cc7146a3e122074557e4c8802a23b9ea`, [Assurance](https://github.com/edithatogo/standards_check/actions/runs/45383864747) passed with **403 Python tests, zero skips**. The downloaded [artifact 14914883717](https://github.com/edithatogo/standards_check/actions/runs/45383864747/artifacts/14914883717) SHA-256 `f3c4bdd4d862727c6896dc6f2ffa5996f14041728f60d752fd958a9c65201fed` matches the hosted digest. All nine Parquet files' SHA-256s matched their manifest; file magic checked locally, typed round-trip ran in hosted CI (local Polars unavailable). Rows: guidelines 725, sources 729, requirements/anchors 391 each, canonical requirements 42, linguistic comparisons 82, format comparisons 890, extraction runs 9, dispositions 351 (268 independent review, 2 source holds, 28 text discrepancies, 53 unaligned). Zero promotions.
 
 Official byte comparison SHA-256 `8528e6d7f7bc4f68e210f549c4feb97909ce3881b07038befec196e9075b171b`: PDF, DOCX and XLSX each byte-identical to official download; CSV is a local derivative. CSV/DOCX/XLSX 89/89 ordered IDs; DOCX/XLSX 89 exact; CSV versus either 88, discrepancy 8.3. PDF: pdfplumber 0 complete rows (incomplete/ambiguous header); Poppler 89 ID tokens but 0 complete rows (missing header). Thus T01.5c is **not qualified**. Original artifact remains immutable. The review identified a cross-page false completeness risk; two isolated tests using the exact old layout function failed RED, then passed with the proposed change GREEN. Hold every nonfinal-page tail lacking independently established row-boundary geometry, including when a header repeats. This deliberately sacrifices coverage; final full hosted tests required. Next: independent geometry-aware table reconstruction on the pinned actual PDF; do not infer row completeness from identifier recovery or compare against a legacy oracle.
+
+
+## Reuse cross-format evidence across the pipeline
+
+Implement through existing contracts/tracks rather than a second source
+database. See the [manifestation benchmark](cross-family-format-benchmark.md)
+and [specialist source gate](../../source-reconciliation/specialist-family-gates-20261126.md).
+Maintain exact source identity and anchored clause fingerprints separately
+from layout projection, scope, heading and note-link evidence. A complete
+ordered row signature is a candidate content observation, never sufficient
+for canonical or rights admission. Preserve path aliases and structural
+holds, even when bytes or fingerprints agree. Where same source assets
+occur across families, inspect provenance before grouping leakage components.
+
+The weekly EQUATOR asset monitor identifies candidate changed paths;
+requalify changed editions and compute exact ordered item/field differences
+before touching canonical packs or progress. T03 owns reversible migration,
+T04 owns downstream rendering/representation contracts, T05 owns
+independent family-disjoint qualification. Test PDF/DOCX/HTML/XML and
+native Typst/LaTeX round trips against the same item/anchor references;
+do not treat generated renderings as additional independent examples.
+Use measured structural residuals and single-change negative controls,
+including scope and note-link loss, to choose further readers/models.
+Preserve public redistribution and research-use decisions separately.
+
+Use #191 bibliographic evidence, #193 catalogue topic/ontology candidates,
+#181 native-format qualification and #192 durable publication supplement.
+They retain their current owners; the source lane supplies verified
+manifestations and anchor evidence only. No parallel pipeline, duplicated
+model execution or new registry. Retain independent reference lock and
+confirmatory factorial acceptance under T01.052/T05.049/T05.063.

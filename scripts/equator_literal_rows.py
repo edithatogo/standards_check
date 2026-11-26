@@ -606,7 +606,9 @@ def observe_priority(source_dir, name, spec, pins):
             name == "tripod"
             and result["issuer_pdf"]["git_blob"] == "dcdcf9ed46273432ac0f941624a48086db9b48d8"
         ):
-            result["issuer_pdf"]["identity_observation"] = "matches_equator_article_pdf_not_checklist_pin"
+            result["issuer_pdf"]["identity_observation"] = (
+                "matches_equator_article_pdf_not_checklist_pin"
+            )
     except (OSError, ValueError) as exc:
         result["issuer_pdf"] = {"status": "held", "error_type": type(exc).__name__}
     return result

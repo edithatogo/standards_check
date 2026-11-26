@@ -68,3 +68,36 @@ are asserted here.
 Historical artifact [14914864611](https://github.com/edithatogo/standards_check/actions/runs/45384270600/artifacts/14914864611), SHA-256 cf4277cd8b07780dee5b14305f0450afbfd8c428e87b23f2c3beaa58ea4d892d, inspected. All 14 cohorts reported, but generic header aliases recovered zero EcoEvo IDs in all four formats despite later #156 qualification. Four retained JATS snapshots recovered 82 rows; PRISMA-P and abstracts DOCX recovered 26/12 rows. Trial, other PDF and missing-source holds retained; no pooled denominator or promotion.
 
 Reconcile latest receiving main (including #145 maintained pins, #154 classical comparator and #156 PDF grid). Preserve existing strict fingerprints and separate layout-aware comparison. EcoEvo uses its original specific subitem header and the qualified native/Poppler PDF readers, not generic ruled-table extraction. New regressions cover ambiguous main/subitem aliases and actual synthetic independent grid replay. Actual old cohort artifact is the reproduced RED evidence; local complete checkout and new tests not executed here, require hosted suite and actual artifact inspection. No new parser/runtime or rights promotion. Other formats stay diagnostic/held.
+
+
+## Manifestation-aware reconciliation (26 November)
+
+The existing comparator groups exact SHA-256 byte aliases separately from
+complete ordered item-ID/requirement-hash signatures. The latter require
+a known denominator, exact order, unique rows, full requirement fingerprints
+and both source anchors. Retain every source path, exact byte hash and all
+structural holds, including for members of a matching group. Different
+editions, variants and translations are never merged by row-hash grouping.
+An unknown denominator cannot produce a complete-row agreement group.
+Same-byte assets across directories are leakage/identity leads, not an
+automatic family relation or semantic equivalence decision.
+
+[Actual hosted evidence 15117906776](https://github.com/edithatogo/standards_check/actions/runs/45820413670/artifacts/15117906776):
+14 edition cohorts, two complete ordered row groups (EcoEvo XLSX/DOCX
+89/89; PRISMA abstracts DOCX/JATS snapshot 12/12), both retain structural
+or pinned XML holds. No within-cohort byte alias groups. The separate
+EQUATOR asset monitor observes five upstream duplicate-byte groups.
+[Priority structural replay](https://github.com/edithatogo/standards_check/actions/runs/45820483650/artifacts/15116877562)
+retains TRIPOD 46/52 strict vs 51/52 display row agreement and 52 scope
+cells; STROBE has 22 candidate main ID locations but 11 classified IDs.
+Do not silently promote either. See [source gate and rights record](../../source-reconciliation/specialist-family-gates-20261126.md).
+
+Use observed discrepancy classes as regression obligations in the same
+readers and representation round trips: list marker vs missing list
+content; headings/merged cells; subitem grouping and study-design scope;
+explicit footnote link identity (not co-presence); duplicate, reordered
+and unanchored rows. Preserve strict and separately justified structural
+projections. Track 03/04 migrations consume exact old/new edition and
+item identities with explicit unresolved mappings; no automatic semantic
+migration from similar text. Track 05 freezes family-disjoint references
+and compares matched budgets before confirmation.
