@@ -134,9 +134,19 @@ def escalation(records):
     }
 
 
-def source_pairs(root, source_dir):
-    from xml.etree import ElementTree as ET
+def read_pinned_article_xml(path, expected_sha256):
+    """Require exact bytes and the shared bounded UTF-8 XML trust boundary."""
+    from .source_xml import parse_xml
 
+    max_bytes = 8_000_000
+    with path.open("rb") as stream:
+        raw = stream.read(max_bytes + 1)
+    if len(raw) > max_bytes or hashlib.sha256(raw).hexdigest() != expected_sha256:
+        raise ValueError("source bytes not pinned")
+    return parse_xml(raw, max_bytes), raw
+
+
+def source_pairs(root, source_dir):
     from .reconcile_authoritative_articles import (
         content,
         extract_table,
@@ -177,11 +187,7 @@ def source_pairs(root, source_dir):
             continue
         pin, table_id, table_hash = pinned[name]
         try:
-            with (source_dir / (spec["pmcid"] + ".xml")).open("rb") as f:
-                raw = f.read(8_000_001)
-            if len(raw) > 8_000_000 or hashlib.sha256(raw).hexdigest() != pin:
-                raise ValueError("source bytes not pinned")
-            doc = ET.fromstring(raw)
+            doc, raw = read_pinned_article_xml(source_dir / (spec["pmcid"] + ".xml"), pin)
             wrappers = [t for t in doc.findall("./body//table-wrap") if t.get("id") == table_id]
             if len(wrappers) != 1:
                 raise ValueError("table not unique")
@@ -218,7 +224,7 @@ def source_pairs(root, source_dir):
                     results[0]["rows"],
                 )
             )
-        except (OSError, ValueError, ET.ParseError) as exc:
+        except (OSError, ValueError) as exc:
             held.append({"edition": name, "status": "held", "error_type": type(exc).__name__})
     cases = []
     families = set()

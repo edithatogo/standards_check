@@ -284,11 +284,10 @@ def consort_rows(root):
 
     path = root / "source/archive/processed/CONSORT_2025_checklist.docx"
     raw = path.read_bytes()
-    # Git blob pin is a second repository provenance boundary; retain SHA-256 too.
-    if (
-        hashlib.sha1(b"blob " + str(len(raw)).encode() + b"\x00" + raw).hexdigest()
-        != "a1bf7fa3b9c019c5360750cd4981db73cccc3add"
-    ):
+    # SHA-1 is the Git object identifier, not a security digest; retain SHA-256 too.
+    blob_bytes = b"blob " + str(len(raw)).encode() + b"\x00" + raw
+    blob_id = hashlib.sha1(blob_bytes, usedforsecurity=False).hexdigest()
+    if blob_id != "a1bf7fa3b9c019c5360750cd4981db73cccc3add":
         raise ValueError("CONSORT source blob mismatch")
     check_package(raw)
     specs = json.loads((root / "source/official/priority-article-candidates.json").read_text())
