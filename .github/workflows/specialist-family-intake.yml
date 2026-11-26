@@ -16,12 +16,7 @@ on:
         type: string
         default: ""
   pull_request:
-    types: [opened, synchronize, reopened, labeled]
-    paths:
-      - ".github/workflows/specialist-family-intake.yml"
-      - "conductor/source-reconciliation/specialist-family-gates-20261126.md"
-      - "scripts/equator_resume_batch.py"
-      - "scripts/pack_evidence_inventory.py"
+    types: [labeled]
 
 permissions:
   contents: read
@@ -33,7 +28,7 @@ concurrency:
 
 jobs:
   family-intake:
-    if: (github.event_name == 'workflow_dispatch' && !inputs.bulk_only) || (github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name != 'run-bulk-intake' && (github.head_ref == 'research/specialist-family-intake' || contains(github.event.pull_request.labels.*.name, 'run-family-intake')))
+    if: (github.event_name == 'workflow_dispatch' && !inputs.bulk_only) || (github.event_name == 'pull_request' && github.event.action == 'labeled' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-family-intake')
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:

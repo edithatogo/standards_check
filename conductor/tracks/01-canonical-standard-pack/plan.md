@@ -389,7 +389,7 @@ registry, canonical schema, admission path or observed publication claim.
   is not a source-rights decision or a neural-model qualification. Next: exact
   repository-runtime replay, independently annotated qualified families, then
   one pinned Granite-Docling challenger if residual layout loss merits it.
-- **E10 (T01.027, T01.029), planned after E9:** compare one compact extractive
+- **E10 (T01.027, T01.029), development executed:** compare one compact extractive
   GLiNER2.5-small candidate (the protocol's proposed checkpoint, not yet qualified)
   against existing classical condition/modality/negation rules on identical
   authorized source strings. Freeze model revision, weight/tokenizer/config hashes,
@@ -398,7 +398,7 @@ registry, canonical schema, admission path or observed publication claim.
   conditions, exceptions, nested spans, chunk-boundary losses and abstentions,
   including empty/unresolved cases. No generation, canonical writes or remote
   inference. Separate bounded opt-in job and receipt.
-- **E11 (T01.050, T01.053, T01.064), planned after E9:** reuse existing candidate
+- **E11 (T01.050, T01.053, T01.064), development executed:** reuse existing candidate
   ranking, stable IDs, complete-pool checks and paired-retrieval metrics in
   scripts/costing_retrieval.py and requirement-graph contract. Freeze a common
   eligible universe and lexical incumbent rankings; use source-anchored parent
@@ -410,7 +410,9 @@ registry, canonical schema, admission path or observed publication claim.
   graph edges are advisory, never equivalence evidence. Keep independent
   directional evidence and applicability/rights gates. Separate opt-in job.
 
-E10/E11 are prospective work, not executed. Use T01.052 and T05.049 for confirmatory
+E9/E11 are merged (#182/#187); E10 hosted results and follow-up are retained in #186/#189.
+See the [original-request and shared recall crosswalk](../../source-reconciliation/specialist-family-gates-20261126.md#original-e9e11-request-recall-coordination-and-acceptance-crosswalk).
+Development execution does not complete independent qualification. Use T01.052 and T05.049 for confirmatory
 family-component splits: editions, derivatives, translations and extensions stay
 together, references and eligible universes locked before evaluation. Each arm
 records exact code/data/model/runtime pins, licences, artifact/download bytes,

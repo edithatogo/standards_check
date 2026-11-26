@@ -168,3 +168,128 @@ the operational denominator. Extend structural inventories with verified
 subitem, qualifier, footnote and parent edges only when corresponding
 source evidence is available. Confirmatory family/reference freeze and
 actual reviewer outcomes remain held, not inferred from engineering tests.
+
+
+## Original E9–E11 request, recall coordination and acceptance crosswalk
+
+Inspected receiving main `776ed1dbfbe19d16365310ef0fa07d29a793611a`. #182 (E9) and #187 (E11)
+are protected merges; #186 and its stacked #189 retain E10 and alternative
+formulations. #185 owns the existing low-cost parent-heading text control.
+Do not create another extraction, missed-match or source registry.
+The [shared audit exchange convention](https://github.com/edithatogo/standards_check/blob/dd0eff304c0b1aa42e8b863514bd2b33b4ac95c1/research/model-placement/replay.md)
+and [implementation](https://github.com/edithatogo/standards_check/blob/dd0eff304c0b1aa42e8b863514bd2b33b4ac95c1/research/model-placement/recall_audit.py)
+are owned by Model Placement Study (#183/#158). The
+[exact stage handoff](https://github.com/edithatogo/standards_check/issues/158#issuecomment-7189323646)
+retains original IDs, source and model digests, anchors and exact miss cases.
+Use that exchange rather than a duplicate receipt schema; the coordinator
+allocates opaque positive IDs only after independent reference lock.
+
+| Requested scope | Implemented / observed evidence | Remaining acceptance |
+| --- | --- | --- |
+| E9 reader against existing extractor, run first | #182; same two synthetic PDF sources, exact rows 1/4 vs 4/4; nesting 1/1, footnote 1/1, qualifier links 2/2 for both | Independent complete source regions and line-to-box mapping, column/order and continuation/footnote ambiguity controls; compare stronger existing native table readers before neural layout |
+| E10 compact source-span tagging | #186 GLiNER and rules; exact typed offsets, nested cases, abstention and costs; #189 alternative learned/supervised formulations | Independent labels, long document/chunk-boundary cases, class-wise exact/overlap endpoints, full runtime and asset pin/licence closure |
+| E11 graph retrieval | #187 existing lexical functions; identical 250 pairs/17 positives; eight edge combinations and 20 rewired seeds per method; #185 heading-text control | Independent full-pool relevance, same-budget BGE/instructed Qwen fusion comparator from #183, evidence-bundle completion separately, no semantic inference |
+| Separable and bounded opt-in execution | Existing three Actions lanes, no routine model downloads; exact synthetic fixtures and historical artifacts | Protect remaining integrations; keep documentation-only changes from retrying providers |
+| Resources and reproducibility | Versioned result notes, exact archive SHA-256, source/model/runtime pins, per-arm time/RSS and acquisition byte receipts | Exact transitive lock and asset hashes across all future arms; compare fixed hardware and cold/warm cost; durable metrics/miss IDs before artifact expiry |
+| Independent family qualification | Existing #188 source inventory and rights holds, provisional component groups | Complete source/rights/anchor reconciliation, leakage audit, locked independent reference and family-disjoint splits |
+| Confirmatory E9–E11 and component interactions | Existing prospective design and eight-arm factorial above | No confirmation until gates actually pass; no claim from separate synthetic corpora |
+
+### Bound observed receipts and loss attribution
+
+- E9: [run 45787042673 / artifact 15100692740](https://github.com/edithatogo/standards_check/actions/runs/45787042673/artifacts/15100692740);
+  see [versioned result](../../docs/research/e9-layout-development-20261126.md).
+  Three score-column-contaminated rows 1.1, 1.1.1, 1.2 retained printed IDs
+  and page/line locators; they lost exact content, not item identity.
+  Manual reference rectangles are not predicted bounding boxes.
+- E10: [run 45799077555 / artifact 15105999587](https://github.com/edithatogo/standards_check/actions/runs/45799077555/artifacts/15105999587).
+  Exact F1 rules .848485, original .083333, clause names .16, operator-first 0.
+  [#189 run 45798338941 / artifact 15107111276](https://github.com/edithatogo/standards_check/actions/runs/45798338941/artifacts/15107111276):
+  joint .10, per-type .105263 (three calls per case), token BIO and span
+  boundary 0. All learned exact hits already rule hits. Missing rule spans
+  q06 applicability [0,11), q11 exception [22,40), q12 condition [0,52).
+  No invented source offsets, learned fallback adoption or further prompt
+  tuning on this exposed fixture. Preserve all failures and exact cost.
+- E11: [run 45797308283 / artifact 15105947458](https://github.com/edithatogo/standards_check/actions/runs/45797308283/artifacts/15105947458),
+  archive SHA-256 `f30563e5c866fc7408987a07abd3a0014490dc263ceeb9e441fafc82c3b8534a`,
+  tested merge `1665545cb5f2e1d9c0f0dd119233bad4222c2da8`.
+  Full graph and parent-only macro R@5 word/char 1.00/.95 versus
+  .90/.90 baseline; crossref .95/.90, dependency .90/.90.
+  #185 heading-prepended generation 1.00/1.00; fixed pool 1.00/.95.
+  Word misses Q4/B5, Q7/D3 in top ten; character misses Q7/D2 in top ten
+  and Q7/D3 outside top ten. Heading generation recovers both; rank-only
+  cannot recover outside-pool D3. Shuffled controls can sometimes equal
+  or exceed factual graph; not significance. Preserve distinct canonical
+  clause text, parent heading, explicit edge spans and evidence references;
+  only ranking uses enrichment. The full edge and paired rank records
+  are in existing receipts, not a second benchmark.
+- Source intake: [run 45797664414 / artifact 15106576904](https://github.com/edithatogo/standards_check/actions/runs/45797664414/artifacts/15106576904),
+  archive SHA-256 `4133e229f7b6965e17690e063ebecd745ed96671b1fd8ce8247acedd2455a846`,
+  tested merge `d072b7d89a7c304c136e3ae5bbcdeb613680fce8`.
+  Existing deterministic retrospective reports source_held: 5.
+  CONSORT/SPIRIT/ARRIVE/STROBE: PLOS OSError, Europe PMC TimeoutError,
+  PMC OAI unavailable_or_held ValueError. CHEERS: the latter two.
+  Zero new rows/independent eligible families; source availability holds,
+  not extracted-clause false negatives or inferred rights failure.
+  Continue the existing bounded worklist/checkpoint, not repeated identical
+  priority runs on code or documentation pushes.
+
+### Ponytail review and next justified increments
+
+The shortest useful path is native source readers -> exact source identity
+and canonical clause -> deterministic qualifier tags -> heading-aware
+candidate generation -> only necessary explicit links -> anchored evidence
+verification. No new parser, ANN/vector database, graph database, GNN,
+model router or agent orchestrator. The 25-target and 31-domain fixtures
+fit complete in-memory ranking. Reconsider learned components only when
+independent evidence shows a residual deficit they uniquely recover.
+
+- Implemented: #186 rebase onto receiving E11; #189 stack reconciliation
+  (single loader, retained predictor factory, fixed two Ruff findings;
+  14 local tests and exact per-case supervised output conservation).
+  Keep original results unchanged. No new model or dependency.
+- Implemented: explicit label or dispatch for priority/bulk intake, replacing
+  automatic branch-wide reacquisition on every synchronize. Ordinary
+  assurance and privacy gates remain independent. Preserve historical
+  receipts and existing bulk resume budget; fresh attempts require a reason
+  (unattempted worklist or changed provider/representation evidence).
+- Defer: consolidation of duplicated one-hop scoring in graph_development
+  and graph_ablation until the next necessary method change; use one shared
+  function then, with exact prior ranking/edge receipt equivalence. Do not
+  churn already merged tested runners solely for line counts.
+- Defer: any neural layout reader unless independently measured residual
+  failure after existing structured XML/DOCX, pdfplumber tables and Poppler
+  geometry; use one compact candidate with pinned assets if warranted.
+- Next: qualify source-native row/order/region and exact qualifier
+  anchors on rights-cleared independent components. Run a bounded
+  source-format replay with known malformed, shifted-column,
+  duplicated-ID, continuation and ambiguous-note controls. Record
+  source_anchor fail for demonstrated corruption, unknown when unmeasured;
+  do not fabricate later retrieval outcomes for different datasets.
+- Next: compare clause-only, heading-prepended, and explicit-link-only
+  retrieval on the same locked corpus with identical candidate/review
+  budgets. Measure heading-only false positives, shortlist oracle
+  ceiling, gained/lost positives and required evidence completeness;
+  test the stronger existing dense/fusion comparator on that *same*
+  universe. No extra benchmark parallel to #183. Only after actual
+  candidate-generation failures are isolated consider deeper retrieval
+  or reranking, and keep relevance distinct from equivalence.
+- Next: preserve reference lock, source/target identity, split, evidence
+  and decision/referral receipts, and both first_observed and
+  first_established under #183's convention. Prior unknown stages
+  preclude causal attribution; inaccessible sources remain holds.
+  Independently adjudicated positive labels and complete reference
+  pool must exist before final partition freeze. No final decisions
+  on the current unrelated synthetic E9/E10/E11 fixtures.
+- Keep the eight-arm combined evaluation **conditional**. No end-to-end
+  claim from concatenated independent development results. On qualified
+  common inputs, compare layout, tagging and retrieval incrementally,
+  keep simple controls and equal budgets, retain upstream missing
+  items in denominator, report paired main and interaction effects,
+  false discharge and workload, family-clustered uncertainty.
+  A candidate with no independently supported benefit stops at the
+  preceding simpler control; do not execute all combinations merely
+  because they exist. No weakening of protected integration or
+  source rights, blinded label, freeze or publication acceptance gates.
+
+No production or canonical changes, new issue registry, independent source
+or scientific promotion. Exact-head checks still required.
