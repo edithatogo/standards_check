@@ -135,7 +135,8 @@ def flow_view(source, *, expected_review, template):
     reasons = source["full_text_exclusions"]
     require(
         all(
-            safe_count(row["count"]) and row["count"] > 0 and row["label"].strip() for row in reasons
+            safe_count(row["count"]) and row["count"] > 0 and row["label"].strip()
+            for row in reasons
         ),
         "invalid reason",
     )
