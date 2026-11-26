@@ -101,7 +101,6 @@ def model_spans(text, response):
     return spans
 
 
-
 class InvalidPrediction(ValueError):
     """Keep the rejected model response without crediting any of its spans."""
 
