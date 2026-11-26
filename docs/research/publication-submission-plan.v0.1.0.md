@@ -272,3 +272,7 @@ No deadline or publication target changes the evidence required to support a cla
 
 See [the prospective E4-E8 protocol](composition-graph-protocol.v0.1.0.md) and
 [publication contract](../../contracts/publication/composition-graph.v0.1.0.json). Keep E1-E3 unchanged. Plan a distinct methods/utility contribution only if the empirical findings warrant it; recheck venue, preprint and reporting policies at submission. No independent results, ethics approval or submission claimed.
+
+## Exploratory results supplement — 26 November 2026
+
+The [first content-addressed results supplement](../../research/publication/results-v1.md) now consolidates observed and failed development experiments, compares within compatible panels, documents actual resource measures, and starts draft methods, results and discussion. Its 67 input pins, 2,317 metric records and original restricted evidence bundle are linked by the [snapshot receipt](../../research/publication/snapshot-v1-receipt.json). The immutable publication protocol, claim and freeze states remain unchanged. The bounded source-structure diagnostics do not qualify semantic references or close the full specialist factorial; retain existing source-intake and adjudication ownership.
