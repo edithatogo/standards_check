@@ -113,6 +113,14 @@ class BatchTests(unittest.TestCase):
         self.assertEqual(results[1]["status"],"held")
         self.assertTrue(results[1]["acquisition"]["attempts"])
 
+    def test_priority_explicit_publisher_route_keeps_source_holds(self):
+        doi = "10.1371/journal.pmed.1004587"
+        with patch("scripts.survey_equator_articles.fetch_priority", return_value=(XML, {"provider": "plos"})) as getter, patch("scripts.survey_equator_articles.time.sleep"):
+            result = priority_survey([{**SPEC, "doi": doi, "publisher_xml": "plos"}], None)[0]
+        getter.assert_called_once_with("PMC42", plos_doi=doi)
+        self.assertEqual(result["status"], "held")
+        self.assertEqual(result["canonical_packs_promoted"], 0)
+
     def test_provider_disagreement_and_oa_worklist_deduplication(self):
         a=resolve(row("a","123","10.1234/test"),[article_record()])
         b={**a,"id":"equator:b"}

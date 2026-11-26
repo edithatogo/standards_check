@@ -50,6 +50,33 @@ class ProviderTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             fetch_priority("PMC42/other")
 
+
+    def test_explicit_plos_primary_article_route(self):
+        doi = "10.1371/journal.pmed.1004587"
+        with patch("scripts.source_provider_evidence.fetch", return_value=ARTICLE) as getter:
+            raw, receipt = fetch_priority("PMC42", plos_doi=doi)
+        getter.assert_called_once_with(
+            "journals.plos.org",
+            "/plosmedicine/article/file?id=10.1371%2Fjournal.pmed.1004587&type=manuscript",
+        )
+        self.assertEqual(raw, ARTICLE)
+        self.assertEqual(receipt["provider"], "plos")
+        self.assertEqual(receipt["response_bytes"], len(ARTICLE))
+        self.assertEqual(receipt["representation"], "plos_publisher_jats_xml")
+
+    def test_plos_fallback_and_rejection(self):
+        doi = "10.1371/journal.pbio.3000410"
+        with patch("scripts.source_provider_evidence.fetch", side_effect=[TimeoutError(), ARTICLE]) as getter:
+            _, receipt = fetch_priority("PMC42", plos_doi=doi)
+        self.assertEqual(getter.call_count, 2)
+        self.assertIn("/plosbiology/", getter.call_args_list[0].args[1])
+        self.assertEqual(receipt["provider"], "europe_pmc")
+        self.assertEqual([a["provider"] for a in receipt["attempts"]], ["plos", "europe_pmc"])
+        with patch("scripts.source_provider_evidence.fetch") as getter:
+            with self.assertRaises(ValueError):
+                fetch_priority("PMC42", plos_doi="10.1371/journal.pmed.1004587?x=1")
+            getter.assert_not_called()
+
     def test_invalid_converter_response_remains_incomplete(self):
         with patch("scripts.source_provider_evidence.fetch", return_value=b'{"status":"error"}'), \
              patch("scripts.source_provider_evidence.time.sleep"):
