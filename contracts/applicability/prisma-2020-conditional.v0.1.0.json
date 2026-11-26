@@ -1,0 +1,75 @@
+{
+  "schema_version": "dev.standardflow.source-conditional-clauses.v1",
+  "status": "source_corroborated_review_required",
+  "source": {
+    "path": "packs/org.prisma/prisma/2020/pack.json",
+    "sha256": "56f79ee76d463c3878431a0342f127a1bcc89c019d636e4f28afdc0dfc462ec1",
+    "git_blob_sha1": "318b0786e195ee9b6ccb5b0a39ade117ce3c6a2c",
+    "pack_id": "org.prisma/prisma/2020",
+    "version": "2020",
+    "official_pdf_sha256": "2eedbd5452741f9615307a0bce21a8198c0597ce2a0a8a0fd7e140d64b08c625",
+    "licence": "CC-BY-4.0",
+    "statement_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8008539/",
+    "explanation_url": "https://www.bmj.com/content/372/bmj.n160.full",
+    "issuer_url": "https://www.prisma-statement.org/prisma-2020-checklist"
+  },
+  "clauses": [
+    {
+      "id": "prisma-2020:8:screening-automation",
+      "parent_item": "PRISMA-2020:8",
+      "condition_atom": "screening_automation_used",
+      "source_anchor": "prisma-2020-checklist:item:8",
+      "line": 188,
+      "review_status": "source_text_corroborated_not_independent_adjudication"
+    },
+    {
+      "id": "prisma-2020:9:collection-automation",
+      "parent_item": "PRISMA-2020:9",
+      "condition_atom": "collection_automation_used",
+      "source_anchor": "prisma-2020-checklist:item:9",
+      "line": 204,
+      "review_status": "source_text_corroborated_not_independent_adjudication"
+    },
+    {
+      "id": "prisma-2020:11:bias-automation",
+      "parent_item": "PRISMA-2020:11",
+      "condition_atom": "bias_automation_used",
+      "source_anchor": "prisma-2020-checklist:item:11",
+      "line": 252,
+      "review_status": "source_text_corroborated_not_independent_adjudication"
+    },
+    {
+      "id": "prisma-2020:10a:result-selection",
+      "parent_item": "PRISMA-2020:10a",
+      "condition_atom": "subset_of_eligible_results_selected",
+      "source_anchor": "prisma-2020-checklist:item:10a",
+      "line": 220,
+      "review_status": "source_text_corroborated_not_independent_adjudication"
+    },
+    {
+      "id": "prisma-2020:13d:meta-analysis-methods",
+      "parent_item": "PRISMA-2020:13d",
+      "condition_atom": "meta_analysis_performed",
+      "source_anchor": "prisma-2020-checklist:item:13d",
+      "line": 332,
+      "review_status": "source_text_corroborated_not_independent_adjudication"
+    },
+    {
+      "id": "prisma-2020:20b:meta-analysis-results",
+      "parent_item": "PRISMA-2020:20b",
+      "condition_atom": "meta_analysis_performed",
+      "source_anchor": "prisma-2020-checklist:item:20b",
+      "line": 511,
+      "review_status": "source_text_corroborated_not_independent_adjudication"
+    },
+    {
+      "id": "prisma-2020:20b:group-comparison-direction",
+      "parent_item": "PRISMA-2020:20b",
+      "condition_atom": "groups_compared",
+      "source_anchor": "prisma-2020-checklist:item:20b",
+      "line": 511,
+      "review_status": "source_text_corroborated_not_independent_adjudication"
+    }
+  ],
+  "boundary": "Candidate subclauses only. No parent requirement is excluded. Separate manuscript facts required; absence of a fact is unknown. Independently adjudicated scope and other guideline families remain held."
+}
