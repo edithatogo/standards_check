@@ -1,0 +1,16 @@
+# Candidate only. Copy to Cargo.toml in an isolated scratch workspace after review.
+[workspace]
+
+[package]
+name = "standardflow-native-format-qualification"
+version = "0.0.0"
+edition = "2024"
+rust-version = "1.98"
+publish = false
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+typst-syntax = "=0.15.1"
+tree-sitter = "=0.25.10"
+codebook-tree-sitter-latex = "=0.6.1"
+rustfst = "=1.3.1"
