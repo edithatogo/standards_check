@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "status": "bounded_observation",
+  "purpose": "Distinguish exact article indexing, target-study scope, development-method role, and publication lineage. Not an exhaustive citation graph or independent reference.",
+  "observed_articles": [
+    {
+      "name": "CONSORT 2025",
+      "pmid": "40228833",
+      "doi": "10.1136/bmj-2024-081123",
+      "observed_mesh": [
+        "Randomized Controlled Trials as Topic / standards",
+        "Humans",
+        "Checklist / standards",
+        "Publishing / standards",
+        "Guidelines as Topic",
+        "Research Report / standards",
+        "Research Design / standards",
+        "Delphi Technique"
+      ],
+      "publication_types": [
+        "Journal Article"
+      ],
+      "source": "https://pubmed.ncbi.nlm.nih.gov/40228833/",
+      "roles": [
+        {
+          "concept": "Randomized Controlled Trials as Topic",
+          "role": "target_study_type"
+        },
+        {
+          "concept": "Delphi Technique",
+          "role": "development_method"
+        },
+        {
+          "concept": "Scoping review",
+          "role": "development_method"
+        }
+      ],
+      "role_source": "https://doi.org/10.1136/bmj-2024-081123"
+    },
+    {
+      "name": "ARRIVE 2.0",
+      "pmid": "32663219",
+      "doi": "10.1371/journal.pbio.3000410",
+      "observed_mesh": [
+        "Animal Experimentation",
+        "Animals",
+        "Checklist",
+        "Guidelines as Topic",
+        "Research Report"
+      ],
+      "publication_types": [
+        "Journal Article",
+        "Research Support, Non-U.S. Gov't"
+      ],
+      "source": "https://pubmed.ncbi.nlm.nih.gov/32663219/",
+      "roles": [
+        {
+          "concept": "Animal Experimentation",
+          "role": "target_study_type"
+        },
+        {
+          "concept": "Delphi exercise",
+          "role": "development_method"
+        }
+      ],
+      "role_source": "https://doi.org/10.1371/journal.pbio.3000410"
+    },
+    {
+      "name": "PRISMA 2020",
+      "pmid": "33782057",
+      "doi": "10.1136/bmj.n71",
+      "observed_mesh": [
+        "Humans",
+        "Medical Writing / standards",
+        "Meta-Analysis as Topic",
+        "Practice Guidelines as Topic",
+        "Quality Control",
+        "Research Design / standards",
+        "Statistics as Topic",
+        "Systematic Reviews as Topic / methods, standards",
+        "Terminology as Topic"
+      ],
+      "publication_types": [
+        "Journal Article",
+        "Research Support, Non-U.S. Gov't"
+      ],
+      "source": "https://pubmed.ncbi.nlm.nih.gov/33782057/",
+      "roles": [
+        {
+          "concept": "Systematic Reviews as Topic",
+          "role": "target_study_type"
+        }
+      ],
+      "role_source": "https://doi.org/10.1136/bmj.n71"
+    }
+  ],
+  "relationships": [
+    {
+      "source_doi": "10.1136/bmj-2024-081123",
+      "target_doi": "10.1136/bmj.c332",
+      "predicate": "updates_guidance",
+      "basis": "primary statement and cited predecessor; not sameAs"
+    },
+    {
+      "source_doi": "10.1136/bmj-2024-081123",
+      "target_doi": "10.1136/bmj.g1687",
+      "predicate": "references_related_guidance",
+      "basis": "primary statement references TIDieR"
+    },
+    {
+      "source_doi": "10.1136/bmj-2024-081123",
+      "target_doi": "10.1136/bmj-2024-081477",
+      "predicate": "harmonised_with",
+      "basis": "primary statement describes coordinated SPIRIT update"
+    },
+    {
+      "source_doi": "10.1136/bmj.n71",
+      "target_doi": "10.1136/bmj.b2535",
+      "predicate": "updates_guidance",
+      "basis": "source-stated predecessor relationship, reference list not exhaustively traversed"
+    },
+    {
+      "source_doi": "10.1371/journal.pbio.3000410",
+      "target_doi": "10.1371/journal.pbio.1000412",
+      "predicate": "updates_guidance",
+      "basis": "source-stated predecessor relationship, reference list not exhaustively traversed"
+    }
+  ],
+  "failed_identity_observations": {
+    "wrong_article_matches": 2,
+    "unresolved": 1,
+    "disposition": "Rejected; no graph edge; exact DOI/edition corroboration required."
+  },
+  "limitations": [
+    "No independent adjudication. Indexing article and governed studies are different classification targets.",
+    "Do not interpret absence of MeSH indexing as a negative.",
+    "No broad bibliographic acquisition or citation-model evaluation executed here; coordinate #191 and source qualification #188."
+  ]
+}
