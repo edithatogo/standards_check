@@ -8,6 +8,13 @@ import time
 from collections import Counter
 
 PINS = {
+    "k2-horizon": {
+        "id": "IFM/K2-Horizon-3.7B-GGUF",
+        "revision": "839b82cdd4e8b7c824b509172ae0cd1fab56576e",
+        "file": "K2-Horizon-4B-Q4_K_M.gguf",
+        "sha256": "07773aed93890d4f5d08b421430000d5c8d73cefc74fbdc32e67d820f23207b2",
+        "licence": "Apache-2.0",
+    },
     "minicpm5": {
         "id": "openbmb/MiniCPM5-2B-GGUF",
         "revision": "2079a22f3beaa4e306449978533478fe0522f4b3",
@@ -216,6 +223,9 @@ def generation_options(model):
     options = {"seed": 724, "max_tokens": 256}
     if model == "lfm3":
         options["chat_template_kwargs"] = {"enable_thinking": False}
+    elif model == "k2-horizon":
+        options["max_tokens"] = 1024
+        options["chat_template_kwargs"] = {"reasoning_effort": "low"}
     elif model == "minicpm5":
         options["max_tokens"] = 512
     elif model == "lfm25-thinking":

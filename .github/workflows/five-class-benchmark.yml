@@ -124,13 +124,13 @@ jobs:
 
   lfm-development:
     # Exploratory synthetic-only lane, explicitly requested; not a qualification run.
-    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && (github.event.label.name == 'run-lfm-followup' || github.event.label.name == 'run-lfm-thinking-repair' || github.event.label.name == 'run-compact-model-panel')
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && (github.event.label.name == 'run-lfm-followup' || github.event.label.name == 'run-lfm-thinking-repair' || github.event.label.name == 'run-compact-model-panel' || github.event.label.name == 'run-k2-development')
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     strategy:
       fail-fast: false
       matrix:
-        challenger: ${{ fromJSON(github.event.label.name == 'run-lfm-thinking-repair' && '["lfm25-thinking"]' || github.event.label.name == 'run-compact-model-panel' && '["minicpm5"]' || '["lfm3","lfm25-instruct","lfm25-thinking","lfm2-2.6b"]') }}
+        challenger: ${{ fromJSON(github.event.label.name == 'run-lfm-thinking-repair' && '["lfm25-thinking"]' || github.event.label.name == 'run-compact-model-panel' && '["minicpm5"]' || github.event.label.name == 'run-k2-development' && '["k2-horizon"]' || '["lfm3","lfm25-instruct","lfm25-thinking","lfm2-2.6b"]') }}
     env:
       CHALLENGER: ${{ matrix.challenger }}
       HF_HUB_OFFLINE: "1"
@@ -201,7 +201,7 @@ jobs:
                               "--max-filesize", str(cap), "--proto", "=https", "--proto-redir", "=https",
                               url, "--output", str(path)], check=True)
           weights = root / "lfm.gguf"
-          acquire(model, model["file"], weights, 3000000000)
+          acquire(model, model["file"], weights, 3500000000 if os.environ["CHALLENGER"] == "k2-horizon" else 3000000000)
           if file_hash(weights) != model["sha256"]:
               raise ValueError("challenger model hash mismatch")
           licence = evidence / "model-LICENSE.txt"

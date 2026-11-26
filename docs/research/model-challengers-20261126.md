@@ -187,3 +187,21 @@ Trigger labels `run-compact-model-panel`, `run-native-qwen-reranker`,
 `run-k2-pin-review` are isolated explicit development/metadata lanes. No hosted
 credentials, no inference on private data, no scientific qualification. The
 bounded 512-token MiniCPM arm is not a reproduction of publisher benchmark settings.
+
+### K2 publisher naming resolved
+
+[Metadata retry 45761900423](https://github.com/edithatogo/standards_check/actions/runs/45761900423/artifacts/15089119538),
+ZIP SHA-256 d4e378da09d9e18d80a14d43d39887ccd4f78386b4e7966fac683607270723c2,
+confirms the unique official Q4_K_M artifact is named
+`K2-Horizon-4B-Q4_K_M.gguf` in IFM/K2-Horizon-3.7B-GGUF. Pin revision
+`839b82cdd4e8b7c824b509172ae0cd1fab56576e`, weights SHA-256
+`07773aed93890d4f5d08b421430000d5c8d73cefc74fbdc32e67d820f23207b2`,
+3,156,598,144 bytes, Apache-2.0 model card. This supersedes only the filename
+hold, not any scientific gate. The `run-k2-development` arm uses the same
+36 historical synthetic controls, native b11960 CPU runtime, seed 724,
+1024 output tokens and low reasoning effort. The publisher recommends high
+reasoning effort and a much larger generation budget, so this is explicitly a
+bounded CPU feasibility diagnostic, not a replication of publisher scores;
+length exhaustion stays an abstention. No mutable revision, remote code or
+third-party quantization. Weight acquisition and inference must succeed before
+reporting metrics.

@@ -94,7 +94,7 @@ def test_paired_does_not_discard_abstention():
         lfm.metrics(expected, {"a": "equivalent"})
 
 
-@pytest.mark.parametrize("model", ["d1", "lfm25-instruct", "lfm3", "lfm25-thinking", "lfm2-2.6b", "minicpm5"])
+@pytest.mark.parametrize("model", ["d1", "lfm25-instruct", "lfm3", "lfm25-thinking", "lfm2-2.6b", "minicpm5", "k2-horizon"])
 def test_existing_harness_and_receipts(model, monkeypatch, tmp_path):
     def score(ledger, records, assets, sha):
         return {
@@ -155,6 +155,7 @@ def test_shared_judge_rejects_unblinded_input():
     ("lfm25-thinking", 512, True),
     ("lfm2-2.6b", 256, None),
     ("minicpm5", 512, None),
+    ("k2-horizon", 1024, None),
 ])
 def test_declared_output_budget(model, cap, thinking):
     options = lfm.generation_options(model)
@@ -175,3 +176,7 @@ def test_truncated_response_is_held_even_if_content_looks_valid():
     for model in ("d1", "unregistered"):
         with pytest.raises(ValueError):
             lfm.generation_options(model)
+
+
+def test_k2_bounded_reasoning_is_declared():
+    assert lfm.generation_options("k2-horizon")["chat_template_kwargs"] == {"reasoning_effort": "low"}
