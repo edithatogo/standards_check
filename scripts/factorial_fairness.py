@@ -108,21 +108,32 @@ def controlled(cases):
             # isolates selection utility, not the incremental cost of hybrid search.
             word, char = (score(query, corpus, method) for method in ("word", "char"))
             rankings = [rank(s) for s in (word, char)]
-            reciprocal = {k: sum(1 / (60 + order.index(k) + 1) for order in rankings) for k in corpus}
+            reciprocal = {
+                k: sum(1 / (60 + order.index(k) + 1) for order in rankings) for k in corpus
+            }
             for g in (0, 1):
                 pool = (rank(reciprocal) if g else rankings[0])[:6]
                 for m in (0, 1):
                     scores = char if m else word
                     selected = rank({k: scores[k] for k in pool})[:2]
-                    after = observe({**state, "evidence": {**evidence, **{k: corpus[k] for k in selected}}})
+                    after = observe(
+                        {**state, "evidence": {**evidence, **{k: corpus[k] for k in selected}}}
+                    )
                     pred, gold = decision(after), reference(row)
                     target = key + ":tail"
                     cells[f"{q}{g}{m}"][key] = {
-                        "id": key, "family": row["family"], "split": row["split"],
-                        "pool": pool, "selected": selected, "target_in_pool": int(target in pool),
-                        "complete": int(after[0]), "correct": int(pred == gold),
+                        "id": key,
+                        "family": row["family"],
+                        "split": row["split"],
+                        "pool": pool,
+                        "selected": selected,
+                        "target_in_pool": int(target in pool),
+                        "complete": int(after[0]),
+                        "correct": int(pred == gold),
                         "false_equivalence": int(pred == "equivalent" and gold != "equivalent"),
-                        "abstained": int(pred == "abstain"), "reference": gold, "prediction": pred,
+                        "abstained": int(pred == "abstain"),
+                        "reference": gold,
+                        "prediction": pred,
                         "scored_candidates_per_channel": len(corpus),
                         "selected_words": sum(len(corpus[k].split()) for k in selected),
                     }
@@ -146,15 +157,17 @@ def paired_bayes(cells, names, field, *, draws=10000, seed=17):
     for size in range(1, len(names) + 1):
         for axes in combinations(range(len(names)), size):
             effects = {
-                k: sum(
-                    (-1) ** sum(b[i] == "0" for i in axes) * cells[b][k][field] for b in keys
-                ) / 2 ** (len(names) - size)
+                k: sum((-1) ** sum(b[i] == "0" for i in axes) * cells[b][k][field] for b in keys)
+                / 2 ** (len(names) - size)
                 for k in ids
             }
-            group = np.asarray([np.mean([effects[k] for k in sorted(ids) if groups[k] == f]) for f in families])
+            group = np.asarray(
+                [np.mean([effects[k] for k in sorted(ids) if groups[k] == f]) for f in families]
+            )
             samples = weights @ group
             out[":".join(names[i] for i in axes)] = {
-                "mean": float(group.mean()), "interval_90": np.quantile(samples, [0.05, 0.95]).tolist(),
+                "mean": float(group.mean()),
+                "interval_90": np.quantile(samples, [0.05, 0.95]).tolist(),
                 "family_effects": dict(zip(families, group.tolist(), strict=True)),
                 "probability_positive": float(np.mean(samples > 0)),
             }
@@ -167,13 +180,18 @@ def hierarchical_predict(x, y, families, cases, x_test):
     centre, scale = x.mean(axis=0), x.std(axis=0)
     scale = np.where(scale > 0, scale, 1)
     fixed = np.column_stack((np.ones(len(x)), (x - centre) / scale))
-    random = np.column_stack([
-        np.asarray([key == v for key in group], dtype=float)
-        for group in (families, cases) for v in sorted(set(group))
-    ])
+    random = np.column_stack(
+        [
+            np.asarray([key == v for key in group], dtype=float)
+            for group in (families, cases)
+            for v in sorted(set(group))
+        ]
+    )
     design = np.column_stack((fixed, random))
-    prior_sd = np.asarray([2.] + [1.] * x.shape[1] + [.8] * len(set(families)) + [1.] * len(set(cases)))
-    precision = np.diag(1 / prior_sd ** 2)
+    prior_sd = np.asarray(
+        [2.0] + [1.0] * x.shape[1] + [0.8] * len(set(families)) + [1.0] * len(set(cases))
+    )
+    precision = np.diag(1 / prior_sd**2)
     weight = np.zeros(design.shape[1])
     for _ in range(60):
         probability = 1 / (1 + np.exp(-np.clip(design @ weight, -40, 40)))
@@ -184,11 +202,11 @@ def hierarchical_predict(x, y, families, cases, x_test):
             break
     else:
         raise ValueError("hierarchical posterior mode did not converge")
-    covariance = np.linalg.inv(hessian)[:fixed.shape[1], :fixed.shape[1]]
+    covariance = np.linalg.inv(hessian)[: fixed.shape[1], : fixed.shape[1]]
     held = np.column_stack((np.ones(len(x_test)), (x_test - centre) / scale))
-    mu = held @ weight[:fixed.shape[1]]
+    mu = held @ weight[: fixed.shape[1]]
     # Integrate over uncertainty and unseen case/family intercepts, never fit them on test.
-    variance = np.einsum("ij,jk,ik->i", held, covariance, held) + .8 ** 2 + 1.
+    variance = np.einsum("ij,jk,ik->i", held, covariance, held) + 0.8**2 + 1.0
     nodes, weights = np.polynomial.hermite.hermgauss(24)
     logits = mu[:, None] + np.sqrt(2 * variance)[:, None] * nodes
     return (1 / (1 + np.exp(-np.clip(logits, -40, 40)))) @ weights / np.sqrt(np.pi)
@@ -203,25 +221,48 @@ def observed_neural_ranking(cases, report):
         key = row["id"]
         pool = row["pool"]
         scores = row["neural_rerank"]["scores"]
-        if len(set(pool)) != len(pool) or set(pool) != set(scores) or row["family"] != source[key]["family"]:
+        if (
+            len(set(pool)) != len(pool)
+            or set(pool) != set(scores)
+            or row["family"] != source[key]["family"]
+        ):
             raise ValueError("invalid neural pool binding")
-        corpus = {f"{k}:{part}": layout[k][i] for k, r in source.items()
-                  if r["family"] == row["family"] for i, part in enumerate(("head", "tail"))}
+        corpus = {
+            f"{k}:{part}": layout[k][i]
+            for k, r in source.items()
+            if r["family"] == row["family"]
+            for i, part in enumerate(("head", "tail"))
+        }
         if not set(pool) <= set(corpus):
             raise ValueError("pool outside family corpus")
         current = row["states"]["expanded"]
         seen = set(current["evidence_ids"])
         unseen = [k for k in pool if k not in seen]
         lexical = score(source[key]["source"], {k: corpus[k] for k in pool}, "char")
-        result = {"id": key, "family": row["family"], "pool": pool, "unseen": unseen,
-                  "complete_before": current["complete"], "target_in_pool": key+":tail" in pool}
+        result = {
+            "id": key,
+            "family": row["family"],
+            "pool": pool,
+            "unseen": unseen,
+            "complete_before": current["complete"],
+            "target_in_pool": key + ":tail" in pool,
+        }
         for name, values in (("lexical", lexical), ("neural", scores)):
             selected = rank({k: values[k] for k in unseen})[:2]
-            result[name] = {"selected": selected, "complete": current["complete"] or key+":tail" in selected,
-                            "new_words": sum(len(corpus[k].split()) for k in selected)}
+            result[name] = {
+                "selected": selected,
+                "complete": current["complete"] or key + ":tail" in selected,
+                "new_words": sum(len(corpus[k].split()) for k in selected),
+            }
         rows.append(result)
-    return {"rows": rows, "complete": {name: sum(row[name]["complete"] for row in rows) for name in ("lexical", "neural")},
-            "fresh_neural_calls": 0, "boundary": "Retained scores, equal novel-fragment caps; no imputed NLI outcomes"}
+    return {
+        "rows": rows,
+        "complete": {
+            name: sum(row[name]["complete"] for row in rows) for name in ("lexical", "neural")
+        },
+        "fresh_neural_calls": 0,
+        "boundary": "Retained scores, equal novel-fragment caps; no imputed NLI outcomes",
+    }
 
 
 def matched_coverage(report):
@@ -231,21 +272,41 @@ def matched_coverage(report):
     state = [(r, r["states"][mode]) for r in rows]
     accepted = [(r, s) for r, s in state if s["predictions"]["strict_nli"] != "abstain"]
     proof = [(r, s) for r, s in state if s["predictions"]["proof_required"] != "abstain"]
+
     # Confidence is only a fixed ranking heuristic, not a calibrated probability of correctness.
     def confidence(item):
         r, s = item
         return (-min(max(v[d]) for v in s["raw"].values() for d in ("forward", "reverse")), r["id"])
-    matched = sorted(accepted, key=confidence)[:len(proof)]
-    out = {mode: {name: {"accepted": len(items), "correct": sum(s["predictions"][label] == r["reference"] for r, s in items),
-                        "false_equivalence": sum(s["predictions"][label] == "equivalent" and r["reference"] != "equivalent" for r, s in items),
-                        "ids": sorted(r["id"] for r, _ in items)}
-                 for name, items, label in (("unrestricted_advisory", accepted, "strict_nli"), ("matched_confidence_advisory", matched, "strict_nli"), ("proof_required", proof, "proof_required"))}}
+
+    matched = sorted(accepted, key=confidence)[: len(proof)]
+    out = {
+        mode: {
+            name: {
+                "accepted": len(items),
+                "correct": sum(s["predictions"][label] == r["reference"] for r, s in items),
+                "false_equivalence": sum(
+                    s["predictions"][label] == "equivalent" and r["reference"] != "equivalent"
+                    for r, s in items
+                ),
+                "ids": sorted(r["id"] for r, _ in items),
+            }
+            for name, items, label in (
+                ("unrestricted_advisory", accepted, "strict_nli"),
+                ("matched_confidence_advisory", matched, "strict_nli"),
+                ("proof_required", proof, "proof_required"),
+            )
+        }
+    }
     return out
 
 
-def predict_grouped(cells, features, *, models=("beta", "ridge_logistic", "bayesian_hierarchical", "xgboost")):
+def predict_grouped(
+    cells, features, *, models=("beta", "ridge_logistic", "bayesian_hierarchical", "xgboost")
+):
     """Predict completeness before acquisition, using leave-one-family-out folds."""
-    entries = [(key, b, row) for b, cell in sorted(cells.items()) for key, row in sorted(cell.items())]
+    entries = [
+        (key, b, row) for b, cell in sorted(cells.items()) for key, row in sorted(cell.items())
+    ]
     x = np.asarray([features[k] + [int(i) for i in b] for k, b, _ in entries])
     y = np.asarray([r["complete"] for _, _, r in entries])
     group = np.asarray([r["family"] for _, _, r in entries])
@@ -264,7 +325,11 @@ def predict_grouped(cells, features, *, models=("beta", "ridge_logistic", "bayes
                 continue
             if name == "bayesian_hierarchical":
                 output[name][test] = hierarchical_predict(
-                    x[train], y[train], group[train], [entries[j][0] for j in np.flatnonzero(train)], x[test]
+                    x[train],
+                    y[train],
+                    group[train],
+                    [entries[j][0] for j in np.flatnonzero(train)],
+                    x[test],
                 )
                 continue
             if name == "ridge_logistic":
@@ -272,12 +337,21 @@ def predict_grouped(cells, features, *, models=("beta", "ridge_logistic", "bayes
                 from sklearn.pipeline import make_pipeline
                 from sklearn.preprocessing import StandardScaler
 
-                estimator = make_pipeline(StandardScaler(), LogisticRegression(C=1.0, max_iter=1000))
+                estimator = make_pipeline(
+                    StandardScaler(), LogisticRegression(C=1.0, max_iter=1000)
+                )
             elif name == "xgboost":
                 from xgboost import XGBClassifier
 
-                estimator = XGBClassifier(n_estimators=64, max_depth=2, learning_rate=0.05,
-                                          reg_lambda=5.0, n_jobs=1, random_state=17, tree_method="hist")
+                estimator = XGBClassifier(
+                    n_estimators=64,
+                    max_depth=2,
+                    learning_rate=0.05,
+                    reg_lambda=5.0,
+                    n_jobs=1,
+                    random_state=17,
+                    tree_method="hist",
+                )
             else:
                 raise ValueError("unknown predictive model")
             if len(np.unique(y[train])) == 1:
@@ -285,18 +359,35 @@ def predict_grouped(cells, features, *, models=("beta", "ridge_logistic", "bayes
             else:
                 estimator.fit(x[train], y[train])
                 output[name][test] = estimator.predict_proba(x[test])[:, 1]
-        folds.append({"family": family, "train_families": sorted(set(group[train])), "n": int(test.sum())})
+        folds.append(
+            {"family": family, "train_families": sorted(set(group[train])), "n": int(test.sum())}
+        )
     metrics = {}
     for name, p in output.items():
         p = np.clip(p, 1e-6, 1 - 1e-6)
         loss = -(y * np.log(p) + (1 - y) * np.log1p(-p))
-        metrics[name] = {"n": len(y), "brier": float(np.mean((y-p)**2)), "log_loss": float(loss.mean()),
-                         "family_brier": {f: float(np.mean((y[group == f]-p[group == f])**2)) for f in sorted(set(group))}}
-    return {"folds": folds, "metrics": metrics, "predictions": [
-        {"id": k, "cell": b, "family": r["family"], "observed": int(y[i]),
-         "probabilities": {name: float(p[i]) for name, p in output.items()}}
-        for i, (k, b, r) in enumerate(entries)
-    ]}
+        metrics[name] = {
+            "n": len(y),
+            "brier": float(np.mean((y - p) ** 2)),
+            "log_loss": float(loss.mean()),
+            "family_brier": {
+                f: float(np.mean((y[group == f] - p[group == f]) ** 2)) for f in sorted(set(group))
+            },
+        }
+    return {
+        "folds": folds,
+        "metrics": metrics,
+        "predictions": [
+            {
+                "id": k,
+                "cell": b,
+                "family": r["family"],
+                "observed": int(y[i]),
+                "probabilities": {name: float(p[i]) for name, p in output.items()},
+            }
+            for i, (k, b, r) in enumerate(entries)
+        ],
+    }
 
 
 def read_pinned(path, digest):
@@ -308,7 +399,11 @@ def read_pinned(path, digest):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--fixture", type=Path, default=Path("contracts/examples/semantic-reconciliation-synthetic-v1.json"))
+    parser.add_argument(
+        "--fixture",
+        type=Path,
+        default=Path("contracts/examples/semantic-reconciliation-synthetic-v1.json"),
+    )
     parser.add_argument("--ledger", type=Path)
     parser.add_argument("--neural-report", type=Path)
     parser.add_argument("--output", type=Path, required=True)
@@ -318,17 +413,32 @@ def main():
     cells, features = controlled(cases)
     held = {b: {k: r for k, r in cell.items() if r["split"] == "test"} for b, cell in cells.items()}
     fields = ("target_in_pool", "complete", "correct", "false_equivalence", "abstained")
-    result = {"boundary": "Exposed synthetic development; no new neural inference or scientific admission",
-              "fixture_sha256": FIXTURE_SHA, "factors": FACTORS, "case_outcomes": cells,
-              "heldout_summary": {b: {f: sum(r[f] for r in cell.values()) for f in fields} for b, cell in held.items()},
-              "heldout_resource_counts": {b: {"pool_slots": sum(len(r["pool"]) for r in cell.values()),
-                    "new_fragments": sum(len(r["selected"]) for r in cell.values()),
-                    "scored_candidates_per_channel": sum(r["scored_candidates_per_channel"] for r in cell.values()),
-                    "selected_words": sum(r["selected_words"] for r in cell.values())} for b, cell in held.items()},
-              "family_bayesian_bootstrap": {f: paired_bayes(held, FACTORS, f) for f in fields}}
+    result = {
+        "boundary": "Exposed synthetic development; no new neural inference or scientific admission",
+        "fixture_sha256": FIXTURE_SHA,
+        "factors": FACTORS,
+        "case_outcomes": cells,
+        "heldout_summary": {
+            b: {f: sum(r[f] for r in cell.values()) for f in fields} for b, cell in held.items()
+        },
+        "heldout_resource_counts": {
+            b: {
+                "pool_slots": sum(len(r["pool"]) for r in cell.values()),
+                "new_fragments": sum(len(r["selected"]) for r in cell.values()),
+                "scored_candidates_per_channel": sum(
+                    r["scored_candidates_per_channel"] for r in cell.values()
+                ),
+                "selected_words": sum(r["selected_words"] for r in cell.values()),
+            }
+            for b, cell in held.items()
+        },
+        "family_bayesian_bootstrap": {f: paired_bayes(held, FACTORS, f) for f in fields},
+    }
     if args.predictive:
         result["predictive"] = predict_grouped(cells, features)
-        result["predictive"]["runtime_versions"] = {k: version(k) for k in ("numpy", "scikit-learn", "xgboost")}
+        result["predictive"]["runtime_versions"] = {
+            k: version(k) for k in ("numpy", "scikit-learn", "xgboost")
+        }
     if args.neural_report:
         neural = read_pinned(args.neural_report, NEURAL_SHA)
         if neural["fixture_sha256"] != FIXTURE_SHA:

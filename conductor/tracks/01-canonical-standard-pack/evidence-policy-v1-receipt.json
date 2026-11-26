@@ -215,5 +215,24 @@
     "prior_privacy": "passed",
     "prior_codeql": "passed"
   },
-  "new_head_checks": "pending"
+  "new_head_checks": "pending",
+  "hosted": {
+    "run": 45809762393,
+    "job": 139874239637,
+    "merge_revision": "9c4fc520ce2ccd20a7f79025ab0d1777f0653b7b",
+    "artifact": 15113035196,
+    "archive_sha256": "e89cae2a2728d7904e139e177cdc825cd8ae956e3d709ae010a61ca75d429296",
+    "policy_report_sha256": "9025fbf8b9ede69616b4130a71b70274211075afa40ea2ec720210a58d319172",
+    "fairness_report_sha256": "e9731d43785f4d0cd373b95fd3c7dc96af89fac387792e8d6f60929b805c6a1d",
+    "focused_tests": 12,
+    "deterministic_matches_local": true,
+    "fairness_summary_matches": true,
+    "formatted_blobs": {
+      "policy": "32068c422e225c70e9ae0d881cbdda21cbbfd593",
+      "fairness": "14517983410432f420b619a82cb110bf5d4ff985"
+    },
+    "ast_equal": true,
+    "local_postformat_tests": 60,
+    "required_format_failure": "old head; exact hosted diff applied, new checks required"
+  }
 }

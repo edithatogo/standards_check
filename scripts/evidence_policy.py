@@ -70,7 +70,9 @@ def fit(rows, mode, cap, cost, adaptive):
     for depth in reversed(range(cap)):
         samples = {a: [] for a in ACTIONS}
         for row in dev:
-            if len(row["history"]) != depth or ("parent" in row["history"] and not row["parent_link"]):
+            if len(row["history"]) != depth or (
+                "parent" in row["history"] and not row["parent_link"]
+            ):
                 continue
             for a in feasible(row, cap):
                 after = child(row, a, lookup)
@@ -181,7 +183,9 @@ def policy_study(rows):
         fixed_orders[name] = list(best)
         arms = {}
         for mode in ("rule", "best_fixed_dev", "bandit", "fitted_q"):
-            weights = fit(rows, mode, cap, COST, adaptive) if mode in ("bandit", "fitted_q") else None
+            weights = (
+                fit(rows, mode, cap, COST, adaptive) if mode in ("bandit", "fitted_q") else None
+            )
 
             def select(state, weights=weights, mode=mode, best=best, cap=cap, adaptive=adaptive):
                 if weights is not None:
@@ -209,11 +213,16 @@ def policy_study(rows):
             arms[mode] = {"cases": cases}
         quota = min(
             REVIEW_CAP,
-            *(sum(r["gated_prediction"] == "abstain" for r in arm["cases"]) for arm in arms.values()),
+            *(
+                sum(r["gated_prediction"] == "abstain" for r in arm["cases"])
+                for arm in arms.values()
+            ),
         )
         for arm in arms.values():
             cases = arm["cases"]
-            referrals = set(sorted(r["id"] for r in cases if r["gated_prediction"] == "abstain")[:quota])
+            referrals = set(
+                sorted(r["id"] for r in cases if r["gated_prediction"] == "abstain")[:quota]
+            )
             for row in cases:
                 row.update(referral=row["id"] in referrals, review_outcome=None)
             arm.update(

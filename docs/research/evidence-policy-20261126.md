@@ -107,3 +107,7 @@ formal gate and oracle checks); 60 local extracted-module tests pass.
 Local source/test blob IDs match committed files. The local environment
 cannot run the pinned Ruff or a full repository checkout; use actual
 protected CI. See [receipt](../../conductor/tracks/01-canonical-standard-pack/evidence-policy-v1-receipt.json).
+
+## Observed hosted replay and formatter repair
+
+[Run 45809762393](https://github.com/edithatogo/standards_check/actions/runs/45809762393) completed successfully: 12 focused tests, exact policy deterministic digest match, fairness summary and matched-ranking/coverage results reproduced. Downloaded [artifact 15113035196](https://github.com/edithatogo/standards_check/actions/runs/45809762393/artifacts/15113035196) verified against its archive SHA-256. Both scripts required formatting; apply the exact retained diff to their original blobs, verify Python AST equality and all 60 local overlay tests. The resulting exact formatted Git blob IDs and hosted report hashes are in the versioned receipt. The prior required policy check failed formatting; current-head protected checks remain required. No promotion or automatic merge from an optional replay.
