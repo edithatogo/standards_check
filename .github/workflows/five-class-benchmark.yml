@@ -698,6 +698,8 @@ jobs:
           git rev-parse HEAD > "$RUNNER_TEMP/issuer-evidence/commit.txt"
           python -m pip install pdfplumber==0.11.11 pytest==9.2.0
           python -m pytest --import-mode=importlib tests/test_issuer_column_probe.py -q
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends poppler-utils
           pdftotext -v > "$RUNNER_TEMP/issuer-evidence/poppler-version.txt" 2>&1
           python -m pip freeze > "$RUNNER_TEMP/issuer-evidence/environment.txt"
       - name: Compare two readers on exact issuer PDFs

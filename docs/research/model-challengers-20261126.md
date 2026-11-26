@@ -314,3 +314,19 @@ The `run-issuer-column-probe` job also attempts fixed primary ARRIVE XML
 and the EQUATOR-hosted STARD manifestation; retain metadata and fingerprint
 receipts only. Two pure source-identifier RED/GREEN regressions passed in
 isolation; full hosted verification and actual source receipts remain required.
+
+### Completed ModernBERT result and source prerequisite repair
+
+[ModernBERT run 45762797430](https://github.com/edithatogo/standards_check/actions/runs/45762797430/artifacts/15089539766), ZIP SHA-256 12cd4c4353020aae30147fe44cab193cb92e1da585df108938def7953d54452c,
+paired JSON SHA-256 a1f6679b7d7e48973526c4ec140dbcdfdac83f5aeec2c614911e403965599df5.
+Exact source and candidate pool hash conserved; all 106 queries retained.
+Macro recall@1/3/5/10 21.70%/43.40%/58.02%/80.03%, MRR .405533,
+nDCG@5 .408362, 2 gained and 20 lost associations at 5, 10.102 s reranking,
+456732 KiB full-process peak RSS. No evidence to replace BGE. Preserve this
+negative result; model-card performance is not domain qualification.
+
+[Issuer column run 45763128861](https://github.com/edithatogo/standards_check/actions/runs/45763128861)
+ran all four focused tests successfully, then failed with exit 127 at pdftotext
+version check. Reuse the existing Assurance Poppler package installation;
+rerun the exact source-only lane. No real-source structural observation yet
+from this job; earlier candidate PDF acquisition evidence retained.
