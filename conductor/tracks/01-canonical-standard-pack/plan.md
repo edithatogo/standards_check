@@ -461,3 +461,16 @@ T01.063–064 / #158: [fair factorial redesign](../../../docs/research/factorial
 T01.064 / #158: [offline policy comparison](../../../docs/research/evidence-policy-20261126.md) reuses actual transitions with feasible action masks and invariant proof gate. One-call learned gain one case; at two calls rule reaches hindsight ceiling; adaptive rule 29 calls vs oracle 23. No larger RL framework until measured residual gap on qualified common inputs. Retain full factorial and source/reference holds.
 
 T01.064 / #158: [post-hoc parent-first comparator](evidence-policy-parent-first-v1-receipt.json) reaches 23 complete and 14 gated correct in 24 calls, no reranking, versus 29 calls for the earlier adaptive rule. Synthetic parent completeness is guaranteed by fixture construction; retain real-source qualification and no promotion. Original report unchanged.
+
+
+T01.025/031/052/053/064 / #111/#95/#158: [bibliographic recovery and Searchright consumer](../../source-reconciliation/bibliographic-recovery-20261126.md).
+All 720 historical IDs retained; 49/76 missing IDs and 37/56 incomplete
+lookups expose literal link identifier candidates, no newly qualified
+source. Pinned Searchright main and unmerged #844 source/method/policy
+crosswalk, metadata-only exact work export and opt-in bounded canary;
+upstream security/privacy failures hold actual Rust dependency/execution.
+Use existing acquisition owner #188, #183 locked join, no parallel
+registry or duplicate provider runtime. Extend the existing retrospective
+skill with a bounded evidence-led improvement cycle and explicit stopping
+conditions. Independent family lock, citation/impact coverage and all
+scientific/production acceptance remain open.

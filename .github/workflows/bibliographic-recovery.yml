@@ -1,0 +1,126 @@
+name: Bibliographic recovery and Searchright interoperability
+
+on:
+  pull_request:
+    types: [labeled]
+    paths:
+      - "research/bibliographic-recovery/**"
+      - ".github/workflows/bibliographic-recovery.yml"
+  workflow_dispatch:
+    inputs:
+      live_metadata:
+        description: Run a bounded public metadata canary (not document retrieval)
+        type: boolean
+        default: false
+      previous_artifact:
+        description: Optional verified prior recovery artifact ID
+        type: string
+        default: ""
+      previous_sha256:
+        description: Exact prior ZIP SHA-256 (required with previous artifact)
+        type: string
+        default: ""
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: bibliographic-recovery-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  recovery:
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && (github.event.label.name == 'run-bibliographic-recovery' || github.event.label.name == 'run-bibliographic-metadata'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      PYTHONPATH: "."
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      PIP_DISABLE_PIP_VERSION_CHECK: "1"
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: "3.12"
+      - name: Test exact recovery and interoperability boundaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/bibliographic-evidence" "$RUNNER_TEMP/bibliographic-input"
+          git rev-parse HEAD > "$RUNNER_TEMP/bibliographic-evidence/commit.txt"
+          python -VV > "$RUNNER_TEMP/bibliographic-evidence/python-version.txt"
+          grep -E '^(attrs|referencing|rpds-py|jsonschema|jsonschema-specifications|pytest|iniconfig|pluggy|packaging|pygments|typing-extensions)==' requirements/ci-python312-linux-x86_64.lock.txt > "$RUNNER_TEMP/bibliographic-evidence/python-lock.txt"
+          python -m pip install --require-hashes --only-binary=:all: -r "$RUNNER_TEMP/bibliographic-evidence/python-lock.txt"
+          python -m pip check
+          python -m pytest -q research/bibliographic-recovery/test_bibliographic_recovery.py research/bibliographic-recovery/test_searchright_bridge.py
+          sha256sum research/bibliographic-recovery/*.py > "$RUNNER_TEMP/bibliographic-evidence/code-sha256.txt"
+      - name: Retrieve only fixed census and Searchright evidence inputs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PREVIOUS_ARTIFACT: ${{ inputs.previous_artifact }}
+          PREVIOUS_SHA256: ${{ inputs.previous_sha256 }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          input="$RUNNER_TEMP/bibliographic-input"
+          timeout 60 gh api --method GET "repos/$GITHUB_REPOSITORY/actions/artifacts/15031534787/zip" > "$input/census.zip"
+          echo "21046589502f064d54800c9f495d72d18b97184a1db376f06da773b84bde3f01  $input/census.zip" | sha256sum --check
+          stable=444c5199c0887c0259fe47c3d2545b5c6b877d6d
+          advisory=703f9ede74d78ac3aa58ee322c48471875f2a80e
+          acquire() {
+            local name="$1" path="$2" ref="$3"
+            timeout 60 gh api --method GET -H 'Accept: application/vnd.github.raw+json' "repos/edithatogo/searchright/contents/$path?ref=$ref" > "$input/$name.json"
+          }
+          acquire policies integration/provider-policies/index.json "$stable"
+          acquire methods contracts/fixtures/discovery-source-methods.json "$stable"
+          acquire schema contracts/json-schema/bibliographic-record.v1.schema.json "$stable"
+          acquire advisory data/source-selection/catalogue.v1.json "$advisory"
+          acquire directories data/source-selection/directories.v1.json "$advisory"
+          if [[ -n "$PREVIOUS_ARTIFACT" || -n "$PREVIOUS_SHA256" ]]; then
+            [[ "$PREVIOUS_ARTIFACT" =~ ^[1-9][0-9]{0,19}$ && "$PREVIOUS_SHA256" =~ ^[a-f0-9]{64}$ ]]
+            timeout 60 gh api --method GET "repos/$GITHUB_REPOSITORY/actions/artifacts/$PREVIOUS_ARTIFACT/zip" > "$input/previous.zip"
+            echo "$PREVIOUS_SHA256  $input/previous.zip" | sha256sum --check
+            python - <<'PY'
+          import os
+          from pathlib import Path
+          from zipfile import ZipFile
+          root = Path(os.environ["RUNNER_TEMP"]) / "bibliographic-input"
+          with ZipFile(root / "previous.zip") as z:
+              info = z.getinfo("bibliographic-recovery.json")
+              if info.file_size > 8_000_000:
+                  raise ValueError("prior receipt too large")
+              (root / "previous.json").write_bytes(z.read(info))
+          PY
+          fi
+      - name: Project complete census and optionally acquire a bounded metadata batch
+        env:
+          LIVE_METADATA: ${{ github.event.label.name == 'run-bibliographic-metadata' || inputs.live_metadata == true }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          input="$RUNNER_TEMP/bibliographic-input"
+          output="$RUNNER_TEMP/bibliographic-evidence"
+          previous=()
+          if [[ -f "$input/previous.json" ]]; then
+            pin=$(sha256sum "$input/previous.json" | cut -d ' ' -f 1)
+            previous=(--previous "$input/previous.json" --previous-sha256 "$pin")
+          fi
+          mode=()
+          if [[ "$LIVE_METADATA" == "true" ]]; then mode=(--live); fi
+          timeout 300 python research/bibliographic-recovery/bibliographic_recovery.py --archive "$input/census.zip" --budget 8 --output "$output/bibliographic-recovery.json" "${previous[@]}" "${mode[@]}"
+          python research/bibliographic-recovery/searchright_bridge.py --source-dir "$input" --receipt "$output/bibliographic-recovery.json" --output-dir "$output"
+      - name: Retain projected metadata and explicit source holds
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: bibliographic-recovery-${{ github.sha }}
+          path: ${{ runner.temp }}/bibliographic-evidence/
+          if-no-files-found: error
+          retention-days: 90
