@@ -67,3 +67,5 @@ receipt records that observation.
 
 - [Composition, ontology gaps and editorial validation protocol](../docs/research/composition-graph-protocol.v0.1.0.md).
 - [E4-E8 publication contract](../contracts/publication/composition-graph.v0.1.0.json) and [planned graph/vector/citation outputs](../contracts/analysis/requirement-graph.v0.1.0.json).
+
+- [Optional human review and unattended assurance](../docs/development/optional-human-review.md).

@@ -45,13 +45,13 @@
       "platformAutomerge": false
     },
     {
-      "description": "Breaking changes reviewed separately",
+      "description": "Breaking updates proposed automatically, qualified separately",
       "matchUpdateTypes": [
         "major"
       ],
       "groupName": "major dependency updates",
       "groupSlug": "major-dependency-updates",
-      "dependencyDashboardApproval": true,
+      "dependencyDashboardApproval": false,
       "automerge": false,
       "platformAutomerge": false
     },
@@ -74,5 +74,6 @@
     "schedule": [],
     "automerge": false,
     "dependencyDashboardApproval": false
-  }
+  },
+  "dependencyDashboardApproval": false
 }
