@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "status": "exploratory_internal",
+  "run_date": "2026-11-26",
+  "base_commit": "b48e7adafea41e09f4aa07d9db6f7e9117618c10",
+  "source_revision": "e34dd7d8559a5df0fe4b7185c093978e4b2d6cbe",
+  "inputs": {
+    "catalogue": {
+      "run_id": 45635380131,
+      "artifact_id": 15031534787,
+      "member": "equator-catalogue.json",
+      "sha256": "21046589502f064d54800c9f495d72d18b97184a1db376f06da773b84bde3f01"
+    },
+    "pack": {
+      "path": "packs/org.prisma/prisma/2020/pack.json",
+      "sha256": "56f79ee76d463c3878431a0342f127a1bcc89c019d636e4f28afdc0dfc462ec1"
+    },
+    "terms": {
+      "path": "research/catalogue/mesh-selected-v1.json",
+      "sha256": "ffb58e00328993a84e8e59bcf363fa0e36ced636077cc3ec46fb4a1ab1e1029f",
+      "descriptors": 41,
+      "observation_year": 2026
+    },
+    "implementation": {
+      "path": "research/catalogue/ontology_projection.py",
+      "sha256": "7afabc228d53d10b01b0d53ca0b52d36da97e452559f3a74ad1f2219dc4746bb"
+    }
+  },
+  "snapshot_sha256": "bd571344d776ea9825e57208eab9bbf1510876030c9ae4f9749fc45da0b26246",
+  "outputs": {
+    "graph_sha256": "e5e3005b93f0c42f5e2f398d829e681d546fd520124e4a61f9c1c7a3d17d39b3",
+    "topic_counts_sha256": "b18f484143c8ccf5c0db6356ec0f002bebf8ac17ce5fc0a06f7671b572dfa966",
+    "bundle_sha256": "5b561ce553d016f61e75c7dc9f8145fad52bde8668701218c13348dfa8ab7694",
+    "retention": "Personal Library, immutable content-addressed directory; no public graph release"
+  },
+  "metrics": {
+    "directory_entries": 720,
+    "entries_with_recorded_facets": 719,
+    "study_types": 16,
+    "clinical_specialties": 45,
+    "report_sections": 26,
+    "unspecified_design": 131,
+    "unspecified_specialty": 307,
+    "preferred_label_only_title_matches": 42,
+    "title_matches": 219,
+    "multiple_topic_title_matches": 27,
+    "unique_direct_title_concept_associations": 247,
+    "title_spans": 259,
+    "ancestor_additions": 120,
+    "study_type_candidates": 188,
+    "already_declared": 148,
+    "additional_study_type_candidates": 40,
+    "unspecified_design_entries_with_candidate": 2,
+    "additional_category_counts": {
+      "systematic_reviews": 32,
+      "observational": 3,
+      "clinical_trials": 3,
+      "qualitative": 2
+    },
+    "requirements": 42,
+    "requirements_with_topic_mentions": 10,
+    "nodes": 890,
+    "edges": 3905,
+    "edges_by_type": {
+      "equator_declared_category": 3552,
+      "title_mention_candidate": 259,
+      "mesh_tree_ancestor": 25,
+      "study_type_review_candidate": 40,
+      "local_study_type_hint": 19,
+      "requirement_mention_candidate": 10
+    },
+    "projection_seconds": 0.541243834,
+    "packs_promoted": 0
+  },
+  "verification": {
+    "focused_tests_passed": 5,
+    "repeat_content_identity": true,
+    "full_checkout": false,
+    "hosted_checks": "pending",
+    "independent_reference": false
+  },
+  "limitations": [
+    "Historical catalogue, not current live inventory",
+    "Selected descriptor observations, not a complete pinned ontology release",
+    "Titles and one admitted requirement pack only",
+    "Local curated variants; no neural NER comparison yet",
+    "Topic mentions do not establish applicability, obligation equivalence or coverage gaps",
+    "No new source rights or export approval"
+  ]
+}
