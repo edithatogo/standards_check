@@ -12,7 +12,14 @@ from pathlib import Path
 import numpy as np
 
 from .costing_retrieval import rank
-from .evidence_action_replay import FIXTURE_SHA, decision, observe, reference, split_document, tokens
+from .evidence_action_replay import (
+    FIXTURE_SHA,
+    decision,
+    observe,
+    reference,
+    split_document,
+    tokens,
+)
 from .lexical_text import cosine, term_counts, tfidf_vectors
 
 FACTORS = ("deficit_query", "hybrid_pool", "character_rank")

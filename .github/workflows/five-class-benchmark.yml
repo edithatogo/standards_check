@@ -30,6 +30,8 @@ on:
       - "tests/test_evidence_factorial.py"
       - "scripts/factorial_fairness.py"
       - "tests/test_factorial_fairness.py"
+      - "scripts/evidence_policy.py"
+      - "tests/test_evidence_policy.py"
       - ".github/workflows/five-class-benchmark.yml"
   workflow_dispatch:
 
@@ -1059,7 +1061,7 @@ jobs:
 
   factorial-fairness-development:
     # Same-repository, explicit read-only replay; no fresh inference.
-    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.label.name == 'run-factorial-fairness'
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && (github.event.label.name == 'run-factorial-fairness' || github.event.label.name == 'run-evidence-policy')
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
@@ -1087,11 +1089,18 @@ jobs:
           mkdir -p "$RUNNER_TEMP/fairness-prior" "$RUNNER_TEMP/fairness-evidence"
           git rev-parse HEAD > "$RUNNER_TEMP/fairness-evidence/commit.txt"
           python -m pip install pytest==9.2.0 numpy==2.3.5 ruff==0.17.6
-          ruff check scripts/factorial_fairness.py
-          ruff format --diff scripts/factorial_fairness.py > "$RUNNER_TEMP/fairness-evidence/format.diff" || test "$?" = 1
-          cat "$RUNNER_TEMP/fairness-evidence/format.diff"
-          python -m pytest --import-mode=importlib -q tests/test_factorial_fairness.py
+          # Capture both diagnostics even when the first fails; required CI remains check-only.
+          lint=0
+          ruff check --output-format concise scripts/factorial_fairness.py scripts/evidence_policy.py > "$RUNNER_TEMP/fairness-evidence/lint.txt" 2>&1 || lint=$?
+          fmt=0
+          ruff format --diff scripts/factorial_fairness.py scripts/evidence_policy.py > "$RUNNER_TEMP/fairness-evidence/format.diff" 2>&1 || fmt=$?
+          cat "$RUNNER_TEMP/fairness-evidence/lint.txt" "$RUNNER_TEMP/fairness-evidence/format.diff"
+          test "$lint" = 0
+          test "$fmt" -le 1
+          git hash-object scripts/factorial_fairness.py scripts/evidence_policy.py tests/test_factorial_fairness.py tests/test_evidence_policy.py > "$RUNNER_TEMP/fairness-evidence/executed-blobs.txt"
+          python -m pip check
           python -m pip freeze > "$RUNNER_TEMP/fairness-evidence/environment.txt"
+          python -m pytest --import-mode=importlib -q tests/test_factorial_fairness.py tests/test_evidence_policy.py
       - name: Reproduce the controlled retrieval and matched-coverage comparison
         env:
           GH_TOKEN: ${{ github.token }}
@@ -1100,6 +1109,29 @@ jobs:
           timeout 60 gh run download 45797316771 --repo "$GITHUB_REPOSITORY" --name evidence-verification-5dc29e64ad6ea05fd096cc72090603d2f759e209 --dir "$RUNNER_TEMP/fairness-prior"
           python -m scripts.factorial_fairness --neural-report "$RUNNER_TEMP/fairness-prior/report.json" --output "$RUNNER_TEMP/fairness-evidence/factorial-fairness-v2.json"
           sha256sum "$RUNNER_TEMP/fairness-evidence/factorial-fairness-v2.json" > "$RUNNER_TEMP/fairness-evidence/report-sha256.txt"
+      - name: Execute bounded observed-transition policy comparison and verify receipt
+        run: |
+          set -euo pipefail
+          python -m scripts.evidence_policy --output "$RUNNER_TEMP/fairness-evidence/evidence-policy-v1.json"
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+
+          root = Path(os.environ["RUNNER_TEMP"]) / "fairness-evidence"
+          report = json.loads((root / "evidence-policy-v1.json").read_text())
+          receipt = json.loads(Path("conductor/tracks/01-canonical-standard-pack/evidence-policy-v1-receipt.json").read_text())
+          for arms in report["comparisons"].values():
+              for arm in arms.values():
+                  for case in arm["cases"]:
+                      for edge in case["trace"]:
+                          del edge["acquisition_seconds"]
+          digest = hashlib.sha256(json.dumps(report, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+          (root / "policy-deterministic-sha256.txt").write_text(digest + "\n")
+          if digest != receipt["deterministic_output_sha256"]:
+              raise SystemExit("Policy replay differs from the pinned development receipt")
+          PY
       - name: Retain actual paired evidence
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
