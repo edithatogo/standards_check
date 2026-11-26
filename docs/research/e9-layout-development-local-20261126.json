@@ -1,0 +1,680 @@
+{
+  "status": "local_overlay_development_not_exact_head",
+  "reconstructed_from_actual_local_json": true,
+  "tests": {
+    "red": "ModuleNotFoundError",
+    "green": 5
+  },
+  "arms": [
+    {
+      "experiment": "E9-layout-development-v1",
+      "reader": "pdfplumber",
+      "reader_version": "0.11.9",
+      "revision": "d88f787ffd4647117bca4ca400cbb68d95197d40+local-overlay",
+      "implementation_sha256": "bce38736bb155f261106021e077e241c54efc39041464cfc53c4006aa406e918",
+      "python": "3.13.5",
+      "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+      "model_weight_bytes": 0,
+      "download_bytes": 0,
+      "reference_status": "author_labelled_synthetic_development",
+      "scientific_qualification": false,
+      "canonical_packs_promoted": 0,
+      "seconds": 0.06253940399994917,
+      "peak_individual_process_rss_kib": 102416,
+      "scores": {
+        "row": {
+          "tp": 1,
+          "fp": 3,
+          "fn": 3,
+          "precision": 0.25,
+          "recall": 0.25
+        },
+        "nested": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1,
+          "recall": 1
+        },
+        "footnote": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1,
+          "recall": 1
+        },
+        "qualifier_link": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1,
+          "recall": 1
+        }
+      },
+      "cases": {
+        "existing-grid": {
+          "source_sha256": "f0e1ed7adca73daf68a4a4c1794dc5b4fbd6af3d6b622fc1d876f0560e94a83c",
+          "reference": [
+            [
+              [
+                "row",
+                1,
+                "1.1",
+                "Example requirement."
+              ],
+              [
+                40,
+                70,
+                280,
+                100
+              ]
+            ]
+          ],
+          "predictions": [
+            [
+              [
+                "row",
+                1,
+                "1.1",
+                "Example requirement."
+              ],
+              "page/1/lines/2-2"
+            ]
+          ],
+          "missing": [],
+          "extra": [],
+          "scores": {
+            "row": {
+              "tp": 1,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "nested": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "precision": null,
+              "recall": null
+            },
+            "footnote": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "precision": null,
+              "recall": null
+            },
+            "qualifier_link": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "precision": null,
+              "recall": null
+            }
+          },
+          "reader_pages": [
+            "Sub-item number Sub-item\n1.1 Example requirement."
+          ]
+        },
+        "nested-notes": {
+          "source_sha256": "d983ced46b3c3cec3196acbe2eabef04ae82e545abe8f25a6cd152a23e6e6173",
+          "reference": [
+            [
+              [
+                "row",
+                1,
+                "1.1",
+                "Report outcomes. [a] Include missing data."
+              ],
+              [
+                15,
+                49,
+                310,
+                77
+              ]
+            ],
+            [
+              [
+                "row",
+                1,
+                "1.1.1",
+                "If measured, report timing."
+              ],
+              [
+                15,
+                77,
+                310,
+                105
+              ]
+            ],
+            [
+              [
+                "row",
+                1,
+                "1.2",
+                "Report harms."
+              ],
+              [
+                15,
+                105,
+                310,
+                133
+              ]
+            ],
+            [
+              [
+                "nested",
+                1,
+                "1.1.1",
+                "1.1"
+              ],
+              [
+                15,
+                49,
+                90,
+                105
+              ]
+            ],
+            [
+              [
+                "footnote",
+                1,
+                "a",
+                "Except when withheld."
+              ],
+              [
+                15,
+                145,
+                200,
+                165
+              ]
+            ],
+            [
+              [
+                "qualifier_link",
+                1,
+                "1.1",
+                "a"
+              ],
+              [
+                95,
+                49,
+                270,
+                77
+              ]
+            ],
+            [
+              [
+                "qualifier_link",
+                1,
+                "1.1.1",
+                "If measured"
+              ],
+              [
+                95,
+                77,
+                270,
+                105
+              ]
+            ]
+          ],
+          "predictions": [
+            [
+              [
+                "row",
+                1,
+                "1.1",
+                "Report outcomes. [a] 8.3 Include missing data."
+              ],
+              "page/1/lines/2-3"
+            ],
+            [
+              [
+                "qualifier_link",
+                1,
+                "1.1",
+                "a"
+              ],
+              "page/1/lines/2-3"
+            ],
+            [
+              [
+                "row",
+                1,
+                "1.1.1",
+                "If measured, report timing. 0"
+              ],
+              "page/1/lines/4-4"
+            ],
+            [
+              [
+                "nested",
+                1,
+                "1.1.1",
+                "1.1"
+              ],
+              "page/1/lines/4-4"
+            ],
+            [
+              [
+                "qualifier_link",
+                1,
+                "1.1.1",
+                "If measured"
+              ],
+              "page/1/lines/4-4"
+            ],
+            [
+              [
+                "row",
+                1,
+                "1.2",
+                "Report harms. 1"
+              ],
+              "page/1/lines/5-5"
+            ],
+            [
+              [
+                "footnote",
+                1,
+                "a",
+                "Except when withheld."
+              ],
+              "page/1/lines/6-6"
+            ]
+          ],
+          "missing": [
+            [
+              "row",
+              1,
+              "1.1",
+              "Report outcomes. [a] Include missing data."
+            ],
+            [
+              "row",
+              1,
+              "1.1.1",
+              "If measured, report timing."
+            ],
+            [
+              "row",
+              1,
+              "1.2",
+              "Report harms."
+            ]
+          ],
+          "extra": [
+            [
+              "row",
+              1,
+              "1.1",
+              "Report outcomes. [a] 8.3 Include missing data."
+            ],
+            [
+              "row",
+              1,
+              "1.1.1",
+              "If measured, report timing. 0"
+            ],
+            [
+              "row",
+              1,
+              "1.2",
+              "Report harms. 1"
+            ]
+          ],
+          "scores": {
+            "row": {
+              "tp": 0,
+              "fp": 3,
+              "fn": 3,
+              "precision": 0,
+              "recall": 0
+            },
+            "nested": {
+              "tp": 1,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "footnote": {
+              "tp": 1,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "qualifier_link": {
+              "tp": 2,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1,
+              "recall": 1
+            }
+          },
+          "reader_pages": [
+            "Sub-item number Sub-item Score\n1.1 Report outcomes. [a] 8.3\nInclude missing data.\n1.1.1 If measured, report timing. 0\n1.2 Report harms. 1\n[a] Except when withheld."
+          ]
+        }
+      }
+    },
+    {
+      "experiment": "E9-layout-development-v1",
+      "reader": "poppler",
+      "reader_version": "25.06.0",
+      "revision": "d88f787ffd4647117bca4ca400cbb68d95197d40+local-overlay",
+      "implementation_sha256": "bce38736bb155f261106021e077e241c54efc39041464cfc53c4006aa406e918",
+      "python": "3.13.5",
+      "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+      "model_weight_bytes": 0,
+      "download_bytes": 0,
+      "reference_status": "author_labelled_synthetic_development",
+      "scientific_qualification": false,
+      "canonical_packs_promoted": 0,
+      "seconds": 0.028219686000056754,
+      "peak_individual_process_rss_kib": 95780,
+      "scores": {
+        "row": {
+          "tp": 4,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1,
+          "recall": 1
+        },
+        "nested": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1,
+          "recall": 1
+        },
+        "footnote": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1,
+          "recall": 1
+        },
+        "qualifier_link": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1,
+          "recall": 1
+        }
+      },
+      "cases": {
+        "existing-grid": {
+          "source_sha256": "f0e1ed7adca73daf68a4a4c1794dc5b4fbd6af3d6b622fc1d876f0560e94a83c",
+          "reference": [
+            [
+              [
+                "row",
+                1,
+                "1.1",
+                "Example requirement."
+              ],
+              [
+                40,
+                70,
+                280,
+                100
+              ]
+            ]
+          ],
+          "predictions": [
+            [
+              [
+                "row",
+                1,
+                "1.1",
+                "Example requirement."
+              ],
+              "page/1/lines/4-4"
+            ]
+          ],
+          "missing": [],
+          "extra": [],
+          "scores": {
+            "row": {
+              "tp": 1,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "nested": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "precision": null,
+              "recall": null
+            },
+            "footnote": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "precision": null,
+              "recall": null
+            },
+            "qualifier_link": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "precision": null,
+              "recall": null
+            }
+          },
+          "reader_pages": [
+            "Sub-item number   Sub-item\n\n\n1.1               Example requirement.\n"
+          ]
+        },
+        "nested-notes": {
+          "source_sha256": "d983ced46b3c3cec3196acbe2eabef04ae82e545abe8f25a6cd152a23e6e6173",
+          "reference": [
+            [
+              [
+                "row",
+                1,
+                "1.1",
+                "Report outcomes. [a] Include missing data."
+              ],
+              [
+                15,
+                49,
+                310,
+                77
+              ]
+            ],
+            [
+              [
+                "row",
+                1,
+                "1.1.1",
+                "If measured, report timing."
+              ],
+              [
+                15,
+                77,
+                310,
+                105
+              ]
+            ],
+            [
+              [
+                "row",
+                1,
+                "1.2",
+                "Report harms."
+              ],
+              [
+                15,
+                105,
+                310,
+                133
+              ]
+            ],
+            [
+              [
+                "nested",
+                1,
+                "1.1.1",
+                "1.1"
+              ],
+              [
+                15,
+                49,
+                90,
+                105
+              ]
+            ],
+            [
+              [
+                "footnote",
+                1,
+                "a",
+                "Except when withheld."
+              ],
+              [
+                15,
+                145,
+                200,
+                165
+              ]
+            ],
+            [
+              [
+                "qualifier_link",
+                1,
+                "1.1",
+                "a"
+              ],
+              [
+                95,
+                49,
+                270,
+                77
+              ]
+            ],
+            [
+              [
+                "qualifier_link",
+                1,
+                "1.1.1",
+                "If measured"
+              ],
+              [
+                95,
+                77,
+                270,
+                105
+              ]
+            ]
+          ],
+          "predictions": [
+            [
+              [
+                "row",
+                1,
+                "1.1",
+                "Report outcomes. [a] Include missing data."
+              ],
+              "page/1/lines/3-4"
+            ],
+            [
+              [
+                "qualifier_link",
+                1,
+                "1.1",
+                "a"
+              ],
+              "page/1/lines/3-4"
+            ],
+            [
+              [
+                "row",
+                1,
+                "1.1.1",
+                "If measured, report timing."
+              ],
+              "page/1/lines/6-6"
+            ],
+            [
+              [
+                "nested",
+                1,
+                "1.1.1",
+                "1.1"
+              ],
+              "page/1/lines/6-6"
+            ],
+            [
+              [
+                "qualifier_link",
+                1,
+                "1.1.1",
+                "If measured"
+              ],
+              "page/1/lines/6-6"
+            ],
+            [
+              [
+                "row",
+                1,
+                "1.2",
+                "Report harms."
+              ],
+              "page/1/lines/9-9"
+            ],
+            [
+              [
+                "footnote",
+                1,
+                "a",
+                "Except when withheld."
+              ],
+              "page/1/lines/14-14"
+            ]
+          ],
+          "missing": [],
+          "extra": [],
+          "scores": {
+            "row": {
+              "tp": 3,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "nested": {
+              "tp": 1,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "footnote": {
+              "tp": 1,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1,
+              "recall": 1
+            },
+            "qualifier_link": {
+              "tp": 2,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1,
+              "recall": 1
+            }
+          },
+          "reader_pages": [
+            "Sub-item number     Sub-item                      Score\n\n1.1                 Report outcomes. [a]          8.3\n                    Include missing data.\n\n  1.1.1             If measured, report timing.   0\n\n\n1.2                 Report harms.                 1\n\n\n\n\n[a] Except when withheld.\n"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "authority": "source-corroborated candidate, not independent interpretation or production admission",
+  "main_revision": "08e86696180936ef6722e539a32d6ebbd2222625",
+  "seed_revision": "8de17cb4fbb4b19fe0b6ded8fd4227f74f771537",
+  "source_pack_sha256": "56f79ee76d463c3878431a0342f127a1bcc89c019d636e4f28afdc0dfc462ec1",
+  "source_pack_git_blob": "318b0786e195ee9b6ccb5b0a39ade117ce3c6a2c",
+  "seed_sha256": "f3a1fd410119c41655e1dff252dba5a84ca4b03d02c0b57bfa504bef3e02a16e",
+  "seed_git_blob": "17a8bf58760a1c25ed1a703659e1edc14cf49dd8",
+  "source_adapter_blob": "721108d15fc36c09918ec222ec7e1ad2b0c9523d",
+  "applicability_engine_blob": "d5da3848aa1b073097a842b95a6303b7d7a0213b",
+  "audit_blob": "daa8e5cb4ba09f5a89181f1d65c0b415d6aacedb",
+  "tests_blob": "5cd5b251947b1cbfd9f1ead652d17ed945096cd2",
+  "original_local_report_sha256": "54237c360436dfd47afb7094509901ebab85dac41373c2d6be7007e0a24ae30a",
+  "source_license_record": "CC-BY-4.0",
+  "parent_items_retained": 42,
+  "clause_anchors_matched": 7,
+  "distinct_candidate_pairs": 21,
+  "identity_controls": 7,
+  "identity_controls_equivalent": 7,
+  "distinct_candidate_equivalences": 0,
+  "trigger_only_collisions": 1,
+  "witness": {
+    "condition": "meta_analysis_performed",
+    "a": "prisma-2020:13d:meta-analysis-methods",
+    "b": "prisma-2020:20b:meta-analysis-results",
+    "a_only": {
+      "condition": true,
+      "a_reported": true,
+      "b_reported": false
+    },
+    "b_only": {
+      "condition": true,
+      "a_reported": false,
+      "b_reported": true
+    },
+    "relation_under_explicit_independence_assumption": "indeterminate"
+  },
+  "fact_state_campaign": {
+    "synthetic_atoms": 6,
+    "scenarios": 4096,
+    "clause_checks": 28672,
+    "mismatches": 0,
+    "counts": {
+      "unknown": 7168,
+      "required": 7168,
+      "not_applicable": 7168,
+      "held_conflict": 7168
+    },
+    "seconds": 1.711885166000684
+  },
+  "focused_local_tests": 29,
+  "source_audit_tests": 6,
+  "full_checkout": false,
+  "actual_manuscript_review_outcomes": 0,
+  "admission": "held_independent_scope_and_fact_review"
+}

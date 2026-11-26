@@ -180,6 +180,32 @@ PR #177 receiving checks and the next bounded implementations, local evidence, c
 hosted CI gates, exact release scan integration and independent-reference holds. Preserve
 E1–E14 and one integrated publication under #158. All eight wider tasks remain open.
 
+
+### E9–E11 separate qualification receipts — 26 November
+
+Under T05.048, T05.049 and T05.060 / #158, keep E9 layout, E10 extractive
+tagging and E11 graph-assisted retrieval as separate experiments with identical
+within-experiment inputs and one changed method. See the
+[Track 01 bounded sequence](../01-canonical-standard-pack/plan.md#e9e11-bounded-opt-in-sequence--26-november)
+and [E9 local receipt](../../../docs/research/e9-layout-development-20261126.md).
+No pooled accuracy, automatic pack promotion, semantic equivalence, or
+scientific acceptance from synthetic agreement. Before confirmatory execution,
+freeze independent family-component partitions (related editions never cross
+splits), exact models/runtime/source hashes, authorisation, reference scope,
+denominators, metrics and resource/harm limits. Run E10 and E11 in separate
+opt-in lanes only after development qualification; failed/abstained cases
+remain in denominators and all negative observations are retained.
+
+E9 actual hosted comparison passed with both reader versions pinned; the
+[verified hosted receipt](../../../docs/research/e9-layout-development-20261126.md#verified-hosted-replay-and-coverage-repair)
+records the downloaded artifact, source hashes, costs, and the separate
+Codecov patch failure (57.02% vs 90%). Eight new local tests cover the runner
+at 99% branch-inclusive module coverage; protected replay still required.
+Reconcile #183–185 with #182 before integration; do not conflate their
+synthetic and retained-replay comparators with independent scientific results.
+
 ## Orthogonal reference and experiment follow-up — 26 November 2026
 
 T05.060-062: #179 protected merge d88f787ffd4647117bca4ca400cbb68d95197d40; exact PR head 56a1acb53596ee86e5f8441dd346034c9a1649ff, run 45782490486, 845 passed, 3 skipped, 91.71% combined coverage, seven required checks green, advisory patch 83.48% versus 90%, optional offline security queued. E15-E21 planned as #158 supplements; no independent scientific freeze, authorized corpus or release approval. Preserve gates and current receiving verification separately.
+
+Conditional-scope audit (T05.060/062 / #158): [source-bound development receipt](../../../docs/research/conditional-scope-audit-20261126.md) records exact source/seed pins, 4,096 synthetic fact scenarios, 28,672 matching clause-state checks and retained conditional-identity counterexamples. No independent review or scientific gate closure; protected exact-head qualification outstanding.
