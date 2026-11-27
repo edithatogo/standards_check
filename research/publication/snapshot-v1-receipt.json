@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "status": "exploratory_not_scientifically_qualified",
+  "snapshot_sha256": "42b3a00545ebc855295687218deae8a249134938be2fd6e3c441662a1d6e084e",
+  "compiler_sha256": "9a1aca4f816fcede24b22e1a813362d9316136689147d7a6982cceec80d80574",
+  "manifest_sha256": "72947eb94da7c65a2aef4b07fd552cd7c95a8dbac37273f031066821c500a35a",
+  "projection_sha256": "3bafe5cb5585c564608cd836356efe835133da409e881d505533f49268716934",
+  "comparison_sha256": "1c914597f3432f9cb5b9ee38960a4847208fc1b802f1f51de3b0e414e32d8276",
+  "archive_sha256": "36801a156bc8f2b1016405eb9c84b0d4f59a52a3251335edeb54d555a1369657",
+  "hosted_archives": 53,
+  "local_reports": 14,
+  "input_count": 67,
+  "projection_count": 141,
+  "panel_count": 79,
+  "metric_records": 2317,
+  "archive_retention": "Exact ZIP retained in researcher's personal Library; not public distribution; scoped inventory only",
+  "structural": {
+    "report_sha256": "53aa8b11726be059c299b406ec50040f2bb81a90f1551a3b682aa9957b0ad9b7",
+    "source_artefact": 15110837213,
+    "pdf_artefact": 15105308560,
+    "contexts": [
+      {
+        "edition": "consort-2025",
+        "n": 42,
+        "direct": 30,
+        "closure": 42,
+        "gains": 12,
+        "losses": 0
+      },
+      {
+        "edition": "spirit-2025",
+        "n": 53,
+        "direct": 34,
+        "closure": 53,
+        "gains": 19,
+        "losses": 0
+      }
+    ],
+    "cross_reference": {
+      "source": "13a",
+      "target": "5",
+      "configurations": 8,
+      "eligible_candidates": 41,
+      "word_ranks": [
+        8,
+        1,
+        7,
+        1
+      ],
+      "char_ranks": [
+        4,
+        1,
+        4,
+        1
+      ]
+    },
+    "timing_free_replay_equal": true,
+    "scientific_qualification": false
+  },
+  "integration": {
+    "pr184_receiving_assurance": 45811145369,
+    "pr184_receiving_passed": true,
+    "pr190_head": "0093bf2a86c474685ea2027f7785f4f8264d0c19",
+    "pr190_merge": "2d011db16600af47610c16cb52131aba5fea826d",
+    "pr190_protected_checks_passed": true,
+    "offline_ai_security": "queued_non_required"
+  },
+  "local_focused_tests": 5,
+  "full_six_factor_executed_slots": 0,
+  "independent_semantic_reference_qualified": false
+}
