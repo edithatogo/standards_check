@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "main_revision": "776ed1dbfbe19d16365310ef0fa07d29a793611a",
+  "source_revision": "e34dd7d8559a5df0fe4b7185c093978e4b2d6cbe",
+  "initial_census_artifact": 15031534787,
+  "initial_survey_sha256": "fc859acaf9ae378b3bb1a2d74be0eeb0ff294319434d83bce6f9a4daf835fa32",
+  "start_bulk": {
+    "deferred": 202,
+    "held": 2,
+    "observed_not_reconciled": 1
+  },
+  "local_pack_sha256": "56f79ee76d463c3878431a0342f127a1bcc89c019d636e4f28afdc0dfc462ec1",
+  "pack_inventory_output_sha256": "64df8dd8ace0873746d1f6906fc2336ce47218abc935bc0ce2470cd004afe54b",
+  "local_tested_blobs": {
+    "resume": "4ec437dfd76ee2ad9aa6ee8402de4e3025e03577",
+    "resume_tests": "da70dfd8dfc475a29b170bf91de8588d051d65b9",
+    "inventory": "c20edbb6982da6a1fd7f36a40add14aa9b26f500",
+    "inventory_tests": "c9da4917d9cf8c91415be867c067c326951ef23a"
+  },
+  "local_tests": 42,
+  "focused_new_tests": 6,
+  "eligible_pack_count": 1,
+  "item_count": 42,
+  "explicit_reference_count": 1,
+  "queries": 42,
+  "candidate_pairs": 1764,
+  "word_hits": {
+    "1": 41,
+    "3": 42,
+    "5": 42
+  },
+  "char_hits": {
+    "1": 42,
+    "3": 42,
+    "5": 42
+  },
+  "closure_hits": {
+    "word": 42,
+    "char": 42
+  },
+  "boundary": "Masked same-source item identity recovery, not semantic relevance, rights clearance for candidate sources, or independent scientific validation.",
+  "fresh_bulk_status": "observed_two_held_no_new_qualified_sources",
+  "full_checkout_local": false,
+  "first_bulk_checkpoint": {
+    "run_id": 45802629341,
+    "artifact_id": 15107508921,
+    "archive_sha256": "be0c2221b737042d0bb4656d1f1f4145324dbaf820112b1e366ba7f402e8676a",
+    "survey_sha256": "4e05045889b1f8f3a6228466e88d13b2baf866be63ea3c453e305f020fe468e3",
+    "selected": 6,
+    "attempted": 2,
+    "attempted_pmcids": [
+      "PMC10155050",
+      "PMC10182844"
+    ],
+    "remaining_unattempted": 200,
+    "held": 4,
+    "observed_not_reconciled": 1,
+    "canonical_packs_promoted": 0
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "source_revision": "e34dd7d8559a5df0fe4b7185c093978e4b2d6cbe",
+  "artifact_id": 15031534787,
+  "run_id": 45635380131,
+  "archive_sha256": "21046589502f064d54800c9f495d72d18b97184a1db376f06da773b84bde3f01",
+  "member_sha256": {
+    "equator-article-survey.json": "fc859acaf9ae378b3bb1a2d74be0eeb0ff294319434d83bce6f9a4daf835fa32",
+    "equator-catalogue.json": "abea437bf8bc34a14a6022c8e76367cd994e49bc6e888b2943030381068fa868",
+    "equator-legacy-alignment.json": "343f460e865c9cb5ea07c912c946c4bc8a2647dee580509ca8334939c168173a",
+    "equator-source-link-candidates.json": "034380368c88d756f31d47ccec2b9f9bbab48881e418f60d48fa471043215483"
+  },
+  "output_sha256": "4bcf3434f1b907df9a0b52afcaef90b8a184aae05e8ab9b9a30a2f692a0439c2",
+  "source_blob": "73ea48989dfb1235903b5162eb875e8400703305",
+  "tests_blob": "4fae6a6e0cb584583609ca84b31dd99fd8e86523",
+  "focused_tests_passed": 4,
+  "summary": {
+    "bulk_article_status": {
+      "deferred_acquisition_budget": 202,
+      "held": 2,
+      "source_inventory_observed_not_reconciled": 1
+    },
+    "directory_entries": 720,
+    "end_to_end_qualified_from_these_receipts": 0,
+    "entries": 720,
+    "legacy_records": 57,
+    "metadata_status": {
+      "extracted_unverified": 719,
+      "needs_review": 1
+    },
+    "priority_article_status": {
+      "held": 6
+    },
+    "rights_observation": {
+      "not_recorded": 132,
+      "unassessed_article_and_table_reuse": 588
+    },
+    "source_observation": {
+      "deferred_acquisition_budget": 202,
+      "held": 2,
+      "not_evidenced_in_bulk_receipt": 515,
+      "source_inventory_observed_not_reconciled": 1
+    },
+    "survey_status": {
+      "lookup_incomplete": 56,
+      "metadata_only": 379,
+      "missing_identifier": 76,
+      "oa_xml_candidate": 209
+    },
+    "with_legacy_candidates": 41,
+    "with_legacy_original_candidates": 16,
+    "with_source_link_candidates": 317
+  },
+  "study_type_counts_and_oa_candidates": [
+    [
+      "Animal pre-clinical research",
+      24,
+      7
+    ],
+    [
+      "Artificial intelligence/Machine learning",
+      31,
+      11
+    ],
+    [
+      "Clinical practice guidelines",
+      19,
+      8
+    ],
+    [
+      "Clinical trials",
+      254,
+      83
+    ],
+    [
+      "Diagnosis/Prognosis/Prediction",
+      41,
+      15
+    ],
+    [
+      "Economic evaluations",
+      30,
+      12
+    ],
+    [
+      "Experimental studies",
+      262,
+      86
+    ],
+    [
+      "Mixed methods studies",
+      21,
+      11
+    ],
+    [
+      "No study design specified",
+      131,
+      21
+    ],
+    [
+      "Observational studies",
+      244,
+      92
+    ],
+    [
+      "Other",
+      22,
+      5
+    ],
+    [
+      "Qualitative research",
+      58,
+      21
+    ],
+    [
+      "Quality improvement studies",
+      14,
+      6
+    ],
+    [
+      "Reliability/Agreement studies",
+      4,
+      0
+    ],
+    [
+      "Study protocols",
+      30,
+      11
+    ],
+    [
+      "Systematic reviews/Meta-analyses/Reviews",
+      67,
+      18
+    ],
+    [
+      "Unclassified",
+      1,
+      0
+    ]
+  ],
+  "claim_boundary": "Overlapping metadata categories; no inferred extraction, rights clearance, source admission, or complete pipeline execution. Historical census not current live EQUATOR directory.",
+  "protected_checks": "pending"
+}

@@ -326,6 +326,76 @@ def observe_snapshot(root: Path, cohort: Cohort) -> dict:
     }
 
 
+def manifestation_groups(sources, expected_ids):
+    """Group byte aliases and complete ordered row fingerprints within one edition.
+
+    These are storage and content-comparison candidates, not semantic/rights admission.
+    """
+    byte_groups, row_groups, held = {}, {}, []
+    expected = list(expected_ids or [])
+    issues_by_path = {}
+
+    def sha(value):
+        return (
+            isinstance(value, str)
+            and len(value) == 64
+            and all(c in "0123456789abcdef" for c in value)
+        )
+
+    if len(expected) != len(set(expected)):
+        raise ValueError("duplicate manifestation denominator")
+    for source in sources:
+        path = source["path"]
+        if path in issues_by_path:
+            raise ValueError("duplicate manifestation path")
+        issues_by_path[path] = source["issues"]
+        source_hash = source["source_sha256"]
+        if sha(source_hash):
+            byte_groups.setdefault(source_hash, []).append(path)
+        rows = source["rows"]
+        if (
+            not sha(source_hash)
+            or not expected
+            or [row["item_id"] for row in rows] != expected
+            or any(
+                not row.get("identifier_anchor")
+                or not row.get("requirement_anchor")
+                or not sha(row.get("requirement_sha256"))
+                for row in rows
+            )
+        ):
+            held.append(path)
+            continue
+        signature = hashlib.sha256(
+            json.dumps(
+                [[row["item_id"], row["requirement_sha256"]] for row in rows],
+                separators=(",", ":"),
+            ).encode()
+        ).hexdigest()
+        row_groups.setdefault(signature, []).append(path)
+    return {
+        "byte_alias_groups": [
+            {"source_sha256": digest, "paths": sorted(paths)}
+            for digest, paths in sorted(byte_groups.items())
+            if len(paths) > 1
+        ],
+        "ordered_row_hash_groups": [
+            {
+                "ordered_rows_sha256": digest,
+                "paths": sorted(paths),
+                "structural_holds": {
+                    path: issues_by_path[path] for path in sorted(paths) if issues_by_path[path]
+                },
+            }
+            for digest, paths in sorted(row_groups.items())
+            if len(paths) > 1
+        ],
+        "held_row_fingerprint_paths": sorted(held),
+        "independent_identity_verified": False,
+        "canonical_admission": False,
+    }
+
+
 def benchmark(root: Path, cohorts: list[Cohort]) -> dict:
     editions = []
     seen = set()
@@ -389,6 +459,7 @@ def benchmark(root: Path, cohorts: list[Cohort]) -> dict:
                 ),
                 "sources": sources,
                 "pairwise": pairwise,
+                "manifestation_groups": manifestation_groups(sources, cohort.expected_ids),
             }
         )
     return {

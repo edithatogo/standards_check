@@ -45,6 +45,84 @@ def inventory(source: Path) -> tuple[str, list[tuple[str, str]]]:
     return revision, sorted(records)
 
 
+def asset_report(source, revision, records, previous=None):
+    """Identify published candidate-file drift using Git tree metadata only."""
+    parents = {path.rsplit("/", 1)[0] for path, _ in records}
+    assets = {}
+    suffixes = {
+        ".qmd",
+        ".pdf",
+        ".doc",
+        ".docx",
+        ".xls",
+        ".xlsx",
+        ".csv",
+        ".tsv",
+        ".rtf",
+        ".odt",
+        ".xml",
+        ".html",
+    }
+    tree = git(source, "ls-tree", "-r", "-z", revision, "--", "reporting-guidelines")
+    for entry in tree.split("\0"):
+        if not entry:
+            continue
+        left, path = entry.split("\t", 1)
+        parts = path.split("/")
+        if (
+            "/".join(parts[:2]) not in parents
+            or any(p.endswith("_files") for p in parts[2:-1])
+            or Path(path).suffix.lower() not in suffixes
+        ):
+            continue
+        mode, kind, sha = left.split()
+        if (
+            kind != "blob"
+            or mode not in ("100644", "100755")
+            or not re.fullmatch(r"[0-9a-f]{40}", sha)
+        ):
+            raise ValueError(f"Unexpected candidate asset type: {path}")
+        assets[path] = sha
+    if any(assets.get(path) != sha for path, sha in records):
+        raise ValueError("candidate asset inventory does not match directory")
+    changes = previous_revision = None
+    if previous is not None:
+        old = previous.get("assets")
+        previous_revision = previous.get("source_revision")
+        if (
+            previous.get("schema_version") != 1
+            or previous.get("source_repository") != UPSTREAM
+            or not isinstance(previous_revision, str)
+            or not re.fullmatch(r"[0-9a-f]{40}", previous_revision)
+            or not isinstance(old, dict)
+            or not old
+            or any(
+                not path.startswith("reporting-guidelines/")
+                or not isinstance(sha, str)
+                or not re.fullmatch(r"[0-9a-f]{40}", sha)
+                for path, sha in old.items()
+            )
+        ):
+            raise ValueError("invalid asset baseline")
+        changes = {
+            "added": sorted(assets.keys() - old.keys()),
+            "removed": sorted(old.keys() - assets.keys()),
+            "revised": sorted(
+                path for path in assets.keys() & old.keys() if assets[path] != old[path]
+            ),
+        }
+    return {
+        "schema_version": 1,
+        "source_repository": UPSTREAM,
+        "source_revision": revision,
+        "previous_source_revision": previous_revision,
+        "published_count": len(records),
+        "assets": dict(sorted(assets.items())),
+        "changes": changes,
+        "boundary": "Git tree candidates only; no content, rights, edition or canonical admission",
+    }
+
+
 def _frontmatter(path: Path) -> dict:
     source = path.read_text(encoding="utf-8-sig")
     if not source.startswith("---\n"):
@@ -155,12 +233,19 @@ def build_catalog(
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source", type=Path, required=True, help="Local EQUATOR Git checkout")
-    parser.add_argument("--mode", choices=("discover", "catalogue"), required=True)
+    parser.add_argument("--mode", choices=("discover", "catalogue", "assets"), required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--previous-assets", type=Path)
     parser.add_argument("--check", action="store_true", help="Fail on output drift; do not write")
     args = parser.parse_args()
     revision, paths = inventory(args.source)
-    result = build_catalog(args.source, revision, paths, metadata=args.mode == "catalogue")
+    if args.mode == "assets":
+        previous = json.loads(args.previous_assets.read_text()) if args.previous_assets else None
+        result = asset_report(args.source, revision, paths, previous)
+    else:
+        if args.previous_assets:
+            parser.error("--previous-assets requires assets mode")
+        result = build_catalog(args.source, revision, paths, metadata=args.mode == "catalogue")
     output = (json.dumps(result, indent=2, ensure_ascii=False) + "\n").encode("utf-8")
     if args.check:
         if not args.output.is_file() or args.output.read_bytes() != output:

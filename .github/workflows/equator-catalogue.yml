@@ -28,6 +28,7 @@ on:
       - "markdown/**"
       - "source/equator/**"
       - "tests/test_sync_equator_catalog.py"
+      - "tests/test_equator_asset_monitor.py"
       - ".github/workflows/equator-catalogue.yml"
   push:
     branches: [main]
@@ -136,6 +137,26 @@ jobs:
               echo "::warning::Historical bootstrap receipt unavailable or checksum mismatch"
             fi
           done
+      - name: Detect candidate document changes without acquiring document bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          args=()
+          for snapshot in "$RUNNER_TEMP"/prior/*/equator-asset-inventory.json; do
+            if test -s "$snapshot"; then args=(--previous-assets "$snapshot"); break; fi
+          done
+          python scripts/sync_equator_catalog.py --source "$RUNNER_TEMP/equator-website" \
+            --mode assets --output "$RUNNER_TEMP/equator-asset-inventory.json" "${args[@]}"
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          report = json.loads((Path(os.environ["RUNNER_TEMP"]) / "equator-asset-inventory.json").read_text())
+          changes = report["changes"]
+          print("candidate asset inventory", len(report["assets"]))
+          print("asset delta", {key: len(value) for key, value in changes.items()} if changes is not None else "initial snapshot; prior asset receipt unavailable")
+          PY
       - name: Resolve all catalogue identifiers and acquire selected primary OA candidates
         env:
           SOURCE_API_EMAIL: ${{ vars.SOURCE_API_EMAIL }}
@@ -186,11 +207,19 @@ jobs:
           after = json.loads((Path(os.environ["RUNNER_TEMP"]) / "equator-discovery.json").read_text())
           old = {x["id"]: x["source_blob_sha"] for x in before["guidelines"]}
           new = {x["id"]: x["source_blob_sha"] for x in after["guidelines"]}
-          counts = {
-              "added": len(new.keys() - old.keys()),
-              "removed": len(old.keys() - new.keys()),
-              "revised": sum(old[x] != new[x] for x in old.keys() & new.keys()),
+          changes = {
+              "added": sorted(new.keys() - old.keys()),
+              "removed": sorted(old.keys() - new.keys()),
+              "revised": sorted(x for x in old.keys() & new.keys() if old[x] != new[x]),
           }
+          counts = {key: len(value) for key, value in changes.items()}
+          delta = {
+              "before_source_revision": before["source_revision"],
+              "after_source_revision": after["source_revision"],
+              "counts": counts,
+              "changed_ids": changes,
+          }
+          (Path(os.environ["RUNNER_TEMP"]) / "equator-directory-delta.json").write_text(json.dumps(delta, indent=2) + "\n")
           print(f"source: {after['source_revision']} / {after['published_count']} published")
           print(f"directory changes vs checked-in pin: {counts}")
           metadata = json.loads((Path(os.environ["RUNNER_TEMP"]) / "equator-catalogue.json").read_text())
@@ -203,6 +232,8 @@ jobs:
           name: equator-source-${{ github.run_id }}
           path: |
             ${{ runner.temp }}/equator-discovery.json
+            ${{ runner.temp }}/equator-asset-inventory.json
+            ${{ runner.temp }}/equator-directory-delta.json
             ${{ runner.temp }}/equator-catalogue.json
             ${{ runner.temp }}/equator-legacy-alignment.json
             ${{ runner.temp }}/equator-source-link-candidates.json

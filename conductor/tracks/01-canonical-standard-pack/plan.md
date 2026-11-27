@@ -389,7 +389,7 @@ registry, canonical schema, admission path or observed publication claim.
   is not a source-rights decision or a neural-model qualification. Next: exact
   repository-runtime replay, independently annotated qualified families, then
   one pinned Granite-Docling challenger if residual layout loss merits it.
-- **E10 (T01.027, T01.029), planned after E9:** compare one compact extractive
+- **E10 (T01.027, T01.029), development executed:** compare one compact extractive
   GLiNER2.5-small candidate (the protocol's proposed checkpoint, not yet qualified)
   against existing classical condition/modality/negation rules on identical
   authorized source strings. Freeze model revision, weight/tokenizer/config hashes,
@@ -398,7 +398,7 @@ registry, canonical schema, admission path or observed publication claim.
   conditions, exceptions, nested spans, chunk-boundary losses and abstentions,
   including empty/unresolved cases. No generation, canonical writes or remote
   inference. Separate bounded opt-in job and receipt.
-- **E11 (T01.050, T01.053, T01.064), planned after E9:** reuse existing candidate
+- **E11 (T01.050, T01.053, T01.064), development executed:** reuse existing candidate
   ranking, stable IDs, complete-pool checks and paired-retrieval metrics in
   scripts/costing_retrieval.py and requirement-graph contract. Freeze a common
   eligible universe and lexical incumbent rankings; use source-anchored parent
@@ -410,7 +410,9 @@ registry, canonical schema, admission path or observed publication claim.
   graph edges are advisory, never equivalence evidence. Keep independent
   directional evidence and applicability/rights gates. Separate opt-in job.
 
-E10/E11 are prospective work, not executed. Use T01.052 and T05.049 for confirmatory
+E9/E11 are merged (#182/#187); E10 hosted results and follow-up are retained in #186/#189.
+See the [original-request and shared recall crosswalk](../../source-reconciliation/specialist-family-gates-20261126.md#original-e9e11-request-recall-coordination-and-acceptance-crosswalk).
+Development execution does not complete independent qualification. Use T01.052 and T05.049 for confirmatory
 family-component splits: editions, derivatives, translations and extensions stay
 together, references and eligible universes locked before evaluation. Each arm
 records exact code/data/model/runtime pins, licences, artifact/download bytes,
@@ -461,6 +463,19 @@ T01.063–064 / #158: [fair factorial redesign](../../../docs/research/factorial
 T01.064 / #158: [offline policy comparison](../../../docs/research/evidence-policy-20261126.md) reuses actual transitions with feasible action masks and invariant proof gate. One-call learned gain one case; at two calls rule reaches hindsight ceiling; adaptive rule 29 calls vs oracle 23. No larger RL framework until measured residual gap on qualified common inputs. Retain full factorial and source/reference holds.
 
 T01.064 / #158: [post-hoc parent-first comparator](evidence-policy-parent-first-v1-receipt.json) reaches 23 complete and 14 gated correct in 24 calls, no reranking, versus 29 calls for the earlier adaptive rule. Synthetic parent completeness is guaranteed by fixture construction; retain real-source qualification and no promotion. Original report unchanged.
+
+
+T01.025/031/052/053/064 / #111/#95/#158: [manifestation-aware comparison](cross-family-format-benchmark.md)
+and [cross-format reuse design](source-reconciliation-design.md) retain
+all 14 hosted cohorts, two complete ordered row fingerprint groups with
+holds, upstream byte aliases, and explicit structural/semantic separation.
+[Verified priority intake](../../source-reconciliation/specialist-family-gates-20261126.md)
+retains TRIPOD 51/52 display matches and 52 scope cells, STROBE 22 candidate
+IDs/11 classified rows, both issuer identity holds. Reconcile source
+changes before T03 migration and T04 downstream use; reuse #191/#193
+for bibliographic/ontology leads, #181 native representation and #192
+durable receipts. Preserve T05.049/063 reference and factorial gates.
+No scientific promotion.
 
 T01.052–053 / #158 (E4/E6): [catalogue enrichment v1](../../../docs/research/catalogue-enrichment-20261126.md), [hash-bound receipt](../../../research/catalogue/catalogue-enrichment-v1-receipt.json). Executed 720-entry historical census, 41 selected MeSH descriptors, 219 dictionary-matched titles, 120 additional ancestor associations, 40 unverified category suggestions; 42 admitted PRISMA requirements retained, 10 with direct mentions. Five focused tests and deterministic repeat passed locally. No scope, equivalence, rights or independent reference promotion. Freeze ontology releases and qualify semantic roles before comparing neural extraction/linking and graph increment. Coordinate #180/#188/#191/#192 and the existing factorial plan.
 
