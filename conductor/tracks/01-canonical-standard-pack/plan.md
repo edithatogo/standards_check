@@ -504,3 +504,7 @@ upstream security holds remain. #185 receiving tree verified, current
 catalogue enrichment/vector work retained. No duplicate owner or
 registry; source qualification #188, independent labels and same-ID
 analysis still held.
+
+T01.052/053/064 / #158: [matched classifier and role follow-up](../../../docs/research/catalogue-classifier-followup-20261126.md) retains six observed sparse cells and original fold lock; balanced logistic improves matched label recovery, explicit title roles leave 206/259 mentions unresolved. Opt-in BGE/Qwen same-fold representation x classifier comparison, pending observed inference. Retain #191/#188 roles, #192 additive supplement and independent source/reference gates; no promotion.
+
+Hosted catalogue embedding follow-up 45836556902: both pinned model assets verified, both stopped before inference on fold reconstruction mismatch across runtimes. Freeze original 719 fold assignments in compact ordered identity-bound form and verify exact prior digest and group isolation before model acquisition. Six new tests and 16 overlay tests passed, all prior case-level outcomes identical; retain both failed archives. New exact-head hosted replay required.
