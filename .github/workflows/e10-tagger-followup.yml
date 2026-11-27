@@ -1,0 +1,110 @@
+name: E10 task formulation and supervised controls
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+    paths:
+      - "scripts/tagger_followup.py"
+      - "tests/test_tagger_followup.py"
+      - ".github/workflows/e10-tagger-followup.yml"
+
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: e10-framing-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  tagger-followup:
+    if: github.event_name == 'workflow_dispatch' || (github.event.pull_request.head.repo.full_name == github.repository && (github.head_ref == 'experiment/e10-framing-supervision' || contains(github.event.pull_request.labels.*.name, 'run-tagger-followup')))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      HF_HUB_DISABLE_TELEMETRY: "1"
+      PIP_DISABLE_PIP_VERSION_CHECK: "1"
+      OMP_NUM_THREADS: "2"
+      MKL_NUM_THREADS: "2"
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12.16"
+      - name: Execute local-only supervised models before neural acquisition
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/tagger-receipt" "$RUNNER_TEMP/tagger-wheels" "$RUNNER_TEMP/tagger-prior"
+          python -m unittest tests.test_extractive_development tests.test_tagger_followup -v
+          python -m scripts.tagger_followup --arm supervised --revision "$(git rev-parse HEAD)" --output "$RUNNER_TEMP/tagger-receipt/supervised.json"
+      - name: Replay exact previously observed runtime wheel closure
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          prior="$RUNNER_TEMP/tagger-prior"
+          wheelhouse="$RUNNER_TEMP/tagger-wheels"
+          timeout 60 gh run download 45794639014 --repo "$GITHUB_REPOSITORY" --name e10-qualifier-spans-482817aca80b286da42053ef04d1e5bc498686c0 --dir "$prior"
+          printf '%s  %s\n' '3a089a55cc928d8e2ffc537d3b8e78cf65747e7222f0d5c329ed938a6f807def' "$prior/wheel-sha256.txt" | sha256sum --check
+          printf '%s  %s\n' '85dbc970eba245291c9ab1e60527f13f8ecdb72ec457913891f4bede4f89f2af' "$prior/model-sha256.txt" | sha256sum --check
+          python - <<'PY'
+          import os
+          from pathlib import Path
+
+          root = Path(os.environ["RUNNER_TEMP"])
+          wheel_lines = (root / "tagger-prior/wheel-sha256.txt").read_text().splitlines()
+          torch = []
+          others = []
+          for line in wheel_lines:
+              digest, wheel = line.split()
+              name, version = wheel.split("-")[:2]
+              target = torch if name == "torch" else others
+              target.append(f"{name}=={version} --hash=sha256:{digest}")
+          if len(torch) != 1 or not others or len(set(torch + others)) != len(wheel_lines):
+              raise ValueError("unexpected exact wheel closure")
+          for filename, lines in (("torch.txt", torch), ("others.txt", others), ("all.txt", torch + others)):
+              (root / "tagger-receipt" / filename).write_text("\n".join(lines) + "\n")
+          PY
+          receipt="$RUNNER_TEMP/tagger-receipt"
+          python -m pip download --no-deps --require-hashes --only-binary=:all: --timeout 30 --retries 2 --index-url https://download.pytorch.org/whl/cpu --dest "$wheelhouse" -r "$receipt/torch.txt"
+          python -m pip download --no-deps --require-hashes --only-binary=:all: --timeout 30 --retries 2 --index-url https://pypi.org/simple --dest "$wheelhouse" -r "$receipt/others.txt"
+          (cd "$wheelhouse" && sha256sum --check "$prior/wheel-sha256.txt")
+          python -m pip install --require-hashes --no-index --find-links "$wheelhouse" --only-binary=:all: -r "$receipt/all.txt"
+          python -m pip check
+          python -m pip freeze > "$receipt/environment.txt"
+          python -c 'import os,pathlib; p=pathlib.Path(os.environ["RUNNER_TEMP"])/"tagger-wheels"; print(sum(f.stat().st_size for f in p.glob("*.whl")))' > "$receipt/runtime-download-bytes.txt"
+      - name: Acquire and check every pinned checkpoint asset
+        run: |
+          set -euo pipefail
+          model="$RUNNER_TEMP/tagger-model"
+          mkdir -p "$model/encoder_config"
+          base="https://huggingface.co/fastino/gliner2.5-small-v1/resolve/0f9bfda3394fe71b6e2cd479b98d08eca5ba6f0b"
+          for name in config.json encoder_config/config.json tokenizer.json tokenizer_config.json model.safetensors; do
+            limit=10000000
+            if [[ "$name" == model.safetensors ]]; then limit=300000000; fi
+            curl --fail --silent --show-error --location --max-redirs 5 --connect-timeout 15 --max-time 180 --max-filesize "$limit" --proto '=https' --proto-redir '=https' "$base/$name" --output "$model/$name"
+          done
+          (cd "$model" && sha256sum --check "$RUNNER_TEMP/tagger-prior/model-sha256.txt")
+          test "$(stat -c '%s' "$model/model.safetensors")" -eq 295567700
+          du --apparent-size --block-size=1 -s "$model" > "$RUNNER_TEMP/tagger-receipt/model-download-size.txt"
+      - name: Execute independent framing arms and retain failed receipts
+        run: |
+          set -uo pipefail
+          status=0
+          for arm in clause per_type; do
+            timeout 300 python -m scripts.tagger_followup --arm "$arm" --model-dir "$RUNNER_TEMP/tagger-model" --revision "$(git rev-parse HEAD)" --output "$RUNNER_TEMP/tagger-receipt/$arm.json" || status=1
+          done
+          exit "$status"
+      - name: Retain actual evaluations and exact lock, never weights
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: e10-tagger-followup-${{ github.sha }}
+          path: ${{ runner.temp }}/tagger-receipt/
+          if-no-files-found: error
+          retention-days: 90
